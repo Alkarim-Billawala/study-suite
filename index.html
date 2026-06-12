@@ -1,7 +1,15 @@
 <!--
-  Integrated Study Suite  ·  v2.10
+  Integrated Study Suite  ·  v2.12
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v2.12: PWA install support — "Add to Home Screen" button in the header opens a modal
+  with per-device instructions (auto-detects iPhone/iPad, Mac, Android, Windows; user can switch)
+  and a backup-first reminder (installed apps keep separate progress). Head now links
+  manifest.webmanifest + apple-touch-icon (served on the site; harmless 404s locally) so
+  Android/Windows browsers offer a real standalone install. "Features coming soon" section
+  added above the footer (kept in sync with Future-Features.txt — top lines only).
+  Changelog v2.11: custom-pack line hyperlink shortened to "⇣ Download the instruction set";
+  "into your LLM of choice to get started." is now plain text.
   Changelog v2.10: hint line added under the save-state indicator — "Progress lives in this
   browser — use Backup all / Restore backup to carry it across devices and browsers."
   Changelog v2.9: custom-pack line reworded ("Upload your own custom study packs. ⇣ Download the
@@ -35,7 +43,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Alkarim Billawala / alkarim.billawala.ca">
-<title>Integrated Study Suite v2.10</title>
+<title>Integrated Study Suite v2.12</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#7c2d2d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Study Suite">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 :root{--paper:#f3efe6;--paper2:#ece7da;--ink:#1d1b16;--ink-soft:#524f45;--line:#cfc8b6;--accent:#7c2d2d;--accent-soft:#a8534f;--green:#2f6b4f;--green-bg:#e3eee5;--red:#9b2c2c;--red-bg:#f3e0dd;--gold:#9a7b27;--gold-bg:#f1e9cf;--blue:#2d5a6b;--blue-bg:#e0eaee;--shadow:0 1px 0 rgba(0,0,0,.04), 0 8px 28px -16px rgba(40,30,10,.35);}
@@ -199,6 +213,25 @@ section{display:none}section.on{display:block}
 #reviewer{margin-top:24px}
 .revbar{display:flex;align-items:center;gap:14px;margin:0 0 14px}
 .revbar h2{font-family:'Fraunces',serif;font-weight:600;font-size:24px;margin:0}
+/* install button + modal */
+.installbtn{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;border:1.5px solid var(--line);background:var(--paper);border-radius:20px;padding:6px 12px;cursor:pointer;transition:.12s;color:var(--ink-soft);white-space:nowrap}
+.installbtn:hover{border-color:var(--accent-soft);color:var(--ink)}
+.modal-ov{position:fixed;inset:0;background:rgba(29,27,22,.45);z-index:50;display:flex;align-items:center;justify-content:center;padding:18px}
+.modal-card{background:var(--paper);border:1.5px solid var(--line);border-radius:12px;max-width:560px;width:100%;max-height:88vh;overflow-y:auto;padding:20px 22px}
+.modal-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.modal-bar h3{font-family:'Fraunces',serif;font-weight:600;font-size:21px;margin:0}
+.warnbox{border-left:3px solid var(--accent);background:var(--paper2);padding:10px 14px;font-size:14px;margin-bottom:14px;border-radius:0 8px 8px 0}
+.steps{font-size:15px;line-height:1.55;margin-top:12px}
+.steps ol{margin:6px 0 4px;padding-left:22px}
+.steps li{margin:5px 0}
+.steps .alt{font-size:13px;color:var(--ink-soft);margin-top:8px}
+.steps kbd{font-family:'IBM Plex Mono',monospace;font-size:12px;background:var(--paper2);border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+.modal-note{font-size:12.5px;color:var(--ink-soft);margin-top:14px;border-top:1px solid var(--line);padding-top:10px}
+/* features coming soon */
+.soon{margin-top:18px;border-top:1px dashed var(--line);padding-top:12px;text-align:center}
+.soon-t{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
+.soon-i{font-size:14px;color:var(--ink-soft)}
+@media(max-width:560px){.installbtn{font-size:9px;padding:5px 9px}}
 /* default-packs panel (only shown when a packs-manifest.json is served alongside the app) */
 .defpacks{margin:14px 0;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);padding:14px 16px}
 .defpacks .dp-t{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
@@ -293,10 +326,11 @@ section{display:none}section.on{display:block}
 
 <header class="top">
   <div class="top-inner">
-    <div class="brand"><span class="k">Integrated Study Suite</span><span class="t">Review · Practice · Exam<span class="ver">v2.10</span></span></div>
+    <div class="brand"><span class="k">Integrated Study Suite</span><span class="t">Review · Practice · Exam<span class="ver">v2.12</span></span></div>
     <div class="top-right">
       <div class="timer" id="timer" style="display:none"><span class="dot"></span><span id="tclock">--:--</span></div>
       <button class="homebtn" id="homebtn" style="display:none">⮌ Home</button>
+      <button class="installbtn" id="installBtn" title="Install this app on your device">⊕ Add to Home Screen</button>
     </div>
   </div>
 </header>
@@ -338,7 +372,7 @@ section{display:none}section.on{display:block}
       <div class="dp-d">Curated packs by the author — add them straight to your library.</div>
       <div class="dp-list" id="dpList"></div>
     </div>
-    <div class="buildline" id="buildLine" style="display:none">Upload your own custom study packs. <a id="buildLink" href="#">⇣ Download the instruction set into your LLM</a> of choice to get started.</div>
+    <div class="buildline" id="buildLine" style="display:none">Upload your own custom study packs. <a id="buildLink" href="#">⇣ Download the instruction set</a> into your LLM of choice to get started.</div>
     <div class="dropzone" id="dropzone">
       <div class="big">Drop pack files here, or click to choose</div>
       <div class="small">Load one or more <code>.json</code> content packs. They persist between sessions.</div>
@@ -353,7 +387,11 @@ section{display:none}section.on{display:block}
     </div>
     <div class="savestate" id="saveState"></div>
     <div class="savehint">Progress lives in this browser — use <b>Backup all</b> / <b>Restore backup</b> to carry it across devices and browsers.</div>
-    <div class="attrib">Integrated Study Suite v2.10 · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
+    <div class="soon">
+      <div class="soon-t">Features coming soon</div>
+      <div class="soon-i">· Anki import — bring your existing Anki decks into Review</div>
+    </div>
+    <div class="attrib">Integrated Study Suite v2.12 · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
   </section>
 
   <!-- SRS DECK -->
@@ -397,6 +435,22 @@ section{display:none}section.on{display:block}
       <div class="revmain" id="guideHost"></div>
     </div>
   </section>
+
+  <!-- INSTALL (Add to Home Screen) MODAL -->
+  <div class="modal-ov" id="installOv" style="display:none">
+    <div class="modal-card" role="dialog" aria-label="Add to Home Screen">
+      <div class="modal-bar"><h3>Add to Home Screen</h3><button class="minor" id="installClose">✕ Close</button></div>
+      <div class="warnbox"><b>First: back up your progress.</b> The installed app keeps its <i>own</i> separate progress. Tap <b>Backup all</b> here before installing, then <b>Restore backup</b> inside the installed app to carry everything over.</div>
+      <div class="segctl" id="devSeg">
+        <button class="seg" data-dev="ios">iPhone / iPad</button>
+        <button class="seg" data-dev="mac">Mac</button>
+        <button class="seg" data-dev="android">Android</button>
+        <button class="seg" data-dev="win">Windows</button>
+      </div>
+      <div class="steps" id="devSteps"></div>
+      <div class="modal-note">These steps work on the hosted site (not a downloaded copy of this file). Once installed, the app opens in its own window like a native app.</div>
+    </div>
+  </div>
 
   <!-- QUIZ -->
   <section id="quiz">
@@ -454,8 +508,8 @@ section{display:none}section.on{display:block}
 </div>
 
 <script>
-/* Integrated Study Suite v2.10 — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='2.10';
+/* Integrated Study Suite v2.12 — Author: Alkarim Billawala / alkarim.billawala.ca */
+const APP_VERSION='2.12';
 const APP_AUTHOR='Alkarim Billawala / alkarim.billawala.ca';
 
 /* ===== STORAGE ===== */
@@ -514,6 +568,49 @@ function diffCounts(){const pool=qpool();const c={easy:0,medium:0,hard:0,all:poo
 function diffBadge(q){if(!q||diffRank(q)<0)return '';return `<span class="diffbadge ${q.difficulty}">${q.difficulty}</span>`;}
 
 async function persist(){await Store.set(KEY.packs,packs);await Store.set(KEY.sched,sched);await Store.set(KEY.daily,daily);await Store.set(KEY.settings,settings);}
+
+/* ===== ADD TO HOME SCREEN (PWA install) modal ===== */
+const INSTALL_STEPS={
+  ios:`<ol>
+    <li>Open this site in <b>Safari</b> on your iPhone or iPad.</li>
+    <li>Tap the <b>Share</b> button <kbd>&#x2BAD;</kbd> (square with an arrow, in the toolbar).</li>
+    <li>Scroll down and tap <b>Add to Home Screen</b>.</li>
+    <li>Tap <b>Add</b> — the Study Suite icon appears on your home screen and opens full-screen.</li>
+  </ol>`,
+  mac:`<ol>
+    <li>Open this site in <b>Safari</b> (macOS Sonoma or newer).</li>
+    <li>From the menu bar choose <b>File → Add to Dock…</b></li>
+    <li>Click <b>Add</b> — the app appears in your Dock and opens in its own window.</li>
+  </ol>
+  <div class="alt">Using Chrome or Edge instead? Click the <b>install icon</b> at the right end of the address bar, then <b>Install</b>.</div>`,
+  android:`<ol>
+    <li>Open this site in <b>Chrome</b> on your Android device.</li>
+    <li>Tap the <b>⋮ menu</b> (top right).</li>
+    <li>Tap <b>Add to Home screen</b> (on some versions: <b>Install app</b>).</li>
+    <li>Confirm — the icon appears on your home screen and opens like an app.</li>
+  </ol>`,
+  win:`<ol>
+    <li>Open this site in <b>Chrome</b> or <b>Edge</b> on Windows.</li>
+    <li>Click the <b>install icon</b> at the right end of the address bar (a screen with a ↓).</li>
+    <li>Click <b>Install</b> — the app gets its own window, Start-menu entry, and taskbar icon.</li>
+  </ol>
+  <div class="alt">No icon visible? Edge: <b>⋯ menu → Apps → Install this site as an app</b>. Chrome: <b>⋮ menu → Cast, save and share → Install page as app</b>.</div>`
+};
+function detectDevice(){
+  const ua=navigator.userAgent||'';
+  if(/iPhone|iPod/.test(ua))return 'ios';
+  if(/iPad/.test(ua)||(/Macintosh/.test(ua)&&'ontouchend' in document))return 'ios';
+  if(/Android/.test(ua))return 'android';
+  if(/Macintosh|Mac OS X/.test(ua))return 'mac';
+  if(/Windows/.test(ua))return 'win';
+  return 'ios';
+}
+let installDev=null;
+function renderInstall(){const d=installDev||detectDevice();
+  $('devSeg').querySelectorAll('.seg').forEach(b=>b.classList.toggle('on',b.dataset.dev===d));
+  $('devSteps').innerHTML=INSTALL_STEPS[d]||'';}
+function openInstall(){installDev=installDev||detectDevice();renderInstall();$('installOv').style.display='flex';}
+function closeInstall(){$('installOv').style.display='none';}
 
 /* "Default study packs" panel — content-free: pack list comes from a same-origin
    packs-manifest.json generated at deploy time ({packs:[{file,label,id}],authoring}).
@@ -938,6 +1035,11 @@ $('diffSeg').querySelectorAll('.seg').forEach(b=>b.addEventListener('click',()=>
   else settings.sessionDiffs=DIFFS.filter(x=>s.includes(x)||x===d);
   persist();renderHome();}));
 $('openReviewer').addEventListener('click',()=>{if(activeGuides().length)openReviewer();});
+$('installBtn').addEventListener('click',openInstall);
+$('installClose').addEventListener('click',closeInstall);
+$('installOv').addEventListener('click',e=>{if(e.target===$('installOv'))closeInstall();});
+$('devSeg').querySelectorAll('.seg').forEach(b=>b.addEventListener('click',()=>{installDev=b.dataset.dev;renderInstall();}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('installOv').style.display!=='none')closeInstall();});
 $('revBack').addEventListener('click',returnFromReviewer);
 $('revNavToggle').addEventListener('click',()=>{settings.revNavCollapsed=!settings.revNavCollapsed;applyRevNav();persist();});
 $('homebtn').addEventListener('click',()=>{if($('quiz').classList.contains('on')||$('study').classList.contains('on')){if(!confirm('Leave this session and return home?'))return;clearInterval(qTimerId);}renderHome();});
