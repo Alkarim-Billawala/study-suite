@@ -1,7 +1,11 @@
 <!--
-  Integrated Study Suite  ·  v2.6
+  Integrated Study Suite  ·  v2.7
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v2.7: "Need content?" reworked into a "Default study packs" section below the
+  Content library — one-click "+ Add to library" fetches the pack from the site and ingests it
+  in-app (manifest now carries pack ids for in-library detection; ⇣ file download kept as a
+  secondary option). Instruction-set link moved to a line above the dropzone.
   Changelog v2.6: "Content Reviewer" renamed to "Topic Guides" in the UI; the home-screen
   Topic Guides panel is now hidden entirely when no active pack bundles guides.
   Changelog v2.5: download symbol (⇣) added to the "Build your own" authoring-guide link.
@@ -22,7 +26,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Alkarim Billawala / alkarim.billawala.ca">
-<title>Integrated Study Suite v2.6</title>
+<title>Integrated Study Suite v2.7</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 :root{--paper:#f3efe6;--paper2:#ece7da;--ink:#1d1b16;--ink-soft:#524f45;--line:#cfc8b6;--accent:#7c2d2d;--accent-soft:#a8534f;--green:#2f6b4f;--green-bg:#e3eee5;--red:#9b2c2c;--red-bg:#f3e0dd;--gold:#9a7b27;--gold-bg:#f1e9cf;--blue:#2d5a6b;--blue-bg:#e0eaee;--shadow:0 1px 0 rgba(0,0,0,.04), 0 8px 28px -16px rgba(40,30,10,.35);}
@@ -184,13 +188,22 @@ section{display:none}section.on{display:block}
 #reviewer{margin-top:24px}
 .revbar{display:flex;align-items:center;gap:14px;margin:0 0 14px}
 .revbar h2{font-family:'Fraunces',serif;font-weight:600;font-size:24px;margin:0}
-/* get-packs panel (only shown when a packs-manifest.json is served alongside the app) */
-.getpacks{margin-top:14px;border:1px dashed var(--line);border-radius:8px;padding:14px 16px}
-.getpacks .gp-t{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:9px}
-.gp-list{display:flex;flex-wrap:wrap;gap:8px}
-.gp-link{font-family:'Newsreader';font-size:15px;border:1.5px solid var(--line);background:var(--paper);border-radius:20px;padding:6px 13px;color:var(--ink);text-decoration:none;transition:.12s;display:inline-flex;align-items:center;gap:6px}
-.gp-link:hover{border-color:var(--accent-soft)}
-.gp-link.build{border-style:dashed;color:var(--ink-soft)}
+/* default-packs panel (only shown when a packs-manifest.json is served alongside the app) */
+.defpacks{margin:14px 0;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);padding:14px 16px}
+.defpacks .dp-t{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.defpacks .dp-d{font-size:14px;color:var(--ink-soft);margin:3px 0 10px}
+.dp-list{display:flex;flex-direction:column;gap:6px}
+.dp-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.dp-name{font-family:'Newsreader';font-size:16px;flex:1 1 auto;min-width:180px}
+.dp-add{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;border:1.5px solid var(--ink);background:var(--paper);border-radius:20px;padding:5px 13px;cursor:pointer;transition:.12s}
+.dp-add:hover{background:var(--ink);color:var(--paper)}
+.dp-add[disabled]{border-color:var(--line);color:var(--ink-soft);background:var(--paper2);cursor:default}
+.dp-add[disabled]:hover{background:var(--paper2);color:var(--ink-soft)}
+.dp-dl{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 9px;transition:.12s}
+.dp-dl:hover{border-color:var(--accent-soft);color:var(--ink)}
+.buildline{font-size:14px;color:var(--ink-soft);margin:0 0 10px}
+.buildline a{color:var(--accent);text-decoration:none;border-bottom:1px dotted var(--accent-soft)}
+.buildline a:hover{border-bottom-style:solid}
 .revlayout{display:flex;gap:16px;align-items:stretch}
 .revlayout.navhide .revnav{display:none}
 .revbar .navtoggle{margin-left:auto}
@@ -269,7 +282,7 @@ section{display:none}section.on{display:block}
 
 <header class="top">
   <div class="top-inner">
-    <div class="brand"><span class="k">Integrated Study Suite</span><span class="t">Review · Practice · Exam<span class="ver">v2.6</span></span></div>
+    <div class="brand"><span class="k">Integrated Study Suite</span><span class="t">Review · Practice · Exam<span class="ver">v2.7</span></span></div>
     <div class="top-right">
       <div class="timer" id="timer" style="display:none"><span class="dot"></span><span id="tclock">--:--</span></div>
       <button class="homebtn" id="homebtn" style="display:none">⮌ Home</button>
@@ -309,15 +322,17 @@ section{display:none}section.on{display:block}
     <div class="libhdr"><span class="lt">▸ Content library</span><span class="lt" id="libCount"></span></div>
     <div id="libActions" style="display:none;margin-bottom:10px"><button class="minor" id="enableAll">Enable all</button> <button class="minor" id="disableAll">Set all aside</button></div>
     <div id="packList"></div>
+    <div class="defpacks" id="defPacks" style="display:none">
+      <div class="dp-t">Default study packs</div>
+      <div class="dp-d">Curated packs by the author — add them straight to your library.</div>
+      <div class="dp-list" id="dpList"></div>
+    </div>
+    <div class="buildline" id="buildLine" style="display:none">Or bring a custom pack: drop it below, or <a id="buildLink" href="#">⇣ get the instruction set for your LLM</a> to build your own.</div>
     <div class="dropzone" id="dropzone">
       <div class="big">Drop pack files here, or click to choose</div>
       <div class="small">Load one or more <code>.json</code> content packs. They persist between sessions.</div>
     </div>
     <input type="file" id="packFile" accept="application/json" multiple style="display:none">
-    <div class="getpacks" id="getPacks" style="display:none">
-      <div class="gp-t">Need content? Download a pack, then drop it above</div>
-      <div class="gp-list" id="gpList"></div>
-    </div>
 
     <div class="tools">
       <button class="minor accent" id="settingsBtn">⚙ Settings</button>
@@ -326,7 +341,7 @@ section{display:none}section.on{display:block}
       <input type="file" id="restoreFile" accept="application/json" style="display:none">
     </div>
     <div class="savestate" id="saveState"></div>
-    <div class="attrib">Integrated Study Suite v2.6 · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
+    <div class="attrib">Integrated Study Suite v2.7 · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
   </section>
 
   <!-- SRS DECK -->
@@ -427,8 +442,8 @@ section{display:none}section.on{display:block}
 </div>
 
 <script>
-/* Integrated Study Suite v2.6 — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='2.6';
+/* Integrated Study Suite v2.7 — Author: Alkarim Billawala / alkarim.billawala.ca */
+const APP_VERSION='2.7';
 const APP_AUTHOR='Alkarim Billawala / alkarim.billawala.ca';
 
 /* ===== STORAGE ===== */
@@ -487,18 +502,42 @@ function diffBadge(q){if(!q||diffRank(q)<0)return '';return `<span class="diffba
 
 async function persist(){await Store.set(KEY.packs,packs);await Store.set(KEY.sched,sched);await Store.set(KEY.daily,daily);await Store.set(KEY.settings,settings);}
 
-/* "Get study packs" panel — content-free: pack list comes from a same-origin
-   packs-manifest.json generated at deploy time ({packs:[{file,label}],authoring}).
+/* "Default study packs" panel — content-free: pack list comes from a same-origin
+   packs-manifest.json generated at deploy time ({packs:[{file,label,id}],authoring}).
+   Add-to-library fetches the pack and runs it through the normal ingestPack path.
    If the manifest is missing/unreachable (e.g. local file://), the panel stays hidden. */
+let defaultManifest=null;
 async function initPackLinks(){
   try{
     const r=await fetch('packs-manifest.json',{cache:'no-store'});if(!r.ok)return;
     const m=await r.json();if(!m||!Array.isArray(m.packs)||!m.packs.length)return;
-    const host=$('gpList');host.innerHTML='';
-    m.packs.forEach(p=>{if(!p||!p.file)return;const a=document.createElement('a');a.className='gp-link';a.href=encodeURI(String(p.file));a.setAttribute('download','');a.textContent='⇣ '+(p.label||p.file);host.appendChild(a);});
-    if(m.authoring){const a=document.createElement('a');a.className='gp-link build';a.href=encodeURI(String(m.authoring));a.setAttribute('download','');a.textContent='⇣ Build your own — instruction set for your LLM';host.appendChild(a);}
-    if(host.children.length)$('getPacks').style.display='';
+    defaultManifest=m;renderDefaultPacks();
   }catch(e){}
+}
+function renderDefaultPacks(){
+  const m=defaultManifest;if(!m)return;
+  const host=$('dpList');host.innerHTML='';
+  m.packs.forEach(p=>{
+    if(!p||!p.file)return;
+    const row=document.createElement('div');row.className='dp-row';
+    const nm=document.createElement('span');nm.className='dp-name';nm.textContent=p.label||p.file;row.appendChild(nm);
+    const inLib=!!(p.id&&packs.some(x=>x.id===p.id));
+    const btn=document.createElement('button');btn.className='dp-add';
+    btn.textContent=inLib?'✓ In library':'+ Add to library';btn.disabled=inLib;
+    if(!inLib)btn.onclick=async()=>{
+      btn.disabled=true;btn.textContent='Adding…';
+      try{
+        const r=await fetch(encodeURI(String(p.file)),{cache:'no-store'});if(!r.ok)throw 0;
+        ingestPack(await r.json(),(p.label||p.file).replace(/\.json$/i,''));
+        await persist();renderHome();
+      }catch(e){btn.disabled=false;btn.textContent='+ Add to library';alert('Could not load that pack — check your connection and try again.');}
+    };
+    row.appendChild(btn);
+    const dl=document.createElement('a');dl.className='dp-dl';dl.href=encodeURI(String(p.file));dl.setAttribute('download','');dl.textContent='⇣ file';row.appendChild(dl);
+    host.appendChild(row);
+  });
+  $('defPacks').style.display=host.children.length?'':'none';
+  if(m.authoring){$('buildLink').href=encodeURI(String(m.authoring));$('buildLink').setAttribute('download','');$('buildLine').style.display='';}
 }
 
 async function init(){
@@ -597,6 +636,7 @@ function renderHome(){
     left.appendChild(sw);left.appendChild(info);
     const b=document.createElement('button');b.className='rm';b.textContent='Remove';b.onclick=()=>removePack(p.id);
     row.appendChild(left);row.appendChild(b);pl.appendChild(row);});
+  renderDefaultPacks();
   show('home');
 }
 function examTotal(){const g=examGroups();let t=0;g.forEach((ids,k)=>t+=Math.min(ids.length,settings.examCounts[k]||0));return t;}
