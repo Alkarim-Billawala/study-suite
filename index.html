@@ -1,7 +1,10 @@
 <!--
-  Integrated Study Suite  ·  v0.2.21 (beta)
+  Integrated Study Suite  ·  v0.2.22 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.22: fix — scroll position is preserved when the current screen merely
+  re-renders (e.g. adding/removing a pack refreshes Home); show() now scrolls to top only
+  on an actual section change.
   Changelog v0.2.21: coming-soon list — "Cloud sync" line replaced with "User creation and
   sync — save your progress and study anywhere" (per Future-Features.txt item 2).
   Changelog v0.2.20: SUPPORT_URL set to the live Buy Me a Coffee page
@@ -432,7 +435,7 @@ section{display:none}section.on{display:block}
       <div class="soon-i">· Anki import — bring your existing Anki decks into Review</div>
       <div class="soon-i">· User creation and sync — save your progress and study anywhere</div>
     </div>
-    <div class="attrib">Integrated Study Suite v0.2.21 · <span class="betatag">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
+    <div class="attrib">Integrated Study Suite v0.2.22 · <span class="betatag">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
   </section>
 
   <!-- SRS DECK -->
@@ -550,7 +553,7 @@ section{display:none}section.on{display:block}
 
 <script>
 /* Integrated Study Suite v0.2.18 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.21';
+const APP_VERSION='0.2.22';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -798,7 +801,7 @@ function removePack(id){if(!confirm('Remove this pack? Your review progress is k
 
 /* ===== NAV ===== */
 function currentSection(){const s=document.querySelector('section.on');return s?s.id:'home';}
-function show(which){document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===which));$('homebtn').style.display=(which==='home'?'none':'');$('timer').style.display=(which==='quiz'&&timerWanted)?'':'none';window.scrollTo({top:0});}
+function show(which){const switching=currentSection()!==which;document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===which));$('homebtn').style.display=(which==='home'?'none':'');$('timer').style.display=(which==='quiz'&&timerWanted)?'':'none';if(switching)window.scrollTo({top:0});}
 
 /* ===== HOME ===== */
 function renderHome(){
