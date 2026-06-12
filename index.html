@@ -1,7 +1,12 @@
 <!--
-  Integrated Study Suite  ·  v0.2.22 (beta)
+  Integrated Study Suite  ·  v0.2.23 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.23: Topic Guides viewer rework — guide iframe is full-width and taller
+  (calc(100vh-195px)); the topic list is now an OVERLAY drawer floating over the guide
+  ("▤ Topics" button top-left when closed; "◂ Hide topic list" row at the top of the list;
+  picking a topic auto-closes the drawer). New −/+/Fit width controls in the bar adjust
+  zoom (60–200%) and stretch the guide body to full width inside the sandboxed iframe.
   Changelog v0.2.22: fix — scroll position is preserved when the current screen merely
   re-renders (e.g. adding/removing a pack refreshes Home); show() now scrolls to top only
   on an actual section change.
@@ -290,11 +295,14 @@ section{display:none}section.on{display:block}
 .buildline{font-size:14px;color:var(--ink-soft);margin:0 0 10px}
 .buildline a{color:var(--accent);text-decoration:none;border-bottom:1px dotted var(--accent-soft)}
 .buildline a:hover{border-bottom-style:solid}
-.revlayout{display:flex;gap:16px;align-items:stretch}
-.revlayout.navhide .revnav{display:none}
-.revbar .navtoggle{margin-left:auto}
-.revnav{flex:0 0 248px;width:248px;max-height:78vh;overflow-y:auto;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 8px}
-.revnav:empty{display:none}
+/* guide viewer: full-width frame; topic list is an overlay drawer */
+.revlayout{position:relative}
+.revtopics{position:absolute;top:10px;left:10px;z-index:5;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;border:1.5px solid var(--line);background:var(--paper);border-radius:20px;padding:6px 13px;cursor:pointer;transition:.12s;box-shadow:2px 2px 0 rgba(29,27,22,.08)}
+.revtopics:hover{border-color:var(--accent-soft)}
+.revnav{position:absolute;top:6px;left:6px;z-index:6;width:310px;max-width:88%;max-height:calc(100% - 12px);overflow-y:auto;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);padding:8px;box-shadow:5px 5px 0 rgba(29,27,22,.10)}
+.revnav.closed{display:none}
+.revhide{display:flex;align-items:center;gap:7px;width:100%;text-align:left;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);background:var(--paper2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;cursor:pointer;margin-bottom:8px;transition:.12s}
+.revhide:hover{border-color:var(--accent-soft)}
 .revgroup+.revgroup{margin-top:14px}
 .revgroup .gname{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 6px 6px;border-bottom:1px solid var(--line);padding-bottom:4px}
 .revitem{display:flex;align-items:baseline;gap:8px;width:100%;text-align:left;font-family:'Newsreader';font-size:15px;line-height:1.25;border:1.5px solid transparent;background:none;border-radius:8px;padding:7px 9px;cursor:pointer;transition:.12s;color:var(--ink)}
@@ -302,9 +310,10 @@ section{display:none}section.on{display:block}
 .revitem.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .revitem .gn{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink-soft);background:var(--paper2);border-radius:9px;padding:1px 6px;flex:0 0 auto}
 .revitem.on .gn{color:var(--paper);background:rgba(255,255,255,.18)}
-.revmain{flex:1 1 auto;min-width:0}
-.guideframe{width:100%;height:78vh;border:1.5px solid var(--line);border-radius:10px;background:#fff}
-@media(max-width:760px){.revlayout{flex-direction:column}.revnav{width:auto;flex:0 0 auto;max-height:34vh}.guideframe{height:62vh}}
+.revmain{width:100%}
+.guideframe{width:100%;height:calc(100vh - 195px);min-height:420px;border:1.5px solid var(--line);border-radius:10px;background:#fff}
+.sizer{margin-left:auto;display:flex;align-items:center;gap:6px}
+.sizer .pct{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);min-width:42px;text-align:center}
 .revempty{color:var(--ink-soft);font-size:15px;border:1px dashed var(--line);border-radius:8px;padding:22px;text-align:center}
 /* QUIZ */
 #quiz{margin-top:22px}
@@ -435,7 +444,7 @@ section{display:none}section.on{display:block}
       <div class="soon-i">· Anki import — bring your existing Anki decks into Review</div>
       <div class="soon-i">· User creation and sync — save your progress and study anywhere</div>
     </div>
-    <div class="attrib">Integrated Study Suite v0.2.22 · <span class="betatag">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
+    <div class="attrib">Integrated Study Suite v0.2.23 · <span class="betatag">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
   </section>
 
   <!-- SRS DECK -->
@@ -473,9 +482,17 @@ section{display:none}section.on{display:block}
 
   <!-- CONTENT REVIEWER -->
   <section id="reviewer">
-    <div class="revbar"><button class="minor" id="revBack">← Back</button><h2>Topic Guides</h2><button class="minor navtoggle" id="revNavToggle">◂ Hide topics</button></div>
+    <div class="revbar"><button class="minor" id="revBack">← Back</button><h2>Topic Guides</h2>
+      <div class="sizer">
+        <button class="minor" id="zoomOut" title="Smaller text">−</button>
+        <span class="pct" id="zoomPct">100%</span>
+        <button class="minor" id="zoomIn" title="Larger text">+</button>
+        <button class="minor" id="fitBtn" title="Stretch the guide to the full width">Fit width</button>
+      </div>
+    </div>
     <div class="revlayout" id="revLayout">
-      <nav class="revnav" id="guideList" aria-label="Topic guides"></nav>
+      <button class="revtopics" id="revNavToggle">▤ Topics</button>
+      <nav class="revnav closed" id="guideList" aria-label="Topic guides"></nav>
       <div class="revmain" id="guideHost"></div>
     </div>
   </section>
@@ -553,7 +570,7 @@ section{display:none}section.on{display:block}
 
 <script>
 /* Integrated Study Suite v0.2.18 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.22';
+const APP_VERSION='0.2.23';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -973,15 +990,38 @@ function organizeGuides(){const metas=activeGuides().map(guideMeta);
   const names=[...new Set(metas.map(x=>x.g._packName))];
   if(names.length<2){metas.sort(cmp);return metas.length?[{label:null,items:metas}]:[];}
   return names.map(n=>({label:n,items:metas.filter(x=>x.g._packName===n).sort(cmp)}));}
-function applyRevNav(){const c=!!settings.revNavCollapsed;$('revLayout').classList.toggle('navhide',c);$('revNavToggle').textContent=c?'▸ Show topics':'◂ Hide topics';}
+let revNavOpen=null; // overlay drawer state (session); first render seeds from saved preference
+function applyRevNav(){
+  if(revNavOpen===null)revNavOpen=!settings.revNavCollapsed;
+  $('guideList').classList.toggle('closed',!revNavOpen);
+  $('revNavToggle').style.display=revNavOpen?'none':'';
+}
+/* — guide zoom / fit-width (applies inside the sandboxed iframe) — */
+let guideZoom=1,guideFit=false;
+function applyGuideView(){
+  $('zoomPct').textContent=Math.round(guideZoom*100)+'%';
+  $('fitBtn').textContent=guideFit?'✓ Fit width':'Fit width';
+  const fr=document.querySelector('.guideframe');if(!fr)return;
+  try{
+    const d=fr.contentDocument;if(!d||!d.documentElement)return;
+    d.documentElement.style.zoom=guideZoom;
+    let st=d.getElementById('ssFit');
+    if(guideFit){
+      if(!st){st=d.createElement('style');st.id='ssFit';st.textContent='body{max-width:none!important;margin:0!important;padding:18px 30px!important}';(d.head||d.documentElement).appendChild(st);}
+    }else if(st){st.remove();}
+  }catch(e){}
+}
 function openReviewer(){reviewerReturn=currentSection();const org=organizeGuides();renderGuideList();if(org.length){loadGuide(org[0].items[0].g,null);}else{$('guideHost').innerHTML='<div class="revempty">No topic guides are bundled in your active packs. Newer packs embed their guides here; older packs link to <code>Topic_*.html</code> files kept in this folder.</div>';}show('reviewer');}
 function renderGuideList(){const gl=$('guideList');gl.innerHTML='';
+  const hd=document.createElement('button');hd.className='revhide';hd.textContent='◂ Hide topic list';
+  hd.onclick=()=>{revNavOpen=false;settings.revNavCollapsed=true;persist();applyRevNav();};
+  gl.appendChild(hd);
   organizeGuides().forEach(grp=>{const wrap=document.createElement('div');wrap.className='revgroup';
     if(grp.label){const h=document.createElement('div');h.className='gname';h.textContent=grp.label;wrap.appendChild(h);}
     grp.items.forEach(it=>{const b=document.createElement('button');b.className='revitem'+(guideKey(it.g)===curGuideKey?' on':'');
       if(it.badge){const s=document.createElement('span');s.className='gn';s.textContent=it.badge;b.appendChild(s);}
       const t=document.createElement('span');t.textContent=it.label;b.appendChild(t);
-      b.onclick=()=>loadGuide(it.g,null);wrap.appendChild(b);});
+      b.onclick=()=>{revNavOpen=false;loadGuide(it.g,null);};wrap.appendChild(b);});
     gl.appendChild(wrap);});
   const on=gl.querySelector('.revitem.on');if(on)on.scrollIntoView({block:'nearest'});applyRevNav();}
 function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();
@@ -992,7 +1032,8 @@ function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();
     if(anchor)el=d.getElementById(anchor);
     if(!el&&section){el=[...d.querySelectorAll('h1,h2,h3,h4,[id]')].find(h=>(h.textContent||'').toLowerCase().includes(String(section).toLowerCase()));}
     if(el)el.scrollIntoView();
-  }catch(e){}};
+  }catch(e){}
+  applyGuideView();};
   fr.srcdoc=g.html||'<p style=\"font-family:sans-serif;padding:24px\">This guide has no embedded content.</p>';
   host.appendChild(fr);}
 function openGuide(ref,section){const g=findGuide(ref);if(!g){if(ref&&!String(ref).startsWith('javascript')){window.open(String(ref).split('#')[0],'_blank');}return;}
@@ -1125,7 +1166,10 @@ $('installOv').addEventListener('click',e=>{if(e.target===$('installOv'))closeIn
 $('devSeg').querySelectorAll('.seg').forEach(b=>b.addEventListener('click',()=>{installDev=b.dataset.dev;renderInstall();}));
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('installOv').style.display!=='none')closeInstall();});
 $('revBack').addEventListener('click',returnFromReviewer);
-$('revNavToggle').addEventListener('click',()=>{settings.revNavCollapsed=!settings.revNavCollapsed;applyRevNav();persist();});
+$('revNavToggle').addEventListener('click',()=>{revNavOpen=true;settings.revNavCollapsed=false;persist();applyRevNav();});
+$('zoomIn').addEventListener('click',()=>{guideZoom=Math.min(2,Math.round((guideZoom+0.1)*10)/10);applyGuideView();});
+$('zoomOut').addEventListener('click',()=>{guideZoom=Math.max(0.6,Math.round((guideZoom-0.1)*10)/10);applyGuideView();});
+$('fitBtn').addEventListener('click',()=>{guideFit=!guideFit;applyGuideView();});
 $('homebtn').addEventListener('click',()=>{if($('quiz').classList.contains('on')||$('study').classList.contains('on')){if(!confirm('Leave this session and return home?'))return;clearInterval(qTimerId);}renderHome();});
 $('studyBtn').addEventListener('click',startSession);
 $('browseBtn').addEventListener('click',renderBrowse);
