@@ -1,7 +1,8 @@
 <!--
-  Integrated Study Suite  ·  v2.13
+  Integrated Study Suite  ·  v2.14
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v2.14: "Cloud sync" added to the Features coming soon list (see Future-Features.txt §2).
   Changelog v2.13: "Backup all" in the Add to Home Screen modal's warning box is now clickable —
   triggers the same backup() download as the home-screen button.
   Changelog v2.12: PWA install support — "Add to Home Screen" button in the header opens a modal
@@ -45,7 +46,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Alkarim Billawala / alkarim.billawala.ca">
-<title>Integrated Study Suite v2.13</title>
+<title>Integrated Study Suite v2.14</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#7c2d2d">
@@ -330,7 +331,7 @@ section{display:none}section.on{display:block}
 
 <header class="top">
   <div class="top-inner">
-    <div class="brand"><span class="k">Integrated Study Suite</span><span class="t">Review · Practice · Exam<span class="ver">v2.13</span></span></div>
+    <div class="brand"><span class="k">Integrated Study Suite</span><span class="t">Review · Practice · Exam<span class="ver">v2.14</span></span></div>
     <div class="top-right">
       <div class="timer" id="timer" style="display:none"><span class="dot"></span><span id="tclock">--:--</span></div>
       <button class="homebtn" id="homebtn" style="display:none">⮌ Home</button>
@@ -394,8 +395,9 @@ section{display:none}section.on{display:block}
     <div class="soon">
       <div class="soon-t">Features coming soon</div>
       <div class="soon-i">· Anki import — bring your existing Anki decks into Review</div>
+      <div class="soon-i">· Cloud sync — progress follows you across devices via your own Google Drive / Dropbox / OneDrive</div>
     </div>
-    <div class="attrib">Integrated Study Suite v2.13 · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
+    <div class="attrib">Integrated Study Suite v2.14 · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
   </section>
 
   <!-- SRS DECK -->
@@ -512,8 +514,8 @@ section{display:none}section.on{display:block}
 </div>
 
 <script>
-/* Integrated Study Suite v2.13 — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='2.13';
+/* Integrated Study Suite v2.14 — Author: Alkarim Billawala / alkarim.billawala.ca */
+const APP_VERSION='2.14';
 const APP_AUTHOR='Alkarim Billawala / alkarim.billawala.ca';
 
 /* ===== STORAGE ===== */
