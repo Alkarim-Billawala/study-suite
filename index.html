@@ -1,7 +1,11 @@
 <!--
-  Integrated Study Suite  ·  v2.7
+  Integrated Study Suite  ·  v2.8
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v2.8: Session difficulty is now MULTI-SELECT — Easy/Medium/Hard toggle independently
+  (e.g. hard-only sessions); "All" selects all three. With all three selected, unrated questions
+  are included (matches old "All"); with a subset, only questions rated in that subset.
+  Old cumulative setting migrates automatically (settings.sessionDiffs replaces sessionDifficulty).
   Changelog v2.7: "Need content?" reworked into a "Default study packs" section below the
   Content library — one-click "+ Add to library" fetches the pack from the site and ingests it
   in-app (manifest now carries pack ids for in-library detection; ⇣ file download kept as a
@@ -26,7 +30,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Alkarim Billawala / alkarim.billawala.ca">
-<title>Integrated Study Suite v2.7</title>
+<title>Integrated Study Suite v2.8</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 :root{--paper:#f3efe6;--paper2:#ece7da;--ink:#1d1b16;--ink-soft:#524f45;--line:#cfc8b6;--accent:#7c2d2d;--accent-soft:#a8534f;--green:#2f6b4f;--green-bg:#e3eee5;--red:#9b2c2c;--red-bg:#f3e0dd;--gold:#9a7b27;--gold-bg:#f1e9cf;--blue:#2d5a6b;--blue-bg:#e0eaee;--shadow:0 1px 0 rgba(0,0,0,.04), 0 8px 28px -16px rgba(40,30,10,.35);}
@@ -282,7 +286,7 @@ section{display:none}section.on{display:block}
 
 <header class="top">
   <div class="top-inner">
-    <div class="brand"><span class="k">Integrated Study Suite</span><span class="t">Review · Practice · Exam<span class="ver">v2.7</span></span></div>
+    <div class="brand"><span class="k">Integrated Study Suite</span><span class="t">Review · Practice · Exam<span class="ver">v2.8</span></span></div>
     <div class="top-right">
       <div class="timer" id="timer" style="display:none"><span class="dot"></span><span id="tclock">--:--</span></div>
       <button class="homebtn" id="homebtn" style="display:none">⮌ Home</button>
@@ -304,7 +308,7 @@ section{display:none}section.on{display:block}
     </div>
 
     <div class="diffsel">
-      <span class="ds-l">Session difficulty — applies to Practice &amp; Exam</span>
+      <span class="ds-l">Session difficulty — pick any mix · applies to Practice &amp; Exam</span>
       <div class="segctl" id="diffSeg">
         <button class="seg" data-d="easy">Easy <i id="dcEasy">0</i></button>
         <button class="seg" data-d="medium">Medium <i id="dcMed">0</i></button>
@@ -341,7 +345,7 @@ section{display:none}section.on{display:block}
       <input type="file" id="restoreFile" accept="application/json" style="display:none">
     </div>
     <div class="savestate" id="saveState"></div>
-    <div class="attrib">Integrated Study Suite v2.7 · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
+    <div class="attrib">Integrated Study Suite v2.8 · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
   </section>
 
   <!-- SRS DECK -->
@@ -442,8 +446,8 @@ section{display:none}section.on{display:block}
 </div>
 
 <script>
-/* Integrated Study Suite v2.7 — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='2.7';
+/* Integrated Study Suite v2.8 — Author: Alkarim Billawala / alkarim.billawala.ca */
+const APP_VERSION='2.8';
 const APP_AUTHOR='Alkarim Billawala / alkarim.billawala.ca';
 
 /* ===== STORAGE ===== */
@@ -477,7 +481,7 @@ function humanFromNow(due,now){if(due<=now)return 'due';return 'in '+humanDelta(
 
 /* ===== STATE ===== */
 let packs=[], sched={}, daily={date:'',count:0};
-let settings={examGroupBy:'system',examCounts:{},practiceSecs:90,practiceTimer:true,practiceShuffle:true,examMinutes:60,examTimer:true,srsNewPerDay:20,sessionDifficulty:'all',revNavCollapsed:false};
+let settings={examGroupBy:'system',examCounts:{},practiceSecs:90,practiceTimer:true,practiceShuffle:true,examMinutes:60,examTimer:true,srsNewPerDay:20,sessionDiffs:['easy','medium','hard'],revNavCollapsed:false};
 const $=id=>document.getElementById(id);
 const SYS_ORDER=['Endo','GI','KU'];
 const SYS_LABEL={Endo:'Endocrine',GI:'Gastrointestinal',KU:'Renal / Urinary'};
@@ -495,9 +499,10 @@ function sysLabel(s){return SYS_LABEL[s]||s;}
 function systemsPresent(set){const arr=[...set];return SYS_ORDER.filter(s=>set.has(s)).concat(arr.filter(s=>!SYS_ORDER.includes(s)));}
 /* difficulty */
 function diffRank(q){return DIFFS.indexOf(q&&q.difficulty);}
-function matchDiff(q){if(settings.sessionDifficulty==='all')return true;const r=diffRank(q);if(r<0)return false;return r<=DIFFS.indexOf(settings.sessionDifficulty);}
+function selDiffs(){const s=Array.isArray(settings.sessionDiffs)?settings.sessionDiffs.filter(d=>DIFFS.includes(d)):[];return s.length?s:DIFFS.slice();}
+function matchDiff(q){const s=selDiffs();if(s.length===DIFFS.length)return true;const r=diffRank(q);return r>=0&&s.includes(DIFFS[r]);}
 function qTestPool(){return qpool().filter(matchDiff);}
-function diffCounts(){const pool=qpool();const c={easy:0,medium:0,hard:0,all:pool.length};pool.forEach(q=>{const r=diffRank(q);if(r===0)c.easy++;if(r>=0&&r<=1)c.medium++;if(r>=0&&r<=2)c.hard++;});return c;}
+function diffCounts(){const pool=qpool();const c={easy:0,medium:0,hard:0,all:pool.length};pool.forEach(q=>{const r=diffRank(q);if(r>=0)c[DIFFS[r]]++;});return c;}
 function diffBadge(q){if(!q||diffRank(q)<0)return '';return `<span class="diffbadge ${q.difficulty}">${q.difficulty}</span>`;}
 
 async function persist(){await Store.set(KEY.packs,packs);await Store.set(KEY.sched,sched);await Store.set(KEY.daily,daily);await Store.set(KEY.settings,settings);}
@@ -547,6 +552,10 @@ async function init(){
   sched=await Store.get(KEY.sched)||{};
   daily=await Store.get(KEY.daily)||{date:today(),count:0};
   const sv=await Store.get(KEY.settings);if(sv)settings=Object.assign(settings,sv);
+  // migrate pre-v2.8 cumulative sessionDifficulty -> multi-select sessionDiffs
+  if(!Array.isArray(settings.sessionDiffs)){const old=settings.sessionDifficulty;
+    settings.sessionDiffs=(old==='easy')?['easy']:(old==='medium')?['easy','medium']:DIFFS.slice();}
+  delete settings.sessionDifficulty;
   deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});
   if(daily.date!==today())daily={date:today(),count:0};
   $('saveState').textContent=STORAGE_MODE==='persistent'?'✓ packs + progress saved across sessions':STORAGE_MODE==='local'?'✓ saved in this browser':'⚠ in-memory only — use Backup to keep data';
@@ -619,7 +628,7 @@ function renderHome(){
   $('mExam').classList.toggle('dim',tp===0);
   // difficulty selector
   const dc=diffCounts();$('dcEasy').textContent=dc.easy;$('dcMed').textContent=dc.medium;$('dcHard').textContent=dc.hard;$('dcAll').textContent=dc.all;
-  $('diffSeg').querySelectorAll('.seg').forEach(b=>b.classList.toggle('on',b.dataset.d===settings.sessionDifficulty));
+  const sd=selDiffs();$('diffSeg').querySelectorAll('.seg').forEach(b=>b.classList.toggle('on',b.dataset.d==='all'?sd.length===DIFFS.length:sd.includes(b.dataset.d)));
   // topic-guides panel — hidden entirely when no active pack bundles guides
   $('revPanel').style.display=nG?'':'none';
   $('revPanelDesc').textContent=`${nG} topic guide${nG===1?'':'s'} bundled in your active packs.`;
@@ -914,7 +923,12 @@ function restore(file){const r=new FileReader();r.onload=async()=>{try{const d=J
 $('mReview').addEventListener('click',()=>{if(deck().length)openReview();});
 $('mPractice').addEventListener('click',()=>{if(qTestPool().length)startPractice();});
 $('mExam').addEventListener('click',()=>{if(qTestPool().length)startExam();});
-$('diffSeg').querySelectorAll('.seg').forEach(b=>b.addEventListener('click',()=>{settings.sessionDifficulty=b.dataset.d;persist();renderHome();}));
+$('diffSeg').querySelectorAll('.seg').forEach(b=>b.addEventListener('click',()=>{
+  const d=b.dataset.d,s=selDiffs();
+  if(d==='all')settings.sessionDiffs=DIFFS.slice();
+  else if(s.includes(d)){if(s.length===1)return;settings.sessionDiffs=s.filter(x=>x!==d);}
+  else settings.sessionDiffs=DIFFS.filter(x=>s.includes(x)||x===d);
+  persist();renderHome();}));
 $('openReviewer').addEventListener('click',()=>{if(activeGuides().length)openReviewer();});
 $('revBack').addEventListener('click',returnFromReviewer);
 $('revNavToggle').addEventListener('click',()=>{settings.revNavCollapsed=!settings.revNavCollapsed;applyRevNav();persist();});
