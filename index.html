@@ -1,7 +1,9 @@
 <!--
-  Integrated Study Suite  ·  v2.9
+  Integrated Study Suite  ·  v2.10
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v2.10: hint line added under the save-state indicator — "Progress lives in this
+  browser — use Backup all / Restore backup to carry it across devices and browsers."
   Changelog v2.9: custom-pack line reworded ("Upload your own custom study packs. ⇣ Download the
   instruction set into your LLM of choice to get started."); pairs with Authoring Guide v2.1
   (pack-only deliverable, guides embedded — no standalone Topic_*.html output).
@@ -33,7 +35,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Alkarim Billawala / alkarim.billawala.ca">
-<title>Integrated Study Suite v2.9</title>
+<title>Integrated Study Suite v2.10</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 :root{--paper:#f3efe6;--paper2:#ece7da;--ink:#1d1b16;--ink-soft:#524f45;--line:#cfc8b6;--accent:#7c2d2d;--accent-soft:#a8534f;--green:#2f6b4f;--green-bg:#e3eee5;--red:#9b2c2c;--red-bg:#f3e0dd;--gold:#9a7b27;--gold-bg:#f1e9cf;--blue:#2d5a6b;--blue-bg:#e0eaee;--shadow:0 1px 0 rgba(0,0,0,.04), 0 8px 28px -16px rgba(40,30,10,.35);}
@@ -101,6 +103,8 @@ section{display:none}section.on{display:block}
 .minor{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.04em;background:transparent;border:1px solid var(--line);color:var(--ink-soft);border-radius:5px;padding:8px 13px;cursor:pointer}
 .minor:hover{border-color:var(--ink);color:var(--ink)}.minor.accent{border-color:var(--accent);color:var(--accent)}
 .savestate{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;text-align:center;color:var(--ink-soft);margin-top:14px}
+.savehint{font-size:13px;text-align:center;color:var(--ink-soft);margin-top:4px}
+.savehint b{font-weight:600;color:var(--ink)}
 .note{font-size:13px;color:var(--ink-soft);text-align:center;margin-top:12px}
 .attrib{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--ink-soft);text-align:center;margin-top:22px}
 .attrib a{color:var(--accent);text-decoration:none}
@@ -289,7 +293,7 @@ section{display:none}section.on{display:block}
 
 <header class="top">
   <div class="top-inner">
-    <div class="brand"><span class="k">Integrated Study Suite</span><span class="t">Review · Practice · Exam<span class="ver">v2.9</span></span></div>
+    <div class="brand"><span class="k">Integrated Study Suite</span><span class="t">Review · Practice · Exam<span class="ver">v2.10</span></span></div>
     <div class="top-right">
       <div class="timer" id="timer" style="display:none"><span class="dot"></span><span id="tclock">--:--</span></div>
       <button class="homebtn" id="homebtn" style="display:none">⮌ Home</button>
@@ -348,7 +352,8 @@ section{display:none}section.on{display:block}
       <input type="file" id="restoreFile" accept="application/json" style="display:none">
     </div>
     <div class="savestate" id="saveState"></div>
-    <div class="attrib">Integrated Study Suite v2.9 · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
+    <div class="savehint">Progress lives in this browser — use <b>Backup all</b> / <b>Restore backup</b> to carry it across devices and browsers.</div>
+    <div class="attrib">Integrated Study Suite v2.10 · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
   </section>
 
   <!-- SRS DECK -->
@@ -449,8 +454,8 @@ section{display:none}section.on{display:block}
 </div>
 
 <script>
-/* Integrated Study Suite v2.9 — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='2.9';
+/* Integrated Study Suite v2.10 — Author: Alkarim Billawala / alkarim.billawala.ca */
+const APP_VERSION='2.10';
 const APP_AUTHOR='Alkarim Billawala / alkarim.billawala.ca';
 
 /* ===== STORAGE ===== */
