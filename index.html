@@ -1,7 +1,11 @@
 <!--
-  Integrated Study Suite  ·  v0.2.23 (beta)
+  Integrated Study Suite  ·  v0.2.24 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.24: browser/mouse back-forward support — section changes push History API
+  entries; popstate maps them back onto app screens (gotoSec) with graceful re-entry (stale
+  quiz/review/guide states fall back to Home) and a leave-confirm guard for active sessions
+  (declining re-pushes the entry). Back from Home still exits the site, as expected.
   Changelog v0.2.23: Topic Guides viewer rework — guide iframe is full-width and taller
   (calc(100vh-195px)); the topic list is now an OVERLAY drawer floating over the guide
   ("▤ Topics" button top-left when closed; "◂ Hide topic list" row at the top of the list;
@@ -444,7 +448,7 @@ section{display:none}section.on{display:block}
       <div class="soon-i">· Anki import — bring your existing Anki decks into Review</div>
       <div class="soon-i">· User creation and sync — save your progress and study anywhere</div>
     </div>
-    <div class="attrib">Integrated Study Suite v0.2.23 · <span class="betatag">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
+    <div class="attrib">Integrated Study Suite v0.2.24 · <span class="betatag">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
   </section>
 
   <!-- SRS DECK -->
@@ -570,7 +574,7 @@ section{display:none}section.on{display:block}
 
 <script>
 /* Integrated Study Suite v0.2.18 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.23';
+const APP_VERSION='0.2.24';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -751,6 +755,7 @@ function renderDefaultPacks(){
 
 async function init(){
   detectStorage();
+  try{history.replaceState({sec:'home'},'');}catch(e){}
   initPackLinks();
   if(!SUPPORT_URL.includes('CHANGEME')){$('supportLink').href=SUPPORT_URL;$('supportWrap').style.display='';}
   packs=await Store.get(KEY.packs)||[];
@@ -818,7 +823,41 @@ function removePack(id){if(!confirm('Remove this pack? Your review progress is k
 
 /* ===== NAV ===== */
 function currentSection(){const s=document.querySelector('section.on');return s?s.id:'home';}
-function show(which){const switching=currentSection()!==which;document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===which));$('homebtn').style.display=(which==='home'?'none':'');$('timer').style.display=(which==='quiz'&&timerWanted)?'':'none';if(switching)window.scrollTo({top:0});}
+let navLock=false; // true while a popstate is driving navigation (prevents double-push)
+function show(which){const switching=currentSection()!==which;document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===which));$('homebtn').style.display=(which==='home'?'none':'');$('timer').style.display=(which==='quiz'&&timerWanted)?'':'none';if(switching){if(!navLock){try{history.pushState({sec:which},'');}catch(e){}}window.scrollTo({top:0});}}
+/* Browser/mouse back-forward: map history entries onto app sections. */
+function gotoSec(t){
+  switch(t){
+    case 'quiz':
+      if(qorder.length){show('quiz');renderQuiz();if(!qTestSubmitted)startQTick();}
+      else{try{history.replaceState({sec:'home'},'');}catch(e){}renderHome();}
+      break;
+    case 'results':
+      if(qorder.length)show('results');else renderHome();
+      break;
+    case 'reviewer':
+      if(activeGuides().length){
+        show('reviewer');renderGuideList();
+        const g=activeGuides().find(x=>guideKey(x)===curGuideKey);
+        if(g)loadGuide(g,null);else{const org=organizeGuides();if(org.length)loadGuide(org[0].items[0].g,null);}
+      }else renderHome();
+      break;
+    case 'srs': case 'study': case 'srsdone': case 'browse':
+      if(deck().length)openReview();else renderHome();
+      break;
+    default: renderHome();
+  }
+}
+window.addEventListener('popstate',e=>{
+  const target=(e.state&&e.state.sec)||'home';
+  const cur=currentSection();
+  if(target===cur)return;
+  const inSession=(cur==='quiz'&&!qTestSubmitted)||cur==='study';
+  if(inSession&&!confirm('Leave this session?')){navLock=true;try{history.pushState({sec:cur},'');}catch(err){}navLock=false;return;}
+  if(cur==='quiz'||cur==='study')clearInterval(qTimerId);
+  navLock=true;
+  try{gotoSec(target);}finally{navLock=false;}
+});
 
 /* ===== HOME ===== */
 function renderHome(){
