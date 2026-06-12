@@ -1,62 +1,66 @@
 <!--
-  Integrated Study Suite  ·  v2.17
+  Integrated Study Suite  ·  v0.2.18 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
-  Changelog v2.17: school/program level added above Year in the Default study packs panel —
+  VERSIONING NOTE: the app is in beta — scheme is 0.2.x (was 2.x; v2.17 ≡ v0.2.17, backported in
+  the changelog labels below). Archived files older than this one still use the 2.x filenames.
+  Changelog v0.2.18: beta versioning scheme adopted (APP_VERSION='0.2.18', APP_BETA=true);
+  version chip removed from the header — version + beta tag now live in the footer only.
+  Changelog v0.2.17: school/program level added above Year in the Default study packs panel —
   packs carry an optional `school` field; a horizontal selector row of schools sits at the top
   of the panel (one school renders selected; more schools become switchable chips). Packs
   without a school group under "Other". Currently: UofT — Temerty Medicine.
-  Changelog v2.16: per-pack "⇣ file" download link removed from the Default study packs rows
+  Changelog v0.2.16: per-pack "⇣ file" download link removed from the Default study packs rows
   (one-click Add covers the need; code kept commented in dpRow for easy revival).
-  Changelog v2.15: Default study packs panel is now hierarchical — packs carry optional
+  Changelog v0.2.15: Default study packs panel is now hierarchical — packs carry optional
   year/course/weeks metadata (manifest passes it through); panel groups Year → collapsible
   course toggles (▸ CPC 2) → pack rows. Single course auto-expands; packs without metadata
   fall into an "Other packs" group. Pack schema change is additive/optional.
-  Changelog v2.14: "Cloud sync" added to the Features coming soon list (see Future-Features.txt §2).
-  Changelog v2.13: "Backup all" in the Add to Home Screen modal's warning box is now clickable —
+  Changelog v0.2.14: "Cloud sync" added to the Features coming soon list (see Future-Features.txt §2).
+  Changelog v0.2.13: "Backup all" in the Add to Home Screen modal's warning box is now clickable —
   triggers the same backup() download as the home-screen button.
-  Changelog v2.12: PWA install support — "Add to Home Screen" button in the header opens a modal
+  Changelog v0.2.12: PWA install support — "Add to Home Screen" button in the header opens a modal
   with per-device instructions (auto-detects iPhone/iPad, Mac, Android, Windows; user can switch)
   and a backup-first reminder (installed apps keep separate progress). Head now links
   manifest.webmanifest + apple-touch-icon (served on the site; harmless 404s locally) so
   Android/Windows browsers offer a real standalone install. "Features coming soon" section
   added above the footer (kept in sync with Future-Features.txt — top lines only).
-  Changelog v2.11: custom-pack line hyperlink shortened to "⇣ Download the instruction set";
+  Changelog v0.2.11: custom-pack line hyperlink shortened to "⇣ Download the instruction set";
   "into your LLM of choice to get started." is now plain text.
-  Changelog v2.10: hint line added under the save-state indicator — "Progress lives in this
+  Changelog v0.2.10: hint line added under the save-state indicator — "Progress lives in this
   browser — use Backup all / Restore backup to carry it across devices and browsers."
-  Changelog v2.9: custom-pack line reworded ("Upload your own custom study packs. ⇣ Download the
+  Changelog v0.2.9: custom-pack line reworded ("Upload your own custom study packs. ⇣ Download the
   instruction set into your LLM of choice to get started."); pairs with Authoring Guide v2.1
   (pack-only deliverable, guides embedded — no standalone Topic_*.html output).
-  Changelog v2.8: Session difficulty is now MULTI-SELECT — Easy/Medium/Hard toggle independently
+  Changelog v0.2.8: Session difficulty is now MULTI-SELECT — Easy/Medium/Hard toggle independently
   (e.g. hard-only sessions); "All" selects all three. With all three selected, unrated questions
   are included (matches old "All"); with a subset, only questions rated in that subset.
   Old cumulative setting migrates automatically (settings.sessionDiffs replaces sessionDifficulty).
-  Changelog v2.7: "Need content?" reworked into a "Default study packs" section below the
+  Changelog v0.2.7: "Need content?" reworked into a "Default study packs" section below the
   Content library — one-click "+ Add to library" fetches the pack from the site and ingests it
   in-app (manifest now carries pack ids for in-library detection; ⇣ file download kept as a
   secondary option). Instruction-set link moved to a line above the dropzone.
-  Changelog v2.6: "Content Reviewer" renamed to "Topic Guides" in the UI; the home-screen
+  Changelog v0.2.6: "Content Reviewer" renamed to "Topic Guides" in the UI; the home-screen
   Topic Guides panel is now hidden entirely when no active pack bundles guides.
-  Changelog v2.5: download symbol (⇣) added to the "Build your own" authoring-guide link.
-  Changelog v2.4: reworded authoring-guide download link to "Build your own — instruction set for your LLM".
-  Changelog v2.3: home-screen "Get study packs" panel — fetches same-origin packs-manifest.json
+  Changelog v0.2.5: download symbol (⇣) added to the "Build your own" authoring-guide link.
+  Changelog v0.2.4: reworded authoring-guide download link to "Build your own — instruction set for your LLM".
+  Changelog v0.2.3: home-screen "Get study packs" panel — fetches same-origin packs-manifest.json
   (generated at deploy time) and renders pack download links + an authoring-guide link; the panel
   stays hidden when the manifest is absent (e.g. running locally from file://). App stays content-free.
-  Changelog v2.2: collapsible Content Reviewer sidebar (state persisted in settings);
+  Changelog v0.2.2: collapsible Content Reviewer sidebar (state persisted in settings);
   header timer now only visible during an active Practice/Exam session (was lingering
   when leaving mid-session via Home or the reviewer).
-  Changelog v2.1: Content Reviewer redesigned — sidebar navigation with intelligent sorting
+  Changelog v0.2.1: Content Reviewer redesigned — sidebar navigation with intelligent sorting
   (parses "Week NN", "Topic NN", and roman numerals in titles for numeric order; groups by
   source pack when several packs contribute guides).
-  Changelog v2.0: embedded topic-guide Content Reviewer (no same-folder dependency);
+  Changelog v0.2.0: embedded topic-guide Content Reviewer (no same-folder dependency);
   per-question difficulty (easy/medium/hard) display + cumulative session filter for Practice/Exam;
   versioning + authorship metadata.
 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Alkarim Billawala / alkarim.billawala.ca">
-<title>Integrated Study Suite v2.17</title>
+<title>Integrated Study Suite (beta)</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#7c2d2d">
@@ -74,7 +78,7 @@ header.top{position:sticky;top:0;z-index:40;background:rgba(243,239,230,.92);bac
 .brand{display:flex;flex-direction:column;line-height:1}
 .brand .k{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
 .brand .t{font-family:'Fraunces',serif;font-weight:600;font-size:20px;letter-spacing:-.01em}
-.brand .t .ver{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink-soft);font-weight:400;margin-left:6px}
+.betatag{color:var(--accent);text-transform:uppercase;letter-spacing:.14em;border:1px solid var(--accent-soft);border-radius:8px;padding:0 5px}
 .top-right{display:flex;align-items:center;gap:10px}
 .timer{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:21px;padding:6px 12px;border:1.5px solid var(--ink);border-radius:3px;background:var(--paper);display:flex;align-items:center;gap:8px;white-space:nowrap}
 .timer .dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
@@ -354,7 +358,7 @@ section{display:none}section.on{display:block}
 
 <header class="top">
   <div class="top-inner">
-    <div class="brand"><span class="k">Integrated Study Suite</span><span class="t">Review · Practice · Exam<span class="ver">v2.17</span></span></div>
+    <div class="brand"><span class="k">Integrated Study Suite</span><span class="t">Review · Practice · Exam</span></div>
     <div class="top-right">
       <div class="timer" id="timer" style="display:none"><span class="dot"></span><span id="tclock">--:--</span></div>
       <button class="homebtn" id="homebtn" style="display:none">⮌ Home</button>
@@ -421,7 +425,7 @@ section{display:none}section.on{display:block}
       <div class="soon-i">· Anki import — bring your existing Anki decks into Review</div>
       <div class="soon-i">· Cloud sync — progress follows you across devices via your own Google Drive / Dropbox / OneDrive</div>
     </div>
-    <div class="attrib">Integrated Study Suite v2.17 · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
+    <div class="attrib">Integrated Study Suite v0.2.18 · <span class="betatag">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
   </section>
 
   <!-- SRS DECK -->
@@ -538,8 +542,9 @@ section{display:none}section.on{display:block}
 </div>
 
 <script>
-/* Integrated Study Suite v2.17 — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='2.17';
+/* Integrated Study Suite v0.2.18 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
+const APP_VERSION='0.2.18';
+const APP_BETA=true;
 const APP_AUTHOR='Alkarim Billawala / alkarim.billawala.ca';
 
 /* ===== STORAGE ===== */
@@ -670,7 +675,7 @@ function dpRow(p){
     }catch(e){btn.disabled=false;btn.textContent='+ Add to library';alert('Could not load that pack — check your connection and try again.');}
   };
   row.appendChild(btn);
-  /* per-pack raw-file download — disabled v2.16 (packs are bundled; Add covers it). Revive by uncommenting:
+  /* per-pack raw-file download — disabled v0.2.16 (packs are bundled; Add covers it). Revive by uncommenting:
   const dl=document.createElement('a');dl.className='dp-dl';dl.href=encodeURI(String(p.file));dl.setAttribute('download','');dl.textContent='⇣ file';row.appendChild(dl); */
   return row;
 }
@@ -722,7 +727,7 @@ async function init(){
   sched=await Store.get(KEY.sched)||{};
   daily=await Store.get(KEY.daily)||{date:today(),count:0};
   const sv=await Store.get(KEY.settings);if(sv)settings=Object.assign(settings,sv);
-  // migrate pre-v2.8 cumulative sessionDifficulty -> multi-select sessionDiffs
+  // migrate pre-v0.2.8 cumulative sessionDifficulty -> multi-select sessionDiffs
   if(!Array.isArray(settings.sessionDiffs)){const old=settings.sessionDifficulty;
     settings.sessionDiffs=(old==='easy')?['easy']:(old==='medium')?['easy','medium']:DIFFS.slice();}
   delete settings.sessionDifficulty;
