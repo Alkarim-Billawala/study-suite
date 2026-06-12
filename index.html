@@ -1,0 +1,915 @@
+<!--
+  Integrated Study Suite  ·  v2.3
+  Author: Alkarim Billawala / alkarim.billawala.ca
+  Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v2.3: home-screen "Get study packs" panel — fetches same-origin packs-manifest.json
+  (generated at deploy time) and renders pack download links + an authoring-guide link; the panel
+  stays hidden when the manifest is absent (e.g. running locally from file://). App stays content-free.
+  Changelog v2.2: collapsible Content Reviewer sidebar (state persisted in settings);
+  header timer now only visible during an active Practice/Exam session (was lingering
+  when leaving mid-session via Home or the reviewer).
+  Changelog v2.1: Content Reviewer redesigned — sidebar navigation with intelligent sorting
+  (parses "Week NN", "Topic NN", and roman numerals in titles for numeric order; groups by
+  source pack when several packs contribute guides).
+  Changelog v2.0: embedded topic-guide Content Reviewer (no same-folder dependency);
+  per-question difficulty (easy/medium/hard) display + cumulative session filter for Practice/Exam;
+  versioning + authorship metadata.
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Alkarim Billawala / alkarim.billawala.ca">
+<title>Integrated Study Suite v2.3</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+:root{--paper:#f3efe6;--paper2:#ece7da;--ink:#1d1b16;--ink-soft:#524f45;--line:#cfc8b6;--accent:#7c2d2d;--accent-soft:#a8534f;--green:#2f6b4f;--green-bg:#e3eee5;--red:#9b2c2c;--red-bg:#f3e0dd;--gold:#9a7b27;--gold-bg:#f1e9cf;--blue:#2d5a6b;--blue-bg:#e0eaee;--shadow:0 1px 0 rgba(0,0,0,.04), 0 8px 28px -16px rgba(40,30,10,.35);}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{background:radial-gradient(120% 90% at 100% 0%, rgba(124,45,45,.05), transparent 55%),var(--paper);color:var(--ink);font-family:'Newsreader',Georgia,serif;font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:0 22px 120px}
+header.top{position:sticky;top:0;z-index:40;background:rgba(243,239,230,.92);backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--line)}
+.top-inner{max-width:860px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:14px;justify-content:space-between}
+.brand{display:flex;flex-direction:column;line-height:1}
+.brand .k{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
+.brand .t{font-family:'Fraunces',serif;font-weight:600;font-size:20px;letter-spacing:-.01em}
+.brand .t .ver{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink-soft);font-weight:400;margin-left:6px}
+.top-right{display:flex;align-items:center;gap:10px}
+.timer{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:21px;padding:6px 12px;border:1.5px solid var(--ink);border-radius:3px;background:var(--paper);display:flex;align-items:center;gap:8px;white-space:nowrap}
+.timer .dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
+.timer.warn{color:var(--accent);border-color:var(--accent)}.timer.over{color:var(--red);border-color:var(--red)}
+.timer.over .dot,.timer.warn .dot{background:var(--red);animation:pulse 1.1s infinite}
+@keyframes pulse{50%{opacity:.4}}
+.homebtn{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;background:transparent;border:1.5px solid var(--ink);color:var(--ink);border-radius:4px;padding:7px 12px;cursor:pointer}
+.homebtn:hover{background:var(--ink);color:var(--paper)}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+section{display:none}section.on{display:block}
+#home{margin-top:38px;animation:rise .5s ease both}
+#home .crest{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);text-align:center}
+#home h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(30px,5.5vw,46px);line-height:1.05;letter-spacing:-.02em;margin:.3em 0 .15em;text-align:center}
+#home .sub{color:var(--ink-soft);font-size:18px;max-width:560px;margin:0 auto;text-align:center}
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px 0 6px}
+@media(max-width:680px){.modes{grid-template-columns:1fr}}
+.mode{border:1.5px solid var(--line);background:var(--paper);border-radius:10px;padding:20px;cursor:pointer;transition:transform .12s,border-color .2s,box-shadow .2s;text-align:left}
+.mode:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:var(--shadow)}
+.mode.dim{opacity:.45;cursor:not-allowed}.mode.dim:hover{transform:none;border-color:var(--line);box-shadow:none}
+.mode .mt{font-family:'Fraunces',serif;font-weight:600;font-size:23px;margin-bottom:5px}
+.mode .md{color:var(--ink-soft);font-size:15px;line-height:1.5}
+.mode .feat{margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.04em;color:var(--accent);text-transform:uppercase}
+.rule{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:24px 0}
+/* difficulty selector */
+.diffsel{margin:18px 0 2px;text-align:center}
+.ds-l{display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:9px}
+.segctl{display:inline-flex;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;background:var(--paper)}
+.seg{font-family:'Newsreader';font-size:15px;background:transparent;border:none;border-right:1px solid var(--line);color:var(--ink);padding:9px 16px;cursor:pointer;transition:.12s}
+.seg:last-child{border-right:none}.seg:hover{background:var(--paper2)}
+.seg.on{background:var(--ink);color:var(--paper)}
+.seg i{font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:11px;opacity:.6;margin-left:5px}
+.seg.on i{opacity:.8}
+/* content reviewer panel */
+.revpanel{display:flex;align-items:center;justify-content:space-between;gap:14px;border:1.5px solid var(--line);background:var(--paper);border-radius:10px;padding:16px 18px;margin:18px 0 0}
+.revpanel .rp-t{font-family:'Fraunces',serif;font-weight:600;font-size:19px}
+.revpanel .rp-d{color:var(--ink-soft);font-size:14px;margin-top:3px}
+/* library */
+.libhdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.libhdr .lt{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.dropzone{border:1.5px dashed var(--line);border-radius:10px;padding:26px;text-align:center;color:var(--ink-soft);background:var(--paper);transition:.15s;cursor:pointer}
+.dropzone:hover,.dropzone.drag{border-color:var(--accent);background:var(--paper2)}
+.dropzone .big{font-family:'Fraunces',serif;font-size:19px;color:var(--ink)}
+.dropzone .small{font-size:14px;margin-top:5px}
+.packrow{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:11px 14px;margin-bottom:8px}
+.packrow .pn{font-weight:600}
+.packrow .pm{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em}
+.packrow .pkleft{display:flex;align-items:center;gap:13px}
+.packrow.off{opacity:.5}
+.packrow .switch{flex:none;min-width:46px;text-align:center}
+.packrow .rm{font-family:'IBM Plex Mono',monospace;font-size:11px;border:1px solid var(--line);background:transparent;color:var(--ink-soft);border-radius:5px;padding:6px 10px;cursor:pointer}
+.packrow .rm:hover{border-color:var(--red);color:var(--red)}
+.tools{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin-top:18px}
+.minor{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.04em;background:transparent;border:1px solid var(--line);color:var(--ink-soft);border-radius:5px;padding:8px 13px;cursor:pointer}
+.minor:hover{border-color:var(--ink);color:var(--ink)}.minor.accent{border-color:var(--accent);color:var(--accent)}
+.savestate{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;text-align:center;color:var(--ink-soft);margin-top:14px}
+.note{font-size:13px;color:var(--ink-soft);text-align:center;margin-top:12px}
+.attrib{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--ink-soft);text-align:center;margin-top:22px}
+.attrib a{color:var(--accent);text-decoration:none}
+.btn{font-family:'Fraunces',serif;font-weight:600;font-size:19px;background:var(--ink);color:var(--paper);border:none;border-radius:5px;padding:13px 36px;cursor:pointer;box-shadow:var(--shadow);transition:transform .12s,background .2s}
+.btn:hover{background:var(--accent);transform:translateY(-1px)}.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn.sm{font-size:15px;padding:10px 20px}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink);box-shadow:none}.btn.ghost:hover{background:var(--ink);color:var(--paper)}
+.btn.ghost:disabled:hover{background:transparent;color:var(--ink)}
+#srs{margin-top:34px;animation:rise .4s ease both}
+#srs h2,#browse h2{font-family:'Fraunces',serif;font-weight:600;font-size:26px;margin:0 0 4px}
+.counts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0 4px}
+.cbox{border:1.5px solid var(--line);background:var(--paper);border-radius:10px;padding:16px 10px;text-align:center}
+.cbox .n{font-family:'Fraunces',serif;font-size:32px;font-weight:600;line-height:1}
+.cbox .l{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-top:6px}
+.cbox.newc .n{color:var(--blue)}.cbox.learnc .n{color:var(--gold)}.cbox.revc .n{color:var(--green)}
+.scopeline{text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--ink-soft);margin:12px 0 0;text-transform:uppercase}.scopeline b{color:var(--accent)}
+.studybar{display:flex;justify-content:center;gap:12px;margin:16px 0 4px;flex-wrap:wrap}
+.panelhdr{display:flex;justify-content:space-between;align-items:center;cursor:pointer;margin-top:6px}
+.panelhdr .ph-t{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.panelhdr .ph-r{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft)}
+#topicPanel{margin-top:14px;display:none}#topicPanel.open{display:block}
+.tgroup{margin-bottom:14px}.tgroup .gname{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:7px}
+.tchips{display:flex;flex-wrap:wrap;gap:8px}
+.tchip{font-family:'Newsreader';font-size:15px;border:1.5px solid var(--line);background:var(--paper);border-radius:20px;padding:6px 13px;cursor:pointer;transition:.12s;display:flex;align-items:center;gap:7px}
+.tchip:hover{border-color:var(--accent-soft)}.tchip.on{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.tchip .ct{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink-soft);background:var(--paper2);border-radius:10px;padding:1px 6px}
+.tchip.on .ct{color:var(--paper);background:rgba(255,255,255,.18)}.tchip .ct.zero{opacity:.4}
+.topicactions{display:flex;gap:10px;margin-top:6px}
+.sysbreak{max-width:600px;margin:0 auto}
+.sysrow{margin:10px 0}.sysrow .top{display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px}
+.sysrow .name{font-weight:600}.sysrow .sc{font-family:'IBM Plex Mono',monospace;color:var(--ink-soft);font-size:12px}
+.sbar{height:8px;background:var(--paper2);border:1px solid var(--line);border-radius:20px;overflow:hidden}.sbar>i{display:block;height:100%;background:linear-gradient(90deg,#3f8a64,var(--green))}
+#study{margin-top:24px}
+.sprog{display:flex;justify-content:space-between;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--ink-soft);text-transform:uppercase;margin-bottom:8px}
+.sprog .tag{color:var(--accent);border:1px solid var(--line);background:var(--paper);padding:3px 9px;border-radius:20px}
+.cardbox{border:1.5px solid var(--line);background:var(--paper);border-radius:12px;padding:24px;box-shadow:var(--shadow);animation:rise .25s ease both}
+.ctype{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px}
+.prompt{font-size:20px;line-height:1.55}.prompt .lead{font-family:'Fraunces',serif;font-weight:600}
+.choices{display:flex;flex-direction:column;gap:9px;margin-top:16px}
+.choice{display:flex;gap:11px;align-items:flex-start;border:1.5px solid var(--line);background:var(--paper);border-radius:7px;padding:11px 14px;cursor:pointer;font:inherit;color:inherit;text-align:left;transition:.12s}
+.choice:hover{border-color:var(--accent-soft)}
+.choice .box{flex:none;width:24px;height:24px;border:1.5px solid var(--ink-soft);display:grid;place-items:center;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);margin-top:1px}
+.choice.radio .box{border-radius:50%}.choice.check .box{border-radius:5px}
+.choice.sel{border-color:var(--ink);background:var(--paper2)}.choice.sel .box{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.choice.correct{border-color:var(--green);background:var(--green-bg)}.choice.correct .box{background:var(--green);color:#fff;border-color:var(--green)}
+.choice.wrong{border-color:var(--red);background:var(--red-bg)}.choice.wrong .box{background:var(--red);color:#fff;border-color:var(--red)}
+.choice[disabled]{cursor:default}
+.clozetext{font-size:21px;line-height:1.7;margin-top:16px}
+.cz{border-bottom:2px solid var(--accent-soft);padding:0 3px;color:var(--ink-soft)}
+.cz.on{background:var(--green-bg);border-bottom-color:var(--green);color:var(--ink);font-weight:600;border-radius:3px}
+.orderwrap{margin-top:16px}.pool{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.chip{font-family:'Newsreader';font-size:16px;border:1.5px solid var(--line);background:var(--paper);border-radius:7px;padding:8px 13px;cursor:pointer;transition:.12s}
+.chip:hover{border-color:var(--accent-soft)}.chip[disabled]{opacity:.35;cursor:default}
+.seq{display:flex;flex-direction:column;gap:7px}
+.seqitem{display:flex;gap:11px;align-items:center;border:1.5px solid var(--line);background:var(--paper2);border-radius:7px;padding:9px 13px;font-size:16px}
+.seqitem .num{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--accent);width:18px}
+.seqitem.correct{border-color:var(--green);background:var(--green-bg)}.seqitem.wrong{border-color:var(--red);background:var(--red-bg)}
+.miniresetbar{margin-top:8px}
+.matchwrap{margin-top:16px;display:flex;flex-direction:column;gap:9px}
+.matchrow{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+.matchrow .ml{font-size:16px}.matchrow select{font-family:'Newsreader';font-size:15px;padding:7px 9px;border:1.5px solid var(--line);border-radius:6px;background:var(--paper);min-width:150px}
+.matchrow.correct select{border-color:var(--green);background:var(--green-bg)}.matchrow.wrong select{border-color:var(--red);background:var(--red-bg)}
+.banner{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin:18px 0 0}.banner.ok{color:var(--green)}.banner.no{color:var(--red)}
+.answerbox{margin-top:12px;border-left:3px solid var(--accent);background:var(--paper);border-radius:0 6px 6px 0;padding:14px 17px;font-size:16.5px;line-height:1.6;animation:rise .25s ease both}
+.answerbox .h{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}.answerbox b{font-weight:600}
+.guidelink{margin-top:12px;border:1px dashed var(--line);border-radius:6px;padding:11px 14px;background:var(--paper);font-size:15px}
+.guidelink .gt{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
+.guidelink a{display:inline-block;margin-top:7px;color:var(--accent);font-weight:600;text-decoration:none;border-bottom:1.5px solid var(--accent-soft);cursor:pointer}
+.guidelink .hint{font-size:12px;color:var(--ink-soft);margin-top:6px;font-style:italic}
+.diffbadge{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;border-radius:8px;padding:2px 8px;border:1px solid;vertical-align:middle}
+.diffbadge.easy{color:var(--green);border-color:var(--green);background:var(--green-bg)}
+.diffbadge.medium{color:var(--gold);border-color:var(--gold);background:var(--gold-bg)}
+.diffbadge.hard{color:var(--red);border-color:var(--red);background:var(--red-bg)}
+.showbar{display:flex;justify-content:center;margin-top:20px}
+.showbtn{font-family:'Fraunces',serif;font-weight:600;font-size:17px;background:var(--ink);color:var(--paper);border:none;border-radius:5px;padding:12px 34px;cursor:pointer}.showbtn:hover{background:var(--accent)}
+.grades{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:18px}
+.gbtn{border:1.5px solid var(--line);background:var(--paper);border-radius:8px;padding:11px 6px;cursor:pointer;text-align:center;transition:.12s}.gbtn:hover{transform:translateY(-1px)}
+.gbtn .gl{font-family:'Fraunces',serif;font-weight:600;font-size:16px}.gbtn .gi{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);margin-top:3px}
+.gbtn.again{border-color:var(--red)}.gbtn.again .gl{color:var(--red)}.gbtn.hard{border-color:var(--gold)}.gbtn.hard .gl{color:var(--gold)}
+.gbtn.good{border-color:var(--green)}.gbtn.good .gl{color:var(--green)}.gbtn.easy{border-color:var(--blue)}.gbtn.easy .gl{color:var(--blue)}
+#srsdone{text-align:center;margin-top:48px;animation:rise .5s ease both}
+#srsdone .big{font-family:'Fraunces',serif;font-size:40px;font-weight:600}#srsdone .sub{color:var(--ink-soft);font-size:18px;margin-top:6px}
+#srsdone .stats{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink-soft);margin:20px 0}
+.done-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+#browse{margin-top:24px}
+.brow{display:flex;justify-content:space-between;gap:10px;align-items:center;border:1px solid var(--line);background:var(--paper);border-radius:7px;padding:10px 13px;margin-bottom:7px;cursor:pointer;transition:.12s}
+.brow:hover{border-color:var(--accent)}.brow .bl{font-size:15px}
+.brow .bmeta{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.04em;color:var(--ink-soft);text-transform:uppercase}
+.brow .bdue{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);white-space:nowrap}
+.bsys{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--accent)}
+/* reviewer */
+#reviewer{margin-top:24px}
+.revbar{display:flex;align-items:center;gap:14px;margin:0 0 14px}
+.revbar h2{font-family:'Fraunces',serif;font-weight:600;font-size:24px;margin:0}
+/* get-packs panel (only shown when a packs-manifest.json is served alongside the app) */
+.getpacks{margin-top:14px;border:1px dashed var(--line);border-radius:8px;padding:14px 16px}
+.getpacks .gp-t{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:9px}
+.gp-list{display:flex;flex-wrap:wrap;gap:8px}
+.gp-link{font-family:'Newsreader';font-size:15px;border:1.5px solid var(--line);background:var(--paper);border-radius:20px;padding:6px 13px;color:var(--ink);text-decoration:none;transition:.12s;display:inline-flex;align-items:center;gap:6px}
+.gp-link:hover{border-color:var(--accent-soft)}
+.gp-link.build{border-style:dashed;color:var(--ink-soft)}
+.revlayout{display:flex;gap:16px;align-items:stretch}
+.revlayout.navhide .revnav{display:none}
+.revbar .navtoggle{margin-left:auto}
+.revnav{flex:0 0 248px;width:248px;max-height:78vh;overflow-y:auto;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 8px}
+.revnav:empty{display:none}
+.revgroup+.revgroup{margin-top:14px}
+.revgroup .gname{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 6px 6px;border-bottom:1px solid var(--line);padding-bottom:4px}
+.revitem{display:flex;align-items:baseline;gap:8px;width:100%;text-align:left;font-family:'Newsreader';font-size:15px;line-height:1.25;border:1.5px solid transparent;background:none;border-radius:8px;padding:7px 9px;cursor:pointer;transition:.12s;color:var(--ink)}
+.revitem:hover{border-color:var(--accent-soft)}
+.revitem.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.revitem .gn{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink-soft);background:var(--paper2);border-radius:9px;padding:1px 6px;flex:0 0 auto}
+.revitem.on .gn{color:var(--paper);background:rgba(255,255,255,.18)}
+.revmain{flex:1 1 auto;min-width:0}
+.guideframe{width:100%;height:78vh;border:1.5px solid var(--line);border-radius:10px;background:#fff}
+@media(max-width:760px){.revlayout{flex-direction:column}.revnav{width:auto;flex:0 0 auto;max-height:34vh}.guideframe{height:62vh}}
+.revempty{color:var(--ink-soft);font-size:15px;border:1px dashed var(--line);border-radius:8px;padding:22px;text-align:center}
+/* QUIZ */
+#quiz{margin-top:22px}
+.qmeta{display:flex;align-items:center;justify-content:space-between;margin:0 0 6px;gap:10px}
+.qmeta .left{display:flex;align-items:center;gap:8px}
+.qmeta .tag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);border:1px solid var(--line);background:var(--paper);padding:4px 9px;border-radius:20px}
+.qmeta .pos{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft)}
+.progress{height:5px;background:var(--paper2);border-radius:20px;overflow:hidden;border:1px solid var(--line)}.progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent-soft),var(--accent));transition:width .35s}
+.qcard{animation:rise .3s ease both}
+.stem{font-size:20px;line-height:1.6;margin:18px 0 18px}.stem .lead{font-family:'Fraunces',serif;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:11px}
+.opt{display:flex;gap:13px;align-items:flex-start;border:1.5px solid var(--line);background:var(--paper);border-radius:7px;padding:13px 15px;cursor:pointer;transition:border-color .15s,background .15s,transform .08s;text-align:left;font:inherit;color:inherit;width:100%}
+.opt:hover{border-color:var(--accent-soft);transform:translateX(2px)}
+.opt .letter{flex:none;width:27px;height:27px;border-radius:50%;border:1.5px solid var(--ink-soft);display:grid;place-items:center;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:13px;color:var(--ink-soft);transition:all .15s;margin-top:1px}
+.opt.sel{border-color:var(--ink);background:var(--paper2)}.opt.sel .letter{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.opt.correct{border-color:var(--green);background:var(--green-bg)}.opt.correct .letter{background:var(--green);color:#fff;border-color:var(--green)}
+.opt.wrong{border-color:var(--red);background:var(--red-bg)}.opt.wrong .letter{background:var(--red);color:#fff;border-color:var(--red)}
+.opt.locked{cursor:default}.opt.locked:hover{transform:none}.opt:disabled{cursor:default}
+.verdictline{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin:16px 0 0}.verdictline.ok{color:var(--green)}.verdictline.no{color:var(--red)}
+.controls{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:24px}.controls .mid{display:flex;gap:10px}
+.nbtn{font-family:'Newsreader';font-size:16px;background:var(--paper);border:1.5px solid var(--line);color:var(--ink);padding:10px 20px;border-radius:5px;cursor:pointer;transition:all .15s}.nbtn:hover{border-color:var(--ink)}.nbtn:disabled{opacity:.35;cursor:not-allowed}
+.nbtn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink);font-family:'Fraunces',serif;font-weight:600}.nbtn.primary:hover{background:var(--accent);border-color:var(--accent)}.nbtn.primary:disabled{opacity:.4}
+.flagbtn.on{background:var(--gold);color:#fff;border-color:var(--gold)}
+.palette{margin:36px 0 0;border-top:1px solid var(--line);padding-top:20px}
+.palette .ttl{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:12px;display:flex;justify-content:space-between}
+.grid{display:grid;grid-template-columns:repeat(10,1fr);gap:7px}@media(max-width:560px){.grid{grid-template-columns:repeat(8,1fr)}}
+.cell{aspect-ratio:1;border:1.5px solid var(--line);background:var(--paper);border-radius:5px;font-family:'IBM Plex Mono',monospace;font-size:12px;cursor:pointer;color:var(--ink-soft);display:grid;place-items:center;position:relative;transition:all .12s}
+.cell:hover{border-color:var(--ink)}.cell.answered{background:var(--ink);color:var(--paper);border-color:var(--ink)}.cell.current{outline:2px solid var(--accent);outline-offset:1px}
+.cell.flagged::after{content:"";position:absolute;top:3px;right:3px;width:6px;height:6px;background:var(--gold);border-radius:50%}
+.cell.r-correct{background:var(--green-bg);border-color:var(--green);color:var(--green)}.cell.r-wrong{background:var(--red-bg);border-color:var(--red);color:var(--red)}
+.submitbar{display:flex;justify-content:center;margin-top:24px}
+#results{text-align:center;margin-top:36px;animation:rise .5s ease both}
+#results .crest{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent)}
+.scorering{position:relative;width:200px;height:200px;margin:10px auto 6px}.scorering svg{transform:rotate(-90deg)}
+.scorering .pct{position:absolute;inset:0;display:grid;place-items:center}
+.scorering .big{font-family:'Fraunces',serif;font-weight:600;font-size:46px;line-height:1}.scorering .small{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--ink-soft);text-transform:uppercase}
+.verdict{font-family:'Fraunces',serif;font-size:24px;font-weight:600;margin:6px 0 2px}.verdict.sub{font-family:'Newsreader';font-size:17px;font-weight:400;color:var(--ink-soft)}
+.bd{max-width:560px;margin:26px auto;text-align:left}.bd .brow2{margin:13px 0}
+.bd .brow2 .top{display:flex;justify-content:space-between;font-size:15px;margin-bottom:5px}.bd .brow2 .name{font-weight:600}.bd .brow2 .sc{font-family:'IBM Plex Mono',monospace;color:var(--ink-soft)}
+.bar{height:9px;background:var(--paper2);border:1px solid var(--line);border-radius:20px;overflow:hidden}.bar>i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,var(--accent-soft),var(--accent))}.bar.good>i{background:linear-gradient(90deg,#3f8a64,var(--green))}
+.res-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.overlay{position:fixed;inset:0;background:rgba(20,18,14,.55);z-index:60;display:none;align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto}.overlay.show{display:flex}
+.modal{background:var(--paper);border:1.5px solid var(--ink);border-radius:12px;max-width:680px;width:100%;padding:24px;box-shadow:var(--shadow)}
+.modal h2{font-family:'Fraunces',serif;font-weight:600;font-size:24px;margin:0 0 4px}
+.modal .msub{color:var(--ink-soft);font-size:15px;margin-bottom:16px}
+.setsec{border-top:1px solid var(--line);padding-top:16px;margin-top:16px}
+.setsec .sh{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.setrow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:9px 0;font-size:15px}
+.setrow input[type=number]{width:74px;font-family:'IBM Plex Mono',monospace;font-size:14px;padding:6px 8px;border:1.5px solid var(--line);border-radius:5px;background:#fff}
+.setrow select{font-family:'Newsreader';font-size:15px;padding:6px 8px;border:1.5px solid var(--line);border-radius:5px;background:#fff}
+.switch{font-family:'IBM Plex Mono',monospace;font-size:11px;border:1.5px solid var(--line);background:transparent;color:var(--ink-soft);border-radius:20px;padding:5px 12px;cursor:pointer}
+.switch.on{background:var(--green);color:#fff;border-color:var(--green)}
+.weights{margin-top:8px}
+.wrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:7px 0;font-size:15px}
+.wrow .wn{flex:1}.wrow .wc{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft)}
+.wrow input[type=number]{width:62px;font-family:'IBM Plex Mono',monospace;font-size:14px;padding:5px 7px;border:1.5px solid var(--line);border-radius:5px;background:#fff}
+.wtot{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);margin-top:10px;display:flex;justify-content:space-between;align-items:center}
+.modal .mrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px;justify-content:flex-end}
+.mmsg{font-size:14px;margin-top:10px}.mmsg.ok{color:var(--green)}.mmsg.no{color:var(--red)}
+</style>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand"><span class="k">Integrated Study Suite</span><span class="t">Review · Practice · Exam<span class="ver">v2.3</span></span></div>
+    <div class="top-right">
+      <div class="timer" id="timer" style="display:none"><span class="dot"></span><span id="tclock">--:--</span></div>
+      <button class="homebtn" id="homebtn" style="display:none">⮌ Home</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <!-- HOME -->
+  <section id="home" class="on">
+    <div class="crest">◇ Modular Study Suite ◇</div>
+    <h1>Load a pack, pick a mode.</h1>
+    <p class="sub">One engine, your content. Drop in week packs and study them by spaced repetition, practice, or timed exams — with the topic guides bundled right in.</p>
+
+    <div class="modes">
+      <div class="mode" id="mReview"><div class="mt">Review</div><div class="md">Spaced repetition over the cards in your active packs — mixed interactive types, Anki-style SM-2, filter to any topics.</div><div class="feat" id="featReview">— cards</div></div>
+      <div class="mode" id="mPractice"><div class="mt">Practice</div><div class="md">Work the question bank one at a time. Submit to see the answer instantly, with its difficulty and a topic-guide link. Per-question timer.</div><div class="feat" id="featPractice">— questions</div></div>
+      <div class="mode" id="mExam"><div class="mt">Exam</div><div class="md">A timed, scored test sampled to your weighting and chosen difficulty. Answers hidden until you submit.</div><div class="feat" id="featExam">— per test</div></div>
+    </div>
+
+    <div class="diffsel">
+      <span class="ds-l">Session difficulty — applies to Practice &amp; Exam</span>
+      <div class="segctl" id="diffSeg">
+        <button class="seg" data-d="easy">Easy <i id="dcEasy">0</i></button>
+        <button class="seg" data-d="medium">Medium <i id="dcMed">0</i></button>
+        <button class="seg" data-d="hard">Hard <i id="dcHard">0</i></button>
+        <button class="seg on" data-d="all">All <i id="dcAll">0</i></button>
+      </div>
+    </div>
+
+    <div class="revpanel" id="revPanel">
+      <div><div class="rp-t">Content Reviewer</div><div class="rp-d" id="revPanelDesc">Read the topic guides bundled in your active packs.</div></div>
+      <button class="btn ghost sm" id="openReviewer">Open guides</button>
+    </div>
+
+    <div class="rule"></div>
+    <div class="libhdr"><span class="lt">▸ Content library</span><span class="lt" id="libCount"></span></div>
+    <div id="libActions" style="display:none;margin-bottom:10px"><button class="minor" id="enableAll">Enable all</button> <button class="minor" id="disableAll">Set all aside</button></div>
+    <div id="packList"></div>
+    <div class="dropzone" id="dropzone">
+      <div class="big">Drop pack files here, or click to choose</div>
+      <div class="small">Load one or more <code>.json</code> content packs. They persist between sessions.</div>
+    </div>
+    <input type="file" id="packFile" accept="application/json" multiple style="display:none">
+    <div class="getpacks" id="getPacks" style="display:none">
+      <div class="gp-t">Need content? Download a pack, then drop it above</div>
+      <div class="gp-list" id="gpList"></div>
+    </div>
+
+    <div class="tools">
+      <button class="minor accent" id="settingsBtn">⚙ Settings</button>
+      <button class="minor" id="backupBtn">Backup all</button>
+      <button class="minor" id="restoreBtn">Restore backup</button>
+      <input type="file" id="restoreFile" accept="application/json" style="display:none">
+    </div>
+    <div class="savestate" id="saveState"></div>
+    <div class="attrib">Integrated Study Suite v2.3 · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
+  </section>
+
+  <!-- SRS DECK -->
+  <section id="srs">
+    <h2>Review deck</h2>
+    <div class="counts">
+      <div class="cbox newc"><div class="n" id="cNew">0</div><div class="l">New</div></div>
+      <div class="cbox learnc"><div class="n" id="cLearn">0</div><div class="l">Learning</div></div>
+      <div class="cbox revc"><div class="n" id="cRev">0</div><div class="l">To review</div></div>
+    </div>
+    <div class="scopeline" id="scopeline"></div>
+    <div class="studybar"><button class="btn" id="studyBtn">Study now</button><button class="btn ghost sm" id="browseBtn">Browse cards</button></div>
+    <div class="panelhdr" id="topicToggle"><span class="ph-t">▸ Choose topics</span><span class="ph-r" id="topicSummary"></span></div>
+    <div id="topicPanel"><div id="topicList"></div><div class="topicactions"><button class="minor" id="allTopics">Select all</button><button class="minor" id="noneTopics">Clear</button></div></div>
+    <div class="rule"></div>
+    <div class="sysbreak" id="sysbreak"></div>
+  </section>
+
+  <!-- SRS STUDY -->
+  <section id="study">
+    <div class="sprog"><span class="tag" id="sTag">—</span><span id="sLeft"></span></div>
+    <div class="cardbox" id="cardbox"></div>
+  </section>
+
+  <!-- SRS DONE -->
+  <section id="srsdone">
+    <div class="big">Session complete.</div>
+    <div class="sub" id="doneSub"></div>
+    <div class="stats" id="doneStats"></div>
+    <div class="done-actions"><button class="btn" id="doneStudyMore" style="display:none">Keep studying</button><button class="btn ghost" id="doneHome">Back to deck</button></div>
+  </section>
+
+  <!-- BROWSE -->
+  <section id="browse"><h2>All cards</h2><div id="browseList"></div></section>
+
+  <!-- CONTENT REVIEWER -->
+  <section id="reviewer">
+    <div class="revbar"><button class="minor" id="revBack">← Back</button><h2>Content Reviewer</h2><button class="minor navtoggle" id="revNavToggle">◂ Hide topics</button></div>
+    <div class="revlayout" id="revLayout">
+      <nav class="revnav" id="guideList" aria-label="Topic guides"></nav>
+      <div class="revmain" id="guideHost"></div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <div class="qmeta"><span class="left"><span class="tag" id="qtag">—</span><span id="qdiff"></span></span><span class="pos" id="qpos"></span></div>
+    <div class="progress"><i id="pbar" style="width:0%"></i></div>
+    <div class="qcard" id="qcard"></div>
+    <div class="controls">
+      <button class="nbtn" id="prevBtn">← Previous</button>
+      <div class="mid"><button class="nbtn flagbtn" id="flagBtn">⚑ Flag</button><button class="nbtn primary" id="submitAnsBtn" style="display:none">Submit answer</button></div>
+      <button class="nbtn" id="nextBtn">Next →</button>
+    </div>
+    <div class="palette"><div class="ttl"><span id="paletteTitle">Question map</span><span id="answeredCount"></span></div><div class="grid" id="grid"></div><div class="submitbar"><button class="btn" id="finishBtn"></button></div></div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="results">
+    <div class="crest" id="resCrest">Results</div>
+    <div class="scorering"><svg width="200" height="200" viewBox="0 0 200 200"><circle cx="100" cy="100" r="86" fill="none" stroke="var(--paper2)" stroke-width="14"/><circle id="ring" cx="100" cy="100" r="86" fill="none" stroke="var(--accent)" stroke-width="14" stroke-linecap="round" stroke-dasharray="540" stroke-dashoffset="540"/></svg><div class="pct"><div><div class="big" id="scorePct">0%</div><div class="small" id="scoreRaw">0 / 0</div></div></div></div>
+    <div class="verdict" id="verdict"></div><div class="verdict sub" id="verdictSub"></div>
+    <div class="bd" id="breakdown"></div>
+    <div class="res-actions" id="resActions"></div>
+    <p class="note" id="resNote"></p>
+  </section>
+</div>
+
+<!-- SETTINGS MODAL -->
+<div class="overlay" id="settingsModal">
+  <div class="modal">
+    <h2>Settings</h2>
+    <div class="msub">All settings persist between sessions.</div>
+    <div class="setsec">
+      <div class="sh">Exam composition</div>
+      <div class="setrow"><span>Group weights by</span>
+        <select id="setGroupBy"><option value="system">System</option><option value="pack">Pack / week</option><option value="topic">Topic</option></select>
+      </div>
+      <div class="weights" id="weightRows"></div>
+      <div class="wtot"><span>Total test length: <b id="weightTotal">0</b> questions</span>
+        <span><input type="number" id="autoTarget" min="1" value="40" style="width:60px;font-family:'IBM Plex Mono',monospace;padding:4px 6px;border:1.5px solid var(--line);border-radius:5px;background:#fff"> <button class="minor" id="autoBalanceBtn">Auto-balance</button></span>
+      </div>
+      <div class="note" style="text-align:left;margin-top:8px">Availability reflects the current session difficulty. Counts cap automatically when you build a test.</div>
+    </div>
+    <div class="setsec">
+      <div class="sh">Timers</div>
+      <div class="setrow"><span>Practice — seconds per question</span><span><input type="number" id="setPracSecs" min="5" max="600" value="90"> <button class="switch" id="setPracTimer">on</button></span></div>
+      <div class="setrow"><span>Exam — total minutes</span><span><input type="number" id="setExamMins" min="1" max="300" value="60"> <button class="switch" id="setExamTimer">on</button></span></div>
+      <div class="setrow"><span>Shuffle practice questions</span><button class="switch" id="setPracShuffle">on</button></div>
+    </div>
+    <div class="setsec">
+      <div class="sh">Review (spaced repetition)</div>
+      <div class="setrow"><span>New cards per day</span><input type="number" id="setNewPerDay" min="0" max="500" value="20"></div>
+    </div>
+    <div class="mmsg" id="setMsg"></div>
+    <div class="mrow"><button class="btn ghost sm" id="setClose">Done</button></div>
+  </div>
+</div>
+
+<script>
+/* Integrated Study Suite v2.3 — Author: Alkarim Billawala / alkarim.billawala.ca */
+const APP_VERSION='2.3';
+const APP_AUTHOR='Alkarim Billawala / alkarim.billawala.ca';
+
+/* ===== STORAGE ===== */
+const KEY={packs:'suite_packs_v1',sched:'srs_sched_v2',daily:'srs_daily_v2',settings:'suite_settings_v1'};
+const memCache={};
+const Store={
+  async get(k){try{if(window.storage){const r=await window.storage.get(k);if(r&&r.value!=null)return JSON.parse(r.value);}}catch(e){}try{const v=localStorage.getItem(k);if(v!=null)return JSON.parse(v);}catch(e){}return (k in memCache)?memCache[k]:null;},
+  async set(k,val){memCache[k]=val;let ok=false;try{if(window.storage){await window.storage.set(k,JSON.stringify(val));ok=true;}}catch(e){}if(!ok){try{localStorage.setItem(k,JSON.stringify(val));}catch(e){}}}
+};
+let STORAGE_MODE='memory';
+function detectStorage(){if(typeof window.storage!=='undefined'){STORAGE_MODE='persistent';}else{try{localStorage.setItem('__t','1');localStorage.removeItem('__t');STORAGE_MODE='local';}catch(e){STORAGE_MODE='memory';}}}
+
+/* ===== SCHEDULER ===== */
+const MIN=60000,DAY=86400000,LEARN=[1,10],RELEARN=[10],GRAD_IVL=1,EASY_IVL=4,HARD_MULT=1.2,EASY_BONUS=1.3,MIN_EF=1.3,START_EF=2.5;
+function newState(){return {phase:'new',due:0,ivl:0,ef:START_EF,reps:0,lapses:0,step:0,lapseFrom:0};}
+function schedule(s0,g,now){const s=Object.assign({},s0);const setL=(arr,step)=>{s.step=step;s.due=now+arr[Math.min(step,arr.length-1)]*MIN;};
+  if(s.phase==='new'||s.phase==='learning'){s.phase='learning';
+    if(g===1)setL(LEARN,0);else if(g===2)setL(LEARN,s.step||0);
+    else if(g===3){if((s.step||0)+1<LEARN.length)setL(LEARN,(s.step||0)+1);else{s.phase='review';s.ivl=GRAD_IVL;s.reps=1;s.due=now+GRAD_IVL*DAY;}}
+    else{s.phase='review';s.ivl=EASY_IVL;s.reps=1;s.due=now+EASY_IVL*DAY;}
+  }else if(s.phase==='review'){
+    if(g===1){s.ef=Math.max(MIN_EF,s.ef-0.2);s.lapses=(s.lapses||0)+1;s.lapseFrom=s.ivl;s.phase='relearning';s.step=0;s.due=now+RELEARN[0]*MIN;}
+    else{if(g===2){s.ef=Math.max(MIN_EF,s.ef-0.15);s.ivl=Math.max(s.ivl+1,Math.round(s.ivl*HARD_MULT));}
+      else if(g===3){s.ivl=Math.max(s.ivl+1,Math.round(s.ivl*s.ef));}
+      else{s.ef=s.ef+0.15;s.ivl=Math.max(s.ivl+1,Math.round(s.ivl*s.ef*EASY_BONUS));}
+      s.reps=(s.reps||0)+1;s.due=now+s.ivl*DAY;}
+  }else{if(g<=2){s.due=now+RELEARN[0]*MIN;}else{s.phase='review';let base=Math.max(1,Math.round((s.lapseFrom||1)*0.5));if(g===4)base=Math.max(base+1,Math.round(base*1.3));s.ivl=base;s.reps=(s.reps||0)+1;s.due=now+base*DAY;}}
+  return s;}
+function humanDelta(ms){if(ms<MIN)return '<1m';if(ms<60*MIN)return Math.round(ms/MIN)+'m';if(ms<DAY)return Math.round(ms/3600000)+'h';const d=Math.round(ms/DAY);if(d<30)return d+'d';return Math.round(d/30)+'mo';}
+function humanFromNow(due,now){if(due<=now)return 'due';return 'in '+humanDelta(due-now);}
+
+/* ===== STATE ===== */
+let packs=[], sched={}, daily={date:'',count:0};
+let settings={examGroupBy:'system',examCounts:{},practiceSecs:90,practiceTimer:true,practiceShuffle:true,examMinutes:60,examTimer:true,srsNewPerDay:20,sessionDifficulty:'all',revNavCollapsed:false};
+const $=id=>document.getElementById(id);
+const SYS_ORDER=['Endo','GI','KU'];
+const SYS_LABEL={Endo:'Endocrine',GI:'Gastrointestinal',KU:'Renal / Urinary'};
+const TYPE_LABEL={mcq:'Best answer',multi:'Select all that apply',cloze:'Cloze',order:'Put in order',match:'Matching',qa:'Concept'};
+const LETTERS=['A','B','C','D','E','F'];
+const DIFFS=['easy','medium','hard'];
+function today(){return new Date().toISOString().slice(0,10);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function activePacks(){return packs.filter(p=>p.enabled!==false);}
+function deck(){return activePacks().flatMap(p=>p.cards.map(c=>Object.assign({_pack:p.id,_packName:p.pack},c)));}
+function qpool(){return activePacks().flatMap(p=>p.questions.map(q=>Object.assign({_pack:p.id,_packName:p.pack},q)));}
+function activeGuides(){const seen=new Set(),out=[];activePacks().forEach(p=>(p.guides||[]).forEach(g=>{const key=g.file||g.title||g.id;if(key&&!seen.has(key)){seen.add(key);out.push(Object.assign({_pack:p.id,_packName:p.pack||p.id},g));}}));return out;}
+function cardOf(id){return deck().find(c=>c.id===id);}
+function sysLabel(s){return SYS_LABEL[s]||s;}
+function systemsPresent(set){const arr=[...set];return SYS_ORDER.filter(s=>set.has(s)).concat(arr.filter(s=>!SYS_ORDER.includes(s)));}
+/* difficulty */
+function diffRank(q){return DIFFS.indexOf(q&&q.difficulty);}
+function matchDiff(q){if(settings.sessionDifficulty==='all')return true;const r=diffRank(q);if(r<0)return false;return r<=DIFFS.indexOf(settings.sessionDifficulty);}
+function qTestPool(){return qpool().filter(matchDiff);}
+function diffCounts(){const pool=qpool();const c={easy:0,medium:0,hard:0,all:pool.length};pool.forEach(q=>{const r=diffRank(q);if(r===0)c.easy++;if(r>=0&&r<=1)c.medium++;if(r>=0&&r<=2)c.hard++;});return c;}
+function diffBadge(q){if(!q||diffRank(q)<0)return '';return `<span class="diffbadge ${q.difficulty}">${q.difficulty}</span>`;}
+
+async function persist(){await Store.set(KEY.packs,packs);await Store.set(KEY.sched,sched);await Store.set(KEY.daily,daily);await Store.set(KEY.settings,settings);}
+
+/* "Get study packs" panel — content-free: pack list comes from a same-origin
+   packs-manifest.json generated at deploy time ({packs:[{file,label}],authoring}).
+   If the manifest is missing/unreachable (e.g. local file://), the panel stays hidden. */
+async function initPackLinks(){
+  try{
+    const r=await fetch('packs-manifest.json',{cache:'no-store'});if(!r.ok)return;
+    const m=await r.json();if(!m||!Array.isArray(m.packs)||!m.packs.length)return;
+    const host=$('gpList');host.innerHTML='';
+    m.packs.forEach(p=>{if(!p||!p.file)return;const a=document.createElement('a');a.className='gp-link';a.href=encodeURI(String(p.file));a.setAttribute('download','');a.textContent='⇣ '+(p.label||p.file);host.appendChild(a);});
+    if(m.authoring){const a=document.createElement('a');a.className='gp-link build';a.href=encodeURI(String(m.authoring));a.setAttribute('download','');a.textContent='Build your own — authoring guide';host.appendChild(a);}
+    if(host.children.length)$('getPacks').style.display='';
+  }catch(e){}
+}
+
+async function init(){
+  detectStorage();
+  initPackLinks();
+  packs=await Store.get(KEY.packs)||[];
+  sched=await Store.get(KEY.sched)||{};
+  daily=await Store.get(KEY.daily)||{date:today(),count:0};
+  const sv=await Store.get(KEY.settings);if(sv)settings=Object.assign(settings,sv);
+  deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});
+  if(daily.date!==today())daily={date:today(),count:0};
+  $('saveState').textContent=STORAGE_MODE==='persistent'?'✓ packs + progress saved across sessions':STORAGE_MODE==='local'?'✓ saved in this browser':'⚠ in-memory only — use Backup to keep data';
+  renderHome();
+}
+
+/* ===== VALIDATION ===== */
+const KNOWN_TYPES=['mcq','multi','cloze','order','match','qa'];
+function validateCard(c,i){
+  if(typeof c!=='object'||!c)return `card#${i}: not an object`;
+  if(!c.sys||typeof c.sys!=='string')return `card#${i}: missing sys`;
+  if(!c.topic)return `card#${i}: missing topic`;
+  if(!KNOWN_TYPES.includes(c.type))return `card#${i}: bad type`;
+  if(c.type==='mcq'){if(!Array.isArray(c.options)||c.options.length<2||typeof c.correct!=='number'||c.correct<0||c.correct>=c.options.length)return `card#${i}: bad mcq`;}
+  if(c.type==='multi'){if(!Array.isArray(c.options)||!Array.isArray(c.correct)||c.correct.some(x=>x<0||x>=c.options.length))return `card#${i}: bad multi`;}
+  if(c.type==='cloze'){if(!c.text||!/\{\{.+?\}\}/.test(c.text))return `card#${i}: cloze needs {{blanks}}`;}
+  if(c.type==='order'){if(!Array.isArray(c.items)||c.items.length<2)return `card#${i}: order needs items[]`;}
+  if(c.type==='match'){if(!Array.isArray(c.pairs)||c.pairs.some(p=>!Array.isArray(p)||p.length!==2))return `card#${i}: match needs pairs[]`;}
+  if(c.type==='qa'){if(!c.answer)return `card#${i}: qa needs answer`;}
+  if(c.type!=='cloze'&&!c.prompt)return `card#${i}: needs prompt`;
+  return null;}
+function validateQuestion(q,i){
+  if(typeof q!=='object'||!q)return `q#${i}: not an object`;
+  if(!q.sys)return `q#${i}: missing sys`;
+  if(!q.topic)return `q#${i}: missing topic`;
+  if(!q.stem)return `q#${i}: missing stem`;
+  if(!Array.isArray(q.options)||q.options.length<2)return `q#${i}: options[]`;
+  if(typeof q.correct!=='number'||q.correct<0||q.correct>=q.options.length)return `q#${i}: bad correct index`;
+  return null;}
+
+/* ===== PACK LOADING ===== */
+function ingestPack(obj,sourceName){
+  let pk;
+  if(Array.isArray(obj)){const isCards=obj.some(x=>x&&x.type&&KNOWN_TYPES.includes(x.type));pk={id:'pack_'+Date.now().toString(36),pack:sourceName||'Imported',questions:isCards?[]:obj,cards:isCards?obj:[],guides:[]};}
+  else {pk={id:obj.id||('pack_'+Date.now().toString(36)),pack:obj.pack||sourceName||'Imported',questions:Array.isArray(obj.questions)?obj.questions:[],cards:Array.isArray(obj.cards)?obj.cards:[],guides:Array.isArray(obj.guides)?obj.guides:[],version:obj.version,author:obj.author||obj.createdBy};}
+  const errs=[];
+  pk.questions=pk.questions.filter((q,i)=>{const v=validateQuestion(q,i);if(v){errs.push(v);return false;}return true;});
+  pk.cards=pk.cards.filter((c,i)=>{const v=validateCard(c,i);if(v){errs.push(v);return false;}return true;});
+  pk.questions.forEach((q,i)=>{if(!q.id)q.id=pk.id+'_q'+i;});
+  pk.cards.forEach((c,i)=>{if(!c.id)c.id=pk.id+'_c'+i;});
+  const idx=packs.findIndex(p=>p.id===pk.id);
+  pk.enabled=(idx>=0)?packs[idx].enabled!==false:true;
+  if(idx>=0)packs[idx]=pk;else packs.push(pk);
+  deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});
+  return {pk,errs};
+}
+function readFiles(files){
+  let done=0;const arr=[...files];
+  arr.forEach(f=>{const r=new FileReader();r.onload=async()=>{
+    try{const obj=JSON.parse(r.result);ingestPack(obj,f.name.replace(/\.json$/i,''));}catch(e){}
+    if(++done===arr.length){await persist();renderHome();}
+  };r.readAsText(f);});
+}
+function removePack(id){if(!confirm('Remove this pack? Your review progress is kept and will reapply if you reload it.'))return;packs=packs.filter(p=>p.id!==id);persist().then(renderHome);}
+
+/* ===== NAV ===== */
+function currentSection(){const s=document.querySelector('section.on');return s?s.id:'home';}
+function show(which){document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===which));$('homebtn').style.display=(which==='home'?'none':'');$('timer').style.display=(which==='quiz'&&timerWanted)?'':'none';window.scrollTo({top:0});}
+
+/* ===== HOME ===== */
+function renderHome(){
+  const nC=deck().length,nP=packs.length,aP=activePacks().length,tp=qTestPool().length,nG=activeGuides().length;
+  $('libCount').textContent=nP?`${aP} of ${nP} active · ${qpool().length} questions · ${nC} cards`:'empty';
+  $('libActions').style.display=nP?'':'none';
+  $('featReview').textContent=nC+' cards';
+  $('featPractice').textContent=tp+' questions';
+  $('featExam').textContent=examTotal()+' per test';
+  $('mReview').classList.toggle('dim',nC===0);
+  $('mPractice').classList.toggle('dim',tp===0);
+  $('mExam').classList.toggle('dim',tp===0);
+  // difficulty selector
+  const dc=diffCounts();$('dcEasy').textContent=dc.easy;$('dcMed').textContent=dc.medium;$('dcHard').textContent=dc.hard;$('dcAll').textContent=dc.all;
+  $('diffSeg').querySelectorAll('.seg').forEach(b=>b.classList.toggle('on',b.dataset.d===settings.sessionDifficulty));
+  // reviewer panel
+  $('revPanelDesc').textContent=nG?`${nG} topic guide${nG>1?'s':''} bundled in your active packs.`:'No guides bundled in the active packs (older packs link to files in this folder).';
+  $('openReviewer').disabled=(nG===0);
+  // library
+  const pl=$('packList');pl.innerHTML='';
+  packs.forEach(p=>{const on=p.enabled!==false;
+    const row=document.createElement('div');row.className='packrow'+(on?'':' off');
+    const left=document.createElement('div');left.className='pkleft';
+    const sw=document.createElement('button');sw.className='switch'+(on?' on':'');sw.textContent=on?'on':'off';
+    sw.onclick=()=>{p.enabled=!on;persist();renderHome();};
+    const gtag=(p.guides&&p.guides.length)?` · ${p.guides.length} guides`:'';
+    const info=document.createElement('div');info.innerHTML=`<div class="pn">${p.pack}</div><div class="pm">${p.questions.length} questions · ${p.cards.length} cards${gtag}</div>`;
+    left.appendChild(sw);left.appendChild(info);
+    const b=document.createElement('button');b.className='rm';b.textContent='Remove';b.onclick=()=>removePack(p.id);
+    row.appendChild(left);row.appendChild(b);pl.appendChild(row);});
+  show('home');
+}
+function examTotal(){const g=examGroups();let t=0;g.forEach((ids,k)=>t+=Math.min(ids.length,settings.examCounts[k]||0));return t;}
+
+/* ===== SRS DECK ===== */
+let filter=new Set(), sessionQueue=[], currentId=null, revealed=false, work={}, studiedThisSession=0;
+function inScope(c){return filter.size===0||filter.has(c.topic);}
+function counts(){const now=Date.now();let nw=0,lr=0,rv=0,nwTot=0;
+  deck().forEach(c=>{if(!inScope(c))return;const s=sched[c.id];if(s.phase==='new')nwTot++;else if(s.due<=now){(s.phase==='review'?rv++:lr++);}});
+  return {nw:Math.min(nwTot,Math.max(0,settings.srsNewPerDay-daily.count)),lr,rv};}
+function openReview(){renderSrs();show('srs');}
+function renderSrs(){
+  const c=counts();
+  $('cNew').textContent=c.nw;$('cLearn').textContent=c.lr;$('cRev').textContent=c.rv;
+  $('studyBtn').disabled=(c.nw+c.lr+c.rv===0);
+  const scope=filter.size===0?'All topics':(filter.size+' topic'+(filter.size>1?'s':'')+' — '+[...filter].slice(0,3).join(', ')+(filter.size>3?'…':''));
+  $('scopeline').innerHTML='Studying: <b>'+scope+'</b>';
+  $('topicSummary').textContent=filter.size===0?'all selected':filter.size+' selected';
+  renderTopics();renderSysbreak();
+}
+function renderSysbreak(){const sb=$('sysbreak');sb.innerHTML='';const set=new Set(deck().map(c=>c.sys));
+  systemsPresent(set).forEach(sys=>{const list=deck().filter(c=>c.sys===sys);const seen=list.filter(c=>sched[c.id].phase!=='new').length;const p=list.length?Math.round(seen/list.length*100):0;
+    sb.innerHTML+=`<div class="sysrow"><div class="top"><span class="name">${sysLabel(sys)}</span><span class="sc">${seen}/${list.length} started · ${p}%</span></div><div class="sbar"><i style="width:${p}%"></i></div></div>`;});}
+function renderTopics(){const now=Date.now();const tl=$('topicList');tl.innerHTML='';const set=new Set(deck().map(c=>c.sys));
+  systemsPresent(set).forEach(sys=>{const topics=[];const seen=new Set();
+    deck().filter(c=>c.sys===sys).forEach(c=>{if(!seen.has(c.topic)){seen.add(c.topic);topics.push(c.topic);}});
+    let chips='';topics.forEach(t=>{let due=0;deck().forEach(c=>{if(c.topic===t){const s=sched[c.id];if(s.phase==='new'||s.due<=now)due++;}});
+      chips+=`<button class="tchip ${filter.has(t)?'on':''}" data-t="${encodeURIComponent(t)}">${t}<span class="ct ${due?'':'zero'}">${due}</span></button>`;});
+    tl.innerHTML+=`<div class="tgroup"><div class="gname">${sysLabel(sys)}</div><div class="tchips">${chips}</div></div>`;});
+  tl.querySelectorAll('.tchip').forEach(el=>el.addEventListener('click',()=>{const t=decodeURIComponent(el.dataset.t);filter.has(t)?filter.delete(t):filter.add(t);renderSrs();}));}
+
+/* ===== SRS SESSION ===== */
+function buildSession(){const now=Date.now();const due=[],learn=[],news=[];
+  deck().forEach(c=>{if(!inScope(c))return;const s=sched[c.id];if(s.phase==='new')news.push(c.id);else if(s.due<=now){(s.phase==='review'?due:learn).push(c.id);}});
+  due.sort((a,b)=>sched[a].due-sched[b].due);learn.sort((a,b)=>sched[a].due-sched[b].due);
+  sessionQueue=[...learn,...due,...shuffle(news).slice(0,Math.max(0,settings.srsNewPerDay-daily.count))];}
+function startSession(){buildSession();studiedThisSession=0;if(sessionQueue.length===0){renderSrs();return;}presentNext();}
+function presentNext(){if(sessionQueue.length===0){finishSession();return;}currentId=sessionQueue.shift();revealed=false;work={picks:new Set(),pick:null,order:[],pool:null};renderCard();show('study');}
+function finishSession(){$('doneSub').textContent='Nothing more due in this scope right now.';$('doneStats').textContent=`You reviewed ${studiedThisSession} card${studiedThisSession===1?'':'s'}.`;const m=counts();$('doneStudyMore').style.display=(m.nw+m.lr+m.rv>0)?'':'none';show('srsdone');}
+function renderCard(){const c=cardOf(currentId);
+  $('sTag').textContent=`${sysLabel(c.sys).split(' ')[0]} · ${c.topic}`;
+  $('sLeft').textContent=`${sessionQueue.length} left · ${TYPE_LABEL[c.type]||c.type}`;
+  let body=`<div class="ctype">${TYPE_LABEL[c.type]||c.type} — ${c.topic}</div>`+renderInteractive(c);
+  body+= !revealed ? `<div class="showbar"><button class="showbtn" id="showBtn">Show answer</button></div>` : renderAnswer(c)+renderGrades(c);
+  $('cardbox').innerHTML=body;wireInteractive(c);wireGuideLinks($('cardbox'));
+  if(!revealed)$('showBtn').addEventListener('click',()=>{revealed=true;renderCard();});else wireGrades(c);}
+function renderInteractive(c){
+  if(c.type==='mcq'||c.type==='multi'){const multi=c.type==='multi';let h=`<p class="prompt">${c.prompt}</p><div class="choices">`;
+    c.options.forEach((o,i)=>{let cls='choice '+(multi?'check':'radio');
+      if(!revealed){if(multi?work.picks.has(i):work.pick===i)cls+=' sel';}
+      else{const isC=multi?c.correct.includes(i):(i===c.correct);const chosen=multi?work.picks.has(i):work.pick===i;if(isC)cls+=' correct';else if(chosen)cls+=' wrong';}
+      h+=`<button class="${cls}" data-i="${i}" ${revealed?'disabled':''}><span class="box">${LETTERS[i]}</span><span>${o}</span></button>`;});
+    return h+'</div>';}
+  if(c.type==='cloze')return `<div class="clozetext">${c.text.replace(/\{\{(.+?)\}\}/g,(m,t)=>revealed?`<span class="cz on">${t}</span>`:`<span class="cz">\u2002\u2002\u2002\u2002\u2002\u2002</span>`)}</div>`;
+  if(c.type==='qa')return `<p class="prompt">${c.prompt}</p>`;
+  if(c.type==='order'){if(!work.pool)work.pool=shuffle(c.items.map((t,i)=>({t,i})));
+    let h=`<p class="prompt">${c.prompt}</p><div class="orderwrap">`;
+    if(!revealed){h+='<div class="pool">';work.pool.forEach(it=>{const used=work.order.includes(it.i);h+=`<button class="chip" data-i="${it.i}" ${used?'disabled':''}>${it.t}</button>`;});h+='</div><div class="seq">';
+      work.order.forEach((idx,pos)=>{h+=`<div class="seqitem"><span class="num">${pos+1}</span><span>${c.items[idx]}</span></div>`;});h+='</div>';
+      if(work.order.length)h+='<div class="miniresetbar"><button class="minor" id="orderReset">Reset</button></div>';}
+    else{h+='<div class="seq">';c.items.forEach((t,pos)=>{const ok=work.order[pos]===pos;h+=`<div class="seqitem ${ok?'correct':'wrong'}"><span class="num">${pos+1}</span><span>${t}</span></div>`;});h+='</div>';}
+    return h+'</div>';}
+  if(c.type==='match'){if(!work.pool)work.pool=shuffle(c.pairs.map(p=>p[1]));
+    let h=`<p class="prompt">${c.prompt}</p><div class="matchwrap">`;
+    c.pairs.forEach((p,i)=>{let cls='matchrow';if(revealed)cls+=(work['m'+i]===p[1])?' correct':' wrong';
+      h+=`<div class="${cls}"><div class="ml">${p[0]}</div>`;
+      if(!revealed)h+=`<select data-i="${i}"><option value="">— choose —</option>`+work.pool.map(o=>`<option ${work['m'+i]===o?'selected':''}>${o}</option>`).join('')+`</select>`;
+      else h+=`<div class="ml" style="text-align:right">${work['m'+i]||'—'} ${work['m'+i]===p[1]?'✓':'✗ → <b>'+p[1]+'</b>'}</div>`;
+      h+=`</div>`;});
+    return h+'</div>';}
+  return '';}
+function wireInteractive(c){if(revealed)return;
+  if(c.type==='mcq')$('cardbox').querySelectorAll('.choice').forEach(el=>el.addEventListener('click',()=>{work.pick=+el.dataset.i;renderCard();}));
+  if(c.type==='multi')$('cardbox').querySelectorAll('.choice').forEach(el=>el.addEventListener('click',()=>{const i=+el.dataset.i;work.picks.has(i)?work.picks.delete(i):work.picks.add(i);renderCard();}));
+  if(c.type==='order'){$('cardbox').querySelectorAll('.chip').forEach(el=>el.addEventListener('click',()=>{if(!el.disabled){work.order.push(+el.dataset.i);renderCard();}}));const rb=$('orderReset');if(rb)rb.addEventListener('click',()=>{work.order=[];renderCard();});}
+  if(c.type==='match')$('cardbox').querySelectorAll('select').forEach(sel=>sel.addEventListener('change',()=>{work['m'+sel.dataset.i]=sel.value;}));}
+function gotCorrect(c){
+  if(c.type==='mcq')return work.pick===c.correct;
+  if(c.type==='multi')return [...work.picks].sort().join(',')===[...c.correct].sort().join(',');
+  if(c.type==='order')return work.order.length===c.items.length&&work.order.every((v,i)=>v===i);
+  if(c.type==='match')return c.pairs.every((p,i)=>work['m'+i]===p[1]);
+  return null;}
+function guideHTML(g){
+  if(!g||!g.f)return '';
+  const embedded=!!findGuide(g.f);
+  const open=embedded
+    ? `<a class="guideopen" href="javascript:void(0)" data-f="${encodeURIComponent(g.f)}" data-s="${encodeURIComponent(g.s||'')}">Open the topic guide ↗</a>`
+    : `<a href="${g.f}" target="_blank" rel="noopener">Open the topic guide ↗</a>`;
+  return `<div class="guidelink"><div class="gt">Topic guide ${g.t||''}</div>${g.s?`<div>Deeper detail: <b>${g.s}</b></div>`:''}${open}<div class="hint">${embedded?'Opens the bundled guide inside the app.':'Navigates to the guide file in this folder.'}</div></div>`;}
+function wireGuideLinks(container){container.querySelectorAll('.guideopen').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();openGuide(decodeURIComponent(a.dataset.f),decodeURIComponent(a.dataset.s||''));}));}
+function renderAnswer(c){let h='';const res=gotCorrect(c);
+  if(res!==null)h+=`<div class="banner ${res?'ok':'no'}">${res?'✓ Correct':'✗ Not quite'}</div>`;
+  let ans=c.type==='qa'?(c.answer+(c.explain?`<div style="margin-top:8px;color:var(--ink-soft);font-size:14.5px">${c.explain}</div>`:'')):(c.explain||'');
+  h+=`<div class="answerbox"><div class="h">Answer · ${c.topic}</div>${ans}</div>`+guideHTML(c.guide);
+  return h;}
+function renderGrades(c){const now=Date.now(),s=sched[c.id];const p=[1,2,3,4].map(g=>humanDelta(Math.max(0,schedule(s,g,now).due-now)));
+  return `<div class="grades">
+    <button class="gbtn again" data-g="1"><div class="gl">Again</div><div class="gi">${p[0]}</div></button>
+    <button class="gbtn hard" data-g="2"><div class="gl">Hard</div><div class="gi">${p[1]}</div></button>
+    <button class="gbtn good" data-g="3"><div class="gl">Good</div><div class="gi">${p[2]}</div></button>
+    <button class="gbtn easy" data-g="4"><div class="gl">Easy</div><div class="gi">${p[3]}</div></button></div>`;}
+function wireGrades(c){$('cardbox').querySelectorAll('.gbtn').forEach(b=>b.addEventListener('click',()=>grade(+b.dataset.g)));}
+async function grade(g){const c=cardOf(currentId),s=sched[c.id],wasNew=(s.phase==='new');
+  sched[c.id]=schedule(s,g,Date.now());if(wasNew)daily.count++;studiedThisSession++;await persist();
+  if(sched[c.id].phase!=='review'){sessionQueue.splice(Math.min(sessionQueue.length,g===1?1:3),0,currentId);}
+  presentNext();}
+
+/* ===== BROWSE ===== */
+function renderBrowse(){const now=Date.now();const list=$('browseList');list.innerHTML='';const set=new Set(deck().map(c=>c.sys));
+  systemsPresent(set).forEach(sys=>{deck().filter(c=>c.sys===sys).forEach(c=>{const s=sched[c.id];const dueTxt=s.phase==='new'?'new':humanFromNow(s.due,now);
+    const row=document.createElement('div');row.className='brow';
+    row.innerHTML=`<div><div class="bsys">${sysLabel(sys).split(' ')[0]} · ${c.topic}</div><div class="bl">${stripText(c.prompt||c.text)}</div><div class="bmeta">${TYPE_LABEL[c.type]||c.type} · ${s.phase}</div></div><div class="bdue">${dueTxt}</div>`;
+    row.addEventListener('click',()=>{sessionQueue=[c.id];studiedThisSession=0;presentNext();});list.appendChild(row);});});
+  show('browse');}
+function stripText(t){t=(t||'').replace(/<[^>]+>/g,'').replace(/\{\{(.+?)\}\}/g,'____');return t.length>90?t.slice(0,90)+'…':t;}
+
+/* ===== CONTENT REVIEWER ===== */
+let reviewerReturn='home', curGuideKey=null;
+function findGuide(ref){if(!ref)return null;const base=String(ref).split('#')[0];return activeGuides().find(g=>(g.file&&g.file===base)||g.title===ref||g.id===ref||g.title===base)||null;}
+function guideKey(g){return g.file||g.title||g.id;}
+/* — intelligent guide ordering —
+   guideMeta parses a title for a leading "Week NN" / "Topic NN" / bare "NN -" marker
+   (number → primary sort key + sidebar badge; remainder → display label).
+   natKey gives a numeric-aware fallback key, converting digit runs and small
+   UPPERCASE roman numerals (I–XXXIX, e.g. "KU III") so 2 < 10 and II < III < IV.
+   organizeGuides groups by source pack only when >1 active pack contributes guides. */
+function romanVal(s){if(!/^(X{0,3})(IX|IV|V?I{0,3})$/.test(s)||!s)return null;const m={I:1,V:5,X:10};let v=0;for(let i=0;i<s.length;i++){const a=m[s[i]],b=m[s[i+1]]||0;v+=a<b?-a:a;}return v;}
+function natKey(s){return String(s).trim().split(/[\s\-–—_:·.]+/).filter(Boolean).map(w=>{if(/^\d+$/.test(w))return w.padStart(8,'0');const r=w===w.toUpperCase()?romanVal(w):null;return r!==null?String(r).padStart(8,'0'):w.toLowerCase();}).join(' ');}
+function guideMeta(g){const title=String(g.title||g.file||'Guide').replace(/\.html?$/i,'').replace(/_/g,' ').trim();
+  let badge='',label=title,num=Infinity,m;
+  if(m=title.match(/^(?:week|wk)\s*\.?\s*0*(\d+)\s*[-–—:·.]?\s*(.*)$/i)){num=+m[1];badge='W'+m[1];label=m[2]||title;}
+  else if(m=title.match(/^(?:topic|unit|module|chapter|ch|lecture|lec|session)\s*\.?\s*0*(\d+)\s*[-–—:·.]?\s*(.*)$/i)){num=+m[1];badge=String(m[1]).padStart(2,'0');label=m[2]||title;}
+  else if(m=title.match(/^0*(\d+)\s*[-–—:·.]\s*(.*)$/)){num=+m[1];badge=String(m[1]).padStart(2,'0');label=m[2]||title;}
+  return {g,title,badge,label,num,key:natKey(title)};}
+function organizeGuides(){const metas=activeGuides().map(guideMeta);
+  const cmp=(a,b)=>a.num!==b.num?(a.num<b.num?-1:1):(a.key<b.key?-1:a.key>b.key?1:0);
+  const names=[...new Set(metas.map(x=>x.g._packName))];
+  if(names.length<2){metas.sort(cmp);return metas.length?[{label:null,items:metas}]:[];}
+  return names.map(n=>({label:n,items:metas.filter(x=>x.g._packName===n).sort(cmp)}));}
+function applyRevNav(){const c=!!settings.revNavCollapsed;$('revLayout').classList.toggle('navhide',c);$('revNavToggle').textContent=c?'▸ Show topics':'◂ Hide topics';}
+function openReviewer(){reviewerReturn=currentSection();const org=organizeGuides();renderGuideList();if(org.length){loadGuide(org[0].items[0].g,null);}else{$('guideHost').innerHTML='<div class="revempty">No topic guides are bundled in your active packs. Newer packs embed their guides here; older packs link to <code>Topic_*.html</code> files kept in this folder.</div>';}show('reviewer');}
+function renderGuideList(){const gl=$('guideList');gl.innerHTML='';
+  organizeGuides().forEach(grp=>{const wrap=document.createElement('div');wrap.className='revgroup';
+    if(grp.label){const h=document.createElement('div');h.className='gname';h.textContent=grp.label;wrap.appendChild(h);}
+    grp.items.forEach(it=>{const b=document.createElement('button');b.className='revitem'+(guideKey(it.g)===curGuideKey?' on':'');
+      if(it.badge){const s=document.createElement('span');s.className='gn';s.textContent=it.badge;b.appendChild(s);}
+      const t=document.createElement('span');t.textContent=it.label;b.appendChild(t);
+      b.onclick=()=>loadGuide(it.g,null);wrap.appendChild(b);});
+    gl.appendChild(wrap);});
+  const on=gl.querySelector('.revitem.on');if(on)on.scrollIntoView({block:'nearest'});applyRevNav();}
+function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();
+  const host=$('guideHost');host.innerHTML='';
+  const fr=document.createElement('iframe');fr.className='guideframe';fr.setAttribute('sandbox','allow-same-origin');
+  fr.onload=()=>{try{const d=fr.contentDocument;if(!d)return;let el=null;
+    const anchor=anchorOrSection&&anchorOrSection.anchor;const section=anchorOrSection&&anchorOrSection.section;
+    if(anchor)el=d.getElementById(anchor);
+    if(!el&&section){el=[...d.querySelectorAll('h1,h2,h3,h4,[id]')].find(h=>(h.textContent||'').toLowerCase().includes(String(section).toLowerCase()));}
+    if(el)el.scrollIntoView();
+  }catch(e){}};
+  fr.srcdoc=g.html||'<p style=\"font-family:sans-serif;padding:24px\">This guide has no embedded content.</p>';
+  host.appendChild(fr);}
+function openGuide(ref,section){const g=findGuide(ref);if(!g){if(ref&&!String(ref).startsWith('javascript')){window.open(String(ref).split('#')[0],'_blank');}return;}
+  reviewerReturn=currentSection();const anchor=String(ref).includes('#')?String(ref).split('#')[1]:null;
+  show('reviewer');loadGuide(g,{anchor,section});}
+function returnFromReviewer(){const r=reviewerReturn;if(r==='study'){show('study');renderCard();}else if(r==='quiz'){show('quiz');renderQuiz();}else if(r==='srs'){openReview();}else renderHome();}
+
+/* ===== EXAM WEIGHTING ===== */
+function groupKeyOf(q){const by=settings.examGroupBy;return by==='system'?q.sys:by==='pack'?q._packName:q.topic;}
+function examGroups(){const m=new Map();qTestPool().forEach(q=>{const k=groupKeyOf(q);if(!m.has(k))m.set(k,[]);m.get(k).push(q.id);});return m;}
+function autoBalance(target){const g=examGroups();let total=0;g.forEach(ids=>total+=ids.length);if(!total)return;const t=Math.min(target,total);
+  const entries=[...g.entries()];let counts={},sum=0;
+  entries.forEach(([k,ids])=>{counts[k]=Math.min(ids.length,Math.round(t*ids.length/total));sum+=counts[k];});
+  let diff=t-sum,guard=0;
+  while(diff!==0&&guard++<1000){for(const [k,ids] of entries){if(diff===0)break;if(diff>0&&counts[k]<ids.length){counts[k]++;diff--;}else if(diff<0&&counts[k]>0){counts[k]--;diff++;}}}
+  settings.examCounts=counts;}
+
+/* ===== QUIZ ===== */
+let qmode,qorder=[],qmap={},qans=[],qsub=[],qflag=[],qelapsed=[],qcur=0,qTimerId=null,qTimeLeft=0,qTestSubmitted=false,timerWanted=false;
+function fmt(s){s=Math.max(0,Math.round(s));return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;}
+function buildQmap(){qmap={};qpool().forEach(q=>qmap[q.id]=q);}
+function startPractice(){const pool=qTestPool();if(!pool.length){alert('No questions match the current session difficulty.');return;}buildQmap();
+  let ids=pool.map(q=>q.id);if(settings.practiceShuffle)shuffle(ids);qorder=ids;qmode='practice';
+  qinit();qTestSubmitted=false;
+  timerWanted=!!settings.practiceTimer;$('flagBtn').style.display='none';$('submitAnsBtn').style.display='';
+  $('finishBtn').textContent='Finish & summary';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map · practice';
+  renderQuiz();startQTick();show('quiz');}
+function startExam(){const pool=qTestPool();if(!pool.length){alert('No questions match the current session difficulty.');return;}buildQmap();
+  if(examTotal()===0)autoBalance(parseInt($('autoTarget').value)||40);
+  const g=examGroups();let picks=[];g.forEach((ids,k)=>{picks=picks.concat(shuffle([...ids]).slice(0,Math.min(ids.length,settings.examCounts[k]||0)));});
+  if(!picks.length){alert('Set a test length in Settings first.');return;}
+  qorder=shuffle(picks);qmode='test';qinit();qTestSubmitted=false;qTimeLeft=settings.examMinutes*60;
+  timerWanted=!!settings.examTimer;$('flagBtn').style.display='';$('submitAnsBtn').style.display='none';
+  $('finishBtn').textContent='Submit examination';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map';
+  $('timer').classList.remove('over','warn');renderQuiz();startQTick();show('quiz');}
+function qinit(){qcur=0;qans=new Array(qorder.length).fill(null);qsub=new Array(qorder.length).fill(false);qflag=new Array(qorder.length).fill(false);qelapsed=new Array(qorder.length).fill(0);}
+function qRevealed(slot){return qmode==='practice'?qsub[slot]:qTestSubmitted;}
+function startQTick(){clearInterval(qTimerId);qTimerId=setInterval(()=>{
+  if(qmode==='test'){if(!settings.examTimer)return;qTimeLeft--;$('tclock').textContent=fmt(qTimeLeft);$('timer').classList.toggle('warn',qTimeLeft<=300&&qTimeLeft>0);if(qTimeLeft<=0){clearInterval(qTimerId);submitExam(true);}}
+  else{if(!settings.practiceTimer)return;if(!qsub[qcur])qelapsed[qcur]++;updatePracClock();}
+},1000);}
+function updatePracClock(){const rem=settings.practiceSecs-qelapsed[qcur];const t=$('timer');if(rem>=0){t.classList.remove('over');t.classList.toggle('warn',rem<=15);$('tclock').textContent=fmt(rem);}else{t.classList.add('over');t.classList.remove('warn');$('tclock').textContent='+'+fmt(-rem);}}
+function renderQuiz(){const q=qmap[qorder[qcur]],sel=qans[qcur],done=qRevealed(qcur);
+  $('qtag').textContent=q.topic;$('qdiff').innerHTML=diffBadge(q);$('qpos').textContent=`Q${qcur+1} / ${qorder.length}`;$('pbar').style.width=((qcur+1)/qorder.length*100)+'%';
+  let html=`<p class="stem"><span class="lead">${qcur+1}.</span> ${q.stem}</p><div class="opts">`;
+  q.options.forEach((o,i)=>{let cls='opt';if(!done){if(sel===i)cls+=' sel';}else{cls+=' locked';if(i===q.correct)cls+=' correct';else if(sel===i)cls+=' wrong';}
+    html+=`<button class="${cls}" data-i="${i}" ${done?'disabled':''}><span class="letter">${LETTERS[i]}</span><span>${o}</span></button>`;});
+  html+='</div>';
+  if(done){const ok=sel===q.correct;html+=`<div class="verdictline ${ok?'ok':'no'}">${ok?'✓ Correct':(sel==null?'— Not answered':'✗ Incorrect')}</div>`;
+    html+=`<div class="answerbox"><div class="h">Explanation · ${q.topic}${diffRank(q)>=0?' · '+q.difficulty:''}</div>${q.explain||''}</div>`+guideHTML(q.guide);}
+  $('qcard').innerHTML=html;
+  if(!done)$('qcard').querySelectorAll('.opt').forEach(el=>el.addEventListener('click',()=>{qans[qcur]=+el.dataset.i;renderQuiz();renderGrid();}));
+  else wireGuideLinks($('qcard'));
+  $('prevBtn').disabled=(qcur===0);$('nextBtn').disabled=(qcur===qorder.length-1);
+  if(qmode==='practice'){$('submitAnsBtn').style.display=qsub[qcur]?'none':'';$('submitAnsBtn').disabled=(qans[qcur]==null);if(settings.practiceTimer)updatePracClock();}
+  else{$('flagBtn').classList.toggle('on',qflag[qcur]);$('flagBtn').textContent=qflag[qcur]?'⚑ Flagged':'⚑ Flag';}
+  renderGrid();}
+function renderGrid(){const g=$('grid');g.innerHTML='';let answered=0,correct=0;
+  for(let i=0;i<qorder.length;i++){const c=document.createElement('div');c.className='cell';c.textContent=i+1;
+    if(qans[i]!==null)answered++;if(i===qcur)c.classList.add('current');if(qflag[i])c.classList.add('flagged');
+    if(qRevealed(i)){if(qans[i]===qmap[qorder[i]].correct){c.classList.add('r-correct');correct++;}else c.classList.add('r-wrong');}
+    else if(qans[i]!==null)c.classList.add('answered');
+    c.addEventListener('click',()=>{qcur=i;renderQuiz();window.scrollTo({top:0,behavior:'smooth'});});g.appendChild(c);}
+  $('answeredCount').textContent=qmode==='practice'?`${qsub.filter(Boolean).length} submitted · ${correct} correct`:(qTestSubmitted?'review mode':`${answered} answered`);}
+function submitAnswer(){if(qans[qcur]==null)return;qsub[qcur]=true;renderQuiz();renderGrid();}
+function qPrev(){if(qcur>0){qcur--;renderQuiz();window.scrollTo({top:0,behavior:'smooth'});}}
+function qNext(){if(qcur<qorder.length-1){qcur++;renderQuiz();window.scrollTo({top:0,behavior:'smooth'});}}
+function submitExam(auto){if(qTestSubmitted)return;const un=qans.filter(a=>a===null).length;
+  if(!auto&&un>0&&!confirm(`${un} unanswered. Submit anyway?`))return;qTestSubmitted=true;clearInterval(qTimerId);showResults(auto);}
+function finishPractice(){if(qsub.filter(Boolean).length===0){alert('Submit at least one question first.');return;}clearInterval(qTimerId);showResults(false);}
+function showResults(auto){let total=0,correct=0;const byT={};
+  if(qmode==='test'){total=qorder.length;for(let i=0;i<qorder.length;i++){const q=qmap[qorder[i]];byT[q.sys]=byT[q.sys]||{c:0,t:0};byT[q.sys].t++;if(qans[i]===q.correct){correct++;byT[q.sys].c++;}}}
+  else{for(let i=0;i<qorder.length;i++){if(!qsub[i])continue;const q=qmap[qorder[i]];byT[q.sys]=byT[q.sys]||{c:0,t:0};byT[q.sys].t++;total++;if(qans[i]===q.correct){correct++;byT[q.sys].c++;}}}
+  const pct=total?Math.round(correct/total*100):0;
+  timerWanted=false;$('timer').style.display='none';$('resCrest').textContent=qmode==='test'?'Examination Results':'Practice Summary';
+  $('scorePct').textContent=pct+'%';$('scoreRaw').textContent=qmode==='test'?`${correct} / ${total}`:`${correct} / ${total} submitted`;
+  const circ=2*Math.PI*86,ring=$('ring');ring.setAttribute('stroke',pct>=70?'var(--green)':(pct>=55?'var(--gold)':'var(--accent)'));
+  ring.style.transition='none';ring.setAttribute('stroke-dashoffset',circ);setTimeout(()=>{ring.style.transition='stroke-dashoffset 1.1s ease';ring.setAttribute('stroke-dashoffset',circ*(1-pct/100));},60);
+  let v,vs;if(qmode==='test'){if(pct>=80){v="Strong pass.";vs="Comfortably above the line.";}else if(pct>=70){v="Solid.";vs="You'd pass — build a cushion on weak systems.";}else if(pct>=55){v="Borderline.";vs="Focused review of the red systems will move it.";}else{v="Keep going.";vs="Use the breakdown to target your hours.";}}
+  else{v="Nice work.";vs="Practice scores count only submitted questions. Use Review to drill the misses.";}
+  $('verdict').textContent=v;$('verdictSub').textContent=vs;
+  const bd=$('breakdown');bd.innerHTML='';Object.keys(SYS_LABEL).concat(Object.keys(byT).filter(k=>!SYS_LABEL[k])).forEach(s=>{if(!byT[s])return;const {c,t}=byT[s],p=Math.round(c/t*100);bd.innerHTML+=`<div class="brow2"><div class="top"><span class="name">${sysLabel(s)}</span><span class="sc">${c}/${t} · ${p}%</span></div><div class="bar ${p>=70?'good':''}"><i style="width:${p}%"></i></div></div>`;});
+  const ra=$('resActions');ra.innerHTML='';
+  const rb=document.createElement('button');rb.className='btn';rb.textContent='Review every question →';rb.onclick=enterReview;ra.appendChild(rb);
+  const ag=document.createElement('button');ag.className='btn ghost';ag.textContent=qmode==='test'?'New test':'Restart practice';ag.onclick=()=>{qmode==='test'?startExam():startPractice();};ra.appendChild(ag);
+  const hb=document.createElement('button');hb.className='btn ghost';hb.textContent='Home';hb.onclick=()=>renderHome();ra.appendChild(hb);
+  $('resNote').textContent=qmode==='test'?(auto?'Time expired — auto-submitted.':(settings.examTimer?`Time used: ${fmt(settings.examMinutes*60-qTimeLeft)} of ${fmt(settings.examMinutes*60)}.`:'Untimed test.')):'';
+  show('results');}
+function enterReview(){qTestSubmitted=true;if(qmode==='practice')for(let i=0;i<qorder.length;i++)qsub[i]=true;
+  timerWanted=false;$('timer').style.display='none';$('submitAnsBtn').style.display='none';$('finishBtn').style.display='none';qcur=0;renderQuiz();show('quiz');}
+
+/* ===== SETTINGS ===== */
+function openSettings(){
+  $('setGroupBy').value=settings.examGroupBy;
+  $('setPracSecs').value=settings.practiceSecs;$('setExamMins').value=settings.examMinutes;$('setNewPerDay').value=settings.srsNewPerDay;
+  $('autoTarget').value=Math.max(1,examTotal()||40);
+  toggleSwitch($('setPracTimer'),settings.practiceTimer);toggleSwitch($('setExamTimer'),settings.examTimer);toggleSwitch($('setPracShuffle'),settings.practiceShuffle);
+  renderWeights();$('setMsg').textContent='';$('settingsModal').classList.add('show');}
+function toggleSwitch(el,on){el.classList.toggle('on',on);el.textContent=on?'on':'off';}
+function renderWeights(){const wr=$('weightRows');wr.innerHTML='';const g=examGroups();
+  if(g.size===0){wr.innerHTML='<div class="note" style="text-align:left">Load a pack (and pick a difficulty) to set exam weights.</div>';$('weightTotal').textContent='0';return;}
+  const nc={};g.forEach((ids,k)=>{nc[k]=Math.min(ids.length,settings.examCounts[k]||0);});settings.examCounts=nc;
+  g.forEach((ids,k)=>{const row=document.createElement('div');row.className='wrow';
+    row.innerHTML=`<span class="wn">${sysLabel(k)}</span><span class="wc">${ids.length} avail</span>`;
+    const inp=document.createElement('input');inp.type='number';inp.min=0;inp.max=ids.length;inp.value=settings.examCounts[k]||0;
+    inp.addEventListener('input',()=>{let v=Math.max(0,Math.min(ids.length,parseInt(inp.value)||0));settings.examCounts[k]=v;updateWeightTotal();persist();});
+    row.appendChild(inp);wr.appendChild(row);});
+  updateWeightTotal();}
+function updateWeightTotal(){$('weightTotal').textContent=examTotal();}
+
+/* ===== BACKUP ===== */
+function backup(){const data={suite:APP_VERSION,author:APP_AUTHOR,exported:new Date().toISOString(),packs,sched,daily,settings};const blob=new Blob([JSON.stringify(data)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='study-suite-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}
+function restore(file){const r=new FileReader();r.onload=async()=>{try{const d=JSON.parse(r.result);if(d.packs)packs=d.packs;if(d.sched)sched=d.sched;if(d.daily)daily=d.daily;if(d.settings)settings=Object.assign(settings,d.settings);deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});if(daily.date!==today())daily={date:today(),count:0};await persist();renderHome();alert('Backup restored.');}catch(e){alert('Could not read that file.');}};r.readAsText(file);}
+
+/* ===== WIRE UP ===== */
+$('mReview').addEventListener('click',()=>{if(deck().length)openReview();});
+$('mPractice').addEventListener('click',()=>{if(qTestPool().length)startPractice();});
+$('mExam').addEventListener('click',()=>{if(qTestPool().length)startExam();});
+$('diffSeg').querySelectorAll('.seg').forEach(b=>b.addEventListener('click',()=>{settings.sessionDifficulty=b.dataset.d;persist();renderHome();}));
+$('openReviewer').addEventListener('click',()=>{if(activeGuides().length)openReviewer();});
+$('revBack').addEventListener('click',returnFromReviewer);
+$('revNavToggle').addEventListener('click',()=>{settings.revNavCollapsed=!settings.revNavCollapsed;applyRevNav();persist();});
+$('homebtn').addEventListener('click',()=>{if($('quiz').classList.contains('on')||$('study').classList.contains('on')){if(!confirm('Leave this session and return home?'))return;clearInterval(qTimerId);}renderHome();});
+$('studyBtn').addEventListener('click',startSession);
+$('browseBtn').addEventListener('click',renderBrowse);
+$('doneHome').addEventListener('click',openReview);
+$('doneStudyMore').addEventListener('click',startSession);
+$('topicToggle').addEventListener('click',()=>{const p=$('topicPanel');p.classList.toggle('open');$('topicToggle').querySelector('.ph-t').textContent=(p.classList.contains('open')?'▾':'▸')+' Choose topics';});
+$('allTopics').addEventListener('click',()=>{filter=new Set();renderSrs();});
+$('noneTopics').addEventListener('click',()=>{deck().forEach(c=>filter.add(c.topic));renderSrs();});
+$('prevBtn').addEventListener('click',qPrev);$('nextBtn').addEventListener('click',qNext);
+$('submitAnsBtn').addEventListener('click',submitAnswer);
+$('flagBtn').addEventListener('click',()=>{qflag[qcur]=!qflag[qcur];renderQuiz();});
+$('finishBtn').addEventListener('click',()=>{qmode==='test'?submitExam(false):finishPractice();});
+$('dropzone').addEventListener('click',()=>$('packFile').click());
+$('packFile').addEventListener('change',e=>{if(e.target.files.length)readFiles(e.target.files);e.target.value='';});
+['dragover','dragenter'].forEach(ev=>$('dropzone').addEventListener(ev,e=>{e.preventDefault();$('dropzone').classList.add('drag');}));
+['dragleave','drop'].forEach(ev=>$('dropzone').addEventListener(ev,e=>{e.preventDefault();$('dropzone').classList.remove('drag');}));
+$('dropzone').addEventListener('drop',e=>{if(e.dataTransfer.files.length)readFiles(e.dataTransfer.files);});
+$('settingsBtn').addEventListener('click',openSettings);
+$('setClose').addEventListener('click',()=>{$('settingsModal').classList.remove('show');renderHome();});
+$('settingsModal').addEventListener('click',e=>{if(e.target.id==='settingsModal'){$('settingsModal').classList.remove('show');renderHome();}});
+$('setGroupBy').addEventListener('change',e=>{settings.examGroupBy=e.target.value;settings.examCounts={};renderWeights();persist();});
+$('autoBalanceBtn').addEventListener('click',()=>{autoBalance(parseInt($('autoTarget').value)||40);renderWeights();persist();});
+$('setPracTimer').addEventListener('click',()=>{settings.practiceTimer=!settings.practiceTimer;toggleSwitch($('setPracTimer'),settings.practiceTimer);persist();});
+$('setExamTimer').addEventListener('click',()=>{settings.examTimer=!settings.examTimer;toggleSwitch($('setExamTimer'),settings.examTimer);persist();});
+$('setPracShuffle').addEventListener('click',()=>{settings.practiceShuffle=!settings.practiceShuffle;toggleSwitch($('setPracShuffle'),settings.practiceShuffle);persist();});
+$('setPracSecs').addEventListener('change',e=>{settings.practiceSecs=Math.max(5,parseInt(e.target.value)||90);persist();});
+$('setExamMins').addEventListener('change',e=>{settings.examMinutes=Math.max(1,parseInt(e.target.value)||60);persist();});
+$('setNewPerDay').addEventListener('change',e=>{settings.srsNewPerDay=Math.max(0,parseInt(e.target.value)||0);persist();});
+$('enableAll').addEventListener('click',()=>{packs.forEach(p=>p.enabled=true);persist();renderHome();});
+$('disableAll').addEventListener('click',()=>{packs.forEach(p=>p.enabled=false);persist();renderHome();});
+$('backupBtn').addEventListener('click',backup);
+$('restoreBtn').addEventListener('click',()=>$('restoreFile').click());
+$('restoreFile').addEventListener('change',e=>{if(e.target.files[0])restore(e.target.files[0]);});
+document.addEventListener('keydown',e=>{
+  if($('study').classList.contains('on')){if(!revealed){if(e.key===' '||e.key==='Enter'){e.preventDefault();revealed=true;renderCard();}}else if(['1','2','3','4'].includes(e.key))grade(+e.key);return;}
+  if($('quiz').classList.contains('on')){const done=qRevealed(qcur);if(!done){const i=LETTERS.indexOf(e.key.toUpperCase());if(i>=0&&i<qmap[qorder[qcur]].options.length){qans[qcur]=i;renderQuiz();}}if(e.key==='ArrowLeft')qPrev();if(e.key==='ArrowRight')qNext();if(qmode==='practice'&&e.key==='Enter'&&!qsub[qcur]&&qans[qcur]!=null)submitAnswer();}
+});
+
+init();
+</script>

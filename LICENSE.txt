@@ -1,0 +1,9 @@
+Integrated Study Suite
+Copyright © 2026 Alkarim Billawala (alkarim.billawala.ca)
+All rights reserved.
+
+This software and its accompanying content (question packs, topic guides,
+and documentation) are made available for personal study use by the
+author's classmates and friends. No license is granted to copy, modify,
+redistribute, or commercially exploit this software or content without
+the author's prior written permission.

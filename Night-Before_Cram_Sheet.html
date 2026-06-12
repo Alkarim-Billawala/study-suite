@@ -1,0 +1,297 @@
+<!-- Night-Before One-Page Cram Sheet · Endocrine / GI / Renal-Urinary -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root{
+  --paper:#f5f2ea; --ink:#1c1a15; --soft:#56524a; --line:#d8d2c2;
+  --accent:#7c2d2d; --accent2:#9a5a2a; --green:#2f6b4f; --blue:#2d5a6b; --gold:#8a6d1f;
+  --emerg:#7c2d2d;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'IBM Plex Sans',sans-serif; font-size:13px; line-height:1.35;
+  -webkit-font-smoothing:antialiased;
+}
+.page{max-width:1180px;margin:0 auto;padding:18px 20px 60px}
+
+/* header */
+.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:8px;margin-bottom:12px;gap:16px}
+.head .l .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
+.head .l h1{font-family:'Fraunces',serif;font-weight:600;font-size:27px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}
+.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}
+.printbtn{font-family:'IBM Plex Sans';font-weight:600;font-size:12px;background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:8px 16px;cursor:pointer;margin-top:6px}
+.printbtn:hover{background:var(--accent)}
+
+/* emergency strip */
+.emerg{border:1.5px solid var(--emerg);border-radius:6px;background:linear-gradient(180deg,#f6e7e4,#f3efe6);padding:9px 12px;margin-bottom:13px}
+.emerg .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--emerg);font-weight:600;margin-bottom:5px}
+.emerg .items{columns:3;column-gap:22px;font-size:12px;line-height:1.42}
+.emerg .items div{break-inside:avoid;margin-bottom:2px}
+.emerg b{color:var(--emerg)}
+
+/* columns of cards */
+.cols{column-count:4;column-gap:14px}
+@media(max-width:1040px){.cols{column-count:3}}
+@media(max-width:760px){.cols{column-count:2}}
+@media(max-width:520px){.cols{column-count:1}}
+.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:#fbf9f3;padding:8px 9px 7px;margin:0 0 11px}
+.card h2{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;padding-bottom:4px;border-bottom:1.5px solid var(--line);color:var(--accent);display:flex;justify-content:space-between;align-items:center}
+.card h2 .wk{color:var(--soft);font-size:8.5px;font-weight:500;letter-spacing:.06em}
+.card.endo h2{color:var(--accent)}
+.card.gi h2{color:var(--accent2)}
+.card.gi h2{color:var(--blue)}
+.card.renal h2{color:var(--green)}
+
+dl{margin:0}
+.row{margin:0 0 3.5px;font-size:11.5px;line-height:1.32}
+.row .tg{font-weight:600;color:var(--ink)}
+.row .ar{color:var(--soft)}
+.row .ar::before{content:"→ ";color:var(--accent);font-weight:600}
+.mono{font-family:'IBM Plex Mono',monospace;font-size:10.5px}
+hr.mini{border:none;border-top:1px dashed var(--line);margin:5px 0}
+.pill{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9px;padding:0 4px;border:1px solid var(--line);border-radius:3px;color:var(--soft);background:#fff}
+
+.footer{margin-top:8px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}
+
+@media print{
+  @page{size:landscape;margin:9mm}
+  body{background:#fff;font-size:8.4px}
+  .page{max-width:none;padding:0}
+  .printbtn{display:none}
+  .cols{column-count:4;column-gap:8px}
+  .emerg .items{columns:3}
+  .card{margin-bottom:6px;padding:5px 6px;background:#fff;border-color:#bbb}
+  .card h2{font-size:7.6px;margin-bottom:4px}
+  .row{font-size:7.7px;margin-bottom:2px;line-height:1.22}
+  .head h1{font-size:19px}
+  .emerg{background:#fff;margin-bottom:7px;padding:5px 7px}
+  .emerg .items{font-size:7.7px}
+}
+</style>
+
+<div class="page">
+
+  <div class="head">
+    <div class="l">
+      <div class="k">◇ Night-Before High-Yield Sheet ◇</div>
+      <h1>Endocrine · Gastroenterology · Renal &amp; Urinary</h1>
+    </div>
+    <div class="r">
+      11 weeks · single best answer<br>
+      trigger&nbsp;<span style="color:var(--accent)">→</span>&nbsp;answer format
+      <br><button class="printbtn" onclick="window.print()">⎙ Print / Save PDF</button>
+    </div>
+  </div>
+
+  <!-- EMERGENCIES -->
+  <div class="emerg">
+    <div class="t">★ First-step / emergency reflexes (know cold)</div>
+    <div class="items">
+      <div><b>Hyperkalemia + ECG changes</b> → IV calcium gluconate FIRST (stabilizes, doesn't lower K⁺)</div>
+      <div><b>DKA, K⁺ &lt; 3.3</b> → hold insulin, replace K⁺ first; titrate insulin to anion-gap closure (add D5W at glucose ~12–14)</div>
+      <div><b>Post-parathyroidectomy tetany</b> (hungry bone) → IV calcium gluconate + monitor; check Mg</div>
+      <div><b>Acute symptomatic hypercalcemia</b> → IV isotonic saline first</div>
+      <div><b>Adrenal crisis</b> → IV saline + hydrocortisone (use <i>dexamethasone</i> if ACTH-stim pending)</div>
+      <div><b>Septic acute abdomen</b> → resuscitate + broad abx + source control (don't wait for imaging)</div>
+      <div><b>Ascending cholangitis</b> (Charcot/Reynolds) → resuscitate + abx + urgent ERCP</div>
+      <div><b>Variceal bleed</b> → octreotide + ceftriaxone + PPI, then band ligation</div>
+      <div><b>RPGN</b> (nephritic + RBC casts + ↑Cr) → empiric IV pulse steroids; don't wait for biopsy</div>
+      <div><b>Testicular torsion</b> (horizontal lie, absent cremasteric) → urgent surgical exploration</div>
+      <div><b>Acetaminophen overdose</b> (AST/ALT in thousands, ↑INR) → N-acetylcysteine</div>
+      <div><b>Dialysis = AEIOU</b>: Acidosis pH&lt;7.1 · Electrolytes (refractory ↑K) · Intoxication (MeOH/EG/Li/ASA) · Overload · Uremia</div>
+    </div>
+  </div>
+
+  <div class="cols">
+
+    <!-- DIABETES -->
+    <div class="card endo">
+      <h2>Diabetes & vascular <span class="wk">Endo I</span></h2>
+      <div class="row"><span class="tg">Dx</span> <span class="ar">FPG ≥7.0, A1c ≥6.5%, 2-h OGTT ≥11.1; pre-DM A1c 6.0–6.4</span></div>
+      <div class="row"><span class="tg">A1c falsely ↓</span> <span class="ar">hemolysis, sickle/thal, transfusion</span></div>
+      <div class="row"><span class="tg">A1c falsely ↑</span> <span class="ar">B12/folate def, splenectomy</span></div>
+      <hr class="mini">
+      <div class="row"><span class="tg">Metformin</span> <span class="ar">stop if eGFR&lt;30; B12 malabs, lactic acidosis</span></div>
+      <div class="row"><span class="tg">SGLT2i</span> <span class="ar">euglycemic DKA, mycotic infx; CV+renal protect</span></div>
+      <div class="row"><span class="tg">GLP-1 (semaglutide)</span> <span class="ar">A1c↓ + weight loss; avoid active retinopathy</span></div>
+      <div class="row"><span class="tg">Sulfonylurea</span> <span class="ar">hypoglycemia + weight gain (glyburide worst)</span></div>
+      <div class="row"><span class="tg">Linagliptin</span> <span class="ar">only DPP-4 safe in ESRD (non-renal)</span></div>
+      <hr class="mini">
+      <div class="row"><span class="tg">ACEi</span> <span class="ar">≤30% Cr rise OK; cough/angioedema/↑K; preg contra</span></div>
+      <div class="row"><span class="tg">Statin</span> <span class="ar">all DM ≥40/vascular; LDL target &lt;2.0</span></div>
+      <div class="row"><span class="tg">Nephropathy</span> <span class="ar">confirm UACR ×3; early hyperfiltration</span></div>
+      <div class="row"><span class="tg">Retinopathy</span> <span class="ar">PDR = neovascularization (VEGF)</span></div>
+      <div class="row"><span class="tg">HHS</span> <span class="ar">glu&gt;30, osm&gt;320, minimal ketones</span></div>
+    </div>
+
+    <!-- PIT/THY/ADRENAL -->
+    <div class="card endo">
+      <h2>Pituitary · Thyroid · Adrenal <span class="wk">Endo II</span></h2>
+      <div class="row"><span class="tg">Bitemporal hemianopsia + RAPD</span> <span class="ar">optic chiasm compression</span></div>
+      <div class="row"><span class="tg">Prolactinoma</span> <span class="ar">&gt;250 strong; hook (false ↓ huge tumor); stalk (mild ↑); Tx cabergoline</span></div>
+      <div class="row"><span class="tg">Acromegaly</span> <span class="ar">screen IGF-1, confirm OGTT (no GH suppress)</span></div>
+      <hr class="mini">
+      <div class="row"><span class="tg">Hyperthyroid</span> <span class="ar">↓TSH ↑fT4; Graves diffuse↑, toxic nodule focal hot, thyroiditis LOW uptake</span></div>
+      <div class="row"><span class="tg">Antithyroid</span> <span class="ar">methimazole (PTU 1st trimester); agranulocytosis</span></div>
+      <div class="row"><span class="tg">Hypothyroid</span> <span class="ar">↑TSH; levothyroxine empty stomach; screen adrenal first</span></div>
+      <div class="row"><span class="tg">Nodule + suppressed TSH</span> <span class="ar">radionuclide scan (hot = no FNA)</span></div>
+      <hr class="mini">
+      <div class="row"><span class="tg">Cushing</span> <span class="ar">2/3 tests; ACTH low=adrenal, high=pit/ectopic</span></div>
+      <div class="row"><span class="tg">Addison</span> <span class="ar">↓Na ↑K, hyperpigment (POMC→MSH); cosyntropin</span></div>
+      <div class="row"><span class="tg">Conn's</span> <span class="ar">HTN + ↓K, ↑aldo/↓renin; amiloride(ENaC)/spirono</span></div>
+      <div class="row"><span class="tg">Pheo</span> <span class="ar">24-h metanephrines; α-block BEFORE β; MEN2B/NF1</span></div>
+    </div>
+
+    <!-- REPRO -->
+    <div class="card endo">
+      <h2>Reproductive · GAHT <span class="wk">Endo III</span></h2>
+      <div class="row"><span class="tg">NCAH</span> <span class="ar">morning follicular 17-OHP &gt;6 → ACTH stim; dex hs</span></div>
+      <div class="row"><span class="tg">Rapid virilization + ↑↑DHEAS</span> <span class="ar">adrenal androgen tumor</span></div>
+      <div class="row"><span class="tg">PCOS</span> <span class="ar">Rotterdam 2/3; letrozole for ovulation; metformin</span></div>
+      <div class="row"><span class="tg">Klinefelter 47,XXY</span> <span class="ar">tall, small firm testes, ↑LH/FSH ↓T, azoospermia</span></div>
+      <div class="row"><span class="tg">5α-reductase def</span> <span class="ar">46XY, male internal, female external (no DHT)</span></div>
+      <div class="row"><span class="tg">CAIS</span> <span class="ar">46XY, MIF → no uterus; female phenotype</span></div>
+      <div class="row"><span class="tg">Severe oligo &lt;5M</span> <span class="ar">genetic workup; TRT never for fertility</span></div>
+      <div class="row"><span class="tg">FHA</span> <span class="ar">↓LH ↓FSH ↓estradiol</span></div>
+      <hr class="mini">
+      <div class="row"><span class="tg">HRT</span> <span class="ar">+progestogen if uterus intact; transdermal if HTN/VTE</span></div>
+      <div class="row"><span class="tg">Spironolactone (GAHT)</span> <span class="ar">hyperkalemia; teratogenic</span></div>
+      <div class="row"><span class="tg">GnRH agonist (continuous)</span> <span class="ar">downregulates → ↓LH/FSH</span></div>
+      <div class="row"><span class="tg">ED psychogenic</span> <span class="ar">sudden, situational, AM erections; PDE5i ↑cGMP→↓Ca</span></div>
+    </div>
+
+    <!-- BONE/CA -->
+    <div class="card endo">
+      <h2>Bone · Calcium · Thyroid Ca <span class="wk">Endo IV</span></h2>
+      <div class="row"><span class="tg">DXA</span> <span class="ar">≤−2.5 osteoporosis; −1 to −2.4 osteopenia</span></div>
+      <div class="row"><span class="tg">Vertebral fragility fx</span> <span class="ar">treat regardless of T-score; SPEP for myeloma</span></div>
+      <div class="row"><span class="tg">Bisphosphonate (1st)</span> <span class="ar">upright 30–60 min empty stomach; ONJ/AFF</span></div>
+      <div class="row"><span class="tg">Denosumab stopped/late</span> <span class="ar">rebound vertebral fractures</span></div>
+      <hr class="mini">
+      <div class="row"><span class="tg">Hypercalcemia → check PTH</span> <span class="ar">↑PTH = 1° hyperPTH (↑Ca, ↓phos); ↓PTH = malignancy</span></div>
+      <div class="row"><span class="tg">Acute hyperCa</span> <span class="ar">IV saline → calcitonin → bisphosphonate</span></div>
+      <div class="row"><span class="tg">Paget</span> <span class="ar">↑ALP, normal Ca/phos, mixed lytic/sclerotic → IV zoledronic acid</span></div>
+      <div class="row"><span class="tg">Thyroid Ca</span> <span class="ar">papillary common; medullary=calcitonin/MEN2; surveil thyroglobulin</span></div>
+    </div>
+
+    <!-- UPPER GI -->
+    <div class="card gi">
+      <h2>Upper GI <span class="wk">GI I</span></h2>
+      <div class="row"><span class="tg">GERD typical, no alarm</span> <span class="ar">clinical dx; lifestyle + PPI</span></div>
+      <div class="row"><span class="tg">Dyspepsia alarm</span> <span class="ar">wt loss, anemia, dysphagia, vomiting, bleed, ≥60, FHx → endoscopy</span></div>
+      <div class="row"><span class="tg">PUD</span> <span class="ar">H. pylori + NSAIDs; STOP PPI before urea-breath/stool antigen</span></div>
+      <div class="row"><span class="tg">Hematemesis after retching</span> <span class="ar">Mallory-Weiss</span></div>
+      <div class="row"><span class="tg">Solids→liquids + wt loss</span> <span class="ar">esophageal cancer</span></div>
+      <div class="row"><span class="tg">Solids AND liquids from onset</span> <span class="ar">achalasia (motility)</span></div>
+      <div class="row"><span class="tg">N/V receptors</span> <span class="ar">5-HT3 ondansetron; D2 metoclopramide; H1/M1 vestibular; NK1 aprepitant</span></div>
+      <div class="row"><span class="tg">Diabetic gastroparesis</span> <span class="ar">emptying study; domperidone (less CNS)</span></div>
+    </div>
+
+    <!-- LOWER GI -->
+    <div class="card gi">
+      <h2>Diarrhea · Celiac · IBD <span class="wk">GI II</span></h2>
+      <div class="row"><span class="tg">Bloody/fever diarrhea</span> <span class="ar">AVOID loperamide (invasive colitis)</span></div>
+      <div class="row"><span class="tg">Celiac</span> <span class="ar">duodenum → Fe-def anemia; tTG-IgA + total IgA on gluten</span></div>
+      <div class="row"><span class="tg">Terminal ileum / resection</span> <span class="ar">B12 def + bile-acid diarrhea/steatorrhea</span></div>
+      <div class="row"><span class="tg">Crohn</span> <span class="ar">skip lesions, transmural, TI/right, perianal, fistulas</span></div>
+      <div class="row"><span class="tg">UC</span> <span class="ar">continuous, mucosal, rectum, bloody; colectomy curative</span></div>
+      <div class="row"><span class="tg">Steroids</span> <span class="ar">induction NOT maintenance</span></div>
+      <div class="row"><span class="tg">IBS Rome IV</span> <span class="ar">pain ≥6mo + 2 of (defecation, freq, form); no alarm</span></div>
+      <div class="row"><span class="tg">Elderly constipation + "diarrhea"</span> <span class="ar">overflow impaction</span></div>
+    </div>
+
+    <!-- SURGERY -->
+    <div class="card gi">
+      <h2>GI Surgery <span class="wk">GI III</span></h2>
+      <div class="row"><span class="tg">Biliary colic</span> <span class="ar">&lt;6h, no fever → elective lap chole</span></div>
+      <div class="row"><span class="tg">Cholecystitis</span> <span class="ar">&gt;6h, fever, Murphy+ → abx + early lap chole</span></div>
+      <div class="row"><span class="tg">Choledocholithiasis</span> <span class="ar">jaundice, dilated ducts → ERCP then chole</span></div>
+      <div class="row"><span class="tg">Cholangitis</span> <span class="ar">Charcot ± Reynolds → urgent ERCP</span></div>
+      <div class="row"><span class="tg">Painless jaundice + palpable GB</span> <span class="ar">malignancy (Courvoisier)</span></div>
+      <hr class="mini">
+      <div class="row"><span class="tg">SBO</span> <span class="ar">adhesions/hernia; NPO/IVF/NG; surgery if strangulation/closed loop</span></div>
+      <div class="row"><span class="tg">Ogilvie</span> <span class="ar">colonic pseudo-obstruction → neostigmine</span></div>
+      <div class="row"><span class="tg">Diverticulitis</span> <span class="ar">CT (not acute scope); scope after recovery</span></div>
+      <div class="row"><span class="tg">IDA / BRBPR</span> <span class="ar">colonoscopy; hemorrhoids = dx of exclusion</span></div>
+      <div class="row"><span class="tg">Right colon adenoCA</span> <span class="ar">oncologic right hemicolectomy</span></div>
+      <div class="row"><span class="tg">Preop anemia</span> <span class="ar">IV iron</span></div>
+    </div>
+
+    <!-- LIVER -->
+    <div class="card gi">
+      <h2>Liver & Cirrhosis <span class="wk">GI IV</span></h2>
+      <div class="row"><span class="tg">Pattern</span> <span class="ar">↑↑ALT/AST hepatocellular; ↑↑ALP/GGT cholestatic; INR earliest synth marker</span></div>
+      <div class="row"><span class="tg">Alcoholic hepatitis</span> <span class="ar">AST:ALT &gt;2:1, Maddrey ≥32 → prednisolone</span></div>
+      <div class="row"><span class="tg">Hep B</span> <span class="ar">HBsAg=infx; anti-HBs alone=vaccine; anti-HBc IgM=acute</span></div>
+      <div class="row"><span class="tg">Autoimmune hep</span> <span class="ar">↑IgG, ASMA/ANA → steroids+azathioprine</span></div>
+      <div class="row"><span class="tg">PBC</span> <span class="ar">AMA, pruritus, ♀ → UDCA</span></div>
+      <div class="row"><span class="tg">PSC</span> <span class="ar">p-ANCA, onion-skin, IBD; MRCP</span></div>
+      <div class="row"><span class="tg">Wilson</span> <span class="ar">ATP7B, ↓ceruloplasmin, KF rings → chelation</span></div>
+      <hr class="mini">
+      <div class="row"><span class="tg">SAAG ≥11</span> <span class="ar">portal HTN (transudate); &lt;11 malignancy/infx</span></div>
+      <div class="row"><span class="tg">SBP</span> <span class="ar">ascitic neutrophils &gt;250 → cefotaxime; prophylaxis norfloxacin</span></div>
+      <div class="row"><span class="tg">Asterixis</span> <span class="ar">West Haven stage 2; Tx lactulose/rifaximin</span></div>
+      <div class="row"><span class="tg">Transplant absolute contra</span> <span class="ar">active alcohol/drug use (HIV controlled OK)</span></div>
+    </div>
+
+    <!-- NEPHRO -->
+    <div class="card renal">
+      <h2>AKI · Glomerular · CKD <span class="wk">KU 1</span></h2>
+      <div class="row"><span class="tg">Prerenal</span> <span class="ar">FENa&lt;1%, UNa&lt;20, bland sediment</span></div>
+      <div class="row"><span class="tg">ATN</span> <span class="ar">muddy-brown casts, FENa&gt;1%</span></div>
+      <div class="row"><span class="tg">AIN</span> <span class="ar">drug 7–10d, WBC casts, eosinophilia → stop drug</span></div>
+      <div class="row"><span class="tg">Postrenal</span> <span class="ar">US for hydronephrosis</span></div>
+      <div class="row"><span class="tg">Anuric AKI</span> <span class="ar">eGFR ≈ 0 (equations invalid)</span></div>
+      <hr class="mini">
+      <div class="row"><span class="tg">Nephrotic</span> <span class="ar">&gt;3.5g, ↓alb, edema, lipids; MCD(peds→prednisone), membranous(PLA2R)</span></div>
+      <div class="row"><span class="tg">Nephritic</span> <span class="ar">RBC casts, HTN; IgA (#1 GN), SLE(↓C3/4), ANCA(pauci, normal C)</span></div>
+      <hr class="mini">
+      <div class="row"><span class="tg">CKD</span> <span class="ar">DM #1 cause; ACEi/ARB + SGLT2i slow progression</span></div>
+      <div class="row"><span class="tg">CKD-MBD</span> <span class="ar">↓Ca, ↑phos, ↑PTH, ↓1,25-vit D</span></div>
+      <div class="row"><span class="tg">EPO target</span> <span class="ar">110–120 (not &gt;130 → stroke)</span></div>
+    </div>
+
+    <!-- ELECTROLYTES -->
+    <div class="card renal">
+      <h2>Electrolytes · Acid-Base <span class="wk">KU 2</span></h2>
+      <div class="row"><span class="tg">Na content</span> <span class="ar">ECF volume; Na <i>concentration</i> = cell size</span></div>
+      <div class="row"><span class="tg">Hyponatremia</span> <span class="ar">too much water; chronic→slow (ODS); hypovolemic→isotonic saline</span></div>
+      <div class="row"><span class="tg">Hypernatremia</span> <span class="ar">water deficit (no access) → water/D5W</span></div>
+      <div class="row"><span class="tg">Hyperkalemia</span> <span class="ar">Ca → insulin/D + β2/bicarb → saline/furo/resin → HD; peaked T→wide QRS→sine</span></div>
+      <div class="row"><span class="tg">Hypokalemia</span> <span class="ar">flat T, U waves; oral KCl</span></div>
+      <hr class="mini">
+      <div class="row"><span class="tg">Anion gap</span> <span class="ar">Na−(Cl+HCO3); HAGMA = GOLDMARK</span></div>
+      <div class="row"><span class="tg">Osmolar gap &gt;10</span> <span class="ar">toxic alcohol → fomepizole + HD</span></div>
+      <div class="row"><span class="tg">Ethylene glycol</span> <span class="ar">oxalic acid → Ca-oxalate crystals, AKI</span></div>
+      <div class="row"><span class="tg">Methanol</span> <span class="ar">formic acid → blindness</span></div>
+      <div class="row"><span class="tg">Δ-Δ: HCO3 higher than predicted</span> <span class="ar">concurrent metabolic alkalosis (DKA+vomiting)</span></div>
+    </div>
+
+    <!-- DIURETICS/URO -->
+    <div class="card renal">
+      <h2>Diuretics · Urology <span class="wk">KU 2 / 3</span></h2>
+      <div class="row"><span class="tg">Loop (furosemide)</span> <span class="ar">Na-K-2Cl TAL; hypoK, ototoxic, contraction alkalosis</span></div>
+      <div class="row"><span class="tg">Thiazide</span> <span class="ar">Na-Cl DCT; hypoNa, hypoK, ↑Ca/urate; ↑lithium</span></div>
+      <div class="row"><span class="tg">MRA spironolactone</span> <span class="ar">hyperK, gynecomastia; amiloride = ENaC</span></div>
+      <div class="row"><span class="tg">Desmopressin</span> <span class="ar">acts on collecting duct (V2/AQP2)</span></div>
+      <hr class="mini">
+      <div class="row"><span class="tg">BPH (transition zone)</span> <span class="ar">α-blocker (tamsulosin): orthostasis (additive), retrograde ejac; finasteride 6mo, teratogenic</span></div>
+      <div class="row"><span class="tg">Prostate Ca (peripheral)</span> <span class="ar">hard nodule, axial bone pain; Gleason; LHRH agonist + antiandrogen</span></div>
+      <div class="row"><span class="tg">Testicular mass</span> <span class="ar">US + AFP/βHCG; NO biopsy</span></div>
+      <div class="row"><span class="tg">Oxybutynin</span> <span class="ar">contra in narrow-angle glaucoma</span></div>
+      <div class="row"><span class="tg">PDE5i</span> <span class="ar">contra with nitrates</span></div>
+      <div class="row"><span class="tg">Stones</span> <span class="ar">uric acid radiolucent; admit if obstruction+infection</span></div>
+      <div class="row"><span class="tg">Pregnancy HTN</span> <span class="ar">labetalol/methyldopa/nifedipine OK; ACEi/ARB contra</span></div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    Study aid generated from your 11-week guides · verify against course/clinical guidelines · for review only
+  </div>
+
+</div>
