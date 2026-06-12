@@ -1,8 +1,9 @@
 {
  "pack": "Endocrine (Weeks 25–28)",
  "id": "endo",
+ "school": "UofT — Temerty Medicine",
  "formatVersion": "2.0",
- "version": "2.1",
+ "version": "2.2",
  "year": "Year 1",
  "course": "CPC 2",
  "weeks": "Weeks 25–28 · Endo I–IV",

@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.4 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.5 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.4)
+# Study Suite — Content Authoring Guide (v2.5)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,10 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.4 · **Pairs with:** Study Suite app v2.15+, pack `formatVersion` 2.0
+> **Authoring system version:** 2.5 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **What changed in guide v2.5:** new optional pack field `school` (program/institution, e.g.
+> `"UofT — Temerty Medicine"`) — top level of the hosted site's default-pack navigation, above
+> `year`/`course`. Include it alongside the other placement fields when known.
 > **What changed in guide v2.4:** explicit warning — when revising/regenerating a pack, **never
 > change its `id` or existing card `id`s** (a new `id` creates a duplicate in the user's library
 > instead of updating; changed card ids wipe that card's review history).
@@ -115,7 +118,7 @@ A pack is a single JSON object:
 | `created` / `updated` | recommended | ISO date strings. |
 | `questions` / `cards` | arrays | Either may be empty, but a useful pack has both. |
 | `guides` | yes if any item links a guide | Embedded topic guides — see §6. |
-| `year` / `course` / `weeks` | optional | Curriculum placement, e.g. `"Year 1"` / `"CPC 2"` / `"Weeks 25–28"`. Used to group packs in the hosted site's Default study packs panel; ignored otherwise. Ask the user which year/course/weeks the material belongs to and include these. |
+| `school` / `year` / `course` / `weeks` | optional | Curriculum placement, e.g. `"UofT — Temerty Medicine"` / `"Year 1"` / `"CPC 2"` / `"Weeks 25–28"`. Used to group packs in the hosted site's Default study packs panel; ignored otherwise. Ask the user which school/year/course/weeks the material belongs to and include these. |
 
 ### Shared item fields (questions **and** cards)
 
