@@ -1,12 +1,15 @@
 {
- "pack": "Renal & Genitourinary (KU 1–3)",
+ "pack": "Renal & GU (Weeks 33–35)",
  "id": "ku",
  "formatVersion": "2.0",
- "version": "2.0",
+ "version": "2.1",
+ "year": "Year 1",
+ "course": "CPC 2",
+ "weeks": "Weeks 33–35 · KU I–III",
  "author": "Alkarim Billawala / alkarim.billawala.ca",
  "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
  "created": "2026-06-11",
- "updated": "2026-06-11",
+ "updated": "2026-06-12",
  "questions": [
   {
    "id": "ku_q01",

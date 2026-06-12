@@ -1,12 +1,15 @@
 {
- "pack": "Endocrine (Endo I–IV)",
+ "pack": "Endocrine (Weeks 25–28)",
  "id": "endo",
  "formatVersion": "2.0",
- "version": "2.0",
+ "version": "2.1",
+ "year": "Year 1",
+ "course": "CPC 2",
+ "weeks": "Weeks 25–28 · Endo I–IV",
  "author": "Alkarim Billawala / alkarim.billawala.ca",
  "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
  "created": "2026-06-11",
- "updated": "2026-06-11",
+ "updated": "2026-06-12",
  "questions": [
   {
    "id": "endo_q01",

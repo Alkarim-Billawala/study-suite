@@ -1,7 +1,11 @@
 <!--
-  Integrated Study Suite  ·  v2.14
+  Integrated Study Suite  ·  v2.15
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v2.15: Default study packs panel is now hierarchical — packs carry optional
+  year/course/weeks metadata (manifest passes it through); panel groups Year → collapsible
+  course toggles (▸ CPC 2) → pack rows. Single course auto-expands; packs without metadata
+  fall into an "Other packs" group. Pack schema change is additive/optional.
   Changelog v2.14: "Cloud sync" added to the Features coming soon list (see Future-Features.txt §2).
   Changelog v2.13: "Backup all" in the Add to Home Screen modal's warning box is now clickable —
   triggers the same backup() download as the home-screen button.
@@ -46,7 +50,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Alkarim Billawala / alkarim.billawala.ca">
-<title>Integrated Study Suite v2.14</title>
+<title>Integrated Study Suite v2.15</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#7c2d2d">
@@ -242,6 +246,14 @@ section{display:none}section.on{display:block}
 .defpacks .dp-t{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
 .defpacks .dp-d{font-size:14px;color:var(--ink-soft);margin:3px 0 10px}
 .dp-list{display:flex;flex-direction:column;gap:6px}
+.dp-year{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);border-bottom:1px solid var(--line);padding-bottom:4px;margin-top:4px}
+.dp-year:first-child{margin-top:0}
+.dp-course{display:flex;align-items:center;gap:8px;width:100%;text-align:left;font-family:'Newsreader';font-size:16px;border:1.5px solid var(--line);background:var(--paper);border-radius:8px;padding:8px 12px;cursor:pointer;transition:.12s;color:var(--ink)}
+.dp-course:hover{border-color:var(--accent-soft)}
+.dp-course.open{border-color:var(--accent-soft);background:var(--paper2)}
+.dp-course .tri{font-size:12px;color:var(--accent)}
+.dp-course .cnt{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink-soft);background:var(--paper2);border-radius:10px;padding:2px 8px}
+.dp-coursebody{display:flex;flex-direction:column;gap:6px;padding:2px 0 4px 18px;border-left:2px solid var(--line);margin-left:10px}
 .dp-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .dp-name{font-family:'Newsreader';font-size:16px;flex:1 1 auto;min-width:180px}
 .dp-add{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;border:1.5px solid var(--ink);background:var(--paper);border-radius:20px;padding:5px 13px;cursor:pointer;transition:.12s}
@@ -331,7 +343,7 @@ section{display:none}section.on{display:block}
 
 <header class="top">
   <div class="top-inner">
-    <div class="brand"><span class="k">Integrated Study Suite</span><span class="t">Review · Practice · Exam<span class="ver">v2.14</span></span></div>
+    <div class="brand"><span class="k">Integrated Study Suite</span><span class="t">Review · Practice · Exam<span class="ver">v2.15</span></span></div>
     <div class="top-right">
       <div class="timer" id="timer" style="display:none"><span class="dot"></span><span id="tclock">--:--</span></div>
       <button class="homebtn" id="homebtn" style="display:none">⮌ Home</button>
@@ -397,7 +409,7 @@ section{display:none}section.on{display:block}
       <div class="soon-i">· Anki import — bring your existing Anki decks into Review</div>
       <div class="soon-i">· Cloud sync — progress follows you across devices via your own Google Drive / Dropbox / OneDrive</div>
     </div>
-    <div class="attrib">Integrated Study Suite v2.14 · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
+    <div class="attrib">Integrated Study Suite v2.15 · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
   </section>
 
   <!-- SRS DECK -->
@@ -514,8 +526,8 @@ section{display:none}section.on{display:block}
 </div>
 
 <script>
-/* Integrated Study Suite v2.14 — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='2.14';
+/* Integrated Study Suite v2.15 — Author: Alkarim Billawala / alkarim.billawala.ca */
+const APP_VERSION='2.15';
 const APP_AUTHOR='Alkarim Billawala / alkarim.billawala.ca';
 
 /* ===== STORAGE ===== */
@@ -630,27 +642,53 @@ async function initPackLinks(){
     defaultManifest=m;renderDefaultPacks();
   }catch(e){}
 }
+let dpOpen=null; // Set of expanded "year³course" keys; null until first render
+function dpRow(p){
+  const row=document.createElement('div');row.className='dp-row';
+  const nm=document.createElement('span');nm.className='dp-name';nm.textContent=p.label||p.file;row.appendChild(nm);
+  const inLib=!!(p.id&&packs.some(x=>x.id===p.id));
+  const btn=document.createElement('button');btn.className='dp-add';
+  btn.textContent=inLib?'✓ In library':'+ Add to library';btn.disabled=inLib;
+  if(!inLib)btn.onclick=async()=>{
+    btn.disabled=true;btn.textContent='Adding…';
+    try{
+      const r=await fetch(encodeURI(String(p.file)),{cache:'no-store'});if(!r.ok)throw 0;
+      ingestPack(await r.json(),(p.label||p.file).replace(/\.json$/i,''));
+      await persist();renderHome();
+    }catch(e){btn.disabled=false;btn.textContent='+ Add to library';alert('Could not load that pack — check your connection and try again.');}
+  };
+  row.appendChild(btn);
+  const dl=document.createElement('a');dl.className='dp-dl';dl.href=encodeURI(String(p.file));dl.setAttribute('download','');dl.textContent='⇣ file';row.appendChild(dl);
+  return row;
+}
 function renderDefaultPacks(){
   const m=defaultManifest;if(!m)return;
   const host=$('dpList');host.innerHTML='';
-  m.packs.forEach(p=>{
-    if(!p||!p.file)return;
-    const row=document.createElement('div');row.className='dp-row';
-    const nm=document.createElement('span');nm.className='dp-name';nm.textContent=p.label||p.file;row.appendChild(nm);
-    const inLib=!!(p.id&&packs.some(x=>x.id===p.id));
-    const btn=document.createElement('button');btn.className='dp-add';
-    btn.textContent=inLib?'✓ In library':'+ Add to library';btn.disabled=inLib;
-    if(!inLib)btn.onclick=async()=>{
-      btn.disabled=true;btn.textContent='Adding…';
-      try{
-        const r=await fetch(encodeURI(String(p.file)),{cache:'no-store'});if(!r.ok)throw 0;
-        ingestPack(await r.json(),(p.label||p.file).replace(/\.json$/i,''));
-        await persist();renderHome();
-      }catch(e){btn.disabled=false;btn.textContent='+ Add to library';alert('Could not load that pack — check your connection and try again.');}
-    };
-    row.appendChild(btn);
-    const dl=document.createElement('a');dl.className='dp-dl';dl.href=encodeURI(String(p.file));dl.setAttribute('download','');dl.textContent='⇣ file';row.appendChild(dl);
-    host.appendChild(row);
+  // group: year -> course -> packs (insertion order preserved)
+  const years=new Map();
+  m.packs.forEach(p=>{if(!p||!p.file)return;
+    const y=p.year||'Other packs',c=p.course||'';
+    if(!years.has(y))years.set(y,new Map());
+    const cs=years.get(y);if(!cs.has(c))cs.set(c,[]);
+    cs.get(c).push(p);});
+  // count course groups to decide default expansion (single course -> open)
+  let nCourses=0;years.forEach(cs=>nCourses+=cs.size);
+  if(dpOpen===null){dpOpen=new Set();if(nCourses<=1)years.forEach((cs,y)=>cs.forEach((_,c)=>dpOpen.add(y+'³'+c)));}
+  years.forEach((cs,y)=>{
+    const yh=document.createElement('div');yh.className='dp-year';yh.textContent=y;host.appendChild(yh);
+    cs.forEach((plist,c)=>{
+      if(c){
+        const key=y+'³'+c,open=dpOpen.has(key);
+        const tg=document.createElement('button');tg.className='dp-course'+(open?' open':'');
+        tg.innerHTML=`<span class="tri">${open?'▾':'▸'}</span> ${c} <span class="cnt">${plist.length} pack${plist.length===1?'':'s'}</span>`;
+        tg.onclick=()=>{open?dpOpen.delete(key):dpOpen.add(key);renderDefaultPacks();};
+        host.appendChild(tg);
+        if(!open)return;
+      }
+      const wrap=document.createElement('div');wrap.className='dp-coursebody';
+      plist.forEach(p=>wrap.appendChild(dpRow(p)));
+      host.appendChild(wrap);
+    });
   });
   $('defPacks').style.display=host.children.length?'':'none';
   if(m.authoring){$('buildLink').href=encodeURI(String(m.authoring));$('buildLink').setAttribute('download','');$('buildLine').style.display='';}

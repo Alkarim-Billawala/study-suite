@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.1 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.2 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.1)
+# Study Suite — Content Authoring Guide (v2.2)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,10 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.1 · **Pairs with:** Study Suite app v2.8+, pack `formatVersion` 2.0
+> **Authoring system version:** 2.2 · **Pairs with:** Study Suite app v2.15+, pack `formatVersion` 2.0
+> **What changed in guide v2.2:** new optional pack fields `year` / `course` / `weeks` (curriculum
+> placement, e.g. `"Year 1"` / `"CPC 2"` / `"Weeks 25–28"`) — used by the hosted site to group
+> default packs; harmless if omitted. Include them when the user tells you where the content sits.
 > (the pack schema is unchanged from guide v2.0 — packs made with either guide work in the app).
 > **What changed in guide v2.1:** topic guides are delivered **embedded in the pack only** — no
 > standalone `.html` files unless the user asks; the app's reader is now called **Topic Guides**
@@ -80,6 +83,7 @@ A pack is a single JSON object:
 | `created` / `updated` | recommended | ISO date strings. |
 | `questions` / `cards` | arrays | Either may be empty, but a useful pack has both. |
 | `guides` | yes if any item links a guide | Embedded topic guides — see §6. |
+| `year` / `course` / `weeks` | optional | Curriculum placement, e.g. `"Year 1"` / `"CPC 2"` / `"Weeks 25–28"`. Used to group packs in the hosted site's Default study packs panel; ignored otherwise. Ask the user which year/course/weeks the material belongs to and include these. |
 
 ### Shared item fields (questions **and** cards)
 
