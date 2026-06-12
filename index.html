@@ -1,7 +1,10 @@
 <!--
-  Integrated Study Suite  ·  v0.2.24 (beta)
+  Integrated Study Suite  ·  v0.2.25 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.25: search box in the Topic Guides drawer (under the hide row) — live filter
+  over topic titles/badges; group headers hide when no children match; query survives
+  re-renders (revQuery), native ✕ clear via type="search".
   Changelog v0.2.24: browser/mouse back-forward support — section changes push History API
   entries; popstate maps them back onto app screens (gotoSec) with graceful re-entry (stale
   quiz/review/guide states fall back to Home) and a leave-confirm guard for active sessions
@@ -307,6 +310,9 @@ section{display:none}section.on{display:block}
 .revnav.closed{display:none}
 .revhide{display:flex;align-items:center;gap:7px;width:100%;text-align:left;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);background:var(--paper2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;cursor:pointer;margin-bottom:8px;transition:.12s}
 .revhide:hover{border-color:var(--accent-soft)}
+.revsearch{width:100%;box-sizing:border-box;margin-bottom:8px;padding:7px 10px;font-family:'Newsreader';font-size:14px;border:1px solid var(--line);border-radius:8px;background:var(--paper2);color:var(--ink);outline:none}
+.revsearch:focus{border-color:var(--accent-soft)}
+.revsearch::placeholder{color:var(--ink-soft)}
 .revgroup+.revgroup{margin-top:14px}
 .revgroup .gname{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 6px 6px;border-bottom:1px solid var(--line);padding-bottom:4px}
 .revitem{display:flex;align-items:baseline;gap:8px;width:100%;text-align:left;font-family:'Newsreader';font-size:15px;line-height:1.25;border:1.5px solid transparent;background:none;border-radius:8px;padding:7px 9px;cursor:pointer;transition:.12s;color:var(--ink)}
@@ -448,7 +454,7 @@ section{display:none}section.on{display:block}
       <div class="soon-i">· Anki import — bring your existing Anki decks into Review</div>
       <div class="soon-i">· User creation and sync — save your progress and study anywhere</div>
     </div>
-    <div class="attrib">Integrated Study Suite v0.2.24 · <span class="betatag">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
+    <div class="attrib">Integrated Study Suite v0.2.25 · <span class="betatag">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
   </section>
 
   <!-- SRS DECK -->
@@ -574,7 +580,7 @@ section{display:none}section.on{display:block}
 
 <script>
 /* Integrated Study Suite v0.2.18 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.24';
+const APP_VERSION='0.2.25';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1051,10 +1057,18 @@ function applyGuideView(){
   }catch(e){}
 }
 function openReviewer(){reviewerReturn=currentSection();const org=organizeGuides();renderGuideList();if(org.length){loadGuide(org[0].items[0].g,null);}else{$('guideHost').innerHTML='<div class="revempty">No topic guides are bundled in your active packs. Newer packs embed their guides here; older packs link to <code>Topic_*.html</code> files kept in this folder.</div>';}show('reviewer');}
+let revQuery='';
+function filterGuideList(){const q=revQuery.trim().toLowerCase();const gl=$('guideList');
+  gl.querySelectorAll('.revgroup').forEach(wrap=>{let any=false;
+    wrap.querySelectorAll('.revitem').forEach(b=>{const hit=!q||b.textContent.toLowerCase().includes(q);b.style.display=hit?'':'none';if(hit)any=true;});
+    wrap.style.display=any?'':'none';});}
 function renderGuideList(){const gl=$('guideList');gl.innerHTML='';
   const hd=document.createElement('button');hd.className='revhide';hd.textContent='◂ Hide topic list';
   hd.onclick=()=>{revNavOpen=false;settings.revNavCollapsed=true;persist();applyRevNav();};
   gl.appendChild(hd);
+  const se=document.createElement('input');se.type='search';se.className='revsearch';se.placeholder='Search topics…';se.value=revQuery;
+  se.oninput=()=>{revQuery=se.value;filterGuideList();};
+  gl.appendChild(se);
   organizeGuides().forEach(grp=>{const wrap=document.createElement('div');wrap.className='revgroup';
     if(grp.label){const h=document.createElement('div');h.className='gname';h.textContent=grp.label;wrap.appendChild(h);}
     grp.items.forEach(it=>{const b=document.createElement('button');b.className='revitem'+(guideKey(it.g)===curGuideKey?' on':'');
@@ -1062,6 +1076,7 @@ function renderGuideList(){const gl=$('guideList');gl.innerHTML='';
       const t=document.createElement('span');t.textContent=it.label;b.appendChild(t);
       b.onclick=()=>{revNavOpen=false;loadGuide(it.g,null);};wrap.appendChild(b);});
     gl.appendChild(wrap);});
+  filterGuideList();
   const on=gl.querySelector('.revitem.on');if(on)on.scrollIntoView({block:'nearest'});applyRevNav();}
 function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();
   const host=$('guideHost');host.innerHTML='';
