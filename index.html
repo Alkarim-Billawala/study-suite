@@ -1,7 +1,9 @@
 <!--
-  Integrated Study Suite  ·  v2.12
+  Integrated Study Suite  ·  v2.13
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v2.13: "Backup all" in the Add to Home Screen modal's warning box is now clickable —
+  triggers the same backup() download as the home-screen button.
   Changelog v2.12: PWA install support — "Add to Home Screen" button in the header opens a modal
   with per-device instructions (auto-detects iPhone/iPad, Mac, Android, Windows; user can switch)
   and a backup-first reminder (installed apps keep separate progress). Head now links
@@ -43,7 +45,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Alkarim Billawala / alkarim.billawala.ca">
-<title>Integrated Study Suite v2.12</title>
+<title>Integrated Study Suite v2.13</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#7c2d2d">
@@ -221,6 +223,8 @@ section{display:none}section.on{display:block}
 .modal-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .modal-bar h3{font-family:'Fraunces',serif;font-weight:600;font-size:21px;margin:0}
 .warnbox{border-left:3px solid var(--accent);background:var(--paper2);padding:10px 14px;font-size:14px;margin-bottom:14px;border-radius:0 8px 8px 0}
+.warnbox a{color:var(--accent);text-decoration:none;border-bottom:1.5px dotted var(--accent)}
+.warnbox a:hover{border-bottom-style:solid}
 .steps{font-size:15px;line-height:1.55;margin-top:12px}
 .steps ol{margin:6px 0 4px;padding-left:22px}
 .steps li{margin:5px 0}
@@ -326,7 +330,7 @@ section{display:none}section.on{display:block}
 
 <header class="top">
   <div class="top-inner">
-    <div class="brand"><span class="k">Integrated Study Suite</span><span class="t">Review · Practice · Exam<span class="ver">v2.12</span></span></div>
+    <div class="brand"><span class="k">Integrated Study Suite</span><span class="t">Review · Practice · Exam<span class="ver">v2.13</span></span></div>
     <div class="top-right">
       <div class="timer" id="timer" style="display:none"><span class="dot"></span><span id="tclock">--:--</span></div>
       <button class="homebtn" id="homebtn" style="display:none">⮌ Home</button>
@@ -391,7 +395,7 @@ section{display:none}section.on{display:block}
       <div class="soon-t">Features coming soon</div>
       <div class="soon-i">· Anki import — bring your existing Anki decks into Review</div>
     </div>
-    <div class="attrib">Integrated Study Suite v2.12 · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
+    <div class="attrib">Integrated Study Suite v2.13 · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
   </section>
 
   <!-- SRS DECK -->
@@ -440,7 +444,7 @@ section{display:none}section.on{display:block}
   <div class="modal-ov" id="installOv" style="display:none">
     <div class="modal-card" role="dialog" aria-label="Add to Home Screen">
       <div class="modal-bar"><h3>Add to Home Screen</h3><button class="minor" id="installClose">✕ Close</button></div>
-      <div class="warnbox"><b>First: back up your progress.</b> The installed app keeps its <i>own</i> separate progress. Tap <b>Backup all</b> here before installing, then <b>Restore backup</b> inside the installed app to carry everything over.</div>
+      <div class="warnbox"><b>First: back up your progress.</b> The installed app keeps its <i>own</i> separate progress. Tap <a href="#" id="installBackup"><b>Backup all</b></a> before installing, then <b>Restore backup</b> inside the installed app to carry everything over.</div>
       <div class="segctl" id="devSeg">
         <button class="seg" data-dev="ios">iPhone / iPad</button>
         <button class="seg" data-dev="mac">Mac</button>
@@ -508,8 +512,8 @@ section{display:none}section.on{display:block}
 </div>
 
 <script>
-/* Integrated Study Suite v2.12 — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='2.12';
+/* Integrated Study Suite v2.13 — Author: Alkarim Billawala / alkarim.billawala.ca */
+const APP_VERSION='2.13';
 const APP_AUTHOR='Alkarim Billawala / alkarim.billawala.ca';
 
 /* ===== STORAGE ===== */
@@ -1036,6 +1040,7 @@ $('diffSeg').querySelectorAll('.seg').forEach(b=>b.addEventListener('click',()=>
   persist();renderHome();}));
 $('openReviewer').addEventListener('click',()=>{if(activeGuides().length)openReviewer();});
 $('installBtn').addEventListener('click',openInstall);
+$('installBackup').addEventListener('click',e=>{e.preventDefault();backup();});
 $('installClose').addEventListener('click',closeInstall);
 $('installOv').addEventListener('click',e=>{if(e.target===$('installOv'))closeInstall();});
 $('devSeg').querySelectorAll('.seg').forEach(b=>b.addEventListener('click',()=>{installDev=b.dataset.dev;renderInstall();}));
