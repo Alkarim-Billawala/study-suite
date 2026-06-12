@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.0 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.1 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.0)
+# Study Suite — Content Authoring Guide (v2.1)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,13 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.0 · **Pairs with:** Study Suite app v2.0, pack `formatVersion` 2.0.
+> **Authoring system version:** 2.1 · **Pairs with:** Study Suite app v2.8+, pack `formatVersion` 2.0
+> (the pack schema is unchanged from guide v2.0 — packs made with either guide work in the app).
+> **What changed in guide v2.1:** topic guides are delivered **embedded in the pack only** — no
+> standalone `.html` files unless the user asks; the app's reader is now called **Topic Guides**
+> (was "Content Reviewer"); session difficulty in the app is now **multi-select**; the app is
+> hosted at **https://studysuite.billawala.ca** (with one-click default packs), so most users
+> never handle the app file itself.
 > **Author / attribution:** Alkarim Billawala / alkarim.billawala.ca.
 > **Versioning rule:** the app, this guide, and every pack carry a version. When you revise a pack,
 > bump its `version` and `updated` date so changes are trackable.
@@ -24,9 +30,9 @@ Specifically:
 1. **Explain the loop in plain terms:**
    - They give *you* their lecture material (notes, slides, transcripts, a syllabus, optionally past quizzes).
    - You turn it into **one content pack** — a single `.json` file — containing exam questions, spaced-repetition cards, and the topic guides embedded inside it.
-   - They load that pack into the **Study Suite app** (`Study_Suite_v2.0.html`) by dragging it onto the drop zone.
-   - The app then runs three modes over it: **Review** (spaced repetition), **Practice** (one-at-a-time with instant answers), and **Exam** (timed, scored). It also has a **Content Reviewer** that reads the topic guides bundled in the pack.
-2. **Tell them what you need from them and what they'll get back:** their materials in → one `.json` pack (plus standalone `.html` guides) out.
+   - They load that pack into the **Study Suite app** — at **https://studysuite.billawala.ca** (or a local copy) — by dragging it onto the drop zone.
+   - The app then runs three modes over it: **Review** (spaced repetition), **Practice** (one-at-a-time with instant answers), and **Exam** (timed, scored). It also has a **Topic Guides** reader for the guides bundled in the pack.
+2. **Tell them what you need from them and what they'll get back:** their materials in → **one `.json` pack** out. That single file contains everything, topic guides included.
 3. **Then prompt them to upload** the lecture material they want turned into a pack, and ask the **scope question** in §3 (how many weeks the pack covers / how many questions they want).
 
 Keep this overview brief — a few sentences per point. The goal is orientation, not a lecture.
@@ -37,9 +43,10 @@ Keep this overview brief — a few sentences per point. The goal is orientation,
 
 Convert the user's study material into **one valid pack `.json` per week or topic-set**, containing
 `questions` (for Practice/Exam), `cards` (for Review), and a `guides` array holding the **full HTML of
-each topic guide embedded inline**. Also produce those same topic guides as **standalone `.html`
-files**. Rate every question's `difficulty`. Validate everything against §7 before output. Prefer
-**novel** vignettes over reproductions of any practice material you're given (§4).
+each topic guide embedded inline**. The pack is the **only deliverable** — do not produce standalone
+guide `.html` files unless the user explicitly asks for printable copies. Rate every question's
+`difficulty`. Validate everything against §7 before output. Prefer **novel** vignettes over
+reproductions of any practice material you're given (§4).
 
 ---
 
@@ -171,8 +178,10 @@ When in doubt: same *concept*, new *vignette*.
 
 **Scope:** difficulty applies **only to clinical vignette questions** used in **Practice and Exam**.
 It does **not** apply to review cards. The app shows each question's rating to the learner and lets
-them choose a **session difficulty** that filters Practice/Exam **cumulatively**: Easy → easy only;
-Medium → easy + medium; Hard → all rated; All → everything (including anything left unrated).
+them choose a **session difficulty** that filters Practice/Exam. Since app v2.8 this is
+**multi-select**: Easy/Medium/Hard toggle independently (e.g. hard-only sessions), and "All" selects
+all three — which also includes any questions left unrated. This is one more reason to **rate every
+question**: an unrated question disappears from any filtered session.
 
 **Rate every question.** Compute the rating at generation time with a **semantic** judgment that
 weighs four dimensions together — not a single proxy like stem length:
@@ -201,14 +210,15 @@ of easy / medium / hard works well). Don't force a quota; rate honestly, but if 
 
 ---
 
-## 6. Topic guides — produced **twice**: standalone **and** embedded
+## 6. Topic guides — **embedded in the pack** (no separate files)
 
-Every topic guide must exist in **both** forms:
+Topic guides live **inside the pack** in the `guides` array; the app's **Topic Guides** reader
+displays them with no external dependency. **Do not output standalone guide `.html` files** —
+they are redundant now that guides ship inside the pack. (Only produce a standalone copy if the
+user explicitly asks for a printable version.)
 
-1. **A standalone `.html` file** (`Topic_<code>_<Name>.html`) — openable/printable on its own, and the
-   fallback target for `guide.f` links when a pack isn't loaded.
-2. **Embedded inside the pack** in the `guides` array, so the app's **Content Reviewer** can display
-   it with no same-folder dependency.
+Even though no file is written, each guide still needs a **filename-style key** (e.g.
+`Topic_C1_Arrhythmias.html`) — it's the identifier that links items to guides.
 
 The `guides` array holds one object per guide:
 
@@ -223,17 +233,20 @@ The `guides` array holds one object per guide:
 ```
 
 - `file` — **must exactly equal** every `guide.f` that points to this guide. This is how the app
-  resolves a link to the embedded copy.
-- `title` — shown in the Content Reviewer's chip list.
-- `html` — the **complete HTML document** of the guide (the same content as the standalone file).
-  It renders in a sandboxed iframe, so it can carry its own `<style>`.
+  resolves a link to the embedded copy (it's an identifier, not a real file).
+- `title` — shown in the Topic Guides sidebar. **Name it well**: the sidebar sorts intelligently by
+  parsing a leading `Week NN`, `Topic NN`, or bare `NN —` prefix (roman numerals like "KU III" also
+  sort numerically), so titles like `"Week 12 — Arrhythmias"` or `"Topic 03 Adrenal"` order
+  themselves correctly.
+- `html` — the **complete HTML document** of the guide. It renders in a sandboxed iframe, so it
+  carries its own `<style>`.
 
 **Deep-linking (optional, encouraged):** the app does a best-effort scroll to the section named in
 `guide.s` by matching a heading inside the embedded guide, and honors `guide.f = "File.html#anchor"`
-when a heading carries `id="anchor"`. Because the embedded copy can be **richer** than the printable
-standalone, add `id="..."` to the guide's `<h2>`/`<h3>` headings and you can jump straight to them.
+when a heading carries `id="anchor"`. Add `id="..."` to the guide's `<h2>`/`<h3>` headings so links
+can jump straight to them.
 
-### Standalone guide template
+### Guide HTML template (goes in the `html` value)
 
 ```html
 <!doctype html><meta charset="utf-8">
@@ -251,7 +264,7 @@ standalone, add `id="..."` to the guide's `<h2>`/`<h3>` headings and you can jum
 <div class="key">Irregularly irregular, no P waves → <b>beta-blocker</b> or non-DHP CCB first-line.</div>
 ```
 
-Embed this exact HTML as the `html` value of the matching `guides[]` entry.
+Embed the full HTML (escaped for JSON) as the `html` value of the matching `guides[]` entry.
 
 ---
 
@@ -276,30 +289,31 @@ every `guides[]` entry has non-empty `html`.
 
 ---
 
-## 8. Output instructions — and handling a one-file-per-turn limit
+## 8. Output instructions
 
-When you finish, produce **downloadable files** (not just code in chat):
+When you finish, produce **one downloadable file** (not just code in chat):
 
 1. The **pack `.json`**, named for the week/topic (e.g. `Week_12_Cardiology.json`), **with the topic
-   guides embedded** in `guides[]`.
-2. Each topic guide as a **standalone `.html`** file, filenames matching every `guide.f`.
-3. A short report: how many questions (and the easy/medium/hard split), how many cards, and which
-   guide files you produced.
+   guides embedded** in `guides[]`. This single file is the complete deliverable — the embedded
+   guides make it fully self-sufficient (Topic Guides reader included).
+2. A short report in chat: how many questions (and the easy/medium/hard split), how many cards, and
+   which guides are embedded.
 
-**If your environment only lets you emit one file per turn:** the embedded guides make the pack
-**self-sufficient** for studying, so **generate the `.json` pack first** (it works fully in the app,
-Content Reviewer included). Then tell the user you'll provide the **standalone `.html` guides next** —
-and produce them in the following turn(s). Never hold back the pack waiting on the guides.
+Do **not** emit standalone guide `.html` files unless the user asks for printable copies.
 
 ---
 
 ## 9. How the human uses the output (for your closing summary)
 
-1. Put `Study_Suite_v2.0.html`, the pack `.json` file(s), and the standalone `Topic_*.html` guides in **one folder** (the standalone guides are optional once guides are embedded, but handy for printing/direct opening).
-2. Open the app (double-click locally, or host the folder on any static web host to share).
-3. Drag the `.json` pack(s) onto the drop zone — they persist and appear in the **Content library**, each toggleable on/off.
-4. Pick a **Session difficulty** (Easy/Medium/Hard/All) for Practice and Exam; **Review** ignores difficulty. Open **Content Reviewer** to read the bundled guides.
-5. **Backup all** periodically — one file with packs, progress, and settings, restorable anywhere.
+1. Open the app at **https://studysuite.billawala.ca** (nothing to install; a local copy of the
+   app `.html` works identically).
+2. Drag the new `.json` pack onto the drop zone — it persists and appears in the **Content
+   library**, toggleable on/off. (The site also offers the author's default packs with one-click
+   "+ Add to library".)
+3. Pick a **Session difficulty** — Easy/Medium/Hard are multi-select toggles, "All" selects all
+   three — for Practice and Exam; **Review** ignores difficulty. Open **Topic Guides** to read the
+   bundled guides.
+4. **Backup all** periodically — one file with packs, progress, and settings, restorable anywhere.
 
 Load multiple weeks and toggle to whatever's being studied. Add weeks anytime by generating more
 packs with this guide. Bump each pack's `version`/`updated` when you revise it.
