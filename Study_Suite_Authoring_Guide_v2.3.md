@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.2 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.3 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.2)
+# Study Suite — Content Authoring Guide (v2.3)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,10 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.2 · **Pairs with:** Study Suite app v2.15+, pack `formatVersion` 2.0
+> **Authoring system version:** 2.3 · **Pairs with:** Study Suite app v2.15+, pack `formatVersion` 2.0
+> **What changed in guide v2.3:** materials often arrive across **several messages** (upload limits) —
+> you must **confirm the user has sent everything before building the pack**; keep ingesting until
+> they explicitly say to proceed (see §0a).
 > **What changed in guide v2.2:** new optional pack fields `year` / `course` / `weeks` (curriculum
 > placement, e.g. `"Year 1"` / `"CPC 2"` / `"Weeks 25–28"`) — used by the hosted site to group
 > default packs; harmless if omitted. Include them when the user tells you where the content sits.
@@ -36,9 +39,29 @@ Specifically:
    - They load that pack into the **Study Suite app** — at **https://studysuite.billawala.ca** (or a local copy) — by dragging it onto the drop zone.
    - The app then runs three modes over it: **Review** (spaced repetition), **Practice** (one-at-a-time with instant answers), and **Exam** (timed, scored). It also has a **Topic Guides** reader for the guides bundled in the pack.
 2. **Tell them what you need from them and what they'll get back:** their materials in → **one `.json` pack** out. That single file contains everything, topic guides included.
-3. **Then prompt them to upload** the lecture material they want turned into a pack, and ask the **scope question** in §3 (how many weeks the pack covers / how many questions they want).
+3. **Then prompt them to upload** the lecture material they want turned into a pack, and ask the **scope question** in §3 (how many weeks the pack covers / how many questions they want). Mention that they can send material across **multiple messages** if it doesn't fit in one — you'll wait for all of it (§0a).
 
 Keep this overview brief — a few sentences per point. The goal is orientation, not a lecture.
+
+---
+
+## 0a. Wait for ALL the content before building anything
+
+Weekly material is often **too large for one message** — users hit per-query upload limits and
+send their content in batches. Because of this:
+
+1. After each upload, briefly acknowledge what you received (e.g. "Got the Week 25 slides and the
+   endo lecture notes"), then **ask: "Is that everything, or is there more to come?"**
+2. **Do not generate the pack — or any part of it — until the user explicitly confirms** that all
+   content is in and tells you to proceed. No drafts, no partial packs, no "starting on what we
+   have so far."
+3. Keep ingesting across as many messages as it takes. Track what's arrived so you can summarize
+   the full inventory (weeks, lectures, file names) back to the user when they say it's complete.
+4. When they confirm, restate the inventory in one line, confirm the scope (§3), then build the
+   pack from **everything** received.
+
+A pack built from half the week's content is worse than a late pack — it silently teaches an
+incomplete syllabus.
 
 ---
 
