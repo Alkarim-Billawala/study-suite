@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.3 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.4 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.3)
+# Study Suite — Content Authoring Guide (v2.4)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,10 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.3 · **Pairs with:** Study Suite app v2.15+, pack `formatVersion` 2.0
+> **Authoring system version:** 2.4 · **Pairs with:** Study Suite app v2.15+, pack `formatVersion` 2.0
+> **What changed in guide v2.4:** explicit warning — when revising/regenerating a pack, **never
+> change its `id` or existing card `id`s** (a new `id` creates a duplicate in the user's library
+> instead of updating; changed card ids wipe that card's review history).
 > **What changed in guide v2.3:** materials often arrive across **several messages** (upload limits) —
 > you must **confirm the user has sent everything before building the pack**; keep ingesting until
 > they explicitly say to proceed (see §0a).
@@ -23,7 +26,13 @@
 > never handle the app file itself.
 > **Author / attribution:** Alkarim Billawala / alkarim.billawala.ca.
 > **Versioning rule:** the app, this guide, and every pack carry a version. When you revise a pack,
-> bump its `version` and `updated` date so changes are trackable.
+> bump its `version` and `updated` date so changes are trackable — but **keep the pack `id` and all
+> existing card `id`s exactly the same**. The app updates packs by `id`: same `id` → the re-uploaded
+> pack cleanly **replaces** the old one (no duplicate, review progress preserved for unchanged card
+> ids). A **different `id` is the failure mode**: the user gets a duplicate pack (duplicate cards,
+> double-counted questions) and has to delete one manually. Only mint a new `id` for genuinely new
+> content, never for a revision. If you're revising a pack you didn't create, ask the user for the
+> original file (or its `id`) before generating.
 
 ---
 
@@ -99,7 +108,7 @@ A pack is a single JSON object:
 | field | required | notes |
 |---|---|---|
 | `pack` | yes | Display name in the library and as an exam weighting group. |
-| `id` | yes | Short unique slug (`"wk12"`). Reloading a pack with the same `id` **replaces** the old one (and preserves review progress, which is keyed by card `id`). |
+| `id` | yes | Short unique slug (`"wk12"`). Reloading a pack with the same `id` **replaces** the old one (and preserves review progress, which is keyed by card `id`). **Revisions must reuse the original `id`** — a new `id` duplicates the pack in the user's library (see Versioning rule above). |
 | `formatVersion` | yes | Pack-format version. Use `"2.0"`. |
 | `version` | yes | This pack's content version. Bump on revision. |
 | `author` / `createdBy` | yes | Attribution. Set both to `"Alkarim Billawala / alkarim.billawala.ca"` unless told otherwise. |

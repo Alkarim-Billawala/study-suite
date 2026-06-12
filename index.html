@@ -1,7 +1,9 @@
 <!--
-  Integrated Study Suite  ·  v2.15
+  Integrated Study Suite  ·  v2.16
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v2.16: per-pack "⇣ file" download link removed from the Default study packs rows
+  (one-click Add covers the need; code kept commented in dpRow for easy revival).
   Changelog v2.15: Default study packs panel is now hierarchical — packs carry optional
   year/course/weeks metadata (manifest passes it through); panel groups Year → collapsible
   course toggles (▸ CPC 2) → pack rows. Single course auto-expands; packs without metadata
@@ -50,7 +52,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Alkarim Billawala / alkarim.billawala.ca">
-<title>Integrated Study Suite v2.15</title>
+<title>Integrated Study Suite v2.16</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#7c2d2d">
@@ -343,7 +345,7 @@ section{display:none}section.on{display:block}
 
 <header class="top">
   <div class="top-inner">
-    <div class="brand"><span class="k">Integrated Study Suite</span><span class="t">Review · Practice · Exam<span class="ver">v2.15</span></span></div>
+    <div class="brand"><span class="k">Integrated Study Suite</span><span class="t">Review · Practice · Exam<span class="ver">v2.16</span></span></div>
     <div class="top-right">
       <div class="timer" id="timer" style="display:none"><span class="dot"></span><span id="tclock">--:--</span></div>
       <button class="homebtn" id="homebtn" style="display:none">⮌ Home</button>
@@ -409,7 +411,7 @@ section{display:none}section.on{display:block}
       <div class="soon-i">· Anki import — bring your existing Anki decks into Review</div>
       <div class="soon-i">· Cloud sync — progress follows you across devices via your own Google Drive / Dropbox / OneDrive</div>
     </div>
-    <div class="attrib">Integrated Study Suite v2.15 · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
+    <div class="attrib">Integrated Study Suite v2.16 · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
   </section>
 
   <!-- SRS DECK -->
@@ -526,8 +528,8 @@ section{display:none}section.on{display:block}
 </div>
 
 <script>
-/* Integrated Study Suite v2.15 — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='2.15';
+/* Integrated Study Suite v2.16 — Author: Alkarim Billawala / alkarim.billawala.ca */
+const APP_VERSION='2.16';
 const APP_AUTHOR='Alkarim Billawala / alkarim.billawala.ca';
 
 /* ===== STORAGE ===== */
@@ -658,7 +660,8 @@ function dpRow(p){
     }catch(e){btn.disabled=false;btn.textContent='+ Add to library';alert('Could not load that pack — check your connection and try again.');}
   };
   row.appendChild(btn);
-  const dl=document.createElement('a');dl.className='dp-dl';dl.href=encodeURI(String(p.file));dl.setAttribute('download','');dl.textContent='⇣ file';row.appendChild(dl);
+  /* per-pack raw-file download — disabled v2.16 (packs are bundled; Add covers it). Revive by uncommenting:
+  const dl=document.createElement('a');dl.className='dp-dl';dl.href=encodeURI(String(p.file));dl.setAttribute('download','');dl.textContent='⇣ file';row.appendChild(dl); */
   return row;
 }
 function renderDefaultPacks(){
