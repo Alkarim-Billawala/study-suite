@@ -1,7 +1,8 @@
 <!--
-  Integrated Study Suite  ·  v2.4
+  Integrated Study Suite  ·  v2.5
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v2.5: download symbol (⇣) added to the "Build your own" authoring-guide link.
   Changelog v2.4: reworded authoring-guide download link to "Build your own — instruction set for your LLM".
   Changelog v2.3: home-screen "Get study packs" panel — fetches same-origin packs-manifest.json
   (generated at deploy time) and renders pack download links + an authoring-guide link; the panel
@@ -19,7 +20,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Alkarim Billawala / alkarim.billawala.ca">
-<title>Integrated Study Suite v2.4</title>
+<title>Integrated Study Suite v2.5</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 :root{--paper:#f3efe6;--paper2:#ece7da;--ink:#1d1b16;--ink-soft:#524f45;--line:#cfc8b6;--accent:#7c2d2d;--accent-soft:#a8534f;--green:#2f6b4f;--green-bg:#e3eee5;--red:#9b2c2c;--red-bg:#f3e0dd;--gold:#9a7b27;--gold-bg:#f1e9cf;--blue:#2d5a6b;--blue-bg:#e0eaee;--shadow:0 1px 0 rgba(0,0,0,.04), 0 8px 28px -16px rgba(40,30,10,.35);}
@@ -266,7 +267,7 @@ section{display:none}section.on{display:block}
 
 <header class="top">
   <div class="top-inner">
-    <div class="brand"><span class="k">Integrated Study Suite</span><span class="t">Review · Practice · Exam<span class="ver">v2.4</span></span></div>
+    <div class="brand"><span class="k">Integrated Study Suite</span><span class="t">Review · Practice · Exam<span class="ver">v2.5</span></span></div>
     <div class="top-right">
       <div class="timer" id="timer" style="display:none"><span class="dot"></span><span id="tclock">--:--</span></div>
       <button class="homebtn" id="homebtn" style="display:none">⮌ Home</button>
@@ -323,7 +324,7 @@ section{display:none}section.on{display:block}
       <input type="file" id="restoreFile" accept="application/json" style="display:none">
     </div>
     <div class="savestate" id="saveState"></div>
-    <div class="attrib">Integrated Study Suite v2.4 · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
+    <div class="attrib">Integrated Study Suite v2.5 · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
   </section>
 
   <!-- SRS DECK -->
@@ -424,8 +425,8 @@ section{display:none}section.on{display:block}
 </div>
 
 <script>
-/* Integrated Study Suite v2.4 — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='2.4';
+/* Integrated Study Suite v2.5 — Author: Alkarim Billawala / alkarim.billawala.ca */
+const APP_VERSION='2.5';
 const APP_AUTHOR='Alkarim Billawala / alkarim.billawala.ca';
 
 /* ===== STORAGE ===== */
@@ -493,7 +494,7 @@ async function initPackLinks(){
     const m=await r.json();if(!m||!Array.isArray(m.packs)||!m.packs.length)return;
     const host=$('gpList');host.innerHTML='';
     m.packs.forEach(p=>{if(!p||!p.file)return;const a=document.createElement('a');a.className='gp-link';a.href=encodeURI(String(p.file));a.setAttribute('download','');a.textContent='⇣ '+(p.label||p.file);host.appendChild(a);});
-    if(m.authoring){const a=document.createElement('a');a.className='gp-link build';a.href=encodeURI(String(m.authoring));a.setAttribute('download','');a.textContent='Build your own — instruction set for your LLM';host.appendChild(a);}
+    if(m.authoring){const a=document.createElement('a');a.className='gp-link build';a.href=encodeURI(String(m.authoring));a.setAttribute('download','');a.textContent='⇣ Build your own — instruction set for your LLM';host.appendChild(a);}
     if(host.children.length)$('getPacks').style.display='';
   }catch(e){}
 }
