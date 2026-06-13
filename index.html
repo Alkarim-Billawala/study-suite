@@ -1,7 +1,16 @@
 <!--
-  Integrated Study Suite  ·  v0.2.25 (beta)
+  Integrated Study Suite  ·  v0.2.26 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.26: (1) Exam weighting now auto-balances EQUALLY across active packs by default
+  (settings.examAuto=true, examTarget; equalBalance() round-robin-fills the target across groups,
+  capped by availability; currentCounts() recomputes live so it self-updates as packs are added/
+  removed — users never need to set weights). Editing any weight, or the new "Auto-balance equally"
+  switch, flips to manual; "Reset to equal" returns to auto. (2) Fix: Topic Guides Print/Save-PDF
+  button broken since the v0.2.23 viewer rework — the guide iframe's sandbox (allow-same-origin,
+  no allow-scripts/allow-modals) blocked the in-guide window.print(). Added allow-modals, a
+  always-visible "⎙ Print" button in the revbar (drives fr.contentWindow.print()), and injected
+  CSS hiding the now-inert in-guide button.
   Changelog v0.2.25: search box in the Topic Guides drawer (under the hide row) — live filter
   over topic titles/badges; group headers hide when no children match; query survives
   re-renders (revQuery), native ✕ clear via type="search".
@@ -498,6 +507,7 @@ section{display:none}section.on{display:block}
         <span class="pct" id="zoomPct">100%</span>
         <button class="minor" id="zoomIn" title="Larger text">+</button>
         <button class="minor" id="fitBtn" title="Stretch the guide to the full width">Fit width</button>
+        <button class="minor" id="printBtn" title="Print or save this guide as PDF">⎙ Print</button>
       </div>
     </div>
     <div class="revlayout" id="revLayout">
@@ -554,14 +564,15 @@ section{display:none}section.on{display:block}
     <div class="msub">All settings persist between sessions.</div>
     <div class="setsec">
       <div class="sh">Exam composition</div>
+      <div class="setrow"><span>Auto-balance equally across active packs</span><button class="switch" id="setExamAuto">on</button></div>
       <div class="setrow"><span>Group weights by</span>
         <select id="setGroupBy"><option value="system">System</option><option value="pack">Pack / week</option><option value="topic">Topic</option></select>
       </div>
       <div class="weights" id="weightRows"></div>
       <div class="wtot"><span>Total test length: <b id="weightTotal">0</b> questions</span>
-        <span><input type="number" id="autoTarget" min="1" value="40" style="width:60px;font-family:'IBM Plex Mono',monospace;padding:4px 6px;border:1.5px solid var(--line);border-radius:5px;background:#fff"> <button class="minor" id="autoBalanceBtn">Auto-balance</button></span>
+        <span><input type="number" id="autoTarget" min="1" value="40" style="width:60px;font-family:'IBM Plex Mono',monospace;padding:4px 6px;border:1.5px solid var(--line);border-radius:5px;background:#fff"> <button class="minor" id="autoBalanceBtn">Reset to equal</button></span>
       </div>
-      <div class="note" style="text-align:left;margin-top:8px">Availability reflects the current session difficulty. Counts cap automatically when you build a test.</div>
+      <div class="note" id="weightNote" style="text-align:left;margin-top:8px">On by default — the exam splits evenly across your active packs and updates as packs change, so you never have to set this. Edit any value to customize.</div>
     </div>
     <div class="setsec">
       <div class="sh">Timers</div>
@@ -579,8 +590,8 @@ section{display:none}section.on{display:block}
 </div>
 
 <script>
-/* Integrated Study Suite v0.2.18 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.25';
+/* Integrated Study Suite v0.2.26 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
+const APP_VERSION='0.2.26';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -617,7 +628,7 @@ function humanFromNow(due,now){if(due<=now)return 'due';return 'in '+humanDelta(
 
 /* ===== STATE ===== */
 let packs=[], sched={}, daily={date:'',count:0};
-let settings={examGroupBy:'system',examCounts:{},practiceSecs:90,practiceTimer:true,practiceShuffle:true,examMinutes:60,examTimer:true,srsNewPerDay:20,sessionDiffs:['easy','medium','hard'],revNavCollapsed:false};
+let settings={examGroupBy:'system',examAuto:true,examTarget:40,examCounts:{},practiceSecs:90,practiceTimer:true,practiceShuffle:true,examMinutes:60,examTimer:true,srsNewPerDay:20,sessionDiffs:['easy','medium','hard'],revNavCollapsed:false};
 const $=id=>document.getElementById(id);
 const SYS_ORDER=['Endo','GI','KU'];
 const SYS_LABEL={Endo:'Endocrine',GI:'Gastrointestinal',KU:'Renal / Urinary'};
@@ -898,7 +909,19 @@ function renderHome(){
   renderDefaultPacks();
   show('home');
 }
-function examTotal(){const g=examGroups();let t=0;g.forEach((ids,k)=>t+=Math.min(ids.length,settings.examCounts[k]||0));return t;}
+/* Equal-as-possible distribution of `target` across the active groups, capped by availability.
+   Round-robin fill naturally equalizes and redistributes any group's spare capacity. */
+function equalBalance(target){const g=examGroups();const entries=[...g.entries()];const counts={};
+  entries.forEach(([k])=>counts[k]=0);if(!entries.length)return counts;
+  let avail=0;entries.forEach(([,ids])=>avail+=ids.length);let rem=Math.min(Math.max(0,target|0),avail),guard=0;
+  while(rem>0&&guard++<100000){let moved=false;for(const [k,ids] of entries){if(rem<=0)break;if(counts[k]<ids.length){counts[k]++;rem--;moved=true;}}if(!moved)break;}
+  return counts;}
+/* The per-group counts in effect right now: auto → recomputed equally every time (so it self-updates
+   as packs are added/removed); manual → the user's saved counts, capped to current availability. */
+function currentCounts(){const g=examGroups();
+  if(settings.examAuto)return equalBalance(settings.examTarget||40);
+  const c={};g.forEach((ids,k)=>{c[k]=Math.min(ids.length,settings.examCounts[k]||0);});return c;}
+function examTotal(){const c=currentCounts();let t=0;for(const k in c)t+=c[k];return t;}
 
 /* ===== SRS DECK ===== */
 let filter=new Set(), sessionQueue=[], currentId=null, revealed=false, work={}, studiedThisSession=0;
@@ -1049,6 +1072,7 @@ function applyGuideView(){
   const fr=document.querySelector('.guideframe');if(!fr)return;
   try{
     const d=fr.contentDocument;if(!d||!d.documentElement)return;
+    if(!d.getElementById('ssHidePrint')){const hp=d.createElement('style');hp.id='ssHidePrint';hp.textContent='.printbtn{display:none!important}';(d.head||d.documentElement).appendChild(hp);}
     d.documentElement.style.zoom=guideZoom;
     let st=d.getElementById('ssFit');
     if(guideFit){
@@ -1080,7 +1104,7 @@ function renderGuideList(){const gl=$('guideList');gl.innerHTML='';
   const on=gl.querySelector('.revitem.on');if(on)on.scrollIntoView({block:'nearest'});applyRevNav();}
 function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();
   const host=$('guideHost');host.innerHTML='';
-  const fr=document.createElement('iframe');fr.className='guideframe';fr.setAttribute('sandbox','allow-same-origin');
+  const fr=document.createElement('iframe');fr.className='guideframe';fr.setAttribute('sandbox','allow-same-origin allow-modals');
   fr.onload=()=>{try{const d=fr.contentDocument;if(!d)return;let el=null;
     const anchor=anchorOrSection&&anchorOrSection.anchor;const section=anchorOrSection&&anchorOrSection.section;
     if(anchor)el=d.getElementById(anchor);
@@ -1116,9 +1140,8 @@ function startPractice(){const pool=qTestPool();if(!pool.length){alert('No quest
   $('finishBtn').textContent='Finish & summary';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map · practice';
   renderQuiz();startQTick();show('quiz');}
 function startExam(){const pool=qTestPool();if(!pool.length){alert('No questions match the current session difficulty.');return;}buildQmap();
-  if(examTotal()===0)autoBalance(parseInt($('autoTarget').value)||40);
-  const g=examGroups();let picks=[];g.forEach((ids,k)=>{picks=picks.concat(shuffle([...ids]).slice(0,Math.min(ids.length,settings.examCounts[k]||0)));});
-  if(!picks.length){alert('Set a test length in Settings first.');return;}
+  const counts=currentCounts();const g=examGroups();let picks=[];g.forEach((ids,k)=>{picks=picks.concat(shuffle([...ids]).slice(0,Math.min(ids.length,counts[k]||0)));});
+  if(!picks.length){alert('No questions available for an exam. Load a study pack (or widen the session difficulty).');return;}
   qorder=shuffle(picks);qmode='test';qinit();qTestSubmitted=false;qTimeLeft=settings.examMinutes*60;
   timerWanted=!!settings.examTimer;$('flagBtn').style.display='';$('submitAnsBtn').style.display='none';
   $('finishBtn').textContent='Submit examination';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map';
@@ -1183,17 +1206,22 @@ function enterReview(){qTestSubmitted=true;if(qmode==='practice')for(let i=0;i<q
 function openSettings(){
   $('setGroupBy').value=settings.examGroupBy;
   $('setPracSecs').value=settings.practiceSecs;$('setExamMins').value=settings.examMinutes;$('setNewPerDay').value=settings.srsNewPerDay;
-  $('autoTarget').value=Math.max(1,examTotal()||40);
+  $('autoTarget').value=Math.max(1,settings.examTarget||40);
+  toggleSwitch($('setExamAuto'),settings.examAuto);
   toggleSwitch($('setPracTimer'),settings.practiceTimer);toggleSwitch($('setExamTimer'),settings.examTimer);toggleSwitch($('setPracShuffle'),settings.practiceShuffle);
   renderWeights();$('setMsg').textContent='';$('settingsModal').classList.add('show');}
 function toggleSwitch(el,on){el.classList.toggle('on',on);el.textContent=on?'on':'off';}
 function renderWeights(){const wr=$('weightRows');wr.innerHTML='';const g=examGroups();
+  const auto=settings.examAuto;
   if(g.size===0){wr.innerHTML='<div class="note" style="text-align:left">Load a pack (and pick a difficulty) to set exam weights.</div>';$('weightTotal').textContent='0';return;}
-  const nc={};g.forEach((ids,k)=>{nc[k]=Math.min(ids.length,settings.examCounts[k]||0);});settings.examCounts=nc;
+  const disp=currentCounts();
+  if(!auto){const nc={};g.forEach((ids,k)=>{nc[k]=Math.min(ids.length,disp[k]||0);});settings.examCounts=nc;}
   g.forEach((ids,k)=>{const row=document.createElement('div');row.className='wrow';
     row.innerHTML=`<span class="wn">${sysLabel(k)}</span><span class="wc">${ids.length} avail</span>`;
-    const inp=document.createElement('input');inp.type='number';inp.min=0;inp.max=ids.length;inp.value=settings.examCounts[k]||0;
-    inp.addEventListener('input',()=>{let v=Math.max(0,Math.min(ids.length,parseInt(inp.value)||0));settings.examCounts[k]=v;updateWeightTotal();persist();});
+    const inp=document.createElement('input');inp.type='number';inp.min=0;inp.max=ids.length;inp.value=disp[k]||0;
+    inp.disabled=auto;if(auto)inp.style.opacity='.55';
+    inp.addEventListener('input',()=>{if(settings.examAuto){settings.examAuto=false;toggleSwitch($('setExamAuto'),false);const cur=currentCounts();g.forEach((i2,k2)=>settings.examCounts[k2]=cur[k2]||0);}
+      let v=Math.max(0,Math.min(ids.length,parseInt(inp.value)||0));settings.examCounts[k]=v;updateWeightTotal();persist();});
     row.appendChild(inp);wr.appendChild(row);});
   updateWeightTotal();}
 function updateWeightTotal(){$('weightTotal').textContent=examTotal();}
@@ -1224,6 +1252,7 @@ $('revNavToggle').addEventListener('click',()=>{revNavOpen=true;settings.revNavC
 $('zoomIn').addEventListener('click',()=>{guideZoom=Math.min(2,Math.round((guideZoom+0.1)*10)/10);applyGuideView();});
 $('zoomOut').addEventListener('click',()=>{guideZoom=Math.max(0.6,Math.round((guideZoom-0.1)*10)/10);applyGuideView();});
 $('fitBtn').addEventListener('click',()=>{guideFit=!guideFit;applyGuideView();});
+$('printBtn').addEventListener('click',()=>{const fr=document.querySelector('.guideframe');if(fr&&fr.contentWindow){try{fr.contentWindow.focus();fr.contentWindow.print();}catch(e){window.print();}}else{window.print();}});
 $('homebtn').addEventListener('click',()=>{if($('quiz').classList.contains('on')||$('study').classList.contains('on')){if(!confirm('Leave this session and return home?'))return;clearInterval(qTimerId);}renderHome();});
 $('studyBtn').addEventListener('click',startSession);
 $('browseBtn').addEventListener('click',renderBrowse);
@@ -1245,7 +1274,9 @@ $('settingsBtn').addEventListener('click',openSettings);
 $('setClose').addEventListener('click',()=>{$('settingsModal').classList.remove('show');renderHome();});
 $('settingsModal').addEventListener('click',e=>{if(e.target.id==='settingsModal'){$('settingsModal').classList.remove('show');renderHome();}});
 $('setGroupBy').addEventListener('change',e=>{settings.examGroupBy=e.target.value;settings.examCounts={};renderWeights();persist();});
-$('autoBalanceBtn').addEventListener('click',()=>{autoBalance(parseInt($('autoTarget').value)||40);renderWeights();persist();});
+$('setExamAuto').addEventListener('click',()=>{settings.examAuto=!settings.examAuto;toggleSwitch($('setExamAuto'),settings.examAuto);if(!settings.examAuto){const cur=currentCounts();settings.examCounts={};for(const k in cur)settings.examCounts[k]=cur[k];}renderWeights();persist();});
+$('autoTarget').addEventListener('change',()=>{settings.examTarget=Math.max(1,parseInt($('autoTarget').value)||40);renderWeights();persist();});
+$('autoBalanceBtn').addEventListener('click',()=>{settings.examTarget=Math.max(1,parseInt($('autoTarget').value)||40);settings.examAuto=true;toggleSwitch($('setExamAuto'),true);renderWeights();persist();});
 $('setPracTimer').addEventListener('click',()=>{settings.practiceTimer=!settings.practiceTimer;toggleSwitch($('setPracTimer'),settings.practiceTimer);persist();});
 $('setExamTimer').addEventListener('click',()=>{settings.examTimer=!settings.examTimer;toggleSwitch($('setExamTimer'),settings.examTimer);persist();});
 $('setPracShuffle').addEventListener('click',()=>{settings.practiceShuffle=!settings.practiceShuffle;toggleSwitch($('setPracShuffle'),settings.practiceShuffle);persist();});
