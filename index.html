@@ -1,7 +1,13 @@
 <!--
-  Integrated Study Suite  ·  v0.2.28 (beta)
+  Integrated Study Suite  ·  v0.2.29 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.29: Coming-soon list updated — added "Its own domain (studysuite.app) — after beta;
+  plenty of notice, no data lost" and reworded the sync line. Public coming-soon items now have a
+  master source file COMING_SOON.md (curated from Future-Features.txt [PUBLIC]); the same items are
+  mirrored into this panel and the README "## Coming soon" section — keep all three in sync. The
+  domain-migration item was [PRIVATE] (Future-Features item 3); only the user-facing announcement is
+  now public (mechanics stay private).
   Changelog v0.2.28: home-screen footer reworked into a two-button accordion ("Coming soon" / "FAQ",
   .infosec/.inforow/.infobtn, toggleInfo() opens one panel at a time). The old inline "Features coming
   soon" list now lives behind the Coming soon button; a new FAQ panel embeds a user-facing FAQ
@@ -504,7 +510,8 @@ section{display:none}section.on{display:block}
       </div>
       <div class="infopanel" id="comingPanel" style="display:none">
         <div class="soon-i">· Anki import — bring your existing Anki decks into Review</div>
-        <div class="soon-i">· User creation and sync — save your progress and study anywhere</div>
+        <div class="soon-i">· Accounts &amp; sync — save your progress and study across devices (optional)</div>
+        <div class="soon-i">· Its own domain (studysuite.app) — after beta; plenty of notice, no data lost</div>
       </div>
       <div class="infopanel" id="faqPanel" style="display:none">
         <div class="faqbody">
@@ -546,7 +553,7 @@ section{display:none}section.on{display:block}
         </div>
       </div>
     </div>
-    <div class="attrib">Integrated Study Suite <span id="footVer">v0.2.28</span> · <span class="betatag" id="footBeta">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
+    <div class="attrib">Integrated Study Suite <span id="footVer">v0.2.29</span> · <span class="betatag" id="footBeta">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
   </section>
 
   <!-- SRS DECK -->
@@ -673,8 +680,8 @@ section{display:none}section.on{display:block}
 </div>
 
 <script>
-/* Integrated Study Suite v0.2.28 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.28';
+/* Integrated Study Suite v0.2.29 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
+const APP_VERSION='0.2.29';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';

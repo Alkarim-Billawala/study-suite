@@ -63,6 +63,8 @@ the right format. The packs you create from your own material are entirely yours
   an *optional* paid add-on (it's the one feature that needs a server); everything you can do on
   your own device stays free. Your synced data will be end-to-end encrypted, so it can't be read
   by anyone but you. See the [FAQ](#faq) below for details.
+- **Its own domain** — once Study Suite is out of beta, it will move off its current address to its
+  own home at **studysuite.app**. There will be plenty of notice, and no data will be lost.
 
 ## FAQ
 
