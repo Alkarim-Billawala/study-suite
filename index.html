@@ -1,7 +1,20 @@
 <!--
-  Integrated Study Suite  ·  v0.2.29 (beta)
+  Study Suite  ·  v0.2.40 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.40: removed third-party commercial brand names from all user-facing copy (liability).
+  Review mode no longer says "Anki-style" (now "SM-2 scheduling"); FAQ "like Anki" -> "spaced-
+  repetition flashcards"; coming-soon "Anki import" -> "Flashcard import — that other flashcard app";
+  FAQ sync-cost comparison no longer names the question bank ("that one notoriously overpriced
+  question bank"). Mirrored in README/FAQ_DRAFT/COMING_SOON masters. CONVENTION: public-facing copy
+  must not name third-party products; internal docs may, for accuracy.
+  Also removed a stale early-dev remnant in the Add-to-Home modal note that referenced running a
+  "downloaded copy of this file" (the app is hosted now). The "self-contained file / offline"
+  wording stays — that correctly describes running in-browser from the site, offline-capable.
+  Also: app name is now "Study Suite" (not "Integrated Study Suite", which was acting as a brand
+  line). Updated the <title> (tab now reads "Study Suite", unversioned, no beta), the header brand
+  kicker, the footer attribution, and the PWA manifest name (short_name was already "Study Suite");
+  beta is still shown in the footer. README H1 + LICENSE product name updated to match.
   Changelog v0.2.29: Coming-soon list updated — added "Its own domain (studysuite.app) — after beta;
   plenty of notice, no data lost" and reworded the sync line. Public coming-soon items now have a
   master source file COMING_SOON.md (curated from Future-Features.txt [PUBLIC]); the same items are
@@ -115,7 +128,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Alkarim Billawala / alkarim.billawala.ca">
-<title>Integrated Study Suite (beta)</title>
+<title>Study Suite</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#7c2d2d">
@@ -441,7 +454,7 @@ section{display:none}section.on{display:block}
 
 <header class="top">
   <div class="top-inner">
-    <div class="brand"><span class="k">Integrated Study Suite</span><span class="t">Review · Practice · Exam</span></div>
+    <div class="brand"><span class="k">Study Suite</span><span class="t">Review · Practice · Exam</span></div>
     <div class="top-right">
       <div class="timer" id="timer" style="display:none"><span class="dot"></span><span id="tclock">--:--</span></div>
       <button class="homebtn" id="homebtn" style="display:none">⮌ Home</button>
@@ -458,7 +471,7 @@ section{display:none}section.on{display:block}
     <p class="sub">One engine, your content. Drop in week packs and study them by spaced repetition, practice, or timed exams — with the topic guides bundled right in.</p>
 
     <div class="modes">
-      <div class="mode" id="mReview"><div class="mt">Review</div><div class="md">Spaced repetition over the cards in your active packs — mixed interactive types, Anki-style SM-2, filter to any topics.</div><div class="feat" id="featReview">— cards</div></div>
+      <div class="mode" id="mReview"><div class="mt">Review</div><div class="md">Spaced repetition over the cards in your active packs — mixed interactive types, SM-2 scheduling, filter to any topics.</div><div class="feat" id="featReview">— cards</div></div>
       <div class="mode" id="mPractice"><div class="mt">Practice</div><div class="md">Work the question bank one at a time. Submit to see the answer instantly, with its difficulty and a topic-guide link. Per-question timer.</div><div class="feat" id="featPractice">— questions</div></div>
       <div class="mode" id="mExam"><div class="mt">Exam</div><div class="md">A timed, scored test sampled to your weighting and chosen difficulty. Answers hidden until you submit.</div><div class="feat" id="featExam">— per test</div></div>
     </div>
@@ -509,7 +522,7 @@ section{display:none}section.on{display:block}
         <button class="infobtn" id="faqBtn" onclick="toggleInfo('faq')">FAQ</button>
       </div>
       <div class="infopanel" id="comingPanel" style="display:none">
-        <div class="soon-i">· Anki import — bring your existing Anki decks into Review</div>
+        <div class="soon-i">· Flashcard import — bring decks in from that other flashcard app</div>
         <div class="soon-i">· Accounts &amp; sync — save your progress and study across devices (optional)</div>
         <div class="soon-i">· Its own domain (studysuite.app) — after beta; plenty of notice, no data lost</div>
       </div>
@@ -517,7 +530,7 @@ section{display:none}section.on{display:block}
         <div class="faqbody">
           <div class="faq-sec">The basics — how it works today</div>
           <h4>What is Study Suite?</h4>
-          <p>A study tool built around four things: <b>Review</b> (spaced repetition, like Anki), <b>Practice</b> (one question at a time with instant feedback), <b>Exam</b> (timed, scored mock tests), and <b>Topic Guides</b> (readable summaries). The app itself is empty — you load <b>study packs</b> that hold the questions, cards, and guides. It's currently in beta.</p>
+          <p>A study tool built around four things: <b>Review</b> (spaced-repetition flashcards), <b>Practice</b> (one question at a time with instant feedback), <b>Exam</b> (timed, scored mock tests), and <b>Topic Guides</b> (readable summaries). The app itself is empty — you load <b>study packs</b> that hold the questions, cards, and guides. It's currently in beta.</p>
           <h4>Is it really free?</h4>
           <p>Yes — completely free, with no ads, no tracking, and no account required. Everything the app does today runs entirely in your own browser, so there's nothing for me to charge for. If you want to chip in toward the costs of building it, there's an optional "Support development" link, but it's never required and unlocks nothing — the whole app is yours to use.</p>
           <h4>Where is my data stored? Can you see it?</h4>
@@ -539,7 +552,7 @@ section{display:none}section.on{display:block}
           <h4>If the rest of the app is free, why will Sync cost money?</h4>
           <p>Because Sync is the one feature that can't run on your device alone. Everything else happens right in your browser, which costs nothing to give away — so it stays free, for everyone, forever. Sync needs a server running around the clock to hold your (encrypted) data and pass it between your devices, and that has a real, ongoing cost. So only the server-backed features are paid; anything you can do entirely on your own device stays free. If you never want Sync, you lose nothing.</p>
           <h4>How much will Sync cost?</h4>
-          <p>I haven't set a price yet — I'm still testing Sync and working to make it reliable, bulletproof, and secure before anyone depends on it. Whatever it ends up costing will reflect what it actually takes to run the cloud side: servers, backups, networking, credentials management, storage, and so on. What I can promise is that I'm determined to keep it <b>affordable</b> — it will cost far less than many of the study tools you already pay for (UWorld and the like). When Sync launches you'll be notified, and as an early beta tester you'll get a special access price. And to say it once more: Sync is entirely optional — you never need to use it.</p>
+          <p>I haven't set a price yet — I'm still testing Sync and working to make it reliable, bulletproof, and secure before anyone depends on it. Whatever it ends up costing will reflect what it actually takes to run the cloud side: servers, backups, networking, credentials management, storage, and so on. What I can promise is that I'm determined to keep it <b>affordable</b> — it will cost far less than many of the study tools you already pay for (you know, that one notoriously overpriced question bank). When Sync launches you'll be notified, and as an early beta tester you'll get a special access price. And to say it once more: Sync is entirely optional — you never need to use it.</p>
           <h4>Will you be able to see my synced data?</h4>
           <p>No. Sync will be <b>end-to-end encrypted</b>: your data is scrambled on your device <i>before</i> it's uploaded, and only the scrambled version is stored. The key that unlocks it never leaves your device. That means <b>I can't read your synced data</b> — not for support, not for troubleshooting, not under any circumstances — because I simply don't have the key.</p>
           <h4>What if I forget my password?</h4>
@@ -553,7 +566,7 @@ section{display:none}section.on{display:block}
         </div>
       </div>
     </div>
-    <div class="attrib">Integrated Study Suite <span id="footVer">v0.2.29</span> · <span class="betatag" id="footBeta">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
+    <div class="attrib">Study Suite <span id="footVer">v0.2.40</span> · <span class="betatag" id="footBeta">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
   </section>
 
   <!-- SRS DECK -->
@@ -619,7 +632,7 @@ section{display:none}section.on{display:block}
         <button class="seg" data-dev="win">Windows</button>
       </div>
       <div class="steps" id="devSteps"></div>
-      <div class="modal-note">These steps work on the hosted site (not a downloaded copy of this file). Once installed, the app opens in its own window like a native app.</div>
+      <div class="modal-note">These steps work on the hosted site. Once installed, the app opens in its own window like a native app.</div>
     </div>
   </div>
 
@@ -680,8 +693,8 @@ section{display:none}section.on{display:block}
 </div>
 
 <script>
-/* Integrated Study Suite v0.2.29 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.29';
+/* Study Suite v0.2.40 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
+const APP_VERSION='0.2.40';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';

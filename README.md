@@ -1,4 +1,4 @@
-# Integrated Study Suite
+# Study Suite
 
 **Spaced repetition, practice questions, and timed exams — from your own content.**
 
@@ -16,7 +16,7 @@ It's currently in **beta**.
 
 Three study modes plus a built-in guide reader:
 
-- **Review** — spaced repetition, Anki-style. Mixed card types graded Again / Hard / Good / Easy
+- **Review** — spaced-repetition flashcards. Mixed card types graded Again / Hard / Good / Easy
   and scheduled across days. Filter to whichever topics you want.
 - **Practice** — work through the question bank one at a time. Submit to see the answer and
   explanation instantly, with an optional per-question timer.
@@ -58,7 +58,7 @@ the right format. The packs you create from your own material are entirely yours
 
 ## Coming soon
 
-- **Anki import** — bring your existing Anki decks into Review.
+- **Flashcard import** — bring your decks in from that other flashcard app.
 - **Accounts & sync** — save your progress and study across devices automatically. Sync will be
   an *optional* paid add-on (it's the one feature that needs a server); everything you can do on
   your own device stays free. Your synced data will be end-to-end encrypted, so it can't be read
@@ -73,7 +73,7 @@ the right format. The packs you create from your own material are entirely yours
 <details>
 <summary><strong>What is Study Suite?</strong></summary>
 
-A study tool built around four things: **Review** (spaced repetition, like Anki), **Practice**
+A study tool built around four things: **Review** (spaced-repetition flashcards), **Practice**
 (one question at a time with instant feedback), **Exam** (timed, scored mock tests), and **Topic
 Guides** (readable summaries). The app itself is empty — you load **study packs** that hold the
 questions, cards, and guides. It's currently in beta.
@@ -166,8 +166,8 @@ you can do entirely on your own device stays free. If you never want Sync, you l
 No price is set yet — Sync is still being tested and made reliable, bulletproof, and secure before
 anyone depends on it. Whatever it ends up costing will reflect what it actually takes to run the
 cloud side: servers, backups, networking, credentials management, storage, and so on. The aim is to
-keep it **affordable** — far less than many of the study tools you already pay for (UWorld and the
-like). When Sync launches you'll be notified, and early beta testers will get a special access
+keep it **affordable** — far less than many of the study tools you already pay for (you know, that
+one notoriously overpriced question bank). When Sync launches you'll be notified, and early beta testers will get a special access
 price. And to say it once more: Sync is entirely optional — you never need to use it.
 </details>
 
