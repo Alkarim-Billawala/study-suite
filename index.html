@@ -1,7 +1,17 @@
 <!--
-  Integrated Study Suite  ·  v0.2.26 (beta)
+  Integrated Study Suite  ·  v0.2.27 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.27: Topic Guides search is now UNIFIED — one box searches both topic titles AND the
+  text inside guides. Empty query shows the normal grouped list; a query shows "Topics" (title/badge
+  matches, as before) then "In content (N)" with one snippet per guide whose body matches. Clicking a
+  content result opens that guide, scrolls to the passage, and highlights every occurrence. Guide
+  bodies are parsed to plain text in the main window (DOMParser, strip script/style) and cached by
+  guideKey (guideTextCache, cleared on openReviewer so pack edits re-index); highlightInDoc walks the
+  loaded guide's text nodes and wraps matches in <mark class="ssmark">. Content search needs 2+ chars;
+  title matching still works at 1. New CSS: .reshead/.resnone/.revresult. Also fixed: the footer
+  version was a hardcoded string (stuck at v0.2.25) — it now derives from APP_VERSION/APP_BETA in
+  init() (#footVer/#footBeta), so it can never drift from the real version again.
   Changelog v0.2.26: (1) Exam weighting now auto-balances EQUALLY across active packs by default
   (settings.examAuto=true, examTarget; equalBalance() round-robin-fills the target across groups,
   capped by availability; currentCounts() recomputes live so it self-updates as packs are added/
@@ -322,6 +332,13 @@ section{display:none}section.on{display:block}
 .revsearch{width:100%;box-sizing:border-box;margin-bottom:8px;padding:7px 10px;font-family:'Newsreader';font-size:14px;border:1px solid var(--line);border-radius:8px;background:var(--paper2);color:var(--ink);outline:none}
 .revsearch:focus{border-color:var(--accent-soft)}
 .revsearch::placeholder{color:var(--ink-soft)}
+.reshead{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin:10px 2px 6px}
+.resnone{font-size:13px;color:var(--ink-soft);padding:4px 2px 6px}
+.revresult{display:block;width:100%;text-align:left;background:var(--paper2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:6px;cursor:pointer;font-family:'Newsreader'}
+.revresult:hover{border-color:var(--accent-soft)}
+.revresult .rt{display:block;font-size:12px;font-weight:600;color:var(--accent);margin-bottom:3px}
+.revresult .rs{display:block;font-size:13px;line-height:1.45;color:var(--ink-soft)}
+.revresult .rs mark{background:#ffe58a;color:inherit;padding:0 1px;border-radius:2px}
 .revgroup+.revgroup{margin-top:14px}
 .revgroup .gname{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 6px 6px;border-bottom:1px solid var(--line);padding-bottom:4px}
 .revitem{display:flex;align-items:baseline;gap:8px;width:100%;text-align:left;font-family:'Newsreader';font-size:15px;line-height:1.25;border:1.5px solid transparent;background:none;border-radius:8px;padding:7px 9px;cursor:pointer;transition:.12s;color:var(--ink)}
@@ -463,7 +480,7 @@ section{display:none}section.on{display:block}
       <div class="soon-i">· Anki import — bring your existing Anki decks into Review</div>
       <div class="soon-i">· User creation and sync — save your progress and study anywhere</div>
     </div>
-    <div class="attrib">Integrated Study Suite v0.2.25 · <span class="betatag">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
+    <div class="attrib">Integrated Study Suite <span id="footVer">v0.2.27</span> · <span class="betatag" id="footBeta">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
   </section>
 
   <!-- SRS DECK -->
@@ -590,8 +607,8 @@ section{display:none}section.on{display:block}
 </div>
 
 <script>
-/* Integrated Study Suite v0.2.26 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.26';
+/* Integrated Study Suite v0.2.27 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
+const APP_VERSION='0.2.27';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -772,6 +789,7 @@ function renderDefaultPacks(){
 
 async function init(){
   detectStorage();
+  $('footVer').textContent='v'+APP_VERSION;$('footBeta').style.display=APP_BETA?'':'none';
   try{history.replaceState({sec:'home'},'');}catch(e){}
   initPackLinks();
   if(!SUPPORT_URL.includes('CHANGEME')){$('supportLink').href=SUPPORT_URL;$('supportWrap').style.display='';}
@@ -1058,6 +1076,28 @@ function organizeGuides(){const metas=activeGuides().map(guideMeta);
   const names=[...new Set(metas.map(x=>x.g._packName))];
   if(names.length<2){metas.sort(cmp);return metas.length?[{label:null,items:metas}]:[];}
   return names.map(n=>({label:n,items:metas.filter(x=>x.g._packName===n).sort(cmp)}));}
+/* — content search: plain-text of each guide body, cached by guideKey (cleared on openReviewer
+   so pack edits re-index). The main window (not the sandboxed iframe) parses g.html. — */
+let guideTextCache={};
+function guideText(g){const k=guideKey(g);if(guideTextCache[k])return guideTextCache[k];
+  let text='';try{const doc=new DOMParser().parseFromString(g.html||'','text/html');
+    doc.querySelectorAll('script,style').forEach(e=>e.remove());
+    text=(doc.body||doc.documentElement).textContent||'';}catch(e){text=String(g.html||'').replace(/<[^>]+>/g,' ');}
+  text=text.replace(/\s+/g,' ').trim();const o={text,lower:text.toLowerCase()};guideTextCache[k]=o;return o;}
+/* Highlight all occurrences of q inside the loaded guide's document, return the first <mark>. */
+function highlightInDoc(d,q){if(!d||!q)return null;const ql=q.toLowerCase();
+  if(!d.getElementById('ssMarkCss')){const st=d.createElement('style');st.id='ssMarkCss';st.textContent='mark.ssmark{background:#ffe58a;color:inherit;padding:0 1px;border-radius:2px}';(d.head||d.documentElement).appendChild(st);}
+  const root=d.body||d.documentElement;if(!root)return null;
+  const walker=d.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){
+    if(!n.nodeValue||!n.nodeValue.toLowerCase().includes(ql))return NodeFilter.FILTER_REJECT;
+    const p=n.parentNode,tn=p&&p.nodeName?p.nodeName.toLowerCase():'';
+    if(tn==='script'||tn==='style'||tn==='mark')return NodeFilter.FILTER_REJECT;return NodeFilter.FILTER_ACCEPT;}});
+  const nodes=[];let nd;while(nd=walker.nextNode())nodes.push(nd);let first=null;
+  nodes.forEach(node=>{const val=node.nodeValue,low=val.toLowerCase(),frag=d.createDocumentFragment();let idx,last=0;
+    while((idx=low.indexOf(ql,last))!==-1){if(idx>last)frag.appendChild(d.createTextNode(val.slice(last,idx)));
+      const mk=d.createElement('mark');mk.className='ssmark';mk.textContent=val.slice(idx,idx+q.length);frag.appendChild(mk);if(!first)first=mk;last=idx+q.length;}
+    if(last<val.length)frag.appendChild(d.createTextNode(val.slice(last)));node.parentNode.replaceChild(frag,node);});
+  return first;}
 let revNavOpen=null; // overlay drawer state (session); first render seeds from saved preference
 function applyRevNav(){
   if(revNavOpen===null)revNavOpen=!settings.revNavCollapsed;
@@ -1080,19 +1120,42 @@ function applyGuideView(){
     }else if(st){st.remove();}
   }catch(e){}
 }
-function openReviewer(){reviewerReturn=currentSection();const org=organizeGuides();renderGuideList();if(org.length){loadGuide(org[0].items[0].g,null);}else{$('guideHost').innerHTML='<div class="revempty">No topic guides are bundled in your active packs. Newer packs embed their guides here; older packs link to <code>Topic_*.html</code> files kept in this folder.</div>';}show('reviewer');}
+function openReviewer(){reviewerReturn=currentSection();guideTextCache={};const org=organizeGuides();renderGuideList();if(org.length){loadGuide(org[0].items[0].g,null);}else{$('guideHost').innerHTML='<div class="revempty">No topic guides are bundled in your active packs. Newer packs embed their guides here; older packs link to <code>Topic_*.html</code> files kept in this folder.</div>';}show('reviewer');}
 let revQuery='';
-function filterGuideList(){const q=revQuery.trim().toLowerCase();const gl=$('guideList');
-  gl.querySelectorAll('.revgroup').forEach(wrap=>{let any=false;
-    wrap.querySelectorAll('.revitem').forEach(b=>{const hit=!q||b.textContent.toLowerCase().includes(q);b.style.display=hit?'':'none';if(hit)any=true;});
-    wrap.style.display=any?'':'none';});}
+/* Unified search. Empty query → the normal grouped topic list. Query → a results view:
+   "Topics" (title/badge matches) then "In content" (one snippet per guide whose body matches). */
+function filterGuideList(){const raw=revQuery.trim();const q=raw.toLowerCase();const gl=$('guideList');const res=$('guideResults');
+  if(!q){if(res){res.style.display='none';res.innerHTML='';}
+    gl.querySelectorAll('.revgroup').forEach(w=>{w.style.display='';w.querySelectorAll('.revitem').forEach(b=>b.style.display='');});return;}
+  gl.querySelectorAll('.revgroup').forEach(w=>w.style.display='none');
+  if(!res)return;res.style.display='';res.innerHTML='';
+  const metas=[];organizeGuides().forEach(grp=>grp.items.forEach(it=>metas.push(it)));
+  const titleHits=metas.filter(it=>((it.badge+' '+it.label+' '+it.title).toLowerCase().includes(q)));
+  if(titleHits.length){const h=document.createElement('div');h.className='reshead';h.textContent='Topics';res.appendChild(h);
+    titleHits.forEach(it=>{const b=document.createElement('button');b.className='revitem'+(guideKey(it.g)===curGuideKey?' on':'');
+      if(it.badge){const s=document.createElement('span');s.className='gn';s.textContent=it.badge;b.appendChild(s);}
+      const t=document.createElement('span');t.textContent=it.label;b.appendChild(t);
+      b.onclick=()=>{revNavOpen=false;loadGuide(it.g,null);};res.appendChild(b);});}
+  if(q.length>=2){const cHits=[];activeGuides().forEach(g=>{const gt=guideText(g);const idx=gt.lower.indexOf(q);if(idx>=0)cHits.push({g,gt,idx});});
+    const h=document.createElement('div');h.className='reshead';h.textContent='In content'+(cHits.length?' ('+cHits.length+')':'');res.appendChild(h);
+    if(!cHits.length){const none=document.createElement('div');none.className='resnone';none.textContent='No matches inside topics.';res.appendChild(none);}
+    cHits.forEach(({g,gt,idx})=>{const meta=guideMeta(g);const b=document.createElement('button');b.className='revresult';
+      const rt=document.createElement('span');rt.className='rt';rt.textContent=(meta.badge?meta.badge+' · ':'')+meta.label;b.appendChild(rt);
+      const rs=document.createElement('span');rs.className='rs';
+      const start=Math.max(0,idx-40),end=Math.min(gt.text.length,idx+raw.length+90);
+      rs.appendChild(document.createTextNode((start>0?'… ':'')+gt.text.slice(start,idx)));
+      const mk=document.createElement('mark');mk.textContent=gt.text.slice(idx,idx+raw.length);rs.appendChild(mk);
+      rs.appendChild(document.createTextNode(gt.text.slice(idx+raw.length,end)+(end<gt.text.length?' …':'')));b.appendChild(rs);
+      b.onclick=()=>{revNavOpen=false;loadGuide(g,{search:raw});};res.appendChild(b);});}
+  if(!titleHits.length&&q.length<2){const none=document.createElement('div');none.className='resnone';none.textContent='Type 2+ characters to search topic content.';res.appendChild(none);}}
 function renderGuideList(){const gl=$('guideList');gl.innerHTML='';
   const hd=document.createElement('button');hd.className='revhide';hd.textContent='◂ Hide topic list';
   hd.onclick=()=>{revNavOpen=false;settings.revNavCollapsed=true;persist();applyRevNav();};
   gl.appendChild(hd);
-  const se=document.createElement('input');se.type='search';se.className='revsearch';se.placeholder='Search topics…';se.value=revQuery;
+  const se=document.createElement('input');se.type='search';se.className='revsearch';se.placeholder='Search topics & content…';se.value=revQuery;
   se.oninput=()=>{revQuery=se.value;filterGuideList();};
   gl.appendChild(se);
+  const res=document.createElement('div');res.id='guideResults';res.style.display='none';gl.appendChild(res);
   organizeGuides().forEach(grp=>{const wrap=document.createElement('div');wrap.className='revgroup';
     if(grp.label){const h=document.createElement('div');h.className='gname';h.textContent=grp.label;wrap.appendChild(h);}
     grp.items.forEach(it=>{const b=document.createElement('button');b.className='revitem'+(guideKey(it.g)===curGuideKey?' on':'');
@@ -1106,10 +1169,11 @@ function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();
   const host=$('guideHost');host.innerHTML='';
   const fr=document.createElement('iframe');fr.className='guideframe';fr.setAttribute('sandbox','allow-same-origin allow-modals');
   fr.onload=()=>{try{const d=fr.contentDocument;if(!d)return;let el=null;
-    const anchor=anchorOrSection&&anchorOrSection.anchor;const section=anchorOrSection&&anchorOrSection.section;
+    const anchor=anchorOrSection&&anchorOrSection.anchor;const section=anchorOrSection&&anchorOrSection.section;const search=anchorOrSection&&anchorOrSection.search;
     if(anchor)el=d.getElementById(anchor);
     if(!el&&section){el=[...d.querySelectorAll('h1,h2,h3,h4,[id]')].find(h=>(h.textContent||'').toLowerCase().includes(String(section).toLowerCase()));}
-    if(el)el.scrollIntoView();
+    if(!el&&search){el=highlightInDoc(d,search);}
+    if(el)el.scrollIntoView({block:'center'});
   }catch(e){}
   applyGuideView();};
   fr.srcdoc=g.html||'<p style=\"font-family:sans-serif;padding:24px\">This guide has no embedded content.</p>';
