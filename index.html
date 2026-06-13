@@ -1,7 +1,20 @@
 <!--
-  Study Suite  ·  v0.2.40 (beta)
+  Study Suite  ·  v0.2.42 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.42: the Topic Guides "← Back" button now shows a second small line saying where it
+  returns to — "to Practice" / "to Exam" / "to Review" / "to Home" — driven by `reviewerReturn`
+  (set on entry) and `qmode` for the quiz case. `backLabel()` mirrors `returnFromReviewer`'s branches
+  exactly so the subtitle can't diverge from the actual destination; `setBackLabel()` updates
+  `#revBackTo` on each entry (openReviewer + openGuide). Button markup is now two spans (.bk1/.bk2);
+  .bk2 hides when empty.
+  Changelog v0.2.41: Topic Guides drawer is now header-triggered. The big "Topic Guides" title is a
+  clickable toggle (`#revTitle`, role=button + keyboard) with a state chevron (▾ rotates 180° when
+  open via `.revtitle.open .revcaret`); clicking it opens/closes the overlay list+search drawer. The
+  floating "▤ Topics" button (`revNavToggle`/`.revtopics`) is removed. Drawer now DEFAULTS CLOSED on
+  every reviewer entry (`revNavOpen=false` in openReviewer + openGuide; applyRevNav seeds false) so a
+  guide is never obstructed — especially on deep-links from a card/question answer. `settings.
+  revNavCollapsed` is no longer used (kept in the settings object as harmless legacy).
   Changelog v0.2.40: removed third-party commercial brand names from all user-facing copy (liability).
   Review mode no longer says "Anki-style" (now "SM-2 scheduling"); FAQ "like Anki" -> "spaced-
   repetition flashcards"; coming-soon "Anki import" -> "Flashcard import — that other flashcard app";
@@ -298,6 +311,15 @@ section{display:none}section.on{display:block}
 #reviewer{margin-top:24px}
 .revbar{display:flex;align-items:center;gap:14px;margin:0 0 14px}
 .revbar h2{font-family:'Fraunces',serif;font-weight:600;font-size:24px;margin:0}
+.backbtn{display:inline-flex;flex-direction:column;align-items:flex-start;gap:1px;line-height:1.2;text-align:left}
+.backbtn .bk2{font-size:9px;letter-spacing:.06em;color:var(--ink-soft);transition:color .12s}
+.backbtn .bk2:empty{display:none}
+.backbtn:hover .bk2{color:var(--ink)}
+.revtitle{cursor:pointer;user-select:none;display:inline-flex;align-items:center;gap:8px;transition:color .12s;outline:none}
+.revtitle:hover,.revtitle:focus-visible{color:var(--accent)}
+.revcaret{font-size:16px;color:var(--ink-soft);transition:transform .18s,color .12s}
+.revtitle:hover .revcaret,.revtitle.open .revcaret{color:var(--accent)}
+.revtitle.open .revcaret{transform:rotate(180deg)}
 /* install button + modal */
 .installbtn{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;border:1.5px solid var(--line);background:var(--paper);border-radius:20px;padding:6px 12px;cursor:pointer;transition:.12s;color:var(--ink-soft);white-space:nowrap}
 .installbtn:hover{border-color:var(--accent-soft);color:var(--ink)}
@@ -364,8 +386,6 @@ section{display:none}section.on{display:block}
 .buildline a:hover{border-bottom-style:solid}
 /* guide viewer: full-width frame; topic list is an overlay drawer */
 .revlayout{position:relative}
-.revtopics{position:absolute;top:10px;left:10px;z-index:5;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;border:1.5px solid var(--line);background:var(--paper);border-radius:20px;padding:6px 13px;cursor:pointer;transition:.12s;box-shadow:2px 2px 0 rgba(29,27,22,.08)}
-.revtopics:hover{border-color:var(--accent-soft)}
 .revnav{position:absolute;top:6px;left:6px;z-index:6;width:310px;max-width:88%;max-height:calc(100% - 12px);overflow-y:auto;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);padding:8px;box-shadow:5px 5px 0 rgba(29,27,22,.10)}
 .revnav.closed{display:none}
 .revhide{display:flex;align-items:center;gap:7px;width:100%;text-align:left;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);background:var(--paper2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;cursor:pointer;margin-bottom:8px;transition:.12s}
@@ -566,7 +586,7 @@ section{display:none}section.on{display:block}
         </div>
       </div>
     </div>
-    <div class="attrib">Study Suite <span id="footVer">v0.2.40</span> · <span class="betatag" id="footBeta">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
+    <div class="attrib">Study Suite <span id="footVer">v0.2.42</span> · <span class="betatag" id="footBeta">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
   </section>
 
   <!-- SRS DECK -->
@@ -604,7 +624,7 @@ section{display:none}section.on{display:block}
 
   <!-- CONTENT REVIEWER -->
   <section id="reviewer">
-    <div class="revbar"><button class="minor" id="revBack">← Back</button><h2>Topic Guides</h2>
+    <div class="revbar"><button class="minor backbtn" id="revBack"><span class="bk1">← Back</span><span class="bk2" id="revBackTo"></span></button><h2 class="revtitle" id="revTitle" role="button" tabindex="0" aria-expanded="false" aria-controls="guideList" title="Show or hide the topic list">Topic Guides <span class="revcaret" aria-hidden="true">▾</span></h2>
       <div class="sizer">
         <button class="minor" id="zoomOut" title="Smaller text">−</button>
         <span class="pct" id="zoomPct">100%</span>
@@ -614,7 +634,6 @@ section{display:none}section.on{display:block}
       </div>
     </div>
     <div class="revlayout" id="revLayout">
-      <button class="revtopics" id="revNavToggle">▤ Topics</button>
       <nav class="revnav closed" id="guideList" aria-label="Topic guides"></nav>
       <div class="revmain" id="guideHost"></div>
     </div>
@@ -693,8 +712,8 @@ section{display:none}section.on{display:block}
 </div>
 
 <script>
-/* Study Suite v0.2.40 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.40';
+/* Study Suite v0.2.42 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
+const APP_VERSION='0.2.42';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1186,10 +1205,11 @@ function highlightInDoc(d,q){if(!d||!q)return null;const ql=q.toLowerCase();
   return first;}
 let revNavOpen=null; // overlay drawer state (session); first render seeds from saved preference
 function applyRevNav(){
-  if(revNavOpen===null)revNavOpen=!settings.revNavCollapsed;
+  if(revNavOpen===null)revNavOpen=false; // drawer defaults closed so the guide is never obstructed
   $('guideList').classList.toggle('closed',!revNavOpen);
-  $('revNavToggle').style.display=revNavOpen?'none':'';
+  const t=$('revTitle');if(t){t.classList.toggle('open',revNavOpen);t.setAttribute('aria-expanded',revNavOpen?'true':'false');}
 }
+function toggleRevNav(){revNavOpen=!revNavOpen;applyRevNav();}
 /* — guide zoom / fit-width (applies inside the sandboxed iframe) — */
 let guideZoom=1,guideFit=false;
 function applyGuideView(){
@@ -1206,7 +1226,7 @@ function applyGuideView(){
     }else if(st){st.remove();}
   }catch(e){}
 }
-function openReviewer(){reviewerReturn=currentSection();guideTextCache={};const org=organizeGuides();renderGuideList();if(org.length){loadGuide(org[0].items[0].g,null);}else{$('guideHost').innerHTML='<div class="revempty">No topic guides are bundled in your active packs. Newer packs embed their guides here; older packs link to <code>Topic_*.html</code> files kept in this folder.</div>';}show('reviewer');}
+function openReviewer(){reviewerReturn=currentSection();guideTextCache={};revNavOpen=false;setBackLabel();const org=organizeGuides();renderGuideList();if(org.length){loadGuide(org[0].items[0].g,null);}else{$('guideHost').innerHTML='<div class="revempty">No topic guides are bundled in your active packs. Newer packs embed their guides here; older packs link to <code>Topic_*.html</code> files kept in this folder.</div>';}show('reviewer');}
 let revQuery='';
 /* Unified search. Empty query → the normal grouped topic list. Query → a results view:
    "Topics" (title/badge matches) then "In content" (one snippet per guide whose body matches). */
@@ -1236,7 +1256,7 @@ function filterGuideList(){const raw=revQuery.trim();const q=raw.toLowerCase();c
   if(!titleHits.length&&q.length<2){const none=document.createElement('div');none.className='resnone';none.textContent='Type 2+ characters to search topic content.';res.appendChild(none);}}
 function renderGuideList(){const gl=$('guideList');gl.innerHTML='';
   const hd=document.createElement('button');hd.className='revhide';hd.textContent='◂ Hide topic list';
-  hd.onclick=()=>{revNavOpen=false;settings.revNavCollapsed=true;persist();applyRevNav();};
+  hd.onclick=()=>{revNavOpen=false;applyRevNav();};
   gl.appendChild(hd);
   const se=document.createElement('input');se.type='search';se.className='revsearch';se.placeholder='Search topics & content…';se.value=revQuery;
   se.oninput=()=>{revQuery=se.value;filterGuideList();};
@@ -1266,7 +1286,13 @@ function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();
   host.appendChild(fr);}
 function openGuide(ref,section){const g=findGuide(ref);if(!g){if(ref&&!String(ref).startsWith('javascript')){window.open(String(ref).split('#')[0],'_blank');}return;}
   reviewerReturn=currentSection();const anchor=String(ref).includes('#')?String(ref).split('#')[1]:null;
-  show('reviewer');loadGuide(g,{anchor,section});}
+  revNavOpen=false;setBackLabel();show('reviewer');loadGuide(g,{anchor,section});}
+/* Where "← Back" will return — mirrors returnFromReviewer's branches so the subtitle never lies. */
+function backLabel(){const r=reviewerReturn;
+  if(r==='quiz')return qmode==='test'?'Exam':'Practice';
+  if(r==='study'||r==='srs')return 'Review';
+  return 'Home';}
+function setBackLabel(){const el=$('revBackTo');if(el)el.textContent='to '+backLabel();}
 function returnFromReviewer(){const r=reviewerReturn;if(r==='study'){show('study');renderCard();}else if(r==='quiz'){show('quiz');renderQuiz();}else if(r==='srs'){openReview();}else renderHome();}
 /* Home-screen accordion: Coming soon / FAQ — one panel open at a time. */
 function toggleInfo(which){const items={coming:['comingBtn','comingPanel'],faq:['faqBtn','faqPanel']};
@@ -1403,7 +1429,8 @@ $('installOv').addEventListener('click',e=>{if(e.target===$('installOv'))closeIn
 $('devSeg').querySelectorAll('.seg').forEach(b=>b.addEventListener('click',()=>{installDev=b.dataset.dev;renderInstall();}));
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('installOv').style.display!=='none')closeInstall();});
 $('revBack').addEventListener('click',returnFromReviewer);
-$('revNavToggle').addEventListener('click',()=>{revNavOpen=true;settings.revNavCollapsed=false;persist();applyRevNav();});
+$('revTitle').addEventListener('click',toggleRevNav);
+$('revTitle').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleRevNav();}});
 $('zoomIn').addEventListener('click',()=>{guideZoom=Math.min(2,Math.round((guideZoom+0.1)*10)/10);applyGuideView();});
 $('zoomOut').addEventListener('click',()=>{guideZoom=Math.max(0.6,Math.round((guideZoom-0.1)*10)/10);applyGuideView();});
 $('fitBtn').addEventListener('click',()=>{guideFit=!guideFit;applyGuideView();});
