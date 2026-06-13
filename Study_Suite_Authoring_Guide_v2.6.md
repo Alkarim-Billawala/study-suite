@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.5 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.6 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.5)
+# Study Suite — Content Authoring Guide (v2.6)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,9 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.5 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **Authoring system version:** 2.6 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **What changed in guide v2.6:** hosted-site URL updated to **studysuite.app** (the app moved off
+> the old studysuite.billawala.ca beta address). No schema or instruction changes.
 > **What changed in guide v2.5:** new optional pack field `school` (program/institution, e.g.
 > `"UofT — Temerty Medicine"`) — top level of the hosted site's default-pack navigation, above
 > `year`/`course`. Include it alongside the other placement fields when known.
@@ -25,7 +27,7 @@
 > **What changed in guide v2.1:** topic guides are delivered **embedded in the pack only** — no
 > standalone `.html` files unless the user asks; the app's reader is now called **Topic Guides**
 > (was "Content Reviewer"); session difficulty in the app is now **multi-select**; the app is
-> hosted at **https://studysuite.billawala.ca** (with one-click default packs), so most users
+> hosted at **https://studysuite.app** (with one-click default packs), so most users
 > never handle the app file itself.
 > **Author / attribution:** Alkarim Billawala / alkarim.billawala.ca.
 > **Versioning rule:** the app, this guide, and every pack carry a version. When you revise a pack,
@@ -48,7 +50,7 @@ Specifically:
 1. **Explain the loop in plain terms:**
    - They give *you* their lecture material (notes, slides, transcripts, a syllabus, optionally past quizzes).
    - You turn it into **one content pack** — a single `.json` file — containing exam questions, spaced-repetition cards, and the topic guides embedded inside it.
-   - They load that pack into the **Study Suite app** — at **https://studysuite.billawala.ca** (or a local copy) — by dragging it onto the drop zone.
+   - They load that pack into the **Study Suite app** — at **https://studysuite.app** (or a local copy) — by dragging it onto the drop zone.
    - The app then runs three modes over it: **Review** (spaced repetition), **Practice** (one-at-a-time with instant answers), and **Exam** (timed, scored). It also has a **Topic Guides** reader for the guides bundled in the pack.
 2. **Tell them what you need from them and what they'll get back:** their materials in → **one `.json` pack** out. That single file contains everything, topic guides included.
 3. **Then prompt them to upload** the lecture material they want turned into a pack, and ask the **scope question** in §3 (how many weeks the pack covers / how many questions they want). Mention that they can send material across **multiple messages** if it doesn't fit in one — you'll wait for all of it (§0a).
@@ -344,7 +346,7 @@ Do **not** emit standalone guide `.html` files unless the user asks for printabl
 
 ## 9. How the human uses the output (for your closing summary)
 
-1. Open the app at **https://studysuite.billawala.ca** (nothing to install; a local copy of the
+1. Open the app at **https://studysuite.app** (nothing to install; a local copy of the
    app `.html` works identically).
 2. Drag the new `.json` pack onto the drop zone — it persists and appears in the **Content
    library**, toggleable on/off. (The site also offers the author's default packs with one-click

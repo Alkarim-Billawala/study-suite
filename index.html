@@ -1,7 +1,17 @@
 <!--
-  Study Suite  ·  v0.2.42 (beta)
+  Study Suite  ·  v0.2.43 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.43: (1) DOMAIN MIGRATION — app moved from studysuite.billawala.ca to studysuite.app;
+  Web Deploy/CNAME flipped, all in-app/doc/script URL refs swapped (author site alkarim.billawala.ca
+  unchanged). Removed the domain item from Coming soon (it's happening, not upcoming). Deploy ONLY
+  after studysuite.app DNS is live (see Future-Features item 3 for the Cloudflare cutover). (2) No more
+  native browser dialogs — confirm()/alert() replaced by an in-DOM confirm dialog (#confirmOv,
+  confirmDialog(msg,opts,onConfirm)) and toasts (toast(msg)); covers remove-pack, leave-session
+  (homebtn + popstate via a re-pin pattern), submit-with-unanswered, and all the informational
+  notices. Avoids browsers throttling/blocking repeated native dialogs. (3) Footer version is now a
+  link to the GitHub releases page (#footVer is an <a>). Authoring guide bumped v2.5->v2.6 (URL only);
+  refresh script now drops stale older guide copies from Web Deploy.
   Changelog v0.2.42: the Topic Guides "← Back" button now shows a second small line saying where it
   returns to — "to Practice" / "to Exam" / "to Review" / "to Home" — driven by `reviewerReturn`
   (set on entry) and `qmode` for the quiz case. `backLabel()` mirrors `returnFromReviewer`'s branches
@@ -220,6 +230,8 @@ section{display:none}section.on{display:block}
 .note{font-size:13px;color:var(--ink-soft);text-align:center;margin-top:12px}
 .attrib{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--ink-soft);text-align:center;margin-top:22px}
 .attrib a{color:var(--accent);text-decoration:none}
+#footVer{color:inherit;border-bottom:1px dotted var(--ink-soft);transition:color .12s,border-color .12s}
+#footVer:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .btn{font-family:'Fraunces',serif;font-weight:600;font-size:19px;background:var(--ink);color:var(--paper);border:none;border-radius:5px;padding:13px 36px;cursor:pointer;box-shadow:var(--shadow);transition:transform .12s,background .2s}
 .btn:hover{background:var(--accent);transform:translateY(-1px)}.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
 .btn.sm{font-size:15px;padding:10px 20px}
@@ -336,6 +348,14 @@ section{display:none}section.on{display:block}
 .steps .alt{font-size:13px;color:var(--ink-soft);margin-top:8px}
 .steps kbd{font-family:'IBM Plex Mono',monospace;font-size:12px;background:var(--paper2);border:1px solid var(--line);border-radius:5px;padding:1px 6px}
 .modal-note{font-size:12.5px;color:var(--ink-soft);margin-top:14px;border-top:1px solid var(--line);padding-top:10px}
+/* in-app confirm dialog + toasts (replace native confirm/alert) */
+.confirm-card{max-width:420px}
+.confirm-msg{font-size:16px;line-height:1.5;color:var(--ink);margin-bottom:20px}
+.confirm-actions{display:flex;justify-content:flex-end;gap:10px}
+.confirm-actions .btn.danger{background:var(--red)}.confirm-actions .btn.danger:hover{background:var(--accent)}
+.toast-wrap{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
+.toast{background:var(--ink);color:var(--paper);font-family:'Newsreader';font-size:14.5px;line-height:1.4;padding:11px 18px;border-radius:9px;box-shadow:var(--shadow);max-width:90vw;text-align:center;opacity:0;transform:translateY(8px);transition:opacity .2s,transform .2s}
+.toast.show{opacity:1;transform:translateY(0)}
 /* features coming soon */
 .soon{margin-top:18px;border-top:1px dashed var(--line);padding-top:12px;text-align:center}
 .soon-t{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
@@ -544,7 +564,6 @@ section{display:none}section.on{display:block}
       <div class="infopanel" id="comingPanel" style="display:none">
         <div class="soon-i">· Flashcard import — bring decks in from that other flashcard app</div>
         <div class="soon-i">· Accounts &amp; sync — save your progress and study across devices (optional)</div>
-        <div class="soon-i">· Its own domain (studysuite.app) — after beta; plenty of notice, no data lost</div>
       </div>
       <div class="infopanel" id="faqPanel" style="display:none">
         <div class="faqbody">
@@ -586,7 +605,7 @@ section{display:none}section.on{display:block}
         </div>
       </div>
     </div>
-    <div class="attrib">Study Suite <span id="footVer">v0.2.42</span> · <span class="betatag" id="footBeta">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
+    <div class="attrib">Study Suite <a id="footVer" href="https://github.com/Alkarim-Billawala/study-suite/releases" target="_blank" rel="noopener" title="See what's new — release notes on GitHub">v0.2.43</a> · <span class="betatag" id="footBeta">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
   </section>
 
   <!-- SRS DECK -->
@@ -655,6 +674,16 @@ section{display:none}section.on{display:block}
     </div>
   </div>
 
+  <!-- CONFIRM DIALOG (in-app, replaces native confirm()) -->
+  <div class="modal-ov" id="confirmOv" style="display:none">
+    <div class="modal-card confirm-card" role="dialog" aria-modal="true" aria-labelledby="confirmMsg">
+      <div class="confirm-msg" id="confirmMsg"></div>
+      <div class="confirm-actions"><button class="btn ghost sm" id="confirmCancel">Cancel</button><button class="btn sm" id="confirmOk">Confirm</button></div>
+    </div>
+  </div>
+  <!-- TOASTS (in-app, replaces native alert()) -->
+  <div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+
   <!-- QUIZ -->
   <section id="quiz">
     <div class="qmeta"><span class="left"><span class="tag" id="qtag">—</span><span id="qdiff"></span></span><span class="pos" id="qpos"></span></div>
@@ -712,8 +741,8 @@ section{display:none}section.on{display:block}
 </div>
 
 <script>
-/* Study Suite v0.2.42 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.42';
+/* Study Suite v0.2.43 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
+const APP_VERSION='0.2.43';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -844,7 +873,7 @@ function dpRow(p){
       const r=await fetch(encodeURI(String(p.file)),{cache:'no-store'});if(!r.ok)throw 0;
       ingestPack(await r.json(),(p.label||p.file).replace(/\.json$/i,''));
       await persist();renderHome();
-    }catch(e){btn.disabled=false;btn.textContent='+ Add to library';alert('Could not load that pack — check your connection and try again.');}
+    }catch(e){btn.disabled=false;btn.textContent='+ Add to library';toast('Could not load that pack — check your connection and try again.');}
   };
   row.appendChild(btn);
   /* per-pack raw-file download — disabled v0.2.16 (packs are bundled; Add covers it). Revive by uncommenting:
@@ -959,7 +988,7 @@ function readFiles(files){
     if(++done===arr.length){await persist();renderHome();}
   };r.readAsText(f);});
 }
-function removePack(id){if(!confirm('Remove this pack? Your review progress is kept and will reapply if you reload it.'))return;packs=packs.filter(p=>p.id!==id);persist().then(renderHome);}
+function removePack(id){confirmDialog('Remove this pack? Your review progress is kept and will reapply if you reload it.',{confirmText:'Remove',danger:true},()=>{packs=packs.filter(p=>p.id!==id);persist().then(renderHome);});}
 
 /* ===== NAV ===== */
 function currentSection(){const s=document.querySelector('section.on');return s?s.id:'home';}
@@ -993,10 +1022,16 @@ window.addEventListener('popstate',e=>{
   const cur=currentSection();
   if(target===cur)return;
   const inSession=(cur==='quiz'&&!qTestSubmitted)||cur==='study';
-  if(inSession&&!confirm('Leave this session?')){navLock=true;try{history.pushState({sec:cur},'');}catch(err){}navLock=false;return;}
-  if(cur==='quiz'||cur==='study')clearInterval(qTimerId);
-  navLock=true;
-  try{gotoSec(target);}finally{navLock=false;}
+  const doNav=()=>{if(cur==='quiz'||cur==='study')clearInterval(qTimerId);navLock=true;try{gotoSec(target);}finally{navLock=false;}};
+  if(inSession){
+    // Re-pin the current entry so the back gesture is cancelled while the (async) dialog is open;
+    // confirming then navigates forward to the intended target.
+    navLock=true;try{history.pushState({sec:cur},'');}catch(err){}navLock=false;
+    confirmDialog('Leave this session?',{confirmText:'Leave'},()=>{
+      navLock=true;try{history.pushState({sec:target},'');}catch(err){}navLock=false;doNav();});
+    return;
+  }
+  doNav();
 });
 
 /* ===== HOME ===== */
@@ -1294,6 +1329,20 @@ function backLabel(){const r=reviewerReturn;
   return 'Home';}
 function setBackLabel(){const el=$('revBackTo');if(el)el.textContent='to '+backLabel();}
 function returnFromReviewer(){const r=reviewerReturn;if(r==='study'){show('study');renderCard();}else if(r==='quiz'){show('quiz');renderQuiz();}else if(r==='srs'){openReview();}else renderHome();}
+/* In-app confirm dialog + toasts — replace native confirm()/alert() (which browsers throttle/block).
+   confirmDialog(msg, opts?, onConfirm): opts = {confirmText, cancelText, danger}. */
+let confirmCb=null;
+function confirmDialog(msg,opts,onConfirm){if(typeof opts==='function'){onConfirm=opts;opts={};}opts=opts||{};
+  $('confirmMsg').textContent=msg;
+  $('confirmOk').textContent=opts.confirmText||'Confirm';
+  $('confirmCancel').textContent=opts.cancelText||'Cancel';
+  $('confirmOk').classList.toggle('danger',!!opts.danger);
+  confirmCb=typeof onConfirm==='function'?onConfirm:null;
+  $('confirmOv').style.display='flex';$('confirmOk').focus();}
+function closeConfirm(){$('confirmOv').style.display='none';confirmCb=null;}
+function toast(msg,ms){const w=$('toastWrap');if(!w)return;const t=document.createElement('div');t.className='toast';t.textContent=msg;w.appendChild(t);
+  requestAnimationFrame(()=>t.classList.add('show'));
+  setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),250);},ms||2800);}
 /* Home-screen accordion: Coming soon / FAQ — one panel open at a time. */
 function toggleInfo(which){const items={coming:['comingBtn','comingPanel'],faq:['faqBtn','faqPanel']};
   const willOpen=$(items[which][1]).style.display==='none';
@@ -1314,15 +1363,15 @@ function autoBalance(target){const g=examGroups();let total=0;g.forEach(ids=>tot
 let qmode,qorder=[],qmap={},qans=[],qsub=[],qflag=[],qelapsed=[],qcur=0,qTimerId=null,qTimeLeft=0,qTestSubmitted=false,timerWanted=false;
 function fmt(s){s=Math.max(0,Math.round(s));return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;}
 function buildQmap(){qmap={};qpool().forEach(q=>qmap[q.id]=q);}
-function startPractice(){const pool=qTestPool();if(!pool.length){alert('No questions match the current session difficulty.');return;}buildQmap();
+function startPractice(){const pool=qTestPool();if(!pool.length){toast('No questions match the current session difficulty.');return;}buildQmap();
   let ids=pool.map(q=>q.id);if(settings.practiceShuffle)shuffle(ids);qorder=ids;qmode='practice';
   qinit();qTestSubmitted=false;
   timerWanted=!!settings.practiceTimer;$('flagBtn').style.display='none';$('submitAnsBtn').style.display='';
   $('finishBtn').textContent='Finish & summary';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map · practice';
   renderQuiz();startQTick();show('quiz');}
-function startExam(){const pool=qTestPool();if(!pool.length){alert('No questions match the current session difficulty.');return;}buildQmap();
+function startExam(){const pool=qTestPool();if(!pool.length){toast('No questions match the current session difficulty.');return;}buildQmap();
   const counts=currentCounts();const g=examGroups();let picks=[];g.forEach((ids,k)=>{picks=picks.concat(shuffle([...ids]).slice(0,Math.min(ids.length,counts[k]||0)));});
-  if(!picks.length){alert('No questions available for an exam. Load a study pack (or widen the session difficulty).');return;}
+  if(!picks.length){toast('No questions available for an exam. Load a study pack (or widen the session difficulty).');return;}
   qorder=shuffle(picks);qmode='test';qinit();qTestSubmitted=false;qTimeLeft=settings.examMinutes*60;
   timerWanted=!!settings.examTimer;$('flagBtn').style.display='';$('submitAnsBtn').style.display='none';
   $('finishBtn').textContent='Submit examination';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map';
@@ -1360,8 +1409,10 @@ function submitAnswer(){if(qans[qcur]==null)return;qsub[qcur]=true;renderQuiz();
 function qPrev(){if(qcur>0){qcur--;renderQuiz();window.scrollTo({top:0,behavior:'smooth'});}}
 function qNext(){if(qcur<qorder.length-1){qcur++;renderQuiz();window.scrollTo({top:0,behavior:'smooth'});}}
 function submitExam(auto){if(qTestSubmitted)return;const un=qans.filter(a=>a===null).length;
-  if(!auto&&un>0&&!confirm(`${un} unanswered. Submit anyway?`))return;qTestSubmitted=true;clearInterval(qTimerId);showResults(auto);}
-function finishPractice(){if(qsub.filter(Boolean).length===0){alert('Submit at least one question first.');return;}clearInterval(qTimerId);showResults(false);}
+  if(!auto&&un>0){confirmDialog(`${un} unanswered. Submit anyway?`,{confirmText:'Submit'},()=>doSubmitExam(auto));return;}
+  doSubmitExam(auto);}
+function doSubmitExam(auto){if(qTestSubmitted)return;qTestSubmitted=true;clearInterval(qTimerId);showResults(auto);}
+function finishPractice(){if(qsub.filter(Boolean).length===0){toast('Submit at least one question first.');return;}clearInterval(qTimerId);showResults(false);}
 function showResults(auto){let total=0,correct=0;const byT={};
   if(qmode==='test'){total=qorder.length;for(let i=0;i<qorder.length;i++){const q=qmap[qorder[i]];byT[q.sys]=byT[q.sys]||{c:0,t:0};byT[q.sys].t++;if(qans[i]===q.correct){correct++;byT[q.sys].c++;}}}
   else{for(let i=0;i<qorder.length;i++){if(!qsub[i])continue;const q=qmap[qorder[i]];byT[q.sys]=byT[q.sys]||{c:0,t:0};byT[q.sys].t++;total++;if(qans[i]===q.correct){correct++;byT[q.sys].c++;}}}
@@ -1409,7 +1460,7 @@ function updateWeightTotal(){$('weightTotal').textContent=examTotal();}
 
 /* ===== BACKUP ===== */
 function backup(){const data={suite:APP_VERSION,author:APP_AUTHOR,exported:new Date().toISOString(),packs,sched,daily,settings};const blob=new Blob([JSON.stringify(data)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='study-suite-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}
-function restore(file){const r=new FileReader();r.onload=async()=>{try{const d=JSON.parse(r.result);if(d.packs)packs=d.packs;if(d.sched)sched=d.sched;if(d.daily)daily=d.daily;if(d.settings)settings=Object.assign(settings,d.settings);deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});if(daily.date!==today())daily={date:today(),count:0};await persist();renderHome();alert('Backup restored.');}catch(e){alert('Could not read that file.');}};r.readAsText(file);}
+function restore(file){const r=new FileReader();r.onload=async()=>{try{const d=JSON.parse(r.result);if(d.packs)packs=d.packs;if(d.sched)sched=d.sched;if(d.daily)daily=d.daily;if(d.settings)settings=Object.assign(settings,d.settings);deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});if(daily.date!==today())daily={date:today(),count:0};await persist();renderHome();toast('Backup restored.');}catch(e){toast('Could not read that file.');}};r.readAsText(file);}
 
 /* ===== WIRE UP ===== */
 $('mReview').addEventListener('click',()=>{if(deck().length)openReview();});
@@ -1428,6 +1479,10 @@ $('installClose').addEventListener('click',closeInstall);
 $('installOv').addEventListener('click',e=>{if(e.target===$('installOv'))closeInstall();});
 $('devSeg').querySelectorAll('.seg').forEach(b=>b.addEventListener('click',()=>{installDev=b.dataset.dev;renderInstall();}));
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('installOv').style.display!=='none')closeInstall();});
+$('confirmOk').addEventListener('click',()=>{const cb=confirmCb;closeConfirm();if(cb)cb();});
+$('confirmCancel').addEventListener('click',closeConfirm);
+$('confirmOv').addEventListener('click',e=>{if(e.target===$('confirmOv'))closeConfirm();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('confirmOv').style.display!=='none')closeConfirm();});
 $('revBack').addEventListener('click',returnFromReviewer);
 $('revTitle').addEventListener('click',toggleRevNav);
 $('revTitle').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleRevNav();}});
@@ -1435,7 +1490,7 @@ $('zoomIn').addEventListener('click',()=>{guideZoom=Math.min(2,Math.round((guide
 $('zoomOut').addEventListener('click',()=>{guideZoom=Math.max(0.6,Math.round((guideZoom-0.1)*10)/10);applyGuideView();});
 $('fitBtn').addEventListener('click',()=>{guideFit=!guideFit;applyGuideView();});
 $('printBtn').addEventListener('click',()=>{const fr=document.querySelector('.guideframe');if(fr&&fr.contentWindow){try{fr.contentWindow.focus();fr.contentWindow.print();}catch(e){window.print();}}else{window.print();}});
-$('homebtn').addEventListener('click',()=>{if($('quiz').classList.contains('on')||$('study').classList.contains('on')){if(!confirm('Leave this session and return home?'))return;clearInterval(qTimerId);}renderHome();});
+$('homebtn').addEventListener('click',()=>{if($('quiz').classList.contains('on')||$('study').classList.contains('on')){confirmDialog('Leave this session and return home?',{confirmText:'Leave'},()=>{clearInterval(qTimerId);renderHome();});}else renderHome();});
 $('studyBtn').addEventListener('click',startSession);
 $('browseBtn').addEventListener('click',renderBrowse);
 $('doneHome').addEventListener('click',openReview);
