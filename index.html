@@ -1,7 +1,15 @@
 <!--
-  Integrated Study Suite  ·  v0.2.27 (beta)
+  Integrated Study Suite  ·  v0.2.28 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.28: home-screen footer reworked into a two-button accordion ("Coming soon" / "FAQ",
+  .infosec/.inforow/.infobtn, toggleInfo() opens one panel at a time). The old inline "Features coming
+  soon" list now lives behind the Coming soon button; a new FAQ panel embeds a user-facing FAQ
+  (sourced from FAQ_DRAFT.md) — "the basics today" (free/local/privacy/backups/offline/install/
+  authoring/not-medical-advice) + "Accounts & Sync (coming)" (sync, why it's paid, cost, E2EE,
+  recovery code). FAQ content is SANITIZED — no private mechanics. NOTE: this is the first time
+  sync/paid messaging appears on the published site; it's intentional and owner-approved, but keep it
+  free of pricing figures and implementation detail.
   Changelog v0.2.27: Topic Guides search is now UNIFIED — one box searches both topic titles AND the
   text inside guides. Empty query shows the normal grouped list; a query shows "Topics" (title/badge
   matches, as before) then "In content (N)" with one snippet per guide whose body matches. Clicking a
@@ -290,7 +298,21 @@ section{display:none}section.on{display:block}
 /* features coming soon */
 .soon{margin-top:18px;border-top:1px dashed var(--line);padding-top:12px;text-align:center}
 .soon-t{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
-.soon-i{font-size:14px;color:var(--ink-soft)}
+.soon-i{font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+/* coming-soon / FAQ accordion */
+.infosec{margin-top:20px;border-top:1px dashed var(--line);padding-top:16px}
+.inforow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.infobtn{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:transparent;border:1px solid var(--line);color:var(--ink-soft);border-radius:8px;padding:10px 24px;cursor:pointer;transition:.15s}
+.infobtn:hover{border-color:var(--ink);color:var(--ink)}
+.infobtn.on{border-color:var(--accent);color:var(--accent);background:var(--paper2)}
+.infopanel{margin:14px auto 0;max-width:640px;border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:18px 22px;text-align:left}
+.faqbody{max-height:62vh;overflow-y:auto}
+.faqbody .faq-sec{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:22px 0 10px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.faqbody .faq-sec:first-child{margin-top:0}
+.faqbody h4{font-family:'Fraunces',serif;font-weight:600;font-size:16px;margin:16px 0 4px;color:var(--ink)}
+.faqbody p{font-size:14.5px;line-height:1.55;color:var(--ink-soft);margin:0 0 10px}
+.faqbody .faq-note{font-size:13.5px;color:var(--ink-soft);border-left:3px solid var(--accent-soft);background:var(--paper2);padding:8px 12px;border-radius:0 6px 6px 0;margin:0 0 14px}
+.faqbody b{color:var(--ink);font-weight:600}
 @media(max-width:560px){.installbtn{font-size:9px;padding:5px 9px}}
 /* default-packs panel (only shown when a packs-manifest.json is served alongside the app) */
 .defpacks{margin:14px 0;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);padding:14px 16px}
@@ -475,12 +497,56 @@ section{display:none}section.on{display:block}
     </div>
     <div class="savestate" id="saveState"></div>
     <div class="savehint">Progress lives in this browser — use <b>Backup all</b> / <b>Restore backup</b> to carry it across devices and browsers.</div>
-    <div class="soon">
-      <div class="soon-t">Features coming soon</div>
-      <div class="soon-i">· Anki import — bring your existing Anki decks into Review</div>
-      <div class="soon-i">· User creation and sync — save your progress and study anywhere</div>
+    <div class="infosec">
+      <div class="inforow">
+        <button class="infobtn" id="comingBtn" onclick="toggleInfo('coming')">Coming soon</button>
+        <button class="infobtn" id="faqBtn" onclick="toggleInfo('faq')">FAQ</button>
+      </div>
+      <div class="infopanel" id="comingPanel" style="display:none">
+        <div class="soon-i">· Anki import — bring your existing Anki decks into Review</div>
+        <div class="soon-i">· User creation and sync — save your progress and study anywhere</div>
+      </div>
+      <div class="infopanel" id="faqPanel" style="display:none">
+        <div class="faqbody">
+          <div class="faq-sec">The basics — how it works today</div>
+          <h4>What is Study Suite?</h4>
+          <p>A study tool built around four things: <b>Review</b> (spaced repetition, like Anki), <b>Practice</b> (one question at a time with instant feedback), <b>Exam</b> (timed, scored mock tests), and <b>Topic Guides</b> (readable summaries). The app itself is empty — you load <b>study packs</b> that hold the questions, cards, and guides. It's currently in beta.</p>
+          <h4>Is it really free?</h4>
+          <p>Yes — completely free, with no ads, no tracking, and no account required. Everything the app does today runs entirely in your own browser, so there's nothing for me to charge for. If you want to chip in toward the costs of building it, there's an optional "Support development" link, but it's never required and unlocks nothing — the whole app is yours to use.</p>
+          <h4>Where is my data stored? Can you see it?</h4>
+          <p>Everything — your packs, review progress, scores, and settings — is stored locally in your own browser, on your own device. <b>None of it is sent anywhere.</b> There's no server collecting your study data, no analytics, and no tracking cookies. I genuinely can't see what you study or how you're doing, because that information never leaves your device.</p>
+          <h4>How do I back up my progress or move to another device?</h4>
+          <p>Use <b>Backup all</b> to save a file with everything in it, then <b>Restore backup</b> on your other device (or after clearing your browser). Today this is manual — automatic sync across devices is coming (see below). It's worth backing up now and then, since your progress lives in your browser and clearing site data would wipe it.</p>
+          <h4>Does it work offline?</h4>
+          <p>Yes, fully. The app is a single self-contained file. Once it's loaded in your browser — or installed to your home screen — it keeps working with no internet connection. Your packs and progress are right there on your device.</p>
+          <h4>Can I add it to my phone or computer like a real app?</h4>
+          <p>Yes — use <b>Add to Home Screen</b> (the app walks you through it for your device). One thing to know: an installed copy keeps its <b>own separate storage</b> from the browser version, so back up first and restore into the installed app so your progress comes along.</p>
+          <h4>Can I make my own study packs, or use my own notes?</h4>
+          <p>Absolutely — that's encouraged. Download the <b>instruction set</b> (from the home screen) and hand it to the AI assistant of your choice; it walks the assistant through turning your own material into a pack you can load. Packs you make from your own content are <b>yours</b>. (The app, its design, and the pack format are mine, but the content you bring into it is entirely your own.)</p>
+          <h4>Is any of this medical advice?</h4>
+          <p>No. Study Suite and its packs are <b>educational material for exam preparation only</b> — not medical advice, and never a basis for real decisions about real patients. It's also in beta, so content can contain errors or go out of date. Always check against your own curriculum and trusted sources.</p>
+          <div class="faq-sec">Accounts &amp; Sync — coming, not available yet</div>
+          <p class="faq-note">These features aren't live yet. Here's how they'll work when they launch.</p>
+          <h4>What will Sync do?</h4>
+          <p>Sync will let you save your progress to your account and pick up exactly where you left off on any device — phone, laptop, tablet — without manually backing up and restoring. It's the convenient, automatic version of Backup all.</p>
+          <h4>If the rest of the app is free, why will Sync cost money?</h4>
+          <p>Because Sync is the one feature that can't run on your device alone. Everything else happens right in your browser, which costs nothing to give away — so it stays free, for everyone, forever. Sync needs a server running around the clock to hold your (encrypted) data and pass it between your devices, and that has a real, ongoing cost. So only the server-backed features are paid; anything you can do entirely on your own device stays free. If you never want Sync, you lose nothing.</p>
+          <h4>How much will Sync cost?</h4>
+          <p>I haven't set a price yet — I'm still testing Sync and working to make it reliable, bulletproof, and secure before anyone depends on it. Whatever it ends up costing will reflect what it actually takes to run the cloud side: servers, backups, networking, credentials management, storage, and so on. What I can promise is that I'm determined to keep it <b>affordable</b> — it will cost far less than many of the study tools you already pay for (UWorld and the like). When Sync launches you'll be notified, and as an early beta tester you'll get a special access price. And to say it once more: Sync is entirely optional — you never need to use it.</p>
+          <h4>Will you be able to see my synced data?</h4>
+          <p>No. Sync will be <b>end-to-end encrypted</b>: your data is scrambled on your device <i>before</i> it's uploaded, and only the scrambled version is stored. The key that unlocks it never leaves your device. That means <b>I can't read your synced data</b> — not for support, not for troubleshooting, not under any circumstances — because I simply don't have the key.</p>
+          <h4>What if I forget my password?</h4>
+          <p>When you create an account you'll be given a one-time <b>recovery code</b> (and a chance to save it). If you forget your password, that code lets you get back in and set a new one. Keep it somewhere safe — a password manager, or written down where you'll find it.</p>
+          <h4>What happens if I lose both my password and my recovery code?</h4>
+          <p>Your <b>synced</b> copy can't be recovered by anyone — including me. That's not a gap; it's the whole point of end-to-end encryption (I never hold your key, so I can never unlock or reset it). But here's the reassuring part: <b>your studying isn't gone.</b> The data on your own device is completely unaffected, and any <b>Backup all</b> file you've saved still works. You'd just set up a fresh account and re-sync from your device. So the worst case is an inconvenience, not lost progress — which is exactly why keeping your recovery code and an occasional backup is worth it.</p>
+          <h4>What data will an account actually store, and is it private?</h4>
+          <p>The bare minimum to make Sync work — essentially your email (to sign in) and your encrypted study blob. No selling data, no ads, no tracking. You'll be able to export everything at any time (<b>Backup all</b>) and delete your account and its data yourself, instantly. A full privacy policy will be published before accounts launch.</p>
+          <h4>Do I have to make an account?</h4>
+          <p>No. Accounts exist only for Sync. The app will stay completely usable — free, offline, and account-free — for anyone who just wants to study on one device or back up manually.</p>
+        </div>
+      </div>
     </div>
-    <div class="attrib">Integrated Study Suite <span id="footVer">v0.2.27</span> · <span class="betatag" id="footBeta">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
+    <div class="attrib">Integrated Study Suite <span id="footVer">v0.2.28</span> · <span class="betatag" id="footBeta">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
   </section>
 
   <!-- SRS DECK -->
@@ -607,8 +673,8 @@ section{display:none}section.on{display:block}
 </div>
 
 <script>
-/* Integrated Study Suite v0.2.27 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.27';
+/* Integrated Study Suite v0.2.28 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
+const APP_VERSION='0.2.28';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1182,6 +1248,11 @@ function openGuide(ref,section){const g=findGuide(ref);if(!g){if(ref&&!String(re
   reviewerReturn=currentSection();const anchor=String(ref).includes('#')?String(ref).split('#')[1]:null;
   show('reviewer');loadGuide(g,{anchor,section});}
 function returnFromReviewer(){const r=reviewerReturn;if(r==='study'){show('study');renderCard();}else if(r==='quiz'){show('quiz');renderQuiz();}else if(r==='srs'){openReview();}else renderHome();}
+/* Home-screen accordion: Coming soon / FAQ — one panel open at a time. */
+function toggleInfo(which){const items={coming:['comingBtn','comingPanel'],faq:['faqBtn','faqPanel']};
+  const willOpen=$(items[which][1]).style.display==='none';
+  Object.keys(items).forEach(k=>{const[btn,panel]=items[k];const open=(k===which)&&willOpen;
+    $(panel).style.display=open?'':'none';$(btn).classList.toggle('on',open);});}
 
 /* ===== EXAM WEIGHTING ===== */
 function groupKeyOf(q){const by=settings.examGroupBy;return by==='system'?q.sys:by==='pack'?q._packName:q.topic;}
