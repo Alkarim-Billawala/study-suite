@@ -1,0 +1,743 @@
+{
+ "pack": "Gastrointestinal (Weeks 29–32)",
+ "id": "gi",
+ "school": "UofT — Temerty Medicine",
+ "formatVersion": "2.0",
+ "version": "2.3",
+ "year": "Year 1",
+ "course": "CPC 2",
+ "weeks": "Weeks 29–32 · Gastro I–IV",
+ "author": "Alkarim Billawala / alkarim.billawala.ca",
+ "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
+ "created": "2026-06-11",
+ "updated": "2026-06-14",
+ "questions": [
+  {
+   "id": "gi_q01",
+   "topic": "GI I · Upper GI",
+   "stem": "A 58-year-old man has 8 months of heartburn and sour regurgitation, worse lying down, with recent weight gain (BMI 32). No dysphagia, weight loss, bleeding, or anemia. Most appropriate next step?",
+   "options": [
+    "Urgent upper endoscopy",
+    "CT chest and abdomen",
+    "Clinical diagnosis of GERD with lifestyle measures and a PPI",
+    "Esophageal manometry"
+   ],
+   "correct": 2,
+   "explain": "Typical heartburn/regurgitation <b>without alarm features</b> is a clinical diagnosis. Manage with weight loss, head-of-bed elevation, avoiding late meals, and a PPI. Endoscopy is reserved for alarm features (dysphagia, weight loss, bleeding, anemia, persistent vomiting).",
+   "sys": "GI",
+   "guide": {
+    "f": "Topic_07_Upper_GI.html",
+    "t": "07 · Upper GI",
+    "s": "GERD"
+   },
+   "difficulty": "easy"
+  },
+  {
+   "id": "gi_q02",
+   "topic": "GI I · Upper GI",
+   "stem": "A 25-year-old develops 12 hours of forceful vomiting from food poisoning. After repeated retching, he vomits a small amount of bright red blood. He is stable, with no liver disease or NSAID use. Most likely diagnosis?",
+   "options": [
+    "Esophageal varices",
+    "Mallory-Weiss tear",
+    "Gastric adenocarcinoma",
+    "Perforated peptic ulcer"
+   ],
+   "correct": 1,
+   "explain": "Hematemesis <b>following repeated forceful vomiting/retching</b> in an otherwise healthy person is the classic picture of a <b>Mallory-Weiss tear</b> (mucosal laceration at the gastroesophageal junction).",
+   "sys": "GI",
+   "guide": {
+    "f": "Topic_07_Upper_GI.html",
+    "t": "07 · Upper GI",
+    "s": "Upper-GI emergencies — Mallory-Weiss"
+   },
+   "difficulty": "easy"
+  },
+  {
+   "id": "gi_q03",
+   "topic": "GI I · Upper GI",
+   "stem": "A 61-year-old with long-standing T2DM and neuropathy has 6 months of nausea, vomiting of undigested food, and early satiety. Endoscopy is normal; gastric emptying study shows delayed emptying. QTc is normal. Best chronic prokinetic?",
+   "options": [
+    "Ondansetron",
+    "Domperidone",
+    "Scopolamine",
+    "Omeprazole"
+   ],
+   "correct": 1,
+   "explain": "Diabetic <b>gastroparesis</b>. <b>Domperidone</b> (peripheral D2 antagonist) is favored chronically because it doesn't readily cross the blood-brain barrier (fewer CNS effects than metoclopramide), though QTc should be monitored.",
+   "sys": "GI",
+   "guide": {
+    "f": "Topic_07_Upper_GI.html",
+    "t": "07 · Upper GI",
+    "s": "Nausea/vomiting & gastroparesis"
+   },
+   "difficulty": "medium"
+  },
+  {
+   "id": "gi_q04",
+   "topic": "GI II · Lower GI",
+   "stem": "A 30-year-old develops bloody diarrhea, fever, and severe cramps after eating undercooked chicken, with 10 stools/day and lightheadedness. A friend offers loperamide. Best advice?",
+   "options": [
+    "Take loperamide — it shortens invasive diarrhea",
+    "Take diphenoxylate/atropine instead, which is safer",
+    "Avoid anti-motility agents; focus on hydration and appropriate stool testing",
+    "Start prednisone immediately"
+   ],
+   "correct": 2,
+   "explain": "<b>Bloody diarrhea with fever</b> suggests invasive/inflammatory colitis (e.g., Campylobacter). <b>Avoid anti-motility agents</b> (loperamide, diphenoxylate) — they risk toxic megacolon/prolonged infection. Prioritize hydration and targeted stool testing.",
+   "sys": "GI",
+   "guide": {
+    "f": "Topic_08_Lower_GI.html",
+    "t": "08 · Lower GI",
+    "s": "Diarrhea approach — avoid loperamide"
+   },
+   "difficulty": "easy"
+  },
+  {
+   "id": "gi_q05",
+   "topic": "GI II · Lower GI",
+   "stem": "A 42-year-old woman with autoimmune hypothyroidism has fatigue, bloating, and chronic non-bloody diarrhea. Hb 102, MCV 72, ferritin 2. She is not vegetarian and has no overt bleeding. Most likely diagnosis?",
+   "options": [
+    "Lactose intolerance",
+    "Celiac disease",
+    "Ulcerative colitis",
+    "Overflow diarrhea"
+   ],
+   "correct": 1,
+   "explain": "<b>Celiac disease</b> injures the <b>duodenum</b>, where iron is preferentially absorbed → iron-deficiency anemia (microcytic, low ferritin). It associates with other autoimmune disease (e.g., thyroid). Confirm with tissue transglutaminase IgA + total IgA while still eating gluten, then duodenal biopsy.",
+   "sys": "GI",
+   "guide": {
+    "f": "Topic_08_Lower_GI.html",
+    "t": "08 · Lower GI",
+    "s": "Malabsorption — celiac"
+   },
+   "difficulty": "medium"
+  },
+  {
+   "id": "gi_q06",
+   "topic": "GI II · Lower GI",
+   "stem": "A 28-year-old woman with Crohn's has had 180 cm of distal ileum resected over two operations; disease is now controlled on a biologic. She reports greasy, floating, foul-smelling stools and weight loss. Mechanism?",
+   "options": [
+    "Impaired duodenal iron absorption",
+    "Jejunal lactase deficiency",
+    "Bile-acid depletion impairing micelle formation (steatorrhea)",
+    "Excess gastric acid causing ulceration"
+   ],
+   "correct": 2,
+   "explain": "The <b>terminal ileum</b> reabsorbs bile acids. Large ileal resection depletes the bile-acid pool → impaired micelle formation → fat malabsorption and <b>steatorrhea</b> (greasy, floating, foul-smelling stools).",
+   "sys": "GI",
+   "guide": {
+    "f": "Topic_08_Lower_GI.html",
+    "t": "08 · Lower GI",
+    "s": "Absorption sites — terminal ileum"
+   },
+   "difficulty": "medium"
+  },
+  {
+   "id": "gi_q07",
+   "topic": "GI II · Lower GI",
+   "stem": "A man with newly diagnosed moderate-severe Crohn's improves dramatically on prednisone and asks to stay on it long-term to prevent relapse. Best response?",
+   "options": [
+    "Yes — prednisone is ideal long-term maintenance",
+    "No — prednisone is for induction, not maintenance, due to serious long-term toxicity",
+    "Yes, but only combined with loperamide",
+    "Prednisone is only used in ulcerative colitis"
+   ],
+   "correct": 1,
+   "explain": "Corticosteroids are for <b>induction of remission, not maintenance</b>: chronic use causes osteoporosis, adrenal suppression, hyperglycemia, infection risk, and avascular necrosis. Maintenance uses immunomodulators/biologics.",
+   "sys": "GI",
+   "guide": {
+    "f": "Topic_08_Lower_GI.html",
+    "t": "08 · Lower GI",
+    "s": "IBD treatment — steroids = induction only"
+   },
+   "difficulty": "easy"
+  },
+  {
+   "id": "gi_q08",
+   "topic": "GI III · Surgery",
+   "stem": "A 65-year-old woman has severe RUQ pain, jaundice, fever, confusion, HR 125, BP 80/40. Ultrasound shows gallstones with dilated intra- and extra-hepatic ducts. Diagnosis and definitive treatment?",
+   "options": [
+    "Biliary colic; elective outpatient cholecystectomy",
+    "Acute cholecystitis; oral antibiotics and discharge",
+    "Ascending cholangitis; resuscitation, broad-spectrum antibiotics, and urgent ERCP decompression",
+    "Gallstone pancreatitis; NPO only"
+   ],
+   "correct": 2,
+   "explain": "Fever + RUQ pain + jaundice (<b>Charcot triad</b>) plus hypotension and altered mentation (<b>Reynolds pentad</b>) = <b>ascending cholangitis</b>. Treat with resuscitation, broad antibiotics, and <b>urgent biliary decompression by ERCP</b>.",
+   "sys": "GI",
+   "guide": {
+    "f": "Topic_09_Liver_and_Biliary.html",
+    "t": "09 · Liver & Biliary",
+    "s": "Hepatobiliary emergencies — cholangitis"
+   },
+   "difficulty": "medium"
+  },
+  {
+   "id": "gi_q09",
+   "topic": "GI III · Surgery",
+   "stem": "A 70-year-old with a prior laparotomy has 24 hours of crampy pain, bilious vomiting, distension, and obstipation. X-ray shows dilated small-bowel loops. No fever, no peritonitis, normal lactate; CT shows a transition point without ischemia. Most likely cause and initial management?",
+   "options": [
+    "Adhesions; NPO, IV fluids, electrolyte correction, NG decompression, close surgical observation",
+    "Colon cancer; immediate hemicolectomy without staging",
+    "Ogilvie syndrome; neostigmine before excluding mechanical obstruction",
+    "Sigmoid volvulus; urgent ERCP"
+   ],
+   "correct": 0,
+   "explain": "<b>Adhesions</b> are the most common cause of SBO after prior abdominal surgery. A stable, non-ischemic, partial/simple SBO is initially managed <b>conservatively</b>: bowel rest, IV fluids, electrolyte correction, NG decompression, and serial reassessment for signs needing surgery.",
+   "sys": "GI",
+   "guide": {
+    "f": "Topic_10_Acute_Abdomen_Surgery.html",
+    "t": "10 · Acute Abdomen",
+    "s": "Bowel obstruction — SBO"
+   },
+   "difficulty": "medium"
+  },
+  {
+   "id": "gi_q10",
+   "topic": "GI III · Surgery",
+   "stem": "A 44-year-old with imaging-confirmed acute appendicitis is awaiting the OR. Six hours later she becomes confused: HR 140, BP 80/45, O₂ 86%, lactate 9. Best next step?",
+   "options": [
+    "Discharge with oral antibiotics and return precautions",
+    "Immediate colonoscopy to exclude colon cancer",
+    "Aggressive resuscitation, broad-spectrum IV antibiotics, urgent source control, ICU/surgical escalation",
+    "Delay all intervention until CT confirms perforation"
+   ],
+   "correct": 2,
+   "explain": "She has <b>septic shock</b> with organ dysfunction (hypotension, hypoxemia, lactate 9) from an intra-abdominal source. Prioritize <b>resuscitation, early broad antibiotics, and urgent source control</b> — do not delay for perfect imaging in refractory shock.",
+   "sys": "GI",
+   "guide": {
+    "f": "Topic_10_Acute_Abdomen_Surgery.html",
+    "t": "10 · Acute Abdomen",
+    "s": "Appendicitis & sepsis emergencies"
+   },
+   "difficulty": "easy"
+  },
+  {
+   "id": "gi_q11",
+   "topic": "GI III · Surgery",
+   "stem": "A 43-year-old man with iron-deficiency anemia undergoes colonoscopy revealing an ascending-colon mass; biopsy shows adenocarcinoma. CT shows no metastases and CEA is drawn. Most appropriate initial definitive treatment?",
+   "options": [
+    "Rubber-band ligation, since bleeding hemorrhoids explain the anemia",
+    "Oncologic right hemicolectomy with lymphadenectomy; adjuvant therapy by final stage",
+    "Long-term antibiotics for presumed diverticulitis",
+    "ERCP followed by cholecystectomy"
+   ],
+   "correct": 1,
+   "explain": "Biopsy-proven non-metastatic right-colon adenocarcinoma is treated with <b>oncologic right hemicolectomy and lymphadenectomy</b>; final pathology dictates adjuvant chemotherapy. Hemorrhoids are a diagnosis of exclusion and never explain iron-deficiency anemia until cancer is excluded.",
+   "sys": "GI",
+   "guide": {
+    "f": "Topic_10_Acute_Abdomen_Surgery.html",
+    "t": "10 · Acute Abdomen",
+    "s": "Colorectal cancer"
+   },
+   "difficulty": "easy"
+  },
+  {
+   "id": "gi_q12",
+   "topic": "GI IV · Liver",
+   "stem": "A 48-year-old man with heavy alcohol use has jaundice, ascites, and asterixis. ALT 120, AST 290, bilirubin 450 µmol/L, albumin 24, INR 2.9. Paracentesis: SAAG 14, neutrophils 150/mm³. Maddrey discriminant function 65. Most appropriate specific therapy?",
+   "options": [
+    "Ceftriaxone, to treat spontaneous bacterial peritonitis",
+    "Lactulose, to lower ammonia",
+    "Prednisolone, to suppress cytokine-mediated hepatic inflammation",
+    "Spironolactone, to mobilize ascites"
+   ],
+   "correct": 2,
+   "explain": "Severe <b>alcoholic hepatitis</b> (AST:ALT > 2:1, Maddrey ≥ 32) is treated with <b>prednisolone</b> to suppress cytokine-mediated injury. The ascitic neutrophil count is < 250, so there's no SBP contraindicating steroids.",
+   "sys": "GI",
+   "guide": {
+    "f": "Topic_09_Liver_and_Biliary.html",
+    "t": "09 · Liver & Biliary",
+    "s": "Specific liver diseases — alcoholic hepatitis"
+   },
+   "difficulty": "hard"
+  },
+  {
+   "id": "gi_q13",
+   "topic": "GI IV · Liver",
+   "stem": "A 60-year-old with HCV cirrhosis presents with hematemesis, tachycardia, and hypotension. After airway protection and resuscitation, you prepare for urgent endoscopy. Which three drugs should be given before endoscopy?",
+   "options": [
+    "Propranolol, ceftriaxone, pantoprazole",
+    "Octreotide, ceftriaxone, pantoprazole",
+    "Octreotide, lactulose, furosemide",
+    "Vasopressin, norfloxacin, spironolactone"
+   ],
+   "correct": 1,
+   "explain": "For suspected <b>variceal bleeding</b>: <b>octreotide</b> (splanchnic vasoconstriction), <b>ceftriaxone</b> (prophylaxis against SBP/infection improves outcomes), and a <b>PPI/pantoprazole</b> (covers a possible bleeding ulcer) — then urgent band ligation.",
+   "sys": "GI",
+   "guide": {
+    "f": "Topic_11_GI_Bleeding.html",
+    "t": "11 · GI Bleeding",
+    "s": "Variceal bleeding"
+   },
+   "difficulty": "medium"
+  },
+  {
+   "id": "gi_q14",
+   "topic": "GI IV · Liver",
+   "stem": "A 60-year-old man's diagnostic paracentesis reports an ascitic albumin of 34 g/L; his serum albumin is 36 g/L. What is the SAAG and most likely etiology?",
+   "options": [
+    "2 g/L; portal hypertension from cirrhosis",
+    "2 g/L; an exudative process such as malignancy or infection",
+    "70 g/L; a transudative process",
+    "11 g/L; congestive heart failure"
+   ],
+   "correct": 1,
+   "explain": "SAAG = serum − ascitic albumin = 36 − 34 = <b>2 g/L</b>. A SAAG <b>< 11 g/L</b> indicates an <b>exudative</b> process (peritoneal malignancy or infection), not portal hypertension (which gives SAAG ≥ 11).",
+   "sys": "GI",
+   "guide": {
+    "f": "Topic_09_Liver_and_Biliary.html",
+    "t": "09 · Liver & Biliary",
+    "s": "Cirrhosis & complications — SAAG"
+   },
+   "difficulty": "medium"
+  },
+  {
+   "id": "gi_q15",
+   "topic": "GI I · Upper GI",
+   "stem": "A 72-year-old woman has 2 months of new epigastric pain, early satiety, and 6 kg unintentional weight loss. CBC shows microcytic anemia; she denies NSAIDs; her brother died of gastric cancer. Which feature most changes management away from empiric therapy?",
+   "options": [
+    "Epigastric pain",
+    "Early satiety",
+    "Family history, weight loss, and iron-deficiency anemia",
+    "Female sex"
+   ],
+   "correct": 2,
+   "explain": "<b>Alarm features</b> — weight loss, iron-deficiency anemia, age ≥60 with new symptoms, and family history of upper-GI malignancy — warrant <b>prompt endoscopy</b> rather than empiric dyspepsia treatment.",
+   "sys": "GI",
+   "guide": {
+    "f": "Topic_07_Upper_GI.html",
+    "t": "07 · Upper GI",
+    "s": "Dyspepsia & alarm features"
+   },
+   "difficulty": "easy"
+  },
+  {
+   "id": "gi_q16",
+   "topic": "GI I · Upper GI",
+   "stem": "A 52-year-old woman reports difficulty swallowing both solids and liquids from the very onset of her symptoms, with occasional regurgitation of undigested food. Which category of disorder does this pattern suggest?",
+   "options": [
+    "Mechanical obstruction (e.g., peptic stricture)",
+    "Esophageal cancer until proven otherwise",
+    "A motility disorder such as achalasia",
+    "Oropharyngeal dysphagia"
+   ],
+   "correct": 2,
+   "explain": "Dysphagia to <b>solids AND liquids from the start</b> points to an <b>esophageal motility disorder (achalasia)</b>. Trouble with solids first that progresses to liquids suggests a mechanical/structural cause (stricture or, if progressive with weight loss, cancer).",
+   "sys": "GI",
+   "guide": {
+    "f": "Topic_07_Upper_GI.html",
+    "t": "07 · Upper GI",
+    "s": "Dysphagia — achalasia"
+   },
+   "difficulty": "easy"
+  },
+  {
+   "id": "gi_q17",
+   "topic": "GI I · Upper GI",
+   "stem": "A patient with prior peptic ulcer disease is on a daily PPI and you want to confirm H. pylori eradication. What must you do for an accurate urea breath test or stool antigen test?",
+   "options": [
+    "No preparation is needed; PPIs do not affect results",
+    "Stop the PPI before testing, as it can cause false negatives",
+    "Use serology instead, which confirms eradication",
+    "Test only during active GI bleeding"
+   ],
+   "correct": 1,
+   "explain": "<b>PPIs cause false-negative</b> active-infection tests (urea breath/stool antigen), so they should be <b>held before testing</b> when safe. Serology reflects exposure, not active infection or cure.",
+   "sys": "GI",
+   "guide": {
+    "f": "Topic_07_Upper_GI.html",
+    "t": "07 · Upper GI",
+    "s": "H. pylori testing — stop PPI"
+   },
+   "difficulty": "medium"
+  },
+  {
+   "id": "gi_q18",
+   "topic": "GI II · Lower GI",
+   "stem": "An 82-year-old nursing-home resident with dementia and chronic constipation (on iron tablets) develops 'diarrhea' and fecal incontinence, poor appetite, and occasional vomiting. Most likely diagnosis?",
+   "options": [
+    "New-onset IBS-D",
+    "Overflow diarrhea from fecal impaction",
+    "Celiac disease",
+    "Traveler's diarrhea"
+   ],
+   "correct": 1,
+   "explain": "In an older adult with chronic constipation, new 'diarrhea'/incontinence is classically <b>overflow diarrhea from fecal impaction</b>. Iron worsens constipation. Always exclude impaction before labeling true diarrhea.",
+   "sys": "GI",
+   "guide": {
+    "f": "Topic_08_Lower_GI.html",
+    "t": "08 · Lower GI",
+    "s": "Diarrhea approach — overflow"
+   },
+   "difficulty": "easy"
+  },
+  {
+   "id": "gi_q19",
+   "topic": "GI III · Surgery",
+   "stem": "A 48-year-old woman has RUQ pain for 10 hours with fever, nausea, and a positive Murphy sign. WBC is elevated; ultrasound shows gallbladder wall thickening, pericholecystic fluid, and stones. Best management?",
+   "options": [
+    "Elective outpatient cholecystectomy after discharge",
+    "NPO, IV fluids, analgesia, antibiotics, and early laparoscopic cholecystectomy",
+    "Urgent ERCP for duct clearance",
+    "Reassurance — this is biliary colic"
+   ],
+   "correct": 1,
+   "explain": "Pain > 6 h, fever, positive Murphy, leukocytosis, and ultrasound findings = <b>acute cholecystitis</b>. Manage with NPO, IV fluids, analgesia, antibiotics, and <b>early laparoscopic cholecystectomy</b>. ERCP is for CBD stones/cholangitis, not gallbladder-only stones.",
+   "sys": "GI",
+   "guide": {
+    "f": "Topic_09_Liver_and_Biliary.html",
+    "t": "09 · Liver & Biliary",
+    "s": "Gallstone disease — acute cholecystitis"
+   },
+   "difficulty": "easy"
+  },
+  {
+   "id": "gi_q20",
+   "topic": "GI III · Surgery",
+   "stem": "A 60-year-old man has LLQ pain, fever, and localized peritonitis. CT shows sigmoid diverticulitis with fat stranding but no abscess or free air. Best confirmatory test and management principle?",
+   "options": [
+    "Colonoscopy now with biopsy of the inflamed segment",
+    "CT abdomen/pelvis; supportive care with selective antibiotics, then colon evaluation after recovery",
+    "Immediate elective sigmoid colectomy for this first episode",
+    "Diagnostic laparoscopy for all cases"
+   ],
+   "correct": 1,
+   "explain": "<b>CT</b> is the best single test for acute diverticulitis. Manage supportively (selective antibiotics by severity). <b>Avoid colonoscopy acutely</b> (perforation risk), but arrange follow-up colon evaluation after recovery because cancer can mimic diverticulitis.",
+   "sys": "GI",
+   "guide": {
+    "f": "Topic_10_Acute_Abdomen_Surgery.html",
+    "t": "10 · Acute Abdomen",
+    "s": "Diverticulitis"
+   },
+   "difficulty": "easy"
+  },
+  {
+   "id": "gi_q21",
+   "topic": "GI IV · Liver",
+   "stem": "A 54-year-old woman has months of fatigue and intense pruritus, with a history of Sjögren syndrome. Labs: ALT 45, AST 40, ALP 510, GGT 400, bilirubin 18; ultrasound shows no biliary dilation. Which test confirms the diagnosis, and what is first-line treatment?",
+   "options": [
+    "ANA; prednisone",
+    "Anti-mitochondrial antibody (AMA); ursodeoxycholic acid",
+    "Anti-smooth-muscle antibody; azathioprine",
+    "Hepatitis C RNA; sofosbuvir/velpatasvir"
+   ],
+   "correct": 1,
+   "explain": "A <b>cholestatic</b> pattern (high ALP/GGT, near-normal ALT/AST) with fatigue, pruritus, and an autoimmune association is <b>primary biliary cholangitis</b>. <b>AMA</b> is diagnostic; <b>ursodeoxycholic acid</b> is first-line.",
+   "sys": "GI",
+   "guide": {
+    "f": "Topic_09_Liver_and_Biliary.html",
+    "t": "09 · Liver & Biliary",
+    "s": "Specific liver diseases — PBC"
+   },
+   "difficulty": "medium"
+  },
+  {
+   "id": "gi_q22",
+   "topic": "GI IV · Liver",
+   "stem": "A 56-year-old man with alcoholic cirrhosis is brought in for personality change, napping by day and pacing at night, and disorientation to time (but not person/place). On wrist extension he shows a brief, non-rhythmic flexion. West Haven stage?",
+   "options": [
+    "Stage 1",
+    "Stage 2",
+    "Stage 3",
+    "Stage 4"
+   ],
+   "correct": 1,
+   "explain": "Disorientation to time, behavioral/personality change, sleep-wake inversion, and — critically — <b>asterixis</b> mark <b>West Haven Stage 2</b> hepatic encephalopathy. Asterixis first appears at Stage 2.",
+   "sys": "GI",
+   "guide": {
+    "f": "Topic_09_Liver_and_Biliary.html",
+    "t": "09 · Liver & Biliary",
+    "s": "Cirrhosis & complications — encephalopathy staging"
+   },
+   "difficulty": "medium"
+  }
+ ],
+ "cards": [
+  {
+   "id": "g1",
+   "sys": "GI",
+   "topic": "Upper GI",
+   "type": "mcq",
+   "guide": {
+    "f": "Topic_07_Upper_GI.html",
+    "t": "07 · Upper GI",
+    "s": "Dysphagia"
+   },
+   "prompt": "Difficulty swallowing <b>both solids and liquids from the onset</b>, with regurgitation of undigested food. Category?",
+   "options": [
+    "Mechanical obstruction (stricture)",
+    "Esophageal cancer",
+    "Motility disorder (achalasia)",
+    "Oropharyngeal dysphagia"
+   ],
+   "correct": 2,
+   "explain": "Solids <i>and</i> liquids from the start = <b>motility</b> (achalasia). Solids-first then liquids = mechanical/structural."
+  },
+  {
+   "id": "g2",
+   "sys": "GI",
+   "topic": "Upper GI",
+   "type": "cloze",
+   "guide": {
+    "f": "Topic_07_Upper_GI.html",
+    "t": "07 · Upper GI",
+    "s": "H. pylori testing"
+   },
+   "text": "Before a urea breath test or stool antigen for H. pylori, stop the {{PPI}} for about {{2 weeks}}, otherwise you get {{false negatives}}.",
+   "explain": "PPIs suppress the organism enough to make active-infection tests falsely negative."
+  },
+  {
+   "id": "g3",
+   "sys": "GI",
+   "topic": "Upper GI",
+   "type": "match",
+   "guide": {
+    "f": "Topic_07_Upper_GI.html",
+    "t": "07 · Upper GI",
+    "s": "Nausea/vomiting receptors"
+   },
+   "prompt": "Match antiemetic to its receptor target:",
+   "pairs": [
+    [
+     "Ondansetron",
+     "5-HT3"
+    ],
+    [
+     "Metoclopramide",
+     "D2"
+    ],
+    [
+     "Dimenhydrinate",
+     "H1 / M1 (vestibular)"
+    ],
+    [
+     "Aprepitant",
+     "NK1"
+    ]
+   ],
+   "explain": "Receptor-target matching is the basis for choosing antiemetics by cause."
+  },
+  {
+   "id": "g4",
+   "sys": "GI",
+   "topic": "Lower GI",
+   "type": "mcq",
+   "guide": {
+    "f": "Topic_08_Lower_GI.html",
+    "t": "08 · Lower GI",
+    "s": "Diarrhea approach"
+   },
+   "prompt": "Bloody diarrhea with fever after undercooked chicken, 10 stools/day. Which is contraindicated?",
+   "options": [
+    "Oral rehydration",
+    "Stool studies",
+    "Loperamide",
+    "IV fluids"
+   ],
+   "correct": 2,
+   "explain": "Anti-motility agents in invasive/inflammatory (bloody, febrile) diarrhea risk toxic megacolon / prolonged infection — <b>avoid loperamide</b>."
+  },
+  {
+   "id": "g5",
+   "sys": "GI",
+   "topic": "Lower GI",
+   "type": "match",
+   "guide": {
+    "f": "Topic_08_Lower_GI.html",
+    "t": "08 · Lower GI",
+    "s": "IBD — Crohn vs UC"
+   },
+   "prompt": "Assign each feature to Crohn or UC:",
+   "pairs": [
+    [
+     "Skip lesions, mouth-to-anus",
+     "Crohn"
+    ],
+    [
+     "Continuous from the rectum",
+     "UC"
+    ],
+    [
+     "Transmural — fistulae & strictures",
+     "Crohn"
+    ],
+    [
+     "Colectomy is curative",
+     "UC"
+    ]
+   ],
+   "explain": "Crohn = patchy, transmural, complicated; UC = continuous, mucosal, curable by colectomy."
+  },
+  {
+   "id": "g6",
+   "sys": "GI",
+   "topic": "Lower GI",
+   "type": "cloze",
+   "guide": {
+    "f": "Topic_08_Lower_GI.html",
+    "t": "08 · Lower GI",
+    "s": "Absorption sites"
+   },
+   "text": "The terminal ileum absorbs {{B12}} and {{bile acids}}, so ileal Crohn or resection causes B12 deficiency and {{bile-acid}} (or fat) malabsorption.",
+   "explain": "Large ileal resection depletes the bile-acid pool → steatorrhea; cholestyramine helps bile-acid diarrhea."
+  },
+  {
+   "id": "g7",
+   "sys": "GI",
+   "topic": "GI Bleeding",
+   "type": "order",
+   "guide": {
+    "f": "Topic_11_GI_Bleeding.html",
+    "t": "11 · GI Bleeding",
+    "s": "Variceal bleeding"
+   },
+   "prompt": "Order the management of a variceal bleed:",
+   "items": [
+    "Resuscitate (airway, 2 large IVs, restrictive transfusion)",
+    "Octreotide + ceftriaxone + PPI",
+    "Endoscopic band ligation",
+    "TIPS / balloon tamponade as rescue"
+   ],
+   "explain": "Ceftriaxone improves survival in cirrhotic GI bleeds; the β-blocker is prophylaxis, not for the acute bleed."
+  },
+  {
+   "id": "g8",
+   "sys": "GI",
+   "topic": "Liver & Biliary",
+   "type": "mcq",
+   "guide": {
+    "f": "Topic_09_Liver_and_Biliary.html",
+    "t": "09 · Liver & Biliary",
+    "s": "Hepatobiliary emergencies"
+   },
+   "prompt": "RUQ pain, jaundice, fever, PLUS hypotension and confusion, with dilated ducts and stones. Diagnosis & definitive step?",
+   "options": [
+    "Acute cholecystitis → cholecystectomy",
+    "Ascending cholangitis → urgent ERCP",
+    "Biliary colic → elective surgery",
+    "Gallstone pancreatitis → NPO only"
+   ],
+   "correct": 1,
+   "explain": "Charcot triad + hypotension/AMS = Reynolds pentad = <b>ascending cholangitis</b> → resuscitate, antibiotics, <b>urgent ERCP</b> decompression."
+  },
+  {
+   "id": "g9",
+   "sys": "GI",
+   "topic": "Acute Abdomen",
+   "type": "qa",
+   "guide": {
+    "f": "Topic_10_Acute_Abdomen_Surgery.html",
+    "t": "10 · Acute Abdomen",
+    "s": "Mesenteric ischemia"
+   },
+   "prompt": "An elderly patient with atrial fibrillation has severe abdominal pain but a soft, near-normal exam. What must you suspect, and why the mismatch?",
+   "answer": "<b>Acute mesenteric ischemia</b> (embolic, from AF). Early on the visceral ischemia causes severe pain while peritoneal signs are minimal — \"<b>pain out of proportion to exam</b>\" — until infarction/peritonitis develops. Get CT angiography and lactate; it's a surgical/revascularization emergency.",
+   "explain": "AF + pain-out-of-proportion is the classic embolic mesenteric ischemia stem."
+  },
+  {
+   "id": "g10",
+   "sys": "GI",
+   "topic": "Acute Abdomen",
+   "type": "cloze",
+   "guide": {
+    "f": "Topic_10_Acute_Abdomen_Surgery.html",
+    "t": "10 · Acute Abdomen",
+    "s": "Acute pancreatitis"
+   },
+   "text": "Acute pancreatitis = any 2 of 3: epigastric pain to the back, {{lipase}} above 3× ULN, and imaging. The two commonest causes are {{gallstones}} and {{alcohol}}.",
+   "explain": "Management is aggressive fluids, analgesia, early enteral feeding; antibiotics only for infected necrosis."
+  },
+  {
+   "id": "g11",
+   "sys": "GI",
+   "topic": "Liver & Biliary",
+   "type": "mcq",
+   "guide": {
+    "f": "Topic_09_Liver_and_Biliary.html",
+    "t": "09 · Liver & Biliary",
+    "s": "Cirrhosis & complications — SAAG"
+   },
+   "prompt": "Serum albumin 36, ascitic albumin 22 g/L. SAAG and most likely mechanism?",
+   "options": [
+    "14 → portal hypertension",
+    "14 → malignancy",
+    "2 → portal hypertension",
+    "2 → tuberculous peritonitis"
+   ],
+   "correct": 0,
+   "explain": "SAAG = 36 − 22 = <b>14 (≥11)</b> → <b>portal hypertension</b> (transudate). A SAAG < 11 points to malignancy or infection."
+  },
+  {
+   "id": "g12",
+   "sys": "GI",
+   "topic": "Liver & Biliary",
+   "type": "match",
+   "guide": {
+    "f": "Topic_09_Liver_and_Biliary.html",
+    "t": "09 · Liver & Biliary",
+    "s": "Hep B serology"
+   },
+   "prompt": "Match each Hep B result to its meaning:",
+   "pairs": [
+    [
+     "HBsAg positive",
+     "Active infection"
+    ],
+    [
+     "Anti-HBs positive",
+     "Immunity"
+    ],
+    [
+     "Anti-HBc IgM only",
+     "Acute / window period"
+    ],
+    [
+     "Anti-HBs alone (no anti-HBc)",
+     "Vaccinated"
+    ]
+   ],
+   "explain": "In the window period only anti-HBc IgM is positive; isolated anti-HBs means vaccination."
+  },
+  {
+   "id": "g13",
+   "sys": "GI",
+   "topic": "Liver & Biliary",
+   "type": "cloze",
+   "guide": {
+    "f": "Topic_09_Liver_and_Biliary.html",
+    "t": "09 · Liver & Biliary",
+    "s": "Specific liver diseases"
+   },
+   "text": "Severe alcoholic hepatitis shows an AST:ALT ratio above {{2}}:1; a Maddrey discriminant function ≥ {{32}} is treated with {{prednisolone}} (unless active infection or GI bleeding).",
+   "explain": "AST rarely exceeds a few hundred in alcohol — transaminases in the thousands mean ischemia, virus, or toxin."
+  }
+ ],
+ "guides": [
+  {
+   "file": "Topic_07_Upper_GI.html",
+   "title": "Topic 07 Upper GI",
+   "html": "<!-- Topic Reference · UPPER GI (detailed) -->\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#7c2d2d;--accent2:#9a5a2a;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.4;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:13px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:31px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.printbtn{font-family:'IBM Plex Sans';font-weight:600;font-size:12px;background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:8px 16px;cursor:pointer;margin-top:6px}\n.printbtn:hover{background:var(--accent)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(128,128,128,.10);padding:10px 13px;margin-bottom:12px}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:7px}\n.band.emerg{border-color:var(--hi);background:rgba(162,59,46,.10)}.band.emerg .t{color:var(--hi)}\ntable{width:100%;border-collapse:collapse;font-size:11.4px}\nth,td{text-align:left;padding:3px 8px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.6px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600}\ntd:first-child{font-weight:600;white-space:nowrap}\n.physio{columns:2;column-gap:24px;font-size:11.5px}.physio div{break-inside:avoid;margin-bottom:4px}.physio b{color:var(--ink)}\n.emerg .grid2{columns:2;column-gap:22px;font-size:11.4px}.emerg .grid2 div{break-inside:avoid;margin-bottom:4px}.emerg b{color:var(--hi)}\n.cols{column-count:2;column-gap:16px}@media(max-width:700px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(128,128,128,.10);padding:9px 11px 8px;margin:0 0 12px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 7px;padding-bottom:5px;border-bottom:1.5px solid var(--line);color:var(--accent)}\n.row{margin:0 0 4px;font-size:11.6px;line-height:1.38}\n.row .tg{font-weight:600;color:var(--ink)}.row .ar{color:var(--soft)}.row .ar::before{content:\"→ \";color:var(--accent);font-weight:600}\n.lead{font-weight:600;color:var(--ink);display:block;margin:7px 0 3px;font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-family:'IBM Plex Mono',monospace;color:var(--accent2)}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:6px 0}\n.callout{border-left:3px solid var(--accent);background:rgba(128,128,128,.10);padding:7px 10px;border-radius:0 5px 5px 0;margin:5px 0 6px}\n.callout .h{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:3px}\n.foot{margin-top:6px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:portrait;margin:8mm}body{background:#fff;font-size:8.7px}.page{max-width:none;padding:0}.printbtn{display:none}.card,.band{margin-bottom:7px;background:#fff;border-color:#bbb}.card{padding:6px 8px}.card h2{font-size:8.3px;margin-bottom:5px}.row{font-size:8px;margin-bottom:2.5px;line-height:1.28}.head h1{font-size:22px}table{font-size:7.9px}.physio,.emerg .grid2{font-size:7.9px}}\n</style>\n\n<div class=\"page\">\n  <div class=\"head\">\n    <div class=\"l\"><div class=\"k\">◇ Topic Reference · 07 ◇</div><h1>Upper GI</h1></div>\n    <div class=\"r\">GI I · ~2 pp<br>trigger&nbsp;<span style=\"color:var(--accent)\">→</span>&nbsp;answer<br><button class=\"printbtn\" onclick=\"window.print()\">⎙ Print / Save PDF</button></div>\n  </div>\n\n  <div class=\"band\">\n    <div class=\"t\">Physiology & the master switch: alarm features</div>\n    <div class=\"physio\">\n      <div><b>Acid:</b> parietal cells secrete H⁺ via the <b>H⁺/K⁺-ATPase</b> (PPI target), driven by gastrin, histamine (H2), ACh. Mucosal defense = mucus/bicarbonate + <b>prostaglandins</b> (why NSAIDs ulcerate).</div>\n      <div><b>Alarm features</b> (\"VBAD-W\") that mandate <b>endoscopy</b> over empiric therapy: <b>V</b>omiting (persistent), <b>B</b>leeding/anemia, <b>A</b>ge ≥60 with new symptoms, <b>D</b>ysphagia/odynophagia, <b>W</b>eight loss.</div>\n      <div><b>Dysphagia logic:</b> solids→then liquids = <b>mechanical</b>; solids AND liquids from onset = <b>motility</b>. Transfer difficulty/cough on swallow = <b>oropharyngeal</b>.</div>\n      <div><b>Antiemetic targets:</b> 5-HT3 (chemo/GI), D2 (CTZ), H1/M1 (vestibular), NK1 (chemo).</div>\n    </div>\n  </div>\n\n  <div class=\"band emerg\">\n    <div class=\"t\">★ Upper-GI emergencies</div>\n    <div class=\"grid2\">\n      <div><b>Perforated peptic ulcer</b> — sudden severe epigastric pain, rigid \"board-like\" abdomen, <b>free air under diaphragm</b>. Resuscitate, IV PPI + antibiotics, urgent <b>surgery</b>. (Anterior duodenal ulcers perforate; posterior ones bleed from the gastroduodenal artery.)</div>\n      <div><b>Boerhaave (esophageal rupture)</b> — forceful vomiting → transmural tear: severe chest/epigastric pain, subcutaneous emphysema, ± left pleural effusion (Mackler triad). CT/contrast study; <b>surgical/emergency</b> management. (Contrast with the mucosal-only <b>Mallory-Weiss</b> tear, which usually self-limits.)</div>\n    </div>\n  </div>\n\n  <div class=\"cols\">\n    <div class=\"card\">\n      <h2>GERD</h2>\n      <div class=\"row\"><span class=\"tg\">Typical</span> <span class=\"ar\">heartburn + acid regurgitation, worse supine/postprandial</span></div>\n      <div class=\"row\"><span class=\"tg\">Diagnose</span> <span class=\"ar\">clinical if no alarm features → trial PPI + lifestyle (weight loss, head-of-bed elevation, avoid late/large meals & triggers)</span></div>\n      <div class=\"row\"><span class=\"tg\">Endoscopy if</span> <span class=\"ar\">alarm features or refractory</span></div>\n      <div class=\"row\"><span class=\"tg\">Complications</span> <span class=\"ar\">erosive esophagitis, peptic stricture, <b>Barrett esophagus</b> (intestinal metaplasia → adenocarcinoma → surveillance)</span></div>\n      <div class=\"row\"><span class=\"tg\">Refractory</span> <span class=\"ar\">pH-impedance + manometry; consider fundoplication</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Dyspepsia & H. pylori</h2>\n      <div class=\"row\"><span class=\"tg\">&lt;60, no alarm</span> <span class=\"ar\"><b>test-and-treat H. pylori</b> (urea breath / stool antigen) or empiric PPI</span></div>\n      <div class=\"row\"><span class=\"tg\">≥60 or alarm</span> <span class=\"ar\">upper endoscopy</span></div>\n      <div class=\"row\"><span class=\"tg\">Functional dyspepsia</span> <span class=\"ar\">symptoms with normal endoscopy</span></div>\n      <div class=\"callout\">\n        <div class=\"h\">H. pylori testing rules</div>\n        <div class=\"row\"><span class=\"tg\">Stop PPI ~2 wk before</span> <span class=\"ar\">urea breath/stool antigen (false negatives)</span></div>\n        <div class=\"row\"><span class=\"tg\">Treat</span> <span class=\"ar\">quadruple / clarithromycin-based triple therapy; <b>confirm eradication</b> after</span></div>\n      </div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Peptic ulcer disease</h2>\n      <div class=\"row\"><span class=\"tg\">Duodenal</span> <span class=\"ar\">commoner, <b>H. pylori ~90%</b>, pain <b>relieved by food</b>, younger</span></div>\n      <div class=\"row\"><span class=\"tg\">Gastric</span> <span class=\"ar\"><b>NSAIDs</b>, pain <b>worse with food</b>, weight loss — <b>biopsy to exclude malignancy</b></span></div>\n      <div class=\"row\"><span class=\"tg\">Zollinger-Ellison</span> <span class=\"ar\">gastrinoma — multiple/refractory/distal ulcers, diarrhea, ↑gastrin; MEN1</span></div>\n      <div class=\"row\"><span class=\"tg\">Complications</span> <span class=\"ar\">bleeding (posterior duodenal → GDA), perforation (anterior → free air), gastric outlet obstruction</span></div>\n      <div class=\"row\"><span class=\"tg\">Treat</span> <span class=\"ar\">PPI, eradicate H. pylori, stop NSAIDs</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Dysphagia — sorting it out</h2>\n      <div class=\"row\"><span class=\"tg\">Oropharyngeal</span> <span class=\"ar\">trouble initiating, cough/choke/aspiration — neuromuscular (stroke, Parkinson, myasthenia, ALS)</span></div>\n      <hr class=\"mini\">\n      <span class=\"lead\">Esophageal — mechanical (solids first)</span>\n      <div class=\"row\"><span class=\"tg\">Peptic stricture</span> <span class=\"ar\">GERD history, progressive</span></div>\n      <div class=\"row\"><span class=\"tg\">Schatzki ring</span> <span class=\"ar\">intermittent solid food (steakhouse) dysphagia</span></div>\n      <div class=\"row\"><span class=\"tg\">Cancer</span> <span class=\"ar\"><b>progressive + weight loss</b>, age/smoking/alcohol (SCC) or Barrett (adeno)</span></div>\n      <div class=\"row\"><span class=\"tg\">Eosinophilic esophagitis</span> <span class=\"ar\">young, atopic, food impaction; rings on EGD</span></div>\n      <hr class=\"mini\">\n      <span class=\"lead\">Esophageal — motility (solids + liquids)</span>\n      <div class=\"row\"><span class=\"tg\">Achalasia</span> <span class=\"ar\">LES won't relax + aperistalsis; <b>bird-beak</b> on barium, manometry; treat pneumatic dilation/myotomy/botox. Exclude <b>pseudoachalasia</b> (GEJ tumor)</span></div>\n      <div class=\"row\"><span class=\"tg\">Others</span> <span class=\"ar\">diffuse esophageal spasm, scleroderma</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Nausea/vomiting & gastroparesis</h2>\n      <div class=\"row\"><span class=\"tg\">5-HT3 antagonist</span> <span class=\"ar\">ondansetron — chemo/post-op/GI (QT)</span></div>\n      <div class=\"row\"><span class=\"tg\">D2 antagonist</span> <span class=\"ar\">metoclopramide (also prokinetic; tardive dyskinesia), prochlorperazine, haloperidol; <b>domperidone</b> (less CNS)</span></div>\n      <div class=\"row\"><span class=\"tg\">H1/M1</span> <span class=\"ar\">dimenhydrinate, scopolamine — vestibular/motion</span></div>\n      <div class=\"row\"><span class=\"tg\">NK1</span> <span class=\"ar\">aprepitant — chemo</span></div>\n      <hr class=\"mini\">\n      <div class=\"row\"><span class=\"tg\">Gastroparesis</span> <span class=\"ar\">diabetic; vomiting undigested food, early satiety; <b>gastric emptying study</b>; prokinetics (domperidone/metoclopramide/erythromycin) + dietary changes</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Pitfalls</h2>\n      <div class=\"row\"><span class=\"tg\">Gastric ulcer</span> <span class=\"ar\">always biopsy — exclude malignancy</span></div>\n      <div class=\"row\"><span class=\"tg\">Stop PPI</span> <span class=\"ar\">before H. pylori breath/stool testing</span></div>\n      <div class=\"row\"><span class=\"tg\">New dyspepsia ≥60</span> <span class=\"ar\">scope, don't just treat</span></div>\n      <div class=\"row\"><span class=\"tg\">Solids+liquids from onset</span> <span class=\"ar\">motility (achalasia) — but exclude GEJ cancer</span></div>\n      <div class=\"row\"><span class=\"tg\">Don't forget Barrett</span> <span class=\"ar\">surveillance after chronic GERD</span></div>\n    </div>\n  </div>\n  <div class=\"foot\">Topic 07 / Upper GI (detailed) · generated from your 11-week guides · verify against course &amp; clinical guidelines · review aid only</div>\n</div>\n"
+  },
+  {
+   "file": "Topic_08_Lower_GI.html",
+   "title": "Topic 08 Lower GI",
+   "html": "<!-- Topic Reference · LOWER GI (detailed) -->\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#7c2d2d;--accent2:#9a5a2a;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.4;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:13px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:31px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.printbtn{font-family:'IBM Plex Sans';font-weight:600;font-size:12px;background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:8px 16px;cursor:pointer;margin-top:6px}\n.printbtn:hover{background:var(--accent)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(128,128,128,.10);padding:10px 13px;margin-bottom:12px}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:7px}\n.band.emerg{border-color:var(--hi);background:rgba(162,59,46,.10)}.band.emerg .t{color:var(--hi)}\ntable{width:100%;border-collapse:collapse;font-size:11.4px}\nth,td{text-align:left;padding:3px 8px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.6px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600}\ntd:first-child{font-weight:600;white-space:nowrap}\n.physio{columns:2;column-gap:24px;font-size:11.5px}.physio div{break-inside:avoid;margin-bottom:4px}.physio b{color:var(--ink)}\n.emerg .grid2{columns:2;column-gap:22px;font-size:11.4px}.emerg .grid2 div{break-inside:avoid;margin-bottom:4px}.emerg b{color:var(--hi)}\n.cols{column-count:2;column-gap:16px}@media(max-width:700px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(128,128,128,.10);padding:9px 11px 8px;margin:0 0 12px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 7px;padding-bottom:5px;border-bottom:1.5px solid var(--line);color:var(--accent)}\n.row{margin:0 0 4px;font-size:11.6px;line-height:1.38}\n.row .tg{font-weight:600;color:var(--ink)}.row .ar{color:var(--soft)}.row .ar::before{content:\"→ \";color:var(--accent);font-weight:600}\n.lead{font-weight:600;color:var(--ink);display:block;margin:7px 0 3px;font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-family:'IBM Plex Mono',monospace;color:var(--accent2)}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:6px 0}\n.foot{margin-top:6px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:portrait;margin:8mm}body{background:#fff;font-size:8.7px}.page{max-width:none;padding:0}.printbtn{display:none}.card,.band{margin-bottom:7px;background:#fff;border-color:#bbb}.card{padding:6px 8px}.card h2{font-size:8.3px;margin-bottom:5px}.row{font-size:8px;margin-bottom:2.5px;line-height:1.28}.head h1{font-size:22px}table{font-size:7.9px}.physio,.emerg .grid2{font-size:7.9px}}\n</style>\n\n<div class=\"page\">\n  <div class=\"head\">\n    <div class=\"l\"><div class=\"k\">◇ Topic Reference · 08 ◇</div><h1>Lower GI — Diarrhea · Malabsorption · IBD</h1></div>\n    <div class=\"r\">GI II · ~2 pp<br>trigger&nbsp;<span style=\"color:var(--accent)\">→</span>&nbsp;answer<br><button class=\"printbtn\" onclick=\"window.print()\">⎙ Print / Save PDF</button></div>\n  </div>\n\n  <div class=\"band\">\n    <div class=\"t\">Where things are absorbed (predicts the deficiency)</div>\n    <div class=\"physio\">\n      <div><b>Duodenum:</b> iron, calcium → <b>celiac → iron-deficiency anemia</b>.</div>\n      <div><b>Jejunum:</b> most nutrients, folate.</div>\n      <div><b>Terminal ileum:</b> <b>B12 + bile acids</b> → Crohn/resection → B12 deficiency + bile-acid (or fat) malabsorption.</div>\n      <div><b>Colon:</b> water/electrolytes. <b>Osmotic</b> diarrhea stops with fasting (↑stool osmotic gap); <b>secretory</b> persists fasting (large volume); <b>inflammatory</b> = blood/pus.</div>\n    </div>\n  </div>\n\n  <div class=\"band emerg\">\n    <div class=\"t\">★ Lower-GI emergencies</div>\n    <div class=\"grid2\">\n      <div><b>Toxic megacolon</b> — colonic dilation &gt;6 cm + systemic toxicity (fever, tachycardia, ↑WBC), in severe UC or C. difficile. <b>Avoid anti-motility agents/opioids.</b> IV fluids, steroids (if IBD)/antibiotics, decompression; <b>surgery (colectomy)</b> if no improvement or perforation.</div>\n      <div><b>EHEC O157:H7 → HUS</b> — bloody diarrhea + microangiopathic hemolytic anemia, thrombocytopenia, AKI. <b>Do NOT give antibiotics or anti-motility agents</b> (↑ Shiga toxin release / HUS risk); supportive care.</div>\n    </div>\n  </div>\n\n  <div class=\"cols\">\n    <div class=\"card\">\n      <h2>Diarrhea — the approach</h2>\n      <div class=\"row\"><span class=\"tg\">Acute (&lt;2 wk)</span> <span class=\"ar\">usually infectious; rehydrate</span></div>\n      <div class=\"row\"><span class=\"tg\">Watery/non-inflammatory</span> <span class=\"ar\">norovirus, ETEC (traveler's), viral, food toxins — supportive ± loperamide OK</span></div>\n      <div class=\"row\"><span class=\"tg\">Bloody/inflammatory</span> <span class=\"ar\">Shigella, Salmonella, Campylobacter, EHEC, C. diff, Entamoeba — <b>avoid loperamide</b>, stool studies</span></div>\n      <div class=\"row\"><span class=\"tg\">Chronic (&gt;4 wk)</span> <span class=\"ar\">osmotic (fasting-responsive), secretory (large-volume, persists fasting), inflammatory (calprotectin↑, scope), fatty/steatorrhea</span></div>\n      <div class=\"row\"><span class=\"tg\">Overflow</span> <span class=\"ar\">elderly + constipation/impaction presenting as \"diarrhea\"</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Malabsorption</h2>\n      <div class=\"row\"><span class=\"tg\">Celiac</span> <span class=\"ar\">gluten → duodenal villous atrophy; iron-def anemia, dermatitis herpetiformis; <b>tTG-IgA + total IgA on gluten</b> → biopsy; assoc T1DM/thyroid/IgA def; ↑lymphoma; lifelong GFD</span></div>\n      <div class=\"row\"><span class=\"tg\">Lactose intolerance</span> <span class=\"ar\">osmotic diarrhea/bloating after dairy</span></div>\n      <div class=\"row\"><span class=\"tg\">SIBO</span> <span class=\"ar\">bloating; <b>low B12, high folate</b>; breath test; antibiotics</span></div>\n      <div class=\"row\"><span class=\"tg\">Bile-acid malabsorption</span> <span class=\"ar\">ileal disease/resection → watery diarrhea → cholestyramine</span></div>\n      <div class=\"row\"><span class=\"tg\">Pancreatic insufficiency</span> <span class=\"ar\">chronic pancreatitis/CF → steatorrhea, ↓fecal elastase → enzyme replacement</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>IBD — Crohn vs UC</h2>\n      <table>\n        <tr><th></th><th>Crohn</th><th>UC</th></tr>\n        <tr><td>Distribution</td><td class=\"nl\">mouth→anus, <b>skip lesions</b>, TI/right</td><td class=\"nl\"><b>continuous</b> from rectum</td></tr>\n        <tr><td>Depth</td><td class=\"nl\"><b>transmural</b> (fistula/stricture/abscess)</td><td class=\"nl\">mucosal</td></tr>\n        <tr><td>Stool</td><td class=\"nl\">± blood, malabsorption</td><td class=\"nl\"><b>bloody</b> + tenesmus</td></tr>\n        <tr><td>Smoking</td><td class=\"nl\">worsens</td><td class=\"nl\">protective</td></tr>\n        <tr><td>Cure</td><td class=\"nl\">no (surgery for complications)</td><td class=\"nl\"><b>colectomy curative</b></td></tr>\n        <tr><td>Other</td><td class=\"nl\">granulomas, cobblestone, gallstones/oxalate stones, B12</td><td class=\"nl\">toxic megacolon, ↑CRC, PSC</td></tr>\n      </table>\n      <div class=\"row\" style=\"margin-top:5px\"><span class=\"tg\">Extraintestinal</span> <span class=\"ar\">arthritis, erythema nodosum, pyoderma gangrenosum, uveitis/episcleritis, PSC, ankylosing spondylitis</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>IBD — work-up & treatment</h2>\n      <div class=\"row\"><span class=\"tg\">Work-up</span> <span class=\"ar\">fecal calprotectin, colonoscopy + biopsy, cross-sectional imaging (Crohn)</span></div>\n      <div class=\"row\"><span class=\"tg\">5-ASA</span> <span class=\"ar\">mild UC induction/maintenance</span></div>\n      <div class=\"row\"><span class=\"tg\">Corticosteroids</span> <span class=\"ar\"><b>induction ONLY</b> — not maintenance (osteoporosis, adrenal suppression, infection, AVN)</span></div>\n      <div class=\"row\"><span class=\"tg\">Immunomodulators</span> <span class=\"ar\">azathioprine/6-MP, methotrexate (maintenance)</span></div>\n      <div class=\"row\"><span class=\"tg\">Biologics</span> <span class=\"ar\">anti-TNF (infliximab/adalimumab), vedolizumab, ustekinumab — screen TB/HepB first</span></div>\n      <div class=\"row\"><span class=\"tg\">Surgery</span> <span class=\"ar\">UC → curative colectomy; Crohn → for strictures/fistulae/abscess (recurs)</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>IBS · C. difficile · pitfalls</h2>\n      <span class=\"lead\">IBS (Rome IV)</span>\n      <div class=\"row\"><span class=\"tg\">Criteria</span> <span class=\"ar\">recurrent abdominal pain ≥1 day/wk ×3 mo + ≥2 of (defecation-related, change in frequency, change in form); <b>no alarm features</b></span></div>\n      <div class=\"row\"><span class=\"tg\">Treat</span> <span class=\"ar\">low-FODMAP, fiber, antispasmodics; loperamide (IBS-D), laxatives/linaclotide (IBS-C), TCA/SSRI</span></div>\n      <hr class=\"mini\">\n      <span class=\"lead\">C. difficile</span>\n      <div class=\"row\"><span class=\"tg\">Risk</span> <span class=\"ar\">recent antibiotics (clindamycin, fluoroquinolones, cephalosporins), healthcare exposure</span></div>\n      <div class=\"row\"><span class=\"tg\">Dx/Tx</span> <span class=\"ar\">stool toxin/PCR; <b>oral vancomycin or fidaxomicin</b>, stop offending antibiotic; recurrent → fecal transplant</span></div>\n      <hr class=\"mini\">\n      <span class=\"lead\">Pitfalls</span>\n      <div class=\"row\"><span class=\"tg\">No antibiotics in EHEC</span> <span class=\"ar\">(HUS risk); no loperamide in bloody diarrhea</span></div>\n      <div class=\"row\"><span class=\"tg\">Calprotectin</span> <span class=\"ar\">separates inflammatory (IBD) from functional (IBS)</span></div>\n      <div class=\"row\"><span class=\"tg\">Steroids ≠ maintenance</span> <span class=\"ar\">in IBD</span></div>\n    </div>\n  </div>\n  <div class=\"foot\">Topic 08 / Lower GI (detailed) · generated from your 11-week guides · verify against course &amp; clinical guidelines · review aid only</div>\n</div>\n"
+  },
+  {
+   "file": "Topic_09_Liver_and_Biliary.html",
+   "title": "Topic 09 Liver and Biliary",
+   "html": "<!-- Topic Reference · LIVER & BILIARY (detailed) -->\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#7c2d2d;--accent2:#9a5a2a;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.4;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:13px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:31px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.printbtn{font-family:'IBM Plex Sans';font-weight:600;font-size:12px;background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:8px 16px;cursor:pointer;margin-top:6px}\n.printbtn:hover{background:var(--accent)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(128,128,128,.10);padding:10px 13px;margin-bottom:12px}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:7px}\n.band.emerg{border-color:var(--hi);background:rgba(162,59,46,.10)}.band.emerg .t{color:var(--hi)}\ntable{width:100%;border-collapse:collapse;font-size:11.4px}\nth,td{text-align:left;padding:3px 8px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.6px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600}\ntd:first-child{font-weight:600;white-space:nowrap}\n.physio{columns:2;column-gap:24px;font-size:11.5px}.physio div{break-inside:avoid;margin-bottom:4px}.physio b{color:var(--ink)}\n.emerg .grid3{columns:3;column-gap:18px;font-size:11.2px}.emerg .grid3 div{break-inside:avoid;margin-bottom:4px}.emerg b{color:var(--hi)}\n.cols{column-count:2;column-gap:16px}@media(max-width:700px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(128,128,128,.10);padding:9px 11px 8px;margin:0 0 12px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 7px;padding-bottom:5px;border-bottom:1.5px solid var(--line);color:var(--accent)}\n.row{margin:0 0 4px;font-size:11.6px;line-height:1.38}\n.row .tg{font-weight:600;color:var(--ink)}.row .ar{color:var(--soft)}.row .ar::before{content:\"→ \";color:var(--accent);font-weight:600}\n.lead{font-weight:600;color:var(--ink);display:block;margin:7px 0 3px;font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-family:'IBM Plex Mono',monospace;color:var(--accent2)}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:6px 0}\n.callout{border-left:3px solid var(--accent);background:rgba(128,128,128,.10);padding:7px 10px;border-radius:0 5px 5px 0;margin:5px 0 6px}\n.callout .h{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:3px}\n.foot{margin-top:6px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:portrait;margin:8mm}body{background:#fff;font-size:8.6px}.page{max-width:none;padding:0}.printbtn{display:none}.card,.band{margin-bottom:7px;background:#fff;border-color:#bbb}.card{padding:6px 8px}.card h2{font-size:8.2px;margin-bottom:5px}.row{font-size:7.9px;margin-bottom:2.4px;line-height:1.26}.head h1{font-size:21px}table{font-size:7.7px}.physio,.emerg .grid3{font-size:7.7px}}\n</style>\n\n<div class=\"page\">\n  <div class=\"head\">\n    <div class=\"l\"><div class=\"k\">◇ Topic Reference · 09 ◇</div><h1>Liver &amp; Biliary</h1></div>\n    <div class=\"r\">GI III + GI IV · ~2–3 pp<br>trigger&nbsp;<span style=\"color:var(--accent)\">→</span>&nbsp;answer<br><button class=\"printbtn\" onclick=\"window.print()\">⎙ Print / Save PDF</button></div>\n  </div>\n\n  <div class=\"band\">\n    <div class=\"t\">Reading LFTs & jaundice</div>\n    <div class=\"physio\">\n      <div><b>Hepatocellular</b> = ↑↑ALT/AST; <b>cholestatic</b> = ↑↑ALP/GGT. Isolated ↑ALP → check GGT to confirm it's liver (vs bone).</div>\n      <div><b>Synthetic function:</b> <b>↑INR is the earliest marker</b> of acute failure; ↓albumin reflects chronicity. AST:ALT &gt;2:1 → alcohol; values in the thousands → ischemia/toxin/virus.</div>\n      <div><b>Unconjugated (indirect)</b> hyperbilirubinemia: hemolysis, Gilbert, ineffective erythropoiesis — <b>no bilirubin in urine</b>.</div>\n      <div><b>Conjugated (direct):</b> hepatocellular or obstructive — dark urine; <b>pale stools + dark urine = obstruction</b>.</div>\n    </div>\n  </div>\n\n  <div class=\"band emerg\">\n    <div class=\"t\">★ Hepatobiliary emergencies</div>\n    <div class=\"grid3\">\n      <div><b>Variceal hemorrhage</b> — resuscitate + airway → <b>octreotide + ceftriaxone + PPI</b> → urgent band ligation; balloon tamponade/TIPS as rescue. (β-blocker is <i>prophylaxis</i>, not for the acute bleed.)</div>\n      <div><b>Ascending cholangitis</b> — Charcot (fever/RUQ/jaundice) ± Reynolds (hypotension/AMS) → resuscitate + broad antibiotics + <b>urgent ERCP</b> decompression.</div>\n      <div><b>Acute liver failure</b> — encephalopathy + coagulopathy (no prior cirrhosis); <b>acetaminophen</b> #1 → <b>NAC</b>; King's College criteria for transplant.</div>\n    </div>\n  </div>\n\n  <div class=\"cols\">\n    <div class=\"card\">\n      <h2>Viral hepatitis</h2>\n      <div class=\"row\"><span class=\"tg\">A</span> <span class=\"ar\">fecal-oral; acute only, no chronic; HAV IgM = acute</span></div>\n      <div class=\"row\"><span class=\"tg\">E</span> <span class=\"ar\">fecal-oral; fulminant in pregnancy</span></div>\n      <div class=\"row\"><span class=\"tg\">B</span> <span class=\"ar\">blood/sexual/vertical; can become chronic → cirrhosis/HCC</span></div>\n      <div class=\"row\"><span class=\"tg\">C</span> <span class=\"ar\">blood; often chronic; Ab → confirm RNA; <b>DAAs cure</b></span></div>\n      <div class=\"row\"><span class=\"tg\">D</span> <span class=\"ar\">needs HBV co/superinfection</span></div>\n      <div class=\"callout\">\n        <div class=\"h\">Hep B serology</div>\n        <div class=\"row\"><span class=\"tg\">HBsAg</span> <span class=\"ar\">active infection</span></div>\n        <div class=\"row\"><span class=\"tg\">anti-HBs</span> <span class=\"ar\">immunity (recovery or vaccine)</span></div>\n        <div class=\"row\"><span class=\"tg\">anti-HBc IgM</span> <span class=\"ar\">acute (only marker in window period)</span></div>\n        <div class=\"row\"><span class=\"tg\">HBeAg</span> <span class=\"ar\">high replication/infectivity</span></div>\n        <div class=\"row\"><span class=\"tg\">anti-HBs alone</span> <span class=\"ar\">vaccinated</span></div>\n      </div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Cirrhosis & complications</h2>\n      <div class=\"row\"><span class=\"tg\">Portal HTN</span> <span class=\"ar\">varices, splenomegaly, ascites, caput medusae</span></div>\n      <div class=\"row\"><span class=\"tg\">Ascites — SAAG</span> <span class=\"ar\"><b>≥11 = portal HTN</b> (transudate); &lt;11 = malignancy/infection (exudate). Treat: Na restriction + <b>spironolactone + furosemide</b>; LVP + albumin; refractory → TIPS</span></div>\n      <div class=\"row\"><span class=\"tg\">SBP</span> <span class=\"ar\">ascitic <b>PMN &gt;250</b> → cefotaxime + albumin (prevent HRS); prophylaxis norfloxacin</span></div>\n      <div class=\"row\"><span class=\"tg\">Hepatic encephalopathy</span> <span class=\"ar\">ammonia; precipitants (GI bleed, infection, constipation, electrolytes, sedatives); asterixis = stage 2; <b>lactulose + rifaximin</b></span></div>\n      <div class=\"row\"><span class=\"tg\">Hepatorenal syndrome</span> <span class=\"ar\">functional AKI; albumin + vasoconstrictor (terlipressin); transplant</span></div>\n      <div class=\"row\"><span class=\"tg\">HCC surveillance</span> <span class=\"ar\">US ± AFP q6mo in cirrhosis</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Specific liver diseases</h2>\n      <div class=\"row\"><span class=\"tg\">Alcoholic hepatitis</span> <span class=\"ar\">AST:ALT &gt;2:1; <b>Maddrey ≥32 → prednisolone</b> (not if active infection/GIB)</span></div>\n      <div class=\"row\"><span class=\"tg\">NAFLD/NASH</span> <span class=\"ar\">metabolic syndrome; commonest chronic liver disease → weight loss</span></div>\n      <div class=\"row\"><span class=\"tg\">Autoimmune hepatitis</span> <span class=\"ar\">young ♀, ↑IgG, ANA/ASMA (I) or anti-LKM1 (II) → steroids + azathioprine</span></div>\n      <div class=\"row\"><span class=\"tg\">PBC</span> <span class=\"ar\">middle-aged ♀, pruritus, cholestatic, <b>AMA</b>, ↑IgM → UDCA</span></div>\n      <div class=\"row\"><span class=\"tg\">PSC</span> <span class=\"ar\">♂ + IBD/UC, beaded ducts on MRCP, p-ANCA; ↑cholangiocarcinoma</span></div>\n      <div class=\"row\"><span class=\"tg\">Hemochromatosis</span> <span class=\"ar\">HFE C282Y; ↑ferritin/transferrin sat; bronze diabetes, cardiomyopathy, arthropathy → phlebotomy</span></div>\n      <div class=\"row\"><span class=\"tg\">Wilson</span> <span class=\"ar\">ATP7B; ↓ceruloplasmin, KF rings, neuropsych, hemolysis, young → chelation/zinc</span></div>\n      <div class=\"row\"><span class=\"tg\">A1AT deficiency</span> <span class=\"ar\">liver disease + panacinar emphysema</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Gallstone disease — the spectrum</h2>\n      <div class=\"row\"><span class=\"tg\">Risk</span> <span class=\"ar\">cholesterol stones: female, fat, forty, fertile; pigment: hemolysis</span></div>\n      <div class=\"row\"><span class=\"tg\">Biliary colic</span> <span class=\"ar\">postprandial RUQ pain &lt;6 h, no fever, normal labs → <b>elective lap chole</b></span></div>\n      <div class=\"row\"><span class=\"tg\">Acute cholecystitis</span> <span class=\"ar\">&gt;6 h, fever, <b>Murphy+</b>, leukocytosis, US wall thickening → abx + <b>early lap chole</b></span></div>\n      <div class=\"row\"><span class=\"tg\">Choledocholithiasis</span> <span class=\"ar\">jaundice, dilated CBD, ↑bilirubin/ALP → <b>ERCP then chole</b></span></div>\n      <div class=\"row\"><span class=\"tg\">Ascending cholangitis</span> <span class=\"ar\">Charcot/Reynolds → urgent ERCP (see emergencies)</span></div>\n      <div class=\"row\"><span class=\"tg\">Gallstone pancreatitis</span> <span class=\"ar\">↑lipase; supportive; cholecystectomy same admission</span></div>\n      <div class=\"row\"><span class=\"tg\">Courvoisier</span> <span class=\"ar\">painless jaundice + palpable non-tender gallbladder → <b>malignancy</b> (pancreatic/cholangio)</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Pitfalls</h2>\n      <div class=\"row\"><span class=\"tg\">Window period</span> <span class=\"ar\">only anti-HBc IgM positive (HBsAg gone, anti-HBs not yet up)</span></div>\n      <div class=\"row\"><span class=\"tg\">SAAG direction</span> <span class=\"ar\">≥11 portal HTN; &lt;11 exudate — easy to invert</span></div>\n      <div class=\"row\"><span class=\"tg\">β-blocker</span> <span class=\"ar\">prophylaxis only — use octreotide for the acute variceal bleed</span></div>\n      <div class=\"row\"><span class=\"tg\">Acetaminophen</span> <span class=\"ar\">even \"therapeutic\" doses can injure malnourished/alcoholic livers</span></div>\n      <div class=\"row\"><span class=\"tg\">Transplant</span> <span class=\"ar\">active alcohol/substance use = absolute contraindication</span></div>\n      <div class=\"row\"><span class=\"tg\">Confirm SBP</span> <span class=\"ar\">paracentesis before committing to long antibiotic course</span></div>\n    </div>\n  </div>\n  <div class=\"foot\">Topic 09 / Liver &amp; Biliary (detailed) · generated from your 11-week guides · verify against course &amp; clinical guidelines · review aid only</div>\n</div>\n"
+  },
+  {
+   "file": "Topic_10_Acute_Abdomen_Surgery.html",
+   "title": "Topic 10 Acute Abdomen Surgery",
+   "html": "<!-- Topic Reference · ACUTE ABDOMEN & GI SURGERY (detailed) -->\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#7c2d2d;--accent2:#9a5a2a;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.4;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:13px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:31px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.printbtn{font-family:'IBM Plex Sans';font-weight:600;font-size:12px;background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:8px 16px;cursor:pointer;margin-top:6px}\n.printbtn:hover{background:var(--accent)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(128,128,128,.10);padding:10px 13px;margin-bottom:12px}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:7px}\n.band.emerg{border-color:var(--hi);background:rgba(162,59,46,.10)}.band.emerg .t{color:var(--hi)}\ntable{width:100%;border-collapse:collapse;font-size:11.4px}\nth,td{text-align:left;padding:3px 8px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.6px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600}\ntd:first-child{font-weight:600;white-space:nowrap}\n.physio{columns:2;column-gap:24px;font-size:11.5px}.physio div{break-inside:avoid;margin-bottom:4px}.physio b{color:var(--ink)}\n.emerg .grid3{columns:3;column-gap:18px;font-size:11.2px}.emerg .grid3 div{break-inside:avoid;margin-bottom:4px}.emerg b{color:var(--hi)}\n.cols{column-count:2;column-gap:16px}@media(max-width:700px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(128,128,128,.10);padding:9px 11px 8px;margin:0 0 12px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 7px;padding-bottom:5px;border-bottom:1.5px solid var(--line);color:var(--accent)}\n.row{margin:0 0 4px;font-size:11.6px;line-height:1.38}\n.row .tg{font-weight:600;color:var(--ink)}.row .ar{color:var(--soft)}.row .ar::before{content:\"→ \";color:var(--accent);font-weight:600}\n.lead{font-weight:600;color:var(--ink);display:block;margin:7px 0 3px;font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-family:'IBM Plex Mono',monospace;color:var(--accent2)}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:6px 0}\n.callout{border-left:3px solid var(--hi);background:rgba(162,59,46,.08);padding:7px 10px;border-radius:0 5px 5px 0;margin:5px 0 6px}\n.callout .h{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--hi);font-weight:600;margin-bottom:3px}\n.foot{margin-top:6px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:portrait;margin:8mm}body{background:#fff;font-size:8.6px}.page{max-width:none;padding:0}.printbtn{display:none}.card,.band{margin-bottom:7px;background:#fff;border-color:#bbb}.card{padding:6px 8px}.card h2{font-size:8.2px;margin-bottom:5px}.row{font-size:7.9px;margin-bottom:2.4px;line-height:1.26}.head h1{font-size:21px}table{font-size:7.7px}.physio,.emerg .grid3{font-size:7.7px}}\n</style>\n\n<div class=\"page\">\n  <div class=\"head\">\n    <div class=\"l\"><div class=\"k\">◇ Topic Reference · 10 ◇</div><h1>Acute Abdomen &amp; GI Surgery</h1></div>\n    <div class=\"r\">GI III · ~2 pp<br>trigger&nbsp;<span style=\"color:var(--accent)\">→</span>&nbsp;answer<br><button class=\"printbtn\" onclick=\"window.print()\">⎙ Print / Save PDF</button></div>\n  </div>\n\n  <div class=\"band\">\n    <div class=\"t\">Reading abdominal pain</div>\n    <div class=\"physio\">\n      <div><b>Referred pain by embryonic gut:</b> foregut → epigastric, midgut → periumbilical, hindgut → suprapubic. Pain that <b>migrates &amp; localizes</b> (visceral → parietal) signals peritoneal irritation (e.g., appendicitis).</div>\n      <div><b>Peritonism</b> = rigidity, rebound, guarding, pain on movement/cough → surgical abdomen. <b>Pain out of proportion to a soft exam → mesenteric ischemia.</b></div>\n      <div><b>Always:</b> resuscitate, NPO, analgesia (doesn't mask the exam), labs + lactate, <b>β-hCG</b> in women, erect CXR/CT.</div>\n      <div><b>\"Surgery now\" triggers:</b> free air/perforation, generalized peritonitis, ischemia, closed-loop obstruction, uncontrolled bleeding, septic source needing control.</div>\n    </div>\n  </div>\n\n  <div class=\"band emerg\">\n    <div class=\"t\">★ The acute-abdomen emergencies</div>\n    <div class=\"grid3\">\n      <div><b>Perforation / peritonitis</b> — rigid abdomen + free air → resuscitate, broad antibiotics, urgent <b>laparotomy</b>.</div>\n      <div><b>Intra-abdominal sepsis/septic shock</b> — resuscitate + early antibiotics + <b>source control</b> (drain/operate); don't delay for perfect imaging in refractory shock.</div>\n      <div><b>Acute mesenteric ischemia</b> — pain out of proportion, lactate↑; CT angiography; emergent revascularization/resection. Suspect with <b>AF (embolic)</b>.</div>\n    </div>\n  </div>\n\n  <div class=\"cols\">\n    <div class=\"card\">\n      <h2>Appendicitis</h2>\n      <div class=\"row\"><span class=\"tg\">Classic</span> <span class=\"ar\">periumbilical pain → <b>migrates to RLQ</b> (McBurney), anorexia, nausea, low fever</span></div>\n      <div class=\"row\"><span class=\"tg\">Signs</span> <span class=\"ar\">rebound, Rovsing, psoas, obturator</span></div>\n      <div class=\"row\"><span class=\"tg\">Dx</span> <span class=\"ar\">clinical + CT/US (US in young/pregnant); appendicolith</span></div>\n      <div class=\"row\"><span class=\"tg\">Treat</span> <span class=\"ar\">laparoscopic appendectomy + antibiotics; complicated (abscess) → antibiotics ± drainage, interval appendectomy</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Acute pancreatitis</h2>\n      <div class=\"row\"><span class=\"tg\">Causes</span> <span class=\"ar\"><b>gallstones #1, alcohol #2</b>, hypertriglyceridemia, hypercalcemia, ERCP, drugs (GET SMASHED)</span></div>\n      <div class=\"row\"><span class=\"tg\">Diagnose (2 of 3)</span> <span class=\"ar\">epigastric pain → back · <b>lipase &gt;3× ULN</b> · imaging</span></div>\n      <div class=\"row\"><span class=\"tg\">Severity</span> <span class=\"ar\">organ failure, CRP, BISAP/APACHE; CT for necrosis</span></div>\n      <div class=\"row\"><span class=\"tg\">Manage</span> <span class=\"ar\"><b>aggressive IV fluids</b>, analgesia, <b>early enteral feeding</b>; treat cause (ERCP if cholangitis/obstruction; chole same admission for gallstones)</span></div>\n      <div class=\"row\"><span class=\"tg\">⚠</span> <span class=\"ar\">no prophylactic antibiotics — only infected necrosis. Complications: necrosis, pseudocyst, ARDS, hypocalcemia</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Bowel obstruction</h2>\n      <div class=\"row\"><span class=\"tg\">SBO</span> <span class=\"ar\"><b>adhesions #1</b>, hernias, tumor; colicky pain, bilious vomiting, distension, obstipation; dilated small bowel + air-fluid levels</span></div>\n      <div class=\"row\"><span class=\"tg\">SBO management</span> <span class=\"ar\">NPO, IV fluids, electrolytes, <b>NG decompression</b>, serial exams; surgery if strangulation/closed loop/ischemia/peritonitis</span></div>\n      <div class=\"row\"><span class=\"tg\">LBO</span> <span class=\"ar\"><b>colorectal cancer #1</b>, sigmoid volvulus (coffee-bean → endoscopic detorsion), stricture</span></div>\n      <div class=\"row\"><span class=\"tg\">Ogilvie</span> <span class=\"ar\">colonic pseudo-obstruction (no mechanical cause) → supportive, decompression, <b>neostigmine</b> after excluding obstruction</span></div>\n      <div class=\"callout\">\n        <div class=\"h\">Strangulation = operate</div>\n        <div class=\"row\"><span class=\"tg\">Red flags</span> <span class=\"ar\">constant pain, fever, tachycardia, peritonism, ↑lactate, leukocytosis</span></div>\n      </div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Diverticulitis & mesenteric ischemia</h2>\n      <span class=\"lead\">Diverticulitis</span>\n      <div class=\"row\"><span class=\"tg\">Picture</span> <span class=\"ar\">LLQ pain, fever, leukocytosis; <b>CT diagnostic</b> (Hinchey stage)</span></div>\n      <div class=\"row\"><span class=\"tg\">Manage</span> <span class=\"ar\">bowel rest ± selective antibiotics; abscess → drain; perforation → surgery; <b>avoid acute colonoscopy</b> → scope at ~6 wk to exclude cancer</span></div>\n      <hr class=\"mini\">\n      <span class=\"lead\">Mesenteric ischemia</span>\n      <div class=\"row\"><span class=\"tg\">Acute (small bowel, SMA)</span> <span class=\"ar\">embolic (AF), thrombotic, NOMI (shock/pressors), venous (hypercoagulable); <b>pain out of proportion</b>, acidosis → CT angio, emergency</span></div>\n      <div class=\"row\"><span class=\"tg\">Chronic</span> <span class=\"ar\">postprandial pain, food fear, weight loss (\"intestinal angina\")</span></div>\n      <div class=\"row\"><span class=\"tg\">Ischemic colitis</span> <span class=\"ar\">elderly, <b>watershed (splenic flexure)</b>, crampy pain then bloody diarrhea; usually supportive; surgery if gangrene</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Anorectal · hernias · perioperative</h2>\n      <div class=\"row\"><span class=\"tg\">Internal hemorrhoids</span> <span class=\"ar\"><b>painless BRBPR</b>, grade I–IV; fiber/banding/surgery; <b>bleeding is dx of exclusion</b> — rule out CRC</span></div>\n      <div class=\"row\"><span class=\"tg\">Anal fissure</span> <span class=\"ar\">severe pain with defecation, <b>posterior midline</b>; fiber, topical CCB/nitrate, sitz baths</span></div>\n      <div class=\"row\"><span class=\"tg\">Perianal abscess</span> <span class=\"ar\">fluctuant, painful → incision & drainage</span></div>\n      <div class=\"row\"><span class=\"tg\">Hernia</span> <span class=\"ar\">reducible → incarcerated (irreducible) → <b>strangulated</b> (ischemic, surgical emergency); femoral higher strangulation risk</span></div>\n      <hr class=\"mini\">\n      <div class=\"row\"><span class=\"tg\">Consent</span> <span class=\"ar\">capacity + risks/benefits/<b>alternatives incl. no treatment</b></span></div>\n      <div class=\"row\"><span class=\"tg\">Preop</span> <span class=\"ar\">optimize anemia (<b>IV iron</b>), cardiac risk, anticoagulation; VTE + antibiotic prophylaxis</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Colorectal cancer & pitfalls</h2>\n      <div class=\"row\"><span class=\"tg\">CRC</span> <span class=\"ar\">adenoma→carcinoma; <b>right = anemia/occult bleed</b>, <b>left = obstruction/caliber change</b>; colonoscopy + biopsy, staging CT, CEA → resection (hemicolectomy) ± adjuvant</span></div>\n      <hr class=\"mini\">\n      <div class=\"row\"><span class=\"tg\">Pain out of proportion</span> <span class=\"ar\">mesenteric ischemia until proven otherwise</span></div>\n      <div class=\"row\"><span class=\"tg\">Don't scope acute diverticulitis</span> <span class=\"ar\">(perforation)</span></div>\n      <div class=\"row\"><span class=\"tg\">IDA / BRBPR</span> <span class=\"ar\">never blame hemorrhoids until CRC excluded</span></div>\n      <div class=\"row\"><span class=\"tg\">Free air / rigid abdomen</span> <span class=\"ar\">→ OR, not more imaging</span></div>\n    </div>\n  </div>\n  <div class=\"foot\">Topic 10 / Acute Abdomen &amp; GI Surgery (detailed) · generated from your 11-week guides · verify against course &amp; clinical guidelines · review aid only</div>\n</div>\n"
+  },
+  {
+   "file": "Topic_11_GI_Bleeding.html",
+   "title": "Topic 11 GI Bleeding",
+   "html": "<!-- Topic Reference · GI BLEEDING (detailed) -->\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#7c2d2d;--accent2:#9a5a2a;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.4;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:13px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:31px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.printbtn{font-family:'IBM Plex Sans';font-weight:600;font-size:12px;background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:8px 16px;cursor:pointer;margin-top:6px}\n.printbtn:hover{background:var(--accent)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(128,128,128,.10);padding:10px 13px;margin-bottom:12px}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:7px}\n.band.emerg{border-color:var(--hi);background:rgba(162,59,46,.10)}.band.emerg .t{color:var(--hi)}\ntable{width:100%;border-collapse:collapse;font-size:11.4px}\nth,td{text-align:left;padding:3px 8px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.6px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600}\ntd:first-child{font-weight:600;white-space:nowrap}\n.physio{columns:2;column-gap:24px;font-size:11.5px}.physio div{break-inside:avoid;margin-bottom:4px}.physio b{color:var(--ink)}\n.emerg .grid2{columns:2;column-gap:22px;font-size:11.4px}.emerg .grid2 div{break-inside:avoid;margin-bottom:4px}.emerg b{color:var(--hi)}\n.cols{column-count:2;column-gap:16px}@media(max-width:700px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(128,128,128,.10);padding:9px 11px 8px;margin:0 0 12px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 7px;padding-bottom:5px;border-bottom:1.5px solid var(--line);color:var(--accent)}\n.row{margin:0 0 4px;font-size:11.6px;line-height:1.38}\n.row .tg{font-weight:600;color:var(--ink)}.row .ar{color:var(--soft)}.row .ar::before{content:\"→ \";color:var(--accent);font-weight:600}\n.lead{font-weight:600;color:var(--ink);display:block;margin:7px 0 3px;font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-family:'IBM Plex Mono',monospace;color:var(--accent2)}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:6px 0}\n.callout{border-left:3px solid var(--accent);background:rgba(128,128,128,.10);padding:7px 10px;border-radius:0 5px 5px 0;margin:5px 0 6px}\n.callout .h{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:3px}\n.foot{margin-top:6px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:portrait;margin:8mm}body{background:#fff;font-size:8.7px}.page{max-width:none;padding:0}.printbtn{display:none}.card,.band{margin-bottom:7px;background:#fff;border-color:#bbb}.card{padding:6px 8px}.card h2{font-size:8.3px;margin-bottom:5px}.row{font-size:8px;margin-bottom:2.5px;line-height:1.28}.head h1{font-size:22px}table{font-size:7.9px}.physio,.emerg .grid2{font-size:7.9px}}\n</style>\n\n<div class=\"page\">\n  <div class=\"head\">\n    <div class=\"l\"><div class=\"k\">◇ Topic Reference · 11 ◇</div><h1>GI Bleeding</h1></div>\n    <div class=\"r\">spans GI I + GI IV (upper & lower)<br>trigger&nbsp;<span style=\"color:var(--accent)\">→</span>&nbsp;answer<br><button class=\"printbtn\" onclick=\"window.print()\">⎙ Print / Save PDF</button></div>\n  </div>\n\n  <div class=\"band\">\n    <div class=\"t\">Localize by what comes out — but resuscitate first</div>\n    <div class=\"physio\">\n      <div><b>Hematemesis / coffee-ground</b> = upper. <b>Melena</b> (black, tarry) = usually upper (blood digested). <b>Hematochezia</b> (bright/maroon) = usually lower — <b>but a brisk upper bleed can present as hematochezia</b> in an unstable patient.</div>\n      <div><b>BUN:creatinine ↑</b> favors upper (digested blood = protein load).</div>\n      <div><b>Always first:</b> ABCs, two large-bore IVs, crystalloid, type &amp; cross, monitor; the resuscitation precedes the diagnosis.</div>\n      <div><b>Risk scores:</b> Glasgow-Blatchford (pre-endoscopy; identifies very-low-risk for outpatient care), Rockall (mortality/rebleed).</div>\n    </div>\n  </div>\n\n  <div class=\"band emerg\">\n    <div class=\"t\">★ Massive / unstable bleed</div>\n    <div class=\"grid2\">\n      <div><b>Resuscitate to endoscopy:</b> 2 large IVs, balanced crystalloid, <b>restrictive transfusion (Hb threshold ~70</b>, ~80 if cardiac), platelets if &lt;50 + bleeding, FFP/PCC + <b>reverse anticoagulation</b>. Erythromycin/NG before scope to clear the stomach. Urgent endoscopy when stabilized.</div>\n      <div><b>Suspected variceal bleed</b> (known cirrhosis/portal HTN): add <b>octreotide + ceftriaxone + PPI</b> → urgent band ligation; balloon tamponade or TIPS as rescue. Over-transfusion raises portal pressure → rebleed.</div>\n    </div>\n  </div>\n\n  <div class=\"cols\">\n    <div class=\"card\">\n      <h2>Resuscitation & assessment</h2>\n      <div class=\"row\"><span class=\"tg\">Airway/Breathing/Circulation</span> <span class=\"ar\">protect airway if hematemesis/altered; 2 large-bore IVs</span></div>\n      <div class=\"row\"><span class=\"tg\">Transfuse</span> <span class=\"ar\"><b>restrictive Hb ~70</b> (improves survival vs liberal); platelets &lt;50 + bleeding; FFP/PCC for coagulopathy</span></div>\n      <div class=\"row\"><span class=\"tg\">Reverse</span> <span class=\"ar\">hold/reverse anticoagulants &amp; antiplatelets per bleeding severity</span></div>\n      <div class=\"row\"><span class=\"tg\">Stratify</span> <span class=\"ar\">Glasgow-Blatchford (triage), Rockall (prognosis)</span></div>\n      <div class=\"row\"><span class=\"tg\">Prep scope</span> <span class=\"ar\">IV erythromycin / NG lavage to improve visualization</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Upper GI bleed</h2>\n      <div class=\"row\"><span class=\"tg\">Causes</span> <span class=\"ar\"><b>peptic ulcer #1</b>, esophagogastric varices, Mallory-Weiss, erosive gastritis/esophagitis, malignancy, Dieulafoy, AVM, aortoenteric fistula (prior graft)</span></div>\n      <div class=\"row\"><span class=\"tg\">Manage (non-variceal)</span> <span class=\"ar\"><b>high-dose IV PPI</b> → endoscopy within 24 h; endoscopic hemostasis (clips/thermal/injection); Forrest class predicts rebleed</span></div>\n      <div class=\"row\"><span class=\"tg\">After</span> <span class=\"ar\">H. pylori test &amp; treat, stop NSAIDs</span></div>\n      <div class=\"row\"><span class=\"tg\">Variceal</span> <span class=\"ar\">octreotide + ceftriaxone + band ligation (see emergencies)</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Lower GI bleed</h2>\n      <div class=\"row\"><span class=\"tg\">Causes</span> <span class=\"ar\"><b>diverticulosis #1</b> (painless), angiodysplasia (elderly; <b>Heyde</b> = AS + angiodysplasia), hemorrhoids, ischemic colitis, neoplasm/polyp, IBD, post-polypectomy, infectious colitis</span></div>\n      <div class=\"row\"><span class=\"tg\">Work-up (stable)</span> <span class=\"ar\">colonoscopy after prep</span></div>\n      <div class=\"row\"><span class=\"tg\">Work-up (unstable/massive)</span> <span class=\"ar\"><b>CT angiography</b> → embolization, or surgery; tagged RBC scan for slow bleeds</span></div>\n      <div class=\"row\"><span class=\"tg\">⚠</span> <span class=\"ar\">if unstable hematochezia, consider an <b>upper</b> source (do EGD) — brisk UGIB mimics LGIB</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Variceal bleeding (focused)</h2>\n      <div class=\"row\"><span class=\"tg\">Acute</span> <span class=\"ar\"><b>octreotide</b> (splanchnic vasoconstriction) + <b>ceftriaxone</b> (improves survival) + PPI → <b>band ligation</b></span></div>\n      <div class=\"row\"><span class=\"tg\">Rescue</span> <span class=\"ar\">balloon tamponade (Sengstaken-Blakemore), TIPS</span></div>\n      <div class=\"row\"><span class=\"tg\">Prophylaxis</span> <span class=\"ar\"><b>non-selective β-blocker</b> (propranolol/nadolol/carvedilol) and/or EVL — <b>not for the acute bleed</b></span></div>\n      <div class=\"row\"><span class=\"tg\">Transfusion</span> <span class=\"ar\">restrictive — over-transfusion ↑portal pressure → rebleed</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Obscure / occult bleeding</h2>\n      <div class=\"row\"><span class=\"tg\">Occult</span> <span class=\"ar\">positive FOBT/FIT or iron-deficiency anemia with normal initial scopes</span></div>\n      <div class=\"row\"><span class=\"tg\">IDA in older adult</span> <span class=\"ar\"><b>colonoscopy + EGD</b> to exclude malignancy</span></div>\n      <div class=\"row\"><span class=\"tg\">Obscure (negative scopes)</span> <span class=\"ar\">small-bowel source → <b>capsule endoscopy</b>; angiodysplasia common</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Pitfalls</h2>\n      <div class=\"row\"><span class=\"tg\">Melena</span> <span class=\"ar\">treat as upper until proven otherwise</span></div>\n      <div class=\"row\"><span class=\"tg\">Unstable hematochezia</span> <span class=\"ar\">rule out a brisk upper source (EGD)</span></div>\n      <div class=\"row\"><span class=\"tg\">Restrictive transfusion</span> <span class=\"ar\">Hb ~70 — liberal worsens outcomes (esp. varices)</span></div>\n      <div class=\"row\"><span class=\"tg\">Ceftriaxone</span> <span class=\"ar\">in cirrhotic GI bleed improves survival — don't omit it</span></div>\n      <div class=\"row\"><span class=\"tg\">Aortoenteric fistula</span> <span class=\"ar\">consider in anyone with a prior aortic graft + GI bleed</span></div>\n    </div>\n  </div>\n  <div class=\"foot\">Topic 11 / GI Bleeding (detailed) · generated from your 11-week guides · verify against course &amp; clinical guidelines · review aid only</div>\n</div>\n"
+  }
+ ]
+}

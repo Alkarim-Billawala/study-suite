@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.10 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.11 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.10)
+# Study Suite — Content Authoring Guide (v2.11)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,10 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.10 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **Authoring system version:** 2.11 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **What changed in guide v2.11:** **file-naming convention** (§8) — name the pack file after its
+> placement, `<Year>_<Course>_Week<NN>_<Subject>_v<ver>.json`, so a learner's packs stay organized and
+> sort in a folder (the app still identifies/sorts by fields, not the name). No schema change.
 > **What changed in guide v2.10:** quality hardening based on observed failure modes — no schema
 > change. (1) **Output hygiene** (§8): the deliverable is *pure, valid JSON only* — no prose, no
 > markdown fences, and **strip any citation/grounding/footnote markers your tooling injects** (a single
@@ -114,13 +117,13 @@ incomplete syllabus.
 
 ## 0b. First, check you have the latest version of this guide
 
-This guide is **versioned** (see the header — currently **v2.10**). The authoring system evolves, so
+This guide is **versioned** (its version is shown in the header at the top of this file). The authoring system evolves, so
 before you build, make a quick, one-time check that the user isn't working from an outdated copy:
 
 1. **If you can browse the web**, fetch the small public pointer file at
    **`https://studysuite.app/authoring-version.json`** (this is the project's GitHub Pages repo,
    served on its custom domain). It returns something like
-   `{ "authoringGuideVersion": "2.10", "guideUrl": "https://studysuite.app/Study_Suite_Authoring_Guide_v2.10.md", "updated": "2026-06-14" }`.
+   `{ "authoringGuideVersion": "<latest>", "guideUrl": "https://studysuite.app/Study_Suite_Authoring_Guide_v<latest>.md", "updated": "<date>" }`.
 2. **Compare the versions numerically** — treat the version as `major.minor`, so `2.10` is *newer*
    than `2.9` (don't compare as plain text). If the published `authoringGuideVersion` is higher than
    the version in this file's header, tell the user:
@@ -534,9 +537,15 @@ not the week's subject.**
 
 When you finish, produce **one downloadable file** (not just code in chat):
 
-1. The **pack `.json`**, named for the week/topic (e.g. `Week_12_Cardiology.json`), **with the topic
-   guides embedded** in `guides[]`. This single file is the complete deliverable — the embedded
-   guides make it fully self-sufficient (Topic Guides reader included).
+1. The **pack `.json`**, **with the topic guides embedded** in `guides[]`. This single file is the
+   complete deliverable — the embedded guides make it fully self-sufficient (Topic Guides reader
+   included). **Name the file to mirror the pack's placement (§2)** so the learner's packs stay
+   organized and sort sensibly in a folder: **`<Year>_<Course>_Week<NN>_<Subject>_v<ver>.json`** —
+   e.g. `Year1_CPC1_Week09_Pediatrics_v2.0.json`, or `Year1_Cardiology_Week12_Arrhythmias_v1.0.json`.
+   Drop any level the learner doesn't use (a single-week pack with no course is just
+   `Week12_Cardiology_v1.0.json`), and use the same week number(s) as the `weeks` field so name and
+   metadata agree. The filename is for the learner's convenience only — inside the app, packs are
+   identified by `id` and sorted by their `school`/`year`/`course`/`weeks` fields, not the filename.
 2. A short report in chat: how many questions (and the easy/medium/hard split), how many cards, and
    which guides are embedded.
 

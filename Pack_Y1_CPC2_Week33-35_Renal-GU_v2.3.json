@@ -1,0 +1,737 @@
+{
+ "pack": "Renal & GU (Weeks 33–35)",
+ "id": "ku",
+ "school": "UofT — Temerty Medicine",
+ "formatVersion": "2.0",
+ "version": "2.3",
+ "year": "Year 1",
+ "course": "CPC 2",
+ "weeks": "Weeks 33–35 · KU I–III",
+ "author": "Alkarim Billawala / alkarim.billawala.ca",
+ "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
+ "created": "2026-06-11",
+ "updated": "2026-06-14",
+ "questions": [
+  {
+   "id": "ku_q01",
+   "topic": "KU · Nephrology",
+   "stem": "A 76-year-old woman treated with IV levofloxacin for pneumonia has creatinine rise from 90 to 280 µmol/L on day 7. She is euvolemic. Urinalysis: 1+ protein, blood, WBCs and WBC casts; FENa 2.5%. Most likely diagnosis?",
+   "options": [
+    "Acute tubular necrosis",
+    "Pre-renal azotemia",
+    "Acute interstitial nephritis",
+    "Post-infectious glomerulonephritis"
+   ],
+   "correct": 2,
+   "explain": "AKI ~7–10 days after a culprit drug (fluoroquinolone) with <b>WBCs and WBC casts</b> is classic <b>acute interstitial nephritis</b> (allergic, tubulointerstitial). ATN would show muddy-brown granular casts; pre-renal would have low FENa and bland sediment.",
+   "sys": "KU",
+   "guide": {
+    "f": "Topic_12_AKI.html",
+    "t": "12 · AKI",
+    "s": "Intrinsic AKI — AIN"
+   },
+   "difficulty": "medium"
+  },
+  {
+   "id": "ku_q02",
+   "topic": "KU · Nephrology",
+   "stem": "A 78-year-old has 4 months of fatigue, weight loss, and arthralgia; BP 185/110; creatinine 510 (baseline 85), new normocytic anemia. Urine: heavy hematuria, 3 g/L protein, RBC casts. Which statement is most accurate?",
+   "options": [
+    "Empiric IV (pulse) corticosteroids should be started urgently to preserve renal function",
+    "Withhold all treatment until biopsy confirms the exact etiology",
+    "Hemodialysis must start immediately to prevent nephron loss",
+    "A primary podocyte foot-process defect is the mechanism"
+   ],
+   "correct": 0,
+   "explain": "Nephritic syndrome with rapidly rising creatinine and <b>RBC casts</b> = <b>rapidly progressive glomerulonephritis</b>, a renal emergency. Start <b>empiric IV pulse corticosteroids urgently</b> — do not delay for biopsy.",
+   "sys": "KU",
+   "guide": {
+    "f": "Topic_13_Glomerular_Disease.html",
+    "t": "13 · Glomerular",
+    "s": "RPGN emergency"
+   },
+   "difficulty": "hard"
+  },
+  {
+   "id": "ku_q03",
+   "topic": "KU · Nephrology",
+   "stem": "A 62-year-old woman has fatigue, arthralgia, and new hemoptysis; BP 170/95. Urine shows heavy hematuria with RBC casts. ANA negative; C3 and C4 normal. Most likely mechanism?",
+   "options": [
+    "Subepithelial immune complexes against PLA2R",
+    "Granulomatous inflammation with autoantibodies to neutrophil cytoplasm (pauci-immune)",
+    "IgA immune-complex deposition in the mesangium",
+    "Anti-dsDNA immune complexes consuming complement"
+   ],
+   "correct": 1,
+   "explain": "A pulmonary-renal syndrome (hemoptysis + RBC casts) with <b>negative ANA and normal complement</b> is classic <b>pauci-immune ANCA-associated vasculitis</b> (anti-PR3 or anti-MPO). Low complement/positive ANA would suggest lupus.",
+   "sys": "KU",
+   "guide": {
+    "f": "Topic_13_Glomerular_Disease.html",
+    "t": "13 · Glomerular",
+    "s": "Vasculitides — ANCA pauci-immune"
+   },
+   "difficulty": "hard"
+  },
+  {
+   "id": "ku_q04",
+   "topic": "KU · Nephrology",
+   "stem": "A 71-year-old man is anuric (0 mL output) on post-op day 3 with creatinine 310 (baseline 95). His CKD-EPI calculator returns a number. What is his approximate true eGFR?",
+   "options": [
+    "Approximately 0 mL/min",
+    "~15 mL/min as calculated",
+    "~25 mL/min as calculated",
+    "Cannot be estimated without a 24-hour urine"
+   ],
+   "correct": 0,
+   "explain": "In <b>anuric, non-steady-state AKI</b>, the kidneys are filtering essentially nothing, so true eGFR ≈ <b>0 mL/min</b>. Estimating equations are invalid because they assume a stable creatinine — they lag behind acute changes.",
+   "sys": "KU",
+   "guide": {
+    "f": "Topic_12_AKI.html",
+    "t": "12 · AKI",
+    "s": "Work-up & pitfalls — anuric eGFR"
+   },
+   "difficulty": "hard"
+  },
+  {
+   "id": "ku_q05",
+   "topic": "KU · Electrolytes",
+   "stem": "A 52-year-old with diabetic nephropathy (baseline Cr 210) has vomiting, can't eat, but keeps taking ramipril. K⁺ 7.6 mmol/L; ECG shows peaked T waves and widened QRS. Most appropriate first step?",
+   "options": [
+    "IV regular insulin with 50% dextrose",
+    "IV calcium gluconate",
+    "IV furosemide",
+    "Urgent hemodialysis"
+   ],
+   "correct": 1,
+   "explain": "With <b>hyperkalemia and ECG changes (wide QRS)</b>, the first step is <b>IV calcium gluconate</b> to stabilize the myocardium (raises threshold potential). It does not lower K⁺ but buys time; insulin/dextrose, β2-agonists, and excretion/dialysis follow.",
+   "sys": "KU",
+   "guide": {
+    "f": "Topic_15_Fluids_and_Electrolytes.html",
+    "t": "15 · Fluids & Electrolytes",
+    "s": "Potassium emergencies"
+   },
+   "difficulty": "medium"
+  },
+  {
+   "id": "ku_q06",
+   "topic": "KU · Electrolytes",
+   "stem": "A 35-year-old mechanic is found confused in his garage with a high-anion-gap metabolic acidosis, an osmolar gap of 38, and envelope-shaped crystals in the urine. Which toxic metabolite explains his renal findings?",
+   "options": [
+    "Formic acid",
+    "Lactic acid",
+    "Oxalic acid",
+    "Glycolic acid"
+   ],
+   "correct": 2,
+   "explain": "High anion gap + high osmolar gap + envelope-shaped (calcium oxalate) crystals = <b>ethylene glycol</b> poisoning. It's metabolized to <b>oxalic acid</b>, which precipitates as calcium oxalate in the tubules → acute kidney injury. Formic acid is the methanol metabolite (causes blindness).",
+   "sys": "KU",
+   "guide": {
+    "f": "Topic_16_Acid_Base.html",
+    "t": "16 · Acid–Base",
+    "s": "HAGMA — toxic alcohols (ethylene glycol)"
+   },
+   "difficulty": "hard"
+  },
+  {
+   "id": "ku_q07",
+   "topic": "KU · Electrolytes",
+   "stem": "A 70-year-old woman started on furosemide 3 weeks ago has weakness, orthostatic hypotension, undetectable JVP, and palpitations. Na 126, K 2.8, Cl 84, HCO₃ 34. Most appropriate primary step to correct her hyponatremia?",
+   "options": [
+    "IV hypertonic (3%) saline",
+    "Fluid restriction < 1 L/day",
+    "IV isotonic (normal) saline",
+    "Add spironolactone"
+   ],
+   "correct": 2,
+   "explain": "This is <b>hypovolemic hyponatremia</b> from diuretic-induced losses; low effective volume drives non-osmotic ADH release. Restoring volume with <b>isotonic saline</b> shuts off ADH and lets the kidney excrete free water. Hypertonic saline is reserved for acute severe neuro symptoms (e.g., seizures).",
+   "sys": "KU",
+   "guide": {
+    "f": "Topic_15_Fluids_and_Electrolytes.html",
+    "t": "15 · Fluids & Electrolytes",
+    "s": "Hyponatremia algorithm"
+   },
+   "difficulty": "medium"
+  },
+  {
+   "id": "ku_q08",
+   "topic": "KU · Acid-Base",
+   "stem": "A 31-year-old with T1DM and 3 days of vomiting from gastroenteritis: pH 7.27, pCO₂ 26, Na 132, Cl 83, HCO₃ 10, glucose 19, urea 7, measured osmolality 290. Anion gap = 39; calculated osmolality = 290. What is the complete acid-base diagnosis?",
+   "options": [
+    "Pure anion-gap metabolic acidosis with appropriate compensation",
+    "Non-anion-gap metabolic acidosis with respiratory alkalosis",
+    "Anion-gap metabolic acidosis with a concurrent metabolic alkalosis",
+    "Anion-gap acidosis, metabolic alkalosis, and an osmolar gap"
+   ],
+   "correct": 2,
+   "explain": "ΔAG = 39−12 = 27; expected HCO₃ would fall to ~24−27 = −3, yet measured HCO₃ is 10 — far higher than the acidosis alone predicts. That extra base reveals a <b>concurrent metabolic alkalosis</b> (from vomiting) on top of the DKA anion-gap acidosis. Osmolar gap is 0 (no toxic alcohol).",
+   "sys": "KU",
+   "guide": {
+    "f": "Topic_16_Acid_Base.html",
+    "t": "16 · Acid–Base",
+    "s": "Mixed disorders — DKA + vomiting"
+   },
+   "difficulty": "hard"
+  },
+  {
+   "id": "ku_q09",
+   "topic": "KU · Urology",
+   "stem": "A 68-year-old man with obstructive LUTS and a smooth, enlarged prostate is started on tamsulosin. His history includes a prior MI; he takes ramipril and atenolol. Most critical counseling point given his medications?",
+   "options": [
+    "Reflex tachycardia worsening ischemic heart disease",
+    "Combining the alpha-blocker with his antihypertensives risks profound hypotension",
+    "High risk of acute urinary retention requiring catheterization",
+    "Permanent loss of libido from reduced DHT"
+   ],
+   "correct": 1,
+   "explain": "<b>Alpha-1 blockers</b> (tamsulosin) cause vasodilation and orthostatic hypotension. Stacked on an ACE inhibitor and beta-blocker, the additive blood-pressure drop can cause syncope — counsel on first-dose/orthostatic hypotension and dose separation. (DHT reduction/libido loss relates to 5-alpha-reductase inhibitors.)",
+   "sys": "KU",
+   "guide": {
+    "f": "Topic_18_Urology.html",
+    "t": "18 · Urology",
+    "s": "BPH & LUTS"
+   },
+   "difficulty": "medium"
+  },
+  {
+   "id": "ku_q10",
+   "topic": "KU · Urology",
+   "stem": "A 34-year-old man has a firm, painless, slowly enlarging intratesticular nodule; history of surgically corrected cryptorchidism. Most appropriate next step?",
+   "options": [
+    "Reassurance and follow-up in 6 months",
+    "A 14-day course of fluoroquinolone",
+    "Scrotal ultrasound plus serum AFP and β-hCG",
+    "Immediate diagnostic incisional testicular biopsy"
+   ],
+   "correct": 2,
+   "explain": "A solid, painless intratesticular mass (cryptorchidism is a risk factor) is presumed malignant until proven otherwise. Work up with <b>scrotal ultrasound + tumour markers (AFP, β-hCG)</b>. Incisional/needle biopsy is <b>contraindicated</b> — it risks seeding tumour into scrotal lymphatics.",
+   "sys": "KU",
+   "guide": {
+    "f": "Topic_18_Urology.html",
+    "t": "18 · Urology",
+    "s": "Testicular — mass → US + markers"
+   },
+   "difficulty": "medium"
+  },
+  {
+   "id": "ku_q11",
+   "topic": "KU · Nephrology",
+   "stem": "A 30-year-old woman who is 24 weeks pregnant is diagnosed with gestational hypertension (155/95 on repeated readings). Which antihypertensive is strictly contraindicated?",
+   "options": [
+    "Ramipril",
+    "Labetalol",
+    "Methyldopa",
+    "Nifedipine XL"
+   ],
+   "correct": 0,
+   "explain": "<b>ACE inhibitors (ramipril)</b> and ARBs are <b>teratogenic and contraindicated in pregnancy</b>. Safe options include labetalol, methyldopa, and long-acting nifedipine.",
+   "sys": "KU",
+   "guide": {
+    "f": "Topic_14_CKD_and_Complications.html",
+    "t": "14 · CKD",
+    "s": "Pitfalls — ACEi/ARB in pregnancy"
+   },
+   "difficulty": "easy"
+  },
+  {
+   "id": "ku_q12",
+   "topic": "KU · Nephrology",
+   "stem": "A 10-year-old boy has 1 week of periorbital and leg edema with normal blood pressure. Dipstick shows 4+ protein and is negative for blood. Most appropriate next step?",
+   "options": [
+    "Urgent kidney biopsy",
+    "IV cyclophosphamide",
+    "Start oral prednisone (1 mg/kg) with close outpatient follow-up",
+    "ACE inhibitor and loop diuretic, reassess in 4 weeks"
+   ],
+   "correct": 2,
+   "explain": "Pediatric nephrotic syndrome (heavy proteinuria, edema, <b>no hematuria</b>) is overwhelmingly <b>minimal change disease</b>, which is highly steroid-responsive. Start <b>empiric prednisone</b>; biopsy is reserved for steroid non-responders.",
+   "sys": "KU",
+   "guide": {
+    "f": "Topic_13_Glomerular_Disease.html",
+    "t": "13 · Glomerular",
+    "s": "Nephrotic causes — minimal change disease"
+   },
+   "difficulty": "medium"
+  },
+  {
+   "id": "ku_q13",
+   "topic": "KU · Nephrology",
+   "stem": "A 60-year-old man with ESRD on hemodialysis has missed sessions and now reports fatigue, pruritus, and bone pain. Which lab pattern fits the expected mineral-bone disorder (CKD-MBD)?",
+   "options": [
+    "High calcium, low phosphate, low PTH",
+    "Low calcium, low phosphate, high PTH",
+    "Low calcium, high phosphate, high PTH",
+    "High calcium, high phosphate, low PTH"
+   ],
+   "correct": 2,
+   "explain": "In CKD-MBD, loss of 1-alpha-hydroxylase lowers active vitamin D (→ <b>low calcium</b>), the kidney can't excrete phosphate (→ <b>high phosphate</b>), and both stimulate the parathyroids (→ <b>high PTH</b>, secondary hyperparathyroidism).",
+   "sys": "KU",
+   "guide": {
+    "f": "Topic_14_CKD_and_Complications.html",
+    "t": "14 · CKD",
+    "s": "CKD-MBD"
+   },
+   "difficulty": "medium"
+  },
+  {
+   "id": "ku_q14",
+   "topic": "KU · Nephrology",
+   "stem": "A 65-year-old man with Stage 4 CKD has worsening fatigue and dyspnea; Hb 88 g/L (was 105), iron stores adequate. You start an erythropoiesis-stimulating agent. Most appropriate target hemoglobin?",
+   "options": [
+    "90–100 g/L",
+    "110–120 g/L",
+    "130–140 g/L",
+    ">140 g/L"
+   ],
+   "correct": 1,
+   "explain": "ESA therapy is indicated for symptomatic anemia with Hb < 100 g/L; the target is <b>110–120 g/L</b>. Normalizing Hb (>130) is avoided because it raises stroke risk.",
+   "sys": "KU",
+   "guide": {
+    "f": "Topic_14_CKD_and_Complications.html",
+    "t": "14 · CKD",
+    "s": "Anemia of CKD — EPO target"
+   },
+   "difficulty": "medium"
+  },
+  {
+   "id": "ku_q15",
+   "topic": "KU · Nephrology",
+   "stem": "A 68-year-old man with pulmonary edema has creatinine 550 (baseline 130), K⁺ 7.4, and venous pH 7.05. After IV insulin/glucose and high-dose loop diuretics he remains anuric with K⁺ 7.2. Most definitive next step?",
+   "options": [
+    "Increase IV furosemide",
+    "Give a potassium-binding resin",
+    "Initiate urgent hemodialysis",
+    "Emergent renal biopsy"
+   ],
+   "correct": 2,
+   "explain": "Refractory hyperkalemia + severe acidosis (pH < 7.1) + anuric volume overload meets multiple <b>AEIOU</b> dialysis criteria. Failure of medical therapy mandates <b>urgent hemodialysis</b> for definitive removal.",
+   "sys": "KU",
+   "guide": {
+    "f": "Topic_12_AKI.html",
+    "t": "12 · AKI",
+    "s": "AKI emergencies — dialysis (AEIOU)"
+   },
+   "difficulty": "medium"
+  },
+  {
+   "id": "ku_q16",
+   "topic": "KU · Electrolytes",
+   "stem": "An 82-year-old man with advanced dementia who depends on staff for hydration becomes progressively unresponsive over 48 hours with dry mucous membranes and a serum sodium of 158 mmol/L. Primary derangement?",
+   "options": [
+    "Absolute excess of total body sodium",
+    "Relative deficit of total body water",
+    "Inappropriate ADH secretion",
+    "Failure of the collecting duct to excrete potassium"
+   ],
+   "correct": 1,
+   "explain": "<b>Hypernatremia</b> is a relative <b>water deficit</b>. Thirst normally protects against it, so it develops in those who can't access water (dementia, infants, the bedbound). The fix is free water (oral/NG or IV D5W).",
+   "sys": "KU",
+   "guide": {
+    "f": "Topic_15_Fluids_and_Electrolytes.html",
+    "t": "15 · Fluids & Electrolytes",
+    "s": "Hypernatremia"
+   },
+   "difficulty": "easy"
+  },
+  {
+   "id": "ku_q17",
+   "topic": "KU · Electrolytes",
+   "stem": "A 71-year-old woman on furosemide for 3 days develops palpitations; ECG shows flattened T waves and prominent U waves. By what mechanism is the diuretic causing this?",
+   "options": [
+    "Blocking the Na-Cl cotransporter in the distal convoluted tubule",
+    "Blocking the Na-K-2Cl cotransporter in the thick ascending limb",
+    "Antagonizing aldosterone in the collecting duct",
+    "Inhibiting carbonic anhydrase in the proximal tubule"
+   ],
+   "correct": 1,
+   "explain": "Furosemide is a <b>loop diuretic</b> that blocks the <b>Na-K-2Cl cotransporter in the thick ascending limb</b>, driving distal flow and urinary potassium wasting → hypokalemia (flat T waves, U waves). Option A = thiazides; C = MRAs; D = acetazolamide.",
+   "sys": "KU",
+   "guide": {
+    "f": "Topic_17_Diuretics.html",
+    "t": "17 · Diuretics",
+    "s": "Loop diuretics — mechanism"
+   },
+   "difficulty": "medium"
+  },
+  {
+   "id": "ku_q18",
+   "topic": "KU · Urology",
+   "stem": "A 15-year-old boy has sudden severe left scrotal pain and swelling that woke him from sleep. Exam shows a high-riding testis with a horizontal lie, a thickened cord, and an absent cremasteric reflex. Best management?",
+   "options": [
+    "Scrotal ultrasound with tumor markers, then follow-up",
+    "Oral antibiotics for presumed epididymitis",
+    "Urgent surgical exploration and detorsion",
+    "Reassurance and scheduled re-examination"
+   ],
+   "correct": 2,
+   "explain": "Sudden pain with a <b>horizontal lie and absent cremasteric reflex</b> is <b>testicular torsion</b> — a surgical emergency. Proceed to <b>urgent surgical exploration/detorsion</b> to salvage the testis; do not delay for imaging when the diagnosis is clinically clear.",
+   "sys": "KU",
+   "guide": {
+    "f": "Topic_18_Urology.html",
+    "t": "18 · Urology",
+    "s": "Urologic emergencies — testicular torsion"
+   },
+   "difficulty": "easy"
+  },
+  {
+   "id": "ku_q19",
+   "topic": "KU · Urology",
+   "stem": "An 82-year-old man has worsening obstructive LUTS plus new deep, aching, non-positional lower-back pain that wakes him at night. DRE reveals a hard, irregular, asymmetric nodule. A TRUS-guided biopsy is done. Which finding confirms the likely diagnosis?",
+   "options": [
+    "Benign stromal and epithelial hyperplasia",
+    "Malignant glandular proliferation graded by the Gleason system",
+    "Transitional urothelial cells with atypia",
+    "Neutrophil-predominant inflammatory infiltrate"
+   ],
+   "correct": 1,
+   "explain": "Hard irregular nodule + axial bone pain suggests <b>metastatic prostate adenocarcinoma</b> (peripheral zone), histologically <b>malignant glandular proliferation graded by the Gleason score</b> (sum of the two most common patterns). Benign hyperplasia would indicate BPH.",
+   "sys": "KU",
+   "guide": {
+    "f": "Topic_18_Urology.html",
+    "t": "18 · Urology",
+    "s": "Prostate cancer"
+   },
+   "difficulty": "easy"
+  }
+ ],
+ "cards": [
+  {
+   "id": "r1",
+   "sys": "KU",
+   "topic": "AKI",
+   "type": "mcq",
+   "guide": {
+    "f": "Topic_12_AKI.html",
+    "t": "12 · AKI",
+    "s": "Intrinsic AKI — AIN"
+   },
+   "prompt": "AKI 8 days after starting a fluoroquinolone; urine shows WBCs and <b>WBC casts</b>, with eosinophilia. Diagnosis?",
+   "options": [
+    "Acute tubular necrosis",
+    "Acute interstitial nephritis",
+    "Pre-renal azotemia",
+    "Post-infectious GN"
+   ],
+   "correct": 1,
+   "explain": "Drug exposure 7–10 days earlier + <b>WBC casts</b> + eosinophilia = <b>acute interstitial nephritis</b>. Stop the drug ± steroids."
+  },
+  {
+   "id": "r2",
+   "sys": "KU",
+   "topic": "AKI",
+   "type": "match",
+   "guide": {
+    "f": "Topic_12_AKI.html",
+    "t": "12 · AKI",
+    "s": "Reading the urine — casts"
+   },
+   "prompt": "Match each urinary cast to its lesion:",
+   "pairs": [
+    [
+     "Muddy-brown granular casts",
+     "Acute tubular necrosis"
+    ],
+    [
+     "WBC casts",
+     "Interstitial nephritis"
+    ],
+    [
+     "RBC casts",
+     "Glomerulonephritis (nephritic)"
+    ],
+    [
+     "Fatty / oval fat bodies",
+     "Nephrotic syndrome"
+    ]
+   ],
+   "explain": "Casts are nearly free diagnoses — anchor your AKI/glomerular reasoning on them."
+  },
+  {
+   "id": "r3",
+   "sys": "KU",
+   "topic": "AKI",
+   "type": "cloze",
+   "guide": {
+    "f": "Topic_12_AKI.html",
+    "t": "12 · AKI",
+    "s": "Prerenal"
+   },
+   "text": "Prerenal AKI: FENa is below {{1}}%, the BUN:creatinine ratio is above {{20}}, the sediment is {{bland}}, and it reverses once perfusion is restored.",
+   "explain": "FENa is unreliable on diuretics — use FEurea (< 35%) instead."
+  },
+  {
+   "id": "r4",
+   "sys": "KU",
+   "topic": "Glomerular",
+   "type": "mcq",
+   "guide": {
+    "f": "Topic_13_Glomerular_Disease.html",
+    "t": "13 · Glomerular",
+    "s": "Vasculitides"
+   },
+   "prompt": "Nephritic syndrome (RBC casts) with hemoptysis; ANA negative and <b>complement normal</b>. Most likely mechanism?",
+   "options": [
+    "Anti-dsDNA immune complexes (lupus)",
+    "Pauci-immune ANCA-associated vasculitis",
+    "IgA mesangial deposition",
+    "Subepithelial PLA2R deposits"
+   ],
+   "correct": 1,
+   "explain": "Pulmonary-renal syndrome with <b>normal complement and negative ANA</b> = pauci-immune ANCA vasculitis (or anti-GBM). Low complement/positive ANA would suggest lupus."
+  },
+  {
+   "id": "r5",
+   "sys": "KU",
+   "topic": "Glomerular",
+   "type": "multi",
+   "guide": {
+    "f": "Topic_13_Glomerular_Disease.html",
+    "t": "13 · Glomerular",
+    "s": "Nephritic — by complement"
+   },
+   "prompt": "Which nephritic causes have <b>LOW complement</b>? (select all)",
+   "options": [
+    "Post-streptococcal GN",
+    "Lupus nephritis",
+    "IgA nephropathy",
+    "ANCA-associated vasculitis"
+   ],
+   "correct": [
+    0,
+    1
+   ],
+   "explain": "Low complement: post-strep, lupus, MPGN, cryoglobulinemia. Normal complement: IgA, ANCA, anti-GBM."
+  },
+  {
+   "id": "r6",
+   "sys": "KU",
+   "topic": "Electrolytes",
+   "type": "order",
+   "guide": {
+    "f": "Topic_15_Fluids_and_Electrolytes.html",
+    "t": "15 · Fluids & Electrolytes",
+    "s": "Potassium emergencies"
+   },
+   "prompt": "Order the treatment of hyperkalemia with ECG changes:",
+   "items": [
+    "IV calcium gluconate (membrane stabilization)",
+    "Insulin + dextrose (and salbutamol) to shift",
+    "Furosemide / potassium binder to excrete",
+    "Dialysis if refractory"
+   ],
+   "explain": "Calcium first — it stabilizes the myocardium but does not lower K⁺; shifting and excretion follow."
+  },
+  {
+   "id": "r7",
+   "sys": "KU",
+   "topic": "CKD",
+   "type": "cloze",
+   "guide": {
+    "f": "Topic_14_CKD_and_Complications.html",
+    "t": "14 · CKD",
+    "s": "CKD-MBD"
+   },
+   "text": "CKD mineral-bone disorder shows {{low}} calcium, {{high}} phosphate, and {{high}} PTH, with low active (1,25) vitamin D.",
+   "explain": "Loss of 1-α-hydroxylase + phosphate retention + ↑FGF23 drive secondary hyperparathyroidism."
+  },
+  {
+   "id": "r8",
+   "sys": "KU",
+   "topic": "CKD",
+   "type": "mcq",
+   "guide": {
+    "f": "Topic_14_CKD_and_Complications.html",
+    "t": "14 · CKD",
+    "s": "Anemia of CKD"
+   },
+   "prompt": "Symptomatic anemia of CKD, iron replete, starting an ESA. Target hemoglobin?",
+   "options": [
+    "90–100 g/L",
+    "110–120 g/L",
+    "130–140 g/L",
+    "> 140 g/L"
+   ],
+   "correct": 1,
+   "explain": "Target <b>110–120 g/L</b>; normalizing Hb above 130 increases stroke/CV risk."
+  },
+  {
+   "id": "r9",
+   "sys": "KU",
+   "topic": "Electrolytes",
+   "type": "qa",
+   "guide": {
+    "f": "Topic_15_Fluids_and_Electrolytes.html",
+    "t": "15 · Fluids & Electrolytes",
+    "s": "Hyponatremia"
+   },
+   "prompt": "Why does a volume-depleted patient become hyponatremic even with normal kidneys — and what fluid corrects it?",
+   "answer": "Low effective circulating volume triggers <b>non-osmotic ADH release</b>, so the kidney retains free water despite a low sodium. Restoring volume with <b>isotonic saline</b> switches off ADH and lets the kidney excrete the excess water. (Hypertonic saline is reserved for acute severe neuro symptoms.)",
+   "explain": "Hypovolemic hyponatremia: UNa helps localize renal vs extrarenal loss; treat with isotonic saline."
+  },
+  {
+   "id": "r10",
+   "sys": "KU",
+   "topic": "Electrolytes",
+   "type": "cloze",
+   "guide": {
+    "f": "Topic_15_Fluids_and_Electrolytes.html",
+    "t": "15 · Fluids & Electrolytes",
+    "s": "Hypernatremia"
+   },
+   "text": "Hypernatremia is a {{water}} deficit; it happens in those who can't access water. Correct it {{slowly}} to avoid cerebral {{edema}}.",
+   "explain": "Mirror image: chronic hyponatremia corrected too fast → osmotic demyelination."
+  },
+  {
+   "id": "r11",
+   "sys": "KU",
+   "topic": "Acid-Base",
+   "type": "mcq",
+   "guide": {
+    "f": "Topic_16_Acid_Base.html",
+    "t": "16 · Acid–Base",
+    "s": "HAGMA — toxic alcohols"
+   },
+   "prompt": "High anion-gap acidosis, <b>high osmolar gap</b>, and envelope-shaped crystals in the urine. Toxin?",
+   "options": [
+    "Methanol",
+    "Ethylene glycol",
+    "Salicylate",
+    "Metformin"
+   ],
+   "correct": 1,
+   "explain": "<b>Ethylene glycol</b> → oxalic acid → calcium-oxalate crystals + AKI. Methanol → formic acid → blindness. Treat with fomepizole + dialysis."
+  },
+  {
+   "id": "r12",
+   "sys": "KU",
+   "topic": "Acid-Base",
+   "type": "order",
+   "guide": {
+    "f": "Topic_16_Acid_Base.html",
+    "t": "16 · Acid–Base",
+    "s": "Stepwise approach"
+   },
+   "prompt": "Order the stepwise acid-base interpretation:",
+   "items": [
+    "Check the pH (acidemia vs alkalemia)",
+    "Identify the primary disorder (metabolic vs respiratory)",
+    "Check compensation (e.g., Winter's formula)",
+    "Calculate the anion gap",
+    "Delta-delta for a hidden second disorder",
+    "Osmolar gap if high anion gap"
+   ],
+   "explain": "Always compute the gap even if HCO₃ is normal — the delta-delta unmasks a coexisting metabolic alkalosis (DKA + vomiting)."
+  },
+  {
+   "id": "r13",
+   "sys": "KU",
+   "topic": "Diuretics",
+   "type": "match",
+   "guide": {
+    "f": "Topic_17_Diuretics.html",
+    "t": "17 · Diuretics",
+    "s": "Where each class acts"
+   },
+   "prompt": "Match each diuretic to site / signature effect:",
+   "pairs": [
+    [
+     "Loop (furosemide)",
+     "Na-K-2Cl in TAL; lowers calcium"
+    ],
+    [
+     "Thiazide",
+     "Na-Cl in DCT; raises calcium"
+    ],
+    [
+     "Amiloride",
+     "ENaC blocker; raises K⁺"
+    ],
+    [
+     "Spironolactone",
+     "Aldosterone receptor; gynecomastia"
+    ]
+   ],
+   "explain": "\"Loops Lose calcium; thiazides reTain calcium.\" K-sparing agents raise potassium."
+  },
+  {
+   "id": "r14",
+   "sys": "KU",
+   "topic": "Urology",
+   "type": "mcq",
+   "guide": {
+    "f": "Topic_18_Urology.html",
+    "t": "18 · Urology",
+    "s": "Urologic emergencies"
+   },
+   "prompt": "Adolescent with sudden severe scrotal pain, a high-riding horizontal testis, and an absent cremasteric reflex. Best step?",
+   "options": [
+    "Scrotal ultrasound then follow-up",
+    "Antibiotics for epididymitis",
+    "Urgent surgical exploration",
+    "Reassurance and re-examination"
+   ],
+   "correct": 2,
+   "explain": "Classic <b>testicular torsion</b> — go straight to <b>surgical exploration/detorsion</b> within ~6 h; don't delay for imaging."
+  },
+  {
+   "id": "r15",
+   "sys": "KU",
+   "topic": "Urology",
+   "type": "multi",
+   "guide": {
+    "f": "Topic_18_Urology.html",
+    "t": "18 · Urology",
+    "s": "Urologic emergencies"
+   },
+   "prompt": "Which require <b>emergency</b> intervention? (select all)",
+   "options": [
+    "Testicular torsion",
+    "Obstructing ureteric stone WITH infection",
+    "Fournier gangrene",
+    "Uncomplicated cystitis"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "Torsion → surgery; infected obstruction → emergency decompression (stent/nephrostomy); Fournier → debridement. Simple cystitis is outpatient."
+  }
+ ],
+ "guides": [
+  {
+   "file": "Topic_12_AKI.html",
+   "title": "Topic 12 AKI",
+   "html": "<!-- Topic Reference · ACUTE KIDNEY INJURY (detailed) -->\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#7c2d2d;--accent2:#9a5a2a;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.4;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:13px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:31px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.printbtn{font-family:'IBM Plex Sans';font-weight:600;font-size:12px;background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:8px 16px;cursor:pointer;margin-top:6px}\n.printbtn:hover{background:var(--accent)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(128,128,128,.10);padding:10px 13px;margin-bottom:12px}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:7px}\n.band.emerg{border-color:var(--hi);background:rgba(162,59,46,.10)}.band.emerg .t{color:var(--hi)}\ntable{width:100%;border-collapse:collapse;font-size:11.4px}\nth,td{text-align:left;padding:3px 8px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.6px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600}\ntd:first-child{font-weight:600;white-space:nowrap}\n.physio{columns:2;column-gap:24px;font-size:11.5px}.physio div{break-inside:avoid;margin-bottom:4px}.physio b{color:var(--ink)}\n.emerg .grid2{columns:2;column-gap:22px;font-size:11.4px}.emerg .grid2 div{break-inside:avoid;margin-bottom:4px}.emerg b{color:var(--hi)}\n.cols{column-count:2;column-gap:16px}@media(max-width:700px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(128,128,128,.10);padding:9px 11px 8px;margin:0 0 12px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 7px;padding-bottom:5px;border-bottom:1.5px solid var(--line);color:var(--accent)}\n.row{margin:0 0 4px;font-size:11.6px;line-height:1.38}\n.row .tg{font-weight:600;color:var(--ink)}.row .ar{color:var(--soft)}.row .ar::before{content:\"→ \";color:var(--accent);font-weight:600}\n.lead{font-weight:600;color:var(--ink);display:block;margin:7px 0 3px;font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-family:'IBM Plex Mono',monospace;color:var(--accent2)}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:6px 0}\n.callout{border-left:3px solid var(--accent);background:rgba(128,128,128,.10);padding:7px 10px;border-radius:0 5px 5px 0;margin:5px 0 6px}\n.callout .h{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:3px}\n.foot{margin-top:6px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:portrait;margin:8mm}body{background:#fff;font-size:8.7px}.page{max-width:none;padding:0}.printbtn{display:none}.card,.band{margin-bottom:7px;background:#fff;border-color:#bbb}.card{padding:6px 8px}.card h2{font-size:8.3px;margin-bottom:5px}.row{font-size:8px;margin-bottom:2.5px;line-height:1.28}.head h1{font-size:22px}table{font-size:7.9px}.physio,.emerg .grid2{font-size:7.9px}}\n</style>\n\n<div class=\"page\">\n  <div class=\"head\">\n    <div class=\"l\"><div class=\"k\">◇ Topic Reference · 12 ◇</div><h1>Acute Kidney Injury</h1></div>\n    <div class=\"r\">KU 1 · ~2 pp<br>trigger&nbsp;<span style=\"color:var(--accent)\">→</span>&nbsp;answer<br><button class=\"printbtn\" onclick=\"window.print()\">⎙ Print / Save PDF</button></div>\n  </div>\n\n  <div class=\"band\">\n    <div class=\"t\">Definition & the pre/intra/post framework</div>\n    <div class=\"physio\">\n      <div><b>AKI (KDIGO):</b> ↑creatinine ≥26.5 µmol/L in 48 h, or ≥1.5× baseline within 7 d, or urine output &lt;0.5 mL/kg/h for ≥6 h.</div>\n      <div><b>Three buckets:</b> <b>prerenal</b> (hypoperfusion, reversible), <b>intrinsic</b> (ATN/AIN/glomerular/vascular), <b>postrenal</b> (obstruction). Always get a renal <b>ultrasound</b> + bladder scan to exclude obstruction, and review the med list.</div>\n      <div><b>Urine tells the story:</b> bland = prerenal/postrenal; <b>muddy-brown granular casts = ATN</b>; <b>WBC casts = AIN</b>; <b>RBC casts = glomerular</b>.</div>\n      <div><b>FENa:</b> &lt;1% prerenal, &gt;1–2% ATN — but <b>unreliable on diuretics</b> (use FEurea &lt;35%), and low in contrast/glomerular/early obstruction.</div>\n    </div>\n  </div>\n\n  <div class=\"band emerg\">\n    <div class=\"t\">★ AKI emergencies</div>\n    <div class=\"grid2\">\n      <div><b>Hyperkalemia with ECG changes</b> — <b>IV calcium gluconate first</b> (membrane stabilization) → insulin/dextrose + salbutamol (shift) → saline/furosemide or binder (excrete) → dialysis if refractory.</div>\n      <div><b>Dialyze for AEIOU</b> — <b>A</b>cidosis (refractory pH&lt;7.1), <b>E</b>lectrolytes (refractory hyperkalemia), <b>I</b>ntoxication (methanol, ethylene glycol, lithium, salicylates), <b>O</b>verload (refractory pulmonary edema), <b>U</b>remia (pericarditis, encephalopathy, bleeding).</div>\n    </div>\n  </div>\n\n  <div class=\"cols\">\n    <div class=\"card\">\n      <h2>Prerenal</h2>\n      <div class=\"row\"><span class=\"tg\">Causes</span> <span class=\"ar\">true volume loss (hemorrhage, GI, diuretics); <b>↓effective volume</b> (CHF, cirrhosis, sepsis); hemodynamic — <b>NSAIDs (afferent constriction), ACEi/ARB (efferent dilation)</b>, hepatorenal</span></div>\n      <div class=\"row\"><span class=\"tg\">Labs</span> <span class=\"ar\">FENa &lt;1%, UNa &lt;20, urine osm &gt;500, <b>BUN:Cr &gt;20</b>, bland sediment</span></div>\n      <div class=\"row\"><span class=\"tg\">Key feature</span> <span class=\"ar\">reverses with restoration of perfusion; prolonged → ATN</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Intrinsic — ATN & AIN</h2>\n      <div class=\"row\"><span class=\"tg\">ATN — ischemic</span> <span class=\"ar\">prolonged prerenal/shock</span></div>\n      <div class=\"row\"><span class=\"tg\">ATN — nephrotoxic</span> <span class=\"ar\">contrast, aminoglycosides, amphotericin, cisplatin; <b>myoglobin (rhabdo)</b>, hemoglobin, urate (tumor lysis), myeloma casts</span></div>\n      <div class=\"row\"><span class=\"tg\">ATN clues</span> <span class=\"ar\"><b>muddy-brown granular casts</b>, FENa &gt;1–2%; phases oliguric → polyuric recovery</span></div>\n      <hr class=\"mini\">\n      <div class=\"row\"><span class=\"tg\">AIN</span> <span class=\"ar\">drugs (<b>NSAIDs, PPIs, β-lactams, sulfa, allopurinol</b>) ~7–10 d later; fever/rash/eosinophilia (triad often absent); <b>WBC casts</b>, sterile pyuria → stop drug ± steroids</span></div>\n      <div class=\"row\"><span class=\"tg\">Vascular</span> <span class=\"ar\">TTP/HUS, scleroderma renal crisis, <b>cholesterol emboli</b> (post-cath, livedo, blue toes, eosinophilia), malignant HTN</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Postrenal (obstruction)</h2>\n      <div class=\"row\"><span class=\"tg\">Causes</span> <span class=\"ar\">BPH, bilateral stones, pelvic malignancy, retroperitoneal fibrosis, neurogenic bladder (needs bilateral or solitary-kidney obstruction)</span></div>\n      <div class=\"row\"><span class=\"tg\">Diagnose</span> <span class=\"ar\">renal US → <b>hydronephrosis</b>; bladder scan</span></div>\n      <div class=\"row\"><span class=\"tg\">Relieve</span> <span class=\"ar\">outlet (BPH) → <b>urethral catheter</b>; ureteric → stent/nephrostomy</span></div>\n      <div class=\"row\"><span class=\"tg\">Watch</span> <span class=\"ar\"><b>post-obstructive diuresis</b> — monitor fluids/electrolytes</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Work-up & complications</h2>\n      <div class=\"row\"><span class=\"tg\">Work-up</span> <span class=\"ar\">urinalysis + microscopy (casts), FENa/FEurea, renal US, bladder scan, med review, volume assessment, CK if rhabdo suspected</span></div>\n      <div class=\"row\"><span class=\"tg\">Rhabdomyolysis</span> <span class=\"ar\">↑CK, dipstick blood+ but <b>no RBCs</b> (myoglobin), ↑K/PO₄, ↓Ca → aggressive fluids</span></div>\n      <hr class=\"mini\">\n      <span class=\"lead\">Complications</span>\n      <div class=\"row\"><span class=\"tg\">Watch for</span> <span class=\"ar\">hyperkalemia, metabolic acidosis, volume overload, hyperphosphatemia, uremia (pericarditis, encephalopathy, platelet dysfunction)</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Management & pitfalls</h2>\n      <div class=\"row\"><span class=\"tg\">General</span> <span class=\"ar\">treat the cause, optimize perfusion/volume, <b>stop nephrotoxins</b>, renally dose drugs, manage K⁺/acidosis</span></div>\n      <div class=\"row\"><span class=\"tg\">Contrast nephropathy</span> <span class=\"ar\">prevent with hydration; distinguish from cholesterol emboli (delayed, eosinophilia)</span></div>\n      <hr class=\"mini\">\n      <span class=\"lead\">Pitfalls</span>\n      <div class=\"row\"><span class=\"tg\">FENa on diuretics</span> <span class=\"ar\">use FEurea instead</span></div>\n      <div class=\"row\"><span class=\"tg\">Anuric AKI</span> <span class=\"ar\">eGFR ≈ 0 — equations invalid in non-steady state</span></div>\n      <div class=\"row\"><span class=\"tg\">Triple whammy</span> <span class=\"ar\">NSAID + ACEi/ARB + diuretic → prerenal AKI</span></div>\n      <div class=\"row\"><span class=\"tg\">Always exclude obstruction</span> <span class=\"ar\">US/bladder scan early</span></div>\n    </div>\n  </div>\n  <div class=\"foot\">Topic 12 / Acute Kidney Injury (detailed) · generated from your 11-week guides · verify against course &amp; clinical guidelines · review aid only</div>\n</div>\n"
+  },
+  {
+   "file": "Topic_13_Glomerular_Disease.html",
+   "title": "Topic 13 Glomerular Disease",
+   "html": "<!-- Topic Reference · GLOMERULAR DISEASE (detailed) -->\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#7c2d2d;--accent2:#9a5a2a;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.4;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:13px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:31px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.printbtn{font-family:'IBM Plex Sans';font-weight:600;font-size:12px;background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:8px 16px;cursor:pointer;margin-top:6px}\n.printbtn:hover{background:var(--accent)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(128,128,128,.10);padding:10px 13px;margin-bottom:12px}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:7px}\n.band.emerg{border-color:var(--hi);background:rgba(162,59,46,.10)}.band.emerg .t{color:var(--hi)}\ntable{width:100%;border-collapse:collapse;font-size:11.4px}\nth,td{text-align:left;padding:3px 8px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.6px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600}\ntd:first-child{font-weight:600;white-space:nowrap}\n.physio{columns:2;column-gap:24px;font-size:11.5px}.physio div{break-inside:avoid;margin-bottom:4px}.physio b{color:var(--ink)}\n.emerg .grid1{font-size:11.4px}.emerg b{color:var(--hi)}\n.cols{column-count:2;column-gap:16px}@media(max-width:700px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(128,128,128,.10);padding:9px 11px 8px;margin:0 0 12px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 7px;padding-bottom:5px;border-bottom:1.5px solid var(--line);color:var(--accent)}\n.card.neph h2{color:var(--lo)}.card.itic h2{color:var(--hi)}\n.row{margin:0 0 4px;font-size:11.6px;line-height:1.38}\n.row .tg{font-weight:600;color:var(--ink)}.row .ar{color:var(--soft)}.row .ar::before{content:\"→ \";color:var(--accent);font-weight:600}\n.lead{font-weight:600;color:var(--ink);display:block;margin:7px 0 3px;font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-family:'IBM Plex Mono',monospace;color:var(--accent2)}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:6px 0}\n.callout{border-left:3px solid var(--hi);background:rgba(162,59,46,.08);padding:7px 10px;border-radius:0 5px 5px 0;margin:5px 0 6px}\n.callout .h{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--hi);font-weight:600;margin-bottom:3px}\n.foot{margin-top:6px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:portrait;margin:8mm}body{background:#fff;font-size:8.7px}.page{max-width:none;padding:0}.printbtn{display:none}.card,.band{margin-bottom:7px;background:#fff;border-color:#bbb}.card{padding:6px 8px}.card h2{font-size:8.3px;margin-bottom:5px}.row{font-size:8px;margin-bottom:2.5px;line-height:1.28}.head h1{font-size:22px}table{font-size:7.9px}.physio{font-size:7.9px}}\n</style>\n\n<div class=\"page\">\n  <div class=\"head\">\n    <div class=\"l\"><div class=\"k\">◇ Topic Reference · 13 ◇</div><h1>Glomerular Disease</h1></div>\n    <div class=\"r\">KU 1 · ~2 pp<br>trigger&nbsp;<span style=\"color:var(--accent)\">→</span>&nbsp;answer<br><button class=\"printbtn\" onclick=\"window.print()\">⎙ Print / Save PDF</button></div>\n  </div>\n\n  <div class=\"band\">\n    <div class=\"t\">★ The one distinction that organizes everything: nephrotic vs nephritic</div>\n    <table>\n      <tr><th></th><th>Nephrotic</th><th>Nephritic</th></tr>\n      <tr><td>Lesion</td><td class=\"nl\"><b>podocyte injury</b> (non-proliferative)</td><td class=\"nl\"><b>inflammation/proliferation</b></td></tr>\n      <tr><td>Proteinuria</td><td class=\"nl\"><b>&gt;3.5 g/day (heavy)</b></td><td class=\"nl\">mild–moderate (&lt;3.5)</td></tr>\n      <tr><td>Sediment</td><td class=\"nl\"><b>bland</b>; oval fat bodies/fatty casts</td><td class=\"nl\"><b>hematuria + RBC casts</b>, dysmorphic RBCs</td></tr>\n      <tr><td>Other</td><td class=\"nl\">hypoalbuminemia, edema, hyperlipidemia</td><td class=\"nl\">HTN, oliguria, ↓GFR</td></tr>\n    </table>\n  </div>\n\n  <div class=\"band emerg\">\n    <div class=\"t\">★ Glomerular emergency — RPGN</div>\n    <div class=\"grid1\">\n      <div><b>Rapidly progressive GN</b> = nephritic picture (RBC casts) with creatinine climbing over days–weeks; <b>crescents</b> on biopsy. Three immune patterns: <b>anti-GBM</b> (linear IgG), <b>immune-complex</b> (granular — lupus, post-strep, IgA), <b>pauci-immune</b> (ANCA). <b>Start empiric IV pulse corticosteroids ± cyclophosphamide urgently — do NOT wait for biopsy</b>; add plasmapheresis for anti-GBM.</div>\n    </div>\n  </div>\n\n  <div class=\"cols\">\n    <div class=\"card neph\">\n      <h2>Nephrotic syndrome</h2>\n      <div class=\"row\"><span class=\"tg\">Definition</span> <span class=\"ar\">proteinuria &gt;3.5 g/day + hypoalbuminemia + edema + hyperlipidemia/lipiduria (Maltese crosses)</span></div>\n      <div class=\"row\"><span class=\"tg\">Complications</span> <span class=\"ar\"><b>hypercoagulable</b> (loss of antithrombin III → renal vein thrombosis/PE), infection (Ig loss), hyperlipidemia</span></div>\n      <div class=\"row\"><span class=\"tg\">Manage</span> <span class=\"ar\">ACEi/ARB (↓proteinuria), diuretics, statin, treat cause; anticoagulate if indicated</span></div>\n    </div>\n\n    <div class=\"card neph\">\n      <h2>Nephrotic causes</h2>\n      <div class=\"row\"><span class=\"tg\">Minimal change</span> <span class=\"ar\">children; foot-process effacement on EM; <b>steroid-responsive</b>; idiopathic / NSAIDs / Hodgkin</span></div>\n      <div class=\"row\"><span class=\"tg\">FSGS</span> <span class=\"ar\">commonest in adults (esp. Black ancestry); HIV, obesity, reflux; segmental sclerosis</span></div>\n      <div class=\"row\"><span class=\"tg\">Membranous</span> <span class=\"ar\"><b>anti-PLA2R</b>; \"spike and dome\" subepithelial deposits; secondary (malignancy, hep B, SLE, drugs); very hypercoagulable</span></div>\n      <div class=\"row\"><span class=\"tg\">Diabetic</span> <span class=\"ar\">Kimmelstiel-Wilson nodules; commonest overall</span></div>\n      <div class=\"row\"><span class=\"tg\">Amyloid</span> <span class=\"ar\">Congo red, apple-green birefringence</span></div>\n    </div>\n\n    <div class=\"card itic\">\n      <h2>Nephritic syndrome</h2>\n      <div class=\"row\"><span class=\"tg\">Picture</span> <span class=\"ar\">hematuria (dysmorphic RBCs, <b>RBC casts</b>), HTN, oliguria, ↓GFR, sub-nephrotic proteinuria, edema</span></div>\n      <div class=\"row\"><span class=\"tg\">Key reflex</span> <span class=\"ar\"><b>check complement</b> to split the differential</span></div>\n    </div>\n\n    <div class=\"card itic\">\n      <h2>Nephritic causes — by complement</h2>\n      <div class=\"row\"><span class=\"tg\">LOW complement</span> <span class=\"ar\"><b>post-streptococcal</b> (↓C3, 1–3 wk post-GAS, subepithelial humps, resolves), MPGN, <b>lupus nephritis</b> (↓C3/C4, anti-dsDNA), cryoglobulinemia (hep C), endocarditis</span></div>\n      <div class=\"row\"><span class=\"tg\">NORMAL complement</span> <span class=\"ar\"><b>IgA nephropathy</b> (commonest GN; <b>synpharyngitic</b> hematuria 1–2 d after URI), IgA vasculitis/HSP, <b>ANCA-associated</b> (pauci-immune), <b>anti-GBM</b>/Goodpasture (hemoptysis)</span></div>\n      <div class=\"callout\">\n        <div class=\"h\">IgA vs post-strep (classic discriminator)</div>\n        <div class=\"row\"><span class=\"tg\">IgA</span> <span class=\"ar\">hematuria <b>with/1–2 d after</b> URI, normal complement</span></div>\n        <div class=\"row\"><span class=\"tg\">Post-strep</span> <span class=\"ar\">hematuria <b>1–3 wk after</b>, ↓C3, ↑ASO</span></div>\n      </div>\n    </div>\n\n    <div class=\"card itic\">\n      <h2>The vasculitides (pulmonary-renal)</h2>\n      <div class=\"row\"><span class=\"tg\">Anti-GBM / Goodpasture</span> <span class=\"ar\">linear IgG, hemoptysis + RBC casts, anti-GBM Ab → plasmapheresis + steroids + cyclophosphamide</span></div>\n      <div class=\"row\"><span class=\"tg\">GPA</span> <span class=\"ar\"><b>c-ANCA/PR3</b>; sinus + lung + kidney</span></div>\n      <div class=\"row\"><span class=\"tg\">MPA</span> <span class=\"ar\"><b>p-ANCA/MPO</b>; lung + kidney</span></div>\n      <div class=\"row\"><span class=\"tg\">EGPA</span> <span class=\"ar\">asthma + eosinophilia + p-ANCA</span></div>\n      <div class=\"row\"><span class=\"tg\">All ANCA</span> <span class=\"ar\">pauci-immune, <b>normal complement</b></span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Work-up & pitfalls</h2>\n      <div class=\"row\"><span class=\"tg\">Work-up</span> <span class=\"ar\">urinalysis/microscopy, protein quantification (UACR/PCR), serologies (ANA, dsDNA, <b>complement</b>, ANCA, anti-GBM, ASO, hep B/C, cryoglobulins), <b>biopsy</b></span></div>\n      <hr class=\"mini\">\n      <span class=\"lead\">Pitfalls</span>\n      <div class=\"row\"><span class=\"tg\">Casts</span> <span class=\"ar\">RBC = nephritic; fatty/oval-fat = nephrotic</span></div>\n      <div class=\"row\"><span class=\"tg\">Membranous</span> <span class=\"ar\">screen for malignancy/secondary causes; high VTE risk</span></div>\n      <div class=\"row\"><span class=\"tg\">RPGN</span> <span class=\"ar\">renal emergency — treat empirically before biopsy</span></div>\n      <div class=\"row\"><span class=\"tg\">Normal complement + hemoptysis</span> <span class=\"ar\">think ANCA or anti-GBM (not lupus)</span></div>\n    </div>\n  </div>\n  <div class=\"foot\">Topic 13 / Glomerular Disease (detailed) · generated from your 11-week guides · verify against course &amp; clinical guidelines · review aid only</div>\n</div>\n"
+  },
+  {
+   "file": "Topic_14_CKD_and_Complications.html",
+   "title": "Topic 14 CKD and Complications",
+   "html": "<!-- Topic Reference · CKD & COMPLICATIONS (detailed) -->\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#7c2d2d;--accent2:#9a5a2a;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.4;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:13px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:31px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.printbtn{font-family:'IBM Plex Sans';font-weight:600;font-size:12px;background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:8px 16px;cursor:pointer;margin-top:6px}\n.printbtn:hover{background:var(--accent)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(128,128,128,.10);padding:10px 13px;margin-bottom:12px}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:7px}\ntable{width:100%;border-collapse:collapse;font-size:11.4px}\nth,td{text-align:left;padding:3px 8px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.6px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600}\ntd:first-child{font-weight:600;white-space:nowrap}\n.physio{columns:2;column-gap:24px;font-size:11.5px}.physio div{break-inside:avoid;margin-bottom:4px}.physio b{color:var(--ink)}\n.cols{column-count:2;column-gap:16px}@media(max-width:700px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(128,128,128,.10);padding:9px 11px 8px;margin:0 0 12px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 7px;padding-bottom:5px;border-bottom:1.5px solid var(--line);color:var(--accent)}\n.row{margin:0 0 4px;font-size:11.6px;line-height:1.38}\n.row .tg{font-weight:600;color:var(--ink)}.row .ar{color:var(--soft)}.row .ar::before{content:\"→ \";color:var(--accent);font-weight:600}\n.lead{font-weight:600;color:var(--ink);display:block;margin:7px 0 3px;font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-family:'IBM Plex Mono',monospace;color:var(--accent2)}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:6px 0}\n.callout{border-left:3px solid var(--accent);background:rgba(128,128,128,.10);padding:7px 10px;border-radius:0 5px 5px 0;margin:5px 0 6px}\n.callout .h{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:3px}\n.foot{margin-top:6px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:portrait;margin:8mm}body{background:#fff;font-size:8.7px}.page{max-width:none;padding:0}.printbtn{display:none}.card,.band{margin-bottom:7px;background:#fff;border-color:#bbb}.card{padding:6px 8px}.card h2{font-size:8.3px;margin-bottom:5px}.row{font-size:8px;margin-bottom:2.5px;line-height:1.28}.head h1{font-size:22px}table{font-size:7.9px}.physio{font-size:7.9px}}\n</style>\n\n<div class=\"page\">\n  <div class=\"head\">\n    <div class=\"l\"><div class=\"k\">◇ Topic Reference · 14 ◇</div><h1>Chronic Kidney Disease &amp; Complications</h1></div>\n    <div class=\"r\">KU 1 · ~2 pp<br>trigger&nbsp;<span style=\"color:var(--accent)\">→</span>&nbsp;answer<br><button class=\"printbtn\" onclick=\"window.print()\">⎙ Print / Save PDF</button></div>\n  </div>\n\n  <div class=\"band\">\n    <div class=\"t\">Definition, staging & causes</div>\n    <div class=\"physio\">\n      <div><b>CKD:</b> eGFR &lt;60 <i>or</i> markers of kidney damage (albuminuria, hematuria, structural) <b>for ≥3 months</b>.</div>\n      <div><b>GFR stages:</b> G1 ≥90 (+damage), G2 60–89, <b>G3a 45–59, G3b 30–44</b>, G4 15–29, G5 &lt;15 (ESRD). <b>Albuminuria:</b> A1 &lt;3, A2 3–30, A3 &gt;30 mg/mmol.</div>\n      <div><b>Causes:</b> <b>diabetes #1</b>, hypertension #2, glomerulonephritis, <b>ADPKD</b> (flank pain, hematuria, HTN, hepatic cysts, berry aneurysms), obstructive.</div>\n      <div><b>CV disease is the #1 cause of death</b> in CKD — CKD is a cardiovascular risk multiplier.</div>\n    </div>\n  </div>\n\n  <div class=\"cols\">\n    <div class=\"card\">\n      <h2>Slowing progression</h2>\n      <div class=\"row\"><span class=\"tg\">Blood pressure</span> <span class=\"ar\">target ~&lt;130/80</span></div>\n      <div class=\"row\"><span class=\"tg\">ACEi / ARB</span> <span class=\"ar\">first-line with <b>albuminuria</b> (↓intraglomerular pressure, ↓proteinuria); accept ≤30% Cr rise, monitor K⁺</span></div>\n      <div class=\"row\"><span class=\"tg\">SGLT2 inhibitor</span> <span class=\"ar\">slows progression in <b>diabetic AND non-diabetic</b> CKD (dapagliflozin/empagliflozin)</span></div>\n      <div class=\"row\"><span class=\"tg\">Also</span> <span class=\"ar\">glycemic control, sodium/protein moderation, <b>avoid nephrotoxins</b> (NSAIDs, contrast)</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>CKD-MBD (mineral-bone)</h2>\n      <div class=\"row\"><span class=\"tg\">Mechanism</span> <span class=\"ar\">↓1-α-hydroxylase → ↓1,25-vit D; phosphate retention; ↑FGF23 → ↓Ca → <b>secondary hyperPTH</b></span></div>\n      <div class=\"row\"><span class=\"tg\">Lab pattern</span> <span class=\"ar\"><b>↓Ca, ↑phosphate, ↑PTH, ↓1,25-vit D</b></span></div>\n      <div class=\"row\"><span class=\"tg\">Treat</span> <span class=\"ar\">dietary phosphate restriction + <b>phosphate binders</b> (non-calcium e.g. sevelamer) + active vit D (calcitriol) + <b>cinacalcet</b> (lowers PTH & Ca) → prevents renal osteodystrophy</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Anemia of CKD</h2>\n      <div class=\"row\"><span class=\"tg\">Mechanism</span> <span class=\"ar\"><b>EPO deficiency</b> → normocytic normochromic anemia</span></div>\n      <div class=\"row\"><span class=\"tg\">First</span> <span class=\"ar\">ensure <b>iron repletion</b> before starting an ESA</span></div>\n      <div class=\"row\"><span class=\"tg\">ESA target</span> <span class=\"ar\">Hb <b>~100–115 g/L</b> (don't normalize &gt;130 — ↑stroke/CV risk)</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Other complications</h2>\n      <div class=\"row\"><span class=\"tg\">Metabolic acidosis</span> <span class=\"ar\">↓ammonia excretion → treat with oral <b>sodium bicarbonate</b> (slows progression, protects bone/muscle)</span></div>\n      <div class=\"row\"><span class=\"tg\">Hyperkalemia</span> <span class=\"ar\">↓excretion; diet, binders; balance against ACEi/ARB benefit</span></div>\n      <div class=\"row\"><span class=\"tg\">Volume / HTN</span> <span class=\"ar\">salt restriction, diuretics</span></div>\n      <div class=\"row\"><span class=\"tg\">Uremia (late)</span> <span class=\"ar\">pericarditis, encephalopathy, platelet dysfunction, pruritus, restless legs</span></div>\n      <div class=\"row\"><span class=\"tg\">CV disease</span> <span class=\"ar\">leading cause of death — aggressive risk-factor control</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Kidney replacement</h2>\n      <div class=\"row\"><span class=\"tg\">When (AEIOU)</span> <span class=\"ar\">refractory Acidosis, Electrolytes (hyperK), Intoxication, Overload, Uremia — or progressive ESRD with symptoms</span></div>\n      <div class=\"row\"><span class=\"tg\">Access</span> <span class=\"ar\">create <b>AV fistula early</b> (preferred over catheter); \"fistula first\"</span></div>\n      <div class=\"row\"><span class=\"tg\">Modalities</span> <span class=\"ar\">hemodialysis, peritoneal dialysis</span></div>\n      <div class=\"row\"><span class=\"tg\">Transplant</span> <span class=\"ar\">best survival/quality of life when eligible</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Pitfalls</h2>\n      <div class=\"row\"><span class=\"tg\">eGFR equations</span> <span class=\"ar\">assume steady state — invalid in AKI/non-steady state</span></div>\n      <div class=\"row\"><span class=\"tg\">ACEi/ARB</span> <span class=\"ar\">expect ≤30% Cr bump; stop if larger or hyperK; contraindicated in <b>bilateral renal artery stenosis</b> and pregnancy</span></div>\n      <div class=\"row\"><span class=\"tg\">Don't over-correct anemia</span> <span class=\"ar\">Hb &gt;130 increases harm</span></div>\n      <div class=\"row\"><span class=\"tg\">CKD = CV risk equivalent</span> <span class=\"ar\">treat lipids/BP aggressively</span></div>\n      <div class=\"row\"><span class=\"tg\">ADPKD</span> <span class=\"ar\">screen for berry aneurysm if family history of subarachnoid hemorrhage</span></div>\n    </div>\n  </div>\n  <div class=\"foot\">Topic 14 / CKD &amp; Complications (detailed) · generated from your 11-week guides · verify against course &amp; clinical guidelines · review aid only</div>\n</div>\n"
+  },
+  {
+   "file": "Topic_15_Fluids_and_Electrolytes.html",
+   "title": "Topic 15 Fluids and Electrolytes",
+   "html": "<!-- Topic Reference · FLUIDS & ELECTROLYTES (detailed) -->\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#7c2d2d;--accent2:#9a5a2a;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.4;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:13px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:31px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.printbtn{font-family:'IBM Plex Sans';font-weight:600;font-size:12px;background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:8px 16px;cursor:pointer;margin-top:6px}\n.printbtn:hover{background:var(--accent)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(128,128,128,.10);padding:10px 13px;margin-bottom:12px}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:7px}\n.band.emerg{border-color:var(--hi);background:rgba(162,59,46,.10)}.band.emerg .t{color:var(--hi)}\ntable{width:100%;border-collapse:collapse;font-size:11.4px}\nth,td{text-align:left;padding:3px 8px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.6px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600}\ntd:first-child{font-weight:600;white-space:nowrap}\n.physio{columns:2;column-gap:24px;font-size:11.5px}.physio div{break-inside:avoid;margin-bottom:4px}.physio b{color:var(--ink)}\n.emerg .grid2{columns:2;column-gap:22px;font-size:11.4px}.emerg .grid2 div{break-inside:avoid;margin-bottom:4px}.emerg b{color:var(--hi)}\n.cols{column-count:2;column-gap:16px}@media(max-width:700px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(128,128,128,.10);padding:9px 11px 8px;margin:0 0 12px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 7px;padding-bottom:5px;border-bottom:1.5px solid var(--line);color:var(--accent)}\n.row{margin:0 0 4px;font-size:11.6px;line-height:1.38}\n.row .tg{font-weight:600;color:var(--ink)}.row .ar{color:var(--soft)}.row .ar::before{content:\"→ \";color:var(--accent);font-weight:600}\n.lead{font-weight:600;color:var(--ink);display:block;margin:7px 0 3px;font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-family:'IBM Plex Mono',monospace;color:var(--accent2)}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:6px 0}\n.callout{border-left:3px solid var(--accent);background:rgba(128,128,128,.10);padding:7px 10px;border-radius:0 5px 5px 0;margin:5px 0 6px}\n.callout .h{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:3px}\n.foot{margin-top:6px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:portrait;margin:8mm}body{background:#fff;font-size:8.7px}.page{max-width:none;padding:0}.printbtn{display:none}.card,.band{margin-bottom:7px;background:#fff;border-color:#bbb}.card{padding:6px 8px}.card h2{font-size:8.3px;margin-bottom:5px}.row{font-size:8px;margin-bottom:2.5px;line-height:1.28}.head h1{font-size:22px}table{font-size:7.9px}.physio,.emerg .grid2{font-size:7.9px}}\n</style>\n\n<div class=\"page\">\n  <div class=\"head\">\n    <div class=\"l\"><div class=\"k\">◇ Topic Reference · 15 ◇</div><h1>Fluids &amp; Electrolytes</h1></div>\n    <div class=\"r\">KU 2 · ~2 pp<br>trigger&nbsp;<span style=\"color:var(--accent)\">→</span>&nbsp;answer<br><button class=\"printbtn\" onclick=\"window.print()\">⎙ Print / Save PDF</button></div>\n  </div>\n\n  <div class=\"band\">\n    <div class=\"t\">The concept that unlocks sodium problems</div>\n    <div class=\"physio\">\n      <div><b>Sodium <u>content</u> = ECF volume</b> (edema vs dehydration). <b>Sodium <u>concentration</u> = water balance / cell size</b>. They're independent — a patient can be volume-overloaded and hyponatremic at once.</div>\n      <div><b>Dysnatremias are water problems:</b> hyponatremia = relative <b>water excess</b>; hypernatremia = <b>water deficit</b>. ADH (driven by osmolality and by low effective volume) is the central lever.</div>\n      <div><b>Correct slowly:</b> chronic hyponatremia too fast → <b>osmotic demyelination</b>; hypernatremia too fast → <b>cerebral edema</b>. Target ≤8–10 mmol/L/24 h.</div>\n      <div><b>Refractory K⁺ or Ca²⁺?</b> Check and replace <b>magnesium</b>.</div>\n    </div>\n  </div>\n\n  <div class=\"band emerg\">\n    <div class=\"t\">★ Electrolyte emergencies</div>\n    <div class=\"grid2\">\n      <div><b>Severe symptomatic hyponatremia</b> (seizure, coma) — <b>3% hypertonic saline</b> bolus to raise Na a few mmol/L acutely; otherwise correct slowly to avoid osmotic demyelination.</div>\n      <div><b>Severe hyperkalemia + ECG changes</b> — <b>IV calcium gluconate</b> first (stabilize) → insulin/dextrose + salbutamol (shift) → furosemide/binder/dialysis (excrete). ECG: peaked T → wide QRS → sine wave.</div>\n    </div>\n  </div>\n\n  <div class=\"cols\">\n    <div class=\"card\">\n      <h2>Hyponatremia — the algorithm</h2>\n      <div class=\"row\"><span class=\"tg\">① Osmolality</span> <span class=\"ar\">normal/high → pseudohyponatremia (lipids/paraproteins) or <b>hyperglycemia</b> (translocational; correct Na +~2.4/5.5 mmol glucose), mannitol</span></div>\n      <div class=\"row\"><span class=\"tg\">② If hypotonic → volume</span> <span class=\"ar\"></span></div>\n      <div class=\"row\"><span class=\"tg\">Hypovolemic</span> <span class=\"ar\">renal (diuretics, salt-wasting, adrenal — UNa&gt;20) vs extrarenal (GI, third-space — UNa&lt;20) → <b>isotonic saline</b></span></div>\n      <div class=\"row\"><span class=\"tg\">Euvolemic</span> <span class=\"ar\"><b>SIADH</b>, hypothyroid, glucocorticoid deficiency, psychogenic polydipsia/beer potomania (dilute urine) → fluid restriction</span></div>\n      <div class=\"row\"><span class=\"tg\">Hypervolemic</span> <span class=\"ar\">CHF, cirrhosis, nephrotic, renal failure (↓effective volume → ADH) → salt + water restriction, treat cause</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>SIADH</h2>\n      <div class=\"row\"><span class=\"tg\">Criteria</span> <span class=\"ar\">euvolemic hypotonic hyponatremia, <b>urine osm &gt;100</b> (inappropriately concentrated), UNa &gt;30, <b>low uric acid</b>, normal thyroid/adrenal</span></div>\n      <div class=\"row\"><span class=\"tg\">Causes</span> <span class=\"ar\">CNS (stroke, tumor), pulmonary (pneumonia, SCLC), drugs (SSRIs, carbamazepine), pain/post-op, malignancy</span></div>\n      <div class=\"row\"><span class=\"tg\">Treat</span> <span class=\"ar\">fluid restriction; salt ± loop; vaptans/demeclocycline for refractory</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Hypernatremia</h2>\n      <div class=\"row\"><span class=\"tg\">Mechanism</span> <span class=\"ar\"><b>water deficit</b> — thirst normally protects, so occurs in those without water access (elderly, infants, AMS) or with <b>DI</b></span></div>\n      <div class=\"row\"><span class=\"tg\">Causes</span> <span class=\"ar\">pure water loss (insensible, central/nephrogenic DI), hypotonic loss (GI, osmotic diuresis), rarely Na gain</span></div>\n      <div class=\"row\"><span class=\"tg\">Treat</span> <span class=\"ar\">free water (oral/NG or IV D5W); correct slowly; address DI (desmopressin if central)</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Potassium</h2>\n      <span class=\"lead\">Hyperkalemia</span>\n      <div class=\"row\"><span class=\"tg\">Causes</span> <span class=\"ar\">↓excretion (renal failure, ACEi/ARB, K-sparing, <b>type 4 RTA</b>/hypoaldo, Addison), shift (acidosis, insulin deficiency, cell lysis/rhabdo/tumor lysis, β-blocker, digoxin), pseudo (hemolyzed sample)</span></div>\n      <div class=\"row\"><span class=\"tg\">ECG</span> <span class=\"ar\">peaked T → ↑PR/↓P → wide QRS → sine → VF</span></div>\n      <hr class=\"mini\">\n      <span class=\"lead\">Hypokalemia</span>\n      <div class=\"row\"><span class=\"tg\">Causes</span> <span class=\"ar\">GI loss, renal (diuretics, hyperaldo, Bartter/Gitelman, <b>type 1/2 RTA</b>, Mg deficiency), shift (alkalosis, insulin, β-agonist, refeeding)</span></div>\n      <div class=\"row\"><span class=\"tg\">ECG</span> <span class=\"ar\">flat T, <b>U waves</b>, ST depression</span></div>\n      <div class=\"row\"><span class=\"tg\">Treat</span> <span class=\"ar\">KCl; <b>correct Mg</b> (refractory hypoK)</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Mg · PO₄ · pitfalls</h2>\n      <div class=\"row\"><span class=\"tg\">Hypomagnesemia</span> <span class=\"ar\">diuretics, PPI, alcohol, diarrhea → refractory hypoK/hypoCa, <b>torsades</b> → replace Mg</span></div>\n      <div class=\"row\"><span class=\"tg\">Hypermagnesemia</span> <span class=\"ar\">renal failure/antacids → ↓reflexes, resp depression → Ca gluconate</span></div>\n      <div class=\"row\"><span class=\"tg\">Hypophosphatemia</span> <span class=\"ar\"><b>refeeding</b>, DKA treatment, alcohol → weakness, rhabdo, hemolysis</span></div>\n      <hr class=\"mini\">\n      <span class=\"lead\">Pitfalls</span>\n      <div class=\"row\"><span class=\"tg\">Correct slowly</span> <span class=\"ar\">chronic hypoNa (ODS); hyperNa (cerebral edema)</span></div>\n      <div class=\"row\"><span class=\"tg\">Hyperglycemia</span> <span class=\"ar\">→ pseudohyponatremia; correct the Na</span></div>\n      <div class=\"row\"><span class=\"tg\">Vomiting → hypokalemia</span> <span class=\"ar\">mainly via <b>renal</b> loss (bicarbonaturia + aldosterone), not the vomitus</span></div>\n      <div class=\"row\"><span class=\"tg\">RTA & K</span> <span class=\"ar\">type 4 → hyperK; types 1/2 → hypoK</span></div>\n    </div>\n  </div>\n  <div class=\"foot\">Topic 15 / Fluids &amp; Electrolytes (detailed) · generated from your 11-week guides · verify against course &amp; clinical guidelines · review aid only</div>\n</div>\n"
+  },
+  {
+   "file": "Topic_16_Acid_Base.html",
+   "title": "Topic 16 Acid Base",
+   "html": "<!-- Topic Reference · ACID-BASE (detailed) -->\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#7c2d2d;--accent2:#9a5a2a;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.4;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:13px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:31px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.printbtn{font-family:'IBM Plex Sans';font-weight:600;font-size:12px;background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:8px 16px;cursor:pointer;margin-top:6px}\n.printbtn:hover{background:var(--accent)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(128,128,128,.10);padding:10px 13px;margin-bottom:12px}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:7px}\n.steps{counter-reset:s;font-size:11.6px}\n.steps .s{break-inside:avoid;margin-bottom:4px;padding-left:22px;position:relative}\n.steps .s::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:0;width:16px;height:16px;background:var(--accent);color:#fff;border-radius:50%;font-family:'IBM Plex Mono',monospace;font-size:9px;display:grid;place-items:center;font-weight:600}\n.steps b{color:var(--ink)}\ntable{width:100%;border-collapse:collapse;font-size:11.4px}\nth,td{text-align:left;padding:3px 8px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.6px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600}\ntd:first-child{font-weight:600;white-space:nowrap}\n.cols{column-count:2;column-gap:16px}@media(max-width:700px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(128,128,128,.10);padding:9px 11px 8px;margin:0 0 12px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 7px;padding-bottom:5px;border-bottom:1.5px solid var(--line);color:var(--accent)}\n.row{margin:0 0 4px;font-size:11.6px;line-height:1.38}\n.row .tg{font-weight:600;color:var(--ink)}.row .ar{color:var(--soft)}.row .ar::before{content:\"→ \";color:var(--accent);font-weight:600}\n.lead{font-weight:600;color:var(--ink);display:block;margin:7px 0 3px;font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-family:'IBM Plex Mono',monospace;color:var(--accent2)}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:6px 0}\n.callout{border-left:3px solid var(--accent);background:rgba(128,128,128,.10);padding:7px 10px;border-radius:0 5px 5px 0;margin:5px 0 6px}\n.callout .h{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:3px}\n.foot{margin-top:6px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:portrait;margin:8mm}body{background:#fff;font-size:8.7px}.page{max-width:none;padding:0}.printbtn{display:none}.card,.band{margin-bottom:7px;background:#fff;border-color:#bbb}.card{padding:6px 8px}.card h2{font-size:8.3px;margin-bottom:5px}.row{font-size:8px;margin-bottom:2.5px;line-height:1.28}.head h1{font-size:22px}table{font-size:7.9px}.steps{font-size:8px}}\n</style>\n\n<div class=\"page\">\n  <div class=\"head\">\n    <div class=\"l\"><div class=\"k\">◇ Topic Reference · 16 ◇</div><h1>Acid–Base</h1></div>\n    <div class=\"r\">KU 2 · ~2 pp<br>trigger&nbsp;<span style=\"color:var(--accent)\">→</span>&nbsp;answer<br><button class=\"printbtn\" onclick=\"window.print()\">⎙ Print / Save PDF</button></div>\n  </div>\n\n  <div class=\"band\">\n    <div class=\"t\">★ The stepwise approach — do it every time, in order</div>\n    <div class=\"steps\">\n      <div class=\"s\"><b>pH:</b> acidemia (&lt;7.35) or alkalemia (&gt;7.45)?</div>\n      <div class=\"s\"><b>Primary process:</b> metabolic (HCO₃ moves with pH) or respiratory (pCO₂ moves opposite pH)?</div>\n      <div class=\"s\"><b>Compensation appropriate?</b> Metabolic acidosis → <b>Winter's: expected pCO₂ = 1.5×HCO₃ + 8 (±2)</b>. Over/under-shoot = a second disorder.</div>\n      <div class=\"s\"><b>Anion gap = Na − (Cl + HCO₃)</b> (normal ~12). Always compute it, even if HCO₃ is normal.</div>\n      <div class=\"s\"><b>If high gap → delta-delta</b> (ΔAG / ΔHCO₃): ~1–2 pure HAGMA; &lt;1 added NAGMA; &gt;2 added metabolic <b>alkalosis</b>.</div>\n      <div class=\"s\"><b>If high gap → osmolar gap</b> for toxic alcohols (measured − calculated osm &gt;10).</div>\n    </div>\n  </div>\n\n  <div class=\"cols\">\n    <div class=\"card\">\n      <h2>High anion-gap metabolic acidosis</h2>\n      <div class=\"row\"><span class=\"tg\">GOLDMARK / MUDPILES</span> <span class=\"ar\">Glycols (ethylene/propylene), Oxoproline, L-/D-Lactate, Methanol, Aspirin, Renal/uremia, Ketoacidosis</span></div>\n      <div class=\"row\"><span class=\"tg\">Lactic acidosis</span> <span class=\"ar\">sepsis/shock, ischemia, metformin</span></div>\n      <div class=\"row\"><span class=\"tg\">Ketoacidosis</span> <span class=\"ar\">DKA, alcoholic, starvation</span></div>\n      <div class=\"callout\">\n        <div class=\"h\">Osmolar gap &gt;10 → toxic alcohol</div>\n        <div class=\"row\"><span class=\"tg\">Ethylene glycol</span> <span class=\"ar\">→ oxalic acid → Ca-oxalate crystals, AKI</span></div>\n        <div class=\"row\"><span class=\"tg\">Methanol</span> <span class=\"ar\">→ formic acid → blindness</span></div>\n        <div class=\"row\"><span class=\"tg\">Treat</span> <span class=\"ar\">fomepizole + dialysis</span></div>\n      </div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Normal anion-gap (hyperchloremic)</h2>\n      <div class=\"row\"><span class=\"tg\">Causes</span> <span class=\"ar\">GI bicarbonate loss (<b>diarrhea</b>), renal tubular acidosis, carbonic anhydrase inhibitors, saline infusion</span></div>\n      <div class=\"row\"><span class=\"tg\">Urine anion gap</span> <span class=\"ar\">(UNa+UK−UCl): <b>negative</b> = GI loss (kidney appropriately excretes NH₄⁺); <b>positive</b> = renal (RTA)</span></div>\n      <hr class=\"mini\">\n      <span class=\"lead\">Renal tubular acidosis</span>\n      <div class=\"row\"><span class=\"tg\">Type 1 (distal)</span> <span class=\"ar\">can't excrete H⁺; <b>hypokalemia</b>, urine pH &gt;5.5, stones</span></div>\n      <div class=\"row\"><span class=\"tg\">Type 2 (proximal)</span> <span class=\"ar\">HCO₃ wasting; hypokalemia; Fanconi</span></div>\n      <div class=\"row\"><span class=\"tg\">Type 4</span> <span class=\"ar\">hypoaldosteronism → <b>hyperkalemia</b>, ↓NH₄⁺</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Metabolic alkalosis</h2>\n      <div class=\"row\"><span class=\"tg\">Chloride-responsive (urine Cl &lt;20)</span> <span class=\"ar\"><b>vomiting/NG suction</b> (HCl loss), diuretics, contraction → corrects with saline</span></div>\n      <div class=\"row\"><span class=\"tg\">Chloride-resistant (urine Cl &gt;20)</span> <span class=\"ar\"><b>hyperaldosteronism</b>, Cushing, Bartter/Gitelman, severe hypokalemia</span></div>\n      <div class=\"row\"><span class=\"tg\">Maintained by</span> <span class=\"ar\">volume depletion, hypokalemia, hyperaldosteronism</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Respiratory disorders</h2>\n      <div class=\"row\"><span class=\"tg\">Acidosis (↑pCO₂)</span> <span class=\"ar\">hypoventilation — COPD, sedation/opioids, neuromuscular, obesity-hypoventilation</span></div>\n      <div class=\"row\"><span class=\"tg\">Compensation</span> <span class=\"ar\">acute HCO₃ ↑1 per 10 ↑pCO₂; chronic ↑~3.5–4 per 10</span></div>\n      <div class=\"row\"><span class=\"tg\">Alkalosis (↓pCO₂)</span> <span class=\"ar\">hyperventilation — anxiety/pain, hypoxia, <b>PE</b>, sepsis, salicylates, pregnancy, high altitude</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Mixed disorders (high-yield)</h2>\n      <div class=\"row\"><span class=\"tg\">DKA + vomiting</span> <span class=\"ar\">HAGMA + metabolic alkalosis (delta-delta &gt;2)</span></div>\n      <div class=\"row\"><span class=\"tg\">Salicylate toxicity</span> <span class=\"ar\"><b>HAGMA + respiratory alkalosis</b> (the classic mixed picture)</span></div>\n      <div class=\"row\"><span class=\"tg\">COPD + diuretic/vomiting</span> <span class=\"ar\">respiratory acidosis + metabolic alkalosis</span></div>\n      <div class=\"row\"><span class=\"tg\">Sepsis</span> <span class=\"ar\">lactic (HAGMA) + early respiratory alkalosis</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Pitfalls</h2>\n      <div class=\"row\"><span class=\"tg\">Always check compensation</span> <span class=\"ar\">over/under-shoot reveals a second disorder</span></div>\n      <div class=\"row\"><span class=\"tg\">Compute the gap even if HCO₃ normal</span> <span class=\"ar\">can hide a mixed HAGMA + alkalosis</span></div>\n      <div class=\"row\"><span class=\"tg\">Delta-delta</span> <span class=\"ar\">unmasks a concurrent metabolic alkalosis (DKA + vomiting)</span></div>\n      <div class=\"row\"><span class=\"tg\">Salicylates</span> <span class=\"ar\">think mixed acid-base, not a single disorder</span></div>\n      <div class=\"row\"><span class=\"tg\">Osmolar gap</span> <span class=\"ar\">for any unexplained HAGMA → toxic alcohol</span></div>\n    </div>\n  </div>\n  <div class=\"foot\">Topic 16 / Acid–Base (detailed) · generated from your 11-week guides · verify against course &amp; clinical guidelines · review aid only</div>\n</div>\n"
+  },
+  {
+   "file": "Topic_17_Diuretics.html",
+   "title": "Topic 17 Diuretics",
+   "html": "<!-- Topic Reference · DIURETICS (detailed) -->\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#7c2d2d;--accent2:#9a5a2a;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.4;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:13px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:31px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.printbtn{font-family:'IBM Plex Sans';font-weight:600;font-size:12px;background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:8px 16px;cursor:pointer;margin-top:6px}\n.printbtn:hover{background:var(--accent)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(128,128,128,.10);padding:10px 13px;margin-bottom:12px}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:7px}\ntable{width:100%;border-collapse:collapse;font-size:11.4px}\nth,td{text-align:left;padding:3px 8px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.6px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600}\ntd:first-child{font-weight:600;white-space:nowrap}\n.cols{column-count:2;column-gap:16px}@media(max-width:700px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(128,128,128,.10);padding:9px 11px 8px;margin:0 0 12px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 7px;padding-bottom:5px;border-bottom:1.5px solid var(--line);color:var(--accent)}\n.row{margin:0 0 4px;font-size:11.6px;line-height:1.38}\n.row .tg{font-weight:600;color:var(--ink)}.row .ar{color:var(--soft)}.row .ar::before{content:\"→ \";color:var(--accent);font-weight:600}\n.lead{font-weight:600;color:var(--ink);display:block;margin:7px 0 3px;font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-family:'IBM Plex Mono',monospace;color:var(--accent2)}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:6px 0}\n.callout{border-left:3px solid var(--accent);background:rgba(128,128,128,.10);padding:7px 10px;border-radius:0 5px 5px 0;margin:5px 0 6px}\n.callout .h{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:3px}\n.foot{margin-top:6px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:portrait;margin:8mm}body{background:#fff;font-size:8.7px}.page{max-width:none;padding:0}.printbtn{display:none}.card,.band{margin-bottom:7px;background:#fff;border-color:#bbb}.card{padding:6px 8px}.card h2{font-size:8.3px;margin-bottom:5px}.row{font-size:8px;margin-bottom:2.5px;line-height:1.28}.head h1{font-size:22px}table{font-size:7.9px}}\n</style>\n\n<div class=\"page\">\n  <div class=\"head\">\n    <div class=\"l\"><div class=\"k\">◇ Topic Reference · 17 ◇</div><h1>Diuretics</h1></div>\n    <div class=\"r\">KU 2 · ~2 pp<br>trigger&nbsp;<span style=\"color:var(--accent)\">→</span>&nbsp;answer<br><button class=\"printbtn\" onclick=\"window.print()\">⎙ Print / Save PDF</button></div>\n  </div>\n\n  <div class=\"band\">\n    <div class=\"t\">★ Where each class acts along the nephron</div>\n    <table>\n      <tr><th>Class</th><th>Site</th><th>Target</th><th>Signature electrolyte effect</th></tr>\n      <tr><td>Carbonic anhydrase inhibitor (acetazolamide)</td><td>PCT</td><td>carbonic anhydrase</td><td>NAGMA (HCO₃ loss), hypokalemia</td></tr>\n      <tr><td>Osmotic (mannitol)</td><td>PCT/loop</td><td>osmotic</td><td>↓ICP; pulmonary edema risk</td></tr>\n      <tr><td>Loop (furosemide)</td><td>thick ascending limb</td><td><b>Na-K-2Cl</b></td><td>↓K, ↓Mg, <b>↓Ca</b>, metabolic alkalosis</td></tr>\n      <tr><td>Thiazide (HCTZ, chlorthalidone)</td><td>distal convoluted tubule</td><td><b>Na-Cl</b></td><td>↓K, ↓Na, <b>↑Ca</b>, ↑urate/glucose/lipids</td></tr>\n      <tr><td>K-sparing — ENaC (amiloride)</td><td>collecting duct</td><td>ENaC</td><td><b>↑K</b>, mild acidosis</td></tr>\n      <tr><td>K-sparing — MRA (spironolactone)</td><td>collecting duct</td><td>aldosterone receptor</td><td><b>↑K</b>, gynecomastia</td></tr>\n    </table>\n  </div>\n\n  <div class=\"cols\">\n    <div class=\"card\">\n      <h2>Loop diuretics</h2>\n      <div class=\"row\"><span class=\"tg\">Agents</span> <span class=\"ar\">furosemide, bumetanide, torsemide; <b>ethacrynic acid</b> if sulfa allergy</span></div>\n      <div class=\"row\"><span class=\"tg\">Mechanism</span> <span class=\"ar\">block <b>Na-K-2Cl</b> in TAL — most potent; also ↑Ca excretion</span></div>\n      <div class=\"row\"><span class=\"tg\">Uses</span> <span class=\"ar\">CHF/edema, pulmonary edema, HTN with renal impairment, <b>hyperkalemia</b>, <b>hypercalcemia</b> (with saline)</span></div>\n      <div class=\"row\"><span class=\"tg\">SE</span> <span class=\"ar\">hypokalemia, hypomagnesemia, hypocalcemia, contraction <b>metabolic alkalosis</b>, ototoxicity (rapid IV/with aminoglycosides), hyperuricemia, hypovolemia</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Thiazides</h2>\n      <div class=\"row\"><span class=\"tg\">Agents</span> <span class=\"ar\">HCTZ, chlorthalidone, indapamide, metolazone</span></div>\n      <div class=\"row\"><span class=\"tg\">Mechanism</span> <span class=\"ar\">block <b>Na-Cl</b> in DCT; <b>retain calcium</b></span></div>\n      <div class=\"row\"><span class=\"tg\">Uses</span> <span class=\"ar\"><b>HTN (first-line)</b>, CHF, <b>nephrolithiasis</b> (↓urine Ca), nephrogenic DI</span></div>\n      <div class=\"row\"><span class=\"tg\">SE (\"hyper-GLUC\")</span> <span class=\"ar\">↑Glucose, ↑Lipids, ↑Uric acid (gout), ↑Calcium; plus hypoNa (esp. elderly), hypoK, hypomagnesemia; <b>↑lithium levels</b></span></div>\n      <div class=\"row\"><span class=\"tg\">Note</span> <span class=\"ar\">less effective at eGFR &lt;30 → use a loop</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Potassium-sparing & MRAs</h2>\n      <div class=\"row\"><span class=\"tg\">ENaC blockers (amiloride, triamterene)</span> <span class=\"ar\">collecting-duct Na channel; uses: with loop/thiazide to spare K, Liddle, lithium-induced nephrogenic DI</span></div>\n      <div class=\"row\"><span class=\"tg\">MRA (spironolactone, eplerenone, finerenone)</span> <span class=\"ar\">aldosterone-receptor block; uses: <b>HFrEF (mortality)</b>, resistant HTN, primary aldosteronism, cirrhotic ascites</span></div>\n      <div class=\"row\"><span class=\"tg\">SE</span> <span class=\"ar\"><b>hyperkalemia</b> (esp. with ACEi/ARB), metabolic acidosis; <b>spironolactone → gynecomastia</b> (eplerenone spares this)</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Others</h2>\n      <div class=\"row\"><span class=\"tg\">Acetazolamide</span> <span class=\"ar\">glaucoma, altitude sickness, urine alkalinization; causes NAGMA</span></div>\n      <div class=\"row\"><span class=\"tg\">Mannitol</span> <span class=\"ar\">↑ICP, glaucoma; avoid in pulmonary edema/anuria</span></div>\n      <div class=\"row\"><span class=\"tg\">SGLT2 inhibitors</span> <span class=\"ar\">mild osmotic diuresis + glycosuria; CV/renal protection</span></div>\n      <div class=\"row\"><span class=\"tg\">Vaptans (tolvaptan)</span> <span class=\"ar\">V2-receptor antagonist — SIADH, ADPKD</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Clinical use pearls</h2>\n      <div class=\"row\"><span class=\"tg\">Diuretic resistance</span> <span class=\"ar\">sequential nephron blockade — add a thiazide (metolazone) to a loop</span></div>\n      <div class=\"row\"><span class=\"tg\">Cirrhotic ascites</span> <span class=\"ar\">spironolactone + furosemide (~100:40 ratio)</span></div>\n      <div class=\"row\"><span class=\"tg\">HFrEF</span> <span class=\"ar\">loop for symptoms + <b>MRA for mortality</b></span></div>\n      <div class=\"row\"><span class=\"tg\">Stone prevention</span> <span class=\"ar\">thiazide reduces calcium stones (lowers urine Ca)</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Pitfalls</h2>\n      <div class=\"row\"><span class=\"tg\">Sulfa allergy</span> <span class=\"ar\">loops & thiazides are sulfonamides → ethacrynic acid alternative</span></div>\n      <div class=\"row\"><span class=\"tg\">Loop vs thiazide & calcium</span> <span class=\"ar\"><b>Loops Lose Ca; thiazides reTain Ca</b></span></div>\n      <div class=\"row\"><span class=\"tg\">K direction</span> <span class=\"ar\">loops/thiazides ↓K; K-sparing/MRA ↑K</span></div>\n      <div class=\"row\"><span class=\"tg\">MRA + ACEi/ARB</span> <span class=\"ar\">monitor for hyperkalemia</span></div>\n      <div class=\"row\"><span class=\"tg\">Spironolactone</span> <span class=\"ar\">gynecomastia + teratogenic — counsel</span></div>\n    </div>\n  </div>\n  <div class=\"foot\">Topic 17 / Diuretics (detailed) · generated from your 11-week guides · verify against course &amp; clinical guidelines · review aid only</div>\n</div>\n"
+  },
+  {
+   "file": "Topic_18_Urology.html",
+   "title": "Topic 18 Urology",
+   "html": "<!-- Topic Reference · UROLOGY (detailed) -->\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#7c2d2d;--accent2:#9a5a2a;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.4;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:13px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:31px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.printbtn{font-family:'IBM Plex Sans';font-weight:600;font-size:12px;background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:8px 16px;cursor:pointer;margin-top:6px}\n.printbtn:hover{background:var(--accent)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(128,128,128,.10);padding:10px 13px;margin-bottom:12px}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:7px}\n.band.emerg{border-color:var(--hi);background:rgba(162,59,46,.10)}.band.emerg .t{color:var(--hi)}\ntable{width:100%;border-collapse:collapse;font-size:11.4px}\nth,td{text-align:left;padding:3px 8px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.6px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600}\ntd:first-child{font-weight:600;white-space:nowrap}\n.emerg .grid3{columns:3;column-gap:18px;font-size:11.2px}.emerg .grid3 div{break-inside:avoid;margin-bottom:4px}.emerg b{color:var(--hi)}\n.cols{column-count:2;column-gap:16px}@media(max-width:700px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(128,128,128,.10);padding:9px 11px 8px;margin:0 0 12px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 7px;padding-bottom:5px;border-bottom:1.5px solid var(--line);color:var(--accent)}\n.row{margin:0 0 4px;font-size:11.6px;line-height:1.38}\n.row .tg{font-weight:600;color:var(--ink)}.row .ar{color:var(--soft)}.row .ar::before{content:\"→ \";color:var(--accent);font-weight:600}\n.lead{font-weight:600;color:var(--ink);display:block;margin:7px 0 3px;font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-family:'IBM Plex Mono',monospace;color:var(--accent2)}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:6px 0}\n.callout{border-left:3px solid var(--hi);background:rgba(162,59,46,.08);padding:7px 10px;border-radius:0 5px 5px 0;margin:5px 0 6px}\n.callout .h{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--hi);font-weight:600;margin-bottom:3px}\n.foot{margin-top:6px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:portrait;margin:8mm}body{background:#fff;font-size:8.6px}.page{max-width:none;padding:0}.printbtn{display:none}.card,.band{margin-bottom:7px;background:#fff;border-color:#bbb}.card{padding:6px 8px}.card h2{font-size:8.2px;margin-bottom:5px}.row{font-size:7.9px;margin-bottom:2.4px;line-height:1.26}.head h1{font-size:22px}table{font-size:7.7px}.emerg .grid3{font-size:7.7px}}\n</style>\n\n<div class=\"page\">\n  <div class=\"head\">\n    <div class=\"l\"><div class=\"k\">◇ Topic Reference · 18 ◇</div><h1>Urology</h1></div>\n    <div class=\"r\">KU 2–3 · ~2 pp<br>trigger&nbsp;<span style=\"color:var(--accent)\">→</span>&nbsp;answer<br><button class=\"printbtn\" onclick=\"window.print()\">⎙ Print / Save PDF</button></div>\n  </div>\n\n  <div class=\"band emerg\">\n    <div class=\"t\">★ Urologic emergencies</div>\n    <div class=\"grid3\">\n      <div><b>Testicular torsion</b> — sudden severe pain, high-riding/horizontal testis, absent cremasteric reflex, negative Prehn → <b>urgent surgical exploration</b> within ~6 h. Don't delay for imaging.</div>\n      <div><b>Obstructing stone + infection</b> (fever, obstruction on imaging) → urosepsis → <b>emergency decompression</b> (ureteric stent or percutaneous nephrostomy) + antibiotics.</div>\n      <div><b>Fournier gangrene</b> — necrotizing fasciitis of the perineum (diabetics) → resuscitation, broad antibiotics, urgent surgical debridement.</div>\n    </div>\n  </div>\n\n  <div class=\"cols\">\n    <div class=\"card\">\n      <h2>BPH & LUTS</h2>\n      <div class=\"row\"><span class=\"tg\">Pathology</span> <span class=\"ar\"><b>transition-zone</b> enlargement → bladder outlet obstruction</span></div>\n      <div class=\"row\"><span class=\"tg\">Symptoms</span> <span class=\"ar\">voiding (hesitancy, weak stream, intermittency, incomplete emptying) + storage (frequency, urgency, nocturia); IPSS</span></div>\n      <div class=\"row\"><span class=\"tg\">Complications</span> <span class=\"ar\">retention, UTI, stones, hydronephrosis/post-renal AKI</span></div>\n      <div class=\"row\"><span class=\"tg\">α-blocker (tamsulosin)</span> <span class=\"ar\">rapid relief; SE <b>orthostatic hypotension</b> (additive with antihypertensives), retrograde ejaculation, floppy-iris</span></div>\n      <div class=\"row\"><span class=\"tg\">5α-reductase inhibitor (finasteride)</span> <span class=\"ar\">shrinks large glands over ~6 mo; ↓libido/ED, <b>halves PSA</b>, teratogenic</span></div>\n      <div class=\"row\"><span class=\"tg\">Refractory</span> <span class=\"ar\">TURP; acute retention → catheter (see AKI: decompress at the outlet)</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Prostate cancer</h2>\n      <div class=\"row\"><span class=\"tg\">Pathology</span> <span class=\"ar\"><b>peripheral-zone</b> adenocarcinoma; hard nodule on DRE, ↑PSA</span></div>\n      <div class=\"row\"><span class=\"tg\">Spread</span> <span class=\"ar\"><b>osteoblastic bone metastases</b> → back pain</span></div>\n      <div class=\"row\"><span class=\"tg\">Grade</span> <span class=\"ar\">Gleason score / grade groups</span></div>\n      <div class=\"row\"><span class=\"tg\">Screening</span> <span class=\"ar\">PSA — shared decision-making (controversial)</span></div>\n      <div class=\"row\"><span class=\"tg\">Localized</span> <span class=\"ar\">active surveillance (low risk), radical prostatectomy, or radiation</span></div>\n      <div class=\"row\"><span class=\"tg\">Metastatic</span> <span class=\"ar\"><b>androgen deprivation</b> (GnRH agonist/antagonist ± antiandrogen); <b>cover agonist flare with antiandrogen</b></span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Testicular: the three-way split</h2>\n      <div class=\"row\"><span class=\"tg\">Torsion</span> <span class=\"ar\">sudden, severe, horizontal lie, absent cremasteric, <b>negative Prehn</b> → surgery (emergency)</span></div>\n      <div class=\"row\"><span class=\"tg\">Epididymitis</span> <span class=\"ar\">gradual, fever, dysuria, <b>positive Prehn</b> (relief on elevation); young = STI (GC/chlamydia), older = coliform → antibiotics</span></div>\n      <div class=\"row\"><span class=\"tg\">Tumor</span> <span class=\"ar\">painless hard mass, young men, cryptorchidism risk → <b>US + AFP/β-hCG/LDH</b> → radical inguinal orchiectomy; <b>NEVER trans-scrotal biopsy</b></span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Nephrolithiasis</h2>\n      <div class=\"row\"><span class=\"tg\">Stone types</span> <span class=\"ar\">calcium oxalate (most common); uric acid (<b>radiolucent</b>, acidic urine); struvite (infection/Proteus → staghorn); cystine</span></div>\n      <div class=\"row\"><span class=\"tg\">Presentation</span> <span class=\"ar\">acute renal colic (flank → groin), hematuria, nausea</span></div>\n      <div class=\"row\"><span class=\"tg\">Diagnose</span> <span class=\"ar\"><b>non-contrast CT</b> (gold standard); US</span></div>\n      <div class=\"row\"><span class=\"tg\">Manage</span> <span class=\"ar\">hydration, analgesia (NSAIDs), <b>medical expulsive therapy (α-blocker)</b> for distal stones &lt;10 mm; most &lt;5 mm pass</span></div>\n      <div class=\"callout\">\n        <div class=\"h\">Admit / urgent urology</div>\n        <div class=\"row\"><span class=\"tg\">If</span> <span class=\"ar\">obstruction + infection (decompress!), solitary kidney, AKI, intractable pain/vomiting, large stone</span></div>\n      </div>\n      <div class=\"row\"><span class=\"tg\">Prevent</span> <span class=\"ar\">hydration; <b>thiazide</b> (calcium stones), citrate, allopurinol (uric acid)</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>UTI & prostatitis</h2>\n      <div class=\"row\"><span class=\"tg\">Cystitis</span> <span class=\"ar\">dysuria, frequency, urgency → nitrofurantoin / TMP-SMX / fosfomycin</span></div>\n      <div class=\"row\"><span class=\"tg\">Pyelonephritis</span> <span class=\"ar\">fever, flank pain, CVA tenderness → fluoroquinolone or IV; image if obstruction suspected</span></div>\n      <div class=\"row\"><span class=\"tg\">Complicated</span> <span class=\"ar\">men, pregnancy, catheter, obstruction, immunocompromise</span></div>\n      <div class=\"row\"><span class=\"tg\">Acute bacterial prostatitis</span> <span class=\"ar\">fever, dysuria, <b>tender boggy prostate — don't massage</b>; E. coli → fluoroquinolone/TMP-SMX</span></div>\n      <div class=\"row\"><span class=\"tg\">Asymptomatic bacteriuria</span> <span class=\"ar\">treat ONLY in pregnancy or before urologic procedures</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Hematuria, bladder Ca & incontinence</h2>\n      <div class=\"row\"><span class=\"tg\">Painless gross hematuria (older/smoker)</span> <span class=\"ar\"><b>urothelial bladder cancer</b> until proven → CT urogram + cystoscopy + cytology</span></div>\n      <div class=\"row\"><span class=\"tg\">Glomerular vs urologic</span> <span class=\"ar\">dysmorphic RBCs/casts/protein = glomerular; isomorphic = urologic</span></div>\n      <hr class=\"mini\">\n      <div class=\"row\"><span class=\"tg\">Stress</span> <span class=\"ar\">leak with cough/exertion → pelvic floor exercises, surgery</span></div>\n      <div class=\"row\"><span class=\"tg\">Urge / OAB</span> <span class=\"ar\">detrusor overactivity → antimuscarinic (<b>oxybutynin — contraindicated in narrow-angle glaucoma</b>), mirabegron, behavioral</span></div>\n      <div class=\"row\"><span class=\"tg\">Overflow</span> <span class=\"ar\">retention/obstruction or neurogenic → catheter, treat cause</span></div>\n    </div>\n\n    <div class=\"card\">\n      <h2>Pitfalls</h2>\n      <div class=\"row\"><span class=\"tg\">Torsion</span> <span class=\"ar\">operate — don't wait for ultrasound</span></div>\n      <div class=\"row\"><span class=\"tg\">Testicular mass</span> <span class=\"ar\">US + markers; never trans-scrotal biopsy (seeding)</span></div>\n      <div class=\"row\"><span class=\"tg\">Stone + infection</span> <span class=\"ar\">emergency decompression, not just antibiotics</span></div>\n      <div class=\"row\"><span class=\"tg\">GnRH agonist flare</span> <span class=\"ar\">cover with antiandrogen in prostate cancer</span></div>\n      <div class=\"row\"><span class=\"tg\">α-blocker</span> <span class=\"ar\">orthostatic hypotension stacked on antihypertensives</span></div>\n      <div class=\"row\"><span class=\"tg\">PDE5 inhibitors</span> <span class=\"ar\">contraindicated with nitrates</span></div>\n    </div>\n  </div>\n  <div class=\"foot\">Topic 18 / Urology (detailed) · generated from your 11-week guides · verify against course &amp; clinical guidelines · review aid only</div>\n</div>\n"
+  }
+ ]
+}
