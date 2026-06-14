@@ -1,7 +1,14 @@
 <!--
-  Study Suite  ·  v0.2.54 (beta)
+  Study Suite  ·  v0.2.55 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.55: (1) header "Add to Home Screen" compacted to a small app-tile squircle labelled
+  "Add to home" (.installbtn.tile). (2) PWA awareness: isStandalone() detects an installed/standalone
+  app; in that mode the install tile is hidden and a Refresh/Update tile (#refreshBtn) takes its slot —
+  reloading is the only way to pick up a new app/manifest in a PWA. It shows "↑ Update" with a pulse
+  when an update is detected: app updates via a new app-version.json pointer (checkAppVersion → verCmp
+  vs APP_VERSION) and pack updates via pendingUpdates(); otherwise a plain "⟳ Refresh". reloadApp()
+  does a cache-busting reload. Deploy writes Web Deploy/app-version.json from APP_VERSION.
   Changelog v0.2.54: default-pack update prompts. The deploy manifest now carries each pack's `version`;
   the app compares a loaded library pack to the manifest entry for the same id (verCmp handles 2.10>2.9)
   and, if a newer version is published, shows an "↑ Update" button on that Content-library row (+ an
@@ -460,6 +467,13 @@ section{display:none}section.on{display:block}
 /* install button + modal */
 .installbtn{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;border:1.5px solid var(--line);background:var(--paper);border-radius:20px;padding:6px 12px;cursor:pointer;transition:.12s;color:var(--ink-soft);white-space:nowrap}
 .installbtn:hover{border-color:var(--accent-soft);color:var(--ink)}
+.installbtn.tile{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.04;padding:6px 10px;border-radius:13px;background:var(--accent);border-color:var(--accent);color:var(--paper);font-size:8.5px;letter-spacing:.03em}
+.installbtn.tile:hover{filter:brightness(1.08);color:var(--paper)}
+.installbtn.tile .ic{font-size:14px;line-height:1;margin-bottom:1px}
+.installbtn.tile.ghost{background:transparent;border-color:var(--line);color:var(--ink-soft)}
+.installbtn.tile.ghost:hover{filter:none;border-color:var(--accent-soft);color:var(--ink)}
+.installbtn.tile.upd{background:var(--accent);border-color:var(--accent);color:var(--paper);animation:updpulse 2.4s ease-in-out infinite}
+@keyframes updpulse{0%,100%{box-shadow:0 0 0 0 transparent}50%{box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 28%,transparent)}}
 .modal-ov{position:fixed;inset:0;background:rgba(29,27,22,.45);z-index:50;display:flex;align-items:center;justify-content:center;padding:18px}
 .modal-card{background:var(--paper);border:1.5px solid var(--line);border-radius:12px;max-width:560px;width:100%;max-height:88vh;overflow-y:auto;padding:20px 22px}
 .modal-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
@@ -635,7 +649,8 @@ section{display:none}section.on{display:block}
     <div class="top-right">
       <div class="timer" id="timer" style="display:none"><span class="dot"></span><span id="tclock">--:--</span></div>
       <button class="homebtn" id="homebtn" style="display:none">⮌ Home</button>
-      <button class="installbtn" id="installBtn" title="Install this app on your device">⊕ Add to Home Screen</button>
+      <button class="installbtn tile" id="installBtn" title="Add this app to your home screen"><span class="ic">⊕</span>Add to home</button>
+      <button class="installbtn tile ghost" id="refreshBtn" style="display:none"><span class="ic">⟳</span>Refresh</button>
     </div>
   </div>
 </header>
@@ -895,7 +910,7 @@ section{display:none}section.on{display:block}
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.54';
+const APP_VERSION='0.2.55';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1012,6 +1027,20 @@ function renderInstall(){const d=installDev||detectDevice();
   $('devSteps').innerHTML=INSTALL_STEPS[d]||'';}
 function openInstall(){installDev=installDev||detectDevice();renderInstall();$('installOv').style.display='flex';}
 function closeInstall(){$('installOv').style.display='none';}
+function isStandalone(){return (window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;}
+let appUpdateAvailable=false;
+async function checkAppVersion(){try{const r=await fetch('app-version.json',{cache:'no-store'});if(!r.ok)return;const j=await r.json();if(j&&j.appVersion&&verCmp(j.appVersion,APP_VERSION)>0){appUpdateAvailable=true;updateHeaderButtons();}}catch(e){}}
+function reloadApp(){try{location.href=location.pathname+'?r='+Date.now();}catch(e){location.reload();}}
+/* In an installed PWA, "Add to home" is pointless — swap it for a Refresh/Update button (the only way
+   to pick up a new app or manifest in a standalone PWA is to reload). Shows "↑ Update" + a pulse when
+   the app or a loaded pack is behind. */
+function updateHeaderButtons(){const pwa=isStandalone();const ib=$('installBtn'),rb=$('refreshBtn');
+  if(ib)ib.style.display=pwa?'none':'';
+  if(!rb)return;rb.style.display=pwa?'':'none';
+  if(pwa){const out=appUpdateAvailable||(typeof pendingUpdates==='function'&&pendingUpdates().length>0);
+    rb.className='installbtn tile'+(out?' upd':' ghost');
+    rb.innerHTML=out?'<span class="ic">↑</span>Update':'<span class="ic">⟳</span>Refresh';
+    rb.title=out?'A newer app or pack is available — tap to reload and update':'Reload to fetch the latest app';}}
 
 /* "Default study packs" panel — content-free: pack list comes from a same-origin
    packs-manifest.json generated at deploy time ({packs:[{file,label,id}],authoring}).
@@ -1171,7 +1200,7 @@ async function init(){
   detectStorage();
   $('footVer').textContent='v'+APP_VERSION;$('footBeta').style.display=APP_BETA?'':'none';
   try{history.replaceState({sec:'home'},'');}catch(e){}
-  initPackLinks();
+  initPackLinks();checkAppVersion();
   if(!SUPPORT_URL.includes('CHANGEME')){$('supportLink').href=SUPPORT_URL;$('supportWrap').style.display='';}
   packs=await Store.get(KEY.packs)||[];
   sched=await Store.get(KEY.sched)||{};
@@ -1284,6 +1313,7 @@ window.addEventListener('popstate',e=>{
 /* ===== HOME ===== */
 function renderHome(){
   backfillPlacement(); // repair any library packs missing school/year/course/weeks (copied from the manifest by id)
+  updateHeaderButtons(); // PWA: swap "Add to home" for a Refresh/Update button, reflecting app/pack updates
   const nC=deck().length,nP=packs.length,aP=activePacks().length,tp=qTestPool().length,nG=activeGuides().length;
   $('libCount').textContent=nP?`${aP} of ${nP} active · ${qpool().length} questions · ${nC} cards`:'empty';
   $('libActions').style.display=nP?'':'none';
@@ -1800,6 +1830,7 @@ $('diffSeg').querySelectorAll('.seg').forEach(b=>b.addEventListener('click',()=>
   persist();renderHome();}));
 $('openReviewer').addEventListener('click',()=>{if(activeGuides().length)openReviewer();});
 $('installBtn').addEventListener('click',openInstall);
+$('refreshBtn').addEventListener('click',reloadApp);
 $('installBackup').addEventListener('click',e=>{e.preventDefault();backup();});
 $('installClose').addEventListener('click',closeInstall);
 $('installOv').addEventListener('click',e=>{if(e.target===$('installOv'))closeInstall();});
