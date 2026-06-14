@@ -1,0 +1,1278 @@
+{
+ "pack": "Week 10 — Dermatology",
+ "id": "wk10",
+ "formatVersion": "2.0",
+ "version": "2.0",
+ "author": "Alkarim Billawala / alkarim.billawala.ca",
+ "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
+ "created": "2026-06-13",
+ "updated": "2026-06-13",
+ "school": "UofT — Temerty Medicine",
+ "year": "Year 1",
+ "course": "CPC 1",
+ "weeks": "Week 10 · Dermatology",
+ "questions": [
+  {
+   "id": "wk10_q01",
+   "sys": "Derm",
+   "topic": "Derm · Approach",
+   "difficulty": "easy",
+   "stem": "A patient has two complaints: a sharply bordered red plaque with thick silvery scale on the elbow, and separate patches of red, ill-defined, oozy, intensely itchy skin in the elbow creases. How are these two patterns best categorized?",
+   "options": [
+    "Both are dermatitic",
+    "The elbow plaque is papulosquamous; the itchy oozy flexural rash is dermatitic",
+    "Both are papulosquamous",
+    "The flexural rash is papulosquamous; the plaque is dermatitic"
+   ],
+   "correct": 1,
+   "explain": "<b>Well-demarcated + scale = papulosquamous</b> (the silvery plaque, psoriasis). <b>Ill-defined + itchy/oozy = dermatitic</b> (the flexural eczema). This split organizes the red-and-scaly differential.",
+   "guide": {
+    "f": "W10_01_Morphology.html",
+    "t": "1 · Approach",
+    "s": "The first split: papulosquamous vs dermatitic"
+   }
+  },
+  {
+   "id": "wk10_q02",
+   "sys": "Derm",
+   "topic": "Derm · Psoriasis",
+   "difficulty": "medium",
+   "stem": "A man with stable plaque psoriasis develops a marked flare a few weeks after starting a new medication for his bipolar disorder. Which drug most likely triggered the flare?",
+   "options": [
+    "Lithium",
+    "Amoxicillin",
+    "Metformin",
+    "Levothyroxine"
+   ],
+   "correct": 0,
+   "explain": "Classic psoriasis drug triggers are <b>beta-blockers, lithium, NSAIDs, antimalarials, and systemic steroid withdrawal</b>. Other triggers: streptococcal infection, stress, trauma (Koebner), cold, smoking/alcohol.",
+   "guide": {
+    "f": "W10_02_RedScaly.html",
+    "t": "2 · Psoriasis",
+    "s": "Psoriasis"
+   }
+  },
+  {
+   "id": "wk10_q03",
+   "sys": "Derm",
+   "topic": "Derm · Atopic Dermatitis",
+   "difficulty": "medium",
+   "stem": "A 4-year-old with atopic dermatitis has recurrent flares on the eyelids and around the mouth. The parents are anxious about repeatedly using topical steroids on the face. What is the most appropriate steroid-sparing option for these sensitive areas?",
+   "options": [
+    "High-potency clobetasol",
+    "A topical calcineurin inhibitor (e.g. tacrolimus/pimecrolimus)",
+    "Oral isotretinoin",
+    "Topical mupirocin"
+   ],
+   "correct": 1,
+   "explain": "<b>Topical calcineurin inhibitors</b> are well suited to the face/eyelids and flexures and for maintenance, avoiding steroid atrophy. Daily emollients remain the backbone; low-potency steroids are used for short flares.",
+   "guide": {
+    "f": "W10_02_RedScaly.html",
+    "t": "2 · Atopic Dermatitis",
+    "s": "Atopic dermatitis"
+   }
+  },
+  {
+   "id": "wk10_q04",
+   "sys": "Derm",
+   "topic": "Derm · Atopic Dermatitis",
+   "difficulty": "hard",
+   "stem": "A 3-year-old with known eczema develops, over 24 hours, clusters of painful, uniform-looking small vesicles and punched-out erosions over the face and neck, with fever and malaise. What is the diagnosis and the immediate priority?",
+   "options": [
+    "Impetiginized eczema; start topical mupirocin and continue emollients",
+    "Eczema herpeticum; start urgent systemic antiviral therapy and assess for eye involvement",
+    "An eczema flare; increase the topical steroid potency",
+    "Allergic contact dermatitis; begin patch testing"
+   ],
+   "correct": 1,
+   "explain": "<b>Painful, monomorphic vesicles / punched-out erosions, rapid spread, and fever</b> in an atopic patient = <b>eczema herpeticum</b> (disseminated HSV). It needs <span style='color:#a23b2e'><b>urgent systemic antivirals</b></span> and ophthalmology review if peri-ocular — not just topical care. Honey crusting would instead suggest bacterial impetiginization.",
+   "guide": {
+    "f": "W10_02_RedScaly.html",
+    "t": "2 · Atopic Dermatitis",
+    "s": "Two complications to recognize"
+   }
+  },
+  {
+   "id": "wk10_q05",
+   "sys": "Derm",
+   "topic": "Derm · Contact Dermatitis",
+   "difficulty": "medium",
+   "stem": "A 30-year-old develops itchy, linear streaks of vesicles and bullae on the forearms two days after clearing brush in her garden. What mechanism and confirmatory test fit best?",
+   "options": [
+    "Immediate IgE-mediated (type I) reaction; serum tryptase",
+    "Delayed type IV hypersensitivity; patch testing",
+    "Autoantibodies to desmoglein; direct immunofluorescence",
+    "Dermatophyte infection; KOH preparation"
+   ],
+   "correct": 1,
+   "explain": "Linear vesicles in an exposure pattern after plant contact (e.g. poison ivy) is <b>allergic contact dermatitis</b>, a <b>delayed type IV</b> hypersensitivity. The allergen is identified by <b>patch testing</b>; treat with avoidance + topical steroids (systemic if widespread).",
+   "guide": {
+    "f": "W10_02_RedScaly.html",
+    "t": "2 · Contact Dermatitis",
+    "s": "Allergic contact dermatitis"
+   }
+  },
+  {
+   "id": "wk10_q06",
+   "sys": "Derm",
+   "topic": "Derm · Pityriasis Rosea",
+   "difficulty": "easy",
+   "stem": "A healthy 22-year-old noticed a single 3 cm scaly oval patch on the trunk, then a week later developed many smaller salmon-coloured oval plaques along skin-cleavage lines in a 'Christmas-tree' pattern, sparing the face. What is the best management?",
+   "options": [
+    "Oral antifungal for 6 weeks",
+    "Reassurance — it is self-limited over 6–8 weeks",
+    "Wide local excision",
+    "Lifelong topical steroids"
+   ],
+   "correct": 1,
+   "explain": "A <b>herald patch</b> followed by a <b>Christmas-tree</b> distribution with collarette scale is <b>pityriasis rosea</b> (linked to HHV-6/7), self-limited over 6–8 weeks. Management is <b>reassurance</b>; symptomatic care doesn't change the course.",
+   "guide": {
+    "f": "W10_02_RedScaly.html",
+    "t": "2 · Lichen planus · pityriasis rosea · lupus",
+    "s": "Lichen planus · pityriasis rosea · lupus"
+   }
+  },
+  {
+   "id": "wk10_q07",
+   "sys": "Derm",
+   "topic": "Derm · Lichen Planus",
+   "difficulty": "medium",
+   "stem": "A 45-year-old has intensely itchy, violaceous, flat-topped polygonal papules on the wrists and shins, with fine white lacy lines on the surface and similar lacy change on the buccal mucosa. What is the most likely diagnosis?",
+   "options": [
+    "Psoriasis",
+    "Lichen planus",
+    "Pityriasis versicolor",
+    "Bullous pemphigoid"
+   ],
+   "correct": 1,
+   "explain": "The <b>6 Ps</b> — pruritic, purple, polygonal, peripheral, papules (± penile) — with <b>Wickham striae</b> and oral mucosal involvement define <b>lichen planus</b>. Manage with topical steroids and evaluate mucosa/nails/scalp.",
+   "guide": {
+    "f": "W10_02_RedScaly.html",
+    "t": "2 · Lichen Planus",
+    "s": "Lichen planus · pityriasis rosea · lupus"
+   }
+  },
+  {
+   "id": "wk10_q08",
+   "sys": "Derm",
+   "topic": "Derm · Impetigo",
+   "difficulty": "easy",
+   "stem": "A 6-year-old has several erosions with golden honey-coloured crusts around the nose and mouth. He is otherwise well, and the lesions are limited. What is the best first-line treatment?",
+   "options": [
+    "Topical mupirocin (or fusidic acid) after gently removing crusts",
+    "Oral isotretinoin",
+    "Topical clobetasol",
+    "Oral aciclovir"
+   ],
+   "correct": 0,
+   "explain": "Honey-coloured crusts = <b>impetigo</b> (usually S. aureus). For limited disease, remove crusts and apply <b>topical mupirocin or fusidic acid</b>; reserve oral antibiotics (cloxacillin/cephalosporin) for extensive disease.",
+   "guide": {
+    "f": "W10_03_Infections.html",
+    "t": "3 · Bacterial",
+    "s": "Bacterial"
+   }
+  },
+  {
+   "id": "wk10_q09",
+   "sys": "Derm",
+   "topic": "Derm · Emergencies",
+   "difficulty": "hard",
+   "stem": "A diabetic man has a rapidly spreading red, swollen leg over 12 hours. He reports pain far out of proportion to the modest skin findings, is febrile and tachycardic, and now has a dusky patch with a bulla. What is the priority?",
+   "options": [
+    "Oral cephalexin and outpatient follow-up",
+    "Urgent surgical evaluation for debridement plus broad-spectrum IV antibiotics",
+    "High-potency topical steroid and compression",
+    "KOH scraping and topical antifungal"
+   ],
+   "correct": 1,
+   "explain": "<b>Pain out of proportion, rapid progression, systemic toxicity, and dusky skin/bullae</b> signal <b>necrotizing fasciitis</b> — a surgical emergency. Give <b>broad-spectrum IV antibiotics and obtain immediate surgical debridement</b>; imaging/labs must not delay surgery.",
+   "guide": {
+    "f": "W10_03_Infections.html",
+    "t": "3 · Bacterial",
+    "s": "Bacterial"
+   }
+  },
+  {
+   "id": "wk10_q10",
+   "sys": "Derm",
+   "topic": "Derm · Tinea",
+   "difficulty": "medium",
+   "stem": "A 6-year-old has a patch of hair loss with scaling, broken-off hairs, and tender posterior cervical lymphadenopathy. KOH is positive. What is the appropriate treatment principle?",
+   "options": [
+    "Topical antifungal cream alone",
+    "Oral (systemic) antifungal therapy",
+    "High-potency topical steroid",
+    "Permethrin cream"
+   ],
+   "correct": 1,
+   "explain": "<b>Tinea capitis</b> involves the hair follicle/shaft, so <span style='color:#a23b2e'><b>topical therapy is inadequate — it requires oral antifungal</b></span>. Lymphadenopathy and broken hairs are classic clues.",
+   "guide": {
+    "f": "W10_03_Infections.html",
+    "t": "3 · Fungal",
+    "s": "Fungal / yeast"
+   }
+  },
+  {
+   "id": "wk10_q11",
+   "sys": "Derm",
+   "topic": "Derm · Pityriasis Versicolor",
+   "difficulty": "easy",
+   "stem": "A 19-year-old notices several oval, faintly scaly patches on the upper back and shoulders that fail to tan with the rest of his skin in summer. KOH shows short hyphae and spores. What is the diagnosis?",
+   "options": [
+    "Vitiligo",
+    "Pityriasis (tinea) versicolor",
+    "Psoriasis",
+    "Melanoma"
+   ],
+   "correct": 1,
+   "explain": "Hypopigmented, finely scaly patches in a seborrheic distribution from <b>Malassezia</b> overgrowth = <b>pityriasis versicolor</b>; treat with topical antifungals (oral azole if extensive). Contrast <b>vitiligo</b>, which is fully <b>depigmented</b>, not hypopigmented, and non-scaly.",
+   "guide": {
+    "f": "W10_03_Infections.html",
+    "t": "3 · Fungal",
+    "s": "Fungal / yeast"
+   }
+  },
+  {
+   "id": "wk10_q12",
+   "sys": "Derm",
+   "topic": "Derm · Scabies",
+   "difficulty": "medium",
+   "stem": "A university student has severe itch that is worst at night; two roommates are also itchy. Exam shows excoriated papules with subtle linear tracks in the finger webs and on the wrists. What is the best management principle?",
+   "options": [
+    "Topical steroid alone for presumed eczema",
+    "Permethrin cream (or oral ivermectin) plus treatment of close contacts and laundering of clothing/linens",
+    "Reassurance only, as it self-resolves",
+    "Oral antifungal therapy"
+   ],
+   "correct": 1,
+   "explain": "Nocturnal itch, <b>burrows</b> in finger webs/wrists, and affected contacts = <b>scabies</b>. Treat the patient with <b>permethrin or ivermectin</b>, treat <b>close contacts</b>, and decontaminate clothing/linens to prevent reinfestation.",
+   "guide": {
+    "f": "W10_03_Infections.html",
+    "t": "3 · Scabies",
+    "s": "Scabies"
+   }
+  },
+  {
+   "id": "wk10_q13",
+   "sys": "Derm",
+   "topic": "Derm · Rosacea",
+   "difficulty": "medium",
+   "stem": "A 48-year-old woman has central-face redness, flushing triggered by heat and wine, and scattered inflammatory papules and pustules — but no comedones. What single feature best separates her condition from acne?",
+   "options": [
+    "Presence of pustules",
+    "Absence of comedones",
+    "Response to benzoyl peroxide",
+    "Facial distribution"
+   ],
+   "correct": 1,
+   "explain": "Acne and rosacea both have papules/pustules, but <b>acne has comedones and rosacea does not</b> — the high-yield discriminator. Flushing and central-face involvement further favour rosacea.",
+   "guide": {
+    "f": "W10_04_Acne_Tx.html",
+    "t": "4 · Acne",
+    "s": "Acne"
+   }
+  },
+  {
+   "id": "wk10_q14",
+   "sys": "Derm",
+   "topic": "Derm · Acne",
+   "difficulty": "easy",
+   "stem": "A patient is about to start a systemic acne medication for severe scarring cystic acne. Which agent mandates a pregnancy-prevention program and baseline/monitoring β-hCG because it is strongly teratogenic?",
+   "options": [
+    "Doxycycline",
+    "Isotretinoin",
+    "Benzoyl peroxide",
+    "Topical clindamycin"
+   ],
+   "correct": 1,
+   "explain": "<b>Isotretinoin</b> is a potent <b>teratogen</b> — it requires pregnancy prevention and β-hCG monitoring (plus lipids/LFTs) in patients who can become pregnant. It's reserved for severe cystic/scarring or refractory acne.",
+   "guide": {
+    "f": "W10_04_Acne_Tx.html",
+    "t": "4 · Acne drug cautions",
+    "s": "Acne drug cautions"
+   }
+  },
+  {
+   "id": "wk10_q15",
+   "sys": "Derm",
+   "topic": "Derm · Therapeutics",
+   "difficulty": "medium",
+   "stem": "A 26-year-old woman who is 10 weeks pregnant asks about treating her moderate inflammatory acne. Which commonly used acne therapy is contraindicated in pregnancy?",
+   "options": [
+    "Oral doxycycline",
+    "Topical benzoyl peroxide",
+    "Gentle non-comedogenic cleansing",
+    "Warm compresses"
+   ],
+   "correct": 0,
+   "explain": "<b>Oral tetracyclines (doxycycline, minocycline) are contraindicated in pregnancy and in children &lt;8</b> (dental staining, skeletal effects); oral retinoids/isotretinoin and topical retinoids are also avoided. Benzoyl peroxide and gentle skin care are acceptable.",
+   "guide": {
+    "f": "W10_04_Acne_Tx.html",
+    "t": "4 · Acne drug cautions",
+    "s": "Acne drug cautions"
+   }
+  },
+  {
+   "id": "wk10_q16",
+   "sys": "Derm",
+   "topic": "Derm · Skin Cancer",
+   "difficulty": "easy",
+   "stem": "A 64-year-old fair-skinned man has a slowly enlarging pearly papule on the upper lip with surface telangiectasias and intermittent bleeding. What is the most likely diagnosis and its usual behaviour?",
+   "options": [
+    "Squamous cell carcinoma; frequently metastatic",
+    "Basal cell carcinoma; locally destructive with rare metastasis",
+    "Melanoma; benign if under 6 mm",
+    "Molluscum; self-limited poxvirus"
+   ],
+   "correct": 1,
+   "explain": "A <b>pearly, telangiectatic, bleeding papule</b> on sun-exposed skin is classic <b>basal cell carcinoma</b> — the most common cancer, <b>locally destructive but rarely metastatic</b>.",
+   "guide": {
+    "f": "W10_05_SkinCancer.html",
+    "t": "5 · BCC & SCC",
+    "s": "BCC & SCC"
+   }
+  },
+  {
+   "id": "wk10_q17",
+   "sys": "Derm",
+   "topic": "Derm · Melanoma",
+   "difficulty": "hard",
+   "stem": "A 45-year-old has an asymmetric, irregularly bordered pigmented lesion on the calf that has enlarged and changed colour over 8 months. Which approach is correct, and what most determines prognosis?",
+   "options": [
+    "Shave biopsy; lesion diameter determines prognosis",
+    "Excisional biopsy to obtain Breslow depth; depth and ulceration most determine prognosis",
+    "Cryotherapy; colour determines prognosis",
+    "Topical steroid trial; symmetry determines prognosis"
+   ],
+   "correct": 1,
+   "explain": "A changing, asymmetric pigmented lesion needs <b>excisional biopsy</b> (not shave/cryo) to measure <b>Breslow depth</b>. <b>Breslow depth and ulceration</b> are the dominant prognostic factors and drive wide local excision margins and staging.",
+   "guide": {
+    "f": "W10_05_SkinCancer.html",
+    "t": "5 · Melanoma",
+    "s": "Melanoma"
+   }
+  },
+  {
+   "id": "wk10_q18",
+   "sys": "Derm",
+   "topic": "Derm · Drug Reactions",
+   "difficulty": "medium",
+   "stem": "Five weeks after starting an anticonvulsant, a patient develops fever, facial swelling, a widespread morbilliform rash, lymphadenopathy, and bloodwork showing eosinophilia and elevated transaminases. What is the most likely reaction?",
+   "options": [
+    "Simple morbilliform exanthem",
+    "DRESS (drug reaction with eosinophilia and systemic symptoms)",
+    "Allergic contact dermatitis",
+    "Pityriasis rosea"
+   ],
+   "correct": 1,
+   "explain": "Onset <b>2–8 weeks</b> after a drug, with <b>fever, facial edema, eosinophilia, and organ involvement (hepatitis)</b>, is <b>DRESS/DHS</b>. Stop the culprit, check CBC/diff, LFTs, Cr, UA; systemic steroids for significant organ involvement with prolonged taper.",
+   "guide": {
+    "f": "W10_06_Emergencies.html",
+    "t": "6 · Drug-rash hierarchy",
+    "s": "Drug-rash hierarchy"
+   }
+  },
+  {
+   "id": "wk10_q19",
+   "sys": "Derm",
+   "topic": "Derm · Bullous Disease",
+   "difficulty": "medium",
+   "stem": "A 75-year-old has weeks of intense itch followed by tense, fluid-filled blisters on erythematous and urticarial plaques on the trunk and legs. The oral mucosa is spared. Which pathogenesis fits best?",
+   "options": [
+    "Antibodies to the basement membrane causing a subepidermal blister",
+    "Antibodies to desmogleins causing intraepidermal acantholysis",
+    "Dermatophyte invasion of the stratum corneum",
+    "IgA deposition after a streptococcal infection"
+   ],
+   "correct": 0,
+   "explain": "<b>Tense bullae in an elderly, intensely pruritic patient with mucosal sparing</b> = <b>bullous pemphigoid</b> — autoantibodies against the <b>basement membrane</b> → <b>subepidermal</b> blister, Nikolsky negative. Pemphigus vulgaris instead targets desmogleins (intraepidermal, flaccid bullae, oral erosions, Nikolsky positive).",
+   "guide": {
+    "f": "W10_06_Emergencies.html",
+    "t": "6 · Bullous",
+    "s": "Bullous disease discriminator"
+   }
+  },
+  {
+   "id": "wk10_q20",
+   "sys": "Derm",
+   "topic": "Derm · Pediatric",
+   "difficulty": "medium",
+   "stem": "A 3-month-old has a rapidly enlarging bright-red vascular plaque adjacent to the right lower eyelid that is beginning to obstruct the visual axis. What is the appropriate systemic therapy?",
+   "options": [
+    "Oral propranolol",
+    "Oral isotretinoin",
+    "Wide local excision",
+    "Topical antifungal"
+   ],
+   "correct": 0,
+   "explain": "An <b>infantile hemangioma</b> threatening vision (a high-risk peri-ocular location) warrants treatment: <b>oral propranolol</b> is the typical systemic therapy. Most uncomplicated hemangiomas proliferate ~6 months then involute and need only observation.",
+   "guide": {
+    "f": "W10_07_Peds_Hair.html",
+    "t": "7 · Pediatric",
+    "s": "Pediatric dermatology"
+   }
+  }
+ ],
+ "cards": [
+  {
+   "id": "wk10_c01",
+   "sys": "Derm",
+   "topic": "Approach",
+   "type": "match",
+   "guide": {
+    "f": "W10_01_Morphology.html",
+    "t": "1 · Approach",
+    "s": "Primary lesions"
+   },
+   "prompt": "Match each primary lesion to its definition:",
+   "pairs": [
+    [
+     "Macule",
+     "Flat colour change <1 cm"
+    ],
+    [
+     "Papule",
+     "Raised, <1 cm"
+    ],
+    [
+     "Vesicle",
+     "Fluid-filled, <1 cm"
+    ],
+    [
+     "Plaque",
+     "Raised, >1 cm"
+    ],
+    [
+     "Pustule",
+     "Pus-filled"
+    ]
+   ],
+   "explain": "Size (1 cm) and whether raised/fluid/pus distinguish the primary lesions."
+  },
+  {
+   "id": "wk10_c02",
+   "sys": "Derm",
+   "topic": "Approach",
+   "type": "cloze",
+   "guide": {
+    "f": "W10_01_Morphology.html",
+    "t": "1 · Approach",
+    "s": "Secondary change"
+   },
+   "text": "An {{erosion}} is loss of epidermis and heals without a scar; an {{ulcer}} extends into the dermis and {{scars}}.",
+   "explain": "Depth determines scarring."
+  },
+  {
+   "id": "wk10_c03",
+   "sys": "Derm",
+   "topic": "Approach",
+   "type": "qa",
+   "guide": {
+    "f": "W10_01_Morphology.html",
+    "t": "1 · Approach",
+    "s": "The first split"
+   },
+   "prompt": "What is the high-yield first split for a red, scaly rash, and the clue for each side?",
+   "answer": "Papulosquamous (well-demarcated + scale) vs dermatitic (ill-defined, itchy/oozy/lichenified)."
+  },
+  {
+   "id": "wk10_c04",
+   "sys": "Derm",
+   "topic": "Approach",
+   "type": "match",
+   "guide": {
+    "f": "W10_01_Morphology.html",
+    "t": "1 · Approach",
+    "s": "Skin structure"
+   },
+   "prompt": "Match each epidermal cell to its job:",
+   "pairs": [
+    [
+     "Keratinocyte",
+     "Barrier (dominant cell)"
+    ],
+    [
+     "Melanocyte",
+     "Makes melanin"
+    ],
+    [
+     "Langerhans cell",
+     "Antigen presentation"
+    ],
+    [
+     "Merkel cell",
+     "Touch"
+    ]
+   ],
+   "explain": "Four epidermal cell types and their functions."
+  },
+  {
+   "id": "wk10_c05",
+   "sys": "Derm",
+   "topic": "Psoriasis",
+   "type": "multi",
+   "guide": {
+    "f": "W10_02_RedScaly.html",
+    "t": "2 · Psoriasis",
+    "s": "Psoriasis"
+   },
+   "prompt": "Which are recognized psoriasis triggers? (select all)",
+   "options": [
+    "Streptococcal infection",
+    "Beta-blockers and lithium",
+    "Koebner phenomenon/trauma",
+    "Sun exposure in moderation"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "Strep (guttate), drugs (beta-blockers, lithium, NSAIDs, steroid withdrawal), and Koebner trauma trigger psoriasis; sunlight usually helps."
+  },
+  {
+   "id": "wk10_c06",
+   "sys": "Derm",
+   "topic": "Psoriasis",
+   "type": "qa",
+   "guide": {
+    "f": "W10_02_RedScaly.html",
+    "t": "2 · Psoriasis",
+    "s": "Psoriasis"
+   },
+   "prompt": "Why examine the nails and joints in a psoriasis patient?",
+   "answer": "Nail disease (pitting, onycholysis) is common and flags risk of psoriatic arthritis, which should be screened and referred early to prevent joint damage."
+  },
+  {
+   "id": "wk10_c07",
+   "sys": "Derm",
+   "topic": "Atopic Dermatitis",
+   "type": "qa",
+   "guide": {
+    "f": "W10_02_RedScaly.html",
+    "t": "2 · Atopic Dermatitis",
+    "s": "Two complications to recognize"
+   },
+   "prompt": "Distinguish impetiginized eczema from eczema herpeticum.",
+   "answer": "Impetiginized eczema: weeping with honey crust (S. aureus) → antibiotics + eczema control. Eczema herpeticum: painful monomorphic vesicles/punched-out erosions + fever (HSV) → urgent systemic antivirals."
+  },
+  {
+   "id": "wk10_c08",
+   "sys": "Derm",
+   "topic": "Atopic Dermatitis",
+   "type": "cloze",
+   "guide": {
+    "f": "W10_02_RedScaly.html",
+    "t": "2 · Atopic Dermatitis",
+    "s": "Atopic dermatitis"
+   },
+   "text": "Atopic dermatitis is driven by skin {{barrier}} dysfunction and immune dysregulation. Backbone of care is daily {{emollients}} plus topical steroids matched to site; use {{calcineurin}} inhibitors for sensitive areas.",
+   "explain": "Barrier repair + anti-inflammatory therapy; don't undertreat from steroid fear."
+  },
+  {
+   "id": "wk10_c09",
+   "sys": "Derm",
+   "topic": "Contact Dermatitis",
+   "type": "mcq",
+   "guide": {
+    "f": "W10_02_RedScaly.html",
+    "t": "2 · Contact Dermatitis",
+    "s": "Allergic contact dermatitis"
+   },
+   "prompt": "Allergic contact dermatitis is which type of hypersensitivity?",
+   "options": [
+    "Type I (IgE)",
+    "Type II (cytotoxic)",
+    "Type III (immune complex)",
+    "Type IV (delayed, T-cell)"
+   ],
+   "correct": 3,
+   "explain": "Delayed type IV; confirmed by patch testing; common allergens include nickel, poison ivy, fragrances, neomycin/bacitracin."
+  },
+  {
+   "id": "wk10_c10",
+   "sys": "Derm",
+   "topic": "Stasis Dermatitis",
+   "type": "qa",
+   "guide": {
+    "f": "W10_02_RedScaly.html",
+    "t": "2 · Stasis Dermatitis",
+    "s": "Stasis dermatitis"
+   },
+   "prompt": "What drives stasis dermatitis and what is the key treatment?",
+   "answer": "Venous hypertension/insufficiency (edema). Key treatment is compression + leg elevation to address the cause, plus topical steroid for inflammation and wound care."
+  },
+  {
+   "id": "wk10_c11",
+   "sys": "Derm",
+   "topic": "Papulosquamous",
+   "type": "match",
+   "guide": {
+    "f": "W10_02_RedScaly.html",
+    "t": "2 · Lichen Planus",
+    "s": "Lichen planus · pityriasis rosea · lupus"
+   },
+   "prompt": "Match the papulosquamous disease to its hallmark:",
+   "pairs": [
+    [
+     "Lichen planus",
+     "6 Ps + Wickham striae"
+    ],
+    [
+     "Pityriasis rosea",
+     "Herald patch, Christmas-tree"
+    ],
+    [
+     "Cutaneous lupus",
+     "Malar rash sparing nasolabial folds"
+    ],
+    [
+     "Psoriasis",
+     "Silvery scale, nail pitting"
+    ]
+   ],
+   "explain": "Pattern hallmarks for the well-demarcated red-and-scaly diseases."
+  },
+  {
+   "id": "wk10_c12",
+   "sys": "Derm",
+   "topic": "Infections",
+   "type": "qa",
+   "guide": {
+    "f": "W10_03_Infections.html",
+    "t": "3 · Bacterial",
+    "s": "Bacterial"
+   },
+   "prompt": "What finding signals necrotizing fasciitis, and what is the management?",
+   "answer": "Pain out of proportion to exam, rapid progression, systemic toxicity (± bullae/crepitus). It is a surgical emergency: broad-spectrum IV antibiotics + immediate debridement; don't delay surgery for imaging."
+  },
+  {
+   "id": "wk10_c13",
+   "sys": "Derm",
+   "topic": "Infections",
+   "type": "cloze",
+   "guide": {
+    "f": "W10_03_Infections.html",
+    "t": "3 · Bacterial",
+    "s": "Bacterial"
+   },
+   "text": "{{Honey}}-coloured crusts are classic for impetigo (usually {{S. aureus}}); limited disease is treated with topical {{mupirocin}} (or fusidic acid).",
+   "explain": "Honey crust → impetigo → topical antibiotic for limited disease."
+  },
+  {
+   "id": "wk10_c14",
+   "sys": "Derm",
+   "topic": "Infections",
+   "type": "mcq",
+   "guide": {
+    "f": "W10_03_Infections.html",
+    "t": "3 · Fungal",
+    "s": "Fungal / yeast"
+   },
+   "prompt": "Tinea capitis should be treated with:",
+   "options": [
+    "Topical antifungal cream alone",
+    "Oral (systemic) antifungal therapy",
+    "Topical steroid alone",
+    "Permethrin"
+   ],
+   "correct": 1,
+   "explain": "Hair-follicle involvement means topical therapy is inadequate — oral antifungal is required. Same for nails and extensive disease."
+  },
+  {
+   "id": "wk10_c15",
+   "sys": "Derm",
+   "topic": "Infections",
+   "type": "qa",
+   "guide": {
+    "f": "W10_03_Infections.html",
+    "t": "3 · Fungal",
+    "s": "Fungal / yeast"
+   },
+   "prompt": "How do pityriasis versicolor and vitiligo differ?",
+   "answer": "Versicolor (Malassezia) gives hypo- or hyperpigmented finely scaly patches, KOH positive, treated with antifungals. Vitiligo is fully depigmented (not hypopigmented), non-scaly, and autoimmune."
+  },
+  {
+   "id": "wk10_c16",
+   "sys": "Derm",
+   "topic": "Infections",
+   "type": "match",
+   "guide": {
+    "f": "W10_03_Infections.html",
+    "t": "3 · Viral",
+    "s": "Viral"
+   },
+   "prompt": "Match each viral lesion to its clue:",
+   "pairs": [
+    [
+     "HSV",
+     "Grouped vesicles on erythematous base"
+    ],
+    [
+     "Zoster",
+     "Dermatomal vesicles + pain"
+    ],
+    [
+     "Molluscum",
+     "Umbilicated papules (poxvirus)"
+    ],
+    [
+     "Warts",
+     "Black dots, lost dermatoglyphics (HPV)"
+    ]
+   ],
+   "explain": "Morphology distinguishes the cutaneous viral infections."
+  },
+  {
+   "id": "wk10_c17",
+   "sys": "Derm",
+   "topic": "Scabies",
+   "type": "cloze",
+   "guide": {
+    "f": "W10_03_Infections.html",
+    "t": "3 · Scabies",
+    "s": "Scabies"
+   },
+   "text": "Scabies causes intense {{nocturnal}} itch with {{burrows}} in the finger webs and wrists; treat the patient and {{contacts}} with permethrin or ivermectin and decontaminate linens.",
+   "explain": "Itch + burrows + affected contacts; treat everyone and the environment."
+  },
+  {
+   "id": "wk10_c18",
+   "sys": "Derm",
+   "topic": "Infections",
+   "type": "qa",
+   "guide": {
+    "f": "W10_03_Infections.html",
+    "t": "3 · Fungal",
+    "s": "Fungal / yeast"
+   },
+   "prompt": "What is the classic morphology of tinea corporis, and what is 'tinea incognito'?",
+   "answer": "Annular scaly plaque with central clearing and an advancing scaly border. Tinea incognito is tinea altered/worsened by prior topical steroid use, losing its typical features."
+  },
+  {
+   "id": "wk10_c19",
+   "sys": "Derm",
+   "topic": "Acne",
+   "type": "qa",
+   "guide": {
+    "f": "W10_04_Acne_Tx.html",
+    "t": "4 · Acne",
+    "s": "Acne"
+   },
+   "prompt": "What single feature separates acne from rosacea?",
+   "answer": "Comedones — acne has them, rosacea does not (both can have papules/pustules)."
+  },
+  {
+   "id": "wk10_c20",
+   "sys": "Derm",
+   "topic": "Acne",
+   "type": "mcq",
+   "guide": {
+    "f": "W10_04_Acne_Tx.html",
+    "t": "4 · Acne",
+    "s": "Match severity to therapy"
+   },
+   "prompt": "First-line for purely comedonal acne is:",
+   "options": [
+    "Oral antibiotic",
+    "Topical retinoid",
+    "Oral isotretinoin",
+    "Topical steroid"
+   ],
+   "correct": 1,
+   "explain": "Topical retinoids are comedolytic and target the microcomedone precursor — first-line for comedonal acne and maintenance."
+  },
+  {
+   "id": "wk10_c21",
+   "sys": "Derm",
+   "topic": "Acne",
+   "type": "multi",
+   "guide": {
+    "f": "W10_04_Acne_Tx.html",
+    "t": "4 · Acne drug cautions",
+    "s": "Acne drug cautions"
+   },
+   "prompt": "Which acne therapies are contraindicated/avoided in pregnancy? (select all)",
+   "options": [
+    "Oral tetracyclines",
+    "Topical & oral retinoids (incl. isotretinoin)",
+    "Benzoyl peroxide",
+    "Spironolactone"
+   ],
+   "correct": [
+    0,
+    1,
+    3
+   ],
+   "explain": "Tetracyclines, retinoids/isotretinoin, and spironolactone are avoided in pregnancy; benzoyl peroxide is acceptable."
+  },
+  {
+   "id": "wk10_c22",
+   "sys": "Derm",
+   "topic": "Acne",
+   "type": "qa",
+   "guide": {
+    "f": "W10_04_Acne_Tx.html",
+    "t": "4 · Acne drug cautions",
+    "s": "Acne drug cautions"
+   },
+   "prompt": "Why should topical antibiotics not be used as monotherapy for acne?",
+   "answer": "Resistance develops quickly — combine with benzoyl peroxide (which lowers resistance) and/or a retinoid."
+  },
+  {
+   "id": "wk10_c23",
+   "sys": "Derm",
+   "topic": "Therapeutics",
+   "type": "cloze",
+   "guide": {
+    "f": "W10_04_Acne_Tx.html",
+    "t": "4 · Topical therapeutics",
+    "s": "Topical therapeutics"
+   },
+   "text": "For topical steroids, percent concentration {{does not}} equal potency. Clobetasol 0.05% is class {{1}} (super-potent); hydrocortisone 1% is class {{7}} (least potent). Use low potency on face, folds, genitals, and children.",
+   "explain": "Potency is by class and vehicle, not the percentage."
+  },
+  {
+   "id": "wk10_c24",
+   "sys": "Derm",
+   "topic": "Therapeutics",
+   "type": "match",
+   "guide": {
+    "f": "W10_04_Acne_Tx.html",
+    "t": "4 · Topical therapeutics",
+    "s": "Topical therapeutics"
+   },
+   "prompt": "Match the vehicle to its best use:",
+   "pairs": [
+    [
+     "Ointment",
+     "Dry, thick plaques (most potent)"
+    ],
+    [
+     "Cream",
+     "Cosmetically elegant, drying"
+    ],
+    [
+     "Lotion/foam",
+     "Hairy areas"
+    ],
+    [
+     "Gel",
+     "Spreads easily, may sting"
+    ]
+   ],
+   "explain": "Vehicle choice depends on site and lesion."
+  },
+  {
+   "id": "wk10_c25",
+   "sys": "Derm",
+   "topic": "Therapeutics",
+   "type": "qa",
+   "guide": {
+    "f": "W10_04_Acne_Tx.html",
+    "t": "4 · Topical therapeutics",
+    "s": "Topical therapeutics"
+   },
+   "prompt": "Which acne drug is teratogenic and requires pregnancy prevention + monitoring?",
+   "answer": "Isotretinoin — needs pregnancy prevention and β-hCG, plus lipid/LFT monitoring; for severe cystic/scarring or refractory acne."
+  },
+  {
+   "id": "wk10_c26",
+   "sys": "Derm",
+   "topic": "Skin Cancer",
+   "type": "match",
+   "guide": {
+    "f": "W10_05_SkinCancer.html",
+    "t": "5 · BCC & SCC",
+    "s": "BCC & SCC"
+   },
+   "prompt": "Match the skin cancer to its hallmark:",
+   "pairs": [
+    [
+     "BCC",
+     "Pearly papule, telangiectasia, rare metastasis"
+    ],
+    [
+     "SCC",
+     "Keratotic non-healing nodule, more metastatic"
+    ],
+    [
+     "Melanoma",
+     "ABCDE; Breslow depth drives prognosis"
+    ],
+    [
+     "Actinic keratosis",
+     "Rough gritty premalignant papule"
+    ]
+   ],
+   "explain": "Recognition + behaviour for the key neoplasms."
+  },
+  {
+   "id": "wk10_c27",
+   "sys": "Derm",
+   "topic": "Melanoma",
+   "type": "cloze",
+   "guide": {
+    "f": "W10_05_SkinCancer.html",
+    "t": "5 · Melanoma",
+    "s": "Melanoma"
+   },
+   "text": "Suspected melanoma needs an {{excisional}} biopsy to measure {{Breslow}} depth; depth and {{ulceration}} are the dominant prognostic factors.",
+   "explain": "Don't shave/cryo a suspected melanoma — excise to get depth."
+  },
+  {
+   "id": "wk10_c28",
+   "sys": "Derm",
+   "topic": "Melanoma",
+   "type": "qa",
+   "guide": {
+    "f": "W10_05_SkinCancer.html",
+    "t": "5 · Melanoma",
+    "s": "Melanoma"
+   },
+   "prompt": "What does ABCDE stand for?",
+   "answer": "Asymmetry, Border irregularity, Colour variation, Diameter >6 mm, Evolution."
+  },
+  {
+   "id": "wk10_c29",
+   "sys": "Derm",
+   "topic": "Skin Cancer",
+   "type": "qa",
+   "guide": {
+    "f": "W10_05_SkinCancer.html",
+    "t": "5 · Precancer",
+    "s": "Actinic keratosis"
+   },
+   "prompt": "What is an actinic keratosis and why does it matter?",
+   "answer": "A rough, gritty premalignant keratinocyte lesion on sun-damaged skin; it can progress to squamous cell carcinoma. Treat with cryotherapy/field therapy and sun protection."
+  },
+  {
+   "id": "wk10_c30",
+   "sys": "Derm",
+   "topic": "Skin Cancer",
+   "type": "qa",
+   "guide": {
+    "f": "W10_05_SkinCancer.html",
+    "t": "5 · Biopsy",
+    "s": "Biopsy principles"
+   },
+   "prompt": "What should you do if pathology does not fit the clinical impression?",
+   "answer": "Re-biopsy or pursue clinicopathologic correlation/discussion — pathology must correlate with the clinical picture, and margins matter in malignancy."
+  },
+  {
+   "id": "wk10_c31",
+   "sys": "Derm",
+   "topic": "Drug Reactions",
+   "type": "order",
+   "guide": {
+    "f": "W10_06_Emergencies.html",
+    "t": "6 · Drug-rash hierarchy",
+    "s": "Drug-rash hierarchy"
+   },
+   "prompt": "Order these drug reactions from least to most severe:",
+   "items": [
+    "Morbilliform exanthem",
+    "DRESS",
+    "SJS/TEN"
+   ],
+   "explain": "Simple exanthem (no systemic) < DRESS (organ involvement) < SJS/TEN (mucosa, desquamation, mortality)."
+  },
+  {
+   "id": "wk10_c32",
+   "sys": "Derm",
+   "topic": "Drug Reactions",
+   "type": "cloze",
+   "guide": {
+    "f": "W10_06_Emergencies.html",
+    "t": "6 · Drug-rash hierarchy",
+    "s": "Drug-rash hierarchy"
+   },
+   "text": "DRESS begins about {{2-8 weeks}} after a drug with fever, facial edema, {{eosinophilia}}, and organ involvement. SJS/TEN shows tender skin, {{mucosal}} involvement, and a positive Nikolsky sign.",
+   "explain": "Timing and systemic features separate the serious drug reactions."
+  },
+  {
+   "id": "wk10_c33",
+   "sys": "Derm",
+   "topic": "Drug Reactions",
+   "type": "multi",
+   "guide": {
+    "f": "W10_06_Emergencies.html",
+    "t": "6 · Drug-rash hierarchy",
+    "s": "Drug-rash hierarchy"
+   },
+   "prompt": "Which drugs are classic culprits for SJS/TEN and DRESS? (select all)",
+   "options": [
+    "TMP-SMX (sulfonamides)",
+    "Anticonvulsants",
+    "Allopurinol",
+    "Topical emollients"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "Sulfonamides, anticonvulsants, allopurinol, and NSAIDs are common triggers."
+  },
+  {
+   "id": "wk10_c34",
+   "sys": "Derm",
+   "topic": "Bullous Disease",
+   "type": "match",
+   "guide": {
+    "f": "W10_06_Emergencies.html",
+    "t": "6 · Bullous",
+    "s": "Bullous disease discriminator"
+   },
+   "prompt": "Match the feature to the bullous disease:",
+   "pairs": [
+    [
+     "Tense bullae, elderly, mucosa spared",
+     "Bullous pemphigoid"
+    ],
+    [
+     "Flaccid bullae, oral erosions, Nikolsky+",
+     "Pemphigus vulgaris"
+    ],
+    [
+     "Basement-membrane antibodies",
+     "Bullous pemphigoid"
+    ],
+    [
+     "Desmoglein antibodies",
+     "Pemphigus vulgaris"
+    ]
+   ],
+   "explain": "BP = subepidermal/tense; pemphigus = intraepidermal/flaccid."
+  },
+  {
+   "id": "wk10_c35",
+   "sys": "Derm",
+   "topic": "Vasculitis",
+   "type": "qa",
+   "guide": {
+    "f": "W10_06_Emergencies.html",
+    "t": "6 · IgA vasculitis (HSP)",
+    "s": "IgA vasculitis (HSP)"
+   },
+   "prompt": "What is the HSP (IgA vasculitis) tetrad, and what must always be monitored?",
+   "answer": "Palpable purpura, arthralgia/arthritis, abdominal pain, and renal disease. Always monitor renal involvement with urinalysis and blood pressure."
+  },
+  {
+   "id": "wk10_c36",
+   "sys": "Derm",
+   "topic": "Emergencies",
+   "type": "cloze",
+   "guide": {
+    "f": "W10_06_Emergencies.html",
+    "t": "6 · IgA vasculitis (HSP)",
+    "s": "Painful skin + mucosa + new drug"
+   },
+   "text": "Painful skin + {{mucosal}} involvement + a new drug = {{SJS/TEN}} until proven otherwise; pain out of proportion = {{necrotizing fasciitis}}.",
+   "explain": "The two dermatologic emergencies to flag instantly."
+  },
+  {
+   "id": "wk10_c37",
+   "sys": "Derm",
+   "topic": "Pediatric",
+   "type": "qa",
+   "guide": {
+    "f": "W10_07_Peds_Hair.html",
+    "t": "7 · Pediatric",
+    "s": "Pediatric dermatology"
+   },
+   "prompt": "What is the most common trigger of acute urticaria in children?",
+   "answer": "Upper respiratory infection (URI). Treat with second-generation antihistamines; assess for angioedema/anaphylaxis."
+  },
+  {
+   "id": "wk10_c38",
+   "sys": "Derm",
+   "topic": "Pediatric",
+   "type": "cloze",
+   "guide": {
+    "f": "W10_07_Peds_Hair.html",
+    "t": "7 · Pediatric",
+    "s": "Pediatric dermatology"
+   },
+   "text": "Infantile hemangiomas appear in the first weeks, proliferate for about {{6 months}}, then {{involute}} over years. Oral {{propranolol}} is used for large/high-risk lesions, especially near the eye.",
+   "explain": "Proliferate then involute; propranolol for high-risk lesions."
+  },
+  {
+   "id": "wk10_c39",
+   "sys": "Derm",
+   "topic": "Alopecia",
+   "type": "qa",
+   "guide": {
+    "f": "W10_07_Peds_Hair.html",
+    "t": "7 · Alopecia",
+    "s": "Alopecia — the key split"
+   },
+   "prompt": "How do scarring and non-scarring alopecia differ on exam and prognosis?",
+   "answer": "Non-scarring preserves follicular openings and can regrow; scarring loses follicular openings (stem cells destroyed) and cannot regrow in scarred areas — so treat early."
+  },
+  {
+   "id": "wk10_c40",
+   "sys": "Derm",
+   "topic": "Alopecia",
+   "type": "cloze",
+   "guide": {
+    "f": "W10_07_Peds_Hair.html",
+    "t": "7 · Alopecia",
+    "s": "Alopecia — the key split"
+   },
+   "text": "Telogen effluvium classically sheds hair about {{3 months}} after an illness or stressor; screen for triggers such as low {{iron}} and {{thyroid}} disease.",
+   "explain": "Diffuse, reversible shed with a lag after the trigger."
+  },
+  {
+   "id": "wk10_c41",
+   "sys": "Derm",
+   "topic": "Alopecia",
+   "type": "match",
+   "guide": {
+    "f": "W10_07_Peds_Hair.html",
+    "t": "7 · Alopecia",
+    "s": "Alopecia — the key split"
+   },
+   "prompt": "Match the alopecia to a feature/treatment:",
+   "pairs": [
+    [
+     "Androgenetic",
+     "Miniaturized hairs; minoxidil/finasteride"
+    ],
+    [
+     "Alopecia areata",
+     "Circular patches; stem cells intact"
+    ],
+    [
+     "Telogen effluvium",
+     "Diffuse shed ~3 mo post-stressor"
+    ],
+    [
+     "Scarring (LPP)",
+     "Lost follicular openings; no regrowth"
+    ]
+   ],
+   "explain": "Non-scarring types can regrow; scarring cannot."
+  },
+  {
+   "id": "wk10_c42",
+   "sys": "Derm",
+   "topic": "Pediatric",
+   "type": "qa",
+   "guide": {
+    "f": "W10_07_Peds_Hair.html",
+    "t": "7 · Pediatric",
+    "s": "Pediatric dermatology"
+   },
+   "prompt": "In pediatric atopic dermatitis, is broad food elimination recommended?",
+   "answer": "No — food elimination is usually unhelpful unless there is a true, confirmed allergy. Focus on emollients and appropriate-potency topical steroids (low potency on face/infants)."
+  },
+  {
+   "id": "wk10_c43",
+   "sys": "Derm",
+   "topic": "Therapeutics",
+   "type": "qa",
+   "guide": {
+    "f": "W10_04_Acne_Tx.html",
+    "t": "4 · Topical therapeutics",
+    "s": "Topical therapeutics"
+   },
+   "prompt": "What is botulinum toxin's mechanism?",
+   "answer": "It cleaves SNAP-25, preventing synaptic vesicle fusion and acetylcholine release at the neuromuscular junction."
+  },
+  {
+   "id": "wk10_c44",
+   "sys": "Derm",
+   "topic": "Skin Cancer",
+   "type": "multi",
+   "guide": {
+    "f": "W10_05_SkinCancer.html",
+    "t": "5 · Biopsy",
+    "s": "Benign mimickers"
+   },
+   "prompt": "Which are benign mimickers to recognize (but biopsy if evolving/atypical)? (select all)",
+   "options": [
+    "Seborrheic keratosis",
+    "Dermatofibroma",
+    "Melanoma",
+    "Cherry angioma"
+   ],
+   "correct": [
+    0,
+    1,
+    3
+   ],
+   "explain": "Seborrheic keratosis, dermatofibroma, and angiomas are benign; melanoma is malignant. CTCL can mimic chronic eczema/psoriasis."
+  },
+  {
+   "id": "wk10_c45",
+   "sys": "Derm",
+   "topic": "Psoriasis",
+   "type": "mcq",
+   "guide": {
+    "f": "W10_02_RedScaly.html",
+    "t": "2 · Psoriasis",
+    "s": "Psoriasis"
+   },
+   "prompt": "A limited plaque-psoriasis patient is best started on:",
+   "options": [
+    "Systemic biologic",
+    "Topical corticosteroid + vitamin D analogue",
+    "Oral antifungal",
+    "Wide local excision"
+   ],
+   "correct": 1,
+   "explain": "Limited disease: emollients + topical steroid and vitamin D analogue; escalate to phototherapy/systemics for extensive disease or psoriatic arthritis."
+  },
+  {
+   "id": "wk10_c46",
+   "sys": "Derm",
+   "topic": "Infections",
+   "type": "qa",
+   "guide": {
+    "f": "W10_03_Infections.html",
+    "t": "3 · Viral",
+    "s": "Viral"
+   },
+   "prompt": "Where does herpes simplex virus remain latent, and what does early antiviral therapy achieve?",
+   "answer": "In the dorsal root (sensory) ganglion. Early antivirals reduce the duration/severity of an outbreak but do not prevent all future recurrences."
+  }
+ ],
+ "guides": [
+  {
+   "file": "W10_01_Morphology.html",
+   "title": "Week 10 · 1 Morphology & Approach",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Morphology &amp; Approach</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{\n  --paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;\n  --accent:#7c2d2d;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;\n  --hi:#a23b2e;--lo:#2d5a6b;\n}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}\nul{margin:6px 0 6px 0;padding-left:18px}li{margin:3px 0}\nb{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Language of Derm</div><h1>Morphology &amp; Approach</h1></div><div class=\"r\">Week 10 &middot; Dermatology<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">The descriptive scaffold for every rash, the primary/secondary lesion vocabulary, and the first high-yield split &mdash; papulosquamous (well-demarcated) vs dermatitic (ill-defined).</p>\n<h2 id=\"approach\">Describing a rash</h2>\n<p>Order: <b>primary morphology &rarr; size &rarr; colour &rarr; arrangement &rarr; distribution &rarr; secondary change &rarr; symptoms/time course.</b> Accurate description makes most diagnoses fall out.</p>\n<div class=\"key\">Skin functions: barrier (mechanical/chemical/UV/pathogen/dehydration), thermoregulation, vitamin D synthesis. Epidermis cells: <b>keratinocytes</b> (dominant), <b>melanocytes</b> (melanin), <b>Langerhans</b> (antigen presentation), <b>Merkel</b> (touch).</div>\n<h2 id=\"primary\">Primary lesions</h2>\n<table>\n<tr><th>Term</th><th>Recognition</th><th>Example</th></tr>\n<tr><td>Macule / patch</td><td>Flat colour change; macule &lt;1 cm, patch &gt;1 cm</td><td>Freckle, vitiligo</td></tr>\n<tr><td>Papule / plaque</td><td>Raised; papule &lt;1 cm, plaque &gt;1 cm (scale raises it)</td><td>Acne papule, psoriasis plaque</td></tr>\n<tr><td>Nodule / tumour</td><td>Raised with deeper component (&ldquo;tumour&rdquo; &ne; cancer)</td><td>Nodular BCC, hemangioma</td></tr>\n<tr><td>Vesicle / bulla</td><td>Fluid-filled; vesicle &lt;1 cm, bulla &gt;1 cm</td><td>HSV, pemphigoid</td></tr>\n<tr><td>Pustule / abscess</td><td>Pus-filled; abscess is deeper</td><td>Acne pustule, furuncle</td></tr>\n</table>\n<h2 id=\"secondary\">Secondary change</h2>\n<p><b>Scale</b> = excess stratum corneum; <b>crust</b> = dried serum/pus/blood. <b>Erosion</b> (epidermal loss, heals without scar) vs <b>ulcer</b> (into dermis, scars). <b>Lichenification</b> = thickening from chronic rubbing; <b>excoriation</b> = scratch marks.</p>\n<h2 id=\"pattern\">The first split: papulosquamous vs dermatitic</h2>\n<table>\n<tr><th>Pattern</th><th>Core clue</th><th>Key disorders</th></tr>\n<tr><td><b>Papulosquamous</b></td><td>Red + scaly + <b>well-demarcated</b></td><td>Psoriasis, lichen planus, pityriasis rosea, cutaneous lupus, tinea</td></tr>\n<tr><td><b>Dermatitic</b></td><td>Red + scaly but <b>ill-defined</b>; itchy/oozy/crusted/lichenified</td><td>Atopic, allergic contact, stasis dermatitis</td></tr>\n</table>\n<div class=\"band\"><div class=\"t\">Exam pearl</div><b>Well-demarcated + scale = papulosquamous</b> until proven otherwise; <b>ill-defined + itchy/oozy = dermatitic.</b></div>\n</div>"
+  },
+  {
+   "file": "W10_02_RedScaly.html",
+   "title": "Week 10 · 2 Papulosquamous & Dermatitic",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Papulosquamous &amp; Dermatitic</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{\n  --paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;\n  --accent:#7c2d2d;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;\n  --hi:#a23b2e;--lo:#2d5a6b;\n}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}\nul{margin:6px 0 6px 0;padding-left:18px}li{margin:3px 0}\nb{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Red &amp; Scaly</div><h1>Papulosquamous &amp; Dermatitic</h1></div><div class=\"r\">Week 10 &middot; Dermatology<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">Psoriasis and its triggers/comorbidities, atopic dermatitis with its two can't-miss complications, contact and stasis dermatitis, and the lichen planus / pityriasis rosea / lupus trio.</p>\n<h2 id=\"psoriasis\">Psoriasis</h2>\n<p>Chronic, genetic, ~2% of population (peaks in 20s and 50s); relapses rather than cures. <b>Well-demarcated erythematous plaques with silvery scale</b> on scalp, elbows, knees, trunk; <b>check nails</b> (pitting &rarr; psoriatic arthritis risk).</p>\n<div class=\"band warn\"><div class=\"t\">Triggers</div>Streptococcal infection (guttate), stress, <b>Koebner/trauma</b>, cold, smoking/alcohol; drugs: <b>beta-blockers, lithium, NSAIDs, steroid withdrawal</b>.</div>\n<p><b>Management:</b> emollients; topical steroids + <b>vitamin D analogues</b> (limited); phototherapy (extensive); systemics/biologics (severe or psoriatic arthritis). Comorbidities: <b>psoriatic arthritis</b>, metabolic syndrome, CVD &mdash; screen joints.</p>\n<h2 id=\"atopic\">Atopic dermatitis</h2>\n<p>Ill-defined, scaly, <b>intensely pruritic</b>; infants face/extensors, older flexures; more violaceous/hyperpigmented in darker skin. Driver: <b>barrier dysfunction + immune dysregulation + atopy</b>.</p>\n<p><b>Management:</b> daily emollients, gentle care, avoid irritants, topical steroids matched to site/severity, <b>topical calcineurin inhibitors</b> for sensitive areas/maintenance. Don't undertreat from steroid fear.</p>\n<div class=\"band warn\"><div class=\"t\">Two complications to recognize</div>\n<b>Impetiginized eczema</b> &mdash; weeping, <b>honey crust</b>, S. aureus &rarr; antibiotics + eczema control.<br>\n<b>Eczema herpeticum</b> &mdash; painful <b>monomorphic vesicles / punched-out erosions</b>, fever, rapid spread &rarr; <span class=\"dnm\">urgent systemic antivirals</span> + ophtho if eye.</div>\n<h2 id=\"contact\">Allergic contact dermatitis</h2>\n<p>Delayed <b>type IV</b> hypersensitivity. Itch, vesicles/bullae in a <b>distribution matching exposure</b>. Allergens: nickel, poison ivy, hair dye, fragrances, preservatives, <b>neomycin/bacitracin</b>. Dx: <b>patch testing</b>. Rx: avoidance + topical steroids (systemic if widespread).</p>\n<h2 id=\"stasis\">Stasis dermatitis</h2>\n<p>Sign of <b>venous hypertension</b>: lower legs, edema, oozing, <b>hemosiderin (brown) pigment</b>, varicosities, ulcer risk. <span class=\"dnm\">Treat the cause &mdash; compression + elevation</span>; topical steroid for inflammation; wound care.</p>\n<h2 id=\"lp\">Lichen planus · pityriasis rosea · lupus</h2>\n<table>\n<tr><th>Disease</th><th>Recognition</th><th>Course / Rx</th></tr>\n<tr><td><b>Lichen planus</b></td><td>The <b>6 Ps</b>: pruritic, purple, polygonal, peripheral, papules, penile; Wickham striae; oral/nail</td><td>Topical steroids; check mucosa/nails</td></tr>\n<tr><td><b>Pityriasis rosea</b></td><td><b>Herald patch</b> &rarr; salmon plaques in <b>Christmas-tree</b> pattern, collarette scale, spares face; HHV-6/7</td><td>Self-limited 6&ndash;8 wk; <b>reassurance</b></td></tr>\n<tr><td><b>Cutaneous lupus</b></td><td>Acute <b>malar rash sparing nasolabial folds</b>, photosensitive; discoid scars</td><td>Sun protection, topical steroids, antimalarials</td></tr>\n</table>\n</div>"
+  },
+  {
+   "file": "W10_03_Infections.html",
+   "title": "Week 10 · 3 Infections & Infestations",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Infections &amp; Infestations</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{\n  --paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;\n  --accent:#7c2d2d;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;\n  --hi:#a23b2e;--lo:#2d5a6b;\n}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}\nul{margin:6px 0 6px 0;padding-left:18px}li{margin:3px 0}\nb{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Bugs</div><h1>Infections &amp; Infestations</h1></div><div class=\"r\">Week 10 &middot; Dermatology<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">Bacterial (impetigo &rarr; necrotizing fasciitis), viral (HSV/VZV/molluscum/warts), the tinea family with the capitis = oral-antifungal rule, pityriasis versicolor vs vitiligo, and scabies.</p>\n<h2 id=\"bacterial\">Bacterial</h2>\n<table>\n<tr><th>Condition</th><th>Recognition</th><th>Management</th></tr>\n<tr><td><b>Impetigo</b></td><td><b>Honey-coloured crust</b>, face, S. aureus; contagious</td><td>Remove crusts; topical mupirocin/fusidic acid; oral cloxacillin/cephalosporin if extensive</td></tr>\n<tr><td>Cellulitis / erysipelas</td><td>Warm tender expanding plaque; portal of entry (tinea, abrasion)</td><td>Antibiotics vs strep/S. aureus; elevate; treat portal</td></tr>\n<tr><td class=\"dnm\">Necrotizing fasciitis</td><td><b>Pain out of proportion</b>, rapid spread, systemic toxicity, late bullae/crepitus</td><td><span class=\"dnm\">Surgical emergency</span> &mdash; broad IV antibiotics + immediate debridement</td></tr>\n</table>\n<h2 id=\"viral\">Viral</h2>\n<ul>\n<li><b>HSV-1/2:</b> grouped vesicles on erythematous base; latency in dorsal root ganglion; aciclovir/valaciclovir.</li>\n<li><b>Varicella zoster:</b> <b>dermatomal</b> grouped vesicles + pain; antivirals esp. early, facial/eye, immunocompromised.</li>\n<li><b>Molluscum contagiosum:</b> <b>umbilicated</b> dome papules; <b>poxvirus</b>; self-limited over 1&ndash;2 y; treat surrounding eczema.</li>\n<li><b>Warts (HPV):</b> rough papules with black dots, loss of dermatoglyphics; salicylic acid/cryo; HPV vaccine prevents high-risk types.</li>\n</ul>\n<h2 id=\"fungal\">Fungal / yeast</h2>\n<div class=\"band\"><div class=\"t\">Tinea</div>\nDermatophyte of keratin. <b>Corporis:</b> annular plaque, <b>central clearing + advancing border</b>. <b>Capitis:</b> patchy alopecia, scale, broken hairs, lymphadenopathy &rarr; <span class=\"dnm\">needs ORAL antifungal</span> (topical inadequate). KOH/culture before prolonged systemic therapy. Beware <b>tinea incognito</b> from prior steroids.</div>\n<p><b>Pityriasis versicolor:</b> Malassezia overgrowth &rarr; hypo/hyperpigmented oval scaly patches in seborrheic distribution. Topical antifungals; oral azoles if extensive. <b>Contrast vitiligo</b> = fully <b>depigmented</b>, not hypopigmented.</p>\n<h2 id=\"scabies\">Scabies</h2>\n<div class=\"band warn\"><div class=\"t\">Pattern</div>Intense <b>nocturnal</b> itch, <b>burrows</b>, finger webs/wrists/genitals (feet in babies), affected <b>contacts</b>/congregate living.</div>\n<p>Rx: <b>permethrin cream or oral ivermectin</b> + treat close contacts + decontaminate clothing/linens.</p>\n</div>"
+  },
+  {
+   "file": "W10_04_Acne_Tx.html",
+   "title": "Week 10 · 4 Acne, Rosacea & Therapeutics",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Acne, Rosacea &amp; Therapeutics</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{\n  --paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;\n  --accent:#7c2d2d;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;\n  --hi:#a23b2e;--lo:#2d5a6b;\n}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}\nul{margin:6px 0 6px 0;padding-left:18px}li{margin:3px 0}\nb{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Pilosebaceous &amp; Rx</div><h1>Acne, Rosacea &amp; Therapeutics</h1></div><div class=\"r\">Week 10 &middot; Dermatology<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">Acne by severity (and the comedone discriminator vs rosacea), the drug-caution table (isotretinoin teratogenicity, tetracycline limits), and topical therapeutics &mdash; vehicle, potency, and procedures.</p>\n<h2 id=\"acne\">Acne</h2>\n<p>Disorder of the <b>pilosebaceous unit</b>; <b>true acne includes comedones</b> (no comedones &rarr; think mimicker/drug). Pathogenesis: follicular hyperkeratinization, androgen-driven sebum, <i>C. acnes</i>, inflammation.</p>\n<div class=\"key\"><b>Rosacea vs acne:</b> both have papules/pustules, but <b>acne has comedones and rosacea does not</b> &mdash; high-yield discriminator.</div>\n<h3>Match severity to therapy</h3>\n<table>\n<tr><th>Picture</th><th>Approach</th></tr>\n<tr><td>Comedonal</td><td><b>Topical retinoid</b> (comedolytic, targets the precursor)</td></tr>\n<tr><td>Mild papulopustular</td><td>Topical combo (retinoid + benzoyl peroxide &plusmn; antibiotic)</td></tr>\n<tr><td>Moderate / truncal</td><td>Add <b>oral antibiotic</b> (3&ndash;6 mo, with topicals)</td></tr>\n<tr><td>Severe cystic / scarring</td><td>Early <b>isotretinoin</b></td></tr>\n<tr><td>Adult female / PCOS</td><td><b>Antiandrogen</b> (OCP, spironolactone)</td></tr>\n</table>\n<h2 id=\"acnedrugs\">Acne drug cautions</h2>\n<table>\n<tr><th>Drug</th><th>Key adverse / caution</th></tr>\n<tr><td>Benzoyl peroxide</td><td>Low resistance; dryness, <b>bleaches fabric</b></td></tr>\n<tr><td>Topical antibiotic</td><td><span class=\"dnm\">Never monotherapy</span> (resistance) &mdash; pair with BPO</td></tr>\n<tr><td>Topical retinoid</td><td>Irritation, photosensitivity; <b>avoid in pregnancy</b> (tazarotene contraindicated)</td></tr>\n<tr><td>Oral tetracyclines</td><td><span class=\"dnm\">Contraindicated in pregnancy &amp; children &lt;8</span>; photosensitivity, pseudotumor cerebri</td></tr>\n<tr><td>Spironolactone</td><td>Hyperkalemia, spotting; avoid pregnancy</td></tr>\n<tr><td><b>Isotretinoin</b></td><td><span class=\"dnm\">Teratogen</span> &mdash; pregnancy prevention + &beta;-hCG; monitor lipids/LFTs; cheilitis, mood</td></tr>\n</table>\n<h2 id=\"topicalrx\">Topical therapeutics</h2>\n<div class=\"band\"><div class=\"t\">Vehicle &amp; potency</div>\n<b>Ointment</b> = greasy, most potent, dry thick plaques. <b>Cream</b> = elegant, drying. <b>Lotion/foam/solution</b> = hairy areas. <b>Gel</b> = spreads, may sting. <span class=\"dnm\">Percent concentration &ne; potency</span> (clobetasol 0.05% is class 1 super-potent; hydrocortisone 1% is class 7).</div>\n<p><b>Steroid adverse effects:</b> atrophy, striae, telangiectasia, perioral dermatitis, tachyphylaxis; absorption with high potency/large area/occlusion/children. <b>Low potency on face, folds, genitals, children.</b></p>\n<p><b>Procedures:</b> cryotherapy (liquid N&#8322; &minus;196&deg;C, freeze-thaw); suspected melanoma &rarr; excisional biopsy; botulinum toxin cleaves <b>SNAP-25</b> (blocks ACh release).</p>\n</div>"
+  },
+  {
+   "file": "W10_05_SkinCancer.html",
+   "title": "Week 10 · 5 Skin Cancer & Mimickers",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Skin Cancer &amp; Mimickers</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{\n  --paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;\n  --accent:#7c2d2d;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;\n  --hi:#a23b2e;--lo:#2d5a6b;\n}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}\nul{margin:6px 0 6px 0;padding-left:18px}li{margin:3px 0}\nb{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Neoplasia</div><h1>Skin Cancer &amp; Mimickers</h1></div><div class=\"r\">Week 10 &middot; Dermatology<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">Actinic keratosis, the BCC vs SCC contrast, melanoma (ABCDE, excisional biopsy for Breslow depth), biopsy/clinicopathologic principles, and the benign mimickers including CTCL.</p>\n<h2 id=\"precancer\">Actinic keratosis</h2>\n<p><b>Rough, gritty</b> erythematous papule/thin plaque on sun-exposed skin; premalignant. Cumulative UV, Fitzpatrick I/II, bald scalp, immunosuppression. Cryotherapy (isolated) / field therapy; sun protection.</p>\n<h2 id=\"bcc-scc\">BCC &amp; SCC</h2>\n<table>\n<tr><th></th><th>BCC</th><th>SCC</th></tr>\n<tr><td>Look</td><td><b>Pearly papule, telangiectasia, rolled border</b>, may ulcer/bleed</td><td>Tender, keratotic, crusted, <b>non-healing</b> nodule; may arise from AK/wound</td></tr>\n<tr><td>Behaviour</td><td>Most common cancer; <b>locally destructive, metastasis rare</b></td><td>More metastatic potential than BCC</td></tr>\n<tr><td>Rx</td><td>Biopsy; excision/Mohs (high-risk); curettage/topical for superficial</td><td>Excision or Mohs for high-risk sites</td></tr>\n</table>\n<h2 id=\"melanoma\">Melanoma</h2>\n<div class=\"band warn\"><div class=\"t\">ABCDE</div>Asymmetry, Border irregularity, Colour variation, Diameter &gt;6 mm, <b>Evolution</b>. Acral/subungual can mimic bruise.</div>\n<p><span class=\"dnm\">Excisional biopsy</span> to assess <b>Breslow depth</b> (do not shave/cryo a suspected melanoma). <b>Breslow depth and ulceration</b> are the dominant prognostic features; wide local excision by depth &plusmn; sentinel node/imaging by stage.</p>\n<h2 id=\"biopsy\">Biopsy principles</h2>\n<p>Choose technique by lesion/site/info needed/pigment/preference. <b>Margins matter</b> in malignancy; pathology must correlate &mdash; if it doesn't fit the clinical picture, re-biopsy or clinicopathologic discussion.</p>\n<div class=\"key\"><b>Benign mimickers</b> to recognize (avoid unnecessary procedures, but biopsy if evolving/atypical): seborrheic keratosis, dysplastic nevus, dermatofibroma, angioma, pigmented BCC. <b>Cutaneous T-cell lymphoma</b> can mimic chronic eczema/psoriasis (patch &rarr; plaque/tumour &rarr; S&eacute;zary).</p></div>\n</div>"
+  },
+  {
+   "file": "W10_06_Emergencies.html",
+   "title": "Week 10 · 6 Dangerous Rashes & Emergencies",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Dangerous Rashes &amp; Emergencies</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{\n  --paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;\n  --accent:#7c2d2d;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;\n  --hi:#a23b2e;--lo:#2d5a6b;\n}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}\nul{margin:6px 0 6px 0;padding-left:18px}li{margin:3px 0}\nb{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Can't-Miss</div><h1>Dangerous Rashes &amp; Emergencies</h1></div><div class=\"r\">Week 10 &middot; Dermatology<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">The drug-rash hierarchy by timing (morbilliform &rarr; DRESS &rarr; SJS/TEN), the bullous pemphigoid vs pemphigus discriminator, and IgA vasculitis with its mandatory renal monitoring.</p>\n<h2 id=\"drughierarchy\">Drug-rash hierarchy</h2>\n<table>\n<tr><th>Reaction</th><th>Timing &amp; clues</th><th>Action</th></tr>\n<tr><td>Morbilliform exanthem</td><td>Measles-like, ~7&ndash;10 d after drug; <b>no systemic involvement</b> (amoxicillin + EBV)</td><td>Stop drug, supportive; screen for danger signs</td></tr>\n<tr><td><b>DRESS / DHS</b></td><td><b>2&ndash;8 weeks</b> after drug; fever, <b>facial edema</b>, morbilliform rash, lymphadenopathy, <b>eosinophilia</b>, hepatitis/organ</td><td>Stop drug; CBC/diff, LFTs, Cr, UA; systemic steroids; long taper</td></tr>\n<tr><td class=\"dnm\">SJS / TEN</td><td><b>Painful/dusky skin + mucosa</b>, atypical targets, bullae, <b>+Nikolsky</b>, desquamation, fever&rarr;shock. SJS &lt;10% BSA, TEN &gt;30%</td><td><span class=\"dnm\">Stop drug; ICU/burn care</span>; derm + ophtho</td></tr>\n</table>\n<p>Common culprits: <b>TMP-SMX, anticonvulsants, allopurinol, NSAIDs</b>.</p>\n<h2 id=\"bullous\">Bullous disease discriminator</h2>\n<table>\n<tr><th></th><th>Bullous pemphigoid</th><th>Pemphigus vulgaris</th></tr>\n<tr><td>Who</td><td><b>Elderly</b>, intensely pruritic</td><td>Middle-aged; rarer</td></tr>\n<tr><td>Bullae</td><td><b>Tense</b> on normal/urticarial skin; mucosa spared</td><td><b>Flaccid</b>, erosions; <b>starts in mouth</b></td></tr>\n<tr><td>Nikolsky</td><td>Negative</td><td><b>Positive</b></td></tr>\n<tr><td>Target</td><td><b>Basement membrane</b> &rarr; subepidermal</td><td><b>Desmogleins</b> &rarr; intraepidermal acantholysis</td></tr>\n</table>\n<h2 id=\"vasculitis\">IgA vasculitis (HSP)</h2>\n<div class=\"band warn\"><div class=\"t\">Tetrad &mdash; and the thing to monitor</div>\n<b>Palpable purpura</b> (legs/buttocks), arthralgia/arthritis, abdominal pain, <b>renal disease</b>. Most common childhood systemic vasculitis; often post-URI. <span class=\"dnm\">Always monitor renal &mdash; urinalysis + blood pressure.</span></div>\n<div class=\"band\"><div class=\"t\">Painful skin + mucosa + new drug</div>= <b>SJS/TEN until proven otherwise.</b> Severe pain out of proportion = <b>necrotizing fasciitis</b>. These are the dermatologic emergencies.</div>\n</div>"
+  },
+  {
+   "file": "W10_07_Peds_Hair.html",
+   "title": "Week 10 · 7 Pediatric Derm & Alopecia",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Pediatric Derm &amp; Alopecia</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{\n  --paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;\n  --accent:#7c2d2d;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;\n  --hi:#a23b2e;--lo:#2d5a6b;\n}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}\nul{margin:6px 0 6px 0;padding-left:18px}li{margin:3px 0}\nb{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Kids &amp; Hair</div><h1>Pediatric Derm &amp; Alopecia</h1></div><div class=\"r\">Week 10 &middot; Dermatology<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">Pediatric pearls (URI-triggered urticaria, infantile hemangioma and propranolol, molluscum), and alopecia anchored on the scarring vs non-scarring split with telogen effluvium triggers.</p>\n<h2 id=\"peds\">Pediatric dermatology</h2>\n<ul>\n<li><b>Childhood acute urticaria:</b> wheals, each lesion &lt;24 h; most common trigger is <b>URI</b>. 2nd-gen antihistamines; assess for angioedema/anaphylaxis.</li>\n<li><b>Infantile hemangioma:</b> appears first weeks, <b>proliferates ~6 months, then involutes over years</b>. Most just observed; <b>oral propranolol</b> for large/high-risk (esp. near eye), ulceration, or functional threat.</li>\n<li><b>Molluscum:</b> umbilicated papules, common in atopic children; self-limited; treat surrounding eczema.</li>\n<li><b>Atopic dermatitis (peds):</b> emollients + appropriate-potency topical steroid (low potency face/infants); food elimination usually unhelpful unless true allergy.</li>\n</ul>\n<h2 id=\"alopecia\">Alopecia &mdash; the key split</h2>\n<div class=\"band warn\"><div class=\"t\">Scarring vs non-scarring</div>\n<b>Non-scarring</b> preserves follicular openings &rarr; can regrow. <b>Scarring</b> loses follicular openings (stem cells destroyed) &rarr; <span class=\"dnm\">no regrowth in scarred areas</span> &mdash; treat early to preserve remaining follicles.</div>\n<table>\n<tr><th>Type</th><th>Clues</th><th>Rx</th></tr>\n<tr><td>Androgenetic</td><td>Miniaturized hairs; men temples/vertex, women diffuse with preserved hairline</td><td>Minoxidil; finasteride (men)</td></tr>\n<tr><td>Alopecia areata</td><td>Autoimmune circular patches; stem cells intact</td><td>Topical/intralesional steroids; regrowth possible</td></tr>\n<tr><td><b>Telogen effluvium</b></td><td>Diffuse shed ~<b>3 months after</b> illness/stressor (~20% of hair)</td><td>Treat trigger; screen <b>iron/thyroid</b>; regrows</td></tr>\n<tr><td>Scarring (LPP, CCCA)</td><td>Lost follicular openings, perifollicular erythema/scale</td><td>Shut down inflammation early; transplant only when quiet</td></tr>\n</table>\n</div>"
+  }
+ ]
+}
