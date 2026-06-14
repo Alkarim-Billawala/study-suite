@@ -1,7 +1,13 @@
 <!--
-  Study Suite  ·  v0.2.48 (beta)
+  Study Suite  ·  v0.2.49 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.49: optional `term`/`semester` level between year and course, in both the Default
+  packs panel and the Content library. ingestPack(), backfillPlacement(), and the deploy manifest now
+  carry `term`; grouping is year→term→course with a term-aware chronological sort (yearWeek/termWeek
+  + sortedTerms). Gracefully invisible when unset — packs without a term collapse into one unlabelled
+  group that renders no header, so the layout is identical for packs that don't use it. New .dp-term
+  style; open/collapse keys now include the term segment (y³t³c).
   Changelog v0.2.48: (1) Content library grouping fix — ingestPack() now preserves
   school/year/course/weeks on the stored pack object (it previously dropped them, so loaded packs
   fell under "Other"); backfillPlacement() repairs already-stored packs by copying those fields from
@@ -460,6 +466,7 @@ section{display:none}section.on{display:block}
 .dp-school.on{border-color:var(--accent);background:var(--accent);color:var(--paper)}
 .dp-list{display:flex;flex-direction:column;gap:6px}
 .dp-year{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);border-bottom:1px solid var(--line);padding-bottom:4px;margin-top:4px}
+.dp-term{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:7px 0 2px 10px;padding-left:8px;border-left:2px solid var(--line)}
 .dp-year:first-child{margin-top:0}
 .dp-course{display:flex;align-items:center;gap:8px;width:100%;text-align:left;font-family:var(--font-body);font-size:16px;border:1.5px solid var(--line);background:var(--paper);border-radius:8px;padding:8px 12px;cursor:pointer;transition:.12s;color:var(--ink)}
 .dp-course:hover{border-color:var(--accent-soft)}
@@ -833,7 +840,7 @@ section{display:none}section.on{display:block}
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.48';
+const APP_VERSION='0.2.49';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -983,23 +990,24 @@ function dpRow(p){
   const dl=document.createElement('a');dl.className='dp-dl';dl.href=encodeURI(String(p.file));dl.setAttribute('download','');dl.textContent='⇣ file';row.appendChild(dl); */
   return row;
 }
-/* Chronological ordering for the year/course tree: parse the first week number from a pack's
-   `weeks` field (e.g. ITM≈1–8 < CPC 1≈9–24 < CPC 2≈25+); years and courses sort by their
-   earliest week, tie-broken by a numeric-aware natural compare so "CPC 1" precedes "CPC 2". */
+/* Chronological ordering for the year ▸ term ▸ course tree: parse the first week number from a
+   pack's `weeks` field (e.g. ITM≈1–8 < CPC 1≈9–24 < CPC 2≈25+); each level sorts by its earliest
+   week, tie-broken by a numeric-aware natural compare so "CPC 1" precedes "CPC 2". The `term` level
+   is optional — packs without a term collapse into a single unlabelled group that renders no header. */
 function chronoWeek(w){if(!w)return Infinity;const m=String(w).match(/\d+/);return m?parseInt(m[0],10):Infinity;}
 function cmpW(a,b){return a===b?0:(a<b?-1:1);} // Infinity-safe numeric compare
 const natCmp=(a,b)=>String(a).localeCompare(String(b),undefined,{numeric:true,sensitivity:'base'});
-function courseWeek(plist){return plist.reduce((mn,p)=>Math.min(mn,chronoWeek(p.weeks)),Infinity);}
-function sortedYears(years){return [...years.entries()].sort((A,B)=>{
-  const ka=[...A[1].values()].reduce((mn,pl)=>Math.min(mn,courseWeek(pl)),Infinity);
-  const kb=[...B[1].values()].reduce((mn,pl)=>Math.min(mn,courseWeek(pl)),Infinity);
-  return cmpW(ka,kb)||natCmp(A[0],B[0]);});}
+function courseWeek(plist){return plist.reduce((mn,p)=>Math.min(mn,chronoWeek(p.weeks)),Infinity);}     // plist: packs[]
+function termWeek(cs){return [...cs.values()].reduce((mn,pl)=>Math.min(mn,courseWeek(pl)),Infinity);}    // cs: Map(course→packs[])
+function yearWeek(ts){return [...ts.values()].reduce((mn,cs)=>Math.min(mn,termWeek(cs)),Infinity);}      // ts: Map(term→Map(course→packs[]))
+function sortedYears(years){return [...years.entries()].sort((A,B)=>cmpW(yearWeek(A[1]),yearWeek(B[1]))||natCmp(A[0],B[0]));}
+function sortedTerms(ts){return [...ts.entries()].sort((A,B)=>cmpW(termWeek(A[1]),termWeek(B[1]))||natCmp(A[0],B[0]));}
 function sortedCourses(cs){return [...cs.entries()].sort((A,B)=>cmpW(courseWeek(A[1]),courseWeek(B[1]))||natCmp(A[0],B[0]));}
 /* Repair library packs that predate the school/year/course/weeks fields (or were stored before
    ingestPack carried them) by copying those fields from the default-packs manifest, matched by id. */
 function backfillPlacement(){const m=defaultManifest;if(!m||!Array.isArray(m.packs))return;let changed=false;
   m.packs.forEach(mp=>{if(!mp||!mp.id)return;const lp=packs.find(p=>p.id===mp.id);if(!lp)return;
-    ['school','year','course','weeks'].forEach(k=>{if(mp[k]&&lp[k]!==mp[k]){lp[k]=mp[k];changed=true;}});});
+    ['school','year','term','course','weeks'].forEach(k=>{if(mp[k]&&lp[k]!==mp[k]){lp[k]=mp[k];changed=true;}});});
   if(changed)persist();}
 let dpSchool=null; // selected school label; null until first render
 function renderDefaultPacks(){
@@ -1011,31 +1019,35 @@ function renderDefaultPacks(){
   schools.forEach(s=>{const b=document.createElement('button');b.className='dp-school'+(s===dpSchool?' on':'');
     b.textContent=s;b.onclick=()=>{if(s!==dpSchool){dpSchool=s;dpOpen=null;renderDefaultPacks();}};sh.appendChild(b);});
   const host=$('dpList');host.innerHTML='';
-  // group (within selected school): year -> course -> packs (insertion order preserved)
+  // group (within selected school): year -> term -> course -> packs (term optional)
   const years=new Map();
   m.packs.forEach(p=>{if(!p||!p.file)return;
     if((p.school||'Other')!==dpSchool)return;
-    const y=p.year||'Other packs',c=p.course||'';
+    const y=p.year||'Other packs',t=p.term||'',c=p.course||'';
     if(!years.has(y))years.set(y,new Map());
-    const cs=years.get(y);if(!cs.has(c))cs.set(c,[]);
+    const ts=years.get(y);if(!ts.has(t))ts.set(t,new Map());
+    const cs=ts.get(t);if(!cs.has(c))cs.set(c,[]);
     cs.get(c).push(p);});
   // count course groups to decide default expansion (single course -> open)
-  let nCourses=0;years.forEach(cs=>nCourses+=cs.size);
-  if(dpOpen===null){dpOpen=new Set();if(nCourses<=1)years.forEach((cs,y)=>cs.forEach((_,c)=>dpOpen.add(y+'³'+c)));}
-  sortedYears(years).forEach(([y,cs])=>{
+  let nCourses=0;years.forEach(ts=>ts.forEach(cs=>nCourses+=cs.size));
+  if(dpOpen===null){dpOpen=new Set();if(nCourses<=1)years.forEach((ts,y)=>ts.forEach((cs,t)=>cs.forEach((_,c)=>dpOpen.add(y+'³'+t+'³'+c))));}
+  sortedYears(years).forEach(([y,ts])=>{
     const yh=document.createElement('div');yh.className='dp-year';yh.textContent=y;host.appendChild(yh);
-    sortedCourses(cs).forEach(([c,plist])=>{
-      if(c){
-        const key=y+'³'+c,open=dpOpen.has(key);
-        const tg=document.createElement('button');tg.className='dp-course'+(open?' open':'');
-        tg.innerHTML=`<span class="tri">${open?'▾':'▸'}</span> ${c} <span class="cnt">${plist.length} pack${plist.length===1?'':'s'}</span>`;
-        tg.onclick=()=>{open?dpOpen.delete(key):dpOpen.add(key);renderDefaultPacks();};
-        host.appendChild(tg);
-        if(!open)return;
-      }
-      const wrap=document.createElement('div');wrap.className='dp-coursebody';
-      plist.forEach(p=>wrap.appendChild(dpRow(p)));
-      host.appendChild(wrap);
+    sortedTerms(ts).forEach(([t,cs])=>{
+      if(t){const th=document.createElement('div');th.className='dp-term';th.textContent=t;host.appendChild(th);} // header only when a term is set
+      sortedCourses(cs).forEach(([c,plist])=>{
+        if(c){
+          const key=y+'³'+t+'³'+c,open=dpOpen.has(key);
+          const tg=document.createElement('button');tg.className='dp-course'+(open?' open':'');
+          tg.innerHTML=`<span class="tri">${open?'▾':'▸'}</span> ${c} <span class="cnt">${plist.length} pack${plist.length===1?'':'s'}</span>`;
+          tg.onclick=()=>{open?dpOpen.delete(key):dpOpen.add(key);renderDefaultPacks();};
+          host.appendChild(tg);
+          if(!open)return;
+        }
+        const wrap=document.createElement('div');wrap.className='dp-coursebody';
+        plist.forEach(p=>wrap.appendChild(dpRow(p)));
+        host.appendChild(wrap);
+      });
     });
   });
   $('defPacks').style.display=host.children.length?'':'none';
@@ -1091,7 +1103,7 @@ function validateQuestion(q,i){
 function ingestPack(obj,sourceName){
   let pk;
   if(Array.isArray(obj)){const isCards=obj.some(x=>x&&x.type&&KNOWN_TYPES.includes(x.type));pk={id:'pack_'+Date.now().toString(36),pack:sourceName||'Imported',questions:isCards?[]:obj,cards:isCards?obj:[],guides:[]};}
-  else {pk={id:obj.id||('pack_'+Date.now().toString(36)),pack:obj.pack||sourceName||'Imported',questions:Array.isArray(obj.questions)?obj.questions:[],cards:Array.isArray(obj.cards)?obj.cards:[],guides:Array.isArray(obj.guides)?obj.guides:[],version:obj.version,author:obj.author||obj.createdBy,school:obj.school,year:obj.year,course:obj.course,weeks:obj.weeks};}
+  else {pk={id:obj.id||('pack_'+Date.now().toString(36)),pack:obj.pack||sourceName||'Imported',questions:Array.isArray(obj.questions)?obj.questions:[],cards:Array.isArray(obj.cards)?obj.cards:[],guides:Array.isArray(obj.guides)?obj.guides:[],version:obj.version,author:obj.author||obj.createdBy,school:obj.school,year:obj.year,term:obj.term,course:obj.course,weeks:obj.weeks};}
   const errs=[];
   pk.questions=pk.questions.filter((q,i)=>{const v=validateQuestion(q,i);if(v){errs.push(v);return false;}return true;});
   pk.cards=pk.cards.filter((c,i)=>{const v=validateCard(c,i);if(v){errs.push(v);return false;}return true;});
@@ -1204,31 +1216,35 @@ function renderLibrary(){
     schools.forEach(s=>{const b=document.createElement('button');b.className='dp-school'+(s===libSchool?' on':'');
       b.textContent=s;b.onclick=()=>{if(s!==libSchool){libSchool=s;libOpen=null;renderHome();}};sh.appendChild(b);});
     pl.appendChild(sh);}
-  // group within the selected school: year → course → packs (insertion order preserved)
+  // group within the selected school: year → term → course → packs (term optional)
   const years=new Map();
   packs.forEach(p=>{if((p.school||'Other')!==libSchool)return;
-    const y=p.year||'Other packs',c=p.course||'';
+    const y=p.year||'Other packs',t=p.term||'',c=p.course||'';
     if(!years.has(y))years.set(y,new Map());
-    const cs=years.get(y);if(!cs.has(c))cs.set(c,[]);
+    const ts=years.get(y);if(!ts.has(t))ts.set(t,new Map());
+    const cs=ts.get(t);if(!cs.has(c))cs.set(c,[]);
     cs.get(c).push(p);});
-  if(libOpen===null){libOpen=new Set();years.forEach((cs,y)=>cs.forEach((_,c)=>{if(c)libOpen.add(y+'³'+c);}));} // default: all expanded
+  if(libOpen===null){libOpen=new Set();years.forEach((ts,y)=>ts.forEach((cs,t)=>cs.forEach((_,c)=>{if(c)libOpen.add(y+'³'+t+'³'+c);})));} // default: all expanded
   const host=document.createElement('div');host.className='dp-list';pl.appendChild(host);
-  sortedYears(years).forEach(([y,cs])=>{
+  sortedYears(years).forEach(([y,ts])=>{
     const yh=document.createElement('div');yh.className='dp-year';yh.textContent=y;host.appendChild(yh);
-    sortedCourses(cs).forEach(([c,plist])=>{
-      const nOn=plist.filter(p=>p.enabled!==false).length;
-      const sorted=[...plist.filter(p=>p.enabled!==false),...plist.filter(p=>p.enabled===false)]; // enabled to top of subsection
-      if(c){
-        const key=y+'³'+c,open=libOpen.has(key);
-        const tg=document.createElement('button');tg.className='dp-course'+(open?' open':'');
-        tg.innerHTML=`<span class="tri">${open?'▾':'▸'}</span> ${c} <span class="cnt">${nOn}/${plist.length} on</span>`;
-        tg.onclick=()=>{open?libOpen.delete(key):libOpen.add(key);renderHome();};
-        host.appendChild(tg);
-        if(!open)return;
-      }
-      const wrap=document.createElement('div');wrap.className='dp-coursebody';
-      sorted.forEach(p=>wrap.appendChild(libRow(p)));
-      host.appendChild(wrap);
+    sortedTerms(ts).forEach(([t,cs])=>{
+      if(t){const th=document.createElement('div');th.className='dp-term';th.textContent=t;host.appendChild(th);} // header only when a term is set
+      sortedCourses(cs).forEach(([c,plist])=>{
+        const nOn=plist.filter(p=>p.enabled!==false).length;
+        const sorted=[...plist.filter(p=>p.enabled!==false),...plist.filter(p=>p.enabled===false)]; // enabled to top of subsection
+        if(c){
+          const key=y+'³'+t+'³'+c,open=libOpen.has(key);
+          const tg=document.createElement('button');tg.className='dp-course'+(open?' open':'');
+          tg.innerHTML=`<span class="tri">${open?'▾':'▸'}</span> ${c} <span class="cnt">${nOn}/${plist.length} on</span>`;
+          tg.onclick=()=>{open?libOpen.delete(key):libOpen.add(key);renderHome();};
+          host.appendChild(tg);
+          if(!open)return;
+        }
+        const wrap=document.createElement('div');wrap.className='dp-coursebody';
+        sorted.forEach(p=>wrap.appendChild(libRow(p)));
+        host.appendChild(wrap);
+      });
     });
   });
 }

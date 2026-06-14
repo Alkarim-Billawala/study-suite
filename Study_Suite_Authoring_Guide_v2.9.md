@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.8 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.9 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.8)
+# Study Suite — Content Authoring Guide (v2.9)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,15 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.8 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **Authoring system version:** 2.9 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **What changed in guide v2.9:** new optional pack field `term` (semester/term, e.g. `"Fall"` /
+> `"Semester 2"`) — an optional level **between `year` and `course`** in the placement hierarchy. The
+> app (v0.2.49+) renders it as a sub-group and sorts it chronologically, and it is **gracefully
+> invisible when unset** (packs without a term group exactly as before). Also adds an **Organizational
+> hierarchy & sorting** note (§2): the placement fields are ordered slots — encourage the default
+> school → year → (term) → course → week, but users may repurpose them for their own equivalent
+> leveling as long as the values still sort. Ask how the program is organized and whether week/topic
+> numbers **reset per course** (if so, make the course labels or `weeks` values encode the order).
 > **What changed in guide v2.8:** two additions, no schema change. (1) A **cost/usage warning** (§3):
 > generating packs is resource-intensive — discourage users from dumping multiple weeks the night
 > before an exam, or they may run out of usage mid-build. (2) **Absolute vs. relative difficulty and
@@ -132,7 +140,37 @@ A pack is a single JSON object:
 | `created` / `updated` | recommended | ISO date strings. |
 | `questions` / `cards` | arrays | Either may be empty, but a useful pack has both. |
 | `guides` | yes if any item links a guide | Embedded topic guides — see §6. |
-| `school` / `year` / `course` / `weeks` | optional | Curriculum placement, e.g. `"UofT — Temerty Medicine"` / `"Year 1"` / `"CPC 2"` / `"Weeks 25–28"`. Used to group packs in the hosted site's Default study packs panel; ignored otherwise. Ask the user which school/year/course/weeks the material belongs to and include these. |
+| `school` / `year` / `term` / `course` / `weeks` | optional | Curriculum placement, e.g. `"UofT — Temerty Medicine"` / `"Year 1"` / `"Fall"` (term — optional) / `"CPC 2"` / `"Weeks 25–28"`. Used to **group and chronologically sort** packs in the hosted site's Default study packs panel and the user's Content library; ignored otherwise. `term` sits **between `year` and `course`** and is omitted by most packs (harmless when absent — the level simply doesn't render). Ask the user how their program is organized — see *Organizational hierarchy & sorting* below — and include the fields that apply. |
+
+### Organizational hierarchy & sorting
+
+The placement fields form an **ordered hierarchy** the app uses to group and chronologically sort
+packs in both the Default study packs panel and the user's Content library:
+
+> **school → year → `term` (optional) → course → week / unit / topic**
+
+Two things to know — and to **ask the user** about:
+
+1. **Encourage the default, but allow custom leveling.** The default meaning (school / year / term /
+   course / week) fits most curricula, so present it as the recommended default. But the fields are
+   really *generic ordered slots* — a learner whose program isn't shaped that way may repurpose them
+   (e.g. `year:"PGY-2"`, `course:"Cardiology block"`), **as long as the values still sort into the
+   intended order.** The app orders each level by the **first number found in the pack's `weeks`
+   field**, falling back to a numeric-aware natural compare of the label (so `"CPC 1"` precedes
+   `"CPC 2"`, and `"Block 10"` follows `"Block 9"`). Whatever labels the user picks, make sure they
+   sort.
+
+2. **Document the chronology — especially when numbers reset per course.** Some programs number weeks
+   or topics **1, 2, 3… within each course**, so the same "Week 1" recurs across courses. Because the
+   app sorts a level by its earliest `weeks` number, a global reset can make courses tie. To keep the
+   order right, either (a) give `weeks` a **globally increasing** range across the year (the UofT
+   default runs Weeks 1–35 across ITM → CPC 1 → CPC 2), or (b) ensure the **course labels themselves
+   sort** (numbered blocks/units), and/or (c) use the optional **`term`** field to separate them (e.g.
+   Fall vs Winter). Ask the user up front how their weeks/topics are numbered so the pack encodes a
+   sortable chronology.
+
+The `term` level renders **only when a pack actually sets it** — packs that omit it group exactly as
+if the level weren't there, so leaving it out costs nothing.
 
 ### Shared item fields (questions **and** cards)
 
