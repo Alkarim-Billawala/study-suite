@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.7 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.8 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.7)
+# Study Suite — Content Authoring Guide (v2.8)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,13 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.7 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **Authoring system version:** 2.8 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **What changed in guide v2.8:** two additions, no schema change. (1) **Created packs are default
+> packs by default** — unless the user says a pack is private/custom-only, name it `Pack_<Name>.json`
+> so the deploy manifest lists it in the hosted site's *Default study packs* panel (see §8), and tell
+> the user to run `Refresh Web Deploy.command` to publish. (2) A **cost/usage warning** (§3):
+> generating packs is resource-intensive — discourage users from dumping multiple weeks the night
+> before an exam, or they may run out of usage mid-build.
 > **What changed in guide v2.7:** theming contract for topic guides — drive guide colors off the
 > canonical CSS variables (`--paper`/`--ink`/`--soft`/`--line`/`--accent`/`--accent2`/`--green`/
 > `--blue`/`--gold`/`--hi`/`--lo`) instead of hardcoded hex, so the app can re-theme guides to match
@@ -190,6 +196,13 @@ Cards carry `sys`, `topic`, `type`, `explain`, optional `guide`. **Cards do not 
 
 ## 3. How many questions to generate — **ask, don't assume**
 
+> **⚠ Generating packs is resource-intensive — manage scope and timing.** Building a full pack
+> (novel vignettes + 40–60 cards + embedded topic guides) consumes a lot of usage. Warn users **not
+> to leave it to the night before an exam and dump multiple weeks at once** — a large multi-week job
+> can exhaust their available usage before it finishes, leaving them with nothing. Encourage building
+> **one week at a time, well ahead of the exam**. If someone arrives with several weeks the night
+> before, flag the risk up front and offer to prioritize the highest-yield week(s) first.
+
 **Default: 10–20 clinical vignettes per week of content.** But **ask the user first** how many they
 want and how many weeks this pack covers, then pick a number in range accordingly.
 
@@ -357,11 +370,21 @@ every `guides[]` entry has non-empty `html`.
 
 When you finish, produce **one downloadable file** (not just code in chat):
 
-1. The **pack `.json`**, named for the week/topic (e.g. `Week_12_Cardiology.json`), **with the topic
-   guides embedded** in `guides[]`. This single file is the complete deliverable — the embedded
-   guides make it fully self-sufficient (Topic Guides reader included).
+1. The **pack `.json`**, **with the topic guides embedded** in `guides[]`. This single file is the
+   complete deliverable — the embedded guides make it fully self-sufficient (Topic Guides reader
+   included). **Name it `Pack_<Name>.json`** (e.g. `Pack_Week09_Pediatrics_v2.0.json`) so it is
+   picked up as a default pack — see the rule below.
 2. A short report in chat: how many questions (and the easy/medium/hard split), how many cards, and
    which guides are embedded.
+
+**Default packs by default.** Unless the user explicitly says a pack is private/custom-only, every
+pack you create is meant to ship in the hosted site's **Default study packs** panel. The deploy step
+(`Refresh Web Deploy.command`) builds that panel's `packs-manifest.json` by globbing
+**`Study Packs/Pack_*.json`** — so a default pack's filename **must start with `Pack_`** to be listed
+(combined `Weeks_*` packs are deployed but intentionally unlisted to avoid duplicate-card loading).
+Save the file into the `Study Packs/` folder and remind the user to run `Refresh Web Deploy.command`
+to publish it to https://studysuite.app. The `school` / `year` / `course` / `weeks` fields (§2) then
+group it correctly in the panel.
 
 Do **not** emit standalone guide `.html` files unless the user asks for printable copies.
 

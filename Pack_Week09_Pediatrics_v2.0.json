@@ -1,0 +1,1243 @@
+{
+ "pack": "Week 09 — Pediatrics",
+ "id": "wk09",
+ "formatVersion": "2.0",
+ "version": "2.0",
+ "author": "Alkarim Billawala / alkarim.billawala.ca",
+ "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
+ "created": "2026-06-13",
+ "updated": "2026-06-13",
+ "school": "UofT — Temerty Medicine",
+ "year": "Year 1",
+ "course": "CPC 1",
+ "weeks": "Week 09 · Pediatrics",
+ "questions": [
+  {
+   "id": "wk09_q01",
+   "sys": "Peds",
+   "topic": "Peds · Well-Child",
+   "difficulty": "easy",
+   "stem": "A previously healthy 15-month-old comes in for routine preventive care in Canada. Which standardized record is the appropriate framework to structure this visit?",
+   "options": [
+    "Greig Health Record",
+    "Rourke Baby Record",
+    "HEEADSSS form",
+    "Tanner staging chart"
+   ],
+   "correct": 1,
+   "explain": "The <b>Rourke Baby Record</b> is the Canadian standard for infants and young children. The <b>Greig Health Record</b> takes over for ages <b>6–17</b>.",
+   "guide": {
+    "f": "W09_01_Preventive.html",
+    "t": "1 · Well-Child",
+    "s": "Well-child visits"
+   }
+  },
+  {
+   "id": "wk09_q02",
+   "sys": "Peds",
+   "topic": "Peds · Safe Sleep",
+   "difficulty": "medium",
+   "stem": "A tired parent of a 5-week-old says she sometimes falls asleep feeding the baby on the living-room couch, and that the crib has a soft bumper and a small pillow \"so he's comfortable.\" What is the most appropriate counselling?",
+   "options": [
+    "Couch co-sleeping is fine as long as she stays close to the infant",
+    "Place the infant on his back on a firm flat surface, alone, with no soft bedding, pillows, or bumpers, and avoid couch co-sleeping",
+    "Have the infant sleep prone to reduce reflux and choking",
+    "Add a weighted blanket to help him sleep through the night"
+   ],
+   "correct": 1,
+   "explain": "Safe sleep: <b>back to sleep, firm flat surface, no soft bedding/pillows/bumpers/toys, avoid co-sleeping</b> (couch/sofa sleeping is especially dangerous), avoid smoke exposure. This reduces <b>SIDS</b> and asphyxiation.",
+   "guide": {
+    "f": "W09_01_Preventive.html",
+    "t": "1 · Safe Sleep",
+    "s": "Safety & anticipatory guidance"
+   }
+  },
+  {
+   "id": "wk09_q03",
+   "sys": "Peds",
+   "topic": "Peds · Immunization",
+   "difficulty": "medium",
+   "stem": "A 12-month-old is due for MMR and varicella. He has clear rhinorrhea and a temperature of 37.9°C, feeding well and playful. His mother is breastfeeding and worried the vaccines aren't safe today. What is the best approach?",
+   "options": [
+    "Defer all vaccines until he is completely well",
+    "Withhold the live vaccines because he is breastfed",
+    "Proceed with vaccination today — mild illness and breastfeeding are not contraindications",
+    "Give only inactivated vaccines and reschedule the live ones"
+   ],
+   "correct": 2,
+   "explain": "<b>Mild illness, low-grade fever, and breastfeeding are not contraindications.</b> True reasons to withhold <b>live</b> vaccines are severe immunocompromise and pregnancy. Deferring needlessly leaves the infant unprotected.",
+   "guide": {
+    "f": "W09_01_Preventive.html",
+    "t": "1 · Immunization",
+    "s": "Childhood immunizations"
+   }
+  },
+  {
+   "id": "wk09_q04",
+   "sys": "Peds",
+   "topic": "Peds · Immunization",
+   "difficulty": "easy",
+   "stem": "During a 2-month immunization visit, which combination most effectively reduces the infant's procedural pain?",
+   "options": [
+    "Restraining the infant flat and giving the most painful vaccine first",
+    "Breastfeeding or oral sucrose, upright parental holding, distraction, and giving the most painful vaccine last",
+    "Oral sedation before the injections",
+    "Applying ice to the leg for 20 minutes beforehand"
+   ],
+   "correct": 1,
+   "explain": "Evidence-based pain reduction: <b>breast/bottle feeding or oral sucrose/dextrose</b>, upright cuddling, distraction, topical anesthetic when appropriate, and <b>give the most painful vaccine last</b>.",
+   "guide": {
+    "f": "W09_01_Preventive.html",
+    "t": "1 · Immunization",
+    "s": "Side effects & pain reduction"
+   }
+  },
+  {
+   "id": "wk09_q05",
+   "sys": "Peds",
+   "topic": "Peds · Adolescent",
+   "difficulty": "medium",
+   "stem": "A 15-year-old presents with her father for a routine visit. What is the most appropriate way to conduct the psychosocial assessment?",
+   "options": [
+    "Keep the father present throughout and promise the teen absolute confidentiality",
+    "Spend part of the visit alone with the teen, explain confidentiality and its limits, then complete a HEEADSSS assessment",
+    "Skip psychosocial screening unless she raises a concern",
+    "Defer all sensitive topics until age 18"
+   ],
+   "correct": 1,
+   "explain": "Adolescent care needs <b>private time</b> and an explanation of <b>confidentiality and its limits</b> (harm to self/others, abuse, inability to consent) before a <b>HEEADSSS</b> history. Absolute confidentiality cannot be promised when safety is at risk.",
+   "guide": {
+    "f": "W09_01_Preventive.html",
+    "t": "1 · Adolescent",
+    "s": "Adolescent care"
+   }
+  },
+  {
+   "id": "wk09_q06",
+   "sys": "Peds",
+   "topic": "Peds · Growth",
+   "difficulty": "hard",
+   "stem": "A girl is brought in for short stature. Her mother is 160 cm and her father is 178 cm. Using the mid-parental height method, what is her target (mid-parental) height?",
+   "options": [
+    "169 cm",
+    "162.5 cm",
+    "176.5 cm",
+    "152 cm"
+   ],
+   "correct": 1,
+   "explain": "Girl = [maternal + (paternal − 13)] / 2 = [160 + (178 − 13)] / 2 = [160 + 165] / 2 = <b>162.5 cm</b>. (The boy formula instead <i>adds</i> 13 to the maternal height.)",
+   "guide": {
+    "f": "W09_02_Growth_Dev.html",
+    "t": "2 · Growth",
+    "s": "Mid-parental height"
+   }
+  },
+  {
+   "id": "wk09_q07",
+   "sys": "Peds",
+   "topic": "Peds · Growth",
+   "difficulty": "medium",
+   "stem": "A 13-year-old boy is the shortest in his class and has not started puberty. His growth velocity is normal, bone age is delayed by ~2 years, and his father reports being a \"late bloomer\" who grew until age 19. Exam and proportions are normal. What is the most likely diagnosis?",
+   "options": [
+    "Pathologic short stature requiring extensive endocrine workup",
+    "Constitutional delay of growth and puberty",
+    "Familial (genetic) short stature",
+    "Skeletal dysplasia"
+   ],
+   "correct": 1,
+   "explain": "<b>Delayed bone age + normal growth velocity + family history of late bloomers</b> = <b>constitutional delay</b>. Final adult height is usually normal; it is more common in boys.",
+   "guide": {
+    "f": "W09_02_Growth_Dev.html",
+    "t": "2 · Growth",
+    "s": "Short-stature patterns"
+   }
+  },
+  {
+   "id": "wk09_q08",
+   "sys": "Peds",
+   "topic": "Peds · Growth",
+   "difficulty": "medium",
+   "stem": "A 6-year-old previously tracking along the 25th percentile has dropped to below the 3rd percentile over 18 months, growing only ~2 cm in the past year. Which single feature most strongly indicates this is pathologic rather than a normal variant?",
+   "options": [
+    "Her parents are both below average height",
+    "Her bone age is mildly delayed",
+    "Her poor growth velocity with percentile crossing",
+    "She has not yet entered puberty"
+   ],
+   "correct": 2,
+   "explain": "<b>Crossing percentiles with poor growth velocity</b> is the red flag — short stature with poor velocity is pathologic until proven otherwise. A single low point or short parents (familial pattern) is far less concerning than a falling trajectory.",
+   "guide": {
+    "f": "W09_02_Growth_Dev.html",
+    "t": "2 · Growth",
+    "s": "Normal growth principles"
+   }
+  },
+  {
+   "id": "wk09_q09",
+   "sys": "Peds",
+   "topic": "Peds · Puberty",
+   "difficulty": "easy",
+   "stem": "A 9-year-old girl's parents ask what the first physical sign of puberty will be. What should you tell them?",
+   "options": [
+    "Menarche (first period)",
+    "Breast development (thelarche)",
+    "Pubic hair",
+    "The growth spurt"
+   ],
+   "correct": 1,
+   "explain": "In girls, puberty (begins ~8–13 y) typically starts with <b>breast development</b>, then pubic hair, then the growth spurt, with <b>menarche later</b>. In boys it starts with <b>testicular enlargement</b>.",
+   "guide": {
+    "f": "W09_02_Growth_Dev.html",
+    "t": "2 · Puberty",
+    "s": "Puberty"
+   }
+  },
+  {
+   "id": "wk09_q10",
+   "sys": "Peds",
+   "topic": "Peds · Development",
+   "difficulty": "medium",
+   "stem": "An 18-month-old said several words at 14 months but now says none and no longer waves or points; he also makes poor eye contact. Growth is normal. What is the most appropriate interpretation?",
+   "options": [
+    "Normal variation — reassure and recheck in 6 months",
+    "Loss of previously acquired skills is a red flag warranting prompt developmental evaluation",
+    "Expected, because boys talk later than girls",
+    "Likely a hearing problem only; no developmental referral needed"
+   ],
+   "correct": 1,
+   "explain": "<b>Loss of previously acquired skills (regression) at any age</b> is a major developmental red flag — combined with social red flags (no pointing/joint attention, poor eye contact) it warrants prompt evaluation, not watchful waiting.",
+   "guide": {
+    "f": "W09_02_Growth_Dev.html",
+    "t": "2 · Development",
+    "s": "Developmental red flags"
+   }
+  },
+  {
+   "id": "wk09_q11",
+   "sys": "Peds",
+   "topic": "Peds · Development",
+   "difficulty": "easy",
+   "stem": "At a 9-month well-child visit, which skill would be the LEAST expected for a typically developing infant?",
+   "options": [
+    "Sitting independently",
+    "Stranger anxiety and playing peek-a-boo",
+    "An emerging immature pincer grasp",
+    "Walking independently"
+   ],
+   "correct": 3,
+   "explain": "<b>Independent walking</b> is usually closer to 12 months (range to ~18 months). At 9 months expect independent sitting, object permanence/peek-a-boo, stranger anxiety, and an emerging pincer grasp.",
+   "guide": {
+    "f": "W09_02_Growth_Dev.html",
+    "t": "2 · Development",
+    "s": "Development"
+   }
+  },
+  {
+   "id": "wk09_q12",
+   "sys": "Peds",
+   "topic": "Peds · Nutrition",
+   "difficulty": "easy",
+   "stem": "Parents of an 8-month-old ask about sweetening foods with a little honey. What should you advise?",
+   "options": [
+    "Honey is fine in small amounts from 6 months",
+    "Avoid honey until 12 months because of infant botulism risk",
+    "Honey is never safe at any age",
+    "Honey is only a problem if it is unpasteurized"
+   ],
+   "correct": 1,
+   "explain": "<b>Avoid honey before 12 months</b> due to the risk of <b>infant botulism</b> (Clostridium botulinum spores).",
+   "guide": {
+    "f": "W09_03_Nutrition.html",
+    "t": "3 · Nutrition",
+    "s": "Vitamin D, iron, solids, milk"
+   }
+  },
+  {
+   "id": "wk09_q13",
+   "sys": "Peds",
+   "topic": "Peds · Nutrition",
+   "difficulty": "medium",
+   "stem": "A 20-month-old drinks roughly 1 L of cow milk daily and eats few solids. He is pale and irritable. CBC: Hb low, MCV low, MCHC low. Which management plan is best?",
+   "options": [
+    "Start folate and recheck in a year",
+    "Reduce cow milk to ~500 mL/day, increase iron-rich foods, and start oral iron given with vitamin C",
+    "Begin a packed-red-cell transfusion",
+    "Reassure — a normal ferritin would exclude deficiency even during illness"
+   ],
+   "correct": 1,
+   "explain": "Excess cow milk displaces iron-rich foods and causes <b>microcytic, hypochromic iron-deficiency anemia</b>. Treat by limiting milk to ~500 mL/day, adding iron-rich foods, and oral iron with <b>vitamin C</b>. Note ferritin can be falsely normal/high as an acute-phase reactant.",
+   "guide": {
+    "f": "W09_03_Nutrition.html",
+    "t": "3 · Nutrition",
+    "s": "Iron-deficiency anemia"
+   }
+  },
+  {
+   "id": "wk09_q14",
+   "sys": "Peds",
+   "topic": "Peds · Nutrition",
+   "difficulty": "medium",
+   "stem": "Which scenario is a genuine contraindication to breastfeeding?",
+   "options": [
+    "The mother follows a strict vegan diet",
+    "There is a strong family history of atopy",
+    "The mother has active, untreated tuberculosis",
+    "The infant was born at 35 weeks' gestation"
+   ],
+   "correct": 2,
+   "explain": "Contraindications include <b>active untreated TB</b>, HIV (where safe alternatives exist), certain meds/chemo/radioisotopes, illicit drug exposure, and active herpetic breast lesions. A <b>vegan diet, atopy history, and prematurity are not contraindications</b> (though vegan diet needs nutritional attention, e.g. B12).",
+   "guide": {
+    "f": "W09_03_Nutrition.html",
+    "t": "3 · Nutrition",
+    "s": "Breast/chest feeding & formula"
+   }
+  },
+  {
+   "id": "wk09_q15",
+   "sys": "Peds",
+   "topic": "Peds · Nutrition",
+   "difficulty": "easy",
+   "stem": "A 2-month-old is exclusively breastfed and thriving. Which supplement is routinely recommended?",
+   "options": [
+    "Iron drops",
+    "Vitamin D",
+    "Fluoride",
+    "Vitamin B12"
+   ],
+   "correct": 1,
+   "explain": "<b>Vitamin D</b> supplementation is recommended for Canadian infants and is particularly important for <b>exclusively breastfed</b> infants (breast milk is low in vitamin D).",
+   "guide": {
+    "f": "W09_03_Nutrition.html",
+    "t": "3 · Nutrition",
+    "s": "Vitamin D, iron, solids, milk"
+   }
+  },
+  {
+   "id": "wk09_q16",
+   "sys": "Peds",
+   "topic": "Peds · Colic",
+   "difficulty": "medium",
+   "stem": "A thriving 5-week-old cries inconsolably for 3–4 hours most evenings over the past 3 weeks. He feeds well, is afebrile, has normal stools, and a normal exam. What is the best management?",
+   "options": [
+    "Switch to soy formula",
+    "Start simethicone and a lactase supplement",
+    "Reassurance, soothing strategies, validate parental distress, and give return precautions",
+    "Order an abdominal ultrasound and stool cultures"
+   ],
+   "correct": 2,
+   "explain": "This fits <b>infantile colic</b> (Wessel rule of 3; peaks ~6 weeks, resolves by 3–4 months) in a healthy, growing infant. Management is <b>reassurance, support, and safety/return precautions</b> — simethicone, lactase, and sucrose lack good evidence.",
+   "guide": {
+    "f": "W09_04_Common_Problems.html",
+    "t": "4 · Colic",
+    "s": "Infantile colic"
+   }
+  },
+  {
+   "id": "wk09_q17",
+   "sys": "Peds",
+   "topic": "Peds · Diaper Rash",
+   "difficulty": "medium",
+   "stem": "A 10-month-old has a beefy-red diaper rash that involves the inguinal folds with small satellite pustules at the edges. What is the best treatment plan?",
+   "options": [
+    "Barrier cream alone — fold involvement rules out yeast",
+    "Frequent diaper changes, a barrier cream, and a topical antifungal",
+    "A 3-week course of high-potency topical steroid",
+    "Oral antibiotics"
+   ],
+   "correct": 1,
+   "explain": "<b>Fold involvement plus satellite lesions = Candida diaper dermatitis.</b> Treat with frequent changes, barrier protection, and a <b>topical antifungal</b> (clotrimazole/nystatin); a brief low-potency steroid only if very inflamed. Irritant dermatitis instead spares the folds.",
+   "guide": {
+    "f": "W09_04_Common_Problems.html",
+    "t": "4 · Diaper Rash",
+    "s": "Diaper dermatitis"
+   }
+  },
+  {
+   "id": "wk09_q18",
+   "sys": "Peds",
+   "topic": "Peds · Breath-Holding",
+   "difficulty": "hard",
+   "stem": "Parents describe \"breath-holding spells\" in their 2-year-old. On closer history, the episodes occur out of the blue with no trigger, sometimes during sleep, and are followed by 10–15 minutes of confusion and drowsiness. There is a family history of sudden unexplained death. What is the most appropriate next step?",
+   "options": [
+    "Reassure — these are classic breath-holding spells; check iron status",
+    "These features are atypical; pursue evaluation for an alternate cause such as a seizure or cardiac arrhythmia",
+    "Start an antiseizure medication empirically",
+    "Advise the parents to ignore the episodes entirely"
+   ],
+   "correct": 1,
+   "explain": "Classic breath-holding spells have a clear <b>trigger</b> (frustration/pain), are brief, and show <b>rapid return to baseline</b>. <b>No trigger, events during sleep, a prolonged postictal state, and a family history of sudden death</b> are red flags pointing to seizure or a cardiac/arrhythmic cause — investigate rather than reassure.",
+   "guide": {
+    "f": "W09_04_Common_Problems.html",
+    "t": "4 · Breath-Holding",
+    "s": "Breath-holding spells"
+   }
+  },
+  {
+   "id": "wk09_q19",
+   "sys": "Peds",
+   "topic": "Peds · Imaging",
+   "difficulty": "medium",
+   "stem": "A child's frontal chest radiograph shows an air-space opacity that obscures the right heart border, but the right hemidiaphragm remains sharply seen. Which lobe is most likely involved?",
+   "options": [
+    "Right lower lobe",
+    "Right middle lobe",
+    "Right upper lobe",
+    "Lingula"
+   ],
+   "correct": 1,
+   "explain": "The <b>silhouette sign</b>: loss of the <b>right heart border = right middle lobe</b>; a preserved hemidiaphragm argues against lower-lobe disease (which would erase the diaphragm). Loss of the left heart border indicates the lingula.",
+   "guide": {
+    "f": "W09_05_Imaging.html",
+    "t": "5 · Imaging",
+    "s": "Silhouette sign — localizing"
+   }
+  },
+  {
+   "id": "wk09_q20",
+   "sys": "Peds",
+   "topic": "Peds · Oncology",
+   "difficulty": "hard",
+   "stem": "A 10-day-old has noisy, laboured breathing and sweating with feeds. CXR shows a large right posterior mediastinal mass with calcifications compressing the trachea; biopsy reveals a small round blue cell tumour. Which combination of test and prognostic marker is most relevant?",
+   "options": [
+    "Serum AFP and beta-hCG; tumour is a germ-cell tumour",
+    "Urinary VMA/HVA and MYCN amplification by FISH; tumour is a neuroblastoma",
+    "Urinalysis for hematuria and WT1; tumour is a Wilms tumour",
+    "Spirometry and IgE; the mass is reactive thymus"
+   ],
+   "correct": 1,
+   "explain": "A <b>posterior mediastinal</b> mass with calcifications in a neonate plus SRBCT histology strongly suggests <b>neuroblastoma</b> (neural-crest/sympathetic origin). Support with <b>urinary catecholamine metabolites (VMA/HVA)</b> and obtain <b>MYCN amplification by FISH</b> — an adverse prognostic marker.",
+   "guide": {
+    "f": "W09_06_Tumours.html",
+    "t": "6 · Oncology",
+    "s": "Neuroblastoma"
+   }
+  }
+ ],
+ "cards": [
+  {
+   "id": "wk09_c01",
+   "sys": "Peds",
+   "topic": "Well-Child",
+   "type": "match",
+   "guide": {
+    "f": "W09_01_Preventive.html",
+    "t": "1 · Well-Child",
+    "s": "Well-child visits"
+   },
+   "prompt": "Match each Canadian preventive-care tool to its population:",
+   "pairs": [
+    [
+     "Rourke Baby Record",
+     "Infants / young children"
+    ],
+    [
+     "Greig Health Record",
+     "Ages 6–17"
+    ],
+    [
+     "HEEADSSS",
+     "Adolescent psychosocial history"
+    ]
+   ],
+   "explain": "Rourke for the early years, Greig for 6–17, HEEADSSS for the adolescent interview."
+  },
+  {
+   "id": "wk09_c02",
+   "sys": "Peds",
+   "topic": "Well-Child",
+   "type": "qa",
+   "guide": {
+    "f": "W09_01_Preventive.html",
+    "t": "1 · Well-Child",
+    "s": "Well-child visits"
+   },
+   "prompt": "What does the <b>ITHELLPS</b> mnemonic screen for?",
+   "answer": "Social determinants of health: Income, Transportation, Housing, Education, Legal status, Literacy, Personal safety, Support."
+  },
+  {
+   "id": "wk09_c03",
+   "sys": "Peds",
+   "topic": "Safe Sleep",
+   "type": "cloze",
+   "guide": {
+    "f": "W09_01_Preventive.html",
+    "t": "1 · Safe Sleep",
+    "s": "Safety & anticipatory guidance"
+   },
+   "text": "Safe sleep: place infants on their {{back}}, on a {{firm flat}} surface, with {{no}} soft bedding/pillows/bumpers, and {{avoid}} co-sleeping.",
+   "explain": "\"Back to sleep\" on a firm flat surface, alone, reduces SIDS and asphyxiation."
+  },
+  {
+   "id": "wk09_c04",
+   "sys": "Peds",
+   "topic": "Immunization",
+   "type": "qa",
+   "guide": {
+    "f": "W09_01_Preventive.html",
+    "t": "1 · Immunization",
+    "s": "Childhood immunizations"
+   },
+   "prompt": "Give two reasons routine infant vaccines require <b>multiple doses</b>.",
+   "answer": "Initial priming may not be durable, infant immune responses mature over time, maternal antibody can interfere with early responses, and boosters strengthen memory — any two."
+  },
+  {
+   "id": "wk09_c05",
+   "sys": "Peds",
+   "topic": "Immunization",
+   "type": "multi",
+   "guide": {
+    "f": "W09_01_Preventive.html",
+    "t": "1 · Immunization",
+    "s": "Side effects & pain reduction"
+   },
+   "prompt": "Which are evidence-based strategies to reduce vaccine pain in infants? (select all)",
+   "options": [
+    "Breastfeeding during the injection",
+    "Oral sucrose/dextrose",
+    "Giving the most painful vaccine first",
+    "Upright parental holding and distraction"
+   ],
+   "correct": [
+    0,
+    1,
+    3
+   ],
+   "explain": "Feed, sweeten, hold upright, distract — and give the most painful vaccine <b>last</b>, not first."
+  },
+  {
+   "id": "wk09_c06",
+   "sys": "Peds",
+   "topic": "Immunization",
+   "type": "multi",
+   "guide": {
+    "f": "W09_01_Preventive.html",
+    "t": "1 · Immunization",
+    "s": "Childhood immunizations"
+   },
+   "prompt": "Which are NOT contraindications to routine childhood vaccination? (select all)",
+   "options": [
+    "Mild illness / low-grade fever",
+    "Breastfeeding",
+    "Severe immunocompromise (for live vaccines)",
+    "Family history of allergy"
+   ],
+   "correct": [
+    0,
+    1,
+    3
+   ],
+   "explain": "Mild illness, breastfeeding, prematurity, and family allergy history are fine. Severe immunocompromise (and pregnancy) is a true contraindication to <b>live</b> vaccines."
+  },
+  {
+   "id": "wk09_c07",
+   "sys": "Peds",
+   "topic": "Adolescent",
+   "type": "qa",
+   "guide": {
+    "f": "W09_01_Preventive.html",
+    "t": "1 · Adolescent",
+    "s": "Adolescent care"
+   },
+   "prompt": "What does <b>HEEADSSS</b> stand for?",
+   "answer": "Home, Education/employment, Eating/body image, Activities, Drugs, Sexuality, Suicide/depression, Safety."
+  },
+  {
+   "id": "wk09_c08",
+   "sys": "Peds",
+   "topic": "Adolescent",
+   "type": "qa",
+   "guide": {
+    "f": "W09_01_Preventive.html",
+    "t": "1 · Adolescent",
+    "s": "Adolescent care"
+   },
+   "prompt": "Name situations that break adolescent confidentiality.",
+   "answer": "Risk of harm to self or others, abuse, and inability to consent / serious safety concerns. Confidentiality is offered but with these explicit limits."
+  },
+  {
+   "id": "wk09_c09",
+   "sys": "Peds",
+   "topic": "Growth",
+   "type": "cloze",
+   "guide": {
+    "f": "W09_02_Growth_Dev.html",
+    "t": "2 · Growth",
+    "s": "Mid-parental height"
+   },
+   "text": "Mid-parental height — Boy: [(maternal + {{13}} cm) + paternal] / 2. Girl: [maternal + (paternal − {{13}} cm)] / 2.",
+   "explain": "Add 13 cm for boys, subtract 13 cm from the father's height for girls."
+  },
+  {
+   "id": "wk09_c10",
+   "sys": "Peds",
+   "topic": "Growth",
+   "type": "match",
+   "guide": {
+    "f": "W09_02_Growth_Dev.html",
+    "t": "2 · Growth",
+    "s": "Short-stature patterns"
+   },
+   "prompt": "Match the short-stature pattern to its hallmark:",
+   "pairs": [
+    [
+     "Familial short stature",
+     "Short parents, normal velocity, normal bone age"
+    ],
+    [
+     "Constitutional delay",
+     "Delayed bone age, normal velocity, late-bloomer family"
+    ],
+    [
+     "Pathologic",
+     "Poor velocity, crossing percentiles, systemic signs"
+    ]
+   ],
+   "explain": "Velocity and bone age separate the benign variants from pathology."
+  },
+  {
+   "id": "wk09_c11",
+   "sys": "Peds",
+   "topic": "Growth",
+   "type": "qa",
+   "guide": {
+    "f": "W09_02_Growth_Dev.html",
+    "t": "2 · Growth",
+    "s": "Normal growth principles"
+   },
+   "prompt": "Which is the dominant driver of <b>intrauterine</b> growth — growth hormone or insulin?",
+   "answer": "Insulin (with maternal/placental/fetal factors). Growth hormone is NOT the main intrauterine driver — it matters more postnatally."
+  },
+  {
+   "id": "wk09_c12",
+   "sys": "Peds",
+   "topic": "Growth",
+   "type": "cloze",
+   "guide": {
+    "f": "W09_02_Growth_Dev.html",
+    "t": "2 · Growth",
+    "s": "Normal growth principles"
+   },
+   "text": "In <b>infancy</b> the dominant driver of growth is {{nutrition}}; in childhood and adolescence {{genetic and hormonal}} influences become increasingly important.",
+   "explain": "Nutrition first, then genes/hormones take over."
+  },
+  {
+   "id": "wk09_c13",
+   "sys": "Peds",
+   "topic": "Puberty",
+   "type": "order",
+   "guide": {
+    "f": "W09_02_Growth_Dev.html",
+    "t": "2 · Puberty",
+    "s": "Puberty"
+   },
+   "prompt": "Put the sequence of puberty in BOYS in order:",
+   "items": [
+    "Testicular enlargement",
+    "Penile growth",
+    "Pubic hair",
+    "Growth spurt"
+   ],
+   "explain": "Boys: testes → penis → pubic hair → growth spurt."
+  },
+  {
+   "id": "wk09_c14",
+   "sys": "Peds",
+   "topic": "Puberty",
+   "type": "order",
+   "guide": {
+    "f": "W09_02_Growth_Dev.html",
+    "t": "2 · Puberty",
+    "s": "Puberty"
+   },
+   "prompt": "Put the sequence of puberty in GIRLS in order:",
+   "items": [
+    "Breast development",
+    "Pubic hair",
+    "Growth spurt",
+    "Menarche"
+   ],
+   "explain": "Girls: thelarche → pubic hair → growth spurt → menarche (late)."
+  },
+  {
+   "id": "wk09_c15",
+   "sys": "Peds",
+   "topic": "Development",
+   "type": "match",
+   "guide": {
+    "f": "W09_02_Growth_Dev.html",
+    "t": "2 · Development",
+    "s": "Development"
+   },
+   "prompt": "Match age to a hallmark milestone:",
+   "pairs": [
+    [
+     "2 months",
+     "Social smile"
+    ],
+    [
+     "6 months",
+     "Sits with support / tripod"
+    ],
+    [
+     "9 months",
+     "Stranger anxiety, object permanence"
+    ],
+    [
+     "12 months",
+     "First words, pincer grasp"
+    ],
+    [
+     "18 months",
+     "Pretend play; key developmental review visit"
+    ]
+   ],
+   "explain": "Anchor milestones — remember ranges, not exact days."
+  },
+  {
+   "id": "wk09_c16",
+   "sys": "Peds",
+   "topic": "Development",
+   "type": "multi",
+   "guide": {
+    "f": "W09_02_Growth_Dev.html",
+    "t": "2 · Development",
+    "s": "Developmental red flags"
+   },
+   "prompt": "Which are developmental red flags? (select all)",
+   "options": [
+    "Loss of previously acquired skills",
+    "Not sitting by ~9 months",
+    "Not walking by 13 months",
+    "No two-word phrases by ~2 years"
+   ],
+   "correct": [
+    0,
+    1,
+    3
+   ],
+   "explain": "Regression, not sitting by 9 mo, no words by 16–18 mo, and no two-word phrases by 2 y are red flags. Walking has a range to ~18 months, so not walking at 13 months alone is not a red flag."
+  },
+  {
+   "id": "wk09_c17",
+   "sys": "Peds",
+   "topic": "Development",
+   "type": "qa",
+   "guide": {
+    "f": "W09_02_Growth_Dev.html",
+    "t": "2 · Development",
+    "s": "Developmental red flags"
+   },
+   "prompt": "Why is <b>loss of acquired skills</b> always concerning?",
+   "answer": "Regression at any age suggests a neurodegenerative, metabolic, or other serious pathology and warrants prompt evaluation — unlike a single borderline milestone, which may be normal variation."
+  },
+  {
+   "id": "wk09_c18",
+   "sys": "Peds",
+   "topic": "Nutrition",
+   "type": "cloze",
+   "guide": {
+    "f": "W09_03_Nutrition.html",
+    "t": "3 · Nutrition",
+    "s": "Breast/chest feeding & formula"
+   },
+   "text": "Exclusive breastfeeding is recommended for about the first {{6}} months, then continued with complementary foods. Avoid honey before {{12}} months due to botulism risk.",
+   "explain": "6 months exclusive; no honey under 12 months."
+  },
+  {
+   "id": "wk09_c19",
+   "sys": "Peds",
+   "topic": "Nutrition",
+   "type": "multi",
+   "guide": {
+    "f": "W09_03_Nutrition.html",
+    "t": "3 · Nutrition",
+    "s": "Breast/chest feeding & formula"
+   },
+   "prompt": "Which are contraindications to breastfeeding? (select all)",
+   "options": [
+    "Active untreated tuberculosis",
+    "Maternal vegan diet",
+    "Active herpetic breast lesions",
+    "HIV where safe alternatives exist"
+   ],
+   "correct": [
+    0,
+    2,
+    3
+   ],
+   "explain": "TB (untreated), active herpetic breast lesions, and HIV (where formula is safe) contraindicate; a vegan diet does not (needs B12 attention)."
+  },
+  {
+   "id": "wk09_c20",
+   "sys": "Peds",
+   "topic": "Nutrition",
+   "type": "qa",
+   "guide": {
+    "f": "W09_03_Nutrition.html",
+    "t": "3 · Nutrition",
+    "s": "Vitamin D, iron, solids, milk"
+   },
+   "prompt": "Which infants especially need <b>vitamin D</b> supplementation?",
+   "answer": "All Canadian infants are recommended supplementation, but exclusively/predominantly breastfed infants especially, because breast milk is low in vitamin D."
+  },
+  {
+   "id": "wk09_c21",
+   "sys": "Peds",
+   "topic": "Nutrition",
+   "type": "cloze",
+   "guide": {
+    "f": "W09_03_Nutrition.html",
+    "t": "3 · Nutrition",
+    "s": "Vitamin D, iron, solids, milk"
+   },
+   "text": "Limit toddler cow milk to about {{500}} mL/day to prevent {{iron-deficiency}} anemia. Use {{whole}} milk until age 2, then lower-fat.",
+   "explain": "Excess milk displaces iron-rich foods and causes IDA."
+  },
+  {
+   "id": "wk09_c22",
+   "sys": "Peds",
+   "topic": "Nutrition",
+   "type": "mcq",
+   "guide": {
+    "f": "W09_03_Nutrition.html",
+    "t": "3 · Nutrition",
+    "s": "Vitamin D, iron, solids, milk"
+   },
+   "prompt": "When solids are introduced around 6 months, which foods should be prioritized?",
+   "options": [
+    "Fruit juices",
+    "Iron-rich foods (meats, legumes, iron-fortified cereal)",
+    "Cow milk as the main drink",
+    "Honey-sweetened purees"
+   ],
+   "correct": 1,
+   "explain": "Prioritize iron-rich foods at solid introduction; avoid juice, excess cow milk, and honey under 12 months."
+  },
+  {
+   "id": "wk09_c23",
+   "sys": "Peds",
+   "topic": "Iron Deficiency",
+   "type": "cloze",
+   "guide": {
+    "f": "W09_03_Nutrition.html",
+    "t": "3 · Nutrition",
+    "s": "Iron-deficiency anemia"
+   },
+   "text": "Iron-deficiency anemia shows {{microcytic}} {{hypochromic}} RBCs. Ferritin can be falsely {{elevated}} during inflammation because it is an acute-phase reactant.",
+   "explain": "Low MCV/MCHC; interpret ferritin in clinical context."
+  },
+  {
+   "id": "wk09_c24",
+   "sys": "Peds",
+   "topic": "Iron Deficiency",
+   "type": "qa",
+   "guide": {
+    "f": "W09_03_Nutrition.html",
+    "t": "3 · Nutrition",
+    "s": "Iron-deficiency anemia"
+   },
+   "prompt": "Why give oral iron <b>with vitamin C</b>, and what safety point must parents hear?",
+   "answer": "Vitamin C enhances iron absorption. Safety: iron causes dark stools/constipation and is dangerous in overdose — keep it out of children's reach."
+  },
+  {
+   "id": "wk09_c25",
+   "sys": "Peds",
+   "topic": "Nutrition",
+   "type": "qa",
+   "guide": {
+    "f": "W09_03_Nutrition.html",
+    "t": "3 · Nutrition",
+    "s": "Vitamin D, iron, solids, milk"
+   },
+   "prompt": "State the \"division of responsibility\" for picky eating.",
+   "answer": "The parent decides what, when, and where food is offered; the child decides whether and how much to eat. No pressure or punishment; repeated exposure."
+  },
+  {
+   "id": "wk09_c26",
+   "sys": "Peds",
+   "topic": "Colic",
+   "type": "cloze",
+   "guide": {
+    "f": "W09_04_Common_Problems.html",
+    "t": "4 · Colic",
+    "s": "Infantile colic"
+   },
+   "text": "Colic — Wessel rule of 3: crying ≥{{3}} hours/day, ≥{{3}} days/week, for ≥{{3}} weeks; peaks around {{6}} weeks and resolves by 3–4 months.",
+   "explain": "A clinical pattern in a healthy, growing infant."
+  },
+  {
+   "id": "wk09_c27",
+   "sys": "Peds",
+   "topic": "Colic",
+   "type": "multi",
+   "guide": {
+    "f": "W09_04_Common_Problems.html",
+    "t": "4 · Colic",
+    "s": "Infantile colic"
+   },
+   "prompt": "Which are red flags that argue AGAINST simple colic? (select all)",
+   "options": [
+    "Bilious emesis",
+    "Blood in stool",
+    "Evening crying with normal growth",
+    "Poor weight gain / lethargy"
+   ],
+   "correct": [
+    0,
+    1,
+    3
+   ],
+   "explain": "Bilious emesis, blood in stool, poor weight gain, lethargy, fever, or a hair tourniquet point to another diagnosis. Evening crying with normal growth is typical colic."
+  },
+  {
+   "id": "wk09_c28",
+   "sys": "Peds",
+   "topic": "GERD",
+   "type": "match",
+   "guide": {
+    "f": "W09_04_Common_Problems.html",
+    "t": "4 · GER vs GERD",
+    "s": "GER vs GERD"
+   },
+   "prompt": "Match each feature to physiologic GER or GERD:",
+   "pairs": [
+    [
+     "Happy spitter, normal growth",
+     "Physiologic GER"
+    ],
+    [
+     "Poor weight gain, feeding refusal, hematemesis",
+     "GERD"
+    ],
+    [
+     "Reassure, upright after feeds",
+     "Physiologic GER"
+    ],
+    [
+     "Cow-milk-protein-free trial if formula-fed",
+     "GERD"
+    ]
+   ],
+   "explain": "Growth and pain/red-flags separate GER from GERD."
+  },
+  {
+   "id": "wk09_c29",
+   "sys": "Peds",
+   "topic": "Diaper Rash",
+   "type": "mcq",
+   "guide": {
+    "f": "W09_04_Common_Problems.html",
+    "t": "4 · Diaper Rash",
+    "s": "Diaper dermatitis"
+   },
+   "prompt": "A diaper rash that spares the skin folds and affects convex surfaces is most likely:",
+   "options": [
+    "Candida",
+    "Irritant dermatitis",
+    "Bacterial impetigo",
+    "Langerhans cell histiocytosis"
+   ],
+   "correct": 1,
+   "explain": "Irritant dermatitis hits convex surfaces and spares folds; Candida involves the folds with satellite lesions."
+  },
+  {
+   "id": "wk09_c30",
+   "sys": "Peds",
+   "topic": "Diaper Rash",
+   "type": "qa",
+   "guide": {
+    "f": "W09_04_Common_Problems.html",
+    "t": "4 · Diaper Rash",
+    "s": "Diaper dermatitis"
+   },
+   "prompt": "What two features distinguish <b>Candida</b> diaper dermatitis, and what is the treatment?",
+   "answer": "Involvement of the skin folds plus satellite lesions. Treat with barrier care plus a topical antifungal (clotrimazole/nystatin)."
+  },
+  {
+   "id": "wk09_c31",
+   "sys": "Peds",
+   "topic": "Breath-Holding",
+   "type": "qa",
+   "guide": {
+    "f": "W09_04_Common_Problems.html",
+    "t": "4 · Breath-Holding",
+    "s": "Breath-holding spells"
+   },
+   "prompt": "Which deficiency is associated with breath-holding spells, and why check it?",
+   "answer": "Iron deficiency — it is associated with breath-holding spells, and treating iron deficiency can reduce the frequency of events."
+  },
+  {
+   "id": "wk09_c32",
+   "sys": "Peds",
+   "topic": "Breath-Holding",
+   "type": "multi",
+   "guide": {
+    "f": "W09_04_Common_Problems.html",
+    "t": "4 · Breath-Holding",
+    "s": "Breath-holding spells"
+   },
+   "prompt": "Which features should prompt evaluation for an alternative to classic breath-holding spells? (select all)",
+   "options": [
+    "No identifiable trigger",
+    "Events during sleep or exertion",
+    "Brief cyanosis then rapid recovery after a tantrum",
+    "Prolonged postictal confusion"
+   ],
+   "correct": [
+    0,
+    1,
+    3
+   ],
+   "explain": "No trigger, events during sleep/exertion, prolonged altered state, and family history of sudden death are red flags. Quick recovery after a tantrum trigger is the classic, reassuring pattern."
+  },
+  {
+   "id": "wk09_c33",
+   "sys": "Peds",
+   "topic": "Behaviour",
+   "type": "qa",
+   "guide": {
+    "f": "W09_04_Common_Problems.html",
+    "t": "4 · Behaviour",
+    "s": "Tantrums, discipline, toilet training, sleep"
+   },
+   "prompt": "Why is physical punishment (spanking) not recommended?",
+   "answer": "It can worsen aggression, damage the parent-child relationship/trust, and does not teach self-regulation. Use calm, consistent limits and positive reinforcement instead."
+  },
+  {
+   "id": "wk09_c34",
+   "sys": "Peds",
+   "topic": "Behaviour",
+   "type": "cloze",
+   "guide": {
+    "f": "W09_04_Common_Problems.html",
+    "t": "4 · Behaviour",
+    "s": "Tantrums, discipline, toilet training, sleep"
+   },
+   "text": "Night terrors arise from {{non-REM}} sleep; management is {{reassurance}} and safety — do not wake the child.",
+   "explain": "Parasomnia from deep non-REM sleep; benign and self-limited."
+  },
+  {
+   "id": "wk09_c35",
+   "sys": "Peds",
+   "topic": "Imaging",
+   "type": "qa",
+   "guide": {
+    "f": "W09_05_Imaging.html",
+    "t": "5 · Imaging",
+    "s": "Radiation risk & modality choice"
+   },
+   "prompt": "What does <b>ALARA</b> mean and why does it matter more in children?",
+   "answer": "As Low As Reasonably Achievable — minimize radiation dose. Children are more radiosensitive and have more years for radiation-associated malignancy to develop."
+  },
+  {
+   "id": "wk09_c36",
+   "sys": "Peds",
+   "topic": "Imaging",
+   "type": "multi",
+   "guide": {
+    "f": "W09_05_Imaging.html",
+    "t": "5 · Imaging",
+    "s": "Radiation risk & modality choice"
+   },
+   "prompt": "Which imaging modalities avoid ionizing radiation? (select all)",
+   "options": [
+    "Ultrasound",
+    "MRI",
+    "Plain radiograph",
+    "CT"
+   ],
+   "correct": [
+    0,
+    1
+   ],
+   "explain": "US and MRI use no ionizing radiation; radiographs are low-dose and CT is the highest."
+  },
+  {
+   "id": "wk09_c37",
+   "sys": "Peds",
+   "topic": "Imaging",
+   "type": "match",
+   "guide": {
+    "f": "W09_05_Imaging.html",
+    "t": "5 · Imaging",
+    "s": "Silhouette sign — localizing"
+   },
+   "prompt": "Match the lost CXR border to the location of disease:",
+   "pairs": [
+    [
+     "Right heart border",
+     "Right middle lobe"
+    ],
+    [
+     "Left heart border",
+     "Lingula"
+    ],
+    [
+     "Hemidiaphragm",
+     "Lower lobe"
+    ]
+   ],
+   "explain": "The silhouette sign localizes opacities by which adjacent border is effaced."
+  },
+  {
+   "id": "wk09_c38",
+   "sys": "Peds",
+   "topic": "Imaging",
+   "type": "cloze",
+   "guide": {
+    "f": "W09_05_Imaging.html",
+    "t": "5 · Imaging",
+    "s": "Lines & tubes"
+   },
+   "text": "On CXR, the endotracheal tube tip should sit {{above the carina}}, and an enteric tube tip/side-port should be in the {{stomach}} after crossing the diaphragm.",
+   "explain": "Standard line/tube checks."
+  },
+  {
+   "id": "wk09_c39",
+   "sys": "Peds",
+   "topic": "Imaging",
+   "type": "order",
+   "guide": {
+    "f": "W09_05_Imaging.html",
+    "t": "5 · Imaging",
+    "s": "CXR approach"
+   },
+   "prompt": "Order the density scale on a radiograph from most lucent (black) to most opaque (white):",
+   "items": [
+    "Air",
+    "Fat / soft tissue",
+    "Bone",
+    "Metal"
+   ],
+   "explain": "Air is black; metal is brightest white — increasing density increases opacity."
+  },
+  {
+   "id": "wk09_c40",
+   "sys": "Peds",
+   "topic": "Oncology",
+   "type": "qa",
+   "guide": {
+    "f": "W09_06_Tumours.html",
+    "t": "6 · Oncology",
+    "s": "Small round blue cell tumours (SRBCT)"
+   },
+   "prompt": "Name three categories in the pediatric small round blue cell tumour differential.",
+   "answer": "Lymphoma, sarcomas (e.g. rhabdomyosarcoma, Ewing), and blastomas (e.g. neuroblastoma, Wilms, retinoblastoma). Distinguished by site, IHC, and molecular/cytogenetic tests."
+  },
+  {
+   "id": "wk09_c41",
+   "sys": "Peds",
+   "topic": "Oncology",
+   "type": "qa",
+   "guide": {
+    "f": "W09_06_Tumours.html",
+    "t": "6 · Oncology",
+    "s": "Neuroblastoma"
+   },
+   "prompt": "From which tissue does neuroblastoma arise, and what are its two most common sites?",
+   "answer": "Neural-crest / sympathetic nervous system precursors. Common sites: the adrenal gland and the sympathetic chain (including the posterior mediastinum)."
+  },
+  {
+   "id": "wk09_c42",
+   "sys": "Peds",
+   "topic": "Oncology",
+   "type": "cloze",
+   "guide": {
+    "f": "W09_06_Tumours.html",
+    "t": "6 · Oncology",
+    "s": "Neuroblastoma"
+   },
+   "text": "Neuroblastoma workup: urinary catecholamine metabolites {{VMA}} and {{HVA}}; the key adverse prognostic marker is {{MYCN}} amplification, assessed by {{FISH}}.",
+   "explain": "Catecholamine metabolites support the diagnosis; MYCN amplification is adverse."
+  },
+  {
+   "id": "wk09_c43",
+   "sys": "Peds",
+   "topic": "Oncology",
+   "type": "mcq",
+   "guide": {
+    "f": "W09_06_Tumours.html",
+    "t": "6 · Oncology",
+    "s": "Neuroblastoma"
+   },
+   "prompt": "For a suspected neuroblastoma, why is FNA alone often inadequate?",
+   "options": [
+    "FNA is too painful in children",
+    "Diagnosis and molecular testing need architecture and adequate tissue (core or open biopsy)",
+    "FNA cannot reach the adrenal gland",
+    "Catecholamines must be measured in tissue"
+   ],
+   "correct": 1,
+   "explain": "Core needle or open incisional biopsy is preferred so there is enough tissue for histologic architecture and ancillary/molecular testing (e.g. MYCN)."
+  },
+  {
+   "id": "wk09_c44",
+   "sys": "Peds",
+   "topic": "Oncology",
+   "type": "multi",
+   "guide": {
+    "f": "W09_06_Tumours.html",
+    "t": "6 · Oncology",
+    "s": "Neuroblastoma"
+   },
+   "prompt": "Which factors worsen neuroblastoma prognosis? (select all)",
+   "options": [
+    "MYCN amplification",
+    "Segmental chromosomal abnormalities",
+    "High degree of differentiation",
+    "Older age / higher stage"
+   ],
+   "correct": [
+    0,
+    1,
+    3
+   ],
+   "explain": "MYCN amplification, segmental chromosomal changes, older age, and higher stage are adverse; better differentiation is favourable."
+  },
+  {
+   "id": "wk09_c45",
+   "sys": "Peds",
+   "topic": "Oncology",
+   "type": "qa",
+   "guide": {
+    "f": "W09_06_Tumours.html",
+    "t": "6 · Oncology",
+    "s": "Small round blue cell tumours (SRBCT)"
+   },
+   "prompt": "Which malignancies dominate under age 10 vs over age 10?",
+   "answer": "Under 10: leukemias, blastomas (retinoblastoma, neuroblastoma, Wilms, hepatoblastoma), brain tumours. Over 10: lymphoma, sarcomas (osteosarcoma, Ewing), and some carcinomas."
+  }
+ ],
+ "guides": [
+  {
+   "file": "W09_01_Preventive.html",
+   "title": "Week 09 · 1 Well-Child, Vaccines & Adolescent Care",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Well-Child, Vaccines &amp; Adolescent Care</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{\n  --paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;\n  --accent:#2d5a6b;--accent2:#7c2d2d;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;\n  --hi:#a23b2e;--lo:#2d5a6b;\n}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}\nul{margin:6px 0 6px 0;padding-left:18px}li{margin:3px 0}\nb{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Preventive Pediatrics</div><h1>Well-Child, Vaccines &amp; Adolescent Care</h1></div><div class=\"r\">Week 09 &middot; Pediatrics<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">The preventive backbone of Week 9: well-child surveillance tools, safe-sleep and injury counselling, the immunization rationale and hesitancy script, and the confidential adolescent visit.</p>\n<h2 id=\"well-child\">Well-child visits</h2>\n<p>Preventive encounters covering <b>growth surveillance, developmental screening, immunizations, nutrition, physical exam, injury prevention, family functioning, and anticipatory guidance.</b></p>\n<table>\n<tr><th>Tool</th><th>Population</th></tr>\n<tr><td><b>Rourke Baby Record</b></td><td>Canadian standard for infants / young children</td></tr>\n<tr><td><b>Greig Health Record</b></td><td>Children &amp; adolescents <b>6&ndash;17 y</b></td></tr>\n</table>\n<div class=\"key\">Every visit is a chance to screen <b>social determinants of health</b>. Mnemonic <b>ITHELLPS</b> &mdash; Income, Transportation, Housing, Education, Legal status, Literacy, Personal safety, Support.</div>\n<h2 id=\"safety\">Safety &amp; anticipatory guidance</h2>\n<div class=\"band warn\"><div class=\"t\">Do-not-miss &mdash; safe sleep</div>\nBack to sleep &middot; firm flat surface &middot; no soft bedding/pillows/toys &middot; avoid co-sleeping &middot; avoid smoke exposure. Reduces <b>SIDS</b> and asphyxiation.</div>\n<ul>\n<li><b>Car seats</b> chosen by developmental stage/size; correct restraint cuts mortality and injury severity.</li>\n<li>Injury focus evolves with age: falls/burns/choking/poisoning in infants/toddlers &rarr; helmets, water/road safety, substance &amp; sexual safety, violence prevention in older children.</li>\n<li><span class=\"dnm\">OTC cough/cold meds are generally not recommended</span> in young children &mdash; supportive care + return precautions.</li>\n</ul>\n<h2 id=\"vaccines\">Childhood immunizations</h2>\n<p>Routine schedule prevents diphtheria, tetanus, pertussis, polio, Hib, pneumococcus, rotavirus, measles, mumps, rubella, varicella, meningococcus, HPV, influenza, and more (varies by age/province).</p>\n<h3>Why multiple doses?</h3>\n<p>Initial priming may not be durable, infant immune responses mature over time, maternal antibody can interfere, and boosters strengthen memory responses.</p>\n<h3>Side effects &amp; pain reduction</h3>\n<ul>\n<li>Common: local pain, redness/swelling, low-grade fever, irritability, sleepiness. Anaphylaxis is <b>rare</b> but must be anticipated.</li>\n<li>Pain: breast/bottle feed during injection, <b>oral sucrose/dextrose</b> for infants, upright cuddling, topical anesthetic, distraction, and <b>give the most painful vaccine last</b>.</li>\n</ul>\n<div class=\"band\"><div class=\"t\">Hesitancy counselling</div>\nOpen with a <b>presumptive but respectful</b> recommendation (\"Today she is due for these vaccines\"). Use motivational interviewing: ask permission, explore the specific concern, affirm the parent's goal, give targeted (not overwhelming) information. Contrast disease risk vs vaccine risk; explain community protection and the danger of delaying infant protection.</div>\n<div class=\"band good\"><div class=\"t\">NOT contraindications to routine vaccines</div>\nMild illness, breastfeeding, family history of allergy, prematurity. <b>Live</b> vaccines are the ones to withhold in severe immunocompromise/pregnancy.</div>\n<h2 id=\"adolescent\">Adolescent care</h2>\n<p>Ask the caregiver to step out for part of the visit; explain <b>confidentiality and its limits</b> (harm to self/others, abuse, inability to consent) <em>before</em> the psychosocial history.</p>\n<div class=\"key\"><b>HEEADSSS</b> &mdash; Home, Education/employment, Eating/body image, Activities/peers, Drugs, Sexuality (relationships/contraception/STIs), Suicide/depression/anxiety, Safety/violence.</div>\n<ul>\n<li>Counsel <b>&ge;60 min/day</b> moderate-to-vigorous activity; screen-time guidance now emphasizes function/sleep displacement/cyberbullying over strict counting.</li>\n<li>Harm reduction: seatbelts/helmets, substance safety, consent, STI prevention, contraception, mental-health resources, trusted-adult support.</li>\n</ul>\n</div>"
+  },
+  {
+   "file": "W09_02_Growth_Dev.html",
+   "title": "Week 09 · 2 Growth, Puberty & Development",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Growth, Puberty &amp; Development</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{\n  --paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;\n  --accent:#2d5a6b;--accent2:#7c2d2d;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;\n  --hi:#a23b2e;--lo:#2d5a6b;\n}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}\nul{margin:6px 0 6px 0;padding-left:18px}li{margin:3px 0}\nb{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Surveillance</div><h1>Growth, Puberty &amp; Development</h1></div><div class=\"r\">Week 09 &middot; Pediatrics<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">How to read a growth curve, calculate mid-parental height, separate the three short-stature patterns, sequence puberty, and recognize developmental red flags.</p>\n<h2 id=\"growth\">Normal growth principles</h2>\n<p>Growth reflects general health &mdash; shaped by genetics, nutrition, environment, chronic disease, medications, and hormones.</p>\n<ul>\n<li><b>Intrauterine:</b> driven by maternal/placental/fetal factors and <b>insulin</b> &mdash; <span class=\"dnm\">growth hormone is not the main intrauterine driver.</span></li>\n<li><b>Infancy:</b> nutrition dominates. <b>Childhood/adolescence:</b> genetic &amp; hormonal influences rise.</li>\n<li>Assess with serial measurements, correct plotting, <b>growth velocity</b>, pubertal stage, mid-parental height, body proportions.</li>\n</ul>\n<div class=\"key\"><b>Trajectory &gt; single point.</b> Short stature with <b>poor growth velocity</b> is pathologic until proven otherwise.</div>\n<h3 id=\"mph\">Mid-parental height</h3>\n<table>\n<tr><th>Child</th><th>Formula</th></tr>\n<tr><td>Boy</td><td>[(maternal ht + 13 cm) + paternal ht] / 2</td></tr>\n<tr><td>Girl</td><td>[maternal ht + (paternal ht &minus; 13 cm)] / 2</td></tr>\n</table>\n<h2 id=\"short-stature\">Short-stature patterns</h2>\n<table>\n<tr><th>Pattern</th><th>Diagnosis</th><th>Key features</th></tr>\n<tr><td>Short parents, normal velocity, normal bone age</td><td><b>Familial short stature</b></td><td>Projected height matches family; no systemic symptoms</td></tr>\n<tr><td>Delayed puberty, <b>delayed bone age</b>, normal velocity, family of late bloomers</td><td><b>Constitutional delay</b></td><td>Final height usually normal; more common in boys</td></tr>\n<tr><td><b>Poor velocity</b>, crossing percentiles, systemic symptoms, abnormal proportions</td><td><span class=\"dnm\">Pathologic</span></td><td>Chronic/endocrine disease, syndromes, malnutrition</td></tr>\n<tr><td>Disproportionate</td><td>Skeletal dysplasia / syndrome</td><td>Check upper/lower segment ratio, arm span, dysmorphism</td></tr>\n</table>\n<h2 id=\"puberty\">Puberty</h2>\n<div class=\"band\"><div class=\"t\">Sequence &mdash; memorize</div>\n<b>Boys (begin 9&ndash;14 y):</b> testicular enlargement &rarr; penile growth &rarr; pubic hair &rarr; growth spurt.<br>\n<b>Girls (begin 8&ndash;13 y):</b> breast development (thelarche) first &rarr; pubic hair &rarr; growth spurt &rarr; <b>menarche later</b>.</div>\n<p>Interpret precocious/delayed puberty against growth velocity, bone age, neurologic symptoms, chronic disease, and family pattern.</p>\n<h2 id=\"development\">Development</h2>\n<h3>Domains</h3>\n<p>Gross motor &middot; fine motor/adaptive &middot; speech/language &middot; cognitive/problem-solving &middot; social-emotional. The <b>18-month visit</b> is a key developmental review point.</p>\n<table>\n<tr><th>Age</th><th>Gross motor</th><th>Fine/cognitive</th><th>Language/social</th></tr>\n<tr><td>2 mo</td><td>Lifts head</td><td>Opens hands</td><td>Social smile; coos</td></tr>\n<tr><td>4 mo</td><td>Head control; rolls front&rarr;back</td><td>Hands to midline</td><td>Laughs; turns to voice</td></tr>\n<tr><td>6 mo</td><td>Tripod sit</td><td>Transfers; raking grasp</td><td>Babbles</td></tr>\n<tr><td>9 mo</td><td>Sits independently; crawls</td><td>Immature pincer; object permanence</td><td>Peek-a-boo; stranger anxiety; responds to name</td></tr>\n<tr><td>12 mo</td><td>Pulls to stand; cruises; may step</td><td>Pincer; points</td><td>1&ndash;2 words; follows 1-step command</td></tr>\n<tr><td>18 mo</td><td>Walks/runs stiffly</td><td>Scribbles; uses spoon</td><td>Several words; pretend play</td></tr>\n<tr><td>2 y</td><td>Runs, kicks ball</td><td>Stacks blocks</td><td>Two-word phrases</td></tr>\n<tr><td>3&ndash;4 y</td><td>Tricycle; stairs alternating</td><td>Copies circle/cross</td><td>Sentences; imaginative play</td></tr>\n</table>\n<div class=\"band warn\"><div class=\"t\">Developmental red flags</div>\n<ul>\n<li><b>Loss of previously acquired skills at any age</b> (regression).</li>\n<li>No social smile by ~2&ndash;3 mo; poor eye contact / no joint attention.</li>\n<li>Not sitting by ~9 mo; not walking by ~18 mo.</li>\n<li>No words by ~16&ndash;18 mo; no two-word phrases by ~2 y.</li>\n<li>Major asymmetry, persistent primitive reflexes, abnormal tone, multi-domain delay.</li>\n</ul></div>\n</div>"
+  },
+  {
+   "file": "W09_03_Nutrition.html",
+   "title": "Week 09 · 3 Infant & Child Nutrition",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Infant &amp; Child Nutrition</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{\n  --paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;\n  --accent:#2d5a6b;--accent2:#7c2d2d;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;\n  --hi:#a23b2e;--lo:#2d5a6b;\n}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}\nul{margin:6px 0 6px 0;padding-left:18px}li{margin:3px 0}\nb{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Feeding</div><h1>Infant &amp; Child Nutrition</h1></div><div class=\"r\">Week 09 &middot; Pediatrics<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">Breastfeeding benefits and true contraindications, vitamin D / iron / solids timing, the honey rule, the toddler milk limit, and the iron-deficiency-anemia story.</p>\n<h2 id=\"feeding\">Breast/chest feeding &amp; formula</h2>\n<p>Exclusive breast/chest feeding for ~<b>first 6 months</b>, then continued with complementary foods beyond 6 mo as feasible.</p>\n<ul>\n<li><b>Infant benefits:</b> optimal nutrition; protection vs otitis media/gastroenteritis/RSV; lower SIDS risk; allergy/asthma &amp; obesity benefit; safe and economical.</li>\n<li><b>Parent benefits:</b> bonding, delayed menses, reduced breast/ovarian cancer risk, weight management.</li>\n</ul>\n<div class=\"band warn\"><div class=\"t\">Breastfeeding contraindications</div>\nUntreated active <b>TB</b>, <b>HIV</b> (where safe alternatives exist), certain meds/chemo/radioisotopes, illicit drug exposure, active <b>herpetic breast lesions</b>.<br>\n<span class=\"dnm\">NOT contraindications:</span> vegan diet or family history of atopy (but need nutritional attention).</div>\n<p>Formula: standard cow-milk-based for most; <b>extensively hydrolyzed / amino-acid</b> for cow-milk-protein allergy; soy only for selected indications; specialized formulas for prematurity/metabolic disease.</p>\n<h2 id=\"supplements\">Vitamin D, iron, solids, milk</h2>\n<ul>\n<li><b>Vitamin D</b> supplementation recommended for Canadian infants &mdash; especially breastfed infants (follow local dosing).</li>\n<li>Introduce complementary <b>solids ~6 mo</b> when developmentally ready; prioritize <b>iron-rich foods</b> (meats, fish, poultry, eggs, legumes, iron-fortified cereal, tofu).</li>\n<li>Introduce common allergenic foods in safe forms once solids start; avoid whole nuts/choking forms.</li>\n<li class=\"dnm\">Avoid honey before 12 months &mdash; infant botulism risk.</li>\n</ul>\n<div class=\"key\"><b>Toddler cow milk &le; ~500 mL/day (~16 oz).</b> Excess milk &rarr; iron-deficiency anemia and displaces iron-rich foods. Whole milk to age 2, then lower-fat is typical.</div>\n<h3>Picky eating &mdash; division of responsibility</h3>\n<p>Parent decides <b>what/when/where</b>; child decides <b>whether/how much</b>. Keep routine, repeated exposure, no pressure/punishment; avoid grazing and excessive milk/juice.</p>\n<h2 id=\"ida\">Iron-deficiency anemia</h2>\n<ul>\n<li><b>Classic:</b> toddler on excessive cow milk + limited solids; pallor, fatigue, irritability, pica, poor feeding, developmental concern.</li>\n<li><b>Labs:</b> microcytic hypochromic anemia; smear small pale RBCs / pencil cells. <span class=\"dnm\">Ferritin can be falsely elevated by inflammation (acute-phase reactant)</span> &mdash; interpret in context; consider iron studies + reticulocytes.</li>\n<li><b>Management:</b> reduce milk, increase iron-rich foods, oral iron if deficient, give with <b>vitamin C</b> to boost absorption; counsel re dark stools/constipation and <b>keep iron out of reach (overdose is dangerous)</b>.</li>\n</ul>\n</div>"
+  },
+  {
+   "file": "W09_04_Common_Problems.html",
+   "title": "Week 09 · 4 Common Pediatric Problems",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Common Pediatric Problems</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{\n  --paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;\n  --accent:#2d5a6b;--accent2:#7c2d2d;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;\n  --hi:#a23b2e;--lo:#2d5a6b;\n}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}\nul{margin:6px 0 6px 0;padding-left:18px}li{margin:3px 0}\nb{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Outpatient</div><h1>Common Pediatric Problems</h1></div><div class=\"r\">Week 09 &middot; Pediatrics<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">Colic, GER vs GERD, the diaper-rash triad, breath-holding spells and their iron link, and the behavioural basics (tantrums, discipline, toilet training, parasomnias).</p>\n<h2 id=\"colic\">Infantile colic</h2>\n<p>Excessive crying without clear cause in an otherwise <b>healthy, growing</b> infant. <b>Wessel rule of 3:</b> &ge;3 h/day, &ge;3 days/week, &ge;3 weeks; onset &lt;3 mo. <b>Peaks ~6 weeks, resolves by 3&ndash;4 mo.</b></p>\n<div class=\"band warn\"><div class=\"t\">Exclude red flags first</div>\nFever, poor feeding, <b>bilious emesis</b>, blood in stool, lethargy, abnormal exam, poor weight gain, injury, <b>hair tourniquet</b>, corneal abrasion.</div>\n<p><b>Management:</b> reassurance, validate parental distress, soothing strategies, feeding technique, respite/safety plan. <span class=\"dnm\">No good evidence</span> for simethicone, lactase, or sucrose; probiotic evidence is mixed.</p>\n<h2 id=\"ger\">GER vs GERD</h2>\n<table>\n<tr><th>Feature</th><th>Physiologic GER</th><th>GERD / concerning</th></tr>\n<tr><td>Growth</td><td>Normal</td><td><b>Poor weight gain / FTT</b></td></tr>\n<tr><td>Symptoms</td><td>Effortless spit-ups, \"happy spitter\"</td><td>Pain/feeding refusal, hematemesis, apnea/cyanosis, recurrent pneumonia, severe irritability</td></tr>\n<tr><td>Management</td><td>Reassure, avoid overfeeding, burp/upright after feeds</td><td>Assess red flags; <b>cow-milk-protein-free trial</b> if formula-fed; targeted Ix/referral if severe/refractory</td></tr>\n</table>\n<h2 id=\"diaper\">Diaper dermatitis</h2>\n<table>\n<tr><th>Type</th><th>Clues</th><th>Management</th></tr>\n<tr><td>Irritant</td><td>Erythema on <b>convex surfaces</b>; spares folds</td><td>Frequent changes, gentle cleansing, air, thick zinc-oxide/petrolatum barrier</td></tr>\n<tr><td><b>Candida</b></td><td>Beefy red, <b>involves folds</b> + <b>satellite lesions</b></td><td>Barrier + topical antifungal (clotrimazole/nystatin); brief low-potency steroid only if very inflamed</td></tr>\n<tr><td>Bacterial/other</td><td>Pustules, erosions, honey crust, systemic/refractory</td><td>Consider bacterial infection, psoriasis, seborrhea, LCH; treat/refer</td></tr>\n</table>\n<h2 id=\"bhs\">Breath-holding spells</h2>\n<p>Toddler/preschool; triggered by <b>anger/frustration or pain</b>. Child cries &rarr; holds breath &rarr; cyanotic or pallid &rarr; brief LOC &rarr; <b>rapid return to baseline</b>.</p>\n<div class=\"key\">Reassure if classic; <b>check iron status</b> (iron deficiency is associated; treating reduces events). Keep child safe; avoid reinforcing the behaviour.</div>\n<div class=\"band warn\"><div class=\"t\">Red flags for an alternate diagnosis</div>\nEvents during <b>exertion or sleep</b>, prolonged postictal state, <b>no trigger</b>, family history of sudden death, abnormal cardiac/neuro exam.</div>\n<h2 id=\"behaviour\">Tantrums, discipline, toilet training, sleep</h2>\n<ul>\n<li><b>Tantrums</b> are developmentally normal in toddlers: calm/consistent response, positive reinforcement, redirection, ignore minor attention-seeking when safe, meet sleep/hunger needs.</li>\n<li class=\"dnm\">Spanking/physical punishment is not recommended &mdash; worsens aggression, damages trust, doesn't teach self-regulation.</li>\n<li><b>Toilet training</b> when ready (often 18 mo&ndash;3 y): stays dry longer, interest, follows simple instructions, communicates needs. Positive reinforcement, no punishment/pressure.</li>\n<li><b>Sleep / parasomnias:</b> night terrors arise from <b>non-REM</b> sleep &mdash; reassurance &amp; safety, don't wake the child.</li>\n</ul>\n</div>"
+  },
+  {
+   "file": "W09_05_Imaging.html",
+   "title": "Week 09 · 5 Pediatric Imaging & CXR",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Pediatric Imaging &amp; CXR</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{\n  --paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;\n  --accent:#2d5a6b;--accent2:#7c2d2d;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;\n  --hi:#a23b2e;--lo:#2d5a6b;\n}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}\nul{margin:6px 0 6px 0;padding-left:18px}li{margin:3px 0}\nb{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Radiology</div><h1>Pediatric Imaging &amp; CXR</h1></div><div class=\"r\">Week 09 &middot; Pediatrics<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">ALARA and modality choice in children, the outside-in CXR read, the silhouette sign for localizing opacities, and correct line/tube tip positions.</p>\n<h2 id=\"radiation\">Radiation risk &amp; modality choice</h2>\n<p>Children have <b>higher lifetime sensitivity</b> to ionizing radiation and more years for malignancy to manifest. Use <b>ALARA</b> (as low as reasonably achievable).</p>\n<table>\n<tr><th>Modality</th><th>Radiation</th><th>Use</th></tr>\n<tr><td>US, MRI</td><td>None</td><td>Preferred when adequate</td></tr>\n<tr><td>Radiograph</td><td>Low</td><td>First-line for many questions</td></tr>\n<tr><td><b>CT</b></td><td><span class=\"dnm\">High</span></td><td>High detail; must be justified &mdash; will it change management?</td></tr>\n</table>\n<div class=\"key\">Counsel with balanced language: image when benefits outweigh risks <b>and results will change management.</b></div>\n<h2 id=\"cxr\">CXR approach</h2>\n<p><b>Outside-in:</b> identifying data/quality &rarr; soft tissues &rarr; upper abdomen &rarr; bones &rarr; heart/mediastinum &rarr; pleura &rarr; airways &rarr; lungs.</p>\n<p>Density scale: <b>air = lucent/black</b>; soft tissue / fluid / bone / metal are increasingly opaque/white.</p>\n<h3 id=\"silhouette\">Silhouette sign &mdash; localizing</h3>\n<table>\n<tr><th>Lost border</th><th>Location</th></tr>\n<tr><td>Right heart border</td><td><b>Right middle lobe</b></td></tr>\n<tr><td>Left heart border</td><td><b>Lingula</b></td></tr>\n<tr><td>Hemidiaphragm</td><td><b>Lower lobe</b></td></tr>\n</table>\n<p>The lateral film aids anterior/posterior localization. Infection/aspiration appears as consolidation/air-space opacity; aspiration favours <b>dependent</b> regions by position.</p>\n<h2 id=\"lines\">Lines &amp; tubes</h2>\n<table>\n<tr><th>Device</th><th>Correct tip</th></tr>\n<tr><td><b>ETT</b></td><td><b>Above the carina</b></td></tr>\n<tr><td>Enteric tube</td><td>Crosses diaphragm; side-port/tip in <b>stomach</b></td></tr>\n<tr><td>Central line</td><td>Appropriate <b>central venous</b> position (not arterial, not too deep)</td></tr>\n</table>\n</div>"
+  },
+  {
+   "file": "W09_06_Tumours.html",
+   "title": "Week 09 · 6 Tumours & Neuroblastoma",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Pediatric Tumours &amp; Neuroblastoma</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{\n  --paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;\n  --accent:#2d5a6b;--accent2:#7c2d2d;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;\n  --hi:#a23b2e;--lo:#2d5a6b;\n}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}\nul{margin:6px 0 6px 0;padding-left:18px}li{margin:3px 0}\nb{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Oncology / Path</div><h1>Pediatric Tumours &amp; Neuroblastoma</h1></div><div class=\"r\">Week 09 &middot; Pediatrics<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">The small-round-blue-cell-tumour differential by age, and neuroblastoma end-to-end: origin, sites, age-based presentation, VMA/HVA, MYCN/FISH prognosis, and biopsy strategy.</p>\n<h2 id=\"srbct\">Small round blue cell tumours (SRBCT)</h2>\n<p>Pediatric malignancies differ by age:</p>\n<ul>\n<li><b>&lt;10 y:</b> leukemias, blastomas (retinoblastoma, <b>neuroblastoma</b>, nephroblastoma/Wilms, hepatoblastoma), brain tumours.</li>\n<li><b>&gt;10 y:</b> lymphoma, sarcomas (osteosarcoma, Ewing), some carcinomas.</li>\n</ul>\n<p>SRBCTs look similar on H&amp;E. Differential by site: lymphoma, sarcomas (rhabdomyosarcoma, Ewing), blastomas (neuroblastoma, Wilms, retinoblastoma).</p>\n<div class=\"key\">Pathologists distinguish SRBCTs using <b>site of origin, morphologic differentiation, immunohistochemistry, cytogenetics/molecular tests,</b> and ancillary studies.</div>\n<h2 id=\"neuroblastoma\">Neuroblastoma</h2>\n<p>Peripheral neuroblastic tumour from <b>neural-crest / sympathetic</b> precursors. Common sites: <b>adrenal gland</b> and sympathetic chain (including <b>posterior mediastinum</b>).</p>\n<h3>Presentation by age</h3>\n<ul>\n<li><b>Neonate/young infant:</b> congenital mass, respiratory symptoms from thoracic mass, hepatomegaly/skin nodules.</li>\n<li><b>Older child:</b> abdominal mass, pain, systemic symptoms, bone pain, metastatic disease.</li>\n</ul>\n<div class=\"band\"><div class=\"t\">Workup</div>\n<b>Biochemistry:</b> urinary catecholamine metabolites <b>VMA / HVA</b>. <b>Imaging/staging:</b> local extent, critical structures, resectability, metastases, image-defined risk factors. <b>Biopsy</b> must provide enough tissue for diagnosis <em>and</em> molecular testing.</div>\n<div class=\"band warn\"><div class=\"t\">Prognosis</div>\nAge/stage, histology/differentiation, mitosis-karyorrhexis index, <b>MYCN amplification</b> (adverse; assessed by <b>FISH</b>), ploidy, segmental chromosomal abnormalities.</div>\n<div class=\"key\">For suspected neuroblastoma, prefer <b>core needle / open incisional biopsy</b> over FNA alone when architecture &amp; ancillary testing are needed.</div>\n<h2 id=\"case\">Week 9 case anchor</h2>\n<p>A 7-day-old with laboured breathing and sweating with feeds &mdash; CXR shows a large <b>right posterior mediastinal</b> opacity with mass effect on trachea/right main bronchus and <b>calcific foci</b>; CT shows a heterogeneous enhancing posterior mediastinal soft-tissue mass. Differential: lymphoma, neurogenic tumour, metastasis. Tumour-board questions: <b>What is it? Does it need to come out? Is it resectable?</b></p>\n</div>"
+  }
+ ]
+}
