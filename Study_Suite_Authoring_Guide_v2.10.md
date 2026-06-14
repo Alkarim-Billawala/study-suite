@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.9 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.10 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.9)
+# Study Suite — Content Authoring Guide (v2.10)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,20 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.9 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **Authoring system version:** 2.10 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **What changed in guide v2.10:** quality hardening based on observed failure modes — no schema
+> change. (1) **Output hygiene** (§8): the deliverable is *pure, valid JSON only* — no prose, no
+> markdown fences, and **strip any citation/grounding/footnote markers your tooling injects** (a single
+> stray token makes the whole file fail to import); **parse-test before delivering**. (2) **Guides must
+> be substantive** (§6): the template is a *minimum skeleton*, not the goal — produce one real guide
+> per topic block, with sections/tables, not a single sparse page. (3) **Link items to guides** (§6):
+> most questions/cards should carry a `guide` pointer so the Topic Guides reader is actually used.
+> (4) **Hit and scale volume** (§3): 10–20 questions and **40–60 cards per week**, multiplied by the
+> number of weeks the pack covers. (5) **Fill placement; `course` is the grouping block, not the
+> week's subject** (§2). These are baked into the §7 validation checklist. (6) **Version self-check**
+> (§0b): on load, the assistant fetches `https://studysuite.app/authoring-version.json` and, if a newer
+> guide exists, prompts the user to grab the latest before building (best-effort; degrades gracefully
+> when offline).
 > **What changed in guide v2.9:** new optional pack field `term` (semester/term, e.g. `"Fall"` /
 > `"Semester 2"`) — an optional level **between `year` and `course`** in the placement hierarchy. The
 > app (v0.2.49+) renders it as a sub-group and sorts it chronologically, and it is **gracefully
@@ -99,6 +112,29 @@ incomplete syllabus.
 
 ---
 
+## 0b. First, check you have the latest version of this guide
+
+This guide is **versioned** (see the header — currently **v2.10**). The authoring system evolves, so
+before you build, make a quick, one-time check that the user isn't working from an outdated copy:
+
+1. **If you can browse the web**, fetch the small public pointer file at
+   **`https://studysuite.app/authoring-version.json`** (this is the project's GitHub Pages repo,
+   served on its custom domain). It returns something like
+   `{ "authoringGuideVersion": "2.10", "guideUrl": "https://studysuite.app/Study_Suite_Authoring_Guide_v2.10.md", "updated": "2026-06-14" }`.
+2. **Compare the versions numerically** — treat the version as `major.minor`, so `2.10` is *newer*
+   than `2.9` (don't compare as plain text). If the published `authoringGuideVersion` is higher than
+   the version in this file's header, tell the user:
+   > *"Heads up — you're using authoring guide v&lt;yours&gt;, but v&lt;latest&gt; is now available.
+   > For best results, download the latest from &lt;guideUrl&gt; and re-upload it before we build."*
+   Then **proceed with the copy you have** — this is a courtesy, not a gate.
+3. **If you can't browse the web**, don't fail or stall. Just tell the user which version you're
+   working from and that they can check for a newer one at
+   `https://studysuite.app/authoring-version.json` (or the project site) and re-upload if needed.
+
+Do this check **once, at the start**, then carry on with the workflow below.
+
+---
+
 ## 1. Your job, in one paragraph
 
 Convert the user's study material into **one valid pack `.json` per week or topic-set**, containing
@@ -148,6 +184,13 @@ The placement fields form an **ordered hierarchy** the app uses to group and chr
 packs in both the Default study packs panel and the user's Content library:
 
 > **school → year → `term` (optional) → course → week / unit / topic**
+
+> **Common mistake — keep `course` and the week's subject separate.** `course` is the **grouping level
+> that several weeks share** (e.g. `"CPC 1"`, `"Cardiology block"`), so packs nest under it. The week's
+> actual subject goes in `weeks` (e.g. `"Week 11 · Immunology II"`) and/or the `pack` display name —
+> **not** in `course`. Putting the topic in `course` (e.g. `course:"Immunology II"`) gives every week
+> its own one-pack "course" and defeats the grouping; leaving placement fields null drops the pack into
+> an "Other" bucket. Fill them all, and ask the user if you don't know their structure.
 
 Two things to know — and to **ask the user** about:
 
@@ -258,6 +301,12 @@ Review and Exam reinforce each other. As with questions, **ask the user** and sc
 weeks the pack covers (e.g. a 3-week block ≈ 120–180 cards total). Favor high-yield facts, mechanisms,
 and associations over trivia.
 
+> **These are targets to actually hit — and they multiply by the weeks covered.** A common failure is
+> shipping a thin pack (e.g. 15–20 cards) for a **multi-week** unit. If a pack spans 2 weeks, that's
+> roughly **2× the questions and 2× the 40–60 cards** of a single week; for 3 weeks, 3×. Count what
+> you produced against the weeks before delivering (the §7 checklist asks you to confirm this). A
+> two-week pack with one tiny guide and 15 cards is not a complete pack.
+
 ---
 
 ## 4. Source material — use it, but **don't copy it**
@@ -358,6 +407,21 @@ user explicitly asks for a printable version.)
 Even though no file is written, each guide still needs a **filename-style key** (e.g.
 `Topic_C1_Arrhythmias.html`) — it's the identifier that links items to guides.
 
+> **Guides must be substantive — one real guide per topic block.** The template below is a **minimum
+> skeleton, not the target.** A guide that is one heading and a sentence (or a single sparse page for a
+> whole week) wastes the feature and short-changes the learner. Aim for:
+> - **One guide per major topic block** of the week's material (so a typical week has several guides,
+>   and a multi-week pack has more) — not a single mega-guide covering everything.
+> - **Real teaching content in each:** multiple `<h2>`/`<h3>` sections, at least one or two `<table>`s
+>   or key-point boxes, covering the high-yield facts, mechanisms, associations, and "do-not-miss"
+>   items of that block. Match the depth of the source material; a guide should stand on its own as a
+>   revision sheet.
+>
+> **Link items to their guide.** Most questions and cards should carry a `guide` pointer
+> (`{ "f": …, "t": …, "s": … }`) into the relevant embedded guide so the app can deep-link from an
+> item to the right section. A pack where few or no items reference a guide leaves the Topic Guides
+> reader disconnected — wire them up as you write each item.
+
 The `guides` array holds one object per guide:
 
 ```json
@@ -440,9 +504,33 @@ every `guides[]` entry has non-empty `html`.
 **JSON hygiene:** 0-based `correct`; straight quotes; HTML inside strings must keep the JSON valid
 (escape inner double quotes, or use single quotes inside the HTML).
 
+**Parses cleanly (do this last):** the whole file is valid JSON with **no prose, code fences, or
+citation/grounding/footnote markers** anywhere (see §8). Run it through a strict JSON parser — if it
+doesn't parse, it won't import.
+
+**Substance & coverage:** **one guide per topic block** (not a single sparse page), each with real
+sections/tables; **most questions and cards carry a `guide` pointer**; counts meet the targets and are
+**scaled to the weeks covered** (10–20 questions and 40–60 cards *per week*); difficulty lands near the
+**~30 / 55 / 15** easy/medium/hard spread.
+
+**Placement filled:** `school` / `year` / (`term`) / `course` / `weeks` are present (ask if unknown,
+don't leave null), and **`course` is the grouping block shared across weeks (e.g. a course/block name),
+not the week's subject.**
+
 ---
 
 ## 8. Output instructions
+
+> **⚠ Output hygiene — the #1 cause of a pack that won't import.** The pack file must be **pure,
+> valid JSON and nothing else.** Before you deliver:
+> - **No prose, no explanations, and no Markdown code fences** inside the file — the file is JSON from
+>   the first `{` to the last `}`.
+> - **Strip every citation / grounding / source / footnote marker your tooling may inject** — e.g.
+>   bracketed span tags like `[span_0](start_span)…[span_0](end_span)`, `【…】`, superscript reference
+>   numbers, or `[1]`-style cites. **A single stray marker anywhere makes `JSON.parse` reject the
+>   entire file**, so the user sees nothing import.
+> - **Parse-test the final text with a strict JSON parser** (it either parses cleanly or it doesn't).
+>   Also re-run the §7 checklist. Do not hand over a pack you have not verified parses.
 
 When you finish, produce **one downloadable file** (not just code in chat):
 
