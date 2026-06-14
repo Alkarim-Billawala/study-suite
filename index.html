@@ -1,7 +1,21 @@
 <!--
-  Study Suite  ·  v0.2.51 (beta)
+  Study Suite  ·  v0.2.52 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.52: dark-mode contrast audit + fixes. Root cause class: native <button>/<select>
+  elements do NOT inherit `color`, so any control that set a themed background but no explicit text
+  colour rendered with the system default (dark) text — invisible on dark backgrounds. Fixed:
+  • .dp-add ("+ Add to library") — explicit color:var(--ink) on a var(--paper2) fill + var(--accent-soft)
+    border, on-theme var(--accent) hover (was filling var(--paper) with no colour, :hover inverted to
+    full-white var(--ink)).
+  • .chip (order-card answer tokens) and .tchip (unselected Review topic chips) — added color:var(--ink)
+    to the base rule (.tchip.on already set one; the unselected state did not).
+  • .matchrow select (matching cards) — added color:var(--ink) (the settings `select` colour is scoped
+    to .setrow, so it didn't apply here).
+  • Added color-scheme:dark to the dark/black roots so native control internals (select dropdown popups,
+    scrollbars, number-input spinners, caret) theme correctly.
+  Verified the other button/select styles (.btn/.gbtn/.opt/.choice/.minor/.seg/.nbtn/.flagbtn/.backbtn,
+  settings inputs) already set an explicit colour (or color:inherit) and are fine.
   Changelog v0.2.51: the Default study packs "new" badge now CASCADES down the hierarchy. Collapsed,
   the header still shows the total "N new". Expanded, the badge migrates into the tree — a per-count
   badge on the relevant school chip, year header, term header, and course toggle, plus a "NEW" tag on
@@ -253,7 +267,7 @@ var r=document.documentElement;r.setAttribute('data-theme',m);r.setAttribute('da
   --paper:#1b1916;--paper2:#262320;--ink:#ece7da;--ink-soft:#a89f90;--line:#3b362c;--accent:#c98a6a;--accent-soft:#b5705f;--green:#5fae82;--red:#df6f6f;--gold:#c9a44f;--blue:#6aa6cc;}
 :root[data-family="warm"][data-theme="black"]{ /* Warm · Black */
   --paper:#000000;--paper2:#151208;--ink:#ece7da;--ink-soft:#b0a796;--line:#332e22;--accent:#cf8e6e;--accent-soft:#b5705f;--green:#5fae82;--red:#df6f6f;--gold:#c9a44f;--blue:#6aa6cc;}
-:root[data-theme="dark"],:root[data-theme="black"]{--shadow:0 1px 0 rgba(0,0,0,.3), 0 10px 30px -16px rgba(0,0,0,.6)}
+:root[data-theme="dark"],:root[data-theme="black"]{color-scheme:dark;--shadow:0 1px 0 rgba(0,0,0,.3), 0 10px 30px -16px rgba(0,0,0,.6)}
 *{box-sizing:border-box}html,body{margin:0;padding:0}
 body{background:radial-gradient(120% 90% at 100% 0%, color-mix(in srgb,var(--accent) 6%,transparent), transparent 55%),var(--paper);color:var(--ink);font-family:var(--font-body);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
 .wrap{max-width:860px;margin:0 auto;padding:0 22px 120px}
@@ -347,7 +361,7 @@ section{display:none}section.on{display:block}
 #topicPanel{margin-top:14px;display:none}#topicPanel.open{display:block}
 .tgroup{margin-bottom:14px}.tgroup .gname{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:7px}
 .tchips{display:flex;flex-wrap:wrap;gap:8px}
-.tchip{font-family:var(--font-body);font-size:15px;border:1.5px solid var(--line);background:var(--paper);border-radius:20px;padding:6px 13px;cursor:pointer;transition:.12s;display:flex;align-items:center;gap:7px}
+.tchip{font-family:var(--font-body);font-size:15px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:20px;padding:6px 13px;cursor:pointer;transition:.12s;display:flex;align-items:center;gap:7px}
 .tchip:hover{border-color:var(--accent-soft)}.tchip.on{border-color:var(--accent);background:var(--accent);color:var(--paper)}
 .tchip .ct{font-family:var(--font-mono);font-size:10px;color:var(--ink-soft);background:var(--paper2);border-radius:10px;padding:1px 6px}
 .tchip.on .ct{color:var(--paper);background:rgba(255,255,255,.18)}.tchip .ct.zero{opacity:.4}
@@ -375,7 +389,7 @@ section{display:none}section.on{display:block}
 .cz{border-bottom:2px solid var(--accent-soft);padding:0 3px;color:var(--ink-soft)}
 .cz.on{background:color-mix(in srgb,var(--green) 16%,var(--paper2));border-bottom-color:var(--green);color:var(--ink);font-weight:600;border-radius:3px}
 .orderwrap{margin-top:16px}.pool{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
-.chip{font-family:var(--font-body);font-size:16px;border:1.5px solid var(--line);background:var(--paper);border-radius:7px;padding:8px 13px;cursor:pointer;transition:.12s}
+.chip{font-family:var(--font-body);font-size:16px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:7px;padding:8px 13px;cursor:pointer;transition:.12s}
 .chip:hover{border-color:var(--accent-soft)}.chip[disabled]{opacity:.35;cursor:default}
 .seq{display:flex;flex-direction:column;gap:7px}
 .seqitem{display:flex;gap:11px;align-items:center;border:1.5px solid var(--line);background:var(--paper2);border-radius:7px;padding:9px 13px;font-size:16px}
@@ -384,7 +398,7 @@ section{display:none}section.on{display:block}
 .miniresetbar{margin-top:8px}
 .matchwrap{margin-top:16px;display:flex;flex-direction:column;gap:9px}
 .matchrow{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
-.matchrow .ml{font-size:16px}.matchrow select{font-family:var(--font-body);font-size:15px;padding:7px 9px;border:1.5px solid var(--line);border-radius:6px;background:var(--paper);min-width:150px}
+.matchrow .ml{font-size:16px}.matchrow select{font-family:var(--font-body);font-size:15px;padding:7px 9px;border:1.5px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);min-width:150px}
 .matchrow.correct select{border-color:var(--green);background:color-mix(in srgb,var(--green) 16%,var(--paper2))}.matchrow.wrong select{border-color:var(--red);background:color-mix(in srgb,var(--red) 16%,var(--paper2))}
 .banner{font-family:var(--font-mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin:18px 0 0}.banner.ok{color:var(--green)}.banner.no{color:var(--red)}
 .answerbox{margin-top:12px;border-left:3px solid var(--accent);background:var(--paper);border-radius:0 6px 6px 0;padding:14px 17px;font-size:16.5px;line-height:1.6;animation:rise .25s ease both}
@@ -494,10 +508,10 @@ section{display:none}section.on{display:block}
 .dp-coursebody{display:flex;flex-direction:column;gap:6px;padding:2px 0 4px 18px;border-left:2px solid var(--line);margin-left:10px}
 .dp-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .dp-name{font-family:var(--font-body);font-size:16px;flex:1 1 auto;min-width:180px}
-.dp-add{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;border:1.5px solid var(--ink);background:var(--paper);border-radius:20px;padding:5px 13px;cursor:pointer;transition:.12s}
-.dp-add:hover{background:var(--ink);color:var(--paper)}
+.dp-add{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;border:1.5px solid var(--accent-soft);background:var(--paper2);color:var(--ink);border-radius:20px;padding:5px 13px;cursor:pointer;transition:.12s}
+.dp-add:hover{background:var(--accent);border-color:var(--accent);color:var(--paper)}
 .dp-add[disabled]{border-color:var(--line);color:var(--ink-soft);background:var(--paper2);cursor:default}
-.dp-add[disabled]:hover{background:var(--paper2);color:var(--ink-soft)}
+.dp-add[disabled]:hover{background:var(--paper2);color:var(--ink-soft);border-color:var(--line)}
 .dp-dl{font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 9px;transition:.12s}
 .dp-dl:hover{border-color:var(--accent-soft);color:var(--ink)}
 .buildline{font-size:14px;color:var(--ink-soft);margin:0 0 10px}
@@ -860,7 +874,7 @@ section{display:none}section.on{display:block}
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.51';
+const APP_VERSION='0.2.52';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
