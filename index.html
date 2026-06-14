@@ -1,7 +1,10 @@
 <!--
-  Study Suite  ·  v0.2.56 (beta)
+  Study Suite  ·  v0.2.57 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.57: footer is now responsive — the v0.2.56 cleanup stacked the attribution rows on
+  ALL widths; this restores the old single-line attribution on desktop (.foot-row is inline with " · "
+  separators via ::before) and keeps the stacked rows only on mobile (@media max-width:560px).
   Changelog v0.2.56: (1) FAQ — "instruction set" is now a real download link to the authoring guide
   (points at a stable Study_Suite_Authoring_Guide_latest.md the deploy publishes alongside the versioned
   copy, so the link never goes stale); same link added to README + FAQ master. (2) Footer cleanup:
@@ -366,7 +369,9 @@ section{display:none}section.on{display:block}
 .note{font-size:13px;color:var(--ink-soft);text-align:center;margin-top:12px}
 .attrib{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--ink-soft);text-align:center;margin-top:22px}
 .attrib a{color:var(--accent);text-decoration:none}
-.attrib .foot-row{margin:3px 0;line-height:1.5}
+.attrib .foot-row{display:inline;line-height:1.6}
+.attrib .foot-row + .foot-row::before{content:" · "}
+@media(max-width:560px){.attrib .foot-row{display:block;margin:3px 0;line-height:1.5}.attrib .foot-row + .foot-row::before{content:none}}
 .footlinks{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--ink-soft);text-align:center;margin-top:7px}
 .footlinks a{color:var(--accent);text-decoration:none}.footlinks a:hover{text-decoration:underline}
 #footVer{color:inherit;border-bottom:1px dotted var(--ink-soft);transition:color .12s,border-color .12s}
@@ -768,7 +773,7 @@ section{display:none}section.on{display:block}
     </div>
     <div class="attrib">
       <div class="foot-row foot-name">Study Suite <a id="footVer" href="https://github.com/Alkarim-Billawala/study-suite/releases" target="_blank" rel="noopener" title="See what's new — release notes on GitHub">v0.2.46</a> · <span class="betatag" id="footBeta">beta</span></div>
-      <div class="foot-row">Built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
+      <div class="foot-row">built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
       <div class="foot-row" id="supportWrap" style="display:none"><a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></div>
     </div>
     <div class="footlinks"><a href="mailto:support@studysuite.app">Support</a> · <a href="mailto:feedback@studysuite.app">Feedback</a> · <a href="mailto:alkarim@studysuite.app">Contact me</a></div>
@@ -921,7 +926,7 @@ section{display:none}section.on{display:block}
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.56';
+const APP_VERSION='0.2.57';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
