@@ -1,0 +1,1272 @@
+{
+ "pack": "Week 11 — Immunology II",
+ "id": "wk11",
+ "formatVersion": "2.0",
+ "version": "2.0",
+ "author": "Alkarim Billawala / alkarim.billawala.ca",
+ "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
+ "created": "2026-06-13",
+ "updated": "2026-06-13",
+ "school": "UofT — Temerty Medicine",
+ "year": "Year 1",
+ "course": "CPC 1",
+ "weeks": "Week 11 · Immunology II",
+ "questions": [
+  {
+   "id": "wk11_q01",
+   "sys": "Immuno",
+   "topic": "Immuno · Hypersensitivity",
+   "difficulty": "easy",
+   "stem": "A gardener develops itchy, vesicular streaks on the forearms 3 days after weeding, in a pattern matching where the plants brushed her skin. Which Gell and Coombs hypersensitivity type does this represent?",
+   "options": [
+    "Type I (IgE-mediated)",
+    "Type II (antibody vs cell surface)",
+    "Type III (immune complex)",
+    "Type IV (T-cell delayed)"
+   ],
+   "correct": 3,
+   "explain": "Allergic contact dermatitis (e.g. poison ivy) is a <b>delayed type IV</b>, T-cell&ndash;mediated reaction appearing over days; it is investigated with patch testing.",
+   "guide": {
+    "f": "W11_02_Hypersensitivity.html",
+    "t": "2 · Gell & Coombs",
+    "s": "Gell & Coombs types"
+   }
+  },
+  {
+   "id": "wk11_q02",
+   "sys": "Immuno",
+   "topic": "Immuno · Anaphylaxis",
+   "difficulty": "easy",
+   "stem": "Ten minutes after a wasp sting, a 40-year-old develops generalized hives, throat tightness, wheeze, and a blood pressure of 80/50. What is the best immediate treatment?",
+   "options": [
+    "Oral cetirizine and observe",
+    "Intramuscular epinephrine into the outer thigh",
+    "IV hydrocortisone as first-line",
+    "Nebulized salbutamol alone"
+   ],
+   "correct": 1,
+   "explain": "This is anaphylaxis. <b>IM epinephrine into the outer thigh</b> is first-line, repeated every 5&ndash;15 min as needed. Antihistamines, steroids, and bronchodilators are adjuncts that don't reverse airway obstruction or shock.",
+   "guide": {
+    "f": "W11_02_Hypersensitivity.html",
+    "t": "2 · Anaphylaxis",
+    "s": "Type I & anaphylaxis"
+   }
+  },
+  {
+   "id": "wk11_q03",
+   "sys": "Immuno",
+   "topic": "Immuno · Anaphylaxis",
+   "difficulty": "medium",
+   "stem": "A patient in anaphylactic shock has already received an antihistamine and IV corticosteroid from a well-meaning bystander clinician, but remains hypotensive and wheezing. Why are these agents insufficient?",
+   "options": [
+    "They are too low in dose; doubling them will reverse the shock",
+    "They do not reverse airway obstruction or hypotension — epinephrine is required and acts on those directly",
+    "Steroids work within 2 minutes and should have already worked",
+    "Antihistamines are contraindicated in anaphylaxis"
+   ],
+   "correct": 1,
+   "explain": "H1 blockers ease itch/hives and steroids may reduce biphasic reactions, but <b>neither reverses bronchospasm or hypotension</b>. <b>Epinephrine</b> is the only first-line agent — its &alpha;/&beta; effects address airway and blood pressure.",
+   "guide": {
+    "f": "W11_02_Hypersensitivity.html",
+    "t": "2 · Anaphylaxis",
+    "s": "Type I & anaphylaxis"
+   }
+  },
+  {
+   "id": "wk11_q04",
+   "sys": "Immuno",
+   "topic": "Immuno · Urticaria",
+   "difficulty": "medium",
+   "stem": "A 30-year-old has daily itchy hives for 10 weeks; each individual lesion fades within 12 hours leaving no mark. There is no consistent food/drug trigger, and ESR/CRP are normal. First antihistamine at standard dose helps only partially. What is the next step?",
+   "options": [
+    "Strict peanut avoidance",
+    "Up-titrate the non-sedating H1 antihistamine (up to 4× standard dose); add omalizumab if refractory",
+    "Urgent skin biopsy and start colchicine",
+    "C1-inhibitor replacement"
+   ],
+   "correct": 1,
+   "explain": "This is <b>chronic spontaneous urticaria</b> (&gt;6 weeks, each lesion &lt;24 h, no trigger, normal inflammatory markers). Management escalates a <b>non-sedating H1 antihistamine up to 4&times;</b>, then <b>omalizumab</b> for refractory disease.",
+   "guide": {
+    "f": "W11_03_Urticaria.html",
+    "t": "3 · CSU",
+    "s": "The five scenarios"
+   }
+  },
+  {
+   "id": "wk11_q05",
+   "sys": "Immuno",
+   "topic": "Immuno · Angioedema",
+   "difficulty": "hard",
+   "stem": "A 22-year-old man has recurrent episodes of tongue and hand swelling lasting 2–3 days with severe crampy abdominal pain, but never any itching or hives. Antihistamines, prednisone, and epinephrine have all failed. His father had similar attacks. C4 is undetectable. Which mediator and diagnosis fit?",
+   "options": [
+    "Histamine; chronic spontaneous urticaria",
+    "Bradykinin; hereditary C1-inhibitor deficiency",
+    "IgE; occult food anaphylaxis",
+    "Immune complexes; urticarial vasculitis"
+   ],
+   "correct": 1,
+   "explain": "Angioedema <b>without hives</b>, lasting days, with abdominal pain, family history, <b>low C4</b>, and no response to antihistamine/steroid/epinephrine is classic <b>hereditary C1-inhibitor deficiency</b>. The mediator is <b>bradykinin</b>, so histamine-directed therapy fails; treat with C1-INH replacement, a bradykinin-receptor blocker, or anti-kallikrein.",
+   "guide": {
+    "f": "W11_03_Urticaria.html",
+    "t": "3 · Bradykinin",
+    "s": "Bradykinin-mediated angioedema"
+   }
+  },
+  {
+   "id": "wk11_q06",
+   "sys": "Immuno",
+   "topic": "Immuno · Angioedema",
+   "difficulty": "medium",
+   "stem": "A 60-year-old started lisinopril 3 months ago and now presents with isolated lip and tongue swelling, no hives and no itch. What is the mechanism and the key management step?",
+   "options": [
+    "Histamine release; give an antihistamine and continue lisinopril",
+    "Bradykinin accumulation; stop the ACE inhibitor and avoid the class",
+    "IgE-mediated drug allergy; desensitize to lisinopril",
+    "Immune-complex deposition; start corticosteroids long-term"
+   ],
+   "correct": 1,
+   "explain": "<b>ACE-inhibitor angioedema</b> is bradykinin-mediated (ACE normally degrades bradykinin), causes swelling without urticaria, and can occur months into therapy. <b>Stop the ACE inhibitor</b> and avoid the class; manage the airway.",
+   "guide": {
+    "f": "W11_03_Urticaria.html",
+    "t": "3 · Bradykinin",
+    "s": "Bradykinin-mediated angioedema"
+   }
+  },
+  {
+   "id": "wk11_q07",
+   "sys": "Immuno",
+   "topic": "Immuno · Urticaria",
+   "difficulty": "medium",
+   "stem": "A 38-year-old has recurrent hive-like lesions that burn rather than itch, each persisting 2–3 days and leaving brown discolouration, accompanied by arthralgia. Antihistamines barely help. What is the most appropriate next step?",
+   "options": [
+    "Reassure — this is typical chronic spontaneous urticaria",
+    "Skin biopsy; this suggests urticarial vasculitis and systemic evaluation",
+    "IM epinephrine",
+    "C1-inhibitor replacement"
+   ],
+   "correct": 1,
+   "explain": "Painful/burning lesions lasting &gt;24 h with residual pigmentation and systemic features suggest <b>urticarial vasculitis</b> (type III immune-complex). Confirm with <b>skin biopsy</b>, evaluate for systemic involvement, and treat with immunosuppression — antihistamines respond poorly.",
+   "guide": {
+    "f": "W11_03_Urticaria.html",
+    "t": "3 · Urticarial vasculitis",
+    "s": "The five scenarios"
+   }
+  },
+  {
+   "id": "wk11_q08",
+   "sys": "Immuno",
+   "topic": "Immuno · Drug Reactions",
+   "difficulty": "medium",
+   "stem": "Five days after starting a new antibiotic, a patient develops isolated thrombocytopenia with mucosal bleeding; no rash, fever, or organ dysfunction. What hypersensitivity mechanism is most likely?",
+   "options": [
+    "Type I IgE-mediated mast-cell activation",
+    "Type II IgG-mediated destruction of drug-coated platelets",
+    "Type III immune-complex serum sickness",
+    "Type IV T-cell DRESS"
+   ],
+   "correct": 1,
+   "explain": "Drug-induced cytopenias are a <b>type II</b> reaction — IgG against drug-coated platelets/RBCs/WBCs, typically 2&ndash;7 days after starting. Stop the drug and give supportive care.",
+   "guide": {
+    "f": "W11_02_Hypersensitivity.html",
+    "t": "2 · Drug",
+    "s": "Drug hypersensitivity patterns"
+   }
+  },
+  {
+   "id": "wk11_q09",
+   "sys": "Immuno",
+   "topic": "Immuno · Drug Reactions",
+   "difficulty": "medium",
+   "stem": "Two weeks after a course of an antibiotic, a patient develops fever, an urticarial/morbilliform rash, arthralgias, and tender lymphadenopathy. Which reaction pattern is this?",
+   "options": [
+    "Immediate IgE anaphylaxis",
+    "Serum sickness (type III immune-complex)",
+    "Morbilliform exanthem with no systemic features",
+    "Hereditary angioedema"
+   ],
+   "correct": 1,
+   "explain": "Delayed onset (1&ndash;3 weeks) with <b>fever, rash, arthralgia, and lymphadenopathy</b> fits <b>serum sickness / serum-sickness-like reaction</b>, a type III immune-complex process. Stop the trigger and treat symptomatically.",
+   "guide": {
+    "f": "W11_02_Hypersensitivity.html",
+    "t": "2 · Drug",
+    "s": "Drug hypersensitivity patterns"
+   }
+  },
+  {
+   "id": "wk11_q10",
+   "sys": "Immuno",
+   "topic": "Immuno · Complement",
+   "difficulty": "easy",
+   "stem": "A 19-year-old presents with his second episode of Neisseria meningitidis meningitis. Which immune defect should be evaluated, and with what test?",
+   "options": [
+    "Antibody deficiency; quantitative immunoglobulins",
+    "Terminal complement (C5–C9) deficiency; CH50/AH50",
+    "Neutrophil defect; oxidative burst assay",
+    "T-cell defect; TREC screen"
+   ],
+   "correct": 1,
+   "explain": "Recurrent <b>Neisseria</b> infection points to a <b>terminal complement (C5&ndash;C9) deficiency</b>, screened with <b>CH50/AH50</b>. Manage with vaccination and prophylaxis.",
+   "guide": {
+    "f": "W11_06_Immunodeficiency.html",
+    "t": "6 · Patterns",
+    "s": "Infection pattern → defect"
+   }
+  },
+  {
+   "id": "wk11_q11",
+   "sys": "Immuno",
+   "topic": "Immuno · SLE",
+   "difficulty": "easy",
+   "stem": "A 16-year-old with SLE has nephritis, arthritis, a malar rash, low C3/C4, and positive anti-dsDNA. Which immunologic mechanism best explains the multi-organ involvement?",
+   "options": [
+    "Type I IgE mast-cell degranulation",
+    "Type II receptor-stimulating antibody",
+    "Type III immune-complex deposition with complement activation",
+    "Type IV cytotoxic T cells confined to the pancreas"
+   ],
+   "correct": 2,
+   "explain": "SLE is a systemic <b>type III</b> disease: anti-nuclear autoantibodies form <b>immune complexes</b> that deposit in kidney, skin, joints, and serosa, activating complement (hence <b>low C3/C4</b>).",
+   "guide": {
+    "f": "W11_05_SLE.html",
+    "t": "5 · SLE",
+    "s": "SLE & lupus nephritis"
+   }
+  },
+  {
+   "id": "wk11_q12",
+   "sys": "Immuno",
+   "topic": "Immuno · SLE",
+   "difficulty": "medium",
+   "stem": "A patient with known SLE and prior lupus nephritis returns for monitoring. Which combination of labs best tracks disease/renal activity over time?",
+   "options": [
+    "ANA titre repeated each visit",
+    "Anti-dsDNA and C3/C4 levels",
+    "Anti-Sm titre",
+    "ESR alone"
+   ],
+   "correct": 1,
+   "explain": "<b>Anti-dsDNA and complement (C3/C4)</b> track activity, especially nephritis (rising dsDNA, falling complement signal flare). <b>ANA is not repeated to monitor</b>, and anti-Sm doesn't follow activity well.",
+   "guide": {
+    "f": "W11_05_SLE.html",
+    "t": "5 · SLE",
+    "s": "SLE & lupus nephritis"
+   }
+  },
+  {
+   "id": "wk11_q13",
+   "sys": "Immuno",
+   "topic": "Immuno · SLE",
+   "difficulty": "hard",
+   "stem": "A woman with active SLE on prednisone and mycophenolate develops a new fever. Anti-dsDNA is mildly up and complement mildly down. What is the most important principle in her evaluation?",
+   "options": [
+    "The fever is certainly a lupus flare; escalate immunosuppression immediately",
+    "Treat fever in an immunosuppressed SLE patient as infection until proven otherwise, while keeping flare and other causes in the differential",
+    "Fever is most likely a drug reaction to mycophenolate; stop it",
+    "Fever rules out infection because she is on steroids"
+   ],
+   "correct": 1,
+   "explain": "In an SLE patient on prednisone/mycophenolate, <b>fever is infection until proven otherwise</b> — immunosuppression both raises infection risk and can mask it. Flare is possible (and the serologies hint at activity), but you must not escalate immunosuppression before excluding infection; also consider drug fever, thrombosis, and malignancy.",
+   "guide": {
+    "f": "W11_05_SLE.html",
+    "t": "5 · SLE",
+    "s": "SLE & lupus nephritis"
+   }
+  },
+  {
+   "id": "wk11_q14",
+   "sys": "Immuno",
+   "topic": "Immuno · SLE Therapeutics",
+   "difficulty": "medium",
+   "stem": "A 24-year-old woman with lupus nephritis on mycophenolate and a prednisone taper wants to conceive in the next year. Which counselling is most accurate?",
+   "options": [
+    "Continue mycophenolate — it is the safest agent in pregnancy",
+    "Mycophenolate is teratogenic and should be switched well before conception, aiming for disease quiescence; hydroxychloroquine is generally continued",
+    "Stop all medications immediately and conceive now",
+    "Pregnancy is low-risk as long as ANA is no longer followed"
+   ],
+   "correct": 1,
+   "explain": "<b>Mycophenolate is teratogenic</b> — switch to a pregnancy-compatible agent (e.g. azathioprine) well before conception and aim for quiescence. <b>Hydroxychloroquine</b> is usually continued. Antiphospholipid antibodies, if present, add thrombosis/pregnancy-loss risk.",
+   "guide": {
+    "f": "W11_05_SLE.html",
+    "t": "5 · SLE management",
+    "s": "SLE management"
+   }
+  },
+  {
+   "id": "wk11_q15",
+   "sys": "Immuno",
+   "topic": "Immuno · ITP",
+   "difficulty": "easy",
+   "stem": "A 12-year-old has petechiae and isolated platelets of 12 × 10⁹/L with normal hemoglobin, WBC, PT, and aPTT. ITP is suspected. Which mechanism explains the low platelets?",
+   "options": [
+    "IgE-mediated mast-cell degranulation",
+    "IgG antibodies against platelet surface glycoproteins (e.g. GPIIb/IIIa)",
+    "Immune-complex deposition in glomeruli",
+    "Failure of thymic positive selection"
+   ],
+   "correct": 1,
+   "explain": "ITP is a <b>type II</b> reaction: <b>IgG against platelet glycoproteins</b> (e.g. GPIIb/IIIa) drives destruction. Isolated thrombocytopenia with normal coagulation times fits platelet destruction, not a clotting-factor problem.",
+   "guide": {
+    "f": "W11_05_SLE.html",
+    "t": "5 · Other",
+    "s": "Other autoimmune diseases"
+   }
+  },
+  {
+   "id": "wk11_q16",
+   "sys": "Immuno",
+   "topic": "Immuno · Thyroid Autoimmunity",
+   "difficulty": "easy",
+   "stem": "A 34-year-old has weight loss, tremor, heat intolerance, a diffuse goiter, and eye prominence. TSH is suppressed, free T4 elevated, and antibodies stimulate the TSH receptor. Which diagnosis and mechanism fit?",
+   "options": [
+    "Hashimoto thyroiditis; T-cell destruction",
+    "Graves disease; type II receptor-stimulating antibody",
+    "SLE; type III immune complexes",
+    "IPEX; FOXP3 loss"
+   ],
+   "correct": 1,
+   "explain": "<b>Graves disease</b> is a <b>type II</b> reaction in which a <b>TSH-receptor&ndash;stimulating IgG</b> drives hyperthyroidism. Hashimoto instead causes hypothyroidism via destructive autoimmune thyroiditis.",
+   "guide": {
+    "f": "W11_05_SLE.html",
+    "t": "5 · Other",
+    "s": "Other autoimmune diseases"
+   }
+  },
+  {
+   "id": "wk11_q17",
+   "sys": "Immuno",
+   "topic": "Immuno · Autoinflammation",
+   "difficulty": "medium",
+   "stem": "A 27-year-old has recurrent hive-like rashes, 1–2 day fevers, shin/ankle pain, and progressive hearing loss. Infectious, malignant, and autoimmune work-ups are negative; ESR/CRP are high and genetics show an NLRP3 mutation. Which therapy targets the mechanism?",
+   "options": [
+    "Anti-IgE (omalizumab)",
+    "Anti-IL-1 biologic therapy",
+    "High-dose antihistamines",
+    "C1-inhibitor replacement"
+   ],
+   "correct": 1,
+   "explain": "This is <b>CAPS</b>, an autoinflammatory disease: an <b>NLRP3</b> mutation causes inappropriate inflammasome activation and excess <b>IL-1&beta;</b>. <b>Anti-IL-1 therapy</b> (canakinumab/anakinra) directly targets the pathway.",
+   "guide": {
+    "f": "W11_04_Tolerance.html",
+    "t": "4 · Autoinflammation",
+    "s": "Autoinflammation & CAPS"
+   }
+  },
+  {
+   "id": "wk11_q18",
+   "sys": "Immuno",
+   "topic": "Immuno · Immunodeficiency",
+   "difficulty": "medium",
+   "stem": "A 2-month-old boy has failure to thrive, chronic diarrhea, oral thrush, and Pneumocystis pneumonia. HIV testing of infant and parents is negative; newborn screening showed absent TRECs. What is the diagnosis and a key management point?",
+   "options": [
+    "Selective IgA deficiency; reassure",
+    "Severe combined immunodeficiency; avoid live vaccines and arrange HSCT",
+    "CVID; start IVIG and observe",
+    "Hereditary angioedema; C1-INH replacement"
+   ],
+   "correct": 1,
+   "explain": "FTT, thrush, PCP, and <b>absent TRECs</b> in infancy indicate <b>SCID</b> — a medical emergency. <span style='color:#a23b2e'><b>Avoid live vaccines</b></span>, treat infections aggressively, and pursue <b>hematopoietic stem cell transplant</b> as early as possible.",
+   "guide": {
+    "f": "W11_06_Immunodeficiency.html",
+    "t": "6 · PID",
+    "s": "Primary immunodeficiency examples"
+   }
+  },
+  {
+   "id": "wk11_q19",
+   "sys": "Immuno",
+   "topic": "Immuno · Immunodeficiency",
+   "difficulty": "hard",
+   "stem": "A boy has recurrent encapsulated bacterial infections plus an episode of Pneumocystis pneumonia. Immunoglobulins show high-normal IgM with low IgG and IgA. Which defect best explains the full picture?",
+   "options": [
+    "AID deficiency",
+    "CD40L deficiency",
+    "Bruton tyrosine kinase (BTK) deficiency",
+    "Terminal complement deficiency"
+   ],
+   "correct": 1,
+   "explain": "High IgM with low IgG/IgA = a <b>hyper-IgM</b> phenotype (no class switching). The added <b>opportunistic infection (PCP)</b> points to <b>CD40L deficiency</b>, because CD40L also drives macrophage activation. <b>AID deficiency</b> gives the same antibody pattern but spares macrophage function, so it lacks the opportunistic-infection susceptibility.",
+   "guide": {
+    "f": "W11_06_Immunodeficiency.html",
+    "t": "6 · PID",
+    "s": "Primary immunodeficiency examples"
+   }
+  },
+  {
+   "id": "wk11_q20",
+   "sys": "Immuno",
+   "topic": "Immuno · Immunodeficiency",
+   "difficulty": "medium",
+   "stem": "A 36-year-old woman has recurrent bacterial sinusitis, otitis, and two pneumonias, plus autoimmune thrombocytopenia. Quantitative immunoglobulins show low IgG and low IgA, and pneumococcal vaccine titres are poor. Which diagnosis and management fit best?",
+   "options": [
+    "Common variable immunodeficiency; immunoglobulin (IVIG/SCIG) replacement",
+    "X-linked agammaglobulinemia, which usually first presents in adult women",
+    "SCID; treat with antihistamines",
+    "ACE-inhibitor angioedema"
+   ],
+   "correct": 0,
+   "explain": "Adult-onset recurrent sinopulmonary infections with <b>low IgG plus low IgA/IgM</b>, poor vaccine responses, and autoimmune cytopenias define <b>CVID</b>. Treat with <b>immunoglobulin replacement</b> and monitor for autoimmune, lung, and malignancy complications. (XLA presents in boys after 6 months, not adult women.)",
+   "guide": {
+    "f": "W11_06_Immunodeficiency.html",
+    "t": "6 · PID",
+    "s": "Primary immunodeficiency examples"
+   }
+  }
+ ],
+ "cards": [
+  {
+   "id": "wk11_c01",
+   "sys": "Immuno",
+   "topic": "Framework",
+   "type": "match",
+   "guide": {
+    "f": "W11_01_Framework.html",
+    "t": "1 · CD4",
+    "s": "CD4 helper subsets"
+   },
+   "prompt": "Match each CD4 helper subset to its signature:",
+   "pairs": [
+    [
+     "Th1",
+     "IFN-γ; intracellular pathogens"
+    ],
+    [
+     "Th2",
+     "IL-4/5/13; IgE & eosinophils"
+    ],
+    [
+     "Th17",
+     "IL-17; Candida & extracellular bacteria"
+    ],
+    [
+     "Treg",
+     "FOXP3; suppression (loss → IPEX)"
+    ]
+   ],
+   "explain": "Each subset's cytokine defines the infections seen when it fails."
+  },
+  {
+   "id": "wk11_c02",
+   "sys": "Immuno",
+   "topic": "Framework",
+   "type": "qa",
+   "guide": {
+    "f": "W11_01_Framework.html",
+    "t": "1 · B/T help",
+    "s": "B-cell activation & T-cell help"
+   },
+   "prompt": "What interaction delivers T-cell help to B cells, and what does it enable?",
+   "answer": "CD40L (on T cell) binding CD40 (on B cell), plus cytokines — enabling proliferation, class switching, affinity maturation, and plasma/memory cell formation."
+  },
+  {
+   "id": "wk11_c03",
+   "sys": "Immuno",
+   "topic": "Framework",
+   "type": "cloze",
+   "guide": {
+    "f": "W11_01_Framework.html",
+    "t": "1 · B/T help",
+    "s": "Hyper-IgM clinical link"
+   },
+   "text": "Hyper-IgM shows {{high}} IgM with low {{IgG/IgA}}. CD40L deficiency also impairs {{macrophage}} activation, so it adds opportunistic infections like {{Pneumocystis}}; AID deficiency does not.",
+   "explain": "Class-switch failure; CD40L vs AID separated by opportunistic infection."
+  },
+  {
+   "id": "wk11_c04",
+   "sys": "Immuno",
+   "topic": "Framework",
+   "type": "mcq",
+   "guide": {
+    "f": "W11_01_Framework.html",
+    "t": "1 · Innate vs adaptive",
+    "s": "Innate vs adaptive"
+   },
+   "prompt": "Recurrent Neisseria infection most suggests a defect in:",
+   "options": [
+    "Adaptive antibody production",
+    "Terminal complement (innate)",
+    "Th2 cells",
+    "B-cell receptor editing"
+   ],
+   "correct": 1,
+   "explain": "Terminal complement (C5–C9) defects classically cause recurrent Neisseria infection."
+  },
+  {
+   "id": "wk11_c05",
+   "sys": "Immuno",
+   "topic": "Hypersensitivity",
+   "type": "match",
+   "guide": {
+    "f": "W11_02_Hypersensitivity.html",
+    "t": "2 · Gell & Coombs",
+    "s": "Gell & Coombs types"
+   },
+   "prompt": "Match each Gell & Coombs type to an example:",
+   "pairs": [
+    [
+     "Type I",
+     "Anaphylaxis"
+    ],
+    [
+     "Type II",
+     "ITP / Graves"
+    ],
+    [
+     "Type III",
+     "SLE / serum sickness"
+    ],
+    [
+     "Type IV",
+     "Contact dermatitis / DRESS"
+    ]
+   ],
+   "explain": "I=IgE, II=antibody vs cell surface, III=immune complex, IV=T cell."
+  },
+  {
+   "id": "wk11_c06",
+   "sys": "Immuno",
+   "topic": "Anaphylaxis",
+   "type": "qa",
+   "guide": {
+    "f": "W11_02_Hypersensitivity.html",
+    "t": "2 · Anaphylaxis",
+    "s": "Type I & anaphylaxis"
+   },
+   "prompt": "Why is epinephrine — not antihistamines or steroids — first-line in anaphylaxis?",
+   "answer": "Only epinephrine reverses the airway obstruction and hypotension (via α/β effects). Antihistamines ease itch/hives and steroids may blunt biphasic reactions, but both are adjuncts that don't treat shock or bronchospasm."
+  },
+  {
+   "id": "wk11_c07",
+   "sys": "Immuno",
+   "topic": "Hypersensitivity",
+   "type": "match",
+   "guide": {
+    "f": "W11_02_Hypersensitivity.html",
+    "t": "2 · Drug",
+    "s": "Drug hypersensitivity patterns"
+   },
+   "prompt": "Match the drug reaction to its timing/type:",
+   "pairs": [
+    [
+     "Anaphylaxis",
+     "Minutes–hours (type I)"
+    ],
+    [
+     "Drug cytopenia",
+     "2–7 days (type II)"
+    ],
+    [
+     "Serum sickness",
+     "1–3 weeks (type III)"
+    ],
+    [
+     "DRESS/SJS/TEN",
+     "Severe type IV"
+    ]
+   ],
+   "explain": "Timing and mechanism distinguish the drug-reaction patterns."
+  },
+  {
+   "id": "wk11_c08",
+   "sys": "Immuno",
+   "topic": "Hypersensitivity",
+   "type": "qa",
+   "guide": {
+    "f": "W11_02_Hypersensitivity.html",
+    "t": "2 · Gell & Coombs",
+    "s": "Gell & Coombs types"
+   },
+   "prompt": "How does the hypersensitivity mechanism guide allergy testing?",
+   "answer": "IgE (type I) disease → skin testing or serum specific IgE; type IV contact dermatitis → patch testing; severe type IV drug reactions → stop the drug and assess for systemic involvement."
+  },
+  {
+   "id": "wk11_c09",
+   "sys": "Immuno",
+   "topic": "Urticaria",
+   "type": "cloze",
+   "guide": {
+    "f": "W11_03_Urticaria.html",
+    "t": "3 · Definitions",
+    "s": "Definitions & first move"
+   },
+   "text": "In urticaria each individual lesion resolves within {{24 hours}}; angioedema is deeper and resolves more slowly, up to about {{72 hours}}.",
+   "explain": "Lesion duration helps separate urticaria from angioedema and from vasculitis."
+  },
+  {
+   "id": "wk11_c10",
+   "sys": "Immuno",
+   "topic": "Urticaria",
+   "type": "mcq",
+   "guide": {
+    "f": "W11_03_Urticaria.html",
+    "t": "3 · CSU",
+    "s": "The five scenarios"
+   },
+   "prompt": "Daily hives for >6 weeks, each lesion <24 h, no trigger, normal ESR/CRP. Diagnosis?",
+   "options": [
+    "Urticarial vasculitis",
+    "Chronic spontaneous urticaria",
+    "Hereditary angioedema",
+    "Anaphylaxis"
+   ],
+   "correct": 1,
+   "explain": "CSU: non-sedating H1 antihistamine, up-dose to 4×, omalizumab if refractory."
+  },
+  {
+   "id": "wk11_c11",
+   "sys": "Immuno",
+   "topic": "Angioedema",
+   "type": "qa",
+   "guide": {
+    "f": "W11_03_Urticaria.html",
+    "t": "3 · Bradykinin",
+    "s": "Bradykinin-mediated angioedema"
+   },
+   "prompt": "Why do antihistamines, steroids, and epinephrine fail in C1-inhibitor deficiency?",
+   "answer": "Because the swelling is mediated by bradykinin, not histamine. Treat with C1-INH replacement, a bradykinin-receptor blocker (icatibant), or anti-kallikrein therapy."
+  },
+  {
+   "id": "wk11_c12",
+   "sys": "Immuno",
+   "topic": "Angioedema",
+   "type": "multi",
+   "guide": {
+    "f": "W11_03_Urticaria.html",
+    "t": "3 · Bradykinin",
+    "s": "Bradykinin-mediated angioedema"
+   },
+   "prompt": "Which features point to bradykinin-mediated angioedema rather than allergic? (select all)",
+   "options": [
+    "No urticaria/itch",
+    "Severe abdominal pain",
+    "Poor response to antihistamines/epinephrine",
+    "Resolves within minutes of epinephrine"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "No hives, abdominal pain, days-long course, and no response to antihistamine/epi/steroid suggest HAE or ACE-inhibitor angioedema; check C4 and C1-INH."
+  },
+  {
+   "id": "wk11_c13",
+   "sys": "Immuno",
+   "topic": "Urticaria",
+   "type": "qa",
+   "guide": {
+    "f": "W11_03_Urticaria.html",
+    "t": "3 · Urticarial vasculitis",
+    "s": "The five scenarios"
+   },
+   "prompt": "What distinguishes urticarial vasculitis from ordinary urticaria?",
+   "answer": "Lesions burn rather than itch, last >24 h (days), leave residual bruising/hyperpigmentation, and may have systemic features; it is a type III immune-complex process. Confirm with skin biopsy."
+  },
+  {
+   "id": "wk11_c14",
+   "sys": "Immuno",
+   "topic": "Tolerance",
+   "type": "cloze",
+   "guide": {
+    "f": "W11_04_Tolerance.html",
+    "t": "4 · Tolerance",
+    "s": "Central & peripheral tolerance"
+   },
+   "text": "{{AIRE}} enables thymic expression of tissue antigens (central tolerance); its loss causes APECED. {{FOXP3}}/Treg loss breaks peripheral tolerance and causes IPEX.",
+   "explain": "AIRE = central; FOXP3/Treg = peripheral."
+  },
+  {
+   "id": "wk11_c15",
+   "sys": "Immuno",
+   "topic": "Tolerance",
+   "type": "match",
+   "guide": {
+    "f": "W11_04_Tolerance.html",
+    "t": "4 · Breaking",
+    "s": "How tolerance breaks"
+   },
+   "prompt": "Match the tolerance-breaking mechanism to an example:",
+   "pairs": [
+    [
+     "Molecular mimicry",
+     "Rheumatic fever"
+    ],
+    [
+     "Enabling environment",
+     "Autoantibodies after inflammation"
+    ],
+    [
+     "Hidden-site antigen exposure",
+     "Trauma to eye/testis"
+    ],
+    [
+     "Genetic susceptibility",
+     "HLA / AIRE / FOXP3"
+    ]
+   ],
+   "explain": "Four routes by which self-tolerance fails."
+  },
+  {
+   "id": "wk11_c16",
+   "sys": "Immuno",
+   "topic": "Tolerance",
+   "type": "qa",
+   "guide": {
+    "f": "W11_04_Tolerance.html",
+    "t": "4 · Pearl",
+    "s": "How tolerance breaks"
+   },
+   "prompt": "What is the difference between autoimmunity and autoimmune disease?",
+   "answer": "Autoimmunity is recognition of self; autoimmune disease is when that recognition causes tissue damage. A positive autoantibody alone is not necessarily disease."
+  },
+  {
+   "id": "wk11_c17",
+   "sys": "Immuno",
+   "topic": "Autoinflammation",
+   "type": "cloze",
+   "guide": {
+    "f": "W11_04_Tolerance.html",
+    "t": "4 · Autoinflammation",
+    "s": "Autoinflammation & CAPS"
+   },
+   "text": "CAPS is caused by {{NLRP3}}/cryopyrin mutations that activate the {{inflammasome}} and overproduce {{IL-1}}β, treated with an {{anti-IL-1}} biologic.",
+   "explain": "Innate autoinflammation, not adaptive autoimmunity."
+  },
+  {
+   "id": "wk11_c18",
+   "sys": "Immuno",
+   "topic": "Autoinflammation",
+   "type": "qa",
+   "guide": {
+    "f": "W11_04_Tolerance.html",
+    "t": "4 · Autoinflammation",
+    "s": "Autoinflammation & CAPS"
+   },
+   "prompt": "Contrast autoimmunity with autoinflammation.",
+   "answer": "Autoimmunity is an adaptive response (T cells/antibodies/immune complexes vs self). Autoinflammation is an innate response — defined mutations switch innate pathways on, with neutrophils and cytokines (e.g. IL-1) driving disease."
+  },
+  {
+   "id": "wk11_c19",
+   "sys": "Immuno",
+   "topic": "SLE",
+   "type": "match",
+   "guide": {
+    "f": "W11_05_SLE.html",
+    "t": "5 · SLE",
+    "s": "SLE & lupus nephritis"
+   },
+   "prompt": "Match the SLE lab to its meaning:",
+   "pairs": [
+    [
+     "ANA",
+     "Sensitive screen, not specific"
+    ],
+    [
+     "Anti-dsDNA",
+     "Specific; tracks nephritis/activity"
+    ],
+    [
+     "Anti-Sm",
+     "Specific; poor activity marker"
+    ],
+    [
+     "Low C3/C4",
+     "Consumed in active disease"
+    ]
+   ],
+   "explain": "dsDNA + complement track activity; ANA is the entry test."
+  },
+  {
+   "id": "wk11_c20",
+   "sys": "Immuno",
+   "topic": "SLE",
+   "type": "qa",
+   "guide": {
+    "f": "W11_05_SLE.html",
+    "t": "5 · SLE",
+    "s": "SLE & lupus nephritis"
+   },
+   "prompt": "Which two labs monitor SLE/lupus nephritis activity, and which is NOT followed serially?",
+   "answer": "Anti-dsDNA and C3/C4 complement track activity (rising dsDNA, falling complement = flare). ANA is sensitive but not followed to monitor response."
+  },
+  {
+   "id": "wk11_c21",
+   "sys": "Immuno",
+   "topic": "SLE",
+   "type": "qa",
+   "guide": {
+    "f": "W11_05_SLE.html",
+    "t": "5 · SLE",
+    "s": "SLE & lupus nephritis"
+   },
+   "prompt": "An SLE patient on prednisone and mycophenolate spikes a fever. What is the guiding principle?",
+   "answer": "Infection until proven otherwise — immunosuppression raises and masks infection. Still consider flare, drug fever, thrombosis/vasculitis, and malignancy."
+  },
+  {
+   "id": "wk11_c22",
+   "sys": "Immuno",
+   "topic": "SLE Therapeutics",
+   "type": "multi",
+   "guide": {
+    "f": "W11_05_SLE.html",
+    "t": "5 · SLE management",
+    "s": "SLE management"
+   },
+   "prompt": "Which are teratogenic and must be switched before conception? (select all)",
+   "options": [
+    "Mycophenolate",
+    "Cyclophosphamide",
+    "Methotrexate",
+    "Hydroxychloroquine"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "Mycophenolate, cyclophosphamide, and methotrexate are teratogenic; hydroxychloroquine is generally continued in pregnancy."
+  },
+  {
+   "id": "wk11_c23",
+   "sys": "Immuno",
+   "topic": "SLE Therapeutics",
+   "type": "qa",
+   "guide": {
+    "f": "W11_05_SLE.html",
+    "t": "5 · SLE management",
+    "s": "SLE management"
+   },
+   "prompt": "What is hydroxychloroquine's role and its key monitoring requirement in SLE?",
+   "answer": "Long-term immunomodulator that reduces flares (often continued in pregnancy); requires periodic eye monitoring for retinopathy."
+  },
+  {
+   "id": "wk11_c24",
+   "sys": "Immuno",
+   "topic": "SLE",
+   "type": "qa",
+   "guide": {
+    "f": "W11_05_SLE.html",
+    "t": "5 · SLE",
+    "s": "SLE & lupus nephritis"
+   },
+   "prompt": "What do antiphospholipid antibodies confer in SLE, and a paradoxical lab finding?",
+   "answer": "Increased risk of thrombosis, pregnancy loss, and thrombocytopenia — yet they can paradoxically prolong the aPTT in vitro despite a prothrombotic tendency."
+  },
+  {
+   "id": "wk11_c25",
+   "sys": "Immuno",
+   "topic": "Autoimmune",
+   "type": "match",
+   "guide": {
+    "f": "W11_05_SLE.html",
+    "t": "5 · Other",
+    "s": "Other autoimmune diseases"
+   },
+   "prompt": "Match the disease to its mechanism:",
+   "pairs": [
+    [
+     "ITP",
+     "Type II IgG vs GPIIb/IIIa"
+    ],
+    [
+     "Graves",
+     "Type II TSH-receptor stimulation"
+    ],
+    [
+     "Hashimoto",
+     "T-cell destruction → hypothyroid"
+    ],
+    [
+     "Type 1 diabetes",
+     "T-cell β-cell destruction"
+    ]
+   ],
+   "explain": "Graves stimulates, Hashimoto destroys; ITP targets platelet glycoproteins."
+  },
+  {
+   "id": "wk11_c26",
+   "sys": "Immuno",
+   "topic": "Autoimmune",
+   "type": "mcq",
+   "guide": {
+    "f": "W11_05_SLE.html",
+    "t": "5 · Other",
+    "s": "Other autoimmune diseases"
+   },
+   "prompt": "Graves disease and Hashimoto differ in that Graves antibodies primarily:",
+   "options": [
+    "Destroy thyrocytes → hypothyroid",
+    "Stimulate the TSH receptor → hyperthyroid",
+    "Deposit immune complexes in the thyroid",
+    "Block calcium channels"
+   ],
+   "correct": 1,
+   "explain": "Graves: stimulating TSH-receptor IgG → hyperthyroidism. Hashimoto: destructive → hypothyroidism."
+  },
+  {
+   "id": "wk11_c27",
+   "sys": "Immuno",
+   "topic": "Immunodeficiency",
+   "type": "match",
+   "guide": {
+    "f": "W11_06_Immunodeficiency.html",
+    "t": "6 · Patterns",
+    "s": "Infection pattern → defect"
+   },
+   "prompt": "Match the infection pattern to the immune defect:",
+   "pairs": [
+    [
+     "Recurrent Neisseria",
+     "Terminal complement"
+    ],
+    [
+     "Catalase+ organisms, abscesses",
+     "Neutrophil (CGD)"
+    ],
+    [
+     "PCP, thrush, severe viral",
+     "T-cell"
+    ],
+    [
+     "Recurrent sinopulmonary + Giardia",
+     "B-cell/antibody"
+    ]
+   ],
+   "explain": "Infection pattern localizes the immune arm at fault."
+  },
+  {
+   "id": "wk11_c28",
+   "sys": "Immuno",
+   "topic": "Immunodeficiency",
+   "type": "order",
+   "guide": {
+    "f": "W11_06_Immunodeficiency.html",
+    "t": "6 · Work-up",
+    "s": "When to suspect immunodeficiency"
+   },
+   "prompt": "Order the initial immune work-up for recurrent infections:",
+   "items": [
+    "History & physical + CBC/diff",
+    "Quantitative IgG/IgA/IgM",
+    "Vaccine titres (specific antibody function)",
+    "T/B/NK flow + CH50",
+    "Specialized tests (oxidative burst, genetics)"
+   ],
+   "explain": "Start cheap and broad, escalate to functional/genetic testing."
+  },
+  {
+   "id": "wk11_c29",
+   "sys": "Immuno",
+   "topic": "Immunodeficiency",
+   "type": "qa",
+   "guide": {
+    "f": "W11_06_Immunodeficiency.html",
+    "t": "6 · Suspect",
+    "s": "When to suspect immunodeficiency"
+   },
+   "prompt": "Before diagnosing a primary immunodeficiency, what must you exclude, and why?",
+   "answer": "Secondary causes (HIV, immunosuppressants, malignancy, diabetes, malnutrition, asplenia, barrier defects, CF) — they are far more common than primary immunodeficiency."
+  },
+  {
+   "id": "wk11_c30",
+   "sys": "Immuno",
+   "topic": "Immunodeficiency",
+   "type": "cloze",
+   "guide": {
+    "f": "W11_06_Immunodeficiency.html",
+    "t": "6 · PID",
+    "s": "Primary immunodeficiency examples"
+   },
+   "text": "SCID presents in infancy with FTT, thrush, and PCP, and shows {{absent TRECs}} on newborn screen. It is an emergency: avoid {{live vaccines}} and arrange {{HSCT}}.",
+   "explain": "SCID = T-cell emergency; transplant is curative."
+  },
+  {
+   "id": "wk11_c31",
+   "sys": "Immuno",
+   "topic": "Immunodeficiency",
+   "type": "qa",
+   "guide": {
+    "f": "W11_06_Immunodeficiency.html",
+    "t": "6 · PID",
+    "s": "Primary immunodeficiency examples"
+   },
+   "prompt": "How do CVID and X-linked agammaglobulinemia differ in presentation and B cells?",
+   "answer": "XLA (BTK): boys after 6 months, absent B cells, all isotypes very low. CVID: usually adolescents/adults, low IgG plus low IgA/IgM with poor vaccine responses (B cells present but dysfunctional), plus autoimmune/lymphoma risk."
+  },
+  {
+   "id": "wk11_c32",
+   "sys": "Immuno",
+   "topic": "Immunodeficiency",
+   "type": "qa",
+   "guide": {
+    "f": "W11_06_Immunodeficiency.html",
+    "t": "6 · PID",
+    "s": "Primary immunodeficiency examples"
+   },
+   "prompt": "What does CATCH-22 stand for in DiGeorge syndrome?",
+   "answer": "Cardiac defects, Abnormal facies, Thymic hypoplasia, Cleft palate, Hypocalcemia — from a 22q11.2 deletion."
+  },
+  {
+   "id": "wk11_c33",
+   "sys": "Immuno",
+   "topic": "Immunodeficiency",
+   "type": "mcq",
+   "guide": {
+    "f": "W11_06_Immunodeficiency.html",
+    "t": "6 · PID",
+    "s": "Primary immunodeficiency examples"
+   },
+   "prompt": "Chronic granulomatous disease is diagnosed by an abnormal:",
+   "options": [
+    "TREC screen",
+    "Neutrophil oxidative burst assay",
+    "Quantitative IgG",
+    "CH50"
+   ],
+   "correct": 1,
+   "explain": "CGD = defective neutrophil oxidative burst → catalase-positive organisms and granulomas."
+  },
+  {
+   "id": "wk11_c34",
+   "sys": "Immuno",
+   "topic": "Immunosuppression",
+   "type": "match",
+   "guide": {
+    "f": "W11_07_Therapeutics.html",
+    "t": "7 · Drugs",
+    "s": "Immunosuppressant classes"
+   },
+   "prompt": "Match the drug to its mechanism:",
+   "pairs": [
+    [
+     "Cyclosporine/tacrolimus",
+     "Calcineurin inhibition → ↓IL-2"
+    ],
+    [
+     "Mycophenolate",
+     "IMPDH/purine synthesis"
+    ],
+    [
+     "Sirolimus",
+     "mTOR inhibition"
+    ],
+    [
+     "Azathioprine",
+     "→6-MP, purine synthesis"
+    ]
+   ],
+   "explain": "Calcineurin vs mTOR vs antimetabolites."
+  },
+  {
+   "id": "wk11_c35",
+   "sys": "Immuno",
+   "topic": "Immunosuppression",
+   "type": "qa",
+   "guide": {
+    "f": "W11_07_Therapeutics.html",
+    "t": "7 · Drugs",
+    "s": "Immunosuppressant classes"
+   },
+   "prompt": "What must be screened before starting an anti-TNF biologic, and why?",
+   "answer": "Latent tuberculosis and hepatitis B — anti-TNF therapy can reactivate them."
+  },
+  {
+   "id": "wk11_c36",
+   "sys": "Immuno",
+   "topic": "Immunosuppression",
+   "type": "multi",
+   "guide": {
+    "f": "W11_07_Therapeutics.html",
+    "t": "7 · Drugs",
+    "s": "Immunosuppressant classes"
+   },
+   "prompt": "Which adverse effects are characteristic of cyclophosphamide? (select all)",
+   "options": [
+    "Hemorrhagic cystitis",
+    "Bladder cancer / AML",
+    "Infertility",
+    "Retinopathy"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "Cyclophosphamide: hemorrhagic cystitis, bladder cancer, AML, infertility. Retinopathy is hydroxychloroquine."
+  },
+  {
+   "id": "wk11_c37",
+   "sys": "Immuno",
+   "topic": "Immunosuppression",
+   "type": "qa",
+   "guide": {
+    "f": "W11_07_Therapeutics.html",
+    "t": "7 · Drugs",
+    "s": "Immunosuppressant classes"
+   },
+   "prompt": "Which biologic is used for CAPS, and which for refractory chronic spontaneous urticaria?",
+   "answer": "Anti-IL-1 (e.g. canakinumab/anakinra) for CAPS; anti-IgE (omalizumab) for refractory chronic spontaneous urticaria."
+  },
+  {
+   "id": "wk11_c38",
+   "sys": "Immuno",
+   "topic": "Immunosuppression",
+   "type": "cloze",
+   "guide": {
+    "f": "W11_07_Therapeutics.html",
+    "t": "7 · Drugs",
+    "s": "Immunosuppressant classes"
+   },
+   "text": "Calcineurin inhibitors (cyclosporine/tacrolimus) are characteristically {{nephrotoxic}}. Azathioprine causes marrow suppression, especially with {{TPMT}} deficiency.",
+   "explain": "Signature toxicities to recognize."
+  },
+  {
+   "id": "wk11_c39",
+   "sys": "Immuno",
+   "topic": "Labs",
+   "type": "qa",
+   "guide": {
+    "f": "W11_07_Therapeutics.html",
+    "t": "7 · Labs",
+    "s": "Lab cheat sheet"
+   },
+   "prompt": "What immunoglobulin/flow pattern distinguishes CVID from XLA?",
+   "answer": "CVID: low IgG with low IgA/IgM and poor vaccine titres, but B cells present. XLA: absent/very low all isotypes AND absent B cells on flow cytometry."
+  },
+  {
+   "id": "wk11_c40",
+   "sys": "Immuno",
+   "topic": "Labs",
+   "type": "qa",
+   "guide": {
+    "f": "W11_07_Therapeutics.html",
+    "t": "7 · Labs",
+    "s": "Lab cheat sheet"
+   },
+   "prompt": "How are C4 and C1-inhibitor used in the angioedema work-up?",
+   "answer": "Low/undetectable C4 with low C1-INH level/function supports C1-inhibitor deficiency (hereditary or acquired) — i.e. bradykinin-mediated angioedema."
+  },
+  {
+   "id": "wk11_c41",
+   "sys": "Immuno",
+   "topic": "Labs",
+   "type": "mcq",
+   "guide": {
+    "f": "W11_07_Therapeutics.html",
+    "t": "7 · Labs",
+    "s": "Lab cheat sheet"
+   },
+   "prompt": "Eosinophilia is most associated with which group?",
+   "options": [
+    "SCID",
+    "Allergy, DRESS, and parasitic infection",
+    "Terminal complement deficiency",
+    "Hereditary angioedema"
+   ],
+   "correct": 1,
+   "explain": "Eosinophilia points to allergy, drug reactions like DRESS, and parasites."
+  },
+  {
+   "id": "wk11_c42",
+   "sys": "Immuno",
+   "topic": "SLE",
+   "type": "cloze",
+   "guide": {
+    "f": "W11_05_SLE.html",
+    "t": "5 · SLE",
+    "s": "SLE & lupus nephritis"
+   },
+   "text": "SLE is a systemic type {{III}} disease: immune complexes deposit and activate complement, consuming {{C3/C4}}. Renal red flags include proteinuria, hematuria, and {{RBC casts}}.",
+   "explain": "Immune-complex nephritis with complement consumption."
+  },
+  {
+   "id": "wk11_c43",
+   "sys": "Immuno",
+   "topic": "Hypersensitivity",
+   "type": "qa",
+   "guide": {
+    "f": "W11_02_Hypersensitivity.html",
+    "t": "2 · Anaphylaxis",
+    "s": "Type I & anaphylaxis"
+   },
+   "prompt": "State a working clinical definition of anaphylaxis.",
+   "answer": "A rapid reaction with skin/mucosal plus respiratory or cardiovascular involvement, OR involvement of ≥2 organ systems after a likely allergen, OR hypotension after a known allergen."
+  },
+  {
+   "id": "wk11_c44",
+   "sys": "Immuno",
+   "topic": "Framework",
+   "type": "qa",
+   "guide": {
+    "f": "W11_01_Framework.html",
+    "t": "1 · Innate vs adaptive",
+    "s": "Innate vs adaptive"
+   },
+   "prompt": "Give one infection consequence each for an innate vs an adaptive immune defect.",
+   "answer": "Innate (e.g. terminal complement) → recurrent Neisseria; adaptive (e.g. antibody deficiency) → recurrent encapsulated sinopulmonary infections."
+  },
+  {
+   "id": "wk11_c45",
+   "sys": "Immuno",
+   "topic": "Immunodeficiency",
+   "type": "qa",
+   "guide": {
+    "f": "W11_06_Immunodeficiency.html",
+    "t": "6 · PID",
+    "s": "Primary immunodeficiency examples"
+   },
+   "prompt": "Why is a low/absent TREC newborn screen useful, and for what?",
+   "answer": "TRECs mark new T-cell development; low/absent values flag SCID early (a screening test, not perfect), enabling urgent treatment before infections occur."
+  },
+  {
+   "id": "wk11_c46",
+   "sys": "Immuno",
+   "topic": "Urticaria",
+   "type": "qa",
+   "guide": {
+    "f": "W11_03_Urticaria.html",
+    "t": "3 · Definitions",
+    "s": "Definitions & first move"
+   },
+   "prompt": "Before treating urticaria, what is the first thing to assess?",
+   "answer": "Rule out anaphylaxis/airway compromise — hives with respiratory symptoms, hypotension, or multi-system involvement need IM epinephrine."
+  }
+ ],
+ "guides": [
+  {
+   "file": "W11_01_Framework.html",
+   "title": "Week 11 · 1 Core Immune Framework",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Core Immune Framework</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#5a3a7c;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Foundations</div><h1>Core Immune Framework</h1></div><div class=\"r\">Week 11 &middot; Immunology II<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">Innate vs adaptive defenses, B-cell activation with CD40L&ndash;CD40 help (and the hyper-IgM link), and the CD4 helper subsets with the infection each defect invites.</p>\n<h2 id=\"innate-adaptive\">Innate vs adaptive</h2>\n<table>\n<tr><th>System</th><th>Components</th><th>Defects cause</th></tr>\n<tr><td><b>Innate</b></td><td>Barriers, complement, phagocytes, NK, pattern-recognition receptors</td><td>Abscesses, invasive bacterial/fungal infection, <b>Neisseria</b> (terminal complement), autoinflammation</td></tr>\n<tr><td><b>Adaptive</b></td><td>B cells/antibody, T cells, antigen receptors, memory</td><td>Vaccine failure, allergy, autoimmunity, rejection, most primary immunodeficiencies</td></tr>\n</table>\n<h2 id=\"bt-help\">B-cell activation &amp; T-cell help</h2>\n<p>B cell binds antigen via BCR &rarr; internalizes &rarr; presents peptide on <b>MHC II</b> to a helper T cell. <b>Linked recognition</b>: T cell delivers help via <b>CD40L&ndash;CD40</b> + cytokines &rarr; proliferation, <b>class switching</b>, affinity maturation, plasma + memory cells.</p>\n<div class=\"band warn\"><div class=\"t\">Hyper-IgM clinical link</div>\nDefects in <b>CD40L</b> or <b>AID</b> &rarr; hyper-IgM (high IgM, low IgG/IgA), recurrent encapsulated bacteria. <b>CD40L</b> also impairs macrophage activation &rarr; opportunistic infections (<b>Pneumocystis jirovecii</b>); AID does not.</div>\n<h2 id=\"cd4\">CD4 helper subsets</h2>\n<table>\n<tr><th>Subset</th><th>Cytokines / role</th><th>Defect &rarr;</th></tr>\n<tr><td>Th1</td><td>IFN-&gamma;; macrophage activation; intracellular pathogens</td><td>Mycobacteria, intracellular organisms</td></tr>\n<tr><td>Th2</td><td>IL-4/5/13; <b>IgE class switch</b>, eosinophils, mast cells</td><td>Atopy, allergy, type I hypersensitivity</td></tr>\n<tr><td>Th17</td><td>IL-17; neutrophil recruitment, mucocutaneous defense</td><td><b>Candida</b>, extracellular bacteria</td></tr>\n<tr><td>Tfh</td><td>B-cell help in germinal centers</td><td>Poor affinity maturation</td></tr>\n<tr><td><b>Treg</b></td><td>FOXP3+, CD25+; IL-10/TGF-&beta; suppression</td><td>Loss &rarr; <b>IPEX</b>, failed peripheral tolerance</td></tr>\n</table>\n</div>"
+  },
+  {
+   "file": "W11_02_Hypersensitivity.html",
+   "title": "Week 11 · 2 Hypersensitivity & Allergy",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Hypersensitivity &amp; Allergy</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#5a3a7c;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Gell &amp; Coombs</div><h1>Hypersensitivity &amp; Allergy</h1></div><div class=\"r\">Week 11 &middot; Immunology II<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">The four hypersensitivity types and how mechanism dictates testing, type I allergy and the anaphylaxis rule (epinephrine first, antihistamines/steroids are adjuncts), and the drug-reaction patterns by type and timing.</p>\n<h2 id=\"gellcoombs\">Gell &amp; Coombs types</h2>\n<table>\n<tr><th>Type</th><th>Mechanism</th><th>Timing</th><th>Examples</th></tr>\n<tr><td><b>I</b></td><td><b>IgE</b> &rarr; mast-cell degranulation (histamine, leukotrienes)</td><td>Minutes&ndash;hours</td><td>Allergic rhinitis/asthma, food allergy, <b>anaphylaxis</b></td></tr>\n<tr><td><b>II</b></td><td><b>IgG/IgM</b> vs cell-surface antigen; complement/phagocytes; or alters receptor signalling</td><td>Variable</td><td>ITP, AIHA, <b>Graves</b>, chronic spontaneous urticaria (anti-Fc&epsilon;R)</td></tr>\n<tr><td><b>III</b></td><td><b>Immune complexes</b> deposit &rarr; complement activation</td><td>Systemic</td><td><b>SLE</b>, serum sickness, urticarial vasculitis</td></tr>\n<tr><td><b>IV</b></td><td><b>T-cell</b> delayed (CD4/CD8)</td><td>Days&ndash;weeks</td><td>Contact dermatitis, morbilliform rash, <b>DRESS, SJS/TEN</b></td></tr>\n</table>\n<div class=\"key\">Mechanism predicts the test: IgE disease &rarr; skin test / specific IgE; type IV contact &rarr; <b>patch testing</b>; severe type IV drug reaction &rarr; stop drug + assess systemic involvement.</div>\n<h2 id=\"anaphylaxis\">Type I &amp; anaphylaxis</h2>\n<div class=\"band warn\"><div class=\"t\">Do not miss</div>\nAnaphylaxis = rapid multi-system reaction (skin/mucosa + respiratory or cardiovascular, or &ge;2 systems after a likely allergen, or hypotension after a known allergen). <span class=\"dnm\">IM epinephrine into the outer thigh</span>, repeat q5&ndash;15 min. <b>H1 blockers and steroids are adjuncts</b> &mdash; they do NOT reverse airway obstruction or hypotension.</div>\n<ul>\n<li><b>Allergic rhinitis:</b> intranasal corticosteroid + non-sedating 2nd-gen antihistamine; immunotherapy for selected aeroallergens.</li>\n<li><b>Allergic asthma:</b> ICS + bronchodilator; not all asthma is allergic.</li>\n</ul>\n<h2 id=\"drug\">Drug hypersensitivity patterns</h2>\n<table>\n<tr><th>Pattern</th><th>Type / timing</th><th>Clues</th></tr>\n<tr><td>Immediate / anaphylaxis</td><td>I (or non-IgE)</td><td>Min&ndash;hrs; hives, bronchospasm, hypotension (antibiotics, contrast, NSAIDs)</td></tr>\n<tr><td>Drug-induced cytopenia</td><td><b>II</b>; 2&ndash;7 days</td><td>Thrombocytopenia/anemia/leukopenia &rarr; stop drug</td></tr>\n<tr><td>Serum sickness</td><td><b>III</b>; 1&ndash;3 weeks</td><td>Fever, rash, arthralgia, lymphadenopathy</td></tr>\n<tr><td>Morbilliform exanthem</td><td>IV; days&ndash;weeks</td><td>Maculopapular, no systemic involvement</td></tr>\n<tr><td class=\"dnm\">DRESS, SJS/TEN</td><td>Severe IV</td><td>Fever, mucosal erosions, blistering, organ injury &rarr; emergency, stop culprit</td></tr>\n</table>\n</div>"
+  },
+  {
+   "file": "W11_03_Urticaria.html",
+   "title": "Week 11 · 3 Urticaria & Angioedema",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Urticaria &amp; Angioedema</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#5a3a7c;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Hives &amp; Swelling</div><h1>Urticaria &amp; Angioedema</h1></div><div class=\"r\">Week 11 &middot; Immunology II<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">Urticaria vs angioedema, the five clinical scenarios from acute hives to autoimmune CSU and urticarial vasculitis, and the can't-miss bradykinin-mediated angioedema (HAE / ACE-inhibitor) that ignores antihistamines.</p>\n<h2 id=\"defs\">Definitions &amp; first move</h2>\n<ul>\n<li><b>Urticaria:</b> wheals/hives, sharply circumscribed, itchy, <b>each lesion resolves &lt;24 h</b> (often 30 min&ndash;24 h).</li>\n<li><b>Angioedema:</b> deeper dermal/subcutaneous or mucosal swelling; burning/tightness &gt; itch; resolves slowly (up to ~72 h).</li>\n</ul>\n<div class=\"band warn\"><div class=\"t\">First action</div>Rule out anaphylaxis/airway. Hives + respiratory or hypotension or multi-system &rarr; <span class=\"dnm\">IM epinephrine</span>.</div>\n<h2 id=\"scenarios\">The five scenarios</h2>\n<table>\n<tr><th>Scenario</th><th>Mechanism</th><th>Management</th></tr>\n<tr><td>Acute hives + clear trigger</td><td>Type I IgE / non-IgE mast cell</td><td>Anaphylaxis &rarr; epi; else non-sedating H1 + avoidance</td></tr>\n<tr><td>Acute hives + viral prodrome</td><td>Non-allergic mast-cell activation</td><td>Non-sedating H1; don't mislabel as food/vaccine allergy</td></tr>\n<tr><td><b>Chronic spontaneous urticaria</b></td><td>Type II&ndash;like autoimmune (IgG vs IgE/Fc&epsilon;R)</td><td>&gt;6 wk, each lesion &lt;24 h, no trigger; non-sedating H1, <b>up-dose to 4&times;</b>, <b>omalizumab</b> if refractory</td></tr>\n<tr><td>Urticarial vasculitis</td><td><b>Type III</b> immune complex</td><td>Burning lesions lasting <b>days</b>, residual bruising, systemic; <b>skin biopsy</b>; immunosuppression</td></tr>\n<tr><td class=\"dnm\">Angioedema WITHOUT hives</td><td><b>Bradykinin</b> / drug</td><td>No itch; abdominal pain; poor response to antihistamine/epi/steroid; check ACE-i, <b>C4 + C1-INH</b></td></tr>\n</table>\n<h2 id=\"bradykinin\">Bradykinin-mediated angioedema</h2>\n<div class=\"band\"><div class=\"t\">C1 inhibitor deficiency / HAE</div>\nRecurrent angioedema without urticaria, severe abdominal pain or laryngeal swelling, family history, <b>low C4 and low C1-INH level/function</b>. Mediator is <b>bradykinin</b>, not histamine &mdash; so antihistamines/steroids/epinephrine don't work. Treat with <b>C1-INH replacement, a bradykinin-receptor blocker (icatibant), or anti-kallikrein</b>.</div>\n<p><b>ACE inhibitor angioedema:</b> bradykinin accumulation; lips/tongue, no urticaria; <b>stop the ACE inhibitor</b> (and avoid the class).</p>\n</div>"
+  },
+  {
+   "file": "W11_04_Tolerance.html",
+   "title": "Week 11 · 4 Tolerance, Autoimmunity & Autoinflammation",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Tolerance, Autoimmunity &amp; Autoinflammation</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#5a3a7c;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Self &amp; Non-self</div><h1>Tolerance, Autoimmunity &amp; Autoinflammation</h1></div><div class=\"r\">Week 11 &middot; Immunology II<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">Central vs peripheral tolerance (AIRE&rarr;APECED, FOXP3&rarr;IPEX), the four ways tolerance breaks, and autoinflammation/CAPS &mdash; NLRP3 inflammasome &rarr; excess IL-1&beta;, treated with anti-IL-1.</p>\n<h2 id=\"tolerance\">Central &amp; peripheral tolerance</h2>\n<table>\n<tr><th>Cell</th><th>Central tolerance</th><th>Peripheral tolerance</th></tr>\n<tr><td><b>B cell</b></td><td>Bone marrow: receptor editing or clonal deletion of autoreactive cells</td><td>Anergy (no co-stimulation); ignorance of segregated antigen</td></tr>\n<tr><td><b>T cell</b></td><td>Thymus: positive (self-MHC) + negative selection; <b>AIRE</b> expresses tissue antigens</td><td>Anergy; <b>Treg</b> suppression (IL-10/TGF-&beta;)</td></tr>\n</table>\n<div class=\"key\"><b>AIRE</b> mutation &rarr; <b>APECED</b> (central-tolerance failure, polyendocrinopathy + candidiasis). <b>FOXP3/Treg</b> loss &rarr; <b>IPEX</b> (peripheral-tolerance failure).</div>\n<h2 id=\"breaking\">How tolerance breaks</h2>\n<table>\n<tr><th>Mechanism</th><th>Example</th></tr>\n<tr><td>Enabling environment (inflammation/infection gives co-stimulation)</td><td>SLE-like autoantibodies after an inflammatory trigger</td></tr>\n<tr><td><b>Molecular mimicry</b></td><td>Rheumatic fever; reactive arthritis after GI infection</td></tr>\n<tr><td>Access to hidden (privileged-site) antigens</td><td>Trauma exposes eye/brain/testis antigens</td></tr>\n<tr><td>Genetic susceptibility</td><td>HLA associations, AIRE, FOXP3</td></tr>\n</table>\n<div class=\"band\"><div class=\"t\">Clinical pearl</div><b>Autoimmunity</b> = recognizing self; <b>autoimmune disease</b> = that recognition causes tissue damage. A positive autoantibody alone is not disease.</div>\n<h2 id=\"autoinflammation\">Autoinflammation &amp; CAPS</h2>\n<table>\n<tr><th>Autoimmunity</th><th>Autoinflammation</th></tr>\n<tr><td>Adaptive; T cells / antibodies / immune complexes vs self</td><td>Innate; defined mutations switch innate pathways on; neutrophils + cytokines drive disease</td></tr>\n</table>\n<div class=\"band warn\"><div class=\"t\">CAPS</div>\n<b>NLRP3/cryopyrin</b> mutation &rarr; inappropriate <b>inflammasome</b> activation &rarr; caspase-1 &rarr; excess active <b>IL-1&beta;</b> (no infection needed). Recurrent hive-like rash, fever, bone/joint pain, <b>hearing loss</b>; untreated &rarr; amyloidosis. ESR/CRP high; NLRP3 genetics. <span class=\"dnm\">Treat with anti-IL-1 biologic</span> (canakinumab/anakinra).</div>\n</div>"
+  },
+  {
+   "file": "W11_05_SLE.html",
+   "title": "Week 11 · 5 SLE & Autoimmune Diseases",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>SLE &amp; Autoimmune Diseases</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#5a3a7c;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Type III &amp; Friends</div><h1>SLE &amp; Autoimmune Diseases</h1></div><div class=\"r\">Week 11 &middot; Immunology II<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">SLE as immune-complex disease with its antibody/complement labs and activity monitoring, the management ladder (steroids + mycophenolate, hydroxychloroquine, pregnancy planning), and ITP/T1DM/Hashimoto/Graves.</p>\n<h2 id=\"sle\">SLE &amp; lupus nephritis</h2>\n<p>Systemic <b>type III</b> hypersensitivity: anti-nuclear autoantibodies form <b>immune complexes</b> that deposit (skin, joints, kidney, serosa, CNS, vessels); complement activation drives inflammation.</p>\n<table>\n<tr><th>Lab</th><th>Meaning</th></tr>\n<tr><td><b>ANA</b></td><td>Sensitive screen, <b>not specific</b>; negative argues against SLE; don't follow serially</td></tr>\n<tr><td><b>Anti-dsDNA</b></td><td>Specific; tracks <b>nephritis / activity</b></td></tr>\n<tr><td>Anti-Sm</td><td>Highly specific; poor activity marker</td></tr>\n<tr><td><b>Low C3/C4</b></td><td>Consumed in active disease; tracks activity</td></tr>\n<tr><td>Antiphospholipid (anti-cardiolipin, LA, anti-&beta;2GPI)</td><td>Thrombosis, pregnancy loss, thrombocytopenia; prolongs aPTT</td></tr>\n</table>\n<div class=\"band warn\"><div class=\"t\">Do not miss</div>Fever in active SLE on prednisone/mycophenolate is <span class=\"dnm\">infection until proven otherwise</span> (also consider flare, drug fever, thrombosis, malignancy).</div>\n<div class=\"key\">Monitor activity (esp. nephritis) with <b>anti-dsDNA + C3/C4</b>, not ANA.</div>\n<h2 id=\"sletx\">SLE management</h2>\n<table>\n<tr><th>Therapy</th><th>Caution</th></tr>\n<tr><td>Corticosteroids (rapid control)</td><td>Infection, adrenal suppression (taper!), hyperglycemia, bone loss, <b>osteonecrosis</b>, cataracts</td></tr>\n<tr><td><b>Mycophenolate</b> (steroid-sparing, nephritis)</td><td>GI, leukopenia, <span class=\"dnm\">teratogenic &mdash; switch before conception</span></td></tr>\n<tr><td>Cyclophosphamide</td><td>Myelosuppression, infertility, hemorrhagic cystitis, bladder cancer</td></tr>\n<tr><td><b>Hydroxychloroquine</b> (long-term, reduces flares)</td><td>Retinopathy (eye monitoring); often pregnancy-compatible</td></tr>\n<tr><td>IVIG / plasmapheresis</td><td>Fc blockade / antibody removal; bridge therapies</td></tr>\n</table>\n<h2 id=\"other\">Other autoimmune diseases</h2>\n<table>\n<tr><th>Disease</th><th>Mechanism</th><th>Key</th></tr>\n<tr><td><b>ITP</b></td><td>Type II IgG vs <b>GPIIb/IIIa</b></td><td>Isolated low platelets, normal PT/aPTT; steroids/IVIG if bleeding</td></tr>\n<tr><td>Type 1 diabetes</td><td>T-cell destruction of &beta; cells</td><td>Insulin</td></tr>\n<tr><td>Hashimoto</td><td>T-cell + anti-TPO &rarr; <b>hypo</b>thyroid</td><td>Levothyroxine</td></tr>\n<tr><td><b>Graves</b></td><td><b>Type II</b> TSH-receptor&ndash;stimulating IgG &rarr; <b>hyper</b>thyroid</td><td>Antithyroid/RAI/surgery + beta-blocker</td></tr>\n</table>\n</div>"
+  },
+  {
+   "file": "W11_06_Immunodeficiency.html",
+   "title": "Week 11 · 6 Recurrent Infections & Immunodeficiency",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Recurrent Infections &amp; Immunodeficiency</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#5a3a7c;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">PID</div><h1>Recurrent Infections &amp; Immunodeficiency</h1></div><div class=\"r\">Week 11 &middot; Immunology II<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">When to suspect immunodeficiency (rule out secondary first), the infection-pattern&rarr;defect map and initial work-up, and the primary immunodeficiency line-up &mdash; SCID, DiGeorge, XLA, hyper-IgM, CVID, CGD.</p>\n<h2 id=\"suspect\">When to suspect immunodeficiency</h2>\n<p>Recurrent, severe, unusual/opportunistic infections, or failure to thrive. <b>Rule out secondary causes first</b> (far more common): barrier defects, CF/ciliary dyskinesia, diabetes, malnutrition, malignancy, <b>HIV</b>, immunosuppressants, asplenia.</p>\n<h2 id=\"patterns\">Infection pattern &rarr; defect</h2>\n<table>\n<tr><th>Pattern</th><th>Defect</th><th>Test</th></tr>\n<tr><td>Abscesses, poor healing, catalase+ organisms, Aspergillus</td><td><b>Phagocyte/neutrophil</b></td><td><b>Oxidative burst</b> (CGD); LAD testing</td></tr>\n<tr><td>Recurrent <b>Neisseria</b></td><td>Terminal complement (C5&ndash;9)</td><td>CH50/AH50</td></tr>\n<tr><td>Encapsulated bacteria + <b>lupus-like</b> disease</td><td>Early classical complement</td><td>C3/C4, CH50</td></tr>\n<tr><td>Candida, PCP, mycobacteria, severe viral, live-vaccine complications</td><td><b>T-cell</b></td><td>HIV first; T/B/NK flow; TREC (SCID)</td></tr>\n<tr><td>Recurrent sinopulmonary (encapsulated), Giardia</td><td><b>B-cell/antibody</b></td><td>Quant IgG/IgA/IgM, vaccine titers</td></tr>\n</table>\n<div class=\"band\"><div class=\"t\">Initial work-up</div>History/exam &rarr; CBC + diff &rarr; quantitative <b>IgG/IgA/IgM</b> &rarr; <b>vaccine titers</b> (tetanus/pneumococcus) &rarr; T/B/NK flow &rarr; <b>CH50</b> &rarr; HIV when cellular/opportunistic &rarr; specialized (oxidative burst, genetics).</div>\n<h2 id=\"pid\">Primary immunodeficiency examples</h2>\n<table>\n<tr><th>Disease</th><th>Defect / clue</th><th>Management</th></tr>\n<tr><td class=\"dnm\">SCID</td><td>Profound T-cell loss; infancy FTT, thrush, PCP, <b>absent TRECs</b>; emergency</td><td><b>Avoid live vaccines</b>; HSCT ASAP</td></tr>\n<tr><td>DiGeorge (22q11.2)</td><td>Thymic hypoplasia; <b>CATCH-22</b> (cardiac, facies, cleft, hypocalcemia)</td><td>Manage cardiac/Ca; avoid live vaccines if severe</td></tr>\n<tr><td>X-linked agammaglobulinemia</td><td><b>BTK</b>; boys after 6 mo (maternal IgG wanes); absent B cells, all isotypes low</td><td>Lifelong IVIG/SCIG</td></tr>\n<tr><td>Hyper-IgM (CD40L)</td><td>High IgM, low IgG/IgA; encapsulated <b>+ PCP/opportunistic</b></td><td>IVIG/SCIG, prophylaxis, &plusmn; HSCT</td></tr>\n<tr><td>CVID</td><td>Low IgG + low IgA/IgM, poor titers; adults; sinopulmonary, autoimmune cytopenia, lymphoma risk</td><td>IVIG/SCIG, monitor autoimmune/lung/malignancy</td></tr>\n<tr><td>CGD</td><td>Defective neutrophil oxidative burst; catalase+ organisms, granulomas</td><td>Antimicrobial prophylaxis, &plusmn; HSCT</td></tr>\n</table>\n</div>"
+  },
+  {
+   "file": "W11_07_Therapeutics.html",
+   "title": "Week 11 · 7 Immunosuppression & Lab Cheat Sheet",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Immunosuppression &amp; Lab Cheat Sheet</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#5a3a7c;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Drugs &amp; Tests</div><h1>Immunosuppression &amp; Lab Cheat Sheet</h1></div><div class=\"r\">Week 11 &middot; Immunology II<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">The immunosuppressant classes by mechanism and signature toxicity (calcineurin nephrotoxicity, teratogens, anti-TNF TB/HBV screen), and a high-yield immunology lab interpretation table.</p>\n<h2 id=\"drugs\">Immunosuppressant classes</h2>\n<table>\n<tr><th>Drug</th><th>Mechanism</th><th>Key adverse / caution</th></tr>\n<tr><td>Corticosteroids</td><td>GR &rarr; broad immune suppression</td><td>Infection, adrenal suppression (taper), diabetes, bone loss, <b>osteonecrosis</b>, cataracts</td></tr>\n<tr><td>Azathioprine</td><td>&rarr; 6-MP; blocks purine synthesis</td><td>Marrow suppression (esp. <b>TPMT</b> deficiency), skin cancer</td></tr>\n<tr><td>Cyclophosphamide</td><td>Alkylator</td><td>AML, bladder cancer, hemorrhagic cystitis, infertility</td></tr>\n<tr><td>Methotrexate</td><td>Folate antagonist</td><td>Myelosuppression, hepatotoxicity, pneumonitis, <b>teratogenic</b></td></tr>\n<tr><td>Mycophenolate</td><td>IMPDH / purine synthesis (T &amp; B)</td><td>GI, leukopenia, <b>teratogenic</b></td></tr>\n<tr><td>Cyclosporine / tacrolimus</td><td><b>Calcineurin</b> inhibitor &rarr; &darr;IL-2</td><td><b>Nephrotoxic</b>, hypertension, infection</td></tr>\n<tr><td>Sirolimus</td><td><b>mTOR</b> inhibitor</td><td>Infection/malignancy, metabolic, wound healing</td></tr>\n<tr><td>Biologics</td><td>Anti-TNF, <b>anti-IL-1</b> (CAPS), <b>anti-IgE</b> (omalizumab, CSU), anti-CD20</td><td>Infection by target; <b>anti-TNF: screen latent TB + hepatitis B</b> first</td></tr>\n<tr><td>IVIG / plasmapheresis</td><td>Fc blockade / antibody removal</td><td>Infusion reactions; antibodies rebound without immunosuppression</td></tr>\n</table>\n<h2 id=\"labs\">Lab cheat sheet</h2>\n<table>\n<tr><th>Test</th><th>High-yield read</th></tr>\n<tr><td>CBC + diff</td><td>Neutropenia &rarr; bacterial/fungal; lymphopenia &rarr; cellular; eosinophilia &rarr; allergy/DRESS/parasites</td></tr>\n<tr><td>ESR/CRP</td><td>Nonspecific; usually <b>normal in simple CSU</b></td></tr>\n<tr><td>ANA / anti-dsDNA / anti-Sm</td><td>ANA sensitive not specific; dsDNA tracks activity; Sm specific</td></tr>\n<tr><td>C3/C4/CH50</td><td>Low in active SLE; terminal defect &rarr; Neisseria</td></tr>\n<tr><td>Quant IgG/IgA/IgM + vaccine titers</td><td>Low IgG + low IgA/IgM + poor titers &rarr; <b>CVID</b>; absent all + absent B cells &rarr; <b>XLA</b></td></tr>\n<tr><td>Flow T/B/NK; TREC</td><td>Low T &rarr; SCID/DiGeorge; absent B &rarr; XLA; low/absent TREC &rarr; SCID screen</td></tr>\n<tr><td>Oxidative burst</td><td>Abnormal in <b>CGD</b></td></tr>\n<tr><td>C4 + C1-INH level/function</td><td>Low in HAE/AAE (bradykinin angioedema)</td></tr>\n</table>\n</div>"
+  }
+ ]
+}
