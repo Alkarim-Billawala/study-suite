@@ -52,7 +52,8 @@ as an app on iPhone, iPad, Mac, Android, or Windows.
 ## Bring your own content
 
 The app is content-free by design, and making your own packs is encouraged. Download the
-**instruction set** from the home screen, hand it to the AI assistant of your choice along with
+[**instruction set**](https://studysuite.app/Study_Suite_Authoring_Guide_latest.md) (from the home
+screen, or that link), hand it to the AI assistant of your choice along with
 your own notes, and it produces a pack you can load — questions, flashcards, and topic guides in
 the right format. The packs you create from your own material are entirely yours.
 
@@ -122,8 +123,9 @@ restore into the installed app so your progress comes along.
 <details>
 <summary><strong>Can I make my own study packs, or use my own notes?</strong></summary>
 
-Absolutely — that's encouraged. Download the **instruction set** (from the home screen) and hand it
-to the AI assistant of your choice; it walks the assistant through turning your own material into a
+Absolutely — that's encouraged. Download the [**instruction set**](https://studysuite.app/Study_Suite_Authoring_Guide_latest.md)
+(from the home screen, or that link) and hand it to the AI assistant of your choice; it walks the
+assistant through turning your own material into a
 pack you can load. Packs you make from your own content are **yours**. (The app, its design, and the
 pack format are the author's, but the content you bring into it is entirely your own.)
 </details>

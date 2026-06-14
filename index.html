@@ -1,7 +1,13 @@
 <!--
-  Study Suite  ·  v0.2.55 (beta)
+  Study Suite  ·  v0.2.56 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.56: (1) FAQ — "instruction set" is now a real download link to the authoring guide
+  (points at a stable Study_Suite_Authoring_Guide_latest.md the deploy publishes alongside the versioned
+  copy, so the link never goes stale); same link added to README + FAQ master. (2) Footer cleanup:
+  the single jammed attribution line is now four tidy rows — app name·version·beta / Built by … /
+  Support development / contact links (.foot-row) — much cleaner on mobile. Same #footVer/#footBeta/
+  #supportWrap/#supportLink ids, so init wiring is unchanged.
   Changelog v0.2.55: (1) header "Add to Home Screen" compacted to a small app-tile squircle labelled
   "Add to home" (.installbtn.tile). (2) PWA awareness: isStandalone() detects an installed/standalone
   app; in that mode the install tile is hidden and a Refresh/Update tile (#refreshBtn) takes its slot —
@@ -360,6 +366,7 @@ section{display:none}section.on{display:block}
 .note{font-size:13px;color:var(--ink-soft);text-align:center;margin-top:12px}
 .attrib{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--ink-soft);text-align:center;margin-top:22px}
 .attrib a{color:var(--accent);text-decoration:none}
+.attrib .foot-row{margin:3px 0;line-height:1.5}
 .footlinks{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--ink-soft);text-align:center;margin-top:7px}
 .footlinks a{color:var(--accent);text-decoration:none}.footlinks a:hover{text-decoration:underline}
 #footVer{color:inherit;border-bottom:1px dotted var(--ink-soft);transition:color .12s,border-color .12s}
@@ -735,7 +742,7 @@ section{display:none}section.on{display:block}
           <h4>Can I add it to my phone or computer like a real app?</h4>
           <p>Yes — use <b>Add to Home Screen</b> (the app walks you through it for your device). One thing to know: an installed copy keeps its <b>own separate storage</b> from the browser version, so back up first and restore into the installed app so your progress comes along.</p>
           <h4>Can I make my own study packs, or use my own notes?</h4>
-          <p>Absolutely — that's encouraged. Download the <b>instruction set</b> (from the home screen) and hand it to the AI assistant of your choice; it walks the assistant through turning your own material into a pack you can load. Packs you make from your own content are <b>yours</b>. (The app, its design, and the pack format are mine, but the content you bring into it is entirely your own.)</p>
+          <p>Absolutely — that's encouraged. Download the <a href="https://studysuite.app/Study_Suite_Authoring_Guide_latest.md" download><b>instruction set</b></a> (also linked on the home screen) and hand it to the AI assistant of your choice; it walks the assistant through turning your own material into a pack you can load. Packs you make from your own content are <b>yours</b>. (The app, its design, and the pack format are mine, but the content you bring into it is entirely your own.)</p>
           <h4>Is any of this medical advice?</h4>
           <p>No. Study Suite and its packs are <b>educational material for exam preparation only</b> — not medical advice, and never a basis for real decisions about real patients. It's also in beta, so content can contain errors or go out of date. Always check against your own curriculum and trusted sources.</p>
           <div class="faq-sec">Accounts &amp; Sync — coming, not available yet</div>
@@ -759,7 +766,11 @@ section{display:none}section.on{display:block}
         </div>
       </div>
     </div>
-    <div class="attrib">Study Suite <a id="footVer" href="https://github.com/Alkarim-Billawala/study-suite/releases" target="_blank" rel="noopener" title="See what's new — release notes on GitHub">v0.2.46</a> · <span class="betatag" id="footBeta">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
+    <div class="attrib">
+      <div class="foot-row foot-name">Study Suite <a id="footVer" href="https://github.com/Alkarim-Billawala/study-suite/releases" target="_blank" rel="noopener" title="See what's new — release notes on GitHub">v0.2.46</a> · <span class="betatag" id="footBeta">beta</span></div>
+      <div class="foot-row">Built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
+      <div class="foot-row" id="supportWrap" style="display:none"><a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></div>
+    </div>
     <div class="footlinks"><a href="mailto:support@studysuite.app">Support</a> · <a href="mailto:feedback@studysuite.app">Feedback</a> · <a href="mailto:alkarim@studysuite.app">Contact me</a></div>
   </section>
 
@@ -910,7 +921,7 @@ section{display:none}section.on{display:block}
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.55';
+const APP_VERSION='0.2.56';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
