@@ -1,7 +1,15 @@
 <!--
-  Study Suite  ·  v0.2.49 (beta)
+  Study Suite  ·  v0.2.50 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.50: home-screen Default study packs section is now collapsible to keep the page calm
+  as the library grows. dpSectionOpen (per-session) starts expanded only while the library is empty,
+  collapsed once there is content. New (unseen) default packs — tracked by id in
+  settings.seenDefaultPackIds — raise a "N new" badge on the collapsed header and auto-expand the
+  section ONCE on first detection (settings.dpAutoExpandedIds), then only badge on later sessions until
+  the user opens it (a manual open marks current packs seen). First-run migration sets seen/auto-expanded
+  to the current manifest so pre-existing packs aren't flagged. Header reworked into a #dpToggle button
+  + #dpBadge over a collapsible #dpBody; new .dp-badge style.
   Changelog v0.2.49: optional `term`/`semester` level between year and course, in both the Default
   packs panel and the Content library. ingestPack(), backfillPlacement(), and the deploy manifest now
   carry `term`; grouping is year→term→course with a term-aware chronological sort (yearWeek/termWeek
@@ -457,7 +465,9 @@ section{display:none}section.on{display:block}
 @media(max-width:560px){.installbtn{font-size:9px;padding:5px 9px}}
 /* default-packs panel (only shown when a packs-manifest.json is served alongside the app) */
 .defpacks{margin:14px 0;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);padding:14px 16px}
-.defpacks .dp-t{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.defpacks .dp-t{display:flex;align-items:center;gap:7px;width:100%;text-align:left;background:transparent;border:none;cursor:pointer;padding:0;font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.defpacks .dp-t .tri{font-size:12px}
+.defpacks .dp-badge{margin-left:auto;font-family:var(--font-mono);font-size:9px;letter-spacing:.06em;text-transform:none;color:var(--paper);background:var(--accent);border-radius:10px;padding:2px 8px}
 .defpacks .dp-d{font-size:14px;color:var(--ink-soft);margin:3px 0 10px}
 .dp-schools{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;margin:0 0 12px;padding-bottom:4px}
 .dp-schools:empty{display:none}
@@ -620,10 +630,12 @@ section{display:none}section.on{display:block}
     <div id="libActions" style="display:none;margin-bottom:10px"><button class="minor" id="enableAll">Enable all</button> <button class="minor" id="disableAll">Set all aside</button></div>
     <div id="packList"></div>
     <div class="defpacks" id="defPacks" style="display:none">
-      <div class="dp-t">Default study packs</div>
-      <div class="dp-d">Curated packs by the author — add them straight to your library.</div>
-      <div class="dp-schools" id="dpSchools"></div>
-      <div class="dp-list" id="dpList"></div>
+      <button class="dp-t" id="dpToggle" type="button"><span class="tri" id="dpTri">▸</span> Default study packs <span class="dp-badge" id="dpBadge" style="display:none"></span></button>
+      <div id="dpBody">
+        <div class="dp-d">Curated packs by the author — add them straight to your library.</div>
+        <div class="dp-schools" id="dpSchools"></div>
+        <div class="dp-list" id="dpList"></div>
+      </div>
     </div>
     <div class="buildline" id="buildLine" style="display:none">Upload your own custom study packs. <a id="buildLink" href="#">⇣ Download the instruction set</a> into your LLM of choice to get started.</div>
     <div class="dropzone" id="dropzone">
@@ -840,7 +852,7 @@ section{display:none}section.on{display:block}
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.49';
+const APP_VERSION='0.2.50';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1010,8 +1022,22 @@ function backfillPlacement(){const m=defaultManifest;if(!m||!Array.isArray(m.pac
     ['school','year','term','course','weeks'].forEach(k=>{if(mp[k]&&lp[k]!==mp[k]){lp[k]=mp[k];changed=true;}});});
   if(changed)persist();}
 let dpSchool=null; // selected school label; null until first render
+let dpSectionOpen=null; // Default-packs section collapse state for this session; null until first render
 function renderDefaultPacks(){
   const m=defaultManifest;if(!m)return;
+  // Collapse/badge state: expanded only while the library is empty; once the user has content it starts
+  // collapsed each session. New (unseen) default packs raise a badge and auto-expand the section once on
+  // first detection, then just badge on later sessions until the user opens it themselves.
+  const allIds=m.packs.filter(p=>p&&p.id).map(p=>p.id);
+  if(!Array.isArray(settings.seenDefaultPackIds)){settings.seenDefaultPackIds=allIds.slice();persist();} // first run: don't flag packs the user already had
+  const newIds=allIds.filter(id=>!settings.seenDefaultPackIds.includes(id));
+  if(dpSectionOpen===null){
+    dpSectionOpen=(packs.length===0);
+    const seenAuto=Array.isArray(settings.dpAutoExpandedIds)?settings.dpAutoExpandedIds:[];
+    const autoNew=allIds.filter(id=>!seenAuto.includes(id));
+    if(packs.length>0&&newIds.length>0&&autoNew.length>0)dpSectionOpen=true; // auto-expand once on first detection of new content
+    if(!Array.isArray(settings.dpAutoExpandedIds)||autoNew.length){settings.dpAutoExpandedIds=allIds.slice();persist();}
+  }
   // school selector row (horizontal chips above the year/course tree)
   const schools=[...new Set(m.packs.filter(p=>p&&p.file).map(p=>p.school||'Other'))];
   if(dpSchool===null||!schools.includes(dpSchool))dpSchool=schools[0]||null;
@@ -1052,6 +1078,13 @@ function renderDefaultPacks(){
   });
   $('defPacks').style.display=host.children.length?'':'none';
   if(m.authoring){$('buildLink').href=encodeURI(String(m.authoring));$('buildLink').setAttribute('download','');$('buildLine').style.display='';}
+  // header toggle + new-content badge
+  $('dpTri').textContent=dpSectionOpen?'▾':'▸';
+  $('dpBody').style.display=dpSectionOpen?'':'none';
+  const showBadge=!dpSectionOpen&&newIds.length>0;
+  $('dpBadge').style.display=showBadge?'':'none';
+  if(showBadge)$('dpBadge').textContent=newIds.length+' new';
+  $('dpToggle').onclick=()=>{dpSectionOpen=!dpSectionOpen;if(dpSectionOpen){settings.seenDefaultPackIds=allIds.slice();persist();}renderDefaultPacks();}; // manual open acknowledges current packs
 }
 
 async function init(){
