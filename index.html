@@ -1,7 +1,13 @@
 <!--
-  Study Suite  ·  v0.2.52 (beta)
+  Study Suite  ·  v0.2.53 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.53: fix — the Topic Guides side panel ordered its per-pack groups by import order
+  (activePacks order) instead of the curriculum hierarchy. organizeGuides() now sorts pack groups by
+  the same chronological key as the library/Default-packs panels (school → year → term → leading week#
+  in `weeks`, via natCmp/chronoWeek/cmpW; missing fields sort last), grouping by pack id so duplicate
+  pack names don't merge. Guides within a pack are still ordered by their title number; single-pack
+  view is still header-less.
   Changelog v0.2.52: dark-mode contrast audit + fixes. Root cause class: native <button>/<select>
   elements do NOT inherit `color`, so any control that set a themed background but no explicit text
   colour rendered with the system default (dark) text — invisible on dark backgrounds. Fixed:
@@ -874,7 +880,7 @@ section{display:none}section.on{display:block}
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.52';
+const APP_VERSION='0.2.53';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1471,10 +1477,17 @@ function guideMeta(g){const title=String(g.title||g.file||'Guide').replace(/\.ht
   else if(m=title.match(/^0*(\d+)\s*[-–—:·.]\s*(.*)$/)){num=+m[1];badge=String(m[1]).padStart(2,'0');label=m[2]||title;}
   return {g,title,badge,label,num,key:natKey(title)};}
 function organizeGuides(){const metas=activeGuides().map(guideMeta);
-  const cmp=(a,b)=>a.num!==b.num?(a.num<b.num?-1:1):(a.key<b.key?-1:a.key>b.key?1:0);
-  const names=[...new Set(metas.map(x=>x.g._packName))];
-  if(names.length<2){metas.sort(cmp);return metas.length?[{label:null,items:metas}]:[];}
-  return names.map(n=>({label:n,items:metas.filter(x=>x.g._packName===n).sort(cmp)}));}
+  if(!metas.length)return [];
+  const cmp=(a,b)=>a.num!==b.num?(a.num<b.num?-1:1):(a.key<b.key?-1:a.key>b.key?1:0); // within a pack: by guide title number
+  // Order the per-pack groups by the curriculum hierarchy (school → year → term → week#), matching the
+  // Content library / Default packs panels — not by import order. Missing fields sort last.
+  const packCmp=(p,q)=>natCmp(p.school||'￿',q.school||'￿')||natCmp(p.year||'￿',q.year||'￿')
+    ||natCmp(p.term||'',q.term||'')||cmpW(chronoWeek(p.weeks),chronoWeek(q.weeks))||natCmp(p.pack||p.id||'',q.pack||q.id||'');
+  const orderedPacks=activePacks().slice().sort(packCmp);
+  const groups=[];
+  orderedPacks.forEach(p=>{const items=metas.filter(x=>x.g._pack===p.id).sort(cmp);if(items.length)groups.push({label:p.pack||p.id,items});});
+  if(groups.length<=1)return groups.length?[{label:null,items:groups[0].items}]:[]; // single pack: no header (as before)
+  return groups;}
 /* — content search: plain-text of each guide body, cached by guideKey (cleared on openReviewer
    so pack edits re-index). The main window (not the sandboxed iframe) parses g.html. — */
 let guideTextCache={};
