@@ -152,7 +152,7 @@ automatic version of Backup all.
 <summary><strong>If the rest of the app is free, why will Sync cost money?</strong></summary>
 
 Because Sync is the one feature that can't run on your device alone. Everything else happens right
-in your browser, which costs nothing to give away — so it stays free, for everyone, forever. Sync
+in your browser, which costs very little to run — so the app is free today, and keeping the core app free is the plan. (That's straightforward while it runs entirely on your own device; if it ever grows to need its own servers, I'll work out how to keep it sustainable then.) Sync
 needs a server running around the clock to hold your (encrypted) data and pass it between your
 devices, and that has a real, ongoing cost. So only the server-backed features are paid; anything
 you can do entirely on your own device stays free. If you never want Sync, you lose nothing.

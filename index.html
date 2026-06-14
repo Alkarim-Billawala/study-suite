@@ -1,7 +1,26 @@
 <!--
-  Study Suite  ·  v0.2.44 (beta)
+  Study Suite  ·  v0.2.46 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.46: hardened guide theming — themeGuideFrame() now also injects an html,body
+  background/color fallback (literal resolved colors, !important) so a guide that strays from the
+  canonical var names still gets a correct themed backdrop (no white flash). Pairs with Authoring
+  Guide v2.7, which documents the guide CSS-variable contract for newly generated guides. Also
+  softened the FAQ's free-"forever" wording to "free today / keeping the core free is the plan"
+  (avoids an open-ended promise that only holds on the current static architecture) — mirrored in
+  FAQ_DRAFT.md + README.md. Selected-state color fix: .tchip.on / .dp-school.on / .seg.on now use
+  var(--accent) instead of var(--ink) (difficulty + school chips + segmented controls were solid
+  black in navy-light; now theme-accent). New brand icon/favicon (navy "stack of study cards"):
+  favicon.svg + favicon.ico + favicon-32 + regenerated icon-192/512/apple-touch (Web Assets, copied
+  by the refresh script); head adds rel=icon (svg + ico). Authoring Guide v2.7 also adds a Review
+  volume guideline (40–60 cards/week). Footer 2nd row: Support / Feedback / Contact me mailto: links
+  (support@ · feedback@ · alkarim@ studysuite.app) via .footlinks.
+  Changelog v0.2.45: Topic Guides now follow the app theme. The guide iframe (sandboxed, same-origin
+  srcdoc) is re-themed by injecting a `<style id="ssTheme">` that maps the app's current resolved
+  colors onto the guides' own CSS-var names (--paper/--ink/--soft/--line/--accent/--accent2/--green/
+  --blue/--gold/--hi/--lo) + sets color-scheme. `themeGuideFrame()` reads getComputedStyle of the
+  app root; called from applyGuideView (on guide load) and applyTheme (on theme/family change), so an
+  open guide recolors live. Guide fonts are left as the guides' own (colors only).
   Changelog v0.2.44: THEMES + DARK/BLACK MODE. Two color families — Navy (default) and Warm
   (the original) — each in three modes: Light, Dark, Black (OLED). Driven by data-family + data-theme
   on <html>; CSS has 6 palette blocks (each redefines all colors so the most-specific match wins) +
@@ -168,6 +187,8 @@ var r=document.documentElement;r.setAttribute('data-theme',m);r.setAttribute('da
 <meta name="author" content="Alkarim Billawala / alkarim.billawala.ca">
 <title>Study Suite</title>
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#7c2d2d">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -232,7 +253,7 @@ section{display:none}section.on{display:block}
 .segctl{display:inline-flex;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;background:var(--paper)}
 .seg{font-family:var(--font-body);font-size:15px;background:transparent;border:none;border-right:1px solid var(--line);color:var(--ink);padding:9px 16px;cursor:pointer;transition:.12s}
 .seg:last-child{border-right:none}.seg:hover{background:var(--paper2)}
-.seg.on{background:var(--ink);color:var(--paper)}
+.seg.on{background:var(--accent);color:var(--paper);border-color:var(--accent)}
 .seg i{font-style:normal;font-family:var(--font-mono);font-size:11px;opacity:.6;margin-left:5px}
 .seg.on i{opacity:.8}
 /* content reviewer panel */
@@ -263,6 +284,8 @@ section{display:none}section.on{display:block}
 .note{font-size:13px;color:var(--ink-soft);text-align:center;margin-top:12px}
 .attrib{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--ink-soft);text-align:center;margin-top:22px}
 .attrib a{color:var(--accent);text-decoration:none}
+.footlinks{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--ink-soft);text-align:center;margin-top:7px}
+.footlinks a{color:var(--accent);text-decoration:none}.footlinks a:hover{text-decoration:underline}
 #footVer{color:inherit;border-bottom:1px dotted var(--ink-soft);transition:color .12s,border-color .12s}
 #footVer:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .btn{font-family:var(--font-head);font-weight:600;font-size:19px;background:var(--ink);color:var(--paper);border:none;border-radius:5px;padding:13px 36px;cursor:pointer;box-shadow:var(--shadow);transition:transform .12s,background .2s}
@@ -286,7 +309,7 @@ section{display:none}section.on{display:block}
 .tgroup{margin-bottom:14px}.tgroup .gname{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:7px}
 .tchips{display:flex;flex-wrap:wrap;gap:8px}
 .tchip{font-family:var(--font-body);font-size:15px;border:1.5px solid var(--line);background:var(--paper);border-radius:20px;padding:6px 13px;cursor:pointer;transition:.12s;display:flex;align-items:center;gap:7px}
-.tchip:hover{border-color:var(--accent-soft)}.tchip.on{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.tchip:hover{border-color:var(--accent-soft)}.tchip.on{border-color:var(--accent);background:var(--accent);color:var(--paper)}
 .tchip .ct{font-family:var(--font-mono);font-size:10px;color:var(--ink-soft);background:var(--paper2);border-radius:10px;padding:1px 6px}
 .tchip.on .ct{color:var(--paper);background:rgba(255,255,255,.18)}.tchip .ct.zero{opacity:.4}
 .topicactions{display:flex;gap:10px;margin-top:6px}
@@ -416,7 +439,7 @@ section{display:none}section.on{display:block}
 .dp-schools:empty{display:none}
 .dp-school{font-family:var(--font-body);font-size:15px;border:1.5px solid var(--line);background:var(--paper);border-radius:20px;padding:6px 14px;cursor:pointer;transition:.12s;white-space:nowrap;color:var(--ink)}
 .dp-school:hover{border-color:var(--accent-soft)}
-.dp-school.on{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.dp-school.on{border-color:var(--accent);background:var(--accent);color:var(--paper)}
 .dp-list{display:flex;flex-direction:column;gap:6px}
 .dp-year{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);border-bottom:1px solid var(--line);padding-bottom:4px;margin-top:4px}
 .dp-year:first-child{margin-top:0}
@@ -625,7 +648,7 @@ section{display:none}section.on{display:block}
           <h4>What will Sync do?</h4>
           <p>Sync will let you save your progress to your account and pick up exactly where you left off on any device — phone, laptop, tablet — without manually backing up and restoring. It's the convenient, automatic version of Backup all.</p>
           <h4>If the rest of the app is free, why will Sync cost money?</h4>
-          <p>Because Sync is the one feature that can't run on your device alone. Everything else happens right in your browser, which costs nothing to give away — so it stays free, for everyone, forever. Sync needs a server running around the clock to hold your (encrypted) data and pass it between your devices, and that has a real, ongoing cost. So only the server-backed features are paid; anything you can do entirely on your own device stays free. If you never want Sync, you lose nothing.</p>
+          <p>Because Sync is the one feature that can't run on your device alone. Everything else happens right in your browser, which costs very little to run — so the app is free today, and keeping the core app free is the plan. (That's straightforward while it runs entirely on your own device; if it ever grows to need its own servers, I'll work out how to keep it sustainable then.) Sync needs a server running around the clock to hold your (encrypted) data and pass it between your devices, and that has a real, ongoing cost. So only the server-backed features are paid; anything you can do entirely on your own device stays free. If you never want Sync, you lose nothing.</p>
           <h4>How much will Sync cost?</h4>
           <p>I haven't set a price yet — I'm still testing Sync and working to make it reliable, bulletproof, and secure before anyone depends on it. Whatever it ends up costing will reflect what it actually takes to run the cloud side: servers, backups, networking, credentials management, storage, and so on. What I can promise is that I'm determined to keep it <b>affordable</b> — it will cost far less than many of the study tools you already pay for (you know, that one notoriously overpriced question bank). When Sync launches you'll be notified, and as an early beta tester you'll get a special access price. And to say it once more: Sync is entirely optional — you never need to use it.</p>
           <h4>Will you be able to see my synced data?</h4>
@@ -641,7 +664,8 @@ section{display:none}section.on{display:block}
         </div>
       </div>
     </div>
-    <div class="attrib">Study Suite <a id="footVer" href="https://github.com/Alkarim-Billawala/study-suite/releases" target="_blank" rel="noopener" title="See what's new — release notes on GitHub">v0.2.44</a> · <span class="betatag" id="footBeta">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
+    <div class="attrib">Study Suite <a id="footVer" href="https://github.com/Alkarim-Billawala/study-suite/releases" target="_blank" rel="noopener" title="See what's new — release notes on GitHub">v0.2.46</a> · <span class="betatag" id="footBeta">beta</span> · built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a><span id="supportWrap" style="display:none"> · <a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></span></div>
+    <div class="footlinks"><a href="mailto:support@studysuite.app">Support</a> · <a href="mailto:feedback@studysuite.app">Feedback</a> · <a href="mailto:alkarim@studysuite.app">Contact me</a></div>
   </section>
 
   <!-- SRS DECK -->
@@ -790,8 +814,8 @@ section{display:none}section.on{display:block}
 </div>
 
 <script>
-/* Study Suite v0.2.44 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.44';
+/* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
+const APP_VERSION='0.2.46';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -834,7 +858,7 @@ function resolveMode(){const t=settings.theme||'auto';
   if(t==='light'||t==='dark'||t==='black')return t;
   const dark=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches;
   return dark?(settings.autoDark==='black'?'black':'dark'):'light';}
-function applyTheme(){const r=document.documentElement;r.setAttribute('data-theme',resolveMode());r.setAttribute('data-family',settings.themeFamily||'navy');}
+function applyTheme(){const r=document.documentElement;r.setAttribute('data-theme',resolveMode());r.setAttribute('data-family',settings.themeFamily||'navy');if(typeof themeGuideFrame==='function')themeGuideFrame();}
 function updateThemeUI(){
   document.querySelectorAll('#famSeg .seg').forEach(b=>b.classList.toggle('on',b.dataset.f===(settings.themeFamily||'navy')));
   document.querySelectorAll('#themeSeg .seg').forEach(b=>b.classList.toggle('on',b.dataset.t===(settings.theme||'auto')));
@@ -1322,6 +1346,20 @@ function applyGuideView(){
       if(!st){st=d.createElement('style');st.id='ssFit';st.textContent='body{max-width:none!important;margin:0!important;padding:18px 30px!important}';(d.head||d.documentElement).appendChild(st);}
     }else if(st){st.remove();}
   }catch(e){}
+  themeGuideFrame();
+}
+/* Re-theme the open guide iframe to match the app's active theme. Guides use their own CSS-var
+   names (--paper/--ink/--soft/--line/--accent/--accent2/--green/--blue/--gold/--hi/--lo); we inject
+   an override mapping the app's current resolved colors onto them. Same-origin srcdoc lets us. */
+function themeGuideFrame(){
+  const fr=document.querySelector('.guideframe');if(!fr)return;
+  let d;try{d=fr.contentDocument;}catch(e){return;}if(!d||!d.documentElement)return;
+  const cs=getComputedStyle(document.documentElement),v=k=>cs.getPropertyValue(k).trim();
+  const dt=document.documentElement.getAttribute('data-theme')||'light',dark=(dt==='dark'||dt==='black');
+  const css=`:root{color-scheme:${dark?'dark':'light'};--paper:${v('--paper')};--ink:${v('--ink')};--soft:${v('--ink-soft')};--line:${v('--line')};--accent:${v('--accent')};--accent2:${v('--accent-soft')};--green:${v('--green')};--blue:${v('--blue')};--gold:${v('--gold')};--hi:${v('--red')};--lo:${v('--blue')};}`
+    +`html,body{background:${v('--paper')}!important;color:${v('--ink')}!important}`;
+  let st=d.getElementById('ssTheme');if(!st){st=d.createElement('style');st.id='ssTheme';(d.head||d.documentElement).appendChild(st);}
+  if(st.textContent!==css)st.textContent=css;
 }
 function openReviewer(){reviewerReturn=currentSection();guideTextCache={};revNavOpen=false;setBackLabel();const org=organizeGuides();renderGuideList();if(org.length){loadGuide(org[0].items[0].g,null);}else{$('guideHost').innerHTML='<div class="revempty">No topic guides are bundled in your active packs. Newer packs embed their guides here; older packs link to <code>Topic_*.html</code> files kept in this folder.</div>';}show('reviewer');}
 let revQuery='';

@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.6 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.7 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.6)
+# Study Suite — Content Authoring Guide (v2.7)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,12 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.6 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **Authoring system version:** 2.7 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **What changed in guide v2.7:** theming contract for topic guides — drive guide colors off the
+> canonical CSS variables (`--paper`/`--ink`/`--soft`/`--line`/`--accent`/`--accent2`/`--green`/
+> `--blue`/`--gold`/`--hi`/`--lo`) instead of hardcoded hex, so the app can re-theme guides to match
+> the user's Light/Dark/Black + Navy/Warm choice (see §6). Also adds a **Review volume guideline**:
+> 40–60 cards per week of content (§3). No schema change.
 > **What changed in guide v2.6:** hosted-site URL updated to **studysuite.app** (the app moved off
 > the old studysuite.billawala.ca beta address). No schema or instruction changes.
 > **What changed in guide v2.5:** new optional pack field `school` (program/institution, e.g.
@@ -195,8 +200,11 @@ Rationale to share when you ask (this is the real exam pattern to calibrate agai
 > questions/week**, a **3-week** block ≈ **13/week**, a **4-week** block ≈ **10/week**. Pick the
 > per-week count so the pack(s) for a block land near a realistic 40-question test.
 
-Cards (spaced repetition) can be more generous than questions — they're for durable recall, not
-exam simulation — but keep them tied to the same topics so Review and Exam reinforce each other.
+**Cards (spaced repetition): default 40–60 per week of content.** They're for durable recall, not
+exam simulation, so they're more generous than questions — but keep them tied to the same topics so
+Review and Exam reinforce each other. As with questions, **ask the user** and scale to how many
+weeks the pack covers (e.g. a 3-week block ≈ 120–180 cards total). Favor high-yield facts, mechanisms,
+and associations over trivia.
 
 ---
 
@@ -287,17 +295,32 @@ The `guides` array holds one object per guide:
 when a heading carries `id="anchor"`. Add `id="..."` to the guide's `<h2>`/`<h3>` headings so links
 can jump straight to them.
 
+### Theming contract — IMPORTANT for colors
+
+The app re-themes every guide at runtime so it matches the user's chosen appearance (Light / Dark /
+Black, and the Navy or Warm color family). It does this by **overriding a fixed set of CSS variable
+names** inside the guide. So: **drive every color off these variables** (with the light values as
+fallbacks) — do **not** hardcode hex colors for text, backgrounds, borders, or accents, or the guide
+will look wrong (e.g. a white page) in dark mode.
+
+Canonical variable names the app overrides (use these exact names):
+`--paper` (page background), `--ink` (text), `--soft` (muted text), `--line` (borders/rules),
+`--accent` (primary accent), `--accent2` (secondary accent), `--green` / `--blue` / `--gold`
+(status colors), `--hi` (highlight/important), `--lo` (secondary highlight). Define them in `:root`
+with sensible **light** defaults; the app swaps them per theme automatically.
+
 ### Guide HTML template (goes in the `html` value)
 
 ```html
 <!doctype html><meta charset="utf-8">
 <title>C1 · Arrhythmias</title>
 <style>
-  body{max-width:820px;margin:40px auto;padding:0 22px;font:18px/1.6 Georgia,serif;color:#1d1b16;background:#f3efe6}
+  :root{--paper:#f3efe6;--ink:#1d1b16;--soft:#56524a;--line:#cfc8b6;--accent:#7c2d2d;--accent2:#9a5a2a;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b}
+  body{max-width:820px;margin:40px auto;padding:0 22px;font:18px/1.6 Georgia,serif;color:var(--ink);background:var(--paper)}
   h1{font-size:30px;margin:0 0 4px}
-  h2{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#7c2d2d;margin:26px 0 6px}
-  td,th{border:1px solid #cfc8b6;padding:7px 10px;text-align:left;font-size:15px}
-  .key{border-left:3px solid #7c2d2d;background:#fff;padding:10px 14px;margin:10px 0}
+  h2{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:26px 0 6px}
+  td,th{border:1px solid var(--line);padding:7px 10px;text-align:left;font-size:15px}
+  .key{border-left:3px solid var(--accent);background:var(--paper);padding:10px 14px;margin:10px 0}
 </style>
 <h1>C1 · Arrhythmias</h1>
 <p>One-line orientation.</p>
