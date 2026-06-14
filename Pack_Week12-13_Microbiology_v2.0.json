@@ -1,0 +1,2172 @@
+{
+ "pack": "Weeks 12–13 — Microbiology & ID",
+ "id": "wk12-13",
+ "formatVersion": "2.0",
+ "version": "2.0",
+ "author": "Alkarim Billawala / alkarim.billawala.ca",
+ "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
+ "created": "2026-06-13",
+ "updated": "2026-06-13",
+ "school": "UofT — Temerty Medicine",
+ "year": "Year 1",
+ "course": "CPC 1",
+ "weeks": "Weeks 12–13 · Micro & ID I–II",
+ "questions": [
+  {
+   "id": "wk1213_q01",
+   "sys": "ID",
+   "topic": "ID · Stewardship",
+   "difficulty": "easy",
+   "stem": "A patient improving on day 3 of IV ceftriaxone for pyelonephritis is now afebrile, eating, and has a urine culture growing pan-sensitive E. coli. What is the best stewardship move?",
+   "options": [
+    "Continue broad IV ceftriaxone for a full 14 days",
+    "De-escalate to a targeted oral agent (e.g. an oral cephalosporin or TMP-SMX per susceptibilities) and set a stop date",
+    "Add vancomycin for broader cover",
+    "Switch to meropenem"
+   ],
+   "correct": 1,
+   "explain": "Once the organism, susceptibilities, and clinical improvement are known, <b>de-escalate</b>: narrow the spectrum, switch <b>IV&rarr;PO</b>, and set a defined stop date.",
+   "guide": {
+    "f": "W1213_01_Framework.html",
+    "t": "1 · Stewardship",
+    "s": "Stewardship questions"
+   }
+  },
+  {
+   "id": "wk1213_q02",
+   "sys": "ID",
+   "topic": "ID · Stewardship",
+   "difficulty": "medium",
+   "stem": "A septic patient needs antibiotics urgently, but the team wants blood cultures first. The blood-draw will take ~10 minutes; the patient is hypotensive. What is correct?",
+   "options": [
+    "Delay antibiotics until cultures and susceptibilities fully return",
+    "Obtain cultures if it does not meaningfully delay therapy, but never delay lifesaving antibiotics in sepsis",
+    "Give antibiotics and never bother with cultures",
+    "Give antibiotics only after imaging"
+   ],
+   "correct": 1,
+   "explain": "Get cultures <b>before</b> antibiotics when feasible (improves yield), but in sepsis/meningitis <span style='color:#a23b2e'><b>do not delay</b></span> empiric therapy &mdash; delays increase mortality.",
+   "guide": {
+    "f": "W1213_01_Framework.html",
+    "t": "1 · Stewardship",
+    "s": "Stewardship questions"
+   }
+  },
+  {
+   "id": "wk1213_q03",
+   "sys": "ID",
+   "topic": "ID · Microbiology",
+   "difficulty": "easy",
+   "stem": "A blood culture from a patient with an indwelling central line grows Gram-positive cocci in clusters identified as Staphylococcus aureus. How should this be regarded?",
+   "options": [
+    "Almost certainly a skin contaminant — repeat and ignore",
+    "A true pathogen — S. aureus in blood is never dismissed as a contaminant",
+    "Only significant if the patient is febrile",
+    "Coagulase-negative staph, so contaminant"
+   ],
+   "correct": 1,
+   "explain": "<b>S. aureus in blood is never dismissed as a contaminant</b> &mdash; it implies true bacteremia (endocarditis/metastatic foci risk). Coagulase-<i>negative</i> staph is the common contaminant/biofilm organism.",
+   "guide": {
+    "f": "W1213_02_Micro.html",
+    "t": "2 · Gram",
+    "s": "Gram stain & morphology"
+   }
+  },
+  {
+   "id": "wk1213_q04",
+   "sys": "ID",
+   "topic": "ID · Microbiology",
+   "difficulty": "medium",
+   "stem": "A patient with a prosthetic hip has indolent infection; cultures grow coagulase-negative staphylococci forming a biofilm on the implant. Beyond antibiotics, what is often required for cure?",
+   "options": [
+    "Nothing further — antibiotics alone clear biofilm",
+    "Source control: removal/replacement of the infected prosthetic material",
+    "Indefinite suppression without surgery in all cases",
+    "Topical antifungals"
+   ],
+   "correct": 1,
+   "explain": "Biofilm on prosthetic material (CoNS, S. aureus, Candida) shields organisms from antibiotics; <b>device removal/replacement (source control)</b> is frequently needed.",
+   "guide": {
+    "f": "W1213_02_Micro.html",
+    "t": "2 · Virulence",
+    "s": "Virulence & microbiota"
+   }
+  },
+  {
+   "id": "wk1213_q05",
+   "sys": "ID",
+   "topic": "ID · Infection Control",
+   "difficulty": "easy",
+   "stem": "A patient with suspected active pulmonary tuberculosis is admitted. Which precautions are required?",
+   "options": [
+    "Contact precautions only",
+    "Airborne precautions: negative-pressure room and a fit-tested N95 respirator",
+    "Droplet precautions with a surgical mask only",
+    "Routine practices only"
+   ],
+   "correct": 1,
+   "explain": "TB is <b>airborne</b> &mdash; negative-pressure room, N95, door closed, plus public-health notification and contact tracing. The airborne trio to memorize: <b>TB, measles, varicella</b>.",
+   "guide": {
+    "f": "W1213_03_InfectionControl.html",
+    "t": "3 · Modes",
+    "s": "Transmission modes & precautions"
+   }
+  },
+  {
+   "id": "wk1213_q06",
+   "sys": "ID",
+   "topic": "ID · Infection Control",
+   "difficulty": "medium",
+   "stem": "A college student is admitted with meningococcal meningitis. Beyond treating the patient, what is the key public-health action for close contacts?",
+   "options": [
+    "No action needed",
+    "Offer chemoprophylaxis (post-exposure prophylaxis) to close contacts",
+    "Airborne isolation of all contacts for 21 days",
+    "Start all contacts on a 4-week antiretroviral course"
+   ],
+   "correct": 1,
+   "explain": "<b>Neisseria meningitidis</b> spreads by droplets; close contacts should be offered <b>PEP/chemoprophylaxis</b>. The patient needs droplet precautions until 24 h of effective therapy.",
+   "guide": {
+    "f": "W1213_03_InfectionControl.html",
+    "t": "3 · Modes",
+    "s": "Transmission modes & precautions"
+   }
+  },
+  {
+   "id": "wk1213_q07",
+   "sys": "ID",
+   "topic": "ID · Infection Control",
+   "difficulty": "medium",
+   "stem": "On a ward, a patient with antibiotic-associated diarrhea is confirmed to have C. difficile. Which combination of measures is most appropriate?",
+   "options": [
+    "Droplet precautions and alcohol gel only",
+    "Contact precautions, hand hygiene with soap and water, and sporicidal environmental cleaning",
+    "Airborne precautions with N95",
+    "No precautions; C. difficile is not transmissible"
+   ],
+   "correct": 1,
+   "explain": "C. difficile is spread by the fecal-oral/contact route and its <b>spores resist alcohol</b> &mdash; use <b>contact precautions, soap-and-water hand hygiene, and sporicidal cleaning</b>, plus antimicrobial stewardship.",
+   "guide": {
+    "f": "W1213_03_InfectionControl.html",
+    "t": "3 · Modes",
+    "s": "Transmission modes & precautions"
+   }
+  },
+  {
+   "id": "wk1213_q08",
+   "sys": "ID",
+   "topic": "ID · Antibacterials",
+   "difficulty": "medium",
+   "stem": "A patient with bronchiectasis and a Pseudomonas-colonized airway develops pneumonia needing empiric anti-pseudomonal beta-lactam therapy. Which agent is appropriate?",
+   "options": [
+    "Cloxacillin",
+    "Piperacillin-tazobactam",
+    "Cephalexin",
+    "Ampicillin"
+   ],
+   "correct": 1,
+   "explain": "<b>Piperacillin-tazobactam</b> (or ceftazidime/cefepime/meropenem) covers <b>Pseudomonas</b>. Cloxacillin/cephalexin/ampicillin do not.",
+   "guide": {
+    "f": "W1213_04_Antibacterials.html",
+    "t": "4 · Beta-lactams",
+    "s": "Beta-lactams"
+   }
+  },
+  {
+   "id": "wk1213_q09",
+   "sys": "ID",
+   "topic": "ID · Antibacterials",
+   "difficulty": "easy",
+   "stem": "A patient with MRSA bacteremia needs an appropriate empiric agent. Which is correct?",
+   "options": [
+    "Ceftriaxone",
+    "Vancomycin",
+    "Ampicillin",
+    "Cephalexin"
+   ],
+   "correct": 1,
+   "explain": "<b>Vancomycin</b> covers MRSA and resistant Gram-positives (no Gram-negative activity). The other listed agents don't reliably cover MRSA.",
+   "guide": {
+    "f": "W1213_04_Antibacterials.html",
+    "t": "4 · Others",
+    "s": "Other key antibacterials"
+   }
+  },
+  {
+   "id": "wk1213_q10",
+   "sys": "ID",
+   "topic": "ID · Antibacterials",
+   "difficulty": "easy",
+   "stem": "A patient on metronidazole for an anaerobic intra-abdominal infection asks whether he can have a beer. What should you advise and why?",
+   "options": [
+    "Alcohol is fine with metronidazole",
+    "Avoid alcohol — metronidazole can cause a disulfiram-like reaction",
+    "Alcohol enhances the antibiotic's effect",
+    "Only red wine is a problem"
+   ],
+   "correct": 1,
+   "explain": "<b>Metronidazole</b> can cause a <b>disulfiram-like reaction</b> with alcohol (flushing, nausea, vomiting). Counsel avoidance; also note metallic taste and neuropathy with prolonged use.",
+   "guide": {
+    "f": "W1213_04_Antibacterials.html",
+    "t": "4 · Others",
+    "s": "Other key antibacterials"
+   }
+  },
+  {
+   "id": "wk1213_q11",
+   "sys": "ID",
+   "topic": "ID · Antibacterials",
+   "difficulty": "medium",
+   "stem": "A previously healthy adult is treated with clindamycin for a dental abscess and 10 days later develops profuse watery diarrhea. Which adverse effect is most likely?",
+   "options": [
+    "Tendon rupture",
+    "Clostridioides difficile colitis",
+    "Nephrotoxicity",
+    "Photosensitivity"
+   ],
+   "correct": 1,
+   "explain": "<b>Clindamycin</b> carries a <b>high C. difficile</b> risk. (Tendon rupture is fluoroquinolones; nephrotoxicity is vancomycin/aminoglycosides; photosensitivity is doxycycline/FQ.)",
+   "guide": {
+    "f": "W1213_04_Antibacterials.html",
+    "t": "4 · Others",
+    "s": "Other key antibacterials"
+   }
+  },
+  {
+   "id": "wk1213_q12",
+   "sys": "ID",
+   "topic": "ID · Antibacterials",
+   "difficulty": "easy",
+   "stem": "A 9-year-old and a pregnant woman both need an antibiotic. Which agent should specifically be avoided in both because of effects on teeth and bone?",
+   "options": [
+    "Amoxicillin",
+    "Doxycycline",
+    "Azithromycin",
+    "Cephalexin"
+   ],
+   "correct": 1,
+   "explain": "<b>Doxycycline (tetracyclines)</b> are avoided in pregnancy and in children &lt;8 (dental staining/skeletal effects). Amoxicillin, azithromycin, and cephalexin are generally acceptable.",
+   "guide": {
+    "f": "W1213_04_Antibacterials.html",
+    "t": "4 · Others",
+    "s": "Other key antibacterials"
+   }
+  },
+  {
+   "id": "wk1213_q13",
+   "sys": "ID",
+   "topic": "ID · Antifungals",
+   "difficulty": "medium",
+   "stem": "An ICU patient with central lines and recent broad-spectrum antibiotics grows Candida in blood cultures and is hemodynamically unstable. What is the best empiric antifungal and key concurrent step?",
+   "options": [
+    "Topical clotrimazole; leave the line",
+    "An echinocandin (e.g. caspofungin) plus removal/replacement of infected lines",
+    "Oral nystatin; observe",
+    "Oseltamivir; remove the line"
+   ],
+   "correct": 1,
+   "explain": "For candidemia in an ill patient, start an <b>echinocandin</b> empirically and pursue <b>line removal/replacement</b> (source control), then step down to fluconazole if susceptible/stable and evaluate for dissemination.",
+   "guide": {
+    "f": "W1213_07_GI_SSTI.html",
+    "t": "7 · Candida",
+    "s": "Candidiasis"
+   }
+  },
+  {
+   "id": "wk1213_q14",
+   "sys": "ID",
+   "topic": "ID · Antifungals",
+   "difficulty": "medium",
+   "stem": "A neutropenic patient with prolonged fever has CT findings suggestive of invasive pulmonary aspergillosis. The team considers fluconazole. What is the problem?",
+   "options": [
+    "Fluconazole is ideal for Aspergillus",
+    "Fluconazole does not cover Aspergillus — voriconazole/posaconazole (or amphotericin) are needed",
+    "Fluconazole only works topically",
+    "Aspergillus is best treated with an echinocandin alone as first-line"
+   ],
+   "correct": 1,
+   "explain": "<b>Fluconazole covers many Candida and Cryptococcus but NOT Aspergillus.</b> Mould-active azoles (<b>voriconazole/posaconazole</b>) or amphotericin are required; echinocandins have only secondary activity against Aspergillus.",
+   "guide": {
+    "f": "W1213_05_Antimicrobials2.html",
+    "t": "5 · Antifungals",
+    "s": "Antifungals"
+   }
+  },
+  {
+   "id": "wk1213_q15",
+   "sys": "ID",
+   "topic": "ID · Antivirals",
+   "difficulty": "easy",
+   "stem": "A patient asks why valacyclovir treats her genital herpes but would do nothing for influenza. What is the basis of acyclovir/valacyclovir selectivity for HSV/VZV?",
+   "options": [
+    "They inhibit bacterial ribosomes",
+    "They are nucleoside analogues activated by viral thymidine kinase and then inhibit viral DNA polymerase",
+    "They are neuraminidase inhibitors",
+    "They bind ergosterol"
+   ],
+   "correct": 1,
+   "explain": "Acyclovir/valacyclovir/famciclovir require <b>viral thymidine kinase</b> for activation and then inhibit the <b>viral DNA polymerase</b> &mdash; conferring HSV/VZV selectivity. Influenza needs a neuraminidase inhibitor (oseltamivir).",
+   "guide": {
+    "f": "W1213_05_Antimicrobials2.html",
+    "t": "5 · Antivirals",
+    "s": "Antivirals & ART"
+   }
+  },
+  {
+   "id": "wk1213_q16",
+   "sys": "ID",
+   "topic": "ID · Antiparasitics",
+   "difficulty": "medium",
+   "stem": "Before prescribing primaquine to clear P. vivax liver hypnozoites, which test must be checked, and why?",
+   "options": [
+    "INR, because primaquine causes bleeding",
+    "G6PD activity, because primaquine causes hemolysis in G6PD deficiency",
+    "TSH, because primaquine affects the thyroid",
+    "Amylase, because primaquine causes pancreatitis"
+   ],
+   "correct": 1,
+   "explain": "<b>Check G6PD before primaquine</b> &mdash; it triggers <b>hemolysis</b> in G6PD-deficient patients. Primaquine clears the dormant <b>hypnozoites</b> of P. vivax/ovale (not severe falciparum, which needs IV artesunate).",
+   "guide": {
+    "f": "W1213_05_Antimicrobials2.html",
+    "t": "5 · Antiparasitics",
+    "s": "Antiparasitics"
+   }
+  },
+  {
+   "id": "wk1213_q17",
+   "sys": "ID",
+   "topic": "ID · Antiretrovirals",
+   "difficulty": "medium",
+   "stem": "A newly diagnosed person with HIV is started on antiretroviral therapy. Which describes a typical initial regimen?",
+   "options": [
+    "A single antiretroviral agent",
+    "Two NRTIs plus an integrase strand-transfer inhibitor",
+    "Two protease inhibitors only",
+    "Antibiotics plus an antifungal"
+   ],
+   "correct": 1,
+   "explain": "A typical initial ART regimen is <b>two NRTIs + an integrase inhibitor</b> &mdash; combination therapy hits multiple life-cycle steps to suppress viral load, preserve immunity, and prevent transmission.",
+   "guide": {
+    "f": "W1213_05_Antimicrobials2.html",
+    "t": "5 · Antivirals",
+    "s": "Antivirals & ART"
+   }
+  },
+  {
+   "id": "wk1213_q18",
+   "sys": "ID",
+   "topic": "ID · Pneumonia",
+   "difficulty": "medium",
+   "stem": "A 70-year-old with COPD is admitted with hypoxemic CAP (RR 30, confusion, SpO2 88%). Which empiric regimen best fits the course approach?",
+   "options": [
+    "Oral amoxicillin and discharge",
+    "Ceftriaxone IV plus azithromycin",
+    "Oral vancomycin",
+    "No antibiotics pending sputum culture"
+   ],
+   "correct": 1,
+   "explain": "Admitted, hypoxemic, older CAP with CRB-65 features warrants inpatient therapy: <b>ceftriaxone + azithromycin</b> (atypical/Legionella cover). Don't delay antibiotics; add vancomycin only if MRSA concern or pip-tazo if Pseudomonas risk.",
+   "guide": {
+    "f": "W1213_06_Respiratory.html",
+    "t": "6 · CAP",
+    "s": "Pneumonia (CAP vs HAP)"
+   }
+  },
+  {
+   "id": "wk1213_q19",
+   "sys": "ID",
+   "topic": "ID · Pneumonia",
+   "difficulty": "medium",
+   "stem": "A CAP patient stabilizes and the blood culture returns penicillin-sensitive Streptococcus pneumoniae. What is the best next step?",
+   "options": [
+    "Broaden to meropenem",
+    "Narrow to amoxicillin/penicillin and plan IV-to-PO switch",
+    "Add vancomycin indefinitely",
+    "Continue ceftriaxone for 21 days"
+   ],
+   "correct": 1,
+   "explain": "Targeted de-escalation: penicillin-sensitive pneumococcus &rarr; <b>narrow to amoxicillin/penicillin</b>, switch IV&rarr;PO once improving, finish an appropriate (usually 5&ndash;7 day) course.",
+   "guide": {
+    "f": "W1213_06_Respiratory.html",
+    "t": "6 · CAP",
+    "s": "Pneumonia (CAP vs HAP)"
+   }
+  },
+  {
+   "id": "wk1213_q20",
+   "sys": "ID",
+   "topic": "ID · Tuberculosis",
+   "difficulty": "medium",
+   "stem": "A woman from a high-incidence country has 2 months of cough, fevers, night sweats, and weight loss, unimproved after amoxicillin-clavulanate and a respiratory fluoroquinolone. What is the priority diagnostic and infection-control step?",
+   "options": [
+    "Repeat the same antibiotics at home",
+    "Airborne isolation and sputum ×3 for AFB smear/culture + NAAT, with public-health notification",
+    "IGRA to diagnose active disease and discharge",
+    "CT only, no isolation"
+   ],
+   "correct": 1,
+   "explain": "Non-resolving 'pneumonia' with chronic constitutional symptoms from a high-incidence region is TB until proven otherwise: <b>airborne isolation</b> + <b>sputum &times;3 AFB/culture + NAAT</b>, notify public health, contact-trace. IGRA/TST diagnose latent infection, not active disease.",
+   "guide": {
+    "f": "W1213_06_Respiratory.html",
+    "t": "6 · TB",
+    "s": "Tuberculosis"
+   }
+  },
+  {
+   "id": "wk1213_q21",
+   "sys": "ID",
+   "topic": "ID · Sepsis",
+   "difficulty": "medium",
+   "stem": "A 75-year-old with pyelonephritis is drowsy with RR 30 and SBP 100. Which plan best fits sepsis management?",
+   "options": [
+    "Oral antibiotics and discharge because SBP >90",
+    "IV fluids, blood and urine cultures, organ-dysfunction labs, and early empiric IV antibiotics",
+    "Antipyretics only",
+    "Delay antibiotics until susceptibilities return"
+   ],
+   "correct": 1,
+   "explain": "She meets qSOFA (RR &ge;22, altered mentation). Sepsis care targets infection <b>and</b> the dysregulated host response: cultures, <b>early empiric IV antibiotics</b>, IV fluids/perfusion, lactate/organ monitoring, and source control.",
+   "guide": {
+    "f": "W1213_06_Respiratory.html",
+    "t": "6 · Sepsis",
+    "s": "Sepsis & meningitis"
+   }
+  },
+  {
+   "id": "wk1213_q22",
+   "sys": "ID",
+   "topic": "ID · Meningitis",
+   "difficulty": "hard",
+   "stem": "A 68-year-old presents with fever, neck stiffness, and confusion; bacterial meningitis is suspected. Which empiric regimen best matches the course approach for adults, and why is the third agent included?",
+   "options": [
+    "Ceftriaxone alone",
+    "Ceftriaxone + vancomycin + ampicillin — ampicillin adds Listeria cover in older/at-risk adults",
+    "Metronidazole alone",
+    "Oseltamivir + ceftriaxone"
+   ],
+   "correct": 1,
+   "explain": "Adult bacterial meningitis empiric therapy: <b>ceftriaxone</b> (common pathogens) + <b>vancomycin</b> (resistant pneumococcus) + <b>ampicillin</b> for <b>Listeria</b> in older/immunocompromised/pregnant adults. Don't delay for the LP.",
+   "guide": {
+    "f": "W1213_06_Respiratory.html",
+    "t": "6 · Sepsis",
+    "s": "Sepsis & meningitis"
+   }
+  },
+  {
+   "id": "wk1213_q23",
+   "sys": "ID",
+   "topic": "ID · C. difficile",
+   "difficulty": "easy",
+   "stem": "An older inpatient develops watery diarrhea after antibiotics; C. difficile toxin is positive. Which treatment fits current course guidance?",
+   "options": [
+    "IV metronidazole as preferred first-line",
+    "Oral vancomycin or fidaxomicin",
+    "Oral amoxicillin",
+    "No treatment ever needed"
+   ],
+   "correct": 1,
+   "explain": "Current CDI therapy favours <b>oral vancomycin or fidaxomicin</b> (metronidazole is now less preferred). Recurrent disease may need fecal microbiota transplant; severe complications may need colectomy.",
+   "guide": {
+    "f": "W1213_07_GI_SSTI.html",
+    "t": "7 · Gastro",
+    "s": "Gastroenteritis & C. difficile"
+   }
+  },
+  {
+   "id": "wk1213_q24",
+   "sys": "ID",
+   "topic": "ID · SSTI",
+   "difficulty": "easy",
+   "stem": "A diabetic man has a red, hot, tender leg with a clear portal of entry at a cracked, scaly web space between the toes. Besides treating the cellulitis, what should be addressed?",
+   "options": [
+    "Nothing else",
+    "Treat the tinea pedis portal of entry",
+    "Start antifungal therapy for candidemia",
+    "Immediate amputation"
+   ],
+   "correct": 1,
+   "explain": "Cellulitis often has a <b>portal of entry</b> &mdash; here <b>tinea pedis</b>. Treating it reduces recurrence. Manage cellulitis with cephalexin/cefazolin and reassess.",
+   "guide": {
+    "f": "W1213_07_GI_SSTI.html",
+    "t": "7 · SSTI",
+    "s": "Skin & soft tissue"
+   }
+  },
+  {
+   "id": "wk1213_q25",
+   "sys": "ID",
+   "topic": "ID · SSTI",
+   "difficulty": "medium",
+   "stem": "A man has severe leg pain out of proportion to exam, rapidly advancing erythema, tense bullae, fever, and tachycardia. What is the immediate priority?",
+   "options": [
+    "Oral cephalexin and next-day follow-up",
+    "Urgent surgical consultation for debridement plus broad empiric antibiotics",
+    "Wait for a superficial wound swab",
+    "Outpatient DVT ultrasound"
+   ],
+   "correct": 1,
+   "explain": "<b>Necrotizing fasciitis</b> &mdash; pain out of proportion, rapid spread, bullae, systemic toxicity &mdash; is a <span style='color:#a23b2e'><b>surgical emergency</b></span>. Immediate surgical debridement + broad antibiotics (penicillin + clindamycin for GAS); imaging/cultures must not delay surgery.",
+   "guide": {
+    "f": "W1213_07_GI_SSTI.html",
+    "t": "7 · SSTI",
+    "s": "Skin & soft tissue"
+   }
+  },
+  {
+   "id": "wk1213_q26",
+   "sys": "ID",
+   "topic": "ID · Candidiasis",
+   "difficulty": "easy",
+   "stem": "Blood cultures from an ICU patient grow Candida albicans. How should this result be interpreted?",
+   "options": [
+    "Dismiss as skin contamination",
+    "Treat as candidemia/invasive candidiasis — Candida in blood is never a contaminant",
+    "Start oseltamivir",
+    "Repeat once and ignore if the second is negative"
+   ],
+   "correct": 1,
+   "explain": "<b>Candida in blood is never dismissed as a contaminant.</b> Treat as candidemia: systemic antifungal (echinocandin first in ill patients), remove/replace lines, and assess for disseminated foci.",
+   "guide": {
+    "f": "W1213_07_GI_SSTI.html",
+    "t": "7 · Candida",
+    "s": "Candidiasis"
+   }
+  },
+  {
+   "id": "wk1213_q27",
+   "sys": "ID",
+   "topic": "ID · Hepatitis",
+   "difficulty": "hard",
+   "stem": "Serology: HBsAg negative, anti-HBc positive, anti-HBs positive, IgM anti-HBc negative; anti-HCV positive. Which interpretation and next test are correct?",
+   "options": [
+    "Acute hepatitis B; no HCV testing needed",
+    "Resolved natural hepatitis B, plus HCV exposure that requires HCV RNA to determine active infection",
+    "Hepatitis B vaccine immunity; HCV cured",
+    "Chronic hepatitis B and HCV immunity"
+   ],
+   "correct": 1,
+   "explain": "HBsAg&minus;, anti-HBc+, anti-HBs+, IgM&minus; = <b>resolved natural HBV infection</b> (vaccine immunity would lack anti-HBc). <b>Anti-HCV+ means exposure only</b> &mdash; order <b>HCV RNA</b> to confirm active infection.",
+   "guide": {
+    "f": "W1213_08_Hepatitis_HIV.html",
+    "t": "8 · Hepatitis",
+    "s": "Viral hepatitis"
+   }
+  },
+  {
+   "id": "wk1213_q28",
+   "sys": "ID",
+   "topic": "ID · Hepatitis",
+   "difficulty": "medium",
+   "stem": "A medical student with a documented complete hepatitis B vaccine series has anti-HBs of 4 IU/L, with negative HBsAg and anti-HBc. What does this indicate?",
+   "options": [
+    "Adequate immunity; no action",
+    "Chronic hepatitis B",
+    "Inadequate vaccine response — booster/repeat series with repeat serology per occupational-health policy",
+    "Resolved natural infection"
+   ],
+   "correct": 2,
+   "explain": "Anti-HBs &lt;10 IU/L after vaccination indicates an <b>inadequate/non-responder</b> state; negative HBsAg/anti-HBc argues against current or past natural infection. Occupational health uses a <b>booster/repeat series</b> with repeat titres.",
+   "guide": {
+    "f": "W1213_08_Hepatitis_HIV.html",
+    "t": "8 · Hepatitis",
+    "s": "Viral hepatitis"
+   }
+  },
+  {
+   "id": "wk1213_q29",
+   "sys": "ID",
+   "topic": "ID · Hepatitis",
+   "difficulty": "easy",
+   "stem": "A patient with chronic hepatitis B and detectable HBV DNA is started on antiviral suppression. Which agents are first-line?",
+   "options": [
+    "Acyclovir",
+    "Tenofovir or entecavir (nucleos(t)ide analogues)",
+    "Oseltamivir",
+    "Praziquantel"
+   ],
+   "correct": 1,
+   "explain": "Chronic HBV suppression uses <b>nucleos(t)ide analogues &mdash; tenofovir or entecavir</b> &mdash; monitored with HBV DNA. Acyclovir is for HSV/VZV; oseltamivir for influenza.",
+   "guide": {
+    "f": "W1213_05_Antimicrobials2.html",
+    "t": "5 · Antivirals",
+    "s": "Antivirals & ART"
+   }
+  },
+  {
+   "id": "wk1213_q30",
+   "sys": "ID",
+   "topic": "ID · HIV",
+   "difficulty": "medium",
+   "stem": "A 39-year-old has 8 days of fever, sore throat, diffuse maculopapular rash, diarrhea, and tender cervical lymphadenopathy, 3 weeks after condomless sex with a new partner. Which tests best evaluate the leading diagnosis?",
+   "options": [
+    "Stool ova and parasites only",
+    "HIV 1/2 antibody/p24 antigen test plus HIV viral load",
+    "Tuberculin skin test only",
+    "Blood culture for coagulase-negative staph"
+   ],
+   "correct": 1,
+   "explain": "This is classic <b>acute HIV seroconversion</b>. Test with a 4th-gen <b>Ab/p24 antigen</b> assay plus <b>HIV viral load</b> &mdash; HIV RNA is detectable earliest, before antibodies fully develop.",
+   "guide": {
+    "f": "W1213_08_Hepatitis_HIV.html",
+    "t": "8 · HIV",
+    "s": "HIV"
+   }
+  },
+  {
+   "id": "wk1213_q31",
+   "sys": "ID",
+   "topic": "ID · HIV Exposure",
+   "difficulty": "hard",
+   "stem": "A nurse sustains a percutaneous needlestick from a patient with HIV who has been on ART for years with a documented undetectable viral load and no concomitant STI. What does the course framework say about PEP?",
+   "options": [
+    "PEP is mandatory for every HIV-source needlestick regardless of viral load",
+    "PEP is generally not recommended when the source is virologically suppressed with no STI (negligible transmissible risk); still perform baseline/follow-up testing",
+    "A single dose of one antiretroviral suffices",
+    "PEP can wait until 10 days after exposure"
+   ],
+   "correct": 1,
+   "explain": "PEP decisions weigh source risk and exposure type. A <b>virologically suppressed</b> source with no STI poses negligible transmissible risk, so PEP is generally <b>not recommended</b>; when indicated, PEP is <b>3 antiretrovirals for 4 weeks, started within 72 h</b>. Baseline and 6/12-week testing still apply.",
+   "guide": {
+    "f": "W1213_08_Hepatitis_HIV.html",
+    "t": "8 · Exposure",
+    "s": "Blood-borne exposure / PEP"
+   }
+  },
+  {
+   "id": "wk1213_q32",
+   "sys": "ID",
+   "topic": "ID · HIV Exposure",
+   "difficulty": "medium",
+   "stem": "A man presents for HIV PEP for the third time in 6 months after repeated high-risk exposures. Beyond this PEP course, what should be offered?",
+   "options": [
+    "Pre-exposure prophylaxis (PrEP)",
+    "Nothing — repeated PEP is the expected long-term strategy",
+    "BCG vaccination",
+    "Oral vancomycin prophylaxis"
+   ],
+   "correct": 0,
+   "explain": "Recurrent high-risk exposures needing repeated PEP should prompt counselling and an offer of <b>PrEP</b> rather than relying on serial post-exposure courses.",
+   "guide": {
+    "f": "W1213_08_Hepatitis_HIV.html",
+    "t": "8 · Exposure",
+    "s": "Blood-borne exposure / PEP"
+   }
+  },
+  {
+   "id": "wk1213_q33",
+   "sys": "ID",
+   "topic": "ID · Traveller",
+   "difficulty": "medium",
+   "stem": "A physician returns from rural Kenya and develops fever, headache, and malaise 5 days later, having taken malaria prophylaxis inconsistently. What is the first diagnostic priority?",
+   "options": [
+    "Assume dengue and treat supportively",
+    "Rule out malaria now with thick/thin smears (repeat q12h ×3) or NAAT",
+    "Empiric C. difficile therapy",
+    "Defer malaria testing unless jaundiced"
+   ],
+   "correct": 1,
+   "explain": "<b>Malaria must be ruled out first</b> in any febrile traveller from the tropics (esp. sub-Saharan Africa) &mdash; thick/thin smears now, repeated q12h &times;3, or NAAT. It is the key life-threatening, treatable diagnosis.",
+   "guide": {
+    "f": "W1213_09_Fever_Travel.html",
+    "t": "9 · Traveller",
+    "s": "The returned traveller"
+   }
+  },
+  {
+   "id": "wk1213_q34",
+   "sys": "ID",
+   "topic": "ID · Traveller",
+   "difficulty": "hard",
+   "stem": "A traveller from Cameroon has P. falciparum on smear and is confused, hypoglycemic, and in acute kidney injury. Which management is correct?",
+   "options": [
+    "Oral chloroquine and discharge",
+    "Urgent parenteral therapy with IV artesunate plus critical-care management",
+    "Primaquine alone",
+    "Wait for spontaneous resolution"
+   ],
+   "correct": 1,
+   "explain": "<b>Severe falciparum malaria</b> (cerebral involvement, hypoglycemia, AKI) needs <span style='color:#a23b2e'><b>IV artesunate</b></span> and ICU-level care. Primaquine targets P. vivax/ovale hypnozoites, not severe falciparum.",
+   "guide": {
+    "f": "W1213_05_Antimicrobials2.html",
+    "t": "5 · Antiparasitics",
+    "s": "Antiparasitics"
+   }
+  },
+  {
+   "id": "wk1213_q35",
+   "sys": "ID",
+   "topic": "ID · Fever",
+   "difficulty": "medium",
+   "stem": "A patient with gastroenteritis has rigors and feels intensely cold despite a measured temperature of 38.7 °C. Which mechanism explains the rigors?",
+   "options": [
+    "Pyrogens lower the set point and shivering cools the body",
+    "Pyrogen-induced cytokines raise PGE2 and the hypothalamic set point; shivering generates heat toward the new, higher set point",
+    "Sweating produces rigors",
+    "All thermoregulation is lost"
+   ],
+   "correct": 1,
+   "explain": "Pyrogens &rarr; leukocyte cytokines (IL-1/TNF/IL-6) &rarr; <b>PGE2</b> &rarr; <b>raised hypothalamic set point</b>. The body now perceives itself as cold and <b>shivers (rigors)</b> to generate heat.",
+   "guide": {
+    "f": "W1213_09_Fever_Travel.html",
+    "t": "9 · Fever",
+    "s": "Fever & FUO"
+   }
+  },
+  {
+   "id": "wk1213_q36",
+   "sys": "ID",
+   "topic": "ID · Non-resolving",
+   "difficulty": "hard",
+   "stem": "A previously healthy man with bilateral pneumonia worsens after 4 days of ceftriaxone + azithromycin; cultures and atypical/viral testing are negative and labs show profound lymphopenia. What is the best next step?",
+   "options": [
+    "Continue the same antibiotics indefinitely",
+    "Send HIV testing and consider Pneumocystis jirovecii pneumonia",
+    "Stop investigating because sputum grew normal flora",
+    "Switch to oral vancomycin"
+   ],
+   "correct": 1,
+   "explain": "Non-resolving pneumonia means re-examine bug/drug/diagnosis/host/source. <b>Profound lymphopenia</b> with worsening diffuse pneumonia should prompt <b>HIV testing</b> and consideration of <b>PJP</b> (an AIDS-defining opportunistic infection).",
+   "guide": {
+    "f": "W1213_09_Fever_Travel.html",
+    "t": "9 · Non-resolving",
+    "s": "Emerging diseases & the non-resolving case"
+   }
+  }
+ ],
+ "cards": [
+  {
+   "id": "wk1213_c01",
+   "sys": "ID",
+   "topic": "Stewardship",
+   "type": "order",
+   "guide": {
+    "f": "W1213_01_Framework.html",
+    "t": "1 · Framework",
+    "s": "The 7-step approach"
+   },
+   "prompt": "Order the ID case approach:",
+   "items": [
+    "Identify the syndrome",
+    "Likely bugs + host risk factors",
+    "Diagnostics that change management",
+    "Empiric therapy",
+    "Reassess / de-escalate at 48–72 h"
+   ],
+   "explain": "Syndrome → bugs/host → tests → empiric → reassess/narrow."
+  },
+  {
+   "id": "wk1213_c02",
+   "sys": "ID",
+   "topic": "Stewardship",
+   "type": "multi",
+   "guide": {
+    "f": "W1213_01_Framework.html",
+    "t": "1 · Stewardship",
+    "s": "Stewardship questions"
+   },
+   "prompt": "Which are core stewardship actions? (select all)",
+   "options": [
+    "Narrow spectrum once susceptibilities return",
+    "Switch IV to PO when improving",
+    "Set a defined stop date",
+    "Continue the broadest agent for a fixed 14 days regardless"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "De-escalate, IV→PO, stop date; don't reflexively run broad agents."
+  },
+  {
+   "id": "wk1213_c03",
+   "sys": "ID",
+   "topic": "Stewardship",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_01_Framework.html",
+    "t": "1 · Stewardship",
+    "s": "Stewardship questions"
+   },
+   "prompt": "When is it acceptable to give antibiotics before cultures?",
+   "answer": "In sepsis/meningitis (and other life-threatening infection) — never delay lifesaving antibiotics for cultures, though you obtain cultures first whenever it doesn't meaningfully delay therapy."
+  },
+  {
+   "id": "wk1213_c04",
+   "sys": "ID",
+   "topic": "Stewardship",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_01_Framework.html",
+    "t": "1 · Framework",
+    "s": "The 7-step approach"
+   },
+   "prompt": "Name four situations that require source control.",
+   "answer": "Drain an abscess, remove an infected line/device, debride necrotizing infection, control a perforated viscus (also: relieve obstruction, drain empyema)."
+  },
+  {
+   "id": "wk1213_c05",
+   "sys": "ID",
+   "topic": "Microbiology",
+   "type": "match",
+   "guide": {
+    "f": "W1213_02_Micro.html",
+    "t": "2 · Gram",
+    "s": "Gram stain & morphology"
+   },
+   "prompt": "Match the Gram morphology to an organism:",
+   "pairs": [
+    [
+     "GPC clusters",
+     "Staphylococcus aureus"
+    ],
+    [
+     "GPC chains",
+     "Streptococcus / Enterococcus"
+    ],
+    [
+     "GN diplococci",
+     "Neisseria"
+    ],
+    [
+     "GN bacilli",
+     "E. coli / Pseudomonas"
+    ]
+   ],
+   "explain": "Shape + Gram reaction narrows the differential."
+  },
+  {
+   "id": "wk1213_c06",
+   "sys": "ID",
+   "topic": "Microbiology",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_02_Micro.html",
+    "t": "2 · Gram",
+    "s": "Gram stain & morphology"
+   },
+   "prompt": "Why is S. aureus in a blood culture never dismissed as a contaminant, while CoNS often is?",
+   "answer": "S. aureus bacteremia is virulent (endocarditis, metastatic seeding) and must be treated; coagulase-negative staph is common skin flora and a frequent contaminant/biofilm organism."
+  },
+  {
+   "id": "wk1213_c07",
+   "sys": "ID",
+   "topic": "Microbiology",
+   "type": "cloze",
+   "guide": {
+    "f": "W1213_02_Micro.html",
+    "t": "2 · Classes",
+    "s": "Organism classes"
+   },
+   "text": "Yeasts such as {{Candida}} and Cryptococcus are unicellular budding fungi; {{Aspergillus}} is a mould. The simplest first split for viruses is {{DNA vs RNA}}.",
+   "explain": "Fungi: yeast vs mould; viruses: nucleic acid first."
+  },
+  {
+   "id": "wk1213_c08",
+   "sys": "ID",
+   "topic": "Microbiology",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_02_Micro.html",
+    "t": "2 · Virulence",
+    "s": "Virulence & microbiota"
+   },
+   "prompt": "Why does biofilm on a prosthetic device often require device removal?",
+   "answer": "Biofilm (CoNS, S. aureus, Candida) shields organisms from antibiotics and host defenses, so antibiotics alone frequently fail — source control by removing/replacing the device is needed."
+  },
+  {
+   "id": "wk1213_c09",
+   "sys": "ID",
+   "topic": "Microbiology",
+   "type": "mcq",
+   "guide": {
+    "f": "W1213_02_Micro.html",
+    "t": "2 · Virulence",
+    "s": "Virulence & microbiota"
+   },
+   "prompt": "Antibiotic-driven dysbiosis predisposes to:",
+   "options": [
+    "Tendon rupture",
+    "C. difficile infection and candidiasis",
+    "Aortic aneurysm",
+    "G6PD deficiency"
+   ],
+   "correct": 1,
+   "explain": "Loss of colonization resistance from antibiotics enables C. difficile and Candida overgrowth."
+  },
+  {
+   "id": "wk1213_c10",
+   "sys": "ID",
+   "topic": "Infection Control",
+   "type": "match",
+   "guide": {
+    "f": "W1213_03_InfectionControl.html",
+    "t": "3 · Modes",
+    "s": "Transmission modes & precautions"
+   },
+   "prompt": "Match the pathogen to its precaution:",
+   "pairs": [
+    [
+     "Tuberculosis",
+     "Airborne (N95, negative pressure)"
+    ],
+    [
+     "N. meningitidis",
+     "Droplet (+ contact PEP)"
+    ],
+    [
+     "C. difficile",
+     "Contact + sporicidal cleaning"
+    ],
+    [
+     "Norovirus",
+     "Contact / fecal-oral"
+    ]
+   ],
+   "explain": "Match mode to precaution; airborne = TB, measles, varicella."
+  },
+  {
+   "id": "wk1213_c11",
+   "sys": "ID",
+   "topic": "Infection Control",
+   "type": "cloze",
+   "guide": {
+    "f": "W1213_03_InfectionControl.html",
+    "t": "3 · Modes",
+    "s": "Memorize the airborne three"
+   },
+   "text": "The three classic airborne infections requiring N95 and negative pressure are {{TB}}, {{measles}}, and {{varicella}}.",
+   "explain": "Everything else respiratory is usually droplet."
+  },
+  {
+   "id": "wk1213_c12",
+   "sys": "ID",
+   "topic": "Infection Control",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_03_InfectionControl.html",
+    "t": "3 · PH",
+    "s": "Infection control & public health"
+   },
+   "prompt": "List four public-health tools used to control communicable disease.",
+   "answer": "Vaccination, post-exposure prophylaxis, reportable-disease notification, contact tracing, quarantine, outbreak investigation, surveillance (any four)."
+  },
+  {
+   "id": "wk1213_c13",
+   "sys": "ID",
+   "topic": "Infection Control",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_03_InfectionControl.html",
+    "t": "3 · Modes",
+    "s": "Transmission modes & precautions"
+   },
+   "prompt": "What is offered to close contacts of a meningococcal meningitis case, and why?",
+   "answer": "Chemoprophylaxis/PEP — N. meningitidis is droplet-transmitted and close contacts are at risk; the index case needs droplet precautions until 24 h of effective therapy."
+  },
+  {
+   "id": "wk1213_c14",
+   "sys": "ID",
+   "topic": "Antibacterials",
+   "type": "match",
+   "guide": {
+    "f": "W1213_04_Antibacterials.html",
+    "t": "4 · Beta-lactams",
+    "s": "Beta-lactams"
+   },
+   "prompt": "Match the beta-lactam to its niche:",
+   "pairs": [
+    [
+     "Piperacillin-tazobactam",
+     "Pseudomonas + anaerobes"
+    ],
+    [
+     "Cefazolin/cloxacillin",
+     "MSSA"
+    ],
+    [
+     "Ceftriaxone",
+     "CAP / meningitis / pyelo"
+    ],
+    [
+     "Ampicillin",
+     "Enterococcus / Listeria"
+    ]
+   ],
+   "explain": "Know who covers Pseudomonas, MSSA, and Listeria/Enterococcus."
+  },
+  {
+   "id": "wk1213_c15",
+   "sys": "ID",
+   "topic": "Antibacterials",
+   "type": "mcq",
+   "guide": {
+    "f": "W1213_04_Antibacterials.html",
+    "t": "4 · Others",
+    "s": "Other key antibacterials"
+   },
+   "prompt": "Vancomycin's spectrum is best summarized as:",
+   "options": [
+    "Broad Gram-negative including Pseudomonas",
+    "MRSA and resistant Gram-positives, no Gram-negative",
+    "Anaerobes only",
+    "Atypicals only"
+   ],
+   "correct": 1,
+   "explain": "Glycopeptide for MRSA/resistant Gram-positives; no Gram-negative activity."
+  },
+  {
+   "id": "wk1213_c16",
+   "sys": "ID",
+   "topic": "Antibacterials",
+   "type": "match",
+   "guide": {
+    "f": "W1213_04_Antibacterials.html",
+    "t": "4 · Others",
+    "s": "Other key antibacterials"
+   },
+   "prompt": "Match the antibiotic to its signature toxicity:",
+   "pairs": [
+    [
+     "Fluoroquinolone",
+     "Tendon rupture / QT / aortic aneurysm"
+    ],
+    [
+     "Metronidazole",
+     "Disulfiram-like reaction"
+    ],
+    [
+     "Aminoglycoside",
+     "Nephro- and ototoxicity"
+    ],
+    [
+     "Clindamycin",
+     "C. difficile colitis"
+    ]
+   ],
+   "explain": "Toxicity fingerprints are high-yield exam discriminators."
+  },
+  {
+   "id": "wk1213_c17",
+   "sys": "ID",
+   "topic": "Antibacterials",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_04_Antibacterials.html",
+    "t": "4 · Others",
+    "s": "Other key antibacterials"
+   },
+   "prompt": "Why is clindamycin added to penicillin in invasive group A strep / necrotizing fasciitis?",
+   "answer": "Clindamycin has an anti-toxin (protein-synthesis-inhibiting) effect that suppresses GAS exotoxin production, in addition to its antibacterial action."
+  },
+  {
+   "id": "wk1213_c18",
+   "sys": "ID",
+   "topic": "Antibacterials",
+   "type": "cloze",
+   "guide": {
+    "f": "W1213_04_Antibacterials.html",
+    "t": "4 · Others",
+    "s": "Other key antibacterials"
+   },
+   "text": "Doxycycline is avoided in {{pregnancy}} and in children under {{8}} due to dental staining and skeletal effects.",
+   "explain": "Tetracycline class caution."
+  },
+  {
+   "id": "wk1213_c19",
+   "sys": "ID",
+   "topic": "Antibacterials",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_04_Antibacterials.html",
+    "t": "4 · Others",
+    "s": "Other key antibacterials"
+   },
+   "prompt": "Which antibiotic classes cover atypical pneumonia organisms (Mycoplasma, Chlamydophila, Legionella)?",
+   "answer": "Macrolides (azithromycin), respiratory fluoroquinolones (levofloxacin/moxifloxacin), and tetracyclines (doxycycline)."
+  },
+  {
+   "id": "wk1213_c20",
+   "sys": "ID",
+   "topic": "Antifungals",
+   "type": "match",
+   "guide": {
+    "f": "W1213_05_Antimicrobials2.html",
+    "t": "5 · Antifungals",
+    "s": "Antifungals"
+   },
+   "prompt": "Match the antifungal to its key point:",
+   "pairs": [
+    [
+     "Echinocandin",
+     "Empiric candidemia in ill patients"
+    ],
+    [
+     "Fluconazole",
+     "Candida/Cryptococcus, NOT Aspergillus"
+    ],
+    [
+     "Voriconazole",
+     "Covers Aspergillus"
+    ],
+    [
+     "Amphotericin B",
+     "Nephrotoxic, ↓K/↓Mg"
+    ]
+   ],
+   "explain": "Echinocandin first for candidemia; mould azoles for Aspergillus."
+  },
+  {
+   "id": "wk1213_c21",
+   "sys": "ID",
+   "topic": "Antifungals",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_05_Antimicrobials2.html",
+    "t": "5 · Antifungals",
+    "s": "Antifungals"
+   },
+   "prompt": "What is the empiric antifungal of choice for candidemia in an unstable patient, and the key non-drug step?",
+   "answer": "An echinocandin (caspofungin/micafungin/anidulafungin), plus removal/replacement of infected lines/devices; step down to fluconazole if susceptible and stable."
+  },
+  {
+   "id": "wk1213_c22",
+   "sys": "ID",
+   "topic": "Antifungals",
+   "type": "mcq",
+   "guide": {
+    "f": "W1213_05_Antimicrobials2.html",
+    "t": "5 · Antifungals",
+    "s": "Antifungals"
+   },
+   "prompt": "Flucytosine is typically combined with amphotericin to treat:",
+   "options": [
+    "Aspergillus",
+    "Cryptococcus",
+    "Dermatophytes",
+    "Influenza"
+   ],
+   "correct": 1,
+   "explain": "Flucytosine + amphotericin for cryptococcal disease; not as monotherapy (resistance)."
+  },
+  {
+   "id": "wk1213_c23",
+   "sys": "ID",
+   "topic": "Antivirals",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_05_Antimicrobials2.html",
+    "t": "5 · Antivirals",
+    "s": "Antivirals & ART"
+   },
+   "prompt": "Why do acyclovir/valacyclovir selectively treat HSV/VZV?",
+   "answer": "They are nucleoside analogues that require activation by viral thymidine kinase, then inhibit the viral DNA polymerase — conferring selectivity (and TK mutations cause resistance)."
+  },
+  {
+   "id": "wk1213_c24",
+   "sys": "ID",
+   "topic": "Antivirals",
+   "type": "cloze",
+   "guide": {
+    "f": "W1213_05_Antimicrobials2.html",
+    "t": "5 · Antivirals",
+    "s": "Antivirals & ART"
+   },
+   "text": "Influenza is treated with neuraminidase inhibitors such as {{oseltamivir}}; chronic HBV is suppressed with nucleos(t)ides such as {{tenofovir}} or entecavir.",
+   "explain": "Match antiviral to virus."
+  },
+  {
+   "id": "wk1213_c25",
+   "sys": "ID",
+   "topic": "Antiretrovirals",
+   "type": "cloze",
+   "guide": {
+    "f": "W1213_05_Antimicrobials2.html",
+    "t": "5 · Antivirals",
+    "s": "Antivirals & ART"
+   },
+   "text": "A typical initial HIV regimen is two {{NRTIs}} plus an {{integrase}} inhibitor; goals include viral suppression and prevention of {{transmission}}.",
+   "explain": "Combination ART hits multiple steps."
+  },
+  {
+   "id": "wk1213_c26",
+   "sys": "ID",
+   "topic": "Antiparasitics",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_05_Antimicrobials2.html",
+    "t": "5 · Antiparasitics",
+    "s": "Antiparasitics"
+   },
+   "prompt": "What must be checked before primaquine, and what does primaquine target?",
+   "answer": "Check G6PD (hemolysis risk). Primaquine clears the dormant liver hypnozoites of P. vivax and P. ovale."
+  },
+  {
+   "id": "wk1213_c27",
+   "sys": "ID",
+   "topic": "Antiparasitics",
+   "type": "mcq",
+   "guide": {
+    "f": "W1213_05_Antimicrobials2.html",
+    "t": "5 · Antiparasitics",
+    "s": "Antiparasitics"
+   },
+   "prompt": "Treatment of severe falciparum malaria is:",
+   "options": [
+    "Oral chloroquine",
+    "IV artesunate + critical care",
+    "Primaquine alone",
+    "Topical clotrimazole"
+   ],
+   "correct": 1,
+   "explain": "Severe malaria → IV artesunate; supportive ICU care."
+  },
+  {
+   "id": "wk1213_c28",
+   "sys": "ID",
+   "topic": "Pneumonia",
+   "type": "cloze",
+   "guide": {
+    "f": "W1213_06_Respiratory.html",
+    "t": "6 · CAP",
+    "s": "Pneumonia (CAP vs HAP)"
+   },
+   "text": "CRB-65 scores {{Confusion}}, RR ≥{{30}}, low BP, and age ≥{{65}}. The most common CAP organism is {{S. pneumoniae}}.",
+   "explain": "CRB-65 stratifies CAP severity/disposition."
+  },
+  {
+   "id": "wk1213_c29",
+   "sys": "ID",
+   "topic": "Pneumonia",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_06_Respiratory.html",
+    "t": "6 · CAP",
+    "s": "Pneumonia (CAP vs HAP)"
+   },
+   "prompt": "How do CAP and HAP differ in likely organisms?",
+   "answer": "CAP: S. pneumoniae (plus H. influenzae, Moraxella, atypicals, post-flu S. aureus). HAP: more Gram-negative bacilli, Pseudomonas, and S. aureus — needing broader/anti-pseudomonal empiric cover."
+  },
+  {
+   "id": "wk1213_c30",
+   "sys": "ID",
+   "topic": "Pneumonia",
+   "type": "mcq",
+   "guide": {
+    "f": "W1213_06_Respiratory.html",
+    "t": "6 · CAP",
+    "s": "Pneumonia (CAP vs HAP)"
+   },
+   "prompt": "Severe/admitted CAP empiric therapy typically pairs a beta-lactam with:",
+   "options": [
+    "An antifungal",
+    "A macrolide (azithromycin) for atypical/Legionella cover",
+    "An antiparasitic",
+    "Topical mupirocin"
+   ],
+   "correct": 1,
+   "explain": "Ceftriaxone + azithromycin covers typical + atypical organisms."
+  },
+  {
+   "id": "wk1213_c31",
+   "sys": "ID",
+   "topic": "Tuberculosis",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_06_Respiratory.html",
+    "t": "6 · TB",
+    "s": "Tuberculosis"
+   },
+   "prompt": "Which tests diagnose latent vs active pulmonary TB?",
+   "answer": "Latent: TST or IGRA. Active pulmonary: CXR plus sputum ×3 for AFB smear/culture with susceptibilities, and NAAT. TST/IGRA do not diagnose active disease in adults."
+  },
+  {
+   "id": "wk1213_c32",
+   "sys": "ID",
+   "topic": "Tuberculosis",
+   "type": "multi",
+   "guide": {
+    "f": "W1213_06_Respiratory.html",
+    "t": "6 · TB",
+    "s": "Tuberculosis"
+   },
+   "prompt": "Which apply to suspected active pulmonary TB? (select all)",
+   "options": [
+    "Airborne isolation with N95",
+    "Public-health notification and contact tracing",
+    "Sputum ×3 for AFB",
+    "Discharge home on amoxicillin"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "Airborne control, notification/tracing, sputum ×3; not routine CAP antibiotics."
+  },
+  {
+   "id": "wk1213_c33",
+   "sys": "ID",
+   "topic": "Sepsis",
+   "type": "cloze",
+   "guide": {
+    "f": "W1213_06_Respiratory.html",
+    "t": "6 · Sepsis",
+    "s": "Sepsis & meningitis"
+   },
+   "text": "qSOFA flags risk with ≥2 of: RR ≥{{22}}, altered {{mentation}}, and SBP ≤{{100}}. Septic shock adds vasopressor need and elevated {{lactate}} despite fluids.",
+   "explain": "qSOFA is a bedside screen, not a diagnosis."
+  },
+  {
+   "id": "wk1213_c34",
+   "sys": "ID",
+   "topic": "Sepsis",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_06_Respiratory.html",
+    "t": "6 · Sepsis",
+    "s": "Sepsis & meningitis"
+   },
+   "prompt": "Outline the core early sepsis bundle.",
+   "answer": "Obtain cultures quickly, give early appropriate broad-spectrum antibiotics, give IV fluids to restore perfusion and clear lactate, add vasopressors for shock, monitor lactate/organ function, and achieve source control. Don't delay antibiotics."
+  },
+  {
+   "id": "wk1213_c35",
+   "sys": "ID",
+   "topic": "Meningitis",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_06_Respiratory.html",
+    "t": "6 · Sepsis",
+    "s": "Sepsis & meningitis"
+   },
+   "prompt": "What is the empiric regimen for adult bacterial meningitis, and what does each component cover?",
+   "answer": "Ceftriaxone (common pathogens, e.g. pneumococcus/meningococcus) + vancomycin (resistant pneumococcus) + ampicillin (Listeria in older/immunocompromised/pregnant adults). Don't delay for the LP."
+  },
+  {
+   "id": "wk1213_c36",
+   "sys": "ID",
+   "topic": "C. difficile",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_07_GI_SSTI.html",
+    "t": "7 · Gastro",
+    "s": "Gastroenteritis & C. difficile"
+   },
+   "prompt": "Why does C. difficile recur, and how is it treated first-line now?",
+   "answer": "Its spores resist alcohol and harsh environments (and persist in colonic crypts), driving recurrence. First-line: oral vancomycin or fidaxomicin (metronidazole less preferred); recurrent disease may need fecal microbiota transplant."
+  },
+  {
+   "id": "wk1213_c37",
+   "sys": "ID",
+   "topic": "Gastroenteritis",
+   "type": "mcq",
+   "guide": {
+    "f": "W1213_07_GI_SSTI.html",
+    "t": "7 · Gastro",
+    "s": "Gastroenteritis & C. difficile"
+   },
+   "prompt": "Most non-C. difficile infectious diarrhea is best managed with:",
+   "options": [
+    "Empiric broad-spectrum antibiotics for everyone",
+    "Supportive hydration; antibiotics only when indicated",
+    "Antifungals",
+    "Immediate colectomy"
+   ],
+   "correct": 1,
+   "explain": "Most acute infectious diarrhea is self-limited; avoid unnecessary antibiotics."
+  },
+  {
+   "id": "wk1213_c38",
+   "sys": "ID",
+   "topic": "SSTI",
+   "type": "match",
+   "guide": {
+    "f": "W1213_07_GI_SSTI.html",
+    "t": "7 · SSTI",
+    "s": "Skin & soft tissue"
+   },
+   "prompt": "Match the SSTI to a management point:",
+   "pairs": [
+    [
+     "Abscess",
+     "Incision & drainage"
+    ],
+    [
+     "Cellulitis",
+     "Find the portal of entry (tinea)"
+    ],
+    [
+     "Necrotizing fasciitis",
+     "Surgical emergency + penicillin/clindamycin"
+    ],
+    [
+     "Animal bite",
+     "Amoxicillin-clavulanate"
+    ]
+   ],
+   "explain": "I&D for abscess, surgery for nec fasc, find the portal in cellulitis."
+  },
+  {
+   "id": "wk1213_c39",
+   "sys": "ID",
+   "topic": "SSTI",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_07_GI_SSTI.html",
+    "t": "7 · SSTI",
+    "s": "Skin & soft tissue"
+   },
+   "prompt": "What clinical clues flag necrotizing fasciitis over simple cellulitis?",
+   "answer": "Pain out of proportion to exam, rapid progression, bullae, systemic toxicity, and crepitus/skin necrosis — a surgical emergency needing debridement, not just antibiotics."
+  },
+  {
+   "id": "wk1213_c40",
+   "sys": "ID",
+   "topic": "Candidiasis",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_07_GI_SSTI.html",
+    "t": "7 · Candida",
+    "s": "Candidiasis"
+   },
+   "prompt": "List several risk factors for invasive candidiasis.",
+   "answer": "Central lines, TPN, broad-spectrum antibiotics, prolonged ICU stay, abdominal surgery, neutropenia/hematologic malignancy, diabetes, organ transplant."
+  },
+  {
+   "id": "wk1213_c41",
+   "sys": "ID",
+   "topic": "Candidiasis",
+   "type": "cloze",
+   "guide": {
+    "f": "W1213_07_GI_SSTI.html",
+    "t": "7 · Candida",
+    "s": "Candidiasis"
+   },
+   "text": "Candida in blood is {{never}} a contaminant. Empiric therapy in an ill patient is an {{echinocandin}}, plus removal of infected {{lines}}.",
+   "explain": "Candidemia: treat, source-control, assess dissemination."
+  },
+  {
+   "id": "wk1213_c42",
+   "sys": "ID",
+   "topic": "Hepatitis",
+   "type": "match",
+   "guide": {
+    "f": "W1213_08_Hepatitis_HIV.html",
+    "t": "8 · Hepatitis",
+    "s": "Viral hepatitis"
+   },
+   "prompt": "Match the HBV marker to its meaning:",
+   "pairs": [
+    [
+     "HBsAg",
+     "Current infection (>6 mo = chronic)"
+    ],
+    [
+     "Anti-HBs",
+     "Immunity (vaccine or resolved)"
+    ],
+    [
+     "Total anti-HBc",
+     "Past/current natural infection"
+    ],
+    [
+     "IgM anti-HBc",
+     "Acute infection / flare"
+    ]
+   ],
+   "explain": "anti-HBc distinguishes natural infection from vaccine immunity."
+  },
+  {
+   "id": "wk1213_c43",
+   "sys": "ID",
+   "topic": "Hepatitis",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_08_Hepatitis_HIV.html",
+    "t": "8 · Hepatitis",
+    "s": "Viral hepatitis"
+   },
+   "prompt": "A patient is HBsAg−, anti-HBc+, anti-HBs+, IgM anti-HBc−. Interpretation?",
+   "answer": "Resolved natural HBV infection (vaccine immunity would have anti-HBs but NOT anti-HBc)."
+  },
+  {
+   "id": "wk1213_c44",
+   "sys": "ID",
+   "topic": "Hepatitis",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_08_Hepatitis_HIV.html",
+    "t": "8 · Hepatitis",
+    "s": "Viral hepatitis"
+   },
+   "prompt": "A positive anti-HCV tells you what, and what test confirms active infection?",
+   "answer": "It indicates HCV exposure (could be acute, chronic, or resolved). HCV RNA is needed to confirm active viremia/infection."
+  },
+  {
+   "id": "wk1213_c45",
+   "sys": "ID",
+   "topic": "Hepatitis",
+   "type": "cloze",
+   "guide": {
+    "f": "W1213_08_Hepatitis_HIV.html",
+    "t": "8 · Hepatitis",
+    "s": "Viral hepatitis"
+   },
+   "text": "Protective hepatitis B immunity is anti-HBs ≥{{10}} IU/L. Chronic HBV risk is ~{{90}}% after infant infection but only ~5% after adult infection.",
+   "explain": "Age at infection drives chronicity risk."
+  },
+  {
+   "id": "wk1213_c46",
+   "sys": "ID",
+   "topic": "Hepatitis",
+   "type": "mcq",
+   "guide": {
+    "f": "W1213_08_Hepatitis_HIV.html",
+    "t": "8 · Hepatitis",
+    "s": "Viral hepatitis"
+   },
+   "prompt": "Which hepatitis virus has the highest rate of progression to chronic infection (but is usually curable)?",
+   "options": [
+    "Hepatitis A",
+    "Hepatitis C",
+    "Hepatitis E",
+    "None become chronic"
+   ],
+   "correct": 1,
+   "explain": "HCV: ~75–85% chronic, but modern DAAs cure most. HAV never chronic."
+  },
+  {
+   "id": "wk1213_c47",
+   "sys": "ID",
+   "topic": "HIV",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_08_Hepatitis_HIV.html",
+    "t": "8 · HIV",
+    "s": "HIV"
+   },
+   "prompt": "In acute HIV, which marker becomes detectable earliest, and what is the screening test?",
+   "answer": "HIV RNA (viral load) is detectable earliest, then p24 antigen, then antibodies. Screen with a 4th-generation HIV antibody/p24-antigen assay."
+  },
+  {
+   "id": "wk1213_c48",
+   "sys": "ID",
+   "topic": "HIV",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_08_Hepatitis_HIV.html",
+    "t": "8 · HIV",
+    "s": "HIV"
+   },
+   "prompt": "When should ART be started in a newly diagnosed HIV patient?",
+   "answer": "For all people with HIV, regardless of CD4 count — don't wait for CD4 <200. Early ART preserves immunity and prevents transmission."
+  },
+  {
+   "id": "wk1213_c49",
+   "sys": "ID",
+   "topic": "HIV Exposure",
+   "type": "cloze",
+   "guide": {
+    "f": "W1213_08_Hepatitis_HIV.html",
+    "t": "8 · Exposure",
+    "s": "Blood-borne exposure / PEP"
+   },
+   "text": "HIV PEP should start within {{72}} hours (best <24 h) and consists of {{3}} antiretrovirals for {{4}} weeks; follow-up testing at 6 and 12 weeks.",
+   "explain": "Time-critical, 3-drug, 4-week course."
+  },
+  {
+   "id": "wk1213_c50",
+   "sys": "ID",
+   "topic": "HIV Exposure",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_08_Hepatitis_HIV.html",
+    "t": "8 · Exposure",
+    "s": "Blood-borne exposure / PEP"
+   },
+   "prompt": "A source patient on ART has a documented undetectable viral load and no STI. How does this affect PEP?",
+   "answer": "Transmissible risk is negligible, so PEP is generally not recommended even for higher-risk exposures; baseline and follow-up testing still apply."
+  },
+  {
+   "id": "wk1213_c51",
+   "sys": "ID",
+   "topic": "HIV Exposure",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_08_Hepatitis_HIV.html",
+    "t": "8 · Exposure",
+    "s": "Blood-borne exposure / PEP"
+   },
+   "prompt": "What is the immediate response to a needlestick injury?",
+   "answer": "Stop, wash/flush the area, and report immediately to a supervisor/occupational health/ED — do not wait until the end of shift; then assess source and exposure for PEP decisions."
+  },
+  {
+   "id": "wk1213_c52",
+   "sys": "ID",
+   "topic": "HIV Exposure",
+   "type": "multi",
+   "guide": {
+    "f": "W1213_08_Hepatitis_HIV.html",
+    "t": "8 · Exposure",
+    "s": "Blood-borne exposure / PEP"
+   },
+   "prompt": "Which are true about hepatitis post-exposure? (select all)",
+   "options": [
+    "HBV: check anti-HBs; vaccine ± HBIG if nonimmune and source positive/unknown",
+    "HCV: no vaccine or prophylaxis; baseline + follow-up testing",
+    "HCV: give immune globulin prophylaxis",
+    "Protective anti-HBs is ≥10 IU/L"
+   ],
+   "correct": [
+    0,
+    1,
+    3
+   ],
+   "explain": "No HCV vaccine/Ig/prophylaxis exists; HBV uses vaccine ± HBIG; anti-HBs ≥10 is protective."
+  },
+  {
+   "id": "wk1213_c53",
+   "sys": "ID",
+   "topic": "Fever",
+   "type": "cloze",
+   "guide": {
+    "f": "W1213_09_Fever_Travel.html",
+    "t": "9 · Fever",
+    "s": "Fever & FUO"
+   },
+   "text": "Pyrogens trigger leukocyte cytokines (IL-1/TNF/IL-6) → {{PGE2}} → a {{raised}} hypothalamic set point; the body then {{shivers}} (rigors) to reach it.",
+   "explain": "Set-point physiology explains rigors."
+  },
+  {
+   "id": "wk1213_c54",
+   "sys": "ID",
+   "topic": "Fever",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_09_Fever_Travel.html",
+    "t": "9 · Fever",
+    "s": "Fever & FUO"
+   },
+   "prompt": "Besides infection, name causes on the fever differential.",
+   "answer": "Malignancy, autoimmune/inflammatory disease, drug fever, thrombosis (DVT/PE), endocrine/metabolic, and environmental heat illness. Fever may be blunted in older adults."
+  },
+  {
+   "id": "wk1213_c55",
+   "sys": "ID",
+   "topic": "Traveller",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_09_Fever_Travel.html",
+    "t": "9 · Traveller",
+    "s": "The returned traveller"
+   },
+   "prompt": "What is the first diagnosis to exclude in any febrile traveller from the tropics, and how?",
+   "answer": "Malaria — with thick/thin blood smears now, repeated q12h up to 3 sets, or malaria NAAT. It is the key life-threatening, treatable cause."
+  },
+  {
+   "id": "wk1213_c56",
+   "sys": "ID",
+   "topic": "Traveller",
+   "type": "match",
+   "guide": {
+    "f": "W1213_09_Fever_Travel.html",
+    "t": "9 · Traveller",
+    "s": "The returned traveller"
+   },
+   "prompt": "Match the incubation to likely diagnoses:",
+   "pairs": [
+    [
+     "Short (<21 d)",
+     "Dengue, typhoid, acute HIV"
+    ],
+    [
+     "Long (>21 d)",
+     "Malaria, viral hepatitis, TB"
+    ]
+   ],
+   "explain": "Incubation narrows the traveller differential."
+  },
+  {
+   "id": "wk1213_c57",
+   "sys": "ID",
+   "topic": "Classification",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_09_Fever_Travel.html",
+    "t": "9 · Parasites",
+    "s": "Parasite & virus classification"
+   },
+   "prompt": "What is the simplest clinically useful first split for classifying human viruses?",
+   "answer": "DNA versus RNA (then further by envelope, capsid symmetry, and replication strategy). Enveloped viruses are generally less environmentally hardy."
+  },
+  {
+   "id": "wk1213_c58",
+   "sys": "ID",
+   "topic": "Classification",
+   "type": "match",
+   "guide": {
+    "f": "W1213_09_Fever_Travel.html",
+    "t": "9 · Parasites",
+    "s": "Parasite & virus classification"
+   },
+   "prompt": "Match the parasite host term to its definition:",
+   "pairs": [
+    [
+     "Definitive host",
+     "Adult/sexual reproduction"
+    ],
+    [
+     "Intermediate host",
+     "Larval/asexual stage"
+    ],
+    [
+     "Accidental host",
+     "Not normally infected"
+    ]
+   ],
+   "explain": "Host terminology for parasite life cycles."
+  },
+  {
+   "id": "wk1213_c59",
+   "sys": "ID",
+   "topic": "Emerging",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_09_Fever_Travel.html",
+    "t": "9 · Emerging",
+    "s": "Emerging diseases & the non-resolving case"
+   },
+   "prompt": "List several drivers of infectious-disease emergence.",
+   "answer": "Microbial adaptation/change, human susceptibility, economic development/land use, climate/weather, travel/commerce, breakdown of public-health measures, and intent to harm (bioterrorism)."
+  },
+  {
+   "id": "wk1213_c60",
+   "sys": "ID",
+   "topic": "Emerging",
+   "type": "cloze",
+   "guide": {
+    "f": "W1213_09_Fever_Travel.html",
+    "t": "9 · Emerging",
+    "s": "Emerging diseases & the non-resolving case"
+   },
+   "text": "Pandemic influenza arises from a novel virus via antigenic {{shift}}/reassortment, giving higher attack rates than seasonal flu.",
+   "explain": "Shift/reassortment = pandemic potential; drift = seasonal."
+  },
+  {
+   "id": "wk1213_c61",
+   "sys": "ID",
+   "topic": "Non-resolving",
+   "type": "match",
+   "guide": {
+    "f": "W1213_09_Fever_Travel.html",
+    "t": "9 · Non-resolving",
+    "s": "Emerging diseases & the non-resolving case"
+   },
+   "prompt": "Match the non-resolving-infection problem to an example:",
+   "pairs": [
+    [
+     "Bug-drug mismatch",
+     "Resistant or atypical/TB/fungal organism"
+    ],
+    [
+     "Missing source control",
+     "Undrained abscess / infected line"
+    ],
+    [
+     "Wrong diagnosis",
+     "Malignancy or PE mimic"
+    ],
+    [
+     "Host factor",
+     "Undiagnosed HIV → PJP"
+    ]
+   ],
+   "explain": "Re-think bug, drug, source, diagnosis, and host."
+  },
+  {
+   "id": "wk1213_c62",
+   "sys": "ID",
+   "topic": "Non-resolving",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_09_Fever_Travel.html",
+    "t": "9 · Non-resolving",
+    "s": "Emerging diseases & the non-resolving case"
+   },
+   "prompt": "Worsening bilateral pneumonia with profound lymphopenia despite standard CAP therapy — what host-factor work-up is key?",
+   "answer": "Test for HIV and consider Pneumocystis jirovecii pneumonia (an opportunistic, AIDS-defining infection)."
+  },
+  {
+   "id": "wk1213_c63",
+   "sys": "ID",
+   "topic": "Antibacterials",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_04_Antibacterials.html",
+    "t": "4 · Beta-lactams",
+    "s": "Beta-lactams"
+   },
+   "prompt": "Which beta-lactams add Listeria/Enterococcus coverage that cephalosporins lack?",
+   "answer": "Aminopenicillins — ampicillin/amoxicillin. (Cephalosporins generally do not cover Listeria or enterococci.)"
+  },
+  {
+   "id": "wk1213_c64",
+   "sys": "ID",
+   "topic": "Infection Control",
+   "type": "mcq",
+   "guide": {
+    "f": "W1213_03_InfectionControl.html",
+    "t": "3 · PH",
+    "s": "Infection control & public health"
+   },
+   "prompt": "Additional (transmission-based) precautions are added when:",
+   "options": [
+    "Always, for every patient",
+    "The syndrome/pathogen suggests extra transmission risk (contact, droplet, or airborne)",
+    "Only for surgical patients",
+    "Never, routine practices suffice for all"
+   ],
+   "correct": 1,
+   "explain": "Routine practices for all; additional precautions layered by transmission risk."
+  },
+  {
+   "id": "wk1213_c65",
+   "sys": "ID",
+   "topic": "Microbiology",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_02_Micro.html",
+    "t": "2 · Classes",
+    "s": "Organism classes"
+   },
+   "prompt": "How are bacteria classically classified in the lab?",
+   "answer": "By Gram reaction (positive/negative), morphology (cocci/bacilli; clusters/chains), and oxygen tolerance (aerobic/anaerobic)."
+  },
+  {
+   "id": "wk1213_c66",
+   "sys": "ID",
+   "topic": "Hepatitis",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_08_Hepatitis_HIV.html",
+    "t": "8 · Hepatitis",
+    "s": "Viral hepatitis"
+   },
+   "prompt": "Which lab pattern reflects impaired hepatic synthetic function in hepatitis?",
+   "answer": "Low albumin and a prolonged PT/INR (in addition to elevated bilirubin and transaminases, which reflect injury rather than synthesis)."
+  },
+  {
+   "id": "wk1213_c67",
+   "sys": "ID",
+   "topic": "Emerging",
+   "type": "match",
+   "guide": {
+    "f": "W1213_09_Fever_Travel.html",
+    "t": "9 · Emerging",
+    "s": "Emerging diseases & the non-resolving case"
+   },
+   "prompt": "Match the emerging disease to a key feature:",
+   "pairs": [
+    [
+     "Anthrax",
+     "Spore-forming Bacillus; potential bioterror agent"
+    ],
+    [
+     "West Nile virus",
+     "Mosquito-borne flavivirus, birds reservoir"
+    ],
+    [
+     "Lyme disease",
+     "Tick-borne Borrelia; erythema migrans"
+    ],
+    [
+     "Measles",
+     "Airborne, highly contagious"
+    ]
+   ],
+   "explain": "Each emerging/re-emerging disease has a signature reservoir/transmission."
+  },
+  {
+   "id": "wk1213_c68",
+   "sys": "ID",
+   "topic": "Antiparasitics",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_05_Antimicrobials2.html",
+    "t": "5 · Antiparasitics",
+    "s": "Antiparasitics"
+   },
+   "prompt": "Name the malaria chemoprophylaxis options and a caution for each.",
+   "answer": "Atovaquone-proguanil (GI/cost), doxycycline (photosensitivity/esophagitis, not in pregnancy/young children), and mefloquine (neuropsychiatric effects). Choice depends on destination/resistance/patient."
+  },
+  {
+   "id": "wk1213_c69",
+   "sys": "ID",
+   "topic": "HIV Exposure",
+   "type": "cloze",
+   "guide": {
+    "f": "W1213_08_Hepatitis_HIV.html",
+    "t": "8 · Exposure",
+    "s": "Blood-borne exposure / PEP"
+   },
+   "text": "Per-exposure HIV transmission risk (course figures): percutaneous ~{{0.3}}%, mucous membrane ~{{0.1}}%, intact skin <0.1%; risk rises with source {{viral load}}.",
+   "explain": "Exposure type and source viral load drive risk."
+  },
+  {
+   "id": "wk1213_c70",
+   "sys": "ID",
+   "topic": "Antivirals",
+   "type": "mcq",
+   "guide": {
+    "f": "W1213_05_Antimicrobials2.html",
+    "t": "5 · Antivirals",
+    "s": "Antivirals & ART"
+   },
+   "prompt": "Oseltamivir treats influenza by inhibiting:",
+   "options": [
+    "Viral DNA polymerase",
+    "Neuraminidase",
+    "Beta-1,3-glucan synthesis",
+    "Bacterial ribosomes"
+   ],
+   "correct": 1,
+   "explain": "Oseltamivir is a neuraminidase inhibitor; baloxavir inhibits the cap-dependent endonuclease."
+  },
+  {
+   "id": "wk1213_c71",
+   "sys": "ID",
+   "topic": "Antibacterials",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_04_Antibacterials.html",
+    "t": "4 · Others",
+    "s": "Other key antibacterials"
+   },
+   "prompt": "For what infections is TMP-SMX used, and what are key cautions?",
+   "answer": "Some MRSA SSTIs, Pneumocystis (PJP) treatment/prophylaxis, and many UTIs. Cautions: sulfa allergy/SJS, hyperkalemia, cytopenias, and use-with-care in pregnancy."
+  },
+  {
+   "id": "wk1213_c72",
+   "sys": "ID",
+   "topic": "Antibacterials",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_04_Antibacterials.html",
+    "t": "4 · Beta-lactams",
+    "s": "Beta-lactams"
+   },
+   "prompt": "Name two cautions specific to carbapenems (e.g. meropenem).",
+   "answer": "Seizure/CNS risk and a drug interaction that lowers valproic acid levels; reserve for strong indications (e.g. severe ESBL infection). Ertapenem lacks Pseudomonas coverage."
+  },
+  {
+   "id": "wk1213_c73",
+   "sys": "ID",
+   "topic": "Hepatitis",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_08_Hepatitis_HIV.html",
+    "t": "8 · Hepatitis",
+    "s": "Viral hepatitis"
+   },
+   "prompt": "What does an isolated positive anti-HBc (HBsAg−, anti-HBs−) mean?",
+   "answer": "Several possibilities: resolved infection with waning anti-HBs, a false positive, occult HBV infection, or the window period — interpret clinically and with further testing."
+  },
+  {
+   "id": "wk1213_c74",
+   "sys": "ID",
+   "topic": "Classification",
+   "type": "cloze",
+   "guide": {
+    "f": "W1213_09_Fever_Travel.html",
+    "t": "9 · Parasites",
+    "s": "Parasite & virus classification"
+   },
+   "text": "{{Enveloped}} viruses are generally less environmentally hardy than non-enveloped viruses. Active viral disease is often confirmed by {{NAAT}}/PCR or antigen detection.",
+   "explain": "Envelope affects environmental survival; NAAT detects active disease."
+  },
+  {
+   "id": "wk1213_c75",
+   "sys": "ID",
+   "topic": "Traveller",
+   "type": "mcq",
+   "guide": {
+    "f": "W1213_09_Fever_Travel.html",
+    "t": "9 · Traveller",
+    "s": "The returned traveller"
+   },
+   "prompt": "A febrile traveller who returned 10 days ago — which becomes LESS likely?",
+   "options": [
+    "Malaria",
+    "Dengue",
+    "Typhoid",
+    "Tuberculosis"
+   ],
+   "correct": 1,
+   "explain": "Dengue has a short incubation (often 3–5 days); if symptom onset is >7 days after return it becomes less likely."
+  },
+  {
+   "id": "wk1213_c76",
+   "sys": "ID",
+   "topic": "Antibacterials",
+   "type": "mcq",
+   "guide": {
+    "f": "W1213_04_Antibacterials.html",
+    "t": "4 · Others",
+    "s": "Other key antibacterials"
+   },
+   "prompt": "Aminoglycosides (e.g. gentamicin) require monitoring chiefly because of:",
+   "options": [
+    "Tendon rupture",
+    "Nephrotoxicity and ototoxicity",
+    "Disulfiram-like reactions",
+    "C. difficile colitis"
+   ],
+   "correct": 1,
+   "explain": "Nephro- and ototoxicity (and neuromuscular blockade) necessitate level monitoring."
+  },
+  {
+   "id": "wk1213_c77",
+   "sys": "ID",
+   "topic": "Microbiology",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_02_Micro.html",
+    "t": "2 · Virulence",
+    "s": "Virulence & microbiota"
+   },
+   "prompt": "Give one benefit and one harm of the normal microbiota.",
+   "answer": "Benefit: immune stimulation and colonization resistance against pathogens. Harm: a source of contamination or opportunistic infection when displaced into sterile sites (e.g. translocation, line infection)."
+  },
+  {
+   "id": "wk1213_c78",
+   "sys": "ID",
+   "topic": "Antifungals",
+   "type": "match",
+   "guide": {
+    "f": "W1213_05_Antimicrobials2.html",
+    "t": "5 · Antifungals",
+    "s": "Antifungals"
+   },
+   "prompt": "Match the antifungal class to its mechanism:",
+   "pairs": [
+    [
+     "Polyene (amphotericin)",
+     "Binds ergosterol → membrane pores"
+    ],
+    [
+     "Azole",
+     "Inhibits ergosterol synthesis"
+    ],
+    [
+     "Echinocandin",
+     "Inhibits β-1,3-glucan (cell wall)"
+    ],
+    [
+     "Allylamine (terbinafine)",
+     "Ergosterol pathway; dermatophytes"
+    ]
+   ],
+   "explain": "Target the membrane, its synthesis, or the cell wall."
+  },
+  {
+   "id": "wk1213_c79",
+   "sys": "ID",
+   "topic": "SSTI",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_07_GI_SSTI.html",
+    "t": "7 · SSTI",
+    "s": "Skin & soft tissue"
+   },
+   "prompt": "What is the empiric antibiotic of choice for animal/human bite wounds, and why?",
+   "answer": "Amoxicillin-clavulanate — bites are polymicrobial including anaerobes and oral flora (e.g. Pasteurella), which it covers; moxifloxacin is an alternative in some settings."
+  },
+  {
+   "id": "wk1213_c80",
+   "sys": "ID",
+   "topic": "Sepsis",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_06_Respiratory.html",
+    "t": "6 · Sepsis",
+    "s": "Sepsis & meningitis"
+   },
+   "prompt": "Define sepsis vs septic shock, with their approximate mortality.",
+   "answer": "Sepsis = life-threatening organ dysfunction from a dysregulated host response to infection (SOFA ≥2; mortality >10%). Septic shock = sepsis with vasopressor requirement and elevated lactate despite fluid resuscitation (mortality >40%)."
+  },
+  {
+   "id": "wk1213_c81",
+   "sys": "ID",
+   "topic": "HIV",
+   "type": "cloze",
+   "guide": {
+    "f": "W1213_08_Hepatitis_HIV.html",
+    "t": "8 · HIV",
+    "s": "HIV"
+   },
+   "text": "Acute HIV seroconversion presents with fever, {{lymphadenopathy}}, pharyngitis, {{rash}}, and diarrhea after exposure; untreated HIV progresses over roughly {{10}} years.",
+   "explain": "A mononucleosis-like syndrome should prompt HIV testing in the right context."
+  },
+  {
+   "id": "wk1213_c82",
+   "sys": "ID",
+   "topic": "Stewardship",
+   "type": "qa",
+   "guide": {
+    "f": "W1213_01_Framework.html",
+    "t": "1 · Stewardship",
+    "s": "Stewardship questions"
+   },
+   "prompt": "Why obtain cultures before starting antibiotics when feasible?",
+   "answer": "Antibiotics rapidly reduce culture yield; pre-treatment blood/urine/sputum/CSF/abscess cultures improve the chance of identifying the organism and susceptibilities to enable later de-escalation — but never delay lifesaving therapy to get them."
+  }
+ ],
+ "guides": [
+  {
+   "file": "W1213_01_Framework.html",
+   "title": "Weeks 12–13 · 1 ID Framework & Stewardship",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>ID Framework &amp; Stewardship</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#2f6b4f;--accent2:#7c2d2d;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.4px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.6px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Approach</div><h1>ID Framework &amp; Stewardship</h1></div><div class=\"r\">Weeks 12&ndash;13 &middot; Micro &amp; ID<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">The seven-step approach applied to every infection case, and the stewardship questions &mdash; empiric vs targeted, broad vs narrow, cultures-first, source control, and de-escalation.</p>\n<h2 id=\"framework\">The 7-step approach</h2>\n<p>Use the same scaffold for every case: <b>syndrome &rarr; likely bugs &rarr; host risk factors &rarr; diagnostics &rarr; empiric therapy &rarr; reassess/de-escalate &rarr; prevention/transmission control.</b></p>\n<ol>\n<li><b>Is there an infection?</b> Localizing + systemic signs, inflammatory markers, imaging, micro. <b>Fever is not always infection.</b></li>\n<li><b>What is the syndrome?</b> (pneumonia, gastroenteritis, SSTI, sepsis, traveller's fever&hellip;)</li>\n<li><b>Bug story:</b> likely pathogens, reservoir, portal of entry, source-control need.</li>\n<li><b>Patient story:</b> age, pregnancy, immunosuppression, diabetes, devices, travel, exposures.</li>\n<li><b>Communicable?</b> Routine practices + additional precautions; public-health notification/contact tracing.</li>\n<li><b>Confirm &amp; manage:</b> order tests that change management; treat promptly (esp. <b>sepsis/meningitis</b>) but avoid unnecessary antimicrobials.</li>\n<li><b>Reassess at 48&ndash;72 h / on cultures:</b> narrow, IV&rarr;PO, set a stop date.</li>\n</ol>\n<h2 id=\"stewardship\">Stewardship questions</h2>\n<table>\n<tr><th>Ask</th><th>Meaning</th></tr>\n<tr><td>Bacterial — confirmed or suspected?</td><td>No antibacterials for uncomplicated viral URTI</td></tr>\n<tr><td>Empiric or targeted?</td><td>Empiric if ill/pending; targeted once organism + susceptibilities known</td></tr>\n<tr><td>Broad or narrow?</td><td>Start broad only when justified; <b>narrow ASAP</b></td></tr>\n<tr><td>Cultures first?</td><td>Blood/urine/sputum/CSF/abscess before antibiotics when feasible &mdash; but <span class=\"dnm\">never delay lifesaving antibiotics</span></td></tr>\n<tr><td><b>Source control?</b></td><td>Drain abscess, remove infected line/device, debride necrotizing infection, control perforation</td></tr>\n<tr><td>Route/dose/duration?</td><td>IV for severe/can't absorb; switch to PO once improving; shortest effective duration</td></tr>\n</table>\n<div class=\"key\"><b>De-escalation</b> (narrow spectrum, IV&rarr;PO, stop date) is the heart of antimicrobial stewardship.</div>\n</div>"
+  },
+  {
+   "file": "W1213_02_Micro.html",
+   "title": "Weeks 12–13 · 2 Microbiology Basics & Gram Stain",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Microbiology Basics &amp; Gram Stain</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#2f6b4f;--accent2:#7c2d2d;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.4px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.6px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Bugs 101</div><h1>Microbiology Basics &amp; Gram Stain</h1></div><div class=\"r\">Weeks 12&ndash;13 &middot; Micro &amp; ID<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">Organism classes, the Gram-stain/morphology map from staph clusters to Gram-negative bacilli (with the contaminant caveats), and virulence factors, biofilm, and dysbiosis.</p>\n<h2 id=\"classes\">Organism classes</h2>\n<table>\n<tr><th>Class</th><th>High-yield</th></tr>\n<tr><td>Bacteria</td><td>Prokaryote, peptidoglycan wall; classify by Gram, morphology, O&#8322; tolerance</td></tr>\n<tr><td>Viruses</td><td>Acellular, obligate intracellular; classify by nucleic acid (DNA/RNA), envelope, capsid, replication</td></tr>\n<tr><td>Fungi</td><td><b>Yeasts</b> (Candida, Cryptococcus) vs <b>moulds/dimorphic</b> (Aspergillus, Mucor, Histoplasma, Blastomyces)</td></tr>\n<tr><td>Parasites</td><td>Protozoa, helminths, arthropods (Plasmodium &rarr; malaria)</td></tr>\n</table>\n<h2 id=\"gram\">Gram stain &amp; morphology</h2>\n<table>\n<tr><th>Gram / shape</th><th>Examples</th><th>Clinical clue</th></tr>\n<tr><td>GPC in <b>clusters</b></td><td>S. aureus; CoNS</td><td>S. aureus: SSTI, bacteremia, post-flu pneumonia. <span class=\"dnm\">Never dismiss S. aureus in blood as contaminant</span>; CoNS often contaminant/biofilm</td></tr>\n<tr><td>GPC in <b>chains</b></td><td>S. pyogenes, S. agalactiae, Enterococcus; S. pneumoniae (diplococci)</td><td>GAS: cellulitis/nec fasc/TSS; pneumococcus: CAP/meningitis</td></tr>\n<tr><td>GP bacilli</td><td>Listeria, Corynebacterium, Bacillus, Clostridium</td><td><b>C. difficile</b> spores &rarr; antibiotic-associated colitis</td></tr>\n<tr><td>GN diplococci</td><td>Neisseria</td><td>Meningitis/meningococcemia; gonorrhea</td></tr>\n<tr><td>GN coccobacilli</td><td>Haemophilus, Moraxella</td><td>CAP/COPD exacerbation</td></tr>\n<tr><td>GN bacilli</td><td>E. coli, Klebsiella, Pseudomonas, Bacteroides</td><td>UTI, sepsis, HAP, intra-abdominal; Bacteroides anaerobic; Pseudomonas with structural lung/healthcare</td></tr>\n</table>\n<h2 id=\"virulence\">Virulence &amp; microbiota</h2>\n<ul>\n<li><b>Virulence:</b> invasion (adhesins, capsule, biofilm, intracellular survival) + host damage (inflammation, toxins).</li>\n<li><b>Biofilm</b> on catheters/prosthetics (CoNS, S. aureus, Candida) &rarr; may need <b>device removal</b>.</li>\n<li><b>Dysbiosis</b> (often from antimicrobials) &rarr; C. difficile, candidiasis.</li>\n</ul>\n</div>"
+  },
+  {
+   "file": "W1213_03_InfectionControl.html",
+   "title": "Weeks 12–13 · 3 Transmission, Infection Control & Public Health",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Transmission, Infection Control &amp; Public Health</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#2f6b4f;--accent2:#7c2d2d;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.4px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.6px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Stop the Spread</div><h1>Transmission, Infection Control &amp; Public Health</h1></div><div class=\"r\">Weeks 12&ndash;13 &middot; Micro &amp; ID<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">The five transmission modes and their precautions (with the airborne trio &mdash; TB, measles, varicella), routine vs additional precautions, and the public-health toolkit.</p>\n<h2 id=\"modes\">Transmission modes &amp; precautions</h2>\n<table>\n<tr><th>Mode</th><th>Examples</th><th>Precautions</th></tr>\n<tr><td>Contact / fecal-oral</td><td>Norovirus, <b>C. difficile</b>, resistant organisms</td><td>Gown/gloves, hand hygiene; <b>sporicidal cleaning</b> for C. diff</td></tr>\n<tr><td>Droplet (~2 m)</td><td>Influenza, respiratory viruses, <b>N. meningitidis</b></td><td>Surgical mask + eye protection; close-contact <b>PEP</b> for meningococcus</td></tr>\n<tr><td class=\"dnm\">Airborne</td><td><b>TB, measles, varicella</b></td><td><b>Negative-pressure room + N95</b>, door closed; notify public health, contact-trace</td></tr>\n<tr><td>Vector-borne</td><td>Malaria, Zika, West Nile, Lyme</td><td>Vector avoidance, travel counselling, surveillance</td></tr>\n<tr><td>Blood-borne</td><td>Needlestick, transfusion, IDU, sexual, vertical</td><td>Immediate reporting, baseline testing, <b>PEP</b> when indicated</td></tr>\n</table>\n<div class=\"band warn\"><div class=\"t\">Memorize the airborne three</div><b>TB, measles, varicella</b> &rarr; N95 + negative pressure. Everything else respiratory is usually droplet.</div>\n<h2 id=\"ph\">Infection control &amp; public health</h2>\n<ul>\n<li><b>Routine practices:</b> hand hygiene, risk assessment, PPE, safe sharps, environmental cleaning.</li>\n<li><b>Additional precautions:</b> contact, droplet/contact, or airborne by syndrome/pathogen.</li>\n<li><b>Public-health tools:</b> vaccination, PEP, reportable-disease notification, contact tracing, quarantine, outbreak investigation, surveillance.</li>\n<li><b>Stewardship of resources:</b> avoid low-value testing/treatment (harm, false positives, cost).</li>\n</ul>\n</div>"
+  },
+  {
+   "file": "W1213_04_Antibacterials.html",
+   "title": "Weeks 12–13 · 4 Antibacterial Pharmacology",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Antibacterial Pharmacology</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#2f6b4f;--accent2:#7c2d2d;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.4px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.6px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Drugs I</div><h1>Antibacterial Pharmacology</h1></div><div class=\"r\">Weeks 12&ndash;13 &middot; Micro &amp; ID<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">Beta-lactams from amoxicillin to carbapenems (who covers Pseudomonas, Enterococcus/Listeria, MSSA), and the key non-beta-lactams with their signature toxicities (vancomycin, FQs, metronidazole disulfiram, clindamycin&rarr;C. diff).</p>\n<h2 id=\"betalactams\">Beta-lactams</h2>\n<table>\n<tr><th>Drug</th><th>Spectrum pearl</th><th>Caution</th></tr>\n<tr><td>Amoxicillin/ampicillin</td><td>Strep, <b>Enterococcus, Listeria</b></td><td>Allergy; C. diff</td></tr>\n<tr><td>Cloxacillin / cefazolin</td><td><b>MSSA</b></td><td>Not MRSA</td></tr>\n<tr><td><b>Piperacillin-tazobactam</b></td><td>Broad incl. <b>Pseudomonas + anaerobes</b></td><td>Broad — reserve</td></tr>\n<tr><td>Ceftriaxone</td><td><b>CAP, meningitis, pyelo</b></td><td>Avoid in neonates</td></tr>\n<tr><td>Ceftazidime / cefepime</td><td><b>Pseudomonas</b></td><td>—</td></tr>\n<tr><td>Carbapenems (meropenem)</td><td>Very broad; <b>ESBL</b></td><td>Seizure risk; &darr;valproate; reserve</td></tr>\n</table>\n<h2 id=\"others\">Other key antibacterials</h2>\n<table>\n<tr><th>Drug</th><th>Use</th><th>Signature toxicity</th></tr>\n<tr><td><b>Vancomycin</b></td><td><b>MRSA</b>, resistant Gram-positives (no Gram-neg)</td><td>Nephrotoxicity; monitor levels</td></tr>\n<tr><td>Azithromycin (macrolide)</td><td><b>Atypicals</b> (Mycoplasma, Chlamydophila, Legionella)</td><td>QT prolongation</td></tr>\n<tr><td>Fluoroquinolones (levo/moxi/cipro)</td><td>Respiratory FQ (levo/moxi); <b>cipro = Pseudomonas</b>, weak pneumococcus</td><td><b>Tendon rupture</b>, QT, dysglycemia, aortic aneurysm, C. diff</td></tr>\n<tr><td>Doxycycline</td><td>Atypicals, rickettsia, malaria ppx</td><td><span class=\"dnm\">Avoid pregnancy &amp; children &lt;8</span>; photosensitivity</td></tr>\n<tr><td>Aminoglycosides (gentamicin)</td><td>Gram-negative synergy</td><td>Nephro/ototoxicity; monitor</td></tr>\n<tr><td><b>Metronidazole</b></td><td>Anaerobes, Giardia, Entamoeba, Trichomonas</td><td><b>Disulfiram-like</b> reaction (no alcohol); neuropathy</td></tr>\n<tr><td><b>Clindamycin</b></td><td>GP/anaerobe; <b>anti-toxin in invasive GAS/nec fasc</b></td><td><span class=\"dnm\">High C. difficile risk</span></td></tr>\n<tr><td>TMP-SMX</td><td>Some MRSA, <b>PJP</b>, UTI</td><td>Sulfa allergy/SJS, hyperkalemia, cytopenias</td></tr>\n</table>\n</div>"
+  },
+  {
+   "file": "W1213_05_Antimicrobials2.html",
+   "title": "Weeks 12–13 · 5 Antifungal, Antiviral & Antiparasitic",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Antifungal, Antiviral &amp; Antiparasitic</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#2f6b4f;--accent2:#7c2d2d;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.4px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.6px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Drugs II</div><h1>Antifungal, Antiviral &amp; Antiparasitic</h1></div><div class=\"r\">Weeks 12&ndash;13 &middot; Micro &amp; ID<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">Antifungals (echinocandin-first candidemia, fluconazole's Aspergillus gap, amphotericin toxicity), antivirals/ART (acyclovir needs viral TK, HBV nucleos(t)ides, 2-NRTI+INSTI), and antiparasitics (IV artesunate, G6PD before primaquine).</p>\n<h2 id=\"antifungal\">Antifungals</h2>\n<table>\n<tr><th>Drug</th><th>Mechanism / use</th><th>Caution</th></tr>\n<tr><td><b>Amphotericin B</b></td><td>Binds ergosterol &rarr; membrane pores; broad, severe invasive disease</td><td>Infusion reactions, <b>nephrotoxicity, &darr;K/&darr;Mg</b>; liposomal less toxic</td></tr>\n<tr><td>Azoles (fluconazole, vori/posaconazole)</td><td>Inhibit ergosterol synthesis. <b>Fluconazole: Candida + Cryptococcus, NOT Aspergillus</b>; vori/posa cover Aspergillus</td><td>Hepatotoxicity, QT, big <b>CYP interactions</b></td></tr>\n<tr><td><b>Echinocandins</b> (caspofungin)</td><td>Inhibit &beta;-1,3-glucan; cidal for Candida; <b>empiric for candidemia in ill patients</b></td><td>IV only</td></tr>\n<tr><td>Terbinafine</td><td>Dermatophytes (nails/hair)</td><td>Hepatotoxicity</td></tr>\n<tr><td>Flucytosine</td><td>With amphotericin for <b>Cryptococcus</b></td><td>Marrow suppression</td></tr>\n</table>\n<h2 id=\"antiviral\">Antivirals &amp; ART</h2>\n<table>\n<tr><th>Drug</th><th>Use / mechanism</th><th>Caution</th></tr>\n<tr><td>Acyclovir/valacyclovir</td><td><b>HSV/VZV</b> polymerase inhibitor; needs viral <b>thymidine kinase</b> activation</td><td>Crystalluria/nephrotoxicity &mdash; hydrate</td></tr>\n<tr><td>Ganciclovir; foscarnet; cidofovir</td><td><b>CMV</b></td><td>Ganciclovir: myelosuppression; foscarnet: nephro/electrolytes</td></tr>\n<tr><td>Oseltamivir; baloxavir</td><td><b>Influenza</b> (neuraminidase / cap-endonuclease)</td><td>GI; resistance</td></tr>\n<tr><td>Tenofovir, entecavir</td><td><b>HBV</b> nucleos(t)ide polymerase inhibitors</td><td>Tenofovir renal/bone</td></tr>\n<tr><td>HCV DAAs (sofosbuvir, &hellip;)</td><td>NS5B/NS5A/NS3-4A; <b>cure most HCV</b></td><td>Interactions; screen HBV reactivation</td></tr>\n<tr><td><b>HIV ART</b></td><td>Initial = <b>2 NRTIs + integrase inhibitor</b>; suppresses load, prevents transmission</td><td>Tenofovir renal/bone; abacavir hypersensitivity</td></tr>\n</table>\n<h2 id=\"antiparasitic\">Antiparasitics</h2>\n<div class=\"band warn\"><div class=\"t\">Malaria</div>\nSevere malaria &rarr; <b>IV artesunate</b> + critical care. Hypnozoites of <b>P. vivax/ovale</b> &rarr; <b>primaquine</b> &mdash; <span class=\"dnm\">check G6PD first</span> (hemolysis). Prophylaxis: atovaquone-proguanil, doxycycline, or mefloquine.</div>\n<p>Protozoa: <b>metronidazole</b> (Giardia/Entamoeba/Trichomonas), nitazoxanide (Crypto). Helminths: albendazole/mebendazole, ivermectin, praziquantel.</p>\n</div>"
+  },
+  {
+   "file": "W1213_06_Respiratory.html",
+   "title": "Weeks 12–13 · 6 Pneumonia, TB, Sepsis & Meningitis",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Pneumonia, TB, Sepsis &amp; Meningitis</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#2f6b4f;--accent2:#7c2d2d;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.4px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.6px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Severe Syndromes</div><h1>Pneumonia, TB, Sepsis &amp; Meningitis</h1></div><div class=\"r\">Weeks 12&ndash;13 &middot; Micro &amp; ID<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">CAP vs HAP bugs and empiric therapy with CRB-65, the TB work-up and airborne control, and the sepsis bundle plus the adult bacterial-meningitis empiric triple (ceftriaxone + vancomycin + ampicillin).</p>\n<h2 id=\"cap\">Pneumonia (CAP vs HAP)</h2>\n<table>\n<tr><th></th><th>Bugs</th><th>Empiric</th></tr>\n<tr><td><b>CAP</b></td><td><b>S. pneumoniae</b> #1; H. influenzae, Moraxella; atypicals; post-influenza S. aureus</td><td>Mild: amoxicillin. Severe/admitted: <b>ceftriaxone + azithromycin</b> (atypical/Legionella); add vancomycin if MRSA, pip-tazo if Pseudomonas risk</td></tr>\n<tr><td><b>HAP</b></td><td>More Gram-negatives, <b>Pseudomonas</b>, S. aureus</td><td>Anti-pseudomonal coverage</td></tr>\n</table>\n<p><b>CRB-65:</b> Confusion, RR &ge;30, low BP (SBP &lt;90 / DBP &le;60), age &ge;65. 0 &rarr; often outpatient; 3&ndash;4 &rarr; urgent admission. <b>Hypoxemia matters even at low scores.</b> Narrow on cultures (penicillin-sensitive pneumococcus &rarr; amoxicillin).</p>\n<h2 id=\"tb\">Tuberculosis</h2>\n<div class=\"band warn\"><div class=\"t\">Think TB when</div>Chronic cough, fever, night sweats, weight loss, hemoptysis, or <b>non-resolving pneumonia despite typical antibiotics</b>, esp. from a high-incidence country.</div>\n<p><b>Latent:</b> TST or IGRA (don't use to diagnose active disease in adults). <b>Active:</b> CXR + <b>sputum &times;3 AFB smear/culture + susceptibilities + NAAT</b>. Control: <b>airborne isolation (negative pressure, N95)</b>, notify public health, contact tracing, directly observed therapy. Latent Rx: rifampin &times;4 mo; active: RIPE then continuation.</p>\n<h2 id=\"sepsis\">Sepsis &amp; meningitis</h2>\n<p><b>Sepsis</b> = life-threatening organ dysfunction from dysregulated host response (SOFA &ge;2). <b>Septic shock</b> = vasopressor need + high lactate despite fluids (mortality &gt;40%). <b>qSOFA</b> (&ge;2 of: RR &ge;22, altered mentation, SBP &le;100) screens for risk.</p>\n<div class=\"band warn\"><div class=\"t\">Sepsis bundle</div>Cultures fast &rarr; <span class=\"dnm\">early broad-spectrum antibiotics</span> &rarr; IV fluids to restore perfusion / clear lactate &rarr; vasopressors for shock &rarr; <b>source control</b>. Delays in appropriate therapy raise mortality.</div>\n<div class=\"key\"><b>Adult bacterial meningitis empiric:</b> <b>ceftriaxone + vancomycin</b> (resistant pneumococcus) <b>+ ampicillin</b> (Listeria in older/at-risk adults). Don't delay for the LP/culture.</div>\n</div>"
+  },
+  {
+   "file": "W1213_07_GI_SSTI.html",
+   "title": "Weeks 12–13 · 7 GI, SSTI & Candidiasis",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>GI, SSTI &amp; Candidiasis</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#2f6b4f;--accent2:#7c2d2d;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.4px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.6px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Gut, Skin &amp; Yeast</div><h1>GI, SSTI &amp; Candidiasis</h1></div><div class=\"r\">Weeks 12&ndash;13 &middot; Micro &amp; ID<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">Gastroenteritis and C. difficile (spores, contact + sporicidal, vancomycin/fidaxomicin), the SSTI ladder to necrotizing fasciitis, and invasive candidiasis (echinocandin first, pull the line, never a contaminant).</p>\n<h2 id=\"gastro\">Gastroenteritis &amp; C. difficile</h2>\n<p>Most non-C. diff infectious diarrhea is <b>self-limited</b> &mdash; supportive hydration, avoid unnecessary antibiotics. <b>Fever/bloody diarrhea</b> suggests invasive pathogens (Salmonella, Shigella, Campylobacter, EHEC).</p>\n<div class=\"band warn\"><div class=\"t\">C. difficile</div>\nAfter antibiotics/dysbiosis; watery diarrhea, abdominal pain, fever/leukocytosis; most common nosocomial enteric pathogen. <b>Spores</b> survive harsh environments &rarr; recurrence + need for <b>sporicidal cleaning</b> and <b>contact precautions</b>. Treat with <b>oral vancomycin or fidaxomicin</b> (metronidazole now less preferred); recurrent &rarr; fecal microbiota transplant.</div>\n<h2 id=\"ssti\">Skin &amp; soft tissue</h2>\n<table>\n<tr><th>Syndrome</th><th>Bug</th><th>Management</th></tr>\n<tr><td>Impetigo</td><td>S. aureus, S. pyogenes</td><td>Topical mupirocin / oral cephalexin</td></tr>\n<tr><td>Erysipelas / cellulitis</td><td>S. pyogenes, S. aureus</td><td>Cephalexin/cefazolin; find <b>portal of entry</b> (tinea pedis)</td></tr>\n<tr><td>Furuncle / abscess</td><td>S. aureus incl. <b>MRSA</b></td><td><b>Incision &amp; drainage</b>; antibiotics if cellulitis/systemic/immunocompromised</td></tr>\n<tr><td>Bite wounds</td><td>Polymicrobial + anaerobes</td><td>Amoxicillin-clavulanate</td></tr>\n<tr><td class=\"dnm\">Necrotizing fasciitis</td><td>GAS, polymicrobial, clostridial</td><td><span class=\"dnm\">Surgical emergency</span>: debridement + broad antibiotics; <b>penicillin + clindamycin</b> for GAS; IVIG for TSS</td></tr>\n</table>\n<p>Superficial swabs are low-yield in cellulitis; abscess aspirate/deep tissue/blood cultures help when severe. Invasive GAS &rarr; droplet/contact for 24 h after effective therapy.</p>\n<h2 id=\"candida\">Candidiasis</h2>\n<p>Candida is a normal commensal; superficial disease = thrush, esophagitis (HIV/malignancy), vulvovaginitis, intertrigo. Risk: diabetes, antibiotics, <b>central lines, TPN, ICU</b>, neutropenia.</p>\n<div class=\"band warn\"><div class=\"t\">Invasive candidiasis</div>\n<span class=\"dnm\">Candida in blood is never a contaminant.</span> Candidemia disseminates (eye, heart, kidney). Treat with an <b>echinocandin</b> empirically in ill patients, step down to fluconazole if susceptible/stable, <b>remove/replace infected lines</b>, and evaluate for disseminated foci (e.g. eye exam).</div>\n</div>"
+  },
+  {
+   "file": "W1213_08_Hepatitis_HIV.html",
+   "title": "Weeks 12–13 · 8 Viral Hepatitis, HIV & Exposures",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Viral Hepatitis, HIV &amp; Exposures</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#2f6b4f;--accent2:#7c2d2d;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.4px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.6px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Blood-Borne</div><h1>Viral Hepatitis, HIV &amp; Exposures</h1></div><div class=\"r\">Weeks 12&ndash;13 &middot; Micro &amp; ID<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">Hepatitis B serology decoded (vaccine vs resolved vs acute vs chronic) and the anti-HCV&rarr;HCV-RNA rule, HIV acute seroconversion and test sequence, and needlestick management with PEP/PrEP.</p>\n<h2 id=\"hepatitis\">Viral hepatitis</h2>\n<p>Nonspecific labs: &uarr;bilirubin, &uarr;ALT/AST; impaired synthesis = low albumin, prolonged INR. <b>Serology is the cornerstone</b>; molecular testing for viral load/genotype.</p>\n<table>\n<tr><th>Marker</th><th>Meaning</th></tr>\n<tr><td><b>HBsAg</b></td><td>Current infection (&gt;6 mo = chronic); infectious</td></tr>\n<tr><td><b>Anti-HBs</b></td><td>Immunity (vaccine or resolved); <b>&ge;10 IU/L protective</b></td></tr>\n<tr><td>Total anti-HBc</td><td>Past/current natural infection (<b>not from vaccine</b>)</td></tr>\n<tr><td>IgM anti-HBc</td><td>Acute infection / flare</td></tr>\n<tr><td>Anti-HCV</td><td>Exposure only &mdash; <b>need HCV RNA</b> to prove active infection</td></tr>\n</table>\n<div class=\"band\"><div class=\"t\">HBV profiles</div>\nAnti-HBs only &rarr; <b>vaccine immune</b>. Anti-HBc + anti-HBs, IgM neg &rarr; <b>resolved infection</b>. HBsAg + IgM anti-HBc &rarr; <b>acute</b>. HBsAg &gt;6 mo + anti-HBc, IgM neg &rarr; <b>chronic</b>.</div>\n<p>Natural history: HAV no chronicity; <b>HBV</b> adult chronic ~5% / infant ~90%; <b>HCV</b> chronic 75&ndash;85% but mostly curable. HBV suppression: <b>tenofovir/entecavir</b>, monitor HBV DNA.</p>\n<h2 id=\"hiv\">HIV</h2>\n<p>Retrovirus &rarr; CD4+ T-cell loss. <b>Acute seroconversion</b>: fever, lymphadenopathy, pharyngitis, rash, diarrhea after exposure. Diagnose with <b>4th-gen Ab/p24 Ag</b> + viral load (<b>HIV RNA detectable earliest</b>, then p24, then antibodies). Treat ALL with ART (2 NRTIs + INSTI) &mdash; don't wait for CD4 &lt;200.</p>\n<h2 id=\"exposure\">Blood-borne exposure / PEP</h2>\n<table>\n<tr><th>Issue</th><th>Management</th></tr>\n<tr><td>Needlestick</td><td>Wash/flush, <span class=\"dnm\">report immediately</span> (don't wait); assess source/exposure</td></tr>\n<tr><td><b>HIV PEP</b></td><td>Within <b>72 h</b> (best &lt;24 h), <b>4 weeks of 3 antiretrovirals</b>; NOT for low-risk or a <b>virologically suppressed</b> source with no STI; test at 6 &amp; 12 wk</td></tr>\n<tr><td>Recurrent exposures</td><td>Offer <b>PrEP</b>, not repeated PEP</td></tr>\n<tr><td>HBV exposure</td><td>Check anti-HBs; if nonimmune + source positive/unknown &rarr; vaccine &plusmn; HBIG</td></tr>\n<tr><td>HCV exposure</td><td>No vaccine/Ig/prophylaxis; baseline + follow-up testing; early treatment</td></tr>\n</table>\n</div>"
+  },
+  {
+   "file": "W1213_09_Fever_Travel.html",
+   "title": "Weeks 12–13 · 9 Fever, Travel, Parasites & Emerging Disease",
+   "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Fever, Travel, Parasites &amp; Emerging Disease</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#2f6b4f;--accent2:#7c2d2d;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.4px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.6px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Wider Lens</div><h1>Fever, Travel, Parasites &amp; Emerging Disease</h1></div><div class=\"r\">Weeks 12&ndash;13 &middot; Micro &amp; ID<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">Fever physiology and rigors, the returned-traveller work-up (malaria first), virus/parasite classification, the emerging-disease drivers, and the structured re-think for a non-resolving infection.</p>\n<h2 id=\"fever\">Fever &amp; FUO</h2>\n<p>Exogenous pyrogens &rarr; leukocyte <b>IL-1/TNF/IFN/IL-6</b> &rarr; <b>PGE2</b> &rarr; raised hypothalamic set point. <b>Rigors</b> occur because the body now perceives itself as too cold and shivers to generate heat. Differential: infection, malignancy, autoimmune, drug fever, thrombosis, endocrine, heat illness (blunted in elderly).</p>\n<h2 id=\"traveller\">The returned traveller</h2>\n<div class=\"band warn\"><div class=\"t\">Rule out malaria FIRST</div>\nAny febrile traveller from the tropics (esp. <b>sub-Saharan Africa</b>): <b>thick/thin smears now, repeat q12h &times;3</b>, or malaria NAAT. Dengue (Central America/Caribbean, short incubation), enteric fever (South Asia), also consider acute HIV, hepatitis, rickettsia, schistosomiasis, TB.</div>\n<table>\n<tr><th>Incubation</th><th>Think</th></tr>\n<tr><td>Short (&lt;21 d)</td><td>Dengue (3&ndash;5 d), Zika, bacterial enteritis, typhoid, acute HIV</td></tr>\n<tr><td>Long (&gt;21 d)</td><td>Malaria, viral hepatitis, TB, schistosomiasis</td></tr>\n</table>\n<h2 id=\"parasites\">Parasite &amp; virus classification</h2>\n<ul>\n<li><b>Virus first split:</b> DNA vs RNA (then envelope, capsid, replication). Enveloped viruses are less environmentally hardy.</li>\n<li><b>Parasite hosts:</b> definitive (sexual/adult) vs intermediate (larval/asexual) vs accidental.</li>\n<li>Categories: protozoa, helminths (nematode/cestode/trematode), arthropods.</li>\n</ul>\n<h2 id=\"emerging\">Emerging diseases &amp; the non-resolving case</h2>\n<p><b>Emergence drivers:</b> microbial adaptation, human susceptibility, land use/economic development, climate/weather, travel/commerce, public-health breakdown, intent to harm. Newly vs re-emerging vs deliberately emerging. <b>Antigenic shift/reassortment</b> drives pandemic influenza.</p>\n<div class=\"band\"><div class=\"t\">Non-resolving infection — reconsider</div>\n<b>Bug-drug mismatch</b> (resistant/atypical/TB/fungal/parasite), <b>missing source control</b> (abscess, line, necrosis, obstruction), <b>wrong diagnosis</b> (malignancy, PE, drug fever), <b>host factors</b> (immunocompromise &mdash; consider <b>HIV + PJP</b>), or a <b>pharmacology problem</b> (dose/route/absorption/adherence).</div>\n</div>"
+  }
+ ]
+}
