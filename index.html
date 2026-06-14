@@ -1,7 +1,17 @@
 <!--
-  Study Suite  ·  v0.2.53 (beta)
+  Study Suite  ·  v0.2.54 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.54: default-pack update prompts. The deploy manifest now carries each pack's `version`;
+  the app compares a loaded library pack to the manifest entry for the same id (verCmp handles 2.10>2.9)
+  and, if a newer version is published, shows an "↑ Update" button on that Content-library row (+ an
+  "update to vX" note), an "↑ Update all (N)" action in the library header, and "↑ Update to vX" in the
+  Default-packs panel (instead of the disabled "✓ In library"). Updating re-fetches + re-ingests, which
+  replaces by id — keeping the enabled state and card-id-keyed review progress. Graceful when the
+  manifest lacks `version` (old deploys) — nothing is flagged.
+  Also fixed: the Content library ordered packs WITHIN a course by insertion order (so e.g. CPC 1 could
+  show descending or jumbled), unlike the Default-packs panel. renderLibrary now sorts each course's
+  packs by the leading week number in `weeks` (enabled-first, then chronological), matching the panel.
   Changelog v0.2.53: fix — the Topic Guides side panel ordered its per-pack groups by import order
   (activePacks order) instead of the curriculum hierarchy. organizeGuides() now sorts pack groups by
   the same chronological key as the library/Default-packs panels (school → year → term → leading week#
@@ -518,6 +528,11 @@ section{display:none}section.on{display:block}
 .dp-add:hover{background:var(--accent);border-color:var(--accent);color:var(--paper)}
 .dp-add[disabled]{border-color:var(--line);color:var(--ink-soft);background:var(--paper2);cursor:default}
 .dp-add[disabled]:hover{background:var(--paper2);color:var(--ink-soft);border-color:var(--line)}
+.packrow .pkacts{display:flex;align-items:center;gap:8px;flex:none}
+.upd{font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;border:1px solid var(--accent);background:var(--accent);color:var(--paper);border-radius:5px;padding:6px 11px;cursor:pointer}
+.upd:hover{filter:brightness(1.08)}
+.upd:disabled{opacity:.6;cursor:default;filter:none}
+.packrow .updnote{color:var(--accent);font-weight:700}
 .dp-dl{font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:4px 9px;transition:.12s}
 .dp-dl:hover{border-color:var(--accent-soft);color:var(--ink)}
 .buildline{font-size:14px;color:var(--ink-soft);margin:0 0 10px}
@@ -655,7 +670,7 @@ section{display:none}section.on{display:block}
 
     <div class="rule"></div>
     <div class="libhdr"><span class="lt">▸ Content library</span><span class="lt" id="libCount"></span></div>
-    <div id="libActions" style="display:none;margin-bottom:10px"><button class="minor" id="enableAll">Enable all</button> <button class="minor" id="disableAll">Set all aside</button></div>
+    <div id="libActions" style="display:none;margin-bottom:10px"><button class="minor" id="enableAll">Enable all</button> <button class="minor" id="disableAll">Set all aside</button> <button class="minor upd" id="updateAll" style="display:none">↑ Update all</button></div>
     <div id="packList"></div>
     <div class="defpacks" id="defPacks" style="display:none">
       <button class="dp-t" id="dpToggle" type="button"><span class="tri" id="dpTri">▸</span> Default study packs <span class="dp-badge" id="dpBadge" style="display:none"></span></button>
@@ -880,7 +895,7 @@ section{display:none}section.on{display:block}
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.53';
+const APP_VERSION='0.2.54';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1015,16 +1030,17 @@ function dpRow(p,isNew){
   const row=document.createElement('div');row.className='dp-row';
   const nm=document.createElement('span');nm.className='dp-name';nm.textContent=p.label||p.file;row.appendChild(nm);
   if(isNew){const tag=document.createElement('span');tag.className='dp-badge mini';tag.textContent='NEW';row.appendChild(tag);}
-  const inLib=!!(p.id&&packs.some(x=>x.id===p.id));
+  const lib=p.id?packs.find(x=>x.id===p.id):null;const inLib=!!lib;
+  const outdated=inLib&&p.version&&verCmp(p.version,lib.version)>0; // in library but a newer version is published
   const btn=document.createElement('button');btn.className='dp-add';
-  btn.textContent=inLib?'✓ In library':'+ Add to library';btn.disabled=inLib;
-  if(!inLib)btn.onclick=async()=>{
-    btn.disabled=true;btn.textContent='Adding…';
+  btn.textContent=outdated?('↑ Update to v'+p.version):(inLib?'✓ In library':'+ Add to library');btn.disabled=inLib&&!outdated;
+  if(!inLib||outdated)btn.onclick=async()=>{
+    btn.disabled=true;btn.textContent=outdated?'Updating…':'Adding…';
     try{
       const r=await fetch(encodeURI(String(p.file)),{cache:'no-store'});if(!r.ok)throw 0;
       ingestPack(await r.json(),(p.label||p.file).replace(/\.json$/i,''));
       await persist();renderHome();
-    }catch(e){btn.disabled=false;btn.textContent='+ Add to library';toast('Could not load that pack — check your connection and try again.');}
+    }catch(e){btn.disabled=false;btn.textContent=outdated?'↑ Update':'+ Add to library';toast('Could not load that pack — check your connection and try again.');}
   };
   row.appendChild(btn);
   /* per-pack raw-file download — disabled v0.2.16 (packs are bundled; Add covers it). Revive by uncommenting:
@@ -1050,6 +1066,24 @@ function backfillPlacement(){const m=defaultManifest;if(!m||!Array.isArray(m.pac
   m.packs.forEach(mp=>{if(!mp||!mp.id)return;const lp=packs.find(p=>p.id===mp.id);if(!lp)return;
     ['school','year','term','course','weeks'].forEach(k=>{if(mp[k]&&lp[k]!==mp[k]){lp[k]=mp[k];changed=true;}});});
   if(changed)persist();}
+/* Default-pack updates: compare a loaded library pack's version to the manifest entry for the same id.
+   verCmp returns >0 if a is newer (handles "2.10" > "2.9"). Requires `version` in the manifest entries
+   (added at deploy time); when absent (old manifest) nothing is flagged — graceful. */
+function verCmp(a,b){const pa=String(a==null?0:a).split('.').map(n=>parseInt(n,10)||0),pb=String(b==null?0:b).split('.').map(n=>parseInt(n,10)||0);
+  for(let i=0;i<Math.max(pa.length,pb.length);i++){const x=pa[i]||0,y=pb[i]||0;if(x!==y)return x-y;}return 0;}
+function packUpdate(p){const m=defaultManifest;if(!m||!Array.isArray(m.packs)||!p)return null;
+  const mp=m.packs.find(x=>x&&x.id===p.id&&x.version&&x.file);return (mp&&verCmp(mp.version,p.version)>0)?mp:null;}
+function pendingUpdates(){return packs.map(p=>[p,packUpdate(p)]).filter(e=>e[1]);}
+/* Re-fetch the latest pack file and re-ingest. ingestPack replaces by id (keeping the enabled state),
+   and review progress is keyed by card id in `sched`, so it survives the update. */
+async function applyPackUpdate(p,mp){const r=await fetch(encodeURI(String(mp.file)),{cache:'no-store'});if(!r.ok)throw 0;
+  ingestPack(await r.json(),(mp.label||mp.file).replace(/\.json$/i,''));}
+function updatePack(p,mp,btn){if(btn){btn.disabled=true;btn.textContent='Updating…';}
+  applyPackUpdate(p,mp).then(async()=>{await persist();renderHome();toast('Updated '+(p.pack||p.id)+' to v'+mp.version+'.');})
+    .catch(()=>{if(btn){btn.disabled=false;btn.textContent='↑ Update';}toast('Could not update — check your connection and try again.');});}
+function updateAllPacks(){const todo=pendingUpdates();if(!todo.length)return;
+  (async()=>{let n=0;for(const e of todo){try{await applyPackUpdate(e[0],e[1]);n++;}catch(err){}}await persist();renderHome();
+    toast(n?('Updated '+n+' pack'+(n===1?'':'s')+'.'):'Could not update — check your connection.');})();}
 let dpSchool=null; // selected school label; null until first render
 let dpSectionOpen=null; // Default-packs section collapse state for this session; null until first render
 function renderDefaultPacks(){
@@ -1253,6 +1287,7 @@ function renderHome(){
   const nC=deck().length,nP=packs.length,aP=activePacks().length,tp=qTestPool().length,nG=activeGuides().length;
   $('libCount').textContent=nP?`${aP} of ${nP} active · ${qpool().length} questions · ${nC} cards`:'empty';
   $('libActions').style.display=nP?'':'none';
+  const nUpd=pendingUpdates().length;const ua=$('updateAll');if(ua){ua.style.display=nUpd?'':'none';if(nUpd)ua.textContent='↑ Update all ('+nUpd+')';}
   $('featReview').textContent=nC+' cards';
   $('featPractice').textContent=tp+' questions';
   $('featExam').textContent=examTotal()+' per test';
@@ -1275,16 +1310,19 @@ function renderHome(){
    across the top ('Other' for packs without a school), then year → course → packs beneath the
    selected school. Enabled packs sort to the top of their subsection. Course groups default open. */
 let libSchool=null, libOpen=null;
-function libRow(p){const on=p.enabled!==false;
+function libRow(p){const on=p.enabled!==false;const upd=packUpdate(p);
   const row=document.createElement('div');row.className='packrow'+(on?'':' off');
   const left=document.createElement('div');left.className='pkleft';
   const sw=document.createElement('button');sw.className='switch'+(on?' on':'');sw.setAttribute('role','switch');sw.setAttribute('aria-checked',on?'true':'false');sw.setAttribute('aria-label','Enable pack');
   sw.onclick=()=>{p.enabled=!on;persist();renderHome();};
   const gtag=(p.guides&&p.guides.length)?` · ${p.guides.length} guides`:'';
-  const info=document.createElement('div');info.innerHTML=`<div class="pn">${p.pack}</div><div class="pm">${p.questions.length} questions · ${p.cards.length} cards${gtag}</div>`;
+  const updtag=upd?` · <span class="updnote">update to v${upd.version}</span>`:'';
+  const info=document.createElement('div');info.innerHTML=`<div class="pn">${p.pack}</div><div class="pm">${p.questions.length} questions · ${p.cards.length} cards${gtag}${updtag}</div>`;
   left.appendChild(sw);left.appendChild(info);
-  const b=document.createElement('button');b.className='rm';b.textContent='Remove';b.onclick=()=>removePack(p.id);
-  row.appendChild(left);row.appendChild(b);return row;}
+  const acts=document.createElement('div');acts.className='pkacts';
+  if(upd){const u=document.createElement('button');u.className='upd';u.textContent='↑ Update';u.title='Update to v'+upd.version+' — your review progress is kept';u.onclick=()=>updatePack(p,upd,u);acts.appendChild(u);}
+  const b=document.createElement('button');b.className='rm';b.textContent='Remove';b.onclick=()=>removePack(p.id);acts.appendChild(b);
+  row.appendChild(left);row.appendChild(acts);return row;}
 function renderLibrary(){
   const pl=$('packList');pl.innerHTML='';
   if(!packs.length)return;
@@ -1311,7 +1349,8 @@ function renderLibrary(){
       if(t){const th=document.createElement('div');th.className='dp-term';th.textContent=t;host.appendChild(th);} // header only when a term is set
       sortedCourses(cs).forEach(([c,plist])=>{
         const nOn=plist.filter(p=>p.enabled!==false).length;
-        const sorted=[...plist.filter(p=>p.enabled!==false),...plist.filter(p=>p.enabled===false)]; // enabled to top of subsection
+        const byWeek=(a,b)=>cmpW(chronoWeek(a.weeks),chronoWeek(b.weeks))||natCmp(a.pack||a.id||'',b.pack||b.id||''); // chronological within a course
+        const sorted=[...plist.filter(p=>p.enabled!==false).sort(byWeek),...plist.filter(p=>p.enabled===false).sort(byWeek)]; // enabled to top, then by week within each group
         if(c){
           const key=y+'³'+t+'³'+c,open=libOpen.has(key);
           const tg=document.createElement('button');tg.className='dp-course'+(open?' open':'');
@@ -1810,6 +1849,7 @@ $('setPracShuffle').addEventListener('click',()=>{settings.practiceShuffle=!sett
 $('setPracSecs').addEventListener('change',e=>{settings.practiceSecs=Math.max(5,parseInt(e.target.value)||90);persist();});
 $('setExamMins').addEventListener('change',e=>{settings.examMinutes=Math.max(1,parseInt(e.target.value)||60);persist();});
 $('setNewPerDay').addEventListener('change',e=>{settings.srsNewPerDay=Math.max(0,parseInt(e.target.value)||0);persist();});
+$('updateAll').addEventListener('click',updateAllPacks);
 $('enableAll').addEventListener('click',()=>{packs.forEach(p=>p.enabled=true);persist();renderHome();});
 $('disableAll').addEventListener('click',()=>{packs.forEach(p=>p.enabled=false);persist();renderHome();});
 $('backupBtn').addEventListener('click',backup);
