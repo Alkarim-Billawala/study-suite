@@ -1,7 +1,16 @@
 <!--
-  Study Suite  ·  v0.2.47 (beta)
+  Study Suite  ·  v0.2.48 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.48: (1) Content library grouping fix — ingestPack() now preserves
+  school/year/course/weeks on the stored pack object (it previously dropped them, so loaded packs
+  fell under "Other"); backfillPlacement() repairs already-stored packs by copying those fields from
+  the default-packs manifest (matched by id), run at the top of renderHome() and after the manifest
+  loads. The library also always shows the school chip row now, mirroring the Default packs panel.
+  (2) Year/course tree sorts chronologically — sortedYears()/sortedCourses() order by the earliest
+  week number parsed from each pack's `weeks` field (chronoWeek), tie-broken by a numeric natural
+  compare; applied to both renderDefaultPacks and renderLibrary, so e.g. ITM → CPC 1 → CPC 2 rather
+  than alphabetical/insertion order.
   Changelog v0.2.47: (1) Review topic selector fixed — "Select all" now lights every chip and studies
   all; "Clear" deselects them (studies none). The two were inverted. Reworked the filter model:
   filter=null is the ALL sentinel (a chip renders "on" when !filter||filter.has(t)); an empty Set
@@ -824,7 +833,7 @@ section{display:none}section.on{display:block}
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.47';
+const APP_VERSION='0.2.48';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -951,7 +960,7 @@ async function initPackLinks(){
   try{
     const r=await fetch('packs-manifest.json',{cache:'no-store'});if(!r.ok)return;
     const m=await r.json();if(!m||!Array.isArray(m.packs)||!m.packs.length)return;
-    defaultManifest=m;renderDefaultPacks();
+    defaultManifest=m;backfillPlacement();renderLibrary();renderDefaultPacks();
   }catch(e){}
 }
 let dpOpen=null; // Set of expanded "year³course" keys; null until first render
@@ -974,6 +983,24 @@ function dpRow(p){
   const dl=document.createElement('a');dl.className='dp-dl';dl.href=encodeURI(String(p.file));dl.setAttribute('download','');dl.textContent='⇣ file';row.appendChild(dl); */
   return row;
 }
+/* Chronological ordering for the year/course tree: parse the first week number from a pack's
+   `weeks` field (e.g. ITM≈1–8 < CPC 1≈9–24 < CPC 2≈25+); years and courses sort by their
+   earliest week, tie-broken by a numeric-aware natural compare so "CPC 1" precedes "CPC 2". */
+function chronoWeek(w){if(!w)return Infinity;const m=String(w).match(/\d+/);return m?parseInt(m[0],10):Infinity;}
+function cmpW(a,b){return a===b?0:(a<b?-1:1);} // Infinity-safe numeric compare
+const natCmp=(a,b)=>String(a).localeCompare(String(b),undefined,{numeric:true,sensitivity:'base'});
+function courseWeek(plist){return plist.reduce((mn,p)=>Math.min(mn,chronoWeek(p.weeks)),Infinity);}
+function sortedYears(years){return [...years.entries()].sort((A,B)=>{
+  const ka=[...A[1].values()].reduce((mn,pl)=>Math.min(mn,courseWeek(pl)),Infinity);
+  const kb=[...B[1].values()].reduce((mn,pl)=>Math.min(mn,courseWeek(pl)),Infinity);
+  return cmpW(ka,kb)||natCmp(A[0],B[0]);});}
+function sortedCourses(cs){return [...cs.entries()].sort((A,B)=>cmpW(courseWeek(A[1]),courseWeek(B[1]))||natCmp(A[0],B[0]));}
+/* Repair library packs that predate the school/year/course/weeks fields (or were stored before
+   ingestPack carried them) by copying those fields from the default-packs manifest, matched by id. */
+function backfillPlacement(){const m=defaultManifest;if(!m||!Array.isArray(m.packs))return;let changed=false;
+  m.packs.forEach(mp=>{if(!mp||!mp.id)return;const lp=packs.find(p=>p.id===mp.id);if(!lp)return;
+    ['school','year','course','weeks'].forEach(k=>{if(mp[k]&&lp[k]!==mp[k]){lp[k]=mp[k];changed=true;}});});
+  if(changed)persist();}
 let dpSchool=null; // selected school label; null until first render
 function renderDefaultPacks(){
   const m=defaultManifest;if(!m)return;
@@ -995,9 +1022,9 @@ function renderDefaultPacks(){
   // count course groups to decide default expansion (single course -> open)
   let nCourses=0;years.forEach(cs=>nCourses+=cs.size);
   if(dpOpen===null){dpOpen=new Set();if(nCourses<=1)years.forEach((cs,y)=>cs.forEach((_,c)=>dpOpen.add(y+'³'+c)));}
-  years.forEach((cs,y)=>{
+  sortedYears(years).forEach(([y,cs])=>{
     const yh=document.createElement('div');yh.className='dp-year';yh.textContent=y;host.appendChild(yh);
-    cs.forEach((plist,c)=>{
+    sortedCourses(cs).forEach(([c,plist])=>{
       if(c){
         const key=y+'³'+c,open=dpOpen.has(key);
         const tg=document.createElement('button');tg.className='dp-course'+(open?' open':'');
@@ -1064,7 +1091,7 @@ function validateQuestion(q,i){
 function ingestPack(obj,sourceName){
   let pk;
   if(Array.isArray(obj)){const isCards=obj.some(x=>x&&x.type&&KNOWN_TYPES.includes(x.type));pk={id:'pack_'+Date.now().toString(36),pack:sourceName||'Imported',questions:isCards?[]:obj,cards:isCards?obj:[],guides:[]};}
-  else {pk={id:obj.id||('pack_'+Date.now().toString(36)),pack:obj.pack||sourceName||'Imported',questions:Array.isArray(obj.questions)?obj.questions:[],cards:Array.isArray(obj.cards)?obj.cards:[],guides:Array.isArray(obj.guides)?obj.guides:[],version:obj.version,author:obj.author||obj.createdBy};}
+  else {pk={id:obj.id||('pack_'+Date.now().toString(36)),pack:obj.pack||sourceName||'Imported',questions:Array.isArray(obj.questions)?obj.questions:[],cards:Array.isArray(obj.cards)?obj.cards:[],guides:Array.isArray(obj.guides)?obj.guides:[],version:obj.version,author:obj.author||obj.createdBy,school:obj.school,year:obj.year,course:obj.course,weeks:obj.weeks};}
   const errs=[];
   pk.questions=pk.questions.filter((q,i)=>{const v=validateQuestion(q,i);if(v){errs.push(v);return false;}return true;});
   pk.cards=pk.cards.filter((c,i)=>{const v=validateCard(c,i);if(v){errs.push(v);return false;}return true;});
@@ -1131,6 +1158,7 @@ window.addEventListener('popstate',e=>{
 
 /* ===== HOME ===== */
 function renderHome(){
+  backfillPlacement(); // repair any library packs missing school/year/course/weeks (copied from the manifest by id)
   const nC=deck().length,nP=packs.length,aP=activePacks().length,tp=qTestPool().length,nG=activeGuides().length;
   $('libCount').textContent=nP?`${aP} of ${nP} active · ${qpool().length} questions · ${nC} cards`:'empty';
   $('libActions').style.display=nP?'':'none';
@@ -1171,7 +1199,7 @@ function renderLibrary(){
   if(!packs.length)return;
   const schools=[...new Set(packs.map(p=>p.school||'Other'))];
   if(libSchool===null||!schools.includes(libSchool))libSchool=schools[0]||null;
-  if(schools.length>1){ // chip row only matters when more than one school is present
+  if(schools.length){ // school chips across the top, mirroring the Default study packs panel
     const sh=document.createElement('div');sh.className='dp-schools';
     schools.forEach(s=>{const b=document.createElement('button');b.className='dp-school'+(s===libSchool?' on':'');
       b.textContent=s;b.onclick=()=>{if(s!==libSchool){libSchool=s;libOpen=null;renderHome();}};sh.appendChild(b);});
@@ -1185,9 +1213,9 @@ function renderLibrary(){
     cs.get(c).push(p);});
   if(libOpen===null){libOpen=new Set();years.forEach((cs,y)=>cs.forEach((_,c)=>{if(c)libOpen.add(y+'³'+c);}));} // default: all expanded
   const host=document.createElement('div');host.className='dp-list';pl.appendChild(host);
-  years.forEach((cs,y)=>{
+  sortedYears(years).forEach(([y,cs])=>{
     const yh=document.createElement('div');yh.className='dp-year';yh.textContent=y;host.appendChild(yh);
-    cs.forEach((plist,c)=>{
+    sortedCourses(cs).forEach(([c,plist])=>{
       const nOn=plist.filter(p=>p.enabled!==false).length;
       const sorted=[...plist.filter(p=>p.enabled!==false),...plist.filter(p=>p.enabled===false)]; // enabled to top of subsection
       if(c){
