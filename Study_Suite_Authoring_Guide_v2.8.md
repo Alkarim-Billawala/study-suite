@@ -9,12 +9,13 @@
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
 > **Authoring system version:** 2.8 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
-> **What changed in guide v2.8:** two additions, no schema change. (1) **Created packs are default
-> packs by default** — unless the user says a pack is private/custom-only, name it `Pack_<Name>.json`
-> so the deploy manifest lists it in the hosted site's *Default study packs* panel (see §8), and tell
-> the user to run `Refresh Web Deploy.command` to publish. (2) A **cost/usage warning** (§3):
+> **What changed in guide v2.8:** two additions, no schema change. (1) A **cost/usage warning** (§3):
 > generating packs is resource-intensive — discourage users from dumping multiple weeks the night
-> before an exam, or they may run out of usage mid-build.
+> before an exam, or they may run out of usage mid-build. (2) **Absolute vs. relative difficulty and
+> customization** (§5a): the easy/medium/hard tags are *relative* and must always be applied so the
+> app can filter; the pack's *absolute* level is customizable (e.g. shift up for a resident sitting a
+> Royal College exam) and auto-scales from school/year/field and the difficulty of the supplied
+> materials. Question *format* is likewise customizable.
 > **What changed in guide v2.7:** theming contract for topic guides — drive guide colors off the
 > canonical CSS variables (`--paper`/`--ink`/`--soft`/`--line`/`--accent`/`--accent2`/`--green`/
 > `--blue`/`--gold`/`--hi`/`--lo`) instead of hardcoded hex, so the app can re-theme guides to match
@@ -272,6 +273,43 @@ of easy / medium / hard works well). Don't force a quota; rate honestly, but if 
 
 ---
 
+## 5a. Absolute vs. relative difficulty — and customizing for the learner
+
+The `easy`/`medium`/`hard` ratings in §5 are **relative**: they rank questions *within a pack* so the
+app can filter Practice/Exam by difficulty. **Always apply them, on every question, for every learner**
+— the app reads these tags, and an unrated question silently drops out of any filtered session.
+
+Distinct from that is the pack's **absolute** difficulty — the overall level the whole easy→hard band
+is pitched at. The defaults in this guide are tuned for **medical students**. Two controls sit on top
+of that default:
+
+**1. The learner can dial absolute difficulty up or down.** Ask who the pack is for. A resident
+preparing for a **Royal College** exam (or any graduate/board exam) should get a pack shifted
+**upward** — harder stems, more cross-system integration, subtler distractors, less hand-holding —
+while a pre-clerkship student gets the default band. Honour an explicit request ("make these harder,
+I'm studying for the Royal College"). **Crucially, still rate every question `easy`/`medium`/`hard`
+relative to that shifted band**, so filtering keeps working: a "hard" item in a resident pack is
+simply harder in absolute terms than a "hard" in a med-student pack. The rating is always *within-pack
+relative*; the band it sits on is what moves.
+
+**2. Auto-scale absolute difficulty from context** — even when not explicitly asked:
+
+- **School / year / field** (the `school` / `year` / `course` fields, §2). Higher training levels are
+  harder. In the default packs there is a deliberate **step up from Year 1 to Year 2**; a
+  residency/fellowship context steps up further again.
+- **The supplied materials themselves.** Mirror the level of the user's notes, slides, and especially
+  any **example questions or past quizzes** they share — treat the difficulty of those items as a
+  direct indicator of the absolute level to target (while still writing *novel* questions per §4).
+
+**Format is customizable too.** The default is single-best-answer clinical vignettes, but the learner
+can ask for a different mix — more cloze/short-answer, more "select all," image-anchored stems, longer
+or shorter stems, etc. Honour the request while keeping each item valid per §7 and rated per §5.
+
+When you're unsure where to pitch a pack, **ask**: *"Who's this for — what year/level — and how hard do
+you want it?"*
+
+---
+
 ## 6. Topic guides — **embedded in the pack** (no separate files)
 
 Topic guides live **inside the pack** in the `guides` array; the app's **Topic Guides** reader
@@ -370,21 +408,11 @@ every `guides[]` entry has non-empty `html`.
 
 When you finish, produce **one downloadable file** (not just code in chat):
 
-1. The **pack `.json`**, **with the topic guides embedded** in `guides[]`. This single file is the
-   complete deliverable — the embedded guides make it fully self-sufficient (Topic Guides reader
-   included). **Name it `Pack_<Name>.json`** (e.g. `Pack_Week09_Pediatrics_v2.0.json`) so it is
-   picked up as a default pack — see the rule below.
+1. The **pack `.json`**, named for the week/topic (e.g. `Week_12_Cardiology.json`), **with the topic
+   guides embedded** in `guides[]`. This single file is the complete deliverable — the embedded
+   guides make it fully self-sufficient (Topic Guides reader included).
 2. A short report in chat: how many questions (and the easy/medium/hard split), how many cards, and
    which guides are embedded.
-
-**Default packs by default.** Unless the user explicitly says a pack is private/custom-only, every
-pack you create is meant to ship in the hosted site's **Default study packs** panel. The deploy step
-(`Refresh Web Deploy.command`) builds that panel's `packs-manifest.json` by globbing
-**`Study Packs/Pack_*.json`** — so a default pack's filename **must start with `Pack_`** to be listed
-(combined `Weeks_*` packs are deployed but intentionally unlisted to avoid duplicate-card loading).
-Save the file into the `Study Packs/` folder and remind the user to run `Refresh Web Deploy.command`
-to publish it to https://studysuite.app. The `school` / `year` / `course` / `weeks` fields (§2) then
-group it correctly in the panel.
 
 Do **not** emit standalone guide `.html` files unless the user asks for printable copies.
 

@@ -1,7 +1,16 @@
 <!--
-  Study Suite  ·  v0.2.46 (beta)
+  Study Suite  ·  v0.2.47 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.47: (1) Review topic selector fixed — "Select all" now lights every chip and studies
+  all; "Clear" deselects them (studies none). The two were inverted. Reworked the filter model:
+  filter=null is the ALL sentinel (a chip renders "on" when !filter||filter.has(t)); an empty Set
+  means none; chip-click expands null→explicit set before toggling one off and collapses back to null
+  when everything is re-selected; allTopics→null, noneTopics→new Set(). (2) Content library is now
+  hierarchical, mirroring the Default study packs panel — renderLibrary() groups loaded packs by a
+  single-select school chip row ("Other" for packs with no school) → year → collapsible course
+  (libSchool/libOpen, default all-expanded); enabled packs sort to the top of their subsection.
+  Replaces the old flat packList loop.
   Changelog v0.2.46: hardened guide theming — themeGuideFrame() now also injects an html,body
   background/color fallback (literal resolved colors, !important) so a guide that strays from the
   canonical var names still gets a correct themed backdrop (no white flash). Pairs with Authoring
@@ -815,7 +824,7 @@ section{display:none}section.on{display:block}
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.46';
+const APP_VERSION='0.2.47';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1138,20 +1147,62 @@ function renderHome(){
   $('revPanel').style.display=nG?'':'none';
   $('revPanelDesc').textContent=`${nG} topic guide${nG===1?'':'s'} bundled in your active packs.`;
   $('openReviewer').disabled=(nG===0);
-  // library
-  const pl=$('packList');pl.innerHTML='';
-  packs.forEach(p=>{const on=p.enabled!==false;
-    const row=document.createElement('div');row.className='packrow'+(on?'':' off');
-    const left=document.createElement('div');left.className='pkleft';
-    const sw=document.createElement('button');sw.className='switch'+(on?' on':'');sw.setAttribute('role','switch');sw.setAttribute('aria-checked',on?'true':'false');sw.setAttribute('aria-label','Enable pack');
-    sw.onclick=()=>{p.enabled=!on;persist();renderHome();};
-    const gtag=(p.guides&&p.guides.length)?` · ${p.guides.length} guides`:'';
-    const info=document.createElement('div');info.innerHTML=`<div class="pn">${p.pack}</div><div class="pm">${p.questions.length} questions · ${p.cards.length} cards${gtag}</div>`;
-    left.appendChild(sw);left.appendChild(info);
-    const b=document.createElement('button');b.className='rm';b.textContent='Remove';b.onclick=()=>removePack(p.id);
-    row.appendChild(left);row.appendChild(b);pl.appendChild(row);});
+  // library (hierarchical: school ▸ year ▸ course, mirroring the Default study packs panel)
+  renderLibrary();
   renderDefaultPacks();
   show('home');
+}
+/* Content library, grouped like the Default study packs panel: a single-select school chip row
+   across the top ('Other' for packs without a school), then year → course → packs beneath the
+   selected school. Enabled packs sort to the top of their subsection. Course groups default open. */
+let libSchool=null, libOpen=null;
+function libRow(p){const on=p.enabled!==false;
+  const row=document.createElement('div');row.className='packrow'+(on?'':' off');
+  const left=document.createElement('div');left.className='pkleft';
+  const sw=document.createElement('button');sw.className='switch'+(on?' on':'');sw.setAttribute('role','switch');sw.setAttribute('aria-checked',on?'true':'false');sw.setAttribute('aria-label','Enable pack');
+  sw.onclick=()=>{p.enabled=!on;persist();renderHome();};
+  const gtag=(p.guides&&p.guides.length)?` · ${p.guides.length} guides`:'';
+  const info=document.createElement('div');info.innerHTML=`<div class="pn">${p.pack}</div><div class="pm">${p.questions.length} questions · ${p.cards.length} cards${gtag}</div>`;
+  left.appendChild(sw);left.appendChild(info);
+  const b=document.createElement('button');b.className='rm';b.textContent='Remove';b.onclick=()=>removePack(p.id);
+  row.appendChild(left);row.appendChild(b);return row;}
+function renderLibrary(){
+  const pl=$('packList');pl.innerHTML='';
+  if(!packs.length)return;
+  const schools=[...new Set(packs.map(p=>p.school||'Other'))];
+  if(libSchool===null||!schools.includes(libSchool))libSchool=schools[0]||null;
+  if(schools.length>1){ // chip row only matters when more than one school is present
+    const sh=document.createElement('div');sh.className='dp-schools';
+    schools.forEach(s=>{const b=document.createElement('button');b.className='dp-school'+(s===libSchool?' on':'');
+      b.textContent=s;b.onclick=()=>{if(s!==libSchool){libSchool=s;libOpen=null;renderHome();}};sh.appendChild(b);});
+    pl.appendChild(sh);}
+  // group within the selected school: year → course → packs (insertion order preserved)
+  const years=new Map();
+  packs.forEach(p=>{if((p.school||'Other')!==libSchool)return;
+    const y=p.year||'Other packs',c=p.course||'';
+    if(!years.has(y))years.set(y,new Map());
+    const cs=years.get(y);if(!cs.has(c))cs.set(c,[]);
+    cs.get(c).push(p);});
+  if(libOpen===null){libOpen=new Set();years.forEach((cs,y)=>cs.forEach((_,c)=>{if(c)libOpen.add(y+'³'+c);}));} // default: all expanded
+  const host=document.createElement('div');host.className='dp-list';pl.appendChild(host);
+  years.forEach((cs,y)=>{
+    const yh=document.createElement('div');yh.className='dp-year';yh.textContent=y;host.appendChild(yh);
+    cs.forEach((plist,c)=>{
+      const nOn=plist.filter(p=>p.enabled!==false).length;
+      const sorted=[...plist.filter(p=>p.enabled!==false),...plist.filter(p=>p.enabled===false)]; // enabled to top of subsection
+      if(c){
+        const key=y+'³'+c,open=libOpen.has(key);
+        const tg=document.createElement('button');tg.className='dp-course'+(open?' open':'');
+        tg.innerHTML=`<span class="tri">${open?'▾':'▸'}</span> ${c} <span class="cnt">${nOn}/${plist.length} on</span>`;
+        tg.onclick=()=>{open?libOpen.delete(key):libOpen.add(key);renderHome();};
+        host.appendChild(tg);
+        if(!open)return;
+      }
+      const wrap=document.createElement('div');wrap.className='dp-coursebody';
+      sorted.forEach(p=>wrap.appendChild(libRow(p)));
+      host.appendChild(wrap);
+    });
+  });
 }
 /* Equal-as-possible distribution of `target` across the active groups, capped by availability.
    Round-robin fill naturally equalizes and redistributes any group's spare capacity. */
@@ -1168,8 +1219,8 @@ function currentCounts(){const g=examGroups();
 function examTotal(){const c=currentCounts();let t=0;for(const k in c)t+=c[k];return t;}
 
 /* ===== SRS DECK ===== */
-let filter=new Set(), sessionQueue=[], currentId=null, revealed=false, work={}, studiedThisSession=0;
-function inScope(c){return filter.size===0||filter.has(c.topic);}
+let filter=null, sessionQueue=[], currentId=null, revealed=false, work={}, studiedThisSession=0; // filter=null ⇒ ALL topics; empty Set ⇒ none; Set with members ⇒ that subset
+function inScope(c){return !filter||filter.has(c.topic);}
 function counts(){const now=Date.now();let nw=0,lr=0,rv=0,nwTot=0;
   deck().forEach(c=>{if(!inScope(c))return;const s=sched[c.id];if(s.phase==='new')nwTot++;else if(s.due<=now){(s.phase==='review'?rv++:lr++);}});
   return {nw:Math.min(nwTot,Math.max(0,settings.srsNewPerDay-daily.count)),lr,rv};}
@@ -1178,9 +1229,9 @@ function renderSrs(){
   const c=counts();
   $('cNew').textContent=c.nw;$('cLearn').textContent=c.lr;$('cRev').textContent=c.rv;
   $('studyBtn').disabled=(c.nw+c.lr+c.rv===0);
-  const scope=filter.size===0?'All topics':(filter.size+' topic'+(filter.size>1?'s':'')+' — '+[...filter].slice(0,3).join(', ')+(filter.size>3?'…':''));
+  const scope=!filter?'All topics':(filter.size===0?'No topics selected':(filter.size+' topic'+(filter.size>1?'s':'')+' — '+[...filter].slice(0,3).join(', ')+(filter.size>3?'…':'')));
   $('scopeline').innerHTML='Studying: <b>'+scope+'</b>';
-  $('topicSummary').textContent=filter.size===0?'all selected':filter.size+' selected';
+  $('topicSummary').textContent=!filter?'all selected':(filter.size===0?'none selected':filter.size+' selected');
   renderTopics();renderSysbreak();
 }
 function renderSysbreak(){const sb=$('sysbreak');sb.innerHTML='';const set=new Set(deck().map(c=>c.sys));
@@ -1190,9 +1241,14 @@ function renderTopics(){const now=Date.now();const tl=$('topicList');tl.innerHTM
   systemsPresent(set).forEach(sys=>{const topics=[];const seen=new Set();
     deck().filter(c=>c.sys===sys).forEach(c=>{if(!seen.has(c.topic)){seen.add(c.topic);topics.push(c.topic);}});
     let chips='';topics.forEach(t=>{let due=0;deck().forEach(c=>{if(c.topic===t){const s=sched[c.id];if(s.phase==='new'||s.due<=now)due++;}});
-      chips+=`<button class="tchip ${filter.has(t)?'on':''}" data-t="${encodeURIComponent(t)}">${t}<span class="ct ${due?'':'zero'}">${due}</span></button>`;});
+      chips+=`<button class="tchip ${(!filter||filter.has(t))?'on':''}" data-t="${encodeURIComponent(t)}">${t}<span class="ct ${due?'':'zero'}">${due}</span></button>`;});
     tl.innerHTML+=`<div class="tgroup"><div class="gname">${sysLabel(sys)}</div><div class="tchips">${chips}</div></div>`;});
-  tl.querySelectorAll('.tchip').forEach(el=>el.addEventListener('click',()=>{const t=decodeURIComponent(el.dataset.t);filter.has(t)?filter.delete(t):filter.add(t);renderSrs();}));}
+  tl.querySelectorAll('.tchip').forEach(el=>el.addEventListener('click',()=>{const t=decodeURIComponent(el.dataset.t);
+    const all=[...new Set(deck().map(c=>c.topic))];
+    if(!filter)filter=new Set(all); // expand 'ALL' to an explicit set before toggling one off
+    filter.has(t)?filter.delete(t):filter.add(t);
+    if(filter.size===all.length)filter=null; // re-selected everything ⇒ collapse back to 'ALL'
+    renderSrs();}));}
 
 /* ===== SRS SESSION ===== */
 function buildSession(){const now=Date.now();const due=[],learn=[],news=[];
@@ -1597,8 +1653,8 @@ $('browseBtn').addEventListener('click',renderBrowse);
 $('doneHome').addEventListener('click',openReview);
 $('doneStudyMore').addEventListener('click',startSession);
 $('topicToggle').addEventListener('click',()=>{const p=$('topicPanel');p.classList.toggle('open');$('topicToggle').querySelector('.ph-t').textContent=(p.classList.contains('open')?'▾':'▸')+' Choose topics';});
-$('allTopics').addEventListener('click',()=>{filter=new Set();renderSrs();});
-$('noneTopics').addEventListener('click',()=>{deck().forEach(c=>filter.add(c.topic));renderSrs();});
+$('allTopics').addEventListener('click',()=>{filter=null;renderSrs();}); // ALL ⇒ every chip on, studies all
+$('noneTopics').addEventListener('click',()=>{filter=new Set();renderSrs();}); // none ⇒ no chips on, studies nothing
 $('prevBtn').addEventListener('click',qPrev);$('nextBtn').addEventListener('click',qNext);
 $('submitAnsBtn').addEventListener('click',submitAnswer);
 $('flagBtn').addEventListener('click',()=>{qflag[qcur]=!qflag[qcur];renderQuiz();});
