@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.12 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.13 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.12)
+# Study Suite — Content Authoring Guide (v2.13)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,18 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.12 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **Authoring system version:** 2.13 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **What changed in guide v2.13:** quality refinements from a side-by-side audit of an outside-LLM pack
+> vs. the maintainer pack (same week, same source). No schema change. (1) **Answer-option order no longer
+> matters** (§2 question schema): the app **shuffles options at render time**, so place `correct`
+> at any index (first is fine for readability) — but **avoid position-dependent options** like "all of
+> the above" / "A and B". (2) **Card-type mix** (§3a): target a varied spread and don't go cloze-heavy;
+> every `multi` needs ≥1 false option (no "all correct" or "all-but-last" patterns). (3) **Guide
+> granularity** (§6): one dense week ≈ **6–10 narrow guides**, not 3–4 broad ones. (4) **`guide.s` is a
+> best-effort deep-link + a displayed label** (§6): make it a short heading-like cue. (5) **Source
+> practice questions** (§4): if the upload contains "Question 1/Answer 1…", name them as source and write
+> **novel** vignettes by default. (6) **Placement example** (§2): `course` is the shared block (`CPC 1`),
+> not a broad code (`MED120`). (7) The §7a reference validator gains positional-option + card-mix lints.
 > **What changed in guide v2.12:** **build the pack programmatically and validate before delivering**
 > (new §7a) — if you can execute code, don't hand-write the JSON: assemble the pack as a data structure,
 > run it through a validator that enforces the §7 checklist + the §8 output-hygiene scan, **pretty-print**
@@ -201,6 +212,12 @@ packs in both the Default study packs panel and the user's Content library:
 > **not** in `course`. Putting the topic in `course` (e.g. `course:"Immunology II"`) gives every week
 > its own one-pack "course" and defeats the grouping; leaving placement fields null drops the pack into
 > an "Other" bucket. Fill them all, and ask the user if you don't know their structure.
+>
+> **Also avoid the opposite mistake — a broad administrative code.** Use the curriculum **block the
+> learner thinks in** (e.g. `"CPC 1"`), not a registrar's course code like `"MED120"`, unless the user
+> explicitly wants to group by that code. The block is what the user recognizes and what keeps related
+> weeks together. (Likewise, prefer a short stable `id` such as `"wk16"` and sequential item ids
+> `"wk16_q01"` / `"wk16_c01"`, with guide keys like `"W16_01_<Topic>.html"`.)
 
 Two things to know — and to **ask the user** about:
 
@@ -254,6 +271,13 @@ if the level weren't there, so leaving it out costs nothing.
 Rules: `options` has **2+** entries; `correct` is a **0-based integer index**; `stem` is required;
 `difficulty` is one of `"easy" | "medium" | "hard"` (see §5). **Put `difficulty` on questions only —
 never on cards.**
+
+> **Option order does not matter — the app SHUFFLES options at render time** (app v0.2.62+), for both
+> Practice/Exam questions and `mcq`/`multi` cards. So you may put the `correct` option at **any** index
+> (placing it first is perfectly fine for readability); the learner never sees a fixed "always-A"
+> pattern. **The one rule this creates: never write position-dependent options** — no "All of the
+> above", "None of the above", "A and B", "Options 1 and 3", etc. They become nonsense once reordered.
+> Write every option as a standalone answer. (The §7a validator flags positional options.)
 
 ### Card schema (spaced repetition) — six types
 
@@ -319,6 +343,29 @@ and associations over trivia.
 
 ---
 
+## 3a. Card-type mix — vary the retrieval, don't go cloze-heavy
+
+The six card types exist so Review *mixes* recall styles. A common outside-LLM failure is making the deck
+**mostly cloze** (fill-in-the-blank), which turns Review into rote text completion. Aim for a spread
+roughly like:
+
+- **qa** ~25–30% — short "what's the key distinction / why" prompts.
+- **mcq** ~15–25% — single high-yield associations.
+- **cloze** ~15–25% — definitions, numeric thresholds, criteria (**not** the majority of the deck).
+- **multi** ~10–15% — "select all"; **every multi card needs at least one FALSE option** and a real
+  discriminating choice. Do **not** mark all options correct, and do **not** fall into an "all true
+  except the last one" habit — vary which/how many are correct.
+- **order** ~10–15% — best for **algorithms / workups / sequences** (e.g. febrile-neutropenia steps,
+  an approach to an abnormal CBC, a diagnostic pathway).
+- **match** ~10–15% — for clean associations: disease→clue, drug→toxicity, disease→treatment,
+  framework→purpose.
+
+These are guides, not quotas — but if your deck is >35% cloze or has multi cards with no false option,
+rebalance. (`mcq`/`multi` options are shuffled at render, so author them in any order; never use
+position-dependent options — see §2.)
+
+---
+
 ## 4. Source material — use it, but **don't copy it**
 
 The user may upload their own **WFQs (weekly feedback quizzes)** or other practice questions. You
@@ -331,6 +378,13 @@ The user may upload their own **WFQs (weekly feedback quizzes)** or other practi
 > questions as a syllabus signal, not a question bank to echo.
 
 When in doubt: same *concept*, new *vignette*.
+
+> **If the upload contains numbered practice questions** (a study guide with "Question 1 … Answer 1 …",
+> a quiz, a WFQ), **explicitly recognize them as source practice questions**, tell the user you're using
+> them for topic emphasis/level/style, and then write **novel** vignettes that test the same concepts
+> from new angles. Do **not** silently reproduce or lightly paraphrase them. The only exception is when
+> the user *explicitly* asks for a faithful conversion of an existing question set — then say so and
+> convert. Default = novel.
 
 ---
 
@@ -421,7 +475,10 @@ Even though no file is written, each guide still needs a **filename-style key** 
 > skeleton, not the target.** A guide that is one heading and a sentence (or a single sparse page for a
 > whole week) wastes the feature and short-changes the learner. Aim for:
 > - **One guide per major topic block** of the week's material (so a typical week has several guides,
->   and a multi-week pack has more) — not a single mega-guide covering everything.
+>   and a multi-week pack has more) — not a single mega-guide covering everything. As a rule of thumb,
+>   **a dense one-week medical pack lands around 6–10 narrow guides**, each with a tight title — not
+>   3–4 broad guides that staple unrelated topics together (e.g. split "Lymphadenopathy & Lymphoma"
+>   and "Plasma-cell disorders" rather than one "everything-lymphoid" guide).
 > - **Real teaching content in each:** multiple `<h2>`/`<h3>` sections, at least one or two `<table>`s
 >   or key-point boxes, covering the high-yield facts, mechanisms, associations, and "do-not-miss"
 >   items of that block. Match the depth of the source material; a guide should stand on its own as a
@@ -453,10 +510,15 @@ The `guides` array holds one object per guide:
 - `html` — the **complete HTML document** of the guide. It renders in a sandboxed iframe, so it
   carries its own `<style>`.
 
-**Deep-linking (optional, encouraged):** the app does a best-effort scroll to the section named in
-`guide.s` by matching a heading inside the embedded guide, and honors `guide.f = "File.html#anchor"`
-when a heading carries `id="anchor"`. Add `id="..."` to the guide's `<h2>`/`<h3>` headings so links
-can jump straight to them.
+**What `guide.s` is — a label AND a best-effort deep-link.** The app does two things with `guide.s`:
+it **displays** it to the learner ("Deeper detail: …") next to the Open-guide link, and it tries to
+**scroll** the opened guide to the matching spot. The scroll is best-effort, in this order: (1) an
+`id` anchor if you wrote `guide.f = "File.html#anchor"`; (2) otherwise the first heading whose text
+**contains** `guide.s` (case-insensitive substring); (3) otherwise a text search/highlight of `guide.s`
+in the body. So `guide.s` does **not** have to exactly equal a heading — but you get the best result by
+making it a **short, heading-like cue** that actually appears in that guide (e.g. `"5 · HIT"` when the
+guide has an `<h2>HIT</h2>`), rather than a long abstract micro-objective that matches nothing. Adding
+`id="..."` to your `<h2>`/`<h3>` headings (and pointing `guide.f` at them) makes the jump exact.
 
 ### Theming contract — IMPORTANT for colors
 
@@ -518,10 +580,16 @@ every `guides[]` entry has non-empty `html`.
 citation/grounding/footnote markers** anywhere (see §8). Run it through a strict JSON parser — if it
 doesn't parse, it won't import.
 
-**Substance & coverage:** **one guide per topic block** (not a single sparse page), each with real
-sections/tables; **most questions and cards carry a `guide` pointer**; counts meet the targets and are
-**scaled to the weeks covered** (10–20 questions and 40–60 cards *per week*); difficulty lands near the
-**~30 / 55 / 15** easy/medium/hard spread.
+**Substance & coverage:** **6–10 narrow guides for a dense one-week pack** (not a single sparse page),
+each with real sections/tables; **most questions and cards carry a `guide` pointer**; counts meet the
+targets and are **scaled to the weeks covered** (10–20 questions — favour the upper end, 18–20, for a
+dense week — and 40–60 cards *per week*); difficulty lands near the **~30 / 55 / 15** easy/medium/hard
+spread, with **hard** items testing contraindications, emergencies, or multi-step reasoning (not just
+longer stems).
+
+**Options & card mix:** **no position-dependent options** anywhere (`"all of the above"`, `"A and B"`,
+…) — options are shuffled at render (§2). Card types are **varied, not cloze-heavy** (cloze ≲ 35% of the
+deck); **every `multi` card has ≥1 false option** (never all-correct, never "all-but-the-last").
 
 **Placement filled:** `school` / `year` / (`term`) / `course` / `weeks` are present (ask if unknown,
 don't leave null), and **`course` is the grouping block shared across weeks (e.g. a course/block name),
@@ -561,6 +629,9 @@ from collections import Counter
 
 CARD_TYPES = {"mcq", "multi", "cloze", "order", "match", "qa"}
 ARTIFACTS  = ["start_span", "end_span", "【", "】", "```"]  # any of these breaks the import
+# options whose meaning depends on position — break when the app shuffles options at render
+POSITIONAL = re.compile(r"\b(all of the above|none of the above|both (the )?(first|a)\b|a and b\b|"
+                        r"options? [a-e]\b|answers? [a-e]\b|all of these|none of these)", re.I)
 
 def validate_pack(pack):
     errs, warns = [], []
@@ -584,6 +655,9 @@ def validate_pack(pack):
         if q.get("guide", {}).get("f") and q["guide"]["f"] not in gfiles:
             errs.append(f"{qid}: guide.f '{q['guide']['f']}' matches no guide")
         if len(q.get("explain", "")) < 80: warns.append(f"{qid}: explanation looks thin")
+        for o in opts:
+            if isinstance(o, str) and POSITIONAL.search(o):
+                warns.append(f"{qid}: position-dependent option {o!r} — reword (options are shuffled)")
 
     for c in cs:
         cid, t = c.get("id", "?"), c.get("type")
@@ -596,6 +670,12 @@ def validate_pack(pack):
         if t == "multi" and not (isinstance(c.get("correct"), list)
                                  and all(0 <= i < len(c.get("options", [])) for i in c.get("correct", []))):
             errs.append(f"{cid}: bad multi correct")
+        if t == "multi" and isinstance(c.get("correct"), list) and len(c["correct"]) >= len(c.get("options", [])):
+            warns.append(f"{cid}: multi marks ALL options correct — add a false option")
+        if t in {"mcq", "multi"}:
+            for o in c.get("options", []):
+                if isinstance(o, str) and POSITIONAL.search(o):
+                    warns.append(f"{cid}: position-dependent option {o!r} — reword (options are shuffled)")
         if t == "cloze":
             txt = c.get("text", "")
             if txt.count("{{") != txt.count("}}") or txt.count("{{") == 0:
@@ -614,8 +694,15 @@ def validate_pack(pack):
     hit = [m for m in ARTIFACTS if m in blob]
     if hit: errs.append(f"citation/markdown artifacts present: {hit}")
 
+    types = Counter(c.get("type") for c in cs)
+    if cs and types.get("cloze", 0) > 0.35 * len(cs):
+        warns.append(f"cloze cards {types['cloze']}/{len(cs)} (>35%) — vary the card mix (more qa/mcq/order)")
+    if len(gs) < 6:
+        warns.append(f"only {len(gs)} guide(s) — a dense one-week pack usually wants ~6–10 narrow guides")
+
     diffs = Counter(q.get("difficulty") for q in qs)
-    print(f"questions={len(qs)} cards={len(cs)} guides={len(gs)} difficulty={dict(diffs)}")
+    print(f"questions={len(qs)} cards={len(cs)} guides={len(gs)} "
+          f"difficulty={dict(diffs)} cardtypes={dict(types)}")
     return errs, warns
 
 # usage:
