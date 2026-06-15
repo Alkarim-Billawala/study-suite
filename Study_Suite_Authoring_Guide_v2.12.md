@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.11 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.12 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.11)
+# Study Suite — Content Authoring Guide (v2.12)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,14 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.11 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **Authoring system version:** 2.12 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **What changed in guide v2.12:** **build the pack programmatically and validate before delivering**
+> (new §7a) — if you can execute code, don't hand-write the JSON: assemble the pack as a data structure,
+> run it through a validator that enforces the §7 checklist + the §8 output-hygiene scan, **pretty-print**
+> it, and **refuse to emit on any failure**. A copy-pasteable reference validator is included. This
+> directly eliminates the most common import-breaking failures (minified JSON, injected citation/grounding
+> markers, broken `correct` indices, unbalanced cloze, unrated questions). It does *not* substitute for
+> content depth (§3/§6) — a validator checks structure, not teaching quality. No schema change.
 > **What changed in guide v2.11:** **file-naming convention** (§8) — name the pack file after its
 > placement, `<Year>_<Course>_Week<NN>_<Subject>_v<ver>.json`, so a learner's packs stay organized and
 > sort in a folder (the app still identifies/sorts by fields, not the name). No schema change.
@@ -522,6 +529,110 @@ not the week's subject.**
 
 ---
 
+## 7a. Build it programmatically and validate — don't hand-write the JSON
+
+**If you can execute code (a Python sandbox, code interpreter, notebook, etc.), build the pack with a
+script instead of typing JSON by hand.** Hand-authored JSON is where the import-breaking failures come
+from — and they are *silent*: the user drags in the file and nothing appears, with no error. The most
+common ones are mechanical and 100% catchable:
+
+- **Minified / single-line JSON** that's unreadable and hard to diff → fixed by pretty-printing.
+- **Citation / grounding / footnote markers your tooling injects** — `start_span`/`end_span`, `【…】`,
+  ` ``` ` fences, `[1]`-style cites — **a single one makes the whole file fail to parse** (see §8).
+- **Broken `correct` indices, unbalanced `{{…}}` cloze blanks, a `guide.f` that matches no guide, a
+  question with no `difficulty`** — each silently breaks or degrades the pack.
+
+The workflow that prevents all of the above:
+
+1. **Assemble** the pack as a native data structure (lists/dicts), not a hand-typed string.
+2. **Validate** it against the §7 checklist *and* scan for the §8 artifacts.
+3. **Pretty-print** with 1- or 2-space indentation.
+4. **Refuse to write/deliver** if validation fails — fix, then re-run.
+
+> A validator checks **structure, not substance.** It cannot tell you a guide is too thin or a question
+> is one shallow line — that's on the content instructions in §3 (volume) and §6 (substantive guides).
+> Treat the heuristic warnings below (guide length, explanation length, counts) as nudges, not a pass.
+
+### Reference validator (Python — copy, adapt, run)
+
+```python
+import json, re
+from collections import Counter
+
+CARD_TYPES = {"mcq", "multi", "cloze", "order", "match", "qa"}
+ARTIFACTS  = ["start_span", "end_span", "【", "】", "```"]  # any of these breaks the import
+
+def validate_pack(pack):
+    errs, warns = [], []
+    for k in ("pack", "id", "formatVersion", "version"):
+        if not pack.get(k): errs.append(f"missing top-level field: {k}")
+    qs, cs, gs = pack.get("questions", []), pack.get("cards", []), pack.get("guides", [])
+    gfiles = {g.get("file") for g in gs}
+
+    ids = [x.get("id") for x in qs + cs if x.get("id")]
+    for i, n in Counter(ids).items():
+        if n > 1: errs.append(f"duplicate id: {i} (x{n})")
+
+    for q in qs:
+        qid = q.get("id", "?")
+        if not all(q.get(k) for k in ("sys", "topic", "stem")): errs.append(f"{qid}: missing sys/topic/stem")
+        opts = q.get("options", [])
+        if len(opts) < 2 or not isinstance(q.get("correct"), int) or not (0 <= q.get("correct", -1) < len(opts)):
+            errs.append(f"{qid}: bad options/correct")
+        if q.get("difficulty") not in ("easy", "medium", "hard"):
+            errs.append(f"{qid}: difficulty must be easy/medium/hard")
+        if q.get("guide", {}).get("f") and q["guide"]["f"] not in gfiles:
+            errs.append(f"{qid}: guide.f '{q['guide']['f']}' matches no guide")
+        if len(q.get("explain", "")) < 80: warns.append(f"{qid}: explanation looks thin")
+
+    for c in cs:
+        cid, t = c.get("id", "?"), c.get("type")
+        if t not in CARD_TYPES: errs.append(f"{cid}: bad card type {t!r}"); continue
+        if "difficulty" in c: errs.append(f"{cid}: cards must NOT carry difficulty")
+        if t in {"mcq", "multi", "order", "match", "qa"} and not c.get("prompt"):
+            errs.append(f"{cid}: {t} needs a prompt")
+        if t == "mcq" and not (0 <= c.get("correct", -1) < len(c.get("options", []))):
+            errs.append(f"{cid}: bad mcq correct")
+        if t == "multi" and not (isinstance(c.get("correct"), list)
+                                 and all(0 <= i < len(c.get("options", [])) for i in c.get("correct", []))):
+            errs.append(f"{cid}: bad multi correct")
+        if t == "cloze":
+            txt = c.get("text", "")
+            if txt.count("{{") != txt.count("}}") or txt.count("{{") == 0:
+                errs.append(f"{cid}: unbalanced/empty cloze blanks")
+        if t == "qa" and not c.get("answer"): errs.append(f"{cid}: qa needs an answer")
+        if t == "match" and (not c.get("pairs") or any(len(p) != 2 for p in c.get("pairs", []))):
+            errs.append(f"{cid}: match pairs must be 2-element arrays")
+        if c.get("guide", {}).get("f") and c["guide"]["f"] not in gfiles:
+            errs.append(f"{cid}: guide.f '{c['guide']['f']}' matches no guide")
+
+    for g in gs:
+        if not g.get("html"): errs.append(f"guide {g.get('file')}: empty html")
+        elif len(g["html"]) < 1500: warns.append(f"guide {g.get('file')}: looks thin (<1500 chars)")
+
+    blob = json.dumps(pack, ensure_ascii=False)
+    hit = [m for m in ARTIFACTS if m in blob]
+    if hit: errs.append(f"citation/markdown artifacts present: {hit}")
+
+    diffs = Counter(q.get("difficulty") for q in qs)
+    print(f"questions={len(qs)} cards={len(cs)} guides={len(gs)} difficulty={dict(diffs)}")
+    return errs, warns
+
+# usage:
+# errs, warns = validate_pack(pack)
+# for w in warns: print("warn:", w)
+# if errs:
+#     for e in errs: print("ERROR:", e)
+#     raise SystemExit("NOT WRITTEN — fix the errors above.")
+# with open(out_name, "w", encoding="utf-8") as f:
+#     json.dump(pack, f, ensure_ascii=False, indent=1)   # pretty-printed, never minified
+```
+
+**If you cannot run code,** you can't skip validation — you just do it by hand: re-read §7 item by item,
+then paste the finished text into a strict JSON parser (per §8) and confirm it parses *before* delivering.
+
+---
+
 ## 8. Output instructions
 
 > **⚠ Output hygiene — the #1 cause of a pack that won't import.** The pack file must be **pure,
@@ -533,7 +644,8 @@ not the week's subject.**
 >   numbers, or `[1]`-style cites. **A single stray marker anywhere makes `JSON.parse` reject the
 >   entire file**, so the user sees nothing import.
 > - **Parse-test the final text with a strict JSON parser** (it either parses cleanly or it doesn't).
->   Also re-run the §7 checklist. Do not hand over a pack you have not verified parses.
+>   Also re-run the §7 checklist. Do not hand over a pack you have not verified parses. **If you can run
+>   code, do all of this with the §7a validator rather than by eye — it catches every artifact above.**
 
 When you finish, produce **one downloadable file** (not just code in chat):
 

@@ -1,0 +1,1351 @@
+{
+ "pack": "Week 15 — Blood II",
+ "id": "wk15",
+ "formatVersion": "2.0",
+ "version": "2.0",
+ "author": "Alkarim Billawala / alkarim.billawala.ca",
+ "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
+ "created": "2026-06-15",
+ "updated": "2026-06-15",
+ "school": "UofT — Temerty Medicine",
+ "year": "Year 1",
+ "course": "CPC 1",
+ "weeks": "Week 15 · Blood II",
+ "questions": [
+  {
+   "id": "wk15_q01",
+   "sys": "Heme",
+   "topic": "Hemostasis · Primary vs secondary",
+   "difficulty": "easy",
+   "stem": "A 19-year-old man is seen after a knee injury. Over the next two days the knee becomes hot, tense, and swollen with a large effusion, and he later develops a deep thigh hematoma. He has had similar deep bleeds before. His platelet count is normal. Which part of hemostasis is most likely defective?",
+   "options": [
+    "Secondary hemostasis (coagulation factors)",
+    "Primary hemostasis (platelet plug)",
+    "Fibrinolysis (excess plasmin)",
+    "Vascular integrity (collagen)",
+    "Natural anticoagulants"
+   ],
+   "correct": 0,
+   "explain": "<b>Deep bleeding</b> &mdash; hemarthroses and muscle hematomas &mdash; is the classic pattern of a <b>secondary hemostasis</b> (coagulation factor) defect such as hemophilia. Mucocutaneous bleeding (petechiae, epistaxis, gum bleeding) would instead point to primary hemostasis (platelets/vWF).",
+   "guide": {
+    "f": "W15_01_Normal_Hemostasis.html",
+    "t": "1 · Bleeding pattern",
+    "s": "deep bleeding = secondary"
+   }
+  },
+  {
+   "id": "wk15_q02",
+   "sys": "Heme",
+   "topic": "Hemostasis · Cascade",
+   "difficulty": "easy",
+   "stem": "A medical student is asked which screening test reflects the extrinsic coagulation pathway and is used to monitor warfarin therapy. Which test is correct?",
+   "options": [
+    "PT / INR",
+    "PTT / aPTT",
+    "Platelet count",
+    "Bleeding time",
+    "D-dimer"
+   ],
+   "correct": 0,
+   "explain": "The <b>PT/INR</b> reflects the <b>extrinsic and common pathways</b> (factor VII first) and is the standard test for warfarin monitoring. The PTT reflects the intrinsic pathway and is used for heparin and hemophilia.",
+   "guide": {
+    "f": "W15_01_Normal_Hemostasis.html",
+    "t": "1 · Cascade",
+    "s": "PT extrinsic, PTT intrinsic"
+   }
+  },
+  {
+   "id": "wk15_q03",
+   "sys": "Heme",
+   "topic": "vWD",
+   "difficulty": "medium",
+   "stem": "A 26-year-old woman is assessed before tonsillectomy. Her PT/INR and PTT are normal and she is cleared for surgery. Postoperatively she has severe bleeding requiring ICU admission, multiple transfusions, and return trips to the OR. On review she reports heavy menstrual bleeding since adolescence and severe postpartum hemorrhage. Which diagnosis best explains her presentation?",
+   "options": [
+    "von Willebrand disease",
+    "Factor XII deficiency",
+    "Severe factor VII deficiency",
+    "Disseminated intravascular coagulation",
+    "Antithrombin deficiency"
+   ],
+   "correct": 0,
+   "explain": "Normal PT/PTT does <b>not</b> exclude a bleeding disorder. Lifelong mucocutaneous bleeding &mdash; menorrhagia, postpartum hemorrhage, severe surgical mucosal bleeding &mdash; strongly suggests <b>vWD</b>, the most common inherited bleeding disorder. Factor XII deficiency prolongs PTT but does not cause bleeding; factor VII deficiency prolongs PT; antithrombin deficiency causes thrombosis.",
+   "guide": {
+    "f": "W15_03_Bleeding_Disorders.html",
+    "t": "3 · vWD",
+    "s": "normal PT/PTT, mucosal bleeding"
+   }
+  },
+  {
+   "id": "wk15_q04",
+   "sys": "Heme",
+   "topic": "Thrombocytopenia · Red flags",
+   "difficulty": "medium",
+   "stem": "A 34-year-old woman presents with a new non-blanching petechial rash on both legs. CBC shows platelets 2 &times;10⁹/L, hemoglobin 121 g/L, and WBC 5.1 &times;10⁹/L. She has no neurologic symptoms. Which additional finding would be most concerning for an increased risk of life-threatening bleeding?",
+   "options": [
+    "Oral blood blisters",
+    "Splenomegaly",
+    "Mild bruising after a fall",
+    "Pruritic wheals",
+    "Ankle edema"
+   ],
+   "correct": 0,
+   "explain": "In severe thrombocytopenia, <b>wet purpura</b> &mdash; oral mucous-membrane bleeding such as blood blisters &mdash; signals higher risk of serious bleeding, including intracranial hemorrhage, compared with petechiae alone. Splenomegaly may explain a cause but does not predict imminent bleeding as strongly.",
+   "guide": {
+    "f": "W15_03_Bleeding_Disorders.html",
+    "t": "3 · ITP",
+    "s": "wet purpura red flag"
+   }
+  },
+  {
+   "id": "wk15_q05",
+   "sys": "Heme",
+   "topic": "DIC",
+   "difficulty": "medium",
+   "stem": "A 74-year-old man in the ICU with E. coli sepsis begins bleeding from IV sites, his nose, and his endotracheal tube. Hemoglobin is 90 g/L, platelets 110 &times;10⁹/L, the film shows red-cell fragments, PT/INR and PTT are both markedly prolonged, and fibrinogen is low. What is the most likely cause of his bleeding?",
+   "options": [
+    "Disseminated intravascular coagulation",
+    "Hemophilia A",
+    "Isolated factor VII deficiency",
+    "Immune thrombocytopenia",
+    "von Willebrand disease"
+   ],
+   "correct": 0,
+   "explain": "Sepsis plus oozing from lines/tubes, thrombocytopenia, prolonged PT <b>and</b> PTT, <b>low fibrinogen</b>, raised fibrin degradation, and schistocytes is classic <b>DIC</b>. Hemophilia gives isolated PTT prolongation with deep bleeding; ITP gives isolated thrombocytopenia; vWD is mucocutaneous with often-normal screening labs.",
+   "guide": {
+    "f": "W15_04_DIC_Microangiopathy.html",
+    "t": "4 · DIC",
+    "s": "sepsis + low fibrinogen"
+   }
+  },
+  {
+   "id": "wk15_q06",
+   "sys": "Heme",
+   "topic": "Hemophilia",
+   "difficulty": "medium",
+   "stem": "A 19-year-old man has recurrent hemarthroses and large muscle hematomas. Platelet count and PT/INR are normal, but PTT is prolonged. A mixing study corrects the PTT. Which diagnosis is most likely?",
+   "options": [
+    "Hemophilia A",
+    "Aspirin-induced platelet dysfunction",
+    "Warfarin excess",
+    "Immune thrombocytopenia",
+    "Glanzmann thrombasthenia"
+   ],
+   "correct": 0,
+   "explain": "Deep bleeding with a <b>normal PT and prolonged PTT</b> points to an intrinsic-pathway factor (VIII, IX, XI, XII). <b>Correction on mixing</b> indicates a factor <b>deficiency</b> rather than an inhibitor. Hemophilia A (factor VIII deficiency) fits. Warfarin would prolong PT; antiplatelet/Glanzmann defects give mucocutaneous bleeding.",
+   "guide": {
+    "f": "W15_03_Bleeding_Disorders.html",
+    "t": "3 · Hemophilia",
+    "s": "normal PT, prolonged PTT, corrects"
+   }
+  },
+  {
+   "id": "wk15_q07",
+   "sys": "Heme",
+   "topic": "VTE · Empiric anticoagulation",
+   "difficulty": "medium",
+   "stem": "A 70-year-old man presents with right calf swelling and tenderness after a long car trip. He is tachycardic at 129, tachypneic at 30, and his oxygen saturation is 90%. Chest X-ray is normal. You strongly suspect PE with DVT. CT pulmonary angiography will be delayed several hours. Platelets, INR, and PTT are normal, and there is no active bleeding. What is the best next step while awaiting imaging?",
+   "options": [
+    "Start empiric therapeutic anticoagulation",
+    "Order D-dimer and wait for the result before any treatment",
+    "Reassure and discharge with outpatient follow-up",
+    "Give aspirin only",
+    "Insert an IVC filter as first-line therapy"
+   ],
+   "correct": 0,
+   "explain": "High clinical probability PE/DVT with abnormal vitals and no bleeding contraindication warrants <b>empiric therapeutic anticoagulation</b> while imaging is delayed. D-dimer is not useful when pre-test probability is high; aspirin is inadequate for acute VTE; IVC filters are reserved for patients who cannot be anticoagulated.",
+   "guide": {
+    "f": "W15_07_VTE_Management.html",
+    "t": "7 · Core principle",
+    "s": "empiric anticoagulation"
+   }
+  },
+  {
+   "id": "wk15_q08",
+   "sys": "Heme",
+   "topic": "VTE · D-dimer",
+   "difficulty": "easy",
+   "stem": "A 22-year-old man injures his calf playing basketball and now has a sore, swollen calf. He has no prior VTE, no family history, no recent surgery or hospitalization, and no cancer. His clinical probability for DVT is low. Which test is best to rule out DVT?",
+   "options": [
+    "D-dimer",
+    "CT pulmonary angiogram",
+    "Chest X-ray",
+    "Troponin",
+    "PT / INR"
+   ],
+   "correct": 0,
+   "explain": "In a <b>low pre-test probability</b> patient, a negative <b>D-dimer</b> safely rules out DVT. D-dimer should not be used to rule in VTE and is less useful in high-risk or older patients where false positives are common.",
+   "guide": {
+    "f": "W15_06_VTE_Diagnosis.html",
+    "t": "6 · Pre-test probability",
+    "s": "low prob + D-dimer"
+   }
+  },
+  {
+   "id": "wk15_q09",
+   "sys": "Heme",
+   "topic": "VTE · Pregnancy",
+   "difficulty": "hard",
+   "stem": "A 34-year-old woman at 26 weeks gestation presents with acute dyspnea and you suspect PE. She also has unilateral leg swelling and tenderness. Which test is the best next step to confirm VTE while minimizing fetal and maternal risk?",
+   "options": [
+    "Doppler ultrasound of the legs",
+    "CT pulmonary angiography as the first and only test",
+    "D-dimer as a definitive rule-in test",
+    "Bronchoscopy",
+    "Exercise stress test"
+   ],
+   "correct": 0,
+   "explain": "In pregnancy with suspected PE <b>and leg symptoms</b>, <b>leg Doppler ultrasound</b> is often the preferred first test: finding a DVT establishes the need for anticoagulation (the same treatment as PE) without exposing mother and fetus to chest imaging/contrast. D-dimer cannot rule in VTE and is physiologically elevated in pregnancy.",
+   "guide": {
+    "f": "W15_06_VTE_Diagnosis.html",
+    "t": "6 · Pre-test probability",
+    "s": "pregnancy leg Doppler first"
+   }
+  },
+  {
+   "id": "wk15_q10",
+   "sys": "Heme",
+   "topic": "Superficial thrombophlebitis",
+   "difficulty": "easy",
+   "stem": "A 63-year-old woman has a tender, hard, erythematous palpable cord running along a superficial vein of the leg. She has no whole-leg swelling, no dyspnea, and no hypoxia. What is the most likely diagnosis?",
+   "options": [
+    "Superficial thrombophlebitis",
+    "Calf deep vein thrombosis",
+    "Post-thrombotic syndrome",
+    "Cellulitis",
+    "Acute arterial occlusion"
+   ],
+   "correct": 0,
+   "explain": "A tender, hard, <b>palpable cord</b> along a superficial vein is characteristic of <b>superficial thrombophlebitis</b>. DVT more often presents with deep venous tenderness and asymmetric swelling of part or all of the limb.",
+   "guide": {
+    "f": "W15_06_VTE_Diagnosis.html",
+    "t": "6 · DVT presentation",
+    "s": "palpable superficial cord"
+   }
+  },
+  {
+   "id": "wk15_q11",
+   "sys": "Heme",
+   "topic": "Cancer-associated VTE",
+   "difficulty": "hard",
+   "stem": "A patient with confirmed DVT/PE is found two weeks later to have gastric carcinoma after developing melena and a hemoglobin drop from 130 to 80 g/L while on anticoagulation. He is hemodynamically stable after resuscitation, and endoscopy achieves hemostasis. What is the most appropriate anticoagulation strategy after bleeding control?",
+   "options": [
+    "Resume anticoagulation, often using LMWH in active GI malignancy, with close monitoring",
+    "Permanently stop all anticoagulation because any bleed contraindicates future treatment",
+    "Switch to aspirin because it prevents recurrent PE as effectively as anticoagulation",
+    "Place an IVC filter and never restart anticoagulation",
+    "Treat for only 24 hours because the clot has already embolized"
+   ],
+   "correct": 0,
+   "explain": "Cancer-associated VTE carries a high recurrence risk and usually needs extended anticoagulation while cancer is active. Active bleeding may require temporarily holding anticoagulation plus source control and resuscitation; <b>after hemostasis it should be resumed</b>. <b>LMWH</b> is often favored in active cancer, especially with GI malignancy/bleeding. IVC filters are only temporizing when anticoagulation is impossible.",
+   "guide": {
+    "f": "W15_07_VTE_Management.html",
+    "t": "7 · Cancer + bleeding",
+    "s": "resume LMWH after hemostasis"
+   }
+  },
+  {
+   "id": "wk15_q12",
+   "sys": "Heme",
+   "topic": "Trauma · Hemorrhage",
+   "difficulty": "medium",
+   "stem": "A 45-year-old construction worker is crushed by heavy machinery. He is hypotensive and tachycardic. Primary survey shows a patent airway, good bilateral breath sounds, a soft abdomen, a negative FAST, an unstable pelvis, and bilateral thigh deformity with crepitus. Pulses are present. Which immediate intervention best addresses the likely source of hemorrhagic shock?",
+   "options": [
+    "Pelvic binder application and blood-product resuscitation",
+    "Oral warfarin",
+    "Delay resuscitation until CT confirms bleeding",
+    "Aspirin loading dose",
+    "Encourage ambulation to prevent DVT"
+   ],
+   "correct": 0,
+   "explain": "Hypotensive blunt trauma with an <b>unstable pelvis and bilateral femur injuries</b> raises major hemorrhage concern <b>even with a negative FAST</b>, because pelvic/retroperitoneal bleeding may not be detected. Apply a <b>pelvic binder</b>, splint long bones, resuscitate with <b>blood products</b>, and activate the massive hemorrhage protocol.",
+   "guide": {
+    "f": "W15_08_Trauma_TXA_Aging.html",
+    "t": "8 · Trauma",
+    "s": "binder + blood products, negative FAST"
+   }
+  },
+  {
+   "id": "wk15_q13",
+   "sys": "Heme",
+   "topic": "HIT",
+   "difficulty": "hard",
+   "stem": "A 68-year-old woman receiving unfractionated heparin for a DVT has her platelet count fall from 250 to 95 &times;10⁹/L on day 7, and she develops a new clot in the contralateral leg. What is the most appropriate immediate management?",
+   "options": [
+    "Stop all heparin and start a non-heparin anticoagulant",
+    "Continue heparin and transfuse platelets",
+    "Stop heparin and start warfarin immediately",
+    "Reduce the heparin dose and monitor",
+    "Give IVIG and continue heparin"
+   ],
+   "correct": 0,
+   "explain": "A &gt;50% platelet fall around day 5&ndash;10 of heparin with new thrombosis is classic <b>HIT</b>. Management: <b>stop all heparin</b> and start a <b>non-heparin</b> anticoagulant. Do <b>not</b> start warfarin until platelets recover (risk of venous limb gangrene/skin necrosis), and avoid platelet transfusion, which can worsen thrombosis.",
+   "guide": {
+    "f": "W15_05_Hemostasis_Drugs.html",
+    "t": "5 · HIT",
+    "s": "stop heparin, non-heparin agent"
+   }
+  },
+  {
+   "id": "wk15_q14",
+   "sys": "Heme",
+   "topic": "TTP vs DIC",
+   "difficulty": "medium",
+   "stem": "A 40-year-old woman presents with confusion, a petechial rash, and acute kidney injury. CBC shows thrombocytopenia and the film shows numerous schistocytes. Her PT, PTT, and fibrinogen are all normal. Which is the most appropriate next step?",
+   "options": [
+    "Urgent plasma exchange",
+    "Platelet transfusion",
+    "Cryoprecipitate for low fibrinogen",
+    "High-dose vitamin K",
+    "Begin therapeutic heparin"
+   ],
+   "correct": 0,
+   "explain": "Thrombocytopenia + schistocytes + neurologic/renal features with <b>normal coagulation studies</b> is <b>TTP</b>, a hematologic emergency treated with urgent <b>plasma exchange</b>. <b>Avoid platelet transfusion</b> (can worsen microthrombi). Normal PT/PTT/fibrinogen argues against DIC, where they would be deranged.",
+   "guide": {
+    "f": "W15_04_DIC_Microangiopathy.html",
+    "t": "4 · Microangiopathies",
+    "s": "normal coags + schistocytes = TTP"
+   }
+  },
+  {
+   "id": "wk15_q15",
+   "sys": "Heme",
+   "topic": "Anticoagulant choice",
+   "difficulty": "medium",
+   "stem": "A 55-year-old man with a first unprovoked proximal DVT is hemodynamically stable, has normal renal function, no active bleeding, and reliable follow-up. He has no cancer and is not pregnant. Which initial anticoagulation strategy is most appropriate for outpatient management?",
+   "options": [
+    "An oral DOAC such as apixaban or rivaroxaban",
+    "IV unfractionated heparin with PTT monitoring",
+    "Warfarin alone without any bridging",
+    "An IVC filter",
+    "Aspirin 81 mg daily"
+   ],
+   "correct": 0,
+   "explain": "For a stable, uncomplicated VTE with no contraindication, an oral <b>DOAC</b> is preferred &mdash; rapid onset, no routine monitoring, and suitable for outpatient care. UFH is reserved for high bleeding risk/renal failure/anticipated procedures; warfarin requires bridging; aspirin is inadequate; an IVC filter does not treat the clot.",
+   "guide": {
+    "f": "W15_07_VTE_Management.html",
+    "t": "7 · Choosing the agent",
+    "s": "DOAC for stable VTE"
+   }
+  },
+  {
+   "id": "wk15_q16",
+   "sys": "Heme",
+   "topic": "D-dimer interpretation",
+   "difficulty": "medium",
+   "stem": "A 78-year-old woman recovering from hip surgery has a D-dimer ordered as part of a workup. It returns elevated. Which statement best describes how to interpret this result for VTE?",
+   "options": [
+    "It is nonspecific here and cannot confirm VTE; imaging is needed",
+    "An elevated value confirms PE and warrants lifelong anticoagulation",
+    "A normal value would have been impossible in this patient",
+    "It reliably distinguishes DVT from PE",
+    "It rules in DIC by itself"
+   ],
+   "correct": 0,
+   "explain": "D-dimer is <b>sensitive but not specific</b> and is predictably raised by recent surgery, age, inflammation, and hospitalization. In a high-risk/older post-operative patient it cannot rule in VTE &mdash; <b>imaging</b> is required. Its value lies in <b>ruling out</b> VTE in low pre-test-probability patients.",
+   "guide": {
+    "f": "W15_06_VTE_Diagnosis.html",
+    "t": "6 · Pre-test probability",
+    "s": "D-dimer sensitive not specific"
+   }
+  },
+  {
+   "id": "wk15_q17",
+   "sys": "Heme",
+   "topic": "Warfarin · Vitamin K",
+   "difficulty": "medium",
+   "stem": "A patient on warfarin for a mechanical heart valve needs to understand why the drug works and how it is reversed. Which mechanism and reversal pairing is correct?",
+   "options": [
+    "Inhibits vitamin K epoxide reductase (↓ II, VII, IX, X); reversed with vitamin K / PCC",
+    "Directly inhibits factor Xa; reversed with protamine",
+    "Potentiates antithrombin; reversed with idarucizumab",
+    "Blocks ADP receptors; reversed with platelet transfusion",
+    "Activates plasminogen; reversed with tranexamic acid"
+   ],
+   "correct": 0,
+   "explain": "<b>Warfarin</b> blocks <b>vitamin K epoxide reductase</b>, lowering the vitamin-K-dependent factors (II, VII, IX, X) and proteins C/S; it is reversed with <b>vitamin K</b> and, urgently, <b>PCC</b>. Protamine reverses heparin; idarucizumab reverses dabigatran; TXA is an antifibrinolytic.",
+   "guide": {
+    "f": "W15_05_Hemostasis_Drugs.html",
+    "t": "5 · Anticoagulants",
+    "s": "warfarin mechanism & reversal"
+   }
+  },
+  {
+   "id": "wk15_q18",
+   "sys": "Heme",
+   "topic": "FAST exam",
+   "difficulty": "easy",
+   "stem": "During a FAST exam on a trauma patient, the sonographer examines the right upper quadrant. Which space is being assessed for free fluid in this view?",
+   "options": [
+    "Morison pouch (hepatorenal recess)",
+    "Pouch of Douglas",
+    "Splenorenal space",
+    "Rectovesical pouch",
+    "Pericardial sac"
+   ],
+   "correct": 0,
+   "explain": "The RUQ FAST view assesses <b>Morison pouch</b> (the hepatorenal recess) for free fluid. The splenorenal space is the LUQ view, the pouch of Douglas/rectovesical pouch is the pelvic view, and the pericardial sac is the subxiphoid view.",
+   "guide": {
+    "f": "W15_08_Trauma_TXA_Aging.html",
+    "t": "8 · FAST",
+    "s": "RUQ = Morison pouch"
+   }
+  },
+  {
+   "id": "wk15_q19",
+   "sys": "Heme",
+   "topic": "TXA",
+   "difficulty": "medium",
+   "stem": "A trauma patient with significant hemorrhage receives tranexamic acid early after injury. What is the mechanism by which TXA reduces bleeding?",
+   "options": [
+    "It blocks plasminogen activation, reducing fibrin breakdown",
+    "It replaces deficient clotting factors",
+    "It directly inhibits factor Xa",
+    "It increases platelet production",
+    "It potentiates antithrombin"
+   ],
+   "correct": 0,
+   "explain": "<b>TXA</b> is an <b>antifibrinolytic</b>: it blocks plasminogen binding/activation, so less plasmin is generated and the fibrin clot is preserved. It is an adjunct &mdash; not a substitute for source control, resuscitation, or correcting major coagulopathy.",
+   "guide": {
+    "f": "W15_08_Trauma_TXA_Aging.html",
+    "t": "8 · TXA",
+    "s": "antifibrinolytic mechanism"
+   }
+  },
+  {
+   "id": "wk15_q20",
+   "sys": "Heme",
+   "topic": "Anticoagulation duration",
+   "difficulty": "medium",
+   "stem": "A 50-year-old man had a DVT three months ago that was provoked by a major orthopedic surgery, now fully recovered, with no other risk factors. He has completed three months of anticoagulation. What is the most appropriate duration decision?",
+   "options": [
+    "Stop anticoagulation, as 3 months is usually sufficient for VTE provoked by a major transient risk factor",
+    "Continue indefinitely because all DVTs require lifelong therapy",
+    "Extend to exactly 12 months regardless of provocation",
+    "Switch to lifelong aspirin",
+    "Place an IVC filter for long-term protection"
+   ],
+   "correct": 0,
+   "explain": "VTE <b>provoked by a major transient risk factor</b> (such as recent surgery) has a low recurrence risk once the factor resolves, so <b>~3 months</b> of anticoagulation is usually sufficient. Unprovoked or recurrent VTE and active-cancer VTE warrant longer or indefinite therapy.",
+   "guide": {
+    "f": "W15_07_VTE_Management.html",
+    "t": "7 · Duration",
+    "s": "provoked = 3 months"
+   }
+  }
+ ],
+ "cards": [
+  {
+   "id": "wk15_c01",
+   "sys": "Heme",
+   "topic": "Hemostasis",
+   "type": "qa",
+   "guide": {
+    "f": "W15_01_Normal_Hemostasis.html",
+    "t": "1 · Three stages",
+    "s": "stages of hemostasis"
+   },
+   "prompt": "Name the three linked stages of hemostasis in order.",
+   "answer": "Primary hemostasis (vascular response + platelet plug), secondary hemostasis (coagulation cascade → fibrin clot), then fibrinolysis with natural anticoagulant regulation (clot limitation and breakdown)."
+  },
+  {
+   "id": "wk15_c02",
+   "sys": "Heme",
+   "topic": "Hemostasis",
+   "type": "qa",
+   "guide": {
+    "f": "W15_01_Normal_Hemostasis.html",
+    "t": "1 · Bleeding pattern",
+    "s": "localizing the defect"
+   },
+   "prompt": "How does bleeding pattern localize the defect?",
+   "answer": "Immediate mucocutaneous bleeding (petechiae, epistaxis, gum bleeding, menorrhagia) → platelets/vWF (primary). Delayed deep bleeding (hemarthrosis, muscle/retroperitoneal/intracranial hematoma) → coagulation factors (secondary)."
+  },
+  {
+   "id": "wk15_c03",
+   "sys": "Heme",
+   "topic": "vWD",
+   "type": "qa",
+   "guide": {
+    "f": "W15_03_Bleeding_Disorders.html",
+    "t": "3 · vWD",
+    "s": "two roles of vWF"
+   },
+   "prompt": "What are the two roles of von Willebrand factor?",
+   "answer": "It bridges platelets to exposed subendothelial collagen (via GPIb) for adhesion, and it carries/stabilizes factor VIII in the circulation."
+  },
+  {
+   "id": "wk15_c04",
+   "sys": "Heme",
+   "topic": "DIC",
+   "type": "qa",
+   "guide": {
+    "f": "W15_04_DIC_Microangiopathy.html",
+    "t": "4 · DIC",
+    "s": "first management step"
+   },
+   "prompt": "What is the single most important step in managing DIC?",
+   "answer": "Treat the underlying cause (e.g. sepsis, trauma, obstetric emergency, malignancy). Product support (platelets, cryoprecipitate/fibrinogen, plasma) is only adjunctive and given for bleeding or planned procedures."
+  },
+  {
+   "id": "wk15_c05",
+   "sys": "Heme",
+   "topic": "HIT",
+   "type": "qa",
+   "guide": {
+    "f": "W15_05_Hemostasis_Drugs.html",
+    "t": "5 · HIT",
+    "s": "why not warfarin"
+   },
+   "prompt": "In HIT, why must warfarin be avoided until platelets recover?",
+   "answer": "Warfarin acutely lowers proteins C and S, which can precipitate venous limb gangrene and skin necrosis in the prothrombotic HIT state. Use a non-heparin anticoagulant first and add warfarin only after platelet recovery."
+  },
+  {
+   "id": "wk15_c06",
+   "sys": "Heme",
+   "topic": "VTE",
+   "type": "qa",
+   "guide": {
+    "f": "W15_07_VTE_Management.html",
+    "t": "7 · Core principle",
+    "s": "acute VTE management"
+   },
+   "prompt": "What is the core principle of acute DVT/PE management?",
+   "answer": "Anticoagulation. If pre-test probability is high and bleeding risk is acceptable, start empiric anticoagulation even before imaging confirms the diagnosis."
+  },
+  {
+   "id": "wk15_c07",
+   "sys": "Heme",
+   "topic": "IVC filters",
+   "type": "qa",
+   "guide": {
+    "f": "W15_07_VTE_Management.html",
+    "t": "7 · IVC filters",
+    "s": "filter indication"
+   },
+   "prompt": "When is an IVC filter indicated, and is it definitive treatment?",
+   "answer": "Only for acute VTE patients who cannot be anticoagulated. It is not definitive treatment, does not treat existing clot, and should be removed once anticoagulation can resume."
+  },
+  {
+   "id": "wk15_c08",
+   "sys": "Heme",
+   "topic": "Trauma",
+   "type": "qa",
+   "guide": {
+    "f": "W15_08_Trauma_TXA_Aging.html",
+    "t": "8 · ATLS",
+    "s": "primary survey"
+   },
+   "prompt": "What does the ATLS primary survey (ABCDE) stand for?",
+   "answer": "Airway with C-spine protection, Breathing, Circulation with hemorrhage control, Disability (neurologic status), Exposure/environment with hypothermia prevention."
+  },
+  {
+   "id": "wk15_c09",
+   "sys": "Heme",
+   "topic": "TXA",
+   "type": "qa",
+   "guide": {
+    "f": "W15_08_Trauma_TXA_Aging.html",
+    "t": "8 · TXA",
+    "s": "what TXA is"
+   },
+   "prompt": "What class of drug is tranexamic acid and what does it do?",
+   "answer": "An antifibrinolytic — it blocks plasminogen activation, reducing plasmin-mediated fibrin breakdown so the clot is preserved. Used early in trauma hemorrhage and for mucosal/menstrual bleeding."
+  },
+  {
+   "id": "wk15_c10",
+   "sys": "Heme",
+   "topic": "Fibrinolysis",
+   "type": "qa",
+   "guide": {
+    "f": "W15_01_Normal_Hemostasis.html",
+    "t": "1 · Fibrinolysis",
+    "s": "D-dimer origin"
+   },
+   "prompt": "Where does D-dimer come from?",
+   "answer": "Plasmin (generated when tPA converts plasminogen) degrades crosslinked fibrin; D-dimer is a fibrin degradation product. It is sensitive for clot turnover but nonspecific."
+  },
+  {
+   "id": "wk15_c11",
+   "sys": "Heme",
+   "topic": "Cascade",
+   "type": "cloze",
+   "guide": {
+    "f": "W15_01_Normal_Hemostasis.html",
+    "t": "1 · Cascade",
+    "s": "PT vs PTT"
+   },
+   "text": "The {{PT/INR}} reflects the extrinsic pathway (factor VII) and monitors warfarin, while the {{PTT}} reflects the intrinsic pathway and monitors heparin.",
+   "explain": "PT → extrinsic/common; PTT → intrinsic/common. This pairing anchors the coagulation grid."
+  },
+  {
+   "id": "wk15_c12",
+   "sys": "Heme",
+   "topic": "Cascade",
+   "type": "cloze",
+   "guide": {
+    "f": "W15_01_Normal_Hemostasis.html",
+    "t": "1 · Cascade",
+    "s": "thrombin and XIII"
+   },
+   "text": "Thrombin converts fibrinogen to {{fibrin}}, and factor {{XIII}} crosslinks it into a stable, insoluble clot.",
+   "explain": "Crosslinking by factor XIII stabilizes the platelet plug; its degradation later yields D-dimer."
+  },
+  {
+   "id": "wk15_c13",
+   "sys": "Heme",
+   "topic": "Platelet thresholds",
+   "type": "cloze",
+   "guide": {
+    "f": "W15_03_Bleeding_Disorders.html",
+    "t": "3 · ITP",
+    "s": "platelet thresholds"
+   },
+   "text": "Spontaneous bleeding risk rises markedly when platelets fall below {{20}} ×10⁹/L, and serious spontaneous bleeding (including intracranial) is a concern below {{10}} ×10⁹/L.",
+   "explain": "Below 50 carries procedure/trauma risk; below 20 higher spontaneous risk; below 10 serious spontaneous bleeding."
+  },
+  {
+   "id": "wk15_c14",
+   "sys": "Heme",
+   "topic": "Hemophilia",
+   "type": "cloze",
+   "guide": {
+    "f": "W15_03_Bleeding_Disorders.html",
+    "t": "3 · Hemophilia",
+    "s": "factors and inheritance"
+   },
+   "text": "Hemophilia A is deficiency of factor {{VIII}}, hemophilia B is deficiency of factor {{IX}}, and both are {{X-linked}} recessive.",
+   "explain": "Both prolong PTT with normal PT and cause deep bleeding; mixing study corrects unless an inhibitor is present."
+  },
+  {
+   "id": "wk15_c15",
+   "sys": "Heme",
+   "topic": "Anticoagulant reversal",
+   "type": "cloze",
+   "guide": {
+    "f": "W15_05_Hemostasis_Drugs.html",
+    "t": "5 · Anticoagulants",
+    "s": "reversal agents"
+   },
+   "text": "Heparin is reversed with {{protamine}}, dabigatran with {{idarucizumab}}, and warfarin with {{vitamin K}} (plus PCC urgently).",
+   "explain": "Knowing the specific reversal agent for each anticoagulant is high-yield for bleeding management."
+  },
+  {
+   "id": "wk15_c16",
+   "sys": "Heme",
+   "topic": "VTE duration",
+   "type": "cloze",
+   "guide": {
+    "f": "W15_07_VTE_Management.html",
+    "t": "7 · Duration",
+    "s": "provoked vs unprovoked"
+   },
+   "text": "VTE provoked by a major transient risk factor is usually treated for {{3 months}}, whereas recurrent unprovoked VTE is often treated {{indefinitely}}.",
+   "explain": "Duration balances recurrence risk against bleeding risk and patient preference."
+  },
+  {
+   "id": "wk15_c17",
+   "sys": "Heme",
+   "topic": "Fibrinolysis",
+   "type": "cloze",
+   "guide": {
+    "f": "W15_01_Normal_Hemostasis.html",
+    "t": "1 · Fibrinolysis",
+    "s": "tPA pathway"
+   },
+   "text": "Endothelial {{tPA}} converts plasminogen to {{plasmin}}, which breaks down the fibrin clot.",
+   "explain": "This is the fibrinolytic axis; TXA blocks plasminogen activation to oppose it."
+  },
+  {
+   "id": "wk15_c18",
+   "sys": "Heme",
+   "topic": "Wells / D-dimer",
+   "type": "cloze",
+   "guide": {
+    "f": "W15_06_VTE_Diagnosis.html",
+    "t": "6 · Pre-test probability",
+    "s": "rule out logic"
+   },
+   "text": "D-dimer is best used to {{rule out}} VTE in {{low}} pre-test probability patients; high-probability patients should be {{imaged}} directly.",
+   "explain": "D-dimer is sensitive but not specific, so it excludes rather than confirms VTE."
+  },
+  {
+   "id": "wk15_c19",
+   "sys": "Heme",
+   "topic": "Primary hemostasis",
+   "type": "mcq",
+   "guide": {
+    "f": "W15_01_Normal_Hemostasis.html",
+    "t": "1 · Platelet plug",
+    "s": "aggregation receptor"
+   },
+   "prompt": "Which receptor mediates the final platelet aggregation step by binding fibrinogen between platelets?",
+   "options": [
+    "GP IIb/IIIa",
+    "GP Ib",
+    "P2Y12",
+    "COX-1"
+   ],
+   "correct": 0,
+   "explain": "GP IIb/IIIa binds fibrinogen to bridge platelets (aggregation). GP Ib binds vWF for adhesion; P2Y12 and COX-1 are activation targets."
+  },
+  {
+   "id": "wk15_c20",
+   "sys": "Heme",
+   "topic": "DIC labs",
+   "type": "mcq",
+   "guide": {
+    "f": "W15_04_DIC_Microangiopathy.html",
+    "t": "4 · DIC",
+    "s": "fibrinogen in DIC"
+   },
+   "prompt": "Which laboratory finding most helps distinguish DIC from other causes of prolonged PT/PTT?",
+   "options": [
+    "Low fibrinogen with high D-dimer",
+    "Normal fibrinogen",
+    "Isolated low platelets",
+    "Normal D-dimer"
+   ],
+   "correct": 0,
+   "explain": "DIC consumes fibrinogen (low) while brisk fibrinolysis raises D-dimer; together with low platelets and schistocytes this is the classic pattern."
+  },
+  {
+   "id": "wk15_c21",
+   "sys": "Heme",
+   "topic": "TTP",
+   "type": "mcq",
+   "guide": {
+    "f": "W15_04_DIC_Microangiopathy.html",
+    "t": "4 · Microangiopathies",
+    "s": "TTP treatment"
+   },
+   "prompt": "What is the treatment of choice for TTP, and what should be avoided?",
+   "options": [
+    "Plasma exchange; avoid platelet transfusion",
+    "Platelet transfusion; avoid plasma",
+    "Heparin; avoid steroids",
+    "Vitamin K; avoid fluids"
+   ],
+   "correct": 0,
+   "explain": "TTP is treated urgently with plasma exchange. Platelet transfusion is generally avoided as it may fuel microthrombosis."
+  },
+  {
+   "id": "wk15_c22",
+   "sys": "Heme",
+   "topic": "Antiplatelet vs anticoagulant",
+   "type": "mcq",
+   "guide": {
+    "f": "W15_05_Hemostasis_Drugs.html",
+    "t": "5 · Antiplatelets",
+    "s": "arterial vs venous"
+   },
+   "prompt": "Antiplatelet agents are most relevant to which type of thrombosis?",
+   "options": [
+    "Arterial (platelet-rich, high-flow)",
+    "Venous (fibrin/red-cell rich)",
+    "Capillary",
+    "Lymphatic"
+   ],
+   "correct": 0,
+   "explain": "Arterial thrombi are platelet-rich, so antiplatelets dominate; venous thrombi are fibrin-rich and need anticoagulants."
+  },
+  {
+   "id": "wk15_c23",
+   "sys": "Heme",
+   "topic": "DVT differential",
+   "type": "mcq",
+   "guide": {
+    "f": "W15_06_VTE_Diagnosis.html",
+    "t": "6 · DVT presentation",
+    "s": "unilateral leg swelling"
+   },
+   "prompt": "Which is NOT a typical differential for unilateral leg swelling mimicking DVT?",
+   "options": [
+    "Bilateral heart-failure edema",
+    "Cellulitis",
+    "Ruptured Baker cyst",
+    "Superficial thrombophlebitis"
+   ],
+   "correct": 0,
+   "explain": "Heart-failure edema is typically bilateral. Cellulitis, ruptured Baker cyst, and superficial thrombophlebitis are classic unilateral mimics."
+  },
+  {
+   "id": "wk15_c24",
+   "sys": "Heme",
+   "topic": "PE imaging",
+   "type": "mcq",
+   "guide": {
+    "f": "W15_06_VTE_Diagnosis.html",
+    "t": "6 · PE investigations",
+    "s": "main PE test"
+   },
+   "prompt": "What is the main diagnostic imaging test for PE in most adults?",
+   "options": [
+    "CT pulmonary angiography (CTPA)",
+    "Chest X-ray",
+    "Echocardiography",
+    "Troponin"
+   ],
+   "correct": 0,
+   "explain": "CTPA is the principal test; V/Q is the alternative when CTPA is contraindicated. CXR/troponin/echo support risk stratification, not diagnosis alone."
+  },
+  {
+   "id": "wk15_c25",
+   "sys": "Heme",
+   "topic": "Cancer-associated VTE",
+   "type": "mcq",
+   "guide": {
+    "f": "W15_07_VTE_Management.html",
+    "t": "7 · Choosing the agent",
+    "s": "cancer VTE agent"
+   },
+   "prompt": "Which anticoagulant is often preferred in cancer-associated VTE, especially with GI malignancy/bleeding concerns?",
+   "options": [
+    "LMWH",
+    "Warfarin",
+    "Aspirin",
+    "No anticoagulation"
+   ],
+   "correct": 0,
+   "explain": "LMWH is frequently favored in active cancer; DOACs may raise GI bleeding concerns in some GI malignancies."
+  },
+  {
+   "id": "wk15_c26",
+   "sys": "Heme",
+   "topic": "vWD treatment",
+   "type": "mcq",
+   "guide": {
+    "f": "W15_03_Bleeding_Disorders.html",
+    "t": "3 · vWD",
+    "s": "desmopressin caution"
+   },
+   "prompt": "What is a key adverse effect to monitor with repeated desmopressin dosing?",
+   "options": [
+    "Hyponatremia / fluid retention",
+    "Hyperkalemia",
+    "Hyperglycemia",
+    "Hypercalcemia"
+   ],
+   "correct": 0,
+   "explain": "Desmopressin can cause hyponatremia and fluid retention; avoid repeated dosing without monitoring, and note it is not suitable for all vWD types."
+  },
+  {
+   "id": "wk15_c27",
+   "sys": "Heme",
+   "topic": "FAST",
+   "type": "mcq",
+   "guide": {
+    "f": "W15_08_Trauma_TXA_Aging.html",
+    "t": "8 · FAST",
+    "s": "negative FAST"
+   },
+   "prompt": "A negative FAST in hypotensive blunt trauma most importantly fails to exclude bleeding in which location?",
+   "options": [
+    "Retroperitoneal / pelvic",
+    "Pericardial",
+    "Pleural",
+    "Subcutaneous"
+   ],
+   "correct": 0,
+   "explain": "FAST is poor at detecting retroperitoneal/pelvic hemorrhage, so a negative FAST does not exclude major bleeding in unstable pelvic injury."
+  },
+  {
+   "id": "wk15_c28",
+   "sys": "Heme",
+   "topic": "Virchow's triad",
+   "type": "multi",
+   "guide": {
+    "f": "W15_06_VTE_Diagnosis.html",
+    "t": "6 · Virchow",
+    "s": "triad components"
+   },
+   "prompt": "Which are components of Virchow's triad for VTE risk? (select all)",
+   "options": [
+    "Stasis",
+    "Hypercoagulability",
+    "Endothelial injury",
+    "High platelet aggregation set point"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "Virchow's triad = stasis, hypercoagulability, and endothelial injury."
+  },
+  {
+   "id": "wk15_c29",
+   "sys": "Heme",
+   "topic": "DIC findings",
+   "type": "multi",
+   "guide": {
+    "f": "W15_04_DIC_Microangiopathy.html",
+    "t": "4 · DIC",
+    "s": "typical findings"
+   },
+   "prompt": "Which findings are typical of DIC? (select all)",
+   "options": [
+    "Thrombocytopenia",
+    "Prolonged PT and PTT",
+    "Low fibrinogen",
+    "High fibrinogen with normal D-dimer"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "DIC shows low platelets, prolonged PT/PTT, low fibrinogen, high D-dimer, and schistocytes."
+  },
+  {
+   "id": "wk15_c30",
+   "sys": "Heme",
+   "topic": "HIT criteria",
+   "type": "multi",
+   "guide": {
+    "f": "W15_05_Hemostasis_Drugs.html",
+    "t": "5 · HIT",
+    "s": "when to suspect"
+   },
+   "prompt": "Which features raise suspicion for HIT? (select all)",
+   "options": [
+    "Platelet fall >50% from baseline",
+    "Onset 5–10 days after heparin",
+    "New thrombosis while on heparin",
+    "Bleeding with low fibrinogen"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "HIT is a clinical-timing diagnosis: large platelet drop, day 5–10 timing, and new thrombosis. Low fibrinogen with bleeding suggests DIC instead."
+  },
+  {
+   "id": "wk15_c31",
+   "sys": "Heme",
+   "topic": "PE red flags",
+   "type": "multi",
+   "guide": {
+    "f": "W15_06_VTE_Diagnosis.html",
+    "t": "6 · PE",
+    "s": "red flags"
+   },
+   "prompt": "Which are red flags requiring urgent evaluation in suspected PE? (select all)",
+   "options": [
+    "O₂ saturation ≤90%",
+    "HR >100",
+    "Syncope / hypotension",
+    "Mild pleuritic pain with normal vitals"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "Hypoxia, tachycardia, and syncope/hypotension flag high-risk PE; isolated mild pleuritic pain with normal vitals is lower acuity."
+  },
+  {
+   "id": "wk15_c32",
+   "sys": "Heme",
+   "topic": "Bleeding history",
+   "type": "multi",
+   "guide": {
+    "f": "W15_02_Bleeding_Approach.html",
+    "t": "2 · History",
+    "s": "high-concern features"
+   },
+   "prompt": "Which features increase concern for an inherited bleeding disorder? (select all)",
+   "options": [
+    "Bleeding since childhood",
+    "Menorrhagia with iron-deficiency anemia",
+    "Family history of abnormal bleeding",
+    "A single bleed after major trauma"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "Lifelong, recurrent, transfusion-requiring, or familial bleeding raises concern; a single bleed after major trauma is lower concern."
+  },
+  {
+   "id": "wk15_c33",
+   "sys": "Heme",
+   "topic": "Fibrinolysis",
+   "type": "order",
+   "guide": {
+    "f": "W15_01_Normal_Hemostasis.html",
+    "t": "1 · Fibrinolysis",
+    "s": "fibrinolytic sequence"
+   },
+   "prompt": "Order the fibrinolysis sequence from first to last:",
+   "items": [
+    "Endothelium releases tPA",
+    "tPA converts plasminogen to plasmin",
+    "Plasmin degrades the fibrin clot",
+    "D-dimer is released from crosslinked fibrin"
+   ],
+   "explain": "tPA → plasmin → fibrin breakdown → D-dimer release."
+  },
+  {
+   "id": "wk15_c34",
+   "sys": "Heme",
+   "topic": "Suspected DVT",
+   "type": "order",
+   "guide": {
+    "f": "W15_06_VTE_Diagnosis.html",
+    "t": "6 · DVT algorithm",
+    "s": "low-probability workup"
+   },
+   "prompt": "Order the workup of a low-probability suspected DVT:",
+   "items": [
+    "Assess pre-test probability (Wells/gestalt)",
+    "Order D-dimer",
+    "If positive, compression ultrasound",
+    "If confirmed, anticoagulate"
+   ],
+   "explain": "Low probability → D-dimer → ultrasound if positive → anticoagulate if confirmed."
+  },
+  {
+   "id": "wk15_c35",
+   "sys": "Heme",
+   "topic": "Trauma hemorrhage",
+   "type": "order",
+   "guide": {
+    "f": "W15_08_Trauma_TXA_Aging.html",
+    "t": "8 · Trauma",
+    "s": "pelvic hemorrhage steps"
+   },
+   "prompt": "Order the immediate response to hypotensive pelvic-crush trauma:",
+   "items": [
+    "Primary survey (ABCDE) with hemorrhage control",
+    "Apply pelvic binder and splint femurs",
+    "Resuscitate with blood products + activate MHP",
+    "Definitive hemorrhage control (IR/OR)"
+   ],
+   "explain": "Stabilize and control hemorrhage, bind/splint, resuscitate with blood, then definitive control."
+  },
+  {
+   "id": "wk15_c36",
+   "sys": "Heme",
+   "topic": "Cancer VTE + bleed",
+   "type": "order",
+   "guide": {
+    "f": "W15_07_VTE_Management.html",
+    "t": "7 · Cancer + bleeding",
+    "s": "manage GI bleed on AC"
+   },
+   "prompt": "Order the management of a GI bleed in a patient on anticoagulation for cancer-associated VTE:",
+   "items": [
+    "Stabilize ABCs and circulation",
+    "Temporarily hold anticoagulation",
+    "Control the bleeding source (endoscopy/PPI)",
+    "Resume anticoagulation once hemostasis achieved"
+   ],
+   "explain": "Stabilize → hold AC → source control → resume AC after hemostasis (untreated VTE remains dangerous)."
+  },
+  {
+   "id": "wk15_c37",
+   "sys": "Heme",
+   "topic": "Coag grid",
+   "type": "match",
+   "guide": {
+    "f": "W15_02_Bleeding_Approach.html",
+    "t": "2 · PT/PTT grid",
+    "s": "interpret patterns"
+   },
+   "prompt": "Match the coagulation pattern to its likely cause:",
+   "pairs": [
+    [
+     "Isolated prolonged PT",
+     "Factor VII deficiency / early warfarin"
+    ],
+    [
+     "Isolated prolonged PTT",
+     "Hemophilia / heparin / lupus anticoagulant"
+    ],
+    [
+     "Prolonged PT and PTT with low fibrinogen",
+     "DIC"
+    ],
+    [
+     "Normal PT/PTT with mucosal bleeding",
+     "vWD / platelet function defect"
+    ]
+   ],
+   "explain": "The PT/PTT/platelet grid is the backbone of the bleeding workup."
+  },
+  {
+   "id": "wk15_c38",
+   "sys": "Heme",
+   "topic": "Anticoagulants",
+   "type": "match",
+   "guide": {
+    "f": "W15_05_Hemostasis_Drugs.html",
+    "t": "5 · Anticoagulants",
+    "s": "drug to mechanism"
+   },
+   "prompt": "Match the anticoagulant to its mechanism:",
+   "pairs": [
+    [
+     "Heparin",
+     "Potentiates antithrombin (IIa & Xa)"
+    ],
+    [
+     "Apixaban",
+     "Direct factor Xa inhibition"
+    ],
+    [
+     "Dabigatran",
+     "Direct thrombin (IIa) inhibition"
+    ],
+    [
+     "Warfarin",
+     "Blocks vitamin K epoxide reductase"
+    ]
+   ],
+   "explain": "Mechanism dictates monitoring, reversal, and contraindications."
+  },
+  {
+   "id": "wk15_c39",
+   "sys": "Heme",
+   "topic": "Antiplatelets",
+   "type": "match",
+   "guide": {
+    "f": "W15_05_Hemostasis_Drugs.html",
+    "t": "5 · Antiplatelets",
+    "s": "drug to target"
+   },
+   "prompt": "Match the antiplatelet to its target:",
+   "pairs": [
+    [
+     "Aspirin",
+     "COX-1 → ↓thromboxane A2"
+    ],
+    [
+     "Clopidogrel",
+     "P2Y12 (ADP) receptor"
+    ],
+    [
+     "Eptifibatide",
+     "GP IIb/IIIa receptor"
+    ]
+   ],
+   "explain": "Each acts at a different step of platelet activation/aggregation."
+  },
+  {
+   "id": "wk15_c40",
+   "sys": "Heme",
+   "topic": "FAST views",
+   "type": "match",
+   "guide": {
+    "f": "W15_08_Trauma_TXA_Aging.html",
+    "t": "8 · FAST",
+    "s": "view to landmark"
+   },
+   "prompt": "Match the FAST view to its key space:",
+   "pairs": [
+    [
+     "RUQ",
+     "Morison pouch"
+    ],
+    [
+     "LUQ",
+     "Splenorenal space"
+    ],
+    [
+     "Pelvis",
+     "Rectovesical / pouch of Douglas"
+    ],
+    [
+     "Subxiphoid",
+     "Pericardial sac"
+    ]
+   ],
+   "explain": "Four FAST windows screen for free fluid/blood."
+  },
+  {
+   "id": "wk15_c41",
+   "sys": "Heme",
+   "topic": "Microangiopathies",
+   "type": "match",
+   "guide": {
+    "f": "W15_04_DIC_Microangiopathy.html",
+    "t": "4 · Microangiopathies",
+    "s": "entity to clue"
+   },
+   "prompt": "Match the entity to its discriminating clue:",
+   "pairs": [
+    [
+     "ITP",
+     "Isolated thrombocytopenia, normal coags, no schistocytes"
+    ],
+    [
+     "TTP",
+     "Schistocytes + neuro/renal, normal coags"
+    ],
+    [
+     "DIC",
+     "Schistocytes + prolonged PT/PTT + low fibrinogen"
+    ]
+   ],
+   "explain": "Coagulation studies and the smear separate the three."
+  },
+  {
+   "id": "wk15_c42",
+   "sys": "Heme",
+   "topic": "VTE agent choice",
+   "type": "match",
+   "guide": {
+    "f": "W15_07_VTE_Management.html",
+    "t": "7 · Choosing the agent",
+    "s": "scenario to agent"
+   },
+   "prompt": "Match the VTE scenario to the preferred agent:",
+   "pairs": [
+    [
+     "Stable uncomplicated VTE",
+     "DOAC"
+    ],
+    [
+     "Severe renal impairment / procedure likely",
+     "UFH"
+    ],
+    [
+     "Cancer-associated VTE",
+     "LMWH"
+    ],
+    [
+     "Antiphospholipid syndrome",
+     "Warfarin"
+    ]
+   ],
+   "explain": "Agent choice is driven by renal function, cancer, pregnancy, and APS."
+  },
+  {
+   "id": "wk15_c43",
+   "sys": "Heme",
+   "topic": "Natural anticoagulants",
+   "type": "qa",
+   "guide": {
+    "f": "W15_01_Normal_Hemostasis.html",
+    "t": "1 · Natural brakes",
+    "s": "antithrombin role"
+   },
+   "prompt": "How do heparins exert their anticoagulant effect?",
+   "answer": "They potentiate antithrombin, which then inhibits thrombin (IIa) and factor Xa. Antithrombin deficiency both reduces heparin effect and raises VTE risk."
+  },
+  {
+   "id": "wk15_c44",
+   "sys": "Heme",
+   "topic": "Mixing study",
+   "type": "qa",
+   "guide": {
+    "f": "W15_02_Bleeding_Approach.html",
+    "t": "2 · Mixing study",
+    "s": "interpretation"
+   },
+   "prompt": "What does a mixing study distinguish, and how is it read?",
+   "answer": "It distinguishes a factor deficiency from an inhibitor when PT/PTT is prolonged: mixing with normal plasma corrects a factor deficiency but fails to correct in the presence of an inhibitor (e.g. factor VIII inhibitor, lupus anticoagulant)."
+  },
+  {
+   "id": "wk15_c45",
+   "sys": "Heme",
+   "topic": "D-dimer pitfalls",
+   "type": "multi",
+   "guide": {
+    "f": "W15_01_Normal_Hemostasis.html",
+    "t": "1 · Fibrinolysis",
+    "s": "D-dimer elevations"
+   },
+   "prompt": "Besides VTE, which conditions can elevate D-dimer? (select all)",
+   "options": [
+    "Cancer",
+    "Pregnancy",
+    "Recent surgery / trauma",
+    "A normal young patient at rest"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "D-dimer rises in cancer, pregnancy, surgery/trauma, infection, age, and DIC — hence its poor specificity."
+  },
+  {
+   "id": "wk15_c46",
+   "sys": "Heme",
+   "topic": "Admit vs outpatient",
+   "type": "mcq",
+   "guide": {
+    "f": "W15_07_VTE_Management.html",
+    "t": "7 · Admit vs outpatient",
+    "s": "who to admit"
+   },
+   "prompt": "Which feature most strongly favors admission rather than outpatient VTE management?",
+   "options": [
+    "Hemodynamic instability or hypoxemia",
+    "Low sPESI score",
+    "Reliable follow-up",
+    "Normal stable vitals"
+   ],
+   "correct": 0,
+   "explain": "Instability, hypoxemia, RV strain, syncope, high bleeding risk, or unreliable follow-up favor admission; stable low-risk patients can be managed as outpatients."
+  },
+  {
+   "id": "wk15_c47",
+   "sys": "Heme",
+   "topic": "Aging & VTE",
+   "type": "qa",
+   "guide": {
+    "f": "W15_08_Trauma_TXA_Aging.html",
+    "t": "8 · Aging",
+    "s": "aging and clot risk"
+   },
+   "prompt": "Why does an aging population increase both thrombotic and bleeding burden?",
+   "answer": "VTE risk rises with age (more cancer, immobility, surgery, hospitalization), increasing anticoagulant use; bleeding risk also rises from renal impairment, polypharmacy, falls, frailty, and GI pathology — so treatment must be individualized."
+  }
+ ],
+ "guides": [
+  {
+   "file": "W15_01_Normal_Hemostasis.html",
+   "title": "Normal Hemostasis & Fibrinolysis",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Normal Hemostasis &amp; Fibrinolysis</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Hemostasis</div><h1>Normal Hemostasis &amp; Fibrinolysis</h1></div><div class='r'>Week 15 &middot; Blood II<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Stop bleeding fast, keep it local: the platelet plug, the fibrin clot, and the brakes that limit both.</p>\n<h2>Three linked stages</h2>\n<p>Hemostasis must be <b>rapid</b> enough to prevent exsanguination yet <b>localized</b> enough to avoid pathologic clotting. Thrombosis is clot forming where/when it is not needed.</p>\n<table>\n<tr><th>Stage</th><th>Event</th><th>Time scale</th></tr>\n<tr><td>Vasoconstriction</td><td>Local reduction in flow</td><td>Seconds</td></tr>\n<tr><td><b>Primary</b></td><td>Platelet plug (vessel + platelets + vWF)</td><td>Seconds</td></tr>\n<tr><td><b>Secondary</b></td><td>Coagulation cascade &rarr; fibrin clot</td><td>30&ndash;120 s</td></tr>\n<tr><td>Fibrinolysis</td><td>Clot limitation, breakdown, repair</td><td>Hours&ndash;days</td></tr>\n</table>\n<h2>Primary hemostasis: the platelet plug</h2>\n<table>\n<tr><th>Step</th><th>Key molecule</th><th>Disorder example</th></tr>\n<tr><td><b>Adhesion</b> &mdash; platelets stick to subendothelium</td><td>vWF bridges collagen to GP&thinsp;Ib</td><td>vWD, Bernard-Soulier</td></tr>\n<tr><td><b>Activation</b> &mdash; shape change, granule release</td><td>ADP, thromboxane A2, Ca, serotonin</td><td>Aspirin (TXA2), P2Y12 inhibitors (ADP)</td></tr>\n<tr><td><b>Aggregation</b> &mdash; platelets bind each other</td><td>GP&thinsp;IIb/IIIa binds fibrinogen</td><td>Glanzmann, GPIIb/IIIa inhibitors</td></tr>\n</table>\n<div class='key'>Primary hemostasis defects &rarr; <b>mucocutaneous</b> bleeding: petechiae, purpura, epistaxis, gum bleeding, menorrhagia, <b>immediate</b> post-procedure bleeding.</div>\n<h2>Secondary hemostasis: the cascade</h2>\n<table>\n<tr><th>Pathway</th><th>Test</th><th>Factors</th></tr>\n<tr><td>Extrinsic</td><td>PT / INR</td><td>VII</td></tr>\n<tr><td>Intrinsic</td><td>PTT / aPTT</td><td>XII, XI, IX, VIII</td></tr>\n<tr><td>Common</td><td>both PT &amp; PTT</td><td>X, V, II, fibrinogen</td></tr>\n</table>\n<p>Thrombin (IIa) converts <b>fibrinogen &rarr; fibrin</b>; <b>factor XIII</b> crosslinks fibrin into a stable, insoluble clot.</p>\n<div class='band'><div class='t'>Localizing by bleeding pattern</div>\n<b>Immediate mucosal</b> bleeding &rarr; platelets/vWF (primary). <b>Delayed deep</b> bleeding &mdash; hemarthrosis, muscle/retroperitoneal/intracranial hematoma, re-bleed after surgery &rarr; coagulation factors (secondary).</div>\n<h2>Fibrinolysis &amp; the natural brakes</h2>\n<p>Endothelial <b>tPA</b> converts plasminogen &rarr; <b>plasmin</b>, which degrades fibrin; crosslinked-fibrin breakdown releases <b>D-dimer</b> (sensitive, not specific).</p>\n<table>\n<tr><th>Regulator</th><th>Action</th><th>Correlation</th></tr>\n<tr><td>Antithrombin</td><td>Inhibits thrombin &amp; Xa</td><td>How heparins work; deficiency &rarr; VTE</td></tr>\n<tr><td>Protein C + S</td><td>Inactivate Va &amp; VIIIa</td><td>Deficiency &rarr; VTE; warfarin start can be transiently prothrombotic</td></tr>\n<tr><td>TFPI</td><td>Inhibits tissue-factor pathway</td><td>Limits excess initiation</td></tr>\n</table>\n</div>"
+  },
+  {
+   "file": "W15_02_Bleeding_Approach.html",
+   "title": "Approach to the Bleeding Patient",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Approach to the Bleeding Patient</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Approach</div><h1>Approach to the Bleeding Patient</h1></div><div class='r'>Week 15 &middot; Blood II<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The history is the most powerful test; the screening panel and PT/PTT/platelet grid do the rest.</p>\n<h2>The bleeding history is the key test</h2>\n<p>A <b>normal PT/INR and PTT does not exclude</b> a clinically important bleeding disorder &mdash; vWD, platelet function defects, mild factor deficiencies, and vascular disorders can all screen normal. Structure the history around:</p>\n<ul>\n<li><b>Location</b> &mdash; mucocutaneous vs deep.</li>\n<li><b>Timing</b> &mdash; spontaneous/traumatic, immediate/delayed, acute/chronic/recurrent.</li>\n<li><b>Severity</b> &mdash; transfusions, iron, surgery, ICU, return to OR.</li>\n</ul>\n<table>\n<tr><th>High concern</th><th>Lower concern</th></tr>\n<tr><td>Recurrent spontaneous bleeding</td><td>Single bleed after major trauma/surgery</td></tr>\n<tr><td>Severe bleeding after minor trauma/procedures</td><td>Resolved at home without intervention</td></tr>\n<tr><td>Menorrhagia with iron-deficiency anemia; PPH</td><td>No personal/family history despite prior challenges</td></tr>\n<tr><td>Bleeding needing transfusion/OR/ICU; bleeding since childhood; family history</td><td></td></tr>\n</table>\n<h2>Initial investigations</h2>\n<table>\n<tr><th>Test</th><th>Why</th></tr>\n<tr><td>CBC + blood film</td><td>Anemia, platelet count/morphology; schistocytes, blasts</td></tr>\n<tr><td>PT/INR</td><td>Extrinsic/common; warfarin, vitamin K, liver disease, DIC</td></tr>\n<tr><td>PTT/aPTT</td><td>Intrinsic/common; hemophilia, heparin, lupus anticoagulant</td></tr>\n<tr><td>Fibrinogen</td><td>Low in DIC, massive bleeding, severe liver disease</td></tr>\n<tr><td>vWF antigen/activity + VIII</td><td>Mucocutaneous bleeding with normal PT/PTT</td></tr>\n<tr><td>Mixing study</td><td>Factor deficiency (corrects) vs inhibitor (does not)</td></tr>\n</table>\n<h2>The PT / PTT / platelet grid</h2>\n<table>\n<tr><th>PT</th><th>PTT</th><th>Platelets</th><th>Think</th></tr>\n<tr><td>N</td><td>N</td><td>Low</td><td>ITP, marrow disease, sequestration</td></tr>\n<tr><td>N</td><td>N</td><td>N</td><td>vWD, platelet function defect, mild factor deficiency</td></tr>\n<tr><td><b>&uarr;</b></td><td>N</td><td>N</td><td>Factor VII deficiency, early warfarin/vitamin K</td></tr>\n<tr><td>N</td><td><b>&uarr;</b></td><td>N</td><td>Hemophilia A/B, XI/XII, heparin, lupus anticoagulant</td></tr>\n<tr><td><b>&uarr;</b></td><td><b>&uarr;</b></td><td>Variable</td><td>Liver disease, DIC, common-pathway, massive transfusion</td></tr>\n</table>\n<div class='band warn'><div class='t'>Mixing study logic</div>\nWhen PT/PTT is prolonged, a mixing study with normal plasma <b>corrects a factor deficiency</b> but <b>fails to correct an inhibitor</b> (e.g. factor VIII inhibitor, lupus anticoagulant).</div>\n<div class='key'>Replace what is missing <b>only when clinically indicated</b> &mdash; do not reflexively \"correct numbers\" in the absence of bleeding or a planned procedure.</div>\n</div>"
+  },
+  {
+   "file": "W15_03_Bleeding_Disorders.html",
+   "title": "Bleeding Disorders: vWD, Hemophilia, ITP",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Bleeding Disorders: vWD, Hemophilia, ITP</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Disorders</div><h1>Bleeding Disorders: vWD, Hemophilia, ITP</h1></div><div class='r'>Week 15 &middot; Blood II<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The common inherited and acquired causes &mdash; how they present, what the labs show, and how they are treated.</p>\n<h2>von Willebrand disease</h2>\n<p>The most common <b>inherited</b> bleeding disorder. vWF mediates platelet adhesion <i>and</i> carries/stabilizes factor VIII.</p>\n<ul>\n<li><b>Clues:</b> epistaxis, gum bleeding, easy bruising, menorrhagia, PPH, bleeding after dental work/tonsillectomy.</li>\n<li><b>Labs:</b> platelets usually normal; PT normal; PTT normal or prolonged if VIII low; confirm with vWF antigen/activity + factor VIII.</li>\n</ul>\n<table>\n<tr><th>Situation</th><th>Treatment</th></tr>\n<tr><td>Mild mucosal bleed / prophylaxis</td><td>Tranexamic acid; desmopressin if responsive type</td></tr>\n<tr><td>Major bleed / high-risk surgery</td><td>vWF-containing factor concentrate &plusmn; TXA</td></tr>\n<tr><td>Heavy menstrual bleeding</td><td>Hormonal therapy, TXA, iron replacement</td></tr>\n</table>\n<div class='band warn'><div class='t'>Desmopressin caution</div>\nDesmopressin releases stored vWF/VIII but is <b>not</b> appropriate for all vWD types and causes <b>hyponatremia / fluid retention</b>; avoid repeated dosing without monitoring.</div>\n<h2>Hemophilia A and B</h2>\n<table>\n<tr><th>Disorder</th><th>Factor</th><th>Inheritance</th></tr>\n<tr><td>Hemophilia A</td><td>VIII</td><td>X-linked recessive</td></tr>\n<tr><td>Hemophilia B</td><td>IX</td><td>X-linked recessive</td></tr>\n</table>\n<p>Deep bleeding &mdash; <b>hemarthroses</b>, muscle hematomas, delayed surgical bleeding. <b>Labs:</b> normal platelets and PT, <b>prolonged PTT</b>, mixing study corrects (factor deficiency, no inhibitor).</p>\n<ul>\n<li>Replace deficient factor (VIII or IX concentrate); desmopressin can raise VIII in mild hemophilia A.</li>\n<li>Avoid aspirin/NSAIDs; treat serious bleeds with factor <b>before</b> imaging delays.</li>\n<li><b>Inhibitor</b> development is a major complication that changes management.</li>\n</ul>\n<h2>Immune thrombocytopenia (ITP)</h2>\n<p>Isolated thrombocytopenia with petechiae/purpura; otherwise normal WBC/Hb unless bleeding.</p>\n<table>\n<tr><th>Severity</th><th>Management</th></tr>\n<tr><td>Mild, no bleeding</td><td>Observe</td></tr>\n<tr><td>Significant bleeding / very low count</td><td>Corticosteroids or IVIG</td></tr>\n<tr><td>Life-threatening bleeding</td><td>Platelet transfusion (only here &mdash; transfused platelets are rapidly destroyed)</td></tr>\n</table>\n<div class='key'>Thrombocytopenia differential in 3 buckets: <b>decreased production</b> (marrow failure, leukemia, chemo, alcohol, B12/folate), <b>increased destruction/consumption</b> (ITP, DIC, TTP/HUS, HIT, drugs), <b>sequestration/dilution</b> (splenomegaly, massive transfusion).</div>\n</div>"
+  },
+  {
+   "file": "W15_04_DIC_Microangiopathy.html",
+   "title": "DIC & the Microangiopathies",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>DIC &amp; the Microangiopathies</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Consumption</div><h1>DIC &amp; the Microangiopathies</h1></div><div class='r'>Week 15 &middot; Blood II<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Systemic coagulation activation that consumes platelets and factors &mdash; and the look-alikes that share a smear.</p>\n<h2>Disseminated intravascular coagulation</h2>\n<p>DIC is <b>systemic coagulation activation</b> with consumption of platelets and clotting factors. It can cause <b>both thrombosis and bleeding</b>.</p>\n<table>\n<tr><th>Triggers</th><th>Typical findings</th></tr>\n<tr><td>Sepsis (esp. gram-negative)</td><td>Thrombocytopenia</td></tr>\n<tr><td>Trauma</td><td>Prolonged PT <b>and</b> PTT</td></tr>\n<tr><td>Malignancy</td><td>Elevated D-dimer</td></tr>\n<tr><td>Obstetric complications</td><td><b>Low fibrinogen</b></td></tr>\n<tr><td>Severe inflammation/shock</td><td>Schistocytes; bleeding from lines, mucosa, tubes, wounds</td></tr>\n</table>\n<div class='band'><div class='t'>Management priorities</div>\n1. <b>Treat the underlying cause</b> &mdash; this is the definitive step.<br>\n2. Supportive transfusion only if bleeding/procedure: platelets if low + bleeding; cryoprecipitate or fibrinogen concentrate if fibrinogen low; plasma for significant factor deficiency.<br>\n3. Avoid reflexively correcting numbers without clinical bleeding.</div>\n<h2>Distinguishing the low-platelet + schistocyte states</h2>\n<table>\n<tr><th>Entity</th><th>Coagulation</th><th>Schistocytes</th><th>Distinctive</th></tr>\n<tr><td><b>ITP</b></td><td>Normal</td><td>No</td><td>Isolated thrombocytopenia</td></tr>\n<tr><td><b>TTP</b></td><td><b>Normal</b></td><td>Yes</td><td>Neuro/renal &plusmn; fever; <span class='dnm'>plasma exchange</span>; avoid platelet transfusion</td></tr>\n<tr><td><b>DIC</b></td><td>&uarr;PT/PTT, <b>&darr;fibrinogen</b></td><td>Yes</td><td>Sepsis/trauma/obstetric; high D-dimer</td></tr>\n</table>\n<div class='band warn'><div class='t'>The discriminator</div>\n<b>Normal</b> coagulation studies with schistocytes and thrombocytopenia point to <b>TTP/HUS</b>; <b>prolonged PT/PTT with low fibrinogen</b> point to <b>DIC</b>. In pregnancy also consider HELLP and gestational thrombocytopenia.</div>\n<h2>Why the labs move the way they do</h2>\n<p>Widespread microthrombi consume platelets and factors faster than they are made &rarr; counts fall and PT/PTT prolong. Brisk fibrinolysis of those clots releases <b>D-dimer</b>, and fibrinogen drops as it is consumed. Red cells shredded passing through fibrin strands become <b>schistocytes</b>.</p>\n<div class='key'>One-line tell: <b>bleeding + thrombosis + sepsis/trauma/cancer + falling platelets + prolonged PT/PTT + low fibrinogen</b> = DIC until proven otherwise.</div>\n</div>"
+  },
+  {
+   "file": "W15_05_Hemostasis_Drugs.html",
+   "title": "Drugs Affecting Hemostasis",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Drugs Affecting Hemostasis</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Pharmacology</div><h1>Drugs Affecting Hemostasis</h1></div><div class='r'>Week 15 &middot; Blood II<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Antiplatelets for arterial clot, anticoagulants for venous clot &mdash; mechanisms, reversal, and HIT.</p>\n<h2>Antiplatelet agents (think arterial)</h2>\n<p>Platelet-rich thrombi dominate in high-flow <b>arterial</b> beds.</p>\n<table>\n<tr><th>Drug</th><th>Mechanism</th><th>Adverse</th></tr>\n<tr><td>Aspirin</td><td>Irreversible COX-1 &rarr; &darr;thromboxane A2</td><td>GI bleeding, platelet dysfunction</td></tr>\n<tr><td>P2Y12: clopidogrel, ticagrelor, prasugrel</td><td>Block ADP-mediated activation</td><td>Bleeding; ticagrelor dyspnea; prasugrel higher bleed risk</td></tr>\n<tr><td>GP IIb/IIIa inhibitors</td><td>Block final common aggregation</td><td>Significant bleeding, thrombocytopenia</td></tr>\n</table>\n<h2>Anticoagulants (think venous)</h2>\n<p>Venous thrombi are fibrin/red-cell rich and driven by coagulation activation + stasis.</p>\n<table>\n<tr><th>Class</th><th>Mechanism</th><th>Reversal / notes</th></tr>\n<tr><td><b>UFH</b></td><td>Potentiates antithrombin (IIa &amp; Xa)</td><td>Protamine; rapid on/off; PTT/anti-Xa; useful in severe renal impairment / high bleeding risk</td></tr>\n<tr><td><b>LMWH</b> (enoxaparin)</td><td>Antithrombin, mainly anti-Xa</td><td>SC, predictable, no routine monitoring; renal dose adjust; favored in cancer-associated VTE</td></tr>\n<tr><td><b>DOAC &mdash; Xa</b> (apixaban, rivaroxaban)</td><td>Direct Xa inhibition</td><td>Oral, rapid, no INR; preferred for many VTE; avoid in pregnancy</td></tr>\n<tr><td><b>DOAC &mdash; IIa</b> (dabigatran)</td><td>Direct thrombin inhibition</td><td>Idarucizumab reversal; renal clearance</td></tr>\n<tr><td><b>Warfarin</b> (VKA)</td><td>Blocks vitamin K epoxide reductase &rarr; &darr;II, VII, IX, X, protein C/S</td><td>Vitamin K / PCC; INR monitoring; teratogenic; needed in APS &amp; mechanical valves</td></tr>\n</table>\n<div class='band warn'><div class='t'>Heparin-induced thrombocytopenia (HIT)</div>\nSuspect when platelets fall <b>&gt;50% from baseline</b>, typically <b>5&ndash;10 days</b> after heparin (sooner with recent exposure), or new thrombosis on heparin. <b>Stop all heparin</b>, start a non-heparin anticoagulant, and <b>do not give warfarin until platelets recover</b> (risk of venous limb gangrene/skin necrosis).</div>\n<div class='key'>Warfarin pitfall: early on it lowers <b>protein C/S</b> faster than the procoagulant factors, creating a transient prothrombotic window &mdash; hence bridging for acute VTE and the warfarin-skin-necrosis risk.</div>\n</div>"
+  },
+  {
+   "file": "W15_06_VTE_Diagnosis.html",
+   "title": "VTE: Diagnosis of DVT & PE",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>VTE: Diagnosis of DVT &amp; PE</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Thrombosis</div><h1>VTE: Diagnosis of DVT &amp; PE</h1></div><div class='r'>Week 15 &middot; Blood II<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Virchow's triad, the presentations, and the pre-test-probability logic that decides D-dimer vs imaging.</p>\n<h2>Definitions &amp; Virchow's triad</h2>\n<p>DVT and PE are manifestations of the same disease; most PEs originate as leg DVTs.</p>\n<table>\n<tr><th>Stasis</th><th>Hypercoagulability</th><th>Endothelial injury</th></tr>\n<tr><td>Immobility, long travel, surgery, hospitalization, heart failure</td><td>Cancer, pregnancy, estrogen, inherited thrombophilia, APS, age</td><td>Surgery, trauma, central catheters</td></tr>\n</table>\n<div class='key'><b>Age</b> is a major prothrombotic state; <b>unprovoked VTE</b> can be the first sign of occult malignancy (gastric, pancreatic, lung, ovarian classics).</div>\n<h2>DVT presentation</h2>\n<p>Unilateral leg swelling, calf/thigh tenderness along the deep system, warmth/erythema, pitting edema, calf asymmetry. Differential: cellulitis, ruptured Baker cyst, muscle tear, superficial thrombophlebitis, venous insufficiency, lymphedema.</p>\n<h2>PE presentation</h2>\n<p>Acute dyspnea, tachypnea, tachycardia, hypoxemia, pleuritic chest pain, syncope, hemoptysis, signs of DVT, right-heart strain. Central PE may cause dyspnea/hypoxemia <b>without</b> pleuritic pain (pleura not irritated); peripheral PE with infarction causes pleuritic pain.</p>\n<div class='band warn'><div class='t'>Red flags &mdash; urgent</div>\nO&#8322; sat &le;90%, HR &gt;100, elevated RR, hypotension/syncope, altered mental status, severe distress &rarr; ED-level evaluation, oxygen, imaging, possible empiric anticoagulation.</div>\n<h2>The pre-test-probability rule</h2>\n<table>\n<tr><th>Probability</th><th>Next step</th></tr>\n<tr><td>Low / unlikely (Wells)</td><td><b>D-dimer</b>: if negative, VTE ruled out; if positive &rarr; image</td></tr>\n<tr><td>High / likely (Wells)</td><td>Image directly (compression ultrasound for DVT; CTPA for PE); <b>do not rely on D-dimer</b></td></tr>\n<tr><td>Pregnancy + leg symptoms</td><td>Leg Doppler first &mdash; finding DVT establishes treatment without chest imaging</td></tr>\n</table>\n<p>D-dimer is <b>sensitive but not specific</b> (raised in cancer, infection, trauma, surgery, pregnancy, age, DIC). Best use: <b>ruling out</b> VTE in low-probability patients. CTPA is the main PE test; V/Q is the alternative when CTPA is contraindicated.</p>\n<div class='band'><div class='t'>Why not image everyone?</div>\nRadiation/contrast risk, limited resources/delays, incidental findings, detection of insignificant subsegmental clots, and unnecessary anticoagulation with its bleeding risk.</div>\n</div>"
+  },
+  {
+   "file": "W15_07_VTE_Management.html",
+   "title": "VTE Management & Anticoagulation",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>VTE Management &amp; Anticoagulation</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Treatment</div><h1>VTE Management &amp; Anticoagulation</h1></div><div class='r'>Week 15 &middot; Blood II<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Anticoagulate, choose the right agent, set the duration, and navigate the cancer/bleeding tightrope.</p>\n<h2>Core principle</h2>\n<div class='key'>Acute DVT/PE management = <b>anticoagulation, anticoagulation, anticoagulation</b>. If pre-test probability is high and bleeding risk acceptable, start <b>empiric</b> anticoagulation while awaiting imaging.</div>\n<h3>Assess bleeding risk first</h3>\n<p>Active bleeding, recent major surgery/trauma, platelet count, INR/PTT, hemoglobin trend, renal/liver function, history of intracranial hemorrhage.</p>\n<h2>Choosing the agent</h2>\n<table>\n<tr><th>Scenario</th><th>Preferred</th></tr>\n<tr><td>Stable, uncomplicated VTE</td><td>DOAC (oral, no monitoring)</td></tr>\n<tr><td>Severe renal impairment / procedure likely</td><td>UFH (rapid off, reversible)</td></tr>\n<tr><td>Cancer-associated, esp. GI malignancy/bleed concern</td><td>LMWH</td></tr>\n<tr><td>Pregnancy</td><td>LMWH</td></tr>\n<tr><td>Antiphospholipid syndrome</td><td>Warfarin (over DOACs)</td></tr>\n</table>\n<h2>Admit vs outpatient</h2>\n<table>\n<tr><th>Admit</th><th>Consider outpatient</th></tr>\n<tr><td>Hemodynamic instability; hypoxemia/oxygen need</td><td>Low-risk PE or DVT</td></tr>\n<tr><td>High-risk PE / RV strain; syncope</td><td>Normal stable vitals, adequate oxygenation</td></tr>\n<tr><td>Active bleeding/high bleeding risk; renal failure</td><td>Low PESI/sPESI</td></tr>\n<tr><td>Unreliable follow-up / social barriers</td><td>Reliable follow-up &amp; medication access</td></tr>\n</table>\n<h2>Duration of anticoagulation</h2>\n<table>\n<tr><th>VTE type</th><th>Duration</th></tr>\n<tr><td>Provoked by major transient risk factor</td><td>Usually 3 months</td></tr>\n<tr><td>Unprovoked</td><td>Minimum 3 months, reassess; often extended</td></tr>\n<tr><td>Recurrent unprovoked</td><td>Often indefinite</td></tr>\n<tr><td>Cancer-associated</td><td>While cancer active/treated and risk persists</td></tr>\n</table>\n<div class='band warn'><div class='t'>Cancer-associated VTE with active bleeding</div>\nStabilize ABCs &rarr; <b>temporarily hold</b> anticoagulation if bleeding is significant &rarr; resuscitate &rarr; control the source (endoscopy/PPI/IR) &rarr; <b>resume</b> anticoagulation once hemostasis is achieved (untreated PE/DVT remains dangerous). LMWH often favored.</div>\n<div class='band'><div class='t'>IVC filters</div>\n<b>Not</b> definitive treatment &mdash; reserved for acute VTE patients who <b>cannot</b> be anticoagulated. Remove when anticoagulation can resume; filters carry their own thrombosis risk and do not treat existing clot.</div>\n</div>"
+  },
+  {
+   "file": "W15_08_Trauma_TXA_Aging.html",
+   "title": "Trauma, Massive Hemorrhage, FAST & TXA",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Trauma, Massive Hemorrhage, FAST &amp; TXA</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Trauma</div><h1>Trauma, Massive Hemorrhage, FAST &amp; TXA</h1></div><div class='r'>Week 15 &middot; Blood II<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The hypotensive trauma patient: ATLS, the FAST exam, blood-product resuscitation, TXA, and the aging-population context.</p>\n<h2>ATLS primary survey</h2>\n<p>For the hypotensive trauma patient, work the <b>A-B-C-D-E</b>:</p>\n<ul>\n<li><b>A</b>irway with C-spine protection</li>\n<li><b>B</b>reathing and ventilation</li>\n<li><b>C</b>irculation with hemorrhage control</li>\n<li><b>D</b>isability (neurologic status)</li>\n<li><b>E</b>xposure/environment, prevent hypothermia</li>\n</ul>\n<div class='key'>Unstable pelvis + bilateral femur injuries + hypotension/tachycardia &rarr; suspect <b>major hemorrhage</b> (retroperitoneal/pelvic + long-bone loss), <b>even with a negative FAST</b>.</div>\n<h3>Early interventions</h3>\n<p>Large-bore IV/IO access; <b>blood products over large-volume crystalloid</b>; <b>pelvic binder</b> for unstable pelvis; splint femurs; analgesia (ketamine/fentanyl); <b>early TXA</b>; CXR + pelvic X-ray; FAST; activate the massive hemorrhage protocol.</p>\n<h2>FAST exam</h2>\n<p>Looks for free fluid (usually blood).</p>\n<table>\n<tr><th>View</th><th>Landmark</th></tr>\n<tr><td>RUQ</td><td>Morison pouch (hepatorenal recess)</td></tr>\n<tr><td>LUQ</td><td>Splenorenal space + diaphragm</td></tr>\n<tr><td>Pelvis</td><td>Rectovesical (male) / pouch of Douglas (female)</td></tr>\n<tr><td>Subxiphoid</td><td>Pericardial effusion</td></tr>\n</table>\n<div class='band warn'><div class='t'>FAST limitation</div>\nA <b>negative FAST does not exclude hemorrhage</b>, especially <b>retroperitoneal/pelvic</b> bleeding. Integrate with hemodynamics, not in isolation.</div>\n<h2>Tranexamic acid</h2>\n<p>An <b>antifibrinolytic</b> &mdash; blocks plasminogen activation, reducing fibrin breakdown. Uses: early trauma hemorrhage, heavy menstrual bleeding, mucosal bleeding in vWD/platelet disorders, peri-procedural prophylaxis. <b>Not</b> a substitute for source control, resuscitation, or correcting major coagulopathy.</p>\n<h2>Public health: aging &amp; clot risk</h2>\n<p>Seniors are a rapidly growing group in Canada. VTE risk rises substantially with age, and older adults more often have cancer, immobility, surgery, and hospitalization &mdash; so anticoagulant use grows. <b>Bleeding</b> risk also rises (renal impairment, polypharmacy, falls, frailty, GI pathology).</p>\n<div class='key'>Clinical takeaway: in older adults, <b>individualize</b> VTE prevention/treatment &mdash; balance thrombotic risk, bleeding risk, renal function, goals of care, adherence, and follow-up.</div>\n</div>"
+  }
+ ]
+}
