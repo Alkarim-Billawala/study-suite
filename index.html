@@ -2,7 +2,14 @@
   Study Suite  ·  v0.2.63 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
-  Changelog v0.2.63: ANCHORED options for the shuffle (v0.2.62). Options matching "All/None of the
+  Changelog v0.2.63: (A) FAULTY-PACK ERROR POPUP. readFiles() no longer silently swallows a bad pack:
+  a JSON parse failure or per-item validation errors (already computed by ingestPack) now surface in an
+  informative modal (alertDialog/showPackErrors) that points to WHERE the problem is — the file, or the
+  q#N / card#N position in questions[]/cards[] — and tags each error with the relevant AUTHORING-GUIDE
+  section (guideSectionFor → §2 schema/card-types, §7 checklist, §8 output hygiene) plus the live
+  Study_Suite_Authoring_Guide_latest.md URL, without prescribing a fix, so the user can hand it to their
+  assistant. Built from DOM nodes (filenames can't inject HTML); confirmDialog() restores the Cancel
+  button after an alert. (B) ANCHORED options for the shuffle (v0.2.62): options matching "All/None of the
   above|these" are order-independent, so optPerm() now PINS them to their authored slot and shuffles only
   the other options around them (an "All of the above" stays last). Options that reference SPECIFIC
   positions ("A and B", "both of the above") still can't be safely shuffled OR anchored — the authoring
@@ -1387,10 +1394,16 @@ function ingestPack(obj,sourceName){
   return {pk,errs};
 }
 function readFiles(files){
-  let done=0;const arr=[...files];
+  let done=0;const arr=[...files];const reports=[];
   arr.forEach(f=>{const r=new FileReader();r.onload=async()=>{
-    try{const obj=JSON.parse(r.result);ingestPack(obj,f.name.replace(/\.json$/i,''));}catch(e){}
-    if(++done===arr.length){await persist();renderHome();}
+    const name=f.name.replace(/\.json$/i,'');
+    try{const obj=JSON.parse(r.result);
+      const {pk,errs}=ingestPack(obj,name);
+      const items=(pk.questions?pk.questions.length:0)+(pk.cards?pk.cards.length:0);
+      if(errs&&errs.length)reports.push({name:f.name,errs,kept:items});
+      else if(items===0&&(!pk.guides||!pk.guides.length))reports.push({name:f.name,empty:true});
+    }catch(e){reports.push({name:f.name,parse:true,detail:String((e&&e.message)||e)});}
+    if(++done===arr.length){await persist();renderHome();if(reports.length)showPackErrors(reports);}
   };r.readAsText(f);});
 }
 function removePack(id){confirmDialog('Remove this pack? Your review progress is kept and will reapply if you reload it.',{confirmText:'Remove',danger:true},()=>{packs=packs.filter(p=>p.id!==id);persist().then(renderHome);});}
@@ -1819,11 +1832,41 @@ function returnFromReviewer(){const r=reviewerReturn;if(r==='study'){show('study
 let confirmCb=null;
 function confirmDialog(msg,opts,onConfirm){if(typeof opts==='function'){onConfirm=opts;opts={};}opts=opts||{};
   $('confirmMsg').textContent=msg;
+  $('confirmCancel').style.display='';
   $('confirmOk').textContent=opts.confirmText||'Confirm';
   $('confirmCancel').textContent=opts.cancelText||'Cancel';
   $('confirmOk').classList.toggle('danger',!!opts.danger);
   confirmCb=typeof onConfirm==='function'?onConfirm:null;
   $('confirmOv').style.display='flex';$('confirmOk').focus();}
+/* Alert-style (OK only) modal, built from DOM nodes so user-derived text (filenames) can't inject HTML. */
+function alertDialog(title,lines,opts){opts=opts||{};const box=$('confirmMsg');box.innerHTML='';
+  const h=document.createElement('div');h.style.cssText='font-weight:600;margin-bottom:7px';h.textContent=title;box.appendChild(h);
+  (lines||[]).forEach(l=>{const p=document.createElement('div');
+    p.style.cssText='font-size:13px;line-height:1.4;color:var(--ink-soft);margin:3px 0;white-space:pre-wrap';
+    p.textContent=l;box.appendChild(p);});
+  $('confirmCancel').style.display='none';
+  $('confirmOk').textContent=opts.okText||'OK';$('confirmOk').classList.remove('danger');
+  confirmCb=null;$('confirmOv').style.display='flex';$('confirmOk').focus();}
+/* Map a per-item validation error to the relevant authoring-guide section, so the message is actionable. */
+function guideSectionFor(e){
+  if(/cloze|mcq|multi|order|match|\bqa\b|prompt|bad type/i.test(e))return 'guide §2 (card types)';
+  if(/correct index|options\[\]|stem|missing (sys|topic)|not an object/i.test(e))return 'guide §2 (item schema)';
+  return 'guide §7 (checklist)';}
+const GUIDE_URL='https://studysuite.app/Study_Suite_Authoring_Guide_latest.md';
+/* Tell the user (and their assistant) WHERE a dropped pack went wrong — not how to fix it. */
+function showPackErrors(reports){const lines=[];
+  reports.forEach(r=>{
+    if(r.parse){lines.push('• "'+r.name+'" — not valid JSON, so nothing could be loaded.');
+      lines.push('    Often a stray character, smart quote, or a citation/footnote marker. The file must be pure JSON, from the first { to the last }. → guide §8 (output hygiene).');
+      if(r.detail)lines.push('    Parser said: '+r.detail);}
+    else if(r.empty){lines.push('• "'+r.name+'" — loaded, but no questions or cards were found. Check it has a questions[] and/or cards[] array. → guide §2.');}
+    else if(r.errs&&r.errs.length){lines.push('• "'+r.name+'" — '+r.errs.length+' item'+(r.errs.length===1?'':'s')+' skipped'+(r.kept?(' (kept '+r.kept+')'):'')+':');
+      r.errs.slice(0,6).forEach(e=>lines.push('    – '+e+'  → '+guideSectionFor(e)));
+      if(r.errs.length>6)lines.push('    – …and '+(r.errs.length-6)+' more');}
+  });
+  lines.push('Where to look: q#N / card#N is the item’s position (0-based) in the pack’s questions[] / cards[] array.');
+  lines.push('Authoring guide: '+GUIDE_URL+'  — paste these lines to your assistant to fix the source pack.');
+  alertDialog(reports.length>1?'Some packs had problems loading':'There was a problem loading your pack',lines,{okText:'Got it'});}
 function closeConfirm(){$('confirmOv').style.display='none';confirmCb=null;}
 function toast(msg,ms){const w=$('toastWrap');if(!w)return;const t=document.createElement('div');t.className='toast';t.textContent=msg;w.appendChild(t);
   requestAnimationFrame(()=>t.classList.add('show'));
