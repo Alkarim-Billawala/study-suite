@@ -1,7 +1,12 @@
 <!--
-  Study Suite  ·  v0.2.57 (beta)
+  Study Suite  ·  v0.2.58 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.58: Topic Guides viewer is now first-class on mobile (@media max-width:560px). The
+  "← Back" button collapses to an arrow only (.bkw/.bk2 hidden); the title shrinks; the zoom (− % +)
+  and Fit/Print controls split into two .szgrp rows stacked top-right (.sizer flex-column); the guide
+  iframe goes edge-to-edge (.revmain negative margins break out of .wrap padding, borders/radius
+  dropped, height uses dvh); and the Print button reads "⎙ Save" on mobile (.prn-d/.prn-m swap).
   Changelog v0.2.57: footer is now responsive — the v0.2.56 cleanup stacked the attribution rows on
   ALL widths; this restores the old single-line attribution on desktop (.foot-row is inline with " · "
   separators via ::before) and keeps the stacked rows only on mobile (@media max-width:560px).
@@ -590,8 +595,26 @@ section{display:none}section.on{display:block}
 .revmain{width:100%}
 .guideframe{width:100%;height:calc(100vh - 195px);min-height:420px;border:1.5px solid var(--line);border-radius:10px;background:#fff}
 .sizer{margin-left:auto;display:flex;align-items:center;gap:6px}
+.szgrp{display:flex;align-items:center;gap:6px}
 .sizer .pct{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-width:42px;text-align:center}
+.backbtn .bka{font-size:16px}
+.prn-m{display:none}
 .revempty{color:var(--ink-soft);font-size:15px;border:1px dashed var(--line);border-radius:8px;padding:22px;text-align:center}
+/* Topic Guides viewer — mobile: arrow-only Back, smaller title, 2-row control cluster, full-bleed guide */
+@media(max-width:560px){
+  .revbar{gap:8px}
+  .revbar h2{font-size:16px;white-space:nowrap}
+  .backbtn{flex-direction:row}
+  .backbtn .bkw,.backbtn .bk2{display:none}
+  .backbtn .bka{font-size:18px}
+  #reviewer .minor{padding:5px 8px;font-size:11px}
+  .sizer{flex-direction:column;align-items:flex-end;gap:5px}
+  .szgrp{gap:5px}
+  .revmain{margin-left:-22px;margin-right:-22px}
+  .guideframe{height:calc(100dvh - 168px);min-height:340px;border-radius:0;border-left:none;border-right:none}
+  .prn-d{display:none}
+  .prn-m{display:inline}
+}
 /* QUIZ */
 #quiz{margin-top:22px}
 .qmeta{display:flex;align-items:center;justify-content:space-between;margin:0 0 6px;gap:10px}
@@ -814,13 +837,17 @@ section{display:none}section.on{display:block}
 
   <!-- CONTENT REVIEWER -->
   <section id="reviewer">
-    <div class="revbar"><button class="minor backbtn" id="revBack"><span class="bk1">← Back</span><span class="bk2" id="revBackTo"></span></button><h2 class="revtitle" id="revTitle" role="button" tabindex="0" aria-expanded="false" aria-controls="guideList" title="Show or hide the topic list">Topic Guides <span class="revcaret" aria-hidden="true">▾</span></h2>
+    <div class="revbar"><button class="minor backbtn" id="revBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2" id="revBackTo"></span></button><h2 class="revtitle" id="revTitle" role="button" tabindex="0" aria-expanded="false" aria-controls="guideList" title="Show or hide the topic list">Topic Guides <span class="revcaret" aria-hidden="true">▾</span></h2>
       <div class="sizer">
-        <button class="minor" id="zoomOut" title="Smaller text">−</button>
-        <span class="pct" id="zoomPct">100%</span>
-        <button class="minor" id="zoomIn" title="Larger text">+</button>
-        <button class="minor" id="fitBtn" title="Stretch the guide to the full width">Fit width</button>
-        <button class="minor" id="printBtn" title="Print or save this guide as PDF">⎙ Print</button>
+        <div class="szgrp">
+          <button class="minor" id="zoomOut" title="Smaller text">−</button>
+          <span class="pct" id="zoomPct">100%</span>
+          <button class="minor" id="zoomIn" title="Larger text">+</button>
+        </div>
+        <div class="szgrp">
+          <button class="minor" id="fitBtn" title="Stretch the guide to the full width">Fit width</button>
+          <button class="minor" id="printBtn" title="Print or save this guide as PDF"><span class="prn-d">⎙ Print</span><span class="prn-m">⎙ Save</span></button>
+        </div>
       </div>
     </div>
     <div class="revlayout" id="revLayout">
@@ -926,7 +953,7 @@ section{display:none}section.on{display:block}
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.57';
+const APP_VERSION='0.2.58';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
