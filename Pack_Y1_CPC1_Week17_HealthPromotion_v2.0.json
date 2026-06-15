@@ -1,0 +1,1336 @@
+{
+ "pack": "Week 17 — Health Promotion",
+ "id": "wk17",
+ "formatVersion": "2.0",
+ "version": "2.0",
+ "author": "Alkarim Billawala / alkarim.billawala.ca",
+ "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
+ "created": "2026-06-15",
+ "updated": "2026-06-15",
+ "school": "UofT — Temerty Medicine",
+ "year": "Year 1",
+ "course": "CPC 1",
+ "weeks": "Week 17 · Health Promotion",
+ "questions": [
+  {
+   "id": "wk17_q01",
+   "sys": "Health Promo",
+   "topic": "Exercise · PAVS",
+   "difficulty": "medium",
+   "stem": "A 48-year-old man with hypertension comes for a medication renewal. He plays recreational hockey once a month, has a desk job, and otherwise does not exercise. You ask how many days per week he does moderate-or-greater activity and for how long; he says about 1 day per week for 40 minutes. What is the best interpretation and next step?",
+   "options": [
+    "He does not meet guidelines; advise ~150 min/week of moderate-to-vigorous activity and co-create a realistic SMART goal",
+    "He meets guidelines because he completes a bout over 30 minutes",
+    "He must have a cardiac stress test before any exercise because he has hypertension",
+    "He should focus only on weight loss before attempting exercise",
+    "He should start vigorous interval training immediately, since vigorous activity is required for benefit"
+   ],
+   "correct": 0,
+   "explain": "His PAVS is ~40 min/week, well below the adult target of ~150 min/week plus strengthening &ge;2 days/week. Advise and <b>co-create a SMART goal</b>. Stable hypertension is not an absolute contraindication to low/moderate activity, and benefit does not require vigorous intensity.",
+   "guide": {
+    "f": "W17_06_Exercise_Rx.html",
+    "t": "6 · PAVS",
+    "s": "days × minutes vs 150/week"
+   }
+  },
+  {
+   "id": "wk17_q02",
+   "sys": "Health Promo",
+   "topic": "Nutrition · Portfolio diet",
+   "difficulty": "medium",
+   "stem": "A 56-year-old woman with LDL-C 4.1 mmol/L wants to try diet before medication and asks which pattern has the strongest LDL-lowering evidence. Which recommendation is most appropriate?",
+   "options": [
+    "Portfolio diet emphasizing nuts, plant protein, viscous fibre, and plant sterols",
+    "A high-protein carnivore diet",
+    "A generic multivitamin",
+    "Iron, B12, and folate supplementation",
+    "Avoiding all dietary fat, including nuts and olive oil"
+   ],
+   "correct": 0,
+   "explain": "The <b>Portfolio diet</b> combines four LDL-lowering components (nuts, plant protein, viscous fibre, plant sterols) and has the strongest LDL-lowering evidence among lifestyle options; it can complement a statin.",
+   "guide": {
+    "f": "W17_04_Nutrition.html",
+    "t": "4 · Portfolio diet",
+    "s": "four LDL-lowering components"
+   }
+  },
+  {
+   "id": "wk17_q03",
+   "sys": "Health Promo",
+   "topic": "Metabolic syndrome",
+   "difficulty": "medium",
+   "stem": "A 45-year-old South Asian man has waist circumference 119 cm, triglycerides 2.6 mmol/L, HDL-C 0.4 mmol/L, BP 134/88 mmHg, and fasting glucose 6.2 mmol/L. Which statement is most accurate?",
+   "options": [
+    "He meets metabolic syndrome criteria, having at least 3 of 5 cardiometabolic risk factors",
+    "He cannot be classified because his BMI is not provided",
+    "Metabolic syndrome requires diagnosed diabetes and a prior myocardial infarction",
+    "Waist circumference is not useful because BMI is the only validated adiposity measure",
+    "His low HDL-C is protective"
+   ],
+   "correct": 0,
+   "explain": "Metabolic syndrome needs <b>&ge;3 of 5</b>: elevated waist, high triglycerides, low HDL, elevated BP, elevated fasting glucose &mdash; he meets all five. BMI is not required, and waist circumference (with ethnicity-specific cutoffs) independently predicts risk.",
+   "guide": {
+    "f": "W17_05_CV_Risk_Lipids.html",
+    "t": "5 · Metabolic syndrome",
+    "s": "≥3 of 5 criteria"
+   }
+  },
+  {
+   "id": "wk17_q04",
+   "sys": "Health Promo",
+   "topic": "Behaviour change · Stages",
+   "difficulty": "easy",
+   "stem": "A 38-year-old patient says, \"I know I should exercise more, but I'm not ready. Work is chaotic and I don't know where I'd fit it in.\" Which stage of change does this best reflect?",
+   "options": [
+    "Contemplation",
+    "Precontemplation",
+    "Preparation",
+    "Action",
+    "Maintenance"
+   ],
+   "correct": 0,
+   "explain": "He recognizes the need to change but is <b>ambivalent</b> and has not committed to action &mdash; classic <b>contemplation</b>. The clinical move is to explore pros/cons, values, and confidence.",
+   "guide": {
+    "f": "W17_02_Behaviour_Change.html",
+    "t": "2 · Stages of change",
+    "s": "contemplation = ambivalent"
+   }
+  },
+  {
+   "id": "wk17_q05",
+   "sys": "Health Promo",
+   "topic": "Obesity · Patient-centred",
+   "difficulty": "easy",
+   "stem": "A 52-year-old man with obesity says previous doctors made him feel ashamed, and he now avoids appointments because he expects to be blamed. Which response best reflects patient-centred obesity care?",
+   "options": [
+    "\"Would it be okay if we discussed how weight may or may not be affecting your health, and what goals matter most to you?\"",
+    "\"You need to lose weight or you'll keep getting sick.\"",
+    "\"Your BMI means you are unhealthy, regardless of labs or function.\"",
+    "\"Diet and exercise are simple; it's mainly about willpower.\"",
+    "\"We should avoid discussing weight even if you want help.\""
+   ],
+   "correct": 0,
+   "explain": "The best response is <b>permission-based and non-stigmatizing</b>, recognizes BMI alone is insufficient, and centres the patient's goals. The others are stigmatizing, inaccurate, or avoidant.",
+   "guide": {
+    "f": "W17_03_Obesity.html",
+    "t": "3 · 5A approach",
+    "s": "ask permission, non-stigmatizing"
+   }
+  },
+  {
+   "id": "wk17_q06",
+   "sys": "Health Promo",
+   "topic": "Exercise · Dose",
+   "difficulty": "easy",
+   "stem": "A 63-year-old woman with osteoarthritis and depression asks whether walking can help, but worries that unless she reaches 150 minutes/week immediately there is no point. Which counselling point is best?",
+   "options": [
+    "The largest health gain often comes from moving from inactivity to even small amounts of activity",
+    "Benefits occur only after reaching 150 minutes/week",
+    "Physical activity helps only cardiovascular disease, not depression or pain",
+    "Resistance training is contraindicated in older adults",
+    "Exercise is useful only if it causes weight loss"
+   ],
+   "correct": 0,
+   "explain": "\"<b>Some is better than none</b>\" &mdash; the biggest gain is moving from no activity to some. Exercise also helps depression, pain/function, CVD and diabetes risk, osteoporosis, and cognition.",
+   "guide": {
+    "f": "W17_06_Exercise_Rx.html",
+    "t": "6 · Benefits",
+    "s": "some is better than none"
+   }
+  },
+  {
+   "id": "wk17_q07",
+   "sys": "Health Promo",
+   "topic": "Exercise · Intensity",
+   "difficulty": "easy",
+   "stem": "A patient asks how to tell whether their exercise intensity is \"moderate.\" Which description is most appropriate?",
+   "options": [
+    "You can talk but not sing",
+    "You are unable to speak at all",
+    "There is no increase in breathing or heart rate",
+    "Your heart rate is above the predicted maximum",
+    "You are sweating profusely"
+   ],
+   "correct": 0,
+   "explain": "Moderate intensity is the \"<b>talk but not sing</b>\" level; vigorous intensity allows only a few words without pausing.",
+   "guide": {
+    "f": "W17_06_Exercise_Rx.html",
+    "t": "6 · Canadian guideline",
+    "s": "talk-but-not-sing cue"
+   }
+  },
+  {
+   "id": "wk17_q08",
+   "sys": "Health Promo",
+   "topic": "Exercise · Pre-participation",
+   "difficulty": "medium",
+   "stem": "A sedentary 60-year-old man with stable, treated hypertension wants to begin light-intensity walking. He has no chest pain, syncope, dyspnea, palpitations, or heart-failure symptoms. What is the best advice?",
+   "options": [
+    "Begin low-intensity walking and progress gradually while monitoring symptoms",
+    "Avoid all exercise, because hypertension is an absolute contraindication",
+    "Start vigorous running immediately to lower blood pressure faster",
+    "Exercise only after coronary angiography",
+    "Exercise is contraindicated unless BP medications are stopped"
+   ],
+   "correct": 0,
+   "explain": "A stable patient without red-flag symptoms can usually <b>begin low-intensity walking and progress gradually</b>. Red flags (chest pain, syncope, unexplained dyspnea, decompensated HF, unstable angina) would prompt evaluation first.",
+   "guide": {
+    "f": "W17_06_Exercise_Rx.html",
+    "t": "6 · Pre-exercise red flags",
+    "s": "stable patient can start low-intensity"
+   }
+  },
+  {
+   "id": "wk17_q09",
+   "sys": "Health Promo",
+   "topic": "CV risk · Lifestyle + statin",
+   "difficulty": "medium",
+   "stem": "A 45-year-old smoker with dyslipidemia and low HDL has a calculated 10-year cardiovascular risk above 20%. Which management principle is most appropriate?",
+   "options": [
+    "High absolute risk supports intensive lifestyle intervention and consideration of statin therapy",
+    "Lifestyle counselling is unnecessary once medication is started",
+    "Statins are contraindicated in smokers",
+    "Framingham includes waist circumference, so no further clinical judgment is needed",
+    "LDL-C cannot be modified by diet"
+   ],
+   "correct": 0,
+   "explain": "High 10-year CVD risk supports <b>both</b> intensive lifestyle change and pharmacologic risk reduction (commonly a statin) &mdash; they are complementary, not alternatives. Framingham omits waist circumference and does not replace judgment.",
+   "guide": {
+    "f": "W17_05_CV_Risk_Lipids.html",
+    "t": "5 · Lipid pharmacotherapy",
+    "s": "lifestyle + statin complementary"
+   }
+  },
+  {
+   "id": "wk17_q10",
+   "sys": "Health Promo",
+   "topic": "Older adult weight loss",
+   "difficulty": "medium",
+   "stem": "A 72-year-old man has unintentionally lost 6% of his body weight over 9 months, with fatigue and decreased appetite. Which statement is most accurate?",
+   "options": [
+    "This is clinically significant and should prompt evaluation for social, psychological, medical, medication-related, and age-related causes",
+    "This is normal aging and needs no evaluation",
+    "Weight loss in older adults is only concerning if intentional",
+    "Obesity is always more dangerous than weight loss in older adults",
+    "Pharmacologic appetite stimulation is first-line before any history or exam"
+   ],
+   "correct": 0,
+   "explain": "Loss of <b>4&ndash;5% in a year (or 10% over any period)</b> is clinically significant in older adults and is usually multifactorial. Evaluate before considering appetite stimulants, which are not first-line.",
+   "guide": {
+    "f": "W17_08_LGBTQ_WeightLoss.html",
+    "t": "8 · Older-adult weight loss",
+    "s": "significant: ≥4–5%/yr"
+   }
+  },
+  {
+   "id": "wk17_q11",
+   "sys": "Health Promo",
+   "topic": "Older adult weight loss · Exam",
+   "difficulty": "medium",
+   "stem": "An 81-year-old woman with unintentional weight loss is examined. Which physical finding is most concerning for serious underlying disease?",
+   "options": [
+    "Lymphadenopathy and hepatosplenomegaly",
+    "Mild temporal hollowing alone",
+    "Wrinkled skin",
+    "Grey hair",
+    "A mild reduction in height"
+   ],
+   "correct": 0,
+   "explain": "<b>Lymphadenopathy, hepatosplenomegaly, and masses</b> are the worrying findings (malignancy, infiltrative disease). The others are non-specific changes of aging.",
+   "guide": {
+    "f": "W17_08_LGBTQ_WeightLoss.html",
+    "t": "8 · Workup",
+    "s": "exam red flags"
+   }
+  },
+  {
+   "id": "wk17_q12",
+   "sys": "Health Promo",
+   "topic": "Older adult weight loss · Management",
+   "difficulty": "medium",
+   "stem": "A 79-year-old man with poor intake has ill-fitting dentures, social isolation, and recently started a medication that causes nausea. Which management plan is most appropriate?",
+   "options": [
+    "Address dentures, review/adjust the offending medication, assess social supports and food access, involve dietitian/social work, add calorie-dense meals/snacks, and monitor weight",
+    "Reassure him that poor intake is expected with aging",
+    "Treat only with protein shakes and do not investigate causes",
+    "Recommend strict low-fat foods to avoid cardiovascular disease",
+    "Start vigorous exercise and delay nutritional intervention"
+   ],
+   "correct": 0,
+   "explain": "Management targets the <b>reversible causes and barriers</b>: dental issues, offending medications, social supports/food access, dietitian/social-work input, calorie-dense intake, and monitoring. Supplements alone without evaluation miss reversible causes.",
+   "guide": {
+    "f": "W17_08_LGBTQ_WeightLoss.html",
+    "t": "8 · Management",
+    "s": "treat causes + barriers"
+   }
+  },
+  {
+   "id": "wk17_q13",
+   "sys": "Health Promo",
+   "topic": "Nutrition · Diabetes patterns",
+   "difficulty": "medium",
+   "stem": "A 34-year-old woman with prediabetes asks which dietary patterns have evidence for improving glycemic control and cardiometabolic risk. Which set is most appropriate?",
+   "options": [
+    "Low-GI, Mediterranean, DASH, and vegetarian/vegan dietary patterns",
+    "Paleo, carnivore, Atkins, and grapefruit diets only",
+    "Iron/B12/folate supplementation for all patients",
+    "A diet defined only by macronutrient percentages with no attention to food quality",
+    "A juice cleanse followed by fasting"
+   ],
+   "correct": 0,
+   "explain": "<b>Low-GI, Mediterranean, DASH, and vegetarian/vegan</b> patterns are evidence-informed for glycemic and cardiometabolic improvement. Patterns that improve multiple risk factors are preferred over single-nutrient tweaks.",
+   "guide": {
+    "f": "W17_04_Nutrition.html",
+    "t": "4 · Patterns",
+    "s": "diabetes-appropriate patterns"
+   }
+  },
+  {
+   "id": "wk17_q14",
+   "sys": "Health Promo",
+   "topic": "Obesity · Assessment",
+   "difficulty": "medium",
+   "stem": "A 50-year-old patient has BMI 32 kg/m² but normal BP, normal glucose, excellent function, and no weight-related distress. Which statement best reflects modern obesity assessment?",
+   "options": [
+    "BMI is one screening measure, but diagnosis and treatment planning should consider adiposity-related medical, functional, and psychosocial impairment",
+    "BMI alone proves the patient has severe obesity-related illness",
+    "BMI is irrelevant and should never be measured",
+    "Waist circumference has no relationship to cardiovascular risk",
+    "Obesity is an acute disease cured by short-term dieting"
+   ],
+   "correct": 0,
+   "explain": "BMI is a <b>screening tool, not a diagnosis</b>. Modern assessment (e.g. EOSS) weighs whether adiposity is impairing medical, functional, or psychosocial health &mdash; this patient has class I BMI but little impairment.",
+   "guide": {
+    "f": "W17_03_Obesity.html",
+    "t": "3 · EOSS",
+    "s": "health impact, not BMI alone"
+   }
+  },
+  {
+   "id": "wk17_q15",
+   "sys": "Health Promo",
+   "topic": "Obesity · Weight regain",
+   "difficulty": "hard",
+   "stem": "A patient with obesity has lost weight several times but regained it, and says \"I failed again.\" Which explanation is most accurate and helpful?",
+   "options": [
+    "After weight loss the body can increase hunger and reduce energy expenditure, so long-term support and relapse planning are part of treatment",
+    "Weight regain proves you were not motivated enough",
+    "There is no biological regulation of body weight",
+    "You should stop all activity until your weight stabilizes",
+    "Medication is never appropriate for obesity"
+   ],
+   "correct": 0,
+   "explain": "The hypothalamic <b>set point</b> defends body weight: after loss, hunger rises and energy expenditure falls, promoting regain. This biology reframes obesity as a <b>chronic relapsing disease</b> needing long-term support, not a willpower failure.",
+   "guide": {
+    "f": "W17_03_Obesity.html",
+    "t": "3 · Set point",
+    "s": "hunger up, expenditure down"
+   }
+  },
+  {
+   "id": "wk17_q16",
+   "sys": "Health Promo",
+   "topic": "Exercise · Depression",
+   "difficulty": "easy",
+   "stem": "A 29-year-old patient with depression wants a non-pharmacologic adjunct. Which physical activity advice is most appropriate?",
+   "options": [
+    "Moderate physical activity can be recommended as part of a broader depression plan, tailored to readiness and preferences",
+    "Exercise has no evidence for depression",
+    "Only elite athletic training improves mood",
+    "Exercise should replace all psychotherapy and medication",
+    "Exercise is contraindicated in depression"
+   ],
+   "correct": 0,
+   "explain": "Exercise is a useful <b>adjunct</b> in depression, tailored to readiness and preferences. It complements rather than replaces indicated psychotherapy or medication.",
+   "guide": {
+    "f": "W17_06_Exercise_Rx.html",
+    "t": "6 · Benefits",
+    "s": "exercise adjunct in depression"
+   }
+  },
+  {
+   "id": "wk17_q17",
+   "sys": "Health Promo",
+   "topic": "Disability · Exercise Rx",
+   "difficulty": "medium",
+   "stem": "A 50-year-old man with a T7 spinal cord injury who uses a wheelchair wants to increase activity. Which question is most important before writing an exercise prescription?",
+   "options": [
+    "\"What disability-related symptoms or complications should we consider — skin integrity, bladder routines, autonomic symptoms, pain, fatigue, thermoregulation, or upper-extremity overuse?\"",
+    "\"Can you try harder to walk?\"",
+    "\"Do you agree that wheelchair users cannot exercise effectively?\"",
+    "\"Can your caregiver answer for you?\"",
+    "\"Should we avoid activity because disability makes it unsafe?\""
+   ],
+   "correct": 0,
+   "explain": "Exercise prescription in disability requires <b>disability-specific safety</b>: skin integrity, bladder/bowel routines, autonomic dysreflexia, pain/fatigue, thermoregulation, and upper-extremity overuse. The principle is <b>adapt, don't avoid</b>.",
+   "guide": {
+    "f": "W17_07_Disability_Ableism.html",
+    "t": "7 · T7 SCI",
+    "s": "disability-specific safety"
+   }
+  },
+  {
+   "id": "wk17_q18",
+   "sys": "Health Promo",
+   "topic": "Disability · ICF",
+   "difficulty": "medium",
+   "stem": "Which scenario best illustrates the ICF concept of a participation restriction?",
+   "options": [
+    "A person cannot attend a gym because the building has no ramp or accessible equipment",
+    "A spinal cord lesion causing paralysis",
+    "Difficulty walking due to leg weakness",
+    "Reduced range of motion at the shoulder",
+    "Neuropathic pain"
+   ],
+   "correct": 0,
+   "explain": "<b>Participation restriction</b> is difficulty engaging in life roles due to barriers &mdash; e.g. an inaccessible gym. Paralysis is an <b>impairment</b>; difficulty walking is an <b>activity limitation</b>.",
+   "guide": {
+    "f": "W17_07_Disability_Ableism.html",
+    "t": "7 · ICF model",
+    "s": "participation restriction"
+   }
+  },
+  {
+   "id": "wk17_q19",
+   "sys": "Health Promo",
+   "topic": "Equity · Ableism",
+   "difficulty": "easy",
+   "stem": "A physician assumes a patient with a disability must have a poor quality of life and directs all questions to the patient's caregiver instead of the patient. What does this best illustrate?",
+   "options": [
+    "Ableism",
+    "Motivational interviewing",
+    "Shared decision-making",
+    "Trauma-informed care",
+    "Population-level prevention"
+   ],
+   "correct": 0,
+   "explain": "Assuming poor quality of life and speaking to the caregiver rather than the patient are classic examples of <b>ableism</b>, which harms communication, consent, and preventive care.",
+   "guide": {
+    "f": "W17_07_Disability_Ableism.html",
+    "t": "7 · Ableism",
+    "s": "quality-of-life assumptions"
+   }
+  },
+  {
+   "id": "wk17_q20",
+   "sys": "Health Promo",
+   "topic": "LGBTQ2S · Confidentiality",
+   "difficulty": "hard",
+   "stem": "A 16-year-old, capable of making his own health decisions, tells you he is gay and sexually active but has not told his parents. What is the best approach?",
+   "options": [
+    "Explain confidentiality and its limits, provide appropriate care, and do not disclose his orientation or sexual-health information without consent unless mandatory reporting applies",
+    "Tell his parents immediately because he is a minor",
+    "Refuse to discuss sexual health",
+    "Document it prominently so all family members can see",
+    "Tell him confidentiality never has limits"
+   ],
+   "correct": 0,
+   "explain": "A <b>capable minor's confidentiality</b> should be respected &mdash; including sexual orientation and sexual-health information &mdash; except where mandatory reporting or imminent-safety limits apply. Explain those limits clearly and provide affirming care.",
+   "guide": {
+    "f": "W17_08_LGBTQ_WeightLoss.html",
+    "t": "8 · Confidentiality",
+    "s": "capable minor, consent to disclose"
+   }
+  }
+ ],
+ "cards": [
+  {
+   "id": "wk17_c01",
+   "sys": "Health Promo",
+   "topic": "Prevention",
+   "type": "qa",
+   "guide": {
+    "f": "W17_01_Health_Promotion.html",
+    "t": "1 · Geoffrey Rose",
+    "s": "population vs individual"
+   },
+   "prompt": "State the Geoffrey Rose prevention principle.",
+   "answer": "Most cases of disease arise among the many people at average/moderate risk, not the few at highest risk — so a small population-wide shift in risk can prevent more total disease than treating only the high-risk tail."
+  },
+  {
+   "id": "wk17_c02",
+   "sys": "Health Promo",
+   "topic": "Prevention tools",
+   "type": "qa",
+   "guide": {
+    "f": "W17_01_Health_Promotion.html",
+    "t": "1 · Prevention tools",
+    "s": "four pillars"
+   },
+   "prompt": "What are the four components of clinical preventive care?",
+   "answer": "Counselling, screening, immunization, and chemoprophylaxis — supported by office systems like reminders, tracking, prompts, handouts, and preventive prescriptions."
+  },
+  {
+   "id": "wk17_c03",
+   "sys": "Health Promo",
+   "topic": "Behaviour change",
+   "type": "qa",
+   "guide": {
+    "f": "W17_02_Behaviour_Change.html",
+    "t": "2 · Relapse",
+    "s": "relapse framing"
+   },
+   "prompt": "How should relapse be framed in behaviour change?",
+   "answer": "As a normal part of the change process, not a failure — normalize it, learn what got in the way, and re-engage without shame."
+  },
+  {
+   "id": "wk17_c04",
+   "sys": "Health Promo",
+   "topic": "Obesity",
+   "type": "qa",
+   "guide": {
+    "f": "W17_03_Obesity.html",
+    "t": "3 · Definition",
+    "s": "obesity as disease"
+   },
+   "prompt": "Why is obesity defined as a chronic relapsing disease rather than by BMI alone?",
+   "answer": "It is adiposity that impairs health and well-being; the body defends its weight via a hypothalamic set point (hunger rises and energy expenditure falls after loss), so it relapses and needs long-term, non-stigmatizing care rather than short-term willpower."
+  },
+  {
+   "id": "wk17_c05",
+   "sys": "Health Promo",
+   "topic": "Nutrition",
+   "type": "qa",
+   "guide": {
+    "f": "W17_04_Nutrition.html",
+    "t": "4 · Patterns",
+    "s": "best diet"
+   },
+   "prompt": "What makes a dietary pattern the 'best' one for a patient?",
+   "answer": "That it is evidence-informed AND sustainable for them — fitting their values, culture, budget, cooking skills, food access, and medical needs. Fit drives long-term success more than any single 'optimal' diet."
+  },
+  {
+   "id": "wk17_c06",
+   "sys": "Health Promo",
+   "topic": "CV risk",
+   "type": "qa",
+   "guide": {
+    "f": "W17_05_CV_Risk_Lipids.html",
+    "t": "5 · Framingham",
+    "s": "what it omits"
+   },
+   "prompt": "Name key risk factors the Framingham score does NOT directly include.",
+   "answer": "BMI/waist circumference, ethnicity, sleep apnea, family history, and social determinants — so calculators guide but do not replace clinical judgment."
+  },
+  {
+   "id": "wk17_c07",
+   "sys": "Health Promo",
+   "topic": "Exercise",
+   "type": "qa",
+   "guide": {
+    "f": "W17_06_Exercise_Rx.html",
+    "t": "6 · PAVS",
+    "s": "how to compute"
+   },
+   "prompt": "How is the Physical Activity Vital Sign (PAVS) calculated?",
+   "answer": "Days per week of moderate-or-greater activity × minutes per day. E.g. 5 days × 30 min = 150 min/week, the adult target."
+  },
+  {
+   "id": "wk17_c08",
+   "sys": "Health Promo",
+   "topic": "Disability",
+   "type": "qa",
+   "guide": {
+    "f": "W17_07_Disability_Ableism.html",
+    "t": "7 · ICF model",
+    "s": "three dimensions"
+   },
+   "prompt": "Define the three ICF dimensions with an example each.",
+   "answer": "Impairment = a body structure/function problem (paralysis); activity limitation = difficulty executing a task (walking/transferring); participation restriction = difficulty in life roles due to barriers (an inaccessible gym)."
+  },
+  {
+   "id": "wk17_c09",
+   "sys": "Health Promo",
+   "topic": "Equity",
+   "type": "qa",
+   "guide": {
+    "f": "W17_07_Disability_Ableism.html",
+    "t": "7 · Ableism",
+    "s": "definition"
+   },
+   "prompt": "What is ableism, and give two clinical examples.",
+   "answer": "A value system that treats certain body/mind characteristics as essential for a worthwhile life and devalues those that function differently. Examples: assuming disability means poor quality of life; speaking to the caregiver instead of the patient."
+  },
+  {
+   "id": "wk17_c10",
+   "sys": "Health Promo",
+   "topic": "Older adult weight loss",
+   "type": "qa",
+   "guide": {
+    "f": "W17_08_LGBTQ_WeightLoss.html",
+    "t": "8 · Older-adult weight loss",
+    "s": "significant threshold"
+   },
+   "prompt": "What counts as clinically significant unintentional weight loss in an older adult?",
+   "answer": "≥4–5% of body weight within 1 year, or ≥10% over any period — associated with frailty, disability, fractures, and mortality, especially at low baseline BMI."
+  },
+  {
+   "id": "wk17_c11",
+   "sys": "Health Promo",
+   "topic": "Exercise guideline",
+   "type": "cloze",
+   "guide": {
+    "f": "W17_06_Exercise_Rx.html",
+    "t": "6 · Canadian guideline",
+    "s": "150 + strengthening"
+   },
+   "text": "Canadian adults should get at least {{150}} minutes/week of moderate-to-vigorous aerobic activity plus muscle/bone strengthening at least {{2}} days/week.",
+   "explain": "The two-part guideline: aerobic dose plus strengthening."
+  },
+  {
+   "id": "wk17_c12",
+   "sys": "Health Promo",
+   "topic": "Exercise intensity",
+   "type": "cloze",
+   "guide": {
+    "f": "W17_06_Exercise_Rx.html",
+    "t": "6 · Intensity cue",
+    "s": "talk-sing"
+   },
+   "text": "Moderate intensity means you can {{talk}} but not {{sing}}; at vigorous intensity you can say only a few words without pausing.",
+   "explain": "The talk-test is a practical intensity cue."
+  },
+  {
+   "id": "wk17_c13",
+   "sys": "Health Promo",
+   "topic": "FITT",
+   "type": "cloze",
+   "guide": {
+    "f": "W17_06_Exercise_Rx.html",
+    "t": "6 · FITT",
+    "s": "four elements"
+   },
+   "text": "A FITT exercise prescription specifies Frequency, {{Intensity}}, Time, and {{Type}}.",
+   "explain": "FITT structures the written exercise prescription."
+  },
+  {
+   "id": "wk17_c14",
+   "sys": "Health Promo",
+   "topic": "Metabolic syndrome",
+   "type": "cloze",
+   "guide": {
+    "f": "W17_05_CV_Risk_Lipids.html",
+    "t": "5 · Metabolic syndrome",
+    "s": "≥3 of 5"
+   },
+   "text": "Metabolic syndrome generally requires at least {{3}} of 5: elevated waist, high triglycerides, low {{HDL}}, elevated blood pressure, and elevated fasting glucose.",
+   "explain": "BMI is not one of the five and is not required."
+  },
+  {
+   "id": "wk17_c15",
+   "sys": "Health Promo",
+   "topic": "SMART goals",
+   "type": "cloze",
+   "guide": {
+    "f": "W17_02_Behaviour_Change.html",
+    "t": "2 · SMART goals",
+    "s": "acronym"
+   },
+   "text": "A SMART goal is Specific, Measurable, {{Achievable}}, Relevant, and {{Time-bound}}.",
+   "explain": "Concrete SMART goals outperform vague intentions like 'be healthier'."
+  },
+  {
+   "id": "wk17_c16",
+   "sys": "Health Promo",
+   "topic": "Portfolio diet",
+   "type": "cloze",
+   "guide": {
+    "f": "W17_04_Nutrition.html",
+    "t": "4 · Portfolio diet",
+    "s": "components"
+   },
+   "text": "The Portfolio diet combines nuts, plant protein, viscous {{fibre}}, and plant {{sterols}} to lower LDL cholesterol.",
+   "explain": "Four food components with complementary LDL-lowering mechanisms."
+  },
+  {
+   "id": "wk17_c17",
+   "sys": "Health Promo",
+   "topic": "Obesity language",
+   "type": "cloze",
+   "guide": {
+    "f": "W17_03_Obesity.html",
+    "t": "3 · Weight bias",
+    "s": "person-first"
+   },
+   "text": "Use person-first language: a {{person living with obesity}}, not an 'obese patient', to reduce weight {{stigma}}.",
+   "explain": "Weight stigma drives care avoidance and worse outcomes."
+  },
+  {
+   "id": "wk17_c18",
+   "sys": "Health Promo",
+   "topic": "Older adult weight loss",
+   "type": "cloze",
+   "guide": {
+    "f": "W17_08_LGBTQ_WeightLoss.html",
+    "t": "8 · Workup",
+    "s": "exam red flags"
+   },
+   "text": "In older-adult weight loss, the most concerning exam findings are {{lymphadenopathy}}, hepatosplenomegaly, and {{masses}}.",
+   "explain": "These point to malignancy or infiltrative disease."
+  },
+  {
+   "id": "wk17_c19",
+   "sys": "Health Promo",
+   "topic": "Prevention approaches",
+   "type": "mcq",
+   "guide": {
+    "f": "W17_01_Health_Promotion.html",
+    "t": "1 · Individual vs population",
+    "s": "population example"
+   },
+   "prompt": "Which is a population-level (not high-risk individual) prevention strategy?",
+   "options": [
+    "Sodium-reduction policy and smoke-free public spaces",
+    "Prescribing a statin to a high-risk patient",
+    "Treating one patient's hypertension",
+    "Referring a patient to a dietitian"
+   ],
+   "correct": 0,
+   "explain": "Population strategies shift the whole risk curve (sodium policy, smoke-free spaces); the others target individuals."
+  },
+  {
+   "id": "wk17_c20",
+   "sys": "Health Promo",
+   "topic": "MI",
+   "type": "mcq",
+   "guide": {
+    "f": "W17_02_Behaviour_Change.html",
+    "t": "2 · MI",
+    "s": "autonomy"
+   },
+   "prompt": "Which statement best reflects the motivational-interviewing principle of autonomy?",
+   "options": [
+    "\"It's ultimately your decision; we can choose what feels realistic.\"",
+    "\"You must start exercising today or you'll get sicker.\"",
+    "\"I'll decide the plan and you follow it.\"",
+    "\"There's no point discussing it if you won't commit.\""
+   ],
+   "correct": 0,
+   "explain": "Autonomy support affirms the patient's choice and control, which evokes their own motivation."
+  },
+  {
+   "id": "wk17_c21",
+   "sys": "Health Promo",
+   "topic": "BMI limits",
+   "type": "mcq",
+   "guide": {
+    "f": "W17_03_Obesity.html",
+    "t": "3 · BMI limits",
+    "s": "misclassification"
+   },
+   "prompt": "Why can BMI misclassify a muscular athlete?",
+   "options": [
+    "BMI does not distinguish fat mass from muscle/bone mass",
+    "BMI overweights height",
+    "BMI measures fat distribution directly",
+    "BMI includes waist circumference"
+   ],
+   "correct": 0,
+   "explain": "BMI is weight/height² and cannot separate fat from lean mass or show fat distribution, so it misclassifies athletes, sarcopenic older adults, and others."
+  },
+  {
+   "id": "wk17_c22",
+   "sys": "Health Promo",
+   "topic": "Statins",
+   "type": "mcq",
+   "guide": {
+    "f": "W17_05_CV_Risk_Lipids.html",
+    "t": "5 · Lipid pharmacotherapy",
+    "s": "statin AE"
+   },
+   "prompt": "Which is a recognized adverse effect/caution of statins?",
+   "options": [
+    "Myalgias and rare rhabdomyolysis; avoid in pregnancy",
+    "Hyperkalemia",
+    "Pulmonary fibrosis",
+    "Agranulocytosis"
+   ],
+   "correct": 0,
+   "explain": "Statins can cause myalgias, rare rhabdomyolysis, LFT elevation, and a small diabetes signal; they are avoided in pregnancy and active liver disease."
+  },
+  {
+   "id": "wk17_c23",
+   "sys": "Health Promo",
+   "topic": "Pre-exercise screening",
+   "type": "mcq",
+   "guide": {
+    "f": "W17_06_Exercise_Rx.html",
+    "t": "6 · Pre-exercise red flags",
+    "s": "need evaluation"
+   },
+   "prompt": "Which symptom should prompt medical evaluation before moderate/vigorous exercise?",
+   "options": [
+    "Exertional chest pain or syncope",
+    "Mild post-exercise muscle soreness",
+    "Feeling slightly out of breath on a brisk walk",
+    "Improved sleep after activity"
+   ],
+   "correct": 0,
+   "explain": "Chest pain, syncope/presyncope, unexplained dyspnea, palpitations, or heart-failure symptoms are red flags requiring evaluation; mild soreness and breathlessness on exertion are expected."
+  },
+  {
+   "id": "wk17_c24",
+   "sys": "Health Promo",
+   "topic": "Weight management",
+   "type": "mcq",
+   "guide": {
+    "f": "W17_03_Obesity.html",
+    "t": "3 · Options",
+    "s": "bariatric surgery"
+   },
+   "prompt": "Which obesity intervention is the most effective for durable weight loss and improving diabetes/CVD risk in severe obesity?",
+   "options": [
+    "Bariatric surgery",
+    "Orlistat",
+    "A short-term low-fat diet",
+    "A daily multivitamin"
+   ],
+   "correct": 0,
+   "explain": "Bariatric surgery is the most effective durable intervention for selected patients with severe obesity, though it requires lifelong follow-up and carries surgical/nutritional risks."
+  },
+  {
+   "id": "wk17_c25",
+   "sys": "Health Promo",
+   "topic": "Conversion therapy",
+   "type": "mcq",
+   "guide": {
+    "f": "W17_08_LGBTQ_WeightLoss.html",
+    "t": "8 · LGBTQ2S",
+    "s": "conversion therapy"
+   },
+   "prompt": "What is the appropriate stance on conversion therapy?",
+   "options": [
+    "It is rejected by major professional organizations and is harmful; affirming care is the standard",
+    "It is an evidence-based counselling option",
+    "It is appropriate for transgender patients only",
+    "It should precede any confidentiality discussion"
+   ],
+   "correct": 0,
+   "explain": "Conversion therapy is rejected by major professional bodies and is associated with harm; affirming, patient-centred care is the standard."
+  },
+  {
+   "id": "wk17_c26",
+   "sys": "Health Promo",
+   "topic": "Sodium/sugar",
+   "type": "mcq",
+   "guide": {
+    "f": "W17_04_Nutrition.html",
+    "t": "4 · Sat-fat/sugar/sodium",
+    "s": "SSB target"
+   },
+   "prompt": "Why are sugar-sweetened beverages a high-yield dietary target?",
+   "options": [
+    "They add calories with poor satiety and worsen cardiometabolic risk",
+    "They are the only source of dietary sugar",
+    "They improve HDL cholesterol",
+    "They reduce blood pressure"
+   ],
+   "correct": 0,
+   "explain": "SSBs deliver calories without satiety and worsen cardiometabolic risk, making them an efficient target."
+  },
+  {
+   "id": "wk17_c27",
+   "sys": "Health Promo",
+   "topic": "Disability activity",
+   "type": "mcq",
+   "guide": {
+    "f": "W17_07_Disability_Ableism.html",
+    "t": "7 · Barriers",
+    "s": "institutional barrier"
+   },
+   "prompt": "An inaccessible gym with no adapted equipment is which type of barrier to activity?",
+   "options": [
+    "Institutional",
+    "Intrapersonal",
+    "Interpersonal",
+    "Genetic"
+   ],
+   "correct": 0,
+   "explain": "Inaccessible facilities and untrained staff are institutional barriers; pain/fatigue are intrapersonal, and transport/caregiver needs are interpersonal."
+  },
+  {
+   "id": "wk17_c28",
+   "sys": "Health Promo",
+   "topic": "Metabolic syndrome",
+   "type": "multi",
+   "guide": {
+    "f": "W17_05_CV_Risk_Lipids.html",
+    "t": "5 · Metabolic syndrome",
+    "s": "the five"
+   },
+   "prompt": "Which are among the five metabolic syndrome criteria? (select all)",
+   "options": [
+    "Elevated waist circumference",
+    "Low HDL cholesterol",
+    "Elevated fasting glucose",
+    "Elevated BMI"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "The five are elevated waist, high triglycerides, low HDL, elevated BP, and elevated fasting glucose. BMI is not one of them."
+  },
+  {
+   "id": "wk17_c29",
+   "sys": "Health Promo",
+   "topic": "Exercise benefits",
+   "type": "multi",
+   "guide": {
+    "f": "W17_06_Exercise_Rx.html",
+    "t": "6 · Benefits",
+    "s": "conditions reduced"
+   },
+   "prompt": "Regular exercise reduces the risk of which conditions? (select all)",
+   "options": [
+    "Type 2 diabetes",
+    "Depression",
+    "Colon cancer",
+    "Acute appendicitis"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "Exercise lowers risk of diabetes, depression/anxiety, several cancers (breast, colon), CVD, stroke, osteoporosis, and dementia. Appendicitis is unrelated."
+  },
+  {
+   "id": "wk17_c30",
+   "sys": "Health Promo",
+   "topic": "Weight loss causes",
+   "type": "multi",
+   "guide": {
+    "f": "W17_08_LGBTQ_WeightLoss.html",
+    "t": "8 · Differential",
+    "s": "four categories"
+   },
+   "prompt": "Which are recognized categories in the differential for older-adult weight loss? (select all)",
+   "options": [
+    "Social (isolation, food insecurity)",
+    "Psychological (depression, dementia)",
+    "Medical (cancer, hyperthyroidism)",
+    "An obligatory consequence of normal aging"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "The four buckets are social, psychological, medical, and age-related/medication. Significant loss is not an obligatory part of normal aging."
+  },
+  {
+   "id": "wk17_c31",
+   "sys": "Health Promo",
+   "topic": "Confidentiality",
+   "type": "multi",
+   "guide": {
+    "f": "W17_08_LGBTQ_WeightLoss.html",
+    "t": "8 · Confidentiality",
+    "s": "high-yield scenarios"
+   },
+   "prompt": "Which are high-yield LGBTQ2S confidentiality scenarios? (select all)",
+   "options": [
+    "A youth not out to their parents",
+    "A trans patient using different names in different settings",
+    "An older adult fearing discrimination in long-term care",
+    "A routine blood-pressure check with no identity concerns"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "Youth, trans patients across settings, and older adults in care are classic confidentiality flashpoints; ask preferences and avoid non-consensual disclosure."
+  },
+  {
+   "id": "wk17_c32",
+   "sys": "Health Promo",
+   "topic": "Non-stigmatizing care",
+   "type": "multi",
+   "guide": {
+    "f": "W17_02_Behaviour_Change.html",
+    "t": "2 · Communication",
+    "s": "what to avoid"
+   },
+   "prompt": "Which approaches should be AVOIDED in lifestyle counselling? (select all)",
+   "options": [
+    "Blame, shame, and lecturing",
+    "Weight as the only success marker",
+    "Ignoring financial and access barriers",
+    "Asking permission to discuss a topic"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "Avoid blame/shame, weight-centric-only goals, and ignoring barriers; asking permission is a recommended, non-stigmatizing practice."
+  },
+  {
+   "id": "wk17_c33",
+   "sys": "Health Promo",
+   "topic": "5A counselling",
+   "type": "order",
+   "guide": {
+    "f": "W17_06_Exercise_Rx.html",
+    "t": "6 · 5A",
+    "s": "sequence"
+   },
+   "prompt": "Order the 5A framework for exercise counselling:",
+   "items": [
+    "Ask (baseline activity, permission)",
+    "Assess (readiness, barriers, risks)",
+    "Advise (personalized recommendation)",
+    "Agree (co-create SMART goals)",
+    "Assist (prescription, resources, follow-up)"
+   ],
+   "explain": "Ask → Assess → Advise → Agree → Assist."
+  },
+  {
+   "id": "wk17_c34",
+   "sys": "Health Promo",
+   "topic": "Obesity 5A",
+   "type": "order",
+   "guide": {
+    "f": "W17_03_Obesity.html",
+    "t": "3 · 5A approach",
+    "s": "obesity sequence"
+   },
+   "prompt": "Order the patient-centred obesity (5A) approach:",
+   "items": [
+    "Ask permission to discuss weight",
+    "Assess drivers, complications, and goals",
+    "Advise using non-stigmatizing information",
+    "Agree on realistic patient-centred goals",
+    "Assist with resources, follow-up, referrals"
+   ],
+   "explain": "The obesity 5As mirror the counselling 5As, beginning with permission."
+  },
+  {
+   "id": "wk17_c35",
+   "sys": "Health Promo",
+   "topic": "Older adult weight loss",
+   "type": "order",
+   "guide": {
+    "f": "W17_08_LGBTQ_WeightLoss.html",
+    "t": "8 · Workup",
+    "s": "evaluation order"
+   },
+   "prompt": "Order a sensible evaluation of older-adult unintentional weight loss:",
+   "items": [
+    "Confirm and quantify the weight loss",
+    "Review intake, swallowing, dental, mood/cognition, and medications",
+    "Examine for nodes, masses, and hepatosplenomegaly",
+    "Basic labs and targeted investigations, then treat causes"
+   ],
+   "explain": "Confirm → history/med review → focused exam → labs and cause-directed treatment."
+  },
+  {
+   "id": "wk17_c36",
+   "sys": "Health Promo",
+   "topic": "Stages of change",
+   "type": "order",
+   "guide": {
+    "f": "W17_02_Behaviour_Change.html",
+    "t": "2 · Stages of change",
+    "s": "progression"
+   },
+   "prompt": "Order the transtheoretical stages of change:",
+   "items": [
+    "Precontemplation",
+    "Contemplation",
+    "Preparation",
+    "Action",
+    "Maintenance"
+   ],
+   "explain": "Precontemplation → contemplation → preparation → action → maintenance (with relapse possible at any point)."
+  },
+  {
+   "id": "wk17_c37",
+   "sys": "Health Promo",
+   "topic": "Diet to use",
+   "type": "match",
+   "guide": {
+    "f": "W17_04_Nutrition.html",
+    "t": "4 · Patterns",
+    "s": "pattern to use"
+   },
+   "prompt": "Match the dietary pattern to its best-known use:",
+   "pairs": [
+    [
+     "Portfolio",
+     "LDL cholesterol lowering"
+    ],
+    [
+     "DASH",
+     "Hypertension / BP"
+    ],
+    [
+     "Mediterranean",
+     "Cardiovascular risk reduction"
+    ],
+    [
+     "Low-GI",
+     "Glycemic control"
+    ]
+   ],
+   "explain": "Patterns are chosen for the target risk factor and patient fit."
+  },
+  {
+   "id": "wk17_c38",
+   "sys": "Health Promo",
+   "topic": "Stage to action",
+   "type": "match",
+   "guide": {
+    "f": "W17_02_Behaviour_Change.html",
+    "t": "2 · Stages of change",
+    "s": "stage to move"
+   },
+   "prompt": "Match the stage of change to its clinical move:",
+   "pairs": [
+    [
+     "Precontemplation",
+     "Build rapport, raise awareness gently"
+    ],
+    [
+     "Contemplation",
+     "Explore pros/cons and ambivalence"
+    ],
+    [
+     "Preparation",
+     "Set SMART goals and supports"
+    ],
+    [
+     "Maintenance",
+     "Relapse prevention"
+    ]
+   ],
+   "explain": "Match the intervention to the patient's readiness."
+  },
+  {
+   "id": "wk17_c39",
+   "sys": "Health Promo",
+   "topic": "ICF dimensions",
+   "type": "match",
+   "guide": {
+    "f": "W17_07_Disability_Ableism.html",
+    "t": "7 · ICF model",
+    "s": "dimension to example"
+   },
+   "prompt": "Match the ICF dimension to its example:",
+   "pairs": [
+    [
+     "Impairment",
+     "Paralysis after spinal cord injury"
+    ],
+    [
+     "Activity limitation",
+     "Difficulty walking or transferring"
+    ],
+    [
+     "Participation restriction",
+     "Cannot use a gym with no ramp"
+    ]
+   ],
+   "explain": "Impairment → body; activity limitation → task; participation restriction → life role/barrier."
+  },
+  {
+   "id": "wk17_c40",
+   "sys": "Health Promo",
+   "topic": "Lipid drugs",
+   "type": "match",
+   "guide": {
+    "f": "W17_05_CV_Risk_Lipids.html",
+    "t": "5 · Lipid pharmacotherapy",
+    "s": "drug to mechanism"
+   },
+   "prompt": "Match the lipid-lowering agent to its mechanism/role:",
+   "pairs": [
+    [
+     "Statin",
+     "First-line LDL lowering; cuts CV events"
+    ],
+    [
+     "Ezetimibe",
+     "Reduces intestinal cholesterol absorption"
+    ],
+    [
+     "PCSK9 inhibitor",
+     "Injectable for very-high-risk / familial hypercholesterolemia"
+    ]
+   ],
+   "explain": "Statin first-line; ezetimibe add-on; PCSK9 inhibitor for selected very-high-risk patients."
+  },
+  {
+   "id": "wk17_c41",
+   "sys": "Health Promo",
+   "topic": "Exercise terms",
+   "type": "match",
+   "guide": {
+    "f": "W17_06_Exercise_Rx.html",
+    "t": "6 · Definitions",
+    "s": "term to meaning"
+   },
+   "prompt": "Match the term to its definition:",
+   "pairs": [
+    [
+     "Physical activity",
+     "Any movement increasing energy expenditure"
+    ],
+    [
+     "Exercise",
+     "Planned, structured activity for fitness"
+    ],
+    [
+     "Sedentary behaviour",
+     "Low-expenditure waking sitting/reclining"
+    ],
+    [
+     "VO₂ max",
+     "Gold-standard cardiorespiratory fitness measure"
+    ]
+   ],
+   "explain": "Distinguish general movement, structured exercise, sedentary time, and the fitness gold standard."
+  },
+  {
+   "id": "wk17_c42",
+   "sys": "Health Promo",
+   "topic": "Barriers in disability",
+   "type": "match",
+   "guide": {
+    "f": "W17_07_Disability_Ableism.html",
+    "t": "7 · Barriers",
+    "s": "level to example"
+   },
+   "prompt": "Match the barrier level to an example:",
+   "pairs": [
+    [
+     "Intrapersonal",
+     "Pain, fatigue, spasticity"
+    ],
+    [
+     "Interpersonal",
+     "Need for transport or a support person"
+    ],
+    [
+     "Institutional",
+     "Inaccessible gym, untrained staff"
+    ],
+    [
+     "Community/policy",
+     "Cost, poor transit, insufficient funding"
+    ]
+   ],
+   "explain": "Barriers operate at multiple levels and each needs different solutions."
+  },
+  {
+   "id": "wk17_c43",
+   "sys": "Health Promo",
+   "topic": "Waist circumference",
+   "type": "qa",
+   "guide": {
+    "f": "W17_03_Obesity.html",
+    "t": "3 · Measurement",
+    "s": "why waist"
+   },
+   "prompt": "Why is waist circumference useful alongside BMI, and why are cutoffs ethnicity-specific?",
+   "answer": "Central adiposity independently predicts cardiometabolic risk that BMI misses, and risk thresholds differ by ethnicity (e.g. lower waist cutoffs signal increased risk in South Asian patients)."
+  },
+  {
+   "id": "wk17_c44",
+   "sys": "Health Promo",
+   "topic": "Acute exercise physiology",
+   "type": "qa",
+   "guide": {
+    "f": "W17_06_Exercise_Rx.html",
+    "t": "6 · Acute physiology",
+    "s": "BP response"
+   },
+   "prompt": "What happens to systolic and diastolic BP during dynamic aerobic exercise?",
+   "answer": "Systolic BP rises with workload while diastolic BP stays similar or slightly decreases; cardiac output and heart rate rise, and stroke volume increases then plateaus."
+  },
+  {
+   "id": "wk17_c45",
+   "sys": "Health Promo",
+   "topic": "Anti-obesity drugs",
+   "type": "qa",
+   "guide": {
+    "f": "W17_03_Obesity.html",
+    "t": "3 · Options",
+    "s": "pharmacotherapy principles"
+   },
+   "prompt": "What are the general principles for anti-obesity pharmacotherapy?",
+   "answer": "Use when benefits outweigh risks, typically BMI ≥30 (or ≥27 with a complication), alongside lifestyle support; GLP-1 agonists reduce appetite (GI effects), orlistat reduces fat absorption; avoid in pregnancy; therapy is often chronic because obesity is chronic and relapsing."
+  },
+  {
+   "id": "wk17_c46",
+   "sys": "Health Promo",
+   "topic": "LGBTQ2S older adults",
+   "type": "qa",
+   "guide": {
+    "f": "W17_08_LGBTQ_WeightLoss.html",
+    "t": "8 · LGBTQ2S",
+    "s": "older-adult needs"
+   },
+   "prompt": "What unique needs do LGBTQ2S older adults have in care settings?",
+   "answer": "Lifelong stigma exposure, fear of re-closeting in long-term care, reliance on chosen family (sometimes lower family-of-origin support), higher isolation risk, and a need for inclusive advance-care planning and protected confidentiality."
+  },
+  {
+   "id": "wk17_c47",
+   "sys": "Health Promo",
+   "topic": "Energy balance",
+   "type": "qa",
+   "guide": {
+    "f": "W17_03_Obesity.html",
+    "t": "3 · Set point",
+    "s": "components of expenditure"
+   },
+   "prompt": "What are the main components of energy expenditure?",
+   "answer": "Basal metabolic rate, physical activity/exercise, non-exercise activity thermogenesis (daily activities), the thermic effect of food, and adaptive thermogenesis — several of which fall after weight loss, promoting regain."
+  }
+ ],
+ "guides": [
+  {
+   "file": "W17_01_Health_Promotion.html",
+   "title": "Week 17 · 1 Health Promotion & Prevention",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Health Promotion &amp; Prevention</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Big picture</div><h1>Health Promotion &amp; Prevention</h1></div><div class='r'>Week 17 &middot; Health Promotion<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Lifestyle drives non-communicable disease — and why shifting a whole population can beat chasing only the high-risk few.</p>\n<h2>Lifestyle medicine</h2>\n<p>Lifestyle behaviours are major drivers of non-communicable disease (NCD): hypertension, type 2 diabetes, dyslipidemia, cardiovascular disease, obesity complications, depression, osteoporosis, dementia, and some cancers. The clinical task is not to \"tell patients what to do\" but to help them make <b>sustainable</b> changes that fit their goals, readiness, culture, finances, and access.</p>\n<table>\n<tr><th>Condition</th><th>Key lifestyle lever</th></tr>\n<tr><td>Hypertension</td><td>DASH, sodium reduction, aerobic + resistance exercise, alcohol/smoking</td></tr>\n<tr><td>Dyslipidemia</td><td>Portfolio/Mediterranean pattern, unsaturated fats; statin when indicated</td></tr>\n<tr><td>Type 2 diabetes</td><td>Activity, weight management, low-GI/Mediterranean/DASH patterns</td></tr>\n<tr><td>Depression / dementia</td><td>Exercise as adjunct/prevention</td></tr>\n</table>\n<h2>Individual vs population prevention</h2>\n<table>\n<tr><th>Approach</th><th>Strength</th><th>Limit</th></tr>\n<tr><td>High-risk individual</td><td>Targets those most likely to benefit; personalized</td><td>Misses the many cases arising from average-risk people</td></tr>\n<tr><td>Population-level</td><td>Shifts the whole risk curve; may prevent more total cases</td><td>Small effect per person; political/autonomy challenges</td></tr>\n</table>\n<div class='key'><b>Geoffrey Rose principle:</b> most cases arise among people at average/moderate risk (because there are so many of them), so a small population-wide shift can prevent more disease than treating only the high-risk tail.</div>\n<h2>Clinical prevention tools</h2>\n<p>Preventive care = <b>counselling, screening, immunization, and chemoprophylaxis</b>. Office systems that help: chart and patient reminders, tracking systems, visual prompts, handouts, patient-held preventive records, and \"preventive prescriptions.\"</p>\n<div class='band'><div class='t'>Population examples</div>\nSodium-reduction policy, smoke-free public spaces, sugar-sweetened-beverage measures, and active-transportation infrastructure all shift average risk without requiring each individual to act.</div>\n</div>"
+  },
+  {
+   "file": "W17_02_Behaviour_Change.html",
+   "title": "Week 17 · 2 Behaviour Change & Communication",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Behaviour Change &amp; Communication</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Counselling</div><h1>Behaviour Change &amp; Communication</h1></div><div class='r'>Week 17 &middot; Health Promotion<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Information alone rarely changes behaviour — motivational interviewing, the stages of change, and SMART goals do the work.</p>\n<h2>Why \"just educate\" fails</h2>\n<p>Patients rarely change from information alone. Sustainable change is likelier when they feel understood, respected, and empowered, with a plan tailored to readiness, values, barriers, and supports. Use <b>person-first, non-stigmatizing</b> language and <b>permission-based</b> openers (\"Would it be okay if we talked about your activity today?\").</p>\n<h2>Motivational interviewing (MI)</h2>\n<p>A collaborative style that supports <b>autonomy</b> and evokes the patient's own reasons for change.</p>\n<table>\n<tr><th>Element</th><th>In practice</th></tr>\n<tr><td>Collaboration</td><td>Work with, not over, the patient</td></tr>\n<tr><td>Evocation</td><td>Draw out their own motivations</td></tr>\n<tr><td>Autonomy</td><td>\"It's ultimately your decision\"</td></tr>\n<tr><td>Reflective listening</td><td>\"You want to be active, but time and fatigue get in the way\"</td></tr>\n<tr><td>Open questions + affirmations</td><td>Invite exploration; recognize strengths</td></tr>\n</table>\n<h2>Transtheoretical stages of change</h2>\n<table>\n<tr><th>Stage</th><th>Clinical move</th></tr>\n<tr><td>Precontemplation (no intent)</td><td>Build rapport, ask permission, raise awareness gently</td></tr>\n<tr><td>Contemplation (ambivalent)</td><td>Explore pros/cons, values, confidence</td></tr>\n<tr><td>Preparation (intends soon)</td><td>SMART goals, supports, troubleshoot barriers</td></tr>\n<tr><td>Action</td><td>Reinforce, problem-solve setbacks</td></tr>\n<tr><td>Maintenance</td><td>Relapse prevention, revise goals</td></tr>\n</table>\n<div class='key'>Relapse is part of the change process, <b>not failure</b> — normalize it, learn from it, re-engage without shame.</div>\n<h2>SMART goals</h2>\n<p><b>S</b>pecific, <b>M</b>easurable, <b>A</b>chievable, <b>R</b>elevant, <b>T</b>ime-bound. Good: \"Walk briskly 15 min after dinner on Mon/Wed/Fri for 2 weeks.\" Weak: \"Lose weight and be healthier.\"</p>\n</div>"
+  },
+  {
+   "file": "W17_03_Obesity.html",
+   "title": "Week 17 · 3 Obesity & Weight Management",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Obesity &amp; Weight Management</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Chronic disease</div><h1>Obesity &amp; Weight Management</h1></div><div class='r'>Week 17 &middot; Health Promotion<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>A chronic relapsing disease of adiposity-related impairment — diagnosed beyond BMI, managed long-term, free of stigma.</p>\n<h2>Definition &amp; measurement</h2>\n<p>Obesity is a <b>chronic, progressive, relapsing disease</b> of adiposity that impairs health and well-being &mdash; <b>not</b> defined by BMI alone. Diagnosis weighs functional, medical, and psychosocial impairment.</p>\n<table>\n<tr><th>BMI</th><th>Category</th></tr>\n<tr><td>18.5&ndash;24.9</td><td>Normal range</td></tr>\n<tr><td>25.0&ndash;29.9</td><td>Overweight</td></tr>\n<tr><td>30.0&ndash;34.9 / 35&ndash;39.9 / &ge;40</td><td>Obesity class I / II / III</td></tr>\n</table>\n<p><b>BMI limits:</b> ignores fat vs muscle/bone, ignores fat distribution, and misclassifies athletes, sarcopenic older adults, and pregnancy. <b>Waist circumference</b> adds value (central adiposity predicts cardiometabolic risk); cutoffs are ethnicity-specific (e.g. lower thresholds for South Asian patients).</p>\n<div class='band'><div class='t'>Edmonton Obesity Staging System (EOSS)</div>\nEOSS grades severity by <b>health impact</b> (metabolic, physical, psychological, functional) rather than BMI, and predicts morbidity/mortality better than BMI alone.</div>\n<h2>Weight bias, set point &amp; regain</h2>\n<p>Weight stigma harms health &mdash; it drives care avoidance, stress, disordered eating, and less activity. Use person-first language (\"person living with obesity\"). The body <b>defends its weight</b>: after loss, hunger rises and energy expenditure falls (hypothalamic set point), promoting regain &mdash; which is why care is long-term, not a willpower test.</p>\n<h2>The 5A approach &amp; options</h2>\n<p><b>Ask</b> permission &rarr; <b>Assess</b> drivers/complications/goals &rarr; <b>Advise</b> (non-stigmatizing) &rarr; <b>Agree</b> realistic goals &rarr; <b>Assist</b> with resources/referrals.</p>\n<table>\n<tr><th>Option</th><th>Note</th></tr>\n<tr><td>Behavioural/nutrition/activity/psychological</td><td>Foundation; benefit even with modest weight loss</td></tr>\n<tr><td>Pharmacotherapy</td><td>BMI &ge;30 (or &ge;27 + complication); GLP-1 agonists &darr;appetite (GI effects); orlistat &darr;fat absorption</td></tr>\n<tr><td>Bariatric surgery</td><td>Most durable; improves diabetes/CVD risk; needs lifelong follow-up</td></tr>\n</table>\n</div>"
+  },
+  {
+   "file": "W17_04_Nutrition.html",
+   "title": "Week 17 · 4 Nutrition & Medical Nutrition Therapy",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Nutrition &amp; Medical Nutrition Therapy</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Diet</div><h1>Nutrition &amp; Medical Nutrition Therapy</h1></div><div class='r'>Week 17 &middot; Health Promotion<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>There is no single best diet — pick a sustainable, evidence-informed pattern, and know the Portfolio, DASH, and Mediterranean stars.</p>\n<h2>Patterns, not single nutrients</h2>\n<p>The best diet is the one that is <b>evidence-informed and sustainable</b> for that patient &mdash; fit with values, culture, budget, skills, and food access drives long-term success. Modern counselling emphasizes whole-food <b>dietary patterns</b> over \"eat less fat / fewer carbs.\"</p>\n<table>\n<tr><th>Pattern</th><th>Best-known use</th></tr>\n<tr><td><b>Portfolio</b></td><td>LDL lowering (highest-yield lifestyle change for LDL)</td></tr>\n<tr><td><b>DASH</b></td><td>Hypertension / CVD risk</td></tr>\n<tr><td><b>Mediterranean</b></td><td>CVD benefit; practical for adherence</td></tr>\n<tr><td>Low-GI, vegetarian/vegan</td><td>Glycemic + cardiometabolic improvement</td></tr>\n</table>\n<h2>The Portfolio diet</h2>\n<p>An evidence-based cholesterol-lowering pattern combining four LDL-lowering components:</p>\n<table>\n<tr><th>Component</th><th>Target</th><th>Mechanism</th></tr>\n<tr><td>Nuts</td><td>~45 g/day</td><td>Unsaturated fat, fibre, plant protein</td></tr>\n<tr><td>Plant protein</td><td>~50 g/day</td><td>Soy, legumes, tofu replace animal protein</td></tr>\n<tr><td>Viscous fibre</td><td>~20 g/day</td><td>Oats, barley, psyllium &mdash; bind bile acids</td></tr>\n<tr><td>Plant sterols</td><td>~2 g/day</td><td>Reduce intestinal cholesterol absorption</td></tr>\n</table>\n<div class='key'>Portfolio is the <b>highest-yield lifestyle change for LDL reduction</b> and can be combined with a statin. Refer to a dietitian when possible.</div>\n<h2>The sat-fat / sugar / sodium nuance</h2>\n<p>Avoid \"one nutrient is everything\" messaging. <b>Replacement matters:</b> swapping saturated fat for <b>unsaturated fat or whole-food carbs</b> helps; swapping it for refined starch/sugar does not. <b>Sugar-sweetened beverages</b> are high-yield targets (calories with poor satiety). <b>Sodium reduction</b> helps BP, especially salt-sensitive hypertension, but overall food quality still matters.</p>\n</div>"
+  },
+  {
+   "file": "W17_05_CV_Risk_Lipids.html",
+   "title": "Week 17 · 5 CV Risk, Metabolic Syndrome & Lipids",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>CV Risk, Metabolic Syndrome &amp; Lipids</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Cardiometabolic</div><h1>CV Risk, Metabolic Syndrome &amp; Lipids</h1></div><div class='r'>Week 17 &middot; Health Promotion<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Cluster the risk factors, estimate 10-year risk, and layer statins on top of lifestyle — not instead of it.</p>\n<h2>Metabolic syndrome</h2>\n<p>A cluster that raises risk of CVD, type 2 diabetes, and mortality. Diagnosis generally needs <b>&ge;3 of 5</b>:</p>\n<ul>\n<li>Elevated <b>waist circumference</b></li>\n<li>Elevated <b>triglycerides</b></li>\n<li>Low <b>HDL-C</b></li>\n<li>Elevated <b>blood pressure</b></li>\n<li>Elevated <b>fasting glucose</b></li>\n</ul>\n<p>Each component is independently risky, and risk rises as they accumulate. BMI is <b>not</b> required for the diagnosis.</p>\n<h2>Cardiovascular risk assessment</h2>\n<p>Inputs: age, sex, BP, smoking, diabetes, total/HDL/LDL cholesterol (or non-HDL/ApoB), family history, CKD, ethnicity/social determinants. In Canada the <b>Framingham Risk Score</b> estimates 10-year risk from age, sex, total and HDL cholesterol, systolic BP (and treatment), smoking, and diabetes.</p>\n<div class='band warn'><div class='t'>Framingham limits</div>\nIt does <b>not</b> directly include BMI/waist, ethnicity, sleep apnea, family history, or social determinants. Calculators <b>guide</b> but do not replace clinical judgment.</div>\n<h2>Lipid pharmacotherapy</h2>\n<table>\n<tr><th>Agent</th><th>Role / note</th></tr>\n<tr><td><b>Statin</b></td><td>First-line LDL lowering; cuts events. AEs: myalgia, rare rhabdomyolysis, LFT rise, small diabetes signal; avoid in pregnancy/active liver disease</td></tr>\n<tr><td><b>Ezetimibe</b></td><td>&darr;intestinal cholesterol absorption; add-on or statin intolerance</td></tr>\n<tr><td><b>PCSK9 inhibitor</b></td><td>Injectable; very-high-risk or familial hypercholesterolemia; effective but costly</td></tr>\n</table>\n<div class='key'>A high-risk patient often needs <b>both</b> lifestyle change and a statin &mdash; offering a statin does not mean lifestyle is unimportant. They are complementary.</div>\n</div>"
+  },
+  {
+   "file": "W17_06_Exercise_Rx.html",
+   "title": "Week 17 · 6 Physical Activity & Exercise Prescription",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Physical Activity &amp; Exercise Prescription</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Exercise</div><h1>Physical Activity &amp; Exercise Prescription</h1></div><div class='r'>Week 17 &middot; Health Promotion<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Some is better than none: the guidelines, the PAVS, and writing a FITT prescription — plus the red flags that need a check first.</p>\n<h2>Definitions &amp; benefits</h2>\n<table>\n<tr><th>Term</th><th>Meaning</th></tr>\n<tr><td>Physical activity</td><td>Any movement increasing energy expenditure</td></tr>\n<tr><td>Exercise</td><td>Planned, structured, repetitive activity for fitness</td></tr>\n<tr><td>Cardiorespiratory fitness</td><td>O₂ delivery/use; VO₂ max is the gold standard</td></tr>\n<tr><td>Sedentary behaviour</td><td>Low-expenditure waking sitting/reclining</td></tr>\n</table>\n<p>Exercise lowers risk of all-cause mortality, CVD, hypertension, type 2 diabetes, stroke, breast/colon cancer, depression/anxiety, osteoporosis, and dementia.</p>\n<div class='key'>\"<b>Some is better than none</b>\" &mdash; the biggest gain is when a sedentary person becomes even modestly active.</div>\n<h2>Canadian adult guideline (18&ndash;64)</h2>\n<p>&ge;<b>150 min/week</b> moderate-to-vigorous aerobic activity, plus muscle/bone strengthening &ge;<b>2 days/week</b>. <b>Intensity cue:</b> moderate = can talk but not sing; vigorous = only a few words without pausing.</p>\n<h2>Acute &amp; chronic physiology</h2>\n<p><b>Acute:</b> cardiac output and HR rise (HR ~linear with workload), stroke volume rises then plateaus, systolic BP rises (diastolic stable/slightly down in dynamic aerobic), ventilation increases. <b>Training:</b> lower resting HR, higher stroke volume/VO₂ max, better BP, insulin sensitivity, mood, sleep, lipids; resistance training builds muscle and bone.</p>\n<h2>PAVS, 5A &amp; FITT</h2>\n<p><b>Physical Activity Vital Sign:</b> days/week &times; minutes/day (e.g. 5 &times; 30 = 150 min/wk). Counsel with the <b>5As</b> (Ask, Assess, Advise, Agree, Assist) and write a <b>FITT</b> prescription: <b>F</b>requency, <b>I</b>ntensity, <b>T</b>ime, <b>T</b>ype.</p>\n<div class='band warn'><div class='t'>Evaluate before moderate/vigorous exercise if</div>\nChest pain/pressure, unexplained dyspnea, syncope/presyncope, palpitations/arrhythmia, orthopnea/PND, heart-failure edema, symptomatic murmur, claudication, or recent ACS/unstable angina/decompensated HF. Low-intensity walking is usually safe for most patients.</div>\n</div>"
+  },
+  {
+   "file": "W17_07_Disability_Ableism.html",
+   "title": "Week 17 · 7 Disability, Exercise Adaptation & Ableism",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Disability, Exercise Adaptation &amp; Ableism</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Equity</div><h1>Disability, Exercise Adaptation &amp; Ableism</h1></div><div class='r'>Week 17 &middot; Health Promotion<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Adapt activity, don't avoid it — the ICF model, disability-specific safety, and how ableism harms care.</p>\n<h2>The ICF model</h2>\n<table>\n<tr><th>Dimension</th><th>Example</th></tr>\n<tr><td><b>Impairment</b> (body structure/function)</td><td>Paralysis after spinal cord injury</td></tr>\n<tr><td><b>Activity limitation</b> (executing a task)</td><td>Difficulty walking/transferring</td></tr>\n<tr><td><b>Participation restriction</b> (life roles)</td><td>Can't use a gym with no ramp/accessible equipment</td></tr>\n</table>\n<p>Adults with disabilities have higher inactivity and higher risk of heart disease, stroke, diabetes, and cancer &mdash; and a <b>physician recommendation</b> substantially increases participation.</p>\n<h2>Barriers &amp; adapted 5As</h2>\n<p>Barriers span intrapersonal (pain, fatigue, spasticity, fear), interpersonal (transport, caregiver time), institutional (inaccessible gyms, untrained staff), and community/policy (cost, transit, funding). Apply the <b>5As</b>, adding disability-specific safety in the <b>Ask</b> step.</p>\n<div class='band'><div class='t'>Example &mdash; T7 spinal cord injury</div>\nConsider wheelchair-accessible options, <b>upper-extremity overuse</b>, <b>skin breakdown</b>, <b>autonomic dysreflexia</b>, neurogenic bladder/bowel schedule, thermoregulation, and cardiovascular risk. Any increase helps &mdash; <b>adapt, don't avoid</b>.</div>\n<h2>Ableism</h2>\n<p>Ableism treats certain body/mind characteristics as essential for a valuable life and devalues those that function differently. Common assumptions: disability = poor quality of life; the goal is always cure; speaking to the caregiver instead of the patient; ignoring accessibility; infantilizing language.</p>\n<div class='band warn'><div class='t'>Consequences &amp; the fix</div>\nAbleism causes missed diagnoses, poor consent, care avoidance, and worse preventive care. Instead: <b>ask what accommodations are needed</b>, address the patient directly, ensure accessible spaces/timing, recognize the patient's expertise about their own body, and avoid quality-of-life assumptions.</div>\n</div>"
+  },
+  {
+   "file": "W17_08_LGBTQ_WeightLoss.html",
+   "title": "Week 17 · 8 LGBTQ2S Health & Older-Adult Weight Loss",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>LGBTQ2S Health &amp; Older-Adult Weight Loss</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Equity + geriatrics</div><h1>LGBTQ2S Health &amp; Older-Adult Weight Loss</h1></div><div class='r'>Week 17 &middot; Health Promotion<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Confidentiality and affirming care for LGBTQ2S patients, and the multifactorial workup of unintentional weight loss in older adults.</p>\n<h2>LGBTQ2S health &amp; confidentiality</h2>\n<p>LGBTQ2S communities have faced medical, legal, and social discrimination (homosexuality and trans identity were historically pathologized; conversion therapy caused harm), fuelling mistrust and care avoidance. Build safer environments proactively.</p>\n<div class='band'><div class='t'>High-yield confidentiality scenarios</div>\nYouth not out to parents; trans patients using different names/pronouns in different settings; HIV-status disclosure; older adults in long-term care. <b>Ask</b> what name/pronouns to use in clinic, phone, mail, referrals, and with family; <b>do not disclose</b> orientation, gender identity, trans status, or HIV status without consent unless legally required. For a <b>capable minor</b>, respect confidential care except where mandatory reporting applies.</div>\n<p><b>Conversion therapy</b> is rejected by major professional organizations and is harmful &mdash; affirming, patient-centred care is the standard. LGBTQ2S <b>older adults</b> may fear re-closeting in care, rely on <b>chosen family</b>, and need inclusive advance-care planning.</p>\n<h2>Unintentional weight loss in older adults</h2>\n<p><b>Significant:</b> &ge;<b>4&ndash;5% in a year</b> or &ge;<b>10% over any period</b> &mdash; associated with frailty, disability, fractures, and mortality, especially at low baseline BMI.</p>\n<table>\n<tr><th>Category</th><th>Examples</th></tr>\n<tr><td>Social</td><td>Isolation, poverty, can't shop/cook, food insecurity</td></tr>\n<tr><td>Psychological</td><td>Depression, dementia, bereavement</td></tr>\n<tr><td>Medical</td><td>Cancer, infection, hyperthyroidism, malabsorption, dysphagia</td></tr>\n<tr><td>Age-related / meds</td><td>Anorexia of aging, taste/smell, polypharmacy (SSRIs, metformin, digoxin, opioids)</td></tr>\n</table>\n<div class='band warn'><div class='t'>Workup &amp; management</div>\nConfirm and quantify loss; review intake, swallowing, dental, mood/cognition, social supports; exam for <b>lymphadenopathy, hepatosplenomegaly, masses</b>; basic labs (CBC, electrolytes, LFTs, TSH, glucose). Treat the cause, deprescribe offenders, involve dietitian/social work, use calorie-dense meals/snacks; appetite-stimulant drugs are <b>not</b> first-line. Reassess in ~3 months.</div>\n</div>"
+  }
+ ]
+}
