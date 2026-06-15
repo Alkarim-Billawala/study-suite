@@ -1,7 +1,9 @@
 <!--
-  Study Suite  ·  v0.2.60 (beta)
+  Study Suite  ·  v0.2.61 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.61: Added "Pharmacology guide" to the home-screen Coming-soon list (mirrors
+  COMING_SOON.md + the README "## Coming soon" section; Future-Features #15). Content-only change.
   Changelog v0.2.60: Early-access codes are now read from the published eac-codes.json (hashes only)
   via loadEacCodes(), cached in localStorage('suite_eac_codes') for offline, with the window.EAC.hashes
   embedded list kept only as an offline/first-run fallback. This means adding/retiring a code edits
@@ -808,6 +810,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="infopanel" id="comingPanel" style="display:none">
         <div class="soon-i">· Flashcard import — bring decks in from that other flashcard app</div>
         <div class="soon-i">· Accounts &amp; sync — save your progress and study across devices (optional)</div>
+        <div class="soon-i">· Pharmacology guide — a cross-week drug index that builds itself from your active packs</div>
       </div>
       <div class="infopanel" id="faqPanel" style="display:none">
         <div class="faqbody">
@@ -1008,7 +1011,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.60';
+const APP_VERSION='0.2.61';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
