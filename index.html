@@ -1,7 +1,13 @@
 <!--
-  Study Suite  ·  v0.2.59 (beta)
+  Study Suite  ·  v0.2.60 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.60: Early-access codes are now read from the published eac-codes.json (hashes only)
+  via loadEacCodes(), cached in localStorage('suite_eac_codes') for offline, with the window.EAC.hashes
+  embedded list kept only as an offline/first-run fallback. This means adding/retiring a code edits
+  eac-codes.json and redeploys WITHOUT an app version bump (use the "Add Access Code.command" helper).
+  eacTry() awaits ensureEacCodes() before checking. (file:// blocks the cross-origin fetch, so local
+  testing falls back to the embedded list.)
   Changelog v0.2.59: Early-access gate (Future-Features #13). Armed via window.EAC.on (set false to
   disarm). A full-screen lock screen (#eacGate) blocks the app until a valid access code is entered;
   only salted SHA-256 hashes of codes ship here (plaintext lives in Early_Access_Codes_LOCAL.md, never
@@ -1002,7 +1008,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.59';
+const APP_VERSION='0.2.60';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1291,6 +1297,7 @@ function renderDefaultPacks(){
 async function init(){
   detectStorage();
   eac=await Store.get(KEY.eac)||null;applyGate();
+  if(eacArmed()&&!(eac&&eac.unlocked))ensureEacCodes();
   $('footVer').textContent='v'+APP_VERSION;$('footBeta').style.display=APP_BETA?'':'none';
   try{history.replaceState({sec:'home'},'');}catch(e){}
   initPackLinks();checkAppVersion();
@@ -1933,12 +1940,26 @@ function sha256hex(ascii){
 }
 function eacCanon(s){return (s||'').replace(/[\s\-]/g,'').toUpperCase();}
 function eacArmed(){return !!(window.EAC&&window.EAC.on);}
+/* The live code list is the published eac-codes.json (hashes only) — that's what the
+   "Add Access Code" workflow edits, so adding a code never needs an app version bump. The hashes
+   embedded in window.EAC above are just an offline/first-run fallback. Loaded once, cached for
+   offline. (On file:// a cross-origin fetch is blocked, so local testing uses the embedded list.) */
+let eacCodesP=null;
+async function loadEacCodes(){
+  try{const r=await fetch('eac-codes.json',{cache:'no-store'});
+    if(r.ok){const j=await r.json();const a=(j&&Array.isArray(j.hashes))?j.hashes:(Array.isArray(j)?j:null);
+      if(a&&a.length){window.EAC.hashes=a;try{localStorage.setItem('suite_eac_codes',JSON.stringify(a));}catch(e){}return;}}
+  }catch(e){}
+  try{const c=localStorage.getItem('suite_eac_codes');if(c){const a=JSON.parse(c);if(Array.isArray(a)&&a.length)window.EAC.hashes=a;}}catch(e){}
+}
+function ensureEacCodes(){if(!eacCodesP)eacCodesP=loadEacCodes();return eacCodesP;}
 function showGate(){const g=$('eacGate');if(g){g.hidden=false;const i=$('eacInput');if(i)setTimeout(()=>i.focus(),60);}}
 function hideGate(){const g=$('eacGate');if(g)g.hidden=true;}
 function applyGate(){ if(eacArmed()&&!(eac&&eac.unlocked))showGate(); else hideGate(); }
 async function eacTry(){
   const inp=$('eacInput'),err=$('eacErr');const code=inp?inp.value:'';
   if(!eacCanon(code)){if(err)err.textContent='Enter your access code.';return;}
+  await ensureEacCodes();
   const h=sha256hex((window.EAC.salt||'')+eacCanon(code));
   const m=(window.EAC.hashes||[]).find(x=>x.h===h);
   if(m){eac={unlocked:true,via:m.tag||'code',admin:!!m.admin,at:new Date().toISOString()};await Store.set(KEY.eac,eac);if(err)err.textContent='';hideGate();toast('Welcome to Study Suite.');}
