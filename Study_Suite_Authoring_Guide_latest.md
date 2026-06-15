@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.13 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.14 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.13)
+# Study Suite — Content Authoring Guide (v2.14)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,14 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.13 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **Authoring system version:** 2.14 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **What changed in guide v2.14:** kept the option-shuffle guidance in lockstep with app behaviour. The
+> app (v0.2.63) now **anchors** "All/None of the above" / "…of these" options — it pins them to their
+> authored slot and shuffles only the other options around them — so those are **fine to use** (no longer
+> "avoid"). What remains forbidden is **position-REFERENCING** options ("A and B", "both of the above",
+> "the first option", "Options 1 and 3"): they reference *specific* other options, so they can't be
+> safely shuffled OR anchored. §2/§3a/§7/§7a updated accordingly; the §7a validator now flags only the
+> position-referencing kind. No schema change.
 > **What changed in guide v2.13:** quality refinements from a side-by-side audit of an outside-LLM pack
 > vs. the maintainer pack (same week, same source). No schema change. (1) **Answer-option order no longer
 > matters** (§2 question schema): the app **shuffles options at render time**, so place `correct`
@@ -274,10 +281,14 @@ never on cards.**
 
 > **Option order does not matter — the app SHUFFLES options at render time** (app v0.2.62+), for both
 > Practice/Exam questions and `mcq`/`multi` cards. So you may put the `correct` option at **any** index
-> (placing it first is perfectly fine for readability); the learner never sees a fixed "always-A"
-> pattern. **The one rule this creates: never write position-dependent options** — no "All of the
-> above", "None of the above", "A and B", "Options 1 and 3", etc. They become nonsense once reordered.
-> Write every option as a standalone answer. (The §7a validator flags positional options.)
+> (placing it first is perfectly fine for readability); the learner never sees a fixed "always-A" pattern.
+>
+> **"All of the above" / "None of the above" are fine** (app v0.2.63+ **anchors** them — it pins them to
+> their authored slot and shuffles only the other options around them, so they always read correctly; the
+> "…of these" variants too). **What you must NOT write are position-REFERENCING options** — "A and B",
+> "both of the above", "the first option", "Options 1 and 3" — because they point at *specific* other
+> options, which move when the rest shuffle. Those can't be safely shuffled or anchored. Write such an
+> option as a self-contained answer instead. (The §7a validator flags the position-referencing kind.)
 
 ### Card schema (spaced repetition) — six types
 
@@ -361,8 +372,8 @@ roughly like:
   framework→purpose.
 
 These are guides, not quotas — but if your deck is >35% cloze or has multi cards with no false option,
-rebalance. (`mcq`/`multi` options are shuffled at render, so author them in any order; never use
-position-dependent options — see §2.)
+rebalance. (`mcq`/`multi` options are shuffled at render, so author them in any order; "all/none of the
+above" are anchored and fine, but never use position-*referencing* options like "both of the above" — see §2.)
 
 ---
 
@@ -587,9 +598,10 @@ dense week — and 40–60 cards *per week*); difficulty lands near the **~30 / 
 spread, with **hard** items testing contraindications, emergencies, or multi-step reasoning (not just
 longer stems).
 
-**Options & card mix:** **no position-dependent options** anywhere (`"all of the above"`, `"A and B"`,
-…) — options are shuffled at render (§2). Card types are **varied, not cloze-heavy** (cloze ≲ 35% of the
-deck); **every `multi` card has ≥1 false option** (never all-correct, never "all-but-the-last").
+**Options & card mix:** **no position-REFERENCING options** anywhere (`"A and B"`, `"both of the above"`,
+`"the first option"`) — options are shuffled at render (§2). ("All/None of the above" are fine — the app
+anchors them.) Card types are **varied, not cloze-heavy** (cloze ≲ 35% of the deck); **every `multi` card
+has ≥1 false option** (never all-correct, never "all-but-the-last").
 
 **Placement filled:** `school` / `year` / (`term`) / `course` / `weeks` are present (ask if unknown,
 don't leave null), and **`course` is the grouping block shared across weeks (e.g. a course/block name),
@@ -629,9 +641,12 @@ from collections import Counter
 
 CARD_TYPES = {"mcq", "multi", "cloze", "order", "match", "qa"}
 ARTIFACTS  = ["start_span", "end_span", "【", "】", "```"]  # any of these breaks the import
-# options whose meaning depends on position — break when the app shuffles options at render
-POSITIONAL = re.compile(r"\b(all of the above|none of the above|both (the )?(first|a)\b|a and b\b|"
-                        r"options? [a-e]\b|answers? [a-e]\b|all of these|none of these)", re.I)
+# Options that REFERENCE specific other options break when the app shuffles. ("All/None of the above|
+# these" are NOT flagged — the app v0.2.63+ anchors them to their slot.) Conservative on purpose, so it
+# won't false-positive on legit answers like "Hepatitis A and B" or "Vitamin A and D".
+POSITIONAL = re.compile(r"\b(both of the above|neither of the above|both of these|"
+                        r"(option|answer)s? [a-e0-9]\b|"
+                        r"the (first|second|third|fourth|last) (option|answer|choice))", re.I)
 
 def validate_pack(pack):
     errs, warns = [], []

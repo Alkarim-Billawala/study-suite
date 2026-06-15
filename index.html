@@ -1,7 +1,13 @@
 <!--
-  Study Suite  ·  v0.2.62 (beta)
+  Study Suite  ·  v0.2.63 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.63: ANCHORED options for the shuffle (v0.2.62). Options matching "All/None of the
+  above|these" are order-independent, so optPerm() now PINS them to their authored slot and shuffles only
+  the other options around them (an "All of the above" stays last). Options that reference SPECIFIC
+  positions ("A and B", "both of the above") still can't be safely shuffled OR anchored — the authoring
+  guide forbids those. isAnchorOpt() detects the pinned options; optPerm() replaces the raw shuffle in
+  qinit() (questions) and renderInteractive() (mcq/multi cards). Scoring/keyboard invariants unchanged.
   Changelog v0.2.62: Answer options are now SHUFFLED at render time so the correct answer is no longer
   always in the same position. Applies to Practice/Exam questions and mcq/multi Review cards. Backwards-
   compatible (works on every existing pack); authors may keep `correct` at any index. Implementation:
@@ -1018,7 +1024,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.62';
+const APP_VERSION='0.2.63';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1076,6 +1082,19 @@ const LETTERS=['A','B','C','D','E','F'];
 const DIFFS=['easy','medium','hard'];
 function today(){return new Date().toISOString().slice(0,10);}
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+/* Some answer options must NOT move when options are shuffled: "All of the above" / "None of the above"
+   (and the "…of these" variants) quantify over EVERY other option, so they're order-independent but read
+   wrong unless pinned to their authored slot. (Options that reference SPECIFIC positions — "A and B",
+   "both of the above" — can't be safely shuffled OR pinned; the authoring guide forbids those.) */
+function isAnchorOpt(o){const t=String(o==null?'':o).replace(/<[^>]*>/g,'').replace(/[.\s]+$/,'').trim().toLowerCase();
+  return /^(all|none) of (the )?(above|these)\b/.test(t);}
+/* Return a permutation perm[displayPos] = originalIndex: anchored options keep their original slot;
+   the remaining options are shuffled into the leftover slots. */
+function optPerm(options){const n=(options||[]).length;const anchored=new Set();
+  for(let i=0;i<n;i++)if(isAnchorOpt(options[i]))anchored.add(i);
+  const free=shuffle([...Array(n).keys()].filter(i=>!anchored.has(i)));
+  const perm=new Array(n);let k=0;for(let pos=0;pos<n;pos++)perm[pos]=anchored.has(pos)?pos:free[k++];
+  return perm;}
 function activePacks(){return packs.filter(p=>p.enabled!==false);}
 function deck(){return activePacks().flatMap(p=>p.cards.map(c=>Object.assign({_pack:p.id,_packName:p.pack},c)));}
 function qpool(){return activePacks().flatMap(p=>p.questions.map(q=>Object.assign({_pack:p.id,_packName:p.pack},q)));}
@@ -1569,7 +1588,7 @@ function renderCard(){const c=cardOf(currentId);
   if(!revealed)$('showBtn').addEventListener('click',()=>{revealed=true;renderCard();});else wireGrades(c);}
 function renderInteractive(c){
   if(c.type==='mcq'||c.type==='multi'){const multi=c.type==='multi';let h=`<p class="prompt">${c.prompt}</p><div class="choices">`;
-    if(!work.optorder)work.optorder=shuffle([...c.options.keys()]);
+    if(!work.optorder)work.optorder=optPerm(c.options);
     work.optorder.forEach((oi,disp)=>{const o=c.options[oi];let cls='choice '+(multi?'check':'radio');
       if(!revealed){if(multi?work.picks.has(oi):work.pick===oi)cls+=' sel';}
       else{const isC=multi?c.correct.includes(oi):(oi===c.correct);const chosen=multi?work.picks.has(oi):work.pick===oi;if(isC)cls+=' correct';else if(chosen)cls+=' wrong';}
@@ -1843,7 +1862,7 @@ function startExam(){const pool=qTestPool();if(!pool.length){toast('No questions
   $('finishBtn').textContent='Submit examination';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map';
   $('timer').classList.remove('over','warn');renderQuiz();startQTick();show('quiz');}
 function qinit(){qcur=0;qans=new Array(qorder.length).fill(null);qsub=new Array(qorder.length).fill(false);qflag=new Array(qorder.length).fill(false);qelapsed=new Array(qorder.length).fill(0);
-  qopt=qorder.map(id=>shuffle([...(qmap[id].options||[]).keys()]));}
+  qopt=qorder.map(id=>optPerm(qmap[id].options||[]));}
 function qRevealed(slot){return qmode==='practice'?qsub[slot]:qTestSubmitted;}
 function startQTick(){clearInterval(qTimerId);qTimerId=setInterval(()=>{
   if(qmode==='test'){if(!settings.examTimer)return;qTimeLeft--;$('tclock').textContent=fmt(qTimeLeft);$('timer').classList.toggle('warn',qTimeLeft<=300&&qTimeLeft>0);if(qTimeLeft<=0){clearInterval(qTimerId);submitExam(true);}}
