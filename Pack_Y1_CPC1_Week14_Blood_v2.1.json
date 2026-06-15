@@ -1,0 +1,1362 @@
+{
+ "pack": "Week 14 — Blood I",
+ "id": "wk14",
+ "formatVersion": "2.0",
+ "version": "2.1",
+ "author": "Alkarim Billawala / alkarim.billawala.ca",
+ "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
+ "created": "2026-06-15",
+ "updated": "2026-06-15",
+ "school": "UofT — Temerty Medicine",
+ "year": "Year 1",
+ "course": "CPC 1",
+ "weeks": "Week 14 · Blood I",
+ "questions": [
+  {
+   "id": "wk14_q01",
+   "sys": "Heme",
+   "topic": "Heme · Iron deficiency",
+   "difficulty": "easy",
+   "stem": "A 27-year-old woman who follows a vegetarian diet reports four months of fatigue and reduced exercise tolerance. Her CBC shows Hb 104 g/L with an MCV of 73 fL, and the film is microcytic and hypochromic. Before starting empiric treatment, her physician wants the single most useful test of her body iron stores. Which test should be ordered?",
+   "options": [
+    "Serum ferritin",
+    "Hemoglobin electrophoresis",
+    "Bone marrow aspirate",
+    "Reticulocyte count",
+    "Direct antiglobulin test"
+   ],
+   "correct": 0,
+   "explain": "<b>Ferritin</b> is the best single test of iron stores, and a low value is essentially diagnostic of iron deficiency. Remember it is also an acute-phase reactant, so a normal/high value in inflammation does not exclude deficiency &mdash; then check transferrin saturation and TIBC.",
+   "guide": {
+    "f": "W14_05_Iron_Deficiency.html",
+    "t": "5 · Ferritin",
+    "s": "best single test for iron stores"
+   }
+  },
+  {
+   "id": "wk14_q02",
+   "sys": "Heme",
+   "topic": "Heme · O2 physiology",
+   "difficulty": "easy",
+   "stem": "During a sprint, oxygen delivery to a runner's quadriceps rises sharply as the working muscle becomes warmer and more acidic. Which change shifts the oxygen&ndash;hemoglobin dissociation curve in the direction responsible for this increased unloading?",
+   "options": [
+    "Decreased temperature",
+    "Increased CO₂ and H⁺ (lower pH)",
+    "Decreased 2,3-BPG",
+    "A switch to fetal hemoglobin",
+    "Carbon monoxide binding"
+   ],
+   "correct": 1,
+   "explain": "Active tissue generates <b>CO₂ and H⁺</b>, which lower hemoglobin's O₂ affinity and shift the curve <b>right</b> (the Bohr effect), unloading more oxygen exactly where metabolism is highest. Cold, low 2,3-BPG, HbF and CO all shift it left.",
+   "guide": {
+    "f": "W14_03_Oxygen_Hb.html",
+    "t": "3 · Right shift",
+    "s": "right shift more unloading"
+   }
+  },
+  {
+   "id": "wk14_q03",
+   "sys": "Heme",
+   "topic": "Heme · Transfusion",
+   "difficulty": "easy",
+   "stem": "A trauma patient is hemorrhaging and needs red cells immediately, before his ABO type can be determined. Which red blood cell group can be transfused safely into a recipient of any ABO type?",
+   "options": [
+    "Group AB",
+    "Group A",
+    "Group B",
+    "Group O",
+    "Only a fully cross-matched unit is ever acceptable"
+   ],
+   "correct": 3,
+   "explain": "<b>Group O</b> red cells lack A and B antigens, making O the universal RBC donor (O-negative is used uncross-matched in emergencies). Group AB, lacking anti-A and anti-B, is the universal RBC <i>recipient</i>.",
+   "guide": {
+    "f": "W14_08_Transfusion.html",
+    "t": "8 · ABO",
+    "s": "universal RBC donor"
+   }
+  },
+  {
+   "id": "wk14_q04",
+   "sys": "Heme",
+   "topic": "Heme · Bleeding",
+   "difficulty": "easy",
+   "stem": "A 30-year-old presents with pinpoint red spots over both shins, bleeding gums, and heavy menstrual periods, but has never had joint swelling or deep-muscle bleeds. This bleeding pattern points to a problem with which component of hemostasis?",
+   "options": [
+    "Coagulation factors (secondary hemostasis)",
+    "Platelets / primary hemostasis",
+    "Fibrinolysis only",
+    "Vitamin K&ndash;dependent factors",
+    "Endothelial collagen synthesis"
+   ],
+   "correct": 1,
+   "explain": "Petechiae, mucosal bleeding (gums, epistaxis) and menorrhagia are the <b>primary-hemostasis / platelet</b> pattern. Deep-tissue bleeds and hemarthroses instead point to a coagulation-factor (secondary hemostasis) problem such as hemophilia.",
+   "guide": {
+    "f": "W14_07_Thrombocytopenia.html",
+    "t": "7 · Bleeding pattern",
+    "s": "platelet vs coagulation bleeding"
+   }
+  },
+  {
+   "id": "wk14_q05",
+   "sys": "Heme",
+   "topic": "Heme · Hemoglobin",
+   "difficulty": "easy",
+   "stem": "A term newborn extracts oxygen efficiently from maternal blood across the placenta because fetal hemoglobin has a higher oxygen affinity than adult HbA. Which globin-chain composition characterizes fetal hemoglobin (HbF)?",
+   "options": [
+    "2 alpha + 2 beta",
+    "2 alpha + 2 gamma",
+    "2 alpha + 2 delta",
+    "4 beta chains",
+    "2 gamma + 2 beta"
+   ],
+   "correct": 1,
+   "explain": "<b>HbF = 2 alpha + 2 gamma</b> chains. Its higher O₂ affinity (a left-shifted curve) lets the fetus pull oxygen across the placenta; the switch to adult HbA (2 alpha + 2 beta) is why &beta;-globin disorders such as &beta;-thalassemia declare themselves only after birth.",
+   "guide": {
+    "f": "W14_03_Oxygen_Hb.html",
+    "t": "3 · HbF",
+    "s": "fetal hemoglobin 2 alpha 2 gamma"
+   }
+  },
+  {
+   "id": "wk14_q06",
+   "sys": "Heme",
+   "topic": "Heme · Macrocytic anemia",
+   "difficulty": "easy",
+   "stem": "A 44-year-old with months of fatigue has Hb 96 g/L and an MCV of 113 fL. The blood film shows large oval red cells and several neutrophils with six-lobed nuclei. This morphology indicates which underlying process?",
+   "options": [
+    "Iron deficiency",
+    "Megaloblastic anemia (impaired DNA synthesis)",
+    "Hereditary spherocytosis",
+    "Acute blood loss",
+    "Anemia of inflammation"
+   ],
+   "correct": 1,
+   "explain": "Macro-ovalocytes with <b>hypersegmented neutrophils</b> are the hallmark of <b>megaloblastic anemia</b> from impaired DNA synthesis &mdash; usually B12 or folate deficiency. The next step is to measure B12 and folate, because B12 deficiency also threatens the nervous system.",
+   "guide": {
+    "f": "W14_02_Blood_Film.html",
+    "t": "2 · Megaloblastic",
+    "s": "hypersegmented neutrophils megaloblastic"
+   }
+  },
+  {
+   "id": "wk14_q07",
+   "sys": "Heme",
+   "topic": "Heme · Microcytic anemia",
+   "difficulty": "medium",
+   "stem": "A well 24-year-old man has a CBC for an employment medical: Hb 122 g/L, MCV 67 fL, a relatively high RBC count, a normal RDW, and a normal ferritin. The film shows target cells. Which test best confirms the most likely diagnosis?",
+   "options": [
+    "Repeat serum ferritin",
+    "Hemoglobin electrophoresis/HPLC",
+    "Bone marrow biopsy",
+    "Serum B12",
+    "Direct antiglobulin test"
+   ],
+   "correct": 1,
+   "explain": "Marked microcytosis with a <b>preserved Hb, normal RDW, normal ferritin</b> and target cells points to <b>thalassemia trait</b>, not iron deficiency. &beta;-trait is confirmed by an <b>elevated HbA₂</b> on electrophoresis/HPLC (&alpha;-trait may need genetic testing). Do not give iron without proven deficiency.",
+   "guide": {
+    "f": "W14_05_Iron_Deficiency.html",
+    "t": "5 · IDA vs thalassemia",
+    "s": "thalassemia trait HbA2"
+   }
+  },
+  {
+   "id": "wk14_q08",
+   "sys": "Heme",
+   "topic": "Heme · Thrombocytopenia",
+   "difficulty": "medium",
+   "stem": "A 34-year-old woman presents with confusion and fatigue. She has thrombocytopenia, anemia with schistocytes on the film, a mildly raised creatinine, and a low-grade fever; her PT and PTT are normal. What is the most appropriate management?",
+   "options": [
+    "Platelet transfusion",
+    "Urgent plasma exchange",
+    "Oral iron replacement",
+    "Broad-spectrum antibiotics alone",
+    "Reassure and repeat the CBC in a week"
+   ],
+   "correct": 1,
+   "explain": "Thrombocytopenia with microangiopathic hemolysis (schistocytes) plus neurologic and renal findings and <b>normal coagulation</b> is <b>TTP</b> &mdash; a medical emergency treated with <b>plasma exchange</b> (with steroids &plusmn; rituximab/caplacizumab). Platelet transfusion is generally avoided unless there is life-threatening bleeding.",
+   "guide": {
+    "f": "W14_07_Thrombocytopenia.html",
+    "t": "7 · TTP",
+    "s": "TTP plasma exchange avoid platelets"
+   }
+  },
+  {
+   "id": "wk14_q09",
+   "sys": "Heme",
+   "topic": "Heme · Transfusion reaction",
+   "difficulty": "medium",
+   "stem": "An 78-year-old woman with heart failure becomes acutely dyspneic two hours into her second unit of red cells. She is hypertensive with a raised JVP, bibasal crackles, and a markedly elevated BNP, and she improves promptly after furosemide. Which transfusion reaction is this?",
+   "options": [
+    "TRALI",
+    "TACO (circulatory overload)",
+    "Acute hemolytic reaction",
+    "Febrile non-hemolytic reaction",
+    "Anaphylaxis"
+   ],
+   "correct": 1,
+   "explain": "Volume overload with <b>hypertension</b>, raised JVP, pulmonary edema, a high BNP, and a diuretic response is <b>TACO</b>. The key contrast is TRALI, which is non-cardiogenic and not driven by volume; risk is reduced by transfusing slowly and one unit at a time in susceptible patients.",
+   "guide": {
+    "f": "W14_08_Transfusion.html",
+    "t": "8 · TACO",
+    "s": "TACO circulatory overload diuretic"
+   }
+  },
+  {
+   "id": "wk14_q10",
+   "sys": "Heme",
+   "topic": "Heme · Transfusion reaction",
+   "difficulty": "medium",
+   "stem": "A 40-year-old man develops sudden hypoxemia and bilateral pulmonary infiltrates within four hours of a plasma transfusion. He is normotensive with a normal JVP and a normal BNP, and an echocardiogram shows good ventricular function. Which reaction is most likely?",
+   "options": [
+    "TACO",
+    "TRALI",
+    "Delayed hemolytic reaction",
+    "Allergic urticarial reaction",
+    "Iron overload"
+   ],
+   "correct": 1,
+   "explain": "Acute hypoxemia with bilateral infiltrates soon after transfusion but <b>without</b> volume overload (normal BP, JVP, BNP and ventricular function) is <b>TRALI</b> &mdash; non-cardiogenic pulmonary edema from donor antibodies against recipient leukocytes. Management is supportive/respiratory; TACO, by contrast, responds to diuresis.",
+   "guide": {
+    "f": "W14_08_Transfusion.html",
+    "t": "8 · TRALI",
+    "s": "TRALI non-cardiogenic hypoxemia"
+   }
+  },
+  {
+   "id": "wk14_q11",
+   "sys": "Heme",
+   "topic": "Heme · Sickle cell",
+   "difficulty": "medium",
+   "stem": "A 19-year-old with known sickle cell disease is admitted with chest pain, fever, hypoxia, and a new infiltrate on chest radiograph. In addition to analgesia and oxygen, which is a key part of managing this complication?",
+   "options": [
+    "Discharge on oral antibiotics",
+    "Antibiotics with consideration of (exchange) transfusion",
+    "Immediate splenectomy",
+    "High-dose oral iron",
+    "Withhold fluids and oxygen entirely"
+   ],
+   "correct": 1,
+   "explain": "This is <b>acute chest syndrome</b>, a leading cause of death in sickle cell disease and an emergency: oxygen, <b>antibiotics</b>, analgesia, incentive spirometry, and <b>simple or exchange transfusion</b> in severe or progressive cases.",
+   "guide": {
+    "f": "W14_06_Hemoglobinopathies.html",
+    "t": "6 · Acute chest",
+    "s": "acute chest syndrome transfusion"
+   }
+  },
+  {
+   "id": "wk14_q12",
+   "sys": "Heme",
+   "topic": "Heme · Sickle cell",
+   "difficulty": "medium",
+   "stem": "A pediatrician explains why a 3-year-old with sickle cell disease needs pneumococcal vaccination and daily penicillin prophylaxis. Which feature of the disease underlies this recommendation?",
+   "options": [
+    "Hydroxyurea-induced neutropenia",
+    "Functional asplenia raising the risk of encapsulated-organism infection",
+    "Iron overload from hemolysis",
+    "Chronic transfusion suppressing the marrow",
+    "Folate deficiency impairing immunity"
+   ],
+   "correct": 1,
+   "explain": "Repeated splenic infarction produces <b>functional asplenia</b>, sharply raising the risk of overwhelming infection with <b>encapsulated organisms</b> (pneumococcus, <i>H. influenzae</i>, meningococcus). Hence vaccination and, in young children, penicillin prophylaxis.",
+   "guide": {
+    "f": "W14_06_Hemoglobinopathies.html",
+    "t": "6 · Functional asplenia",
+    "s": "functional asplenia encapsulated organisms"
+   }
+  },
+  {
+   "id": "wk14_q13",
+   "sys": "Heme",
+   "topic": "Heme · Macrocytic anemia",
+   "difficulty": "medium",
+   "stem": "A 60-year-old has a megaloblastic anemia, but serum B12 and folate both return borderline-low. You are concerned about missing B12 deficiency, which can cause irreversible neurologic injury. Which test best confirms clinically important B12 deficiency?",
+   "options": [
+    "An elevated methylmalonic acid",
+    "The reticulocyte count",
+    "The RDW",
+    "Serum haptoglobin",
+    "A direct antiglobulin test"
+   ],
+   "correct": 0,
+   "explain": "<b>Methylmalonic acid is elevated in B12 deficiency but not in folate deficiency</b> (homocysteine rises in both). Confirming B12 deficiency matters because treating with folate alone can correct the anemia while allowing subacute combined degeneration of the cord to progress.",
+   "guide": {
+    "f": "W14_02_Blood_Film.html",
+    "t": "2 · Megaloblastic",
+    "s": "B12 versus folate methylmalonic"
+   }
+  },
+  {
+   "id": "wk14_q14",
+   "sys": "Heme",
+   "topic": "Heme · Platelets",
+   "difficulty": "medium",
+   "stem": "A 35-year-old woman with heavy menstrual bleeding has Hb 96 g/L, MCV 71 fL, a high RDW, a low ferritin, and a platelet count of 585 × 10⁹/L. She has no splenomegaly and feels well apart from fatigue. How should the elevated platelet count be interpreted?",
+   "options": [
+    "Essential thrombocythemia needing cytoreduction",
+    "Reactive thrombocytosis from iron deficiency",
+    "An artifact of platelet clumping",
+    "Early acute leukemia",
+    "Immune thrombocytopenia"
+   ],
+   "correct": 1,
+   "explain": "Iron deficiency commonly drives a <b>reactive thrombocytosis</b>; the count typically normalizes once iron is replaced, and no cytoreductive therapy is needed. A persistently high platelet count after iron repletion would prompt reconsideration.",
+   "guide": {
+    "f": "W14_05_Iron_Deficiency.html",
+    "t": "5 · Reactive thrombocytosis",
+    "s": "iron deficiency reactive thrombocytosis"
+   }
+  },
+  {
+   "id": "wk14_q15",
+   "sys": "Heme",
+   "topic": "Heme · Pancytopenia",
+   "difficulty": "medium",
+   "stem": "A 26-year-old develops pancytopenia. There is no splenomegaly and no blasts on the film; reticulocytes are low, and a marrow biopsy is markedly hypocellular with fat replacing hematopoietic tissue. Which diagnosis best fits?",
+   "options": [
+    "Aplastic anemia",
+    "Acute leukemia",
+    "Hereditary spherocytosis",
+    "Iron deficiency anemia",
+    "Thrombotic thrombocytopenic purpura"
+   ],
+   "correct": 0,
+   "explain": "A <b>hypocellular ('empty') marrow</b> with pancytopenia, low reticulocytes, and no infiltrating cells or splenomegaly is characteristic of <b>aplastic anemia</b> (marrow failure). Infiltration by leukemia would instead show a hypercellular marrow with blasts.",
+   "guide": {
+    "f": "W14_04_Hematopoiesis_Pancytopenia.html",
+    "t": "4 · Marrow failure",
+    "s": "aplastic anemia hypocellular marrow"
+   }
+  },
+  {
+   "id": "wk14_q16",
+   "sys": "Heme",
+   "topic": "Heme · Hemolysis",
+   "difficulty": "medium",
+   "stem": "A 40-year-old has anemia with high reticulocytes, high LDH, high indirect bilirubin, low haptoglobin, and numerous spherocytes on the film. Which single test best separates autoimmune hemolytic anemia from hereditary spherocytosis?",
+   "options": [
+    "Direct antiglobulin test (Coombs)",
+    "Serum ferritin",
+    "Hemoglobin electrophoresis",
+    "Bone marrow biopsy",
+    "D-dimer"
+   ],
+   "correct": 0,
+   "explain": "Both show spherocytes and a hemolytic picture. A <b>positive direct antiglobulin test</b> indicates antibody-mediated <b>autoimmune</b> hemolysis; hereditary spherocytosis is <b>DAT-negative</b> and is confirmed with tests such as the EMA-binding test or osmotic fragility.",
+   "guide": {
+    "f": "W14_02_Blood_Film.html",
+    "t": "2 · Spherocytes",
+    "s": "spherocytes autoimmune hemolysis DAT"
+   }
+  },
+  {
+   "id": "wk14_q17",
+   "sys": "Heme",
+   "topic": "Heme · Rh / pregnancy",
+   "difficulty": "medium",
+   "stem": "An RhD-negative woman with no anti-D antibodies is pregnant with an RhD-positive fetus. Her obstetrician plans RhD immune globulin. By what mechanism does it prevent hemolytic disease of the fetus/newborn in future pregnancies?",
+   "options": [
+    "It suppresses fetal erythropoiesis",
+    "It passively clears fetal D-positive cells before the mother mounts her own anti-D response",
+    "It replaces a missing maternal clotting factor",
+    "It raises fetal hemoglobin",
+    "It neutralizes maternal IgM anti-A/anti-B"
+   ],
+   "correct": 1,
+   "explain": "RhD immune globulin is <b>passive anti-D</b> that binds and <b>clears fetal RhD-positive red cells before the maternal immune system is sensitized</b>, preventing the active anti-D <b>IgG</b> alloimmunization that would cross the placenta and harm a later D-positive fetus.",
+   "guide": {
+    "f": "W14_08_Transfusion.html",
+    "t": "8 · HDFN",
+    "s": "RhD immune globulin prevents alloimmunization"
+   }
+  },
+  {
+   "id": "wk14_q18",
+   "sys": "Heme",
+   "topic": "Heme · DIC",
+   "difficulty": "hard",
+   "stem": "A woman develops massive postpartum hemorrhage. She is now oozing from every venipuncture site; platelets are 55 × 10⁹/L, PT and PTT are prolonged, <b>fibrinogen is very low</b>, D-dimer is markedly elevated, and schistocytes are present. Beyond urgently controlling the obstetric source, which product most directly corrects the key deficiency driving her bleeding?",
+   "options": [
+    "Cryoprecipitate (or fibrinogen concentrate)",
+    "Oral iron",
+    "IV immunoglobulin",
+    "Desmopressin alone",
+    "Prophylactic platelets to keep the count >150"
+   ],
+   "correct": 0,
+   "explain": "This is <b>DIC</b> with consumptive <b>hypofibrinogenemia</b>. Alongside treating the cause, <b>cryoprecipitate or fibrinogen concentrate</b> replaces fibrinogen (with FFP and platelets as guided by labs and bleeding). Definitive control still requires stopping the obstetric hemorrhage.",
+   "guide": {
+    "f": "W14_07_Thrombocytopenia.html",
+    "t": "7 · DIC",
+    "s": "DIC low fibrinogen product support"
+   }
+  },
+  {
+   "id": "wk14_q19",
+   "sys": "Heme",
+   "topic": "Heme · O2 physiology",
+   "difficulty": "hard",
+   "stem": "A man rescued from a house fire is confused and tachypneic. His pulse oximeter reads 98%, yet arterial sampling and his clinical state indicate genuine tissue hypoxia. Which statement best explains the discrepancy?",
+   "options": [
+    "CO binds hemoglobin and shifts the curve right, improving unloading",
+    "CO binds hemoglobin, shifts the curve left, and is read as oxyhemoglobin so pulse oximetry is falsely normal",
+    "Methemoglobin lowers affinity and unloads more oxygen",
+    "Elevated 2,3-BPG has raised oxygen affinity",
+    "Fetal hemoglobin is being produced acutely"
+   ],
+   "correct": 1,
+   "explain": "Carbon monoxide binds hemoglobin avidly, forming carboxyhemoglobin that <b>shifts the curve left</b> (impairing unloading) and that a standard <b>pulse oximeter cannot distinguish from oxyhemoglobin</b> &mdash; giving a <b>falsely normal SpO₂</b>. Diagnosis needs co-oximetry to measure carboxyhemoglobin; treat with high-flow/100% oxygen.",
+   "guide": {
+    "f": "W14_03_Oxygen_Hb.html",
+    "t": "3 · Carbon monoxide",
+    "s": "carbon monoxide left shift false oximetry"
+   }
+  },
+  {
+   "id": "wk14_q20",
+   "sys": "Heme",
+   "topic": "Heme · Transfusion reaction",
+   "difficulty": "hard",
+   "stem": "A previously transfused man is readmitted eight days after an uneventful red-cell transfusion with a falling hemoglobin, mild jaundice, and a newly positive direct antiglobulin test. His original cross-match had been fully compatible. Which transfusion reaction best explains this?",
+   "options": [
+    "Acute hemolytic (ABO) reaction",
+    "Delayed hemolytic transfusion reaction",
+    "TRALI",
+    "Febrile non-hemolytic reaction",
+    "TACO"
+   ],
+   "correct": 1,
+   "explain": "An <b>anamnestic</b> rise in a previously formed but undetectable non-ABO alloantibody (classically Kidd/anti-Jk) days to weeks later causes a <b>delayed hemolytic transfusion reaction</b>: a falling Hb, jaundice, and a newly positive DAT despite an initially compatible cross-match. It is usually managed supportively with antigen-negative units thereafter.",
+   "guide": {
+    "f": "W14_08_Transfusion.html",
+    "t": "8 · Delayed hemolytic",
+    "s": "delayed hemolytic reaction Kidd"
+   }
+  }
+ ],
+ "cards": [
+  {
+   "id": "wk14_c01",
+   "sys": "Heme",
+   "topic": "CBC framework",
+   "type": "qa",
+   "guide": {
+    "f": "W14_01_CBC_Anemia.html",
+    "t": "1 · Five questions",
+    "s": "abnormal CBC approach"
+   },
+   "prompt": "What are the first two questions to ask about any abnormal CBC?",
+   "answer": "Which cell line(s) are abnormal, and is it one line or several? Multiple lines down points to a marrow (factory) problem until proven otherwise."
+  },
+  {
+   "id": "wk14_c02",
+   "sys": "Heme",
+   "topic": "CBC framework",
+   "type": "cloze",
+   "guide": {
+    "f": "W14_01_CBC_Anemia.html",
+    "t": "1 · MCV",
+    "s": "MCV buckets"
+   },
+   "text": "By MCV, anemia is microcytic if MCV {{<80}} fL, normocytic {{80–100}} fL, and macrocytic if {{>100}} fL.",
+   "explain": "MCV is the first branch point of the anemia algorithm."
+  },
+  {
+   "id": "wk14_c03",
+   "sys": "Heme",
+   "topic": "CBC framework",
+   "type": "qa",
+   "guide": {
+    "f": "W14_01_CBC_Anemia.html",
+    "t": "1 · Backbone",
+    "s": "MCV plus reticulocyte"
+   },
+   "prompt": "What two tests form the backbone of the anemia algorithm?",
+   "answer": "The MCV (cell size) and the reticulocyte count (production versus loss/destruction)."
+  },
+  {
+   "id": "wk14_c04",
+   "sys": "Heme",
+   "topic": "CBC framework",
+   "type": "mcq",
+   "guide": {
+    "f": "W14_01_CBC_Anemia.html",
+    "t": "1 · RDW",
+    "s": "RDW iron vs thalassemia"
+   },
+   "prompt": "A high RDW with microcytosis favours which diagnosis over thalassemia trait?",
+   "options": [
+    "Iron deficiency",
+    "Thalassemia trait",
+    "Sideroblastic anemia",
+    "Anemia of chronic disease"
+   ],
+   "correct": 0,
+   "explain": "Iron deficiency produces variably sized cells (high RDW); thalassemia trait cells are uniformly small (normal RDW)."
+  },
+  {
+   "id": "wk14_c05",
+   "sys": "Heme",
+   "topic": "CBC framework",
+   "type": "match",
+   "guide": {
+    "f": "W14_01_CBC_Anemia.html",
+    "t": "1 · Reticulocytes",
+    "s": "reticulocyte interpretation"
+   },
+   "prompt": "Match the reticulocyte response to its meaning:",
+   "pairs": [
+    [
+     "High reticulocytes",
+     "Bleeding or hemolysis (marrow responding)"
+    ],
+    [
+     "Low/normal reticulocytes",
+     "Underproduction: deficiency, renal, inflammation, marrow failure"
+    ]
+   ],
+   "explain": "Reticulocytes separate loss/destruction from a production problem."
+  },
+  {
+   "id": "wk14_c06",
+   "sys": "Heme",
+   "topic": "Anemia signs",
+   "type": "qa",
+   "guide": {
+    "f": "W14_01_CBC_Anemia.html",
+    "t": "1 · Signs",
+    "s": "conjunctival pallor"
+   },
+   "prompt": "Which physical sign is most directly attributable to anemia itself?",
+   "answer": "Pallor, especially conjunctival pallor, from reduced hemoglobin and oxygen-carrying capacity."
+  },
+  {
+   "id": "wk14_c07",
+   "sys": "Heme",
+   "topic": "Blood film",
+   "type": "match",
+   "guide": {
+    "f": "W14_02_Blood_Film.html",
+    "t": "2 · Morphology",
+    "s": "film findings"
+   },
+   "prompt": "Match each red-cell finding to its association:",
+   "pairs": [
+    [
+     "Schistocytes",
+     "TTP/HUS/DIC (microangiopathy)"
+    ],
+    [
+     "Spherocytes",
+     "Hereditary spherocytosis or autoimmune hemolysis"
+    ],
+    [
+     "Target cells",
+     "Thalassemia, liver disease, post-splenectomy"
+    ],
+    [
+     "Teardrop cells",
+     "Marrow infiltration/fibrosis"
+    ]
+   ],
+   "explain": "Film morphology often points straight to the mechanism."
+  },
+  {
+   "id": "wk14_c08",
+   "sys": "Heme",
+   "topic": "Blood film",
+   "type": "mcq",
+   "guide": {
+    "f": "W14_02_Blood_Film.html",
+    "t": "2 · Urgent",
+    "s": "schistocytes blasts"
+   },
+   "prompt": "Which two film findings are 'never-miss', urgent results?",
+   "options": [
+    "Target cells and polychromasia",
+    "Schistocytes and blasts",
+    "Macrocytes and spherocytes",
+    "Basophilic stippling and Howell-Jolly bodies",
+    "Teardrops and bite cells"
+   ],
+   "correct": 1,
+   "explain": "Schistocytes (thrombotic microangiopathy) and blasts (acute leukemia) both demand urgent action."
+  },
+  {
+   "id": "wk14_c09",
+   "sys": "Heme",
+   "topic": "Blood film",
+   "type": "qa",
+   "guide": {
+    "f": "W14_02_Blood_Film.html",
+    "t": "2 · Basophilia",
+    "s": "basophilia CML"
+   },
+   "prompt": "Basophilia on the differential should raise suspicion of which group of disorders?",
+   "answer": "Myeloproliferative neoplasms, especially chronic myeloid leukemia (CML)."
+  },
+  {
+   "id": "wk14_c10",
+   "sys": "Heme",
+   "topic": "Blood film",
+   "type": "cloze",
+   "guide": {
+    "f": "W14_02_Blood_Film.html",
+    "t": "2 · Pseudo",
+    "s": "pseudothrombocytopenia"
+   },
+   "text": "A low platelet count caused by {{clumping}} in the EDTA tube is called {{pseudothrombocytopenia}} and must be excluded before working up true thrombocytopenia.",
+   "explain": "Always confirm a low platelet count and review the film for clumps."
+  },
+  {
+   "id": "wk14_c11",
+   "sys": "Heme",
+   "topic": "O2 physiology",
+   "type": "match",
+   "guide": {
+    "f": "W14_03_Oxygen_Hb.html",
+    "t": "3 · Curve shifts",
+    "s": "right vs left shift"
+   },
+   "prompt": "Match each factor to the curve shift it causes:",
+   "pairs": [
+    [
+     "Increased CO₂, H⁺, temperature, 2,3-BPG",
+     "Right shift (more unloading)"
+    ],
+    [
+     "Carbon monoxide and fetal hemoglobin",
+     "Left shift (less unloading)"
+    ]
+   ],
+   "explain": "Right shift unloads O₂ to active tissue; left shift holds onto it."
+  },
+  {
+   "id": "wk14_c12",
+   "sys": "Heme",
+   "topic": "O2 physiology",
+   "type": "cloze",
+   "guide": {
+    "f": "W14_03_Oxygen_Hb.html",
+    "t": "3 · Hb structure",
+    "s": "hemoglobin binds four"
+   },
+   "text": "Adult HbA is made of 2 {{alpha}} and 2 {{beta}} chains, each with a heme, so one hemoglobin molecule binds up to {{4}} oxygen molecules.",
+   "explain": "Four hemes per tetramer; binding is cooperative (sigmoid curve)."
+  },
+  {
+   "id": "wk14_c13",
+   "sys": "Heme",
+   "topic": "O2 physiology",
+   "type": "qa",
+   "guide": {
+    "f": "W14_03_Oxygen_Hb.html",
+    "t": "3 · Bohr",
+    "s": "Bohr effect"
+   },
+   "prompt": "What is the Bohr effect?",
+   "answer": "In active tissue, rising CO₂ and H⁺ lower hemoglobin's O₂ affinity (a right shift), promoting oxygen unloading where it is needed."
+  },
+  {
+   "id": "wk14_c14",
+   "sys": "Heme",
+   "topic": "O2 physiology",
+   "type": "mcq",
+   "guide": {
+    "f": "W14_03_Oxygen_Hb.html",
+    "t": "3 · CO",
+    "s": "carbon monoxide oximetry"
+   },
+   "prompt": "Carbon monoxide poisoning classically produces which oxygen-delivery picture?",
+   "options": [
+    "Right shift with a low SpO₂",
+    "Left shift with a falsely normal SpO₂",
+    "No effect on the curve",
+    "Reduced 2,3-BPG only",
+    "Raised methemoglobin only"
+   ],
+   "correct": 1,
+   "explain": "CO shifts the curve left and is read as oxyhemoglobin by standard pulse oximetry, giving a falsely normal SpO₂; use co-oximetry."
+  },
+  {
+   "id": "wk14_c15",
+   "sys": "Heme",
+   "topic": "Hematopoiesis",
+   "type": "match",
+   "guide": {
+    "f": "W14_04_Hematopoiesis_Pancytopenia.html",
+    "t": "4 · Sites",
+    "s": "sites of hematopoiesis"
+   },
+   "prompt": "Match the life stage to its main hematopoietic site:",
+   "pairs": [
+    [
+     "Early embryo",
+     "Yolk sac"
+    ],
+    [
+     "Fetus",
+     "Fetal liver then marrow"
+    ],
+    [
+     "Adult",
+     "Axial skeleton (pelvis, vertebrae, ribs, sternum)"
+    ]
+   ],
+   "explain": "Hematopoiesis migrates from yolk sac to liver to axial marrow."
+  },
+  {
+   "id": "wk14_c16",
+   "sys": "Heme",
+   "topic": "Pancytopenia",
+   "type": "qa",
+   "guide": {
+    "f": "W14_04_Hematopoiesis_Pancytopenia.html",
+    "t": "4 · Definition",
+    "s": "pancytopenia factory"
+   },
+   "prompt": "What does pancytopenia usually imply about the cause?",
+   "answer": "All three lines down points to a bone-marrow (factory) problem — failure, infiltration/replacement, or ineffective hematopoiesis — until proven otherwise."
+  },
+  {
+   "id": "wk14_c17",
+   "sys": "Heme",
+   "topic": "Pancytopenia",
+   "type": "match",
+   "guide": {
+    "f": "W14_04_Hematopoiesis_Pancytopenia.html",
+    "t": "4 · Causes",
+    "s": "pancytopenia categories"
+   },
+   "prompt": "Match the pancytopenia mechanism to its example:",
+   "pairs": [
+    [
+     "Marrow failure",
+     "Aplastic anemia (hypocellular marrow)"
+    ],
+    [
+     "Infiltration/replacement",
+     "Leukemia, lymphoma, myelofibrosis"
+    ],
+    [
+     "Ineffective hematopoiesis",
+     "B12/folate deficiency, MDS"
+    ],
+    [
+     "Sequestration",
+     "Hypersplenism"
+    ]
+   ],
+   "explain": "Categorize, then test for reversible causes and consider a marrow biopsy."
+  },
+  {
+   "id": "wk14_c18",
+   "sys": "Heme",
+   "topic": "Pancytopenia",
+   "type": "multi",
+   "guide": {
+    "f": "W14_04_Hematopoiesis_Pancytopenia.html",
+    "t": "4 · Red flags",
+    "s": "pancytopenia red flags"
+   },
+   "prompt": "Which findings in pancytopenia are urgent red flags? (select all)",
+   "options": [
+    "Febrile neutropenia",
+    "Platelets <10 or active bleeding",
+    "Blasts on the smear",
+    "A stable mild normocytic anemia"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "Febrile neutropenia, very low platelets/bleeding and blasts all demand urgent action."
+  },
+  {
+   "id": "wk14_c19",
+   "sys": "Heme",
+   "topic": "Iron deficiency",
+   "type": "match",
+   "guide": {
+    "f": "W14_05_Iron_Deficiency.html",
+    "t": "5 · Labs",
+    "s": "iron studies pattern"
+   },
+   "prompt": "Match each iron study to its value in iron deficiency:",
+   "pairs": [
+    [
+     "Ferritin",
+     "Low"
+    ],
+    [
+     "Transferrin saturation",
+     "Low"
+    ],
+    [
+     "TIBC / transferrin",
+     "High"
+    ],
+    [
+     "RDW",
+     "High"
+    ]
+   ],
+   "explain": "Low ferritin + low saturation + high TIBC is the classic iron-deficiency pattern."
+  },
+  {
+   "id": "wk14_c20",
+   "sys": "Heme",
+   "topic": "Iron deficiency",
+   "type": "cloze",
+   "guide": {
+    "f": "W14_05_Iron_Deficiency.html",
+    "t": "5 · Ferritin",
+    "s": "ferritin acute phase"
+   },
+   "text": "Low ferritin is diagnostic of iron deficiency, but ferritin is an {{acute-phase reactant}}, so a {{normal/high}} value does not exclude deficiency during inflammation.",
+   "explain": "In inflammation, confirm with transferrin saturation/TIBC."
+  },
+  {
+   "id": "wk14_c21",
+   "sys": "Heme",
+   "topic": "Iron deficiency",
+   "type": "qa",
+   "guide": {
+    "f": "W14_05_Iron_Deficiency.html",
+    "t": "5 · Cause",
+    "s": "GI evaluation"
+   },
+   "prompt": "A man or postmenopausal woman has new iron-deficiency anemia. What must be excluded?",
+   "answer": "GI blood loss, including malignancy, until proven otherwise — evaluate the GI tract."
+  },
+  {
+   "id": "wk14_c22",
+   "sys": "Heme",
+   "topic": "Iron deficiency",
+   "type": "mcq",
+   "guide": {
+    "f": "W14_05_Iron_Deficiency.html",
+    "t": "5 · IV iron",
+    "s": "indications IV iron"
+   },
+   "prompt": "Which is a clear indication for IV rather than oral iron?",
+   "options": [
+    "Mild deficiency tolerating oral iron",
+    "Documented malabsorption or oral intolerance",
+    "Suspected thalassemia trait",
+    "Reactive thrombocytosis",
+    "A normal ferritin"
+   ],
+   "correct": 1,
+   "explain": "IV iron is used for intolerance, malabsorption, ongoing loss beyond oral replacement, or when rapid repletion is needed."
+  },
+  {
+   "id": "wk14_c23",
+   "sys": "Heme",
+   "topic": "Iron deficiency",
+   "type": "cloze",
+   "guide": {
+    "f": "W14_05_Iron_Deficiency.html",
+    "t": "5 · Pica",
+    "s": "pagophagia"
+   },
+   "text": "A craving for ice is called {{pagophagia}} and is a classic symptom of {{iron deficiency}}.",
+   "explain": "Pica/pagophagia, restless legs and koilonychia are iron-deficiency clues."
+  },
+  {
+   "id": "wk14_c24",
+   "sys": "Heme",
+   "topic": "Thalassemia",
+   "type": "qa",
+   "guide": {
+    "f": "W14_06_Hemoglobinopathies.html",
+    "t": "6 · Iron caution",
+    "s": "thalassemia avoid iron"
+   },
+   "prompt": "Why must you avoid empiric iron in microcytosis due to thalassemia?",
+   "answer": "Thalassemia microcytosis is from reduced globin production, not iron lack; giving iron without proven deficiency risks iron overload."
+  },
+  {
+   "id": "wk14_c25",
+   "sys": "Heme",
+   "topic": "Thalassemia",
+   "type": "cloze",
+   "guide": {
+    "f": "W14_06_Hemoglobinopathies.html",
+    "t": "6 · HbA2",
+    "s": "beta thalassemia HbA2"
+   },
+   "text": "β-thalassemia trait typically shows a very low MCV with a {{normal}} RDW and an elevated {{HbA₂}} on electrophoresis.",
+   "explain": "Contrast with iron deficiency: high RDW, low ferritin, normal electrophoresis."
+  },
+  {
+   "id": "wk14_c26",
+   "sys": "Heme",
+   "topic": "Sickle cell",
+   "type": "match",
+   "guide": {
+    "f": "W14_06_Hemoglobinopathies.html",
+    "t": "6 · Complications",
+    "s": "sickle complications"
+   },
+   "prompt": "Match each sickle cell complication to a key point:",
+   "pairs": [
+    [
+     "Vaso-occlusive crisis",
+     "Prompt analgesia, hydration, O₂ only if hypoxic"
+    ],
+    [
+     "Acute chest syndrome",
+     "O₂, antibiotics, ± exchange transfusion (emergency)"
+    ],
+    [
+     "Functional asplenia",
+     "Encapsulated-organism risk → vaccinate + penicillin"
+    ],
+    [
+     "Hydroxyurea",
+     "Raises HbF, reduces crises"
+    ]
+   ],
+   "explain": "Vaso-occlusion and hemolysis drive the clinical picture."
+  },
+  {
+   "id": "wk14_c27",
+   "sys": "Heme",
+   "topic": "Sickle cell",
+   "type": "qa",
+   "guide": {
+    "f": "W14_06_Hemoglobinopathies.html",
+    "t": "6 · Hydroxyurea",
+    "s": "hydroxyurea HbF"
+   },
+   "prompt": "How does hydroxyurea modify sickle cell disease, and what must be monitored?",
+   "answer": "It increases fetal hemoglobin (HbF), reducing vaso-occlusive episodes; monitor the CBC for myelosuppression."
+  },
+  {
+   "id": "wk14_c28",
+   "sys": "Heme",
+   "topic": "Sickle cell",
+   "type": "mcq",
+   "guide": {
+    "f": "W14_06_Hemoglobinopathies.html",
+    "t": "6 · Hemolysis labs",
+    "s": "hemolysis labs"
+   },
+   "prompt": "Which set of labs indicates active hemolysis?",
+   "options": [
+    "High reticulocytes, high LDH, high indirect bilirubin, low haptoglobin",
+    "Low reticulocytes, low LDH, high haptoglobin",
+    "Low retics, high ferritin, normal LDH",
+    "High platelets, low RDW",
+    "High fibrinogen, low D-dimer"
+   ],
+   "correct": 0,
+   "explain": "Hemolysis: reticulocytosis with high LDH and indirect bilirubin and low haptoglobin."
+  },
+  {
+   "id": "wk14_c29",
+   "sys": "Heme",
+   "topic": "Thrombocytopenia",
+   "type": "match",
+   "guide": {
+    "f": "W14_07_Thrombocytopenia.html",
+    "t": "7 · Causes",
+    "s": "ITP TTP DIC"
+   },
+   "prompt": "Match the cause of thrombocytopenia to its clue:",
+   "pairs": [
+    [
+     "ITP",
+     "Isolated low platelets, otherwise normal CBC/film"
+    ],
+    [
+     "TTP",
+     "Schistocytes + neuro/renal, normal coagulation"
+    ],
+    [
+     "DIC",
+     "Low fibrinogen, high D-dimer, prolonged PT/PTT"
+    ],
+    [
+     "Leukemia",
+     "Other cytopenias plus blasts"
+    ]
+   ],
+   "explain": "Coagulation studies and the film separate these quickly."
+  },
+  {
+   "id": "wk14_c30",
+   "sys": "Heme",
+   "topic": "Thrombocytopenia",
+   "type": "order",
+   "guide": {
+    "f": "W14_07_Thrombocytopenia.html",
+    "t": "7 · Thresholds",
+    "s": "platelet thresholds"
+   },
+   "prompt": "Order these platelet counts from least to most dangerous (lowest bleeding risk first):",
+   "items": [
+    "<50 ×10⁹/L (procedure/trauma risk)",
+    "<20 ×10⁹/L (higher spontaneous risk)",
+    "<10 ×10⁹/L (serious spontaneous bleeding)"
+   ],
+   "explain": "Risk rises as the count falls; <10 carries serious spontaneous bleeding risk."
+  },
+  {
+   "id": "wk14_c31",
+   "sys": "Heme",
+   "topic": "Thrombocytopenia",
+   "type": "mcq",
+   "guide": {
+    "f": "W14_07_Thrombocytopenia.html",
+    "t": "7 · TTP",
+    "s": "avoid platelets TTP"
+   },
+   "prompt": "Which is true of platelet transfusion in TTP?",
+   "options": [
+    "It is first-line therapy",
+    "Generally avoided unless life-threatening bleeding",
+    "Always given to keep platelets >150",
+    "It replaces plasma exchange"
+   ],
+   "correct": 1,
+   "explain": "In TTP, plasma exchange is the treatment; platelet transfusion is generally avoided unless there is life-threatening bleeding."
+  },
+  {
+   "id": "wk14_c32",
+   "sys": "Heme",
+   "topic": "Thrombocytopenia",
+   "type": "qa",
+   "guide": {
+    "f": "W14_07_Thrombocytopenia.html",
+    "t": "7 · ITP",
+    "s": "ITP management"
+   },
+   "prompt": "How is immune thrombocytopenia (ITP) managed across severities?",
+   "answer": "Observe mild, isolated cases; use steroids or IVIG for severe bleeding or a very low count."
+  },
+  {
+   "id": "wk14_c33",
+   "sys": "Heme",
+   "topic": "Thrombocytopenia",
+   "type": "cloze",
+   "guide": {
+    "f": "W14_07_Thrombocytopenia.html",
+    "t": "7 · Emergency",
+    "s": "schistocytes emergency"
+   },
+   "text": "Thrombocytopenia plus {{schistocytes}} is an emergency until {{TTP/DIC/HUS}} is excluded.",
+   "explain": "Microangiopathy with low platelets is a never-miss combination."
+  },
+  {
+   "id": "wk14_c34",
+   "sys": "Heme",
+   "topic": "Transfusion",
+   "type": "match",
+   "guide": {
+    "f": "W14_08_Transfusion.html",
+    "t": "8 · ABO",
+    "s": "ABO table"
+   },
+   "prompt": "Match each ABO group to its plasma antibodies:",
+   "pairs": [
+    [
+     "Group A",
+     "Anti-B"
+    ],
+    [
+     "Group B",
+     "Anti-A"
+    ],
+    [
+     "Group AB",
+     "None (universal RBC recipient)"
+    ],
+    [
+     "Group O",
+     "Anti-A and Anti-B (universal RBC donor)"
+    ]
+   ],
+   "explain": "Antibodies are directed against the antigens the person lacks."
+  },
+  {
+   "id": "wk14_c35",
+   "sys": "Heme",
+   "topic": "Transfusion",
+   "type": "qa",
+   "guide": {
+    "f": "W14_08_Transfusion.html",
+    "t": "8 · AHTR",
+    "s": "ABO incompatible mechanism"
+   },
+   "prompt": "What is the mechanism of an acute hemolytic transfusion reaction from ABO mismatch?",
+   "answer": "Recipient naturally occurring IgM binds donor RBC ABO antigens, activates complement, and causes intravascular hemolysis."
+  },
+  {
+   "id": "wk14_c36",
+   "sys": "Heme",
+   "topic": "Transfusion",
+   "type": "order",
+   "guide": {
+    "f": "W14_08_Transfusion.html",
+    "t": "8 · AHTR steps",
+    "s": "stop transfusion steps"
+   },
+   "prompt": "Order the immediate steps for a suspected acute hemolytic transfusion reaction:",
+   "items": [
+    "Stop the transfusion immediately",
+    "Maintain IV access with normal saline",
+    "Clerical check of patient/unit/labels",
+    "Notify the blood bank; send DAT + hemolysis samples",
+    "Support BP and renal perfusion; manage DIC"
+   ],
+   "explain": "Stop first, then resuscitate, verify, notify, and support organs."
+  },
+  {
+   "id": "wk14_c37",
+   "sys": "Heme",
+   "topic": "Transfusion",
+   "type": "match",
+   "guide": {
+    "f": "W14_08_Transfusion.html",
+    "t": "8 · Reactions",
+    "s": "TACO TRALI reactions"
+   },
+   "prompt": "Match each transfusion reaction to its feature:",
+   "pairs": [
+    [
+     "TACO",
+     "Volume overload: hypertension, raised JVP, responds to diuretic"
+    ],
+    [
+     "TRALI",
+     "Non-cardiogenic hypoxemia + bilateral infiltrates <6 h"
+    ],
+    [
+     "Acute hemolytic",
+     "ABO mismatch, intravascular hemolysis"
+    ],
+    [
+     "Delayed hemolytic",
+     "Days-weeks later, anamnestic alloantibody, positive DAT"
+    ]
+   ],
+   "explain": "TACO is overload; TRALI is non-cardiogenic; ABO is the catastrophic immediate one."
+  },
+  {
+   "id": "wk14_c38",
+   "sys": "Heme",
+   "topic": "Transfusion",
+   "type": "cloze",
+   "guide": {
+    "f": "W14_08_Transfusion.html",
+    "t": "8 · Rh",
+    "s": "anti-D not natural"
+   },
+   "text": "Anti-D antibodies are {{not}} naturally occurring; they form after exposure to D-positive cells through {{transfusion or pregnancy}}, and are prevented by {{RhD immune globulin}}.",
+   "explain": "Contrast with ABO antibodies, which are naturally occurring."
+  },
+  {
+   "id": "wk14_c39",
+   "sys": "Heme",
+   "topic": "Transfusion",
+   "type": "mcq",
+   "guide": {
+    "f": "W14_08_Transfusion.html",
+    "t": "8 · IgA",
+    "s": "allergic IgA deficiency"
+   },
+   "prompt": "Severe allergic/anaphylactic transfusion reactions are classically associated with which recipient factor?",
+   "options": [
+    "IgA deficiency",
+    "Iron overload",
+    "Group O blood",
+    "Low fibrinogen",
+    "Thalassemia trait"
+   ],
+   "correct": 0,
+   "explain": "IgA-deficient recipients can react to IgA in donor plasma, risking anaphylaxis."
+  },
+  {
+   "id": "wk14_c40",
+   "sys": "Heme",
+   "topic": "Transfusion",
+   "type": "qa",
+   "guide": {
+    "f": "W14_08_Transfusion.html",
+    "t": "8 · ABO",
+    "s": "universal donor recipient"
+   },
+   "prompt": "Who is the universal RBC donor and the universal RBC recipient?",
+   "answer": "Group O is the universal RBC donor (no A/B antigens); group AB is the universal RBC recipient (no anti-A/anti-B antibodies)."
+  },
+  {
+   "id": "wk14_c41",
+   "sys": "Heme",
+   "topic": "Sickle cell",
+   "type": "cloze",
+   "guide": {
+    "f": "W14_06_Hemoglobinopathies.html",
+    "t": "6 · HbS",
+    "s": "HbS polymerization"
+   },
+   "text": "In sickle cell disease, {{deoxygenated}} HbS {{polymerizes}}, causing sickling and leading to {{hemolysis}} and {{vaso-occlusion}}.",
+   "explain": "Polymerization on deoxygenation drives both hallmark processes."
+  },
+  {
+   "id": "wk14_c42",
+   "sys": "Heme",
+   "topic": "Blood film",
+   "type": "match",
+   "guide": {
+    "f": "W14_02_Blood_Film.html",
+    "t": "2 · WBC",
+    "s": "white cell functions"
+   },
+   "prompt": "Match each white cell to its core function:",
+   "pairs": [
+    [
+     "Neutrophils",
+     "Acute bacterial/fungal defense"
+    ],
+    [
+     "Lymphocytes",
+     "Adaptive immunity (T, B, NK cells)"
+    ],
+    [
+     "Eosinophils",
+     "Parasites, allergy, drug reactions"
+    ],
+    [
+     "Monocytes",
+     "Phagocytosis and antigen presentation"
+    ]
+   ],
+   "explain": "The differential localizes the type of immune problem."
+  },
+  {
+   "id": "wk14_c43",
+   "sys": "Heme",
+   "topic": "Anemia approach",
+   "type": "order",
+   "guide": {
+    "f": "W14_01_CBC_Anemia.html",
+    "t": "1 · Microcytic workup",
+    "s": "microcytic first tests"
+   },
+   "prompt": "Order the initial workup of a microcytic anemia:",
+   "items": [
+    "Ferritin + iron studies (saturation/TIBC) and review the film",
+    "Hemoglobin electrophoresis if iron studies are normal",
+    "GI/gynecologic evaluation for the source of blood loss"
+   ],
+   "explain": "Confirm iron status first; pursue thalassemia and the bleeding source next."
+  },
+  {
+   "id": "wk14_c44",
+   "sys": "Heme",
+   "topic": "Iron deficiency",
+   "type": "multi",
+   "guide": {
+    "f": "W14_05_Iron_Deficiency.html",
+    "t": "5 · Labs",
+    "s": "iron deficiency labs select"
+   },
+   "prompt": "Which labs fit iron deficiency anemia? (select all)",
+   "options": [
+    "Low ferritin",
+    "High TIBC/transferrin",
+    "High transferrin saturation",
+    "High RDW"
+   ],
+   "correct": [
+    0,
+    1,
+    3
+   ],
+   "explain": "Iron deficiency lowers ferritin and transferrin saturation but raises TIBC and RDW."
+  },
+  {
+   "id": "wk14_c45",
+   "sys": "Heme",
+   "topic": "Transfusion",
+   "type": "qa",
+   "guide": {
+    "f": "W14_08_Transfusion.html",
+    "t": "8 · TACO mgmt",
+    "s": "TACO management"
+   },
+   "prompt": "How is TACO (circulatory overload) managed and prevented?",
+   "answer": "Treat as volume overload — slow or divide transfusions, diurese, sit the patient up, and give oxygen as needed."
+  },
+  {
+   "id": "wk14_c46",
+   "sys": "Heme",
+   "topic": "Pancytopenia",
+   "type": "qa",
+   "guide": {
+    "f": "W14_04_Hematopoiesis_Pancytopenia.html",
+    "t": "4 · Biopsy",
+    "s": "when marrow biopsy"
+   },
+   "prompt": "When is a bone marrow biopsy especially indicated in pancytopenia?",
+   "answer": "When it is unexplained, severe, persistent, or associated with abnormal cells such as blasts on the film."
+  },
+  {
+   "id": "wk14_c47",
+   "sys": "Heme",
+   "topic": "CBC framework",
+   "type": "qa",
+   "guide": {
+    "f": "W14_01_CBC_Anemia.html",
+    "t": "1 · Not a diagnosis",
+    "s": "anemia is a clue"
+   },
+   "prompt": "Why is 'anemia' never an acceptable final diagnosis?",
+   "answer": "It is only a clue to an underlying process (loss, destruction, or underproduction); you must identify the cause."
+  }
+ ],
+ "guides": [
+  {
+   "file": "W14_01_CBC_Anemia.html",
+   "title": "Week 14 · 1 CBC & the Anemia Approach",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>CBC & the Anemia Approach</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Foundations</div><h1>CBC &amp; the Anemia Approach</h1></div><div class='r'>Week 14 &middot; Blood I<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>How to read any abnormal CBC: which line(s), then MCV and reticulocytes for anemia. Anemia is a clue, never a final diagnosis.</p>\n<h2>The five questions for any abnormal CBC</h2>\n<ul>\n<li><b>Which cell line?</b> Red (anemia/erythrocytosis), white (leukopenia/leukocytosis), platelets (low/high).</li>\n<li><b>One line or many?</b> A single line down &rarr; missing raw material, loss/destruction, or a lineage problem. <b>Bicytopenia/pancytopenia &rarr; a bone-marrow (factory) problem until proven otherwise.</b></li>\n<li><b>For anemia, what is the MCV?</b> Microcytic &lt;80, normocytic 80&ndash;100, macrocytic &gt;100 fL.</li>\n<li><b>What is the reticulocyte response?</b> High &rarr; marrow responding (bleeding/hemolysis). Low/inappropriately normal &rarr; an underproduction problem.</li>\n<li><b>What does the film show?</b> Often the single most useful next test in an unexplained CBC.</li>\n</ul>\n<p>You have not truly reviewed a CBC until you have looked at <b>Hb / MCV / RDW</b>, the <b>WBC and differential</b> (including the absolute neutrophil count), and the <b>platelet count</b>.</p>\n<h2>MCV buckets</h2>\n<table>\n<tr><th>MCV</th><th>Common causes</th></tr>\n<tr><td><b>Microcytic &lt;80</b></td><td>Iron deficiency, thalassemia, anemia of inflammation, sideroblastic, lead</td></tr>\n<tr><td><b>Normocytic 80&ndash;100</b></td><td>Acute blood loss, hemolysis, renal disease, inflammation, marrow failure, early iron deficiency</td></tr>\n<tr><td><b>Macrocytic &gt;100</b></td><td>B12/folate deficiency, alcohol, liver disease, hypothyroidism, drugs, MDS, reticulocytosis</td></tr>\n</table>\n<h2>RDW and the reticulocyte count</h2>\n<p><b>RDW</b> measures variability of red-cell size. A <b>high RDW</b> with microcytosis favours <b>iron deficiency</b> (a mix of old normal and new small cells); a <b>normal RDW</b> with marked microcytosis favours <b>thalassemia trait</b> (uniformly small cells).</p>\n<p>The <b>reticulocyte count</b> separates loss/destruction from underproduction. A high count after a few days means the marrow is responding (bleeding or hemolysis); a low or inappropriately normal count means a production problem &mdash; nutrient deficiency, renal disease (low EPO), inflammation, or marrow failure.</p>\n<div class='key'><b>MCV + reticulocyte count is the backbone of the anemia algorithm.</b> Classify by size, then ask whether the marrow is responding.</div>\n<h2>Worked approach</h2>\n<table>\n<tr><th>Step</th><th>What you do</th></tr>\n<tr><td>1</td><td>Confirm anemia; assess severity and stability (bleeding? tissue hypoxia?)</td></tr>\n<tr><td>2</td><td>Isolated, or with other cytopenias? (the latter suggests marrow/systemic cause)</td></tr>\n<tr><td>3</td><td>Classify by MCV; order the targeted first tests for that bucket</td></tr>\n<tr><td>4</td><td>Use reticulocytes &plusmn; the film to refine and to decide on marrow study</td></tr>\n</table>\n<div class='band'><div class='t'>Anemia: symptoms &amp; signs</div>\nFatigue, exertional dyspnea, lightheadedness, headache, <b>conjunctival pallor</b>, tachycardia; chest pain/ischemia, heart failure, or hypotension in severe or rapid anemia. Severity depends on speed as much as on the number.</div>\n<div class='key'>Anemia is never the final diagnosis &mdash; always identify the cause.</div>\n</div>"
+  },
+  {
+   "file": "W14_02_Blood_Film.html",
+   "title": "Week 14 · 2 The Blood Film",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>The Blood Film</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Morphology</div><h1>The Blood Film</h1></div><div class='r'>Week 14 &middot; Blood I<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Pattern recognition on the smear &mdash; the red-cell, white-cell, and platelet findings that point straight to a diagnosis.</p>\n<h2>Red-cell morphology that changes management</h2>\n<table>\n<tr><th>Finding</th><th>Think</th></tr>\n<tr><td>Microcytic / hypochromic</td><td>Iron deficiency, thalassemia, anemia of inflammation, sideroblastic, lead</td></tr>\n<tr><td><b>Macro-ovalocytes + hypersegmented neutrophils</b></td><td>Megaloblastic anemia (B12 or folate)</td></tr>\n<tr><td><b>Schistocytes</b> (fragments)</td><td>Microangiopathy &mdash; TTP, HUS, DIC, mechanical valve <span class='dnm'>(urgent)</span></td></tr>\n<tr><td>Spherocytes (no central pallor)</td><td>Hereditary spherocytosis or autoimmune hemolysis</td></tr>\n<tr><td>Target cells</td><td>Thalassemia, liver disease, post-splenectomy</td></tr>\n<tr><td>Sickle cells</td><td>Sickle cell disease</td></tr>\n<tr><td>Teardrop cells + leukoerythroblastic film</td><td>Marrow infiltration / fibrosis</td></tr>\n<tr><td>Bite cells / Heinz bodies</td><td>Oxidative hemolysis (e.g. G6PD deficiency)</td></tr>\n<tr><td>Basophilic stippling</td><td>Lead poisoning, sideroblastic anemia, thalassemia</td></tr>\n<tr><td>Howell&ndash;Jolly bodies</td><td>Hyposplenism / post-splenectomy</td></tr>\n<tr><td>Polychromasia</td><td>Reticulocytosis (marrow responding)</td></tr>\n<tr><td><b>Blasts</b></td><td>Acute leukemia <span class='dnm'>(urgent)</span></td></tr>\n</table>\n<h2>White cells</h2>\n<table>\n<tr><th>Cell</th><th>Role &amp; clinical relevance</th></tr>\n<tr><td>Neutrophils</td><td>Bacterial/fungal defense; severe neutropenia is a febrile emergency</td></tr>\n<tr><td>Lymphocytes</td><td>Adaptive immunity (T, B, NK); lymphocytosis may be reactive or malignant</td></tr>\n<tr><td>Monocytes</td><td>Phagocytosis, antigen presentation; monocytosis in chronic inflammation or myeloid neoplasms</td></tr>\n<tr><td>Eosinophils</td><td>Allergy, parasites, drug reactions, some malignancies</td></tr>\n<tr><td>Basophils</td><td><b>Basophilia</b> &rarr; myeloproliferative disease, especially CML</td></tr>\n</table>\n<h2>Platelets on the film</h2>\n<p><b>Giant platelets</b> suggest increased turnover or an inherited platelet disorder. Platelet <b>clumping</b> in the EDTA tube causes spurious (pseudo-) thrombocytopenia &mdash; always exclude it before a work-up by checking the film and, if needed, repeating in a citrate tube.</p>\n<div class='band warn'><div class='t'>Two film findings you never miss</div>\n<b>Schistocytes</b> (thrombotic microangiopathy &mdash; TTP/HUS/DIC) and <b>blasts</b> (acute leukemia). Either one changes the pace and the plan immediately.</div>\n<div class='key'>The film is the cheapest high-yield test in hematology &mdash; review it whenever the CBC is unexplained, severe, or clinically concerning.</div>\n</div>"
+  },
+  {
+   "file": "W14_03_Oxygen_Hb.html",
+   "title": "Week 14 · 3 Oxygen Delivery & Hemoglobin",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Oxygen Delivery & Hemoglobin</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Physiology</div><h1>Oxygen Delivery &amp; Hemoglobin</h1></div><div class='r'>Week 14 &middot; Blood I<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>How hemoglobin carries and releases oxygen &mdash; cooperative binding, the sigmoid curve, and what shifts it.</p>\n<h2>Hemoglobin structure</h2>\n<p>Most oxygen travels bound to hemoglobin inside red cells; only a small fraction is dissolved in plasma. Adult <b>HbA = 2&alpha; + 2&beta;</b> chains, each of the four globin chains carrying a <b>heme</b> with iron that binds one O&#8322; &mdash; so one Hb molecule binds up to <b>4 O&#8322;</b>. <b>Fetal HbF = 2&alpha; + 2&gamma;</b>, with higher O&#8322; affinity so the fetus extracts oxygen across the placenta.</p>\n<h2>Cooperative binding &amp; the curve</h2>\n<p>Binding of one O&#8322; raises hemoglobin's affinity for the next, producing the classic <b>sigmoidal</b> dissociation curve. The <b>P&#8325;&#8320;</b> (the PO&#8322; at which Hb is 50% saturated) summarizes affinity: a <b>higher P&#8325;&#8320; = right shift</b> (lower affinity), a lower P&#8325;&#8320; = left shift.</p>\n<table>\n<tr><th>Shift</th><th>Affinity / effect</th><th>Causes</th></tr>\n<tr><td><b>Right</b></td><td>Lower affinity &rarr; <b>more unloading</b> to tissue</td><td>&uarr;CO&#8322;, &uarr;H&#8314;/low pH, &uarr;temperature, &uarr;2,3-BPG, exercise</td></tr>\n<tr><td><b>Left</b></td><td>Higher affinity &rarr; <b>less unloading</b></td><td>&darr;CO&#8322;, alkalosis, &darr;temperature, &darr;2,3-BPG, <b>HbF</b>, <b>carbon monoxide</b></td></tr>\n</table>\n<div class='band'><div class='t'>Bohr effect</div>\nMetabolically active tissue generates CO&#8322; and H&#8314;, which lower Hb affinity, shift the curve <b>right</b>, and promote O&#8322; unloading exactly where it is needed. In the lungs the reverse occurs, favouring loading.</div>\n<h2>Special cases</h2>\n<p><b>2,3-BPG</b> rises in chronic hypoxia/anemia and at altitude (right shift, better unloading); stored (banked) blood is <b>depleted</b> of 2,3-BPG, transiently shifting it left. <b>Methemoglobin</b> (iron oxidized to Fe&#179;&#8314;) cannot carry O&#8322; and shifts the residual curve left.</p>\n<div class='band warn'><div class='t'>Carbon monoxide</div>\nCO binds hemoglobin with ~250&times; the affinity of O&#8322;, shifts the curve <b>left</b>, and is read as oxyhemoglobin by standard pulse oximetry &mdash; giving a <b>falsely normal SpO&#8322;</b> despite real tissue hypoxia. Suspect it clinically and measure <b>carboxyhemoglobin</b> on co-oximetry.</div>\n</div>"
+  },
+  {
+   "file": "W14_04_Hematopoiesis_Pancytopenia.html",
+   "title": "Week 14 · 4 Hematopoiesis & Pancytopenia",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Hematopoiesis & Pancytopenia</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Marrow</div><h1>Hematopoiesis &amp; Pancytopenia</h1></div><div class='r'>Week 14 &middot; Blood I<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Where blood is made, how production is regulated, and how to think about the patient whose marrow factory is failing.</p>\n<h2>Hematopoiesis</h2>\n<p>Mature blood cells arise from <b>hematopoietic stem cells</b> in marrow through four properties: <b>self-renewal</b> (maintain the pool), <b>commitment</b> (choose a lineage), <b>proliferation</b> (expand progenitors), and <b>maturation</b> (become functional cells). Production is tuned by growth factors &mdash; <b>erythropoietin (EPO)</b> from the kidney drives red cells, <b>thrombopoietin (TPO)</b> drives platelets, and <b>G-CSF</b> drives neutrophils.</p>\n<table>\n<tr><th>Stage</th><th>Main site</th></tr>\n<tr><td>Early embryo</td><td>Yolk sac</td></tr>\n<tr><td>Fetus</td><td>Fetal liver, then marrow later in gestation</td></tr>\n<tr><td>Childhood</td><td>Throughout much of the skeleton</td></tr>\n<tr><td>Adult</td><td>Axial skeleton: pelvis, vertebrae, ribs, sternum, proximal long bones</td></tr>\n</table>\n<h2>Pancytopenia = all three lines down</h2>\n<p>Anemia + leukopenia/neutropenia + thrombocytopenia. It usually signals a <b>marrow problem</b> &mdash; failure, replacement, or ineffective hematopoiesis &mdash; until proven otherwise. (Two lines down is bicytopenia and carries the same worry.)</p>\n<table>\n<tr><th>Category</th><th>Example</th><th>Clue</th></tr>\n<tr><td>Marrow failure</td><td>Aplastic anemia</td><td>Hypocellular (\"empty\") marrow, no splenomegaly</td></tr>\n<tr><td>Infiltration / replacement</td><td>Leukemia, lymphoma, metastasis, myelofibrosis</td><td>Blasts, teardrops, leukoerythroblastic film</td></tr>\n<tr><td>Ineffective hematopoiesis</td><td>B12/folate deficiency, MDS</td><td>Macrocytosis, hypersegmented neutrophils</td></tr>\n<tr><td>Destruction / sequestration</td><td>Hypersplenism, autoimmune cytopenias</td><td>Splenomegaly</td></tr>\n<tr><td>Infection / drugs / toxins</td><td>HIV, EBV, hepatitis, chemotherapy, alcohol</td><td>Exposure history</td></tr>\n</table>\n<h2>Work-up</h2>\n<ul>\n<li>Confirm true pancytopenia on a repeat CBC; review the differential and absolute neutrophil count.</li>\n<li>Review the blood film <b>urgently</b>; check the reticulocyte count.</li>\n<li>Screen reversible causes: B12/folate, iron studies, liver and renal tests, viral testing; hemolysis labs if reticulocytes are high.</li>\n<li><b>Bone marrow aspirate/biopsy</b> when unexplained, severe, persistent, or associated with abnormal cells.</li>\n</ul>\n<div class='band warn'><div class='t'>Urgent red flags</div>\nFebrile neutropenia &middot; platelets &lt;10 or active bleeding &middot; blasts on the smear &middot; severe symptomatic anemia &middot; rapidly falling counts &middot; schistocytes/neuro/renal failure (TTP/HUS).</div>\n</div>"
+  },
+  {
+   "file": "W14_05_Iron_Deficiency.html",
+   "title": "Week 14 · 5 Iron Deficiency Anemia",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Iron Deficiency Anemia</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Anemia</div><h1>Iron Deficiency Anemia</h1></div><div class='r'>Week 14 &middot; Blood I<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The most common anemia worldwide: the stages, the lab pattern, the ferritin trap, treatment, and finding the cause.</p>\n<h2>Stages &amp; lab pattern</h2>\n<p>Iron deficiency progresses: <b>depleted stores</b> (low ferritin, normal CBC) &rarr; <b>iron-restricted erythropoiesis</b> (low transferrin saturation, high TIBC, MCV starting to fall) &rarr; <b>iron deficiency anemia</b> (low Hb, low MCV, high RDW, microcytic hypochromic film).</p>\n<table>\n<tr><th>Test</th><th>Iron deficiency</th></tr>\n<tr><td>Ferritin</td><td><b>Low</b> (best single test of stores)</td></tr>\n<tr><td>Serum iron / transferrin saturation</td><td>Low</td></tr>\n<tr><td>TIBC / transferrin</td><td>High</td></tr>\n<tr><td>RDW</td><td>High</td></tr>\n<tr><td>Platelets</td><td>Normal or <b>reactive thrombocytosis</b></td></tr>\n</table>\n<div class='band warn'><div class='t'>The ferritin trap</div>\nFerritin is an <b>acute-phase reactant</b>. A low ferritin is diagnostic of iron deficiency, but a <b>normal or high ferritin does not exclude it</b> in inflammation, infection, or malignancy &mdash; interpret with transferrin saturation/TIBC and the clinical picture.</div>\n<h2>Iron deficiency vs thalassemia trait</h2>\n<p>Both give microcytosis; the distinction matters because giving iron in thalassemia is useless and risks overload.</p>\n<table>\n<tr><th>Feature</th><th>Iron deficiency</th><th>Thalassemia trait</th></tr>\n<tr><td>RDW</td><td>High</td><td>Normal / mildly elevated</td></tr>\n<tr><td>RBC count</td><td>Low/normal</td><td>Normal/high relative to Hb</td></tr>\n<tr><td>Ferritin</td><td>Low</td><td>Normal/high</td></tr>\n<tr><td>Electrophoresis</td><td>Normal</td><td>&beta;-trait: <b>elevated HbA&#8322;</b></td></tr>\n</table>\n<h2>Symptoms, treatment &amp; cause</h2>\n<p>Beyond fatigue and pallor, look for <b>pica/pagophagia</b> (ice craving), restless legs, brittle nails/koilonychia, and glossitis/angular cheilitis. Management has two goals: <b>replace iron</b> and <b>treat the cause</b>.</p>\n<ul>\n<li><b>Oral iron</b> (ferrous sulfate/fumarate/gluconate), often once daily or alternate-day to improve absorption and tolerability; take away from calcium, antacids, tea/coffee; continue after the Hb normalizes to refill stores. Expect a reticulocyte bump within a week and Hb rise over weeks.</li>\n<li><b>IV iron</b> when oral is not tolerated, malabsorption is present, blood loss outpaces oral replacement, rapid repletion is needed, or chronic inflammation limits oral efficacy.</li>\n<li><b>Transfusion</b> only for instability, active major bleeding, or tissue hypoxia &mdash; it raises oxygen-carrying capacity temporarily but does not correct the deficiency.</li>\n</ul>\n<div class='key'>New iron deficiency in a man or postmenopausal woman warrants evaluation for <b>GI blood loss / malignancy</b> until proven otherwise.</div>\n</div>"
+  },
+  {
+   "file": "W14_06_Hemoglobinopathies.html",
+   "title": "Week 14 · 6 Thalassemia & Sickle Cell",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Thalassemia & Sickle Cell</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Hemoglobinopathies</div><h1>Thalassemia &amp; Sickle Cell</h1></div><div class='r'>Week 14 &middot; Blood I<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Two inherited routes to anemia: too little globin (thalassemia) and abnormal globin (sickle). Both selected for by malaria.</p>\n<h2>Thalassemia &mdash; reduced globin production</h2>\n<p>Reduced &alpha; or &beta; chain synthesis leaves an <b>imbalance</b> that damages precursors and circulating cells &rarr; <b>microcytosis</b> &plusmn; hemolysis. Because &alpha; chains are needed for both fetal and adult Hb, severe &alpha;-thalassemia presents early; &beta;-thalassemia declares itself after the fetal-to-adult Hb switch.</p>\n<table>\n<tr><th>Type</th><th>Key features</th></tr>\n<tr><td>Silent carrier / trait</td><td>Asymptomatic or mild microcytosis; &beta;-trait shows <b>&uarr;HbA&#8322;</b></td></tr>\n<tr><td>Intermedia</td><td>Variable anemia, splenomegaly, iron-overload risk</td></tr>\n<tr><td>Major</td><td>Severe transfusion-dependent anemia, marrow expansion, skeletal change, growth failure</td></tr>\n</table>\n<div class='band warn'><div class='t'>Do not give iron blindly</div>\nMicrocytosis is not always iron deficiency. In thalassemia, <b>do not prescribe iron unless deficiency is confirmed</b> &mdash; unnecessary iron risks overload. Offer genetic/family-planning counselling where relevant.</div>\n<h2>Sickle cell disease</h2>\n<p>A structural &beta;-globin point mutation makes <b>HbS</b>; on deoxygenation HbS <b>polymerizes</b>, sickling the cell &rarr; <b>chronic hemolysis + vaso-occlusion</b>. Crises are triggered by infection, hypoxia, dehydration, cold, and stress.</p>\n<table>\n<tr><th>Complication</th><th>Note</th></tr>\n<tr><td>Vaso-occlusive crisis</td><td>Prompt analgesia (often opioids), hydration, treat triggers, O&#8322; only if hypoxic</td></tr>\n<tr><td><b>Acute chest syndrome</b></td><td>Chest pain + fever + hypoxia + new infiltrate; O&#8322;, antibiotics, analgesia, &plusmn; (exchange) transfusion <span class='dnm'>(emergency)</span></td></tr>\n<tr><td><b>Functional asplenia</b></td><td>Repeated infarction &rarr; <b>encapsulated-organism</b> risk &rarr; vaccinate + penicillin prophylaxis in children</td></tr>\n<tr><td>Others</td><td>Stroke, splenic sequestration, dactylitis, priapism, avascular necrosis, CKD, pigment gallstones</td></tr>\n</table>\n<p>Diagnosis is by newborn screening and <b>hemoglobin electrophoresis/HPLC</b>; hemolysis labs show high reticulocytes, high LDH and indirect bilirubin, and low haptoglobin.</p>\n<div class='band good'><div class='t'>Disease-modifying therapy</div>\n<b>Hydroxyurea</b> raises <b>HbF</b> and reduces vaso-occlusive episodes (monitor the CBC for myelosuppression). Folic acid supports the increased erythropoiesis; vaccination and, in selected patients, hematopoietic stem-cell transplantation (curative) round out care.</div>\n</div>"
+  },
+  {
+   "file": "W14_07_Thrombocytopenia.html",
+   "title": "Week 14 · 7 Thrombocytopenia & Bleeding",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Thrombocytopenia & Bleeding</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Hemostasis</div><h1>Thrombocytopenia &amp; Bleeding</h1></div><div class='r'>Week 14 &middot; Blood I<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Reading the bleeding pattern, the causes that matter, and the counts and film findings that signal an emergency.</p>\n<h2>Bleeding pattern localizes the defect</h2>\n<table>\n<tr><th>Platelet / primary hemostasis</th><th>Coagulation factor / secondary</th></tr>\n<tr><td>Petechiae, purpura</td><td>Deep tissue bleeds</td></tr>\n<tr><td>Mucosal bleeding, epistaxis, gum bleeding</td><td>Hemarthroses, large hematomas</td></tr>\n<tr><td>Menorrhagia; immediate bleeding after cuts</td><td>Delayed bleeding after procedures</td></tr>\n</table>\n<h2>Causes that change management</h2>\n<table>\n<tr><th>Cause</th><th>Clue</th><th>Principle</th></tr>\n<tr><td><b>ITP</b></td><td>Isolated thrombocytopenia, otherwise normal CBC/film</td><td>Steroids/IVIG if severe bleeding or very low count; observe mild cases</td></tr>\n<tr><td><b>TTP</b></td><td>Thrombocytopenia + schistocytes + neuro/renal &plusmn; fever, <b>normal</b> coagulation</td><td><span class='dnm'>Emergency</span> plasma exchange; <b>avoid platelet transfusion</b></td></tr>\n<tr><td><b>DIC</b></td><td>Sepsis/trauma/obstetric; &uarr;PT/PTT, <b>&darr;fibrinogen</b>, &uarr;D-dimer, schistocytes</td><td>Treat the cause; product support (incl. cryoprecipitate)</td></tr>\n<tr><td>Marrow failure / leukemia</td><td>Other cytopenias, blasts</td><td>Urgent hematology + marrow study</td></tr>\n<tr><td>Drug-induced / hypersplenism</td><td>New drug; splenomegaly/liver disease</td><td>Stop culprit; treat underlying</td></tr>\n</table>\n<div class='band'><div class='t'>Distinguishing the microangiopathies by labs</div>\n<b>ITP:</b> coagulation normal, no schistocytes. <b>TTP:</b> coagulation normal, schistocytes present. <b>DIC:</b> prolonged PT/PTT, low fibrinogen, high D-dimer, schistocytes. In pregnancy also think gestational thrombocytopenia and HELLP.</div>\n<h2>Platelet thresholds</h2>\n<ul>\n<li><b>&lt;50</b> &times;10&#8313;/L &mdash; increased bleeding risk with procedures/trauma</li>\n<li><b>&lt;20</b> &times;10&#8313;/L &mdash; higher spontaneous bleeding risk</li>\n<li><b>&lt;10</b> &times;10&#8313;/L &mdash; significant risk of spontaneous serious bleeding, including intracranial</li>\n</ul>\n<div class='band warn'><div class='t'>Film red flags &amp; first step</div>\nAlways exclude pseudothrombocytopenia from clumping first. Then: <b>schistocytes</b> &rarr; TTP/HUS/DIC; <b>blasts</b> &rarr; acute leukemia. Both are urgent.</div>\n</div>"
+  },
+  {
+   "file": "W14_08_Transfusion.html",
+   "title": "Week 14 · 8 Blood Groups & Transfusion",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Blood Groups & Transfusion</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Transfusion</div><h1>Blood Groups &amp; Transfusion</h1></div><div class='r'>Week 14 &middot; Blood I<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>ABO and Rh, the catastrophic ABO mismatch, the named transfusion reactions, and preventing hemolytic disease of the newborn.</p>\n<h2>ABO system</h2>\n<p>ABO antigens are red-cell surface carbohydrates; the matching antibodies are <b>naturally occurring IgM</b> against whichever antigen the person lacks.</p>\n<table>\n<tr><th>Group</th><th>RBC antigens</th><th>Plasma antibodies</th><th>Can receive RBCs from</th></tr>\n<tr><td>A</td><td>A</td><td>Anti-B</td><td>A, O</td></tr>\n<tr><td>B</td><td>B</td><td>Anti-A</td><td>B, O</td></tr>\n<tr><td>AB</td><td>A + B</td><td>None</td><td>A, B, AB, O <b>(universal RBC recipient)</b></td></tr>\n<tr><td>O</td><td>None</td><td>Anti-A + Anti-B</td><td>O only <b>(universal RBC donor)</b></td></tr>\n</table>\n<p>Before a planned transfusion the lab does a <b>type and screen</b> (ABO/Rh + antibody screen) and a <b>cross-match</b>; in extreme emergencies, <b>O-negative</b> RBCs are given uncross-matched.</p>\n<div class='band warn'><div class='t'>Acute hemolytic transfusion reaction (ABO mismatch)</div>\nUsually a <b>clerical error</b>. Recipient IgM binds donor antigens &rarr; complement &rarr; <b>intravascular hemolysis</b>: fever, flank/back pain, hypotension, hemoglobinuria, DIC, AKI. <b>Stop the transfusion</b>, give saline, do a clerical check, notify the blood bank, send a DAT and hemolysis labs, and support blood pressure and the kidneys.</div>\n<h2>Named reactions</h2>\n<table>\n<tr><th>Reaction</th><th>Features</th></tr>\n<tr><td>Febrile non-hemolytic</td><td>Fever/chills, no hemolysis (cytokines); common and benign</td></tr>\n<tr><td>Allergic / anaphylaxis</td><td>Urticaria &rarr; anaphylaxis; severe reactions in <b>IgA deficiency</b></td></tr>\n<tr><td><b>TACO</b></td><td>Circulatory <b>overload</b>: dyspnea, <b>hypertension</b>, raised JVP, pulmonary edema, &uarr;BNP; responds to diuretic</td></tr>\n<tr><td><b>TRALI</b></td><td>Acute hypoxemia + bilateral infiltrates within 6 h, <b>non</b>-cardiogenic, normal volume status</td></tr>\n<tr><td>Delayed hemolytic</td><td>Days&ndash;weeks later; anamnestic alloantibody (e.g. Kidd); falling Hb, positive DAT</td></tr>\n</table>\n<h2>Rh &amp; hemolytic disease of the fetus/newborn</h2>\n<p>Anti-D is <b>not</b> naturally occurring &mdash; it forms only after exposure to D-positive RBCs (transfusion or pregnancy). An RhD-negative mother sensitized to a D-positive fetus makes anti-D <b>IgG</b> that crosses the placenta in a later D-positive pregnancy &rarr; fetal hemolysis. Alloimmunization to non-ABO antigens similarly threatens future pregnancies and transfusions.</p>\n<div class='band good'><div class='t'>Prevention</div>\n<b>RhD immune globulin</b> (passive anti-D) given to appropriate RhD-negative patients clears fetal D-positive cells <b>before</b> the maternal immune system responds, preventing anti-D alloimmunization.</div>\n</div>"
+  }
+ ]
+}
