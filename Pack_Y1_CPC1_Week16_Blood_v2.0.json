@@ -1,0 +1,1340 @@
+{
+ "pack": "Week 16 — Blood III",
+ "id": "wk16",
+ "formatVersion": "2.0",
+ "version": "2.0",
+ "author": "Alkarim Billawala / alkarim.billawala.ca",
+ "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
+ "created": "2026-06-15",
+ "updated": "2026-06-15",
+ "school": "UofT — Temerty Medicine",
+ "year": "Year 1",
+ "course": "CPC 1",
+ "weeks": "Week 16 · Blood III",
+ "questions": [
+  {
+   "id": "wk16_q01",
+   "sys": "Heme",
+   "topic": "Pancytopenia / MDS",
+   "difficulty": "medium",
+   "stem": "A 78-year-old man has 8 months of worsening fatigue, exertional dyspnea, and recurrent skin infections. He does not drink alcohol and has no liver disease. CBC: Hb 82 g/L, MCV 111 fL, WBC 2.6 &times;10⁹/L, ANC 0.7 &times;10⁹/L, platelets 48 &times;10⁹/L. The film shows oval macrocytes, hypogranular hypolobated neutrophils, and rare blasts. B12, liver enzymes, and viral serologies are normal/negative, and the spleen is normal on ultrasound. What is the most appropriate next diagnostic step?",
+   "options": [
+    "Bone marrow aspirate and biopsy",
+    "Start oral iron and repeat the CBC in 3 months",
+    "Direct antiglobulin test only",
+    "Colonoscopy for occult GI bleeding",
+    "Reassure, as macrocytosis is common in older adults"
+   ],
+   "correct": 0,
+   "explain": "Macrocytic anemia with neutropenia, thrombocytopenia, dysplastic neutrophils, and rare blasts in an older adult is highly concerning for <b>MDS</b> (or another marrow disorder). Normal B12, LFTs, serology, and spleen make common mimics unlikely, and diagnosis <b>requires bone marrow examination</b>.",
+   "guide": {
+    "f": "W16_02_Pancytopenia_MDS.html",
+    "t": "2 · MDS",
+    "s": "dysplasia + cytopenias = marrow"
+   }
+  },
+  {
+   "id": "wk16_q02",
+   "sys": "Heme",
+   "topic": "Febrile neutropenia",
+   "difficulty": "medium",
+   "stem": "A 68-year-old woman receiving induction chemotherapy for AML presents with fever 38.6°C and malaise. CBC shows ANC 0.2 &times;10⁹/L. BP 102/62, HR 116, with no focal findings. Blood cultures are drawn. What is the best immediate management?",
+   "options": [
+    "Immediate empiric IV antipseudomonal antibiotics (e.g. cefepime or piperacillin-tazobactam)",
+    "Wait for culture results before starting antibiotics",
+    "Oral amoxicillin-clavulanate and discharge",
+    "High-dose corticosteroids",
+    "Platelet transfusion only"
+   ],
+   "correct": 0,
+   "explain": "Fever with severe neutropenia is an emergency. Obtain cultures but <b>do not delay empiric broad-spectrum antibiotics with antipseudomonal coverage</b>. Vancomycin is added only for specific indications (line infection, pneumonia, skin/soft-tissue, instability, MRSA risk).",
+   "guide": {
+    "f": "W16_04_Leukocytosis_Neutropenia.html",
+    "t": "4 · Febrile neutropenia",
+    "s": "empiric antipseudomonal abx"
+   }
+  },
+  {
+   "id": "wk16_q03",
+   "sys": "Heme",
+   "topic": "CML",
+   "difficulty": "medium",
+   "stem": "A 46-year-old man has progressive early satiety, LUQ fullness, night sweats, and 7 kg weight loss. The spleen is palpable 8 cm below the costal margin. CBC: WBC 145 &times;10⁹/L, Hb 102 g/L, platelets 580 &times;10⁹/L, with neutrophilia, a left shift, basophilia, and 2% blasts. Which test is most likely to confirm the diagnosis?",
+   "options": [
+    "BCR-ABL fusion testing",
+    "JAK2 V617F mutation testing only",
+    "Heterophile antibody test",
+    "Serum protein electrophoresis",
+    "Direct antiglobulin test"
+   ],
+   "correct": 0,
+   "explain": "Marked leukocytosis with a neutrophilic left shift, <b>basophilia</b>, thrombocytosis, low blasts, and massive splenomegaly is classic chronic-phase <b>CML</b>, driven by the Philadelphia chromosome / <b>BCR-ABL</b> fusion.",
+   "guide": {
+    "f": "W16_05_Chronic_Leukemias_MPN.html",
+    "t": "5 · CML",
+    "s": "basophilia, splenomegaly, BCR-ABL"
+   }
+  },
+  {
+   "id": "wk16_q04",
+   "sys": "Heme",
+   "topic": "CLL",
+   "difficulty": "medium",
+   "stem": "A 72-year-old man is found to have WBC 88 &times;10⁹/L, Hb 133 g/L, platelets 190 &times;10⁹/L, with lymphocytes 80 &times;10⁹/L. He feels well aside from slowly enlarging painless cervical nodes; the film shows many mature lymphocytes and no blasts. Flow cytometry confirms CLL, and he has no B symptoms, cytopenias, bulky symptomatic nodes, or recurrent infections. What is the best initial management?",
+   "options": [
+    "Watchful waiting with monitoring",
+    "Immediate induction chemotherapy",
+    "Emergency leukapheresis",
+    "Splenectomy",
+    "Empiric broad-spectrum antibiotics"
+   ],
+   "correct": 0,
+   "explain": "Asymptomatic early <b>CLL</b> is monitored, not treated. Therapy is reserved for symptomatic/progressive disease, marrow failure, bulky symptomatic nodes/spleen, B symptoms, rapid lymphocyte doubling, or refractory autoimmune cytopenias.",
+   "guide": {
+    "f": "W16_05_Chronic_Leukemias_MPN.html",
+    "t": "5 · CLL",
+    "s": "watchful waiting"
+   }
+  },
+  {
+   "id": "wk16_q05",
+   "sys": "Heme",
+   "topic": "Infectious mononucleosis",
+   "difficulty": "easy",
+   "stem": "A 24-year-old student has 2 weeks of fever, severe fatigue, sore throat, and posterior cervical lymphadenopathy. Exam shows tonsillar exudates and mild splenomegaly; CBC shows lymphocytosis with atypical lymphocytes. She asks when she can return to rugby. Which advice is most appropriate?",
+   "options": [
+    "Supportive care; avoid contact sports while splenomegaly is present (splenic rupture risk)",
+    "Start amoxicillin and return to rugby once afebrile",
+    "Immediate excisional lymph node biopsy",
+    "Start imatinib",
+    "High-dose aspirin for thrombosis prevention"
+   ],
+   "correct": 0,
+   "explain": "This is classic infectious mononucleosis (EBV). Care is supportive, and <b>contact sports are avoided while the spleen is enlarged</b> because of rupture risk. Amoxicillin/ampicillin can cause a characteristic rash in EBV and is not indicated.",
+   "guide": {
+    "f": "W16_07_Myeloma_Mono_Spleen.html",
+    "t": "7 · Mononucleosis",
+    "s": "avoid contact sports + amoxicillin"
+   }
+  },
+  {
+   "id": "wk16_q06",
+   "sys": "Heme",
+   "topic": "Multiple myeloma",
+   "difficulty": "medium",
+   "stem": "A 63-year-old woman has back pain, fatigue, and recurrent respiratory infections. Labs: Hb 88 g/L, creatinine 185 µmol/L, calcium 3.0 mmol/L, elevated total protein; spine imaging shows lytic vertebral lesions. Which set of investigations best evaluates the suspected diagnosis?",
+   "options": [
+    "Serum protein electrophoresis, serum free light chains, skeletal imaging, and bone marrow biopsy",
+    "BCR-ABL testing and abdominal ultrasound only",
+    "Monospot and throat culture",
+    "DAT, haptoglobin, and bilirubin only",
+    "D-dimer and CT pulmonary angiogram"
+   ],
+   "correct": 0,
+   "explain": "The <b>CRAB</b> features (hyperCalcemia, Renal dysfunction, Anemia, Bone lesions) suggest <b>multiple myeloma</b>. Workup: monoclonal protein testing (SPEP + immunofixation), serum free light chains, skeletal imaging, and bone marrow biopsy.",
+   "guide": {
+    "f": "W16_07_Myeloma_Mono_Spleen.html",
+    "t": "7 · Myeloma",
+    "s": "CRAB workup"
+   }
+  },
+  {
+   "id": "wk16_q07",
+   "sys": "Heme",
+   "topic": "Lymphoma",
+   "difficulty": "medium",
+   "stem": "A 31-year-old man has an enlarging painless right supraclavicular node for 6 weeks, drenching night sweats, and 5 kg weight loss. The node is 3 cm and firm. CBC shows mild normocytic anemia, and chest X-ray shows mediastinal widening. What is the best next step?",
+   "options": [
+    "Urgent imaging and tissue diagnosis, preferably a biopsy adequate for lymphoma architecture",
+    "Reassurance and reassessment in 1 year",
+    "Empiric oral antibiotics for 2 weeks with no further plan",
+    "Fine-needle aspiration only and no staging",
+    "Start prednisone before biopsy to shrink the node"
+   ],
+   "correct": 0,
+   "explain": "A supraclavicular node, B symptoms, anemia, and mediastinal widening are concerning for lymphoma. Diagnosis needs <b>adequate tissue</b> (often excisional biopsy, since architecture matters). Steroids before biopsy can obscure the pathology and are generally avoided unless urgently needed for life-threatening compression.",
+   "guide": {
+    "f": "W16_06_Lymphadenopathy_Lymphoma.html",
+    "t": "6 · When to biopsy",
+    "s": "excisional biopsy for lymphoma"
+   }
+  },
+  {
+   "id": "wk16_q08",
+   "sys": "Heme",
+   "topic": "Polycythemia vera",
+   "difficulty": "medium",
+   "stem": "A 70-year-old woman has Hb 165 g/L, hematocrit 0.53, platelets 520 &times;10⁹/L, and WBC 13 &times;10⁹/L. She reports itching after warm showers and burning redness in her hands. EPO is low and JAK2 mutation is detected. Which strategy best reduces her thrombosis risk?",
+   "options": [
+    "Phlebotomy plus low-dose aspirin if no contraindication; cytoreduction based on risk",
+    "Intrathecal methotrexate",
+    "Observation only, as a high hemoglobin is protective",
+    "Rituximab monotherapy",
+    "Immediate broad-spectrum antibiotics"
+   ],
+   "correct": 0,
+   "explain": "Elevated hematocrit with <b>low EPO</b>, JAK2 mutation, aquagenic pruritus, and erythromelalgia is <b>polycythemia vera</b>. Thrombosis risk is reduced with <b>phlebotomy</b> (target hematocrit) and <b>low-dose aspirin</b>, adding hydroxyurea cytoreduction for high-risk patients.",
+   "guide": {
+    "f": "W16_05_Chronic_Leukemias_MPN.html",
+    "t": "5 · Polycythemia vera",
+    "s": "phlebotomy + low-dose ASA"
+   }
+  },
+  {
+   "id": "wk16_q09",
+   "sys": "Heme",
+   "topic": "Essential thrombocythemia",
+   "difficulty": "hard",
+   "stem": "A 52-year-old woman has platelets of 980 &times;10⁹/L on repeated CBCs with normal Hb and WBC. She has headaches and erythromelalgia, and workup supports essential thrombocythemia. She had a transient ischemic attack last year. Which treatment approach is most appropriate?",
+   "options": [
+    "Low-dose aspirin plus cytoreduction (e.g. hydroxyurea), if no contraindications",
+    "No treatment, because platelets do not contribute to thrombosis",
+    "ATRA immediately",
+    "Amoxicillin-clavulanate",
+    "Vitamin B12 injections only"
+   ],
+   "correct": 0,
+   "explain": "Essential thrombocythemia causes thrombotic/vasomotor symptoms. A prior <b>TIA</b> places her in a high-risk category, so <b>low-dose aspirin plus cytoreduction</b> (hydroxyurea) is appropriate. Watch hydroxyurea cytopenias/mucositis and aspirin bleeding.",
+   "guide": {
+    "f": "W16_05_Chronic_Leukemias_MPN.html",
+    "t": "5 · Essential thrombocythemia",
+    "s": "high-risk: ASA + hydroxyurea"
+   }
+  },
+  {
+   "id": "wk16_q10",
+   "sys": "Heme",
+   "topic": "Research question · PICO",
+   "difficulty": "easy",
+   "stem": "A resident wants to study whether a new outpatient education program improves recognition of febrile-neutropenia warning symptoms among patients on chemotherapy. They define the population as adults receiving chemotherapy, the intervention as the program, the comparator as usual discharge teaching, and the outcome as correct identification of fever as an emergency. Which framework structures this quantitative question?",
+   "options": [
+    "PICO",
+    "CRAB",
+    "B symptoms",
+    "R-CHOP",
+    "FINER only"
+   ],
+   "correct": 0,
+   "explain": "The question names a <b>P</b>opulation, <b>I</b>ntervention, <b>C</b>omparator, and <b>O</b>utcome &mdash; the <b>PICO</b> structure. FINER instead judges whether a question is feasible/interesting/novel/ethical/relevant.",
+   "guide": {
+    "f": "W16_08_Research_Questions.html",
+    "t": "8 · PICO",
+    "s": "P-I-C-O structure"
+   }
+  },
+  {
+   "id": "wk16_q11",
+   "sys": "Heme",
+   "topic": "Acute promyelocytic leukemia",
+   "difficulty": "hard",
+   "stem": "A 39-year-old man presents with fatigue, gum bleeding, and bruising. CBC shows pancytopenia with circulating promyelocytes; coagulation studies show prolonged PT/PTT, low fibrinogen, and elevated D-dimer. The team suspects acute promyelocytic leukemia. What is the most appropriate immediate step?",
+   "options": [
+    "Start ATRA urgently while confirming the diagnosis",
+    "Withhold all therapy until cytogenetics return",
+    "Begin heparin infusion as primary therapy",
+    "Give prophylactic platelet-rich plasma only",
+    "Start a BCR-ABL tyrosine kinase inhibitor"
+   ],
+   "correct": 0,
+   "explain": "<b>APL</b> carries life-threatening <b>DIC</b>. When suspected, <b>start ATRA urgently</b> while confirming the diagnosis &mdash; early ATRA reduces early hemorrhagic death. Watch for differentiation syndrome (fever, infiltrates, edema, hypotension), treated with steroids.",
+   "guide": {
+    "f": "W16_03_Acute_Leukemia.html",
+    "t": "3 · APL",
+    "s": "start ATRA urgently"
+   }
+  },
+  {
+   "id": "wk16_q12",
+   "sys": "Heme",
+   "topic": "Tumor lysis syndrome",
+   "difficulty": "hard",
+   "stem": "A 25-year-old man with a high-burden, rapidly proliferating ALL is about to start induction. He is from a region where G6PD deficiency is common, and screening confirms G6PD deficiency. He is at high risk for tumor lysis syndrome. Which urate-lowering approach is most appropriate?",
+   "options": [
+    "Allopurinol with aggressive IV hydration (avoid rasburicase)",
+    "Rasburicase, the preferred agent regardless of G6PD status",
+    "No prophylaxis; treat hyperkalemia only if it occurs",
+    "Oral potassium supplementation prophylactically",
+    "Diuresis without urate-lowering therapy"
+   ],
+   "correct": 0,
+   "explain": "<b>Rasburicase causes hemolysis and methemoglobinemia in G6PD deficiency</b> and must be avoided. Use <b>allopurinol</b> with aggressive hydration and electrolyte monitoring for tumor-lysis prevention in this patient.",
+   "guide": {
+    "f": "W16_03_Acute_Leukemia.html",
+    "t": "3 · Tumor lysis",
+    "s": "rasburicase contraindicated in G6PD"
+   }
+  },
+  {
+   "id": "wk16_q13",
+   "sys": "Heme",
+   "topic": "MDS therapy",
+   "difficulty": "medium",
+   "stem": "A 74-year-old man with lower-risk MDS has symptomatic transfusion-dependent anemia, and cytogenetics show an isolated del(5q) abnormality. He is not a transplant candidate. Which disease-modifying therapy is classically effective in this subgroup?",
+   "options": [
+    "Lenalidomide",
+    "Allopurinol",
+    "Imatinib",
+    "Rituximab",
+    "ATRA"
+   ],
+   "correct": 0,
+   "explain": "<b>Lenalidomide</b> is classically effective in <b>del(5q)</b> MDS, often reducing transfusion dependence. Monitor for cytopenias, thrombosis, and teratogenicity. Hypomethylating agents (azacitidine/decitabine) are used for higher-risk disease.",
+   "guide": {
+    "f": "W16_02_Pancytopenia_MDS.html",
+    "t": "2 · MDS management",
+    "s": "del(5q) → lenalidomide"
+   }
+  },
+  {
+   "id": "wk16_q14",
+   "sys": "Heme",
+   "topic": "Drug-induced neutropenia",
+   "difficulty": "easy",
+   "stem": "A 35-year-old woman started on an antithyroid drug for Graves disease develops a fever and sore throat 6 weeks later. CBC shows an ANC of 0.3 &times;10⁹/L with otherwise normal lines. Which is the most likely explanation?",
+   "options": [
+    "Drug-induced agranulocytosis from the antithyroid medication",
+    "Iron deficiency",
+    "Essential thrombocythemia",
+    "Polycythemia vera",
+    "Hereditary spherocytosis"
+   ],
+   "correct": 0,
+   "explain": "Antithyroid drugs (<b>methimazole, propylthiouracil</b>) are classic causes of <b>drug-induced agranulocytosis</b>, which often presents with fever/sore throat. Stop the drug and manage as febrile neutropenia. Clozapine, sulfonamides, and carbamazepine are other culprits.",
+   "guide": {
+    "f": "W16_04_Leukocytosis_Neutropenia.html",
+    "t": "4 · Neutropenia",
+    "s": "antithyroid drug agranulocytosis"
+   }
+  },
+  {
+   "id": "wk16_q15",
+   "sys": "Heme",
+   "topic": "Leukocytosis patterns",
+   "difficulty": "easy",
+   "stem": "A blood film on a patient with marked leukocytosis is reported as showing a neutrophilic left shift with prominent basophilia. Which diagnosis does the basophilia most specifically suggest?",
+   "options": [
+    "Chronic myeloid leukemia",
+    "Acute viral infection",
+    "Iron deficiency anemia",
+    "Immune thrombocytopenia",
+    "Reactive lymphocytosis"
+   ],
+   "correct": 0,
+   "explain": "Basophils rarely drive leukocytosis, so <b>basophilia is a key clue for CML</b>, especially alongside a neutrophilic left shift and splenomegaly. Confirm with BCR-ABL testing.",
+   "guide": {
+    "f": "W16_04_Leukocytosis_Neutropenia.html",
+    "t": "4 · Leukocytosis",
+    "s": "basophilia → CML"
+   }
+  },
+  {
+   "id": "wk16_q16",
+   "sys": "Heme",
+   "topic": "Lymphadenopathy red flags",
+   "difficulty": "easy",
+   "stem": "Which lymph node finding is most concerning for malignancy and should prompt biopsy?",
+   "options": [
+    "A hard, fixed supraclavicular node larger than 2 cm",
+    "A 1 cm tender mobile node during a sore throat",
+    "A soft submandibular node with dental infection",
+    "A small reactive node that shrinks over 2 weeks",
+    "A tender inguinal node after a foot laceration"
+   ],
+   "correct": 0,
+   "explain": "<b>Hard, fixed, supraclavicular, and &gt;2 cm</b> are classic malignancy red flags warranting biopsy. Tender, soft, mobile nodes that resolve, or that drain an obvious local infection, are usually reactive.",
+   "guide": {
+    "f": "W16_06_Lymphadenopathy_Lymphoma.html",
+    "t": "6 · Sizing up a node",
+    "s": "hard/fixed/supraclavicular/>2cm"
+   }
+  },
+  {
+   "id": "wk16_q17",
+   "sys": "Heme",
+   "topic": "Massive splenomegaly",
+   "difficulty": "medium",
+   "stem": "A 60-year-old man has a spleen palpable into the left iliac fossa, anemia, and a blood film showing teardrop cells and a leukoerythroblastic picture. Which diagnosis best fits this massive splenomegaly?",
+   "options": [
+    "Primary myelofibrosis",
+    "Iron deficiency anemia",
+    "Acute promyelocytic leukemia",
+    "Hereditary spherocytosis",
+    "Immune thrombocytopenia"
+   ],
+   "correct": 0,
+   "explain": "Massive splenomegaly with <b>teardrop cells</b> and a <b>leukoerythroblastic</b> film (extramedullary hematopoiesis from marrow fibrosis) is characteristic of <b>primary myelofibrosis</b>. CML, hairy cell leukemia, and some lymphomas are other massive-spleen causes.",
+   "guide": {
+    "f": "W16_05_Chronic_Leukemias_MPN.html",
+    "t": "5 · Myelofibrosis",
+    "s": "teardrops + massive spleen"
+   }
+  },
+  {
+   "id": "wk16_q18",
+   "sys": "Heme",
+   "topic": "Mediastinal mass",
+   "difficulty": "medium",
+   "stem": "A 28-year-old man with a large anterior mediastinal mass and suspected lymphoma is orthopneic and has facial plethora with distended neck veins. The team plans a diagnostic biopsy. Which management caution is most important?",
+   "options": [
+    "Avoid unnecessary sedation or general anesthesia because of airway/SVC compromise",
+    "Proceed directly to general anesthesia for an open biopsy",
+    "Start empiric chemotherapy before any tissue diagnosis",
+    "Give a large IV fluid bolus to treat the facial swelling",
+    "Discharge with outpatient follow-up in 4 weeks"
+   ],
+   "correct": 0,
+   "explain": "An anterior mediastinal mass can compress the airway and great vessels (SVC syndrome). <b>Sedation/general anesthesia can precipitate airway or cardiovascular collapse</b>, so they are avoided when possible; urgent specialist involvement is needed. Steroids before biopsy can obscure pathology unless life-threatening.",
+   "guide": {
+    "f": "W16_06_Lymphadenopathy_Lymphoma.html",
+    "t": "6 · Mediastinal mass",
+    "s": "avoid sedation/GA"
+   }
+  },
+  {
+   "id": "wk16_q19",
+   "sys": "Heme",
+   "topic": "Hodgkin lymphoma · ABVD",
+   "difficulty": "medium",
+   "stem": "A 30-year-old man with Hodgkin lymphoma is to receive ABVD chemotherapy. He is a competitive swimmer and asks about long-term lung effects. Which component of ABVD is most associated with pulmonary toxicity?",
+   "options": [
+    "Bleomycin",
+    "Doxorubicin",
+    "Vinblastine",
+    "Dacarbazine",
+    "Rituximab"
+   ],
+   "correct": 0,
+   "explain": "<b>Bleomycin</b> causes pulmonary toxicity (pneumonitis/fibrosis), with caution around lung disease and high inspired oxygen. Doxorubicin causes cardiomyopathy, vinblastine neuropathy, and dacarbazine nausea/myelosuppression. (Rituximab is not part of ABVD.)",
+   "guide": {
+    "f": "W16_06_Lymphadenopathy_Lymphoma.html",
+    "t": "6 · Hodgkin lymphoma",
+    "s": "bleomycin lung toxicity"
+   }
+  },
+  {
+   "id": "wk16_q20",
+   "sys": "Heme",
+   "topic": "Research · FINER vs PICO",
+   "difficulty": "medium",
+   "stem": "A student has drafted a structured clinical question and now wants to appraise whether it is worth pursuing — considering whether it can realistically be done, whether it adds new knowledge, and whether it is ethical. Which framework is she applying at this stage?",
+   "options": [
+    "FINER",
+    "PICO",
+    "CRAB",
+    "Virchow's triad",
+    "Wells criteria"
+   ],
+   "correct": 0,
+   "explain": "<b>FINER</b> (Feasible, Interesting, Novel, Ethical, Relevant) appraises whether a question is worth pursuing. <b>PICO</b> is used earlier to <i>build</i> the structure of the question; the two are complementary, not interchangeable.",
+   "guide": {
+    "f": "W16_08_Research_Questions.html",
+    "t": "8 · FINER",
+    "s": "FINER judges the question"
+   }
+  }
+ ],
+ "cards": [
+  {
+   "id": "wk16_c01",
+   "sys": "Heme",
+   "topic": "CBC approach",
+   "type": "qa",
+   "guide": {
+    "f": "W16_01_CBC_Danger_Approach.html",
+    "t": "1 · First questions",
+    "s": "abnormal CBC approach"
+   },
+   "prompt": "What are the first two questions to ask about any abnormal CBC?",
+   "answer": "Which cell line(s) are abnormal, and is it one line or several? Multiple lines down points to a marrow (factory) problem until proven otherwise."
+  },
+  {
+   "id": "wk16_c02",
+   "sys": "Heme",
+   "topic": "Pancytopenia",
+   "type": "qa",
+   "guide": {
+    "f": "W16_02_Pancytopenia_MDS.html",
+    "t": "2 · Pancytopenia",
+    "s": "blasts significance"
+   },
+   "prompt": "Why do blasts in a pancytopenic patient change the urgency?",
+   "answer": "Blasts shift the differential to acute leukemia, MDS, or myelofibrosis — a marrow-production/infiltration problem, not an isolated anemia — and prompt urgent hematology and bone marrow examination."
+  },
+  {
+   "id": "wk16_c03",
+   "sys": "Heme",
+   "topic": "MDS",
+   "type": "qa",
+   "guide": {
+    "f": "W16_02_Pancytopenia_MDS.html",
+    "t": "2 · MDS",
+    "s": "ineffective hematopoiesis"
+   },
+   "prompt": "Why does MDS cause cytopenias despite a cellular marrow?",
+   "answer": "The clonal stem cells produce dysplastic progeny that function poorly and undergo apoptosis — ineffective hematopoiesis — so peripheral counts fall even though the marrow looks cellular."
+  },
+  {
+   "id": "wk16_c04",
+   "sys": "Heme",
+   "topic": "Febrile neutropenia",
+   "type": "qa",
+   "guide": {
+    "f": "W16_04_Leukocytosis_Neutropenia.html",
+    "t": "4 · Febrile neutropenia",
+    "s": "why emergency"
+   },
+   "prompt": "Why is febrile neutropenia a medical emergency?",
+   "answer": "Neutropenic patients can have life-threatening infection with few localizing signs and may deteriorate rapidly, so empiric broad-spectrum antipseudomonal antibiotics are started immediately after cultures — without waiting for results."
+  },
+  {
+   "id": "wk16_c05",
+   "sys": "Heme",
+   "topic": "CML",
+   "type": "qa",
+   "guide": {
+    "f": "W16_05_Chronic_Leukemias_MPN.html",
+    "t": "5 · CML",
+    "s": "driver and treatment"
+   },
+   "prompt": "What genetic lesion drives CML, and what is first-line therapy?",
+   "answer": "The Philadelphia chromosome produces the BCR-ABL fusion tyrosine kinase; first-line therapy is a BCR-ABL tyrosine kinase inhibitor (e.g. imatinib, dasatinib, nilotinib)."
+  },
+  {
+   "id": "wk16_c06",
+   "sys": "Heme",
+   "topic": "CLL",
+   "type": "qa",
+   "guide": {
+    "f": "W16_05_Chronic_Leukemias_MPN.html",
+    "t": "5 · CLL",
+    "s": "when to treat"
+   },
+   "prompt": "When is asymptomatic CLL treated rather than monitored?",
+   "answer": "Treat for B symptoms, progressive symptomatic lymphadenopathy/splenomegaly, marrow failure (anemia/thrombocytopenia), rapid lymphocyte doubling, or autoimmune cytopenias refractory to standard therapy. Otherwise, watchful waiting."
+  },
+  {
+   "id": "wk16_c07",
+   "sys": "Heme",
+   "topic": "Multiple myeloma",
+   "type": "qa",
+   "guide": {
+    "f": "W16_07_Myeloma_Mono_Spleen.html",
+    "t": "7 · Myeloma",
+    "s": "CRAB"
+   },
+   "prompt": "What does CRAB stand for in multiple myeloma?",
+   "answer": "hyperCalcemia, Renal dysfunction, Anemia, and Bone lesions — the end-organ damage that defines symptomatic myeloma."
+  },
+  {
+   "id": "wk16_c08",
+   "sys": "Heme",
+   "topic": "Mononucleosis",
+   "type": "qa",
+   "guide": {
+    "f": "W16_07_Myeloma_Mono_Spleen.html",
+    "t": "7 · Mononucleosis",
+    "s": "two pitfalls"
+   },
+   "prompt": "What are the two classic management pitfalls in infectious mononucleosis?",
+   "answer": "Avoid contact sports while splenomegaly is present (splenic rupture risk), and avoid amoxicillin/ampicillin (causes a characteristic rash in EBV infection)."
+  },
+  {
+   "id": "wk16_c09",
+   "sys": "Heme",
+   "topic": "APL",
+   "type": "qa",
+   "guide": {
+    "f": "W16_03_Acute_Leukemia.html",
+    "t": "3 · APL",
+    "s": "urgent step"
+   },
+   "prompt": "Why is ATRA started urgently when APL is suspected?",
+   "answer": "APL causes severe DIC with a high risk of early fatal hemorrhage; starting ATRA promptly (before full confirmation) reduces early death by driving promyelocyte differentiation."
+  },
+  {
+   "id": "wk16_c10",
+   "sys": "Heme",
+   "topic": "Splenomegaly",
+   "type": "qa",
+   "guide": {
+    "f": "W16_07_Myeloma_Mono_Spleen.html",
+    "t": "7 · Splenomegaly",
+    "s": "massive causes"
+   },
+   "prompt": "List classic causes of MASSIVE splenomegaly.",
+   "answer": "CML, primary myelofibrosis, hairy cell leukemia, some lymphomas, and chronic infections/parasitic disease in the right epidemiologic context."
+  },
+  {
+   "id": "wk16_c11",
+   "sys": "Heme",
+   "topic": "Pancytopenia",
+   "type": "cloze",
+   "guide": {
+    "f": "W16_02_Pancytopenia_MDS.html",
+    "t": "2 · Pancytopenia",
+    "s": "definition"
+   },
+   "text": "Pancytopenia means a fall in all three lines: {{anemia}}, leukopenia/neutropenia, and {{thrombocytopenia}}.",
+   "explain": "Recognizing all three lines down reframes the problem as marrow disease."
+  },
+  {
+   "id": "wk16_c12",
+   "sys": "Heme",
+   "topic": "AML vs ALL",
+   "type": "cloze",
+   "guide": {
+    "f": "W16_03_Acute_Leukemia.html",
+    "t": "3 · AML vs ALL",
+    "s": "lineage + CNS"
+   },
+   "text": "AML arises from the {{myeloid}} lineage; ALL arises from the {{lymphoid}} lineage and especially requires {{CNS}} prophylaxis with intrathecal chemotherapy.",
+   "explain": "Lineage is defined by flow cytometry; CNS prophylaxis is a hallmark of ALL treatment."
+  },
+  {
+   "id": "wk16_c13",
+   "sys": "Heme",
+   "topic": "CML film",
+   "type": "cloze",
+   "guide": {
+    "f": "W16_05_Chronic_Leukemias_MPN.html",
+    "t": "5 · CML",
+    "s": "film clues"
+   },
+   "text": "Chronic-phase CML shows marked leukocytosis with a neutrophilic {{left shift}} and {{basophilia}}, confirmed by {{BCR-ABL}} testing.",
+   "explain": "Basophilia plus splenomegaly is the classic clue; BCR-ABL confirms."
+  },
+  {
+   "id": "wk16_c14",
+   "sys": "Heme",
+   "topic": "Polycythemia vera",
+   "type": "cloze",
+   "guide": {
+    "f": "W16_05_Chronic_Leukemias_MPN.html",
+    "t": "5 · Polycythemia vera",
+    "s": "EPO + JAK2"
+   },
+   "text": "Polycythemia vera shows a raised hematocrit with a {{low}} EPO and a {{JAK2}} mutation in most cases.",
+   "explain": "Low EPO with high red cell mass distinguishes primary PV from secondary erythrocytosis."
+  },
+  {
+   "id": "wk16_c15",
+   "sys": "Heme",
+   "topic": "Febrile neutropenia",
+   "type": "cloze",
+   "guide": {
+    "f": "W16_04_Leukocytosis_Neutropenia.html",
+    "t": "4 · Febrile neutropenia",
+    "s": "empiric abx"
+   },
+   "text": "Empiric therapy for febrile neutropenia must cover {{Pseudomonas}}; add {{vancomycin}} only for specific indications such as line infection or instability.",
+   "explain": "Antipseudomonal beta-lactam first; vancomycin is not automatic."
+  },
+  {
+   "id": "wk16_c16",
+   "sys": "Heme",
+   "topic": "Research · PICO",
+   "type": "cloze",
+   "guide": {
+    "f": "W16_08_Research_Questions.html",
+    "t": "8 · PICO",
+    "s": "elements"
+   },
+   "text": "PICO structures a quantitative question as Population, {{Intervention}}, Comparator, and {{Outcome}}.",
+   "explain": "PICO builds the question; FINER judges whether it is worth doing."
+  },
+  {
+   "id": "wk16_c17",
+   "sys": "Heme",
+   "topic": "Neutropenia ANC",
+   "type": "cloze",
+   "guide": {
+    "f": "W16_04_Leukocytosis_Neutropenia.html",
+    "t": "4 · Neutropenia by ANC",
+    "s": "severe threshold"
+   },
+   "text": "Neutropenia is severe (high infection risk) when the ANC is below {{0.5}} ×10⁹/L and profound below {{0.1}} ×10⁹/L.",
+   "explain": "ANC thresholds stratify infection risk."
+  },
+  {
+   "id": "wk16_c18",
+   "sys": "Heme",
+   "topic": "Myeloma workup",
+   "type": "cloze",
+   "guide": {
+    "f": "W16_07_Myeloma_Mono_Spleen.html",
+    "t": "7 · Myeloma",
+    "s": "monoclonal protein tests"
+   },
+   "text": "Myeloma workup includes serum protein electrophoresis with {{immunofixation}}, serum {{free light chains}}, skeletal imaging, and a bone marrow biopsy.",
+   "explain": "These identify and quantify the monoclonal protein and clonal plasma cells."
+  },
+  {
+   "id": "wk16_c19",
+   "sys": "Heme",
+   "topic": "MDS therapy",
+   "type": "mcq",
+   "guide": {
+    "f": "W16_02_Pancytopenia_MDS.html",
+    "t": "2 · MDS management",
+    "s": "del(5q)"
+   },
+   "prompt": "Which agent is classically used in del(5q) MDS?",
+   "options": [
+    "Lenalidomide",
+    "Imatinib",
+    "Rituximab",
+    "ATRA"
+   ],
+   "correct": 0,
+   "explain": "Lenalidomide is classically effective in del(5q) MDS; hypomethylating agents are used for higher-risk disease."
+  },
+  {
+   "id": "wk16_c20",
+   "sys": "Heme",
+   "topic": "Tumor lysis",
+   "type": "mcq",
+   "guide": {
+    "f": "W16_03_Acute_Leukemia.html",
+    "t": "3 · Tumor lysis",
+    "s": "G6PD"
+   },
+   "prompt": "Which urate-lowering drug must be avoided in G6PD deficiency?",
+   "options": [
+    "Rasburicase",
+    "Allopurinol",
+    "IV normal saline",
+    "Sodium bicarbonate"
+   ],
+   "correct": 0,
+   "explain": "Rasburicase causes hemolysis/methemoglobinemia in G6PD deficiency; use allopurinol with hydration instead."
+  },
+  {
+   "id": "wk16_c21",
+   "sys": "Heme",
+   "topic": "Leukostasis",
+   "type": "mcq",
+   "guide": {
+    "f": "W16_03_Acute_Leukemia.html",
+    "t": "3 · Leukostasis",
+    "s": "presentation"
+   },
+   "prompt": "Which presentation suggests leukostasis in acute leukemia?",
+   "options": [
+    "Dyspnea, hypoxia, and neurologic/visual symptoms with very high blasts",
+    "Isolated mild anemia",
+    "Painless cervical adenopathy alone",
+    "An incidental low platelet count"
+   ],
+   "correct": 0,
+   "explain": "Very high blast counts can sludge the microcirculation, causing respiratory and neurologic compromise that needs urgent cytoreduction."
+  },
+  {
+   "id": "wk16_c22",
+   "sys": "Heme",
+   "topic": "CLL diagnosis",
+   "type": "mcq",
+   "guide": {
+    "f": "W16_05_Chronic_Leukemias_MPN.html",
+    "t": "5 · CLL",
+    "s": "confirm test"
+   },
+   "prompt": "Which test confirms the immunophenotype of CLL?",
+   "options": [
+    "Flow cytometry",
+    "Bone marrow fibrosis staining",
+    "BCR-ABL PCR",
+    "Serum free light chains"
+   ],
+   "correct": 0,
+   "explain": "Flow cytometry confirms a clonal mature B-cell population; node biopsy is reserved for suspected transformation."
+  },
+  {
+   "id": "wk16_c23",
+   "sys": "Heme",
+   "topic": "Venetoclax",
+   "type": "mcq",
+   "guide": {
+    "f": "W16_05_Chronic_Leukemias_MPN.html",
+    "t": "5 · CLL",
+    "s": "venetoclax risk"
+   },
+   "prompt": "Which serious early risk requires a dose ramp-up when starting venetoclax for CLL?",
+   "options": [
+    "Tumor lysis syndrome",
+    "Pulmonary fibrosis",
+    "QT prolongation",
+    "Hemorrhagic cystitis"
+   ],
+   "correct": 0,
+   "explain": "Venetoclax can precipitate tumor lysis syndrome, so it is started with a dose ramp-up and TLS precautions."
+  },
+  {
+   "id": "wk16_c24",
+   "sys": "Heme",
+   "topic": "Lymphoma biopsy",
+   "type": "mcq",
+   "guide": {
+    "f": "W16_06_Lymphadenopathy_Lymphoma.html",
+    "t": "6 · When to biopsy",
+    "s": "excisional"
+   },
+   "prompt": "Why is excisional biopsy often preferred for suspected lymphoma?",
+   "options": [
+    "It preserves nodal architecture needed for classification",
+    "It is faster than fine-needle aspiration",
+    "It avoids any anesthesia",
+    "It treats the lymphoma"
+   ],
+   "correct": 0,
+   "explain": "Lymphoma classification depends on nodal architecture, which an excisional biopsy preserves better than FNA/core."
+  },
+  {
+   "id": "wk16_c25",
+   "sys": "Heme",
+   "topic": "Hodgkin therapy",
+   "type": "mcq",
+   "guide": {
+    "f": "W16_06_Lymphadenopathy_Lymphoma.html",
+    "t": "6 · Hodgkin lymphoma",
+    "s": "bleomycin"
+   },
+   "prompt": "Which ABVD agent is most associated with pulmonary toxicity?",
+   "options": [
+    "Bleomycin",
+    "Doxorubicin",
+    "Vinblastine",
+    "Dacarbazine"
+   ],
+   "correct": 0,
+   "explain": "Bleomycin causes pneumonitis/fibrosis; doxorubicin is cardiotoxic, vinblastine neurotoxic, dacarbazine emetogenic."
+  },
+  {
+   "id": "wk16_c26",
+   "sys": "Heme",
+   "topic": "Plasma cell spectrum",
+   "type": "mcq",
+   "guide": {
+    "f": "W16_07_Myeloma_Mono_Spleen.html",
+    "t": "7 · Plasma cell disorders",
+    "s": "MGUS"
+   },
+   "prompt": "How does MGUS differ from multiple myeloma?",
+   "options": [
+    "MGUS has a monoclonal protein but no myeloma-defining end-organ damage",
+    "MGUS always has lytic bone lesions",
+    "MGUS requires immediate chemotherapy",
+    "MGUS has higher clonal burden than smoldering myeloma"
+   ],
+   "correct": 0,
+   "explain": "MGUS is premalignant: a monoclonal protein without CRAB/myeloma-defining events; smoldering myeloma has higher burden but still no end-organ damage."
+  },
+  {
+   "id": "wk16_c27",
+   "sys": "Heme",
+   "topic": "Bortezomib",
+   "type": "mcq",
+   "guide": {
+    "f": "W16_07_Myeloma_Mono_Spleen.html",
+    "t": "7 · Myeloma therapy",
+    "s": "bortezomib AE"
+   },
+   "prompt": "Which adverse effect is characteristic of bortezomib?",
+   "options": [
+    "Peripheral neuropathy (with zoster reactivation risk)",
+    "Pulmonary fibrosis",
+    "QT prolongation",
+    "Hemorrhagic cystitis"
+   ],
+   "correct": 0,
+   "explain": "Bortezomib commonly causes peripheral neuropathy and zoster reactivation, so antiviral prophylaxis is often used."
+  },
+  {
+   "id": "wk16_c28",
+   "sys": "Heme",
+   "topic": "Worrying CBC",
+   "type": "multi",
+   "guide": {
+    "f": "W16_01_CBC_Danger_Approach.html",
+    "t": "1 · Worrying findings",
+    "s": "danger patterns"
+   },
+   "prompt": "Which CBC/film findings should prompt urgent concern? (select all)",
+   "options": [
+    "Blasts in peripheral blood",
+    "Pancytopenia",
+    "Severe neutropenia with fever",
+    "A stable mild normocytic anemia"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "Blasts, pancytopenia, and severe febrile neutropenia are danger signs; a stable mild normocytic anemia is not urgent."
+  },
+  {
+   "id": "wk16_c29",
+   "sys": "Heme",
+   "topic": "Multilineage causes",
+   "type": "multi",
+   "guide": {
+    "f": "W16_01_CBC_Danger_Approach.html",
+    "t": "1 · Isolated vs multilineage",
+    "s": "multilineage differential"
+   },
+   "prompt": "Which conditions cause multiple cytopenias (multilineage disease)? (select all)",
+   "options": [
+    "Acute leukemia",
+    "Myelodysplastic syndrome",
+    "Severe B12/folate deficiency",
+    "Isolated iron deficiency"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "Leukemia, MDS, and severe B12/folate deficiency hit multiple lines; isolated iron deficiency causes anemia alone."
+  },
+  {
+   "id": "wk16_c30",
+   "sys": "Heme",
+   "topic": "Acute leukemia emergencies",
+   "type": "multi",
+   "guide": {
+    "f": "W16_03_Acute_Leukemia.html",
+    "t": "3 · Emergencies",
+    "s": "four emergencies"
+   },
+   "prompt": "Which are recognized emergencies in acute leukemia? (select all)",
+   "options": [
+    "Febrile neutropenia",
+    "Tumor lysis syndrome",
+    "Leukostasis",
+    "Aquagenic pruritus"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "Febrile neutropenia, tumor lysis, and leukostasis are leukemia emergencies; aquagenic pruritus is a polycythemia vera symptom."
+  },
+  {
+   "id": "wk16_c31",
+   "sys": "Heme",
+   "topic": "Drug-induced neutropenia",
+   "type": "multi",
+   "guide": {
+    "f": "W16_04_Leukocytosis_Neutropenia.html",
+    "t": "4 · Neutropenia",
+    "s": "drug causes"
+   },
+   "prompt": "Which drugs are classic causes of neutropenia/agranulocytosis? (select all)",
+   "options": [
+    "Clozapine",
+    "Methimazole",
+    "TMP-SMX",
+    "Low-dose aspirin"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "Clozapine, antithyroid drugs, and sulfonamides/TMP-SMX are classic culprits; aspirin is not a typical cause."
+  },
+  {
+   "id": "wk16_c32",
+   "sys": "Heme",
+   "topic": "Lymphadenopathy red flags",
+   "type": "multi",
+   "guide": {
+    "f": "W16_06_Lymphadenopathy_Lymphoma.html",
+    "t": "6 · Sizing up a node",
+    "s": "malignant features"
+   },
+   "prompt": "Which node features raise concern for malignancy? (select all)",
+   "options": [
+    "Supraclavicular location",
+    "Hard and fixed",
+    "Size >2 cm",
+    "Tender and mobile during a sore throat"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "Supraclavicular, hard/fixed, and >2 cm are red flags; tender mobile nodes with a concurrent infection are usually reactive."
+  },
+  {
+   "id": "wk16_c33",
+   "sys": "Heme",
+   "topic": "B symptoms",
+   "type": "multi",
+   "guide": {
+    "f": "W16_06_Lymphadenopathy_Lymphoma.html",
+    "t": "6 · B symptoms",
+    "s": "define"
+   },
+   "prompt": "Which are the B symptoms of lymphoma? (select all)",
+   "options": [
+    "Fever",
+    "Drenching night sweats",
+    "Unintentional weight loss",
+    "Localized node tenderness"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ],
+   "explain": "B symptoms are fever, drenching night sweats, and unintentional weight loss; local tenderness suggests a reactive node."
+  },
+  {
+   "id": "wk16_c34",
+   "sys": "Heme",
+   "topic": "Febrile neutropenia",
+   "type": "order",
+   "guide": {
+    "f": "W16_04_Leukocytosis_Neutropenia.html",
+    "t": "4 · Febrile neutropenia",
+    "s": "management order"
+   },
+   "prompt": "Order the immediate management of febrile neutropenia:",
+   "items": [
+    "Assess ABCs / sepsis physiology and vitals",
+    "Draw blood cultures (peripheral + any line)",
+    "Start empiric broad-spectrum antipseudomonal antibiotics",
+    "Add vancomycin / antifungals only if specifically indicated"
+   ],
+   "explain": "Stabilize, culture, give antipseudomonal abx without delay, then escalate only for specific indications."
+  },
+  {
+   "id": "wk16_c35",
+   "sys": "Heme",
+   "topic": "CBC approach",
+   "type": "order",
+   "guide": {
+    "f": "W16_01_CBC_Danger_Approach.html",
+    "t": "1 · Three steps",
+    "s": "CBC approach order"
+   },
+   "prompt": "Order the structured approach to an abnormal CBC:",
+   "items": [
+    "Identify which cell line(s) are abnormal",
+    "Decide if it is isolated or multilineage",
+    "Check for unstable/urgent physiology",
+    "Build the differential and investigate"
+   ],
+   "explain": "Line → isolated vs multilineage → stability → differential."
+  },
+  {
+   "id": "wk16_c36",
+   "sys": "Heme",
+   "topic": "Myeloma workup",
+   "type": "order",
+   "guide": {
+    "f": "W16_07_Myeloma_Mono_Spleen.html",
+    "t": "7 · Myeloma",
+    "s": "workup order"
+   },
+   "prompt": "Order a sensible workup for suspected multiple myeloma:",
+   "items": [
+    "Basic labs: CBC, calcium, creatinine, albumin",
+    "Serum protein electrophoresis + immunofixation and free light chains",
+    "Skeletal imaging for lytic lesions",
+    "Bone marrow biopsy to quantify clonal plasma cells"
+   ],
+   "explain": "Screen with basics, characterize the monoclonal protein, image bone, then confirm with marrow."
+  },
+  {
+   "id": "wk16_c37",
+   "sys": "Heme",
+   "topic": "Lymphadenopathy",
+   "type": "order",
+   "guide": {
+    "f": "W16_06_Lymphadenopathy_Lymphoma.html",
+    "t": "6 · Workup",
+    "s": "node workup order"
+   },
+   "prompt": "Order the approach to persistent lymphadenopathy:",
+   "items": [
+    "History and exam for red flags",
+    "CBC + film and targeted labs (HIV, EBV, ESR/CRP)",
+    "Imaging to assess extent if malignancy suspected",
+    "Excisional biopsy when red flags are present"
+   ],
+   "explain": "Characterize clinically, screen with labs, image, then biopsy if concerning."
+  },
+  {
+   "id": "wk16_c38",
+   "sys": "Heme",
+   "topic": "Leukemia comparison",
+   "type": "match",
+   "guide": {
+    "f": "W16_05_Chronic_Leukemias_MPN.html",
+    "t": "5 · Comparison",
+    "s": "disease to clue"
+   },
+   "prompt": "Match the leukemia to its hallmark:",
+   "pairs": [
+    [
+     "CML",
+     "BCR-ABL, basophilia, massive spleen"
+    ],
+    [
+     "CLL",
+     "Mature lymphocytosis, painless nodes, watchful waiting"
+    ],
+    [
+     "AML",
+     "Myeloid blasts + cytopenias, acute tempo"
+    ],
+    [
+     "ALL",
+     "Lymphoid blasts, CNS prophylaxis"
+    ]
+   ],
+   "explain": "Tempo, dominant cell, and genetic clue separate the leukemias."
+  },
+  {
+   "id": "wk16_c39",
+   "sys": "Heme",
+   "topic": "Leukocytosis subtypes",
+   "type": "match",
+   "guide": {
+    "f": "W16_04_Leukocytosis_Neutropenia.html",
+    "t": "4 · Leukocytosis",
+    "s": "subtype to cause"
+   },
+   "prompt": "Match the leukocytosis pattern to a typical cause:",
+   "pairs": [
+    [
+     "Neutrophilia",
+     "Bacterial infection / CML"
+    ],
+    [
+     "Lymphocytosis",
+     "Viral infection / CLL"
+    ],
+    [
+     "Eosinophilia",
+     "Allergy / parasites"
+    ],
+    [
+     "Monocytosis",
+     "Chronic infection / CMML"
+    ]
+   ],
+   "explain": "The differential subtype directs the differential diagnosis."
+  },
+  {
+   "id": "wk16_c40",
+   "sys": "Heme",
+   "topic": "MPN drugs",
+   "type": "match",
+   "guide": {
+    "f": "W16_05_Chronic_Leukemias_MPN.html",
+    "t": "5 · MPNs",
+    "s": "disease to therapy"
+   },
+   "prompt": "Match the myeloproliferative neoplasm to a management mainstay:",
+   "pairs": [
+    [
+     "Polycythemia vera",
+     "Phlebotomy + low-dose aspirin"
+    ],
+    [
+     "Essential thrombocythemia",
+     "Low-dose aspirin ± hydroxyurea"
+    ],
+    [
+     "Primary myelofibrosis",
+     "Ruxolitinib (JAK inhibitor)"
+    ],
+    [
+     "CML",
+     "BCR-ABL tyrosine kinase inhibitor"
+    ]
+   ],
+   "explain": "Each MPN has a characteristic first-line strategy."
+  },
+  {
+   "id": "wk16_c41",
+   "sys": "Heme",
+   "topic": "Chemo toxicities",
+   "type": "match",
+   "guide": {
+    "f": "W16_06_Lymphadenopathy_Lymphoma.html",
+    "t": "6 · Hodgkin lymphoma",
+    "s": "drug to toxicity"
+   },
+   "prompt": "Match the chemotherapy agent to its signature toxicity:",
+   "pairs": [
+    [
+     "Bleomycin",
+     "Pulmonary fibrosis"
+    ],
+    [
+     "Doxorubicin",
+     "Cardiomyopathy"
+    ],
+    [
+     "Vincristine",
+     "Peripheral neuropathy"
+    ],
+    [
+     "Cyclophosphamide",
+     "Hemorrhagic cystitis"
+    ]
+   ],
+   "explain": "These agent-specific toxicities recur across leukemia/lymphoma regimens."
+  },
+  {
+   "id": "wk16_c42",
+   "sys": "Heme",
+   "topic": "Plasma cell spectrum",
+   "type": "match",
+   "guide": {
+    "f": "W16_07_Myeloma_Mono_Spleen.html",
+    "t": "7 · Plasma cell disorders",
+    "s": "entity to concept"
+   },
+   "prompt": "Match the plasma-cell condition to its concept:",
+   "pairs": [
+    [
+     "MGUS",
+     "Monoclonal protein, no end-organ damage"
+    ],
+    [
+     "Smoldering myeloma",
+     "Higher burden, no myeloma-defining events"
+    ],
+    [
+     "Multiple myeloma",
+     "Clonal malignancy with CRAB / defining biomarkers"
+    ]
+   ],
+   "explain": "The spectrum runs from premalignant MGUS to symptomatic myeloma."
+  },
+  {
+   "id": "wk16_c43",
+   "sys": "Heme",
+   "topic": "Research frameworks",
+   "type": "match",
+   "guide": {
+    "f": "W16_08_Research_Questions.html",
+    "t": "8 · Frameworks",
+    "s": "framework to use"
+   },
+   "prompt": "Match the research framework to its purpose:",
+   "pairs": [
+    [
+     "PICO",
+     "Build a quantitative question"
+    ],
+    [
+     "FINER",
+     "Judge whether a question is worth doing"
+    ]
+   ],
+   "explain": "PICO structures; FINER appraises."
+  },
+  {
+   "id": "wk16_c44",
+   "sys": "Heme",
+   "topic": "G-CSF",
+   "type": "qa",
+   "guide": {
+    "f": "W16_04_Leukocytosis_Neutropenia.html",
+    "t": "4 · G-CSF",
+    "s": "what it does"
+   },
+   "prompt": "What does G-CSF do, and what are its adverse effects?",
+   "answer": "Granulocyte colony-stimulating factor stimulates neutrophil production (used prophylactically/therapeutically, especially in chemotherapy-related neutropenia). Adverse effects: bone pain, leukocytosis, and rare splenic rupture."
+  },
+  {
+   "id": "wk16_c45",
+   "sys": "Heme",
+   "topic": "TKI cautions",
+   "type": "qa",
+   "guide": {
+    "f": "W16_05_Chronic_Leukemias_MPN.html",
+    "t": "5 · CML",
+    "s": "TKI adverse effects"
+   },
+   "prompt": "Name a key safety concern for nilotinib and for ponatinib.",
+   "answer": "Nilotinib can cause QT prolongation and arterial vascular events; ponatinib carries a notable risk of arterial and venous thrombosis (and pancreatitis/hypertension)."
+  },
+  {
+   "id": "wk16_c46",
+   "sys": "Heme",
+   "topic": "Mediastinal mass",
+   "type": "qa",
+   "guide": {
+    "f": "W16_06_Lymphadenopathy_Lymphoma.html",
+    "t": "6 · Mediastinal mass",
+    "s": "anesthesia caution"
+   },
+   "prompt": "Why is sedation/general anesthesia risky with a large anterior mediastinal mass?",
+   "answer": "The mass can compress the airway and great vessels (including the SVC); loss of airway tone or preload under sedation/GA can precipitate airway or cardiovascular collapse, so they are avoided when possible."
+  },
+  {
+   "id": "wk16_c47",
+   "sys": "Heme",
+   "topic": "Qualitative research",
+   "type": "qa",
+   "guide": {
+    "f": "W16_08_Research_Questions.html",
+    "t": "8 · Qualitative",
+    "s": "what it explores"
+   },
+   "prompt": "What do qualitative research questions typically explore?",
+   "answer": "Experiences, meaning, barriers, facilitators, and context — e.g. patients' experiences of prolonged leukemia treatment or perceived barriers to choosing watchful waiting in CLL."
+  }
+ ],
+ "guides": [
+  {
+   "file": "W16_01_CBC_Danger_Approach.html",
+   "title": "Week 16 · 1 Reading a Dangerous CBC",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Reading a Dangerous CBC</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Approach</div><h1>Reading a Dangerous CBC</h1></div><div class='r'>Week 16 &middot; Blood III<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Which counts should scare you, isolated vs multilineage, and the unstable physiology to catch first.</p>\n<h2>CBC findings that should worry you</h2>\n<ul>\n<li><b>Pancytopenia</b> &mdash; anemia + leukopenia/neutropenia + thrombocytopenia.</li>\n<li><b>Blasts</b> in the peripheral blood &mdash; acute leukemia until proven otherwise.</li>\n<li><b>Severe neutropenia</b>, especially with fever.</li>\n<li><b>Very high WBC</b> with immature granulocytes, basophilia, splenomegaly, or constitutional symptoms.</li>\n<li><b>Multiple abnormal cell lines</b> &mdash; shifts thinking to marrow disease.</li>\n<li><b>Marked lymphocytosis</b> in an older adult with nodes &rarr; CLL.</li>\n<li><b>Macrocytosis + cytopenias + dysplastic neutrophils</b> &rarr; MDS.</li>\n</ul>\n<div class='key'>You aren't expected to be a hematopathologist &mdash; you ARE expected to recognize when a CBC pattern is dangerous and needs a film, a marrow, or urgent hematology.</div>\n<h2>Step 1 &mdash; which line is abnormal?</h2>\n<table>\n<tr><th>Line</th><th>Low</th><th>High</th></tr>\n<tr><td>RBC</td><td>Anemia</td><td>Polycythemia (hyperviscosity/thrombosis)</td></tr>\n<tr><td>Neutrophil</td><td>Neutropenia (infection)</td><td>Neutrophilia (infection/inflam/MPN)</td></tr>\n<tr><td>Lymphocyte</td><td>Lymphopenia</td><td>Lymphocytosis (virus, CLL)</td></tr>\n<tr><td>Platelet</td><td>Thrombocytopenia (bleed)</td><td>Thrombocytosis (reactive vs ET)</td></tr>\n</table>\n<h2>Step 2 &mdash; isolated or multilineage?</h2>\n<p>An <b>isolated</b> abnormality allows a focused approach. <b>Multiple</b> abnormal lines raise concern for acute leukemia, MDS, myelofibrosis, aplastic anemia, marrow infiltration, severe B12/folate deficiency, hypersplenism, or severe systemic illness.</p>\n<h2>Step 3 &mdash; is the patient unstable?</h2>\n<div class='band warn'><div class='t'>Urgent physiology &mdash; look before the differential</div>\nFever with neutropenia; sepsis (hypotension, tachycardia, confusion); severe symptomatic anemia (chest pain, syncope, heart failure); bleeding with severe thrombocytopenia; <b>leukostasis</b> (dyspnea, hypoxia, neuro/visual symptoms with very high blasts).</div>\n<h2>First two questions for any abnormal CBC</h2>\n<p>Which line(s) are abnormal, and is it one line or several? Several lines down points to a marrow (factory) problem until proven otherwise.</p>\n</div>"
+  },
+  {
+   "file": "W16_02_Pancytopenia_MDS.html",
+   "title": "Week 16 · 2 Pancytopenia & MDS",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Pancytopenia &amp; MDS</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Marrow failure</div><h1>Pancytopenia &amp; MDS</h1></div><div class='r'>Week 16 &middot; Blood III<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>When all three lines fall: the workup that matters, and the dysplastic clonal disorder of older adults.</p>\n<h2>Pancytopenia</h2>\n<p>Reduction in all three lines (anemia + leukopenia/neutropenia + thrombocytopenia). With <b>blasts</b>, the differential narrows to <b>acute leukemia, MDS, or myelofibrosis</b>. The key move: this is a marrow-production/infiltration problem, not an isolated anemia.</p>\n<table>\n<tr><th>Deficit</th><th>Consequence</th></tr>\n<tr><td>Anemia</td><td>Fatigue, pallor, exertional dyspnea, demand ischemia</td></tr>\n<tr><td>Neutropenia</td><td>Fever may be the only sign; serious bacterial/fungal infection</td></tr>\n<tr><td>Thrombocytopenia</td><td>Petechiae, mucosal bleeding; intracranial hemorrhage if profound</td></tr>\n</table>\n<h3>Initial workup</h3>\n<p>Repeat CBC + differential, blood film, reticulocytes, B12/folate, liver and renal tests, HIV/hepatitis when appropriate, hemolysis screen (bilirubin, LDH, haptoglobin, DAT) if indicated, abdominal US for splenomegaly, and <b>bone marrow aspirate + biopsy</b> when malignancy/MDS/aplastic anemia/infiltration is suspected.</p>\n<h2>Myelodysplastic syndrome</h2>\n<p>A <b>clonal hematopoietic stem-cell disorder</b> of older adults: the clone fills the marrow but its progeny are dysplastic and die early &rarr; <b>ineffective hematopoiesis</b> and cytopenias despite a cellular marrow.</p>\n<table>\n<tr><th>Clue</th><th>Detail</th></tr>\n<tr><td>Macrocytic anemia</td><td>Oval macrocytes; one or more cytopenias</td></tr>\n<tr><td>Dysplastic neutrophils</td><td>Hypolobated / hypogranular forms</td></tr>\n<tr><td>Blasts</td><td>May be present but below the AML threshold</td></tr>\n</table>\n<div class='band'><div class='t'>Diagnosis &amp; course</div>\nRequires <b>bone marrow examination</b> (trilineage dysplasia, increased blasts below AML threshold). About one-third progress to <b>AML</b>; cytopenias themselves drive infection/bleeding morbidity.</div>\n<h3>Management</h3>\n<p>Risk-adapted. Supportive: transfusions, antibiotics, ESAs, iron chelation in chronically transfused patients. Disease-modifying: <b>hypomethylating agents</b> (azacitidine, decitabine) for higher risk; <b>lenalidomide</b> for del(5q); <b>allogeneic transplant</b> is the only cure but limited by age/comorbidity. Watch lenalidomide thrombosis/teratogenicity and azacitidine myelosuppression.</p>\n</div>"
+  },
+  {
+   "file": "W16_03_Acute_Leukemia.html",
+   "title": "Week 16 · 3 Acute Leukemia & Its Emergencies",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Acute Leukemia &amp; Its Emergencies</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Oncologic emergency</div><h1>Acute Leukemia &amp; Its Emergencies</h1></div><div class='r'>Week 16 &middot; Blood III<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>AML vs ALL, the marrow-failure presentation, and the four emergencies that kill before the diagnosis is final.</p>\n<h2>AML vs ALL</h2>\n<table>\n<tr><th>Feature</th><th>AML</th><th>ALL</th></tr>\n<tr><td>Lineage</td><td>Myeloid</td><td>Lymphoid</td></tr>\n<tr><td>Age</td><td>Adults/older</td><td>Children &gt; adults</td></tr>\n<tr><td>Treatment</td><td>Induction &rarr; consolidation/transplant</td><td>Induction + <b>CNS prophylaxis</b> (intrathecal)</td></tr>\n</table>\n<p>Both present with <b>marrow failure</b>: anemia, neutropenia (fever/infection even if WBC high, since blasts are nonfunctional), thrombocytopenia, bone pain. Lymphadenopathy/hepatosplenomegaly favor ALL.</p>\n<h3>Investigations</h3>\n<p>Smear, <b>marrow aspirate + biopsy</b>, flow cytometry (lineage), cytogenetics/molecular (prognosis, targets), coagulation (if APL suspected), tumor-lysis labs, infection workup if febrile.</p>\n<h2>Four emergencies</h2>\n<div class='band warn'><div class='t'>Febrile neutropenia</div>\nImmediate empiric broad-spectrum <b>antipseudomonal</b> antibiotics; do not wait for cultures.</div>\n<div class='band warn'><div class='t'>Tumor lysis syndrome</div>\nHigh burden of proliferating cells. Hydration + monitor K/PO&#8324;/Ca/urate/Cr. <b>Allopurinol</b> for prevention in lower risk; <b>rasburicase</b> for high risk/established &mdash; but rasburicase causes hemolysis/methemoglobinemia in <b>G6PD deficiency</b>, so avoid it there.</div>\n<div class='band warn'><div class='t'>Leukostasis</div>\nVery high blasts &rarr; dyspnea, hypoxia, headache, confusion, visual/stroke-like signs. Urgent cytoreduction.</div>\n<div class='band warn'><div class='t'>Acute promyelocytic leukemia (APL)</div>\nAML subtype with severe <b>DIC/bleeding</b>. If suspected, start <b>ATRA urgently</b> while confirming. ATRA &rarr; differentiation syndrome (fever, infiltrates, edema, hypotension) treated with steroids.</div>\n<h3>Treatment toxicities to know</h3>\n<p>Myelosuppression/infection, mucositis, anthracycline cardiotoxicity, vincristine neuropathy/constipation, steroid hyperglycemia, asparaginase pancreatitis/thrombosis, intrathecal neurotoxicity.</p>\n</div>"
+  },
+  {
+   "file": "W16_04_Leukocytosis_Neutropenia.html",
+   "title": "Week 16 · 4 Leukocytosis & Neutropenia",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Leukocytosis &amp; Neutropenia</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>WBC</div><h1>Leukocytosis &amp; Neutropenia</h1></div><div class='r'>Week 16 &middot; Blood III<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Sort a high WBC by subtype, recognize reactive neutrophilia, and run the febrile-neutropenia emergency.</p>\n<h2>Leukocytosis &mdash; which subtype?</h2>\n<table>\n<tr><th>Pattern</th><th>Reactive causes</th><th>Clonal concern</th></tr>\n<tr><td>Neutrophilia</td><td>Infection, inflammation, stress, steroids, smoking</td><td>CML</td></tr>\n<tr><td>Lymphocytosis</td><td>Virus, pertussis</td><td>CLL</td></tr>\n<tr><td>Monocytosis</td><td>Infection, autoimmune, cirrhosis</td><td>CMML</td></tr>\n<tr><td>Eosinophilia</td><td>Allergy, asthma, parasites, drugs</td><td>Hypereosinophilic syndrome</td></tr>\n</table>\n<div class='key'>Basophils rarely drive a high WBC &mdash; but <b>basophilia is a key clue for CML</b>.</div>\n<p>Refer urgently if blasts, marked leukocytosis, cytopenias, constitutional symptoms, or organomegaly are present; otherwise repeat the CBC if mild and likely reactive.</p>\n<h2>Neutropenia by ANC</h2>\n<table>\n<tr><th>ANC (&times;10⁹/L)</th><th>Risk</th></tr>\n<tr><td>1.0&ndash;1.5</td><td>Mild &mdash; often low risk</td></tr>\n<tr><td>0.5&ndash;1.0</td><td>Moderate</td></tr>\n<tr><td>&lt;0.5</td><td>Severe &mdash; high infection risk</td></tr>\n<tr><td>&lt;0.1</td><td>Profound &mdash; very high risk</td></tr>\n</table>\n<p><b>Drug causes</b> to know: chemotherapy, clozapine, antithyroid drugs (methimazole, PTU), sulfonamides/TMP-SMX, carbamazepine.</p>\n<h2>Febrile neutropenia &mdash; an emergency</h2>\n<div class='band warn'><div class='t'>Immediate management</div>\nFever may be the only sign. Assess ABCs/sepsis &rarr; blood cultures (peripheral + any line) &rarr; <b>start empiric broad-spectrum antipseudomonal antibiotics without delay</b> (piperacillin-tazobactam, cefepime, or a carbapenem). Add <b>vancomycin only</b> for line infection, skin/soft-tissue, pneumonia, instability, or MRSA risk. Consider antifungals if fever persists in prolonged neutropenia.</div>\n<p><b>G-CSF</b> stimulates neutrophil production (prophylactic/therapeutic in selected patients); adverse effects: bone pain, leukocytosis, rare splenic rupture.</p>\n</div>"
+  },
+  {
+   "file": "W16_05_Chronic_Leukemias_MPN.html",
+   "title": "Week 16 · 5 Chronic Leukemias & MPNs",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Chronic Leukemias &amp; MPNs</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Chronic</div><h1>Chronic Leukemias &amp; MPNs</h1></div><div class='r'>Week 16 &middot; Blood III<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>CML and its BCR-ABL TKIs, indolent CLL and watchful waiting, and the JAK2-driven myeloproliferative trio.</p>\n<h2>Chronic myeloid leukemia (CML)</h2>\n<p>An MPN driven by the <b>Philadelphia chromosome &rarr; BCR-ABL</b> fusion tyrosine kinase. Often found incidentally; may give fatigue, weight loss, night sweats, and LUQ fullness from splenomegaly.</p>\n<table>\n<tr><th>Film</th><th>Confirm</th><th>Treat</th></tr>\n<tr><td>Marked leukocytosis, neutrophilic <b>left shift</b>, <b>basophilia</b>, &uarr;platelets, few blasts</td><td><b>BCR-ABL</b> molecular/cytogenetics</td><td>TKI: imatinib, dasatinib, nilotinib, bosutinib, ponatinib</td></tr>\n</table>\n<p>TKI cautions: nilotinib QT prolongation/arterial events, dasatinib pleural effusion, ponatinib arterial/venous thrombosis.</p>\n<h2>Chronic lymphocytic leukemia (CLL)</h2>\n<p>A mature <b>B-cell</b> disorder of older adults, often indolent over years. Painless lymphadenopathy, fatigue, recurrent infection; autoimmune hemolytic anemia/ITP can occur. Film: <b>mature lymphocytosis, no blasts</b>; confirm by <b>flow cytometry</b>.</p>\n<div class='band good'><div class='t'>Watchful waiting</div>\nAsymptomatic early CLL is monitored, not treated. Treat for B symptoms, progressive symptomatic adenopathy/splenomegaly, marrow failure, rapid lymphocyte doubling, or uncontrolled autoimmune cytopenias. Options: BTK inhibitors (ibrutinib), BCL-2 inhibitor (venetoclax &mdash; TLS risk, dose ramp), anti-CD20 (rituximab).</div>\n<h2>The other MPNs</h2>\n<table>\n<tr><th>Disease</th><th>Clue</th><th>Management</th></tr>\n<tr><td><b>Essential thrombocythemia</b></td><td>Persistent thrombocytosis; JAK2/CALR/MPL</td><td>Low-dose ASA; hydroxyurea if high risk</td></tr>\n<tr><td><b>Polycythemia vera</b></td><td>&uarr;Hct, <b>low EPO</b>, JAK2, aquagenic pruritus, erythromelalgia</td><td>Phlebotomy + low-dose ASA; hydroxyurea if high risk</td></tr>\n<tr><td><b>Primary myelofibrosis</b></td><td>Massive splenomegaly, teardrop cells, leukoerythroblastic film</td><td>Supportive; ruxolitinib; transplant in selected</td></tr>\n</table>\n</div>"
+  },
+  {
+   "file": "W16_06_Lymphadenopathy_Lymphoma.html",
+   "title": "Week 16 · 6 Lymphadenopathy & Lymphoma",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Lymphadenopathy &amp; Lymphoma</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Lymphoid</div><h1>Lymphadenopathy &amp; Lymphoma</h1></div><div class='r'>Week 16 &middot; Blood III<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Read the node, find the red flags, biopsy correctly, and separate indolent from aggressive lymphoma.</p>\n<h2>Sizing up a node</h2>\n<p>Nodes are generally abnormal if &gt;<b>1 cm</b> (inguinal often 1.5&ndash;2 cm). Pattern matters: localized (local infection, metastatic carcinoma, lymphoma) vs generalized (virus, HIV, autoimmune, lymphoma/leukemia, drugs).</p>\n<table>\n<tr><th>Feature</th><th>Interpretation</th></tr>\n<tr><td>Tender, soft</td><td>More likely reactive/inflammatory</td></tr>\n<tr><td>Rubbery</td><td>Benign or lymphoma</td></tr>\n<tr><td><b>Hard, fixed</b></td><td>Concerning for carcinoma</td></tr>\n<tr><td><b>&gt;2 cm, supraclavicular, generalized</b></td><td>Concerning for malignancy/systemic disease</td></tr>\n</table>\n<div class='band warn'><div class='t'>When to biopsy &mdash; and how</div>\nBiopsy for persistent unexplained nodes, &gt;2 cm, supraclavicular, hard/fixed, B symptoms, generalized + abnormal labs, or a mediastinal mass. For suspected lymphoma, <b>excisional biopsy is preferred</b> &mdash; nodal architecture matters. Avoid steroids before biopsy (obscures pathology).</div>\n<h2>Lymphoma: indolent vs aggressive</h2>\n<table>\n<tr><th>Indolent</th><th>Aggressive</th></tr>\n<tr><td>Slow (years); waxing/waning nodes</td><td>Rapid (weeks); B symptoms, organ compromise</td></tr>\n<tr><td>Follicular lymphoma</td><td>Diffuse large B-cell lymphoma (R-CHOP)</td></tr>\n<tr><td>Observe if asymptomatic</td><td>Treat promptly with curative intent</td></tr>\n</table>\n<p><b>B symptoms:</b> fever, drenching night sweats, unintentional weight loss.</p>\n<h3>Hodgkin lymphoma</h3>\n<p>Painless cervical/supraclavicular nodes &plusmn; mediastinal mass; staged with PET/CT; treated with <b>ABVD</b>. Toxicities: doxorubicin cardiomyopathy, <b>bleomycin pulmonary toxicity</b>, vinblastine neuropathy.</p>\n<div class='band'><div class='t'>Mediastinal mass &mdash; urgent</div>\nMay compress airway/great vessels/SVC. Avoid unnecessary sedation/general anesthesia with airway compression; urgent specialist input for SVC syndrome or stridor.</div>\n</div>"
+  },
+  {
+   "file": "W16_07_Myeloma_Mono_Spleen.html",
+   "title": "Week 16 · 7 Myeloma, Mononucleosis & Splenomegaly",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Myeloma, Mononucleosis &amp; Splenomegaly</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Plasma cell + spleen</div><h1>Myeloma, Mononucleosis &amp; Splenomegaly</h1></div><div class='r'>Week 16 &middot; Blood III<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>CRAB and the myeloma workup, the EBV pitfalls, and how to think about a big spleen.</p>\n<h2>Plasma cell disorders</h2>\n<table>\n<tr><th>Condition</th><th>Concept</th></tr>\n<tr><td>MGUS</td><td>Monoclonal protein, no end-organ damage; premalignant</td></tr>\n<tr><td>Smoldering myeloma</td><td>Higher clonal burden, no myeloma-defining events</td></tr>\n<tr><td>Multiple myeloma</td><td>Clonal plasma-cell malignancy with end-organ damage</td></tr>\n</table>\n<div class='key'><b>CRAB:</b> <b>C</b>alcium &uarr; (confusion, constipation, polyuria), <b>R</b>enal injury (light chains), <b>A</b>nemia, <b>B</b>one lesions (pain, lytic, fractures). Clues: recurrent infection, &uarr;ESR, rouleaux.</div>\n<p><b>Workup:</b> CBC, calcium, creatinine, albumin; <b>serum protein electrophoresis + immunofixation</b>; <b>serum free light chains</b>; urine studies; skeletal imaging (whole-body low-dose CT/PET/MRI); <b>bone marrow biopsy</b>. Therapy classes: proteasome inhibitor (bortezomib &mdash; neuropathy, zoster), IMiD (lenalidomide &mdash; thrombosis), dexamethasone, daratumumab, autologous transplant, bisphosphonates (jaw osteonecrosis). Emergencies: hypercalcemia, AKI, cord compression.</p>\n<h2>Infectious mononucleosis</h2>\n<p>Fever, pharyngitis with exudates, fatigue, <b>posterior</b> cervical nodes, splenomegaly, <b>atypical lymphocytosis</b>; heterophile/Monospot (limited early), EBV serology, mildly elevated LFTs.</p>\n<div class='band warn'><div class='t'>Two classic pitfalls</div>\nAvoid <b>contact sports</b> while splenomegaly persists (splenic rupture); avoid <b>amoxicillin/ampicillin</b> (causes a characteristic rash in EBV). Care is supportive; steroids only for severe complications (airway, severe cytopenias).</div>\n<h2>Splenomegaly</h2>\n<p>The spleen clears senescent cells, presents antigen, and can host extramedullary hematopoiesis. Hypersplenism &rarr; cytopenias. <b>Massive</b> splenomegaly: CML, primary myelofibrosis, hairy cell leukemia, some lymphomas, chronic infection. Workup: CBC + film, LFTs, infectious testing, abdominal US; refer if massive/unexplained or with cytopenias/B symptoms. Counsel against contact sports/abdominal trauma.</p>\n</div>"
+  },
+  {
+   "file": "W16_08_Research_Questions.html",
+   "title": "Week 16 · 8 Formulating a Research Question",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Formulating a Research Question</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Scholarship</div><h1>Formulating a Research Question</h1></div><div class='r'>Week 16 &middot; Blood III<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Where questions come from, and the PICO and FINER frameworks for building and judging them.</p>\n<h2>What is a research question?</h2>\n<p>A clear, focused question the study is designed to answer. It specifies what is examined and keeps the project scope manageable.</p>\n<h3>Where questions come from</h3>\n<p>Clinical experience, practice gaps, accepted ideas needing testing, conflicting views, different disciplinary perspectives, curiosity/preclinical work, and informed imagination.</p>\n<h2>PICO &mdash; build a quantitative question</h2>\n<table>\n<tr><th>Letter</th><th>Element</th></tr>\n<tr><td><b>P</b></td><td>Patient / population / problem</td></tr>\n<tr><td><b>I</b></td><td>Intervention / exposure</td></tr>\n<tr><td><b>C</b></td><td>Comparator</td></tr>\n<tr><td><b>O</b></td><td>Outcome</td></tr>\n</table>\n<div class='key'>Example: <i>In adults with newly diagnosed CML, does first-line dasatinib compared with imatinib improve molecular response at 12 months?</i></div>\n<h2>FINER &mdash; judge the question</h2>\n<table>\n<tr><th>Letter</th><th>Criterion</th></tr>\n<tr><td><b>F</b></td><td>Feasible</td></tr>\n<tr><td><b>I</b></td><td>Interesting</td></tr>\n<tr><td><b>N</b></td><td>Novel</td></tr>\n<tr><td><b>E</b></td><td>Ethical</td></tr>\n<tr><td><b>R</b></td><td>Relevant</td></tr>\n</table>\n<div class='band'><div class='t'>PICO vs FINER &mdash; don't confuse them</div>\n<b>PICO builds</b> the structure of a quantitative question; <b>FINER judges</b> whether that question is worth doing. They are complementary, not interchangeable.</div>\n<h2>Qualitative questions</h2>\n<p>Focus on experiences, meaning, barriers, facilitators, and context &mdash; e.g. <i>\"What barriers do older adults with CLL perceive when deciding between watchful waiting and treatment?\"</i></p>\n</div>"
+  }
+ ]
+}
