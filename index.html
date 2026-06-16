@@ -1,7 +1,10 @@
 <!--
-  Study Suite  ·  v0.2.64 (beta)
+  Study Suite  ·  v0.2.65 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.65: The gate's "Request an access code" mailto now PREFILLS the email body with a short
+  template (Name / School / Occupation / Program-year / How heard) via the &body= param (URL-encoded,
+  CRLF line breaks). Subject unchanged. Sender can edit before sending; markup-only.
   Changelog v0.2.64: The faulty-pack error popup (v0.2.63) gains a "Close and Copy" button — copies the
   whole error text (filename, the q#/card# lines + guide-section tags, and the guide URL) to the clipboard
   and closes, so the user can paste it straight to their assistant. alertDialog() takes opts.copyText and
@@ -754,7 +757,7 @@ section{display:none}section.on{display:block}
     </form>
     <div class="eacerr" id="eacErr" role="alert"></div>
     <div class="eacalt">Returning on a new device? <a href="#" id="eacRestore">Restore a backup</a> from an unlocked copy.</div>
-    <a class="btn ghost sm" id="eacRequest" href="mailto:accesscodes@studysuite.app?subject=Study%20Suite%20access%20code%20request" style="display:inline-block;text-decoration:none;margin-top:16px">Request an access code</a>
+    <a class="btn ghost sm" id="eacRequest" href="mailto:accesscodes@studysuite.app?subject=Study%20Suite%20access%20code%20request&body=Hi!%20I'd%20like%20to%20request%20an%20access%20code%20for%20Study%20Suite.%0D%0A%0D%0AName%3A%20%0D%0ASchool%20%2F%20Occupation%3A%20%0D%0AProgram%20%2F%20year%20(if%20a%20student)%3A%20%0D%0AHow%20I%20heard%20about%20Study%20Suite%3A%20%0D%0A%0D%0AThanks!" style="display:inline-block;text-decoration:none;margin-top:16px">Request an access code</a>
   </div>
 </div>
 <script>/* Show the gate at parse time (before content paints) when armed; skip if this browser already
@@ -1038,7 +1041,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.64';
+const APP_VERSION='0.2.65';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
