@@ -2,11 +2,11 @@
  "pack": "Week 16 — Blood III",
  "id": "wk16",
  "formatVersion": "2.0",
- "version": "2.0",
+ "version": "2.1",
  "author": "Alkarim Billawala / alkarim.billawala.ca",
  "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
  "created": "2026-06-15",
- "updated": "2026-06-15",
+ "updated": "2026-06-16",
  "school": "UofT — Temerty Medicine",
  "year": "Year 1",
  "course": "CPC 1",
@@ -1335,6 +1335,466 @@
    "file": "W16_08_Research_Questions.html",
    "title": "Week 16 · 8 Formulating a Research Question",
    "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Formulating a Research Question</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Scholarship</div><h1>Formulating a Research Question</h1></div><div class='r'>Week 16 &middot; Blood III<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Where questions come from, and the PICO and FINER frameworks for building and judging them.</p>\n<h2>What is a research question?</h2>\n<p>A clear, focused question the study is designed to answer. It specifies what is examined and keeps the project scope manageable.</p>\n<h3>Where questions come from</h3>\n<p>Clinical experience, practice gaps, accepted ideas needing testing, conflicting views, different disciplinary perspectives, curiosity/preclinical work, and informed imagination.</p>\n<h2>PICO &mdash; build a quantitative question</h2>\n<table>\n<tr><th>Letter</th><th>Element</th></tr>\n<tr><td><b>P</b></td><td>Patient / population / problem</td></tr>\n<tr><td><b>I</b></td><td>Intervention / exposure</td></tr>\n<tr><td><b>C</b></td><td>Comparator</td></tr>\n<tr><td><b>O</b></td><td>Outcome</td></tr>\n</table>\n<div class='key'>Example: <i>In adults with newly diagnosed CML, does first-line dasatinib compared with imatinib improve molecular response at 12 months?</i></div>\n<h2>FINER &mdash; judge the question</h2>\n<table>\n<tr><th>Letter</th><th>Criterion</th></tr>\n<tr><td><b>F</b></td><td>Feasible</td></tr>\n<tr><td><b>I</b></td><td>Interesting</td></tr>\n<tr><td><b>N</b></td><td>Novel</td></tr>\n<tr><td><b>E</b></td><td>Ethical</td></tr>\n<tr><td><b>R</b></td><td>Relevant</td></tr>\n</table>\n<div class='band'><div class='t'>PICO vs FINER &mdash; don't confuse them</div>\n<b>PICO builds</b> the structure of a quantitative question; <b>FINER judges</b> whether that question is worth doing. They are complementary, not interchangeable.</div>\n<h2>Qualitative questions</h2>\n<p>Focus on experiences, meaning, barriers, facilitators, and context &mdash; e.g. <i>\"What barriers do older adults with CLL perceive when deciding between watchful waiting and treatment?\"</i></p>\n</div>"
+  },
+  {
+   "file": "W16_09_Cram_Sheet.html",
+   "title": "Week 16 · 9 Cram Sheet",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Week 16 · 9 Cram Sheet</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.35;-webkit-font-smoothing:antialiased}\n.page{max-width:1180px;margin:0 auto;padding:18px 20px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:8px;margin-bottom:12px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:26px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.emerg{border:1.5px solid var(--hi);border-radius:6px;background:rgba(0,0,0,.02);padding:9px 12px;margin-bottom:13px}\n.emerg .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--hi);font-weight:600;margin-bottom:5px}\n.emerg .items{columns:3;column-gap:22px;font-size:12px;line-height:1.42}\n.emerg .items div{break-inside:avoid;margin-bottom:3px}\n.emerg b{color:var(--hi)}\n.cols{column-count:4;column-gap:14px}\n@media(max-width:1040px){.cols{column-count:3}}\n@media(max-width:760px){.cols{column-count:2}}\n@media(max-width:520px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(0,0,0,.02);padding:8px 9px 7px;margin:0 0 11px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;padding-bottom:4px;border-bottom:1.5px solid var(--line);color:var(--accent);display:flex;justify-content:space-between;align-items:baseline;gap:6px}\n.card h2 .wk{color:var(--soft);font-size:8.5px;font-weight:500;letter-spacing:.06em;white-space:nowrap}\n.row{margin:0 0 3.5px;font-size:11.5px;line-height:1.32}\n.row .tg{font-weight:600;color:var(--ink)}\n.row .ar{color:var(--soft)}\n.row .ar::before{content:\"\\2192 \";color:var(--accent);font-weight:600}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:5px 0}\n.dnm{color:var(--hi);font-weight:700}\n.foot{margin-top:10px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:landscape;margin:9mm}body{font-size:8.4px}.page{max-width:none;padding:0}.cols{column-count:4;column-gap:8px}.emerg .items{columns:3}.card{margin-bottom:6px}.head h1{font-size:19px}}\n</style><div class='page'><div class='head'><div><div class='k'>Night-Before High-Yield</div><h1>Blood III</h1></div><div class='r'>Week 16 &middot; Blood III<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><div class='emerg'><div class='t'>★ Do-not-miss &middot; first-step reflexes</div><div class='items'><div><b>Febrile neutropenia</b> (fever + ANC &lt;0.5) &rarr; empiric broad-spectrum <b>antipseudomonal</b> antibiotics now — don't wait for cultures</div><div><b>Acute promyelocytic leukemia</b> (promyelocytes + DIC) &rarr; start <b>ATRA</b> urgently</div><div><b>Tumor lysis syndrome</b> &rarr; hydrate + rasburicase; <span class='dnm'>avoid rasburicase in G6PD</span> &rarr; allopurinol</div><div><b>Leukostasis</b> (very high blasts, dyspnea/neuro) &rarr; urgent cytoreduction</div><div><b>TTP</b> (schistocytes + low platelets, <b>normal</b> coags) &rarr; plasma exchange; <span class='dnm'>do NOT transfuse platelets</span></div><div><b>Anterior mediastinal mass</b> + SVC/airway signs &rarr; avoid sedation/GA; urgent specialist</div><div><b>Myeloma</b>: cord compression or symptomatic hyperCa &rarr; urgent steroids + imaging / IV saline</div><div><b>Blasts on the smear</b> &rarr; acute leukemia until proven otherwise — urgent heme + marrow</div></div></div><div class='cols'><div class='card'><h2>Reading a dangerous CBC <span class='wk'>Approach</span></h2><div class='row'><span class='tg'>Blasts</span> <span class='ar'>acute leukemia until proven otherwise</span></div><div class='row'><span class='tg'>Pancytopenia</span> <span class='ar'>marrow problem (leukemia / MDS / MF / aplastic)</span></div><div class='row'><span class='tg'>Multiple lines down</span> <span class='ar'>marrow disease, not isolated</span></div><div class='row'><span class='tg'>First questions</span> <span class='ar'>which line(s)? one or several?</span></div><hr class='mini'><div class='row'><span class='tg'>Urgent</span> <span class='ar'>febrile neutropenia, leukostasis, severe anemia, bleeding</span></div></div><div class='card'><h2>Pancytopenia &amp; MDS <span class='wk'>MDS</span></h2><div class='row'><span class='tg'>Pancytopenia + blasts</span> <span class='ar'>AL / MDS / myelofibrosis &rarr; marrow</span></div><div class='row'><span class='tg'>MDS</span> <span class='ar'>clonal, older adult; macrocytic anemia + dysplastic neutrophils</span></div><div class='row'><span class='tg'>MDS mechanism</span> <span class='ar'>ineffective hematopoiesis (cellular marrow, low counts)</span></div><div class='row'><span class='tg'>MDS Dx</span> <span class='ar'>marrow: trilineage dysplasia, blasts &lt; AML threshold</span></div><div class='row'><span class='tg'>~1/3 MDS</span> <span class='ar'>progress to AML</span></div><hr class='mini'><div class='row'><span class='tg'>del(5q) MDS</span> <span class='ar'>lenalidomide</span></div><div class='row'><span class='tg'>Higher-risk MDS</span> <span class='ar'>azacitidine / decitabine</span></div><div class='row'><span class='tg'>Only cure</span> <span class='ar'>allogeneic transplant</span></div></div><div class='card'><h2>Acute leukemia <span class='wk'>AML/ALL</span></h2><div class='row'><span class='tg'>AML vs ALL</span> <span class='ar'>myeloid vs lymphoid; ALL needs CNS prophylaxis</span></div><div class='row'><span class='tg'>Presentation</span> <span class='ar'>marrow failure: anemia, neutropenia, thrombocytopenia</span></div><div class='row'><span class='tg'>Dx</span> <span class='ar'>marrow + flow cytometry + cytogenetics</span></div><hr class='mini'><div class='row'><span class='tg'>APL</span> <span class='ar'>DIC &rarr; start ATRA urgently (differentiation syndrome &rarr; steroids)</span></div><div class='row'><span class='tg'>Tumor lysis</span> <span class='ar'>hydrate; allopurinol (prevent) / rasburicase (high-risk)</span></div><div class='row'><span class='tg'>Rasburicase</span> <span class='ar'><span class='dnm'>contraindicated in G6PD</span></span></div><div class='row'><span class='tg'>Febrile neutropenia</span> <span class='ar'>empiric antipseudomonal antibiotics</span></div></div><div class='card'><h2>Leukocytosis &amp; neutropenia <span class='wk'>WBC</span></h2><div class='row'><span class='tg'>Neutrophilia</span> <span class='ar'>infection, inflammation, steroids, smoking, CML</span></div><div class='row'><span class='tg'>Lymphocytosis</span> <span class='ar'>virus, pertussis, CLL</span></div><div class='row'><span class='tg'>Basophilia</span> <span class='ar'>CML clue</span></div><div class='row'><span class='tg'>Monocytosis / eosinophilia</span> <span class='ar'>CMML / allergy-parasites</span></div><hr class='mini'><div class='row'><span class='tg'>ANC &lt;0.5 / &lt;0.1</span> <span class='ar'>severe / profound neutropenia</span></div><div class='row'><span class='tg'>Drug neutropenia</span> <span class='ar'>clozapine, antithyroid (methimazole/PTU), sulfonamides</span></div><div class='row'><span class='tg'>G-CSF</span> <span class='ar'>stimulates neutrophils (bone pain)</span></div></div><div class='card'><h2>Chronic leukemias &amp; MPNs <span class='wk'>Chronic</span></h2><div class='row'><span class='tg'>CML</span> <span class='ar'>BCR-ABL, basophilia, left shift, splenomegaly &rarr; TKI</span></div><div class='row'><span class='tg'>TKI cautions</span> <span class='ar'>nilotinib QT/arterial; dasatinib pleural effusion; ponatinib thrombosis</span></div><div class='row'><span class='tg'>CLL</span> <span class='ar'>mature lymphocytosis, painless nodes; flow confirms</span></div><div class='row'><span class='tg'>CLL early / asx</span> <span class='ar'>watchful waiting</span></div><div class='row'><span class='tg'>CLL drugs</span> <span class='ar'>ibrutinib (afib/bleeding); venetoclax (TLS, dose ramp)</span></div><hr class='mini'><div class='row'><span class='tg'>ET</span> <span class='ar'>thrombocytosis; ASA &plusmn; hydroxyurea</span></div><div class='row'><span class='tg'>PV</span> <span class='ar'>&uarr;Hct, low EPO, JAK2, aquagenic pruritus &rarr; phlebotomy + ASA</span></div><div class='row'><span class='tg'>PMF</span> <span class='ar'>teardrops, massive spleen, leukoerythroblastic &rarr; ruxolitinib</span></div></div><div class='card'><h2>Lymphadenopathy &amp; lymphoma <span class='wk'>Lymphoid</span></h2><div class='row'><span class='tg'>Node red flags</span> <span class='ar'>hard/fixed, &gt;2 cm, supraclavicular, B symptoms, generalized</span></div><div class='row'><span class='tg'>Biopsy</span> <span class='ar'>excisional (architecture); avoid steroids pre-biopsy</span></div><div class='row'><span class='tg'>B symptoms</span> <span class='ar'>fever, drenching night sweats, weight loss</span></div><hr class='mini'><div class='row'><span class='tg'>Hodgkin</span> <span class='ar'>cervical/supraclavicular; ABVD</span></div><div class='row'><span class='tg'>Bleomycin</span> <span class='ar'>pulmonary toxicity</span></div><div class='row'><span class='tg'>DLBCL (aggressive)</span> <span class='ar'>R-CHOP; vincristine neuropathy, doxorubicin cardiotox</span></div><div class='row'><span class='tg'>Mediastinal mass</span> <span class='ar'>avoid sedation/GA (airway / SVC)</span></div></div><div class='card'><h2>Myeloma · mono · spleen <span class='wk'>Plasma</span></h2><div class='row'><span class='tg'>Multiple myeloma</span> <span class='ar'>CRAB: Ca&uarr;, Renal, Anemia, Bone lytic</span></div><div class='row'><span class='tg'>Workup</span> <span class='ar'>SPEP + immunofixation, free light chains, skeletal imaging, marrow</span></div><div class='row'><span class='tg'>MGUS</span> <span class='ar'>M-protein, no end-organ damage (premalignant)</span></div><div class='row'><span class='tg'>Bortezomib</span> <span class='ar'>neuropathy + zoster (prophylaxis)</span></div><hr class='mini'><div class='row'><span class='tg'>Mono (EBV)</span> <span class='ar'>posterior nodes, atypical lymphocytes</span></div><div class='row'><span class='tg'>EBV pitfalls</span> <span class='ar'>avoid amoxicillin (rash) + contact sports (splenic rupture)</span></div><div class='row'><span class='tg'>Massive spleen</span> <span class='ar'>CML, PMF, hairy cell, lymphoma</span></div></div><div class='card'><h2>Research module <span class='wk'>Scholarship</span></h2><div class='row'><span class='tg'>PICO</span> <span class='ar'>Population, Intervention, Comparator, Outcome — builds the question</span></div><div class='row'><span class='tg'>FINER</span> <span class='ar'>Feasible, Interesting, Novel, Ethical, Relevant — judges it</span></div><div class='row'><span class='tg'>Qualitative</span> <span class='ar'>experiences, barriers, meaning</span></div></div></div><div class='foot'>Week 16 &middot; Blood III &middot; cram sheet &middot; cue &rarr; answer</div></div>"
+  }
+ ],
+ "drugs": [
+  {
+   "id": "rx:imatinib",
+   "name": "Imatinib",
+   "class": "rx:bcr-abl-tki",
+   "facets": {
+    "use": "First-line chronic-phase CML",
+    "mechanism": "BCR-ABL tyrosine kinase inhibitor",
+    "adverse": "Edema, nausea, muscle cramps, cytopenias, rash"
+   },
+   "ref": {
+    "topic": "CML",
+    "guide": "W16_05_Chronic_Leukemias_MPN.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:dasatinib",
+   "name": "Dasatinib",
+   "class": "rx:bcr-abl-tki",
+   "facets": {
+    "use": "CML (2nd-gen TKI)",
+    "mechanism": "BCR-ABL TKI",
+    "adverse": "Pleural effusion, pulmonary hypertension, cytopenias"
+   },
+   "ref": {
+    "topic": "CML",
+    "guide": "W16_05_Chronic_Leukemias_MPN.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:nilotinib",
+   "name": "Nilotinib",
+   "class": "rx:bcr-abl-tki",
+   "facets": {
+    "use": "CML (2nd-gen TKI)",
+    "mechanism": "BCR-ABL TKI",
+    "adverse": "QT prolongation, arterial vascular events, metabolic effects",
+    "contra": "Caution with QT-prolonging drugs / cardiac risk"
+   },
+   "ref": {
+    "topic": "CML",
+    "guide": "W16_05_Chronic_Leukemias_MPN.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:ponatinib",
+   "name": "Ponatinib",
+   "class": "rx:bcr-abl-tki",
+   "facets": {
+    "use": "Resistant CML (incl. T315I)",
+    "mechanism": "BCR-ABL TKI",
+    "adverse": "Arterial &amp; venous thrombosis, hypertension, pancreatitis"
+   },
+   "ref": {
+    "topic": "CML",
+    "guide": "W16_05_Chronic_Leukemias_MPN.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:atra",
+   "name": "ATRA (all-trans retinoic acid)",
+   "class": "rx:differentiating-agent",
+   "facets": {
+    "use": "Acute promyelocytic leukemia (start urgently)",
+    "mechanism": "Drives promyelocyte differentiation",
+    "adverse": "Differentiation syndrome (fever, infiltrates, edema, hypotension) &rarr; steroids; headache, dry mucosa"
+   },
+   "ref": {
+    "topic": "APL",
+    "guide": "W16_03_Acute_Leukemia.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:rasburicase",
+   "name": "Rasburicase",
+   "class": "rx:urate-oxidase",
+   "facets": {
+    "use": "High-risk / established tumor lysis",
+    "mechanism": "Recombinant urate oxidase (degrades uric acid)",
+    "contra": "G6PD deficiency (hemolysis, methemoglobinemia)"
+   },
+   "ref": {
+    "topic": "Tumor lysis",
+    "guide": "W16_03_Acute_Leukemia.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:allopurinol",
+   "name": "Allopurinol",
+   "class": "rx:xanthine-oxidase-inhibitor",
+   "facets": {
+    "use": "Tumor lysis prevention (lower risk)",
+    "mechanism": "Xanthine oxidase inhibitor",
+    "adverse": "Rash, hypersensitivity; drug interactions"
+   },
+   "ref": {
+    "topic": "Tumor lysis",
+    "guide": "W16_03_Acute_Leukemia.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:azacitidine",
+   "name": "Azacitidine",
+   "class": "rx:hypomethylating",
+   "facets": {
+    "use": "Higher-risk MDS",
+    "mechanism": "Hypomethylating agent",
+    "adverse": "Myelosuppression, infection, GI upset, fatigue"
+   },
+   "ref": {
+    "topic": "MDS",
+    "guide": "W16_02_Pancytopenia_MDS.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:decitabine",
+   "name": "Decitabine",
+   "class": "rx:hypomethylating",
+   "facets": {
+    "use": "Higher-risk MDS",
+    "mechanism": "Hypomethylating agent",
+    "adverse": "Myelosuppression, infection"
+   },
+   "ref": {
+    "topic": "MDS",
+    "guide": "W16_02_Pancytopenia_MDS.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:lenalidomide",
+   "name": "Lenalidomide",
+   "class": "rx:imid",
+   "facets": {
+    "use": "del(5q) MDS; multiple myeloma",
+    "mechanism": "Immunomodulatory drug (IMiD)",
+    "adverse": "Cytopenias, thrombosis, teratogenicity"
+   },
+   "ref": {
+    "topic": "MDS / Myeloma",
+    "guide": "W16_02_Pancytopenia_MDS.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:hydroxyurea",
+   "name": "Hydroxyurea",
+   "class": "rx:cytoreductive",
+   "facets": {
+    "use": "Cytoreduction in high-risk ET / PV",
+    "mechanism": "Ribonucleotide reductase inhibitor",
+    "adverse": "Cytopenias, mouth ulcers, skin/nail changes; teratogenic"
+   },
+   "ref": {
+    "topic": "MPN",
+    "guide": "W16_05_Chronic_Leukemias_MPN.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:ruxolitinib",
+   "name": "Ruxolitinib",
+   "class": "rx:jak-inhibitor",
+   "facets": {
+    "use": "Myelofibrosis (symptomatic spleen / constitutional symptoms)",
+    "mechanism": "JAK inhibitor",
+    "adverse": "Anemia, thrombocytopenia, infection (incl. zoster)"
+   },
+   "ref": {
+    "topic": "Myelofibrosis",
+    "guide": "W16_05_Chronic_Leukemias_MPN.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:ibrutinib",
+   "name": "Ibrutinib",
+   "class": "rx:btk-inhibitor",
+   "facets": {
+    "use": "CLL",
+    "mechanism": "BTK inhibitor",
+    "adverse": "Bleeding, atrial fibrillation, hypertension, infections"
+   },
+   "ref": {
+    "topic": "CLL",
+    "guide": "W16_05_Chronic_Leukemias_MPN.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:venetoclax",
+   "name": "Venetoclax",
+   "class": "rx:bcl2-inhibitor",
+   "facets": {
+    "use": "CLL (often with anti-CD20)",
+    "mechanism": "BCL-2 inhibitor",
+    "adverse": "Tumor lysis syndrome (requires dose ramp-up), neutropenia"
+   },
+   "ref": {
+    "topic": "CLL",
+    "guide": "W16_05_Chronic_Leukemias_MPN.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:rituximab",
+   "name": "Rituximab",
+   "class": "rx:anti-cd20",
+   "facets": {
+    "use": "CLL; B-cell lymphoma (R-CHOP)",
+    "mechanism": "Anti-CD20 monoclonal antibody",
+    "adverse": "Infusion reactions, hepatitis B reactivation, infections"
+   },
+   "ref": {
+    "topic": "Lymphoma / CLL",
+    "guide": "W16_06_Lymphadenopathy_Lymphoma.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:bortezomib",
+   "name": "Bortezomib",
+   "class": "rx:proteasome-inhibitor",
+   "facets": {
+    "use": "Multiple myeloma",
+    "mechanism": "Proteasome inhibitor",
+    "adverse": "Peripheral neuropathy, zoster reactivation",
+    "monitoring": "Antiviral (zoster) prophylaxis often used"
+   },
+   "ref": {
+    "topic": "Myeloma",
+    "guide": "W16_07_Myeloma_Mono_Spleen.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:daratumumab",
+   "name": "Daratumumab",
+   "class": "rx:anti-cd38",
+   "facets": {
+    "use": "Multiple myeloma",
+    "mechanism": "Anti-CD38 monoclonal antibody",
+    "adverse": "Infusion reactions; interferes with blood crossmatch"
+   },
+   "ref": {
+    "topic": "Myeloma",
+    "guide": "W16_07_Myeloma_Mono_Spleen.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:bleomycin",
+   "name": "Bleomycin",
+   "class": "rx:antitumor-antibiotic",
+   "facets": {
+    "use": "Hodgkin lymphoma (ABVD)",
+    "mechanism": "Antitumour antibiotic (DNA strand breaks)",
+    "adverse": "Pulmonary toxicity (pneumonitis / fibrosis)",
+    "contra": "Caution: lung disease, high inspired O2"
+   },
+   "ref": {
+    "topic": "Hodgkin lymphoma",
+    "guide": "W16_06_Lymphadenopathy_Lymphoma.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:doxorubicin",
+   "name": "Doxorubicin",
+   "class": "rx:anthracycline",
+   "facets": {
+    "use": "ABVD / R-CHOP",
+    "mechanism": "Anthracycline (topoisomerase II)",
+    "adverse": "Cardiomyopathy (cumulative dose), myelosuppression"
+   },
+   "ref": {
+    "topic": "Lymphoma chemo",
+    "guide": "W16_06_Lymphadenopathy_Lymphoma.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:vincristine",
+   "name": "Vincristine",
+   "class": "rx:vinca-alkaloid",
+   "facets": {
+    "use": "R-CHOP, ALL",
+    "mechanism": "Vinca alkaloid (microtubule inhibitor)",
+    "adverse": "Peripheral neuropathy, constipation / ileus"
+   },
+   "ref": {
+    "topic": "Lymphoma chemo",
+    "guide": "W16_06_Lymphadenopathy_Lymphoma.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:vinblastine",
+   "name": "Vinblastine",
+   "class": "rx:vinca-alkaloid",
+   "facets": {
+    "use": "ABVD",
+    "mechanism": "Vinca alkaloid",
+    "adverse": "Neuropathy, myelosuppression"
+   },
+   "ref": {
+    "topic": "Hodgkin lymphoma",
+    "guide": "W16_06_Lymphadenopathy_Lymphoma.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:dacarbazine",
+   "name": "Dacarbazine",
+   "class": "rx:alkylating",
+   "facets": {
+    "use": "ABVD",
+    "mechanism": "Alkylating agent",
+    "adverse": "Nausea / vomiting, myelosuppression"
+   },
+   "ref": {
+    "topic": "Hodgkin lymphoma",
+    "guide": "W16_06_Lymphadenopathy_Lymphoma.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:cyclophosphamide",
+   "name": "Cyclophosphamide",
+   "class": "rx:alkylating",
+   "facets": {
+    "use": "R-CHOP",
+    "mechanism": "Alkylating agent",
+    "adverse": "Myelosuppression, hemorrhagic cystitis, infertility"
+   },
+   "ref": {
+    "topic": "Lymphoma chemo",
+    "guide": "W16_06_Lymphadenopathy_Lymphoma.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:prednisone",
+   "name": "Prednisone",
+   "class": "rx:corticosteroid",
+   "facets": {
+    "use": "R-CHOP; ALL induction",
+    "mechanism": "Corticosteroid",
+    "adverse": "Hyperglycemia, mood changes, infection risk"
+   },
+   "ref": {
+    "topic": "Lymphoma chemo",
+    "guide": "W16_06_Lymphadenopathy_Lymphoma.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:filgrastim",
+   "name": "Filgrastim (G-CSF)",
+   "class": "rx:growth-factor",
+   "facets": {
+    "use": "Chemo-related neutropenia (prophylaxis / therapy)",
+    "mechanism": "G-CSF — stimulates neutrophil production",
+    "adverse": "Bone pain, leukocytosis, rare splenic rupture"
+   },
+   "ref": {
+    "topic": "Neutropenia",
+    "guide": "W16_04_Leukocytosis_Neutropenia.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:piperacillin-tazobactam",
+   "name": "Piperacillin-tazobactam",
+   "class": "rx:antipseudomonal-betalactam",
+   "facets": {
+    "use": "Empiric febrile neutropenia",
+    "mechanism": "Antipseudomonal β-lactam",
+    "adverse": "Allergy, AKI, cytopenias, C. difficile"
+   },
+   "ref": {
+    "topic": "Febrile neutropenia",
+    "guide": "W16_04_Leukocytosis_Neutropenia.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:cefepime",
+   "name": "Cefepime",
+   "class": "rx:antipseudomonal-betalactam",
+   "facets": {
+    "use": "Empiric febrile neutropenia",
+    "mechanism": "Antipseudomonal cephalosporin",
+    "adverse": "Neurotoxicity (esp. renal impairment), allergy, C. difficile"
+   },
+   "ref": {
+    "topic": "Febrile neutropenia",
+    "guide": "W16_04_Leukocytosis_Neutropenia.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:meropenem",
+   "name": "Meropenem",
+   "class": "rx:carbapenem",
+   "facets": {
+    "use": "Febrile neutropenia (resistant / high-risk)",
+    "mechanism": "Carbapenem",
+    "adverse": "Seizures (predisposed), allergy, C. difficile"
+   },
+   "ref": {
+    "topic": "Febrile neutropenia",
+    "guide": "W16_04_Leukocytosis_Neutropenia.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:vancomycin",
+   "name": "Vancomycin",
+   "class": "rx:glycopeptide",
+   "facets": {
+    "use": "Add for specific neutropenic-fever indications (line infx, MRSA, instability)",
+    "mechanism": "Glycopeptide (gram-positive cover)",
+    "adverse": "Nephrotoxicity, infusion reaction; needs monitoring"
+   },
+   "ref": {
+    "topic": "Febrile neutropenia",
+    "guide": "W16_04_Leukocytosis_Neutropenia.html",
+    "week": "Week 16 · Blood III"
+   }
+  },
+  {
+   "id": "rx:aspirin",
+   "name": "Aspirin (low-dose)",
+   "class": "rx:antiplatelet",
+   "facets": {
+    "use": "Low-dose in ET / PV to reduce thrombosis",
+    "mechanism": "Irreversible COX-1 inhibition",
+    "adverse": "GI bleeding, bronchospasm in sensitive asthmatics"
+   },
+   "ref": {
+    "topic": "MPN",
+    "guide": "W16_05_Chronic_Leukemias_MPN.html",
+    "week": "Week 16 · Blood III"
+   }
   }
  ]
 }
