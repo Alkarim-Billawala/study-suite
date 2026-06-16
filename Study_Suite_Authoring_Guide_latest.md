@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.14 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.15 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.14)
+# Study Suite — Content Authoring Guide (v2.15)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,13 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.14 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **Authoring system version:** 2.15 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **What changed in guide v2.15:** **every pack now ends with a one-page CRAM SHEET** as its final
+> `guides[]` entry (new §6a) — a dense, print-friendly "night-before" rapid review of the pack's week(s):
+> a do-not-miss/emergency strip, then compact topic cards of *cue → answer* rows. It uses the same
+> dark-mode-safe CSS contract as the other guides, and links from items are optional (it's a review
+> surface, not a deep-link target). §7 checklist updated to expect it. No schema change (the cram sheet is
+> just another guide).
 > **What changed in guide v2.14:** kept the option-shuffle guidance in lockstep with app behaviour. The
 > app (v0.2.63) now **anchors** "All/None of the above" / "…of these" options — it pins them to their
 > authored slot and shuffles only the other options around them — so those are **fine to use** (no longer
@@ -568,6 +574,32 @@ Embed the full HTML (escaped for JSON) as the `html` value of the matching `guid
 
 ---
 
+## 6a. The cram sheet — the LAST guide in every pack
+
+**Every pack ends with a one-page cram sheet** as the **final `guides[]` entry**: a dense, print-friendly
+"night-before" rapid review of the pack's week(s). It is a regular guide (same `{file,title,html}` shape,
+same dark-mode-safe CSS contract from §6) — just purpose-built as a single high-density revision page.
+
+- **Title it** so it sorts last and reads clearly, e.g. `"Week 16 · 9 Cram Sheet"` (use the next number
+  after your last topic guide). `file` key e.g. `"W16_09_Cram_Sheet.html"`.
+- **Scope = this pack's week(s) only.** One sheet per pack (per week, or per the pack's week-range) — not
+  one giant sheet for a whole course.
+- **Structure** (mirror `Night-Before_Cram_Sheet.html`):
+  - a top **"do-not-miss / emergency" strip** — the can't-miss diagnoses, red flags, and first actions;
+  - then **compact multi-column topic cards**, each a tight list of **cue → answer** rows (the single
+    highest-yield fact per line: classic clue → diagnosis/next step/drug). Think "everything you'd want
+    on one page the night before," not prose.
+- **CSS:** dark-mode-safe, variables only (§6) — the legacy standalone Night-Before sheet hardcodes hex;
+  the embedded version must theme cleanly. A multi-column print layout (`column-count`) and a print button
+  are encouraged but optional.
+- **Linking:** items generally do **not** point their `guide` at the cram sheet (it's a review surface,
+  not a section target) — keep wiring questions/cards to the substantive topic guides.
+
+> Density over completeness: the cram sheet distills, it doesn't re-teach. If it reads like a paragraph,
+> tighten it into cue → answer rows.
+
+---
+
 ## 7. Validation checklist (every item must pass)
 
 **Pack:** JSON object with `id`, `pack`, `formatVersion`, `version`, `author`; `questions` and/or
@@ -582,7 +614,7 @@ with ≥1 `{{…}}`) · `order` (`prompt`, `items` ≥2, in correct order) · `m
 2-element arrays) · `qa` (`prompt`, `answer`). All non-`cloze` cards need a `prompt`.
 
 **Guides:** every `guide.f` used anywhere **resolves to a `guides[]` entry whose `file` matches**;
-every `guides[]` entry has non-empty `html`.
+every `guides[]` entry has non-empty `html`; **the LAST guide is the pack's cram sheet (§6a)**.
 
 **JSON hygiene:** 0-based `correct`; straight quotes; HTML inside strings must keep the JSON valid
 (escape inner double quotes, or use single quotes inside the HTML).
@@ -591,8 +623,9 @@ every `guides[]` entry has non-empty `html`.
 citation/grounding/footnote markers** anywhere (see §8). Run it through a strict JSON parser — if it
 doesn't parse, it won't import.
 
-**Substance & coverage:** **6–10 narrow guides for a dense one-week pack** (not a single sparse page),
-each with real sections/tables; **most questions and cards carry a `guide` pointer**; counts meet the
+**Substance & coverage:** **6–10 narrow topic guides for a dense one-week pack** (not a single sparse
+page), each with real sections/tables, **plus a cram sheet as the final guide (§6a)**; **most questions
+and cards carry a `guide` pointer**; counts meet the
 targets and are **scaled to the weeks covered** (10–20 questions — favour the upper end, 18–20, for a
 dense week — and 40–60 cards *per week*); difficulty lands near the **~30 / 55 / 15** easy/medium/hard
 spread, with **hard** items testing contraindications, emergencies, or multi-step reasoning (not just
@@ -704,6 +737,8 @@ def validate_pack(pack):
     for g in gs:
         if not g.get("html"): errs.append(f"guide {g.get('file')}: empty html")
         elif len(g["html"]) < 1500: warns.append(f"guide {g.get('file')}: looks thin (<1500 chars)")
+    if gs and not any("cram" in (g.get("title","") or "").lower() for g in gs):
+        warns.append("no cram-sheet guide — every pack should end with a one-page cram sheet (§6a)")
 
     blob = json.dumps(pack, ensure_ascii=False)
     hit = [m for m in ARTIFACTS if m in blob]

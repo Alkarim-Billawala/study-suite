@@ -1,7 +1,13 @@
 <!--
-  Study Suite  ·  v0.2.63 (beta)
+  Study Suite  ·  v0.2.64 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.64: The faulty-pack error popup (v0.2.63) gains a "Close and Copy" button — copies the
+  whole error text (filename, the q#/card# lines + guide-section tags, and the guide URL) to the clipboard
+  and closes, so the user can paste it straight to their assistant. alertDialog() takes opts.copyText and
+  shows #confirmCopy; copyToClipboard() uses navigator.clipboard with an execCommand fallback (works on
+  file://). Also: the early-access gate (#eacGate) gains a "Request an access code" button — a mailto:
+  link to accesscodes@studysuite.app (with a prefilled subject). No other behaviour change.
   Changelog v0.2.63: (A) FAULTY-PACK ERROR POPUP. readFiles() no longer silently swallows a bad pack:
   a JSON parse failure or per-item validation errors (already computed by ingestPack) now surface in an
   informative modal (alertDialog/showPackErrors) that points to WHERE the problem is — the file, or the
@@ -748,6 +754,7 @@ section{display:none}section.on{display:block}
     </form>
     <div class="eacerr" id="eacErr" role="alert"></div>
     <div class="eacalt">Returning on a new device? <a href="#" id="eacRestore">Restore a backup</a> from an unlocked copy.</div>
+    <a class="btn ghost sm" id="eacRequest" href="mailto:accesscodes@studysuite.app?subject=Study%20Suite%20access%20code%20request" style="display:inline-block;text-decoration:none;margin-top:16px">Request an access code</a>
   </div>
 </div>
 <script>/* Show the gate at parse time (before content paints) when armed; skip if this browser already
@@ -954,7 +961,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
   <div class="modal-ov" id="confirmOv" style="display:none">
     <div class="modal-card confirm-card" role="dialog" aria-modal="true" aria-labelledby="confirmMsg">
       <div class="confirm-msg" id="confirmMsg"></div>
-      <div class="confirm-actions"><button class="btn ghost sm" id="confirmCancel">Cancel</button><button class="btn sm" id="confirmOk">Confirm</button></div>
+      <div class="confirm-actions"><button class="btn ghost sm" id="confirmCopy" style="display:none">Close and Copy</button><button class="btn ghost sm" id="confirmCancel">Cancel</button><button class="btn sm" id="confirmOk">Confirm</button></div>
     </div>
   </div>
   <!-- TOASTS (in-app, replaces native alert()) -->
@@ -1031,7 +1038,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.63';
+const APP_VERSION='0.2.64';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1832,21 +1839,28 @@ function returnFromReviewer(){const r=reviewerReturn;if(r==='study'){show('study
 let confirmCb=null;
 function confirmDialog(msg,opts,onConfirm){if(typeof opts==='function'){onConfirm=opts;opts={};}opts=opts||{};
   $('confirmMsg').textContent=msg;
-  $('confirmCancel').style.display='';
+  $('confirmCancel').style.display='';$('confirmCopy').style.display='none';
   $('confirmOk').textContent=opts.confirmText||'Confirm';
   $('confirmCancel').textContent=opts.cancelText||'Cancel';
   $('confirmOk').classList.toggle('danger',!!opts.danger);
   confirmCb=typeof onConfirm==='function'?onConfirm:null;
   $('confirmOv').style.display='flex';$('confirmOk').focus();}
 /* Alert-style (OK only) modal, built from DOM nodes so user-derived text (filenames) can't inject HTML. */
+let copyPayload=null;
 function alertDialog(title,lines,opts){opts=opts||{};const box=$('confirmMsg');box.innerHTML='';
   const h=document.createElement('div');h.style.cssText='font-weight:600;margin-bottom:7px';h.textContent=title;box.appendChild(h);
   (lines||[]).forEach(l=>{const p=document.createElement('div');
     p.style.cssText='font-size:13px;line-height:1.4;color:var(--ink-soft);margin:3px 0;white-space:pre-wrap';
     p.textContent=l;box.appendChild(p);});
   $('confirmCancel').style.display='none';
+  copyPayload=opts.copyText||null;
+  $('confirmCopy').style.display=copyPayload?'':'none';
   $('confirmOk').textContent=opts.okText||'OK';$('confirmOk').classList.remove('danger');
   confirmCb=null;$('confirmOv').style.display='flex';$('confirmOk').focus();}
+function copyToClipboard(text){
+  try{if(navigator.clipboard&&navigator.clipboard.writeText){return navigator.clipboard.writeText(text);}}catch(e){}
+  return new Promise((res,rej)=>{try{const ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;left:-9999px;top:0';
+    document.body.appendChild(ta);ta.focus();ta.select();const ok=document.execCommand('copy');document.body.removeChild(ta);ok?res():rej();}catch(e){rej(e);}});}
 /* Map a per-item validation error to the relevant authoring-guide section, so the message is actionable. */
 function guideSectionFor(e){
   if(/cloze|mcq|multi|order|match|\bqa\b|prompt|bad type/i.test(e))return 'guide §2 (card types)';
@@ -1866,7 +1880,8 @@ function showPackErrors(reports){const lines=[];
   });
   lines.push('Where to look: q#N / card#N is the item’s position (0-based) in the pack’s questions[] / cards[] array.');
   lines.push('Authoring guide: '+GUIDE_URL+'  — paste these lines to your assistant to fix the source pack.');
-  alertDialog(reports.length>1?'Some packs had problems loading':'There was a problem loading your pack',lines,{okText:'Got it'});}
+  const title=reports.length>1?'Some packs had problems loading':'There was a problem loading your pack';
+  alertDialog(title,lines,{okText:'Close',copyText:'Study Suite — pack load error\n'+lines.join('\n')});}
 function closeConfirm(){$('confirmOv').style.display='none';confirmCb=null;}
 function toast(msg,ms){const w=$('toastWrap');if(!w)return;const t=document.createElement('div');t.className='toast';t.textContent=msg;w.appendChild(t);
   requestAnimationFrame(()=>t.classList.add('show'));
@@ -2062,6 +2077,7 @@ $('installOv').addEventListener('click',e=>{if(e.target===$('installOv'))closeIn
 $('devSeg').querySelectorAll('.seg').forEach(b=>b.addEventListener('click',()=>{installDev=b.dataset.dev;renderInstall();}));
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('installOv').style.display!=='none')closeInstall();});
 $('confirmOk').addEventListener('click',()=>{const cb=confirmCb;closeConfirm();if(cb)cb();});
+$('confirmCopy').addEventListener('click',()=>{const t=copyPayload;Promise.resolve(t?copyToClipboard(t):null).then(()=>toast('Error details copied.')).catch(()=>toast('Could not copy — select and copy manually.')).finally(()=>closeConfirm());});
 $('confirmCancel').addEventListener('click',closeConfirm);
 $('confirmOv').addEventListener('click',e=>{if(e.target===$('confirmOv'))closeConfirm();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('confirmOv').style.display!=='none')closeConfirm();});
