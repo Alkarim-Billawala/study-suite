@@ -2,11 +2,11 @@
  "pack": "Week 15 — Blood II",
  "id": "wk15",
  "formatVersion": "2.0",
- "version": "2.1",
+ "version": "2.2",
  "author": "Alkarim Billawala / alkarim.billawala.ca",
  "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
  "created": "2026-06-15",
- "updated": "2026-06-15",
+ "updated": "2026-06-16",
  "school": "UofT — Temerty Medicine",
  "year": "Year 1",
  "course": "CPC 1",
@@ -1346,6 +1346,256 @@
    "file": "W15_08_Trauma_TXA_Aging.html",
    "title": "Week 15 · 8 Trauma, Massive Hemorrhage, FAST & TXA",
    "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Trauma, Massive Hemorrhage, FAST &amp; TXA</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Trauma</div><h1>Trauma, Massive Hemorrhage, FAST &amp; TXA</h1></div><div class='r'>Week 15 &middot; Blood II<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The hypotensive trauma patient: ATLS, the FAST exam, blood-product resuscitation, TXA, and the aging-population context.</p>\n<h2>ATLS primary survey</h2>\n<p>For the hypotensive trauma patient, work the <b>A-B-C-D-E</b>:</p>\n<ul>\n<li><b>A</b>irway with C-spine protection</li>\n<li><b>B</b>reathing and ventilation</li>\n<li><b>C</b>irculation with hemorrhage control</li>\n<li><b>D</b>isability (neurologic status)</li>\n<li><b>E</b>xposure/environment, prevent hypothermia</li>\n</ul>\n<div class='key'>Unstable pelvis + bilateral femur injuries + hypotension/tachycardia &rarr; suspect <b>major hemorrhage</b> (retroperitoneal/pelvic + long-bone loss), <b>even with a negative FAST</b>.</div>\n<h3>Early interventions</h3>\n<p>Large-bore IV/IO access; <b>blood products over large-volume crystalloid</b>; <b>pelvic binder</b> for unstable pelvis; splint femurs; analgesia (ketamine/fentanyl); <b>early TXA</b>; CXR + pelvic X-ray; FAST; activate the massive hemorrhage protocol.</p>\n<h2>FAST exam</h2>\n<p>Looks for free fluid (usually blood).</p>\n<table>\n<tr><th>View</th><th>Landmark</th></tr>\n<tr><td>RUQ</td><td>Morison pouch (hepatorenal recess)</td></tr>\n<tr><td>LUQ</td><td>Splenorenal space + diaphragm</td></tr>\n<tr><td>Pelvis</td><td>Rectovesical (male) / pouch of Douglas (female)</td></tr>\n<tr><td>Subxiphoid</td><td>Pericardial effusion</td></tr>\n</table>\n<div class='band warn'><div class='t'>FAST limitation</div>\nA <b>negative FAST does not exclude hemorrhage</b>, especially <b>retroperitoneal/pelvic</b> bleeding. Integrate with hemodynamics, not in isolation.</div>\n<h2>Tranexamic acid</h2>\n<p>An <b>antifibrinolytic</b> &mdash; blocks plasminogen activation, reducing fibrin breakdown. Uses: early trauma hemorrhage, heavy menstrual bleeding, mucosal bleeding in vWD/platelet disorders, peri-procedural prophylaxis. <b>Not</b> a substitute for source control, resuscitation, or correcting major coagulopathy.</p>\n<h2>Public health: aging &amp; clot risk</h2>\n<p>Seniors are a rapidly growing group in Canada. VTE risk rises substantially with age, and older adults more often have cancer, immobility, surgery, and hospitalization &mdash; so anticoagulant use grows. <b>Bleeding</b> risk also rises (renal impairment, polypharmacy, falls, frailty, GI pathology).</p>\n<div class='key'>Clinical takeaway: in older adults, <b>individualize</b> VTE prevention/treatment &mdash; balance thrombotic risk, bleeding risk, renal function, goals of care, adherence, and follow-up.</div>\n</div>"
+  },
+  {
+   "file": "W15_09_Cram_Sheet.html",
+   "title": "Week 15 · 9 Cram Sheet",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Week 15 · 9 Cram Sheet</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.35;-webkit-font-smoothing:antialiased}\n.page{max-width:1180px;margin:0 auto;padding:18px 20px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:8px;margin-bottom:12px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:26px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.emerg{border:1.5px solid var(--hi);border-radius:6px;background:rgba(0,0,0,.02);padding:9px 12px;margin-bottom:13px}\n.emerg .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--hi);font-weight:600;margin-bottom:5px}\n.emerg .items{columns:3;column-gap:22px;font-size:12px;line-height:1.42}\n.emerg .items div{break-inside:avoid;margin-bottom:3px}\n.emerg b{color:var(--hi)}\n.cols{column-count:4;column-gap:14px}\n@media(max-width:1040px){.cols{column-count:3}}\n@media(max-width:760px){.cols{column-count:2}}\n@media(max-width:520px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(0,0,0,.02);padding:8px 9px 7px;margin:0 0 11px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;padding-bottom:4px;border-bottom:1.5px solid var(--line);color:var(--accent);display:flex;justify-content:space-between;align-items:baseline;gap:6px}\n.card h2 .wk{color:var(--soft);font-size:8.5px;font-weight:500;letter-spacing:.06em;white-space:nowrap}\n.row{margin:0 0 3.5px;font-size:11.5px;line-height:1.32}\n.row .tg{font-weight:600;color:var(--ink)}\n.row .ar{color:var(--soft)}\n.row .ar::before{content:\"\\2192 \";color:var(--accent);font-weight:600}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:5px 0}\n.dnm{color:var(--hi);font-weight:700}\n.foot{margin-top:10px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:landscape;margin:9mm}body{font-size:8.4px}.page{max-width:none;padding:0}.cols{column-count:4;column-gap:8px}.emerg .items{columns:3}.card{margin-bottom:6px}.head h1{font-size:19px}}\n</style><div class='page'><div class='head'><div><div class='k'>Night-Before High-Yield</div><h1>Blood II</h1></div><div class='r'>Week 15 &middot; Blood II<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><div class='emerg'><div class='t'>★ Do-not-miss &middot; first-step reflexes</div><div class='items'><div><b>Major hemorrhage / hemorrhagic shock</b> &rarr; blood products over crystalloid, pelvic binder, early TXA, activate massive-transfusion protocol</div><div><b>DIC</b> (sepsis/trauma/OB + bleeding, <b>&darr;fibrinogen</b>, &uarr;D-dimer) &rarr; treat the cause + product support</div><div><b>TTP</b> (schistocytes + low platelets, <b>normal</b> coags &plusmn; neuro) &rarr; plasma exchange; <span class='dnm'>do NOT transfuse platelets</span></div><div><b>HIT</b> (platelets &darr;&gt;50%, day 5–10, new clot) &rarr; <span class='dnm'>stop ALL heparin</span> + non-heparin anticoagulant; no warfarin until platelets recover</div><div><b>High-probability PE</b> + acceptable bleeding risk + imaging delayed &rarr; start empiric anticoagulation</div><div><b>Warfarin + life-threatening bleed</b> &rarr; vitamin K + <b>PCC</b> (reverse fast)</div><div><b>Severe thrombocytopenia + wet purpura</b> (oral blood blisters) &rarr; high serious-bleeding risk</div></div></div><div class='cols'><div class='card'><h2>Normal hemostasis <span class='wk'>Physiology</span></h2><div class='row'><span class='tg'>Primary</span> <span class='ar'>platelet plug — vWF/GPIb adhesion, GPIIb/IIIa aggregation</span></div><div class='row'><span class='tg'>Secondary</span> <span class='ar'>cascade &rarr; fibrin; PT = extrinsic (VII), PTT = intrinsic (VIII/IX/XI/XII)</span></div><div class='row'><span class='tg'>Mucocutaneous bleed</span> <span class='ar'>primary (platelets/vWF)</span></div><div class='row'><span class='tg'>Deep / delayed bleed</span> <span class='ar'>secondary (coagulation factors)</span></div><hr class='mini'><div class='row'><span class='tg'>Fibrinolysis</span> <span class='ar'>tPA &rarr; plasmin; D-dimer sensitive, not specific</span></div><div class='row'><span class='tg'>Natural brakes</span> <span class='ar'>antithrombin, protein C/S, TFPI</span></div></div><div class='card'><h2>Approach to bleeding <span class='wk'>Workup</span></h2><div class='row'><span class='tg'>History</span> <span class='ar'>the key test; normal PT/PTT doesn't exclude (vWD, platelet defect)</span></div><div class='row'><span class='tg'>PT&uarr; only</span> <span class='ar'>factor VII / early warfarin</span></div><div class='row'><span class='tg'>PTT&uarr; only</span> <span class='ar'>hemophilia, heparin, lupus anticoagulant</span></div><div class='row'><span class='tg'>PT&uarr; + PTT&uarr;</span> <span class='ar'>liver disease, DIC, common pathway</span></div><div class='row'><span class='tg'>Mixing study</span> <span class='ar'>corrects = deficiency; no correction = inhibitor</span></div></div><div class='card'><h2>Bleeding disorders <span class='wk'>Disorders</span></h2><div class='row'><span class='tg'>vWD</span> <span class='ar'>mucocutaneous; normal/&uarr;PTT; TXA / desmopressin / vWF concentrate</span></div><div class='row'><span class='tg'>Hemophilia A (VIII) / B (IX)</span> <span class='ar'>X-linked, deep bleeds, &uarr;PTT corrects &rarr; factor replacement</span></div><div class='row'><span class='tg'>ITP</span> <span class='ar'>isolated thrombocytopenia; steroids/IVIG if bleeding; platelets only if life-threatening</span></div><hr class='mini'><div class='row'><span class='tg'>Platelet thresholds</span> <span class='ar'>&lt;50 procedure · &lt;20 spontaneous · &lt;10 serious</span></div></div><div class='card'><h2>DIC &amp; microangiopathies <span class='wk'>Consumption</span></h2><div class='row'><span class='tg'>DIC</span> <span class='ar'>&uarr;PT/PTT, &darr;fibrinogen, &uarr;D-dimer, schistocytes &rarr; treat cause + products</span></div><div class='row'><span class='tg'>TTP</span> <span class='ar'>schistocytes + neuro/renal, <b>normal</b> coags &rarr; plasma exchange</span></div><div class='row'><span class='tg'>Discriminator</span> <span class='ar'>ITP (normal coags, no schisto) · TTP (schisto, normal coags) · DIC (&darr;fibrinogen)</span></div></div><div class='card'><h2>Drugs affecting hemostasis <span class='wk'>Pharm</span></h2><div class='row'><span class='tg'>Antiplatelets (arterial)</span> <span class='ar'>aspirin (COX-1); clopidogrel/ticagrelor (P2Y12); GPIIb/IIIa</span></div><div class='row'><span class='tg'>UFH / LMWH</span> <span class='ar'>potentiate antithrombin; UFH reversed by protamine</span></div><div class='row'><span class='tg'>DOAC</span> <span class='ar'>apixaban/rivaroxaban (Xa); dabigatran (IIa, reversed by idarucizumab)</span></div><div class='row'><span class='tg'>Warfarin</span> <span class='ar'>blocks vitamin K epoxide reductase; reverse with vitamin K / PCC</span></div><hr class='mini'><div class='row'><span class='tg'>HIT</span> <span class='ar'>stop heparin &rarr; non-heparin agent; no warfarin until platelets recover</span></div><div class='row'><span class='tg'>Warfarin pitfall</span> <span class='ar'>protein C/S drop first &rarr; transient prothrombotic (bridge)</span></div></div><div class='card'><h2>VTE diagnosis <span class='wk'>Thrombosis</span></h2><div class='row'><span class='tg'>Virchow's triad</span> <span class='ar'>stasis, hypercoagulability, endothelial injury</span></div><div class='row'><span class='tg'>Low probability</span> <span class='ar'>D-dimer (rules out if negative)</span></div><div class='row'><span class='tg'>High probability</span> <span class='ar'>image directly — US (DVT), CTPA (PE)</span></div><div class='row'><span class='tg'>D-dimer</span> <span class='ar'>sensitive, not specific (rule out only)</span></div><hr class='mini'><div class='row'><span class='tg'>PE red flags</span> <span class='ar'>O&#8322; &le;90%, HR &gt;100, syncope, hypotension</span></div><div class='row'><span class='tg'>Pregnancy + leg sx</span> <span class='ar'>leg Doppler first</span></div></div><div class='card'><h2>VTE management <span class='wk'>Treatment</span></h2><div class='row'><span class='tg'>Core</span> <span class='ar'>anticoagulate; empiric if high-prob + delayed imaging</span></div><div class='row'><span class='tg'>Agent</span> <span class='ar'>DOAC (stable) · LMWH (cancer/pregnancy) · UFH (renal/procedure) · warfarin (APS/valve)</span></div><div class='row'><span class='tg'>Duration</span> <span class='ar'>provoked 3 mo · unprovoked &ge;3 mo (often extended) · recurrent/cancer longer</span></div><hr class='mini'><div class='row'><span class='tg'>Cancer VTE + bleed</span> <span class='ar'>hold &rarr; source control &rarr; resume (LMWH)</span></div><div class='row'><span class='tg'>IVC filter</span> <span class='ar'>only if can't anticoagulate; not definitive</span></div></div><div class='card'><h2>Trauma · FAST · TXA <span class='wk'>Trauma</span></h2><div class='row'><span class='tg'>ATLS</span> <span class='ar'>ABCDE; unstable pelvis + femurs = major hemorrhage even if FAST negative</span></div><div class='row'><span class='tg'>Resuscitate</span> <span class='ar'>blood products &gt; crystalloid; pelvic binder; splint; early TXA</span></div><div class='row'><span class='tg'>FAST views</span> <span class='ar'>RUQ Morison · LUQ splenorenal · pelvis · subxiphoid pericardial</span></div><div class='row'><span class='tg'>TXA</span> <span class='ar'>antifibrinolytic (blocks plasminogen activation)</span></div><div class='row'><span class='tg'>Aging</span> <span class='ar'>&uarr;VTE and &uarr;bleeding risk &rarr; individualize</span></div></div></div><div class='foot'>Week 15 &middot; Blood II &middot; cram sheet &middot; cue &rarr; answer</div></div>"
+  }
+ ],
+ "drugs": [
+  {
+   "id": "rx:heparin-ufh",
+   "name": "Unfractionated heparin (UFH)",
+   "class": "rx:heparin",
+   "facets": {
+    "use": "Acute VTE; situations needing rapid on/off or reversal",
+    "mechanism": "Potentiates antithrombin &rarr; inhibits thrombin (IIa) &amp; Xa",
+    "monitoring": "PTT or anti-Xa",
+    "adverse": "Bleeding, HIT, osteoporosis (prolonged)"
+   },
+   "ref": {
+    "topic": "Anticoagulants",
+    "guide": "W15_05_Hemostasis_Drugs.html",
+    "week": "Week 15 · Blood II"
+   }
+  },
+  {
+   "id": "rx:enoxaparin",
+   "name": "Enoxaparin (LMWH)",
+   "class": "rx:lmwh",
+   "facets": {
+    "use": "Acute VTE; favored in cancer-associated VTE and pregnancy",
+    "mechanism": "Potentiates antithrombin, mainly anti-Xa",
+    "adverse": "Bleeding, HIT (lower than UFH)",
+    "contra": "Renal impairment (dose-adjust)"
+   },
+   "ref": {
+    "topic": "Anticoagulants",
+    "guide": "W15_05_Hemostasis_Drugs.html",
+    "week": "Week 15 · Blood II"
+   }
+  },
+  {
+   "id": "rx:apixaban",
+   "name": "Apixaban",
+   "class": "rx:doac-xa",
+   "facets": {
+    "use": "Many stable VTE (oral, outpatient)",
+    "mechanism": "Direct factor Xa inhibitor",
+    "adverse": "Bleeding",
+    "contra": "Avoid in pregnancy; caution in renal/hepatic disease"
+   },
+   "ref": {
+    "topic": "Anticoagulants",
+    "guide": "W15_05_Hemostasis_Drugs.html",
+    "week": "Week 15 · Blood II"
+   }
+  },
+  {
+   "id": "rx:rivaroxaban",
+   "name": "Rivaroxaban",
+   "class": "rx:doac-xa",
+   "facets": {
+    "use": "VTE treatment / prevention",
+    "mechanism": "Direct factor Xa inhibitor",
+    "adverse": "Bleeding (incl. GI)",
+    "contra": "Avoid in pregnancy"
+   },
+   "ref": {
+    "topic": "Anticoagulants",
+    "guide": "W15_05_Hemostasis_Drugs.html",
+    "week": "Week 15 · Blood II"
+   }
+  },
+  {
+   "id": "rx:dabigatran",
+   "name": "Dabigatran",
+   "class": "rx:doac-iia",
+   "facets": {
+    "use": "VTE (oral)",
+    "mechanism": "Direct thrombin (IIa) inhibitor",
+    "adverse": "Dyspepsia, GI bleeding",
+    "monitoring": "Specific reversal: idarucizumab"
+   },
+   "ref": {
+    "topic": "Anticoagulants",
+    "guide": "W15_05_Hemostasis_Drugs.html",
+    "week": "Week 15 · Blood II"
+   }
+  },
+  {
+   "id": "rx:warfarin",
+   "name": "Warfarin",
+   "class": "rx:vka",
+   "facets": {
+    "use": "VTE; antiphospholipid syndrome, mechanical valves",
+    "mechanism": "Blocks vitamin K epoxide reductase &rarr; &darr;II, VII, IX, X, protein C/S",
+    "monitoring": "INR; bridge for acute VTE",
+    "contra": "Teratogenic"
+   },
+   "ref": {
+    "topic": "Anticoagulants",
+    "guide": "W15_05_Hemostasis_Drugs.html",
+    "week": "Week 15 · Blood II"
+   }
+  },
+  {
+   "id": "rx:protamine",
+   "name": "Protamine",
+   "class": "rx:reversal-agent",
+   "facets": {
+    "use": "Reverse unfractionated heparin",
+    "mechanism": "Binds and neutralizes heparin"
+   },
+   "ref": {
+    "topic": "Reversal",
+    "guide": "W15_05_Hemostasis_Drugs.html",
+    "week": "Week 15 · Blood II"
+   }
+  },
+  {
+   "id": "rx:idarucizumab",
+   "name": "Idarucizumab",
+   "class": "rx:reversal-agent",
+   "facets": {
+    "use": "Reverse dabigatran",
+    "mechanism": "Monoclonal antibody fragment binding dabigatran"
+   },
+   "ref": {
+    "topic": "Reversal",
+    "guide": "W15_05_Hemostasis_Drugs.html",
+    "week": "Week 15 · Blood II"
+   }
+  },
+  {
+   "id": "rx:vitamin-k",
+   "name": "Vitamin K (phytonadione)",
+   "class": "rx:reversal-agent",
+   "facets": {
+    "use": "Reverse warfarin (with PCC if urgent)",
+    "mechanism": "Restores vitamin-K-dependent clotting factors"
+   },
+   "ref": {
+    "topic": "Reversal",
+    "guide": "W15_05_Hemostasis_Drugs.html",
+    "week": "Week 15 · Blood II"
+   }
+  },
+  {
+   "id": "rx:pcc",
+   "name": "Prothrombin complex concentrate (PCC)",
+   "class": "rx:reversal-agent",
+   "facets": {
+    "use": "Rapid warfarin reversal in major bleeding",
+    "mechanism": "Concentrated factors II, VII, IX, X"
+   },
+   "ref": {
+    "topic": "Reversal",
+    "guide": "W15_05_Hemostasis_Drugs.html",
+    "week": "Week 15 · Blood II"
+   }
+  },
+  {
+   "id": "rx:clopidogrel",
+   "name": "Clopidogrel",
+   "class": "rx:p2y12-inhibitor",
+   "facets": {
+    "use": "Arterial thrombosis (ACS/stents)",
+    "mechanism": "P2Y12 (ADP) receptor inhibitor",
+    "adverse": "Bleeding"
+   },
+   "ref": {
+    "topic": "Antiplatelets",
+    "guide": "W15_05_Hemostasis_Drugs.html",
+    "week": "Week 15 · Blood II"
+   }
+  },
+  {
+   "id": "rx:ticagrelor",
+   "name": "Ticagrelor",
+   "class": "rx:p2y12-inhibitor",
+   "facets": {
+    "use": "ACS",
+    "mechanism": "Reversible P2Y12 inhibitor",
+    "adverse": "Bleeding, dyspnea"
+   },
+   "ref": {
+    "topic": "Antiplatelets",
+    "guide": "W15_05_Hemostasis_Drugs.html",
+    "week": "Week 15 · Blood II"
+   }
+  },
+  {
+   "id": "rx:prasugrel",
+   "name": "Prasugrel",
+   "class": "rx:p2y12-inhibitor",
+   "facets": {
+    "use": "ACS/PCI",
+    "mechanism": "P2Y12 inhibitor",
+    "adverse": "Higher bleeding risk"
+   },
+   "ref": {
+    "topic": "Antiplatelets",
+    "guide": "W15_05_Hemostasis_Drugs.html",
+    "week": "Week 15 · Blood II"
+   }
+  },
+  {
+   "id": "rx:eptifibatide",
+   "name": "Eptifibatide",
+   "class": "rx:gp2b3a-inhibitor",
+   "facets": {
+    "use": "Selected ACS/PCI",
+    "mechanism": "GP IIb/IIIa inhibitor (blocks final aggregation)",
+    "adverse": "Significant bleeding, thrombocytopenia"
+   },
+   "ref": {
+    "topic": "Antiplatelets",
+    "guide": "W15_05_Hemostasis_Drugs.html",
+    "week": "Week 15 · Blood II"
+   }
+  },
+  {
+   "id": "rx:tranexamic-acid",
+   "name": "Tranexamic acid (TXA)",
+   "class": "rx:antifibrinolytic",
+   "facets": {
+    "use": "Trauma hemorrhage (early), menorrhagia, mucosal bleeding in vWD/platelet disorders",
+    "mechanism": "Antifibrinolytic — blocks plasminogen activation",
+    "monitoring": "Not a substitute for source control/resuscitation"
+   },
+   "ref": {
+    "topic": "Hemostatic agents",
+    "guide": "W15_08_Trauma_TXA_Aging.html",
+    "week": "Week 15 · Blood II"
+   }
+  },
+  {
+   "id": "rx:desmopressin",
+   "name": "Desmopressin (DDAVP)",
+   "class": "rx:vasopressin-analog",
+   "facets": {
+    "use": "Mild vWD / mild hemophilia A; uremic bleeding",
+    "mechanism": "Releases stored vWF and factor VIII",
+    "adverse": "Hyponatremia / fluid retention",
+    "contra": "Not for all vWD types; avoid repeated dosing without monitoring"
+   },
+   "ref": {
+    "topic": "Bleeding disorders",
+    "guide": "W15_03_Bleeding_Disorders.html",
+    "week": "Week 15 · Blood II"
+   }
   }
  ]
 }
