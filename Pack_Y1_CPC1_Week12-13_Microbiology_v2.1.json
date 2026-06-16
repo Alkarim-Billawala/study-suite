@@ -2,11 +2,11 @@
  "pack": "Weeks 12–13 — Microbiology & ID",
  "id": "wk12-13",
  "formatVersion": "2.0",
- "version": "2.0",
+ "version": "2.1",
  "author": "Alkarim Billawala / alkarim.billawala.ca",
  "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
  "created": "2026-06-13",
- "updated": "2026-06-13",
+ "updated": "2026-06-16",
  "school": "UofT — Temerty Medicine",
  "year": "Year 1",
  "course": "CPC 1",
@@ -2167,6 +2167,302 @@
    "file": "W1213_09_Fever_Travel.html",
    "title": "Weeks 12–13 · 9 Fever, Travel, Parasites & Emerging Disease",
    "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Fever, Travel, Parasites &amp; Emerging Disease</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#2f6b4f;--accent2:#7c2d2d;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.4px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.6px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Wider Lens</div><h1>Fever, Travel, Parasites &amp; Emerging Disease</h1></div><div class=\"r\">Weeks 12&ndash;13 &middot; Micro &amp; ID<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">Fever physiology and rigors, the returned-traveller work-up (malaria first), virus/parasite classification, the emerging-disease drivers, and the structured re-think for a non-resolving infection.</p>\n<h2 id=\"fever\">Fever &amp; FUO</h2>\n<p>Exogenous pyrogens &rarr; leukocyte <b>IL-1/TNF/IFN/IL-6</b> &rarr; <b>PGE2</b> &rarr; raised hypothalamic set point. <b>Rigors</b> occur because the body now perceives itself as too cold and shivers to generate heat. Differential: infection, malignancy, autoimmune, drug fever, thrombosis, endocrine, heat illness (blunted in elderly).</p>\n<h2 id=\"traveller\">The returned traveller</h2>\n<div class=\"band warn\"><div class=\"t\">Rule out malaria FIRST</div>\nAny febrile traveller from the tropics (esp. <b>sub-Saharan Africa</b>): <b>thick/thin smears now, repeat q12h &times;3</b>, or malaria NAAT. Dengue (Central America/Caribbean, short incubation), enteric fever (South Asia), also consider acute HIV, hepatitis, rickettsia, schistosomiasis, TB.</div>\n<table>\n<tr><th>Incubation</th><th>Think</th></tr>\n<tr><td>Short (&lt;21 d)</td><td>Dengue (3&ndash;5 d), Zika, bacterial enteritis, typhoid, acute HIV</td></tr>\n<tr><td>Long (&gt;21 d)</td><td>Malaria, viral hepatitis, TB, schistosomiasis</td></tr>\n</table>\n<h2 id=\"parasites\">Parasite &amp; virus classification</h2>\n<ul>\n<li><b>Virus first split:</b> DNA vs RNA (then envelope, capsid, replication). Enveloped viruses are less environmentally hardy.</li>\n<li><b>Parasite hosts:</b> definitive (sexual/adult) vs intermediate (larval/asexual) vs accidental.</li>\n<li>Categories: protozoa, helminths (nematode/cestode/trematode), arthropods.</li>\n</ul>\n<h2 id=\"emerging\">Emerging diseases &amp; the non-resolving case</h2>\n<p><b>Emergence drivers:</b> microbial adaptation, human susceptibility, land use/economic development, climate/weather, travel/commerce, public-health breakdown, intent to harm. Newly vs re-emerging vs deliberately emerging. <b>Antigenic shift/reassortment</b> drives pandemic influenza.</p>\n<div class=\"band\"><div class=\"t\">Non-resolving infection — reconsider</div>\n<b>Bug-drug mismatch</b> (resistant/atypical/TB/fungal/parasite), <b>missing source control</b> (abscess, line, necrosis, obstruction), <b>wrong diagnosis</b> (malignancy, PE, drug fever), <b>host factors</b> (immunocompromise &mdash; consider <b>HIV + PJP</b>), or a <b>pharmacology problem</b> (dose/route/absorption/adherence).</div>\n</div>"
+  },
+  {
+   "file": "W1213_10_Cram_Sheet.html",
+   "title": "Weeks 12–13 · 10 Cram Sheet",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Weeks 12–13 · 10 Cram Sheet</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.35;-webkit-font-smoothing:antialiased}\n.page{max-width:1180px;margin:0 auto;padding:18px 20px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:8px;margin-bottom:12px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:26px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.emerg{border:1.5px solid var(--hi);border-radius:6px;background:rgba(0,0,0,.02);padding:9px 12px;margin-bottom:13px}\n.emerg .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--hi);font-weight:600;margin-bottom:5px}\n.emerg .items{columns:3;column-gap:22px;font-size:12px;line-height:1.42}\n.emerg .items div{break-inside:avoid;margin-bottom:3px}\n.emerg b{color:var(--hi)}\n.cols{column-count:4;column-gap:14px}\n@media(max-width:1040px){.cols{column-count:3}}\n@media(max-width:760px){.cols{column-count:2}}\n@media(max-width:520px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(0,0,0,.02);padding:8px 9px 7px;margin:0 0 11px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;padding-bottom:4px;border-bottom:1.5px solid var(--line);color:var(--accent);display:flex;justify-content:space-between;align-items:baseline;gap:6px}\n.card h2 .wk{color:var(--soft);font-size:8.5px;font-weight:500;letter-spacing:.06em;white-space:nowrap}\n.row{margin:0 0 3.5px;font-size:11.5px;line-height:1.32}\n.row .tg{font-weight:600;color:var(--ink)}\n.row .ar{color:var(--soft)}\n.row .ar::before{content:\"\\2192 \";color:var(--accent);font-weight:600}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:5px 0}\n.dnm{color:var(--hi);font-weight:700}\n.foot{margin-top:10px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:landscape;margin:9mm}body{font-size:8.4px}.page{max-width:none;padding:0}.cols{column-count:4;column-gap:8px}.emerg .items{columns:3}.card{margin-bottom:6px}.head h1{font-size:19px}}\n</style><div class='page'><div class='head'><div><div class='k'>Night-Before High-Yield</div><h1>Microbiology</h1></div><div class='r'>Weeks 12–13 &middot; Microbiology<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><div class='emerg'><div class='t'>★ Do-not-miss &middot; first-step reflexes</div><div class='items'><div><b>Sepsis</b> &rarr; resuscitate + cultures + broad-spectrum antibiotics within 1 h + source control</div><div><b>Bacterial meningitis</b> &rarr; empiric ceftriaxone + vancomycin (+ dexamethasone; + ampicillin if Listeria risk) — don't delay for imaging/LP</div><div><b>Febrile neutropenia</b> &rarr; empiric antipseudomonal antibiotics</div><div><b>Necrotizing fasciitis</b> &rarr; surgical debridement + broad antibiotics</div><div><b>HIV / blood-borne exposure</b> &rarr; start post-exposure prophylaxis urgently</div></div></div><div class='cols'><div class='card'><h2>ID framework &amp; stewardship <span class='wk'>Approach</span></h2><div class='row'><span class='tg'>Empiric &rarr; targeted</span> <span class='ar'>broad first, then de-escalate on cultures</span></div><div class='row'><span class='tg'>Stewardship</span> <span class='ar'>narrowest effective agent, shortest course, source control</span></div></div><div class='card'><h2>Micro basics &amp; Gram stain <span class='wk'>Micro</span></h2><div class='row'><span class='tg'>Gram positive</span> <span class='ar'>cocci — staph (clusters), strep (chains)</span></div><div class='row'><span class='tg'>Gram negative</span> <span class='ar'>rods (enteric), diplococci (Neisseria)</span></div><div class='row'><span class='tg'>Anaerobes</span> <span class='ar'>abscesses, gut, mouth</span></div></div><div class='card'><h2>Infection control <span class='wk'>Public health</span></h2><div class='row'><span class='tg'>Transmission</span> <span class='ar'>contact · droplet · airborne</span></div><div class='row'><span class='tg'>Core</span> <span class='ar'>hand hygiene; isolation precautions; reportable diseases</span></div></div><div class='card'><h2>Antibacterials <span class='wk'>Antibiotics</span></h2><div class='row'><span class='tg'>Cell wall</span> <span class='ar'>β-lactams (penicillins, cephalosporins, carbapenems), vancomycin</span></div><div class='row'><span class='tg'>Protein synthesis</span> <span class='ar'>macrolides, tetracyclines, aminoglycosides, clindamycin</span></div><div class='row'><span class='tg'>DNA / folate</span> <span class='ar'>fluoroquinolones; TMP-SMX; metronidazole (anaerobes)</span></div><div class='row'><span class='tg'>MRSA</span> <span class='ar'>vancomycin, TMP-SMX, doxycycline, clindamycin</span></div></div><div class='card'><h2>Antifungal / antiviral / antiparasitic <span class='wk'>Other antimicrobials</span></h2><div class='row'><span class='tg'>Antifungal</span> <span class='ar'>azoles (fluconazole), amphotericin, echinocandins</span></div><div class='row'><span class='tg'>Antiviral</span> <span class='ar'>acyclovir (HSV/VZV); oseltamivir (influenza)</span></div><div class='row'><span class='tg'>Antiparasitic</span> <span class='ar'>agent depends on organism / travel</span></div></div><div class='card'><h2>Respiratory / sepsis / meningitis <span class='wk'>Severe ID</span></h2><div class='row'><span class='tg'>CAP</span> <span class='ar'>amoxicillin / macrolide; or respiratory fluoroquinolone</span></div><div class='row'><span class='tg'>TB</span> <span class='ar'>RIPE: rifampin, isoniazid, pyrazinamide, ethambutol</span></div><div class='row'><span class='tg'>Meningitis</span> <span class='ar'>ceftriaxone + vancomycin (+ dexamethasone)</span></div></div><div class='card'><h2>GI / SSTI / candidiasis <span class='wk'>GI & skin</span></h2><div class='row'><span class='tg'>C. difficile</span> <span class='ar'>oral vancomycin or fidaxomicin; stop the culprit antibiotic</span></div><div class='row'><span class='tg'>Cellulitis</span> <span class='ar'>cover strep/staph; add MRSA cover if risk</span></div><div class='row'><span class='tg'>Candidiasis</span> <span class='ar'>fluconazole (azole)</span></div></div><div class='card'><h2>Viral hepatitis / HIV / exposures <span class='wk'>Bloodborne</span></h2><div class='row'><span class='tg'>Hepatitis</span> <span class='ar'>HBV/HCV serology; vaccinate HBV</span></div><div class='row'><span class='tg'>HIV</span> <span class='ar'>combination ART (e.g. tenofovir + emtricitabine + 3rd agent)</span></div><div class='row'><span class='tg'>Exposure</span> <span class='ar'>PEP after exposure; PrEP for prevention</span></div></div><div class='card'><h2>Fever / travel / parasites <span class='wk'>Travel ID</span></h2><div class='row'><span class='tg'>Travel fever</span> <span class='ar'>malaria, typhoid, dengue — take a travel history</span></div><div class='row'><span class='tg'>Malaria</span> <span class='ar'>thick/thin films; species-directed therapy</span></div></div></div><div class='foot'>Weeks 12–13 &middot; Microbiology &middot; cram sheet &middot; cue &rarr; answer</div></div>"
+  }
+ ],
+ "drugs": [
+  {
+   "id": "rx:amoxicillin",
+   "name": "Amoxicillin",
+   "class": "rx:aminopenicillin",
+   "facets": {
+    "use": "CAP, otitis, strep",
+    "mechanism": "Aminopenicillin (cell-wall synthesis)",
+    "adverse": "Rash, diarrhea"
+   },
+   "ref": {
+    "topic": "Antibacterials",
+    "guide": "W1213_04_Antibacterials.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:ceftriaxone",
+   "name": "Ceftriaxone",
+   "class": "rx:cephalosporin",
+   "facets": {
+    "use": "Meningitis, pyelonephritis, gonorrhea",
+    "mechanism": "3rd-gen cephalosporin",
+    "adverse": "Allergy, C. difficile"
+   },
+   "ref": {
+    "topic": "Severe ID",
+    "guide": "W1213_06_Respiratory.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:vancomycin",
+   "name": "Vancomycin",
+   "class": "rx:glycopeptide",
+   "facets": {
+    "use": "MRSA; empiric meningitis; severe C. difficile (oral)",
+    "mechanism": "Glycopeptide (gram-positive cell wall)",
+    "adverse": "Nephrotoxicity, infusion reaction",
+    "monitoring": "Levels"
+   },
+   "ref": {
+    "topic": "Antibacterials",
+    "guide": "W1213_04_Antibacterials.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:azithromycin",
+   "name": "Azithromycin",
+   "class": "rx:macrolide",
+   "facets": {
+    "use": "CAP (atypicals), STIs",
+    "mechanism": "Macrolide (50S protein synthesis)",
+    "adverse": "QT prolongation, GI"
+   },
+   "ref": {
+    "topic": "Antibacterials",
+    "guide": "W1213_04_Antibacterials.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:ciprofloxacin",
+   "name": "Ciprofloxacin",
+   "class": "rx:fluoroquinolone",
+   "facets": {
+    "use": "Gram-negative / urinary / GI infections",
+    "mechanism": "Fluoroquinolone (DNA gyrase)",
+    "adverse": "Tendinopathy, QT, C. difficile",
+    "contra": "Caution in children/pregnancy"
+   },
+   "ref": {
+    "topic": "Antibacterials",
+    "guide": "W1213_04_Antibacterials.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:metronidazole",
+   "name": "Metronidazole",
+   "class": "rx:nitroimidazole",
+   "facets": {
+    "use": "Anaerobes, C. difficile, protozoa",
+    "mechanism": "Nitroimidazole (DNA damage)",
+    "adverse": "Metallic taste, disulfiram reaction with alcohol"
+   },
+   "ref": {
+    "topic": "Antibacterials",
+    "guide": "W1213_04_Antibacterials.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:tmp-smx",
+   "name": "Trimethoprim-sulfamethoxazole",
+   "class": "rx:folate-antagonist-abx",
+   "facets": {
+    "use": "UTI, MRSA SSTI, PJP",
+    "mechanism": "Sequential folate-pathway blockade",
+    "adverse": "Rash, hyperkalemia, marrow suppression"
+   },
+   "ref": {
+    "topic": "Antibacterials",
+    "guide": "W1213_04_Antibacterials.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:clindamycin",
+   "name": "Clindamycin",
+   "class": "rx:lincosamide",
+   "facets": {
+    "use": "Anaerobes, MRSA SSTI, toxin suppression",
+    "mechanism": "Lincosamide (50S)",
+    "adverse": "C. difficile colitis"
+   },
+   "ref": {
+    "topic": "Antibacterials",
+    "guide": "W1213_04_Antibacterials.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:gentamicin",
+   "name": "Gentamicin",
+   "class": "rx:aminoglycoside",
+   "facets": {
+    "use": "Serious gram-negative infections (synergy)",
+    "mechanism": "Aminoglycoside (30S)",
+    "adverse": "Nephrotoxicity, ototoxicity",
+    "monitoring": "Levels / renal function"
+   },
+   "ref": {
+    "topic": "Antibacterials",
+    "guide": "W1213_04_Antibacterials.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:fluconazole",
+   "name": "Fluconazole",
+   "class": "rx:azole-antifungal",
+   "facets": {
+    "use": "Candidiasis, cryptococcus",
+    "mechanism": "Azole antifungal (ergosterol synthesis)",
+    "adverse": "LFT rise, QT, drug interactions"
+   },
+   "ref": {
+    "topic": "Other antimicrobials",
+    "guide": "W1213_05_Antimicrobials2.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:amphotericin",
+   "name": "Amphotericin B",
+   "class": "rx:polyene-antifungal",
+   "facets": {
+    "use": "Severe / systemic fungal infections",
+    "mechanism": "Polyene (binds ergosterol)",
+    "adverse": "Nephrotoxicity, infusion reactions, electrolyte wasting"
+   },
+   "ref": {
+    "topic": "Other antimicrobials",
+    "guide": "W1213_05_Antimicrobials2.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:acyclovir",
+   "name": "Acyclovir",
+   "class": "rx:nucleoside-antiviral",
+   "facets": {
+    "use": "HSV, varicella-zoster",
+    "mechanism": "Nucleoside analogue (viral thymidine kinase)",
+    "adverse": "Renal (crystal nephropathy) — hydrate"
+   },
+   "ref": {
+    "topic": "Other antimicrobials",
+    "guide": "W1213_05_Antimicrobials2.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:oseltamivir",
+   "name": "Oseltamivir",
+   "class": "rx:neuraminidase-inhibitor",
+   "facets": {
+    "use": "Influenza (early)",
+    "mechanism": "Neuraminidase inhibitor",
+    "adverse": "GI upset"
+   },
+   "ref": {
+    "topic": "Other antimicrobials",
+    "guide": "W1213_05_Antimicrobials2.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:rifampin",
+   "name": "Rifampin",
+   "class": "rx:rifamycin",
+   "facets": {
+    "use": "TB (RIPE); meningococcal prophylaxis",
+    "mechanism": "Inhibits RNA polymerase",
+    "adverse": "Orange secretions, hepatotoxic, strong CYP inducer"
+   },
+   "ref": {
+    "topic": "TB",
+    "guide": "W1213_06_Respiratory.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:isoniazid",
+   "name": "Isoniazid",
+   "class": "rx:antitubercular",
+   "facets": {
+    "use": "TB (RIPE)",
+    "mechanism": "Inhibits mycolic acid synthesis",
+    "adverse": "Hepatotoxic, peripheral neuropathy",
+    "monitoring": "Give pyridoxine (B6)"
+   },
+   "ref": {
+    "topic": "TB",
+    "guide": "W1213_06_Respiratory.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:pyrazinamide",
+   "name": "Pyrazinamide",
+   "class": "rx:antitubercular",
+   "facets": {
+    "use": "TB (RIPE, first 2 months)",
+    "mechanism": "Antitubercular",
+    "adverse": "Hepatotoxic, hyperuricemia"
+   },
+   "ref": {
+    "topic": "TB",
+    "guide": "W1213_06_Respiratory.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:ethambutol",
+   "name": "Ethambutol",
+   "class": "rx:antitubercular",
+   "facets": {
+    "use": "TB (RIPE)",
+    "mechanism": "Inhibits arabinosyl transferase",
+    "adverse": "Optic neuritis (colour vision)"
+   },
+   "ref": {
+    "topic": "TB",
+    "guide": "W1213_06_Respiratory.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:tenofovir",
+   "name": "Tenofovir",
+   "class": "rx:nrti",
+   "facets": {
+    "use": "HIV ART; PrEP/PEP; HBV",
+    "mechanism": "Nucleotide reverse transcriptase inhibitor",
+    "adverse": "Renal, bone density"
+   },
+   "ref": {
+    "topic": "HIV",
+    "guide": "W1213_08_Hepatitis_HIV.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:emtricitabine",
+   "name": "Emtricitabine",
+   "class": "rx:nrti",
+   "facets": {
+    "use": "HIV ART; PrEP/PEP",
+    "mechanism": "Nucleoside reverse transcriptase inhibitor",
+    "adverse": "Generally well tolerated"
+   },
+   "ref": {
+    "topic": "HIV",
+    "guide": "W1213_08_Hepatitis_HIV.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
   }
  ]
 }

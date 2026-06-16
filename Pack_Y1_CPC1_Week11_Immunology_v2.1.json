@@ -2,11 +2,11 @@
  "pack": "Week 11 — Immunology II",
  "id": "wk11",
  "formatVersion": "2.0",
- "version": "2.0",
+ "version": "2.1",
  "author": "Alkarim Billawala / alkarim.billawala.ca",
  "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
  "created": "2026-06-13",
- "updated": "2026-06-13",
+ "updated": "2026-06-16",
  "school": "UofT — Temerty Medicine",
  "year": "Year 1",
  "course": "CPC 1",
@@ -1267,6 +1267,182 @@
    "file": "W11_07_Therapeutics.html",
    "title": "Week 11 · 7 Immunosuppression & Lab Cheat Sheet",
    "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Immunosuppression &amp; Lab Cheat Sheet</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#5a3a7c;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Drugs &amp; Tests</div><h1>Immunosuppression &amp; Lab Cheat Sheet</h1></div><div class=\"r\">Week 11 &middot; Immunology II<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">The immunosuppressant classes by mechanism and signature toxicity (calcineurin nephrotoxicity, teratogens, anti-TNF TB/HBV screen), and a high-yield immunology lab interpretation table.</p>\n<h2 id=\"drugs\">Immunosuppressant classes</h2>\n<table>\n<tr><th>Drug</th><th>Mechanism</th><th>Key adverse / caution</th></tr>\n<tr><td>Corticosteroids</td><td>GR &rarr; broad immune suppression</td><td>Infection, adrenal suppression (taper), diabetes, bone loss, <b>osteonecrosis</b>, cataracts</td></tr>\n<tr><td>Azathioprine</td><td>&rarr; 6-MP; blocks purine synthesis</td><td>Marrow suppression (esp. <b>TPMT</b> deficiency), skin cancer</td></tr>\n<tr><td>Cyclophosphamide</td><td>Alkylator</td><td>AML, bladder cancer, hemorrhagic cystitis, infertility</td></tr>\n<tr><td>Methotrexate</td><td>Folate antagonist</td><td>Myelosuppression, hepatotoxicity, pneumonitis, <b>teratogenic</b></td></tr>\n<tr><td>Mycophenolate</td><td>IMPDH / purine synthesis (T &amp; B)</td><td>GI, leukopenia, <b>teratogenic</b></td></tr>\n<tr><td>Cyclosporine / tacrolimus</td><td><b>Calcineurin</b> inhibitor &rarr; &darr;IL-2</td><td><b>Nephrotoxic</b>, hypertension, infection</td></tr>\n<tr><td>Sirolimus</td><td><b>mTOR</b> inhibitor</td><td>Infection/malignancy, metabolic, wound healing</td></tr>\n<tr><td>Biologics</td><td>Anti-TNF, <b>anti-IL-1</b> (CAPS), <b>anti-IgE</b> (omalizumab, CSU), anti-CD20</td><td>Infection by target; <b>anti-TNF: screen latent TB + hepatitis B</b> first</td></tr>\n<tr><td>IVIG / plasmapheresis</td><td>Fc blockade / antibody removal</td><td>Infusion reactions; antibodies rebound without immunosuppression</td></tr>\n</table>\n<h2 id=\"labs\">Lab cheat sheet</h2>\n<table>\n<tr><th>Test</th><th>High-yield read</th></tr>\n<tr><td>CBC + diff</td><td>Neutropenia &rarr; bacterial/fungal; lymphopenia &rarr; cellular; eosinophilia &rarr; allergy/DRESS/parasites</td></tr>\n<tr><td>ESR/CRP</td><td>Nonspecific; usually <b>normal in simple CSU</b></td></tr>\n<tr><td>ANA / anti-dsDNA / anti-Sm</td><td>ANA sensitive not specific; dsDNA tracks activity; Sm specific</td></tr>\n<tr><td>C3/C4/CH50</td><td>Low in active SLE; terminal defect &rarr; Neisseria</td></tr>\n<tr><td>Quant IgG/IgA/IgM + vaccine titers</td><td>Low IgG + low IgA/IgM + poor titers &rarr; <b>CVID</b>; absent all + absent B cells &rarr; <b>XLA</b></td></tr>\n<tr><td>Flow T/B/NK; TREC</td><td>Low T &rarr; SCID/DiGeorge; absent B &rarr; XLA; low/absent TREC &rarr; SCID screen</td></tr>\n<tr><td>Oxidative burst</td><td>Abnormal in <b>CGD</b></td></tr>\n<tr><td>C4 + C1-INH level/function</td><td>Low in HAE/AAE (bradykinin angioedema)</td></tr>\n</table>\n</div>"
+  },
+  {
+   "file": "W11_08_Cram_Sheet.html",
+   "title": "Week 11 · 8 Cram Sheet",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Week 11 · 8 Cram Sheet</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.35;-webkit-font-smoothing:antialiased}\n.page{max-width:1180px;margin:0 auto;padding:18px 20px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:8px;margin-bottom:12px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:26px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.emerg{border:1.5px solid var(--hi);border-radius:6px;background:rgba(0,0,0,.02);padding:9px 12px;margin-bottom:13px}\n.emerg .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--hi);font-weight:600;margin-bottom:5px}\n.emerg .items{columns:3;column-gap:22px;font-size:12px;line-height:1.42}\n.emerg .items div{break-inside:avoid;margin-bottom:3px}\n.emerg b{color:var(--hi)}\n.cols{column-count:4;column-gap:14px}\n@media(max-width:1040px){.cols{column-count:3}}\n@media(max-width:760px){.cols{column-count:2}}\n@media(max-width:520px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(0,0,0,.02);padding:8px 9px 7px;margin:0 0 11px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;padding-bottom:4px;border-bottom:1.5px solid var(--line);color:var(--accent);display:flex;justify-content:space-between;align-items:baseline;gap:6px}\n.card h2 .wk{color:var(--soft);font-size:8.5px;font-weight:500;letter-spacing:.06em;white-space:nowrap}\n.row{margin:0 0 3.5px;font-size:11.5px;line-height:1.32}\n.row .tg{font-weight:600;color:var(--ink)}\n.row .ar{color:var(--soft)}\n.row .ar::before{content:\"\\2192 \";color:var(--accent);font-weight:600}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:5px 0}\n.dnm{color:var(--hi);font-weight:700}\n.foot{margin-top:10px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:landscape;margin:9mm}body{font-size:8.4px}.page{max-width:none;padding:0}.cols{column-count:4;column-gap:8px}.emerg .items{columns:3}.card{margin-bottom:6px}.head h1{font-size:19px}}\n</style><div class='page'><div class='head'><div><div class='k'>Night-Before High-Yield</div><h1>Immunology</h1></div><div class='r'>Week 11 &middot; Immunology<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><div class='emerg'><div class='t'>★ Do-not-miss &middot; first-step reflexes</div><div class='items'><div><b>Anaphylaxis</b> &rarr; <span class='dnm'>IM epinephrine FIRST</span> (anterolateral thigh); airway, oxygen, fluids</div><div><b>Hereditary angioedema</b> (swelling, NO urticaria; C1-INH) &rarr; C1-INH / icatibant — <span class='dnm'>not</span> epinephrine/antihistamine/steroid</div><div><b>ACE-inhibitor angioedema</b> &rarr; stop the ACE inhibitor; airway watch</div><div><b>Asplenia / complement deficiency</b> &rarr; encapsulated-organism sepsis risk (vaccinate, prompt abx)</div><div><b>Immunosuppressed + fever</b> &rarr; low threshold for empiric antibiotics</div></div></div><div class='cols'><div class='card'><h2>Core framework <span class='wk'>Framework</span></h2><div class='row'><span class='tg'>Innate vs adaptive</span> <span class='ar'>fast/non-specific vs specific/memory</span></div><div class='row'><span class='tg'>B vs T cells</span> <span class='ar'>antibody (humoral) vs cell-mediated</span></div><div class='row'><span class='tg'>Complement</span> <span class='ar'>opsonization, MAC, inflammation</span></div></div><div class='card'><h2>Hypersensitivity <span class='wk'>Allergy</span></h2><div class='row'><span class='tg'>Type I</span> <span class='ar'>IgE / mast cell &rarr; anaphylaxis, atopy</span></div><div class='row'><span class='tg'>Type II</span> <span class='ar'>antibody-mediated cytotoxic</span></div><div class='row'><span class='tg'>Type III</span> <span class='ar'>immune complex (serum sickness, SLE)</span></div><div class='row'><span class='tg'>Type IV</span> <span class='ar'>delayed, T-cell (contact dermatitis, TB test)</span></div></div><div class='card'><h2>Urticaria &amp; angioedema <span class='wk'>Urticaria</span></h2><div class='row'><span class='tg'>Urticaria</span> <span class='ar'>histamine wheals &rarr; antihistamines</span></div><div class='row'><span class='tg'>Allergic angioedema</span> <span class='ar'>with urticaria; mast-cell/histamine</span></div><div class='row'><span class='tg'>Bradykinin angioedema</span> <span class='ar'>HAE / ACE inhibitor; NO urticaria</span></div></div><div class='card'><h2>Tolerance &amp; autoimmunity <span class='wk'>Tolerance</span></h2><div class='row'><span class='tg'>Tolerance</span> <span class='ar'>central (thymus/marrow) + peripheral</span></div><div class='row'><span class='tg'>Autoimmune vs autoinflammatory</span> <span class='ar'>adaptive (autoantibodies) vs innate (e.g. periodic fevers)</span></div></div><div class='card'><h2>SLE &amp; autoimmune <span class='wk'>SLE</span></h2><div class='row'><span class='tg'>ANA</span> <span class='ar'>sensitive, not specific (screen)</span></div><div class='row'><span class='tg'>Specific</span> <span class='ar'>anti-dsDNA, anti-Smith</span></div><div class='row'><span class='tg'>Multisystem</span> <span class='ar'>skin, joints, renal (nephritis), cytopenias</span></div><div class='row'><span class='tg'>Base therapy</span> <span class='ar'>hydroxychloroquine for most</span></div></div><div class='card'><h2>Immunodeficiency <span class='wk'>PID</span></h2><div class='row'><span class='tg'>Recurrent bacterial / encapsulated</span> <span class='ar'>antibody or complement defect</span></div><div class='row'><span class='tg'>Viral / fungal / opportunistic</span> <span class='ar'>T-cell defect</span></div><div class='row'><span class='tg'>Pattern</span> <span class='ar'>site, organism, age, severity guide the workup</span></div></div><div class='card'><h2>Immunosuppression <span class='wk'>Therapeutics</span></h2><div class='row'><span class='tg'>Corticosteroids</span> <span class='ar'>broad anti-inflammatory (infection, metabolic AEs)</span></div><div class='row'><span class='tg'>Antimetabolites</span> <span class='ar'>azathioprine (TPMT), methotrexate, mycophenolate</span></div><div class='row'><span class='tg'>Calcineurin inhibitors</span> <span class='ar'>tacrolimus / cyclosporine (nephrotoxic, levels)</span></div><div class='row'><span class='tg'>Biologics</span> <span class='ar'>anti-TNF (screen TB/HBV), rituximab, IVIG</span></div></div></div><div class='foot'>Week 11 &middot; Immunology &middot; cram sheet &middot; cue &rarr; answer</div></div>"
+  }
+ ],
+ "drugs": [
+  {
+   "id": "rx:epinephrine",
+   "name": "Epinephrine",
+   "class": "rx:sympathomimetic",
+   "facets": {
+    "use": "Anaphylaxis — first-line",
+    "mechanism": "α/β agonist (vasoconstriction, bronchodilation, stabilizes mast cells)",
+    "monitoring": "IM anterolateral thigh; repeat q5–15 min"
+   },
+   "ref": {
+    "topic": "Anaphylaxis",
+    "guide": "W11_02_Hypersensitivity.html",
+    "week": "Week 11 · Immunology II"
+   }
+  },
+  {
+   "id": "rx:cetirizine",
+   "name": "Cetirizine",
+   "class": "rx:antihistamine",
+   "facets": {
+    "use": "Urticaria / allergic rhinitis",
+    "mechanism": "2nd-gen H1 antihistamine",
+    "adverse": "Minimal sedation"
+   },
+   "ref": {
+    "topic": "Urticaria",
+    "guide": "W11_03_Urticaria.html",
+    "week": "Week 11 · Immunology II"
+   }
+  },
+  {
+   "id": "rx:diphenhydramine",
+   "name": "Diphenhydramine",
+   "class": "rx:antihistamine",
+   "facets": {
+    "use": "Acute allergic symptoms",
+    "mechanism": "1st-gen H1 antihistamine",
+    "adverse": "Sedation, anticholinergic"
+   },
+   "ref": {
+    "topic": "Urticaria",
+    "guide": "W11_03_Urticaria.html",
+    "week": "Week 11 · Immunology II"
+   }
+  },
+  {
+   "id": "rx:hydroxychloroquine",
+   "name": "Hydroxychloroquine",
+   "class": "rx:antimalarial-dmard",
+   "facets": {
+    "use": "SLE base therapy; RA",
+    "mechanism": "Antimalarial DMARD (immunomodulatory)",
+    "adverse": "Retinopathy",
+    "monitoring": "Baseline + periodic eye exams"
+   },
+   "ref": {
+    "topic": "SLE",
+    "guide": "W11_05_SLE.html",
+    "week": "Week 11 · Immunology II"
+   }
+  },
+  {
+   "id": "rx:azathioprine",
+   "name": "Azathioprine",
+   "class": "rx:antimetabolite-immunosuppressant",
+   "facets": {
+    "use": "Steroid-sparing immunosuppression",
+    "mechanism": "Purine antimetabolite",
+    "adverse": "Myelosuppression",
+    "monitoring": "Check TPMT activity first"
+   },
+   "ref": {
+    "topic": "Therapeutics",
+    "guide": "W11_07_Therapeutics.html",
+    "week": "Week 11 · Immunology II"
+   }
+  },
+  {
+   "id": "rx:methotrexate",
+   "name": "Methotrexate",
+   "class": "rx:antimetabolite-immunosuppressant",
+   "facets": {
+    "use": "Autoimmune disease (RA, etc.)",
+    "mechanism": "Dihydrofolate reductase inhibitor",
+    "adverse": "Myelosuppression, hepatotoxic, pneumonitis",
+    "contra": "Pregnancy (teratogen); give folic acid"
+   },
+   "ref": {
+    "topic": "Therapeutics",
+    "guide": "W11_07_Therapeutics.html",
+    "week": "Week 11 · Immunology II"
+   }
+  },
+  {
+   "id": "rx:mycophenolate",
+   "name": "Mycophenolate mofetil",
+   "class": "rx:antimetabolite-immunosuppressant",
+   "facets": {
+    "use": "Lupus nephritis, transplant",
+    "mechanism": "Inhibits inosine monophosphate dehydrogenase",
+    "adverse": "GI, cytopenias; teratogenic"
+   },
+   "ref": {
+    "topic": "Therapeutics",
+    "guide": "W11_07_Therapeutics.html",
+    "week": "Week 11 · Immunology II"
+   }
+  },
+  {
+   "id": "rx:tacrolimus",
+   "name": "Tacrolimus",
+   "class": "rx:calcineurin-inhibitor",
+   "facets": {
+    "use": "Transplant; some autoimmune disease",
+    "mechanism": "Calcineurin inhibitor (blocks T-cell IL-2)",
+    "adverse": "Nephrotoxicity, neurotoxicity, hyperglycemia",
+    "monitoring": "Drug levels"
+   },
+   "ref": {
+    "topic": "Therapeutics",
+    "guide": "W11_07_Therapeutics.html",
+    "week": "Week 11 · Immunology II"
+   }
+  },
+  {
+   "id": "rx:adalimumab",
+   "name": "Adalimumab (anti-TNF)",
+   "class": "rx:tnf-inhibitor",
+   "facets": {
+    "use": "RA, IBD, psoriasis",
+    "mechanism": "Anti-TNF-α monoclonal antibody",
+    "adverse": "Infection (incl. reactivation)",
+    "monitoring": "Screen TB and hepatitis B before starting"
+   },
+   "ref": {
+    "topic": "Therapeutics",
+    "guide": "W11_07_Therapeutics.html",
+    "week": "Week 11 · Immunology II"
+   }
+  },
+  {
+   "id": "rx:omalizumab",
+   "name": "Omalizumab (anti-IgE)",
+   "class": "rx:anti-ige",
+   "facets": {
+    "use": "Chronic urticaria; severe allergic asthma",
+    "mechanism": "Anti-IgE monoclonal antibody"
+   },
+   "ref": {
+    "topic": "Urticaria",
+    "guide": "W11_03_Urticaria.html",
+    "week": "Week 11 · Immunology II"
+   }
+  },
+  {
+   "id": "rx:ivig",
+   "name": "IVIG",
+   "class": "rx:ivig",
+   "facets": {
+    "use": "Immune replacement; immunomodulation (ITP, etc.)",
+    "mechanism": "Pooled immunoglobulin",
+    "adverse": "Infusion reactions, rare thrombosis/renal"
+   },
+   "ref": {
+    "topic": "Therapeutics",
+    "guide": "W11_07_Therapeutics.html",
+    "week": "Week 11 · Immunology II"
+   }
   }
  ]
 }

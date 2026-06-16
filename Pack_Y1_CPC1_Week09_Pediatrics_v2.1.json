@@ -2,11 +2,11 @@
  "pack": "Week 09 — Pediatrics",
  "id": "wk09",
  "formatVersion": "2.0",
- "version": "2.0",
+ "version": "2.1",
  "author": "Alkarim Billawala / alkarim.billawala.ca",
  "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
  "created": "2026-06-13",
- "updated": "2026-06-13",
+ "updated": "2026-06-16",
  "school": "UofT — Temerty Medicine",
  "year": "Year 1",
  "course": "CPC 1",
@@ -1238,6 +1238,73 @@
    "file": "W09_06_Tumours.html",
    "title": "Week 09 · 6 Tumours & Neuroblastoma",
    "html": "<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Pediatric Tumours &amp; Neuroblastoma</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{\n  --paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;\n  --accent:#2d5a6b;--accent2:#7c2d2d;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;\n  --hi:#a23b2e;--lo:#2d5a6b;\n}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}\nul{margin:6px 0 6px 0;padding-left:18px}li{margin:3px 0}\nb{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class=\"page\"><div class=\"head\"><div><div class=\"k\">Oncology / Path</div><h1>Pediatric Tumours &amp; Neuroblastoma</h1></div><div class=\"r\">Week 09 &middot; Pediatrics<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class=\"lede\">The small-round-blue-cell-tumour differential by age, and neuroblastoma end-to-end: origin, sites, age-based presentation, VMA/HVA, MYCN/FISH prognosis, and biopsy strategy.</p>\n<h2 id=\"srbct\">Small round blue cell tumours (SRBCT)</h2>\n<p>Pediatric malignancies differ by age:</p>\n<ul>\n<li><b>&lt;10 y:</b> leukemias, blastomas (retinoblastoma, <b>neuroblastoma</b>, nephroblastoma/Wilms, hepatoblastoma), brain tumours.</li>\n<li><b>&gt;10 y:</b> lymphoma, sarcomas (osteosarcoma, Ewing), some carcinomas.</li>\n</ul>\n<p>SRBCTs look similar on H&amp;E. Differential by site: lymphoma, sarcomas (rhabdomyosarcoma, Ewing), blastomas (neuroblastoma, Wilms, retinoblastoma).</p>\n<div class=\"key\">Pathologists distinguish SRBCTs using <b>site of origin, morphologic differentiation, immunohistochemistry, cytogenetics/molecular tests,</b> and ancillary studies.</div>\n<h2 id=\"neuroblastoma\">Neuroblastoma</h2>\n<p>Peripheral neuroblastic tumour from <b>neural-crest / sympathetic</b> precursors. Common sites: <b>adrenal gland</b> and sympathetic chain (including <b>posterior mediastinum</b>).</p>\n<h3>Presentation by age</h3>\n<ul>\n<li><b>Neonate/young infant:</b> congenital mass, respiratory symptoms from thoracic mass, hepatomegaly/skin nodules.</li>\n<li><b>Older child:</b> abdominal mass, pain, systemic symptoms, bone pain, metastatic disease.</li>\n</ul>\n<div class=\"band\"><div class=\"t\">Workup</div>\n<b>Biochemistry:</b> urinary catecholamine metabolites <b>VMA / HVA</b>. <b>Imaging/staging:</b> local extent, critical structures, resectability, metastases, image-defined risk factors. <b>Biopsy</b> must provide enough tissue for diagnosis <em>and</em> molecular testing.</div>\n<div class=\"band warn\"><div class=\"t\">Prognosis</div>\nAge/stage, histology/differentiation, mitosis-karyorrhexis index, <b>MYCN amplification</b> (adverse; assessed by <b>FISH</b>), ploidy, segmental chromosomal abnormalities.</div>\n<div class=\"key\">For suspected neuroblastoma, prefer <b>core needle / open incisional biopsy</b> over FNA alone when architecture &amp; ancillary testing are needed.</div>\n<h2 id=\"case\">Week 9 case anchor</h2>\n<p>A 7-day-old with laboured breathing and sweating with feeds &mdash; CXR shows a large <b>right posterior mediastinal</b> opacity with mass effect on trachea/right main bronchus and <b>calcific foci</b>; CT shows a heterogeneous enhancing posterior mediastinal soft-tissue mass. Differential: lymphoma, neurogenic tumour, metastasis. Tumour-board questions: <b>What is it? Does it need to come out? Is it resectable?</b></p>\n</div>"
+  },
+  {
+   "file": "W09_07_Cram_Sheet.html",
+   "title": "Week 09 · 7 Cram Sheet",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Week 09 · 7 Cram Sheet</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.35;-webkit-font-smoothing:antialiased}\n.page{max-width:1180px;margin:0 auto;padding:18px 20px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:8px;margin-bottom:12px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:26px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.emerg{border:1.5px solid var(--hi);border-radius:6px;background:rgba(0,0,0,.02);padding:9px 12px;margin-bottom:13px}\n.emerg .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--hi);font-weight:600;margin-bottom:5px}\n.emerg .items{columns:3;column-gap:22px;font-size:12px;line-height:1.42}\n.emerg .items div{break-inside:avoid;margin-bottom:3px}\n.emerg b{color:var(--hi)}\n.cols{column-count:4;column-gap:14px}\n@media(max-width:1040px){.cols{column-count:3}}\n@media(max-width:760px){.cols{column-count:2}}\n@media(max-width:520px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(0,0,0,.02);padding:8px 9px 7px;margin:0 0 11px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;padding-bottom:4px;border-bottom:1.5px solid var(--line);color:var(--accent);display:flex;justify-content:space-between;align-items:baseline;gap:6px}\n.card h2 .wk{color:var(--soft);font-size:8.5px;font-weight:500;letter-spacing:.06em;white-space:nowrap}\n.row{margin:0 0 3.5px;font-size:11.5px;line-height:1.32}\n.row .tg{font-weight:600;color:var(--ink)}\n.row .ar{color:var(--soft)}\n.row .ar::before{content:\"\\2192 \";color:var(--accent);font-weight:600}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:5px 0}\n.dnm{color:var(--hi);font-weight:700}\n.foot{margin-top:10px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:landscape;margin:9mm}body{font-size:8.4px}.page{max-width:none;padding:0}.cols{column-count:4;column-gap:8px}.emerg .items{columns:3}.card{margin-bottom:6px}.head h1{font-size:19px}}\n</style><div class='page'><div class='head'><div><div class='k'>Night-Before High-Yield</div><h1>Pediatrics</h1></div><div class='r'>Week 09 &middot; Pediatrics<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><div class='emerg'><div class='t'>★ Do-not-miss &middot; first-step reflexes</div><div class='items'><div><b>Febrile infant &lt;90 days</b> &rarr; full sepsis workup + empiric antibiotics</div><div><b>Fever + non-blanching purpura</b> &rarr; meningococcemia &mdash; urgent antibiotics</div><div><b>Bilious vomiting in a neonate</b> &rarr; malrotation / volvulus &mdash; surgical emergency</div><div><b>Abdominal mass in a child</b> &rarr; neuroblastoma / Wilms &mdash; imaging + referral</div><div><b>Non-accidental injury</b> red flags &rarr; protect the child + report</div></div></div><div class='cols'><div class='card'><h2>Well-child &amp; vaccines <span class='wk'>Preventive</span></h2><div class='row'><span class='tg'>Schedule</span> <span class='ar'>routine immunizations at set ages; catch-up if behind</span></div><div class='row'><span class='tg'>Live vaccines</span> <span class='ar'>avoid in significant immunocompromise / pregnancy</span></div><div class='row'><span class='tg'>Adolescents</span> <span class='ar'>confidential care; HEADSS psychosocial screen</span></div></div><div class='card'><h2>Growth &amp; development <span class='wk'>Growth</span></h2><div class='row'><span class='tg'>Plot it</span> <span class='ar'>weight/length/head circumference on growth charts; track the trend</span></div><div class='row'><span class='tg'>Milestones</span> <span class='ar'>gross/fine motor, language, social — know red-flag delays</span></div><div class='row'><span class='tg'>Puberty</span> <span class='ar'>Tanner staging; investigate precocious or delayed</span></div></div><div class='card'><h2>Nutrition <span class='wk'>Feeding</span></h2><div class='row'><span class='tg'>Infancy</span> <span class='ar'>breastfeeding preferred; vitamin D supplementation</span></div><div class='row'><span class='tg'>Solids</span> <span class='ar'>introduce ~6 months; iron-rich foods</span></div><div class='row'><span class='tg'>Failure to thrive</span> <span class='ar'>evaluate intake, losses, and medical causes</span></div></div><div class='card'><h2>Common problems <span class='wk'>Acute</span></h2><div class='row'><span class='tg'>Acute otitis media</span> <span class='ar'>amoxicillin first-line (or observation)</span></div><div class='row'><span class='tg'>Bronchiolitis</span> <span class='ar'>supportive (RSV); no routine bronchodilators/steroids</span></div><div class='row'><span class='tg'>Febrile seizure</span> <span class='ar'>usually benign 6 mo–5 yr; reassure</span></div><div class='row'><span class='tg'>Viral exanthems</span> <span class='ar'>supportive; recognize the classics</span></div></div><div class='card'><h2>Imaging <span class='wk'>Radiology</span></h2><div class='row'><span class='tg'>Principle</span> <span class='ar'>minimize radiation (ALARA); ultrasound first-line for many</span></div><div class='row'><span class='tg'>CXR</span> <span class='ar'>a normal thymus can mimic a mediastinal mass</span></div></div><div class='card'><h2>Tumours <span class='wk'>Oncology</span></h2><div class='row'><span class='tg'>Neuroblastoma</span> <span class='ar'>adrenal/sympathetic chain; catecholamines; periorbital ecchymoses</span></div><div class='row'><span class='tg'>Wilms tumour</span> <span class='ar'>painless abdominal mass</span></div><div class='row'><span class='tg'>Leukemia</span> <span class='ar'>ALL is the most common childhood cancer</span></div></div></div><div class='foot'>Week 09 &middot; Pediatrics &middot; cram sheet &middot; cue &rarr; answer</div></div>"
+  }
+ ],
+ "drugs": [
+  {
+   "id": "rx:acetaminophen",
+   "name": "Acetaminophen",
+   "class": "rx:antipyretic",
+   "facets": {
+    "use": "Fever / pain in children",
+    "mechanism": "Central antipyretic / analgesic",
+    "adverse": "Hepatotoxic in overdose",
+    "monitoring": "Weight-based dosing"
+   },
+   "ref": {
+    "topic": "Common problems",
+    "guide": "W09_04_Common_Problems.html",
+    "week": "Week 09 · Pediatrics"
+   }
+  },
+  {
+   "id": "rx:ibuprofen",
+   "name": "Ibuprofen",
+   "class": "rx:nsaid",
+   "facets": {
+    "use": "Fever / pain &ge;6 months",
+    "mechanism": "NSAID (COX inhibitor)",
+    "adverse": "GI upset, renal; avoid in dehydration / &lt;6 months"
+   },
+   "ref": {
+    "topic": "Common problems",
+    "guide": "W09_04_Common_Problems.html",
+    "week": "Week 09 · Pediatrics"
+   }
+  },
+  {
+   "id": "rx:amoxicillin",
+   "name": "Amoxicillin",
+   "class": "rx:aminopenicillin",
+   "facets": {
+    "use": "Acute otitis media, strep pharyngitis",
+    "mechanism": "Aminopenicillin (cell-wall synthesis)",
+    "adverse": "Rash, diarrhea; EBV rash"
+   },
+   "ref": {
+    "topic": "Common problems",
+    "guide": "W09_04_Common_Problems.html",
+    "week": "Week 09 · Pediatrics"
+   }
+  },
+  {
+   "id": "rx:vitamin-d",
+   "name": "Vitamin D",
+   "class": "rx:vitamin-d",
+   "facets": {
+    "use": "Infant supplementation (esp. breastfed)",
+    "mechanism": "Supports bone mineralization (prevents rickets)"
+   },
+   "ref": {
+    "topic": "Nutrition",
+    "guide": "W09_03_Nutrition.html",
+    "week": "Week 09 · Pediatrics"
+   }
   }
  ]
 }

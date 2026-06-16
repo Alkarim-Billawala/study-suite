@@ -2,11 +2,11 @@
  "pack": "Week 17 — Health Promotion",
  "id": "wk17",
  "formatVersion": "2.0",
- "version": "2.0",
+ "version": "2.1",
  "author": "Alkarim Billawala / alkarim.billawala.ca",
  "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
  "created": "2026-06-15",
- "updated": "2026-06-15",
+ "updated": "2026-06-16",
  "school": "UofT — Temerty Medicine",
  "year": "Year 1",
  "course": "CPC 1",
@@ -1331,6 +1331,91 @@
    "file": "W17_08_LGBTQ_WeightLoss.html",
    "title": "Week 17 · 8 LGBTQ2S Health & Older-Adult Weight Loss",
    "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>LGBTQ2S Health &amp; Older-Adult Weight Loss</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Equity + geriatrics</div><h1>LGBTQ2S Health &amp; Older-Adult Weight Loss</h1></div><div class='r'>Week 17 &middot; Health Promotion<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Confidentiality and affirming care for LGBTQ2S patients, and the multifactorial workup of unintentional weight loss in older adults.</p>\n<h2>LGBTQ2S health &amp; confidentiality</h2>\n<p>LGBTQ2S communities have faced medical, legal, and social discrimination (homosexuality and trans identity were historically pathologized; conversion therapy caused harm), fuelling mistrust and care avoidance. Build safer environments proactively.</p>\n<div class='band'><div class='t'>High-yield confidentiality scenarios</div>\nYouth not out to parents; trans patients using different names/pronouns in different settings; HIV-status disclosure; older adults in long-term care. <b>Ask</b> what name/pronouns to use in clinic, phone, mail, referrals, and with family; <b>do not disclose</b> orientation, gender identity, trans status, or HIV status without consent unless legally required. For a <b>capable minor</b>, respect confidential care except where mandatory reporting applies.</div>\n<p><b>Conversion therapy</b> is rejected by major professional organizations and is harmful &mdash; affirming, patient-centred care is the standard. LGBTQ2S <b>older adults</b> may fear re-closeting in care, rely on <b>chosen family</b>, and need inclusive advance-care planning.</p>\n<h2>Unintentional weight loss in older adults</h2>\n<p><b>Significant:</b> &ge;<b>4&ndash;5% in a year</b> or &ge;<b>10% over any period</b> &mdash; associated with frailty, disability, fractures, and mortality, especially at low baseline BMI.</p>\n<table>\n<tr><th>Category</th><th>Examples</th></tr>\n<tr><td>Social</td><td>Isolation, poverty, can't shop/cook, food insecurity</td></tr>\n<tr><td>Psychological</td><td>Depression, dementia, bereavement</td></tr>\n<tr><td>Medical</td><td>Cancer, infection, hyperthyroidism, malabsorption, dysphagia</td></tr>\n<tr><td>Age-related / meds</td><td>Anorexia of aging, taste/smell, polypharmacy (SSRIs, metformin, digoxin, opioids)</td></tr>\n</table>\n<div class='band warn'><div class='t'>Workup &amp; management</div>\nConfirm and quantify loss; review intake, swallowing, dental, mood/cognition, social supports; exam for <b>lymphadenopathy, hepatosplenomegaly, masses</b>; basic labs (CBC, electrolytes, LFTs, TSH, glucose). Treat the cause, deprescribe offenders, involve dietitian/social work, use calorie-dense meals/snacks; appetite-stimulant drugs are <b>not</b> first-line. Reassess in ~3 months.</div>\n</div>"
+  },
+  {
+   "file": "W17_09_Cram_Sheet.html",
+   "title": "Week 17 · 9 Cram Sheet",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Week 17 · 9 Cram Sheet</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.35;-webkit-font-smoothing:antialiased}\n.page{max-width:1180px;margin:0 auto;padding:18px 20px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:8px;margin-bottom:12px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:26px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.emerg{border:1.5px solid var(--hi);border-radius:6px;background:rgba(0,0,0,.02);padding:9px 12px;margin-bottom:13px}\n.emerg .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--hi);font-weight:600;margin-bottom:5px}\n.emerg .items{columns:3;column-gap:22px;font-size:12px;line-height:1.42}\n.emerg .items div{break-inside:avoid;margin-bottom:3px}\n.emerg b{color:var(--hi)}\n.cols{column-count:4;column-gap:14px}\n@media(max-width:1040px){.cols{column-count:3}}\n@media(max-width:760px){.cols{column-count:2}}\n@media(max-width:520px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(0,0,0,.02);padding:8px 9px 7px;margin:0 0 11px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;padding-bottom:4px;border-bottom:1.5px solid var(--line);color:var(--accent);display:flex;justify-content:space-between;align-items:baseline;gap:6px}\n.card h2 .wk{color:var(--soft);font-size:8.5px;font-weight:500;letter-spacing:.06em;white-space:nowrap}\n.row{margin:0 0 3.5px;font-size:11.5px;line-height:1.32}\n.row .tg{font-weight:600;color:var(--ink)}\n.row .ar{color:var(--soft)}\n.row .ar::before{content:\"\\2192 \";color:var(--accent);font-weight:600}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:5px 0}\n.dnm{color:var(--hi);font-weight:700}\n.foot{margin-top:10px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:landscape;margin:9mm}body{font-size:8.4px}.page{max-width:none;padding:0}.cols{column-count:4;column-gap:8px}.emerg .items{columns:3}.card{margin-bottom:6px}.head h1{font-size:19px}}\n</style><div class='page'><div class='head'><div><div class='k'>Night-Before High-Yield</div><h1>Health Promotion</h1></div><div class='r'>Week 17 &middot; Health Promotion<br>CPC 1 &middot; Year 1<br>Study Suite</div></div><div class='emerg'><div class='t'>★ Do-not-miss &middot; first-step reflexes</div><div class='items'><div><b>Pre-exercise red flags</b> (chest pain, syncope, unexplained dyspnea, palpitations, HF signs) &rarr; evaluate before moderate/vigorous exercise</div><div><b>Older-adult unintentional weight loss</b> &ge;4–5%/yr or &ge;10% over any period &rarr; <span class='dnm'>evaluate</span> (don't dismiss as aging)</div><div><b>Weight-loss exam red flags</b> &rarr; lymphadenopathy, hepatosplenomegaly, masses</div><div><b>High 10-yr CV risk</b> &rarr; intensive lifestyle <b>and</b> statin (complementary, not either/or)</div><div><b>Capable minor</b> (sexual orientation / sexual health) &rarr; <span class='dnm'>don't disclose without consent</span> unless mandatory reporting applies</div><div><b>Anti-obesity / GLP-1 / statin</b> &rarr; avoid in pregnancy</div></div></div><div class='cols'><div class='card'><h2>Health promotion <span class='wk'>Prevention</span></h2><div class='row'><span class='tg'>Geoffrey Rose</span> <span class='ar'>most cases arise at average risk &rarr; population shift beats chasing the tail</span></div><div class='row'><span class='tg'>Two approaches</span> <span class='ar'>high-risk individual vs population-level</span></div><div class='row'><span class='tg'>Prevention</span> <span class='ar'>counselling, screening, immunization, chemoprophylaxis</span></div></div><div class='card'><h2>Behaviour change <span class='wk'>Counselling</span></h2><div class='row'><span class='tg'>Motivational interviewing</span> <span class='ar'>collaboration, evocation, autonomy, reflective listening</span></div><div class='row'><span class='tg'>Stages</span> <span class='ar'>precontemplation &rarr; contemplation &rarr; preparation &rarr; action &rarr; maintenance</span></div><div class='row'><span class='tg'>Relapse</span> <span class='ar'>part of the process — normalize, re-engage</span></div><div class='row'><span class='tg'>SMART</span> <span class='ar'>Specific, Measurable, Achievable, Relevant, Time-bound</span></div></div><div class='card'><h2>Obesity <span class='wk'>Weight</span></h2><div class='row'><span class='tg'>Disease</span> <span class='ar'>chronic, relapsing; NOT BMI alone — EOSS grades by health impact</span></div><div class='row'><span class='tg'>Set point</span> <span class='ar'>after loss: hunger &uarr;, expenditure &darr; &rarr; regain (not willpower)</span></div><div class='row'><span class='tg'>5A</span> <span class='ar'>Ask permission, Assess, Advise, Agree, Assist</span></div><div class='row'><span class='tg'>Pharmacotherapy</span> <span class='ar'>BMI &ge;30 (or &ge;27 + complication); bariatric = most durable</span></div><div class='row'><span class='tg'>Language</span> <span class='ar'>person-first; weight stigma harms care</span></div></div><div class='card'><h2>Nutrition <span class='wk'>Diet</span></h2><div class='row'><span class='tg'>Portfolio</span> <span class='ar'>highest-yield for LDL</span></div><div class='row'><span class='tg'>DASH / Mediterranean</span> <span class='ar'>BP / CVD risk</span></div><div class='row'><span class='tg'>Low-GI, veg patterns</span> <span class='ar'>glycemic control</span></div><div class='row'><span class='tg'>Best diet</span> <span class='ar'>the sustainable, evidence-informed one</span></div><div class='row'><span class='tg'>High-yield target</span> <span class='ar'>sugar-sweetened beverages</span></div></div><div class='card'><h2>CV risk &amp; lipids <span class='wk'>Cardiometabolic</span></h2><div class='row'><span class='tg'>Metabolic syndrome</span> <span class='ar'>&ge;3 of 5: waist, TG, low HDL, BP, fasting glucose</span></div><div class='row'><span class='tg'>Framingham</span> <span class='ar'>10-yr risk; omits BMI/waist, ethnicity, family history</span></div><div class='row'><span class='tg'>Statin</span> <span class='ar'>first-line LDL lowering; cuts events</span></div><div class='row'><span class='tg'>Ezetimibe / PCSK9</span> <span class='ar'>add-on / intolerance · very-high-risk or familial hypercholesterolemia</span></div><div class='row'><span class='tg'>Key</span> <span class='ar'>lifestyle + statin are complementary</span></div></div><div class='card'><h2>Exercise prescription <span class='wk'>Exercise</span></h2><div class='row'><span class='tg'>Guideline</span> <span class='ar'>&ge;150 min/wk moderate-vigorous + strengthening &ge;2 d/wk</span></div><div class='row'><span class='tg'>Moderate</span> <span class='ar'>talk but not sing</span></div><div class='row'><span class='tg'>PAVS</span> <span class='ar'>days/wk &times; min/day</span></div><div class='row'><span class='tg'>Counsel</span> <span class='ar'>5A; write a FITT prescription (Frequency, Intensity, Time, Type)</span></div><div class='row'><span class='tg'>Dose</span> <span class='ar'>some is better than none</span></div></div><div class='card'><h2>Disability &amp; ableism <span class='wk'>Equity</span></h2><div class='row'><span class='tg'>ICF</span> <span class='ar'>impairment · activity limitation · participation restriction (e.g. inaccessible gym)</span></div><div class='row'><span class='tg'>Principle</span> <span class='ar'>adapt, don't avoid</span></div><div class='row'><span class='tg'>SCI safety</span> <span class='ar'>skin integrity, autonomic dysreflexia, bladder/bowel, overuse</span></div><div class='row'><span class='tg'>Ableism</span> <span class='ar'>assuming poor QoL; speaking to the caregiver, not the patient</span></div></div><div class='card'><h2>LGBTQ2S &amp; older-adult wt loss <span class='wk'>Equity + Geri</span></h2><div class='row'><span class='tg'>Confidentiality</span> <span class='ar'>capable minor; trans names/pronouns; no non-consensual disclosure</span></div><div class='row'><span class='tg'>Conversion therapy</span> <span class='ar'>rejected and harmful &rarr; affirming care</span></div><div class='row'><span class='tg'>Older-adult wt loss</span> <span class='ar'>social / psychological / medical / age-medication buckets</span></div><div class='row'><span class='tg'>Appetite stimulants</span> <span class='ar'>NOT first-line — evaluate the cause first</span></div></div></div><div class='foot'>Week 17 &middot; Health Promotion &middot; cram sheet &middot; cue &rarr; answer</div></div>"
+  }
+ ],
+ "drugs": [
+  {
+   "id": "rx:atorvastatin",
+   "name": "Atorvastatin (statin)",
+   "class": "rx:statin",
+   "facets": {
+    "use": "First-line LDL lowering / CVD risk reduction",
+    "mechanism": "HMG-CoA reductase inhibitor",
+    "adverse": "Myalgia, rare rhabdomyolysis, LFT rise, small diabetes signal",
+    "contra": "Pregnancy, active liver disease; drug interactions"
+   },
+   "ref": {
+    "topic": "Lipids",
+    "guide": "W17_05_CV_Risk_Lipids.html",
+    "week": "Week 17 · Health Promotion"
+   }
+  },
+  {
+   "id": "rx:ezetimibe",
+   "name": "Ezetimibe",
+   "class": "rx:cholesterol-absorption-inhibitor",
+   "facets": {
+    "use": "Add-on when LDL target unmet / statin intolerance",
+    "mechanism": "Reduces intestinal cholesterol absorption",
+    "adverse": "Generally well tolerated"
+   },
+   "ref": {
+    "topic": "Lipids",
+    "guide": "W17_05_CV_Risk_Lipids.html",
+    "week": "Week 17 · Health Promotion"
+   }
+  },
+  {
+   "id": "rx:evolocumab",
+   "name": "Evolocumab (PCSK9 inhibitor)",
+   "class": "rx:pcsk9-inhibitor",
+   "facets": {
+    "use": "Very-high-risk or familial hypercholesterolemia",
+    "mechanism": "PCSK9 inhibitor (injectable)",
+    "adverse": "Injection-site reactions",
+    "monitoring": "Costly / access-limited"
+   },
+   "ref": {
+    "topic": "Lipids",
+    "guide": "W17_05_CV_Risk_Lipids.html",
+    "week": "Week 17 · Health Promotion"
+   }
+  },
+  {
+   "id": "rx:semaglutide",
+   "name": "Semaglutide (GLP-1 agonist)",
+   "class": "rx:glp1-agonist",
+   "facets": {
+    "use": "Obesity; type 2 diabetes",
+    "mechanism": "GLP-1 receptor agonist — decreases appetite, improves glycemia",
+    "adverse": "GI effects (nausea)",
+    "contra": "Avoid in pregnancy; certain endocrine cancer syndromes (agent label)"
+   },
+   "ref": {
+    "topic": "Obesity pharmacotherapy",
+    "guide": "W17_03_Obesity.html",
+    "week": "Week 17 · Health Promotion"
+   }
+  },
+  {
+   "id": "rx:orlistat",
+   "name": "Orlistat",
+   "class": "rx:lipase-inhibitor",
+   "facets": {
+    "use": "Obesity (adjunct)",
+    "mechanism": "Pancreatic lipase inhibitor — reduces fat absorption",
+    "adverse": "Oily stools, GI symptoms, fat-soluble vitamin malabsorption"
+   },
+   "ref": {
+    "topic": "Obesity pharmacotherapy",
+    "guide": "W17_03_Obesity.html",
+    "week": "Week 17 · Health Promotion"
+   }
   }
  ]
 }
