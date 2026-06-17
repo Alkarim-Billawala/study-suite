@@ -2,7 +2,7 @@
  "pack": "Week 09 — Pediatrics",
  "id": "wk09",
  "formatVersion": "2.0",
- "version": "2.2",
+ "version": "2.3",
  "author": "Alkarim Billawala / alkarim.billawala.ca",
  "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
  "created": "2026-06-13",
@@ -1303,6 +1303,81 @@
    "ref": {
     "topic": "Nutrition",
     "guide": "W09_03_Nutrition.html",
+    "week": "Week 09 · Pediatrics"
+   }
+  },
+  {
+   "id": "rx:dexamethasone",
+   "name": "Dexamethasone",
+   "class": "rx:corticosteroid",
+   "facets": {
+    "use": "Croup (single dose); also antiemetic",
+    "mechanism": "Corticosteroid (reduces airway edema)",
+    "adverse": "Generally well tolerated as a single dose"
+   },
+   "ref": {
+    "topic": "Common problems",
+    "guide": "W09_04_Common_Problems.html",
+    "week": "Week 09 · Pediatrics"
+   }
+  },
+  {
+   "id": "rx:salbutamol",
+   "name": "Salbutamol (albuterol)",
+   "class": "rx:beta2-agonist",
+   "facets": {
+    "use": "Wheeze / reactive airways (not routine in bronchiolitis)",
+    "mechanism": "Short-acting β2-agonist (bronchodilation)",
+    "adverse": "Tremor, tachycardia"
+   },
+   "ref": {
+    "topic": "Common problems",
+    "guide": "W09_04_Common_Problems.html",
+    "week": "Week 09 · Pediatrics"
+   }
+  },
+  {
+   "id": "rx:ondansetron",
+   "name": "Ondansetron",
+   "class": "rx:antiemetic",
+   "facets": {
+    "use": "Vomiting / acute gastroenteritis (aids oral rehydration)",
+    "mechanism": "5-HT3 antagonist (antiemetic)",
+    "adverse": "QT prolongation, headache"
+   },
+   "ref": {
+    "topic": "Common problems",
+    "guide": "W09_04_Common_Problems.html",
+    "week": "Week 09 · Pediatrics"
+   }
+  },
+  {
+   "id": "rx:polyethylene-glycol",
+   "name": "Polyethylene glycol (PEG)",
+   "class": "rx:laxative",
+   "facets": {
+    "use": "Childhood constipation (disimpaction + maintenance)",
+    "mechanism": "Osmotic laxative (retains water in stool)",
+    "adverse": "Bloating, diarrhea if over-dosed"
+   },
+   "ref": {
+    "topic": "Common problems",
+    "guide": "W09_04_Common_Problems.html",
+    "week": "Week 09 · Pediatrics"
+   }
+  },
+  {
+   "id": "rx:vitamin-k",
+   "name": "Vitamin K (phytonadione)",
+   "class": "rx:reversal-agent",
+   "facets": {
+    "use": "Routine newborn prophylaxis (prevents hemorrhagic disease of the newborn)",
+    "mechanism": "Cofactor for clotting factors II, VII, IX, X",
+    "dosing": "IM at birth"
+   },
+   "ref": {
+    "topic": "Newborn",
+    "guide": "W09_04_Common_Problems.html",
     "week": "Week 09 · Pediatrics"
    }
   }

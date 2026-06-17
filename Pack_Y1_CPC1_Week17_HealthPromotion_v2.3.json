@@ -2,7 +2,7 @@
  "pack": "Week 17 — Health Promotion",
  "id": "wk17",
  "formatVersion": "2.0",
- "version": "2.2",
+ "version": "2.3",
  "author": "Alkarim Billawala / alkarim.billawala.ca",
  "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
  "created": "2026-06-15",
@@ -1414,6 +1414,85 @@
    "ref": {
     "topic": "Obesity pharmacotherapy",
     "guide": "W17_03_Obesity.html",
+    "week": "Week 17 · Health Promotion"
+   }
+  },
+  {
+   "id": "rx:varenicline",
+   "name": "Varenicline",
+   "class": "rx:smoking-cessation",
+   "facets": {
+    "use": "Smoking cessation — most effective monotherapy",
+    "mechanism": "Partial α4β2 nicotinic agonist (reduces cravings + reward)",
+    "adverse": "Nausea, vivid dreams, mood changes",
+    "monitoring": "Pair with behavioural support"
+   },
+   "ref": {
+    "topic": "Smoking cessation",
+    "guide": "W17_02_Behaviour_Change.html",
+    "week": "Week 17 · Health Promotion"
+   }
+  },
+  {
+   "id": "rx:bupropion",
+   "name": "Bupropion",
+   "class": "rx:smoking-cessation",
+   "facets": {
+    "use": "Smoking cessation (also reduces post-cessation weight gain)",
+    "mechanism": "Dopamine/norepinephrine reuptake inhibitor",
+    "adverse": "Insomnia, seizure risk",
+    "contra": "Seizure disorder, eating disorders"
+   },
+   "ref": {
+    "topic": "Smoking cessation",
+    "guide": "W17_02_Behaviour_Change.html",
+    "week": "Week 17 · Health Promotion"
+   }
+  },
+  {
+   "id": "rx:nicotine-replacement",
+   "name": "Nicotine replacement therapy",
+   "class": "rx:smoking-cessation",
+   "facets": {
+    "use": "Smoking cessation (patch + short-acting combination)",
+    "mechanism": "Replaces nicotine to blunt withdrawal",
+    "adverse": "Local irritation, vivid dreams (patch)"
+   },
+   "ref": {
+    "topic": "Smoking cessation",
+    "guide": "W17_02_Behaviour_Change.html",
+    "week": "Week 17 · Health Promotion"
+   }
+  },
+  {
+   "id": "rx:metformin",
+   "name": "Metformin",
+   "class": "rx:biguanide",
+   "facets": {
+    "use": "Type 2 diabetes; prediabetes / metabolic syndrome risk reduction",
+    "mechanism": "Biguanide — decreases hepatic gluconeogenesis, improves insulin sensitivity",
+    "adverse": "GI upset, B12 deficiency; rare lactic acidosis",
+    "contra": "Hold with advanced renal impairment / contrast"
+   },
+   "ref": {
+    "topic": "Cardiometabolic",
+    "guide": "W17_05_CV_Risk_Lipids.html",
+    "week": "Week 17 · Health Promotion"
+   }
+  },
+  {
+   "id": "rx:ramipril",
+   "name": "Ramipril (ACE inhibitor)",
+   "class": "rx:ace-inhibitor",
+   "facets": {
+    "use": "Hypertension; cardiovascular / renal protection",
+    "mechanism": "ACE inhibitor (blocks angiotensin II)",
+    "adverse": "Cough, hyperkalemia, angioedema",
+    "contra": "Pregnancy, bilateral renal artery stenosis"
+   },
+   "ref": {
+    "topic": "Cardiometabolic",
+    "guide": "W17_05_CV_Risk_Lipids.html",
     "week": "Week 17 · Health Promotion"
    }
   }

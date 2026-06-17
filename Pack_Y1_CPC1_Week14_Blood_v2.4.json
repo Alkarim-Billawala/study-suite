@@ -2,7 +2,7 @@
  "pack": "Week 14 — Blood I",
  "id": "wk14",
  "formatVersion": "2.0",
- "version": "2.3",
+ "version": "2.4",
  "author": "Alkarim Billawala / alkarim.billawala.ca",
  "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
  "created": "2026-06-15",
@@ -1449,6 +1449,62 @@
    "ref": {
     "topic": "Sickle cell",
     "guide": "W14_06_Hemoglobinopathies.html"
+   }
+  },
+  {
+   "id": "rx:prednisone",
+   "name": "Prednisone",
+   "class": "rx:corticosteroid",
+   "facets": {
+    "use": "First-line immune thrombocytopenia (ITP); warm AIHA",
+    "mechanism": "Corticosteroid (dampens autoantibody-mediated destruction)",
+    "adverse": "Hyperglycemia, infection, osteoporosis with prolonged use"
+   },
+   "ref": {
+    "topic": "Thrombocytopenia",
+    "guide": "W14_07_Thrombocytopenia.html"
+   }
+  },
+  {
+   "id": "rx:ivig",
+   "name": "IVIG",
+   "class": "rx:ivig",
+   "facets": {
+    "use": "ITP when a rapid platelet rise is needed (bleeding, pre-procedure)",
+    "mechanism": "Pooled immunoglobulin (blockades splenic Fc receptors)",
+    "adverse": "Infusion reactions, rare thrombosis/renal"
+   },
+   "ref": {
+    "topic": "Thrombocytopenia",
+    "guide": "W14_07_Thrombocytopenia.html"
+   }
+  },
+  {
+   "id": "rx:rituximab",
+   "name": "Rituximab",
+   "class": "rx:anti-cd20",
+   "facets": {
+    "use": "Refractory ITP; warm AIHA",
+    "mechanism": "Anti-CD20 monoclonal antibody (depletes B cells)",
+    "adverse": "Infusion reactions; screen HBV"
+   },
+   "ref": {
+    "topic": "Thrombocytopenia",
+    "guide": "W14_07_Thrombocytopenia.html"
+   }
+  },
+  {
+   "id": "rx:tranexamic-acid",
+   "name": "Tranexamic acid (TXA)",
+   "class": "rx:antifibrinolytic",
+   "facets": {
+    "use": "Adjunct for mucosal/menstrual bleeding in thrombocytopenia",
+    "mechanism": "Antifibrinolytic (stabilizes clot)",
+    "contra": "Active thromboembolism, hematuria from upper tract"
+   },
+   "ref": {
+    "topic": "Thrombocytopenia",
+    "guide": "W14_07_Thrombocytopenia.html"
    }
   }
  ]

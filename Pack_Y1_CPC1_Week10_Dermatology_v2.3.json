@@ -2,7 +2,7 @@
  "pack": "Week 10 — Dermatology",
  "id": "wk10",
  "formatVersion": "2.0",
- "version": "2.2",
+ "version": "2.3",
  "author": "Alkarim Billawala / alkarim.billawala.ca",
  "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
  "created": "2026-06-13",
@@ -1398,6 +1398,66 @@
    },
    "ref": {
     "topic": "Infestations",
+    "guide": "W10_03_Infections.html",
+    "week": "Week 10 · Dermatology"
+   }
+  },
+  {
+   "id": "rx:mupirocin",
+   "name": "Mupirocin (topical)",
+   "class": "rx:topical-antibiotic",
+   "facets": {
+    "use": "Localized impetigo (topical)",
+    "mechanism": "Topical antibiotic (isoleucyl-tRNA synthetase)",
+    "adverse": "Local irritation"
+   },
+   "ref": {
+    "topic": "Infections",
+    "guide": "W10_03_Infections.html",
+    "week": "Week 10 · Dermatology"
+   }
+  },
+  {
+   "id": "rx:cephalexin",
+   "name": "Cephalexin",
+   "class": "rx:cephalosporin",
+   "facets": {
+    "use": "Non-purulent cellulitis (streptococcal cover)",
+    "mechanism": "1st-gen cephalosporin (cell-wall synthesis)",
+    "adverse": "GI upset, rash"
+   },
+   "ref": {
+    "topic": "Infections",
+    "guide": "W10_03_Infections.html",
+    "week": "Week 10 · Dermatology"
+   }
+  },
+  {
+   "id": "rx:acyclovir",
+   "name": "Acyclovir",
+   "class": "rx:nucleoside-antiviral",
+   "facets": {
+    "use": "HSV / zoster; eczema herpeticum",
+    "mechanism": "Nucleoside analogue (viral thymidine kinase)",
+    "adverse": "Renal — hydrate"
+   },
+   "ref": {
+    "topic": "Infections",
+    "guide": "W10_03_Infections.html",
+    "week": "Week 10 · Dermatology"
+   }
+  },
+  {
+   "id": "rx:cetirizine",
+   "name": "Cetirizine",
+   "class": "rx:antihistamine",
+   "facets": {
+    "use": "Pruritus / itch relief (eczema, scabies, urticaria)",
+    "mechanism": "2nd-gen H1 antihistamine",
+    "adverse": "Minimal sedation"
+   },
+   "ref": {
+    "topic": "Therapeutics",
     "guide": "W10_03_Infections.html",
     "week": "Week 10 · Dermatology"
    }

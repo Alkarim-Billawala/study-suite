@@ -2,7 +2,7 @@
  "pack": "Week 11 — Immunology II",
  "id": "wk11",
  "formatVersion": "2.0",
- "version": "2.2",
+ "version": "2.3",
  "author": "Alkarim Billawala / alkarim.billawala.ca",
  "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
  "created": "2026-06-13",
@@ -1437,6 +1437,67 @@
     "use": "Immune replacement; immunomodulation (ITP, etc.)",
     "mechanism": "Pooled immunoglobulin",
     "adverse": "Infusion reactions, rare thrombosis/renal"
+   },
+   "ref": {
+    "topic": "Therapeutics",
+    "guide": "W11_07_Therapeutics.html",
+    "week": "Week 11 · Immunology II"
+   }
+  },
+  {
+   "id": "rx:c1-inhibitor",
+   "name": "C1-esterase inhibitor",
+   "class": "rx:complement-inhibitor",
+   "facets": {
+    "use": "Hereditary angioedema (acute attacks / prophylaxis)",
+    "mechanism": "Replaces deficient C1-esterase inhibitor (controls bradykinin)",
+    "monitoring": "Not epinephrine/antihistamine/steroid-responsive"
+   },
+   "ref": {
+    "topic": "Urticaria",
+    "guide": "W11_03_Urticaria.html",
+    "week": "Week 11 · Immunology II"
+   }
+  },
+  {
+   "id": "rx:icatibant",
+   "name": "Icatibant",
+   "class": "rx:bradykinin-antagonist",
+   "facets": {
+    "use": "Acute hereditary angioedema attack",
+    "mechanism": "Bradykinin B2 receptor antagonist",
+    "adverse": "Injection-site reactions"
+   },
+   "ref": {
+    "topic": "Urticaria",
+    "guide": "W11_03_Urticaria.html",
+    "week": "Week 11 · Immunology II"
+   }
+  },
+  {
+   "id": "rx:prednisone",
+   "name": "Prednisone",
+   "class": "rx:corticosteroid",
+   "facets": {
+    "use": "Broad immunosuppression / autoimmune flares",
+    "mechanism": "Corticosteroid (anti-inflammatory, immunosuppressive)",
+    "adverse": "Infection, hyperglycemia, osteoporosis, weight gain",
+    "monitoring": "Taper; not for bradykinin angioedema"
+   },
+   "ref": {
+    "topic": "Therapeutics",
+    "guide": "W11_07_Therapeutics.html",
+    "week": "Week 11 · Immunology II"
+   }
+  },
+  {
+   "id": "rx:rituximab",
+   "name": "Rituximab",
+   "class": "rx:anti-cd20",
+   "facets": {
+    "use": "Antibody-mediated autoimmune disease; lymphoma",
+    "mechanism": "Anti-CD20 monoclonal antibody (depletes B cells)",
+    "adverse": "Infusion reactions; screen HBV (reactivation)"
    },
    "ref": {
     "topic": "Therapeutics",

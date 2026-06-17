@@ -2,7 +2,7 @@
  "pack": "Weeks 12–13 — Microbiology & ID",
  "id": "wk12-13",
  "formatVersion": "2.0",
- "version": "2.2",
+ "version": "2.3",
  "author": "Alkarim Billawala / alkarim.billawala.ca",
  "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
  "created": "2026-06-13",
@@ -2461,6 +2461,97 @@
    "ref": {
     "topic": "HIV",
     "guide": "W1213_08_Hepatitis_HIV.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:piperacillin-tazobactam",
+   "name": "Piperacillin-tazobactam",
+   "class": "rx:antipseudomonal-betalactam",
+   "facets": {
+    "use": "Febrile neutropenia, sepsis, intra-abdominal — antipseudomonal",
+    "mechanism": "Antipseudomonal penicillin + β-lactamase inhibitor",
+    "adverse": "Allergy, C. difficile"
+   },
+   "ref": {
+    "topic": "Antibacterials",
+    "guide": "W1213_04_Antibacterials.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:cefepime",
+   "name": "Cefepime",
+   "class": "rx:antipseudomonal-betalactam",
+   "facets": {
+    "use": "Febrile neutropenia, nosocomial gram-negatives — antipseudomonal",
+    "mechanism": "4th-gen cephalosporin",
+    "adverse": "Neurotoxicity in renal impairment"
+   },
+   "ref": {
+    "topic": "Antibacterials",
+    "guide": "W1213_04_Antibacterials.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:meropenem",
+   "name": "Meropenem",
+   "class": "rx:carbapenem",
+   "facets": {
+    "use": "Severe / resistant gram-negative infections (ESBL); polymicrobial",
+    "mechanism": "Carbapenem (broadest β-lactam)",
+    "adverse": "Seizures (rare); reserve to limit resistance"
+   },
+   "ref": {
+    "topic": "Antibacterials",
+    "guide": "W1213_04_Antibacterials.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:penicillin-g",
+   "name": "Penicillin G",
+   "class": "rx:natural-penicillin",
+   "facets": {
+    "use": "Streptococcal infections, syphilis, meningococcus",
+    "mechanism": "Natural penicillin (cell-wall synthesis)",
+    "adverse": "Hypersensitivity"
+   },
+   "ref": {
+    "topic": "Antibacterials",
+    "guide": "W1213_04_Antibacterials.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:nitrofurantoin",
+   "name": "Nitrofurantoin",
+   "class": "rx:nitrofuran",
+   "facets": {
+    "use": "Uncomplicated cystitis (lower UTI)",
+    "mechanism": "Damages bacterial DNA (concentrates in urine)",
+    "adverse": "Pulmonary toxicity (chronic); avoid if eGFR low or pyelonephritis"
+   },
+   "ref": {
+    "topic": "Antibacterials",
+    "guide": "W1213_04_Antibacterials.html",
+    "week": "Weeks 12–13 · Micro & ID I–II"
+   }
+  },
+  {
+   "id": "rx:doxycycline",
+   "name": "Doxycycline",
+   "class": "rx:tetracycline",
+   "facets": {
+    "use": "Atypicals, MRSA SSTI, tick-borne, acne",
+    "mechanism": "Tetracycline (30S protein synthesis)",
+    "adverse": "Photosensitivity, GI",
+    "contra": "Pregnancy, children &lt;8 yr"
+   },
+   "ref": {
+    "topic": "Antibacterials",
+    "guide": "W1213_04_Antibacterials.html",
     "week": "Weeks 12–13 · Micro & ID I–II"
    }
   }
