@@ -1,0 +1,1708 @@
+{
+ "pack": "Week 26 — Endocrine II (Pituitary/Thyroid/Adrenal)",
+ "id": "wk26",
+ "formatVersion": "2.0",
+ "version": "1.0",
+ "author": "Alkarim Billawala / alkarim.billawala.ca",
+ "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
+ "created": "2026-06-16",
+ "updated": "2026-06-16",
+ "school": "UofT — Temerty Medicine",
+ "year": "Year 1",
+ "course": "CPC 2",
+ "weeks": "Week 26 · Endocrine II — Pituitary, Thyroid & Adrenal",
+ "questions": [
+  {
+   "id": "wk26_q01",
+   "sys": "Endo",
+   "topic": "Pituitary · Acromegaly",
+   "difficulty": "easy",
+   "stem": "A 45-year-old man is referred after his dentist notes jaw widening (prognathism). His shoe size and ring size have increased, and he has new T2DM and carpal tunnel syndrome. What is the best initial screening test?",
+   "options": [
+    "Random growth hormone level",
+    "Serum IGF-1",
+    "Oral glucose tolerance test",
+    "Pituitary MRI"
+   ],
+   "correct": 1,
+   "explain": "Acromegaly screening is <b>IGF-1</b> (a stable integrated marker of GH action). Random GH is too pulsatile. Confirmation is failure of GH to suppress after an oral glucose load; MRI follows biochemical confirmation.",
+   "guide": {
+    "f": "W26_01_Pituitary.html",
+    "t": "1 · Acromegaly",
+    "s": "IGF-1 screen"
+   }
+  },
+  {
+   "id": "wk26_q02",
+   "sys": "Endo",
+   "topic": "Pituitary · Prolactinoma",
+   "difficulty": "medium",
+   "stem": "A 26-year-old woman has 4 months of amenorrhea and new galactorrhea. She recently started metoclopramide for nausea. β-hCG negative, TSH 1.5, prolactin 190 µg/L. What is the most appropriate next step?",
+   "options": [
+    "Order a pituitary MRI now",
+    "Start cabergoline",
+    "Discontinue metoclopramide and recheck prolactin",
+    "Refer for transsphenoidal surgery"
+   ],
+   "correct": 2,
+   "explain": "Metoclopramide is a dopamine antagonist that removes tonic lactotroph inhibition, raising prolactin (often up to ~200 µg/L). With normal TSH and a clear drug cause, <b>stop the offending drug and recheck</b> before imaging or a dopamine agonist.",
+   "guide": {
+    "f": "W26_01_Pituitary.html",
+    "t": "1 · Prolactin secondary causes",
+    "s": "drug cause first"
+   }
+  },
+  {
+   "id": "wk26_q03",
+   "sys": "Endo",
+   "topic": "Pituitary · Stalk/hook",
+   "difficulty": "hard",
+   "stem": "A 60-year-old has an incidental 3 cm pituitary macroadenoma, no galactorrhea, and a prolactin of only 150 µg/L. The clinician suspects the true prolactin is much higher. Which phenomenon explains the falsely low reading?",
+   "options": [
+    "Hook effect (assay saturation by very high prolactin)",
+    "Stalk effect",
+    "Macroprolactinemia",
+    "Hypothyroidism"
+   ],
+   "correct": 0,
+   "explain": "The <b>hook effect</b>: extremely high prolactin overwhelms the assay antibodies and is reported falsely low. (The <b>stalk effect</b> instead explains a mild rise &lt;200 from a non-functioning mass compressing the stalk and blocking dopamine.)",
+   "guide": {
+    "f": "W26_01_Pituitary.html",
+    "t": "1 · Hook vs stalk",
+    "s": "assay artifacts"
+   }
+  },
+  {
+   "id": "wk26_q04",
+   "sys": "Endo",
+   "topic": "Pituitary · Mass effect",
+   "difficulty": "medium",
+   "stem": "A 45-year-old reports walking into door frames. Confrontation fields show bitemporal hemianopsia; the swinging-flashlight test makes both pupils dilate when light moves to the left eye. What is being compressed?",
+   "options": [
+    "Cavernous sinus (CN VI)",
+    "Optic chiasm (CN II)",
+    "Lateral geniculate nucleus",
+    "Occipital cortex"
+   ],
+   "correct": 1,
+   "explain": "Bitemporal hemianopsia + a relative afferent pupillary defect (RAPD) localizes to the <b>optic chiasm/nerve (CN II)</b>, classically compressed by a pituitary adenoma extending out of the sella.",
+   "guide": {
+    "f": "W26_01_Pituitary.html",
+    "t": "1 · Mass effect",
+    "s": "chiasm + RAPD"
+   }
+  },
+  {
+   "id": "wk26_q05",
+   "sys": "Endo",
+   "topic": "Thyroid · Graves in pregnancy",
+   "difficulty": "hard",
+   "stem": "A 28-year-old, 8 weeks pregnant, has palpitations, heat intolerance, weight loss, a diffuse non-tender goiter, suppressed TSH, high fT4, and positive TRAb. Which treatment and which severe side effect to warn about?",
+   "options": [
+    "Methimazole; agranulocytosis",
+    "Propylthiouracil; agranulocytosis",
+    "Radioactive iodine; permanent hypothyroidism",
+    "Propylthiouracil; pulmonary fibrosis"
+   ],
+   "correct": 1,
+   "explain": "First-trimester Graves' is treated with <b>PTU</b> (methimazole is teratogenic early). Warn about <b>agranulocytosis</b> — fever or sore throat means stop the drug and get an urgent CBC. RAI is contraindicated in pregnancy.",
+   "guide": {
+    "f": "W26_02_Hyperthyroidism.html",
+    "t": "2 · Thionamides",
+    "s": "pregnancy + agranulocytosis"
+   }
+  },
+  {
+   "id": "wk26_q06",
+   "sys": "Endo",
+   "topic": "Thyroid · Etiology",
+   "difficulty": "medium",
+   "stem": "A 68-year-old man has weight loss, palpitations, new atrial fibrillation, a palpable right thyroid nodule, suppressed TSH, and high fT4. What is the best next test, and what result avoids an FNA?",
+   "options": [
+    "Thyroid ultrasound; a cystic nodule",
+    "RAIU scan; a focal 'hot' nodule",
+    "CT neck; calcification",
+    "Anti-TPO; positive antibodies"
+   ],
+   "correct": 1,
+   "explain": "With suppressed TSH, get a <b>RAIU scan</b>. A focal <b>hot</b> nodule (toxic adenoma) explains the thyrotoxicosis and is almost never malignant, so <b>FNA is unnecessary</b>. Cold nodules are the ones needing FNA.",
+   "guide": {
+    "f": "W26_03_Hypothyroidism_Nodules.html",
+    "t": "3 · Nodules",
+    "s": "hot = no biopsy"
+   }
+  },
+  {
+   "id": "wk26_q07",
+   "sys": "Endo",
+   "topic": "Thyroid · Thyroiditis",
+   "difficulty": "medium",
+   "stem": "A 32-year-old woman has 2 weeks of palpitations and a tender thyroid after a viral illness. TSH suppressed, fT4 high, and RAIU is LOW. What is the best management?",
+   "options": [
+    "Methimazole",
+    "NSAIDs and a beta-blocker",
+    "Radioactive iodine",
+    "Total thyroidectomy"
+   ],
+   "correct": 1,
+   "explain": "Low uptake = <b>subacute thyroiditis</b> (pre-formed hormone leak), not new synthesis — thionamides don't help. Manage symptomatically with <b>NSAIDs and a beta-blocker</b>; it is self-limited (may pass through a hypothyroid phase).",
+   "guide": {
+    "f": "W26_02_Hyperthyroidism.html",
+    "t": "2 · Low-uptake thyrotoxicosis",
+    "s": "supportive only"
+   }
+  },
+  {
+   "id": "wk26_q08",
+   "sys": "Endo",
+   "topic": "Thyroid · Levothyroxine",
+   "difficulty": "medium",
+   "stem": "A 70-year-old man with stable angina is found to have TSH 14, fT4 low. How should levothyroxine be started?",
+   "options": [
+    "Full weight-based dose (1.6 mcg/kg) immediately",
+    "Start low (25–50 mcg) and titrate slowly",
+    "Give IV T3",
+    "Withhold therapy until angina resolves"
+   ],
+   "correct": 1,
+   "explain": "In the elderly or those with cardiac disease, <b>start low (25–50 mcg) and go slow</b> — a sudden rise in metabolic rate can precipitate angina or arrhythmia. Recheck TSH in 6 weeks.",
+   "guide": {
+    "f": "W26_03_Hypothyroidism_Nodules.html",
+    "t": "3 · Levothyroxine",
+    "s": "start low, go slow"
+   }
+  },
+  {
+   "id": "wk26_q09",
+   "sys": "Endo",
+   "topic": "Adrenal · Addison precipitated",
+   "difficulty": "hard",
+   "stem": "A 35-year-old woman with Hashimoto's, started on levothyroxine 2 weeks ago, presents with profound fatigue, hypotension, nausea, and hyperpigmented palmar creases and buccal mucosa. What happened and why the pigmentation?",
+   "options": [
+    "Thyroid storm; catecholamine surge",
+    "Addisonian crisis unmasked by levothyroxine; high ACTH/MSH from POMC",
+    "Myxedema coma; carotenemia",
+    "Cushing syndrome; ACTH excess"
+   ],
+   "correct": 1,
+   "explain": "Starting levothyroxine raised metabolic/cortisol demand and unmasked <b>primary adrenal insufficiency &rarr; Addisonian crisis</b>. Hyperpigmentation is from high <b>ACTH</b>, which shares the POMC precursor with <b>MSH</b> and stimulates melanocortin receptors.",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Addison's",
+    "s": "levothyroxine trap"
+   }
+  },
+  {
+   "id": "wk26_q10",
+   "sys": "Endo",
+   "topic": "Adrenal · Crisis testing",
+   "difficulty": "medium",
+   "stem": "A 24-year-old man with suspected primary adrenal insufficiency is hypotensive. You plan an ACTH stimulation test but must treat now. Which IV glucocorticoid stabilizes him without interfering with the cortisol assay?",
+   "options": [
+    "Hydrocortisone",
+    "Prednisone",
+    "Dexamethasone",
+    "Methylprednisolone"
+   ],
+   "correct": 2,
+   "explain": "<b>Dexamethasone</b> does not cross-react with the cortisol assay, so it stabilizes the patient while the ACTH-stimulation test is completed. (Hydrocortisone is standard once testing is done or not planned.)",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Adrenal crisis",
+    "s": "dexamethasone preserves assay"
+   }
+  },
+  {
+   "id": "wk26_q11",
+   "sys": "Endo",
+   "topic": "Adrenal · Cushing localization",
+   "difficulty": "medium",
+   "stem": "A 42-year-old woman has central weight gain, purple striae, and proximal weakness; she denies steroids. 24-h urine free cortisol is high and 1-mg dexamethasone fails to suppress. ACTH is 0.5 pg/mL (low). Where is the lesion?",
+   "options": [
+    "Pituitary adenoma",
+    "Ectopic ACTH-secreting tumour",
+    "Adrenal tumour",
+    "Hypothalamic CRH excess"
+   ],
+   "correct": 2,
+   "explain": "Confirmed endogenous Cushing's with a <b>low ACTH</b> = ACTH-independent &rarr; autonomous cortisol from an <b>adrenal</b> adenoma/carcinoma suppressing pituitary ACTH. High/normal ACTH would point to pituitary or ectopic sources.",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Cushing's",
+    "s": "ACTH splits the cause"
+   }
+  },
+  {
+   "id": "wk26_q12",
+   "sys": "Endo",
+   "topic": "Adrenal · Conn's",
+   "difficulty": "easy",
+   "stem": "A 65-year-old woman has refractory hypertension (180/110) and K 2.4 mmol/L, with low renin and high aldosterone. Which medication class directly blocks the epithelial sodium channel for this condition?",
+   "options": [
+    "Spironolactone",
+    "Amiloride",
+    "Hydrochlorothiazide",
+    "Lisinopril"
+   ],
+   "correct": 1,
+   "explain": "Primary aldosteronism (Conn's): aldosterone antagonists (spironolactone/eplerenone) or an <b>ENaC blocker — amiloride</b> — are the medical options. Amiloride directly blocks the collecting-duct sodium channel, sparing potassium.",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Conn's",
+    "s": "aldosterone antagonist / ENaC"
+   }
+  },
+  {
+   "id": "wk26_q13",
+   "sys": "Endo",
+   "topic": "Adrenal · Pheochromocytoma",
+   "difficulty": "hard",
+   "stem": "A 27-year-old has episodic headaches, palpitations, and sweating with paroxysmal hypertension; CT shows a 2.9 cm hypervascular adrenal mass (40 HU) and urinary metanephrines are high. What pre-op pharmacologic sequence is required?",
+   "options": [
+    "Beta-blocker first, then alpha-blocker",
+    "Alpha-blocker first, then beta-blocker",
+    "ACE inhibitor only",
+    "Calcium channel blocker alone"
+   ],
+   "correct": 1,
+   "explain": "Pheochromocytoma needs <b>alpha-blockade first</b> (doxazosin/phenoxybenzamine), then beta-blockade. Giving a beta-blocker first leaves unopposed alpha vasoconstriction &rarr; hypertensive crisis. Skin findings (café-au-lait, neurofibromas, mucosal neuromas) hint at NF1/MEN2B.",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Pheo",
+    "s": "alpha before beta"
+   }
+  },
+  {
+   "id": "wk26_q14",
+   "sys": "Endo",
+   "topic": "Pituitary · Prolactin from hypothyroid",
+   "difficulty": "medium",
+   "stem": "A 31-year-old woman with oligomenorrhea and infertility has prolactin 95 µg/L and TSH 16.0 (negative pregnancy test, no meds). What links the two, and what is the best initial therapy?",
+   "options": [
+    "Prolactinoma; cabergoline",
+    "Primary hypothyroidism → high TRH stimulates prolactin; levothyroxine",
+    "Stalk effect; surgery",
+    "Acromegaly; octreotide"
+   ],
+   "correct": 1,
+   "explain": "Primary hypothyroidism raises <b>TRH</b>, which directly stimulates lactotrophs &rarr; mild hyperprolactinemia. Treat the hypothyroidism with <b>levothyroxine</b>; prolactin normalizes — no dopamine agonist needed.",
+   "guide": {
+    "f": "W26_01_Pituitary.html",
+    "t": "1 · Secondary hyperprolactinemia",
+    "s": "treat the thyroid"
+   }
+  },
+  {
+   "id": "wk26_q15",
+   "sys": "Endo",
+   "topic": "Adrenal · Labs",
+   "difficulty": "easy",
+   "stem": "Which electrolyte pattern is most characteristic of primary adrenal insufficiency?",
+   "options": [
+    "Hypernatremia + hypokalemia",
+    "Hyponatremia + hyperkalemia",
+    "Hypernatremia + hyperkalemia",
+    "Hyponatremia + hypokalemia"
+   ],
+   "correct": 1,
+   "explain": "Aldosterone deficiency causes sodium loss and potassium retention &rarr; <b>hyponatremia + hyperkalemia</b> (with hypotension and hypoglycemia). This pattern in a hyperpigmented, hypotensive patient points to Addison's.",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Addison's",
+    "s": "Na low, K high"
+   }
+  },
+  {
+   "id": "wk26_q16",
+   "sys": "Endo",
+   "topic": "Thyroid · Storm",
+   "difficulty": "medium",
+   "stem": "A thyrotoxic patient develops fever, agitation, and high-output heart failure after surgery. Which treatment ordering is correct for thyroid storm?",
+   "options": [
+    "Iodine first, then PTU",
+    "Beta-blocker + PTU, then iodine, plus glucocorticoids",
+    "Radioactive iodine emergently",
+    "Levothyroxine and a beta-blocker"
+   ],
+   "correct": 1,
+   "explain": "Thyroid storm: <b>beta-blocker + thionamide (PTU)</b> first, then <b>iodine</b> (given after the thionamide so it doesn't fuel new synthesis), plus glucocorticoids (and treat the trigger).",
+   "guide": {
+    "f": "W26_05_Endocrine_Emergencies.html",
+    "t": "5 · Thyroid storm",
+    "s": "order of agents"
+   }
+  },
+  {
+   "id": "wk26_q17",
+   "sys": "Endo",
+   "topic": "Pituitary · Apoplexy",
+   "difficulty": "medium",
+   "stem": "A patient with a known pituitary macroadenoma develops sudden 'worst headache of my life,' visual loss, an eye that won't move laterally, and hypotension. Besides hemodynamic support, what is the key medication?",
+   "options": [
+    "IV hydrocortisone",
+    "IV levothyroxine",
+    "IV mannitol",
+    "IV labetalol"
+   ],
+   "correct": 0,
+   "explain": "Pituitary apoplexy (hemorrhage into the adenoma) can cause acute ACTH/cortisol deficiency and hypotension &rarr; give <b>IV hydrocortisone</b> with hemodynamic support; neurosurgery for decompression if vision is threatened.",
+   "guide": {
+    "f": "W26_05_Endocrine_Emergencies.html",
+    "t": "5 · Apoplexy",
+    "s": "stress-dose steroids"
+   }
+  },
+  {
+   "id": "wk26_q18",
+   "sys": "Endo",
+   "topic": "Adrenal · Incidentaloma",
+   "difficulty": "medium",
+   "stem": "A 3.5 cm adrenal mass with 8 HU unenhanced attenuation is found incidentally. The patient is asymptomatic. What is the appropriate next step?",
+   "options": [
+    "Immediate adrenalectomy for size",
+    "Biochemical workup for hormone excess (and reassess malignancy risk)",
+    "Reassure; no further testing",
+    "Start spironolactone empirically"
+   ],
+   "correct": 1,
+   "explain": "Every adrenal incidentaloma needs <b>biochemical screening for functionality</b> (cortisol/Cushing's, metanephrines/pheo, aldosterone:renin if hypertensive). Low attenuation (&lt;10 HU) and &lt;4 cm are reassuring for a benign adenoma, but function must still be assessed.",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Incidentaloma",
+    "s": "always assess function"
+   }
+  },
+  {
+   "id": "wk26_q19",
+   "sys": "Endo",
+   "topic": "Thyroid · Hypothyroid sequence",
+   "difficulty": "hard",
+   "stem": "A patient with suspected panhypopituitarism and central hypothyroidism is about to be started on hormone replacement. Which should be replaced first?",
+   "options": [
+    "Levothyroxine before hydrocortisone",
+    "Hydrocortisone before levothyroxine",
+    "Both simultaneously at full dose",
+    "Sex steroids first"
+   ],
+   "correct": 1,
+   "explain": "<b>Replace glucocorticoids (hydrocortisone) before levothyroxine.</b> Thyroid hormone speeds cortisol metabolism and raises demand; giving it first in a cortisol-deficient patient can precipitate adrenal crisis.",
+   "guide": {
+    "f": "W26_03_Hypothyroidism_Nodules.html",
+    "t": "3 · Levothyroxine",
+    "s": "cortisol first"
+   }
+  },
+  {
+   "id": "wk26_q20",
+   "sys": "Endo",
+   "topic": "Adrenal · Maintenance",
+   "difficulty": "easy",
+   "stem": "A patient with Addison's disease asks about managing a mild febrile respiratory infection at home. What is the correct sick-day rule?",
+   "options": [
+    "Stop hydrocortisone to avoid immunosuppression",
+    "Double or triple the hydrocortisone dose",
+    "Switch to fludrocortisone only",
+    "No change is needed"
+   ],
+   "correct": 1,
+   "explain": "Sick-day rule: <b>double or triple the glucocorticoid</b> for mild/moderate illness to match increased demand; if vomiting or unable to keep it down, go to the ER for IV steroids. Fludrocortisone provides mineralocorticoid replacement, not stress coverage.",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Sick-day rules",
+    "s": "stress-dose steroid"
+   }
+  }
+ ],
+ "cards": [
+  {
+   "id": "wk26_c01",
+   "sys": "Endo",
+   "topic": "Mass effect",
+   "type": "qa",
+   "guide": {
+    "f": "W26_01_Pituitary.html",
+    "t": "1 · Mass effect",
+    "s": "chiasm"
+   },
+   "prompt": "What visual field defect and pupillary sign suggest optic-chiasm compression by a pituitary mass?",
+   "answer": "Bitemporal hemianopsia plus a relative afferent pupillary defect (RAPD) on the swinging-flashlight test (both pupils dilate when light moves to the affected eye)."
+  },
+  {
+   "id": "wk26_c02",
+   "sys": "Endo",
+   "topic": "Prolactinoma",
+   "type": "qa",
+   "guide": {
+    "f": "W26_01_Pituitary.html",
+    "t": "1 · Prolactin",
+    "s": "secondary causes"
+   },
+   "prompt": "Which secondary causes of hyperprolactinemia must be excluded before imaging?",
+   "answer": "Pregnancy (β-hCG), primary hypothyroidism (TRH stimulates prolactin), renal/liver dysfunction, and dopamine-antagonist drugs (metoclopramide, antipsychotics)."
+  },
+  {
+   "id": "wk26_c03",
+   "sys": "Endo",
+   "topic": "Prolactinoma Rx",
+   "type": "qa",
+   "guide": {
+    "f": "W26_01_Pituitary.html",
+    "t": "1 · Prolactinoma",
+    "s": "first-line"
+   },
+   "prompt": "What is first-line treatment for a symptomatic prolactinoma, even a macroadenoma?",
+   "answer": "A dopamine agonist (cabergoline, or bromocriptine if pregnancy desired) — it shrinks the tumour and restores fertility; surgery is reserved for failures/intolerance."
+  },
+  {
+   "id": "wk26_c04",
+   "sys": "Endo",
+   "topic": "Acromegaly",
+   "type": "qa",
+   "guide": {
+    "f": "W26_01_Pituitary.html",
+    "t": "1 · Acromegaly",
+    "s": "screen/confirm"
+   },
+   "prompt": "How is acromegaly screened and confirmed?",
+   "answer": "Screen with IGF-1; confirm with failure of GH to suppress after an oral glucose load. MRI localizes after biochemical confirmation."
+  },
+  {
+   "id": "wk26_c05",
+   "sys": "Endo",
+   "topic": "Hypopituitarism",
+   "type": "qa",
+   "guide": {
+    "f": "W26_01_Pituitary.html",
+    "t": "1 · Hypopituitarism",
+    "s": "order of loss"
+   },
+   "prompt": "What is the usual order of pituitary hormone loss?",
+   "answer": "GH → LH → FSH → TSH → ACTH → Prolactin ('Go Look For The Adenoma Please')."
+  },
+  {
+   "id": "wk26_c06",
+   "sys": "Endo",
+   "topic": "Thyrotoxicosis",
+   "type": "qa",
+   "guide": {
+    "f": "W26_02_Hyperthyroidism.html",
+    "t": "2 · RAIU",
+    "s": "high vs low"
+   },
+   "prompt": "How does radioiodine uptake separate causes of thyrotoxicosis?",
+   "answer": "High diffuse uptake = Graves'; focal hot = toxic adenoma/TMNG; low uptake = thyroiditis or exogenous hormone."
+  },
+  {
+   "id": "wk26_c07",
+   "sys": "Endo",
+   "topic": "Graves signs",
+   "type": "qa",
+   "guide": {
+    "f": "W26_02_Hyperthyroidism.html",
+    "t": "2 · Graves'",
+    "s": "unique features"
+   },
+   "prompt": "Which findings are unique to Graves' disease?",
+   "answer": "Orbitopathy (proptosis), pretibial myxedema (dermopathy), and a thyroid bruit — from the stimulating TSH-receptor antibody."
+  },
+  {
+   "id": "wk26_c08",
+   "sys": "Endo",
+   "topic": "Thionamides",
+   "type": "qa",
+   "guide": {
+    "f": "W26_02_Hyperthyroidism.html",
+    "t": "2 · Thionamides",
+    "s": "agranulocytosis"
+   },
+   "prompt": "What thionamide side effect must patients be warned about, and what symptoms trigger action?",
+   "answer": "Agranulocytosis — fever or sore throat means stop the drug and get an urgent CBC. (PTU is also more hepatotoxic.)"
+  },
+  {
+   "id": "wk26_c09",
+   "sys": "Endo",
+   "topic": "Levothyroxine",
+   "type": "qa",
+   "guide": {
+    "f": "W26_03_Hypothyroidism_Nodules.html",
+    "t": "3 · Levothyroxine",
+    "s": "administration"
+   },
+   "prompt": "How should levothyroxine be taken?",
+   "answer": "Empty stomach in the morning, wait 30–60 min before food, and separate from iron/calcium by 3–4 hours; recheck TSH 6 weeks after a dose change."
+  },
+  {
+   "id": "wk26_c10",
+   "sys": "Endo",
+   "topic": "Levothyroxine trap",
+   "type": "qa",
+   "guide": {
+    "f": "W26_03_Hypothyroidism_Nodules.html",
+    "t": "3 · Adrenal trap",
+    "s": "cortisol first"
+   },
+   "prompt": "Why screen for adrenal insufficiency before starting levothyroxine?",
+   "answer": "Raising the metabolic rate increases cortisol demand; in unrecognized adrenal insufficiency this can precipitate a fatal adrenal crisis — replace cortisol first."
+  },
+  {
+   "id": "wk26_c11",
+   "sys": "Endo",
+   "topic": "Nodules",
+   "type": "qa",
+   "guide": {
+    "f": "W26_03_Hypothyroidism_Nodules.html",
+    "t": "3 · Nodules",
+    "s": "hot vs cold"
+   },
+   "prompt": "How do you manage a hot vs a cold thyroid nodule?",
+   "answer": "A hot nodule is almost never cancer → no biopsy. A cold (photopenic) nodule carries malignancy risk → FNA if ultrasound features are suspicious."
+  },
+  {
+   "id": "wk26_c12",
+   "sys": "Endo",
+   "topic": "Addison's",
+   "type": "qa",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Addison's",
+    "s": "hyperpigmentation"
+   },
+   "prompt": "Why are patients with primary adrenal insufficiency hyperpigmented?",
+   "answer": "Low cortisol removes negative feedback → high ACTH; ACTH shares the POMC precursor with MSH and stimulates melanocortin receptors in skin."
+  },
+  {
+   "id": "wk26_c13",
+   "sys": "Endo",
+   "topic": "Addison's confirm",
+   "type": "qa",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Addison's",
+    "s": "stim test"
+   },
+   "prompt": "What confirms primary adrenal insufficiency?",
+   "answer": "An ACTH (Cortrosyn) stimulation test — a normal response is cortisol rising >500 nmol/L; failure to rise confirms the diagnosis. Baseline shows low cortisol with high ACTH/renin."
+  },
+  {
+   "id": "wk26_c14",
+   "sys": "Endo",
+   "topic": "Cushing's",
+   "type": "qa",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Cushing's",
+    "s": "screening trio"
+   },
+   "prompt": "What are the screening tests for Cushing syndrome (need 2 of 3)?",
+   "answer": "24-h urine free cortisol, midnight salivary cortisol, and the 1-mg overnight dexamethasone suppression test (cortisol fails to suppress)."
+  },
+  {
+   "id": "wk26_c15",
+   "sys": "Endo",
+   "topic": "Pheo",
+   "type": "qa",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Pheo",
+    "s": "diagnosis + prep"
+   },
+   "prompt": "How is pheochromocytoma diagnosed and prepared for surgery?",
+   "answer": "24-h urinary metanephrines/catecholamines; pre-op alpha-blockade first (doxazosin/phenoxybenzamine), then beta-blockade, to prevent intraoperative crisis."
+  },
+  {
+   "id": "wk26_c16",
+   "sys": "Endo",
+   "topic": "Emergencies",
+   "type": "qa",
+   "guide": {
+    "f": "W26_05_Endocrine_Emergencies.html",
+    "t": "5 · Crises",
+    "s": "glucocorticoids"
+   },
+   "prompt": "Which endocrine emergencies include glucocorticoids in treatment?",
+   "answer": "Pituitary apoplexy, thyroid storm, myxedema coma, and adrenal crisis — when a stressed endocrine patient is unstable, steroids are rarely wrong."
+  },
+  {
+   "id": "wk26_c17",
+   "sys": "Endo",
+   "topic": "Prolactin threshold",
+   "type": "mcq",
+   "guide": {
+    "f": "W26_01_Pituitary.html",
+    "t": "1 · Prolactin",
+    "s": "level interpretation"
+   },
+   "prompt": "A prolactin level most strongly suggesting a true prolactinoma is:",
+   "options": [
+    "< 50 µg/L",
+    "~100 µg/L",
+    "> 250 µg/L",
+    "Any elevation"
+   ],
+   "correct": 2
+  },
+  {
+   "id": "wk26_c18",
+   "sys": "Endo",
+   "topic": "Acromegaly screen",
+   "type": "mcq",
+   "guide": {
+    "f": "W26_01_Pituitary.html",
+    "t": "1 · Acromegaly",
+    "s": "screen"
+   },
+   "prompt": "Initial screening test for acromegaly:",
+   "options": [
+    "Random GH",
+    "IGF-1",
+    "Pituitary MRI",
+    "TSH"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk26_c19",
+   "sys": "Endo",
+   "topic": "Graves uptake",
+   "type": "mcq",
+   "guide": {
+    "f": "W26_02_Hyperthyroidism.html",
+    "t": "2 · RAIU",
+    "s": "Graves pattern"
+   },
+   "prompt": "Graves' disease shows what pattern on radioiodine uptake?",
+   "options": [
+    "Low uptake",
+    "Focal hot nodule",
+    "Diffuse high uptake",
+    "Patchy cold areas"
+   ],
+   "correct": 2
+  },
+  {
+   "id": "wk26_c20",
+   "sys": "Endo",
+   "topic": "Pregnancy thionamide",
+   "type": "mcq",
+   "guide": {
+    "f": "W26_02_Hyperthyroidism.html",
+    "t": "2 · Thionamides",
+    "s": "first trimester"
+   },
+   "prompt": "Preferred antithyroid drug in the first trimester of pregnancy:",
+   "options": [
+    "Methimazole",
+    "Propylthiouracil",
+    "Radioactive iodine",
+    "Carbimazole"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk26_c21",
+   "sys": "Endo",
+   "topic": "Hypothyroid confirm",
+   "type": "mcq",
+   "guide": {
+    "f": "W26_03_Hypothyroidism_Nodules.html",
+    "t": "3 · Hypothyroidism",
+    "s": "confirm"
+   },
+   "prompt": "After a high TSH, the confirmatory test for primary hypothyroidism is:",
+   "options": [
+    "Free T3",
+    "Free T4",
+    "Total T4",
+    "Reverse T3"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk26_c22",
+   "sys": "Endo",
+   "topic": "Cushing ACTH",
+   "type": "mcq",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Cushing's",
+    "s": "localize"
+   },
+   "prompt": "In confirmed Cushing's, a LOW ACTH indicates the source is:",
+   "options": [
+    "Pituitary",
+    "Ectopic",
+    "Adrenal",
+    "Hypothalamic"
+   ],
+   "correct": 2
+  },
+  {
+   "id": "wk26_c23",
+   "sys": "Endo",
+   "topic": "Conn's labs",
+   "type": "mcq",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Conn's",
+    "s": "biochemistry"
+   },
+   "prompt": "Primary aldosteronism shows:",
+   "options": [
+    "High aldosterone, low renin",
+    "Low aldosterone, high renin",
+    "High aldosterone, high renin",
+    "Low aldosterone, low renin"
+   ],
+   "correct": 0
+  },
+  {
+   "id": "wk26_c24",
+   "sys": "Endo",
+   "topic": "Pheo sequence",
+   "type": "mcq",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Pheo",
+    "s": "blockade order"
+   },
+   "prompt": "Correct pre-op blockade order for pheochromocytoma:",
+   "options": [
+    "Beta then alpha",
+    "Alpha then beta",
+    "Beta only",
+    "Calcium channel blocker only"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk26_c25",
+   "sys": "Endo",
+   "topic": "Crisis steroid",
+   "type": "mcq",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Crisis",
+    "s": "assay-safe steroid"
+   },
+   "prompt": "Which steroid stabilizes adrenal crisis without disturbing a pending cortisol assay?",
+   "options": [
+    "Hydrocortisone",
+    "Prednisone",
+    "Dexamethasone",
+    "Cortisone"
+   ],
+   "correct": 2
+  },
+  {
+   "id": "wk26_c26",
+   "sys": "Endo",
+   "topic": "Addison electrolytes",
+   "type": "mcq",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Addison's",
+    "s": "labs"
+   },
+   "prompt": "The classic electrolyte pattern of Addison's disease is:",
+   "options": [
+    "High Na, low K",
+    "Low Na, high K",
+    "High Na, high K",
+    "Low Na, low K"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk26_c27",
+   "sys": "Endo",
+   "topic": "Graves-specific",
+   "type": "multi",
+   "guide": {
+    "f": "W26_02_Hyperthyroidism.html",
+    "t": "2 · Graves'",
+    "s": "unique signs"
+   },
+   "prompt": "Select findings UNIQUE to Graves' disease:",
+   "options": [
+    "Orbitopathy (proptosis)",
+    "Pretibial myxedema",
+    "Weight loss",
+    "Thyroid bruit",
+    "Heat intolerance"
+   ],
+   "correct": [
+    0,
+    1,
+    3
+   ]
+  },
+  {
+   "id": "wk26_c28",
+   "sys": "Endo",
+   "topic": "Cushing screen",
+   "type": "multi",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Cushing's",
+    "s": "screening tests"
+   },
+   "prompt": "Select accepted screening tests for Cushing syndrome:",
+   "options": [
+    "24-h urine free cortisol",
+    "Midnight salivary cortisol",
+    "1-mg overnight dexamethasone suppression",
+    "Random morning cortisol",
+    "Random ACTH alone"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "id": "wk26_c29",
+   "sys": "Endo",
+   "topic": "Pheo syndromes",
+   "type": "multi",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Pheo",
+    "s": "genetic clues"
+   },
+   "prompt": "Select skin/exam clues to a hereditary pheochromocytoma syndrome:",
+   "options": [
+    "Café-au-lait spots",
+    "Axillary freckling",
+    "Neurofibromas",
+    "Mucosal neuromas",
+    "Pretibial myxedema"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk26_c30",
+   "sys": "Endo",
+   "topic": "Low-uptake causes",
+   "type": "multi",
+   "guide": {
+    "f": "W26_02_Hyperthyroidism.html",
+    "t": "2 · RAIU",
+    "s": "low uptake"
+   },
+   "prompt": "Select causes of thyrotoxicosis with LOW radioiodine uptake:",
+   "options": [
+    "Subacute (viral) thyroiditis",
+    "Post-partum thyroiditis",
+    "Exogenous hormone ingestion",
+    "Graves' disease",
+    "Toxic adenoma"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "id": "wk26_c31",
+   "sys": "Endo",
+   "topic": "Drug-induced hypothyroid",
+   "type": "multi",
+   "guide": {
+    "f": "W26_03_Hypothyroidism_Nodules.html",
+    "t": "3 · Hypothyroidism",
+    "s": "drug causes"
+   },
+   "prompt": "Select drugs that can cause hypothyroidism:",
+   "options": [
+    "Lithium",
+    "Amiodarone",
+    "Levothyroxine",
+    "Metoclopramide"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  {
+   "id": "wk26_c32",
+   "sys": "Endo",
+   "topic": "Cortex zones",
+   "type": "cloze",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Anatomy",
+    "s": "GFR mnemonic"
+   },
+   "text": "Adrenal cortex: glomerulosa → {{aldosterone}}, fasciculata → {{cortisol}}, reticularis → {{androgens}}.",
+   "explain": "'Salt, sugar, sex' from outer to inner; the medulla makes catecholamines."
+  },
+  {
+   "id": "wk26_c33",
+   "sys": "Endo",
+   "topic": "Addison stim",
+   "type": "cloze",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Stim test",
+    "s": "cut-off"
+   },
+   "text": "On the ACTH stimulation test, a normal response is cortisol rising above {{500}} nmol/L at 60 minutes.",
+   "explain": "Failure to rise confirms adrenal insufficiency."
+  },
+  {
+   "id": "wk26_c34",
+   "sys": "Endo",
+   "topic": "Acromegaly confirm",
+   "type": "cloze",
+   "guide": {
+    "f": "W26_01_Pituitary.html",
+    "t": "1 · Acromegaly",
+    "s": "confirm"
+   },
+   "text": "Acromegaly is confirmed when {{GH}} fails to suppress after an oral {{glucose}} load.",
+   "explain": "IGF-1 screens; the suppression test confirms."
+  },
+  {
+   "id": "wk26_c35",
+   "sys": "Endo",
+   "topic": "Levothyroxine timing",
+   "type": "cloze",
+   "guide": {
+    "f": "W26_03_Hypothyroidism_Nodules.html",
+    "t": "3 · Monitoring",
+    "s": "recheck"
+   },
+   "text": "After a levothyroxine dose change, recheck {{TSH}} in {{6}} weeks; in pregnancy requirements rise ~{{30}}%.",
+   "explain": "Reflects the time to reach steady state."
+  },
+  {
+   "id": "wk26_c36",
+   "sys": "Endo",
+   "topic": "Pheo blockade",
+   "type": "cloze",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Pheo",
+    "s": "sequence"
+   },
+   "text": "Pre-op pheochromocytoma blockade gives an {{alpha}}-blocker before a {{beta}}-blocker.",
+   "explain": "Beta-first risks unopposed alpha vasoconstriction → crisis."
+  },
+  {
+   "id": "wk26_c37",
+   "sys": "Endo",
+   "topic": "Thyrotoxicosis workup",
+   "type": "order",
+   "guide": {
+    "f": "W26_02_Hyperthyroidism.html",
+    "t": "2 · Workup",
+    "s": "sequence"
+   },
+   "prompt": "Order the workup of suspected thyrotoxicosis:",
+   "items": [
+    "Check TSH (suppressed)",
+    "Confirm with free T4 / free T3",
+    "RAIU scan for etiology",
+    "Direct treatment to the cause"
+   ]
+  },
+  {
+   "id": "wk26_c38",
+   "sys": "Endo",
+   "topic": "Thyroid storm",
+   "type": "order",
+   "guide": {
+    "f": "W26_05_Endocrine_Emergencies.html",
+    "t": "5 · Storm",
+    "s": "agent order"
+   },
+   "prompt": "Order thyroid-storm pharmacotherapy:",
+   "items": [
+    "Beta-blocker for adrenergic symptoms",
+    "Thionamide (PTU) to block synthesis",
+    "Iodine AFTER the thionamide",
+    "Glucocorticoids + treat the trigger"
+   ]
+  },
+  {
+   "id": "wk26_c39",
+   "sys": "Endo",
+   "topic": "Panhypopituitary replacement",
+   "type": "order",
+   "guide": {
+    "f": "W26_03_Hypothyroidism_Nodules.html",
+    "t": "3 · Replacement",
+    "s": "cortisol first"
+   },
+   "prompt": "Order hormone replacement in central hypothyroidism + adrenal insufficiency:",
+   "items": [
+    "Replace glucocorticoid (hydrocortisone) first",
+    "Then start levothyroxine",
+    "Titrate to symptoms / labs",
+    "Recheck TSH and cortisol adequacy"
+   ]
+  },
+  {
+   "id": "wk26_c40",
+   "sys": "Endo",
+   "topic": "Adenoma → marker",
+   "type": "match",
+   "guide": {
+    "f": "W26_01_Pituitary.html",
+    "t": "1 · Adenomas",
+    "s": "screen tests"
+   },
+   "prompt": "Match the pituitary adenoma to its screening test/treatment:",
+   "pairs": [
+    [
+     "Prolactinoma",
+     "Prolactin → dopamine agonist"
+    ],
+    [
+     "Acromegaly",
+     "IGF-1 → surgery / octreotide"
+    ],
+    [
+     "Cushing's disease",
+     "ACTH-dependent hypercortisolism"
+    ],
+    [
+     "Non-functioning macroadenoma",
+     "Mass effect / stalk effect"
+    ]
+   ]
+  },
+  {
+   "id": "wk26_c41",
+   "sys": "Endo",
+   "topic": "Disorder → lab",
+   "type": "match",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Adrenal",
+    "s": "biochemistry"
+   },
+   "prompt": "Match the adrenal disorder to its hallmark lab:",
+   "pairs": [
+    [
+     "Addison's",
+     "Low cortisol, high ACTH; Na low/K high"
+    ],
+    [
+     "Cushing's (adrenal)",
+     "High cortisol, low ACTH"
+    ],
+    [
+     "Conn's",
+     "High aldosterone, low renin; low K"
+    ],
+    [
+     "Pheochromocytoma",
+     "High urinary metanephrines"
+    ]
+   ]
+  },
+  {
+   "id": "wk26_c42",
+   "sys": "Endo",
+   "topic": "Emergency → first move",
+   "type": "match",
+   "guide": {
+    "f": "W26_05_Endocrine_Emergencies.html",
+    "t": "5 · Crises",
+    "s": "first move"
+   },
+   "prompt": "Match the emergency to its first move:",
+   "pairs": [
+    [
+     "Pituitary apoplexy",
+     "IV hydrocortisone + decompression"
+    ],
+    [
+     "Thyroid storm",
+     "Beta-blocker + PTU, then iodine"
+    ],
+    [
+     "Myxedema coma",
+     "IV thyroid hormone + glucocorticoid"
+    ],
+    [
+     "Adrenal crisis",
+     "IV saline + hydrocortisone"
+    ]
+   ]
+  },
+  {
+   "id": "wk26_c43",
+   "sys": "Endo",
+   "topic": "Drug → target",
+   "type": "match",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Therapeutics",
+    "s": "drug actions"
+   },
+   "prompt": "Match the drug to its action:",
+   "pairs": [
+    [
+     "Cabergoline",
+     "D2 agonist — shrinks prolactinoma"
+    ],
+    [
+     "Methimazole",
+     "Inhibits thyroid peroxidase"
+    ],
+    [
+     "Spironolactone",
+     "Aldosterone receptor antagonist"
+    ],
+    [
+     "Doxazosin",
+     "Alpha-blocker for pheo prep"
+    ],
+    [
+     "Fludrocortisone",
+     "Mineralocorticoid replacement"
+    ]
+   ]
+  },
+  {
+   "id": "wk26_c44",
+   "sys": "Endo",
+   "topic": "Hook vs stalk",
+   "type": "qa",
+   "guide": {
+    "f": "W26_01_Pituitary.html",
+    "t": "1 · Assay artifacts",
+    "s": "hook vs stalk"
+   },
+   "prompt": "Distinguish the hook effect from the stalk effect.",
+   "answer": "Hook effect: a very high prolactin saturates the assay → falsely LOW report from a large prolactinoma. Stalk effect: a non-functioning mass compresses the stalk, blocking dopamine → mildly high prolactin (<200)."
+  },
+  {
+   "id": "wk26_c45",
+   "sys": "Endo",
+   "topic": "Apathetic hyperthyroid",
+   "type": "qa",
+   "guide": {
+    "f": "W26_02_Hyperthyroidism.html",
+    "t": "2 · Elderly",
+    "s": "atypical"
+   },
+   "prompt": "How can hyperthyroidism present atypically in older adults?",
+   "answer": "As 'apathetic' hyperthyroidism — weight loss, atrial fibrillation, or depression rather than classic adrenergic features."
+  },
+  {
+   "id": "wk26_c46",
+   "sys": "Endo",
+   "topic": "Incidentaloma",
+   "type": "qa",
+   "guide": {
+    "f": "W26_04_Adrenal.html",
+    "t": "4 · Incidentaloma",
+    "s": "workup"
+   },
+   "prompt": "What two questions must every adrenal incidentaloma answer?",
+   "answer": "Is it functional (screen for cortisol, catecholamine, and—if hypertensive—aldosterone excess)? And is it malignant (size >4 cm, attenuation >10 HU, heterogeneity raise concern)?"
+  },
+  {
+   "id": "wk26_c47",
+   "sys": "Endo",
+   "topic": "TFT grid",
+   "type": "qa",
+   "guide": {
+    "f": "W26_06_TFT_Interpretation.html",
+    "t": "6 · TFT grid",
+    "s": "interpretation"
+   },
+   "prompt": "What does a high TSH with a normal free T4 indicate?",
+   "answer": "Subclinical hypothyroidism. Treat if TSH ≥10, symptomatic, pregnant/planning pregnancy with positive anti-TPO, or a goiter; otherwise monitor."
+  },
+  {
+   "id": "wk26_c48",
+   "sys": "Endo",
+   "topic": "Subclinical hyper",
+   "type": "mcq",
+   "guide": {
+    "f": "W26_06_TFT_Interpretation.html",
+    "t": "6 · Subclinical",
+    "s": "treat when"
+   },
+   "prompt": "Subclinical hyperthyroidism most warrants treatment when there is:",
+   "options": [
+    "TSH 0.3 and no symptoms",
+    "Persistent TSH <0.1 with atrial fibrillation",
+    "A single low TSH during a viral illness",
+    "Normal TSH"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk26_c49",
+   "sys": "Endo",
+   "topic": "Sick euthyroid",
+   "type": "qa",
+   "guide": {
+    "f": "W26_06_TFT_Interpretation.html",
+    "t": "6 · Sick-euthyroid",
+    "s": "don't chase"
+   },
+   "prompt": "Why avoid screening thyroid function in acutely ill inpatients?",
+   "answer": "Non-thyroidal illness lowers T3 (and later T4) with variable TSH, mimicking thyroid disease; you'll chase an artifact. Recheck after recovery if truly suspected."
+  },
+  {
+   "id": "wk26_c50",
+   "sys": "Endo",
+   "topic": "DI localization",
+   "type": "mcq",
+   "guide": {
+    "f": "W26_07_Posterior_Pituitary.html",
+    "t": "7 · DI",
+    "s": "DDAVP test"
+   },
+   "prompt": "After water deprivation, giving desmopressin concentrates the urine. This indicates:",
+   "options": [
+    "Nephrogenic DI",
+    "Central DI",
+    "SIADH",
+    "Primary polydipsia only"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk26_c51",
+   "sys": "Endo",
+   "topic": "Nephrogenic DI",
+   "type": "qa",
+   "guide": {
+    "f": "W26_07_Posterior_Pituitary.html",
+    "t": "7 · Nephrogenic DI",
+    "s": "causes"
+   },
+   "prompt": "Name common causes of nephrogenic diabetes insipidus.",
+   "answer": "Lithium, hypercalcemia, hypokalemia, and hereditary ADH-receptor/aquaporin defects — the kidney cannot respond to ADH."
+  },
+  {
+   "id": "wk26_c52",
+   "sys": "Endo",
+   "topic": "SIADH",
+   "type": "qa",
+   "guide": {
+    "f": "W26_07_Posterior_Pituitary.html",
+    "t": "7 · SIADH",
+    "s": "picture"
+   },
+   "prompt": "What defines SIADH biochemically, and how fast can you correct the sodium?",
+   "answer": "Euvolemic hyponatremia with inappropriately concentrated urine (urine osm > serum, urine Na >20–40), low serum osmolality, normal thyroid/adrenal/renal function. Correct ≤8–10 mmol/L per 24 h to avoid osmotic demyelination."
+  },
+  {
+   "id": "wk26_c53",
+   "sys": "Endo",
+   "topic": "Sodium correction",
+   "type": "cloze",
+   "guide": {
+    "f": "W26_07_Posterior_Pituitary.html",
+    "t": "7 · Correction",
+    "s": "limit"
+   },
+   "text": "Raise serum sodium by no more than ~{{8}}–{{10}} mmol/L per 24 h to avoid central pontine {{myelinolysis}}.",
+   "explain": "Overcorrection of chronic hyponatremia causes osmotic demyelination."
+  },
+  {
+   "id": "wk26_c54",
+   "sys": "Endo",
+   "topic": "MEN1",
+   "type": "mcq",
+   "guide": {
+    "f": "W26_08_MEN_Syndromes.html",
+    "t": "8 · MEN1",
+    "s": "3 Ps"
+   },
+   "prompt": "MEN1 classically involves which trio?",
+   "options": [
+    "Parathyroid, pancreas, pituitary",
+    "Thyroid, adrenal, parathyroid",
+    "Pituitary, thyroid, gonad",
+    "Pancreas, adrenal, thyroid"
+   ],
+   "correct": 0
+  },
+  {
+   "id": "wk26_c55",
+   "sys": "Endo",
+   "topic": "MEN2",
+   "type": "qa",
+   "guide": {
+    "f": "W26_08_MEN_Syndromes.html",
+    "t": "8 · MEN2",
+    "s": "RET + pheo"
+   },
+   "prompt": "What gene drives MEN2, and what must be excluded before any surgery?",
+   "answer": "The RET proto-oncogene. Always exclude (and treat first) pheochromocytoma before thyroid/parathyroid surgery — with alpha-then-beta blockade — to avoid intraoperative hypertensive crisis."
+  },
+  {
+   "id": "wk26_c56",
+   "sys": "Endo",
+   "topic": "MEN syndromes",
+   "type": "match",
+   "guide": {
+    "f": "W26_08_MEN_Syndromes.html",
+    "t": "8 · MEN",
+    "s": "match"
+   },
+   "prompt": "Match the MEN syndrome to a defining feature:",
+   "pairs": [
+    [
+     "MEN1",
+     "Parathyroid + pancreas + pituitary"
+    ],
+    [
+     "MEN2A",
+     "Medullary thyroid Ca + pheo + parathyroid"
+    ],
+    [
+     "MEN2B",
+     "Mucosal neuromas / marfanoid + MTC + pheo"
+    ],
+    [
+     "Medullary thyroid cancer",
+     "Calcitonin marker"
+    ]
+   ]
+  }
+ ],
+ "guides": [
+  {
+   "file": "W26_01_Pituitary.html",
+   "title": "Week 26 · 1 The Pituitary Axis &amp; Adenomas",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>The Pituitary Axis &amp;amp; Adenomas</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Pituitary</div><h1>The Pituitary Axis &amp;amp; Adenomas</h1></div><div class='r'>Week 26 &middot; Endocrine II &mdash; Pituitary, Thyroid &amp; Adrenal<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Mass effect and the cranial-nerve exam, the hyperfunctioning adenomas (prolactinoma, acromegaly), and how the gland fails.</p>\n<h2>Mass effect &mdash; what a sellar tumour compresses</h2>\n<table>\n<tr><th>Structure</th><th>Finding</th></tr>\n<tr><td><b>Optic chiasm</b> (CN II)</td><td>Bitemporal hemianopsia, &darr; acuity &amp; red desaturation, a <b>RAPD</b> (swinging-flashlight: both pupils dilate when light moves to the affected eye), pale disc</td></tr>\n<tr><td><b>Cavernous sinus</b> (CN III, IV, VI)</td><td>Diplopia, abnormal extra-ocular movements</td></tr>\n<tr><td>CN V1/V2</td><td>Forehead/cheek numbness</td></tr>\n<tr><td><b>Stalk effect</b></td><td>Loss of tonic dopamine inhibition &rarr; mildly &uarr; prolactin + hypofunction of other axes</td></tr>\n</table>\n<h2>Prolactinoma / hyperprolactinemia</h2>\n<p>Prolactin suppresses GnRH pulsatility &rarr; central hypogonadism: women get oligo/amenorrhea, galactorrhea, infertility; men get low libido, ED.</p>\n<div class='band warn'><div class='t'>Rule out secondary causes BEFORE imaging</div>\nCheck &beta;-hCG (pregnancy), <b>TSH</b> (hypothyroidism &rarr; high TRH stimulates prolactin), and renal/liver function. Stop dopamine antagonists (<b>metoclopramide</b>, antipsychotics). Med/hypothyroid causes are usually &lt;100 &micro;g/L; <b>&gt;250 &micro;g/L</b> suggests a true prolactinoma. MRI only after secondary causes excluded or with neuro symptoms.</div>\n<ul>\n<li><b>Hook effect:</b> a huge prolactin level overwhelms the assay &rarr; <b>falsely low</b> report from a large tumour.</li>\n<li><b>Treatment:</b> dopamine agonists (<b>cabergoline</b>, bromocriptine) shrink the tumour and restore fertility &mdash; first-line even for macroadenomas. Bromocriptine if pregnancy desired.</li>\n</ul>\n<h2>Acromegaly (GH excess)</h2>\n<p>Enlarging hands/feet/jaw (prognathism), carpal tunnel, OSA, arthritis, colonic polyps, diabetes/HTN. <b>Screen with IGF-1</b>; confirm with an oral glucose load that <b>fails to suppress GH</b>. Treat: transsphenoidal surgery; medical = somatostatin analogue (<b>octreotide</b>), GH-receptor antagonist (pegvisomant), or a dopamine agonist.</p>\n<h2>Hypopituitarism</h2>\n<p>Order of hormone loss: <b>Go Look For The Adenoma Please</b> (GH, LH, FSH, TSH, ACTH, Prolactin). Work up with 8 AM paired levels (TSH+fT4, ACTH+cortisol); stimulation tests if equivocal. Replace target hormones (levothyroxine, hydrocortisone, sex steroids, GH, DDAVP).</p>\n<div class='key'>Bitemporal hemianopsia + a sellar mass = optic-chiasm compression. A mildly high prolactin with a big non-functioning mass = stalk effect; an unexpectedly low prolactin in a big tumour = hook effect.</div>\n</div>"
+  },
+  {
+   "file": "W26_02_Hyperthyroidism.html",
+   "title": "Week 26 · 2 Thyrotoxicosis &amp; Hyperthyroidism",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Thyrotoxicosis &amp;amp; Hyperthyroidism</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Overactive</div><h1>Thyrotoxicosis &amp;amp; Hyperthyroidism</h1></div><div class='r'>Week 26 &middot; Endocrine II &mdash; Pituitary, Thyroid &amp; Adrenal<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>High vs low radioiodine uptake, Graves' unique signs, and the thionamides — including the pregnancy and agranulocytosis rules.</p>\n<h2>Thyrotoxicosis vs hyperthyroidism</h2>\n<p><b>Thyrotoxicosis</b> = high circulating fT4/fT3 from any source. <b>Hyperthyroidism</b> = the gland over-producing. The radioiodine uptake (RAIU) scan splits them.</p>\n<table>\n<tr><th>High uptake (gland making hormone)</th><th>Low uptake (no new synthesis)</th></tr>\n<tr><td><b>Graves'</b> (diffuse) — TSH-receptor stimulating antibody; young women</td><td><b>Subacute thyroiditis</b> — pre-formed hormone leak (painful post-viral, or painless post-partum)</td></tr>\n<tr><td><b>Toxic adenoma / TMNG</b> (focal \"hot\") — autonomous, older patients</td><td><b>Exogenous</b> thyroid hormone ingestion</td></tr>\n</table>\n<h2>Presentation</h2>\n<p>Weight loss with &uarr; appetite, heat intolerance, tremor, palpitations, anxiety, hyperdefecation, proximal weakness. <b>Graves'-specific:</b> orbitopathy (proptosis), pretibial myxedema, thyroid bruit. Elderly may be \"apathetic\" or present only with <b>atrial fibrillation</b>.</p>\n<h2>Investigations</h2>\n<ul>\n<li>Screen: <b>suppressed TSH</b>. Confirm: high fT4 and fT3 (fT3 catches T3-toxicosis).</li>\n<li>Etiology: <b>RAIU scan</b> — diffuse high = Graves'; focal hot = adenoma/TMNG; low = thyroiditis/exogenous.</li>\n</ul>\n<h2>Treatment</h2>\n<table>\n<tr><th>Tool</th><th>Role</th></tr>\n<tr><td><b>Beta-blocker</b> (propranolol)</td><td>Rapid symptom control (tremor, tachycardia) while definitive therapy works</td></tr>\n<tr><td><b>Thionamides</b> — methimazole (preferred), PTU</td><td>Inhibit thyroid peroxidase &rarr; block synthesis</td></tr>\n<tr><td><b>Radioactive iodine</b></td><td>Ablates follicular cells; high rate of later hypothyroidism; <b>contraindicated in pregnancy</b> (need negative &beta;-hCG)</td></tr>\n</table>\n<div class='band warn'><div class='t'>Two thionamide rules that get tested</div>\n<b>Agranulocytosis</b> — rare but life-threatening: any fever/sore throat &rarr; stop drug, check CBC, urgent care. <b>Pregnancy</b> — methimazole is teratogenic in the <b>first trimester</b>, so use <b>PTU</b> early; PTU is more hepatotoxic.</div>\n<div class='key'>Thyroiditis is self-limited: thionamides don't help (no synthesis happening) — treat with NSAIDs + a beta-blocker.</div>\n</div>"
+  },
+  {
+   "file": "W26_03_Hypothyroidism_Nodules.html",
+   "title": "Week 26 · 3 Hypothyroidism &amp; Thyroid Nodules",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Hypothyroidism &amp;amp; Thyroid Nodules</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Underactive &amp; lumps</div><h1>Hypothyroidism &amp;amp; Thyroid Nodules</h1></div><div class='r'>Week 26 &middot; Endocrine II &mdash; Pituitary, Thyroid &amp; Adrenal<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Hashimoto's and the levothyroxine rules (including the adrenal-crisis trap), plus the hot-vs-cold nodule workup.</p>\n<h2>Hypothyroidism</h2>\n<p><b>Causes:</b> Hashimoto's (most common), post-RAI/surgery, iodine deficiency, drugs (<b>lithium, amiodarone</b>). <b>Presentation:</b> fatigue, cold intolerance, weight gain, dry skin, constipation, <b>delayed reflex relaxation</b>, bradycardia, diastolic HTN; elderly may present as confusion/failure-to-thrive.</p>\n<ul>\n<li><b>Screen:</b> elevated TSH. <b>Confirm:</b> low fT4. (Don't order fT3 — unreliable in hypothyroidism.)</li>\n<li><b>Anti-TPO antibodies</b> identify Hashimoto's etiology (not needed routinely if TSH clearly high).</li>\n</ul>\n<h2>Levothyroxine rules</h2>\n<table>\n<tr><th>Rule</th><th>Detail</th></tr>\n<tr><td>Dose</td><td>~1.6 mcg/kg/day; recheck TSH in <b>6 weeks</b> after changes</td></tr>\n<tr><td>Administration</td><td>Empty stomach AM, wait 30&ndash;60 min before food; separate from iron/calcium by 3&ndash;4 h</td></tr>\n<tr><td>Elderly / cardiac</td><td><b>Start low (25&ndash;50 mcg), go slow</b></td></tr>\n<tr><td>Pregnancy</td><td>Requirements rise ~30%</td></tr>\n</table>\n<div class='band warn'><div class='t'>The adrenal-crisis trap</div>\nIf adrenal insufficiency is suspected, <b>screen/replace cortisol BEFORE starting levothyroxine</b> — raising the metabolic rate increases cortisol demand and can precipitate a fatal adrenal crisis.</div>\n<h2>Thyroid nodules</h2>\n<ul>\n<li>Don't reflexively ultrasound abnormal labs unless there's a palpable abnormality.</li>\n<li>If TSH is <b>suppressed</b> &rarr; RAIU scan. A <b>\"hot\" nodule is almost never cancer</b> &mdash; no biopsy.</li>\n<li>A <b>\"cold\" (photopenic) nodule</b> carries malignancy risk &rarr; <b>FNA</b> if ultrasound features are suspicious.</li>\n</ul>\n<div class='key'>Sequence for a thyrotoxic nodule: suppressed TSH &rarr; RAIU; a focal hot nodule explains the thyrotoxicosis and spares the patient a biopsy.</div>\n</div>"
+  },
+  {
+   "file": "W26_04_Adrenal.html",
+   "title": "Week 26 · 4 Adrenal Disorders",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Adrenal Disorders</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Adrenal</div><h1>Adrenal Disorders</h1></div><div class='r'>Week 26 &middot; Endocrine II &mdash; Pituitary, Thyroid &amp; Adrenal<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Addison's vs Cushing's, the ACTH-splits-the-cause logic, Conn's and pheochromocytoma — including the alpha-before-beta rule.</p>\n<h2>Cortex anatomy (GFR &rarr; salt, sugar, sex)</h2>\n<p>Zona <b>Glomerulosa</b> &rarr; aldosterone; zona <b>Fasciculata</b> &rarr; cortisol; zona <b>Reticularis</b> &rarr; adrenal androgens. Medulla (neural crest) &rarr; catecholamines.</p>\n<h2>Primary adrenal insufficiency (Addison's)</h2>\n<ul>\n<li><b>Cause:</b> usually autoimmune (often with Hashimoto's/vitiligo); also TB, HIV, hemorrhage.</li>\n<li><b>Clues:</b> fatigue, weight loss, hypotension; <b>hyperpigmentation</b> (high ACTH/MSH from POMC) in creases/scars/buccal mucosa. Labs: <b>hyponatremia + hyperkalemia</b>, hypoglycemia.</li>\n<li><b>Confirm:</b> low AM cortisol with high ACTH/renin; <b>Cortrosyn (ACTH) stim</b> — cortisol should rise &gt;500 nmol/L.</li>\n</ul>\n<div class='band warn'><div class='t'>Adrenal crisis</div>\nDon't wait for tests: IV saline + <b>IV hydrocortisone</b>. If the stim test isn't done yet, use <b>dexamethasone</b> (doesn't cross-react with the cortisol assay). Maintenance: hydrocortisone + <b>fludrocortisone</b>; sick-day rule = double/triple the steroid, ER if vomiting.</div>\n<h2>Cushing syndrome (hypercortisolism)</h2>\n<p>Most common cause = <b>exogenous steroids</b>. Endogenous: pituitary (Cushing's <b>disease</b>, high ACTH), adrenal tumour (low ACTH), or ectopic ACTH. Features: central obesity, moon face, buffalo hump, purple striae, thin skin, proximal weakness, osteoporosis.</p>\n<ul>\n<li><b>Confirm</b> (need 2 of 3): 24-h urine free cortisol, midnight salivary cortisol, 1-mg overnight <b>dexamethasone suppression</b> (fails to suppress).</li>\n<li><b>ACTH splits the cause:</b> high/normal &rarr; pituitary or ectopic; <b>low &rarr; adrenal</b>.</li>\n</ul>\n<h2>Primary aldosteronism (Conn's)</h2>\n<p>Refractory HTN + <b>hypokalemia</b>; high <b>aldosterone-to-renin ratio</b>. Treat: adenoma &rarr; surgery; medical &rarr; aldosterone antagonist (<b>spironolactone</b>, eplerenone) or ENaC blocker (amiloride).</p>\n<h2>Pheochromocytoma</h2>\n<p>Triad: <b>headache, palpitations, perspiration</b> + paroxysmal HTN. Up to 50% germline (MEN2B — mucosal neuromas/marfanoid; NF1 — caf&eacute;-au-lait/neurofibromas). Diagnose with <b>24-h urinary metanephrines</b>.</p>\n<div class='band warn'><div class='t'>Alpha before beta</div>\nPre-op: start an <b>&alpha;-blocker (doxazosin / phenoxybenzamine) FIRST</b>, then add a beta-blocker. Beta-blockade alone leaves unopposed &alpha; vasoconstriction &rarr; hypertensive crisis.</div>\n</div>"
+  },
+  {
+   "file": "W26_05_Endocrine_Emergencies.html",
+   "title": "Week 26 · 5 Endocrine Emergencies",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Endocrine Emergencies</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Crises</div><h1>Endocrine Emergencies</h1></div><div class='r'>Week 26 &middot; Endocrine II &mdash; Pituitary, Thyroid &amp; Adrenal<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The five endocrine emergencies of this week — recognition and the first moves for each.</p>\n<h2>The five to recognise instantly</h2>\n<table>\n<tr><th>Emergency</th><th>Picture</th><th>First moves</th></tr>\n<tr><td><b>Pituitary apoplexy</b></td><td>Hemorrhage into a macroadenoma: \"worst headache,\" visual loss, CN palsies, hypotension</td><td>Hemodynamic support, <b>IV hydrocortisone</b>, consider surgical decompression</td></tr>\n<tr><td><b>Thyroid storm</b></td><td>Severe thyrotoxicosis: fever, heart failure, vomiting, agitation</td><td><b>Beta-blocker, PTU, iodine</b> (after PTU), glucocorticoids</td></tr>\n<tr><td><b>Myxedema coma</b></td><td>Severe hypothyroidism: hypothermia, bradycardia, &darr; LOC</td><td>IV thyroid hormone (T4&plusmn;T3) + <b>glucocorticoids</b></td></tr>\n<tr><td><b>Adrenal (Addisonian) crisis</b></td><td>Shock precipitated by stress/illness in adrenal insufficiency</td><td>IV saline + <b>IV hydrocortisone</b> (dexamethasone if stim test pending)</td></tr>\n<tr><td><b>Pheochromocytoma crisis</b></td><td>Hypertensive crisis on tumour manipulation</td><td>Prevented by proper pre-op <b>&alpha;-then-&beta;</b> blockade</td></tr>\n</table>\n<h2>Recurring rules</h2>\n<ul>\n<li><b>Glucocorticoids feature in three</b> of these (apoplexy, storm, myxedema, crisis) — when in doubt about a stressed endocrine patient, cortisol is rarely wrong.</li>\n<li><b>Order matters:</b> in storm, give a beta-blocker + thionamide before iodine (iodine first could fuel synthesis); in pheo, alpha before beta.</li>\n<li><b>Don't delay steroids for testing</b> in adrenal crisis — use dexamethasone to preserve the assay.</li>\n</ul>\n<div class='key'>A Hashimoto's patient started on levothyroxine who crashes into shock = unmasked Addisonian crisis: replace cortisol first.</div>\n</div>"
+  },
+  {
+   "file": "W26_06_TFT_Interpretation.html",
+   "title": "Week 26 · 6 Thyroid Function Tests &amp; Subclinical Disease",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Thyroid Function Tests &amp;amp; Subclinical Disease</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>TFT logic</div><h1>Thyroid Function Tests &amp;amp; Subclinical Disease</h1></div><div class='r'>Week 26 &middot; Endocrine II &mdash; Pituitary, Thyroid &amp; Adrenal<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Reading the TSH/fT4 grid, deciding when subclinical disease is worth treating, and not chasing the sick-euthyroid pattern.</p>\n<h2>The TSH / free-T4 grid</h2>\n<table>\n<tr><th>TSH</th><th>fT4</th><th>Interpretation</th></tr>\n<tr><td>High</td><td>Low</td><td><b>Overt primary hypothyroidism</b></td></tr>\n<tr><td>High</td><td>Normal</td><td><b>Subclinical hypothyroidism</b></td></tr>\n<tr><td>Low</td><td>High</td><td><b>Overt hyperthyroidism</b></td></tr>\n<tr><td>Low</td><td>Normal</td><td><b>Subclinical hyperthyroidism</b></td></tr>\n<tr><td>Low</td><td>Low</td><td>Central hypothyroidism or sick-euthyroid</td></tr>\n<tr><td>High</td><td>High</td><td>TSH-secreting adenoma or thyroid hormone resistance (rare)</td></tr>\n</table>\n<p>TSH is the most sensitive screen because of the log-linear feedback: a small fT4 change moves TSH a lot.</p>\n<h2>Subclinical hypothyroidism &mdash; treat when?</h2>\n<div class='band warn'><div class='t'>Treat subclinical hypothyroidism if</div>\nTSH <b>&ge; 10 mIU/L</b>, OR symptomatic, OR positive anti-TPO with intent to conceive / pregnant, OR a goiter. Otherwise (TSH 4&ndash;10, asymptomatic) usually <b>monitor</b>, since many normalize and over-treatment causes harm.</div>\n<h2>Subclinical hyperthyroidism</h2>\n<p>Suppressed TSH with normal fT4/fT3. Treat when TSH is <b>persistently &lt;0.1</b>, especially with <b>atrial fibrillation, osteoporosis, or age &gt;65</b> (cardiac and bone risk). Confirm it is persistent and not thyroiditis first.</p>\n<h2>Sick-euthyroid (non-thyroidal illness)</h2>\n<ul>\n<li>In acute illness: <b>low T3</b> first (impaired peripheral conversion), then low T4 in severe illness; TSH often low-normal and rebounds on recovery.</li>\n<li><b>Don't screen thyroid function in acutely ill inpatients</b> unless thyroid disease is genuinely suspected &mdash; you'll chase an artifact. Recheck after recovery.</li>\n</ul>\n<div class='key'>TSH first; add fT4 to place the patient on the grid. Subclinical hypothyroidism: treat at TSH &ge;10 or if symptomatic/pregnant. A low T3 in a sick inpatient is usually sick-euthyroid, not thyroid disease.</div>\n</div>"
+  },
+  {
+   "file": "W26_07_Posterior_Pituitary.html",
+   "title": "Week 26 · 7 Posterior Pituitary: Diabetes Insipidus &amp; SIADH",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Posterior Pituitary: Diabetes Insipidus &amp;amp; SIADH</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Water balance</div><h1>Posterior Pituitary: Diabetes Insipidus &amp;amp; SIADH</h1></div><div class='r'>Week 26 &middot; Endocrine II &mdash; Pituitary, Thyroid &amp; Adrenal<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The two ADH disorders — too little (DI) and too much (SIADH) — how to localize them, and how to correct sodium safely.</p>\n<h2>ADH in one line</h2>\n<p>ADH (vasopressin) makes the collecting duct reabsorb <b>water</b>. Too little &rarr; dilute urine and rising sodium (<b>DI</b>); too much &rarr; water retention and falling sodium (<b>SIADH</b>).</p>\n<h2>Diabetes insipidus</h2>\n<table>\n<tr><th></th><th>Central DI</th><th>Nephrogenic DI</th></tr>\n<tr><td>Defect</td><td>No ADH (pituitary/hypothalamic)</td><td>Kidney unresponsive to ADH</td></tr>\n<tr><td>Causes</td><td>Tumour, surgery, trauma, apoplexy</td><td><b>Lithium</b>, hypercalcemia, hypokalemia, hereditary</td></tr>\n<tr><td>Picture</td><td colspan='2'>Polyuria + polydipsia, dilute urine, hypernatremia if water not accessible</td></tr>\n</table>\n<div class='band warn'><div class='t'>Water deprivation test then desmopressin</div>\nDeprive water: in DI the urine stays dilute. Then give <b>desmopressin (DDAVP)</b>: <b>central DI concentrates the urine</b> (responds); <b>nephrogenic DI does not</b> (kidney can't respond). Central DI &rarr; treat with desmopressin; nephrogenic &rarr; remove the cause (stop lithium), thiazide, low-salt diet.</div>\n<h2>SIADH</h2>\n<ul>\n<li><b>Euvolemic hyponatremia</b> with concentrated urine (urine osm &gt; serum osm, urine Na &gt;20&ndash;40), low serum osmolality, normal thyroid/adrenal/renal function.</li>\n<li><b>Causes:</b> CNS disease, pulmonary disease, malignancy (small-cell lung), drugs (SSRIs, carbamazepine).</li>\n<li><b>Treat:</b> fluid restriction first; severe/symptomatic &rarr; hypertonic saline; persistent &rarr; vaptan (tolvaptan) or demeclocycline.</li>\n</ul>\n<div class='band warn'><div class='t'>Correct sodium slowly</div>\nRaise serum sodium by <b>no more than ~8&ndash;10 mmol/L in 24 h</b>. Overcorrection of chronic hyponatremia risks <b>osmotic demyelination</b> (central pontine myelinolysis).</div>\n<div class='key'>DDAVP separates the DIs: central responds, nephrogenic doesn't. SIADH is euvolemic hyponatremia with inappropriately concentrated urine; fix it slowly.</div>\n</div>"
+  },
+  {
+   "file": "W26_08_MEN_Syndromes.html",
+   "title": "Week 26 · 8 Multiple Endocrine Neoplasia (MEN)",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Multiple Endocrine Neoplasia (MEN)</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Inherited tumours</div><h1>Multiple Endocrine Neoplasia (MEN)</h1></div><div class='r'>Week 26 &middot; Endocrine II &mdash; Pituitary, Thyroid &amp; Adrenal<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The three MEN patterns, the genes behind them, and the screening that prevents lethal complications.</p>\n<h2>Why MEN matters</h2>\n<p>MEN syndromes cluster endocrine tumours in families. Recognizing one tumour should prompt screening for the others &mdash; and for at-risk relatives &mdash; because some components (medullary thyroid cancer, pheochromocytoma) are lethal if missed.</p>\n<table>\n<tr><th>Syndrome</th><th>Gene</th><th>Components (mnemonic)</th></tr>\n<tr><td><b>MEN 1</b></td><td><b>MEN1</b> (menin)</td><td>\"3 Ps\": <b>Parathyroid</b> hyperplasia, <b>Pancreatic</b> islet tumours (gastrinoma, insulinoma), <b>Pituitary</b> adenoma</td></tr>\n<tr><td><b>MEN 2A</b></td><td><b>RET</b></td><td><b>Medullary thyroid cancer</b>, <b>Pheochromocytoma</b>, <b>Parathyroid</b> hyperplasia</td></tr>\n<tr><td><b>MEN 2B</b></td><td><b>RET</b></td><td>Medullary thyroid cancer, Pheochromocytoma, <b>mucosal neuromas / marfanoid</b> habitus (no parathyroid)</td></tr>\n</table>\n<h2>Key clinical points</h2>\n<ul>\n<li><b>Medullary thyroid cancer</b> arises from parafollicular C cells &rarr; secretes <b>calcitonin</b> (tumour marker). RET-positive carriers are offered <b>prophylactic thyroidectomy</b>.</li>\n<li><b>Always exclude pheochromocytoma BEFORE any surgery</b> in MEN2 (operate on the pheo first, with alpha-then-beta blockade) &mdash; unrecognized pheo causes intraoperative hypertensive crisis.</li>\n<li><b>Primary hyperparathyroidism</b> is the most common and earliest manifestation of MEN1.</li>\n</ul>\n<div class='band warn'><div class='t'>Order of operations in MEN2</div>\nPheochromocytoma is resected (or at least medically blocked) <b>before</b> thyroid or parathyroid surgery. The same alpha-before-beta rule from the adrenal guide applies.</div>\n<div class='key'>MEN1 = 3 Ps (parathyroid, pancreas, pituitary; MEN1 gene). MEN2 = medullary thyroid cancer + pheo (RET gene); 2B adds mucosal neuromas/marfanoid and drops the parathyroid. Find a pheo before you operate.</div>\n</div>"
+  },
+  {
+   "file": "W26_09_Cram_Sheet.html",
+   "title": "Week 26 · 9 Cram Sheet",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Week 26 · 9 Cram Sheet</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.35;-webkit-font-smoothing:antialiased}\n.page{max-width:1180px;margin:0 auto;padding:18px 20px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:8px;margin-bottom:12px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:26px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.emerg{border:1.5px solid var(--hi);border-radius:6px;background:rgba(0,0,0,.02);padding:9px 12px;margin-bottom:13px}\n.emerg .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--hi);font-weight:600;margin-bottom:5px}\n.emerg .items{columns:3;column-gap:22px;font-size:12px;line-height:1.42}\n.emerg .items div{break-inside:avoid;margin-bottom:3px}\n.emerg b{color:var(--hi)}\n.cols{column-count:4;column-gap:14px}\n@media(max-width:1040px){.cols{column-count:3}}\n@media(max-width:760px){.cols{column-count:2}}\n@media(max-width:520px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(0,0,0,.02);padding:8px 9px 7px;margin:0 0 11px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;padding-bottom:4px;border-bottom:1.5px solid var(--line);color:var(--accent);display:flex;justify-content:space-between;align-items:baseline;gap:6px}\n.card h2 .wk{color:var(--soft);font-size:8.5px;font-weight:500;letter-spacing:.06em;white-space:nowrap}\n.row{margin:0 0 3.5px;font-size:11.5px;line-height:1.32}\n.row .tg{font-weight:600;color:var(--ink)}\n.row .ar{color:var(--soft)}\n.row .ar::before{content:\"\\2192 \";color:var(--accent);font-weight:600}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:5px 0}\n.dnm{color:var(--hi);font-weight:700}\n.foot{margin-top:10px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:landscape;margin:9mm}body{font-size:8.4px}.page{max-width:none;padding:0}.cols{column-count:4;column-gap:8px}.emerg .items{columns:3}.card{margin-bottom:6px}.head h1{font-size:19px}}\n</style><div class='page'><div class='head'><div><div class='k'>Night-Before High-Yield</div><h1>Endocrine II</h1></div><div class='r'>Week 26 &middot; Endocrine II &mdash; Pituitary, Thyroid &amp; Adrenal<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><div class='emerg'><div class='t'>★ Do-not-miss &middot; first-step reflexes</div><div class='items'><div><b>Adrenal (Addisonian) crisis</b> &rarr; IV saline + IV hydrocortisone NOW (dexamethasone if a stim test is pending); don't wait for results</div><div><b>Pituitary apoplexy</b> (worst headache + visual loss + CN palsy + hypotension) &rarr; IV hydrocortisone + decompression</div><div><b>Thyroid storm</b> &rarr; beta-blocker + PTU, then iodine, + glucocorticoids</div><div><b>Myxedema coma</b> (hypothermia, bradycardia, &darr;LOC) &rarr; IV thyroid hormone + glucocorticoid</div><div><b>Pheochromocytoma</b> &rarr; ALPHA-blocker before beta-blocker (beta-first = unopposed &alpha; crisis)</div><div><b>Levothyroxine in unrecognized adrenal insufficiency</b> &rarr; can precipitate adrenal crisis &mdash; replace cortisol FIRST</div></div></div><div class='cols'><div class='card'><h2>Pituitary <span class='wk'>Pituitary</span></h2><div class='row'><span class='tg'>Chiasm compression</span> <span class='ar'>bitemporal hemianopsia + RAPD</span></div><div class='row'><span class='tg'>Prolactinoma Rx</span> <span class='ar'>dopamine agonist (cabergoline); >250 µg/L = true tumour</span></div><div class='row'><span class='tg'>Acromegaly</span> <span class='ar'>screen IGF-1; confirm GH non-suppression on OGTT</span></div><div class='row'><span class='tg'>Hook effect</span> <span class='ar'>huge prolactin → falsely LOW assay</span></div><div class='row'><span class='tg'>Stalk effect</span> <span class='ar'>non-functioning mass, mild prolactin <200</span></div><div class='row'><span class='tg'>Hormone-loss order</span> <span class='ar'>GH, LH, FSH, TSH, ACTH, PRL</span></div></div><div class='card'><h2>Hyperthyroid <span class='wk'>Thyroid+</span></h2><div class='row'><span class='tg'>Screen / confirm</span> <span class='ar'>suppressed TSH; high fT4/fT3</span></div><div class='row'><span class='tg'>RAIU high</span> <span class='ar'>Graves (diffuse) / toxic nodule (focal)</span></div><div class='row'><span class='tg'>RAIU low</span> <span class='ar'>thyroiditis / exogenous → supportive only</span></div><div class='row'><span class='tg'>Graves-only signs</span> <span class='ar'>orbitopathy, pretibial myxedema, bruit</span></div><div class='row'><span class='tg'>Thionamides</span> <span class='ar'>methimazole preferred; PTU in 1st trimester</span></div><div class='row'><span class='tg'>Agranulocytosis</span> <span class='ar'>fever/sore throat → stop + CBC</span></div></div><div class='card'><h2>Hypothyroid &amp; nodules <span class='wk'>Thyroid-</span></h2><div class='row'><span class='tg'>Screen / confirm</span> <span class='ar'>high TSH; low fT4 (don't order fT3)</span></div><div class='row'><span class='tg'>Levothyroxine</span> <span class='ar'>AM empty stomach; recheck TSH 6 wk; pregnancy +30%</span></div><div class='row'><span class='tg'>Elderly/cardiac</span> <span class='ar'>start low, go slow</span></div><div class='row'><span class='tg'>Adrenal trap</span> <span class='ar'>replace cortisol before levothyroxine</span></div><div class='row'><span class='tg'>Hot nodule</span> <span class='ar'>almost never cancer → no FNA</span></div><div class='row'><span class='tg'>Cold nodule</span> <span class='ar'>FNA if suspicious</span></div></div><div class='card'><h2>Adrenal <span class='wk'>Adrenal</span></h2><div class='row'><span class='tg'>Addison's labs</span> <span class='ar'>Na low, K high; hyperpigmentation (ACTH/MSH)</span></div><div class='row'><span class='tg'>Addison's confirm</span> <span class='ar'>ACTH stim — cortisol rise >500</span></div><div class='row'><span class='tg'>Cushing's screen</span> <span class='ar'>2 of 3: UFC, midnight saliva, 1-mg DST</span></div><div class='row'><span class='tg'>Cushing's ACTH</span> <span class='ar'>low = adrenal; high/normal = pituitary/ectopic</span></div><div class='row'><span class='tg'>Conn's</span> <span class='ar'>refractory HTN + low K; high aldo:renin</span></div><div class='row'><span class='tg'>Pheo</span> <span class='ar'>24-h metanephrines; alpha-then-beta</span></div><div class='row'><span class='tg'>Sick-day rule</span> <span class='ar'>double/triple hydrocortisone; ER if vomiting</span></div></div><div class='card'><h2>TFTs &amp; subclinical <span class='wk'>TFTs</span></h2><div class='row'><span class='tg'>Screen</span> <span class='ar'>TSH first; add fT4 to localize</span></div><div class='row'><span class='tg'>Subclinical hypo</span> <span class='ar'>high TSH, normal fT4</span></div><div class='row'><span class='tg'>Treat subclinical hypo</span> <span class='ar'>TSH ≥10, symptomatic, pregnant/anti-TPO</span></div><div class='row'><span class='tg'>Subclinical hyper</span> <span class='ar'>low TSH, normal fT4/fT3</span></div><div class='row'><span class='tg'>Treat subclinical hyper</span> <span class='ar'>TSH <0.1 + AF/osteoporosis/age>65</span></div><div class='row'><span class='tg'>Sick-euthyroid</span> <span class='ar'>low T3 in illness — don't screen inpatients</span></div></div><div class='card'><h2>Posterior pituitary <span class='wk'>ADH</span></h2><div class='row'><span class='tg'>Central DI</span> <span class='ar'>no ADH → responds to DDAVP</span></div><div class='row'><span class='tg'>Nephrogenic DI</span> <span class='ar'>kidney resistant (lithium, ↑Ca) → no DDAVP response</span></div><div class='row'><span class='tg'>DI picture</span> <span class='ar'>polyuria, dilute urine, hypernatremia</span></div><div class='row'><span class='tg'>SIADH</span> <span class='ar'>euvolemic hyponatremia, concentrated urine</span></div><div class='row'><span class='tg'>SIADH treat</span> <span class='ar'>fluid restriction; hypertonic saline if severe; vaptan</span></div><div class='row'><span class='tg'>Correction limit</span> <span class='ar'>≤8–10 mmol/L/24 h (avoid osmotic demyelination)</span></div></div><div class='card'><h2>MEN syndromes <span class='wk'>MEN</span></h2><div class='row'><span class='tg'>MEN1 (MEN1 gene)</span> <span class='ar'>3 Ps: parathyroid, pancreas, pituitary</span></div><div class='row'><span class='tg'>MEN2A (RET)</span> <span class='ar'>medullary thyroid Ca, pheo, parathyroid</span></div><div class='row'><span class='tg'>MEN2B (RET)</span> <span class='ar'>MTC, pheo, mucosal neuromas/marfanoid</span></div><div class='row'><span class='tg'>MTC marker</span> <span class='ar'>calcitonin; prophylactic thyroidectomy in carriers</span></div><div class='row'><span class='tg'>Before surgery</span> <span class='ar'>exclude/treat pheo FIRST (alpha-then-beta)</span></div></div></div><div class='foot'>Week 26 &middot; Endocrine II &mdash; Pituitary, Thyroid &amp; Adrenal &middot; cram sheet &middot; cue &rarr; answer</div></div>"
+  }
+ ],
+ "drugs": [
+  {
+   "id": "rx:cabergoline",
+   "name": "Cabergoline",
+   "class": "rx:dopamine-agonist",
+   "facets": {
+    "use": "Prolactinoma (first-line)",
+    "mechanism": "D2 dopamine agonist — suppresses lactotrophs, shrinks tumour",
+    "adverse": "Nausea, orthostatic hypotension; valvulopathy at high dose"
+   },
+   "ref": {
+    "topic": "Prolactinoma",
+    "guide": "W26_01_Pituitary.html",
+    "week": "Week 26 · Endocrine II — Pituitary, Thyroid & Adrenal"
+   }
+  },
+  {
+   "id": "rx:bromocriptine",
+   "name": "Bromocriptine",
+   "class": "rx:dopamine-agonist",
+   "facets": {
+    "use": "Prolactinoma when pregnancy desired",
+    "mechanism": "Dopamine agonist",
+    "adverse": "Nausea, orthostasis"
+   },
+   "ref": {
+    "topic": "Prolactinoma",
+    "guide": "W26_01_Pituitary.html",
+    "week": "Week 26 · Endocrine II — Pituitary, Thyroid & Adrenal"
+   }
+  },
+  {
+   "id": "rx:octreotide",
+   "name": "Octreotide",
+   "class": "rx:somatostatin-analogue",
+   "facets": {
+    "use": "Acromegaly (medical therapy)",
+    "mechanism": "Somatostatin analogue — suppresses GH",
+    "adverse": "Gallstones, GI upset, glucose dysregulation"
+   },
+   "ref": {
+    "topic": "Acromegaly",
+    "guide": "W26_01_Pituitary.html",
+    "week": "Week 26 · Endocrine II — Pituitary, Thyroid & Adrenal"
+   }
+  },
+  {
+   "id": "rx:pegvisomant",
+   "name": "Pegvisomant",
+   "class": "rx:gh-receptor-antagonist",
+   "facets": {
+    "use": "Acromegaly resistant to other therapy",
+    "mechanism": "GH receptor antagonist",
+    "adverse": "LFT elevation"
+   },
+   "ref": {
+    "topic": "Acromegaly",
+    "guide": "W26_01_Pituitary.html",
+    "week": "Week 26 · Endocrine II — Pituitary, Thyroid & Adrenal"
+   }
+  },
+  {
+   "id": "rx:methimazole",
+   "name": "Methimazole",
+   "class": "rx:thionamide",
+   "facets": {
+    "use": "Hyperthyroidism (preferred thionamide)",
+    "mechanism": "Inhibits thyroid peroxidase → blocks hormone synthesis",
+    "adverse": "Agranulocytosis, hepatotoxicity, rash",
+    "contra": "First trimester of pregnancy (teratogenic)"
+   },
+   "ref": {
+    "topic": "Hyperthyroidism",
+    "guide": "W26_02_Hyperthyroidism.html",
+    "week": "Week 26 · Endocrine II — Pituitary, Thyroid & Adrenal"
+   }
+  },
+  {
+   "id": "rx:propylthiouracil",
+   "name": "Propylthiouracil (PTU)",
+   "class": "rx:thionamide",
+   "facets": {
+    "use": "Hyperthyroidism in 1st-trimester pregnancy; thyroid storm",
+    "mechanism": "Inhibits TPO; also blocks peripheral T4→T3",
+    "adverse": "Agranulocytosis, more hepatotoxic than methimazole"
+   },
+   "ref": {
+    "topic": "Hyperthyroidism",
+    "guide": "W26_02_Hyperthyroidism.html",
+    "week": "Week 26 · Endocrine II — Pituitary, Thyroid & Adrenal"
+   }
+  },
+  {
+   "id": "rx:propranolol",
+   "name": "Propranolol",
+   "class": "rx:beta-blocker",
+   "facets": {
+    "use": "Adrenergic symptom control in thyrotoxicosis / storm",
+    "mechanism": "Non-selective beta-blocker (also blunts T4→T3)",
+    "adverse": "Bradycardia, bronchospasm"
+   },
+   "ref": {
+    "topic": "Hyperthyroidism",
+    "guide": "W26_02_Hyperthyroidism.html",
+    "week": "Week 26 · Endocrine II — Pituitary, Thyroid & Adrenal"
+   }
+  },
+  {
+   "id": "rx:levothyroxine",
+   "name": "Levothyroxine (L-thyroxine)",
+   "class": "rx:thyroid-hormone",
+   "facets": {
+    "use": "Hypothyroidism replacement",
+    "mechanism": "Synthetic T4",
+    "adverse": "Over-replacement → AF, bone loss",
+    "dosing": "~1.6 mcg/kg/day; start low in elderly/cardiac; empty stomach AM",
+    "monitoring": "TSH at 6 weeks"
+   },
+   "ref": {
+    "topic": "Hypothyroidism",
+    "guide": "W26_03_Hypothyroidism_Nodules.html",
+    "week": "Week 26 · Endocrine II — Pituitary, Thyroid & Adrenal"
+   }
+  },
+  {
+   "id": "rx:hydrocortisone",
+   "name": "Hydrocortisone",
+   "class": "rx:corticosteroid",
+   "facets": {
+    "use": "Adrenal insufficiency / crisis; glucocorticoid replacement",
+    "mechanism": "Glucocorticoid (+ some mineralocorticoid activity)",
+    "adverse": "Hyperglycemia, infection with excess",
+    "monitoring": "Sick-day doubling; stress dosing"
+   },
+   "ref": {
+    "topic": "Adrenal",
+    "guide": "W26_04_Adrenal.html",
+    "week": "Week 26 · Endocrine II — Pituitary, Thyroid & Adrenal"
+   }
+  },
+  {
+   "id": "rx:fludrocortisone",
+   "name": "Fludrocortisone",
+   "class": "rx:mineralocorticoid",
+   "facets": {
+    "use": "Mineralocorticoid replacement in Addison's",
+    "mechanism": "Synthetic mineralocorticoid (Na retention, K excretion)",
+    "adverse": "Edema, hypertension, hypokalemia"
+   },
+   "ref": {
+    "topic": "Adrenal",
+    "guide": "W26_04_Adrenal.html",
+    "week": "Week 26 · Endocrine II — Pituitary, Thyroid & Adrenal"
+   }
+  },
+  {
+   "id": "rx:dexamethasone",
+   "name": "Dexamethasone",
+   "class": "rx:corticosteroid",
+   "facets": {
+    "use": "Adrenal crisis when a cortisol assay is pending",
+    "mechanism": "Long-acting glucocorticoid (no cortisol-assay cross-reactivity)",
+    "adverse": "Hyperglycemia, immunosuppression"
+   },
+   "ref": {
+    "topic": "Adrenal",
+    "guide": "W26_04_Adrenal.html",
+    "week": "Week 26 · Endocrine II — Pituitary, Thyroid & Adrenal"
+   }
+  },
+  {
+   "id": "rx:spironolactone",
+   "name": "Spironolactone",
+   "class": "rx:aldosterone-antagonist",
+   "facets": {
+    "use": "Primary aldosteronism (Conn's); resistant HTN",
+    "mechanism": "Aldosterone receptor antagonist (K-sparing)",
+    "adverse": "Hyperkalemia, gynecomastia"
+   },
+   "ref": {
+    "topic": "Adrenal",
+    "guide": "W26_04_Adrenal.html",
+    "week": "Week 26 · Endocrine II — Pituitary, Thyroid & Adrenal"
+   }
+  },
+  {
+   "id": "rx:eplerenone",
+   "name": "Eplerenone",
+   "class": "rx:aldosterone-antagonist",
+   "facets": {
+    "use": "Primary aldosteronism (fewer anti-androgen effects)",
+    "mechanism": "Selective aldosterone receptor antagonist",
+    "adverse": "Hyperkalemia"
+   },
+   "ref": {
+    "topic": "Adrenal",
+    "guide": "W26_04_Adrenal.html",
+    "week": "Week 26 · Endocrine II — Pituitary, Thyroid & Adrenal"
+   }
+  },
+  {
+   "id": "rx:amiloride",
+   "name": "Amiloride",
+   "class": "rx:enac-blocker",
+   "facets": {
+    "use": "Primary aldosteronism; K-sparing diuresis",
+    "mechanism": "Blocks the epithelial sodium channel (ENaC)",
+    "adverse": "Hyperkalemia"
+   },
+   "ref": {
+    "topic": "Adrenal",
+    "guide": "W26_04_Adrenal.html",
+    "week": "Week 26 · Endocrine II — Pituitary, Thyroid & Adrenal"
+   }
+  },
+  {
+   "id": "rx:doxazosin",
+   "name": "Doxazosin",
+   "class": "rx:alpha-blocker",
+   "facets": {
+    "use": "Pre-op pheochromocytoma blockade",
+    "mechanism": "Alpha-1 adrenergic blocker",
+    "adverse": "Orthostatic hypotension",
+    "monitoring": "Start BEFORE any beta-blocker"
+   },
+   "ref": {
+    "topic": "Adrenal",
+    "guide": "W26_04_Adrenal.html",
+    "week": "Week 26 · Endocrine II — Pituitary, Thyroid & Adrenal"
+   }
+  },
+  {
+   "id": "rx:phenoxybenzamine",
+   "name": "Phenoxybenzamine",
+   "class": "rx:alpha-blocker",
+   "facets": {
+    "use": "Pre-op pheochromocytoma blockade",
+    "mechanism": "Non-selective irreversible alpha-blocker",
+    "adverse": "Orthostasis, reflex tachycardia"
+   },
+   "ref": {
+    "topic": "Adrenal",
+    "guide": "W26_04_Adrenal.html",
+    "week": "Week 26 · Endocrine II — Pituitary, Thyroid & Adrenal"
+   }
+  },
+  {
+   "id": "rx:desmopressin",
+   "name": "Desmopressin (DDAVP)",
+   "class": "rx:vasopressin-analog",
+   "facets": {
+    "use": "Central diabetes insipidus",
+    "mechanism": "Synthetic ADH (V2 agonist) — collecting-duct water reabsorption",
+    "adverse": "Hyponatremia, headache",
+    "monitoring": "Confirms central DI on the water-deprivation test"
+   },
+   "ref": {
+    "topic": "Posterior pituitary",
+    "guide": "W26_07_Posterior_Pituitary.html",
+    "week": "Week 26 · Endocrine II — Pituitary, Thyroid & Adrenal"
+   }
+  },
+  {
+   "id": "rx:tolvaptan",
+   "name": "Tolvaptan",
+   "class": "rx:vaptan",
+   "facets": {
+    "use": "Persistent/symptomatic SIADH (hyponatremia)",
+    "mechanism": "Vasopressin V2 receptor antagonist — aquaresis",
+    "adverse": "Overly rapid sodium correction, hepatotoxicity",
+    "monitoring": "Sodium closely (avoid osmotic demyelination)"
+   },
+   "ref": {
+    "topic": "Posterior pituitary",
+    "guide": "W26_07_Posterior_Pituitary.html",
+    "week": "Week 26 · Endocrine II — Pituitary, Thyroid & Adrenal"
+   }
+  }
+ ]
+}

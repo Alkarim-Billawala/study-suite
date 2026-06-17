@@ -1,0 +1,1720 @@
+{
+ "pack": "Week 27 — Endocrine III (Reproductive)",
+ "id": "wk27",
+ "formatVersion": "2.0",
+ "version": "1.0",
+ "author": "Alkarim Billawala / alkarim.billawala.ca",
+ "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
+ "created": "2026-06-16",
+ "updated": "2026-06-16",
+ "school": "UofT — Temerty Medicine",
+ "year": "Year 1",
+ "course": "CPC 2",
+ "weeks": "Week 27 · Endocrine III — Reproductive",
+ "questions": [
+  {
+   "id": "wk27_q01",
+   "sys": "Endo",
+   "topic": "Repro · NCAH",
+   "difficulty": "hard",
+   "stem": "A 22-year-old woman has 2 years of irregular cycles, severe acne, and terminal hair on the lip and abdomen; normal BMI/BP. A morning follicular 17-OH progesterone is markedly elevated and rises sharply on ACTH stimulation. What is the pathophysiology?",
+   "options": [
+    "Insulin resistance stimulating theca-cell androgens",
+    "Activating LH-receptor mutation",
+    "Partial 21-hydroxylase deficiency → low cortisol, high ACTH, precursors shunted to androgens",
+    "Absent aromatase preventing estradiol synthesis"
+   ],
+   "correct": 2,
+   "explain": "This is <b>non-classic CAH</b> (partial 21-hydroxylase deficiency): low cortisol removes feedback, ACTH rises, and precursor 17-OHP backs up into the androgen pathway — mimicking PCOS but distinguished by the high 17-OHP.",
+   "guide": {
+    "f": "W27_02_Hyperandrogenism.html",
+    "t": "2 · NCAH",
+    "s": "21-hydroxylase"
+   }
+  },
+  {
+   "id": "wk27_q02",
+   "sys": "Endo",
+   "topic": "Repro · GAHT",
+   "difficulty": "medium",
+   "stem": "A 34-year-old transgender woman on transdermal estradiol and oral spironolactone develops dizziness and muscle weakness. Which lab abnormality is she at highest risk for?",
+   "options": [
+    "Polycythemia",
+    "Hyperkalemia",
+    "Severe hyperprolactinemia",
+    "Undetectable TSH"
+   ],
+   "correct": 1,
+   "explain": "Spironolactone is an aldosterone antagonist, so it spares potassium &rarr; <b>hyperkalemia</b> (monitor K and creatinine). Polycythemia is a testosterone risk; severe hyperprolactinemia is a cyproterone risk.",
+   "guide": {
+    "f": "W27_05_GAHT_DSD.html",
+    "t": "5 · Feminizing therapy",
+    "s": "spironolactone → hyperK"
+   }
+  },
+  {
+   "id": "wk27_q03",
+   "sys": "Endo",
+   "topic": "Repro · Virilization",
+   "difficulty": "hard",
+   "stem": "A 55-year-old postmenopausal woman has 4 months of rapidly progressive hirsutism, voice deepening, temporal balding, and clitoromegaly. Total testosterone 14.2 nmol/L and DHEAS 28.5 µmol/L are both markedly elevated. Most likely diagnosis?",
+   "options": [
+    "PCOS",
+    "Ovarian Leydig-cell tumour",
+    "Idiopathic hirsutism",
+    "Androgen-secreting adrenal carcinoma"
+   ],
+   "correct": 3,
+   "explain": "Rapid virilization is a red flag for an androgen-secreting tumour. The markedly high <b>DHEAS</b> (100% adrenal) localizes it to the <b>adrenal cortex</b>. An ovarian tumour would raise testosterone with normal/mildly elevated DHEAS.",
+   "guide": {
+    "f": "W27_02_Hyperandrogenism.html",
+    "t": "2 · Virilization",
+    "s": "DHEAS → adrenal"
+   }
+  },
+  {
+   "id": "wk27_q04",
+   "sys": "Endo",
+   "topic": "Repro · Infertility",
+   "difficulty": "medium",
+   "stem": "A 32-year-old man has 14 months of infertility. Semen analysis: volume 2.0 mL, concentration 4 million/mL, motility 45%; normal virilization and testicular volume. What is the most appropriate next step?",
+   "options": [
+    "Repeat after 14 days of abstinence",
+    "Prescribe IM testosterone to boost sperm",
+    "Genetic testing (karyotype, Y-microdeletion)",
+    "Urgent sella MRI for prolactinoma"
+   ],
+   "correct": 2,
+   "explain": "Concentration &lt;5 million/mL = <b>severe oligospermia</b>, which warrants a <b>genetic workup</b> (Klinefelter, Y-microdeletion). Prolonged abstinence harms the sample; testosterone is contraindicated (suppresses spermatogenesis).",
+   "guide": {
+    "f": "W27_04_Male_Infertility_ED.html",
+    "t": "4 · Semen analysis",
+    "s": "severe oligospermia → genetics"
+   }
+  },
+  {
+   "id": "wk27_q05",
+   "sys": "Endo",
+   "topic": "Repro · Gynecomastia",
+   "difficulty": "easy",
+   "stem": "A 65-year-old man with heart failure and CKD has 2 months of tender bilateral subareolar breast enlargement, no discharge or skin change. Which initial lab panel is most appropriate?",
+   "options": [
+    "Total testosterone, estradiol, prolactin, hCG, LH, TSH, LFTs, creatinine",
+    "Free testosterone, FSH, DHEAS, 17-OHP",
+    "24-h urine cortisol + dexamethasone suppression",
+    "CA 15-3, CEA, BRCA1/2"
+   ],
+   "correct": 0,
+   "explain": "The standard 8-test gynecomastia workup screens for hypogonadism, hyperthyroidism, liver/renal dysfunction, and hormone-secreting tumours: <b>total testosterone, estradiol, prolactin, hCG, LH, TSH, LFTs, creatinine</b>.",
+   "guide": {
+    "f": "W27_04_Male_Infertility_ED.html",
+    "t": "4 · Gynecomastia",
+    "s": "8-test workup"
+   }
+  },
+  {
+   "id": "wk27_q06",
+   "sys": "Endo",
+   "topic": "Repro · DSD",
+   "difficulty": "hard",
+   "stem": "A 16-year-old phenotypic female has primary amenorrhea, normal breasts, scant axillary/pubic hair, an absent uterus on ultrasound, and a 46,XY karyotype (CAIS). Why is there no uterus?",
+   "options": [
+    "No SRY gene",
+    "Leydig testosterone suppressed Mullerian ducts",
+    "Sertoli MIF regressed the Mullerian ducts",
+    "The mutation blocked 5α-reductase synthesis"
+   ],
+   "correct": 2,
+   "explain": "In CAIS the testes form and <b>Sertoli cells make MIF</b>, whose receptors are normal, so the Mullerian ducts regress (no uterus). The androgen-receptor defect only blocks masculinization of the external genitalia → female phenotype.",
+   "guide": {
+    "f": "W27_05_GAHT_DSD.html",
+    "t": "5 · DSD",
+    "s": "CAIS — MIF still works"
+   }
+  },
+  {
+   "id": "wk27_q07",
+   "sys": "Endo",
+   "topic": "Repro · Klinefelter",
+   "difficulty": "medium",
+   "stem": "A 29-year-old man with infertility has a history of learning difficulties and pubertal gynecomastia surgery. He is 195 cm, with small firm 3 cc testes and azoospermia. Which lab profile is expected?",
+   "options": [
+    "Low LH, low FSH, low T",
+    "High LH, high FSH, low T",
+    "Low LH, high FSH, normal T",
+    "Normal LH/FSH, high T"
+   ],
+   "correct": 1,
+   "explain": "Klinefelter (47,XXY): dysgenetic tubules → low testosterone/inhibin → loss of feedback → <b>high LH and FSH with low testosterone</b> (primary/hypergonadotropic hypogonadism).",
+   "guide": {
+    "f": "W27_03_Male_Hypogonadism.html",
+    "t": "3 · Klinefelter",
+    "s": "primary hypogonadism"
+   }
+  },
+  {
+   "id": "wk27_q08",
+   "sys": "Endo",
+   "topic": "Repro · HRT",
+   "difficulty": "medium",
+   "stem": "A 54-year-old woman with disruptive hot flashes, mild diet-controlled hypertension, an intact uterus, and no breast-cancer/VTE history wants HRT. Which regimen is best?",
+   "options": [
+    "Oral estrogen alone",
+    "Transdermal estrogen alone",
+    "Oral estrogen + anti-androgen",
+    "Transdermal estrogen + a progestogen"
+   ],
+   "correct": 3,
+   "explain": "Intact uterus &rarr; must add a <b>progestogen</b> (prevent endometrial hyperplasia). Her hypertension favours <b>transdermal</b> estrogen (bypasses hepatic first-pass, less effect on clotting factors).",
+   "guide": {
+    "f": "W27_01_Menstrual_Menopause.html",
+    "t": "1 · HRT",
+    "s": "uterus → progestogen; HTN → patch"
+   }
+  },
+  {
+   "id": "wk27_q09",
+   "sys": "Endo",
+   "topic": "Repro · GAHT",
+   "difficulty": "medium",
+   "stem": "A 22-year-old transgender woman starting oral estradiol will add a medication to allow the lowest effective estrogen dose. Which agent and monitoring is correct?",
+   "options": [
+    "Cyproterone; monitor calcium",
+    "Spironolactone; monitor for hyperkalemia",
+    "Testosterone; monitor polycythemia",
+    "Letrozole; monitor osteoporosis"
+   ],
+   "correct": 1,
+   "explain": "An anti-androgen augments feminization and lowers the estrogen dose needed. <b>Spironolactone</b> antagonizes both androgen and aldosterone receptors &rarr; <b>monitor for hyperkalemia</b> and creatinine.",
+   "guide": {
+    "f": "W27_05_GAHT_DSD.html",
+    "t": "5 · Feminizing therapy",
+    "s": "anti-androgen + K monitoring"
+   }
+  },
+  {
+   "id": "wk27_q10",
+   "sys": "Endo",
+   "topic": "Repro · Amenorrhea",
+   "difficulty": "medium",
+   "stem": "A 19-year-old cross-country runner has 8 months of secondary amenorrhea, BMI 17.5, intense training, and a low-calorie diet; pregnancy test negative. Which hormonal pattern fits?",
+   "options": [
+    "High FSH, high LH, low estradiol",
+    "Low FSH, low LH, low estradiol",
+    "Normal FSH/LH, high estradiol",
+    "Low FSH, high LH, low estradiol"
+   ],
+   "correct": 1,
+   "explain": "Functional hypothalamic amenorrhea (female-athlete triad): low energy availability suppresses GnRH pulsatility &rarr; <b>low LH, low FSH, low estradiol</b> (hypogonadotropic hypogonadism).",
+   "guide": {
+    "f": "W27_02_Hyperandrogenism.html",
+    "t": "2 · Amenorrhea",
+    "s": "hypothalamic = low gonadotropins"
+   }
+  },
+  {
+   "id": "wk27_q11",
+   "sys": "Endo",
+   "topic": "Repro · ED",
+   "difficulty": "medium",
+   "stem": "A 35-year-old man has erectile dysfunction that began abruptly after a stressful new job and a new partner; he has normal morning erections and a normal exam. What is the etiology and the mechanism of first-line oral therapy?",
+   "options": [
+    "Endocrine; increases intracellular calcium",
+    "Vascular; inhibits guanylate cyclase",
+    "Psychogenic; raises cGMP (PDE5 inhibition) → lowers calcium",
+    "Neurologic; increases cGMP breakdown"
+   ],
+   "correct": 2,
+   "explain": "Abrupt, situational ED with preserved morning erections = <b>psychogenic</b>. PDE5 inhibitors (sildenafil) <b>block cGMP breakdown</b>; higher cGMP lowers intracellular calcium &rarr; smooth-muscle relaxation.",
+   "guide": {
+    "f": "W27_04_Male_Infertility_ED.html",
+    "t": "4 · ED",
+    "s": "psychogenic + PDE5"
+   }
+  },
+  {
+   "id": "wk27_q12",
+   "sys": "Endo",
+   "topic": "Repro · DSD",
+   "difficulty": "hard",
+   "stem": "A 46,XY newborn has ambiguous genitalia with bilateral undescended testes, normal epididymides/vasa/seminal vesicles, but predominantly female external genitalia with a blind vaginal pouch and clitoromegaly. Which enzyme deficiency is most likely?",
+   "options": [
+    "Aromatase",
+    "21-hydroxylase",
+    "11β-hydroxylase",
+    "5α-reductase"
+   ],
+   "correct": 3,
+   "explain": "Normal internal male ducts (testosterone present) but feminized external genitalia points to <b>5&alpha;-reductase deficiency</b> — testosterone can't be converted to DHT, which is required for external virilization.",
+   "guide": {
+    "f": "W27_05_GAHT_DSD.html",
+    "t": "5 · DSD",
+    "s": "5α-reductase"
+   }
+  },
+  {
+   "id": "wk27_q13",
+   "sys": "Endo",
+   "topic": "Repro · PCOS therapy",
+   "difficulty": "medium",
+   "stem": "A 28-year-old woman with PCOS wants to reduce chin/abdominal hirsutism but is actively trying to conceive and uses no contraception. Which statement is most accurate?",
+   "options": [
+    "Spironolactone is first-line and safe while conceiving",
+    "Eflornithine cream removes existing terminal hair systemically",
+    "Combined OCPs are indicated to raise LH",
+    "Spironolactone is contraindicated due to teratogenicity"
+   ],
+   "correct": 3,
+   "explain": "<b>Spironolactone is teratogenic</b> and contraindicated when conception is possible without reliable contraception. Eflornithine is topical and only slows growth; OCPs lower (not raise) LH; metformin is an insulin sensitizer, not a receptor blocker.",
+   "guide": {
+    "f": "W27_02_Hyperandrogenism.html",
+    "t": "2 · Anti-androgens",
+    "s": "spironolactone teratogen"
+   }
+  },
+  {
+   "id": "wk27_q14",
+   "sys": "Endo",
+   "topic": "Repro · GAHT",
+   "difficulty": "medium",
+   "stem": "A 25-year-old transgender woman is given injectable leuprolide (a GnRH agonist) every 12 weeks. What is its mechanism of testosterone suppression?",
+   "options": [
+    "Competitively blocks the androgen receptor",
+    "Inhibits testicular 5α-reductase",
+    "Continuous dosing desensitizes pituitary GnRH receptors, suppressing LH/FSH",
+    "Pulsatile dosing acts on the adrenal glands"
+   ],
+   "correct": 2,
+   "explain": "Given <b>continuously</b>, a GnRH agonist paradoxically down-regulates and desensitizes pituitary GnRH receptors &rarr; LH/FSH fall &rarr; gonadal testosterone drops. (Pulsatile GnRH would instead stimulate the axis.)",
+   "guide": {
+    "f": "W27_05_GAHT_DSD.html",
+    "t": "5 · GnRH agonist",
+    "s": "continuous → desensitization"
+   }
+  },
+  {
+   "id": "wk27_q15",
+   "sys": "Endo",
+   "topic": "Repro · Ovulation",
+   "difficulty": "easy",
+   "stem": "A couple is being assessed for infertility. Which single test best confirms that the woman is ovulating?",
+   "options": [
+    "Day-3 FSH",
+    "Day-21 (luteal) progesterone >30 nmol/L",
+    "Random estradiol",
+    "Anti-Müllerian hormone"
+   ],
+   "correct": 1,
+   "explain": "A <b>mid-luteal (day-21) progesterone &gt;30 nmol/L</b> confirms a functioning corpus luteum and therefore ovulation. Day-3 FSH assesses ovarian reserve, not ovulation.",
+   "guide": {
+    "f": "W27_01_Menstrual_Menopause.html",
+    "t": "1 · Confirming ovulation",
+    "s": "day-21 progesterone"
+   }
+  },
+  {
+   "id": "wk27_q16",
+   "sys": "Endo",
+   "topic": "Repro · PCOS ovulation",
+   "difficulty": "easy",
+   "stem": "A woman with PCOS and anovulatory infertility wants to conceive. What is the first-line agent to induce ovulation?",
+   "options": [
+    "Spironolactone",
+    "Letrozole",
+    "Metformin alone",
+    "Leuprolide"
+   ],
+   "correct": 1,
+   "explain": "<b>Letrozole</b> (an aromatase inhibitor) is first-line for ovulation induction in PCOS. Metformin improves insulin sensitivity but isn't the primary ovulation agent; spironolactone is teratogenic.",
+   "guide": {
+    "f": "W27_02_Hyperandrogenism.html",
+    "t": "2 · PCOS",
+    "s": "letrozole induces ovulation"
+   }
+  },
+  {
+   "id": "wk27_q17",
+   "sys": "Endo",
+   "topic": "Repro · TRT",
+   "difficulty": "medium",
+   "stem": "A 38-year-old man with low libido and a borderline-low testosterone wants treatment but also wants to father a child soon. Why is testosterone replacement the wrong choice for fertility?",
+   "options": [
+    "It raises SHBG and lowers free testosterone",
+    "It suppresses the HPG axis, collapsing intratesticular testosterone and spermatogenesis",
+    "It directly destroys Leydig cells",
+    "It converts entirely to estradiol"
+   ],
+   "correct": 1,
+   "explain": "Exogenous testosterone suppresses LH/FSH &rarr; <b>intratesticular</b> testosterone plummets and spermatogenesis halts. TRT is contraindicated when fertility is desired; use HPG-stimulating approaches instead.",
+   "guide": {
+    "f": "W27_03_Male_Hypogonadism.html",
+    "t": "3 · TRT",
+    "s": "sterilizing effect"
+   }
+  },
+  {
+   "id": "wk27_q18",
+   "sys": "Endo",
+   "topic": "Repro · SHBG",
+   "difficulty": "hard",
+   "stem": "A man with obesity and type 2 diabetes has a low total testosterone but normal free testosterone and no symptoms of hypogonadism. What explains this?",
+   "options": [
+    "Obesity and T2DM lower SHBG, reducing total but preserving free testosterone",
+    "He has primary hypogonadism",
+    "Lab error in the free testosterone",
+    "Estrogen excess raising SHBG"
+   ],
+   "correct": 0,
+   "explain": "Obesity, T2DM, and glucocorticoids <b>lower SHBG</b>, so the <b>total</b> testosterone reads low while <b>free</b> (active) testosterone is normal. Interpret total testosterone in light of SHBG.",
+   "guide": {
+    "f": "W27_03_Male_Hypogonadism.html",
+    "t": "3 · SHBG",
+    "s": "total vs free"
+   }
+  },
+  {
+   "id": "wk27_q19",
+   "sys": "Endo",
+   "topic": "Repro · HRT route",
+   "difficulty": "medium",
+   "stem": "A 52-year-old woman with a prior DVT and migraine with aura has bothersome vasomotor symptoms and an intact uterus. If HRT is used, which estrogen route is preferred and why?",
+   "options": [
+    "Oral, for better absorption",
+    "Transdermal, because it bypasses hepatic first-pass and has lower thrombotic impact",
+    "Vaginal, for systemic hot-flash control",
+    "No route is acceptable; her uterus is intact"
+   ],
+   "correct": 1,
+   "explain": "<b>Transdermal</b> estrogen bypasses hepatic first-pass metabolism and has less effect on clotting factors, preferred when VTE risk or migraine-with-aura is present (still add a progestogen for the intact uterus). Her VTE history is a relative/absolute caution overall.",
+   "guide": {
+    "f": "W27_01_Menstrual_Menopause.html",
+    "t": "1 · HRT route",
+    "s": "transdermal for VTE risk"
+   }
+  },
+  {
+   "id": "wk27_q20",
+   "sys": "Endo",
+   "topic": "Repro · NCAH screen",
+   "difficulty": "easy",
+   "stem": "A 27-year-old woman with irregular menses, hirsutism, and acne (BMI 31) is suspected of PCOS, but the physician wants to exclude an adrenal enzyme deficiency first. Best initial screening test?",
+   "options": [
+    "Luteal progesterone",
+    "24-h urine free cortisol",
+    "Morning follicular 17-OH progesterone",
+    "CYP21 genetic testing"
+   ],
+   "correct": 2,
+   "explain": "A <b>morning follicular 17-OH progesterone</b> is the best initial screen for non-classic CAH (21-hydroxylase deficiency). If &gt;6 nmol/L, confirm with an ACTH stimulation test.",
+   "guide": {
+    "f": "W27_02_Hyperandrogenism.html",
+    "t": "2 · NCAH screen",
+    "s": "17-OHP"
+   }
+  }
+ ],
+ "cards": [
+  {
+   "id": "wk27_c01",
+   "sys": "Endo",
+   "topic": "Cycle",
+   "type": "qa",
+   "guide": {
+    "f": "W27_01_Menstrual_Menopause.html",
+    "t": "1 · Cycle",
+    "s": "phases"
+   },
+   "prompt": "What hormone dominates each menstrual phase, and what triggers ovulation?",
+   "answer": "Follicular = estradiol (FSH-driven); luteal = progesterone (corpus luteum). Peak estradiol gives positive feedback → LH surge → ovulation."
+  },
+  {
+   "id": "wk27_c02",
+   "sys": "Endo",
+   "topic": "Ovulation test",
+   "type": "qa",
+   "guide": {
+    "f": "W27_01_Menstrual_Menopause.html",
+    "t": "1 · Ovulation",
+    "s": "confirm"
+   },
+   "prompt": "How is ovulation confirmed?",
+   "answer": "A mid-luteal (day-21) serum progesterone >30 nmol/L confirms a functioning corpus luteum."
+  },
+  {
+   "id": "wk27_c03",
+   "sys": "Endo",
+   "topic": "HRT uterus",
+   "type": "qa",
+   "guide": {
+    "f": "W27_01_Menstrual_Menopause.html",
+    "t": "1 · HRT",
+    "s": "progestogen rule"
+   },
+   "prompt": "When must a progestogen accompany estrogen in HRT?",
+   "answer": "Whenever the uterus is intact — unopposed estrogen causes endometrial hyperplasia/cancer. Estrogen alone only after hysterectomy."
+  },
+  {
+   "id": "wk27_c04",
+   "sys": "Endo",
+   "topic": "HRT route",
+   "type": "qa",
+   "guide": {
+    "f": "W27_01_Menstrual_Menopause.html",
+    "t": "1 · HRT",
+    "s": "transdermal"
+   },
+   "prompt": "When is transdermal estrogen preferred over oral?",
+   "answer": "With migraine-with-aura, hypertension, obesity, or VTE risk — it bypasses hepatic first-pass metabolism and has less impact on clotting factors."
+  },
+  {
+   "id": "wk27_c05",
+   "sys": "Endo",
+   "topic": "PCOS",
+   "type": "qa",
+   "guide": {
+    "f": "W27_02_Hyperandrogenism.html",
+    "t": "2 · PCOS",
+    "s": "Rotterdam"
+   },
+   "prompt": "State the Rotterdam criteria for PCOS.",
+   "answer": "2 of 3: oligo/anovulation, clinical or biochemical hyperandrogenism, and polycystic ovaries on ultrasound."
+  },
+  {
+   "id": "wk27_c06",
+   "sys": "Endo",
+   "topic": "NCAH",
+   "type": "qa",
+   "guide": {
+    "f": "W27_02_Hyperandrogenism.html",
+    "t": "2 · NCAH",
+    "s": "screen"
+   },
+   "prompt": "How do you distinguish NCAH from PCOS?",
+   "answer": "Screen with a morning follicular 17-OH progesterone (>6 nmol/L suggests NCAH); confirm with ACTH stimulation. NCAH is partial 21-hydroxylase deficiency."
+  },
+  {
+   "id": "wk27_c07",
+   "sys": "Endo",
+   "topic": "Virilization",
+   "type": "qa",
+   "guide": {
+    "f": "W27_02_Hyperandrogenism.html",
+    "t": "2 · Virilization",
+    "s": "red flag"
+   },
+   "prompt": "What does rapid-onset virilization with very high DHEAS suggest?",
+   "answer": "An androgen-secreting adrenal tumour (DHEAS is 100% adrenal). Very high testosterone with normal DHEAS points to an ovarian source."
+  },
+  {
+   "id": "wk27_c08",
+   "sys": "Endo",
+   "topic": "Spironolactone",
+   "type": "qa",
+   "guide": {
+    "f": "W27_02_Hyperandrogenism.html",
+    "t": "2 · Anti-androgens",
+    "s": "caution"
+   },
+   "prompt": "What is the key safety caution with spironolactone for hirsutism?",
+   "answer": "It is teratogenic — requires reliable contraception and is contraindicated when trying to conceive. It also raises potassium."
+  },
+  {
+   "id": "wk27_c09",
+   "sys": "Endo",
+   "topic": "Differentiation",
+   "type": "qa",
+   "guide": {
+    "f": "W27_03_Male_Hypogonadism.html",
+    "t": "3 · Differentiation",
+    "s": "cells"
+   },
+   "prompt": "What do Leydig cells, Sertoli cells, and 5α-reductase each contribute to male development?",
+   "answer": "Leydig → testosterone (Wolffian/internal); Sertoli → MIF (regress Mullerian ducts); 5α-reductase → DHT (external genitalia)."
+  },
+  {
+   "id": "wk27_c10",
+   "sys": "Endo",
+   "topic": "Klinefelter",
+   "type": "qa",
+   "guide": {
+    "f": "W27_03_Male_Hypogonadism.html",
+    "t": "3 · Klinefelter",
+    "s": "features"
+   },
+   "prompt": "Describe the Klinefelter (47,XXY) presentation and hormone profile.",
+   "answer": "Tall, small firm testes, gynecomastia, learning difficulties, azoospermia; primary hypogonadism with high LH/FSH and low testosterone."
+  },
+  {
+   "id": "wk27_c11",
+   "sys": "Endo",
+   "topic": "TRT",
+   "type": "qa",
+   "guide": {
+    "f": "W27_03_Male_Hypogonadism.html",
+    "t": "3 · TRT",
+    "s": "fertility"
+   },
+   "prompt": "Why is testosterone replacement contraindicated in men seeking fertility?",
+   "answer": "It suppresses the HPG axis, collapsing intratesticular testosterone and halting spermatogenesis (also causes erythrocytosis, worsens OSA, shrinks testes)."
+  },
+  {
+   "id": "wk27_c12",
+   "sys": "Endo",
+   "topic": "Semen analysis",
+   "type": "qa",
+   "guide": {
+    "f": "W27_04_Male_Infertility_ED.html",
+    "t": "4 · Semen",
+    "s": "severe oligospermia"
+   },
+   "prompt": "What semen concentration defines severe oligospermia, and what does it trigger?",
+   "answer": "<5 million/mL — warrants a genetic workup (karyotype, Y-chromosome microdeletion). Normal concentration is ≥15 million/mL."
+  },
+  {
+   "id": "wk27_c13",
+   "sys": "Endo",
+   "topic": "ED mechanism",
+   "type": "qa",
+   "guide": {
+    "f": "W27_04_Male_Infertility_ED.html",
+    "t": "4 · ED",
+    "s": "cGMP"
+   },
+   "prompt": "How do PDE5 inhibitors produce an erection?",
+   "answer": "NO → guanylate cyclase → ↑cGMP → ↓intracellular calcium → smooth-muscle relaxation. PDE5 inhibitors block cGMP breakdown, amplifying this."
+  },
+  {
+   "id": "wk27_c14",
+   "sys": "Endo",
+   "topic": "Gynecomastia",
+   "type": "qa",
+   "guide": {
+    "f": "W27_04_Male_Infertility_ED.html",
+    "t": "4 · Gynecomastia",
+    "s": "workup"
+   },
+   "prompt": "List the 8-test gynecomastia workup.",
+   "answer": "Total testosterone, estradiol, prolactin, hCG, LH, TSH, LFTs, and creatinine."
+  },
+  {
+   "id": "wk27_c15",
+   "sys": "Endo",
+   "topic": "CAIS",
+   "type": "qa",
+   "guide": {
+    "f": "W27_05_GAHT_DSD.html",
+    "t": "5 · DSD",
+    "s": "CAIS"
+   },
+   "prompt": "Why is there no uterus in complete androgen insensitivity (46,XY)?",
+   "answer": "Testes form and Sertoli cells make MIF (normal receptors), which regresses the Mullerian ducts; the androgen-receptor defect only blocks external masculinization."
+  },
+  {
+   "id": "wk27_c16",
+   "sys": "Endo",
+   "topic": "GAHT monitoring",
+   "type": "qa",
+   "guide": {
+    "f": "W27_05_GAHT_DSD.html",
+    "t": "5 · GAHT",
+    "s": "monitoring"
+   },
+   "prompt": "What is monitored on masculinizing vs feminizing therapy?",
+   "answer": "Masculinizing (testosterone): Hb/Hct (cis-male ranges) for erythrocytosis. Feminizing (spironolactone): potassium for hyperkalemia; cyproterone: LFTs and prolactin."
+  },
+  {
+   "id": "wk27_c17",
+   "sys": "Endo",
+   "topic": "Ovulation",
+   "type": "mcq",
+   "guide": {
+    "f": "W27_01_Menstrual_Menopause.html",
+    "t": "1 · Ovulation",
+    "s": "cut-off"
+   },
+   "prompt": "A day-21 progesterone confirming ovulation is above:",
+   "options": [
+    "3 nmol/L",
+    "10 nmol/L",
+    "30 nmol/L",
+    "100 nmol/L"
+   ],
+   "correct": 2
+  },
+  {
+   "id": "wk27_c18",
+   "sys": "Endo",
+   "topic": "Menopause dx",
+   "type": "mcq",
+   "guide": {
+    "f": "W27_01_Menstrual_Menopause.html",
+    "t": "1 · Menopause",
+    "s": "definition"
+   },
+   "prompt": "Menopause is diagnosed after amenorrhea for:",
+   "options": [
+    "3 months",
+    "6 months",
+    "12 months",
+    "24 months"
+   ],
+   "correct": 2
+  },
+  {
+   "id": "wk27_c19",
+   "sys": "Endo",
+   "topic": "NCAH screen",
+   "type": "mcq",
+   "guide": {
+    "f": "W27_02_Hyperandrogenism.html",
+    "t": "2 · NCAH",
+    "s": "best screen"
+   },
+   "prompt": "Best initial screen to differentiate NCAH from PCOS:",
+   "options": [
+    "Luteal progesterone",
+    "Morning follicular 17-OH progesterone",
+    "24-h urine cortisol",
+    "Random testosterone"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk27_c20",
+   "sys": "Endo",
+   "topic": "PCOS ovulation",
+   "type": "mcq",
+   "guide": {
+    "f": "W27_02_Hyperandrogenism.html",
+    "t": "2 · PCOS",
+    "s": "first-line"
+   },
+   "prompt": "First-line agent to induce ovulation in PCOS:",
+   "options": [
+    "Metformin",
+    "Letrozole",
+    "Spironolactone",
+    "Leuprolide"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk27_c21",
+   "sys": "Endo",
+   "topic": "DHEAS source",
+   "type": "mcq",
+   "guide": {
+    "f": "W27_02_Hyperandrogenism.html",
+    "t": "2 · Androgens",
+    "s": "source"
+   },
+   "prompt": "DHEAS is produced almost entirely by the:",
+   "options": [
+    "Ovary",
+    "Adrenal gland",
+    "Peripheral fat",
+    "Liver"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk27_c22",
+   "sys": "Endo",
+   "topic": "Klinefelter labs",
+   "type": "mcq",
+   "guide": {
+    "f": "W27_03_Male_Hypogonadism.html",
+    "t": "3 · Klinefelter",
+    "s": "profile"
+   },
+   "prompt": "Klinefelter syndrome shows which gonadotropin pattern?",
+   "options": [
+    "Low LH/FSH",
+    "High LH/FSH",
+    "Normal LH/FSH",
+    "High LH, low FSH"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk27_c23",
+   "sys": "Endo",
+   "topic": "DHT enzyme",
+   "type": "mcq",
+   "guide": {
+    "f": "W27_03_Male_Hypogonadism.html",
+    "t": "3 · Differentiation",
+    "s": "DHT"
+   },
+   "prompt": "External male genitalia require testosterone conversion to DHT by:",
+   "options": [
+    "Aromatase",
+    "5α-reductase",
+    "21-hydroxylase",
+    "17,20-lyase"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk27_c24",
+   "sys": "Endo",
+   "topic": "Severe oligospermia",
+   "type": "mcq",
+   "guide": {
+    "f": "W27_04_Male_Infertility_ED.html",
+    "t": "4 · Semen",
+    "s": "threshold"
+   },
+   "prompt": "Severe oligospermia is a sperm concentration below:",
+   "options": [
+    "15 million/mL",
+    "10 million/mL",
+    "5 million/mL",
+    "1 million/mL"
+   ],
+   "correct": 2
+  },
+  {
+   "id": "wk27_c25",
+   "sys": "Endo",
+   "topic": "GAHT GnRH",
+   "type": "mcq",
+   "guide": {
+    "f": "W27_05_GAHT_DSD.html",
+    "t": "5 · GnRH agonist",
+    "s": "mechanism"
+   },
+   "prompt": "A continuously dosed GnRH agonist suppresses testosterone by:",
+   "options": [
+    "Blocking the androgen receptor",
+    "Desensitizing pituitary GnRH receptors",
+    "Inhibiting 5α-reductase",
+    "Destroying Leydig cells"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk27_c26",
+   "sys": "Endo",
+   "topic": "GAHT spironolactone",
+   "type": "mcq",
+   "guide": {
+    "f": "W27_05_GAHT_DSD.html",
+    "t": "5 · Feminizing",
+    "s": "monitor"
+   },
+   "prompt": "Spironolactone in feminizing therapy requires monitoring for:",
+   "options": [
+    "Hypokalemia",
+    "Hyperkalemia",
+    "Polycythemia",
+    "Hypercalcemia"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk27_c27",
+   "sys": "Endo",
+   "topic": "HRT contraindications",
+   "type": "multi",
+   "guide": {
+    "f": "W27_01_Menstrual_Menopause.html",
+    "t": "1 · HRT",
+    "s": "contraindications"
+   },
+   "prompt": "Select contraindications to systemic estrogen HRT:",
+   "options": [
+    "Undiagnosed vaginal bleeding",
+    "History of VTE",
+    "Active breast cancer",
+    "Active liver disease",
+    "Bothersome hot flashes"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk27_c28",
+   "sys": "Endo",
+   "topic": "Rotterdam",
+   "type": "multi",
+   "guide": {
+    "f": "W27_02_Hyperandrogenism.html",
+    "t": "2 · PCOS",
+    "s": "criteria"
+   },
+   "prompt": "Select the Rotterdam criteria components (2 of 3 needed):",
+   "options": [
+    "Oligo/anovulation",
+    "Clinical/biochemical hyperandrogenism",
+    "Polycystic ovaries on ultrasound",
+    "Obesity",
+    "Insulin resistance"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "id": "wk27_c29",
+   "sys": "Endo",
+   "topic": "TRT risks",
+   "type": "multi",
+   "guide": {
+    "f": "W27_03_Male_Hypogonadism.html",
+    "t": "3 · TRT",
+    "s": "adverse"
+   },
+   "prompt": "Select recognised risks of testosterone replacement:",
+   "options": [
+    "Erythrocytosis",
+    "Impaired spermatogenesis",
+    "Worsened sleep apnea",
+    "Testicular shrinkage",
+    "Increased SHBG"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk27_c30",
+   "sys": "Endo",
+   "topic": "Hirsutism causes",
+   "type": "multi",
+   "guide": {
+    "f": "W27_02_Hyperandrogenism.html",
+    "t": "2 · Hirsutism",
+    "s": "causes"
+   },
+   "prompt": "Select common causes of hirsutism:",
+   "options": [
+    "PCOS",
+    "Non-classic CAH",
+    "Androgen-secreting tumour",
+    "Hypothyroidism"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "id": "wk27_c31",
+   "sys": "Endo",
+   "topic": "Low SHBG",
+   "type": "multi",
+   "guide": {
+    "f": "W27_03_Male_Hypogonadism.html",
+    "t": "3 · SHBG",
+    "s": "modifiers"
+   },
+   "prompt": "Select factors that LOWER SHBG (raising free testosterone):",
+   "options": [
+    "Obesity",
+    "Type 2 diabetes",
+    "Glucocorticoids",
+    "Aging",
+    "Hyperthyroidism"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "id": "wk27_c32",
+   "sys": "Endo",
+   "topic": "Ovulation confirm",
+   "type": "cloze",
+   "guide": {
+    "f": "W27_01_Menstrual_Menopause.html",
+    "t": "1 · Ovulation",
+    "s": "value"
+   },
+   "text": "A day-{{21}} progesterone above {{30}} nmol/L confirms ovulation.",
+   "explain": "Reflects a functioning corpus luteum in the luteal phase."
+  },
+  {
+   "id": "wk27_c33",
+   "sys": "Endo",
+   "topic": "NCAH screen",
+   "type": "cloze",
+   "guide": {
+    "f": "W27_02_Hyperandrogenism.html",
+    "t": "2 · NCAH",
+    "s": "cut-off"
+   },
+   "text": "NCAH is screened with a morning follicular {{17-OH progesterone}} level above {{6}} nmol/L.",
+   "explain": "Confirm an elevated screen with an ACTH stimulation test."
+  },
+  {
+   "id": "wk27_c34",
+   "sys": "Endo",
+   "topic": "Semen normals",
+   "type": "cloze",
+   "guide": {
+    "f": "W27_04_Male_Infertility_ED.html",
+    "t": "4 · Semen",
+    "s": "limits"
+   },
+   "text": "Normal semen: volume ≥ {{1.5}} mL, concentration ≥ {{15}} million/mL, total motility ≥ {{40}}%.",
+   "explain": "Strict-criteria morphology lower limit is ≥4%."
+  },
+  {
+   "id": "wk27_c35",
+   "sys": "Endo",
+   "topic": "Erection pathway",
+   "type": "cloze",
+   "guide": {
+    "f": "W27_04_Male_Infertility_ED.html",
+    "t": "4 · ED",
+    "s": "second messenger"
+   },
+   "text": "Nitric oxide raises {{cGMP}}, which lowers intracellular {{calcium}} → smooth-muscle relaxation; PDE5 inhibitors block cGMP breakdown.",
+   "explain": "The basis of sildenafil's action."
+  },
+  {
+   "id": "wk27_c36",
+   "sys": "Endo",
+   "topic": "DSD enzymes",
+   "type": "cloze",
+   "guide": {
+    "f": "W27_05_GAHT_DSD.html",
+    "t": "5 · DSD",
+    "s": "5-ARD"
+   },
+   "text": "In {{5-alpha-reductase}} deficiency, internal male ducts are normal but external genitalia are feminized because {{DHT}} is not made.",
+   "explain": "DHT drives external virilization."
+  },
+  {
+   "id": "wk27_c37",
+   "sys": "Endo",
+   "topic": "Hyperandrogenism workup",
+   "type": "order",
+   "guide": {
+    "f": "W27_02_Hyperandrogenism.html",
+    "t": "2 · Workup",
+    "s": "sequence"
+   },
+   "prompt": "Order the workup of a hyperandrogenic woman:",
+   "items": [
+    "History + exam (rate of onset, virilization)",
+    "Screen 17-OH progesterone to exclude NCAH",
+    "Measure testosterone / DHEAS (localize source)",
+    "Diagnose PCOS by Rotterdam if mimics excluded",
+    "Treat (lifestyle/metformin, anti-androgen, letrozole if conceiving)"
+   ]
+  },
+  {
+   "id": "wk27_c38",
+   "sys": "Endo",
+   "topic": "Male infertility workup",
+   "type": "order",
+   "guide": {
+    "f": "W27_04_Male_Infertility_ED.html",
+    "t": "4 · Workup",
+    "s": "sequence"
+   },
+   "prompt": "Order the male infertility workup:",
+   "items": [
+    "Investigate after 1 year of trying",
+    "Semen analysis after 2–7 days abstinence",
+    "Repeat a confirmatory sample",
+    "Genetic testing if severe oligospermia/azoospermia"
+   ]
+  },
+  {
+   "id": "wk27_c39",
+   "sys": "Endo",
+   "topic": "HRT decision",
+   "type": "order",
+   "guide": {
+    "f": "W27_01_Menstrual_Menopause.html",
+    "t": "1 · HRT",
+    "s": "decision"
+   },
+   "prompt": "Order the HRT decision steps:",
+   "items": [
+    "Confirm bothersome symptoms + candidacy (<60 / within 10 yr)",
+    "Check contraindications (VTE, breast cancer, liver)",
+    "Add a progestogen if the uterus is intact",
+    "Choose route (transdermal if VTE/HTN/migraine risk)"
+   ]
+  },
+  {
+   "id": "wk27_c40",
+   "sys": "Endo",
+   "topic": "Amenorrhea → pattern",
+   "type": "match",
+   "guide": {
+    "f": "W27_02_Hyperandrogenism.html",
+    "t": "2 · Amenorrhea",
+    "s": "localize"
+   },
+   "prompt": "Match the amenorrhea cause to its gonadotropins:",
+   "pairs": [
+    [
+     "Functional hypothalamic amenorrhea",
+     "Low LH/FSH, low estradiol"
+    ],
+    [
+     "Premature ovarian insufficiency",
+     "High LH/FSH, low estradiol"
+    ],
+    [
+     "Turner syndrome (45,X)",
+     "High LH/FSH, low estradiol"
+    ],
+    [
+     "Prolactinoma",
+     "Low/normal LH/FSH (central)"
+    ]
+   ]
+  },
+  {
+   "id": "wk27_c41",
+   "sys": "Endo",
+   "topic": "Drug → action",
+   "type": "match",
+   "guide": {
+    "f": "W27_02_Hyperandrogenism.html",
+    "t": "2 · Therapeutics",
+    "s": "anti-androgens"
+   },
+   "prompt": "Match the agent to its action in hyperandrogenism:",
+   "pairs": [
+    [
+     "Letrozole",
+     "Aromatase inhibitor — induces ovulation"
+    ],
+    [
+     "Spironolactone",
+     "Androgen-receptor blocker (teratogen)"
+    ],
+    [
+     "Combined OCP",
+     "↑SHBG, ↓LH"
+    ],
+    [
+     "Eflornithine",
+     "Topical — slows hair growth"
+    ],
+    [
+     "Metformin",
+     "Insulin sensitizer"
+    ]
+   ]
+  },
+  {
+   "id": "wk27_c42",
+   "sys": "Endo",
+   "topic": "DSD → mechanism",
+   "type": "match",
+   "guide": {
+    "f": "W27_05_GAHT_DSD.html",
+    "t": "5 · DSD",
+    "s": "mechanisms"
+   },
+   "prompt": "Match the disorder to its mechanism:",
+   "pairs": [
+    [
+     "CAIS (46,XY)",
+     "Androgen-receptor defect; MIF still regresses uterus"
+    ],
+    [
+     "5α-reductase deficiency",
+     "No DHT → female external, male internal"
+    ],
+    [
+     "Classic 21-OH CAH (46,XX)",
+     "Virilized female + salt-wasting"
+    ],
+    [
+     "Klinefelter (47,XXY)",
+     "Primary hypogonadism, azoospermia"
+    ]
+   ]
+  },
+  {
+   "id": "wk27_c43",
+   "sys": "Endo",
+   "topic": "GAHT → monitor",
+   "type": "match",
+   "guide": {
+    "f": "W27_05_GAHT_DSD.html",
+    "t": "5 · GAHT",
+    "s": "monitoring"
+   },
+   "prompt": "Match the GAHT agent to its monitoring concern:",
+   "pairs": [
+    [
+     "Testosterone",
+     "Hb/Hct (erythrocytosis)"
+    ],
+    [
+     "Spironolactone",
+     "Potassium (hyperkalemia)"
+    ],
+    [
+     "Cyproterone acetate",
+     "LFTs and prolactin"
+    ],
+    [
+     "Estradiol",
+     "VTE risk (prefer transdermal if high risk)"
+    ]
+   ]
+  },
+  {
+   "id": "wk27_c44",
+   "sys": "Endo",
+   "topic": "Vaginal estrogen",
+   "type": "qa",
+   "guide": {
+    "f": "W27_01_Menstrual_Menopause.html",
+    "t": "1 · HRT",
+    "s": "genitourinary"
+   },
+   "prompt": "When is vaginal low-dose estrogen preferred?",
+   "answer": "For isolated genitourinary symptoms (dryness, dyspareunia) — minimal systemic absorption, so it avoids systemic risks."
+  },
+  {
+   "id": "wk27_c45",
+   "sys": "Endo",
+   "topic": "11β-hydroxylase",
+   "type": "qa",
+   "guide": {
+    "f": "W27_02_Hyperandrogenism.html",
+    "t": "2 · CAH variants",
+    "s": "11β"
+   },
+   "prompt": "How does 11β-hydroxylase deficiency differ from 21-hydroxylase deficiency?",
+   "answer": "11β-deficiency builds up deoxycorticosterone (mineralocorticoid effect) → hypertension, whereas 21-hydroxylase deficiency tends to salt-wasting."
+  },
+  {
+   "id": "wk27_c46",
+   "sys": "Endo",
+   "topic": "Psychogenic ED",
+   "type": "qa",
+   "guide": {
+    "f": "W27_04_Male_Infertility_ED.html",
+    "t": "4 · ED",
+    "s": "psychogenic clues"
+   },
+   "prompt": "What features point to psychogenic erectile dysfunction?",
+   "answer": "Sudden onset, situational occurrence, preserved spontaneous morning erections, and a normal physical exam."
+  },
+  {
+   "id": "wk27_c47",
+   "sys": "Endo",
+   "topic": "Contraception safety",
+   "type": "qa",
+   "guide": {
+    "f": "W27_06_Contraception.html",
+    "t": "6 · Estrogen risk",
+    "s": "when to avoid"
+   },
+   "prompt": "When should estrogen-containing contraception be avoided?",
+   "answer": "Migraine with aura, smoker ≥35, VTE/thrombophilia, uncontrolled hypertension, active breast cancer, or <3 weeks postpartum — use a progestin-only method or the copper IUD instead."
+  },
+  {
+   "id": "wk27_c48",
+   "sys": "Endo",
+   "topic": "Emergency contraception",
+   "type": "mcq",
+   "guide": {
+    "f": "W27_06_Contraception.html",
+    "t": "6 · EC",
+    "s": "most effective"
+   },
+   "prompt": "The most effective form of emergency contraception is:",
+   "options": [
+    "Levonorgestrel pill",
+    "Ulipristal acetate",
+    "Copper IUD",
+    "Combined OCP double dose"
+   ],
+   "correct": 2
+  },
+  {
+   "id": "wk27_c49",
+   "sys": "Endo",
+   "topic": "COC mechanism",
+   "type": "mcq",
+   "guide": {
+    "f": "W27_06_Contraception.html",
+    "t": "6 · Combined",
+    "s": "mechanism"
+   },
+   "prompt": "The primary contraceptive action of the progestin in a combined pill is to:",
+   "options": [
+    "Thicken cervical mucus only",
+    "Suppress LH and block ovulation",
+    "Increase SHBG",
+    "Cause endometrial proliferation"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk27_c50",
+   "sys": "Endo",
+   "topic": "Male puberty",
+   "type": "mcq",
+   "guide": {
+    "f": "W27_07_Puberty.html",
+    "t": "7 · Puberty",
+    "s": "first sign"
+   },
+   "prompt": "The first physical sign of puberty in boys is:",
+   "options": [
+    "Pubic hair",
+    "Testicular enlargement (≥4 mL)",
+    "Voice change",
+    "Growth spurt"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk27_c51",
+   "sys": "Endo",
+   "topic": "Precocious puberty",
+   "type": "qa",
+   "guide": {
+    "f": "W27_07_Puberty.html",
+    "t": "7 · Precocious",
+    "s": "central vs peripheral"
+   },
+   "prompt": "How do gonadotropins separate central from peripheral precocious puberty, and how is central treated?",
+   "answer": "Central (GnRH-dependent) has high/pubertal LH/FSH; peripheral has suppressed LH/FSH (hormone from gonad/adrenal). Central is treated with a continuous GnRH agonist to halt progression and preserve height."
+  },
+  {
+   "id": "wk27_c52",
+   "sys": "Endo",
+   "topic": "Delayed puberty",
+   "type": "qa",
+   "guide": {
+    "f": "W27_07_Puberty.html",
+    "t": "7 · Delayed",
+    "s": "constitutional"
+   },
+   "prompt": "What is the most common cause of delayed puberty, and its hallmark?",
+   "answer": "Constitutional delay of growth and puberty — a benign, often familial 'late bloomer' pattern with a delayed bone age and normal eventual puberty; reassurance is appropriate."
+  },
+  {
+   "id": "wk27_c53",
+   "sys": "Endo",
+   "topic": "AUB causes",
+   "type": "cloze",
+   "guide": {
+    "f": "W27_08_AUB_Dysmenorrhea.html",
+    "t": "8 · AUB",
+    "s": "framework"
+   },
+   "text": "Abnormal uterine bleeding is classified by {{PALM-COEIN}}; postmenopausal bleeding is {{endometrial cancer}} until proven otherwise.",
+   "explain": "PALM = structural, COEIN = non-structural causes."
+  },
+  {
+   "id": "wk27_c54",
+   "sys": "Endo",
+   "topic": "Adolescent menorrhagia",
+   "type": "mcq",
+   "guide": {
+    "f": "W27_08_AUB_Dysmenorrhea.html",
+    "t": "8 · AUB",
+    "s": "coagulopathy"
+   },
+   "prompt": "An adolescent with heavy menstrual bleeding since menarche should be screened for:",
+   "options": [
+    "Endometrial cancer",
+    "A coagulopathy (e.g. von Willebrand disease)",
+    "Menopause",
+    "Fibroids"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk27_c55",
+   "sys": "Endo",
+   "topic": "Dysmenorrhea",
+   "type": "qa",
+   "guide": {
+    "f": "W27_08_AUB_Dysmenorrhea.html",
+    "t": "8 · Dysmenorrhea",
+    "s": "primary vs secondary"
+   },
+   "prompt": "Distinguish primary from secondary dysmenorrhea and give first-line therapy for primary.",
+   "answer": "Primary = no pathology, prostaglandin-mediated cramping starting in adolescence → NSAIDs ± combined hormonal contraception. Secondary = underlying disease (endometriosis, adenomyosis, fibroids, PID) → treat the cause."
+  },
+  {
+   "id": "wk27_c56",
+   "sys": "Endo",
+   "topic": "Contraception → use",
+   "type": "match",
+   "guide": {
+    "f": "W27_06_Contraception.html",
+    "t": "6 · Methods",
+    "s": "match"
+   },
+   "prompt": "Match the contraceptive to a key feature:",
+   "pairs": [
+    [
+     "Copper IUD",
+     "Hormone-free; also emergency contraception"
+    ],
+    [
+     "Levonorgestrel IUD",
+     "Reduces menstrual bleeding"
+    ],
+    [
+     "Depot medroxyprogesterone",
+     "Reversible bone-density loss"
+    ],
+    [
+     "Ulipristal",
+     "EC effective up to 5 days"
+    ]
+   ]
+  }
+ ],
+ "guides": [
+  {
+   "file": "W27_01_Menstrual_Menopause.html",
+   "title": "Week 27 · 1 Menstrual Cycle, Ovulation &amp; Menopause",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Menstrual Cycle, Ovulation &amp;amp; Menopause</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Cycle &amp; HRT</div><h1>Menstrual Cycle, Ovulation &amp;amp; Menopause</h1></div><div class='r'>Week 27 &middot; Endocrine III &mdash; Reproductive<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The two-phase cycle and how to confirm ovulation, then menopause and the HRT rules — including who must get a progestogen and who gets the patch.</p>\n<h2>The cycle in two phases</h2>\n<table>\n<tr><th>Follicular</th><th>Luteal</th></tr>\n<tr><td>FSH &rarr; follicle &rarr; estradiol; endometrial proliferation; \"type E\" wet mucus</td><td>Corpus luteum &rarr; progesterone; decidualization; \"type G\" dry mucus; &uarr; basal body temp</td></tr>\n</table>\n<p>Peak estradiol gives <b>positive feedback &rarr; LH surge &rarr; ovulation</b>.</p>\n<ul>\n<li><b>Confirm ovulation:</b> a <b>day-21 progesterone &gt;30 nmol/L</b> is the single most useful test.</li>\n<li><b>Progesterone challenge:</b> 10&ndash;14 days of progestogen &mdash; a withdrawal bleed means the endometrium was adequately estrogenized; <b>no bleed = chronic hypoestrogenemia</b>.</li>\n</ul>\n<h2>Menopause</h2>\n<p><b>Diagnosis:</b> 12 consecutive months of amenorrhea with no other cause (loss of follicular activity). <b>Symptoms:</b> vasomotor (hot flashes, night sweats), genitourinary (dryness, dyspareunia), accelerated bone loss, sleep/mood change.</p>\n<h2>Hormone replacement therapy</h2>\n<div class='band warn'><div class='t'>Intact uterus &rarr; estrogen MUST be opposed</div>\nEstrogen alone only if there is <b>no uterus</b> (hysterectomy). With a uterus, add a <b>progestogen</b> to prevent unopposed-estrogen endometrial hyperplasia/cancer.</div>\n<table>\n<tr><th>Situation</th><th>Choice</th></tr>\n<tr><td>Symptomatic, &lt;60 or within 10 yr of menopause</td><td>Systemic HRT reasonable</td></tr>\n<tr><td>Migraine w/ aura, HTN, obesity, VTE risk</td><td><b>Transdermal</b> estrogen (bypasses hepatic first-pass)</td></tr>\n<tr><td>Isolated genitourinary symptoms</td><td><b>Vaginal</b> low-dose estrogen (minimal systemic absorption)</td></tr>\n</table>\n<ul>\n<li><b>Contraindications:</b> undiagnosed vaginal bleeding, breast/estrogen-dependent cancer, active CHD, VTE or stroke history, thrombophilia, active liver disease.</li>\n<li><b>Non-hormonal options</b> for vasomotor symptoms: SSRIs/SNRIs, gabapentin/pregabalin, CBT, hypnosis.</li>\n</ul>\n<div class='key'>Exam pattern: intact uterus + HTN &rarr; <b>transdermal estrogen + progestogen</b> (patch avoids first-pass; progestogen protects the endometrium).</div>\n</div>"
+  },
+  {
+   "file": "W27_02_Hyperandrogenism.html",
+   "title": "Week 27 · 2 Female Hyperandrogenism &amp; Amenorrhea",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Female Hyperandrogenism &amp;amp; Amenorrhea</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>PCOS &amp; mimics</div><h1>Female Hyperandrogenism &amp;amp; Amenorrhea</h1></div><div class='r'>Week 27 &middot; Endocrine III &mdash; Reproductive<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Localize amenorrhea by gonadotropins, separate PCOS from NCAH and an androgen-secreting tumour, and match the anti-androgen to the patient.</p>\n<h2>Amenorrhea by gonadotropins</h2>\n<table>\n<tr><th>Pattern</th><th>Localizes to</th><th>Causes</th></tr>\n<tr><td><b>Low/normal LH &amp; FSH</b>, low estradiol</td><td>Hypothalamic/pituitary (hypogonadotropic)</td><td>Functional hypothalamic amenorrhea (female-athlete triad), prolactinoma</td></tr>\n<tr><td><b>High LH &amp; FSH</b>, low estradiol</td><td>Ovarian failure (hypergonadotropic)</td><td>Turner (45,X), premature ovarian insufficiency</td></tr>\n</table>\n<h2>PCOS</h2>\n<p>Insulin resistance &rarr; hyperinsulinemia &rarr; theca-cell androgen excess; high LH:FSH &rarr; follicular arrest &amp; anovulation. <b>Rotterdam = 2 of 3:</b> oligo/anovulation, clinical/biochemical hyperandrogenism, polycystic ovaries on US.</p>\n<ul>\n<li><b>Manage:</b> lifestyle + metformin (insulin sensitivity); <b>letrozole</b> (aromatase inhibitor) is first-line to induce ovulation.</li>\n</ul>\n<h2>Non-classic CAH (21-hydroxylase)</h2>\n<div class='band warn'><div class='t'>The PCOS mimic to exclude</div>\nPartial 21-hydroxylase deficiency &rarr; &darr;cortisol &rarr; &uarr;ACTH &rarr; precursor backup into androgens. Presents post-puberty like PCOS (irregular menses, acne, hirsutism). <b>Screen with a morning follicular 17-OH progesterone &gt;6 nmol/L</b>; confirm with ACTH stim. Treat with low-dose <b>dexamethasone</b> at bedtime to suppress the morning ACTH drive. (11&beta;-hydroxylase deficiency instead builds up deoxycorticosterone &rarr; hypertension.)</div>\n<h2>Hirsutism vs virilization</h2>\n<ul>\n<li><b>Hirsutism:</b> terminal hair in androgen areas; Ferriman-Gallwey &ge;6&ndash;8. Causes: PCOS (most), NCAH, rarely tumour.</li>\n<li><b>Virilization</b> (deep voice, clitoromegaly, temporal balding, &uarr;muscle) &mdash; <b>rapid onset is a red flag for an androgen-secreting tumour</b>. Very high <b>DHEAS</b> (100% adrenal) &rarr; adrenal source; very high <b>testosterone</b> with normal DHEAS &rarr; ovarian source.</li>\n</ul>\n<h2>Anti-androgen pharmacology</h2>\n<table>\n<tr><th>Drug</th><th>Action / caution</th></tr>\n<tr><td>Combined OCP</td><td>&uarr;SHBG (lowers free T) + progestin suppresses LH</td></tr>\n<tr><td><b>Spironolactone</b></td><td>Androgen-receptor + aldosterone blocker; <b>teratogen &mdash; needs contraception</b></td></tr>\n<tr><td>Eflornithine cream</td><td>Topical ODC inhibitor; slows growth, doesn't remove existing hair</td></tr>\n<tr><td>Metformin</td><td>Insulin sensitizer (PCOS)</td></tr>\n</table>\n<div class='key'>A woman trying to conceive with PCOS hirsutism: spironolactone is <b>contraindicated</b> (teratogen). Rapid virilization + huge DHEAS = adrenal androgen-secreting carcinoma until proven otherwise.</div>\n</div>"
+  },
+  {
+   "file": "W27_03_Male_Hypogonadism.html",
+   "title": "Week 27 · 3 Andrology: Hypogonadism, Klinefelter &amp; TRT",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Andrology: Hypogonadism, Klinefelter &amp;amp; TRT</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Male axis</div><h1>Andrology: Hypogonadism, Klinefelter &amp;amp; TRT</h1></div><div class='r'>Week 27 &middot; Endocrine III &mdash; Reproductive<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Sexual differentiation, primary vs secondary hypogonadism, the Klinefelter picture, and why testosterone replacement sterilizes.</p>\n<h2>Sexual differentiation (who makes what)</h2>\n<ul>\n<li><b>SRY</b> (Y chromosome) &rarr; testis.</li>\n<li><b>Leydig cells</b> &rarr; testosterone &rarr; Wolffian ducts (internal male).</li>\n<li><b>Sertoli cells</b> &rarr; Mullerian-inhibiting factor &rarr; regress Mullerian ducts.</li>\n<li><b>5&alpha;-reductase</b> &rarr; converts testosterone to <b>DHT</b> &rarr; external male genitalia.</li>\n</ul>\n<h2>Hypogonadism by gonadotropins</h2>\n<table>\n<tr><th>Primary (testicular)</th><th>Secondary (central)</th></tr>\n<tr><td><b>High LH &amp; FSH</b>, low testosterone</td><td><b>Low LH &amp; FSH</b>, low testosterone</td></tr>\n<tr><td>Klinefelter, orchitis, chemo/radiation</td><td>Pituitary/hypothalamic disease, hyperprolactinemia</td></tr>\n</table>\n<h2>Klinefelter (47,XXY)</h2>\n<p>Tall stature, <b>small firm testes</b>, gynecomastia, learning difficulties, azoospermia. Fibrosed seminiferous tubules &rarr; low testosterone/inhibin &rarr; loss of feedback &rarr; <b>high LH &amp; FSH</b> (primary hypogonadism).</p>\n<h2>Testosterone (binding &amp; SHBG)</h2>\n<ul>\n<li>Only <b>0.5&ndash;3% of testosterone is free</b> and active.</li>\n<li><b>&darr;SHBG (raises free T):</b> obesity, T2DM, glucocorticoids. <b>&uarr;SHBG (lowers free T):</b> aging, hyperthyroidism, estrogens.</li>\n</ul>\n<div class='band warn'><div class='t'>TRT sterilizes</div>\nExogenous testosterone suppresses the HPG axis, collapsing <b>intratesticular</b> testosterone and halting spermatogenesis &mdash; it is <b>contraindicated in men seeking fertility</b>. Other risks: erythrocytosis, worsened sleep apnea, testicular shrinkage.</div>\n<div class='key'>Tall, small firm testes, gynecomastia, azoospermia, high LH/FSH = Klinefelter. Never give TRT to \"boost\" fertility — it does the opposite.</div>\n</div>"
+  },
+  {
+   "file": "W27_04_Male_Infertility_ED.html",
+   "title": "Week 27 · 4 Semen Analysis, Erectile Dysfunction &amp; Gynecomastia",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Semen Analysis, Erectile Dysfunction &amp;amp; Gynecomastia</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Infertility &amp; ED</div><h1>Semen Analysis, Erectile Dysfunction &amp;amp; Gynecomastia</h1></div><div class='r'>Week 27 &middot; Endocrine III &mdash; Reproductive<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The strict semen-analysis numbers (and when to send genetics), the erection pathway and PDE5 inhibitors, and the 8-test gynecomastia workup.</p>\n<h2>Semen analysis (strict criteria)</h2>\n<table>\n<tr><th>Parameter</th><th>Lower limit</th></tr>\n<tr><td>Abstinence before test</td><td>2&ndash;7 days</td></tr>\n<tr><td>Volume</td><td>&ge; 1.5 mL</td></tr>\n<tr><td>Concentration</td><td>&ge; 15 million/mL</td></tr>\n<tr><td>Motility (total / progressive)</td><td>&ge; 40% / &ge; 32%</td></tr>\n<tr><td>Morphology (strict)</td><td>&ge; 4% normal forms</td></tr>\n</table>\n<ul>\n<li>Investigate after <b>1 year</b> of unprotected intercourse; confirm with <b>2 samples</b> (day-to-day variability).</li>\n<li>Oligospermia &lt;15 million/mL; <b>severe oligospermia &lt;5 million/mL &rarr; genetic workup</b> (karyotype, Y-microdeletion); azoospermia = 0.</li>\n</ul>\n<h2>Erectile dysfunction</h2>\n<p><b>PENIS:</b> Psychogenic, Endocrine, Neurologic, Insufficiency of blood flow, Substances. <b>Psychogenic</b> = sudden, situational, preserved morning erections, normal exam.</p>\n<div class='band'><div class='t'>The erection pathway</div>\nNitric oxide &rarr; guanylate cyclase &rarr; &uarr;<b>cGMP</b> &rarr; &darr;intracellular calcium &rarr; smooth-muscle relaxation. <b>PDE5 inhibitors</b> (sildenafil) block cGMP breakdown. If they fail: intracavernosal alprostadil (&plusmn; phentolamine/papaverine).</div>\n<h2>Gynecomastia</h2>\n<ul>\n<li><b>Physiologic</b> (infancy, puberty, old age) vs <b>pathologic</b> (liver disease, hyperthyroidism, drugs, hCG/estrogen-secreting tumours). Idiopathic is most common overall.</li>\n<li><b>8-test workup:</b> total testosterone, estradiol, prolactin, hCG, LH, TSH, LFTs, creatinine.</li>\n<li><b>Manage:</b> reassure physiologic; SERM (<b>tamoxifen</b>) for acute tender disease; surgery for chronic/fibrotic.</li>\n</ul>\n<div class='key'>Concentration &lt;5 million/mL = severe oligospermia &rarr; genetics, not testosterone (TRT worsens it). PDE5 inhibitors work by raising cGMP, not by blocking calcium directly.</div>\n</div>"
+  },
+  {
+   "file": "W27_05_GAHT_DSD.html",
+   "title": "Week 27 · 5 Gender-Affirming Hormone Therapy &amp; Sexual Differentiation",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Gender-Affirming Hormone Therapy &amp;amp; Sexual Differentiation</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>GAHT &amp; DSD</div><h1>Gender-Affirming Hormone Therapy &amp;amp; Sexual Differentiation</h1></div><div class='r'>Week 27 &middot; Endocrine III &mdash; Reproductive<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Feminizing and masculinizing regimens with their monitoring traps, and the classic disorders of sex development.</p>\n<h2>Feminizing therapy (estrogen + anti-androgen)</h2>\n<table>\n<tr><th>Agent</th><th>Effect / monitoring</th></tr>\n<tr><td><b>Estradiol</b></td><td>Breast development, fat redistribution; VTE/stroke risk &mdash; <b>transdermal preferred if &gt;45 or VTE risk</b>. Measure mid-dose, target &lt;735 pmol/L</td></tr>\n<tr><td><b>Spironolactone</b></td><td>Androgen-receptor + aldosterone blocker &rarr; <b>monitor for hyperkalemia</b> (and creatinine)</td></tr>\n<tr><td><b>Cyproterone acetate</b></td><td>Stronger anti-androgen &mdash; monitor LFTs and <b>prolactin</b>; mood effects</td></tr>\n<tr><td><b>GnRH agonist</b> (leuprolide)</td><td>Continuous dosing <b>down-regulates</b> pituitary receptors &rarr; suppresses LH/FSH</td></tr>\n</table>\n<h2>Masculinizing therapy</h2>\n<p><b>Testosterone</b> (IM/SC/gel) &rarr; voice deepening, facial/body hair, clitoromegaly (irreversible). <b>Monitor Hb/Hct using cis-male ranges</b> for erythrocytosis; can worsen OSA.</p>\n<div class='band warn'><div class='t'>Two GAHT exam traps</div>\nSpironolactone &rarr; <b>hyperkalemia</b> (not hypokalemia). The GnRH agonist works by <b>continuous</b> exposure desensitizing the pituitary (paradoxical), not by blocking the receptor peripherally. Discuss <b>fertility preservation BEFORE</b> starting cross-sex hormones (potentially irreversible).</div>\n<h2>Disorders of sex development</h2>\n<table>\n<tr><th>Condition</th><th>Mechanism / picture</th></tr>\n<tr><td><b>Complete androgen insensitivity (CAIS)</b>, 46,XY</td><td>Testes form; Sertoli MIF regresses Mullerian ducts (no uterus); androgen receptor defect &rarr; female external phenotype, absent uterus, scant pubic hair</td></tr>\n<tr><td><b>5&alpha;-reductase deficiency</b>, 46,XY</td><td>Normal internal male ducts (testosterone ok) but ambiguous/female external genitalia (no DHT)</td></tr>\n<tr><td><b>Classic 21-hydroxylase CAH</b>, 46,XX</td><td>Virilized female genitalia + salt-wasting (low aldosterone) at birth</td></tr>\n</table>\n<div class='key'>CAIS has a uterus-absent female with a 46,XY karyotype because MIF still works; 5&alpha;-reductase deficiency keeps internal male anatomy but feminizes the outside (no DHT).</div>\n</div>"
+  },
+  {
+   "file": "W27_06_Contraception.html",
+   "title": "Week 27 · 6 Contraception",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Contraception</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Family planning</div><h1>Contraception</h1></div><div class='r'>Week 27 &middot; Endocrine III &mdash; Reproductive<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>How each method works, the estrogen-containing-method red flags, and what to reach for as emergency contraception.</p>\n<h2>Methods by mechanism</h2>\n<table>\n<tr><th>Method</th><th>How it works</th></tr>\n<tr><td><b>Combined (estrogen+progestin)</b> pill/patch/ring</td><td>Progestin suppresses LH (blocks ovulation); estrogen stabilizes the cycle + suppresses FSH</td></tr>\n<tr><td>Progestin-only pill</td><td>Thickens cervical mucus, thins endometrium, variable ovulation suppression</td></tr>\n<tr><td><b>Depot medroxyprogesterone</b> (injection)</td><td>Suppresses ovulation; amenorrhea common; reversible bone-density loss</td></tr>\n<tr><td><b>LARC: copper IUD</b></td><td>Spermicidal/inflammatory; hormone-free</td></tr>\n<tr><td><b>LARC: levonorgestrel IUD</b></td><td>Local progestin &rarr; endometrial atrophy, mucus thickening; reduces bleeding</td></tr>\n</table>\n<p>LARC (IUD, implant) are the most effective reversible methods (least user-dependent).</p>\n<div class='band warn'><div class='t'>When estrogen-containing methods are unsafe</div>\nAvoid combined (estrogen) contraception with <b>migraine with aura</b>, <b>smoker &ge;35</b>, history of <b>VTE</b>/thrombophilia, uncontrolled hypertension, active breast cancer, or &lt;3 weeks postpartum. A <b>progestin-only</b> method or the <b>copper IUD</b> is the safe alternative.</div>\n<h2>Emergency contraception</h2>\n<table>\n<tr><th>Option</th><th>Notes</th></tr>\n<tr><td><b>Copper IUD</b></td><td>Most effective; up to 5 days after; also ongoing contraception</td></tr>\n<tr><td><b>Ulipristal acetate</b></td><td>Progesterone-receptor modulator; effective up to 5 days; more effective than levonorgestrel, esp. later/higher BMI</td></tr>\n<tr><td><b>Levonorgestrel</b></td><td>OTC; best within 72 h; less effective with delay/higher BMI</td></tr>\n</table>\n<div class='key'>Migraine-with-aura or smoker &ge;35 &rarr; <b>no estrogen</b> (progestin-only or copper IUD). The copper IUD is both the most effective emergency contraceptive and ongoing contraception.</div>\n</div>"
+  },
+  {
+   "file": "W27_07_Puberty.html",
+   "title": "Week 27 · 7 Normal &amp; Abnormal Puberty",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Normal &amp;amp; Abnormal Puberty</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Development</div><h1>Normal &amp;amp; Abnormal Puberty</h1></div><div class='r'>Week 27 &middot; Endocrine III &mdash; Reproductive<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The order of pubertal events, and how to separate benign constitutional delay from pathology at both ends.</p>\n<h2>Normal sequence</h2>\n<ul>\n<li><b>Girls:</b> thelarche (breast) &rarr; pubarche &rarr; growth spurt &rarr; menarche; first sign is breast budding (~8&ndash;13 yr).</li>\n<li><b>Boys:</b> <b>testicular enlargement</b> (&ge;4 mL) is the first sign (~9&ndash;14 yr) &rarr; pubarche &rarr; growth spurt (later than girls).</li>\n<li>Tanner staging tracks breast/genital and pubic-hair development 1&ndash;5.</li>\n</ul>\n<h2>Precocious puberty (girls &lt;8, boys &lt;9)</h2>\n<table>\n<tr><th>Central (GnRH-dependent)</th><th>Peripheral (GnRH-independent)</th></tr>\n<tr><td>Early HPG activation; high LH/FSH; idiopathic (esp. girls) or CNS lesion</td><td>Gonadal/adrenal hormone source; <b>low</b> LH/FSH (suppressed); CAH, tumour, McCune-Albright</td></tr>\n</table>\n<div class='band warn'><div class='t'>Work it up</div>\nBone age (advanced), then LH/FSH (basal + GnRH-stimulated). Central precocious puberty is treated with a <b>GnRH agonist</b> (continuous &rarr; pituitary desensitization) to halt progression and preserve adult height. Peripheral causes are treated at the source.</div>\n<h2>Delayed puberty (no breast by 13 / no testicular enlargement by 14)</h2>\n<ul>\n<li><b>Constitutional delay</b> (most common) &mdash; the \"late bloomer,\" often familial, delayed bone age, normal eventual puberty; reassurance.</li>\n<li><b>Hypogonadotropic</b> (low LH/FSH): functional (illness, malnutrition, exercise), Kallmann syndrome (+ anosmia), pituitary disease.</li>\n<li><b>Hypergonadotropic</b> (high LH/FSH): gonadal failure &mdash; Turner (45,X), Klinefelter (47,XXY).</li>\n</ul>\n<div class='key'>First male pubertal sign = testicular enlargement. Precocious puberty: gonadotropins separate central (high) from peripheral (low). Constitutional delay is benign with delayed bone age.</div>\n</div>"
+  },
+  {
+   "file": "W27_08_AUB_Dysmenorrhea.html",
+   "title": "Week 27 · 8 Abnormal Uterine Bleeding &amp; Dysmenorrhea",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Abnormal Uterine Bleeding &amp;amp; Dysmenorrhea</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Bleeding &amp; pain</div><h1>Abnormal Uterine Bleeding &amp;amp; Dysmenorrhea</h1></div><div class='r'>Week 27 &middot; Endocrine III &mdash; Reproductive<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>A structured cause list for abnormal bleeding (PALM-COEIN), plus primary vs secondary dysmenorrhea and PMS/PMDD.</p>\n<h2>Abnormal uterine bleeding &mdash; PALM-COEIN</h2>\n<table>\n<tr><th>Structural (PALM)</th><th>Non-structural (COEIN)</th></tr>\n<tr><td><b>P</b>olyp, <b>A</b>denomyosis, <b>L</b>eiomyoma (fibroid), <b>M</b>alignancy/hyperplasia</td><td><b>C</b>oagulopathy, <b>O</b>vulatory dysfunction, <b>E</b>ndometrial, <b>I</b>atrogenic, <b>N</b>ot otherwise classified</td></tr>\n</table>\n<div class='band warn'><div class='t'>Don't miss</div>\n<b>Postmenopausal bleeding</b> is endometrial cancer until proven otherwise &rarr; transvaginal ultrasound &plusmn; endometrial biopsy. In adolescents with heavy menstrual bleeding from menarche, screen for a <b>coagulopathy</b> (e.g. von Willebrand disease). Always exclude <b>pregnancy</b> first in reproductive-age bleeding.</div>\n<h2>Workup &amp; management</h2>\n<ul>\n<li>&beta;-hCG, CBC/ferritin, TSH; ultrasound for structure; endometrial sampling if at risk (age &ge;45, risk factors, or persistent).</li>\n<li><b>Ovulatory dysfunction (AUB-O):</b> hormonal therapy &mdash; combined OCP or a levonorgestrel IUD; <b>tranexamic acid</b> or NSAIDs for heavy bleeding.</li>\n</ul>\n<h2>Dysmenorrhea</h2>\n<table>\n<tr><th>Primary</th><th>Secondary</th></tr>\n<tr><td>No pathology; <b>prostaglandin</b>-mediated cramping starting with menses in adolescence</td><td>Underlying disease: endometriosis, adenomyosis, fibroids, PID</td></tr>\n<tr><td>First-line: <b>NSAIDs</b> &plusmn; combined hormonal contraception</td><td>Treat the cause; consider laparoscopy for endometriosis</td></tr>\n</table>\n<h2>PMS / PMDD</h2>\n<p>Cyclic physical and mood symptoms in the <b>luteal phase</b> resolving with menses. PMDD is the severe mood-predominant form &mdash; first-line is an <b>SSRI</b> (luteal or continuous) &plusmn; a combined OCP.</p>\n<div class='key'>Postmenopausal bleeding &rarr; rule out endometrial cancer. Primary dysmenorrhea is prostaglandin-driven &rarr; NSAIDs; new or worsening pain with deep dyspareunia suggests secondary causes like endometriosis.</div>\n</div>"
+  },
+  {
+   "file": "W27_09_Cram_Sheet.html",
+   "title": "Week 27 · 9 Cram Sheet",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Week 27 · 9 Cram Sheet</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.35;-webkit-font-smoothing:antialiased}\n.page{max-width:1180px;margin:0 auto;padding:18px 20px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:8px;margin-bottom:12px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:26px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.emerg{border:1.5px solid var(--hi);border-radius:6px;background:rgba(0,0,0,.02);padding:9px 12px;margin-bottom:13px}\n.emerg .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--hi);font-weight:600;margin-bottom:5px}\n.emerg .items{columns:3;column-gap:22px;font-size:12px;line-height:1.42}\n.emerg .items div{break-inside:avoid;margin-bottom:3px}\n.emerg b{color:var(--hi)}\n.cols{column-count:4;column-gap:14px}\n@media(max-width:1040px){.cols{column-count:3}}\n@media(max-width:760px){.cols{column-count:2}}\n@media(max-width:520px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(0,0,0,.02);padding:8px 9px 7px;margin:0 0 11px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;padding-bottom:4px;border-bottom:1.5px solid var(--line);color:var(--accent);display:flex;justify-content:space-between;align-items:baseline;gap:6px}\n.card h2 .wk{color:var(--soft);font-size:8.5px;font-weight:500;letter-spacing:.06em;white-space:nowrap}\n.row{margin:0 0 3.5px;font-size:11.5px;line-height:1.32}\n.row .tg{font-weight:600;color:var(--ink)}\n.row .ar{color:var(--soft)}\n.row .ar::before{content:\"\\2192 \";color:var(--accent);font-weight:600}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:5px 0}\n.dnm{color:var(--hi);font-weight:700}\n.foot{margin-top:10px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:landscape;margin:9mm}body{font-size:8.4px}.page{max-width:none;padding:0}.cols{column-count:4;column-gap:8px}.emerg .items{columns:3}.card{margin-bottom:6px}.head h1{font-size:19px}}\n</style><div class='page'><div class='head'><div><div class='k'>Night-Before High-Yield</div><h1>Endocrine III &amp;mdash; Reproductive</h1></div><div class='r'>Week 27 &middot; Endocrine III &mdash; Reproductive<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><div class='emerg'><div class='t'>★ Do-not-miss &middot; first-step reflexes</div><div class='items'><div><b>Rapid virilization</b> (deep voice, clitoromegaly) + very high DHEAS &rarr; androgen-secreting adrenal tumour until proven otherwise</div><div><b>Salt-wasting classic CAH</b> in a virilized newborn &rarr; low aldosterone &mdash; life-threatening, needs glucocorticoid + mineralocorticoid</div><div><b>Spironolactone in a woman who may conceive</b> &rarr; teratogen &mdash; mandatory contraception / avoid</div><div><b>Testosterone for fertility</b> &rarr; WRONG &mdash; it suppresses spermatogenesis; never give TRT to a man seeking conception</div><div><b>Estrogen HRT</b> with VTE/stroke history or active estrogen-dependent cancer &rarr; contraindicated</div></div></div><div class='cols'><div class='card'><h2>Cycle &amp; menopause <span class='wk'>Cycle</span></h2><div class='row'><span class='tg'>Follicular / luteal</span> <span class='ar'>estradiol / progesterone</span></div><div class='row'><span class='tg'>Confirm ovulation</span> <span class='ar'>day-21 progesterone >30 nmol/L</span></div><div class='row'><span class='tg'>Menopause dx</span> <span class='ar'>12 months amenorrhea</span></div><div class='row'><span class='tg'>Intact uterus</span> <span class='ar'>estrogen + progestogen (always)</span></div><div class='row'><span class='tg'>VTE/HTN/migraine</span> <span class='ar'>transdermal estrogen</span></div><div class='row'><span class='tg'>Genitourinary only</span> <span class='ar'>vaginal low-dose estrogen</span></div></div><div class='card'><h2>Hyperandrogenism <span class='wk'>Hyperandrogen</span></h2><div class='row'><span class='tg'>PCOS</span> <span class='ar'>Rotterdam 2 of 3; metformin + letrozole</span></div><div class='row'><span class='tg'>NCAH screen</span> <span class='ar'>morning follicular 17-OHP >6 → ACTH stim</span></div><div class='row'><span class='tg'>NCAH treat</span> <span class='ar'>bedtime low-dose dexamethasone</span></div><div class='row'><span class='tg'>Virilization + high DHEAS</span> <span class='ar'>adrenal tumour</span></div><div class='row'><span class='tg'>Spironolactone</span> <span class='ar'>anti-androgen but teratogen</span></div><div class='row'><span class='tg'>Eflornithine</span> <span class='ar'>topical, slows growth only</span></div></div><div class='card'><h2>Male hypogonadism <span class='wk'>Andrology</span></h2><div class='row'><span class='tg'>Primary</span> <span class='ar'>high LH/FSH, low T (Klinefelter)</span></div><div class='row'><span class='tg'>Secondary</span> <span class='ar'>low LH/FSH, low T (central)</span></div><div class='row'><span class='tg'>Klinefelter</span> <span class='ar'>47,XXY; tall, small firm testes, azoospermia</span></div><div class='row'><span class='tg'>TRT</span> <span class='ar'>sterilizes (suppresses HPG); erythrocytosis</span></div><div class='row'><span class='tg'>SHBG ↓ (free T up)</span> <span class='ar'>obesity, T2DM, glucocorticoids</span></div></div><div class='card'><h2>Infertility / ED / gynecomastia <span class='wk'>Repro male</span></h2><div class='row'><span class='tg'>Semen normals</span> <span class='ar'>vol ≥1.5, conc ≥15M, motility ≥40%, morph ≥4%</span></div><div class='row'><span class='tg'>Severe oligospermia</span> <span class='ar'><5M/mL → genetics</span></div><div class='row'><span class='tg'>Psychogenic ED</span> <span class='ar'>sudden, situational, AM erections intact</span></div><div class='row'><span class='tg'>PDE5 inhibitor</span> <span class='ar'>blocks cGMP breakdown</span></div><div class='row'><span class='tg'>Gynecomastia workup</span> <span class='ar'>TT, E2, PRL, hCG, LH, TSH, LFTs, Cr</span></div><div class='row'><span class='tg'>Tender gynecomastia</span> <span class='ar'>trial tamoxifen (SERM)</span></div></div><div class='card'><h2>GAHT &amp; DSD <span class='wk'>GAHT/DSD</span></h2><div class='row'><span class='tg'>Feminizing</span> <span class='ar'>estradiol + anti-androgen; transdermal if >45/VTE</span></div><div class='row'><span class='tg'>Spironolactone</span> <span class='ar'>monitor hyperkalemia</span></div><div class='row'><span class='tg'>Cyproterone</span> <span class='ar'>LFTs + prolactin</span></div><div class='row'><span class='tg'>GnRH agonist</span> <span class='ar'>continuous → desensitizes pituitary</span></div><div class='row'><span class='tg'>Masculinizing</span> <span class='ar'>testosterone; monitor Hct (cis-male)</span></div><div class='row'><span class='tg'>CAIS</span> <span class='ar'>46,XY, no uterus (MIF), female external</span></div><div class='row'><span class='tg'>5α-reductase def</span> <span class='ar'>male internal, female external</span></div></div><div class='card'><h2>Contraception <span class='wk'>Contraception</span></h2><div class='row'><span class='tg'>Combined</span> <span class='ar'>progestin blocks LH/ovulation + estrogen</span></div><div class='row'><span class='tg'>No estrogen if</span> <span class='ar'>migraine w/ aura, smoker ≥35, VTE</span></div><div class='row'><span class='tg'>Most effective reversible</span> <span class='ar'>LARC (IUD, implant)</span></div><div class='row'><span class='tg'>Emergency: copper IUD</span> <span class='ar'>most effective; up to 5 days</span></div><div class='row'><span class='tg'>Emergency: ulipristal</span> <span class='ar'>up to 5 days; > levonorgestrel</span></div><div class='row'><span class='tg'>Emergency: levonorgestrel</span> <span class='ar'>OTC; best <72 h</span></div></div><div class='card'><h2>Puberty <span class='wk'>Puberty</span></h2><div class='row'><span class='tg'>First sign — girls</span> <span class='ar'>breast budding (thelarche)</span></div><div class='row'><span class='tg'>First sign — boys</span> <span class='ar'>testicular enlargement ≥4 mL</span></div><div class='row'><span class='tg'>Precocious central</span> <span class='ar'>high LH/FSH → GnRH agonist</span></div><div class='row'><span class='tg'>Precocious peripheral</span> <span class='ar'>low LH/FSH (CAH, tumour, McCune-Albright)</span></div><div class='row'><span class='tg'>Constitutional delay</span> <span class='ar'>benign, delayed bone age, familial</span></div><div class='row'><span class='tg'>Kallmann</span> <span class='ar'>hypogonadotropic + anosmia</span></div></div><div class='card'><h2>AUB &amp; pain <span class='wk'>AUB</span></h2><div class='row'><span class='tg'>Cause list</span> <span class='ar'>PALM-COEIN</span></div><div class='row'><span class='tg'>Postmenopausal bleeding</span> <span class='ar'>endometrial cancer until proven otherwise</span></div><div class='row'><span class='tg'>Heavy bleed from menarche</span> <span class='ar'>screen coagulopathy (vWD)</span></div><div class='row'><span class='tg'>AUB-O treatment</span> <span class='ar'>OCP / LNG-IUD; TXA or NSAIDs</span></div><div class='row'><span class='tg'>Primary dysmenorrhea</span> <span class='ar'>prostaglandin-driven → NSAIDs</span></div><div class='row'><span class='tg'>PMDD</span> <span class='ar'>SSRI ± combined OCP</span></div></div></div><div class='foot'>Week 27 &middot; Endocrine III &mdash; Reproductive &middot; cram sheet &middot; cue &rarr; answer</div></div>"
+  }
+ ],
+ "drugs": [
+  {
+   "id": "rx:estradiol",
+   "name": "Estradiol",
+   "class": "rx:estrogen",
+   "facets": {
+    "use": "Menopausal HRT; feminizing GAHT",
+    "mechanism": "Estrogen receptor agonist",
+    "adverse": "VTE/stroke, breast tenderness",
+    "contra": "Estrogen-dependent cancer, VTE/stroke history, active liver disease",
+    "monitoring": "Prefer transdermal if VTE/HTN/migraine risk; oppose with progestogen if uterus intact"
+   },
+   "ref": {
+    "topic": "Menopause / HRT",
+    "guide": "W27_01_Menstrual_Menopause.html",
+    "week": "Week 27 · Endocrine III — Reproductive"
+   }
+  },
+  {
+   "id": "rx:progesterone",
+   "name": "Progesterone / progestogen",
+   "class": "rx:progestogen",
+   "facets": {
+    "use": "Endometrial protection in HRT; progesterone challenge",
+    "mechanism": "Progestogen — decidualizes/opposes estrogen",
+    "adverse": "Mood, bloating"
+   },
+   "ref": {
+    "topic": "Menopause / HRT",
+    "guide": "W27_01_Menstrual_Menopause.html",
+    "week": "Week 27 · Endocrine III — Reproductive"
+   }
+  },
+  {
+   "id": "rx:letrozole",
+   "name": "Letrozole",
+   "class": "rx:aromatase-inhibitor",
+   "facets": {
+    "use": "Ovulation induction in PCOS",
+    "mechanism": "Aromatase inhibitor — lowers estrogen feedback → FSH rise",
+    "adverse": "Hot flashes, fatigue"
+   },
+   "ref": {
+    "topic": "PCOS",
+    "guide": "W27_02_Hyperandrogenism.html",
+    "week": "Week 27 · Endocrine III — Reproductive"
+   }
+  },
+  {
+   "id": "rx:metformin",
+   "name": "Metformin",
+   "class": "rx:biguanide",
+   "facets": {
+    "use": "Insulin resistance in PCOS",
+    "mechanism": "Biguanide — improves insulin sensitivity, lowers androgen drive",
+    "adverse": "GI upset, B12 malabsorption"
+   },
+   "ref": {
+    "topic": "PCOS",
+    "guide": "W27_02_Hyperandrogenism.html",
+    "week": "Week 27 · Endocrine III — Reproductive"
+   }
+  },
+  {
+   "id": "rx:spironolactone",
+   "name": "Spironolactone",
+   "class": "rx:aldosterone-antagonist",
+   "facets": {
+    "use": "Hirsutism; feminizing anti-androgen",
+    "mechanism": "Androgen-receptor + aldosterone antagonist",
+    "adverse": "Hyperkalemia, teratogenic — needs contraception",
+    "monitoring": "Potassium, creatinine"
+   },
+   "ref": {
+    "topic": "Hyperandrogenism",
+    "guide": "W27_02_Hyperandrogenism.html",
+    "week": "Week 27 · Endocrine III — Reproductive"
+   }
+  },
+  {
+   "id": "rx:combined-ocp",
+   "name": "Combined oral contraceptive",
+   "class": "rx:combined-oc",
+   "facets": {
+    "use": "Hirsutism / menstrual regulation",
+    "mechanism": "Estrogen ↑SHBG (↓free T) + progestin suppresses LH",
+    "adverse": "VTE risk",
+    "contra": "Migraine with aura, VTE history"
+   },
+   "ref": {
+    "topic": "Hyperandrogenism",
+    "guide": "W27_02_Hyperandrogenism.html",
+    "week": "Week 27 · Endocrine III — Reproductive"
+   }
+  },
+  {
+   "id": "rx:eflornithine",
+   "name": "Eflornithine (topical)",
+   "class": "rx:odc-inhibitor",
+   "facets": {
+    "use": "Facial hirsutism (topical)",
+    "mechanism": "Ornithine decarboxylase inhibitor — slows follicular proliferation",
+    "adverse": "Local irritation; does not remove existing hair"
+   },
+   "ref": {
+    "topic": "Hyperandrogenism",
+    "guide": "W27_02_Hyperandrogenism.html",
+    "week": "Week 27 · Endocrine III — Reproductive"
+   }
+  },
+  {
+   "id": "rx:dexamethasone",
+   "name": "Dexamethasone",
+   "class": "rx:corticosteroid",
+   "facets": {
+    "use": "Non-classic CAH (suppress ACTH drive)",
+    "mechanism": "Glucocorticoid — bedtime dose suppresses the morning ACTH surge",
+    "adverse": "Cushingoid effects with excess"
+   },
+   "ref": {
+    "topic": "NCAH",
+    "guide": "W27_02_Hyperandrogenism.html",
+    "week": "Week 27 · Endocrine III — Reproductive"
+   }
+  },
+  {
+   "id": "rx:testosterone",
+   "name": "Testosterone",
+   "class": "rx:androgen",
+   "facets": {
+    "use": "Male hypogonadism; masculinizing GAHT",
+    "mechanism": "Androgen receptor agonist",
+    "adverse": "Erythrocytosis, OSA, testicular shrinkage",
+    "contra": "Men seeking fertility (suppresses spermatogenesis)",
+    "monitoring": "Hb/Hct, PSA"
+   },
+   "ref": {
+    "topic": "Hypogonadism",
+    "guide": "W27_03_Male_Hypogonadism.html",
+    "week": "Week 27 · Endocrine III — Reproductive"
+   }
+  },
+  {
+   "id": "rx:sildenafil",
+   "name": "Sildenafil",
+   "class": "rx:pde5-inhibitor",
+   "facets": {
+    "use": "Erectile dysfunction (first-line)",
+    "mechanism": "PDE5 inhibitor — prevents cGMP breakdown",
+    "adverse": "Headache, flushing, hypotension",
+    "contra": "Concurrent nitrates"
+   },
+   "ref": {
+    "topic": "Erectile dysfunction",
+    "guide": "W27_04_Male_Infertility_ED.html",
+    "week": "Week 27 · Endocrine III — Reproductive"
+   }
+  },
+  {
+   "id": "rx:alprostadil",
+   "name": "Alprostadil",
+   "class": "rx:prostaglandin",
+   "facets": {
+    "use": "ED refractory to PDE5 inhibitors",
+    "mechanism": "Prostaglandin E1 — intracavernosal vasodilation",
+    "adverse": "Penile pain, priapism"
+   },
+   "ref": {
+    "topic": "Erectile dysfunction",
+    "guide": "W27_04_Male_Infertility_ED.html",
+    "week": "Week 27 · Endocrine III — Reproductive"
+   }
+  },
+  {
+   "id": "rx:tamoxifen",
+   "name": "Tamoxifen",
+   "class": "rx:serm",
+   "facets": {
+    "use": "Acute tender gynecomastia",
+    "mechanism": "SERM — antagonizes breast estrogen receptors",
+    "adverse": "VTE, hot flashes"
+   },
+   "ref": {
+    "topic": "Gynecomastia",
+    "guide": "W27_04_Male_Infertility_ED.html",
+    "week": "Week 27 · Endocrine III — Reproductive"
+   }
+  },
+  {
+   "id": "rx:cyproterone",
+   "name": "Cyproterone acetate",
+   "class": "rx:anti-androgen",
+   "facets": {
+    "use": "Feminizing GAHT (anti-androgen)",
+    "mechanism": "Strong central + peripheral anti-androgen",
+    "adverse": "Hepatotoxicity, elevated prolactin, mood effects",
+    "monitoring": "LFTs, prolactin"
+   },
+   "ref": {
+    "topic": "GAHT",
+    "guide": "W27_05_GAHT_DSD.html",
+    "week": "Week 27 · Endocrine III — Reproductive"
+   }
+  },
+  {
+   "id": "rx:leuprolide",
+   "name": "Leuprolide",
+   "class": "rx:gnrh-agonist",
+   "facets": {
+    "use": "GAHT / puberty suppression; central precocious puberty",
+    "mechanism": "GnRH agonist — continuous dosing desensitizes the pituitary → ↓LH/FSH",
+    "adverse": "Hot flashes, bone loss"
+   },
+   "ref": {
+    "topic": "GAHT / puberty",
+    "guide": "W27_05_GAHT_DSD.html",
+    "week": "Week 27 · Endocrine III — Reproductive"
+   }
+  },
+  {
+   "id": "rx:levonorgestrel",
+   "name": "Levonorgestrel",
+   "class": "rx:progestogen",
+   "facets": {
+    "use": "Contraception (pill, IUD); emergency contraception",
+    "mechanism": "Progestin — thickens mucus, suppresses ovulation, thins endometrium",
+    "adverse": "Irregular bleeding",
+    "dosing": "EC best within 72 h"
+   },
+   "ref": {
+    "topic": "Contraception",
+    "guide": "W27_06_Contraception.html",
+    "week": "Week 27 · Endocrine III — Reproductive"
+   }
+  },
+  {
+   "id": "rx:medroxyprogesterone",
+   "name": "Medroxyprogesterone acetate (depot)",
+   "class": "rx:progestogen",
+   "facets": {
+    "use": "Depot injectable contraception",
+    "mechanism": "Progestin — suppresses ovulation",
+    "adverse": "Reversible bone-density loss, weight gain, amenorrhea"
+   },
+   "ref": {
+    "topic": "Contraception",
+    "guide": "W27_06_Contraception.html",
+    "week": "Week 27 · Endocrine III — Reproductive"
+   }
+  },
+  {
+   "id": "rx:ulipristal",
+   "name": "Ulipristal acetate",
+   "class": "rx:progesterone-modulator",
+   "facets": {
+    "use": "Emergency contraception (up to 5 days)",
+    "mechanism": "Selective progesterone receptor modulator — delays ovulation",
+    "adverse": "Headache, nausea"
+   },
+   "ref": {
+    "topic": "Contraception",
+    "guide": "W27_06_Contraception.html",
+    "week": "Week 27 · Endocrine III — Reproductive"
+   }
+  },
+  {
+   "id": "rx:tranexamic-acid",
+   "name": "Tranexamic acid (TXA)",
+   "class": "rx:antifibrinolytic",
+   "facets": {
+    "use": "Heavy menstrual bleeding (AUB)",
+    "mechanism": "Antifibrinolytic — stabilizes clot",
+    "adverse": "GI upset",
+    "contra": "Active thromboembolism"
+   },
+   "ref": {
+    "topic": "Abnormal uterine bleeding",
+    "guide": "W27_08_AUB_Dysmenorrhea.html",
+    "week": "Week 27 · Endocrine III — Reproductive"
+   }
+  }
+ ]
+}
