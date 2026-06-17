@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.15 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.16 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.15)
+# Study Suite — Content Authoring Guide (v2.16)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,12 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.15 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **Authoring system version:** 2.16 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **What changed in guide v2.16:** packs may now carry an **optional `drugs[]` array** that powers the app's new
+> **Pharmacology** view — a cross-week drug index built from every active pack (new §6b). It's additive and optional
+> (packs without it are unaffected); when present, the app merges drug records across enabled packs by a stable
+> `rx:` id, groups them by class, and renders faceted fields (use / mechanism / dosing / cautions / adverse /
+> monitoring / interactions) with source links back to the originating week's guide. §2 schema + §7 checklist updated.
 > **What changed in guide v2.15:** **every pack now ends with a one-page CRAM SHEET** as its final
 > `guides[]` entry (new §6a) — a dense, print-friendly "night-before" rapid review of the pack's week(s):
 > a do-not-miss/emergency strip, then compact topic cards of *cue → answer* rows. It uses the same
@@ -196,7 +201,8 @@ A pack is a single JSON object:
   "updated": "2026-01-15",
   "questions": [ /* exam questions, each with a difficulty */ ],
   "cards":     [ /* spaced-repetition cards */ ],
-  "guides":    [ /* embedded topic guides: {file, title, html} */ ]
+  "guides":    [ /* embedded topic guides: {file, title, html} */ ],
+  "drugs":     [ /* OPTIONAL — pharmacology records for the Pharmacology view; see §6b */ ]
 }
 ```
 
@@ -210,6 +216,7 @@ A pack is a single JSON object:
 | `created` / `updated` | recommended | ISO date strings. |
 | `questions` / `cards` | arrays | Either may be empty, but a useful pack has both. |
 | `guides` | yes if any item links a guide | Embedded topic guides — see §6. |
+| `drugs` | optional | Pharmacology records that feed the app's cross-week **Pharmacology** view. Additive/optional — omit it and nothing changes. See **§6b**. |
 | `school` / `year` / `term` / `course` / `weeks` | optional | Curriculum placement, e.g. `"UofT — Temerty Medicine"` / `"Year 1"` / `"Fall"` (term — optional) / `"CPC 2"` / `"Weeks 25–28"`. Used to **group and chronologically sort** packs in the hosted site's Default study packs panel and the user's Content library; ignored otherwise. `term` sits **between `year` and `course`** and is omitted by most packs (harmless when absent — the level simply doesn't render). Ask the user how their program is organized — see *Organizational hierarchy & sorting* below — and include the fields that apply. |
 
 ### Organizational hierarchy & sorting
@@ -597,6 +604,46 @@ same dark-mode-safe CSS contract from §6) — just purpose-built as a single hi
 
 > Density over completeness: the cram sheet distills, it doesn't re-teach. If it reads like a paragraph,
 > tighten it into cue → answer rows.
+
+---
+
+## 6b. Pharmacology data (`drugs[]`) — optional, powers the Pharmacology view
+
+A pack **may** include a top-level **`drugs[]`** array. It is **optional and additive** — leave it out and nothing changes; include it and the app's **Pharmacology** view builds a cross-week **drug index** from every *enabled* pack: it merges your records (and those from other packs) by a stable id, groups them by drug class, and shows the faceted fields with a link back to the week/guide each fact came from. This is content the learner reads alongside the topic guides — only add it when your source material actually covers the drug.
+
+**One record per drug, per pack:**
+
+```json
+{
+  "id": "rx:metformin",
+  "name": "Metformin",
+  "class": "rx:biguanide",
+  "facets": {
+    "use": "First-line type 2 diabetes",
+    "mechanism": "↓ hepatic gluconeogenesis; ↑ peripheral glucose uptake",
+    "adverse": "GI upset, B12 malabsorption; rare lactic acidosis",
+    "contra": "eGFR < 30",
+    "monitoring": "Renal function, B12"
+  },
+  "ref": { "week": "Week 25 · Endocrine I", "topic": "Biguanide", "guide": "W25_02_Diabetes_Pharmacology.html" }
+}
+```
+
+| field | required | notes |
+|---|---|---|
+| `id` | yes | A **stable identifier**, `rx:<slug>`, where `<slug>` is the lowercase generic name, hyphenated — e.g. `rx:metformin`, `rx:atorvastatin`, `rx:piperacillin-tazobactam`. **Use the SAME id for the same drug in every pack** — that is exactly how the app merges, say, a statin mentioned in three weeks into ONE growing entry instead of three duplicates. Don't mint a new id for a drug that plausibly already has one. |
+| `name` | yes | Human-readable display name (e.g. `"Metformin"`). |
+| `class` | optional | A class id, `rx:<class-slug>` (e.g. `rx:statin`, `rx:ace-inhibitor`, `rx:sglt2-inhibitor`). The view groups drugs under their class heading. Use a consistent slug across packs; omit if no sensible class. |
+| `facets` | yes | An object holding **only the facets your source covers**, drawn from exactly these keys: `use`, `mechanism`, `dosing`, `contra` (cautions/contraindications), `adverse` (adverse effects), `monitoring`, `interactions`. Each value is a **short phrase, not prose** — it renders as a faceted line. Include 2–5 of them; never invent keys. |
+| `ref` | yes | `{ week, topic, guide }` locating the source so the view can link back. `week` = this pack's `weeks` string (or just the week label); `topic` = the topic/section; **`guide` MUST equal the `file` of a real `guides[]` entry** in this pack — the app deep-links to it. |
+
+**Rules of thumb:**
+
+- **Reuse ids; that's the whole point.** Consistent `rx:` ids across weeks are what let the index consolidate a drug; inconsistent ids produce duplicates. Pick the obvious generic-name slug.
+- **One record per drug per pack** — don't repeat the same drug twice in one pack's `drugs[]`. (Across *different* packs is expected and is what merges.)
+- **Short facet values.** Aim for the one high-yield phrase per facet, like the cram sheet's cue→answer density — not a paragraph.
+- **Point `ref.guide` at the guide that teaches the drug** (often a pharmacology or therapeutics guide). If you have no matching guide, you can still include the drug, but a valid `guide` file makes the back-link work.
+- **It's optional.** If the week isn't drug-heavy, skip `drugs[]` entirely — an empty or absent array is fine and never fails validation.
 
 ---
 

@@ -1,0 +1,1549 @@
+{
+ "pack": "Week 35 — KU III (Urology)",
+ "id": "wk35",
+ "formatVersion": "2.0",
+ "version": "1.0",
+ "author": "Alkarim Billawala / alkarim.billawala.ca",
+ "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
+ "created": "2026-06-16",
+ "updated": "2026-06-16",
+ "school": "UofT — Temerty Medicine",
+ "year": "Year 1",
+ "course": "CPC 2",
+ "weeks": "Week 35 · KU III — Urology",
+ "questions": [
+  {
+   "id": "wk35_q01",
+   "sys": "Urology",
+   "topic": "Uro · BPH pharmacology",
+   "difficulty": "medium",
+   "stem": "A 68-year-old with progressive nocturia and incomplete emptying (smooth enlarged prostate, no nodules) is on ramipril and atenolol after an MI. Starting tamsulosin, what is the most critical counseling point given his history?",
+   "options": [
+    "Reflex tachycardia worsening ischemia",
+    "Combining it with his antihypertensives risks profound hypotension",
+    "High risk of acute urinary retention",
+    "It permanently lowers DHT and libido"
+   ],
+   "correct": 1,
+   "explain": "<b>α1-blockers</b> cause vasodilation/orthostatic hypotension; added to an ACE inhibitor + beta-blocker this risks <b>profound additive hypotension</b> — separate dosing and counsel. (Libido/DHT effects are 5-ARIs, not α-blockers.)",
+   "guide": {
+    "f": "W35_01_BPH.html",
+    "t": "1 · α1-blocker",
+    "s": "additive hypotension"
+   }
+  },
+  {
+   "id": "wk35_q02",
+   "sys": "Urology",
+   "topic": "Uro · Testicular tumour",
+   "difficulty": "medium",
+   "stem": "A 34-year-old with prior corrected cryptorchidism has a firm, painless, slowly enlarging intrinsic left testicular mass. Most appropriate next step?",
+   "options": [
+    "Reassure, review in 6 months",
+    "Fluoroquinolone for 14 days",
+    "Scrotal ultrasound + serum AFP and β-hCG",
+    "Immediate trans-scrotal diagnostic biopsy"
+   ],
+   "correct": 2,
+   "explain": "A solid painless intrinsic testicular mass (cryptorchidism is a risk factor) needs a <b>scrotal ultrasound + tumour markers (AFP, β-hCG)</b>. A <b>trans-scrotal biopsy is contraindicated</b> (seeding risk); definitive management is radical inguinal orchiectomy.",
+   "guide": {
+    "f": "W35_03_Testicular.html",
+    "t": "3 · Tumour",
+    "s": "US + markers, no biopsy"
+   }
+  },
+  {
+   "id": "wk35_q03",
+   "sys": "Urology",
+   "topic": "Uro · Prostate cancer",
+   "difficulty": "medium",
+   "stem": "An 82-year-old man of African descent has worsening LUTS, a hard irregular DRE nodule, and new constant night-time axial back pain. TRUS biopsy is done. Which histology confirms the likely diagnosis?",
+   "options": [
+    "Benign stromal/epithelial hyperplasia",
+    "Malignant glandular proliferation graded by Gleason score",
+    "Transitional urothelial cells with atypia",
+    "Neutrophilic inflammatory infiltrate"
+   ],
+   "correct": 1,
+   "explain": "Age, ancestry, a hard irregular nodule, and constant non-positional axial bone pain (osteoblastic mets) point to <b>prostate adenocarcinoma</b> — <b>malignant glandular proliferation graded by the Gleason score</b>.",
+   "guide": {
+    "f": "W35_02_Prostate_Cancer.html",
+    "t": "2 · Diagnosis",
+    "s": "Gleason adenocarcinoma"
+   }
+  },
+  {
+   "id": "wk35_q04",
+   "sys": "Urology",
+   "topic": "Uro · Torsion",
+   "difficulty": "hard",
+   "stem": "A 15-year-old has sudden severe left scrotal pain and vomiting. The testis is high-riding with a horizontal lie and the cremasteric reflex is absent. What is the most appropriate management?",
+   "options": [
+    "Doppler ultrasound, then antibiotics",
+    "Urgent surgical exploration and detorsion",
+    "Scrotal elevation and NSAIDs",
+    "Outpatient urology referral"
+   ],
+   "correct": 1,
+   "explain": "Sudden pain + <b>absent cremasteric reflex + horizontal high-riding testis</b> = <b>testicular torsion</b>, a surgical emergency. Proceed to <b>urgent exploration and detorsion</b>; don't delay for imaging when the diagnosis is clear (viability falls after ~6 h).",
+   "guide": {
+    "f": "W35_03_Testicular.html",
+    "t": "3 · Torsion",
+    "s": "explore now"
+   }
+  },
+  {
+   "id": "wk35_q05",
+   "sys": "Urology",
+   "topic": "Uro · Stone emergency",
+   "difficulty": "hard",
+   "stem": "A patient with acute flank pain has a 7-mm obstructing ureteric stone, a temperature of 38.9°C, and pyuria. What is the priority?",
+   "options": [
+    "Outpatient analgesia and tamsulosin",
+    "Urgent decompression (stent/nephrostomy) plus antibiotics",
+    "Increase oral fluids and rescan in 6 weeks",
+    "Potassium citrate to dissolve the stone"
+   ],
+   "correct": 1,
+   "explain": "An <b>infected, obstructed urinary system</b> is a urological emergency — source control with <b>urgent decompression (ureteric stent or percutaneous nephrostomy) plus antibiotics</b>. Antibiotics alone behind an obstruction are inadequate.",
+   "guide": {
+    "f": "W35_04_Nephrolithiasis.html",
+    "t": "4 · Admit criteria",
+    "s": "infected + obstructed → decompress"
+   }
+  },
+  {
+   "id": "wk35_q06",
+   "sys": "Urology",
+   "topic": "Uro · Hematuria",
+   "difficulty": "medium",
+   "stem": "A 67-year-old smoker has a single episode of painless gross hematuria. Urine culture is negative. What is the most appropriate evaluation?",
+   "options": [
+    "Reassurance; hematuria is benign",
+    "Cytology, CT urography, and cystoscopy to exclude urologic malignancy",
+    "Start empiric antibiotics",
+    "Repeat urinalysis in 1 year only"
+   ],
+   "correct": 1,
+   "explain": "<b>Painless gross hematuria in an older smoker</b> is urologic malignancy (bladder/renal) until proven otherwise → <b>urine cytology + CT urography + cystoscopy</b>. Smoking is the leading bladder-cancer risk factor.",
+   "guide": {
+    "f": "W35_05_Hematuria.html",
+    "t": "5 · Gross hematuria",
+    "s": "exclude malignancy"
+   }
+  },
+  {
+   "id": "wk35_q07",
+   "sys": "Urology",
+   "topic": "Uro · Pyelonephritis",
+   "difficulty": "medium",
+   "stem": "A 28-year-old woman has 2 days of dysuria and frequency, now with fever, rigors, and right costovertebral-angle tenderness. What is the diagnosis and an appropriate antibiotic?",
+   "options": [
+    "Cystitis; single-dose fosfomycin",
+    "Pyelonephritis; ciprofloxacin (or ceftriaxone if unwell)",
+    "Urethritis; azithromycin",
+    "Asymptomatic bacteriuria; no treatment"
+   ],
+   "correct": 1,
+   "explain": "Fever + flank/CVA tenderness with urinary symptoms = <b>acute pyelonephritis</b> (upper UTI), treated with a fluoroquinolone (<b>ciprofloxacin</b>) or <b>ceftriaxone</b> (IV if systemically unwell). Single-dose fosfomycin is for lower cystitis only.",
+   "guide": {
+    "f": "W35_06_UTI.html",
+    "t": "6 · Pyelonephritis",
+    "s": "cipro/ceftriaxone"
+   }
+  },
+  {
+   "id": "wk35_q08",
+   "sys": "Urology",
+   "topic": "Uro · Overflow incontinence",
+   "difficulty": "medium",
+   "stem": "A 76-year-old man with known BPH has constant dribbling; bladder scan shows 600 mL post-void residual. Which incontinence type is this, and what would be harmful?",
+   "options": [
+    "Urge incontinence; start oxybutynin",
+    "Overflow incontinence; an antimuscarinic would worsen it — relieve the obstruction/retention",
+    "Stress incontinence; pelvic-floor exercises",
+    "Functional incontinence; no treatment"
+   ],
+   "correct": 1,
+   "explain": "A high post-void residual with dribbling = <b>overflow incontinence</b> from obstruction/retention. An <b>antimuscarinic would worsen retention</b>; instead relieve the obstruction (α-blocker, catheter) and treat the cause. Always check PVR first.",
+   "guide": {
+    "f": "W35_08_LUTS_Incontinence.html",
+    "t": "8 · Overflow",
+    "s": "check PVR; don't give antimuscarinic"
+   }
+  },
+  {
+   "id": "wk35_q09",
+   "sys": "Urology",
+   "topic": "Uro · Stone imaging",
+   "difficulty": "medium",
+   "stem": "A patient with classic renal colic has a normal plain KUB x-ray but ongoing symptoms. Which stone type is most likely, and what imaging is needed?",
+   "options": [
+    "Calcium oxalate; no further imaging",
+    "Uric acid stone (radiolucent); non-contrast CT or ultrasound",
+    "Struvite; MRI",
+    "Cystine; PSA"
+   ],
+   "correct": 1,
+   "explain": "<b>Uric acid stones are radiolucent</b> and invisible on plain x-ray — use <b>non-contrast CT</b> (most sensitive) or ultrasound. Calcium and struvite stones are radiopaque.",
+   "guide": {
+    "f": "W35_04_Nephrolithiasis.html",
+    "t": "4 · Imaging",
+    "s": "uric acid radiolucent"
+   }
+  },
+  {
+   "id": "wk35_q10",
+   "sys": "Urology",
+   "topic": "Uro · 5-ARI PSA",
+   "difficulty": "medium",
+   "stem": "A man with BPH on finasteride for a year has a PSA of 2.0 ng/mL. How should this be interpreted?",
+   "options": [
+    "It is reassuringly normal as reported",
+    "Finasteride roughly halves PSA — effectively ~4.0; interpret accordingly / investigate",
+    "Finasteride raises PSA",
+    "PSA is meaningless on finasteride"
+   ],
+   "correct": 1,
+   "explain": "<b>5-α reductase inhibitors lower PSA by ~50%</b>, so the measured value should be <b>doubled</b> to compare with reference ranges. A 'normal' 2.0 on finasteride corresponds to ~4.0 and may warrant evaluation.",
+   "guide": {
+    "f": "W35_02_Prostate_Cancer.html",
+    "t": "2 · PSA",
+    "s": "5-ARI halves PSA"
+   }
+  },
+  {
+   "id": "wk35_q11",
+   "sys": "Urology",
+   "topic": "Uro · BPH symptoms",
+   "difficulty": "easy",
+   "stem": "Which symptom argues AGAINST simple BPH and should prompt a search for another cause?",
+   "options": [
+    "Nocturia",
+    "Weak stream",
+    "Flank/back pain",
+    "Hesitancy"
+   ],
+   "correct": 2,
+   "explain": "<b>Flank or back pain is not a feature</b> of simple lower-urinary-tract disease; it suggests an alternative (stone, pyelonephritis, malignancy/metastasis). Frequency, nocturia, weak stream, and hesitancy are typical LUTS.",
+   "guide": {
+    "f": "W35_01_BPH.html",
+    "t": "1 · LUTS",
+    "s": "flank pain not BPH"
+   }
+  },
+  {
+   "id": "wk35_q12",
+   "sys": "Urology",
+   "topic": "Uro · Stress incontinence",
+   "difficulty": "medium",
+   "stem": "A 52-year-old woman leaks small amounts of urine when she coughs, laughs, or lifts, with no urgency. Which type is this and what is first-line?",
+   "options": [
+    "Urge incontinence; antimuscarinic",
+    "Stress incontinence; pelvic-floor (Kegel) exercises ± duloxetine",
+    "Overflow incontinence; catheterization",
+    "Functional incontinence; toileting schedule"
+   ],
+   "correct": 1,
+   "explain": "Leakage with increased intra-abdominal pressure (cough/laugh/lift) and no urgency is <b>stress incontinence</b> (sphincter/pelvic-floor weakness). First-line is <b>pelvic-floor exercises</b>, with duloxetine or a sling as options.",
+   "guide": {
+    "f": "W35_08_LUTS_Incontinence.html",
+    "t": "8 · Stress",
+    "s": "Kegels / duloxetine"
+   }
+  },
+  {
+   "id": "wk35_q13",
+   "sys": "Urology",
+   "topic": "Uro · Cystitis",
+   "difficulty": "easy",
+   "stem": "A healthy non-pregnant woman has dysuria, frequency, and suprapubic discomfort without fever or flank pain. Which is an appropriate first-line treatment for uncomplicated cystitis?",
+   "options": [
+    "Ciprofloxacin for 14 days",
+    "Nitrofurantoin (or TMP-SMX / single-dose fosfomycin)",
+    "IV ceftriaxone",
+    "No antibiotics ever"
+   ],
+   "correct": 1,
+   "explain": "Uncomplicated cystitis is treated with <b>nitrofurantoin, TMP-SMX</b> (resistance-dependent), or <b>single-dose fosfomycin</b>. Fluoroquinolones are reserved (resistance/adverse effects); IV therapy is for pyelonephritis/sepsis.",
+   "guide": {
+    "f": "W35_06_UTI.html",
+    "t": "6 · Cystitis",
+    "s": "nitrofurantoin/TMP-SMX/fosfomycin"
+   }
+  },
+  {
+   "id": "wk35_q14",
+   "sys": "Urology",
+   "topic": "Uro · Glomerular hematuria",
+   "difficulty": "medium",
+   "stem": "A 40-year-old has microscopic hematuria with dysmorphic RBCs, RBC casts, 1 g/day proteinuria, and hypertension. Where should the workup be directed?",
+   "options": [
+    "Cystoscopy for bladder cancer",
+    "Nephrology — this is glomerular (nephritic) bleeding",
+    "Trial of antibiotics",
+    "Reassurance"
+   ],
+   "correct": 1,
+   "explain": "<b>RBC casts and dysmorphic RBCs with proteinuria/hypertension</b> indicate a <b>glomerular (nephritic)</b> source → nephrology workup (serologies, possible biopsy), not a urologic cancer evaluation.",
+   "guide": {
+    "f": "W35_05_Hematuria.html",
+    "t": "5 · Glomerular vs urologic",
+    "s": "RBC casts → glomerular"
+   }
+  },
+  {
+   "id": "wk35_q15",
+   "sys": "Urology",
+   "topic": "Uro · POCUS",
+   "difficulty": "medium",
+   "stem": "A bedside renal ultrasound in a patient with anuria shows a dilated, anechoic, fluid-filled renal pelvis bilaterally. What does this indicate?",
+   "options": [
+    "Acute tubular necrosis",
+    "Hydronephrosis (obstruction) — post-renal AKI",
+    "Renal cysts",
+    "Normal kidneys"
+   ],
+   "correct": 1,
+   "explain": "A dilated anechoic renal pelvis = <b>hydronephrosis</b>, indicating <b>obstruction (post-renal AKI)</b> — POCUS rapidly identifies this and bladder distension, directing urgent decompression.",
+   "guide": {
+    "f": "W35_07_POCUS.html",
+    "t": "7 · Signs",
+    "s": "hydronephrosis = obstruction"
+   }
+  },
+  {
+   "id": "wk35_q16",
+   "sys": "Urology",
+   "topic": "Uro · Prostate ADT",
+   "difficulty": "hard",
+   "stem": "A man with metastatic prostate cancer is started on leuprolide. Why is a short course of an antiandrogen (e.g. bicalutamide) given at initiation?",
+   "options": [
+    "To shrink the prostate faster",
+    "To cover the initial testosterone 'flare' from the GnRH agonist",
+    "To lower PSA artificially",
+    "To prevent hyperkalemia"
+   ],
+   "correct": 1,
+   "explain": "A <b>GnRH agonist initially surges</b> LH/testosterone (a 'flare') before desensitizing the pituitary; an <b>antiandrogen covers this flare</b> to prevent tumour stimulation/symptom worsening, then long-term suppression follows.",
+   "guide": {
+    "f": "W35_02_Prostate_Cancer.html",
+    "t": "2 · ADT",
+    "s": "cover the flare"
+   }
+  },
+  {
+   "id": "wk35_q17",
+   "sys": "Urology",
+   "topic": "Uro · Stone prevention",
+   "difficulty": "medium",
+   "stem": "A patient with recurrent calcium-oxalate stones and high urinary calcium asks about prevention. Besides high fluid intake, which medication helps?",
+   "options": [
+    "Loop diuretic",
+    "Thiazide diuretic (lowers urinary calcium)",
+    "Acetazolamide",
+    "Vitamin D"
+   ],
+   "correct": 1,
+   "explain": "<b>Thiazides</b> reduce urinary calcium excretion and recurrent calcium-stone formation. (Potassium citrate alkalinizes urine for uric-acid and some calcium stones; loops increase calcium excretion and would be counterproductive.)",
+   "guide": {
+    "f": "W35_04_Nephrolithiasis.html",
+    "t": "4 · Prevention",
+    "s": "thiazide lowers urine calcium"
+   }
+  },
+  {
+   "id": "wk35_q18",
+   "sys": "Urology",
+   "topic": "Uro · Varicocele",
+   "difficulty": "medium",
+   "stem": "A 30-year-old man has a new-onset RIGHT-sided varicocele that does not decompress when he lies down. What does this warrant?",
+   "options": [
+    "Reassurance; varicoceles are always benign",
+    "Imaging for a retroperitoneal mass (e.g. compressing the right gonadal/renal vein)",
+    "Immediate orchiectomy",
+    "Antibiotics"
+   ],
+   "correct": 1,
+   "explain": "Varicoceles are usually <b>left-sided</b> and decompress when supine. A <b>new right-sided or non-decompressing</b> varicocele is a red flag for a <b>retroperitoneal mass</b> obstructing venous drainage → imaging.",
+   "guide": {
+    "f": "W35_03_Testicular.html",
+    "t": "3 · Varicocele",
+    "s": "right-sided → image"
+   }
+  },
+  {
+   "id": "wk35_q19",
+   "sys": "Urology",
+   "topic": "Uro · Bladder volume",
+   "difficulty": "easy",
+   "stem": "On bladder POCUS the dimensions are width 8 cm, depth 6 cm, height 7 cm. Approximately what is the bladder volume?",
+   "options": [
+    "~96 mL",
+    "~235 mL",
+    "~336 mL",
+    "~672 mL"
+   ],
+   "correct": 1,
+   "explain": "Bladder volume ≈ width × depth × height × 0.7 = 8 × 6 × 7 × 0.7 ≈ <b>235 mL</b>. This estimates post-void residual / retention at the bedside.",
+   "guide": {
+    "f": "W35_07_POCUS.html",
+    "t": "7 · Bladder",
+    "s": "W×D×H×0.7"
+   }
+  },
+  {
+   "id": "wk35_q20",
+   "sys": "Urology",
+   "topic": "Uro · Urge incontinence",
+   "difficulty": "easy",
+   "stem": "A 70-year-old woman has sudden strong urges to void followed by leakage, several times daily, with a normal post-void residual and negative urinalysis. First-line management?",
+   "options": [
+    "Indwelling catheter",
+    "Bladder training, then an antimuscarinic (oxybutynin) or mirabegron",
+    "Tamsulosin",
+    "Duloxetine"
+   ],
+   "correct": 1,
+   "explain": "Urgency-driven leakage with a normal PVR = <b>urge incontinence / overactive bladder</b>. Start with <b>bladder training</b>, then an <b>antimuscarinic (oxybutynin)</b> or <b>mirabegron</b> (β3-agonist, useful if antimuscarinics are contraindicated).",
+   "guide": {
+    "f": "W35_08_LUTS_Incontinence.html",
+    "t": "8 · Urge",
+    "s": "antimuscarinic / mirabegron"
+   }
+  }
+ ],
+ "cards": [
+  {
+   "id": "wk35_c01",
+   "sys": "Urology",
+   "topic": "BPH zone/LUTS",
+   "type": "qa",
+   "guide": {
+    "f": "W35_01_BPH.html",
+    "t": "1 · BPH",
+    "s": "zone & LUTS"
+   },
+   "prompt": "Which prostate zone enlarges in BPH, and what symptom argues against simple BPH?",
+   "answer": "The transition zone (cancer favours the peripheral zone). Flank/back pain is NOT a feature of simple lower-tract disease and should prompt another diagnosis."
+  },
+  {
+   "id": "wk35_c02",
+   "sys": "Urology",
+   "topic": "BPH drugs",
+   "type": "qa",
+   "guide": {
+    "f": "W35_01_BPH.html",
+    "t": "1 · Pharmacotherapy",
+    "s": "two classes"
+   },
+   "prompt": "Compare the two BPH drug classes.",
+   "answer": "α1-blockers (tamsulosin) relax smooth muscle for rapid relief (orthostatic hypotension, retrograde ejaculation). 5-α reductase inhibitors (finasteride) shrink the gland over ~6 months and lower PSA ~50%."
+  },
+  {
+   "id": "wk35_c03",
+   "sys": "Urology",
+   "topic": "Prostate cancer zone/PSA",
+   "type": "qa",
+   "guide": {
+    "f": "W35_02_Prostate_Cancer.html",
+    "t": "2 · Prostate cancer",
+    "s": "peripheral/PSA"
+   },
+   "prompt": "Where does prostate cancer arise, and why is PSA non-specific?",
+   "answer": "Usually the peripheral zone. PSA rises with cancer but also BPH, prostatitis, recent ejaculation, vigorous DRE, and age — so it's sensitive but not specific (and a 5-ARI halves it)."
+  },
+  {
+   "id": "wk35_c04",
+   "sys": "Urology",
+   "topic": "Gleason",
+   "type": "qa",
+   "guide": {
+    "f": "W35_02_Prostate_Cancer.html",
+    "t": "2 · Grading",
+    "s": "Gleason"
+   },
+   "prompt": "What does the Gleason score represent?",
+   "answer": "The sum of the most common and second-most-common histologic patterns — it grades differentiation, distinct from TNM staging (spread)."
+  },
+  {
+   "id": "wk35_c05",
+   "sys": "Urology",
+   "topic": "Prostate mets",
+   "type": "qa",
+   "guide": {
+    "f": "W35_02_Prostate_Cancer.html",
+    "t": "2 · Metastasis",
+    "s": "bone"
+   },
+   "prompt": "How does metastatic prostate cancer classically present?",
+   "answer": "Deep, constant, atraumatic axial bone pain (osteoblastic metastases), weight loss, and lower-extremity edema from pelvic nodal disease."
+  },
+  {
+   "id": "wk35_c06",
+   "sys": "Urology",
+   "topic": "Torsion",
+   "type": "qa",
+   "guide": {
+    "f": "W35_03_Testicular.html",
+    "t": "3 · Torsion",
+    "s": "emergency"
+   },
+   "prompt": "What are the signs of testicular torsion and the management?",
+   "answer": "Sudden severe scrotal pain, high-riding horizontal testis, thickened cord, absent cremasteric reflex → urgent surgical exploration and detorsion (don't delay for imaging if clear)."
+  },
+  {
+   "id": "wk35_c07",
+   "sys": "Urology",
+   "topic": "Testicular tumour",
+   "type": "qa",
+   "guide": {
+    "f": "W35_03_Testicular.html",
+    "t": "3 · Tumour",
+    "s": "workup"
+   },
+   "prompt": "How is a suspected testicular tumour worked up, and what is contraindicated?",
+   "answer": "Scrotal ultrasound + tumour markers (AFP, β-hCG, LDH); a trans-scrotal biopsy is contraindicated (seeding) — treat with radical inguinal orchiectomy."
+  },
+  {
+   "id": "wk35_c08",
+   "sys": "Urology",
+   "topic": "Stone types",
+   "type": "qa",
+   "guide": {
+    "f": "W35_04_Nephrolithiasis.html",
+    "t": "4 · Stones",
+    "s": "radiolucent"
+   },
+   "prompt": "Which kidney stone is radiolucent, and how is it imaged?",
+   "answer": "Uric acid stones are radiolucent (invisible on plain x-ray); use non-contrast CT (most sensitive) or ultrasound. Calcium and struvite stones are radiopaque."
+  },
+  {
+   "id": "wk35_c09",
+   "sys": "Urology",
+   "topic": "Stone admission",
+   "type": "qa",
+   "guide": {
+    "f": "W35_04_Nephrolithiasis.html",
+    "t": "4 · Admission",
+    "s": "criteria"
+   },
+   "prompt": "When does nephrolithiasis require urgent admission/urology?",
+   "answer": "Obstructing stone with fever/infection (emergency decompression), bilateral obstruction or a solitary kidney, AKI, or intractable pain/vomiting preventing oral intake."
+  },
+  {
+   "id": "wk35_c10",
+   "sys": "Urology",
+   "topic": "Stone management",
+   "type": "qa",
+   "guide": {
+    "f": "W35_04_Nephrolithiasis.html",
+    "t": "4 · Management",
+    "s": "acute/prevent"
+   },
+   "prompt": "Outline acute and preventive stone management.",
+   "answer": "Acute: NSAIDs (ketorolac) for pain, antiemetics, hydration, tamsulosin (medical expulsive therapy), urology for large/obstructing stones. Prevent: fluids, thiazide for calcium stones, potassium citrate for uric-acid/calcium stones."
+  },
+  {
+   "id": "wk35_c11",
+   "sys": "Urology",
+   "topic": "Gross hematuria",
+   "type": "qa",
+   "guide": {
+    "f": "W35_05_Hematuria.html",
+    "t": "5 · Gross hematuria",
+    "s": "red flag"
+   },
+   "prompt": "What does painless gross hematuria in an older smoker signify?",
+   "answer": "Genitourinary malignancy (bladder urothelial or renal cell carcinoma) until proven otherwise — work up with cytology, CT urography, and cystoscopy. Smoking is the leading bladder-cancer risk factor."
+  },
+  {
+   "id": "wk35_c12",
+   "sys": "Urology",
+   "topic": "Glomerular vs urologic",
+   "type": "qa",
+   "guide": {
+    "f": "W35_05_Hematuria.html",
+    "t": "5 · Source",
+    "s": "casts"
+   },
+   "prompt": "How do you tell glomerular from urologic hematuria?",
+   "answer": "Glomerular: dysmorphic RBCs, RBC casts, proteinuria, hypertension → nephrology. Urologic: clots, normal RBCs, no casts → image the tract and cystoscopy."
+  },
+  {
+   "id": "wk35_c13",
+   "sys": "Urology",
+   "topic": "UTI spectrum",
+   "type": "qa",
+   "guide": {
+    "f": "W35_06_UTI.html",
+    "t": "6 · Spectrum",
+    "s": "cystitis vs pyelo"
+   },
+   "prompt": "Distinguish cystitis from pyelonephritis.",
+   "answer": "Cystitis (lower): dysuria, frequency, suprapubic pain, no fever. Pyelonephritis (upper): fever, flank/CVA tenderness, nausea — may need IV therapy/admission. E. coli is the commonest organism."
+  },
+  {
+   "id": "wk35_c14",
+   "sys": "Urology",
+   "topic": "UTI antibiotics",
+   "type": "qa",
+   "guide": {
+    "f": "W35_06_UTI.html",
+    "t": "6 · Antibiotics",
+    "s": "first-line"
+   },
+   "prompt": "Give first-line antibiotics for cystitis vs pyelonephritis.",
+   "answer": "Cystitis: nitrofurantoin, TMP-SMX (resistance-dependent), or single-dose fosfomycin. Pyelonephritis: ciprofloxacin or ceftriaxone (IV if unwell). An infected obstructed stone needs decompression, not antibiotics alone."
+  },
+  {
+   "id": "wk35_c15",
+   "sys": "Urology",
+   "topic": "POCUS",
+   "type": "qa",
+   "guide": {
+    "f": "W35_07_POCUS.html",
+    "t": "7 · POCUS",
+    "s": "signs"
+   },
+   "prompt": "What are sonographic signs of an obstructing stone?",
+   "answer": "A hyperechoic stone with posterior acoustic shadowing, a twinkling artifact on Doppler, hydronephrosis (dilated renal pelvis), and absent ureteral jets on the affected side."
+  },
+  {
+   "id": "wk35_c16",
+   "sys": "Urology",
+   "topic": "Incontinence types",
+   "type": "qa",
+   "guide": {
+    "f": "W35_08_LUTS_Incontinence.html",
+    "t": "8 · Incontinence",
+    "s": "types"
+   },
+   "prompt": "Match the incontinence types to first-line treatment.",
+   "answer": "Stress → pelvic-floor exercises ± duloxetine; urge (OAB) → bladder training + antimuscarinic/mirabegron; overflow → relieve obstruction/retention; functional → environmental measures."
+  },
+  {
+   "id": "wk35_c17",
+   "sys": "Urology",
+   "topic": "BPH zone",
+   "type": "mcq",
+   "guide": {
+    "f": "W35_01_BPH.html",
+    "t": "1 · Anatomy",
+    "s": "zone"
+   },
+   "prompt": "BPH primarily affects which prostate zone?",
+   "options": [
+    "Peripheral zone",
+    "Transition zone",
+    "Central zone",
+    "Anterior fibromuscular stroma"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk35_c18",
+   "sys": "Urology",
+   "topic": "Cancer zone",
+   "type": "mcq",
+   "guide": {
+    "f": "W35_02_Prostate_Cancer.html",
+    "t": "2 · Anatomy",
+    "s": "zone"
+   },
+   "prompt": "Prostate cancer most commonly arises in the:",
+   "options": [
+    "Transition zone",
+    "Peripheral zone",
+    "Central zone",
+    "Urethra"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk35_c19",
+   "sys": "Urology",
+   "topic": "Torsion sign",
+   "type": "mcq",
+   "guide": {
+    "f": "W35_03_Testicular.html",
+    "t": "3 · Torsion",
+    "s": "sign"
+   },
+   "prompt": "Which exam finding supports testicular torsion?",
+   "options": [
+    "Positive cremasteric reflex",
+    "Absent cremasteric reflex",
+    "Relief with elevation (Prehn +)",
+    "Transillumination"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk35_c20",
+   "sys": "Urology",
+   "topic": "Testicular markers",
+   "type": "mcq",
+   "guide": {
+    "f": "W35_03_Testicular.html",
+    "t": "3 · Tumour",
+    "s": "markers"
+   },
+   "prompt": "Tumour markers for testicular cancer include:",
+   "options": [
+    "PSA and CEA",
+    "AFP and β-hCG",
+    "CA-125 and CA 19-9",
+    "Calcitonin"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk35_c21",
+   "sys": "Urology",
+   "topic": "Radiolucent stone",
+   "type": "mcq",
+   "guide": {
+    "f": "W35_04_Nephrolithiasis.html",
+    "t": "4 · Imaging",
+    "s": "radiolucent"
+   },
+   "prompt": "Which stone is radiolucent on plain x-ray?",
+   "options": [
+    "Calcium oxalate",
+    "Calcium phosphate",
+    "Uric acid",
+    "Struvite"
+   ],
+   "correct": 2
+  },
+  {
+   "id": "wk35_c22",
+   "sys": "Urology",
+   "topic": "Stone MET",
+   "type": "mcq",
+   "guide": {
+    "f": "W35_04_Nephrolithiasis.html",
+    "t": "4 · Management",
+    "s": "expulsive"
+   },
+   "prompt": "Medical expulsive therapy for a distal ureteric stone uses:",
+   "options": [
+    "A thiazide",
+    "An α-blocker (tamsulosin)",
+    "Potassium citrate",
+    "A loop diuretic"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk35_c23",
+   "sys": "Urology",
+   "topic": "Cystitis antibiotic",
+   "type": "mcq",
+   "guide": {
+    "f": "W35_06_UTI.html",
+    "t": "6 · Cystitis",
+    "s": "first-line"
+   },
+   "prompt": "A single-dose option for uncomplicated cystitis is:",
+   "options": [
+    "Ciprofloxacin",
+    "Fosfomycin",
+    "Ceftriaxone",
+    "Vancomycin"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk35_c24",
+   "sys": "Urology",
+   "topic": "Pyelo antibiotic",
+   "type": "mcq",
+   "guide": {
+    "f": "W35_06_UTI.html",
+    "t": "6 · Pyelonephritis",
+    "s": "treatment"
+   },
+   "prompt": "Appropriate therapy for acute pyelonephritis is:",
+   "options": [
+    "Single-dose fosfomycin",
+    "Ciprofloxacin or ceftriaxone",
+    "Topical estrogen",
+    "No antibiotics"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk35_c25",
+   "sys": "Urology",
+   "topic": "Overflow",
+   "type": "mcq",
+   "guide": {
+    "f": "W35_08_LUTS_Incontinence.html",
+    "t": "8 · Overflow",
+    "s": "clue"
+   },
+   "prompt": "Constant dribbling with a high post-void residual indicates:",
+   "options": [
+    "Stress incontinence",
+    "Urge incontinence",
+    "Overflow incontinence",
+    "Functional incontinence"
+   ],
+   "correct": 2
+  },
+  {
+   "id": "wk35_c26",
+   "sys": "Urology",
+   "topic": "Bladder cancer risk",
+   "type": "mcq",
+   "guide": {
+    "f": "W35_05_Hematuria.html",
+    "t": "5 · Bladder cancer",
+    "s": "risk"
+   },
+   "prompt": "The biggest risk factor for bladder cancer is:",
+   "options": [
+    "Diabetes",
+    "Smoking",
+    "Hypertension",
+    "High calcium intake"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk35_c27",
+   "sys": "Urology",
+   "topic": "LUTS storage",
+   "type": "multi",
+   "guide": {
+    "f": "W35_01_BPH.html",
+    "t": "1 · LUTS",
+    "s": "storage"
+   },
+   "prompt": "Select STORAGE (irritative) LUTS:",
+   "options": [
+    "Frequency",
+    "Urgency",
+    "Nocturia",
+    "Hesitancy",
+    "Weak stream"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "id": "wk35_c28",
+   "sys": "Urology",
+   "topic": "Stone admit",
+   "type": "multi",
+   "guide": {
+    "f": "W35_04_Nephrolithiasis.html",
+    "t": "4 · Admission",
+    "s": "criteria"
+   },
+   "prompt": "Select indications for urgent admission with a kidney stone:",
+   "options": [
+    "Obstruction + fever/infection",
+    "Solitary kidney obstruction",
+    "Intractable vomiting",
+    "Acute kidney injury",
+    "A 3-mm stone with controlled pain"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk35_c29",
+   "sys": "Urology",
+   "topic": "Complicated UTI",
+   "type": "multi",
+   "guide": {
+    "f": "W35_06_UTI.html",
+    "t": "6 · Complicated",
+    "s": "features"
+   },
+   "prompt": "Select features that make a UTI 'complicated':",
+   "options": [
+    "Male sex",
+    "Pregnancy",
+    "Indwelling catheter",
+    "Obstruction/stones",
+    "Healthy non-pregnant woman"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk35_c30",
+   "sys": "Urology",
+   "topic": "Hematuria workup",
+   "type": "multi",
+   "guide": {
+    "f": "W35_05_Hematuria.html",
+    "t": "5 · Workup",
+    "s": "tests"
+   },
+   "prompt": "Select components of a gross-hematuria workup (malignancy risk):",
+   "options": [
+    "Urine culture",
+    "Urine cytology",
+    "CT urography",
+    "Cystoscopy",
+    "PSA velocity only"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk35_c31",
+   "sys": "Urology",
+   "topic": "Stone signs POCUS",
+   "type": "multi",
+   "guide": {
+    "f": "W35_07_POCUS.html",
+    "t": "7 · POCUS",
+    "s": "signs"
+   },
+   "prompt": "Select sonographic signs suggesting an obstructing stone:",
+   "options": [
+    "Posterior acoustic shadowing",
+    "Twinkling artifact",
+    "Hydronephrosis",
+    "Absent ureteral jet",
+    "Twinkling of the gallbladder"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk35_c32",
+   "sys": "Urology",
+   "topic": "PSA & 5-ARI",
+   "type": "cloze",
+   "guide": {
+    "f": "W35_02_Prostate_Cancer.html",
+    "t": "2 · PSA",
+    "s": "5-ARI"
+   },
+   "text": "A 5-α reductase inhibitor lowers PSA by about {{50}}%, so the measured value should be {{doubled}} to interpret.",
+   "explain": "Important to avoid missing cancer in men on finasteride."
+  },
+  {
+   "id": "wk35_c33",
+   "sys": "Urology",
+   "topic": "Torsion triad",
+   "type": "cloze",
+   "guide": {
+    "f": "W35_03_Testicular.html",
+    "t": "3 · Torsion",
+    "s": "signs"
+   },
+   "text": "Torsion: sudden pain, a {{high-riding}}/horizontal testis, and an {{absent}} cremasteric reflex → urgent {{exploration}}.",
+   "explain": "Viability falls after ~6 hours."
+  },
+  {
+   "id": "wk35_c34",
+   "sys": "Urology",
+   "topic": "Micro-hematuria",
+   "type": "cloze",
+   "guide": {
+    "f": "W35_05_Hematuria.html",
+    "t": "5 · Definition",
+    "s": "threshold"
+   },
+   "text": "Microscopic hematuria is defined as > {{2}} RBCs per high-power field.",
+   "explain": "Confirm it is not menstrual or exercise-related."
+  },
+  {
+   "id": "wk35_c35",
+   "sys": "Urology",
+   "topic": "Bladder volume",
+   "type": "cloze",
+   "guide": {
+    "f": "W35_07_POCUS.html",
+    "t": "7 · Bladder",
+    "s": "formula"
+   },
+   "text": "Bladder volume = width × depth × height × {{0.7}}.",
+   "explain": "Used to estimate post-void residual / retention."
+  },
+  {
+   "id": "wk35_c36",
+   "sys": "Urology",
+   "topic": "UTI organism",
+   "type": "cloze",
+   "guide": {
+    "f": "W35_06_UTI.html",
+    "t": "6 · Microbiology",
+    "s": "organism"
+   },
+   "text": "The most common organism causing UTIs is {{E. coli}}; {{nitrites}} on dipstick suggest Enterobacteriaceae.",
+   "explain": "Leukocyte esterase indicates pyuria."
+  },
+  {
+   "id": "wk35_c37",
+   "sys": "Urology",
+   "topic": "Hematuria workup order",
+   "type": "order",
+   "guide": {
+    "f": "W35_05_Hematuria.html",
+    "t": "5 · Workup",
+    "s": "sequence"
+   },
+   "prompt": "Order the workup of painless gross hematuria:",
+   "items": [
+    "Urinalysis + microscopy (RBC casts? dysmorphic?)",
+    "Urine culture (exclude infection) + cytology",
+    "CT urography (image upper tracts)",
+    "Cystoscopy (inspect the bladder)"
+   ]
+  },
+  {
+   "id": "wk35_c38",
+   "sys": "Urology",
+   "topic": "Renal colic order",
+   "type": "order",
+   "guide": {
+    "f": "W35_04_Nephrolithiasis.html",
+    "t": "4 · Acute",
+    "s": "management"
+   },
+   "prompt": "Order acute renal-colic management:",
+   "items": [
+    "Analgesia (NSAID/ketorolac) + antiemetic",
+    "Non-contrast CT to confirm/size the stone",
+    "Tamsulosin (medical expulsive therapy) for small distal stones",
+    "Urgent decompression + antibiotics if infected/obstructed"
+   ]
+  },
+  {
+   "id": "wk35_c39",
+   "sys": "Urology",
+   "topic": "Incontinence approach",
+   "type": "order",
+   "guide": {
+    "f": "W35_08_LUTS_Incontinence.html",
+    "t": "8 · Approach",
+    "s": "steps"
+   },
+   "prompt": "Order the approach to urinary incontinence:",
+   "items": [
+    "Characterize symptoms (stress / urge / overflow / functional)",
+    "Urinalysis (exclude UTI/hematuria) + post-void residual",
+    "Behavioural therapy (pelvic floor / bladder training)",
+    "Targeted drug or procedure by type"
+   ]
+  },
+  {
+   "id": "wk35_c40",
+   "sys": "Urology",
+   "topic": "Incontinence → treatment",
+   "type": "match",
+   "guide": {
+    "f": "W35_08_LUTS_Incontinence.html",
+    "t": "8 · Incontinence",
+    "s": "match"
+   },
+   "prompt": "Match the incontinence type to first-line therapy:",
+   "pairs": [
+    [
+     "Stress",
+     "Pelvic-floor exercises ± duloxetine"
+    ],
+    [
+     "Urge (OAB)",
+     "Antimuscarinic / mirabegron"
+    ],
+    [
+     "Overflow",
+     "Relieve obstruction / catheter"
+    ],
+    [
+     "Functional",
+     "Toileting / environmental measures"
+    ]
+   ]
+  },
+  {
+   "id": "wk35_c41",
+   "sys": "Urology",
+   "topic": "Scrotal → feature",
+   "type": "match",
+   "guide": {
+    "f": "W35_03_Testicular.html",
+    "t": "3 · Scrotum",
+    "s": "conditions"
+   },
+   "prompt": "Match the scrotal condition to its hallmark:",
+   "pairs": [
+    [
+     "Torsion",
+     "Absent cremasteric reflex → OR"
+    ],
+    [
+     "Testicular tumour",
+     "Painless firm mass → US + AFP/β-hCG"
+    ],
+    [
+     "Varicocele",
+     "'Bag of worms', usually left-sided"
+    ],
+    [
+     "Cryptorchidism",
+     "Risk factor for testicular cancer"
+    ]
+   ]
+  },
+  {
+   "id": "wk35_c42",
+   "sys": "Urology",
+   "topic": "Drug → urologic use",
+   "type": "match",
+   "guide": {
+    "f": "W35_01_BPH.html",
+    "t": "1 · Drugs",
+    "s": "uses"
+   },
+   "prompt": "Match the drug to its urologic use:",
+   "pairs": [
+    [
+     "Tamsulosin",
+     "BPH / stone expulsion (α-blocker)"
+    ],
+    [
+     "Finasteride",
+     "BPH gland reduction (5-ARI)"
+    ],
+    [
+     "Leuprolide",
+     "Prostate cancer androgen deprivation"
+    ],
+    [
+     "Bicalutamide",
+     "Antiandrogen (covers GnRH-agonist flare)"
+    ],
+    [
+     "Tolterodine/oxybutynin",
+     "Overactive bladder"
+    ]
+   ]
+  },
+  {
+   "id": "wk35_c43",
+   "sys": "Urology",
+   "topic": "UTI → antibiotic",
+   "type": "match",
+   "guide": {
+    "f": "W35_06_UTI.html",
+    "t": "6 · UTI",
+    "s": "antibiotics"
+   },
+   "prompt": "Match the infection to an appropriate antibiotic:",
+   "pairs": [
+    [
+     "Uncomplicated cystitis",
+     "Nitrofurantoin / fosfomycin"
+    ],
+    [
+     "Pyelonephritis",
+     "Ciprofloxacin / ceftriaxone"
+    ],
+    [
+     "Infected obstructed stone",
+     "Decompression + antibiotics"
+    ]
+   ]
+  },
+  {
+   "id": "wk35_c44",
+   "sys": "Urology",
+   "topic": "BPH workup",
+   "type": "qa",
+   "guide": {
+    "f": "W35_01_BPH.html",
+    "t": "1 · Workup",
+    "s": "PVR/UA"
+   },
+   "prompt": "What two simple tests are essential when working up BPH/LUTS?",
+   "answer": "A post-void residual (bladder scan/uroflowmetry) to assess retention, and a urinalysis to exclude a confounding UTI or hematuria (plus a DRE)."
+  },
+  {
+   "id": "wk35_c45",
+   "sys": "Urology",
+   "topic": "Struvite",
+   "type": "qa",
+   "guide": {
+    "f": "W35_04_Nephrolithiasis.html",
+    "t": "4 · Stones",
+    "s": "struvite"
+   },
+   "prompt": "What causes struvite stones and what shape do they form?",
+   "answer": "Urease-producing organisms (e.g. Proteus) alkalinize the urine, forming magnesium-ammonium-phosphate stones that can grow into large 'staghorn' calculi."
+  },
+  {
+   "id": "wk35_c46",
+   "sys": "Urology",
+   "topic": "Asymptomatic bacteriuria",
+   "type": "qa",
+   "guide": {
+    "f": "W35_06_UTI.html",
+    "t": "6 · Pregnancy",
+    "s": "screen"
+   },
+   "prompt": "When should asymptomatic bacteriuria be treated?",
+   "answer": "In pregnancy (and before urologic procedures) — otherwise asymptomatic bacteriuria is generally not treated, to limit resistance."
+  },
+  {
+   "id": "wk35_c47",
+   "sys": "Urology",
+   "topic": "Retrograde ejaculation",
+   "type": "qa",
+   "guide": {
+    "f": "W35_01_BPH.html",
+    "t": "1 · α1-blocker",
+    "s": "retrograde"
+   },
+   "prompt": "Why do α1-blockers cause retrograde ejaculation?",
+   "answer": "α1A receptors normally close the bladder neck during ejaculation; blocking them lets semen flow backward into the bladder (appearing later on urinalysis)."
+  },
+  {
+   "id": "wk35_c48",
+   "sys": "Urology",
+   "topic": "CKD on POCUS",
+   "type": "qa",
+   "guide": {
+    "f": "W35_07_POCUS.html",
+    "t": "7 · Renal",
+    "s": "CKD"
+   },
+   "prompt": "What does chronic kidney disease look like on ultrasound?",
+   "answer": "Small, echogenic kidneys with thinned cortices — helps distinguish chronic disease from acute (where kidneys are usually normal-sized)."
+  },
+  {
+   "id": "wk35_c49",
+   "sys": "Urology",
+   "topic": "Hematospermia",
+   "type": "qa",
+   "guide": {
+    "f": "W35_02_Prostate_Cancer.html",
+    "t": "2 · Presentation",
+    "s": "local"
+   },
+   "prompt": "What local symptoms can locally advanced prostate cancer cause?",
+   "answer": "Obstructive LUTS, erectile dysfunction (cavernous-nerve invasion), and gross hematuria or hematospermia."
+  },
+  {
+   "id": "wk35_c50",
+   "sys": "Urology",
+   "topic": "Stress vs urge",
+   "type": "qa",
+   "guide": {
+    "f": "W35_08_LUTS_Incontinence.html",
+    "t": "8 · Incontinence",
+    "s": "stress vs urge"
+   },
+   "prompt": "How do stress and urge incontinence differ clinically?",
+   "answer": "Stress: small leaks with cough/laugh/exertion (sphincter weakness), no urgency. Urge: sudden compelling urgency then leakage (detrusor overactivity). They guide different first-line therapy."
+  }
+ ],
+ "guides": [
+  {
+   "file": "W35_01_BPH.html",
+   "title": "Week 35 · 1 Benign Prostatic Hyperplasia",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Benign Prostatic Hyperplasia</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>BPH</div><h1>Benign Prostatic Hyperplasia</h1></div><div class='r'>Week 35 &middot; KU III &mdash; Urology<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The transition-zone enlargement, the LUTS categories, the workup that rules out mimics, and the two complementary drug classes.</p>\n<h2>Anatomy &amp; presentation</h2>\n<p>BPH is hyperplasia of the prostate's <b>transition zone</b> (cancer favours the peripheral zone). It causes <b>lower urinary tract symptoms (LUTS)</b>:</p>\n<table>\n<tr><th>Category</th><th>Symptoms</th></tr>\n<tr><td><b>Storage (irritative)</b></td><td>Frequency, urgency, nocturia, urgency incontinence</td></tr>\n<tr><td><b>Voiding (obstructive)</b></td><td>Hesitancy, weak stream, intermittency, straining</td></tr>\n<tr><td><b>Post-micturition</b></td><td>Dribbling, incomplete emptying</td></tr>\n</table>\n<p><b>Flank/back pain is NOT a feature</b> of simple lower-tract disease — look elsewhere (stone, malignancy, pyelonephritis).</p>\n<h2>Workup</h2>\n<ul>\n<li><b>Post-void residual</b> (bladder scan/uroflowmetry) to assess retention; <b>urinalysis</b> must be clear of leukocyte esterase/nitrites to exclude a confounding <b>UTI</b>. DRE: smooth, rubbery, symmetrically enlarged (a hard nodule suggests cancer).</li>\n</ul>\n<h2>Pharmacotherapy — two complementary classes</h2>\n<table>\n<tr><th>Class</th><th>Effect</th><th>Caution</th></tr>\n<tr><td><b>α1-blocker</b> (tamsulosin, alfuzosin)</td><td><b>Rapid</b> relief — relaxes prostate/bladder-neck smooth muscle</td><td>Orthostatic hypotension (additive with antihypertensives), <b>retrograde (\"dry\") ejaculation</b></td></tr>\n<tr><td><b>5-α reductase inhibitor</b> (finasteride, dutasteride)</td><td><b>Shrinks</b> the gland over ~6 months (blocks testosterone→DHT)</td><td>↓Libido, impotence, gynecomastia; <b>lowers PSA ~50%</b>; teratogen</td></tr>\n</table>\n<div class='key'>BPH = transition-zone LUTS (storage/voiding/post-micturition); flank pain is not BPH. Exclude UTI and check PVR. α1-blocker for fast relief (orthostatic hypotension, retrograde ejaculation) + 5-ARI to shrink the gland (halves PSA) — often combined.</div>\n</div>"
+  },
+  {
+   "file": "W35_02_Prostate_Cancer.html",
+   "title": "Week 35 · 2 Prostate Cancer",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Prostate Cancer</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Malignancy</div><h1>Prostate Cancer</h1></div><div class='r'>Week 35 &middot; KU III &mdash; Urology<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Peripheral-zone adenocarcinoma, the PSA caveats, Gleason grading, the metastatic red flags, and androgen-deprivation therapy.</p>\n<h2>Where it is and how it presents</h2>\n<p>Prostate adenocarcinoma usually arises in the <b>peripheral zone</b>. <b>Early disease is asymptomatic</b>; locally advanced disease causes obstruction, ED (nerve invasion), or hematuria/hematospermia.</p>\n<div class='band warn'><div class='t'>Metastatic red flags</div>\nUnexplained weight loss, night sweats, lower-extremity edema (pelvic nodes), and <b>deep, atraumatic axial bone pain</b> (osteoblastic bone metastases) — classically constant and worse at night. A hard, irregular, asymmetric nodule on DRE is suspicious.</div>\n<h2>PSA &mdash; sensitive, not specific</h2>\n<p>PSA liquefies semen; it rises with cancer but also with <b>BPH, prostatitis, recent ejaculation, vigorous DRE, cycling, and age</b>. Use it for shared-decision screening, not as a standalone diagnosis. (A 5-ARI roughly halves PSA — double the value to interpret.)</p>\n<h2>Diagnosis &amp; grading</h2>\n<ul>\n<li><b>TRUS-guided biopsy</b> confirms adenocarcinoma (indicated by a suspicious DRE nodule or rising PSA).</li>\n<li><b>Gleason score</b> = sum of the most common + second-most-common histologic patterns (grades differentiation). Don't confuse with <b>TNM</b> staging (spread).</li>\n</ul>\n<h2>Advanced therapy — total androgen blockade</h2>\n<ul>\n<li><b>Testicular suppression:</b> orchiectomy, or medical castration with a <b>GnRH agonist (leuprolide)</b> — continuous dosing desensitizes the pituitary and shuts down the gonads (a transient initial \"flare\" is covered by an antiandrogen).</li>\n<li><b>Adrenal-androgen blockade:</b> a non-steroidal <b>antiandrogen (bicalutamide, enzalutamide)</b>.</li>\n</ul>\n<div class='key'>Peripheral-zone adenocarcinoma; PSA is sensitive but non-specific. Gleason grades differentiation (≠ TNM stage). Deep axial bone pain = osteoblastic mets. Advanced disease → androgen deprivation (leuprolide + antiandrogen) or orchiectomy.</div>\n</div>"
+  },
+  {
+   "file": "W35_03_Testicular.html",
+   "title": "Week 35 · 3 Testicular Conditions",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Testicular Conditions</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Scrotum</div><h1>Testicular Conditions</h1></div><div class='r'>Week 35 &middot; KU III &mdash; Urology<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The torsion emergency, the painless-mass tumour workup (and the biopsy you must not do), and varicocele.</p>\n<h2>Testicular torsion &mdash; a surgical emergency</h2>\n<div class='band warn'><div class='t'>Time-critical</div>\n<b>Sudden</b>, severe, unilateral scrotal pain &plusmn; nausea (often during exertion or sleep). Exam: <b>high-riding, horizontal-lie testis</b>, thickened cord, and an <b>absent cremasteric reflex</b>. This is a <b>urological emergency</b> — <b>urgent surgical exploration + detorsion</b> (don't delay for imaging if the diagnosis is clear); viability falls sharply after ~6 hours.</div>\n<h2>Testicular malignancy</h2>\n<ul>\n<li><b>Firm, painless, intrinsic testicular nodule</b> that slowly enlarges in a young man; <b>cryptorchidism</b> (even after correction) is a risk factor.</li>\n<li><b>Workup: scrotal ultrasound + tumour markers AFP and β-hCG</b> (and LDH).</li>\n<li><b>Do NOT do a trans-scrotal biopsy</b> — it risks seeding tumour into scrotal lymphatics; diagnosis/treatment is <b>radical inguinal orchiectomy</b>.</li>\n</ul>\n<h2>Varicocele</h2>\n<ul>\n<li>Dilated pampiniform-plexus veins (\"bag of worms\"), usually <b>left-sided</b>; classically decompresses when supine.</li>\n<li>A <b>new right-sided</b> or non-decompressing varicocele &rarr; image for a retroperitoneal mass. Treat surgically only for <b>testicular atrophy or impaired fertility</b>.</li>\n</ul>\n<div class='key'>Sudden pain + absent cremasteric reflex + horizontal lie = torsion → OR now. Painless firm intrinsic mass = tumour → ultrasound + AFP/β-hCG, NO scrotal biopsy, inguinal orchiectomy. Left varicocele common; new right-sided one → look for a mass.</div>\n</div>"
+  },
+  {
+   "file": "W35_04_Nephrolithiasis.html",
+   "title": "Week 35 · 4 Nephrolithiasis (Kidney Stones)",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Nephrolithiasis (Kidney Stones)</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Stones</div><h1>Nephrolithiasis (Kidney Stones)</h1></div><div class='r'>Week 35 &middot; KU III &mdash; Urology<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Stone types and what's radiolucent, the colicky presentation, the must-admit criteria, and acute vs preventive management.</p>\n<h2>Presentation</h2>\n<p>Acute, severe, <b>colicky flank pain radiating to the groin</b>, often with hematuria, nausea, and an inability to sit still. Most pass spontaneously if small (&lt;5 mm).</p>\n<h2>Stone types &amp; imaging</h2>\n<table>\n<tr><th>Stone</th><th>Note</th></tr>\n<tr><td>Calcium oxalate (most common), calcium phosphate, struvite</td><td><b>Radiopaque</b> on plain x-ray</td></tr>\n<tr><td><b>Uric acid</b></td><td><b>Radiolucent</b> (invisible on KUB) — need non-contrast CT or ultrasound</td></tr>\n<tr><td>Struvite (Mg-ammonium-phosphate)</td><td>Urease-producing organisms (Proteus); \"staghorn\" calculi</td></tr>\n</table>\n<p><b>Non-contrast CT</b> is the most sensitive test; ultrasound (and a low-dose CT) limits radiation.</p>\n<div class='band warn'><div class='t'>Admit / urgent urology when</div>\n<b>Obstructing stone + fever/infection</b> (infected obstructed system = emergency &mdash; decompress + antibiotics), bilateral obstruction or obstruction of a <b>solitary kidney</b> (post-renal failure risk), <b>AKI</b>, or intractable vomiting/pain (can't tolerate oral intake).</div>\n<h2>Management</h2>\n<ul>\n<li><b>Acute:</b> analgesia (<b>NSAIDs/ketorolac</b> first-line, opioids if needed), antiemetics, hydration; <b>medical expulsive therapy with an α-blocker (tamsulosin)</b> for distal ureteric stones; urology (lithotripsy/ureteroscopy) for large/obstructing stones.</li>\n<li><b>Prevention:</b> high fluid intake; for calcium stones, a <b>thiazide</b> (lowers urine calcium) and dietary changes; <b>potassium citrate</b> for uric-acid/calcium stones (alkalinizes urine).</li>\n</ul>\n<div class='key'>Colicky flank-to-groin pain; uric-acid stones are radiolucent (need CT/US). Infected + obstructed stone = emergency decompression. NSAIDs for pain, tamsulosin to expel, thiazide/citrate to prevent.</div>\n</div>"
+  },
+  {
+   "file": "W35_05_Hematuria.html",
+   "title": "Week 35 · 5 Hematuria & Bladder Cancer",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Hematuria &amp; Bladder Cancer</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Blood in urine</div><h1>Hematuria &amp; Bladder Cancer</h1></div><div class='r'>Week 35 &middot; KU III &mdash; Urology<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The micro-hematuria definition, the gross-hematuria split (UTI vs malignancy), and the workup that must not miss cancer.</p>\n<h2>Definitions</h2>\n<p><b>Microscopic hematuria</b> = &gt;2 RBCs/high-power field on a properly collected sample (confirm it's not menstrual/exercise-related). <b>Gross hematuria</b> is visible blood.</p>\n<div class='band warn'><div class='t'>Painless gross hematuria = cancer until proven otherwise</div>\nIn an <b>older adult or smoker</b>, painless gross hematuria carries a high risk of <b>genitourinary malignancy</b> (bladder urothelial carcinoma, renal cell carcinoma) and mandates full evaluation. In a peri-menopausal woman, the commonest cause of gross hematuria is actually a <b>UTI</b> — but malignancy must still be excluded.</p></div>\n<h2>Glomerular vs urologic bleeding</h2>\n<ul>\n<li><b>Glomerular</b> (nephritic): <b>RBC casts</b>, dysmorphic RBCs, proteinuria, hypertension → nephrology.</li>\n<li><b>Urologic</b>: clots, normal-shaped RBCs, no casts → image the tract and scope the bladder.</li>\n</ul>\n<h2>Workup</h2>\n<ul>\n<li>Urinalysis + microscopy, <b>urine culture</b> (exclude infection) and <b>cytology</b>; <b>CT urography</b> (or renal/bladder ultrasound) to image the upper tracts; <b>cystoscopy</b> to inspect the bladder.</li>\n<li><b>Bladder cancer</b> risk factors: smoking (the biggest), occupational aromatic amines, chronic irritation; most are urothelial carcinoma presenting with painless hematuria.</li>\n</ul>\n<div class='key'>Micro-hematuria = &gt;2 RBC/HPF. Painless gross hematuria in an older adult/smoker = urologic malignancy until excluded (cytology + CT urogram + cystoscopy). RBC casts redirect you to a glomerular (nephritic) cause.</div>\n</div>"
+  },
+  {
+   "file": "W35_06_UTI.html",
+   "title": "Week 35 · 6 Urinary Tract Infection",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Urinary Tract Infection</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Infection</div><h1>Urinary Tract Infection</h1></div><div class='r'>Week 35 &middot; KU III &mdash; Urology<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Cystitis vs pyelonephritis, the complicated-vs-uncomplicated split, and first-line antibiotics (with what to avoid).</p>\n<h2>The spectrum</h2>\n<table>\n<tr><th></th><th>Cystitis (lower)</th><th>Pyelonephritis (upper)</th></tr>\n<tr><td>Symptoms</td><td>Dysuria, frequency, urgency, suprapubic pain; no fever</td><td><b>Fever, flank pain, CVA tenderness</b>, nausea &plusmn; cystitis symptoms</td></tr>\n<tr><td>Setting</td><td>Often outpatient</td><td>May need admission/IV therapy</td></tr>\n</table>\n<p><b>Most common organism:</b> <i>E. coli</i>. Diagnose with urinalysis (leukocyte esterase, nitrites) and culture; nitrites suggest Enterobacteriaceae.</p>\n<h2>Uncomplicated vs complicated</h2>\n<ul>\n<li><b>Uncomplicated:</b> healthy non-pregnant women, normal tract.</li>\n<li><b>Complicated:</b> men, pregnancy, catheters, obstruction/stones, immunocompromise, or structural/functional abnormality — broader coverage, longer course, and imaging if obstruction suspected.</li>\n</ul>\n<div class='band warn'><div class='t'>First-line antibiotics</div>\n<b>Uncomplicated cystitis:</b> <b>nitrofurantoin</b>, <b>TMP-SMX</b> (resistance-dependent), or <b>fosfomycin</b> (single dose). <b>Pyelonephritis:</b> a fluoroquinolone (<b>ciprofloxacin</b>) or <b>ceftriaxone</b> (IV if unwell). <b>Pregnancy:</b> treat asymptomatic bacteriuria; avoid fluoroquinolones; nitrofurantoin not at term. An <b>infected obstructed stone</b> needs urgent decompression, not antibiotics alone.</div>\n<div class='key'>Cystitis = lower (dysuria, no fever); pyelonephritis = fever + flank/CVA tenderness. E. coli predominates. Nitrofurantoin/TMP-SMX/fosfomycin for cystitis; cipro/ceftriaxone for pyelonephritis. Obstruction + infection = drain it.</div>\n</div>"
+  },
+  {
+   "file": "W35_07_POCUS.html",
+   "title": "Week 35 · 7 Renal & Bladder Point-of-Care Ultrasound",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Renal &amp; Bladder Point-of-Care Ultrasound</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>POCUS</div><h1>Renal &amp; Bladder Point-of-Care Ultrasound</h1></div><div class='r'>Week 35 &middot; KU III &mdash; Urology<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>How POCUS rapidly answers the urgent urology questions — hydronephrosis, stones, and bladder volume.</p>\n<h2>Why POCUS</h2>\n<p>A rapid, radiation-free bedside tool to assess the renal parenchyma and bladder — especially to detect <b>hydronephrosis</b> (the key finding in obstruction) and <b>urinary retention</b>.</p>\n<h2>Renal scan</h2>\n<ul>\n<li>Image both kidneys in <b>long and short axis</b> (right kidney via the liver, left via the spleen, using the diaphragm as a landmark); scan <b>Morison's pouch</b> (hepatorenal space) for free fluid.</li>\n<li>Assess the capsule, cortex, medullary pyramids, and renal pelvis; chronic CKD shows <b>small, echogenic kidneys with thinned cortices</b>.</li>\n</ul>\n<div class='band'><div class='t'>Sonographic signs of stones / obstruction</div>\nA <b>hyperechoic stone with posterior acoustic shadowing</b>, a <b>twinkling artifact</b> on color Doppler, <b>hydronephrosis</b> (dilated anechoic renal pelvis), and <b>absent ureteral jets</b> into the bladder on the affected side.</div>\n<h2>Bladder scan</h2>\n<ul>\n<li>Image in <b>transverse and longitudinal</b> planes. <b>Bladder volume = width &times; depth &times; height &times; 0.7</b> (used for post-void residual / retention).</li>\n<li>Windows differ by sex: male — bladder, seminal vesicles, recto-vesical space; female — bladder, uterus, vesico-uterine and recto-uterine (Pouch of Douglas) spaces.</li>\n</ul>\n<div class='key'>POCUS answers \"is there obstruction (hydronephrosis) or retention (bladder volume)?\" fast and without radiation. Stones: hyperechoic + shadowing + twinkling + absent ureteral jet. Bladder volume = W×D×H×0.7.</div>\n</div>"
+  },
+  {
+   "file": "W35_08_LUTS_Incontinence.html",
+   "title": "Week 35 · 8 LUTS Approach & Urinary Incontinence",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>LUTS Approach &amp; Urinary Incontinence</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Approach</div><h1>LUTS Approach &amp; Urinary Incontinence</h1></div><div class='r'>Week 35 &middot; KU III &mdash; Urology<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>A structured read of lower urinary tract symptoms, and the incontinence types with their targeted treatments.</p>\n<h2>Reading LUTS</h2>\n<p>Sort symptoms into <b>storage</b> (frequency, urgency, nocturia), <b>voiding</b> (hesitancy, weak stream, intermittency), and <b>post-micturition</b> (dribbling, incomplete emptying). Always check a urinalysis (exclude UTI/hematuria) and a post-void residual, and do a DRE in men.</p>\n<h2>Urinary incontinence types</h2>\n<table>\n<tr><th>Type</th><th>Mechanism / clue</th><th>First-line</th></tr>\n<tr><td><b>Stress</b></td><td>Leak with cough/laugh/exertion; weak sphincter/pelvic floor (post-partum, post-prostatectomy)</td><td>Pelvic-floor (Kegel) exercises; <b>duloxetine</b>; surgery (sling)</td></tr>\n<tr><td><b>Urge</b> (overactive bladder)</td><td>Sudden urgency &rarr; leak; detrusor overactivity</td><td>Bladder training; <b>antimuscarinic (oxybutynin)</b> or <b>mirabegron</b></td></tr>\n<tr><td><b>Overflow</b></td><td>Dribbling from a chronically full bladder (BPH obstruction, atonic/neurogenic bladder, diabetes)</td><td>Relieve obstruction (α-blocker, catheter); treat retention</td></tr>\n<tr><td><b>Functional</b></td><td>Intact tract but can't reach the toilet (mobility, cognition)</td><td>Environmental/toileting measures</td></tr>\n</table>\n<div class='band warn'><div class='t'>Don't miss overflow</div>\nAn elderly man with \"incontinence\" and a palpable/scanned full bladder has <b>overflow</b> from obstruction or retention — an antimuscarinic would worsen it. Check the <b>post-void residual</b> first.</div>\n<div class='key'>Stress = leak with effort (Kegels/duloxetine); urge = OAB (antimuscarinic/mirabegron); overflow = retention/obstruction (relieve it, check PVR); functional = access problem. Always exclude UTI and measure PVR before treating.</div>\n</div>"
+  },
+  {
+   "file": "W35_09_Cram_Sheet.html",
+   "title": "Week 35 · 9 Cram Sheet",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Week 35 · 9 Cram Sheet</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.35;-webkit-font-smoothing:antialiased}\n.page{max-width:1180px;margin:0 auto;padding:18px 20px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:8px;margin-bottom:12px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:26px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.emerg{border:1.5px solid var(--hi);border-radius:6px;background:rgba(0,0,0,.02);padding:9px 12px;margin-bottom:13px}\n.emerg .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--hi);font-weight:600;margin-bottom:5px}\n.emerg .items{columns:3;column-gap:22px;font-size:12px;line-height:1.42}\n.emerg .items div{break-inside:avoid;margin-bottom:3px}\n.emerg b{color:var(--hi)}\n.cols{column-count:4;column-gap:14px}\n@media(max-width:1040px){.cols{column-count:3}}\n@media(max-width:760px){.cols{column-count:2}}\n@media(max-width:520px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(0,0,0,.02);padding:8px 9px 7px;margin:0 0 11px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;padding-bottom:4px;border-bottom:1.5px solid var(--line);color:var(--accent);display:flex;justify-content:space-between;align-items:baseline;gap:6px}\n.card h2 .wk{color:var(--soft);font-size:8.5px;font-weight:500;letter-spacing:.06em;white-space:nowrap}\n.row{margin:0 0 3.5px;font-size:11.5px;line-height:1.32}\n.row .tg{font-weight:600;color:var(--ink)}\n.row .ar{color:var(--soft)}\n.row .ar::before{content:\"\\2192 \";color:var(--accent);font-weight:600}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:5px 0}\n.dnm{color:var(--hi);font-weight:700}\n.foot{margin-top:10px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:landscape;margin:9mm}body{font-size:8.4px}.page{max-width:none;padding:0}.cols{column-count:4;column-gap:8px}.emerg .items{columns:3}.card{margin-bottom:6px}.head h1{font-size:19px}}\n</style><div class='page'><div class='head'><div><div class='k'>Night-Before High-Yield</div><h1>KU III — Urology</h1></div><div class='r'>Week 35 &middot; KU III &mdash; Urology<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><div class='emerg'><div class='t'>★ Do-not-miss &middot; first-step reflexes</div><div class='items'><div><b>Testicular torsion</b> (sudden pain, absent cremasteric reflex, horizontal lie) &rarr; urgent surgical exploration &mdash; don't wait for imaging</div><div><b>Infected + obstructed stone</b> (fever + obstruction) &rarr; emergency decompression (stent/nephrostomy) + antibiotics</div><div><b>Painless gross hematuria</b> in an older adult/smoker &rarr; urologic malignancy until excluded (cytology + CT urogram + cystoscopy)</div><div><b>Don't biopsy a testicular mass trans-scrotally</b> &rarr; seeding; do US + AFP/β-hCG, then inguinal orchiectomy</div><div><b>Overflow incontinence</b> (high PVR) &rarr; an antimuscarinic worsens it; relieve the obstruction/retention</div><div><b>New right-sided / non-decompressing varicocele</b> &rarr; image for a retroperitoneal mass</div></div></div><div class='cols'><div class='card'><h2>BPH <span class='wk'>BPH</span></h2><div class='row'><span class='tg'>Zone</span> <span class='ar'>transition zone (cancer = peripheral)</span></div><div class='row'><span class='tg'>LUTS</span> <span class='ar'>storage / voiding / post-micturition</span></div><div class='row'><span class='tg'>Not BPH</span> <span class='ar'>flank/back pain</span></div><div class='row'><span class='tg'>Workup</span> <span class='ar'>PVR + urinalysis (exclude UTI), DRE</span></div><div class='row'><span class='tg'>α1-blocker</span> <span class='ar'>rapid relief; orthostatic hypotension, retrograde ejaculation</span></div><div class='row'><span class='tg'>5-ARI</span> <span class='ar'>shrinks gland ~6 mo; halves PSA</span></div></div><div class='card'><h2>Prostate cancer <span class='wk'>Prostate Ca</span></h2><div class='row'><span class='tg'>Zone</span> <span class='ar'>peripheral</span></div><div class='row'><span class='tg'>PSA</span> <span class='ar'>sensitive, not specific</span></div><div class='row'><span class='tg'>Gleason</span> <span class='ar'>grades differentiation (≠ TNM stage)</span></div><div class='row'><span class='tg'>Mets</span> <span class='ar'>osteoblastic axial bone pain</span></div><div class='row'><span class='tg'>Diagnosis</span> <span class='ar'>TRUS biopsy</span></div><div class='row'><span class='tg'>Advanced Rx</span> <span class='ar'>GnRH agonist (+antiandrogen for flare) / orchiectomy</span></div></div><div class='card'><h2>Testicular <span class='wk'>Testis</span></h2><div class='row'><span class='tg'>Torsion</span> <span class='ar'>absent cremasteric reflex → OR now</span></div><div class='row'><span class='tg'>Tumour</span> <span class='ar'>painless firm mass; US + AFP/β-hCG</span></div><div class='row'><span class='tg'>Biopsy</span> <span class='ar'>trans-scrotal contraindicated (seeding)</span></div><div class='row'><span class='tg'>Risk factor</span> <span class='ar'>cryptorchidism</span></div><div class='row'><span class='tg'>Varicocele</span> <span class='ar'>left common; new right → image</span></div></div><div class='card'><h2>Stones <span class='wk'>Stones</span></h2><div class='row'><span class='tg'>Pain</span> <span class='ar'>colicky flank → groin</span></div><div class='row'><span class='tg'>Radiolucent</span> <span class='ar'>uric acid (need CT/US)</span></div><div class='row'><span class='tg'>Struvite</span> <span class='ar'>urease (Proteus); staghorn</span></div><div class='row'><span class='tg'>Emergency</span> <span class='ar'>infected + obstructed → decompress</span></div><div class='row'><span class='tg'>Acute Rx</span> <span class='ar'>NSAID + tamsulosin (MET)</span></div><div class='row'><span class='tg'>Prevent</span> <span class='ar'>fluids; thiazide (Ca); citrate (uric acid)</span></div></div><div class='card'><h2>Hematuria / UTI <span class='wk'>Hematuria/UTI</span></h2><div class='row'><span class='tg'>Micro-hematuria</span> <span class='ar'>>2 RBC/HPF</span></div><div class='row'><span class='tg'>Painless gross</span> <span class='ar'>older/smoker → malignancy workup</span></div><div class='row'><span class='tg'>RBC casts</span> <span class='ar'>glomerular (nephritic) → nephrology</span></div><div class='row'><span class='tg'>Cystitis</span> <span class='ar'>nitrofurantoin / TMP-SMX / fosfomycin</span></div><div class='row'><span class='tg'>Pyelonephritis</span> <span class='ar'>cipro / ceftriaxone; fever + flank</span></div><div class='row'><span class='tg'>Pregnancy</span> <span class='ar'>treat asymptomatic bacteriuria</span></div></div><div class='card'><h2>POCUS / incontinence <span class='wk'>POCUS/UI</span></h2><div class='row'><span class='tg'>Hydronephrosis</span> <span class='ar'>= obstruction (post-renal)</span></div><div class='row'><span class='tg'>Stone signs</span> <span class='ar'>shadowing, twinkling, absent jet</span></div><div class='row'><span class='tg'>Bladder volume</span> <span class='ar'>W×D×H×0.7</span></div><div class='row'><span class='tg'>Stress</span> <span class='ar'>leak with effort → Kegels/duloxetine</span></div><div class='row'><span class='tg'>Urge</span> <span class='ar'>OAB → antimuscarinic/mirabegron</span></div><div class='row'><span class='tg'>Overflow</span> <span class='ar'>high PVR → relieve obstruction</span></div></div></div><div class='foot'>Week 35 &middot; KU III &mdash; Urology &middot; cram sheet &middot; cue &rarr; answer</div></div>"
+  }
+ ],
+ "drugs": [
+  {
+   "id": "rx:tamsulosin",
+   "name": "Tamsulosin",
+   "class": "rx:alpha-blocker",
+   "facets": {
+    "use": "BPH symptom relief; ureteric-stone expulsion",
+    "mechanism": "α1-blocker — relaxes prostate/bladder-neck (and ureteric) smooth muscle",
+    "adverse": "Orthostatic hypotension, retrograde ejaculation",
+    "monitoring": "Additive hypotension with antihypertensives"
+   },
+   "ref": {
+    "topic": "BPH / stones",
+    "guide": "W35_01_BPH.html",
+    "week": "Week 35 · KU III — Urology"
+   }
+  },
+  {
+   "id": "rx:finasteride",
+   "name": "Finasteride",
+   "class": "rx:5ari",
+   "facets": {
+    "use": "BPH (gland reduction)",
+    "mechanism": "5-α reductase inhibitor — blocks testosterone→DHT",
+    "adverse": "↓Libido, impotence, gynecomastia; lowers PSA ~50%",
+    "contra": "Pregnancy (teratogen)"
+   },
+   "ref": {
+    "topic": "BPH",
+    "guide": "W35_01_BPH.html",
+    "week": "Week 35 · KU III — Urology"
+   }
+  },
+  {
+   "id": "rx:oxybutynin",
+   "name": "Oxybutynin",
+   "class": "rx:anticholinergic",
+   "facets": {
+    "use": "Urge incontinence / overactive bladder",
+    "mechanism": "Antimuscarinic (M3) — relaxes detrusor",
+    "adverse": "Dry mouth, constipation, confusion",
+    "contra": "Narrow-angle glaucoma; worsens overflow/retention"
+   },
+   "ref": {
+    "topic": "Incontinence",
+    "guide": "W35_08_LUTS_Incontinence.html",
+    "week": "Week 35 · KU III — Urology"
+   }
+  },
+  {
+   "id": "rx:mirabegron",
+   "name": "Mirabegron",
+   "class": "rx:beta3-agonist",
+   "facets": {
+    "use": "Overactive bladder",
+    "mechanism": "β3-adrenergic agonist — relaxes detrusor",
+    "adverse": "Hypertension, tachycardia"
+   },
+   "ref": {
+    "topic": "Incontinence",
+    "guide": "W35_08_LUTS_Incontinence.html",
+    "week": "Week 35 · KU III — Urology"
+   }
+  },
+  {
+   "id": "rx:duloxetine",
+   "name": "Duloxetine",
+   "class": "rx:snri",
+   "facets": {
+    "use": "Stress urinary incontinence (adjunct)",
+    "mechanism": "SNRI — increases urethral sphincter tone",
+    "adverse": "Nausea, dry mouth"
+   },
+   "ref": {
+    "topic": "Incontinence",
+    "guide": "W35_08_LUTS_Incontinence.html",
+    "week": "Week 35 · KU III — Urology"
+   }
+  },
+  {
+   "id": "rx:leuprolide",
+   "name": "Leuprolide",
+   "class": "rx:gnrh-agonist",
+   "facets": {
+    "use": "Advanced prostate cancer (androgen deprivation)",
+    "mechanism": "GnRH agonist — continuous dosing desensitizes the pituitary → ↓testosterone",
+    "adverse": "Initial flare (cover with antiandrogen), hot flashes, bone loss"
+   },
+   "ref": {
+    "topic": "Prostate cancer",
+    "guide": "W35_02_Prostate_Cancer.html",
+    "week": "Week 35 · KU III — Urology"
+   }
+  },
+  {
+   "id": "rx:bicalutamide",
+   "name": "Bicalutamide",
+   "class": "rx:anti-androgen",
+   "facets": {
+    "use": "Prostate cancer (with GnRH agonist)",
+    "mechanism": "Non-steroidal antiandrogen — blocks the androgen receptor",
+    "adverse": "Gynecomastia, hot flashes, LFT rise"
+   },
+   "ref": {
+    "topic": "Prostate cancer",
+    "guide": "W35_02_Prostate_Cancer.html",
+    "week": "Week 35 · KU III — Urology"
+   }
+  },
+  {
+   "id": "rx:ketorolac",
+   "name": "Ketorolac",
+   "class": "rx:nsaid",
+   "facets": {
+    "use": "Acute renal-colic pain",
+    "mechanism": "NSAID — reduces ureteric inflammation/pressure",
+    "adverse": "GI bleeding, renal injury",
+    "contra": "AKI, ulcer/bleeding risk"
+   },
+   "ref": {
+    "topic": "Stones",
+    "guide": "W35_04_Nephrolithiasis.html",
+    "week": "Week 35 · KU III — Urology"
+   }
+  },
+  {
+   "id": "rx:potassium-citrate",
+   "name": "Potassium citrate",
+   "class": "rx:urinary-alkalinizer",
+   "facets": {
+    "use": "Uric-acid and calcium stone prevention",
+    "mechanism": "Alkalinizes urine; raises urinary citrate (inhibits crystallization)",
+    "adverse": "GI upset, hyperkalemia"
+   },
+   "ref": {
+    "topic": "Stones",
+    "guide": "W35_04_Nephrolithiasis.html",
+    "week": "Week 35 · KU III — Urology"
+   }
+  },
+  {
+   "id": "rx:hydrochlorothiazide",
+   "name": "Hydrochlorothiazide",
+   "class": "rx:thiazide",
+   "facets": {
+    "use": "Calcium-stone prevention",
+    "mechanism": "Thiazide — lowers urinary calcium excretion",
+    "adverse": "Hypokalemia, hyponatremia, hyperuricemia"
+   },
+   "ref": {
+    "topic": "Stones",
+    "guide": "W35_04_Nephrolithiasis.html",
+    "week": "Week 35 · KU III — Urology"
+   }
+  },
+  {
+   "id": "rx:nitrofurantoin",
+   "name": "Nitrofurantoin",
+   "class": "rx:nitrofuran",
+   "facets": {
+    "use": "Uncomplicated cystitis",
+    "mechanism": "Concentrates in urine, damages bacterial DNA",
+    "adverse": "Pulmonary toxicity (chronic); avoid if low eGFR or at term/pyelonephritis"
+   },
+   "ref": {
+    "topic": "UTI",
+    "guide": "W35_06_UTI.html",
+    "week": "Week 35 · KU III — Urology"
+   }
+  },
+  {
+   "id": "rx:tmp-smx",
+   "name": "Trimethoprim-sulfamethoxazole",
+   "class": "rx:folate-antagonist-abx",
+   "facets": {
+    "use": "Cystitis (resistance-dependent); some pyelonephritis",
+    "mechanism": "Sequential folate-pathway blockade",
+    "adverse": "Rash, hyperkalemia, marrow suppression"
+   },
+   "ref": {
+    "topic": "UTI",
+    "guide": "W35_06_UTI.html",
+    "week": "Week 35 · KU III — Urology"
+   }
+  },
+  {
+   "id": "rx:fosfomycin",
+   "name": "Fosfomycin",
+   "class": "rx:phosphonic-antibiotic",
+   "facets": {
+    "use": "Uncomplicated cystitis (single dose)",
+    "mechanism": "Phosphonic-acid antibiotic — inhibits cell-wall synthesis",
+    "adverse": "Diarrhea"
+   },
+   "ref": {
+    "topic": "UTI",
+    "guide": "W35_06_UTI.html",
+    "week": "Week 35 · KU III — Urology"
+   }
+  },
+  {
+   "id": "rx:ciprofloxacin",
+   "name": "Ciprofloxacin",
+   "class": "rx:fluoroquinolone",
+   "facets": {
+    "use": "Pyelonephritis; complicated UTI",
+    "mechanism": "Fluoroquinolone (DNA gyrase)",
+    "adverse": "Tendinopathy, QT, C. difficile",
+    "contra": "Pregnancy (caution)"
+   },
+   "ref": {
+    "topic": "UTI",
+    "guide": "W35_06_UTI.html",
+    "week": "Week 35 · KU III — Urology"
+   }
+  },
+  {
+   "id": "rx:ceftriaxone",
+   "name": "Ceftriaxone",
+   "class": "rx:cephalosporin",
+   "facets": {
+    "use": "Pyelonephritis (IV if unwell)",
+    "mechanism": "3rd-gen cephalosporin",
+    "adverse": "Allergy, C. difficile"
+   },
+   "ref": {
+    "topic": "UTI",
+    "guide": "W35_06_UTI.html",
+    "week": "Week 35 · KU III — Urology"
+   }
+  }
+ ]
+}

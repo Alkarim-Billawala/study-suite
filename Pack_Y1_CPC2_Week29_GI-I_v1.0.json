@@ -1,0 +1,1617 @@
+{
+ "pack": "Week 29 — GI I (Upper GI)",
+ "id": "wk29",
+ "formatVersion": "2.0",
+ "version": "1.0",
+ "author": "Alkarim Billawala / alkarim.billawala.ca",
+ "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
+ "created": "2026-06-16",
+ "updated": "2026-06-16",
+ "school": "UofT — Temerty Medicine",
+ "year": "Year 1",
+ "course": "CPC 2",
+ "weeks": "Week 29 · GI I — Upper GI",
+ "questions": [
+  {
+   "id": "wk29_q01",
+   "sys": "GI",
+   "topic": "GI · GERD",
+   "difficulty": "easy",
+   "stem": "A 58-year-old man has 8 months of heartburn and sour regurgitation, worse after large meals and lying down, with recent weight gain and nocturnal symptoms. No dysphagia, vomiting, bleeding, or weight loss. BMI 32. Most appropriate next step?",
+   "options": [
+    "Urgent upper endoscopy",
+    "CT chest and abdomen",
+    "Clinical diagnosis of GERD with lifestyle measures and a PPI",
+    "Esophageal manometry"
+   ],
+   "correct": 2,
+   "explain": "Typical heartburn/regurgitation with <b>no alarm features</b> is a clinical GERD diagnosis &rarr; lifestyle (weight loss, head-of-bed elevation, avoid late meals) + PPI. Endoscopy is reserved for alarm features or Barrett screening.",
+   "guide": {
+    "f": "W29_02_GERD.html",
+    "t": "2 · Diagnosis",
+    "s": "clinical if no alarms"
+   }
+  },
+  {
+   "id": "wk29_q02",
+   "sys": "GI",
+   "topic": "GI · Dyspepsia",
+   "difficulty": "medium",
+   "stem": "A 72-year-old woman has 2 months of new epigastric pain, early satiety, fatigue, and 6 kg unintentional weight loss. CBC shows microcytic anemia; no NSAID use; her brother died of gastric cancer. Which feature most changes management away from empiric treatment?",
+   "options": [
+    "Epigastric pain",
+    "Early satiety",
+    "Family history, weight loss, and iron-deficiency anemia",
+    "Absence of NSAID use"
+   ],
+   "correct": 2,
+   "explain": "<b>Alarm features</b> — weight loss, iron-deficiency anemia, older age with new symptoms, and a family history of upper-GI malignancy — warrant <b>endoscopy</b> rather than empiric dyspepsia therapy.",
+   "guide": {
+    "f": "W29_04_Dyspepsia.html",
+    "t": "4 · Alarm features",
+    "s": "scope, don't treat"
+   }
+  },
+  {
+   "id": "wk29_q03",
+   "sys": "GI",
+   "topic": "GI · UGIB",
+   "difficulty": "hard",
+   "stem": "A 66-year-old man on ibuprofen TID for 4 months has black tarry stools and lightheadedness. BP 92/60, HR 118, epigastric tenderness, Hb 86 g/L. Best initial priority?",
+   "options": [
+    "Outpatient H. pylori breath test",
+    "Oral iron and discharge",
+    "Resuscitation (ABCs, IV access, fluids/blood), IV PPI, and urgent endoscopy",
+    "Start loperamide"
+   ],
+   "correct": 2,
+   "explain": "This is an <b>unstable upper GI bleed</b> (likely NSAID ulcer). Priority is <b>hemodynamic resuscitation</b> first, then IV PPI and urgent endoscopy. Outpatient testing or iron alone would be unsafe.",
+   "guide": {
+    "f": "W29_06_UGIB.html",
+    "t": "6 · Initial management",
+    "s": "resuscitate first"
+   }
+  },
+  {
+   "id": "wk29_q04",
+   "sys": "GI",
+   "topic": "GI · UGIB",
+   "difficulty": "medium",
+   "stem": "A 25-year-old develops food poisoning with 12 hours of forceful vomiting, initially non-bloody, then a small amount of bright red blood. He is stable, with no liver disease or NSAID use. Most likely diagnosis?",
+   "options": [
+    "Esophageal varices",
+    "Mallory-Weiss tear",
+    "Gastric adenocarcinoma",
+    "Dieulafoy lesion"
+   ],
+   "correct": 1,
+   "explain": "Hematemesis <b>after repeated forceful vomiting</b> is the classic <b>Mallory-Weiss tear</b> (a mucosal laceration at the gastroesophageal junction); most are self-limited.",
+   "guide": {
+    "f": "W29_06_UGIB.html",
+    "t": "6 · Causes",
+    "s": "Mallory-Weiss"
+   }
+  },
+  {
+   "id": "wk29_q05",
+   "sys": "GI",
+   "topic": "GI · Gastroparesis",
+   "difficulty": "medium",
+   "stem": "A 61-year-old with long-standing type 2 diabetes and neuropathy has 6 months of nausea, vomiting of undigested food, early satiety, and post-prandial fullness. Endoscopy is normal; a gastric emptying study shows delayed emptying. QTc normal. Best chronic prokinetic?",
+   "options": [
+    "Ondansetron",
+    "Domperidone",
+    "Scopolamine",
+    "Omeprazole"
+   ],
+   "correct": 1,
+   "explain": "Diabetic gastroparesis. <b>Domperidone</b> (a peripheral D2 antagonist that doesn't cross the blood-brain barrier) is a common chronic prokinetic with less CNS toxicity than metoclopramide &mdash; monitor QTc.",
+   "guide": {
+    "f": "W29_08_Nausea_Gastroparesis.html",
+    "t": "8 · Prokinetics",
+    "s": "domperidone"
+   }
+  },
+  {
+   "id": "wk29_q06",
+   "sys": "GI",
+   "topic": "GI · Antiemetics",
+   "difficulty": "easy",
+   "stem": "A 36-year-old woman with chemotherapy-induced nausea is prescribed ondansetron. Which receptor is its main target?",
+   "options": [
+    "D2",
+    "H1",
+    "M1",
+    "5-HT3"
+   ],
+   "correct": 3,
+   "explain": "Ondansetron is a <b>5-HT3 receptor antagonist</b> — 5-HT3 signaling is central to chemotherapy-induced and post-operative nausea/vomiting.",
+   "guide": {
+    "f": "W29_08_Nausea_Gastroparesis.html",
+    "t": "8 · Receptors",
+    "s": "5-HT3"
+   }
+  },
+  {
+   "id": "wk29_q07",
+   "sys": "GI",
+   "topic": "GI · Dysphagia",
+   "difficulty": "medium",
+   "stem": "A 68-year-old man has dysphagia that began with solids and now includes soft foods and liquids, with 9 kg weight loss, iron-deficiency anemia, and a 40-pack-year smoking history. Which diagnosis must be urgently excluded?",
+   "options": [
+    "Functional dyspepsia",
+    "Esophageal cancer",
+    "Globus sensation",
+    "Uncomplicated GERD"
+   ],
+   "correct": 1,
+   "explain": "<b>Progressive dysphagia (solids &rarr; liquids) with weight loss, anemia, and smoking</b> are red flags for <b>esophageal cancer</b> &mdash; urgent endoscopy.",
+   "guide": {
+    "f": "W29_07_Dysphagia.html",
+    "t": "7 · Red flags",
+    "s": "progressive → cancer"
+   }
+  },
+  {
+   "id": "wk29_q08",
+   "sys": "GI",
+   "topic": "GI · Functional dyspepsia",
+   "difficulty": "medium",
+   "stem": "A 49-year-old woman has recurrent epigastric burning and post-prandial fullness with no alarm features and a previously normal endoscopy. Which statement best fits functional dyspepsia?",
+   "options": [
+    "Symptoms are fabricated because testing is normal",
+    "Chronic gastroduodenal symptoms can arise from altered motility, visceral hypersensitivity, or brain-gut dysfunction despite normal routine testing",
+    "The diagnosis requires an abnormal CT",
+    "It is the same condition as GERD"
+   ],
+   "correct": 1,
+   "explain": "Functional dyspepsia is a <b>real</b> disorder with normal routine testing; mechanisms include altered motility, <b>visceral hypersensitivity</b>, brain-gut dysfunction, microbiome and immune changes. Treat by phenotype.",
+   "guide": {
+    "f": "W29_04_Dyspepsia.html",
+    "t": "4 · Functional dyspepsia",
+    "s": "real, normal tests"
+   }
+  },
+  {
+   "id": "wk29_q09",
+   "sys": "GI",
+   "topic": "GI · Acid physiology",
+   "difficulty": "medium",
+   "stem": "Which parietal-cell structure is the final common pathway of gastric acid secretion and the target of the most effective acid-suppressing drugs?",
+   "options": [
+    "The H2 histamine receptor",
+    "The H+/K+-ATPase proton pump",
+    "The gastrin receptor",
+    "Carbonic anhydrase"
+   ],
+   "correct": 1,
+   "explain": "The <b>H+/K+-ATPase (proton pump)</b> is the final step. PPIs irreversibly inhibit it, giving the most complete acid suppression; H2 blockers only cut the histamine input.",
+   "guide": {
+    "f": "W29_01_Upper_GI_Physiology.html",
+    "t": "1 · Acid secretion",
+    "s": "proton pump"
+   }
+  },
+  {
+   "id": "wk29_q10",
+   "sys": "GI",
+   "topic": "GI · H. pylori",
+   "difficulty": "medium",
+   "stem": "A patient finishes H. pylori eradication and needs confirmation of cure. They are still taking a PPI for symptoms. What is the most appropriate approach?",
+   "options": [
+    "Serology now",
+    "Urea breath test now while on the PPI",
+    "Hold the PPI for ~2 weeks, then urea breath or stool antigen test",
+    "No confirmation is needed"
+   ],
+   "correct": 2,
+   "explain": "PPIs cause <b>false-negative</b> active-infection tests. <b>Hold the PPI</b> (and avoid recent antibiotics/bismuth) before a <b>urea breath or stool antigen</b> test of cure. Serology only shows past exposure.",
+   "guide": {
+    "f": "W29_05_PUD.html",
+    "t": "5 · H. pylori testing",
+    "s": "hold PPI; breath/stool"
+   }
+  },
+  {
+   "id": "wk29_q11",
+   "sys": "GI",
+   "topic": "GI · NSAID ulcer",
+   "difficulty": "medium",
+   "stem": "A 70-year-old needs long-term NSAIDs for arthritis but has a prior peptic ulcer. Which strategy best reduces NSAID ulcer risk if NSAIDs must continue?",
+   "options": [
+    "Add a PPI (or misoprostol) for gastroprotection",
+    "Switch to a higher NSAID dose",
+    "Add an antacid only as needed",
+    "Take the NSAID on an empty stomach"
+   ],
+   "correct": 0,
+   "explain": "High-risk NSAID users need <b>gastroprotection</b>: a PPI (or misoprostol, a prostaglandin analogue that replaces what NSAIDs suppress). A COX-2 selective agent reduces GI risk but raises cardiovascular risk.",
+   "guide": {
+    "f": "W29_05_PUD.html",
+    "t": "5 · NSAID ulcers",
+    "s": "PPI/misoprostol"
+   }
+  },
+  {
+   "id": "wk29_q12",
+   "sys": "GI",
+   "topic": "GI · Variceal bleed",
+   "difficulty": "hard",
+   "stem": "A patient with known cirrhosis presents with large-volume hematemesis and hypotension. After resuscitation and IV PPI, which additions are most appropriate before/at endoscopy?",
+   "options": [
+    "Loperamide and oral iron",
+    "Octreotide and prophylactic antibiotics (e.g. ceftriaxone)",
+    "Metoclopramide and an antacid",
+    "High-dose NSAID and tranexamic acid only"
+   ],
+   "correct": 1,
+   "explain": "Suspected <b>variceal</b> bleeding in cirrhosis &rarr; add <b>octreotide</b> (splanchnic vasoconstriction) and <b>prophylactic antibiotics</b> (reduce infection and mortality), alongside resuscitation and urgent endoscopy (band ligation).",
+   "guide": {
+    "f": "W29_06_UGIB.html",
+    "t": "6 · Variceal",
+    "s": "octreotide + antibiotics"
+   }
+  },
+  {
+   "id": "wk29_q13",
+   "sys": "GI",
+   "topic": "GI · Dysphagia pattern",
+   "difficulty": "medium",
+   "stem": "A 40-year-old has difficulty swallowing both solids and liquids from the onset of symptoms, with occasional regurgitation of undigested food. There is no weight loss. Which category is most likely?",
+   "options": [
+    "Mechanical obstruction (cancer)",
+    "Peptic stricture",
+    "Esophageal motility disorder (e.g. achalasia)",
+    "Oropharyngeal dysphagia"
+   ],
+   "correct": 2,
+   "explain": "<b>Solids and liquids from onset</b> points to an esophageal <b>motility disorder</b> such as achalasia (confirmed by manometry), in contrast to the solids-then-liquids progression of mechanical obstruction.",
+   "guide": {
+    "f": "W29_07_Dysphagia.html",
+    "t": "7 · Pattern",
+    "s": "solids+liquids = motility"
+   }
+  },
+  {
+   "id": "wk29_q14",
+   "sys": "GI",
+   "topic": "GI · GERD complication",
+   "difficulty": "medium",
+   "stem": "A patient with 10 years of poorly controlled reflux develops slowly progressive solid-food dysphagia. Endoscopy shows a smooth narrowing in the distal esophagus. What is the most likely complication?",
+   "options": [
+    "Peptic stricture",
+    "Achalasia",
+    "Eosinophilic esophagitis",
+    "Zenker diverticulum"
+   ],
+   "correct": 0,
+   "explain": "Chronic acid injury can scar the distal esophagus into a <b>peptic stricture</b> &rarr; progressive solid-food dysphagia. (Barrett esophagus and adenocarcinoma are the other key reflux complications to keep in mind.)",
+   "guide": {
+    "f": "W29_02_GERD.html",
+    "t": "2 · Complications",
+    "s": "peptic stricture"
+   }
+  },
+  {
+   "id": "wk29_q15",
+   "sys": "GI",
+   "topic": "GI · Cells",
+   "difficulty": "easy",
+   "stem": "Atrophy or autoimmune loss of which gastric cell most directly impairs vitamin B12 absorption?",
+   "options": [
+    "Chief cell",
+    "Parietal cell",
+    "G cell",
+    "D cell"
+   ],
+   "correct": 1,
+   "explain": "<b>Parietal cells</b> secrete <b>intrinsic factor</b> (needed for ileal B12 absorption) as well as acid. Their loss (e.g. autoimmune gastritis) causes B12 deficiency.",
+   "guide": {
+    "f": "W29_01_Upper_GI_Physiology.html",
+    "t": "1 · Cells",
+    "s": "parietal = IF"
+   }
+  },
+  {
+   "id": "wk29_q16",
+   "sys": "GI",
+   "topic": "GI · Antiemetic choice",
+   "difficulty": "medium",
+   "stem": "A 30-year-old has nausea and vertigo from motion sickness on a boat. Which antiemetic class best targets this vestibular cause?",
+   "options": [
+    "5-HT3 antagonist",
+    "Antihistamine or anticholinergic (e.g. dimenhydrinate, scopolamine)",
+    "NK1 antagonist",
+    "Proton pump inhibitor"
+   ],
+   "correct": 1,
+   "explain": "<b>Vestibular</b> nausea responds to <b>H1 antihistamines (dimenhydrinate)</b> and <b>anticholinergics (scopolamine)</b>. 5-HT3 and NK1 antagonists are for chemo/post-op nausea.",
+   "guide": {
+    "f": "W29_08_Nausea_Gastroparesis.html",
+    "t": "8 · Receptors",
+    "s": "vestibular → H1/M1"
+   }
+  },
+  {
+   "id": "wk29_q17",
+   "sys": "GI",
+   "topic": "GI · Metoclopramide",
+   "difficulty": "hard",
+   "stem": "A young woman given IV metoclopramide for migraine-associated vomiting develops an acute dystonic reaction (involuntary neck and eye muscle spasm). What explains this?",
+   "options": [
+    "It is a peripheral-only agent",
+    "It crosses the blood-brain barrier and blocks central D2 receptors",
+    "It is a 5-HT3 antagonist",
+    "It is an anticholinergic"
+   ],
+   "correct": 1,
+   "explain": "<b>Metoclopramide crosses the blood-brain barrier</b> and central D2 blockade can cause acute dystonia and tardive dyskinesia &mdash; unlike domperidone, which does not cross the BBB.",
+   "guide": {
+    "f": "W29_08_Nausea_Gastroparesis.html",
+    "t": "8 · Prokinetics",
+    "s": "metoclopramide CNS effects"
+   }
+  },
+  {
+   "id": "wk29_q18",
+   "sys": "GI",
+   "topic": "GI · H. pylori sequelae",
+   "difficulty": "medium",
+   "stem": "Chronic H. pylori infection is most associated with which gastric malignancy in addition to adenocarcinoma?",
+   "options": [
+    "Gastrointestinal stromal tumour (GIST)",
+    "Gastric MALT lymphoma",
+    "Squamous cell carcinoma",
+    "Carcinoid"
+   ],
+   "correct": 1,
+   "explain": "H. pylori drives chronic active gastritis and is the classic cause of <b>gastric MALT lymphoma</b> (which can regress with eradication) as well as adenocarcinoma.",
+   "guide": {
+    "f": "W29_05_PUD.html",
+    "t": "5 · H. pylori disease",
+    "s": "MALT lymphoma"
+   }
+  },
+  {
+   "id": "wk29_q19",
+   "sys": "GI",
+   "topic": "GI · PPI safety",
+   "difficulty": "medium",
+   "stem": "A patient on long-term high-dose PPI is reviewed. Which is the most appropriate management principle?",
+   "options": [
+    "Continue indefinitely without review",
+    "Stop abruptly in all patients",
+    "Use the lowest effective dose and periodically reassess the ongoing indication",
+    "Switch everyone to an antacid"
+   ],
+   "correct": 2,
+   "explain": "PPIs are effective and often necessary, but long-term use has associations (C. difficile, enteric infection, mineral deficiencies, bone concerns). Best practice is the <b>lowest effective dose with periodic reassessment</b>, balanced against the indication.",
+   "guide": {
+    "f": "W29_03_Acid_Suppression.html",
+    "t": "3 · Long-term PPI",
+    "s": "lowest effective dose"
+   }
+  },
+  {
+   "id": "wk29_q20",
+   "sys": "GI",
+   "topic": "GI · Dysphagia emergency",
+   "difficulty": "medium",
+   "stem": "A man who was eating steak suddenly cannot swallow and is drooling, unable to manage his own saliva. What is the appropriate disposition?",
+   "options": [
+    "Reassure and review in clinic",
+    "Trial of a PPI",
+    "Expedited endoscopy for likely food-bolus obstruction",
+    "Barium swallow first"
+   ],
+   "correct": 2,
+   "explain": "<b>Inability to handle secretions</b> indicates near-complete obstruction (food bolus/foreign body) &mdash; a GI emergency requiring <b>expedited endoscopy</b>. A barium study could worsen aspiration risk and isn't first.",
+   "guide": {
+    "f": "W29_07_Dysphagia.html",
+    "t": "7 · Emergency",
+    "s": "can't handle secretions"
+   }
+  }
+ ],
+ "cards": [
+  {
+   "id": "wk29_c01",
+   "sys": "GI",
+   "topic": "Gastric cells",
+   "type": "qa",
+   "guide": {
+    "f": "W29_01_Upper_GI_Physiology.html",
+    "t": "1 · Cells",
+    "s": "who secretes what"
+   },
+   "prompt": "Match the gastric cells to their secretions (parietal, chief, G, ECL, D).",
+   "answer": "Parietal — acid + intrinsic factor; chief — pepsinogen/lipase; G — gastrin (stimulates acid); ECL — histamine (stimulates parietal via H2); D — somatostatin (inhibits acid)."
+  },
+  {
+   "id": "wk29_c02",
+   "sys": "GI",
+   "topic": "Acid stimulators",
+   "type": "qa",
+   "guide": {
+    "f": "W29_01_Upper_GI_Physiology.html",
+    "t": "1 · Acid",
+    "s": "stimulators"
+   },
+   "prompt": "What three signals stimulate parietal-cell acid secretion, and what is the final pathway?",
+   "answer": "Gastrin, histamine, and acetylcholine; the final common pathway is the H+/K+-ATPase proton pump."
+  },
+  {
+   "id": "wk29_c03",
+   "sys": "GI",
+   "topic": "Mucosal defense",
+   "type": "qa",
+   "guide": {
+    "f": "W29_01_Upper_GI_Physiology.html",
+    "t": "1 · Protection",
+    "s": "NSAIDs"
+   },
+   "prompt": "How do NSAIDs cause ulcers?",
+   "answer": "They inhibit COX → less prostaglandin → reduced mucus, bicarbonate, mucosal blood flow, and epithelial repair, weakening defense against acid/pepsin."
+  },
+  {
+   "id": "wk29_c04",
+   "sys": "GI",
+   "topic": "GERD diagnosis",
+   "type": "qa",
+   "guide": {
+    "f": "W29_02_GERD.html",
+    "t": "2 · Diagnosis",
+    "s": "clinical vs scope"
+   },
+   "prompt": "When is GERD a clinical diagnosis, and when is endoscopy indicated?",
+   "answer": "Clinical when typical heartburn/regurgitation occur without alarm features. Endoscopy for alarm features (dysphagia, vomiting, weight loss, bleeding, anemia); 24-h pH study confirms when objective proof is needed."
+  },
+  {
+   "id": "wk29_c05",
+   "sys": "GI",
+   "topic": "GERD complications",
+   "type": "qa",
+   "guide": {
+    "f": "W29_02_GERD.html",
+    "t": "2 · Complications",
+    "s": "Barrett"
+   },
+   "prompt": "What is Barrett esophagus and why does it matter?",
+   "answer": "Intestinal metaplasia of the distal esophagus from chronic reflux; it carries an increased risk of esophageal adenocarcinoma and may warrant surveillance."
+  },
+  {
+   "id": "wk29_c06",
+   "sys": "GI",
+   "topic": "Acid drugs",
+   "type": "qa",
+   "guide": {
+    "f": "W29_03_Acid_Suppression.html",
+    "t": "3 · Classes",
+    "s": "potency"
+   },
+   "prompt": "Rank antacids, H2 blockers, and PPIs by potency and onset.",
+   "answer": "Potency: PPI > H2 blocker > antacid. Onset: antacid > H2 blocker > PPI. PPIs irreversibly block the proton pump; antacids just neutralize existing acid."
+  },
+  {
+   "id": "wk29_c07",
+   "sys": "GI",
+   "topic": "PPI timing",
+   "type": "qa",
+   "guide": {
+    "f": "W29_03_Acid_Suppression.html",
+    "t": "3 · Practical",
+    "s": "timing"
+   },
+   "prompt": "When should a PPI be taken for best effect?",
+   "answer": "30–60 minutes before the first meal — PPIs bind actively secreting proton pumps, which are switched on by the meal."
+  },
+  {
+   "id": "wk29_c08",
+   "sys": "GI",
+   "topic": "Dyspepsia alarms",
+   "type": "qa",
+   "guide": {
+    "f": "W29_04_Dyspepsia.html",
+    "t": "4 · Alarm features",
+    "s": "scope"
+   },
+   "prompt": "List alarm features in dyspepsia that warrant endoscopy.",
+   "answer": "Weight loss, progressive dysphagia, odynophagia, persistent vomiting, GI bleeding/iron-deficiency anemia, jaundice, palpable mass, family history of upper-GI cancer, and age ≥60 with new symptoms."
+  },
+  {
+   "id": "wk29_c09",
+   "sys": "GI",
+   "topic": "Functional dyspepsia",
+   "type": "qa",
+   "guide": {
+    "f": "W29_04_Dyspepsia.html",
+    "t": "4 · FD",
+    "s": "mechanisms"
+   },
+   "prompt": "What mechanisms underlie functional dyspepsia despite normal tests?",
+   "answer": "Altered motility, visceral hypersensitivity, brain-gut dysfunction, microbiome changes, immune dysregulation, and psychological stress — it is a real disorder, not fabricated."
+  },
+  {
+   "id": "wk29_c10",
+   "sys": "GI",
+   "topic": "PUD causes",
+   "type": "qa",
+   "guide": {
+    "f": "W29_05_PUD.html",
+    "t": "5 · Causes",
+    "s": "two main"
+   },
+   "prompt": "What are the two most important causes of peptic ulcer disease?",
+   "answer": "H. pylori infection and NSAID/ASA use."
+  },
+  {
+   "id": "wk29_c11",
+   "sys": "GI",
+   "topic": "H. pylori testing",
+   "type": "qa",
+   "guide": {
+    "f": "W29_05_PUD.html",
+    "t": "5 · Testing",
+    "s": "test of cure"
+   },
+   "prompt": "Which H. pylori tests confirm active infection / cure, and what interferes?",
+   "answer": "Urea breath test and stool antigen (active infection; good for test-of-cure). PPIs, recent antibiotics, and bismuth cause false negatives — hold them. Serology only shows exposure."
+  },
+  {
+   "id": "wk29_c12",
+   "sys": "GI",
+   "topic": "UGIB priority",
+   "type": "qa",
+   "guide": {
+    "f": "W29_06_UGIB.html",
+    "t": "6 · Management",
+    "s": "first priority"
+   },
+   "prompt": "What is the first priority in an upper GI bleed?",
+   "answer": "Hemodynamic resuscitation — ABCs, two large-bore IVs, fluids/blood, labs/crossmatch — before pharmacotherapy (IV PPI) and endoscopy."
+  },
+  {
+   "id": "wk29_c13",
+   "sys": "GI",
+   "topic": "Variceal bleed",
+   "type": "qa",
+   "guide": {
+    "f": "W29_06_UGIB.html",
+    "t": "6 · Variceal",
+    "s": "add-ons"
+   },
+   "prompt": "What do you add when variceal bleeding is suspected?",
+   "answer": "Octreotide (splanchnic vasoconstriction) and prophylactic antibiotics (e.g. ceftriaxone), plus urgent endoscopic band ligation, alongside resuscitation and IV PPI."
+  },
+  {
+   "id": "wk29_c14",
+   "sys": "GI",
+   "topic": "Dysphagia localization",
+   "type": "qa",
+   "guide": {
+    "f": "W29_07_Dysphagia.html",
+    "t": "7 · Pattern",
+    "s": "localize"
+   },
+   "prompt": "How does the solids/liquids pattern localize dysphagia?",
+   "answer": "Solids only → mechanical; progressive solids then liquids → cancer/stricture; solids and liquids from onset → motility disorder (achalasia); intermittent solids → Schatzki ring/eosinophilic esophagitis."
+  },
+  {
+   "id": "wk29_c15",
+   "sys": "GI",
+   "topic": "Vomiting pathway",
+   "type": "qa",
+   "guide": {
+    "f": "W29_08_Nausea_Gastroparesis.html",
+    "t": "8 · Pathway",
+    "s": "CTZ"
+   },
+   "prompt": "Why can blood-borne drugs and toxins trigger vomiting?",
+   "answer": "The chemoreceptor trigger zone (area postrema) lies outside the blood-brain barrier, so it senses blood-borne emetogens (drugs, uremia, hypercalcemia, toxins) and signals the medullary vomiting center."
+  },
+  {
+   "id": "wk29_c16",
+   "sys": "GI",
+   "topic": "Gastroparesis",
+   "type": "qa",
+   "guide": {
+    "f": "W29_08_Nausea_Gastroparesis.html",
+    "t": "8 · Gastroparesis",
+    "s": "define/diagnose"
+   },
+   "prompt": "Define gastroparesis and how it is diagnosed.",
+   "answer": "Delayed gastric emptying without mechanical obstruction (nausea, vomiting of undigested food, early satiety). Diagnose by excluding obstruction (endoscopy ± CT) and a gastric emptying study."
+  },
+  {
+   "id": "wk29_c17",
+   "sys": "GI",
+   "topic": "Proton pump",
+   "type": "mcq",
+   "guide": {
+    "f": "W29_01_Upper_GI_Physiology.html",
+    "t": "1 · Acid",
+    "s": "final step"
+   },
+   "prompt": "The final common pathway of gastric acid secretion is:",
+   "options": [
+    "The gastrin receptor",
+    "The H+/K+-ATPase proton pump",
+    "Carbonic anhydrase",
+    "The H2 receptor"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk29_c18",
+   "sys": "GI",
+   "topic": "PPI mechanism",
+   "type": "mcq",
+   "guide": {
+    "f": "W29_03_Acid_Suppression.html",
+    "t": "3 · PPI",
+    "s": "mechanism"
+   },
+   "prompt": "Proton pump inhibitors act by:",
+   "options": [
+    "Neutralizing acid",
+    "Reversibly blocking H2 receptors",
+    "Irreversibly inhibiting the H+/K+-ATPase",
+    "Blocking gastrin release"
+   ],
+   "correct": 2
+  },
+  {
+   "id": "wk29_c19",
+   "sys": "GI",
+   "topic": "GERD alarm",
+   "type": "mcq",
+   "guide": {
+    "f": "W29_02_GERD.html",
+    "t": "2 · Alarm",
+    "s": "endoscopy"
+   },
+   "prompt": "Which symptom in a refluxer mandates endoscopy?",
+   "options": [
+    "Occasional heartburn",
+    "Dysphagia",
+    "Symptoms after coffee",
+    "Bloating"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk29_c20",
+   "sys": "GI",
+   "topic": "Mallory-Weiss",
+   "type": "mcq",
+   "guide": {
+    "f": "W29_06_UGIB.html",
+    "t": "6 · Causes",
+    "s": "retching"
+   },
+   "prompt": "Hematemesis after repeated retching/vomiting suggests:",
+   "options": [
+    "Varices",
+    "Mallory-Weiss tear",
+    "Peptic ulcer",
+    "Malignancy"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk29_c21",
+   "sys": "GI",
+   "topic": "Ondansetron",
+   "type": "mcq",
+   "guide": {
+    "f": "W29_08_Nausea_Gastroparesis.html",
+    "t": "8 · Antiemetics",
+    "s": "5-HT3"
+   },
+   "prompt": "Ondansetron's target receptor is:",
+   "options": [
+    "D2",
+    "5-HT3",
+    "H1",
+    "NK1"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk29_c22",
+   "sys": "GI",
+   "topic": "Vestibular nausea",
+   "type": "mcq",
+   "guide": {
+    "f": "W29_08_Nausea_Gastroparesis.html",
+    "t": "8 · Antiemetics",
+    "s": "vestibular"
+   },
+   "prompt": "Best antiemetic class for motion-sickness (vestibular) nausea:",
+   "options": [
+    "5-HT3 antagonist",
+    "Antihistamine/anticholinergic",
+    "NK1 antagonist",
+    "Proton pump inhibitor"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk29_c23",
+   "sys": "GI",
+   "topic": "Gastroparesis cause",
+   "type": "mcq",
+   "guide": {
+    "f": "W29_08_Nausea_Gastroparesis.html",
+    "t": "8 · Gastroparesis",
+    "s": "cause"
+   },
+   "prompt": "The most common identifiable cause of gastroparesis is:",
+   "options": [
+    "Long-standing diabetes",
+    "Hyperthyroidism",
+    "Gallstones",
+    "Lactose intolerance"
+   ],
+   "correct": 0
+  },
+  {
+   "id": "wk29_c24",
+   "sys": "GI",
+   "topic": "H. pylori serology",
+   "type": "mcq",
+   "guide": {
+    "f": "W29_05_PUD.html",
+    "t": "5 · Testing",
+    "s": "limitation"
+   },
+   "prompt": "Which test CANNOT confirm H. pylori eradication?",
+   "options": [
+    "Urea breath test",
+    "Stool antigen",
+    "Serology",
+    "Rapid urease test"
+   ],
+   "correct": 2
+  },
+  {
+   "id": "wk29_c25",
+   "sys": "GI",
+   "topic": "NSAID prevention",
+   "type": "mcq",
+   "guide": {
+    "f": "W29_05_PUD.html",
+    "t": "5 · NSAID",
+    "s": "prevention"
+   },
+   "prompt": "Which prostaglandin analogue prevents NSAID-induced ulcers?",
+   "options": [
+    "Omeprazole",
+    "Misoprostol",
+    "Sucralfate",
+    "Bismuth"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk29_c26",
+   "sys": "GI",
+   "topic": "GERD lifestyle",
+   "type": "multi",
+   "guide": {
+    "f": "W29_02_GERD.html",
+    "t": "2 · Lifestyle",
+    "s": "measures"
+   },
+   "prompt": "Select evidence-based GERD lifestyle measures:",
+   "options": [
+    "Weight loss",
+    "Avoid late-evening meals",
+    "Head-of-bed elevation",
+    "Smoking cessation",
+    "Lying flat after meals"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk29_c27",
+   "sys": "GI",
+   "topic": "Alarm features",
+   "type": "multi",
+   "guide": {
+    "f": "W29_04_Dyspepsia.html",
+    "t": "4 · Alarm",
+    "s": "list"
+   },
+   "prompt": "Select dyspepsia alarm features warranting endoscopy:",
+   "options": [
+    "Weight loss",
+    "Iron-deficiency anemia",
+    "GI bleeding",
+    "Family history of upper-GI cancer",
+    "Symptoms relieved by antacids"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk29_c28",
+   "sys": "GI",
+   "topic": "UGIB causes",
+   "type": "multi",
+   "guide": {
+    "f": "W29_06_UGIB.html",
+    "t": "6 · Causes",
+    "s": "common"
+   },
+   "prompt": "Select common causes of upper GI bleeding:",
+   "options": [
+    "Peptic ulcer",
+    "Esophageal varices",
+    "Mallory-Weiss tear",
+    "Esophagitis",
+    "Hemorrhoids"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk29_c29",
+   "sys": "GI",
+   "topic": "H. pylori sequelae",
+   "type": "multi",
+   "guide": {
+    "f": "W29_05_PUD.html",
+    "t": "5 · Disease",
+    "s": "outcomes"
+   },
+   "prompt": "Select conditions associated with H. pylori:",
+   "options": [
+    "Gastric ulcer",
+    "Duodenal ulcer",
+    "Gastric MALT lymphoma",
+    "Gastric adenocarcinoma",
+    "Esophageal varices"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk29_c30",
+   "sys": "GI",
+   "topic": "Acid roles",
+   "type": "multi",
+   "guide": {
+    "f": "W29_01_Upper_GI_Physiology.html",
+    "t": "1 · Acid",
+    "s": "functions"
+   },
+   "prompt": "Select physiologic roles of gastric acid:",
+   "options": [
+    "Optimal pH for pepsin",
+    "Aids duodenal iron absorption",
+    "Kills ingested microbes",
+    "Directly absorbs glucose"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "id": "wk29_c31",
+   "sys": "GI",
+   "topic": "Cells cloze",
+   "type": "cloze",
+   "guide": {
+    "f": "W29_01_Upper_GI_Physiology.html",
+    "t": "1 · Cells",
+    "s": "parietal"
+   },
+   "text": "Parietal cells secrete {{acid}} and {{intrinsic factor}}; chief cells secrete {{pepsinogen}}.",
+   "explain": "Intrinsic factor is needed for ileal B12 absorption."
+  },
+  {
+   "id": "wk29_c32",
+   "sys": "GI",
+   "topic": "UGIB landmark",
+   "type": "cloze",
+   "guide": {
+    "f": "W29_06_UGIB.html",
+    "t": "6 · Define",
+    "s": "landmark"
+   },
+   "text": "Upper GI bleeding arises proximal to the ligament of {{Treitz}} and presents with {{melena}} and/or {{hematemesis}}.",
+   "explain": "The ligament of Treitz marks the duodenojejunal junction."
+  },
+  {
+   "id": "wk29_c33",
+   "sys": "GI",
+   "topic": "Dysphagia cloze",
+   "type": "cloze",
+   "guide": {
+    "f": "W29_07_Dysphagia.html",
+    "t": "7 · Pattern",
+    "s": "progression"
+   },
+   "text": "Dysphagia progressing from {{solids}} to {{liquids}} is cancer or stricture until proven otherwise.",
+   "explain": "Solids-and-liquids from onset instead suggests a motility disorder."
+  },
+  {
+   "id": "wk29_c34",
+   "sys": "GI",
+   "topic": "PPI test interference",
+   "type": "cloze",
+   "guide": {
+    "f": "W29_05_PUD.html",
+    "t": "5 · Testing",
+    "s": "false negative"
+   },
+   "text": "{{PPIs}} cause false-negative active H. pylori tests, so hold them before {{urea breath}} or stool antigen testing.",
+   "explain": "Serology can't distinguish past from current infection."
+  },
+  {
+   "id": "wk29_c35",
+   "sys": "GI",
+   "topic": "GERD confirm",
+   "type": "cloze",
+   "guide": {
+    "f": "W29_02_GERD.html",
+    "t": "2 · Diagnosis",
+    "s": "gold test"
+   },
+   "text": "The best confirmatory test for GERD when objective proof is needed is a 24-hour esophageal {{pH}} study.",
+   "explain": "Used for unclear diagnosis or pre-operative assessment."
+  },
+  {
+   "id": "wk29_c36",
+   "sys": "GI",
+   "topic": "UGIB algorithm",
+   "type": "order",
+   "guide": {
+    "f": "W29_06_UGIB.html",
+    "t": "6 · Algorithm",
+    "s": "order"
+   },
+   "prompt": "Order the management of an unstable upper GI bleed:",
+   "items": [
+    "ABCs + large-bore IV access",
+    "Fluids/blood and labs/crossmatch",
+    "IV PPI (± octreotide/antibiotics if variceal)",
+    "Endoscopy for diagnosis and hemostasis",
+    "IR/angiography or surgery if endoscopy fails"
+   ]
+  },
+  {
+   "id": "wk29_c37",
+   "sys": "GI",
+   "topic": "Dyspepsia pathway",
+   "type": "order",
+   "guide": {
+    "f": "W29_04_Dyspepsia.html",
+    "t": "4 · Pathway",
+    "s": "approach"
+   },
+   "prompt": "Order the approach to new dyspepsia:",
+   "items": [
+    "Assess for alarm features",
+    "If alarms or age ≥60 with new symptoms → endoscopy",
+    "If none → H. pylori test-and-treat and/or PPI trial",
+    "Reassess; scope if refractory"
+   ]
+  },
+  {
+   "id": "wk29_c38",
+   "sys": "GI",
+   "topic": "H. pylori treat",
+   "type": "order",
+   "guide": {
+    "f": "W29_05_PUD.html",
+    "t": "5 · Treatment",
+    "s": "steps"
+   },
+   "prompt": "Order H. pylori ulcer management:",
+   "items": [
+    "Stop NSAIDs/ASA if possible",
+    "Start a PPI for healing",
+    "Eradicate H. pylori (PPI + antibiotics ± bismuth)",
+    "Confirm cure with urea breath/stool antigen off PPI"
+   ]
+  },
+  {
+   "id": "wk29_c39",
+   "sys": "GI",
+   "topic": "Drug → mechanism",
+   "type": "match",
+   "guide": {
+    "f": "W29_03_Acid_Suppression.html",
+    "t": "3 · Drugs",
+    "s": "acid mechanisms"
+   },
+   "prompt": "Match the acid drug to its mechanism:",
+   "pairs": [
+    [
+     "Omeprazole",
+     "Irreversible proton-pump inhibition"
+    ],
+    [
+     "Famotidine",
+     "Reversible H2 blockade"
+    ],
+    [
+     "Calcium carbonate",
+     "Neutralizes existing acid"
+    ],
+    [
+     "Misoprostol",
+     "Prostaglandin analogue (mucosal protection)"
+    ]
+   ]
+  },
+  {
+   "id": "wk29_c40",
+   "sys": "GI",
+   "topic": "Antiemetic → receptor",
+   "type": "match",
+   "guide": {
+    "f": "W29_08_Nausea_Gastroparesis.html",
+    "t": "8 · Antiemetics",
+    "s": "receptors"
+   },
+   "prompt": "Match the antiemetic to its receptor:",
+   "pairs": [
+    [
+     "Ondansetron",
+     "5-HT3"
+    ],
+    [
+     "Prochlorperazine",
+     "D2"
+    ],
+    [
+     "Aprepitant",
+     "NK1"
+    ],
+    [
+     "Dimenhydrinate",
+     "H1 (vestibular)"
+    ],
+    [
+     "Scopolamine",
+     "M1 (vestibular)"
+    ]
+   ]
+  },
+  {
+   "id": "wk29_c41",
+   "sys": "GI",
+   "topic": "UGIB cause → clue",
+   "type": "match",
+   "guide": {
+    "f": "W29_06_UGIB.html",
+    "t": "6 · Causes",
+    "s": "clues"
+   },
+   "prompt": "Match the UGIB cause to its clue:",
+   "pairs": [
+    [
+     "Peptic ulcer",
+     "NSAID/H. pylori, epigastric pain"
+    ],
+    [
+     "Varices",
+     "Cirrhosis/portal hypertension"
+    ],
+    [
+     "Mallory-Weiss",
+     "Hematemesis after retching"
+    ],
+    [
+     "Malignancy",
+     "Weight loss, dysphagia, anemia"
+    ]
+   ]
+  },
+  {
+   "id": "wk29_c42",
+   "sys": "GI",
+   "topic": "Prokinetic → note",
+   "type": "match",
+   "guide": {
+    "f": "W29_08_Nausea_Gastroparesis.html",
+    "t": "8 · Prokinetics",
+    "s": "cautions"
+   },
+   "prompt": "Match the prokinetic to its key feature:",
+   "pairs": [
+    [
+     "Domperidone",
+     "Doesn't cross BBB; QT prolongation"
+    ],
+    [
+     "Metoclopramide",
+     "Crosses BBB; dystonia/tardive dyskinesia"
+    ],
+    [
+     "Erythromycin",
+     "Motilin agonist; tachyphylaxis"
+    ]
+   ]
+  },
+  {
+   "id": "wk29_c43",
+   "sys": "GI",
+   "topic": "Cimetidine",
+   "type": "qa",
+   "guide": {
+    "f": "W29_03_Acid_Suppression.html",
+    "t": "3 · H2 blockers",
+    "s": "cimetidine"
+   },
+   "prompt": "Why is famotidine preferred over cimetidine?",
+   "answer": "Cimetidine inhibits CYP450 (many drug interactions) and can cause gynecomastia/antiandrogen effects; famotidine lacks these."
+  },
+  {
+   "id": "wk29_c44",
+   "sys": "GI",
+   "topic": "Odynophagia",
+   "type": "qa",
+   "guide": {
+    "f": "W29_07_Dysphagia.html",
+    "t": "7 · Related",
+    "s": "odynophagia"
+   },
+   "prompt": "What does odynophagia suggest?",
+   "answer": "Painful swallowing — infectious esophagitis (Candida, HSV), pill-induced injury, severe reflux, or radiation; distinct from the mechanical sticking of dysphagia."
+  },
+  {
+   "id": "wk29_c45",
+   "sys": "GI",
+   "topic": "Sucralfate",
+   "type": "qa",
+   "guide": {
+    "f": "W29_05_PUD.html",
+    "t": "5 · Therapeutics",
+    "s": "sucralfate"
+   },
+   "prompt": "How does sucralfate protect an ulcer?",
+   "answer": "It forms a viscous protective barrier over the ulcer base (a mucosal protectant); it can bind other drugs, so separate dosing times."
+  },
+  {
+   "id": "wk29_c46",
+   "sys": "GI",
+   "topic": "COX-2 trade-off",
+   "type": "qa",
+   "guide": {
+    "f": "W29_05_PUD.html",
+    "t": "5 · NSAID",
+    "s": "COX-2"
+   },
+   "prompt": "What is the trade-off with COX-2 selective NSAIDs?",
+   "answer": "They reduce GI ulcer/bleeding risk but increase cardiovascular/thrombotic risk — choose based on the patient's GI vs cardiovascular risk profile."
+  },
+  {
+   "id": "wk29_c47",
+   "sys": "GI",
+   "topic": "Melena mimics",
+   "type": "qa",
+   "guide": {
+    "f": "W29_06_UGIB.html",
+    "t": "6 · Presentation",
+    "s": "mimics"
+   },
+   "prompt": "What can mimic melena and must be distinguished from a true bleed?",
+   "answer": "Iron tablets, bismuth, and dark green stool can darken stool — history and clinical confirmation (and a digital rectal exam) help distinguish from genuine melena."
+  },
+  {
+   "id": "wk29_c48",
+   "sys": "GI",
+   "topic": "Gastroparesis diet",
+   "type": "qa",
+   "guide": {
+    "f": "W29_08_Nausea_Gastroparesis.html",
+    "t": "8 · Management",
+    "s": "diet"
+   },
+   "prompt": "What dietary changes help gastroparesis?",
+   "answer": "Small, frequent, low-fat, low-roughage meals; liquid enteral nutrition if solids aren't tolerated; plus antiemetics and prokinetics for symptoms."
+  },
+  {
+   "id": "wk29_c49",
+   "sys": "GI",
+   "topic": "Esophageal cancer types",
+   "type": "qa",
+   "guide": {
+    "f": "W29_02_GERD.html",
+    "t": "2 · Cancer",
+    "s": "adeno vs SCC"
+   },
+   "prompt": "Which esophageal cancer is linked to chronic GERD/Barrett vs to smoking and alcohol?",
+   "answer": "Adenocarcinoma (distal) arises from chronic reflux/Barrett esophagus; squamous cell carcinoma is more associated with smoking and alcohol."
+  },
+  {
+   "id": "wk29_c50",
+   "sys": "GI",
+   "topic": "Functional vs structural",
+   "type": "qa",
+   "guide": {
+    "f": "W29_04_Dyspepsia.html",
+    "t": "4 · FD",
+    "s": "reassurance"
+   },
+   "prompt": "How should you frame functional dyspepsia to a patient with normal tests?",
+   "answer": "Explain it is a real, benign disorder of gut-brain function (not 'all in their head'), and treat by phenotype — this validation itself improves outcomes."
+  }
+ ],
+ "guides": [
+  {
+   "file": "W29_01_Upper_GI_Physiology.html",
+   "title": "Week 29 · 1 Upper GI Physiology & Gastric Secretion",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Upper GI Physiology &amp; Gastric Secretion</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Foundations</div><h1>Upper GI Physiology &amp; Gastric Secretion</h1></div><div class='r'>Week 29 &middot; GI I &mdash; Upper GI<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The gastric cells and what they secrete, how acid is made and controlled, and the mucosal defenses NSAIDs dismantle.</p>\n<h2>Stomach regions &amp; job</h2>\n<p>The stomach is a reservoir that mixes food into <b>chyme</b>, meters delivery to the duodenum, and sterilizes (pH ~2). <b>Fundus</b> = receptive relaxation/accommodation; <b>corpus/antrum</b> = trituration/mixing; <b>pylorus</b> = regulates emptying (solids reduced to &lt;1&ndash;2 mm).</p>\n<h2>The cells</h2>\n<table>\n<tr><th>Cell</th><th>Secretes</th><th>Relevance</th></tr>\n<tr><td><b>Parietal</b></td><td>HCl, <b>intrinsic factor</b></td><td>Acid (H+/K+-ATPase); IF for B12 absorption; aids iron absorption</td></tr>\n<tr><td><b>Chief</b></td><td>Pepsinogen, gastric lipase</td><td>Protein digestion</td></tr>\n<tr><td><b>G cell</b></td><td>Gastrin</td><td>Stimulates acid</td></tr>\n<tr><td><b>ECL cell</b></td><td>Histamine</td><td>Stimulates parietal cells via H2</td></tr>\n<tr><td><b>D cell</b></td><td>Somatostatin</td><td>Inhibits acid</td></tr>\n</table>\n<h2>Acid secretion</h2>\n<p>The parietal-cell <b>H+/K+-ATPase (proton pump)</b> is the final common pathway. Three stimulators converge: <b>gastrin, histamine, acetylcholine</b>. Acid generation uses carbonic anhydrase and yields bicarbonate (the post-prandial \"alkaline tide\").</p>\n<div class='band'><div class='t'>Why the pump matters for drugs</div>\nPPIs irreversibly block the proton pump (the final step) &rarr; the most complete acid suppression. H2 blockers cut one input (histamine). Antacids just neutralize acid already present.</div>\n<h2>Mucosal protection</h2>\n<p>Defenses: <b>mucus</b> (barrier), <b>bicarbonate</b> (neutralizes at the surface), <b>prostaglandins</b> (drive mucus/bicarbonate/blood flow), mucosal blood flow, and epithelial restitution.</p>\n<div class='band warn'><div class='t'>NSAIDs break the defense</div>\nNSAIDs inhibit cyclooxygenase &rarr; less <b>prostaglandin</b> &rarr; less mucus, bicarbonate, blood flow, and repair &rarr; ulcers. This is why a prostaglandin analogue (misoprostol) can prevent NSAID ulcers.</div>\n<div class='key'>Gastrin/histamine/ACh stimulate, somatostatin inhibits; the proton pump is the final step. Acid also matters for B12 (IF), iron, and killing microbes &mdash; chronic suppression has trade-offs.</div>\n</div>"
+  },
+  {
+   "file": "W29_02_GERD.html",
+   "title": "Week 29 · 2 Gastroesophageal Reflux Disease (GERD)",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Gastroesophageal Reflux Disease (GERD)</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Reflux</div><h1>Gastroesophageal Reflux Disease (GERD)</h1></div><div class='r'>Week 29 &middot; GI I &mdash; Upper GI<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Typical vs atypical symptoms, when it's a clinical diagnosis vs needs scoping, the complications, and the lifestyle + acid-suppression plan.</p>\n<h2>Definition &amp; symptoms</h2>\n<p>Troublesome symptoms or complications from reflux of gastric contents. <b>Typical:</b> heartburn, regurgitation. <b>Extra-esophageal:</b> chronic cough, throat clearing, hoarseness, sore throat, globus &mdash; more likely GERD-related when typical symptoms coexist.</p>\n<h2>Diagnosis</h2>\n<div class='band warn'><div class='t'>Clinical diagnosis &mdash; unless alarm features</div>\nTypical heartburn/regurgitation with <b>no alarm features</b> &rarr; treat empirically (clinical diagnosis). <b>Endoscopy</b> if any alarm feature: dysphagia, persistent vomiting, weight loss, GI bleeding, or anemia. <b>24-h esophageal pH study</b> is the best confirmatory test when objective proof is needed (unclear diagnosis, pre-operative).</div>\n<h2>Complications</h2>\n<table>\n<tr><th>Complication</th><th>Clue</th></tr>\n<tr><td>Esophagitis</td><td>Heartburn/pain; mucosal breaks</td></tr>\n<tr><td>Peptic stricture</td><td>Progressive <b>solid-food</b> dysphagia</td></tr>\n<tr><td><b>Barrett esophagus</b></td><td>Intestinal metaplasia from chronic reflux &rarr; adenocarcinoma risk</td></tr>\n<tr><td>Esophageal adenocarcinoma</td><td>Progressive dysphagia, weight loss, anemia, bleeding</td></tr>\n</table>\n<h2>Management</h2>\n<ul>\n<li><b>Lifestyle:</b> weight loss (overweight/recent gain), avoid late-evening meals + head-of-bed elevation + left-lateral sleep (nocturnal symptoms), smoking cessation.</li>\n<li><b>Acid suppression:</b> PPI is most effective; H2 blocker PRN for intermittent symptoms; surgery (fundoplication) is rarely needed.</li>\n<li><b>Long-term PPI</b> associations discussed (C. difficile, enteric infection, mineral deficiencies, bone concerns) &mdash; use the lowest effective dose, but balance against the indication.</li>\n</ul>\n<div class='key'>Typical symptoms, no red flags &rarr; lifestyle + PPI, no scope. New dysphagia, weight loss, anemia, or bleeding &rarr; endoscopy. Progressive solid-food dysphagia in a refluxer = stricture or adenocarcinoma.</div>\n</div>"
+  },
+  {
+   "file": "W29_03_Acid_Suppression.html",
+   "title": "Week 29 · 3 Acid-Suppression Pharmacology",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Acid-Suppression Pharmacology</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Acid drugs</div><h1>Acid-Suppression Pharmacology</h1></div><div class='r'>Week 29 &middot; GI I &mdash; Upper GI<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Antacids, H2 blockers and PPIs — how they differ in potency and onset, and the long-term PPI trade-offs.</p>\n<h2>The three tools</h2>\n<table>\n<tr><th>Class</th><th>Examples</th><th>Mechanism</th><th>Best use</th></tr>\n<tr><td><b>Antacids</b></td><td>Calcium carbonate, Al/Mg salts</td><td>Neutralize acid already present</td><td>Rapid, short-lived relief</td></tr>\n<tr><td><b>H2 receptor antagonists</b></td><td>Famotidine, cimetidine, ranitidine, nizatidine</td><td>Reversibly block parietal-cell H2 receptors</td><td>PRN/intermittent or breakthrough symptoms; <b>tachyphylaxis</b> over time</td></tr>\n<tr><td><b>Proton pump inhibitors</b></td><td>Omeprazole, pantoprazole, esomeprazole, lansoprazole</td><td>Irreversibly inhibit H+/K+-ATPase</td><td>Most effective acid suppression; lowest effective dose long-term</td></tr>\n</table>\n<h2>Practical points</h2>\n<ul>\n<li>PPIs work best taken <b>30&ndash;60 min before the first meal</b> (they need active pumps to bind).</li>\n<li><b>Cimetidine</b> inhibits CYP450 (drug interactions) and can cause gynecomastia &mdash; famotidine is preferred.</li>\n<li>PPIs can cause <b>false-negative H. pylori</b> testing &mdash; hold before urea breath / stool antigen testing.</li>\n</ul>\n<div class='band warn'><div class='t'>Long-term PPI trade-offs</div>\nAssociations raised in the course: <b>C. difficile</b> and enteric infections, mineral deficiencies (magnesium, B12, iron), and bone/osteoporosis concerns. These are associations to weigh against a clear indication, not reasons to withhold a needed PPI &mdash; use the lowest effective dose and periodically reassess.</div>\n<div class='key'>PPI &gt; H2 blocker &gt; antacid for potency; antacid &gt; H2 &gt; PPI for speed of onset. Hold the PPI before H. pylori testing. Reassess chronic PPIs rather than continuing reflexively.</div>\n</div>"
+  },
+  {
+   "file": "W29_04_Dyspepsia.html",
+   "title": "Week 29 · 4 Dyspepsia & Functional Dyspepsia",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Dyspepsia &amp; Functional Dyspepsia</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Upper-gut symptoms</div><h1>Dyspepsia &amp; Functional Dyspepsia</h1></div><div class='r'>Week 29 &middot; GI I &mdash; Upper GI<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>What dyspepsia means, the alarm features that force a scope, and how functional dyspepsia is real and phenotype-treated.</p>\n<h2>Dyspepsia vs GERD</h2>\n<p>Dyspepsia = upper-GI symptoms from the <b>gastroduodenal</b> region: epigastric pain/burning, post-prandial fullness, early satiety. GERD is distinct &mdash; its cardinal symptoms are heartburn and regurgitation.</p>\n<h2>Alarm features &rarr; prompt endoscopy</h2>\n<div class='band warn'><div class='t'>Scope, don't just treat, when any of these</div>\nUnintentional <b>weight loss</b>, progressive <b>dysphagia</b>, odynophagia, persistent vomiting, <b>GI bleeding / iron-deficiency anemia</b>, jaundice, palpable mass/lymphadenopathy, <b>family history of upper-GI malignancy</b>, or <b>age &ge;60</b> with new symptoms. These shift management from empiric therapy to endoscopy.</div>\n<h2>Uninvestigated dyspepsia (no alarms)</h2>\n<ul>\n<li><b>Test-and-treat H. pylori</b> in appropriate-prevalence settings, and/or a <b>PPI trial</b>.</li>\n<li>Endoscopy if alarm features, or refractory symptoms.</li>\n</ul>\n<h2>Functional dyspepsia</h2>\n<p>A real functional GI disorder: chronic/recurrent symptoms <b>without</b> a structural lesion on routine testing. Mechanisms: altered motility, <b>visceral hypersensitivity</b>, brain-gut dysfunction, microbiome and immune changes, psychological stress.</p>\n<table>\n<tr><th>Phenotype / strategy</th><th>Approach</th></tr>\n<tr><td>Education + reassurance</td><td>Explain it's real and benign after evaluation</td></tr>\n<tr><td>Epigastric pain/burning</td><td>H. pylori test/treat; PPI trial</td></tr>\n<tr><td>Post-prandial fullness / early satiety</td><td>Prokinetic</td></tr>\n<tr><td>Pain-predominant / hypersensitivity</td><td>Neuromodulator (e.g. low-dose TCA)</td></tr>\n<tr><td>Stress/anxiety comorbidity</td><td>Psychological therapy</td></tr>\n</table>\n<div class='key'>Normal tests don't mean fabricated symptoms &mdash; functional dyspepsia is real. Match therapy to the phenotype: PPI for burning, prokinetic for fullness, neuromodulator for pain.</div>\n</div>"
+  },
+  {
+   "file": "W29_05_PUD.html",
+   "title": "Week 29 · 5 Peptic Ulcer Disease & H. pylori",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Peptic Ulcer Disease &amp; H. pylori</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Ulcers</div><h1>Peptic Ulcer Disease &amp; H. pylori</h1></div><div class='r'>Week 29 &middot; GI I &mdash; Upper GI<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The two causes that matter, how H. pylori is tested and eradicated, and the principles of ulcer healing.</p>\n<h2>What an ulcer is</h2>\n<p>Mucosal injury overwhelming protection. A true ulcer reaches at least the <b>submucosa</b>; an erosion is more superficial. The two dominant causes: <b>H. pylori</b> and <b>NSAID/ASA</b> use.</p>\n<h2>NSAID ulcers</h2>\n<p>COX inhibition &rarr; less prostaglandin &rarr; weakened mucus/bicarbonate/blood-flow/repair. Non-selective NSAIDs hit COX-1 and COX-2; <b>COX-2 selective</b> agents spare the gut but raise cardiovascular/thrombotic risk. Prevent NSAID ulcers with a <b>PPI</b> or <b>misoprostol</b> in high-risk users.</p>\n<h2>H. pylori disease</h2>\n<p>Causes chronic active gastritis &rarr; gastric and duodenal ulcers, <b>gastric MALT lymphoma</b>, atrophy/metaplasia/dysplasia, and <b>gastric adenocarcinoma</b>.</p>\n<table>\n<tr><th>Test</th><th>Use</th></tr>\n<tr><td><b>Urea breath test</b></td><td>Active infection; good for test-of-cure</td></tr>\n<tr><td><b>Stool antigen</b></td><td>Active infection; good for test-of-cure</td></tr>\n<tr><td>Serology</td><td>Exposure only &mdash; can't confirm eradication</td></tr>\n<tr><td>Rapid urease / histology</td><td>At endoscopy</td></tr>\n</table>\n<div class='band warn'><div class='t'>PPIs cause false negatives</div>\nPPIs (and recent antibiotics/bismuth) suppress the organism and can produce <b>false-negative</b> active-infection tests &mdash; hold the PPI before urea breath or stool antigen testing when safe.</div>\n<h2>Treatment principles</h2>\n<ul>\n<li>Stop NSAIDs/ASA when possible; <b>PPI</b> for ulcer healing.</li>\n<li><b>Test and treat H. pylori</b> (e.g. PPI + clarithromycin + amoxicillin, or bismuth quadruple therapy with metronidazole); <b>confirm eradication</b> with urea breath or stool antigen.</li>\n<li><b>Biopsy/repeat endoscopy</b> for gastric ulcers (malignancy concern) to confirm healing.</li>\n</ul>\n<div class='key'>H. pylori + NSAIDs are the two causes. Confirm eradication with urea breath/stool antigen (not serology), off PPI. Gastric ulcers get biopsied and followed &mdash; they can be cancer.</div>\n</div>"
+  },
+  {
+   "file": "W29_06_UGIB.html",
+   "title": "Week 29 · 6 Upper GI Bleeding",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Upper GI Bleeding</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Bleeding</div><h1>Upper GI Bleeding</h1></div><div class='r'>Week 29 &middot; GI I &mdash; Upper GI<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Recognizing the bleed, the cause list, and the resuscitate-first algorithm — plus the variceal add-ons.</p>\n<h2>Define it</h2>\n<p>Bleeding <b>proximal to the ligament of Treitz</b>, presenting with <b>melena</b> and/or <b>hematemesis</b> (brisk UGIB can even cause hematochezia if unstable). Mimics of melena: iron, bismuth, dark green stool &mdash; confirm.</p>\n<table>\n<tr><th>Term</th><th>Meaning</th></tr>\n<tr><td>Hematemesis</td><td>Vomiting blood (bright red or coffee-ground)</td></tr>\n<tr><td>Melena</td><td>Black tarry stool (oxidized hemoglobin)</td></tr>\n<tr><td>Hematochezia</td><td>Red/maroon rectal blood (brisk upper source if unstable)</td></tr>\n</table>\n<h2>Common causes</h2>\n<table>\n<tr><th>Cause</th><th>Clue</th></tr>\n<tr><td>Peptic ulcer</td><td>NSAID/ASA, H. pylori, epigastric pain, melena</td></tr>\n<tr><td><b>Varices</b></td><td>Cirrhosis/portal hypertension; larger bleeds</td></tr>\n<tr><td>Mallory-Weiss tear</td><td>Hematemesis after repeated retching/vomiting</td></tr>\n<tr><td>Esophagitis / malignancy</td><td>GERD/odynophagia; weight loss/dysphagia/anemia</td></tr>\n</table>\n<div class='band warn'><div class='t'>Resuscitate first</div>\nPriority #1 is <b>hemodynamic status</b>: ABCs, two large-bore IVs, fluids/blood as needed, labs/crossmatch. Then <b>IV PPI</b> (raises pH &rarr; stabilizes clot, reduces pepsin-mediated clot breakdown) and <b>endoscopy</b> (diagnostic, prognostic, therapeutic). If variceal bleeding is suspected (known cirrhosis): add <b>octreotide</b> and <b>antibiotics</b> (ceftriaxone). If endoscopy fails: IR/angiography or surgery.</div>\n<div class='key'>Stabilize before you scope. PPI for all UGIB; octreotide + antibiotics when varices are suspected. Hematemesis after vomiting = Mallory-Weiss; hematemesis in a cirrhotic = varices until proven otherwise.</div>\n</div>"
+  },
+  {
+   "file": "W29_07_Dysphagia.html",
+   "title": "Week 29 · 7 Dysphagia",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Dysphagia</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Swallowing</div><h1>Dysphagia</h1></div><div class='r'>Week 29 &middot; GI I &mdash; Upper GI<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Oropharyngeal vs esophageal, the solids-vs-liquids pattern that localizes the cause, and the red flags that mean cancer until proven otherwise.</p>\n<h2>Oropharyngeal vs esophageal</h2>\n<table>\n<tr><th>Oropharyngeal</th><th>Esophageal</th></tr>\n<tr><td>Trouble <b>initiating</b> the swallow; coughing/choking, nasal regurgitation, aspiration</td><td>Food <b>sticks after</b> swallowing; retrosternal sensation</td></tr>\n<tr><td>Often neuromuscular (stroke, Parkinson, myasthenia)</td><td>Structural or motility</td></tr>\n</table>\n<h2>The pattern localizes the cause</h2>\n<table>\n<tr><th>Pattern</th><th>Think</th></tr>\n<tr><td>Solids only</td><td>Mechanical obstruction</td></tr>\n<tr><td><b>Progressive solids &rarr; liquids</b></td><td><b>Cancer or progressive stricture</b> until proven otherwise</td></tr>\n<tr><td>Intermittent solids</td><td>Schatzki ring or eosinophilic esophagitis</td></tr>\n<tr><td>Solids <b>and</b> liquids from onset</td><td>Motility disorder (e.g. achalasia)</td></tr>\n</table>\n<h2>Related symptoms</h2>\n<ul>\n<li><b>Odynophagia</b> (painful swallowing): infectious (Candida, HSV), pill-induced, severe reflux, radiation.</li>\n<li><b>Globus</b>: lump/tightness unrelated to swallowing; GERD, anxiety, ENT.</li>\n</ul>\n<div class='band warn'><div class='t'>Red flags &amp; the emergency</div>\nProgressive dysphagia + weight loss + anemia (&plusmn; smoking/alcohol) &rarr; urgently exclude <b>esophageal cancer</b>. <b>Inability to handle secretions</b> = complete obstruction (food bolus/foreign body) &rarr; a GI emergency needing expedited endoscopy.</div>\n<p>Investigations: endoscopy (first for most), barium swallow, manometry (motility), CT for extrinsic/staging, videofluoroscopy for neuromuscular oropharyngeal dysphagia.</p>\n<div class='key'>Solids-then-liquids progression = mechanical (cancer/stricture); solids-and-liquids from the start = motility (achalasia). Can't manage secretions = emergency scope.</div>\n</div>"
+  },
+  {
+   "file": "W29_08_Nausea_Gastroparesis.html",
+   "title": "Week 29 · 8 Nausea, Vomiting & Gastroparesis",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Nausea, Vomiting &amp; Gastroparesis</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Emesis</div><h1>Nausea, Vomiting &amp; Gastroparesis</h1></div><div class='r'>Week 29 &middot; GI I &mdash; Upper GI<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The vomiting pathway and how it picks the antiemetic, plus diabetic gastroparesis and the prokinetics.</p>\n<h2>The vomiting pathway</h2>\n<p>The <b>vomiting center</b> (medulla) is the final common pathway. Inputs: the <b>chemoreceptor trigger zone (area postrema)</b> &mdash; outside the blood-brain barrier, sensing blood-borne emetogens (drugs, uremia, hypercalcemia, toxins); cortex; visceral afferents; raised ICP; and the <b>vestibular</b> system.</p>\n<h2>Match the antiemetic to the receptor</h2>\n<table>\n<tr><th>Receptor</th><th>Setting</th><th>Drugs</th></tr>\n<tr><td><b>5-HT3</b></td><td>Chemo, post-op, GI</td><td>Ondansetron, granisetron</td></tr>\n<tr><td><b>D2</b></td><td>CTZ-mediated; prokinetic for some</td><td>Prochlorperazine, metoclopramide, haloperidol</td></tr>\n<tr><td><b>NK1</b></td><td>Chemo / post-op</td><td>Aprepitant</td></tr>\n<tr><td><b>H1 / M1</b></td><td><b>Vestibular</b> (motion, vertigo)</td><td>Dimenhydrinate (H1); scopolamine (M1)</td></tr>\n</table>\n<h2>Gastroparesis</h2>\n<p>Delayed gastric emptying <b>without mechanical obstruction</b>: nausea, vomiting of undigested food, early satiety, post-prandial fullness, upper abdominal pain. Causes: long-standing <b>diabetes</b> (autonomic neuropathy), idiopathic/post-infectious, post-surgical, and drugs (<b>opioids</b>). Diagnose by excluding obstruction (endoscopy &plusmn; CT) and a <b>gastric emptying study</b>.</p>\n<table>\n<tr><th>Prokinetic</th><th>Mechanism / caution</th></tr>\n<tr><td><b>Domperidone</b></td><td>D2 antagonist; doesn't cross the BBB &mdash; common chronic choice; <b>QT prolongation</b>, hyperprolactinemia</td></tr>\n<tr><td><b>Metoclopramide</b></td><td>D2 antagonist + 5-HT4 agonist; crosses BBB &rarr; CNS effects (dystonia, tardive dyskinesia); useful IV in acute flares</td></tr>\n<tr><td>Erythromycin</td><td>Motilin agonist; tachyphylaxis &amp; QT &mdash; not ideal chronically</td></tr>\n</table>\n<div class='key'>CTZ sits outside the blood-brain barrier &mdash; that's why blood-borne toxins trigger vomiting. Pick the antiemetic by mechanism: 5-HT3 for chemo, antihistamine/anticholinergic for vestibular, D2/prokinetic for gastroparesis (watch the QT).</div>\n</div>"
+  },
+  {
+   "file": "W29_09_Cram_Sheet.html",
+   "title": "Week 29 · 9 Cram Sheet",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Week 29 · 9 Cram Sheet</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.35;-webkit-font-smoothing:antialiased}\n.page{max-width:1180px;margin:0 auto;padding:18px 20px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:8px;margin-bottom:12px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:26px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.emerg{border:1.5px solid var(--hi);border-radius:6px;background:rgba(0,0,0,.02);padding:9px 12px;margin-bottom:13px}\n.emerg .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--hi);font-weight:600;margin-bottom:5px}\n.emerg .items{columns:3;column-gap:22px;font-size:12px;line-height:1.42}\n.emerg .items div{break-inside:avoid;margin-bottom:3px}\n.emerg b{color:var(--hi)}\n.cols{column-count:4;column-gap:14px}\n@media(max-width:1040px){.cols{column-count:3}}\n@media(max-width:760px){.cols{column-count:2}}\n@media(max-width:520px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(0,0,0,.02);padding:8px 9px 7px;margin:0 0 11px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;padding-bottom:4px;border-bottom:1.5px solid var(--line);color:var(--accent);display:flex;justify-content:space-between;align-items:baseline;gap:6px}\n.card h2 .wk{color:var(--soft);font-size:8.5px;font-weight:500;letter-spacing:.06em;white-space:nowrap}\n.row{margin:0 0 3.5px;font-size:11.5px;line-height:1.32}\n.row .tg{font-weight:600;color:var(--ink)}\n.row .ar{color:var(--soft)}\n.row .ar::before{content:\"\\2192 \";color:var(--accent);font-weight:600}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:5px 0}\n.dnm{color:var(--hi);font-weight:700}\n.foot{margin-top:10px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:landscape;margin:9mm}body{font-size:8.4px}.page{max-width:none;padding:0}.cols{column-count:4;column-gap:8px}.emerg .items{columns:3}.card{margin-bottom:6px}.head h1{font-size:19px}}\n</style><div class='page'><div class='head'><div><div class='k'>Night-Before High-Yield</div><h1>GI I — Upper GI</h1></div><div class='r'>Week 29 &middot; GI I &mdash; Upper GI<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><div class='emerg'><div class='t'>★ Do-not-miss &middot; first-step reflexes</div><div class='items'><div><b>Unstable upper GI bleed</b> &rarr; ABCs + IV access + fluids/blood FIRST, then IV PPI + urgent endoscopy</div><div><b>Suspected variceal bleed</b> (cirrhosis + hematemesis) &rarr; add octreotide + prophylactic antibiotics</div><div><b>Can't handle secretions / drooling</b> with dysphagia &rarr; complete obstruction (food bolus) &mdash; expedited endoscopy</div><div><b>Progressive solids→liquids dysphagia + weight loss/anemia</b> &rarr; exclude esophageal cancer urgently</div><div><b>Dyspepsia with alarm features</b> (weight loss, anemia, bleeding, age ≥60 new) &rarr; endoscopy, not empiric therapy</div><div><b>Metoclopramide</b> &rarr; can cause acute dystonia (crosses BBB)</div></div></div><div class='cols'><div class='card'><h2>Physiology <span class='wk'>Physiology</span></h2><div class='row'><span class='tg'>Parietal cell</span> <span class='ar'>acid + intrinsic factor</span></div><div class='row'><span class='tg'>Chief / G / ECL / D</span> <span class='ar'>pepsinogen / gastrin / histamine / somatostatin</span></div><div class='row'><span class='tg'>Acid stimulators</span> <span class='ar'>gastrin, histamine, ACh</span></div><div class='row'><span class='tg'>Final pathway</span> <span class='ar'>H+/K+-ATPase proton pump</span></div><div class='row'><span class='tg'>Defense</span> <span class='ar'>mucus, bicarbonate, prostaglandins, blood flow</span></div><div class='row'><span class='tg'>NSAIDs</span> <span class='ar'>↓prostaglandin → ulcers</span></div></div><div class='card'><h2>GERD <span class='wk'>GERD</span></h2><div class='row'><span class='tg'>Typical</span> <span class='ar'>heartburn + regurgitation</span></div><div class='row'><span class='tg'>Clinical dx</span> <span class='ar'>if no alarm features</span></div><div class='row'><span class='tg'>Endoscopy</span> <span class='ar'>alarm features (dysphagia, bleed, weight loss)</span></div><div class='row'><span class='tg'>Confirm test</span> <span class='ar'>24-h esophageal pH study</span></div><div class='row'><span class='tg'>Complications</span> <span class='ar'>esophagitis, stricture, Barrett, adenocarcinoma</span></div><div class='row'><span class='tg'>Treat</span> <span class='ar'>lifestyle + PPI</span></div></div><div class='card'><h2>Acid drugs <span class='wk'>Acid Rx</span></h2><div class='row'><span class='tg'>Potency</span> <span class='ar'>PPI > H2 blocker > antacid</span></div><div class='row'><span class='tg'>Onset</span> <span class='ar'>antacid > H2 > PPI</span></div><div class='row'><span class='tg'>PPI timing</span> <span class='ar'>30–60 min before first meal</span></div><div class='row'><span class='tg'>Cimetidine</span> <span class='ar'>CYP450 inhibition, gynecomastia</span></div><div class='row'><span class='tg'>Long-term PPI</span> <span class='ar'>lowest effective dose; reassess</span></div></div><div class='card'><h2>Dyspepsia / PUD <span class='wk'>Dyspepsia</span></h2><div class='row'><span class='tg'>Alarm features</span> <span class='ar'>weight loss, anemia, bleed, dysphagia, age ≥60</span></div><div class='row'><span class='tg'>No alarms</span> <span class='ar'>H. pylori test-and-treat / PPI trial</span></div><div class='row'><span class='tg'>Functional dyspepsia</span> <span class='ar'>real; treat by phenotype</span></div><div class='row'><span class='tg'>PUD causes</span> <span class='ar'>H. pylori + NSAID/ASA</span></div><div class='row'><span class='tg'>Test of cure</span> <span class='ar'>urea breath/stool antigen, OFF PPI</span></div><div class='row'><span class='tg'>NSAID prevention</span> <span class='ar'>PPI or misoprostol</span></div></div><div class='card'><h2>UGIB <span class='wk'>UGIB</span></h2><div class='row'><span class='tg'>Define</span> <span class='ar'>proximal to ligament of Treitz; melena/hematemesis</span></div><div class='row'><span class='tg'>Priority</span> <span class='ar'>resuscitate first</span></div><div class='row'><span class='tg'>All UGIB</span> <span class='ar'>IV PPI + endoscopy</span></div><div class='row'><span class='tg'>Variceal</span> <span class='ar'>octreotide + antibiotics</span></div><div class='row'><span class='tg'>Mallory-Weiss</span> <span class='ar'>hematemesis after retching</span></div></div><div class='card'><h2>Dysphagia <span class='wk'>Dysphagia</span></h2><div class='row'><span class='tg'>Oropharyngeal</span> <span class='ar'>trouble initiating; cough/choke/nasal regurg</span></div><div class='row'><span class='tg'>Esophageal</span> <span class='ar'>food sticks after swallowing</span></div><div class='row'><span class='tg'>Solids→liquids</span> <span class='ar'>mechanical (cancer/stricture)</span></div><div class='row'><span class='tg'>Solids+liquids onset</span> <span class='ar'>motility (achalasia)</span></div><div class='row'><span class='tg'>Red flags</span> <span class='ar'>weight loss + anemia → cancer</span></div></div><div class='card'><h2>Nausea / gastroparesis <span class='wk'>Emesis</span></h2><div class='row'><span class='tg'>CTZ</span> <span class='ar'>area postrema, outside BBB → blood-borne triggers</span></div><div class='row'><span class='tg'>5-HT3</span> <span class='ar'>ondansetron (chemo/post-op)</span></div><div class='row'><span class='tg'>Vestibular</span> <span class='ar'>antihistamine / anticholinergic</span></div><div class='row'><span class='tg'>Gastroparesis</span> <span class='ar'>delayed emptying, no obstruction (diabetes)</span></div><div class='row'><span class='tg'>Domperidone</span> <span class='ar'>no BBB crossing; watch QT</span></div><div class='row'><span class='tg'>Metoclopramide</span> <span class='ar'>crosses BBB → dystonia</span></div></div></div><div class='foot'>Week 29 &middot; GI I &mdash; Upper GI &middot; cram sheet &middot; cue &rarr; answer</div></div>"
+  }
+ ],
+ "drugs": [
+  {
+   "id": "rx:omeprazole",
+   "name": "Omeprazole",
+   "class": "rx:ppi",
+   "facets": {
+    "use": "GERD, PUD, H. pylori regimens",
+    "mechanism": "Irreversibly inhibits the H+/K+-ATPase proton pump",
+    "adverse": "Long-term: C. difficile/enteric infection, low Mg/B12, bone concerns",
+    "monitoring": "Take 30–60 min before meals; lowest effective dose; hold before H. pylori testing"
+   },
+   "ref": {
+    "topic": "Acid suppression",
+    "guide": "W29_03_Acid_Suppression.html",
+    "week": "Week 29 · GI I — Upper GI"
+   }
+  },
+  {
+   "id": "rx:pantoprazole",
+   "name": "Pantoprazole",
+   "class": "rx:ppi",
+   "facets": {
+    "use": "GERD/PUD; IV for upper GI bleeding",
+    "mechanism": "Proton pump inhibitor",
+    "adverse": "As for class",
+    "monitoring": "IV infusion for bleeding ulcers"
+   },
+   "ref": {
+    "topic": "Acid suppression",
+    "guide": "W29_03_Acid_Suppression.html",
+    "week": "Week 29 · GI I — Upper GI"
+   }
+  },
+  {
+   "id": "rx:esomeprazole",
+   "name": "Esomeprazole",
+   "class": "rx:ppi",
+   "facets": {
+    "use": "GERD, erosive esophagitis",
+    "mechanism": "Proton pump inhibitor (S-isomer)",
+    "adverse": "As for class"
+   },
+   "ref": {
+    "topic": "Acid suppression",
+    "guide": "W29_03_Acid_Suppression.html",
+    "week": "Week 29 · GI I — Upper GI"
+   }
+  },
+  {
+   "id": "rx:famotidine",
+   "name": "Famotidine",
+   "class": "rx:h2-blocker",
+   "facets": {
+    "use": "Intermittent/PRN reflux symptoms",
+    "mechanism": "Reversible H2 receptor antagonist",
+    "adverse": "Generally well tolerated; tachyphylaxis"
+   },
+   "ref": {
+    "topic": "Acid suppression",
+    "guide": "W29_03_Acid_Suppression.html",
+    "week": "Week 29 · GI I — Upper GI"
+   }
+  },
+  {
+   "id": "rx:cimetidine",
+   "name": "Cimetidine",
+   "class": "rx:h2-blocker",
+   "facets": {
+    "use": "H2 blockade (largely superseded)",
+    "mechanism": "H2 receptor antagonist",
+    "adverse": "CYP450 inhibition (interactions), gynecomastia"
+   },
+   "ref": {
+    "topic": "Acid suppression",
+    "guide": "W29_03_Acid_Suppression.html",
+    "week": "Week 29 · GI I — Upper GI"
+   }
+  },
+  {
+   "id": "rx:calcium-carbonate",
+   "name": "Calcium carbonate (oral)",
+   "class": "rx:calcium-salt",
+   "facets": {
+    "use": "Rapid antacid relief",
+    "mechanism": "Neutralizes existing gastric acid",
+    "adverse": "Constipation, rebound acid; milk-alkali with excess"
+   },
+   "ref": {
+    "topic": "Acid suppression",
+    "guide": "W29_03_Acid_Suppression.html",
+    "week": "Week 29 · GI I — Upper GI"
+   }
+  },
+  {
+   "id": "rx:clarithromycin",
+   "name": "Clarithromycin",
+   "class": "rx:macrolide",
+   "facets": {
+    "use": "H. pylori eradication (triple therapy)",
+    "mechanism": "Macrolide antibiotic",
+    "adverse": "QT prolongation, taste disturbance; resistance limits use"
+   },
+   "ref": {
+    "topic": "H. pylori",
+    "guide": "W29_05_PUD.html",
+    "week": "Week 29 · GI I — Upper GI"
+   }
+  },
+  {
+   "id": "rx:amoxicillin",
+   "name": "Amoxicillin",
+   "class": "rx:aminopenicillin",
+   "facets": {
+    "use": "H. pylori eradication",
+    "mechanism": "Aminopenicillin",
+    "adverse": "Rash, diarrhea"
+   },
+   "ref": {
+    "topic": "H. pylori",
+    "guide": "W29_05_PUD.html",
+    "week": "Week 29 · GI I — Upper GI"
+   }
+  },
+  {
+   "id": "rx:metronidazole",
+   "name": "Metronidazole",
+   "class": "rx:nitroimidazole",
+   "facets": {
+    "use": "H. pylori (bismuth quadruple therapy)",
+    "mechanism": "Nitroimidazole",
+    "adverse": "Metallic taste, disulfiram reaction with alcohol"
+   },
+   "ref": {
+    "topic": "H. pylori",
+    "guide": "W29_05_PUD.html",
+    "week": "Week 29 · GI I — Upper GI"
+   }
+  },
+  {
+   "id": "rx:bismuth",
+   "name": "Bismuth subsalicylate",
+   "class": "rx:bismuth",
+   "facets": {
+    "use": "H. pylori quadruple therapy; dyspepsia",
+    "mechanism": "Mucosal coating + antibacterial",
+    "adverse": "Black stools/tongue (harmless)"
+   },
+   "ref": {
+    "topic": "H. pylori",
+    "guide": "W29_05_PUD.html",
+    "week": "Week 29 · GI I — Upper GI"
+   }
+  },
+  {
+   "id": "rx:misoprostol",
+   "name": "Misoprostol",
+   "class": "rx:prostaglandin-analog",
+   "facets": {
+    "use": "NSAID-ulcer prevention",
+    "mechanism": "Prostaglandin E1 analogue — restores mucosal defense",
+    "adverse": "Diarrhea, cramping",
+    "contra": "Pregnancy (uterotonic)"
+   },
+   "ref": {
+    "topic": "Ulcer protection",
+    "guide": "W29_05_PUD.html",
+    "week": "Week 29 · GI I — Upper GI"
+   }
+  },
+  {
+   "id": "rx:sucralfate",
+   "name": "Sucralfate",
+   "class": "rx:mucosal-protectant",
+   "facets": {
+    "use": "Mucosal protection (ulcers)",
+    "mechanism": "Forms a protective barrier over the ulcer base",
+    "adverse": "Constipation; binds other drugs (separate dosing)"
+   },
+   "ref": {
+    "topic": "Ulcer protection",
+    "guide": "W29_05_PUD.html",
+    "week": "Week 29 · GI I — Upper GI"
+   }
+  },
+  {
+   "id": "rx:octreotide",
+   "name": "Octreotide",
+   "class": "rx:somatostatin-analogue",
+   "facets": {
+    "use": "Variceal upper GI bleeding",
+    "mechanism": "Somatostatin analogue — splanchnic vasoconstriction",
+    "adverse": "Hyperglycemia, bradycardia"
+   },
+   "ref": {
+    "topic": "Upper GI bleeding",
+    "guide": "W29_06_UGIB.html",
+    "week": "Week 29 · GI I — Upper GI"
+   }
+  },
+  {
+   "id": "rx:ondansetron",
+   "name": "Ondansetron",
+   "class": "rx:antiemetic",
+   "facets": {
+    "use": "Chemo/post-op nausea",
+    "mechanism": "5-HT3 receptor antagonist",
+    "adverse": "QT prolongation, constipation, headache"
+   },
+   "ref": {
+    "topic": "Antiemetics",
+    "guide": "W29_08_Nausea_Gastroparesis.html",
+    "week": "Week 29 · GI I — Upper GI"
+   }
+  },
+  {
+   "id": "rx:metoclopramide",
+   "name": "Metoclopramide",
+   "class": "rx:prokinetic",
+   "facets": {
+    "use": "Gastroparesis (acute), antiemetic",
+    "mechanism": "D2 antagonist + 5-HT4 agonist (crosses BBB)",
+    "adverse": "Dystonia, tardive dyskinesia, restlessness"
+   },
+   "ref": {
+    "topic": "Prokinetics",
+    "guide": "W29_08_Nausea_Gastroparesis.html",
+    "week": "Week 29 · GI I — Upper GI"
+   }
+  },
+  {
+   "id": "rx:domperidone",
+   "name": "Domperidone",
+   "class": "rx:prokinetic",
+   "facets": {
+    "use": "Chronic gastroparesis prokinetic",
+    "mechanism": "Peripheral D2 antagonist (doesn't cross BBB)",
+    "adverse": "QT prolongation, hyperprolactinemia",
+    "monitoring": "ECG/QTc"
+   },
+   "ref": {
+    "topic": "Prokinetics",
+    "guide": "W29_08_Nausea_Gastroparesis.html",
+    "week": "Week 29 · GI I — Upper GI"
+   }
+  },
+  {
+   "id": "rx:erythromycin",
+   "name": "Erythromycin",
+   "class": "rx:macrolide",
+   "facets": {
+    "use": "Gastroparesis (short-term); also antibiotic",
+    "mechanism": "Motilin receptor agonist (prokinetic)",
+    "adverse": "QT prolongation, tachyphylaxis, GI cramping"
+   },
+   "ref": {
+    "topic": "Prokinetics",
+    "guide": "W29_08_Nausea_Gastroparesis.html",
+    "week": "Week 29 · GI I — Upper GI"
+   }
+  },
+  {
+   "id": "rx:prochlorperazine",
+   "name": "Prochlorperazine",
+   "class": "rx:d2-antiemetic",
+   "facets": {
+    "use": "Nausea/vomiting",
+    "mechanism": "D2 antagonist (phenothiazine)",
+    "adverse": "Extrapyramidal effects, sedation"
+   },
+   "ref": {
+    "topic": "Antiemetics",
+    "guide": "W29_08_Nausea_Gastroparesis.html",
+    "week": "Week 29 · GI I — Upper GI"
+   }
+  },
+  {
+   "id": "rx:dimenhydrinate",
+   "name": "Dimenhydrinate",
+   "class": "rx:antihistamine",
+   "facets": {
+    "use": "Vestibular / motion-sickness nausea",
+    "mechanism": "H1 antihistamine",
+    "adverse": "Sedation, anticholinergic effects"
+   },
+   "ref": {
+    "topic": "Antiemetics",
+    "guide": "W29_08_Nausea_Gastroparesis.html",
+    "week": "Week 29 · GI I — Upper GI"
+   }
+  },
+  {
+   "id": "rx:aprepitant",
+   "name": "Aprepitant",
+   "class": "rx:nk1-antagonist",
+   "facets": {
+    "use": "Chemotherapy-induced nausea",
+    "mechanism": "NK1 receptor antagonist",
+    "adverse": "Fatigue, CYP3A4 interactions"
+   },
+   "ref": {
+    "topic": "Antiemetics",
+    "guide": "W29_08_Nausea_Gastroparesis.html",
+    "week": "Week 29 · GI I — Upper GI"
+   }
+  }
+ ]
+}

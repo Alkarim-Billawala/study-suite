@@ -1,0 +1,1542 @@
+{
+ "pack": "Week 31 — GI III (Surgery / Acute Abdomen)",
+ "id": "wk31",
+ "formatVersion": "2.0",
+ "version": "1.0",
+ "author": "Alkarim Billawala / alkarim.billawala.ca",
+ "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
+ "created": "2026-06-16",
+ "updated": "2026-06-16",
+ "school": "UofT — Temerty Medicine",
+ "year": "Year 1",
+ "course": "CPC 2",
+ "weeks": "Week 31 · GI III — Surgery & Acute Abdomen",
+ "questions": [
+  {
+   "id": "wk31_q01",
+   "sys": "GI",
+   "topic": "Surg · Sepsis",
+   "difficulty": "hard",
+   "stem": "A 44-year-old with US-confirmed appendicitis is awaiting the OR when she becomes confused: HR 140, BP 80/45, O2 86% on oxygen, lactate 9. Best next step?",
+   "options": [
+    "Discharge with oral antibiotics",
+    "Immediate colonoscopy to exclude cancer",
+    "Aggressive resuscitation, broad-spectrum IV antibiotics, urgent source control, and ICU/surgical escalation",
+    "Delay until CT confirms perforation"
+   ],
+   "correct": 2,
+   "explain": "This is <b>septic shock with organ dysfunction</b> from an intra-abdominal source. Resuscitate, give early broad antibiotics, achieve <b>source control</b>, and escalate to ICU/senior surgery. Waiting for perfect imaging in refractory shock is unsafe.",
+   "guide": {
+    "f": "W31_02_Sepsis_Appendicitis.html",
+    "t": "2 · Bundle",
+    "s": "resuscitate + source control"
+   }
+  },
+  {
+   "id": "wk31_q02",
+   "sys": "GI",
+   "topic": "Surg · Diverticulitis",
+   "difficulty": "medium",
+   "stem": "A 60-year-old man has LLQ pain, fever, and localized peritonitis. CT shows sigmoid diverticulitis with fat stranding, no abscess or free air. Best confirmatory test and management principle?",
+   "options": [
+    "Colonoscopy now with biopsy",
+    "CT abdomen/pelvis; supportive care with selective antibiotics by severity and follow-up colonoscopy after recovery",
+    "Immediate sigmoid colectomy for all first episodes",
+    "Diagnostic laparoscopy for all cases"
+   ],
+   "correct": 1,
+   "explain": "<b>CT</b> is the best acute test for diverticulitis; colonoscopy is avoided acutely (perforation risk) but done after recovery (cancer mimics diverticulitis). Uncomplicated disease is managed supportively with selective antibiotics.",
+   "guide": {
+    "f": "W31_04_Diverticulitis.html",
+    "t": "4 · Diverticulitis",
+    "s": "CT acutely, scope later"
+   }
+  },
+  {
+   "id": "wk31_q03",
+   "sys": "GI",
+   "topic": "Surg · Cholangitis",
+   "difficulty": "hard",
+   "stem": "A 65-year-old woman has severe RUQ pain, jaundice, fever, confusion, HR 125, BP 80/40. US shows gallstones and dilated intra- and extra-hepatic ducts. Diagnosis and treatment?",
+   "options": [
+    "Biliary colic; elective cholecystectomy",
+    "Acute cholecystitis; oral antibiotics and discharge",
+    "Ascending cholangitis; resuscitation, broad antibiotics, and urgent ERCP decompression",
+    "Gallstone pancreatitis; NPO only"
+   ],
+   "correct": 2,
+   "explain": "Fever + RUQ pain + jaundice + hypotension + altered LOC = <b>Reynolds pentad</b> = severe <b>ascending cholangitis</b>. Treat with resuscitation, broad antibiotics, and <b>urgent biliary decompression by ERCP</b>.",
+   "guide": {
+    "f": "W31_03_Biliary_Pancreatitis.html",
+    "t": "3 · Cholangitis",
+    "s": "ERCP decompression"
+   }
+  },
+  {
+   "id": "wk31_q04",
+   "sys": "GI",
+   "topic": "Surg · Hemorrhoids",
+   "difficulty": "medium",
+   "stem": "A 35-year-old man has bright red blood dripping after straining and feels tissue prolapse that reduces spontaneously. Colonoscopy shows no neoplasm. Most likely diagnosis and grade?",
+   "options": [
+    "Thrombosed external hemorrhoid",
+    "Internal hemorrhoid, grade I",
+    "Internal hemorrhoid, grade II",
+    "Anal fissure"
+   ],
+   "correct": 2,
+   "explain": "Painless bright-red bleeding with prolapse that <b>reduces spontaneously</b> = <b>grade II internal hemorrhoids</b>. Grade I bleeds without prolapse; III needs manual reduction; IV is irreducible.",
+   "guide": {
+    "f": "W31_06_Anorectal.html",
+    "t": "6 · Hemorrhoid grades",
+    "s": "grade II"
+   }
+  },
+  {
+   "id": "wk31_q05",
+   "sys": "GI",
+   "topic": "Surg · SBO",
+   "difficulty": "medium",
+   "stem": "A 70-year-old with a prior laparotomy has 24 h of crampy pain, bilious vomiting, distension, and obstipation. X-rays show dilated small-bowel loops; no fever, no peritonitis, normal lactate; CT shows a transition point without ischemia. Most likely cause and initial management?",
+   "options": [
+    "Adhesions; NPO, IV fluids, electrolytes, NG decompression, close surgical observation",
+    "Colon cancer; immediate hemicolectomy",
+    "Ogilvie syndrome; neostigmine before excluding obstruction",
+    "Sigmoid volvulus; urgent ERCP"
+   ],
+   "correct": 0,
+   "explain": "Prior surgery &rarr; <b>adhesive SBO</b> (commonest cause). A stable, simple/partial SBO without ischemia is managed conservatively: bowel rest, IV fluids, electrolyte correction, NG decompression, and <b>close observation</b>.",
+   "guide": {
+    "f": "W31_05_Bowel_Obstruction.html",
+    "t": "5 · SBO",
+    "s": "adhesions; conservative"
+   }
+  },
+  {
+   "id": "wk31_q06",
+   "sys": "GI",
+   "topic": "Surg · CRC",
+   "difficulty": "medium",
+   "stem": "A 43-year-old man with iron-deficiency anemia has a colonoscopy showing an ascending-colon mass; biopsy = adenocarcinoma. CT shows no metastases; CEA is sent. Most appropriate initial definitive treatment?",
+   "options": [
+    "Rubber-band ligation because hemorrhoids explain the anemia",
+    "Oncologic right hemicolectomy with lymphadenectomy, adjuvant therapy by final stage",
+    "Long-term antibiotics for presumed diverticulitis",
+    "Observation because it looked benign"
+   ],
+   "correct": 1,
+   "explain": "A biopsy-proven non-metastatic ascending-colon adenocarcinoma is treated with an <b>oncologic right hemicolectomy + lymphadenectomy</b>; final pathology determines stage and adjuvant chemotherapy.",
+   "guide": {
+    "f": "W31_07_Colorectal_Cancer.html",
+    "t": "7 · Treatment",
+    "s": "oncologic colectomy"
+   }
+  },
+  {
+   "id": "wk31_q07",
+   "sys": "GI",
+   "topic": "Surg · Consent",
+   "difficulty": "medium",
+   "stem": "A patient with a large benign-appearing polyp at the appendiceal orifice that may not be endoscopically removable asks about options. Which response best reflects proper informed consent?",
+   "options": [
+    "'Surgery is the only option; doing nothing isn't allowed'",
+    "'You must choose what I prefer'",
+    "'Options include expert endoscopic removal, surgery, or doing nothing; let's discuss benefits, risks, and your values'",
+    "'Consent just requires signing the form'"
+   ],
+   "correct": 2,
+   "explain": "Informed consent is a <b>discussion of reasonable options</b> (including no treatment), with benefits, material risks, and the patient's values &mdash; not a coerced choice or a mere signature.",
+   "guide": {
+    "f": "W31_08_Perioperative.html",
+    "t": "8 · Consent",
+    "s": "options + risks + values"
+   }
+  },
+  {
+   "id": "wk31_q08",
+   "sys": "GI",
+   "topic": "Surg · Perforated ulcer",
+   "difficulty": "hard",
+   "stem": "A daily-NSAID user has sudden severe epigastric pain, a rigid abdomen with diffuse rebound, and free air under the diaphragm. Most appropriate management bundle?",
+   "options": [
+    "Oral PPI and outpatient H. pylori testing",
+    "NPO, IV fluids, IV PPI, broad antibiotics, analgesia, and urgent surgical repair/source control",
+    "Colonoscopy to find diverticular bleeding",
+    "High-fiber diet and topical nitroglycerin"
+   ],
+   "correct": 1,
+   "explain": "<b>Perforated peptic ulcer with generalized peritonitis</b> &rarr; resuscitate (NPO, IV fluids), <b>IV PPI</b>, broad antibiotics, analgesia, and <b>urgent surgical source control</b>. H. pylori/NSAID management comes after stabilization.",
+   "guide": {
+    "f": "W31_02_Sepsis_Appendicitis.html",
+    "t": "2 · Perforated ulcer",
+    "s": "OR + IV PPI"
+   }
+  },
+  {
+   "id": "wk31_q09",
+   "sys": "GI",
+   "topic": "Surg · Ogilvie",
+   "difficulty": "medium",
+   "stem": "A 72-year-old develops marked colonic distension and obstipation after orthopedic surgery. CT shows diffuse colonic dilation with NO transition point or mass, no peritonitis. Diagnosis and initial management?",
+   "options": [
+    "Mechanical LBO from cancer; immediate colectomy",
+    "Acute colonic pseudo-obstruction (Ogilvie); correct electrolytes, stop offending meds, mobilize, decompression, escalate to neostigmine/colonoscopic decompression if severe",
+    "Gallstone ileus; ERCP only",
+    "Appendicitis; appendectomy"
+   ],
+   "correct": 1,
+   "explain": "<b>Ogilvie syndrome</b> (acute colonic pseudo-obstruction): colonic dilation without mechanical obstruction in a post-op/hospitalized patient. Start conservative care; escalate to <b>neostigmine</b> or colonoscopic decompression; surgery only for perforation/ischemia.",
+   "guide": {
+    "f": "W31_05_Bowel_Obstruction.html",
+    "t": "5 · Ogilvie",
+    "s": "conservative → neostigmine"
+   }
+  },
+  {
+   "id": "wk31_q10",
+   "sys": "GI",
+   "topic": "Surg · Perioperative anemia",
+   "difficulty": "medium",
+   "stem": "A 52-year-old scheduled for colorectal cancer surgery is anemic. Which strategy best aligns with perioperative blood management?",
+   "options": [
+    "Autologous blood donation for most patients",
+    "Delay surgery until hemoglobin is 140 g/L",
+    "Preoperative IV iron when appropriate, plus patient-specific blood-conservation planning",
+    "Choose open surgery to reduce blood loss"
+   ],
+   "correct": 2,
+   "explain": "Treat the anemia: <b>preoperative IV iron</b> for iron deficiency when time allows, with individualized blood conservation &mdash; rather than routine autologous donation or delaying cancer surgery for an arbitrary normal hemoglobin.",
+   "guide": {
+    "f": "W31_08_Perioperative.html",
+    "t": "8 · Anemia",
+    "s": "IV iron"
+   }
+  },
+  {
+   "id": "wk31_q11",
+   "sys": "GI",
+   "topic": "Surg · Cholecystitis",
+   "difficulty": "medium",
+   "stem": "A 50-year-old has RUQ pain for 10 hours, fever, and a positive Murphy sign with leukocytosis. US shows gallbladder wall thickening and pericholecystic fluid around stones. Best management?",
+   "options": [
+    "Reassurance and elective outpatient follow-up",
+    "NPO, IV fluids, analgesia, antibiotics, and early laparoscopic cholecystectomy",
+    "Urgent ERCP",
+    "Oral antibiotics and discharge"
+   ],
+   "correct": 1,
+   "explain": "This is <b>acute cholecystitis</b> (persistent cystic-duct obstruction). Manage with NPO, fluids, analgesia, antibiotics, and <b>early cholecystectomy</b> (percutaneous cholecystostomy if too unfit for surgery).",
+   "guide": {
+    "f": "W31_03_Biliary_Pancreatitis.html",
+    "t": "3 · Cholecystitis",
+    "s": "early cholecystectomy"
+   }
+  },
+  {
+   "id": "wk31_q12",
+   "sys": "GI",
+   "topic": "Surg · Strangulated hernia",
+   "difficulty": "hard",
+   "stem": "A patient with SBO has a tender, firm, irreducible groin lump with overlying skin discoloration and is febrile. What does this indicate and what is the management?",
+   "options": [
+    "Reducible hernia; reassure",
+    "Strangulated hernia; urgent surgery",
+    "Incarcerated but viable hernia; prolonged manual reduction",
+    "Hydrocele; observation"
+   ],
+   "correct": 1,
+   "explain": "A tender, irreducible hernia with skin changes and systemic signs suggests <b>strangulation</b> (compromised blood supply) &mdash; a <b>surgical emergency</b>. Do not attempt forceful reduction.",
+   "guide": {
+    "f": "W31_05_Bowel_Obstruction.html",
+    "t": "5 · Hernias",
+    "s": "strangulation → OR"
+   }
+  },
+  {
+   "id": "wk31_q13",
+   "sys": "GI",
+   "topic": "Surg · Choledocholithiasis",
+   "difficulty": "medium",
+   "stem": "A stable, afebrile patient has RUQ discomfort, jaundice, cholestatic LFTs, and dilated bile ducts with a stone in the common bile duct on imaging. Best management?",
+   "options": [
+    "Immediate cholecystectomy without addressing the duct",
+    "ERCP to clear the duct, then cholecystectomy",
+    "Long-term antibiotics",
+    "Observation"
+   ],
+   "correct": 1,
+   "explain": "<b>Choledocholithiasis</b> (CBD stone) &rarr; <b>ERCP</b> to clear the duct, followed by <b>cholecystectomy</b> to prevent recurrence. ERCP addresses the duct; the gallbladder still needs removal.",
+   "guide": {
+    "f": "W31_03_Biliary_Pancreatitis.html",
+    "t": "3 · Choledocholithiasis",
+    "s": "ERCP then cholecystectomy"
+   }
+  },
+  {
+   "id": "wk31_q14",
+   "sys": "GI",
+   "topic": "Surg · Anal fissure",
+   "difficulty": "medium",
+   "stem": "A young woman has severe tearing pain with defecation and a streak of bright blood on the toilet paper; exam suggests a posterior midline fissure. Besides fiber and sitz baths, which medical therapy is appropriate?",
+   "options": [
+    "Loperamide",
+    "Topical nitroglycerin or a calcium-channel blocker to relax the sphincter",
+    "Oral antibiotics",
+    "Rubber-band ligation"
+   ],
+   "correct": 1,
+   "explain": "Anal fissures are perpetuated by internal-sphincter spasm. <b>Topical nitroglycerin or diltiazem/nifedipine</b> relaxes the sphincter and improves anoderm blood flow; chronic refractory cases get botulinum toxin or sphincterotomy.",
+   "guide": {
+    "f": "W31_06_Anorectal.html",
+    "t": "6 · Fissure",
+    "s": "relax the sphincter"
+   }
+  },
+  {
+   "id": "wk31_q15",
+   "sys": "GI",
+   "topic": "Surg · Abscess",
+   "difficulty": "easy",
+   "stem": "A patient has a painful, fluctuant, erythematous perianal swelling with fever. What is the definitive management?",
+   "options": [
+    "Oral antibiotics alone",
+    "Incision and drainage",
+    "High-fiber diet",
+    "Topical steroid"
+   ],
+   "correct": 1,
+   "explain": "A perianal abscess requires <b>incision and drainage</b> &mdash; antibiotics alone are inadequate for a drainable collection (added only for significant cellulitis, immunosuppression, or systemic illness).",
+   "guide": {
+    "f": "W31_06_Anorectal.html",
+    "t": "6 · Abscess",
+    "s": "I&D"
+   }
+  },
+  {
+   "id": "wk31_q16",
+   "sys": "GI",
+   "topic": "Surg · CRC screening",
+   "difficulty": "medium",
+   "stem": "A 55-year-old man with iron-deficiency anemia and a change in bowel habits asks for a FIT test for screening. What is the most appropriate response?",
+   "options": [
+    "Do a FIT; it is the right screening test",
+    "He needs diagnostic colonoscopy — symptoms/anemia are not 'screening'",
+    "Reassure; bleeding is from hemorrhoids",
+    "Repeat CBC in a year"
+   ],
+   "correct": 1,
+   "explain": "Symptoms and iron-deficiency anemia require <b>diagnostic colonoscopy</b>, not a screening stool test. Hemorrhoids are a diagnosis of exclusion; colorectal cancer must be ruled out.",
+   "guide": {
+    "f": "W31_07_Colorectal_Cancer.html",
+    "t": "7 · Symptoms",
+    "s": "diagnostic colonoscopy"
+   }
+  },
+  {
+   "id": "wk31_q17",
+   "sys": "GI",
+   "topic": "Surg · Lynch",
+   "difficulty": "hard",
+   "stem": "A 34-year-old man has colon cancer. His family history: 3 relatives with colorectal/endometrial cancer across 2 generations, one diagnosed at 45. What does this suggest and what is the next step?",
+   "options": [
+    "Sporadic cancer; routine follow-up",
+    "A hereditary syndrome (Lynch); genetics referral and counseling",
+    "FAP; immediate total colectomy",
+    "No further action needed"
+   ],
+   "correct": 1,
+   "explain": "The Amsterdam '<b>3-2-1</b>' pattern (3 relatives, 2 generations, 1 first-degree, one &lt;50) and early-onset cancer suggest <b>Lynch syndrome</b> &rarr; <b>genetics referral</b> (and tumour MMR/MSI testing). This screens for hereditary risk; it doesn't replace counseling.",
+   "guide": {
+    "f": "W31_07_Colorectal_Cancer.html",
+    "t": "7 · Hereditary",
+    "s": "3-2-1 → Lynch"
+   }
+  },
+  {
+   "id": "wk31_q18",
+   "sys": "GI",
+   "topic": "Surg · Pancreatitis",
+   "difficulty": "medium",
+   "stem": "A patient with epigastric pain radiating to the back has a lipase 5× the upper limit of normal and gallstones on US, without cholangitis. What is the cornerstone of initial management?",
+   "options": [
+    "Urgent ERCP for everyone",
+    "Supportive care: aggressive IV fluids, analgesia, and early enteral nutrition as tolerated",
+    "Immediate cholecystectomy before stabilization",
+    "Broad antibiotics for all pancreatitis"
+   ],
+   "correct": 1,
+   "explain": "Acute pancreatitis is managed <b>supportively</b> (fluids, analgesia, early enteral nutrition). ERCP is reserved for concurrent cholangitis/persistent obstruction; antibiotics are only for infected necrosis. Cholecystectomy is done during the same admission for mild gallstone pancreatitis.",
+   "guide": {
+    "f": "W31_03_Biliary_Pancreatitis.html",
+    "t": "3 · Pancreatitis",
+    "s": "supportive"
+   }
+  },
+  {
+   "id": "wk31_q19",
+   "sys": "GI",
+   "topic": "Surg · VTE prophylaxis",
+   "difficulty": "easy",
+   "stem": "A patient is admitted for major abdominal surgery. Which is part of standard perioperative VTE prevention when bleeding risk permits?",
+   "options": [
+    "Bed rest until fully recovered",
+    "Pharmacologic prophylaxis (LMWH/UFH) plus mechanical measures and early mobilization",
+    "Routine IVC filter",
+    "Aspirin alone for all"
+   ],
+   "correct": 1,
+   "explain": "Surgical VTE prevention combines <b>pharmacologic prophylaxis</b> (enoxaparin/UFH when bleeding risk allows), <b>mechanical</b> measures, and <b>early mobilization</b> — not prolonged bed rest.",
+   "guide": {
+    "f": "W31_08_Perioperative.html",
+    "t": "8 · VTE",
+    "s": "LMWH + mobilize"
+   }
+  },
+  {
+   "id": "wk31_q20",
+   "sys": "GI",
+   "topic": "Surg · Volvulus",
+   "difficulty": "medium",
+   "stem": "An elderly nursing-home resident has marked distension and a 'coffee-bean' / bent-inner-tube sign on abdominal x-ray, without peritonitis. What is the appropriate initial management of this large-bowel obstruction?",
+   "options": [
+    "Immediate colectomy for all",
+    "Endoscopic detorsion (sigmoid volvulus), with surgery to prevent recurrence",
+    "ERCP",
+    "High-fiber diet"
+   ],
+   "correct": 1,
+   "explain": "The coffee-bean sign indicates <b>sigmoid volvulus</b>. If there's no ischemia/peritonitis, <b>endoscopic detorsion/decompression</b> is the initial step; because recurrence is common, definitive prevention is surgical (sigmoidectomy).",
+   "guide": {
+    "f": "W31_05_Bowel_Obstruction.html",
+    "t": "5 · Volvulus",
+    "s": "endoscopic detorsion"
+   }
+  }
+ ],
+ "cards": [
+  {
+   "id": "wk31_c01",
+   "sys": "GI",
+   "topic": "Acute abdomen",
+   "type": "qa",
+   "guide": {
+    "f": "W31_01_Acute_Abdomen_Approach.html",
+    "t": "1 · Approach",
+    "s": "stabilize"
+   },
+   "prompt": "What is the first principle in any acute abdomen?",
+   "answer": "Stabilize while you diagnose — ABCs, IV access, fluids, analgesia, antiemetics, NPO, labs; an unstable patient may need resuscitation and source control before full diagnostic certainty."
+  },
+  {
+   "id": "wk31_c02",
+   "sys": "GI",
+   "topic": "Pain types",
+   "type": "qa",
+   "guide": {
+    "f": "W31_01_Acute_Abdomen_Approach.html",
+    "t": "1 · Pain",
+    "s": "visceral vs parietal"
+   },
+   "prompt": "Contrast visceral and parietal abdominal pain.",
+   "answer": "Visceral pain is vague, poorly localized, and midline (autonomic); parietal pain is sharp, localized, worse with movement, and signals peritoneal irritation/peritonitis."
+  },
+  {
+   "id": "wk31_c03",
+   "sys": "GI",
+   "topic": "Imaging choice",
+   "type": "qa",
+   "guide": {
+    "f": "W31_01_Acute_Abdomen_Approach.html",
+    "t": "1 · Imaging",
+    "s": "first test"
+   },
+   "prompt": "Which first imaging test for biliary disease vs diverticulitis/obstruction?",
+   "answer": "Ultrasound first for RUQ/biliary disease; CT abdomen/pelvis for diverticulitis, obstruction, perforation, and undifferentiated stable acute abdomen."
+  },
+  {
+   "id": "wk31_c04",
+   "sys": "GI",
+   "topic": "Sepsis bundle",
+   "type": "qa",
+   "guide": {
+    "f": "W31_02_Sepsis_Appendicitis.html",
+    "t": "2 · Bundle",
+    "s": "three steps"
+   },
+   "prompt": "What are the three pillars of managing intra-abdominal sepsis?",
+   "answer": "Resuscitate (fluids, oxygen, pressors if needed), early broad-spectrum antibiotics (gram-negatives + anaerobes), and source control — antibiotics support but do not replace source control."
+  },
+  {
+   "id": "wk31_c05",
+   "sys": "GI",
+   "topic": "Appendicitis",
+   "type": "qa",
+   "guide": {
+    "f": "W31_02_Sepsis_Appendicitis.html",
+    "t": "2 · Appendicitis",
+    "s": "presentation"
+   },
+   "prompt": "Describe the classic appendicitis presentation.",
+   "answer": "Anorexia and periumbilical (visceral) pain that migrates to the RLQ (parietal) as peritoneal irritation develops, with low-grade fever and localized RLQ tenderness; treat with appendectomy."
+  },
+  {
+   "id": "wk31_c06",
+   "sys": "GI",
+   "topic": "Perforated ulcer",
+   "type": "qa",
+   "guide": {
+    "f": "W31_02_Sepsis_Appendicitis.html",
+    "t": "2 · Perforated ulcer",
+    "s": "picture"
+   },
+   "prompt": "How does a perforated peptic ulcer present and what is the management?",
+   "answer": "Sudden severe epigastric pain with generalized peritonitis (± shoulder pain), free air under the diaphragm; manage with NPO, IV fluids, IV PPI, antibiotics, analgesia, and urgent surgical repair."
+  },
+  {
+   "id": "wk31_c07",
+   "sys": "GI",
+   "topic": "Biliary spectrum",
+   "type": "qa",
+   "guide": {
+    "f": "W31_03_Biliary_Pancreatitis.html",
+    "t": "3 · Biliary",
+    "s": "colic vs cholecystitis"
+   },
+   "prompt": "How do biliary colic and acute cholecystitis differ?",
+   "answer": "Biliary colic = transient cystic-duct obstruction (episodic post-prandial pain, no fever, normal labs). Cholecystitis = persistent obstruction with inflammation (pain >6 h, fever, positive Murphy, leukocytosis)."
+  },
+  {
+   "id": "wk31_c08",
+   "sys": "GI",
+   "topic": "Cholangitis",
+   "type": "qa",
+   "guide": {
+    "f": "W31_03_Biliary_Pancreatitis.html",
+    "t": "3 · Cholangitis",
+    "s": "triad/pentad"
+   },
+   "prompt": "State Charcot triad and Reynolds pentad, and the treatment of cholangitis.",
+   "answer": "Charcot: fever, RUQ pain, jaundice. Reynolds adds hypotension and altered mental status. Treat with resuscitation, broad antibiotics, and urgent ERCP biliary decompression."
+  },
+  {
+   "id": "wk31_c09",
+   "sys": "GI",
+   "topic": "ERCP role",
+   "type": "qa",
+   "guide": {
+    "f": "W31_03_Biliary_Pancreatitis.html",
+    "t": "3 · ERCP",
+    "s": "indications"
+   },
+   "prompt": "When is ERCP indicated (and not)?",
+   "answer": "For CBD stones, ascending cholangitis, and persistent biliary obstruction — not for stones sitting only in the gallbladder (that needs cholecystectomy)."
+  },
+  {
+   "id": "wk31_c10",
+   "sys": "GI",
+   "topic": "Diverticulitis test",
+   "type": "qa",
+   "guide": {
+    "f": "W31_04_Diverticulitis.html",
+    "t": "4 · Diverticulitis",
+    "s": "CT vs scope"
+   },
+   "prompt": "Why CT and not colonoscopy in acute diverticulitis?",
+   "answer": "CT is the best acute test; colonoscopy is avoided acutely due to perforation risk. Colonoscopy is done after recovery because cancer can mimic diverticulitis."
+  },
+  {
+   "id": "wk31_c11",
+   "sys": "GI",
+   "topic": "Diverticulosis",
+   "type": "qa",
+   "guide": {
+    "f": "W31_04_Diverticulitis.html",
+    "t": "4 · Diverticulosis",
+    "s": "not diverticulitis"
+   },
+   "prompt": "How is asymptomatic diverticulosis managed?",
+   "answer": "It is not diverticulitis — no antibiotics or surgery; fiber and lifestyle measures only."
+  },
+  {
+   "id": "wk31_c12",
+   "sys": "GI",
+   "topic": "SBO causes",
+   "type": "qa",
+   "guide": {
+    "f": "W31_05_Bowel_Obstruction.html",
+    "t": "5 · SBO",
+    "s": "causes"
+   },
+   "prompt": "What are the most common causes of small-bowel obstruction?",
+   "answer": "Adhesions (prior surgery) and hernias; also Crohn stricture, malignancy, gallstone ileus, and intussusception. Always examine the groins and prior incisions."
+  },
+  {
+   "id": "wk31_c13",
+   "sys": "GI",
+   "topic": "Obstruction danger",
+   "type": "qa",
+   "guide": {
+    "f": "W31_05_Bowel_Obstruction.html",
+    "t": "5 · Danger signs",
+    "s": "operate"
+   },
+   "prompt": "Which features of bowel obstruction mandate surgery?",
+   "answer": "Peritonitis, strangulation, closed-loop obstruction, ischemia, perforation/free air, unstable sepsis, cecal distension (impending perforation), or failed conservative management."
+  },
+  {
+   "id": "wk31_c14",
+   "sys": "GI",
+   "topic": "Hernia terms",
+   "type": "qa",
+   "guide": {
+    "f": "W31_05_Bowel_Obstruction.html",
+    "t": "5 · Hernias",
+    "s": "terms"
+   },
+   "prompt": "Define reducible, incarcerated, and strangulated hernia.",
+   "answer": "Reducible: contents return to the abdomen. Incarcerated: cannot be reduced. Strangulated: blood supply compromised — a surgical emergency; don't forcefully reduce."
+  },
+  {
+   "id": "wk31_c15",
+   "sys": "GI",
+   "topic": "Hemorrhoid grades",
+   "type": "qa",
+   "guide": {
+    "f": "W31_06_Anorectal.html",
+    "t": "6 · Grades",
+    "s": "I–IV"
+   },
+   "prompt": "State the internal hemorrhoid grades.",
+   "answer": "I: bleed without prolapse; II: prolapse that reduces spontaneously; III: prolapse needing manual reduction; IV: irreducible. Bands for I–III; surgery for IV/refractory."
+  },
+  {
+   "id": "wk31_c16",
+   "sys": "GI",
+   "topic": "Hemorrhoid exclusion",
+   "type": "qa",
+   "guide": {
+    "f": "W31_06_Anorectal.html",
+    "t": "6 · Exclusion",
+    "s": "anemia"
+   },
+   "prompt": "Why are hemorrhoids a 'diagnosis of exclusion'?",
+   "answer": "Iron-deficiency anemia, weight loss, or a change in bowel habits must not be attributed to hemorrhoids — colonoscopy is required to exclude colorectal cancer."
+  },
+  {
+   "id": "wk31_c17",
+   "sys": "GI",
+   "topic": "CRC symptoms",
+   "type": "qa",
+   "guide": {
+    "f": "W31_07_Colorectal_Cancer.html",
+    "t": "7 · Symptoms",
+    "s": "not screening"
+   },
+   "prompt": "Why isn't a symptomatic patient a candidate for screening tests?",
+   "answer": "Screening is for asymptomatic average-risk people; symptoms or iron-deficiency anemia require diagnostic colonoscopy. A positive stool test always needs colonoscopy."
+  },
+  {
+   "id": "wk31_c18",
+   "sys": "GI",
+   "topic": "CRC staging",
+   "type": "qa",
+   "guide": {
+    "f": "W31_07_Colorectal_Cancer.html",
+    "t": "7 · Workup",
+    "s": "staging"
+   },
+   "prompt": "What is the staging workup after a colon cancer diagnosis?",
+   "answer": "Complete colonoscopy + biopsy, baseline CEA, CT chest/abdomen/pelvis, bloodwork, and surgical-fitness assessment; rectal cancer also needs pelvic MRI and neoadjuvant planning."
+  },
+  {
+   "id": "wk31_c19",
+   "sys": "GI",
+   "topic": "Consent",
+   "type": "qa",
+   "guide": {
+    "f": "W31_08_Perioperative.html",
+    "t": "8 · Consent",
+    "s": "elements"
+   },
+   "prompt": "What does informed consent require?",
+   "answer": "A discussion of diagnosis, recommended treatment, reasonable alternatives (including no treatment), benefits, and material/patient-specific risks, with confirmation of understanding and voluntariness — not just a signature."
+  },
+  {
+   "id": "wk31_c20",
+   "sys": "GI",
+   "topic": "Preop anemia",
+   "type": "qa",
+   "guide": {
+    "f": "W31_08_Perioperative.html",
+    "t": "8 · Anemia",
+    "s": "IV iron"
+   },
+   "prompt": "How should preoperative iron-deficiency anemia be managed?",
+   "answer": "Identify and treat it — preoperative IV iron when time allows, with blood-conservation planning — rather than routine autologous donation or delaying cancer surgery for a normal hemoglobin."
+  },
+  {
+   "id": "wk31_c21",
+   "sys": "GI",
+   "topic": "Appendicitis migration",
+   "type": "mcq",
+   "guide": {
+    "f": "W31_01_Acute_Abdomen_Approach.html",
+    "t": "1 · Pain",
+    "s": "migration"
+   },
+   "prompt": "Periumbilical pain migrating to the RLQ is classic for:",
+   "options": [
+    "Diverticulitis",
+    "Appendicitis",
+    "Cholecystitis",
+    "Pancreatitis"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk31_c22",
+   "sys": "GI",
+   "topic": "Biliary first test",
+   "type": "mcq",
+   "guide": {
+    "f": "W31_03_Biliary_Pancreatitis.html",
+    "t": "3 · Biliary",
+    "s": "imaging"
+   },
+   "prompt": "First-line imaging for suspected gallbladder disease:",
+   "options": [
+    "CT",
+    "Ultrasound",
+    "MRI",
+    "Plain film"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk31_c23",
+   "sys": "GI",
+   "topic": "Cholangitis treatment",
+   "type": "mcq",
+   "guide": {
+    "f": "W31_03_Biliary_Pancreatitis.html",
+    "t": "3 · Cholangitis",
+    "s": "decompression"
+   },
+   "prompt": "Definitive intervention for ascending cholangitis is:",
+   "options": [
+    "Cholecystectomy first",
+    "Urgent ERCP biliary decompression",
+    "Oral antibiotics",
+    "Observation"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk31_c24",
+   "sys": "GI",
+   "topic": "Diverticulitis imaging",
+   "type": "mcq",
+   "guide": {
+    "f": "W31_04_Diverticulitis.html",
+    "t": "4 · Diverticulitis",
+    "s": "acute test"
+   },
+   "prompt": "Best acute diagnostic test for diverticulitis:",
+   "options": [
+    "Colonoscopy",
+    "CT abdomen/pelvis",
+    "Barium enema",
+    "Ultrasound"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk31_c25",
+   "sys": "GI",
+   "topic": "LBO cause",
+   "type": "mcq",
+   "guide": {
+    "f": "W31_05_Bowel_Obstruction.html",
+    "t": "5 · LBO",
+    "s": "cause"
+   },
+   "prompt": "The most important cause of large-bowel obstruction to exclude is:",
+   "options": [
+    "Adhesions",
+    "Colorectal cancer",
+    "Gallstone ileus",
+    "Bezoar"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk31_c26",
+   "sys": "GI",
+   "topic": "Ogilvie",
+   "type": "mcq",
+   "guide": {
+    "f": "W31_05_Bowel_Obstruction.html",
+    "t": "5 · Ogilvie",
+    "s": "feature"
+   },
+   "prompt": "Ogilvie syndrome is characterized by:",
+   "options": [
+    "A mechanical transition point",
+    "Colonic dilation WITHOUT mechanical obstruction",
+    "Small-bowel volvulus",
+    "Gallstone in the duct"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk31_c27",
+   "sys": "GI",
+   "topic": "Fissure therapy",
+   "type": "mcq",
+   "guide": {
+    "f": "W31_06_Anorectal.html",
+    "t": "6 · Fissure",
+    "s": "medical"
+   },
+   "prompt": "Topical therapy for a chronic anal fissure works by:",
+   "options": [
+    "Killing bacteria",
+    "Relaxing the internal anal sphincter",
+    "Numbing the skin permanently",
+    "Shrinking hemorrhoids"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk31_c28",
+   "sys": "GI",
+   "topic": "Abscess management",
+   "type": "mcq",
+   "guide": {
+    "f": "W31_06_Anorectal.html",
+    "t": "6 · Abscess",
+    "s": "definitive"
+   },
+   "prompt": "Definitive management of a perianal abscess is:",
+   "options": [
+    "Oral antibiotics",
+    "Incision and drainage",
+    "Sitz baths alone",
+    "Topical steroid"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk31_c29",
+   "sys": "GI",
+   "topic": "Lynch pattern",
+   "type": "mcq",
+   "guide": {
+    "f": "W31_07_Colorectal_Cancer.html",
+    "t": "7 · Hereditary",
+    "s": "3-2-1"
+   },
+   "prompt": "The '3-2-1' family pattern suggests:",
+   "options": [
+    "Sporadic cancer",
+    "Lynch syndrome (hereditary risk)",
+    "FAP only",
+    "No increased risk"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk31_c30",
+   "sys": "GI",
+   "topic": "SSI prophylaxis",
+   "type": "mcq",
+   "guide": {
+    "f": "W31_08_Perioperative.html",
+    "t": "8 · SSI",
+    "s": "timing"
+   },
+   "prompt": "Surgical prophylactic antibiotics should be given:",
+   "options": [
+    "After the incision",
+    "Before the incision (within the appropriate window)",
+    "Only postoperatively",
+    "Only if infection develops"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk31_c31",
+   "sys": "GI",
+   "topic": "Peritonitis signs",
+   "type": "multi",
+   "guide": {
+    "f": "W31_01_Acute_Abdomen_Approach.html",
+    "t": "1 · Peritonitis",
+    "s": "urgent"
+   },
+   "prompt": "Select features that should trigger urgent surgical assessment:",
+   "options": [
+    "Generalized rigidity/rebound",
+    "Hypotension",
+    "Altered level of consciousness",
+    "High lactate",
+    "Mild localized tenderness that resolves"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk31_c32",
+   "sys": "GI",
+   "topic": "Biliary entities",
+   "type": "multi",
+   "guide": {
+    "f": "W31_03_Biliary_Pancreatitis.html",
+    "t": "3 · Biliary",
+    "s": "spectrum"
+   },
+   "prompt": "Select gallstone-related diagnoses:",
+   "options": [
+    "Biliary colic",
+    "Acute cholecystitis",
+    "Choledocholithiasis",
+    "Ascending cholangitis",
+    "Diverticulitis"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk31_c33",
+   "sys": "GI",
+   "topic": "Operate signs",
+   "type": "multi",
+   "guide": {
+    "f": "W31_05_Bowel_Obstruction.html",
+    "t": "5 · Danger",
+    "s": "surgery"
+   },
+   "prompt": "Select bowel-obstruction findings that mandate surgery:",
+   "options": [
+    "Peritonitis",
+    "Closed-loop obstruction",
+    "Free air / perforation",
+    "Strangulated hernia",
+    "Stable partial SBO with normal lactate"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk31_c34",
+   "sys": "GI",
+   "topic": "CRC risk",
+   "type": "multi",
+   "guide": {
+    "f": "W31_07_Colorectal_Cancer.html",
+    "t": "7 · Risk",
+    "s": "factors"
+   },
+   "prompt": "Select colorectal cancer risk factors:",
+   "options": [
+    "Inflammatory bowel disease",
+    "Family history / Lynch syndrome",
+    "Obesity and inactivity",
+    "Prior adenomatous polyps",
+    "High physical activity"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk31_c35",
+   "sys": "GI",
+   "topic": "Perioperative",
+   "type": "multi",
+   "guide": {
+    "f": "W31_08_Perioperative.html",
+    "t": "8 · Perioperative",
+    "s": "measures"
+   },
+   "prompt": "Select evidence-based perioperative measures:",
+   "options": [
+    "Prophylactic antibiotics before incision",
+    "VTE prophylaxis + early mobilization",
+    "Preoperative IV iron for iron-deficiency anemia",
+    "Normothermia",
+    "Routine preoperative tests on everyone"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk31_c36",
+   "sys": "GI",
+   "topic": "Charcot/Reynolds",
+   "type": "cloze",
+   "guide": {
+    "f": "W31_03_Biliary_Pancreatitis.html",
+    "t": "3 · Cholangitis",
+    "s": "triad"
+   },
+   "text": "Charcot triad = fever, RUQ pain, {{jaundice}}; Reynolds pentad adds {{hypotension}} and {{altered mental status}}.",
+   "explain": "Reynolds pentad signals severe cholangitis needing urgent decompression."
+  },
+  {
+   "id": "wk31_c37",
+   "sys": "GI",
+   "topic": "Hernia progression",
+   "type": "cloze",
+   "guide": {
+    "f": "W31_05_Bowel_Obstruction.html",
+    "t": "5 · Hernias",
+    "s": "spectrum"
+   },
+   "text": "Hernia spectrum: reducible → {{incarcerated}} (won't reduce) → {{strangulated}} (blood supply compromised).",
+   "explain": "Strangulation is a surgical emergency."
+  },
+  {
+   "id": "wk31_c38",
+   "sys": "GI",
+   "topic": "Hemorrhoid grade II",
+   "type": "cloze",
+   "guide": {
+    "f": "W31_06_Anorectal.html",
+    "t": "6 · Grades",
+    "s": "grade II"
+   },
+   "text": "A grade {{II}} internal hemorrhoid prolapses but {{reduces spontaneously}}.",
+   "explain": "Grade III needs manual reduction; IV is irreducible."
+  },
+  {
+   "id": "wk31_c39",
+   "sys": "GI",
+   "topic": "Lynch criteria",
+   "type": "cloze",
+   "guide": {
+    "f": "W31_07_Colorectal_Cancer.html",
+    "t": "7 · Hereditary",
+    "s": "Amsterdam"
+   },
+   "text": "The Amsterdam pattern: {{3}} affected relatives across {{2}} generations, ≥1 first-degree, one diagnosis before age {{50}}.",
+   "explain": "Triggers consideration of Lynch syndrome and genetics referral."
+  },
+  {
+   "id": "wk31_c40",
+   "sys": "GI",
+   "topic": "Pancreatitis dx",
+   "type": "cloze",
+   "guide": {
+    "f": "W31_03_Biliary_Pancreatitis.html",
+    "t": "3 · Pancreatitis",
+    "s": "criteria"
+   },
+   "text": "Acute pancreatitis: ≥2 of characteristic pain, lipase > {{3}}× upper limit, or {{imaging}}; main causes are gallstones and {{alcohol}}.",
+   "explain": "Management is supportive (fluids, analgesia, early enteral feeding)."
+  },
+  {
+   "id": "wk31_c41",
+   "sys": "GI",
+   "topic": "Sepsis order",
+   "type": "order",
+   "guide": {
+    "f": "W31_02_Sepsis_Appendicitis.html",
+    "t": "2 · Bundle",
+    "s": "order"
+   },
+   "prompt": "Order intra-abdominal sepsis management:",
+   "items": [
+    "Resuscitate (oxygen, IV fluids, monitor lactate)",
+    "Early broad-spectrum antibiotics",
+    "Source control (drain/repair/resect)",
+    "Support organs (pressors/ICU) if shock persists"
+   ]
+  },
+  {
+   "id": "wk31_c42",
+   "sys": "GI",
+   "topic": "Obstruction order",
+   "type": "order",
+   "guide": {
+    "f": "W31_05_Bowel_Obstruction.html",
+    "t": "5 · Initial",
+    "s": "steps"
+   },
+   "prompt": "Order initial bowel-obstruction management:",
+   "items": [
+    "NPO + IV fluids + electrolyte correction",
+    "NG tube if vomiting/distended",
+    "CT to define level/cause/complications",
+    "Surgery if strangulation/peritonitis/closed loop or failed conservative care"
+   ]
+  },
+  {
+   "id": "wk31_c43",
+   "sys": "GI",
+   "topic": "Biliary escalation",
+   "type": "order",
+   "guide": {
+    "f": "W31_03_Biliary_Pancreatitis.html",
+    "t": "3 · Spectrum",
+    "s": "escalation"
+   },
+   "prompt": "Order the gallstone spectrum by escalating obstruction:",
+   "items": [
+    "Biliary colic (transient cystic-duct)",
+    "Acute cholecystitis (persistent, inflamed gallbladder)",
+    "Choledocholithiasis (CBD stone, jaundice)",
+    "Ascending cholangitis (infected duct → ERCP)"
+   ]
+  },
+  {
+   "id": "wk31_c44",
+   "sys": "GI",
+   "topic": "Diagnosis → test",
+   "type": "match",
+   "guide": {
+    "f": "W31_01_Acute_Abdomen_Approach.html",
+    "t": "1 · Imaging",
+    "s": "best test"
+   },
+   "prompt": "Match the diagnosis to its best initial imaging:",
+   "pairs": [
+    [
+     "Gallbladder disease",
+     "Ultrasound"
+    ],
+    [
+     "Diverticulitis",
+     "CT abdomen/pelvis"
+    ],
+    [
+     "Free perforation",
+     "Upright CXR / CT"
+    ],
+    [
+     "Bowel obstruction",
+     "CT abdomen/pelvis"
+    ]
+   ]
+  },
+  {
+   "id": "wk31_c45",
+   "sys": "GI",
+   "topic": "Anorectal → finding",
+   "type": "match",
+   "guide": {
+    "f": "W31_06_Anorectal.html",
+    "t": "6 · Anorectal",
+    "s": "patterns"
+   },
+   "prompt": "Match the anorectal condition to its clue:",
+   "pairs": [
+    [
+     "Anal fissure",
+     "Painful defecation + bright blood"
+    ],
+    [
+     "Internal hemorrhoid",
+     "Painless bleeding + prolapse"
+    ],
+    [
+     "Thrombosed external hemorrhoid",
+     "Painful bluish lump"
+    ],
+    [
+     "Perianal abscess",
+     "Painful swelling + fever → I&D"
+    ]
+   ]
+  },
+  {
+   "id": "wk31_c46",
+   "sys": "GI",
+   "topic": "Obstruction → cause",
+   "type": "match",
+   "guide": {
+    "f": "W31_05_Bowel_Obstruction.html",
+    "t": "5 · Types",
+    "s": "causes"
+   },
+   "prompt": "Match the obstruction type to a typical cause:",
+   "pairs": [
+    [
+     "SBO",
+     "Adhesions / hernia"
+    ],
+    [
+     "LBO",
+     "Colorectal cancer / volvulus"
+    ],
+    [
+     "Ogilvie",
+     "Post-op autonomic dysmotility"
+    ],
+    [
+     "Paralytic ileus",
+     "Opioids / electrolyte disturbance"
+    ]
+   ]
+  },
+  {
+   "id": "wk31_c47",
+   "sys": "GI",
+   "topic": "Drug → use",
+   "type": "match",
+   "guide": {
+    "f": "W31_02_Sepsis_Appendicitis.html",
+    "t": "2 · Drugs",
+    "s": "surgical"
+   },
+   "prompt": "Match the drug to its surgical use:",
+   "pairs": [
+    [
+     "Ceftriaxone + metronidazole",
+     "Intra-abdominal infection coverage"
+    ],
+    [
+     "Cefazolin",
+     "Pre-incision SSI prophylaxis"
+    ],
+    [
+     "Enoxaparin",
+     "VTE prophylaxis"
+    ],
+    [
+     "Neostigmine",
+     "Ogilvie escalation"
+    ],
+    [
+     "Topical nitroglycerin",
+     "Anal fissure"
+    ]
+   ]
+  },
+  {
+   "id": "wk31_c48",
+   "sys": "GI",
+   "topic": "Courvoisier",
+   "type": "qa",
+   "guide": {
+    "f": "W31_03_Biliary_Pancreatitis.html",
+    "t": "3 · Biliary",
+    "s": "painless jaundice"
+   },
+   "prompt": "What does painless jaundice with a palpable non-tender gallbladder suggest?",
+   "answer": "Malignant biliary obstruction (Courvoisier's sign — e.g. pancreatic head cancer), rather than gallstone disease, which is usually painful with a non-distensible fibrotic gallbladder."
+  },
+  {
+   "id": "wk31_c49",
+   "sys": "GI",
+   "topic": "Neostigmine caution",
+   "type": "qa",
+   "guide": {
+    "f": "W31_05_Bowel_Obstruction.html",
+    "t": "5 · Ogilvie",
+    "s": "neostigmine"
+   },
+   "prompt": "What must be excluded before giving neostigmine for Ogilvie syndrome, and what monitoring is needed?",
+   "answer": "Exclude mechanical obstruction and perforation; give in a monitored setting with atropine available because of bradycardia/bronchospasm risk."
+  },
+  {
+   "id": "wk31_c50",
+   "sys": "GI",
+   "topic": "Anastomotic leak",
+   "type": "qa",
+   "guide": {
+    "f": "W31_08_Perioperative.html",
+    "t": "8 · Procedures",
+    "s": "colectomy"
+   },
+   "prompt": "What is the feared complication of a colectomy that is material to consent?",
+   "answer": "Anastomotic leak — it can cause peritonitis/sepsis and is devastating, so it must be discussed (along with bleeding, SSI, ileus, VTE, and hernia) during consent."
+  }
+ ],
+ "guides": [
+  {
+   "file": "W31_01_Acute_Abdomen_Approach.html",
+   "title": "Week 31 · 1 Acute Abdomen: Approach & Imaging",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Acute Abdomen: Approach &amp; Imaging</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Framework</div><h1>Acute Abdomen: Approach &amp; Imaging</h1></div><div class='r'>Week 31 &middot; GI III &mdash; Surgery &amp; Acute Abdomen<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Stabilize-while-you-diagnose, localize and classify the pain, recognize peritonitis, and pick the right first imaging test.</p>\n<h2>Stabilize first, diagnose in parallel</h2>\n<p>ABCs, mental status, IV access, fluids, <b>analgesia</b> (don't withhold it to \"preserve the exam\"), antiemetics, NPO, broad labs. An unstable patient may need resuscitation and <b>source control before diagnostic certainty</b>.</p>\n<h2>Localize the pain</h2>\n<table>\n<tr><th>Region</th><th>Organs</th></tr>\n<tr><td>RUQ</td><td>Gallbladder, liver, duodenum, right kidney, lung/heart</td></tr>\n<tr><td>RLQ</td><td>Appendix, cecum, right ureter, ovary</td></tr>\n<tr><td>LLQ</td><td>Sigmoid, left ureter, ovary</td></tr>\n<tr><td>Epigastrium</td><td>Stomach, duodenum, pancreas, aorta, heart</td></tr>\n</table>\n<h2>Classify the pain</h2>\n<ul>\n<li><b>Visceral:</b> vague, poorly localized, midline, autonomic (early appendicitis = periumbilical).</li>\n<li><b>Parietal:</b> sharp, localized, worse with movement &rarr; <b>peritonitis</b> (e.g. migration to RLQ).</li>\n<li><b>Referred:</b> via shared neural pathways (biliary &rarr; right shoulder/scapula).</li>\n</ul>\n<div class='band warn'><div class='t'>Recognize peritonitis &amp; sepsis</div>\nGeneralized peritonitis (rigidity, rebound), hypotension, altered LOC, high lactate, or hypoxemia &rarr; <b>urgent surgical assessment + broad-spectrum antibiotics</b>. Do <b>not</b> delay the surgeon for imaging in generalized peritonitis or refractory shock.</div>\n<h2>Pick imaging by suspected system</h2>\n<ul>\n<li>RUQ/biliary &rarr; <b>ultrasound</b> first. Diverticulitis / obstruction / undifferentiated stable acute abdomen &rarr; <b>CT abdomen/pelvis</b>. Appendicitis &rarr; US or CT by age/sex/pathway. Free perforation &rarr; upright CXR may show free air, but CT is often definitive in stable patients.</li>\n</ul>\n<div class='key'>Resuscitate while you work up. Migrating periumbilical&rarr;RLQ pain = appendicitis. US for gallbladder, CT for almost everything else &mdash; but peritonitis/shock goes to the surgeon, not the scanner.</div>\n</div>"
+  },
+  {
+   "file": "W31_02_Sepsis_Appendicitis.html",
+   "title": "Week 31 · 2 Intra-Abdominal Sepsis & Appendicitis",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Intra-Abdominal Sepsis &amp; Appendicitis</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Source control</div><h1>Intra-Abdominal Sepsis &amp; Appendicitis</h1></div><div class='r'>Week 31 &middot; GI III &mdash; Surgery &amp; Acute Abdomen<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Why a contained infection turns catastrophic, the resuscitate-antibiotics-source-control bundle, and appendicitis and perforated ulcer.</p>\n<h2>Why appendicitis can become catastrophic</h2>\n<p>Local infection &rarr; systemic inflammatory response &rarr; vasodilation, capillary leak, myocardial depression &rarr; <b>distributive (septic) shock</b>, tissue hypoperfusion, <b>lactate</b> elevation, organ dysfunction. Patients can look only mildly ill then crash after perforation &mdash; <b>reassess frequently</b>.</p>\n<div class='band warn'><div class='t'>The bundle: resuscitate &rarr; antibiotics &rarr; source control</div>\n1) <b>Resuscitate</b> (O&#8322;, two large-bore IVs, crystalloid, Foley, repeat lactate; pressors if hypotensive after fluids). 2) <b>Early broad-spectrum antibiotics</b> covering enteric gram-negatives + anaerobes (e.g. <b>ceftriaxone + metronidazole</b>, or piperacillin-tazobactam). 3) <b>Source control</b> (appendectomy, abscess drainage, ulcer repair, ERCP for cholangitis) &mdash; antibiotics support but <b>do not replace</b> it.</div>\n<h2>Appendicitis</h2>\n<table>\n<tr><th>Uncomplicated</th><th>Complicated/perforated</th></tr>\n<tr><td>Anorexia, nausea, periumbilical&rarr;RLQ pain, low-grade fever, localized RLQ peritonitis; mild leukocytosis</td><td>High fever, tachycardia, generalized peritonitis or abscess/phlegmon, sepsis/shock</td></tr>\n<tr><td><b>Appendectomy</b> + perioperative antibiotics</td><td>Resuscitate, broad antibiotics, urgent source control (a contained abscess may be drained with interval appendectomy)</td></tr>\n</table>\n<h2>Perforated peptic ulcer</h2>\n<p><b>Sudden severe epigastric pain &rarr; generalized peritonitis</b>, &plusmn; shoulder pain (diaphragmatic irritation). Risk: NSAIDs, H. pylori, smoking. Upright CXR may show <b>free air under the diaphragm</b>; CT is sensitive. Manage: NPO, IV fluids, NG decompression, <b>IV PPI</b>, broad antibiotics, analgesia, <b>urgent surgical repair</b>; treat H. pylori and stop NSAIDs <b>later</b>.</p>\n<div class='key'>Worsening vitals/mental status beat the original label &mdash; reassess. Antibiotics never replace source control. Sudden epigastric pain + free air + NSAIDs = perforated ulcer &rarr; OR.</div>\n</div>"
+  },
+  {
+   "file": "W31_03_Biliary_Pancreatitis.html",
+   "title": "Week 31 · 3 Biliary Disease & Pancreatitis",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Biliary Disease &amp; Pancreatitis</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Gallstones</div><h1>Biliary Disease &amp; Pancreatitis</h1></div><div class='r'>Week 31 &middot; GI III &mdash; Surgery &amp; Acute Abdomen<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The five gallstone syndromes side by side, when ERCP is (and isn't) the answer, and gallstone pancreatitis.</p>\n<h2>Five gallstone syndromes</h2>\n<table>\n<tr><th>Diagnosis</th><th>Picture</th><th>Treatment</th></tr>\n<tr><td><b>Biliary colic</b></td><td>Transient cystic-duct obstruction: post-prandial RUQ pain to back/shoulder, resolves, no fever; normal labs</td><td>Elective lap cholecystectomy if symptomatic</td></tr>\n<tr><td><b>Acute cholecystitis</b></td><td>Persistent obstruction: RUQ pain &gt;6 h, fever, <b>+Murphy</b>, leukocytosis; US wall thickening/pericholecystic fluid</td><td>NPO, fluids, antibiotics, <b>early</b> cholecystectomy (cholecystostomy if unfit)</td></tr>\n<tr><td><b>Choledocholithiasis</b></td><td>CBD stone: jaundice, cholestatic LFTs, dilated ducts; may be afebrile</td><td><b>ERCP</b> to clear the duct, then cholecystectomy</td></tr>\n<tr><td><b>Ascending cholangitis</b></td><td><b>Charcot triad</b> (fever, RUQ pain, jaundice); <b>Reynolds pentad</b> adds hypotension + altered LOC</td><td>Resuscitate + antibiotics + <b>urgent ERCP decompression</b></td></tr>\n<tr><td><b>Gallstone pancreatitis</b></td><td>Epigastric pain to back, &uarr;lipase, gallstone cause on US</td><td>Supportive; ERCP if cholangitis/obstruction; cholecystectomy this admission if mild</td></tr>\n</table>\n<div class='band warn'><div class='t'>ERCP is for ducts, not the gallbladder</div>\nERCP treats <b>CBD stones, cholangitis, and persistent biliary obstruction</b> &mdash; not stones sitting only in the gallbladder. Antibiotics aren't needed for simple biliary colic, but are for cholecystitis and cholangitis. <b>Painless jaundice + weight loss + a palpable non-tender gallbladder (Courvoisier)</b> suggests malignant obstruction, not stones.</div>\n<h2>Acute pancreatitis</h2>\n<p>Diagnose with &ge;2 of: characteristic pain, lipase &gt;3&times; upper limit, or imaging. Causes: <b>gallstones and alcohol</b> (most), plus hypertriglyceridemia, drugs, ERCP, hypercalcemia. Management is <b>supportive</b>: aggressive fluids, analgesia, early enteral nutrition as tolerated; antibiotics only for infected necrosis.</p>\n<div class='key'>Walk the duct: colic (transient) &rarr; cholecystitis (inflamed gallbladder, +Murphy) &rarr; choledocholithiasis (CBD stone, jaundice) &rarr; cholangitis (infected duct, Charcot/Reynolds &rarr; ERCP). Pancreatitis is supportive care.</div>\n</div>"
+  },
+  {
+   "file": "W31_04_Diverticulitis.html",
+   "title": "Week 31 · 4 Diverticular Disease",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Diverticular Disease</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Diverticula</div><h1>Diverticular Disease</h1></div><div class='r'>Week 31 &middot; GI III &mdash; Surgery &amp; Acute Abdomen<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Diverticulosis vs diverticulitis, why CT (not colonoscopy) is the acute test, and the complicated-disease pathways.</p>\n<h2>What diverticula are</h2>\n<p>Outpouchings of the colon wall &mdash; usually <b>false diverticula</b> herniating where the vasa recta pierce the muscle. Risk: low-fiber diet, obesity, inactivity, NSAIDs, smoking; prevalence rises sharply with age. <b>Diverticulosis</b> (asymptomatic pouches) is <b>not</b> diverticulitis and needs no antibiotics/surgery.</p>\n<h2>Diverticulitis</h2>\n<p>Pathophysiology resembles appendicitis: a fecalith obstructs a diverticulum &rarr; stasis, pressure, ischemia, inflammation, microperforation. <b>LLQ pain + fever + bowel-habit change</b> (left-sided \"appendicitis\").</p>\n<div class='band warn'><div class='t'>Exam traps</div>\n<b>CT abdomen/pelvis</b> is the best acute test &mdash; <b>colonoscopy is avoided acutely</b> (perforation risk). Diverticulitis and colon cancer mimic each other, so arrange a <b>follow-up colonoscopy after recovery</b> to exclude cancer. Uncomplicated disease may be managed with bowel rest &plusmn; <b>selective</b> antibiotics by severity.</div>\n<h2>Complicated disease</h2>\n<table>\n<tr><th>Complication</th><th>Clue / management</th></tr>\n<tr><td>Abscess</td><td>Persistent fever, mass &rarr; IV antibiotics + <b>percutaneous drainage</b> if large</td></tr>\n<tr><td>Fistula (colovesical)</td><td><b>Pneumaturia/fecaluria</b> &rarr; elective resection</td></tr>\n<tr><td>Obstruction / stricture</td><td>Obstructive symptoms &rarr; elective resection</td></tr>\n<tr><td>Free perforation</td><td>Generalized peritonitis/sepsis &rarr; resuscitate + urgent surgery (&plusmn; stoma)</td></tr>\n</table>\n<div class='key'>CT acutely, colonoscopy later (to rule out cancer). Asymptomatic diverticulosis needs nothing. Abscess &rarr; drain; perforation/peritonitis &rarr; OR.</div>\n</div>"
+  },
+  {
+   "file": "W31_05_Bowel_Obstruction.html",
+   "title": "Week 31 · 5 Bowel Obstruction & Hernias",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Bowel Obstruction &amp; Hernias</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Obstruction</div><h1>Bowel Obstruction &amp; Hernias</h1></div><div class='r'>Week 31 &middot; GI III &mdash; Surgery &amp; Acute Abdomen<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>SBO vs LBO vs pseudo-obstruction, the danger signs that mean the OR, and how a groin hernia can be the cause.</p>\n<h2>Recognize it</h2>\n<p>Crampy pain, nausea/vomiting, <b>obstipation</b>, distension. <b>SBO</b>: earlier vomiting; <b>LBO</b>: more distension/constipation. Initial management: <b>NPO, IV fluids, electrolytes, NG tube if vomiting/distended, analgesia, and CT</b> to define level/cause/complications.</p>\n<table>\n<tr><th>Type</th><th>Common causes</th></tr>\n<tr><td><b>SBO</b></td><td><b>Adhesions</b> and <b>hernias</b> (most); Crohn stricture, malignancy, gallstone ileus, intussusception</td></tr>\n<tr><td><b>LBO</b></td><td><b>Colorectal cancer</b>, diverticular stricture, <b>volvulus</b> (sigmoid/cecal)</td></tr>\n<tr><td>Ogilvie (pseudo-obstruction)</td><td>Autonomic dysmotility &mdash; hospitalized/post-op/elderly; <b>no</b> mechanical transition point</td></tr>\n<tr><td>Paralytic ileus</td><td>Post-op, opioids, electrolyte disturbance</td></tr>\n</table>\n<div class='band warn'><div class='t'>Danger signs &rarr; operate</div>\nFever, tachycardia, continuous severe pain, peritonitis, leukocytosis, <b>lactate/metabolic acidosis</b>, <b>closed-loop</b> obstruction, pneumatosis, free air, or <b>cecal distension</b> (impending perforation, esp. with a competent ileocecal valve in LBO). <b>Sigmoid volvulus</b> = coffee-bean sign &rarr; often endoscopic detorsion first, but recurrence prevention is surgical. <b>Ogilvie</b>: conservative care + neostigmine/colonoscopic decompression; surgery only for perforation/ischemia.</div>\n<h2>Hernias</h2>\n<ul>\n<li><b>Always examine the groins and prior incisions</b> in obstruction &mdash; a tender irreducible hernia can be the cause.</li>\n<li><b>Reducible</b> (returns) &rarr; <b>incarcerated</b> (won't reduce) &rarr; <b>strangulated</b> (compromised blood supply &mdash; surgical emergency).</li>\n<li><b>Don't</b> forcefully reduce if there is strangulation, peritonitis, toxicity, or skin changes.</li>\n</ul>\n<div class='key'>Adhesions/hernias cause SBO; cancer/volvulus cause LBO. Stable simple SBO &rarr; bowel rest + NG + observe. Strangulation, closed loop, peritonitis, or free air &rarr; OR. Tender irreducible hernia = strangulation until proven otherwise.</div>\n</div>"
+  },
+  {
+   "file": "W31_06_Anorectal.html",
+   "title": "Week 31 · 6 Benign Anorectal Disease",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Benign Anorectal Disease</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Anorectal</div><h1>Benign Anorectal Disease</h1></div><div class='r'>Week 31 &middot; GI III &mdash; Surgery &amp; Acute Abdomen<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Hemorrhoid grades, the painful-vs-painless bleeding split, and the abscess/fistula/fissure trio.</p>\n<h2>Bleeding pattern recognition</h2>\n<table>\n<tr><th>Finding</th><th>Think</th></tr>\n<tr><td>Painful defecation + small bright blood</td><td><b>Anal fissure</b> (posterior midline) until proven otherwise</td></tr>\n<tr><td>Painless bright blood + prolapse</td><td><b>Internal hemorrhoids</b> (but rule out cancer/anemia)</td></tr>\n<tr><td>Painful bluish perianal lump</td><td><b>Thrombosed external hemorrhoid</b></td></tr>\n<tr><td>Painful erythematous swelling &plusmn; fever</td><td><b>Perianal abscess</b> &rarr; incision &amp; drainage</td></tr>\n<tr><td>Drainage from a perianal opening after an abscess</td><td><b>Fistula-in-ano</b> &rarr; surgical referral</td></tr>\n</table>\n<h2>Internal hemorrhoid grades</h2>\n<ul>\n<li><b>I</b> bleed, no prolapse; <b>II</b> prolapse, reduces spontaneously; <b>III</b> needs manual reduction; <b>IV</b> irreducible.</li>\n<li>Manage I&ndash;III with fiber/fluids/stool softeners and <b>rubber-band ligation</b>; grade IV/refractory &rarr; hemorrhoidectomy.</li>\n</ul>\n<div class='band warn'><div class='t'>Hemorrhoids are a diagnosis of exclusion</div>\nBleeding attributed to hemorrhoids must not explain <b>iron-deficiency anemia, weight loss, or a change in bowel habits</b> &mdash; these mandate <b>colonoscopy</b> to exclude colorectal cancer first.</div>\n<h2>Fissure, abscess, fistula</h2>\n<ul>\n<li><b>Anal fissure:</b> fiber/fluids/sitz baths + <b>topical nitroglycerin or a calcium-channel blocker</b> (relax the sphincter); chronic refractory &rarr; botulinum toxin or lateral internal sphincterotomy.</li>\n<li><b>Perianal abscess:</b> <b>incision and drainage</b> &mdash; antibiotics alone are inadequate for a drainable abscess.</li>\n<li><b>Fistula-in-ano:</b> fistulotomy for simple low tracts; seton/flap/LIFT for complex tracts (preserve continence).</li>\n</ul>\n<div class='key'>Painful bleeding = fissure; painless bleeding with prolapse = internal hemorrhoid. Drain the abscess (not just antibiotics). Never blame anemia on hemorrhoids without a scope.</div>\n</div>"
+  },
+  {
+   "file": "W31_07_Colorectal_Cancer.html",
+   "title": "Week 31 · 7 Colorectal Cancer & Screening",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Colorectal Cancer &amp; Screening</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>CRC</div><h1>Colorectal Cancer &amp; Screening</h1></div><div class='r'>Week 31 &middot; GI III &mdash; Surgery &amp; Acute Abdomen<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The adenoma-carcinoma sequence, screening vs diagnostic colonoscopy, the staging workup, and hereditary-risk recognition.</p>\n<h2>Biology &amp; risk</h2>\n<p>Most CRC is sporadic via the <b>adenoma-carcinoma sequence</b>. Risk: age, male sex, Western diet, obesity, diabetes, inactivity, prior polyps/CRC, family history, <b>IBD</b>, and hereditary syndromes (<b>Lynch</b>, FAP). <b>Physical activity is protective</b> (~24% lower risk in the most vs least active).</p>\n<div class='band warn'><div class='t'>Symptoms are not \"screening\"</div>\n<b>Iron-deficiency anemia, change in bowel habits, weight loss, or rectal bleeding require diagnostic colonoscopy</b> &mdash; bleeding hemorrhoids are a diagnosis of exclusion. Screening is for <b>asymptomatic average-risk</b> people.</div>\n<h2>Screening (average risk)</h2>\n<ul>\n<li>Stool tests (<b>FIT</b>/FOBT at program intervals) or structural tests (colonoscopy, flexible sigmoidoscopy, CT colonography). <b>A positive stool test requires colonoscopy.</b></li>\n<li>Follow current local policy (some programs lowered the start age to 45).</li>\n</ul>\n<h2>Workup &amp; treatment after diagnosis</h2>\n<ul>\n<li>Complete colonoscopy + biopsy (adenocarcinoma is the major type), <b>baseline CEA</b>, <b>CT chest/abdomen/pelvis</b> for staging, bloodwork, surgical-fitness assessment. <b>Rectal</b> cancer also needs <b>pelvic MRI</b> and neoadjuvant planning.</li>\n<li><b>Colon cancer:</b> oncologic segmental colectomy + lymphadenectomy (e.g. right hemicolectomy for ascending tumours); adjuvant chemo by stage.</li>\n<li><b>Rectal cancer:</b> often neoadjuvant chemoradiation + total mesorectal excision; sphincter-preservation/stoma counseling.</li>\n</ul>\n<h2>Hereditary-risk recognition</h2>\n<p>The Amsterdam \"<b>3-2-1</b>\" pattern: <b>3</b> affected relatives across <b>2</b> generations, &ge;1 first-degree relative, with one diagnosis before age <b>50</b> &rarr; consider genetics referral (Lynch). Early-onset CRC, many polyps, or synchronous tumours also trigger referral.</p>\n<div class='key'>Adenoma-carcinoma sequence; activity protects. Symptoms &rarr; diagnostic colonoscopy (not screening). Stage with CEA + CT (+ pelvic MRI for rectal). 3-2-1 family pattern &rarr; think Lynch.</div>\n</div>"
+  },
+  {
+   "file": "W31_08_Perioperative.html",
+   "title": "Week 31 · 8 Perioperative Care",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Perioperative Care</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Around surgery</div><h1>Perioperative Care</h1></div><div class='r'>Week 31 &middot; GI III &mdash; Surgery &amp; Acute Abdomen<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Consent as a conversation, surgical-site-infection and VTE prevention, treating anemia before the OR, and ERAS.</p>\n<h2>Informed consent</h2>\n<div class='band'><div class='t'>Consent is a discussion, not a signature</div>\nExplain the <b>diagnosis, recommended treatment, reasonable alternatives (including no treatment), benefits, material and patient-specific risks</b>, then confirm understanding and voluntariness. Example: a large benign-appearing right-colon polyp not safely removed endoscopically &rarr; options are <b>expert endoscopic removal, surgery, or doing nothing</b>, compared on benefits/risks/values.</div>\n<h2>Surgical-site-infection prevention</h2>\n<ul>\n<li>Optimize glucose, nutrition, and smoking; <b>prophylactic antibiotics before incision</b> (e.g. cefazolin &plusmn; metronidazole for colorectal), re-dose in long/bloody cases; mechanical bowel prep + oral antibiotics for selected colorectal surgery; maintain <b>normothermia</b> and sterile technique.</li>\n</ul>\n<h2>VTE prophylaxis</h2>\n<ul>\n<li>Assess thrombosis vs bleeding risk; use <b>mechanical + pharmacologic prophylaxis</b> (LMWH/enoxaparin or UFH) when indicated, plus <b>early mobilization</b>.</li>\n</ul>\n<h2>Anemia &amp; transfusion</h2>\n<div class='band warn'><div class='t'>Treat anemia, don't just transfuse</div>\nThe taught strategy is <b>preoperative IV iron</b> when iron-deficient and time allows, with patient-specific blood-conservation planning &mdash; <b>not</b> routine autologous donation and <b>not</b> delaying cancer surgery until an arbitrary \"normal\" hemoglobin (e.g. 140).</div>\n<h2>ERAS &amp; cardiac risk</h2>\n<ul>\n<li><b>ERAS:</b> minimize prolonged fasting, carbohydrate drinks when allowed, euvolemia, <b>multimodal analgesia</b> (limit opioids), early feeding/mobilization, avoid unnecessary tubes/drains.</li>\n<li><b>Cardiac/anesthesia:</b> assess functional capacity and comorbidity; manage antiplatelets/prior stents; order tests <b>only if they will change management</b>.</li>\n</ul>\n<div class='key'>Consent = options + risks + values. Prophylactic antibiotics before incision, VTE prophylaxis + early mobilization, and IV iron for preoperative anemia. Don't order reflexive preoperative tests.</div>\n</div>"
+  },
+  {
+   "file": "W31_09_Cram_Sheet.html",
+   "title": "Week 31 · 9 Cram Sheet",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Week 31 · 9 Cram Sheet</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.35;-webkit-font-smoothing:antialiased}\n.page{max-width:1180px;margin:0 auto;padding:18px 20px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:8px;margin-bottom:12px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:26px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.emerg{border:1.5px solid var(--hi);border-radius:6px;background:rgba(0,0,0,.02);padding:9px 12px;margin-bottom:13px}\n.emerg .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--hi);font-weight:600;margin-bottom:5px}\n.emerg .items{columns:3;column-gap:22px;font-size:12px;line-height:1.42}\n.emerg .items div{break-inside:avoid;margin-bottom:3px}\n.emerg b{color:var(--hi)}\n.cols{column-count:4;column-gap:14px}\n@media(max-width:1040px){.cols{column-count:3}}\n@media(max-width:760px){.cols{column-count:2}}\n@media(max-width:520px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(0,0,0,.02);padding:8px 9px 7px;margin:0 0 11px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;padding-bottom:4px;border-bottom:1.5px solid var(--line);color:var(--accent);display:flex;justify-content:space-between;align-items:baseline;gap:6px}\n.card h2 .wk{color:var(--soft);font-size:8.5px;font-weight:500;letter-spacing:.06em;white-space:nowrap}\n.row{margin:0 0 3.5px;font-size:11.5px;line-height:1.32}\n.row .tg{font-weight:600;color:var(--ink)}\n.row .ar{color:var(--soft)}\n.row .ar::before{content:\"\\2192 \";color:var(--accent);font-weight:600}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:5px 0}\n.dnm{color:var(--hi);font-weight:700}\n.foot{margin-top:10px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:landscape;margin:9mm}body{font-size:8.4px}.page{max-width:none;padding:0}.cols{column-count:4;column-gap:8px}.emerg .items{columns:3}.card{margin-bottom:6px}.head h1{font-size:19px}}\n</style><div class='page'><div class='head'><div><div class='k'>Night-Before High-Yield</div><h1>GI III — Surgery &amp; Acute Abdomen</h1></div><div class='r'>Week 31 &middot; GI III &mdash; Surgery &amp; Acute Abdomen<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><div class='emerg'><div class='t'>★ Do-not-miss &middot; first-step reflexes</div><div class='items'><div><b>Septic shock from an abdominal source</b> &rarr; resuscitate + early broad antibiotics + urgent SOURCE CONTROL (don't wait for perfect imaging)</div><div><b>Ascending cholangitis</b> (Charcot/Reynolds) &rarr; resuscitate + antibiotics + urgent ERCP decompression</div><div><b>Perforated peptic ulcer</b> (free air, NSAIDs) &rarr; NPO, IV PPI, antibiotics, urgent surgical repair</div><div><b>Strangulated hernia / closed-loop or ischemic obstruction</b> &rarr; OR (don't forcefully reduce a strangulated hernia)</div><div><b>Generalized peritonitis / refractory shock</b> &rarr; surgeon now, not the CT scanner</div><div><b>IDA or change in bowel habit blamed on hemorrhoids</b> &rarr; colonoscopy to exclude colorectal cancer</div></div></div><div class='cols'><div class='card'><h2>Approach <span class='wk'>Approach</span></h2><div class='row'><span class='tg'>Stabilize</span> <span class='ar'>while diagnosing; give analgesia</span></div><div class='row'><span class='tg'>Visceral pain</span> <span class='ar'>vague, midline (early appendicitis)</span></div><div class='row'><span class='tg'>Parietal pain</span> <span class='ar'>localized → peritonitis</span></div><div class='row'><span class='tg'>US first</span> <span class='ar'>RUQ / gallbladder</span></div><div class='row'><span class='tg'>CT first</span> <span class='ar'>diverticulitis, obstruction, perforation</span></div><div class='row'><span class='tg'>Peritonitis/shock</span> <span class='ar'>surgeon before scanner</span></div></div><div class='card'><h2>Sepsis &amp; appendicitis <span class='wk'>Sepsis</span></h2><div class='row'><span class='tg'>Bundle</span> <span class='ar'>resuscitate → antibiotics → source control</span></div><div class='row'><span class='tg'>Antibiotics</span> <span class='ar'>gram-neg + anaerobe (ceftriaxone+metro)</span></div><div class='row'><span class='tg'>Appendicitis</span> <span class='ar'>periumbilical → RLQ; appendectomy</span></div><div class='row'><span class='tg'>Perforated ulcer</span> <span class='ar'>free air; NPO, IV PPI, OR</span></div><div class='row'><span class='tg'>Lactate</span> <span class='ar'>tissue hypoperfusion — high risk</span></div></div><div class='card'><h2>Biliary &amp; pancreatitis <span class='wk'>Biliary</span></h2><div class='row'><span class='tg'>Biliary colic</span> <span class='ar'>transient; elective cholecystectomy</span></div><div class='row'><span class='tg'>Cholecystitis</span> <span class='ar'>>6 h, fever, +Murphy; early cholecystectomy</span></div><div class='row'><span class='tg'>Choledocholithiasis</span> <span class='ar'>CBD stone → ERCP then cholecystectomy</span></div><div class='row'><span class='tg'>Cholangitis</span> <span class='ar'>Charcot/Reynolds → urgent ERCP</span></div><div class='row'><span class='tg'>ERCP</span> <span class='ar'>ducts, not the gallbladder</span></div><div class='row'><span class='tg'>Pancreatitis</span> <span class='ar'>supportive; lipase >3×</span></div></div><div class='card'><h2>Diverticulitis <span class='wk'>Diverticular</span></h2><div class='row'><span class='tg'>Picture</span> <span class='ar'>LLQ pain + fever</span></div><div class='row'><span class='tg'>Acute test</span> <span class='ar'>CT (not colonoscopy)</span></div><div class='row'><span class='tg'>After recovery</span> <span class='ar'>colonoscopy to exclude cancer</span></div><div class='row'><span class='tg'>Diverticulosis</span> <span class='ar'>no antibiotics/surgery</span></div><div class='row'><span class='tg'>Abscess</span> <span class='ar'>drain; perforation → OR</span></div></div><div class='card'><h2>Obstruction &amp; hernias <span class='wk'>Obstruction</span></h2><div class='row'><span class='tg'>SBO</span> <span class='ar'>adhesions / hernias</span></div><div class='row'><span class='tg'>LBO</span> <span class='ar'>cancer / volvulus</span></div><div class='row'><span class='tg'>Ogilvie</span> <span class='ar'>no transition point; neostigmine</span></div><div class='row'><span class='tg'>Operate</span> <span class='ar'>strangulation, closed loop, ischemia, free air</span></div><div class='row'><span class='tg'>Sigmoid volvulus</span> <span class='ar'>coffee-bean; endoscopic detorsion</span></div><div class='row'><span class='tg'>Strangulated hernia</span> <span class='ar'>tender, irreducible → OR</span></div></div><div class='card'><h2>Anorectal <span class='wk'>Anorectal</span></h2><div class='row'><span class='tg'>Painful bleeding</span> <span class='ar'>fissure</span></div><div class='row'><span class='tg'>Painless bleeding + prolapse</span> <span class='ar'>internal hemorrhoid</span></div><div class='row'><span class='tg'>Grades</span> <span class='ar'>I bleed, II spont reduce, III manual, IV irreducible</span></div><div class='row'><span class='tg'>Abscess</span> <span class='ar'>incision & drainage</span></div><div class='row'><span class='tg'>Fissure</span> <span class='ar'>topical nitroglycerin / CCB</span></div><div class='row'><span class='tg'>Anemia</span> <span class='ar'>never blame hemorrhoids → scope</span></div></div><div class='card'><h2>CRC &amp; perioperative <span class='wk'>CRC/Periop</span></h2><div class='row'><span class='tg'>Adenoma-carcinoma</span> <span class='ar'>sporadic majority; activity protects</span></div><div class='row'><span class='tg'>Symptoms</span> <span class='ar'>diagnostic colonoscopy (not screening)</span></div><div class='row'><span class='tg'>Staging</span> <span class='ar'>CEA + CT (+ pelvic MRI for rectal)</span></div><div class='row'><span class='tg'>3-2-1</span> <span class='ar'>Lynch → genetics referral</span></div><div class='row'><span class='tg'>Consent</span> <span class='ar'>options + risks + values</span></div><div class='row'><span class='tg'>Preop anemia</span> <span class='ar'>IV iron; VTE prophylaxis + mobilize</span></div></div></div><div class='foot'>Week 31 &middot; GI III &mdash; Surgery &amp; Acute Abdomen &middot; cram sheet &middot; cue &rarr; answer</div></div>"
+  }
+ ],
+ "drugs": [
+  {
+   "id": "rx:ceftriaxone",
+   "name": "Ceftriaxone",
+   "class": "rx:cephalosporin",
+   "facets": {
+    "use": "Intra-abdominal infection (with metronidazole)",
+    "mechanism": "3rd-gen cephalosporin (gram-negative cover)",
+    "adverse": "Allergy, C. difficile"
+   },
+   "ref": {
+    "topic": "Intra-abdominal sepsis",
+    "guide": "W31_02_Sepsis_Appendicitis.html",
+    "week": "Week 31 · GI III — Surgery & Acute Abdomen"
+   }
+  },
+  {
+   "id": "rx:metronidazole",
+   "name": "Metronidazole",
+   "class": "rx:nitroimidazole",
+   "facets": {
+    "use": "Anaerobic cover in intra-abdominal infection",
+    "mechanism": "Nitroimidazole",
+    "adverse": "Metallic taste, disulfiram reaction with alcohol, neuropathy"
+   },
+   "ref": {
+    "topic": "Intra-abdominal sepsis",
+    "guide": "W31_02_Sepsis_Appendicitis.html",
+    "week": "Week 31 · GI III — Surgery & Acute Abdomen"
+   }
+  },
+  {
+   "id": "rx:piperacillin-tazobactam",
+   "name": "Piperacillin-tazobactam",
+   "class": "rx:antipseudomonal-betalactam",
+   "facets": {
+    "use": "Severe intra-abdominal sepsis (single agent)",
+    "mechanism": "Antipseudomonal penicillin + β-lactamase inhibitor",
+    "adverse": "Allergy, C. difficile, cytopenias"
+   },
+   "ref": {
+    "topic": "Intra-abdominal sepsis",
+    "guide": "W31_02_Sepsis_Appendicitis.html",
+    "week": "Week 31 · GI III — Surgery & Acute Abdomen"
+   }
+  },
+  {
+   "id": "rx:pantoprazole",
+   "name": "Pantoprazole",
+   "class": "rx:ppi",
+   "facets": {
+    "use": "Perforated/bleeding peptic ulcer",
+    "mechanism": "Proton pump inhibitor (IV)",
+    "adverse": "Generally safe short-term",
+    "monitoring": "Treat H. pylori / stop NSAIDs after stabilization"
+   },
+   "ref": {
+    "topic": "Intra-abdominal sepsis",
+    "guide": "W31_02_Sepsis_Appendicitis.html",
+    "week": "Week 31 · GI III — Surgery & Acute Abdomen"
+   }
+  },
+  {
+   "id": "rx:morphine",
+   "name": "Morphine",
+   "class": "rx:opioid",
+   "facets": {
+    "use": "Severe acute abdominal/post-op pain",
+    "mechanism": "Opioid agonist",
+    "adverse": "Sedation, respiratory depression, constipation/ileus",
+    "monitoring": "Don't withhold analgesia to 'preserve the exam'; minimize in ileus"
+   },
+   "ref": {
+    "topic": "Acute abdomen",
+    "guide": "W31_01_Acute_Abdomen_Approach.html",
+    "week": "Week 31 · GI III — Surgery & Acute Abdomen"
+   }
+  },
+  {
+   "id": "rx:ibuprofen",
+   "name": "Ibuprofen",
+   "class": "rx:nsaid",
+   "facets": {
+    "use": "Inflammatory/biliary pain (selected)",
+    "mechanism": "NSAID (COX inhibitor)",
+    "adverse": "Renal injury, GI ulcer/bleeding",
+    "contra": "Ulcer/perforation/bleeding risk, renal failure"
+   },
+   "ref": {
+    "topic": "Acute abdomen",
+    "guide": "W31_01_Acute_Abdomen_Approach.html",
+    "week": "Week 31 · GI III — Surgery & Acute Abdomen"
+   }
+  },
+  {
+   "id": "rx:ondansetron",
+   "name": "Ondansetron",
+   "class": "rx:antiemetic",
+   "facets": {
+    "use": "Perioperative nausea/vomiting",
+    "mechanism": "5-HT3 antagonist",
+    "adverse": "QT prolongation, constipation"
+   },
+   "ref": {
+    "topic": "Acute abdomen",
+    "guide": "W31_01_Acute_Abdomen_Approach.html",
+    "week": "Week 31 · GI III — Surgery & Acute Abdomen"
+   }
+  },
+  {
+   "id": "rx:neostigmine",
+   "name": "Neostigmine",
+   "class": "rx:cholinesterase-inhibitor",
+   "facets": {
+    "use": "Acute colonic pseudo-obstruction (Ogilvie)",
+    "mechanism": "Acetylcholinesterase inhibitor — restores colonic motility",
+    "adverse": "Bradycardia, bronchospasm, salivation",
+    "contra": "Mechanical obstruction, perforation; monitor with atropine available"
+   },
+   "ref": {
+    "topic": "Bowel obstruction",
+    "guide": "W31_05_Bowel_Obstruction.html",
+    "week": "Week 31 · GI III — Surgery & Acute Abdomen"
+   }
+  },
+  {
+   "id": "rx:nitroglycerin",
+   "name": "Nitroglycerin (topical)",
+   "class": "rx:nitrate",
+   "facets": {
+    "use": "Chronic anal fissure (topical)",
+    "mechanism": "Nitrate — relaxes the internal anal sphincter, improves anoderm blood flow",
+    "adverse": "Headache, dizziness, hypotension",
+    "contra": "Concurrent PDE-5 inhibitors"
+   },
+   "ref": {
+    "topic": "Anorectal",
+    "guide": "W31_06_Anorectal.html",
+    "week": "Week 31 · GI III — Surgery & Acute Abdomen"
+   }
+  },
+  {
+   "id": "rx:diltiazem",
+   "name": "Diltiazem (topical)",
+   "class": "rx:ccb",
+   "facets": {
+    "use": "Anal fissure (topical alternative)",
+    "mechanism": "Calcium-channel blocker — relaxes internal sphincter",
+    "adverse": "Local irritation, headache"
+   },
+   "ref": {
+    "topic": "Anorectal",
+    "guide": "W31_06_Anorectal.html",
+    "week": "Week 31 · GI III — Surgery & Acute Abdomen"
+   }
+  },
+  {
+   "id": "rx:botulinum-toxin",
+   "name": "Botulinum toxin",
+   "class": "rx:neurotoxin",
+   "facets": {
+    "use": "Chronic refractory anal fissure",
+    "mechanism": "Neurotoxin — chemically relaxes the internal sphincter",
+    "adverse": "Transient incontinence to flatus"
+   },
+   "ref": {
+    "topic": "Anorectal",
+    "guide": "W31_06_Anorectal.html",
+    "week": "Week 31 · GI III — Surgery & Acute Abdomen"
+   }
+  },
+  {
+   "id": "rx:cefazolin",
+   "name": "Cefazolin",
+   "class": "rx:cephalosporin",
+   "facets": {
+    "use": "Surgical site infection prophylaxis",
+    "mechanism": "1st-gen cephalosporin (skin flora; + metronidazole for colorectal)",
+    "adverse": "Allergy",
+    "monitoring": "Give before incision; re-dose in long/bloody cases"
+   },
+   "ref": {
+    "topic": "Perioperative care",
+    "guide": "W31_08_Perioperative.html",
+    "week": "Week 31 · GI III — Surgery & Acute Abdomen"
+   }
+  },
+  {
+   "id": "rx:enoxaparin",
+   "name": "Enoxaparin (LMWH)",
+   "class": "rx:lmwh",
+   "facets": {
+    "use": "Perioperative VTE prophylaxis",
+    "mechanism": "Low-molecular-weight heparin",
+    "adverse": "Bleeding, HIT; accumulates in renal failure",
+    "contra": "Active bleeding"
+   },
+   "ref": {
+    "topic": "Perioperative care",
+    "guide": "W31_08_Perioperative.html",
+    "week": "Week 31 · GI III — Surgery & Acute Abdomen"
+   }
+  },
+  {
+   "id": "rx:iron-sucrose",
+   "name": "Iron sucrose (IV iron)",
+   "class": "rx:iv-iron",
+   "facets": {
+    "use": "Preoperative iron-deficiency anemia",
+    "mechanism": "IV iron repletion — reduces transfusion need",
+    "adverse": "Infusion reactions, hypophosphatemia",
+    "monitoring": "Evaluate the cause of anemia first"
+   },
+   "ref": {
+    "topic": "Perioperative care",
+    "guide": "W31_08_Perioperative.html",
+    "week": "Week 31 · GI III — Surgery & Acute Abdomen"
+   }
+  }
+ ]
+}

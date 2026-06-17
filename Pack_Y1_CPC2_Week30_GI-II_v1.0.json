@@ -1,0 +1,1657 @@
+{
+ "pack": "Week 30 — GI II (Diarrhea / Lower GI)",
+ "id": "wk30",
+ "formatVersion": "2.0",
+ "version": "1.0",
+ "author": "Alkarim Billawala / alkarim.billawala.ca",
+ "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
+ "created": "2026-06-16",
+ "updated": "2026-06-16",
+ "school": "UofT — Temerty Medicine",
+ "year": "Year 1",
+ "course": "CPC 2",
+ "weeks": "Week 30 · GI II — Diarrhea & Lower GI",
+ "questions": [
+  {
+   "id": "wk30_q01",
+   "sys": "GI",
+   "topic": "GI · Acute diarrhea",
+   "difficulty": "easy",
+   "stem": "A 24-year-old woman has 2 days of watery diarrhea after a buffet — 6 loose stools/day, mild cramps, no fever, no blood, no recent antibiotics. She is thirsty but not dizzy with normal vitals, and wants to reduce diarrhea before an exam. Best approach?",
+   "options": [
+    "Loperamide and oral rehydration solution",
+    "Loperamide only if stool becomes bloody",
+    "Colonoscopy before treatment",
+    "Ciprofloxacin for all acute watery diarrhea"
+   ],
+   "correct": 0,
+   "explain": "Acute <b>non-bloody</b> diarrhea without red flags is treated supportively with <b>oral rehydration</b>; <b>loperamide</b> is reasonable because invasive/bloody disease is not suspected.",
+   "guide": {
+    "f": "W30_02_Acute_Diarrhea.html",
+    "t": "2 · Non-bloody",
+    "s": "ORS ± loperamide"
+   }
+  },
+  {
+   "id": "wk30_q02",
+   "sys": "GI",
+   "topic": "GI · Bloody diarrhea",
+   "difficulty": "medium",
+   "stem": "A 30-year-old man has acute bloody diarrhea, fever, and severe cramps after undercooked chicken — 10 stools/day, feeling lightheaded. A friend offers loperamide. Best advice?",
+   "options": [
+    "Take loperamide; it shortens invasive diarrhea",
+    "Take diphenoxylate/atropine instead",
+    "Avoid anti-motility agents; focus on hydration and appropriate testing",
+    "Start prednisone immediately"
+   ],
+   "correct": 2,
+   "explain": "Bloody diarrhea with fever suggests <b>invasive/inflammatory colitis</b> &rarr; <b>avoid anti-motility agents</b> (risk of toxic megacolon / HUS), hydrate, and get stool testing with targeted therapy.",
+   "guide": {
+    "f": "W30_02_Acute_Diarrhea.html",
+    "t": "2 · Bloody",
+    "s": "no anti-motility"
+   }
+  },
+  {
+   "id": "wk30_q03",
+   "sys": "GI",
+   "topic": "GI · Celiac",
+   "difficulty": "medium",
+   "stem": "A 42-year-old woman with autoimmune hypothyroidism has fatigue, bloating, and chronic loose non-bloody stools. Hb 102, MCV 72, ferritin 2. No overt bleeding; not vegetarian. Most likely diagnosis?",
+   "options": [
+    "Lactose intolerance",
+    "Celiac disease",
+    "Ulcerative colitis",
+    "Acute viral gastroenteritis"
+   ],
+   "correct": 1,
+   "explain": "Chronic non-bloody diarrhea + <b>iron-deficiency anemia</b> + an autoimmune background points to <b>celiac disease</b>, where duodenal injury impairs iron absorption. Confirm with tTG-IgA + total IgA while still eating gluten.",
+   "guide": {
+    "f": "W30_04_Celiac.html",
+    "t": "4 · Celiac",
+    "s": "iron deficiency + autoimmune"
+   }
+  },
+  {
+   "id": "wk30_q04",
+   "sys": "GI",
+   "topic": "GI · Malabsorption",
+   "difficulty": "hard",
+   "stem": "A 28-year-old with Crohn disease has had 180 cm of distal ileum resected. Her disease is controlled on a biologic, but she now has greasy, floating, foul stools and weight loss. What is the mechanism?",
+   "options": [
+    "Impaired duodenal iron absorption",
+    "Lactase deficiency",
+    "Bile-acid depletion impairing micelle formation",
+    "Excess gastric acid"
+   ],
+   "correct": 2,
+   "explain": "A <b>large terminal-ileal resection</b> depletes the bile-acid pool faster than the liver can replace it &rarr; impaired micelle formation &rarr; fat malabsorption (<b>steatorrhea</b>). The terminal ileum also absorbs B12.",
+   "guide": {
+    "f": "W30_03_Chronic_Diarrhea_Malabsorption.html",
+    "t": "3 · Bile acids",
+    "s": "large resection → steatorrhea"
+   }
+  },
+  {
+   "id": "wk30_q05",
+   "sys": "GI",
+   "topic": "GI · IBD",
+   "difficulty": "medium",
+   "stem": "A 23-year-old man has 3 months of diarrhea, RLQ cramping, 10-lb weight loss, nocturnal stools, aphthous ulcers, anemia, high CRP, low albumin. Stool culture negative; colonoscopy shows patchy terminal-ileal and right-colon inflammation; a perianal skin tag is noted. Diagnosis?",
+   "options": [
+    "IBS-D",
+    "Ulcerative colitis",
+    "Crohn disease",
+    "Microscopic colitis"
+   ],
+   "correct": 2,
+   "explain": "<b>Crohn disease</b>: RLQ pain, weight loss, nocturnal diarrhea, anemia, high CRP, low albumin, aphthous ulcers, <b>patchy terminal-ileal/right-sided</b> disease, and <b>perianal</b> findings (skip lesions, transmural).",
+   "guide": {
+    "f": "W30_06_IBD.html",
+    "t": "6 · Crohn",
+    "s": "skip lesions + perianal"
+   }
+  },
+  {
+   "id": "wk30_q06",
+   "sys": "GI",
+   "topic": "GI · IBD drugs",
+   "difficulty": "medium",
+   "stem": "A patient with moderate-severe Crohn disease started on prednisone improves dramatically and asks to stay on it long-term to prevent relapse. Best response?",
+   "options": [
+    "Yes, prednisone is ideal for maintenance",
+    "No — prednisone is for induction, not maintenance, due to serious long-term toxicity",
+    "Yes, but only with loperamide",
+    "Prednisone is only used in UC"
+   ],
+   "correct": 1,
+   "explain": "<b>Corticosteroids induce remission but are not for maintenance</b> — long-term toxicity (osteoporosis, adrenal suppression, hyperglycemia, infection, avascular necrosis). Transition to a steroid-sparing maintenance agent.",
+   "guide": {
+    "f": "W30_07_IBD_Pharmacology.html",
+    "t": "7 · Steroids",
+    "s": "induction not maintenance"
+   }
+  },
+  {
+   "id": "wk30_q07",
+   "sys": "GI",
+   "topic": "GI · Overflow",
+   "difficulty": "medium",
+   "stem": "An 82-year-old nursing-home resident with dementia and chronic constipation (on iron) develops 'diarrhea' and fecal incontinence, with poor appetite and occasional vomiting. Most likely cause?",
+   "options": [
+    "New-onset IBS-D",
+    "Overflow diarrhea from fecal impaction",
+    "Celiac disease",
+    "Traveler's diarrhea"
+   ],
+   "correct": 1,
+   "explain": "An older adult with a constipation history and new 'diarrhea'/incontinence has <b>fecal impaction with overflow</b> until proven otherwise (iron worsens constipation). Examine the rectum and disimpact — don't give anti-diarrheals.",
+   "guide": {
+    "f": "W30_08_Constipation_Incontinence.html",
+    "t": "8 · Overflow",
+    "s": "impaction in elders"
+   }
+  },
+  {
+   "id": "wk30_q08",
+   "sys": "GI",
+   "topic": "GI · IBS",
+   "difficulty": "easy",
+   "stem": "A 35-year-old woman has years of recurrent abdominal pain associated with changes in stool frequency and form, sometimes relieved by defecation. No bleeding, anemia, nocturnal symptoms, weight loss, or family history of IBD/CRC. CBC and CRP normal. Most likely diagnosis?",
+   "options": [
+    "IBS",
+    "Crohn disease",
+    "Ischemic colitis",
+    "Acute invasive bacterial colitis"
+   ],
+   "correct": 0,
+   "explain": "Chronic pain associated with <b>defecation and stool changes</b>, no alarm features, and normal inflammatory testing fits <b>IBS</b> (Rome IV). Limited testing (CBC, CRP/calprotectin, celiac serology) is reasonable.",
+   "guide": {
+    "f": "W30_05_IBS.html",
+    "t": "5 · Rome IV",
+    "s": "pain + stool change, no alarms"
+   }
+  },
+  {
+   "id": "wk30_q09",
+   "sys": "GI",
+   "topic": "GI · STEC",
+   "difficulty": "hard",
+   "stem": "A 7-year-old develops bloody diarrhea after a petting-zoo visit. Stool suggests Shiga-toxin E. coli (O157). Which management principle is most important?",
+   "options": [
+    "Give loperamide to reduce stool frequency",
+    "Give empiric antibiotics promptly",
+    "Avoid antibiotics and anti-motility agents; hydrate and monitor for hemolytic-uremic syndrome",
+    "Start prednisone"
+   ],
+   "correct": 2,
+   "explain": "In suspected <b>STEC/O157</b>, both <b>antibiotics and anti-motility agents may increase the risk of hemolytic-uremic syndrome</b>. Manage supportively with hydration and monitor renal function, hemoglobin, and platelets.",
+   "guide": {
+    "f": "W30_02_Acute_Diarrhea.html",
+    "t": "2 · Bloody",
+    "s": "STEC → no abx/anti-motility"
+   }
+  },
+  {
+   "id": "wk30_q10",
+   "sys": "GI",
+   "topic": "GI · Calprotectin",
+   "difficulty": "medium",
+   "stem": "A 26-year-old with chronic non-bloody diarrhea has a normal CBC and CRP. Which single stool test best separates likely inflammatory bowel disease from a functional disorder?",
+   "options": [
+    "Stool osmotic gap",
+    "Fecal calprotectin",
+    "Stool culture",
+    "Fecal occult blood"
+   ],
+   "correct": 1,
+   "explain": "<b>Fecal calprotectin</b> reflects neutrophilic mucosal inflammation and is the key gatekeeper separating <b>inflammatory</b> (IBD) from <b>functional</b> (IBS) disease, guiding the need for colonoscopy.",
+   "guide": {
+    "f": "W30_03_Chronic_Diarrhea_Malabsorption.html",
+    "t": "3 · Workup",
+    "s": "calprotectin gatekeeper"
+   }
+  },
+  {
+   "id": "wk30_q11",
+   "sys": "GI",
+   "topic": "GI · Celiac testing",
+   "difficulty": "medium",
+   "stem": "A patient suspected of celiac disease has already started a gluten-free diet on her own and feels better. What is the most appropriate advice regarding testing?",
+   "options": [
+    "Test serology now; the diet won't affect it",
+    "Resume a gluten-containing diet (gluten challenge) before serology and biopsy",
+    "Diagnose celiac clinically without testing",
+    "Order HLA typing to confirm the diagnosis"
+   ],
+   "correct": 1,
+   "explain": "Serology (tTG-IgA) and histology <b>normalize on a gluten-free diet</b>, so she must undergo a <b>gluten challenge</b> before testing for an accurate diagnosis. (HLA-DQ2/DQ8 can only exclude, not confirm.)",
+   "guide": {
+    "f": "W30_04_Celiac.html",
+    "t": "4 · Diagnosis",
+    "s": "test while eating gluten"
+   }
+  },
+  {
+   "id": "wk30_q12",
+   "sys": "GI",
+   "topic": "GI · UC complication",
+   "difficulty": "medium",
+   "stem": "A patient with severe ulcerative colitis develops abdominal distension, fever, tachycardia, and a dilated colon on x-ray. Which complication is most concerning?",
+   "options": [
+    "Toxic megacolon",
+    "Bile-acid diarrhea",
+    "Peptic stricture",
+    "Gastroparesis"
+   ],
+   "correct": 0,
+   "explain": "Severe UC can progress to <b>toxic megacolon</b> (colonic dilation + systemic toxicity), a surgical emergency. Avoid anti-motility/opioid agents, which can precipitate it. Colectomy is curative for refractory/complicated colitis.",
+   "guide": {
+    "f": "W30_06_IBD.html",
+    "t": "6 · UC",
+    "s": "toxic megacolon"
+   }
+  },
+  {
+   "id": "wk30_q13",
+   "sys": "GI",
+   "topic": "GI · Biologic screening",
+   "difficulty": "medium",
+   "stem": "Before starting infliximab for Crohn disease, which screening is essential?",
+   "options": [
+    "Screen for latent tuberculosis and hepatitis B",
+    "Order a gastric emptying study",
+    "Check serum gastrin",
+    "No screening is needed"
+   ],
+   "correct": 0,
+   "explain": "Anti-TNF biologics reactivate latent infections, so <b>screen for tuberculosis and hepatitis B</b> (and update vaccinations) before starting. Live vaccines are contraindicated during immunosuppression.",
+   "guide": {
+    "f": "W30_07_IBD_Pharmacology.html",
+    "t": "7 · Biologics",
+    "s": "screen TB/HBV"
+   }
+  },
+  {
+   "id": "wk30_q14",
+   "sys": "GI",
+   "topic": "GI · IBS-C",
+   "difficulty": "medium",
+   "stem": "A woman with IBS-C has not responded to fiber and PEG. Which agent specifically increases intestinal fluid secretion for constipation?",
+   "options": [
+    "Loperamide",
+    "Linaclotide",
+    "Cholestyramine",
+    "Ondansetron"
+   ],
+   "correct": 1,
+   "explain": "<b>Linaclotide</b> (a guanylate cyclase-C agonist secretagogue) increases intestinal fluid secretion and transit — used in IBS-C and chronic constipation. Loperamide would worsen constipation.",
+   "guide": {
+    "f": "W30_08_Constipation_Incontinence.html",
+    "t": "8 · Secretagogues",
+    "s": "linaclotide"
+   }
+  },
+  {
+   "id": "wk30_q15",
+   "sys": "GI",
+   "topic": "GI · Bile-acid diarrhea",
+   "difficulty": "hard",
+   "stem": "A patient with a prior limited ileal resection has chronic watery diarrhea that persists with fasting and improves with a bile-acid binder trial. What is the mechanism and treatment?",
+   "options": [
+    "Osmotic diarrhea; lactose avoidance",
+    "Secretory bile-acid diarrhea; cholestyramine",
+    "Inflammatory colitis; mesalamine",
+    "Fatty diarrhea; pancreatic enzymes"
+   ],
+   "correct": 1,
+   "explain": "A <b>smaller</b> ileal resection spills bile acids into the colon, stimulating secretion &rarr; <b>secretory bile-acid diarrhea</b> (persists with fasting). A bile-acid sequestrant (<b>cholestyramine</b>) is both diagnostic and therapeutic.",
+   "guide": {
+    "f": "W30_03_Chronic_Diarrhea_Malabsorption.html",
+    "t": "3 · Bile acids",
+    "s": "cholestyramine"
+   }
+  },
+  {
+   "id": "wk30_q16",
+   "sys": "GI",
+   "topic": "GI · Opioid constipation",
+   "difficulty": "medium",
+   "stem": "A patient on chronic opioids for cancer pain has refractory constipation despite osmotic laxatives. Which agent specifically targets the mechanism?",
+   "options": [
+    "Loperamide",
+    "Naloxegol (a peripheral opioid antagonist)",
+    "Linaclotide",
+    "Senna alone"
+   ],
+   "correct": 1,
+   "explain": "<b>Naloxegol</b> (and methylnaltrexone) are <b>peripherally-acting mu-opioid antagonists (PAMORAs)</b> that block gut opioid receptors without reversing central analgesia — targeted treatment for opioid-induced constipation.",
+   "guide": {
+    "f": "W30_08_Constipation_Incontinence.html",
+    "t": "8 · OIC",
+    "s": "PAMORA"
+   }
+  },
+  {
+   "id": "wk30_q17",
+   "sys": "GI",
+   "topic": "GI · UC vs Crohn",
+   "difficulty": "easy",
+   "stem": "Which feature is characteristic of ulcerative colitis rather than Crohn disease?",
+   "options": [
+    "Skip lesions and transmural inflammation",
+    "Continuous colonic inflammation starting at the rectum",
+    "Perianal fistulae",
+    "Terminal-ileal disease with strictures"
+   ],
+   "correct": 1,
+   "explain": "<b>UC</b> is continuous, mucosal, and begins in the rectum extending proximally within the colon. Skip lesions, transmural inflammation, perianal disease, and terminal-ileal involvement are Crohn features.",
+   "guide": {
+    "f": "W30_06_IBD.html",
+    "t": "6 · Comparison",
+    "s": "continuous from rectum"
+   }
+  },
+  {
+   "id": "wk30_q18",
+   "sys": "GI",
+   "topic": "GI · Secondary constipation",
+   "difficulty": "medium",
+   "stem": "A 60-year-old develops new constipation. Which combination of findings should prompt a search for a secondary cause rather than starting laxatives alone?",
+   "options": [
+    "Mild symptoms relieved by fiber",
+    "Hypothyroidism, hypercalcemia, or new opioid use",
+    "A normal abdominal exam",
+    "Long-standing stable symptoms"
+   ],
+   "correct": 1,
+   "explain": "Constipation can be <b>secondary</b> to hypothyroidism, hypercalcemia, diabetes, neurologic disease, and drugs (opioids, iron, anticholinergics, CCBs). New constipation with these clues (or alarm features) warrants a workup.",
+   "guide": {
+    "f": "W30_08_Constipation_Incontinence.html",
+    "t": "8 · Secondary causes",
+    "s": "exclude before laxatives"
+   }
+  },
+  {
+   "id": "wk30_q19",
+   "sys": "GI",
+   "topic": "GI · Osmotic vs secretory",
+   "difficulty": "medium",
+   "stem": "A patient's large-volume watery diarrhea continues unchanged during a 48-hour fast. Which mechanism does this suggest?",
+   "options": [
+    "Osmotic diarrhea",
+    "Secretory diarrhea",
+    "Fatty diarrhea",
+    "Overflow diarrhea"
+   ],
+   "correct": 1,
+   "explain": "<b>Secretory</b> diarrhea persists despite fasting (driven by active secretion — enterotoxins, bile acids, neuroendocrine tumours). <b>Osmotic</b> diarrhea improves with fasting because the offending solute is removed.",
+   "guide": {
+    "f": "W30_01_Diarrhea_Approach.html",
+    "t": "1 · Mechanisms",
+    "s": "fasting test"
+   }
+  },
+  {
+   "id": "wk30_q20",
+   "sys": "GI",
+   "topic": "GI · 5-ASA",
+   "difficulty": "easy",
+   "stem": "Mesalamine (5-ASA) is most useful in which setting?",
+   "options": [
+    "Mild-to-moderate ulcerative colitis",
+    "Maintenance of Crohn disease",
+    "Acute STEC infection",
+    "Opioid-induced constipation"
+   ],
+   "correct": 0,
+   "explain": "<b>5-ASA (mesalamine)</b> is mainly effective in <b>mild-to-moderate ulcerative colitis</b> (induction and maintenance); it has little role in Crohn disease.",
+   "guide": {
+    "f": "W30_07_IBD_Pharmacology.html",
+    "t": "7 · 5-ASA",
+    "s": "UC drug"
+   }
+  }
+ ],
+ "cards": [
+  {
+   "id": "wk30_c01",
+   "sys": "GI",
+   "topic": "Diarrhea classification",
+   "type": "qa",
+   "guide": {
+    "f": "W30_01_Diarrhea_Approach.html",
+    "t": "1 · Framework",
+    "s": "two features"
+   },
+   "prompt": "What two features classify diarrhea, and what mimics must be excluded?",
+   "answer": "Duration (acute <4 weeks vs chronic >4 weeks) and visible blood. Exclude mimics: overflow diarrhea from constipation, fecal incontinence, and hyperdefecation (thyrotoxicosis)."
+  },
+  {
+   "id": "wk30_c02",
+   "sys": "GI",
+   "topic": "Mechanisms",
+   "type": "qa",
+   "guide": {
+    "f": "W30_01_Diarrhea_Approach.html",
+    "t": "1 · Mechanisms",
+    "s": "osmotic vs secretory"
+   },
+   "prompt": "How do osmotic and secretory diarrhea differ on fasting?",
+   "answer": "Osmotic improves with fasting (offending solute removed); secretory persists despite fasting (active secretion, large-volume watery stool)."
+  },
+  {
+   "id": "wk30_c03",
+   "sys": "GI",
+   "topic": "Acute non-bloody",
+   "type": "qa",
+   "guide": {
+    "f": "W30_02_Acute_Diarrhea.html",
+    "t": "2 · Non-bloody",
+    "s": "management"
+   },
+   "prompt": "How is acute non-bloody diarrhea managed?",
+   "answer": "Oral rehydration first-line (IV if severe), diet as tolerated, and loperamide/diphenoxylate is reasonable since invasive disease isn't suspected. Investigate only if severe, persistent, immunocompromised, or outbreak/antibiotic-related."
+  },
+  {
+   "id": "wk30_c04",
+   "sys": "GI",
+   "topic": "Bloody diarrhea rule",
+   "type": "qa",
+   "guide": {
+    "f": "W30_02_Acute_Diarrhea.html",
+    "t": "2 · Bloody",
+    "s": "anti-motility"
+   },
+   "prompt": "Why avoid anti-motility agents in bloody diarrhea?",
+   "answer": "Bloody diarrhea implies invasive/inflammatory colitis; slowing motility can worsen toxic megacolon and, in Shiga-toxin E. coli, increase hemolytic-uremic syndrome risk."
+  },
+  {
+   "id": "wk30_c05",
+   "sys": "GI",
+   "topic": "Absorption map",
+   "type": "qa",
+   "guide": {
+    "f": "W30_03_Chronic_Diarrhea_Malabsorption.html",
+    "t": "3 · Regions",
+    "s": "who absorbs what"
+   },
+   "prompt": "What does the duodenum vs terminal ileum absorb, and the disease link?",
+   "answer": "Duodenum: iron and calcium (celiac → iron-deficiency anemia, bone disease). Terminal ileum: B12 and bile acids (Crohn/resection → B12 deficiency, bile-acid diarrhea or steatorrhea)."
+  },
+  {
+   "id": "wk30_c06",
+   "sys": "GI",
+   "topic": "Calprotectin",
+   "type": "qa",
+   "guide": {
+    "f": "W30_03_Chronic_Diarrhea_Malabsorption.html",
+    "t": "3 · Workup",
+    "s": "calprotectin"
+   },
+   "prompt": "What does fecal calprotectin distinguish?",
+   "answer": "Inflammatory disease (IBD) from functional disease (IBS) — it reflects neutrophilic mucosal inflammation and guides the need for colonoscopy."
+  },
+  {
+   "id": "wk30_c07",
+   "sys": "GI",
+   "topic": "Celiac presentation",
+   "type": "qa",
+   "guide": {
+    "f": "W30_04_Celiac.html",
+    "t": "4 · Celiac",
+    "s": "duodenum"
+   },
+   "prompt": "Why does celiac disease cause iron-deficiency anemia?",
+   "answer": "Gluten-triggered injury concentrates in the duodenum, where iron (and calcium) are preferentially absorbed, so iron deficiency anemia and bone disease are common presentations."
+  },
+  {
+   "id": "wk30_c08",
+   "sys": "GI",
+   "topic": "Celiac testing",
+   "type": "qa",
+   "guide": {
+    "f": "W30_04_Celiac.html",
+    "t": "4 · Diagnosis",
+    "s": "gluten"
+   },
+   "prompt": "What is the celiac testing pitfall?",
+   "answer": "Serology (tTG-IgA + total IgA) and biopsy normalize on a gluten-free diet — test while the patient is still eating gluten, or do a gluten challenge first."
+  },
+  {
+   "id": "wk30_c09",
+   "sys": "GI",
+   "topic": "IBS Rome",
+   "type": "qa",
+   "guide": {
+    "f": "W30_05_IBS.html",
+    "t": "5 · Rome IV",
+    "s": "criteria"
+   },
+   "prompt": "State the simplified Rome IV criteria for IBS.",
+   "answer": "Recurrent abdominal pain associated with ≥2 of: relation to defecation, change in stool frequency, change in stool form — over ≥6 months, with no alarm features."
+  },
+  {
+   "id": "wk30_c10",
+   "sys": "GI",
+   "topic": "IBS alarms",
+   "type": "qa",
+   "guide": {
+    "f": "W30_05_IBS.html",
+    "t": "5 · Alarms",
+    "s": "exclude IBS"
+   },
+   "prompt": "Which alarm features argue against IBS?",
+   "answer": "Rectal bleeding, anemia, weight loss, nocturnal symptoms, elevated inflammatory markers, family history of IBD/colorectal cancer, or persistent symptoms despite therapy."
+  },
+  {
+   "id": "wk30_c11",
+   "sys": "GI",
+   "topic": "Crohn vs UC",
+   "type": "qa",
+   "guide": {
+    "f": "W30_06_IBD.html",
+    "t": "6 · Comparison",
+    "s": "key differences"
+   },
+   "prompt": "Contrast Crohn disease and ulcerative colitis anatomically.",
+   "answer": "Crohn: mouth-to-anus, skip lesions, transmural, often terminal ileum/right colon, perianal disease, fistulas. UC: colon only, continuous from the rectum, mucosal, bloody diarrhea, toxic-megacolon/cancer risk."
+  },
+  {
+   "id": "wk30_c12",
+   "sys": "GI",
+   "topic": "Extraintestinal",
+   "type": "qa",
+   "guide": {
+    "f": "W30_06_IBD.html",
+    "t": "6 · EIM",
+    "s": "manifestations"
+   },
+   "prompt": "Name extraintestinal manifestations of IBD.",
+   "answer": "Aphthous ulcers, episcleritis/uveitis, erythema nodosum, pyoderma gangrenosum, peripheral/axial arthritis, ankylosing spondylitis, and primary sclerosing cholangitis."
+  },
+  {
+   "id": "wk30_c13",
+   "sys": "GI",
+   "topic": "Steroids in IBD",
+   "type": "qa",
+   "guide": {
+    "f": "W30_07_IBD_Pharmacology.html",
+    "t": "7 · Steroids",
+    "s": "induction only"
+   },
+   "prompt": "What is the role of corticosteroids in IBD?",
+   "answer": "Induction of remission only — not maintenance — because of serious long-term toxicity (osteoporosis, adrenal suppression, hyperglycemia, infection, avascular necrosis). Plan steroid-sparing maintenance."
+  },
+  {
+   "id": "wk30_c14",
+   "sys": "GI",
+   "topic": "Biologic screening",
+   "type": "qa",
+   "guide": {
+    "f": "W30_07_IBD_Pharmacology.html",
+    "t": "7 · Biologics",
+    "s": "screen"
+   },
+   "prompt": "What must be screened before an anti-TNF biologic?",
+   "answer": "Latent tuberculosis and hepatitis B (reactivation risk); update vaccinations; avoid live vaccines during immunosuppression."
+  },
+  {
+   "id": "wk30_c15",
+   "sys": "GI",
+   "topic": "Overflow",
+   "type": "qa",
+   "guide": {
+    "f": "W30_08_Constipation_Incontinence.html",
+    "t": "8 · Overflow",
+    "s": "elders"
+   },
+   "prompt": "What does new 'diarrhea' and incontinence in a constipated older adult suggest?",
+   "answer": "Fecal impaction with overflow diarrhea until proven otherwise — examine the rectum, disimpact, and avoid anti-diarrheals (iron worsens it)."
+  },
+  {
+   "id": "wk30_c16",
+   "sys": "GI",
+   "topic": "Constipation secondary",
+   "type": "qa",
+   "guide": {
+    "f": "W30_08_Constipation_Incontinence.html",
+    "t": "8 · Secondary",
+    "s": "causes"
+   },
+   "prompt": "List secondary causes of constipation to exclude.",
+   "answer": "Opioids, iron, anticholinergics, calcium-channel blockers, hypothyroidism, hypercalcemia, diabetes, Parkinson disease, spinal-cord disease, obstruction, and defecatory disorders."
+  },
+  {
+   "id": "wk30_c17",
+   "sys": "GI",
+   "topic": "Fasting test",
+   "type": "mcq",
+   "guide": {
+    "f": "W30_01_Diarrhea_Approach.html",
+    "t": "1 · Mechanisms",
+    "s": "fasting"
+   },
+   "prompt": "Diarrhea that stops with fasting is most likely:",
+   "options": [
+    "Secretory",
+    "Osmotic",
+    "Inflammatory",
+    "Fatty"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk30_c18",
+   "sys": "GI",
+   "topic": "Loperamide caution",
+   "type": "mcq",
+   "guide": {
+    "f": "W30_02_Acute_Diarrhea.html",
+    "t": "2 · Anti-motility",
+    "s": "avoid"
+   },
+   "prompt": "Loperamide should be avoided in:",
+   "options": [
+    "Mild watery diarrhea",
+    "Bloody diarrhea / suspected invasive colitis",
+    "Traveler's diarrhea prevention",
+    "IBS-D"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk30_c19",
+   "sys": "GI",
+   "topic": "Celiac serology",
+   "type": "mcq",
+   "guide": {
+    "f": "W30_04_Celiac.html",
+    "t": "4 · Diagnosis",
+    "s": "first test"
+   },
+   "prompt": "The first-line serologic test for celiac disease is:",
+   "options": [
+    "Anti-gliadin IgG",
+    "Tissue transglutaminase IgA + total IgA",
+    "HLA-DQ2/DQ8",
+    "Fecal calprotectin"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk30_c20",
+   "sys": "GI",
+   "topic": "Terminal ileum",
+   "type": "mcq",
+   "guide": {
+    "f": "W30_03_Chronic_Diarrhea_Malabsorption.html",
+    "t": "3 · Regions",
+    "s": "B12"
+   },
+   "prompt": "Disease of the terminal ileum classically causes deficiency of:",
+   "options": [
+    "Iron",
+    "Folate",
+    "Vitamin B12",
+    "Vitamin C"
+   ],
+   "correct": 2
+  },
+  {
+   "id": "wk30_c21",
+   "sys": "GI",
+   "topic": "IBS-C drug",
+   "type": "mcq",
+   "guide": {
+    "f": "W30_08_Constipation_Incontinence.html",
+    "t": "8 · Secretagogues",
+    "s": "IBS-C"
+   },
+   "prompt": "Which agent increases intestinal secretion for IBS-C?",
+   "options": [
+    "Loperamide",
+    "Linaclotide",
+    "Cholestyramine",
+    "Codeine"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk30_c22",
+   "sys": "GI",
+   "topic": "5-ASA",
+   "type": "mcq",
+   "guide": {
+    "f": "W30_07_IBD_Pharmacology.html",
+    "t": "7 · 5-ASA",
+    "s": "best use"
+   },
+   "prompt": "Mesalamine is most effective in:",
+   "options": [
+    "Crohn maintenance",
+    "Mild-moderate ulcerative colitis",
+    "Acute STEC",
+    "Opioid constipation"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk30_c23",
+   "sys": "GI",
+   "topic": "UC complication",
+   "type": "mcq",
+   "guide": {
+    "f": "W30_06_IBD.html",
+    "t": "6 · UC",
+    "s": "complication"
+   },
+   "prompt": "A feared complication of severe ulcerative colitis is:",
+   "options": [
+    "Toxic megacolon",
+    "Perianal fistula",
+    "Gallstones",
+    "Peptic stricture"
+   ],
+   "correct": 0
+  },
+  {
+   "id": "wk30_c24",
+   "sys": "GI",
+   "topic": "STEC management",
+   "type": "mcq",
+   "guide": {
+    "f": "W30_02_Acute_Diarrhea.html",
+    "t": "2 · STEC",
+    "s": "HUS"
+   },
+   "prompt": "In suspected Shiga-toxin E. coli, you should avoid:",
+   "options": [
+    "Oral hydration",
+    "Antibiotics and anti-motility agents",
+    "Monitoring renal function",
+    "Stool testing"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk30_c25",
+   "sys": "GI",
+   "topic": "OIC",
+   "type": "mcq",
+   "guide": {
+    "f": "W30_08_Constipation_Incontinence.html",
+    "t": "8 · OIC",
+    "s": "PAMORA"
+   },
+   "prompt": "Opioid-induced constipation is specifically treated with:",
+   "options": [
+    "Loperamide",
+    "Naloxegol",
+    "Linaclotide",
+    "Bismuth"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk30_c26",
+   "sys": "GI",
+   "topic": "Bloody causes",
+   "type": "multi",
+   "guide": {
+    "f": "W30_02_Acute_Diarrhea.html",
+    "t": "2 · Bloody",
+    "s": "causes"
+   },
+   "prompt": "Select causes of acute bloody diarrhea:",
+   "options": [
+    "Shigella",
+    "Campylobacter",
+    "Shiga-toxin E. coli",
+    "Ischemic colitis",
+    "Rotavirus"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk30_c27",
+   "sys": "GI",
+   "topic": "Crohn features",
+   "type": "multi",
+   "guide": {
+    "f": "W30_06_IBD.html",
+    "t": "6 · Crohn",
+    "s": "features"
+   },
+   "prompt": "Select features typical of Crohn disease:",
+   "options": [
+    "Skip lesions",
+    "Transmural inflammation",
+    "Perianal fistulae",
+    "Strictures",
+    "Continuous rectal involvement"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk30_c28",
+   "sys": "GI",
+   "topic": "IBD biologics",
+   "type": "multi",
+   "guide": {
+    "f": "W30_07_IBD_Pharmacology.html",
+    "t": "7 · Biologics",
+    "s": "classes"
+   },
+   "prompt": "Select biologic/advanced therapies used in IBD:",
+   "options": [
+    "Infliximab (anti-TNF)",
+    "Vedolizumab (anti-integrin)",
+    "Ustekinumab (anti-IL-12/23)",
+    "Adalimumab (anti-TNF)",
+    "Loperamide"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk30_c29",
+   "sys": "GI",
+   "topic": "Chronic diarrhea workup",
+   "type": "multi",
+   "guide": {
+    "f": "W30_03_Chronic_Diarrhea_Malabsorption.html",
+    "t": "3 · Workup",
+    "s": "tests"
+   },
+   "prompt": "Select appropriate baseline tests for chronic diarrhea:",
+   "options": [
+    "CBC and ferritin",
+    "Celiac serology (tTG-IgA + total IgA)",
+    "Fecal calprotectin",
+    "TSH",
+    "Random gastrin in all"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk30_c30",
+   "sys": "GI",
+   "topic": "Diarrhea mimics",
+   "type": "multi",
+   "guide": {
+    "f": "W30_01_Diarrhea_Approach.html",
+    "t": "1 · Mimics",
+    "s": "exclude"
+   },
+   "prompt": "Select mimics to exclude before diagnosing true diarrhea:",
+   "options": [
+    "Overflow from constipation",
+    "Fecal incontinence",
+    "Hyperdefecation (thyrotoxicosis)",
+    "Osmotic diarrhea"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "id": "wk30_c31",
+   "sys": "GI",
+   "topic": "Duration cutoff",
+   "type": "cloze",
+   "guide": {
+    "f": "W30_01_Diarrhea_Approach.html",
+    "t": "1 · Framework",
+    "s": "cutoff"
+   },
+   "text": "Diarrhea is acute if < {{4}} weeks and chronic if > {{4}} weeks.",
+   "explain": "Combined with bloody/non-bloody to form four categories."
+  },
+  {
+   "id": "wk30_c32",
+   "sys": "GI",
+   "topic": "Celiac test",
+   "type": "cloze",
+   "guide": {
+    "f": "W30_04_Celiac.html",
+    "t": "4 · Diagnosis",
+    "s": "serology"
+   },
+   "text": "Celiac first-line serology is {{tissue transglutaminase IgA}} with {{total IgA}}, tested while eating {{gluten}}.",
+   "explain": "Total IgA catches selective IgA deficiency (false-negative tTG)."
+  },
+  {
+   "id": "wk30_c33",
+   "sys": "GI",
+   "topic": "IBD location",
+   "type": "cloze",
+   "guide": {
+    "f": "W30_06_IBD.html",
+    "t": "6 · Comparison",
+    "s": "anatomy"
+   },
+   "text": "Ulcerative colitis is {{continuous}} and {{colon}}-only from the rectum; Crohn has {{skip}} lesions and is transmural.",
+   "explain": "Depth and distribution drive complications and surgery."
+  },
+  {
+   "id": "wk30_c34",
+   "sys": "GI",
+   "topic": "Steroid role",
+   "type": "cloze",
+   "guide": {
+    "f": "W30_07_IBD_Pharmacology.html",
+    "t": "7 · Steroids",
+    "s": "role"
+   },
+   "text": "Corticosteroids are used for {{induction}} of remission in IBD, not {{maintenance}}.",
+   "explain": "Long-term steroid toxicity drives steroid-sparing maintenance."
+  },
+  {
+   "id": "wk30_c35",
+   "sys": "GI",
+   "topic": "ORS mechanism",
+   "type": "cloze",
+   "guide": {
+    "f": "W30_03_Chronic_Diarrhea_Malabsorption.html",
+    "t": "3 · Jejunum",
+    "s": "ORS"
+   },
+   "text": "Oral rehydration works through {{sodium-glucose}} cotransport in the {{jejunum}}.",
+   "explain": "Glucose drives sodium and water absorption even in secretory states."
+  },
+  {
+   "id": "wk30_c36",
+   "sys": "GI",
+   "topic": "Diarrhea approach",
+   "type": "order",
+   "guide": {
+    "f": "W30_01_Diarrhea_Approach.html",
+    "t": "1 · Approach",
+    "s": "steps"
+   },
+   "prompt": "Order the approach to diarrhea:",
+   "items": [
+    "Exclude mimics (overflow, incontinence, hyperdefecation)",
+    "Classify: acute vs chronic, bloody vs non-bloody",
+    "Assess hydration/severity",
+    "Targeted testing and treatment by category"
+   ]
+  },
+  {
+   "id": "wk30_c37",
+   "sys": "GI",
+   "topic": "Celiac pathway",
+   "type": "order",
+   "guide": {
+    "f": "W30_04_Celiac.html",
+    "t": "4 · Pathway",
+    "s": "diagnose"
+   },
+   "prompt": "Order the celiac diagnostic pathway:",
+   "items": [
+    "Suspect (iron deficiency, autoimmune, diarrhea)",
+    "Check tTG-IgA + total IgA while eating gluten",
+    "Duodenal biopsy if indicated",
+    "Lifelong gluten-free diet + replace deficiencies"
+   ]
+  },
+  {
+   "id": "wk30_c38",
+   "sys": "GI",
+   "topic": "IBD treatment logic",
+   "type": "order",
+   "guide": {
+    "f": "W30_07_IBD_Pharmacology.html",
+    "t": "7 · Logic",
+    "s": "induction→maintenance"
+   },
+   "prompt": "Order the IBD treatment logic:",
+   "items": [
+    "Induce remission (steroids / biologic)",
+    "Screen TB + hepatitis B before immunosuppression",
+    "Start steroid-sparing maintenance (immunomodulator/biologic)",
+    "Surgery for complications (curative colectomy in UC)"
+   ]
+  },
+  {
+   "id": "wk30_c39",
+   "sys": "GI",
+   "topic": "Mechanism → example",
+   "type": "match",
+   "guide": {
+    "f": "W30_01_Diarrhea_Approach.html",
+    "t": "1 · Mechanisms",
+    "s": "examples"
+   },
+   "prompt": "Match the diarrhea mechanism to an example:",
+   "pairs": [
+    [
+     "Osmotic",
+     "Lactose malabsorption"
+    ],
+    [
+     "Secretory",
+     "Enterotoxin / bile-acid diarrhea"
+    ],
+    [
+     "Inflammatory",
+     "IBD / invasive infection"
+    ],
+    [
+     "Fatty",
+     "Celiac / chronic pancreatitis"
+    ]
+   ]
+  },
+  {
+   "id": "wk30_c40",
+   "sys": "GI",
+   "topic": "Drug → use",
+   "type": "match",
+   "guide": {
+    "f": "W30_07_IBD_Pharmacology.html",
+    "t": "7 · Drugs",
+    "s": "IBD classes"
+   },
+   "prompt": "Match the IBD drug to its role:",
+   "pairs": [
+    [
+     "Prednisone",
+     "Induction only"
+    ],
+    [
+     "Mesalamine",
+     "Mild-moderate UC"
+    ],
+    [
+     "Azathioprine",
+     "Steroid-sparing maintenance"
+    ],
+    [
+     "Infliximab",
+     "Anti-TNF (screen TB/HBV)"
+    ],
+    [
+     "Vedolizumab",
+     "Gut-selective anti-integrin"
+    ]
+   ]
+  },
+  {
+   "id": "wk30_c41",
+   "sys": "GI",
+   "topic": "Region → deficiency",
+   "type": "match",
+   "guide": {
+    "f": "W30_03_Chronic_Diarrhea_Malabsorption.html",
+    "t": "3 · Regions",
+    "s": "deficiency"
+   },
+   "prompt": "Match the bowel region to its deficiency when diseased:",
+   "pairs": [
+    [
+     "Duodenum",
+     "Iron / calcium"
+    ],
+    [
+     "Terminal ileum",
+     "B12 / bile acids"
+    ],
+    [
+     "Exocrine pancreas",
+     "Fat (steatorrhea)"
+    ],
+    [
+     "Jejunum",
+     "Macronutrients / water"
+    ]
+   ]
+  },
+  {
+   "id": "wk30_c42",
+   "sys": "GI",
+   "topic": "Laxative → class",
+   "type": "match",
+   "guide": {
+    "f": "W30_08_Constipation_Incontinence.html",
+    "t": "8 · Laxatives",
+    "s": "classes"
+   },
+   "prompt": "Match the laxative to its class:",
+   "pairs": [
+    [
+     "Psyllium",
+     "Bulk-forming"
+    ],
+    [
+     "PEG 3350",
+     "Osmotic"
+    ],
+    [
+     "Senna",
+     "Stimulant"
+    ],
+    [
+     "Linaclotide",
+     "Secretagogue"
+    ],
+    [
+     "Prucalopride",
+     "5-HT4 prokinetic"
+    ]
+   ]
+  },
+  {
+   "id": "wk30_c43",
+   "sys": "GI",
+   "topic": "Microscopic colitis",
+   "type": "qa",
+   "guide": {
+    "f": "W30_03_Chronic_Diarrhea_Malabsorption.html",
+    "t": "3 · Chronic",
+    "s": "watery"
+   },
+   "prompt": "What is microscopic colitis and how is it diagnosed?",
+   "answer": "Chronic watery non-bloody diarrhea (often older women, sometimes drug-associated) with a normal-appearing colonoscopy but inflammation on biopsy — so biopsies are needed even when the mucosa looks normal."
+  },
+  {
+   "id": "wk30_c44",
+   "sys": "GI",
+   "topic": "Traveler's diarrhea",
+   "type": "qa",
+   "guide": {
+    "f": "W30_02_Acute_Diarrhea.html",
+    "t": "2 · Acute",
+    "s": "traveler's"
+   },
+   "prompt": "How is moderate-severe traveler's diarrhea managed?",
+   "answer": "Hydration plus a short antibiotic course (azithromycin is a common choice; fluoroquinolones where appropriate); loperamide can be added if non-bloody and afebrile."
+  },
+  {
+   "id": "wk30_c45",
+   "sys": "GI",
+   "topic": "Bile-acid diarrhea",
+   "type": "qa",
+   "guide": {
+    "f": "W30_03_Chronic_Diarrhea_Malabsorption.html",
+    "t": "3 · Bile acids",
+    "s": "resection size"
+   },
+   "prompt": "How does ileal resection size change the diarrhea type?",
+   "answer": "A smaller resection spills bile acids into the colon → secretory bile-acid diarrhea (treat with cholestyramine). A large resection (>~100 cm) depletes the bile-acid pool → steatorrhea."
+  },
+  {
+   "id": "wk30_c46",
+   "sys": "GI",
+   "topic": "Low-FODMAP",
+   "type": "qa",
+   "guide": {
+    "f": "W30_05_IBS.html",
+    "t": "5 · Management",
+    "s": "diet"
+   },
+   "prompt": "What dietary intervention helps many IBS patients?",
+   "answer": "A trial of a low-FODMAP diet (reducing fermentable carbohydrates), ideally guided by a dietitian, alongside reassurance, exercise, and stress management."
+  },
+  {
+   "id": "wk30_c47",
+   "sys": "GI",
+   "topic": "Low albumin IBD",
+   "type": "qa",
+   "guide": {
+    "f": "W30_06_IBD.html",
+    "t": "6 · Markers",
+    "s": "albumin"
+   },
+   "prompt": "Why may albumin be low in active IBD?",
+   "answer": "Severe inflammation (negative acute-phase reactant), poor intake, and protein loss through inflamed bowel all lower albumin — a marker of disease severity."
+  },
+  {
+   "id": "wk30_c48",
+   "sys": "GI",
+   "topic": "Gastrocolic reflex",
+   "type": "qa",
+   "guide": {
+    "f": "W30_08_Constipation_Incontinence.html",
+    "t": "8 · Non-drug",
+    "s": "routine"
+   },
+   "prompt": "How is the gastrocolic reflex used in constipation management?",
+   "answer": "Encourage a toileting routine shortly after meals, when the gastrocolic reflex naturally increases colonic motility — combined with fiber, fluids, and exercise."
+  },
+  {
+   "id": "wk30_c49",
+   "sys": "GI",
+   "topic": "C. difficile",
+   "type": "qa",
+   "guide": {
+    "f": "W30_02_Acute_Diarrhea.html",
+    "t": "2 · Hospitalized",
+    "s": "C diff"
+   },
+   "prompt": "When should C. difficile be suspected in diarrhea?",
+   "answer": "With recent antibiotics or hospitalization (and in healthcare settings); avoid anti-motility agents in severe disease, test stool for toxin/PCR, and treat with oral vancomycin or fidaxomicin."
+  },
+  {
+   "id": "wk30_c50",
+   "sys": "GI",
+   "topic": "Pain neuromodulator",
+   "type": "qa",
+   "guide": {
+    "f": "W30_05_IBS.html",
+    "t": "5 · Pain",
+    "s": "neuromodulator"
+   },
+   "prompt": "Why use a low-dose tricyclic in pain-predominant IBS?",
+   "answer": "Tricyclics act as neuromodulators for visceral hypersensitivity/gut-brain dysfunction, reducing pain at doses lower than antidepressant doses (and slowing transit, useful in IBS-D)."
+  }
+ ],
+ "guides": [
+  {
+   "file": "W30_01_Diarrhea_Approach.html",
+   "title": "Week 30 · 1 Approach to Diarrhea & Mechanisms",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Approach to Diarrhea &amp; Mechanisms</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Framework</div><h1>Approach to Diarrhea &amp; Mechanisms</h1></div><div class='r'>Week 30 &middot; GI II &mdash; Diarrhea &amp; Lower GI<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The two questions that organize every diarrhea (duration, blood), the mimics to exclude, and the four mechanistic types.</p>\n<h2>Two questions classify it</h2>\n<p>Classify by <b>duration</b> (acute &lt;4 weeks, chronic &gt;4 weeks) and <b>visible blood</b>. That gives four buckets: acute non-bloody, acute bloody, chronic non-bloody, chronic bloody.</p>\n<div class='band warn'><div class='t'>Exclude the mimics first</div>\nBefore labelling true diarrhea, rule out: <b>overflow diarrhea</b> from constipation/fecal impaction (classic in frail older adults), <b>fecal incontinence</b>, and <b>hyperdefecation</b> (e.g. thyrotoxicosis). These change management entirely.</div>\n<h2>The four mechanisms</h2>\n<table>\n<tr><th>Type</th><th>Mechanism</th><th>Clue</th><th>Examples</th></tr>\n<tr><td><b>Osmotic</b></td><td>Unabsorbed solute draws water in</td><td><b>Improves with fasting</b>; diet-related</td><td>Carbohydrate malabsorption, laxatives</td></tr>\n<tr><td><b>Secretory</b></td><td>Increased secretion / decreased absorption</td><td><b>Persists despite fasting</b>; large-volume watery</td><td>Enterotoxins, bile-acid diarrhea, endocrine</td></tr>\n<tr><td><b>Inflammatory</b></td><td>Mucosal injury</td><td><b>Blood, fever, pain</b>; fecal WBC/calprotectin, &uarr;CRP</td><td>IBD, invasive infection, ischemic colitis</td></tr>\n<tr><td><b>Fatty (steatorrhea)</b></td><td>Fat malabsorption/maldigestion</td><td>Greasy, floating, foul, hard to flush</td><td>Celiac, chronic pancreatitis, ileal resection</td></tr>\n</table>\n<div class='key'>Acute vs chronic and bloody vs non-bloody first. Osmotic stops with fasting; secretory doesn't. Blood/fever/pain = inflammatory &rarr; don't reach for loperamide.</div>\n</div>"
+  },
+  {
+   "file": "W30_02_Acute_Diarrhea.html",
+   "title": "Week 30 · 2 Acute Diarrhea: Non-Bloody & Bloody",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Acute Diarrhea: Non-Bloody &amp; Bloody</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Acute</div><h1>Acute Diarrhea: Non-Bloody &amp; Bloody</h1></div><div class='r'>Week 30 &middot; GI II &mdash; Diarrhea &amp; Lower GI<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Supportive care for the common watery case, the invasive-colitis red flags, and the cardinal rule about anti-motility drugs.</p>\n<h2>Acute non-bloody (usually self-limited)</h2>\n<p>Most are infectious (viral/toxin) and self-limited. In hospitalized patients also consider <b>C. difficile</b>, drug-induced diarrhea, tube feeds, and overflow from impaction. Investigate (stool testing) only with severe/persistent disease, immunocompromise, outbreak/public-health concern, or recent antibiotics.</p>\n<ul>\n<li><b>Rehydrate:</b> oral rehydration solution first-line; IV fluids if severe or can't tolerate oral.</li>\n<li>Advance diet as tolerated; temporarily limit dairy, very sugary/high-fat foods, roughage, alcohol, coffee if they worsen symptoms.</li>\n<li><b>Anti-motility</b> (loperamide, diphenoxylate/atropine) is reasonable for <b>non-bloody, non-invasive</b> diarrhea. Bismuth subsalicylate has anti-secretory/anti-motility/antimicrobial effects (darkens stool).</li>\n</ul>\n<h2>Acute bloody = inflammatory/invasive until proven otherwise</h2>\n<p>Causes: <b>Shigella, Salmonella, Campylobacter, Yersinia</b>, invasive or <b>Shiga-toxin E. coli (STEC/O157)</b>, <i>Entamoeba histolytica</i> (exposure history), <b>ischemic colitis</b>, and first-presentation <b>IBD</b>.</p>\n<div class='band warn'><div class='t'>Two rules for bloody diarrhea</div>\n<b>1) Avoid anti-motility agents</b> (loperamide/diphenoxylate) in bloody diarrhea or suspected invasive colitis &mdash; they can worsen toxic megacolon and, with STEC, increase <b>hemolytic-uremic syndrome</b> risk. <b>2) Avoid empiric antibiotics in suspected STEC</b> (may increase HUS). Get a <b>stool culture/PCR</b>; targeted therapy when indicated. <b>Azithromycin</b> is common for moderate-severe traveler's diarrhea.</div>\n<div class='key'>Watery + no red flags &rarr; ORS &plusmn; loperamide. Bloody/febrile &rarr; hydrate, culture, no anti-motility; suspect STEC (don't give antibiotics or anti-motility, watch for HUS).</div>\n</div>"
+  },
+  {
+   "file": "W30_03_Chronic_Diarrhea_Malabsorption.html",
+   "title": "Week 30 · 3 Chronic Diarrhea & Malabsorption",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Chronic Diarrhea &amp; Malabsorption</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Chronic</div><h1>Chronic Diarrhea &amp; Malabsorption</h1></div><div class='r'>Week 30 &middot; GI II &mdash; Diarrhea &amp; Lower GI<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The broad differential, the baseline workup including fecal calprotectin, and the absorption map that predicts each deficiency.</p>\n<h2>Differential</h2>\n<p>Broad: carbohydrate malabsorption, <b>IBS</b>, <b>celiac</b>, Crohn, microscopic colitis, <b>bile-acid malabsorption</b>, chronic infection (<i>Giardia</i>), medications, and overflow.</p>\n<h2>Baseline workup</h2>\n<ul>\n<li>CBC, electrolytes, renal function, albumin, ferritin, CRP, &plusmn; B12.</li>\n<li><b>Celiac serology</b>: tissue transglutaminase IgA <b>with total IgA</b> (to catch IgA deficiency).</li>\n<li>TSH/fT4 if hyperdefecation/thyroid disease suspected.</li>\n<li><b>Fecal calprotectin</b> separates <b>inflammatory</b> (IBD) from <b>functional</b> (IBS) disease &mdash; a key gatekeeper test.</li>\n</ul>\n<h2>Where things are absorbed (predicts the deficiency)</h2>\n<table>\n<tr><th>Region / factor</th><th>Absorbs</th><th>If lost</th></tr>\n<tr><td><b>Duodenum</b></td><td>Iron, calcium</td><td>Celiac &rarr; iron-deficiency anemia, bone disease</td></tr>\n<tr><td><b>Jejunum</b></td><td>Macronutrients, Na, water</td><td>ORS works via Na-glucose cotransport here</td></tr>\n<tr><td><b>Terminal ileum</b></td><td><b>B12, bile acids</b></td><td>Crohn/resection &rarr; B12 deficiency, bile-acid diarrhea or steatorrhea</td></tr>\n<tr><td><b>Exocrine pancreas</b></td><td>Enzymes + bicarbonate</td><td>Chronic pancreatitis &rarr; maldigestion/steatorrhea</td></tr>\n</table>\n<div class='band warn'><div class='t'>Bile-acid handling</div>\nA <b>large terminal-ileal resection</b> (&gt;~100 cm) depletes the bile-acid pool &rarr; impaired micelle formation &rarr; <b>steatorrhea</b>. A <b>smaller</b> resection spills bile acids into the colon &rarr; secretory <b>bile-acid diarrhea</b> (treat with a sequestrant like cholestyramine).</div>\n<div class='key'>Fecal calprotectin triages inflammatory vs functional. Duodenum = iron/calcium (celiac), terminal ileum = B12/bile acids (Crohn). Greasy floating stool = fat malabsorption.</div>\n</div>"
+  },
+  {
+   "file": "W30_04_Celiac.html",
+   "title": "Week 30 · 4 Celiac Disease",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Celiac Disease</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Gluten</div><h1>Celiac Disease</h1></div><div class='r'>Week 30 &middot; GI II &mdash; Diarrhea &amp; Lower GI<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Why the duodenum drives the presentation, the test-while-eating-gluten rule, and lifelong management.</p>\n<h2>What it is</h2>\n<p>Immune-mediated small-intestinal injury triggered by <b>gluten</b>, concentrated in the <b>duodenum</b> &mdash; which is where iron and calcium are preferentially absorbed. So the high-yield presentations are <b>iron-deficiency anemia</b>, osteopenia/osteoporosis, fatigue, bloating, and chronic non-bloody diarrhea (which may be subtle or absent).</p>\n<h2>Associations</h2>\n<ul>\n<li>Other autoimmune disease (<b>autoimmune thyroid</b>), <b>type 1 diabetes</b>, family history, dermatitis herpetiformis.</li>\n</ul>\n<h2>Diagnosis</h2>\n<div class='band warn'><div class='t'>Test while eating gluten</div>\nFirst-line serology is <b>tissue transglutaminase IgA + total IgA</b>; confirm with <b>duodenal biopsy</b> (villous atrophy) when indicated. <b>The patient must still be eating gluten</b> &mdash; starting a gluten-free diet before testing normalizes serology and histology and obscures the diagnosis.</div>\n<h2>Beyond the gut</h2>\n<ul>\n<li><b>Dermatitis herpetiformis</b> &mdash; intensely itchy grouped vesicles on extensor surfaces; the skin manifestation of celiac (responds to a gluten-free diet &plusmn; dapsone).</li>\n<li>Other clues: transaminitis, recurrent aphthous ulcers, infertility/recurrent miscarriage, peripheral neuropathy, and hyposplenism.</li>\n</ul>\n<h2>Management</h2>\n<ul>\n<li><b>Lifelong gluten-free diet</b> (the only treatment), ideally with dietitian support.</li>\n<li>Assess and replace deficiencies: iron, calcium, vitamin D, folate, B12; consider a baseline bone-density scan.</li>\n<li>Pneumococcal vaccination if hyposplenic.</li>\n<li><b>Monitor</b> symptoms and a falling tTG-IgA as a marker of dietary adherence.</li>\n</ul>\n<div class='band warn'><div class='t'>Persistent symptoms despite a gluten-free diet</div>\nThe commonest cause is <b>ongoing gluten exposure</b> (hidden sources, cross-contamination) &mdash; recheck adherence first. Consider co-existing conditions (lactose intolerance, microscopic colitis, pancreatic insufficiency). True <b>refractory celiac disease</b> is rare and raises concern for <b>enteropathy-associated T-cell lymphoma (EATL)</b> &mdash; refer.</div>\n<div class='key'>Iron-deficiency anemia + an autoimmune background (thyroid, T1DM) + bloating = think celiac. Order tTG-IgA with total IgA, don't go gluten-free before testing, and if symptoms persist on the diet, suspect hidden gluten before rare refractory disease/EATL.</div>\n</div>"
+  },
+  {
+   "file": "W30_05_IBS.html",
+   "title": "Week 30 · 5 Irritable Bowel Syndrome (IBS)",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Irritable Bowel Syndrome (IBS)</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Gut-brain</div><h1>Irritable Bowel Syndrome (IBS)</h1></div><div class='r'>Week 30 &middot; GI II &mdash; Diarrhea &amp; Lower GI<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The Rome-IV definition, the alarm features that exclude it, and subtype-directed therapy.</p>\n<h2>Definition</h2>\n<p>A <b>disorder of gut-brain interaction</b>: recurrent abdominal <b>pain</b> (Rome IV: &ge;1 day/week over the last 3 months, onset &ge;6 months) associated with &ge;2 of: relation to <b>defecation</b>, change in stool <b>frequency</b>, change in stool <b>form</b>. Subtypes: IBS-D, IBS-C, IBS-M.</p>\n<div class='band warn'><div class='t'>Alarm features argue against IBS</div>\nRectal bleeding, anemia, unintentional weight loss, <b>nocturnal symptoms</b>, elevated inflammatory markers, family history of IBD/colorectal cancer, or persistent symptoms despite therapy &rarr; investigate for organic disease instead.</div>\n<h2>Reasonable limited testing (no alarms)</h2>\n<p>CBC, CRP or <b>fecal calprotectin</b>, and <b>celiac serology</b> (especially non-constipation subtypes). Extensive testing isn't needed when the picture fits and alarms are absent.</p>\n<h2>Management</h2>\n<table>\n<tr><th>Subtype</th><th>Options</th></tr>\n<tr><td>All</td><td>Education/reassurance, <b>low-FODMAP</b> trial, exercise, sleep/stress management</td></tr>\n<tr><td><b>IBS-D</b></td><td>Loperamide for frequency; bile-acid binder if bile-acid diarrhea; antispasmodics; <b>rifaximin</b> or neuromodulators in selected cases</td></tr>\n<tr><td><b>IBS-C</b></td><td>Soluble fiber, PEG, secretagogues (<b>linaclotide</b>, plecanatide, lubiprostone)</td></tr>\n<tr><td>Pain-predominant</td><td>Antispasmodics, peppermint oil, low-dose <b>tricyclic</b> or other neuromodulators</td></tr>\n</table>\n<div class='key'>IBS = chronic pain tied to defecation/stool changes with NO alarm features and normal calprotectin. Treat by subtype; loperamide helps the diarrhea but not the pain (use a neuromodulator for that).</div>\n</div>"
+  },
+  {
+   "file": "W30_06_IBD.html",
+   "title": "Week 30 · 6 Inflammatory Bowel Disease: Crohn vs UC",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Inflammatory Bowel Disease: Crohn vs UC</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>IBD</div><h1>Inflammatory Bowel Disease: Crohn vs UC</h1></div><div class='r'>Week 30 &middot; GI II &mdash; Diarrhea &amp; Lower GI<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The anatomy and depth that separate Crohn from ulcerative colitis, the red flags, and the extraintestinal clues.</p>\n<h2>Crohn vs ulcerative colitis</h2>\n<table>\n<tr><th>Feature</th><th>Crohn disease</th><th>Ulcerative colitis</th></tr>\n<tr><td>Location</td><td>Mouth&rarr;anus; often <b>terminal ileum / right colon</b></td><td><b>Colon only</b>; starts in rectum</td></tr>\n<tr><td>Pattern</td><td><b>Skip lesions</b></td><td>Continuous</td></tr>\n<tr><td>Depth</td><td><b>Transmural</b></td><td>Mucosal/submucosal</td></tr>\n<tr><td>Stool</td><td>Chronic non-bloody common</td><td>Chronic <b>bloody</b> common; urgency/tenesmus</td></tr>\n<tr><td>Perianal disease</td><td>Fistulae, abscesses, tags, strictures</td><td>Uncommon</td></tr>\n<tr><td>Complications</td><td>Strictures, fistulas, abscesses, malabsorption</td><td><b>Toxic megacolon</b>, colorectal cancer risk</td></tr>\n<tr><td>Surgery</td><td>Not curative (recurs)</td><td>Colectomy can be <b>curative</b> for colitis</td></tr>\n</table>\n<h2>Red flags &amp; markers</h2>\n<p>Weight loss, <b>nocturnal diarrhea</b>, anemia, blood, fever, perianal disease, &uarr;CRP, <b>low albumin</b>, family history. Stool WBC/RBC, fecal calprotectin, and CRP suggest inflammation but aren't diagnostic alone. Diagnosis is by <b>colonoscopy with biopsies</b> (&plusmn; cross-sectional imaging for Crohn).</p>\n<h2>Extraintestinal manifestations</h2>\n<ul>\n<li>Aphthous ulcers, <b>episcleritis/uveitis</b>, <b>erythema nodosum</b>, pyoderma gangrenosum, peripheral/axial arthritis, ankylosing spondylitis, and <b>primary sclerosing cholangitis</b> (especially UC).</li>\n</ul>\n<div class='key'>Crohn = skip lesions, transmural, terminal ileum/right colon, perianal disease, fistulas. UC = continuous, mucosal, rectum-upward, bloody, toxic-megacolon/cancer risk, curable by colectomy.</div>\n</div>"
+  },
+  {
+   "file": "W30_07_IBD_Pharmacology.html",
+   "title": "Week 30 · 7 IBD Pharmacology",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>IBD Pharmacology</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>IBD drugs</div><h1>IBD Pharmacology</h1></div><div class='r'>Week 30 &middot; GI II &mdash; Diarrhea &amp; Lower GI<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The induction-vs-maintenance logic, the biologic classes, and the safety screening each one needs.</p>\n<h2>Induction vs maintenance</h2>\n<div class='band warn'><div class='t'>Steroids induce, they don't maintain</div>\n<b>Corticosteroids</b> (prednisone; IV in severe disease) rapidly <b>induce remission</b> but are <b>not</b> for maintenance &mdash; long-term toxicity (osteoporosis, adrenal suppression, hyperglycemia, infection, Cushingoid changes, avascular necrosis). Plan a steroid-sparing maintenance agent from the start.</div>\n<h2>The agents</h2>\n<table>\n<tr><th>Class</th><th>Examples</th><th>Role / cautions</th></tr>\n<tr><td><b>5-ASA</b></td><td>Mesalamine (oral/topical)</td><td>Mainly mild-moderate <b>UC</b>; little benefit in Crohn</td></tr>\n<tr><td><b>Immunomodulators</b></td><td>Azathioprine/6-MP; methotrexate (Crohn)</td><td>Steroid-sparing maintenance; myelosuppression, hepatotoxicity; <b>check TPMT</b>; MTX teratogenic</td></tr>\n<tr><td><b>Anti-TNF biologics</b></td><td>Infliximab, adalimumab, certolizumab</td><td>Induction + maintenance; fistulizing disease; <b>screen TB and hepatitis B</b> first; infection risk</td></tr>\n<tr><td><b>Anti-integrin</b></td><td>Vedolizumab</td><td>Gut-selective &rarr; less systemic immunosuppression</td></tr>\n<tr><td><b>Anti-IL (12/23, 23)</b></td><td>Ustekinumab; risankizumab</td><td>Moderate-severe disease; infection risk</td></tr>\n</table>\n<h2>Practical points</h2>\n<ul>\n<li><b>Before any biologic/immunomodulator:</b> screen for latent <b>TB</b> and <b>hepatitis B</b>, update vaccinations (live vaccines while immunosuppressed are contraindicated).</li>\n<li>UC refractory to medical therapy &rarr; colectomy (curative for colitis); Crohn surgery is for complications and is not curative.</li>\n</ul>\n<div class='key'>Steroids = induction only. 5-ASA is a UC drug. Anti-TNF agents need TB/hepatitis-B screening. Vedolizumab is gut-selective. Choose maintenance early to get patients off steroids.</div>\n</div>"
+  },
+  {
+   "file": "W30_08_Constipation_Incontinence.html",
+   "title": "Week 30 · 8 Constipation & Fecal Incontinence",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Constipation &amp; Fecal Incontinence</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Lower tract</div><h1>Constipation &amp; Fecal Incontinence</h1></div><div class='r'>Week 30 &middot; GI II &mdash; Diarrhea &amp; Lower GI<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The secondary causes to exclude, the laxative classes by mechanism, and the overflow-diarrhea trap in older adults.</p>\n<h2>Constipation</h2>\n<p>Reduced frequency, hard stools, straining, incomplete evacuation, or manual maneuvers. Separate <b>primary</b> from <b>secondary</b> causes.</p>\n<div class='band warn'><div class='t'>Secondary causes to exclude</div>\nDrugs (<b>opioids</b>, iron, anticholinergics, calcium-channel blockers), <b>hypothyroidism, hypercalcemia</b>, diabetes, Parkinson disease, spinal-cord disease, structural obstruction, and defecatory disorders. Alarm features (bleeding, weight loss, anemia, new onset in older age) &rarr; investigate for colorectal cancer.</div>\n<h2>Laxatives by class</h2>\n<table>\n<tr><th>Class</th><th>Examples</th><th>Note</th></tr>\n<tr><td>Bulk-forming</td><td>Psyllium</td><td>Increase slowly (bloating)</td></tr>\n<tr><td>Osmotic</td><td><b>PEG 3350</b>, lactulose, magnesium</td><td>Magnesium &rarr; diarrhea; caution in renal disease</td></tr>\n<tr><td>Stimulant</td><td>Senna, bisacodyl</td><td>Stimulate enteric motility</td></tr>\n<tr><td>Secretagogues</td><td>Linaclotide, lubiprostone</td><td>Chronic constipation / IBS-C</td></tr>\n<tr><td>Prokinetic</td><td>Prucalopride (5-HT4 agonist)</td><td>Refractory slow transit</td></tr>\n<tr><td>Opioid-induced (OIC)</td><td>Naloxegol, methylnaltrexone</td><td>Peripheral opioid antagonists</td></tr>\n</table>\n<p>Non-drug: gradual fiber + fluids, exercise, a toileting routine using the <b>gastrocolic reflex</b> after meals.</p>\n<h2>Fecal incontinence</h2>\n<ul>\n<li>Involuntary stool passage (age &gt;4); common in older adults / long-term care.</li>\n<li>Mechanisms: sphincter weakness (obstetric/pelvic injury, diabetes, scleroderma), impaired rectal storage/sensation (dementia, radiation), or a bowel disturbance.</li>\n</ul>\n<div class='band warn'><div class='t'>The overflow trap</div>\nAn older adult with <b>new \"diarrhea\" + incontinence and a constipation history</b> = <b>fecal impaction with overflow</b> until proven otherwise (iron worsens it). Do a rectal exam &mdash; disimpact, don't give loperamide.</div>\n<div class='key'>Always screen constipation for secondary causes (opioids, hypothyroid, hypercalcemia). New diarrhea/incontinence in a constipated elder = overflow from impaction.</div>\n</div>"
+  },
+  {
+   "file": "W30_09_Cram_Sheet.html",
+   "title": "Week 30 · 9 Cram Sheet",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Week 30 · 9 Cram Sheet</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.35;-webkit-font-smoothing:antialiased}\n.page{max-width:1180px;margin:0 auto;padding:18px 20px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:8px;margin-bottom:12px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:26px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.emerg{border:1.5px solid var(--hi);border-radius:6px;background:rgba(0,0,0,.02);padding:9px 12px;margin-bottom:13px}\n.emerg .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--hi);font-weight:600;margin-bottom:5px}\n.emerg .items{columns:3;column-gap:22px;font-size:12px;line-height:1.42}\n.emerg .items div{break-inside:avoid;margin-bottom:3px}\n.emerg b{color:var(--hi)}\n.cols{column-count:4;column-gap:14px}\n@media(max-width:1040px){.cols{column-count:3}}\n@media(max-width:760px){.cols{column-count:2}}\n@media(max-width:520px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(0,0,0,.02);padding:8px 9px 7px;margin:0 0 11px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;padding-bottom:4px;border-bottom:1.5px solid var(--line);color:var(--accent);display:flex;justify-content:space-between;align-items:baseline;gap:6px}\n.card h2 .wk{color:var(--soft);font-size:8.5px;font-weight:500;letter-spacing:.06em;white-space:nowrap}\n.row{margin:0 0 3.5px;font-size:11.5px;line-height:1.32}\n.row .tg{font-weight:600;color:var(--ink)}\n.row .ar{color:var(--soft)}\n.row .ar::before{content:\"\\2192 \";color:var(--accent);font-weight:600}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:5px 0}\n.dnm{color:var(--hi);font-weight:700}\n.foot{margin-top:10px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:landscape;margin:9mm}body{font-size:8.4px}.page{max-width:none;padding:0}.cols{column-count:4;column-gap:8px}.emerg .items{columns:3}.card{margin-bottom:6px}.head h1{font-size:19px}}\n</style><div class='page'><div class='head'><div><div class='k'>Night-Before High-Yield</div><h1>GI II — Diarrhea &amp; Lower GI</h1></div><div class='r'>Week 30 &middot; GI II &mdash; Diarrhea &amp; Lower GI<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><div class='emerg'><div class='t'>★ Do-not-miss &middot; first-step reflexes</div><div class='items'><div><b>Bloody diarrhea / suspected invasive colitis</b> &rarr; NO anti-motility agents; hydrate + stool culture</div><div><b>Suspected Shiga-toxin E. coli (O157)</b> &rarr; avoid antibiotics AND anti-motility; monitor for hemolytic-uremic syndrome</div><div><b>Severe UC with colonic dilation + toxicity</b> &rarr; toxic megacolon &mdash; surgical emergency; stop opioids/anti-motility</div><div><b>Older adult, constipation history, new 'diarrhea'/incontinence</b> &rarr; fecal impaction with overflow (rectal exam, disimpact)</div><div><b>Don't go gluten-free before celiac testing</b> &rarr; serology/biopsy normalize and obscure the diagnosis</div><div><b>Prednisone in IBD</b> &rarr; induction only, never maintenance</div></div></div><div class='cols'><div class='card'><h2>Approach <span class='wk'>Framework</span></h2><div class='row'><span class='tg'>Classify</span> <span class='ar'>acute/chronic + bloody/non-bloody</span></div><div class='row'><span class='tg'>Mimics</span> <span class='ar'>overflow, incontinence, hyperdefecation</span></div><div class='row'><span class='tg'>Osmotic</span> <span class='ar'>improves with fasting</span></div><div class='row'><span class='tg'>Secretory</span> <span class='ar'>persists with fasting</span></div><div class='row'><span class='tg'>Inflammatory</span> <span class='ar'>blood/fever/pain, ↑calprotectin/CRP</span></div><div class='row'><span class='tg'>Fatty</span> <span class='ar'>greasy, floating, foul</span></div></div><div class='card'><h2>Acute diarrhea <span class='wk'>Acute</span></h2><div class='row'><span class='tg'>Non-bloody</span> <span class='ar'>ORS ± loperamide; usually self-limited</span></div><div class='row'><span class='tg'>Bloody</span> <span class='ar'>invasive — no anti-motility; culture</span></div><div class='row'><span class='tg'>STEC/O157</span> <span class='ar'>no abx, no anti-motility; HUS risk</span></div><div class='row'><span class='tg'>Traveler's</span> <span class='ar'>azithromycin if moderate-severe</span></div><div class='row'><span class='tg'>Hospitalized</span> <span class='ar'>think C. difficile</span></div></div><div class='card'><h2>Chronic / malabsorption <span class='wk'>Chronic</span></h2><div class='row'><span class='tg'>Calprotectin</span> <span class='ar'>inflammatory vs functional</span></div><div class='row'><span class='tg'>Duodenum</span> <span class='ar'>iron/calcium (celiac)</span></div><div class='row'><span class='tg'>Terminal ileum</span> <span class='ar'>B12 / bile acids (Crohn)</span></div><div class='row'><span class='tg'>Small resection</span> <span class='ar'>bile-acid diarrhea → cholestyramine</span></div><div class='row'><span class='tg'>Large resection</span> <span class='ar'>steatorrhea</span></div></div><div class='card'><h2>Celiac <span class='wk'>Celiac</span></h2><div class='row'><span class='tg'>Presentation</span> <span class='ar'>iron-deficiency anemia, bloating, bone disease</span></div><div class='row'><span class='tg'>Associations</span> <span class='ar'>autoimmune thyroid, T1DM</span></div><div class='row'><span class='tg'>Test</span> <span class='ar'>tTG-IgA + total IgA, ON gluten</span></div><div class='row'><span class='tg'>Confirm</span> <span class='ar'>duodenal biopsy (villous atrophy)</span></div><div class='row'><span class='tg'>Treat</span> <span class='ar'>lifelong gluten-free; replace iron/Ca/D/folate/B12</span></div></div><div class='card'><h2>IBS <span class='wk'>IBS</span></h2><div class='row'><span class='tg'>Rome IV</span> <span class='ar'>pain + ≥2 stool-related features, no alarms</span></div><div class='row'><span class='tg'>Alarms</span> <span class='ar'>bleed, anemia, weight loss, nocturnal</span></div><div class='row'><span class='tg'>Diet</span> <span class='ar'>low-FODMAP trial</span></div><div class='row'><span class='tg'>IBS-D</span> <span class='ar'>loperamide, bile-acid binder, rifaximin</span></div><div class='row'><span class='tg'>IBS-C</span> <span class='ar'>fiber, PEG, linaclotide</span></div><div class='row'><span class='tg'>Pain</span> <span class='ar'>neuromodulator (low-dose TCA)</span></div></div><div class='card'><h2>IBD <span class='wk'>IBD</span></h2><div class='row'><span class='tg'>Crohn</span> <span class='ar'>skip, transmural, ileum/right colon, perianal</span></div><div class='row'><span class='tg'>UC</span> <span class='ar'>continuous, mucosal, rectum-up, bloody</span></div><div class='row'><span class='tg'>UC complication</span> <span class='ar'>toxic megacolon, CRC risk</span></div><div class='row'><span class='tg'>EIM</span> <span class='ar'>uveitis, erythema nodosum, PSC, arthritis</span></div><div class='row'><span class='tg'>Steroids</span> <span class='ar'>induction only</span></div><div class='row'><span class='tg'>Anti-TNF</span> <span class='ar'>screen TB + hepatitis B</span></div></div><div class='card'><h2>Constipation / incontinence <span class='wk'>Lower</span></h2><div class='row'><span class='tg'>Secondary</span> <span class='ar'>opioids, iron, hypothyroid, hypercalcemia</span></div><div class='row'><span class='tg'>Bulk/osmotic/stimulant</span> <span class='ar'>psyllium / PEG / senna</span></div><div class='row'><span class='tg'>Secretagogue</span> <span class='ar'>linaclotide</span></div><div class='row'><span class='tg'>Prokinetic</span> <span class='ar'>prucalopride (5-HT4)</span></div><div class='row'><span class='tg'>OIC</span> <span class='ar'>naloxegol / methylnaltrexone</span></div><div class='row'><span class='tg'>Overflow</span> <span class='ar'>impaction in elders → disimpact</span></div></div></div><div class='foot'>Week 30 &middot; GI II &mdash; Diarrhea &amp; Lower GI &middot; cram sheet &middot; cue &rarr; answer</div></div>"
+  }
+ ],
+ "drugs": [
+  {
+   "id": "rx:loperamide",
+   "name": "Loperamide",
+   "class": "rx:opioid-antimotility",
+   "facets": {
+    "use": "Symptomatic non-bloody diarrhea; IBS-D",
+    "mechanism": "Peripheral opioid-receptor agonist — slows peristalsis",
+    "adverse": "Constipation; QT at high dose",
+    "contra": "Bloody diarrhea, fever, invasive colitis, severe C. difficile"
+   },
+   "ref": {
+    "topic": "Acute diarrhea",
+    "guide": "W30_02_Acute_Diarrhea.html",
+    "week": "Week 30 · GI II — Diarrhea & Lower GI"
+   }
+  },
+  {
+   "id": "rx:diphenoxylate-atropine",
+   "name": "Diphenoxylate/atropine",
+   "class": "rx:opioid-antimotility",
+   "facets": {
+    "use": "Antimotility (alternative to loperamide)",
+    "mechanism": "Opioid agonist + atropine (deterrent)",
+    "adverse": "CNS/anticholinergic effects",
+    "contra": "Invasive/bloody diarrhea"
+   },
+   "ref": {
+    "topic": "Acute diarrhea",
+    "guide": "W30_02_Acute_Diarrhea.html",
+    "week": "Week 30 · GI II — Diarrhea & Lower GI"
+   }
+  },
+  {
+   "id": "rx:bismuth",
+   "name": "Bismuth subsalicylate",
+   "class": "rx:bismuth",
+   "facets": {
+    "use": "Mild acute diarrhea; traveler's diarrhea",
+    "mechanism": "Anti-secretory, anti-motility, antimicrobial",
+    "adverse": "Black stool/tongue; salicylate cautions"
+   },
+   "ref": {
+    "topic": "Acute diarrhea",
+    "guide": "W30_02_Acute_Diarrhea.html",
+    "week": "Week 30 · GI II — Diarrhea & Lower GI"
+   }
+  },
+  {
+   "id": "rx:azithromycin",
+   "name": "Azithromycin",
+   "class": "rx:macrolide",
+   "facets": {
+    "use": "Moderate-severe traveler's / invasive diarrhea",
+    "mechanism": "Macrolide antibiotic",
+    "adverse": "QT prolongation, GI upset"
+   },
+   "ref": {
+    "topic": "Acute diarrhea",
+    "guide": "W30_02_Acute_Diarrhea.html",
+    "week": "Week 30 · GI II — Diarrhea & Lower GI"
+   }
+  },
+  {
+   "id": "rx:ciprofloxacin",
+   "name": "Ciprofloxacin",
+   "class": "rx:fluoroquinolone",
+   "facets": {
+    "use": "Selected bacterial diarrhea (not STEC)",
+    "mechanism": "Fluoroquinolone",
+    "adverse": "Tendinopathy, QT, C. difficile"
+   },
+   "ref": {
+    "topic": "Acute diarrhea",
+    "guide": "W30_02_Acute_Diarrhea.html",
+    "week": "Week 30 · GI II — Diarrhea & Lower GI"
+   }
+  },
+  {
+   "id": "rx:cholestyramine",
+   "name": "Cholestyramine",
+   "class": "rx:bile-acid-sequestrant",
+   "facets": {
+    "use": "Bile-acid diarrhea",
+    "mechanism": "Bile-acid sequestrant — binds malabsorbed bile acids",
+    "adverse": "Bloating, constipation; binds other drugs (separate dosing)"
+   },
+   "ref": {
+    "topic": "Chronic diarrhea",
+    "guide": "W30_03_Chronic_Diarrhea_Malabsorption.html",
+    "week": "Week 30 · GI II — Diarrhea & Lower GI"
+   }
+  },
+  {
+   "id": "rx:prednisone",
+   "name": "Prednisone",
+   "class": "rx:corticosteroid",
+   "facets": {
+    "use": "IBD induction (and flares)",
+    "mechanism": "Corticosteroid",
+    "adverse": "Osteoporosis, hyperglycemia, infection, adrenal suppression",
+    "monitoring": "Induction only — not maintenance"
+   },
+   "ref": {
+    "topic": "IBD pharmacology",
+    "guide": "W30_07_IBD_Pharmacology.html",
+    "week": "Week 30 · GI II — Diarrhea & Lower GI"
+   }
+  },
+  {
+   "id": "rx:mesalamine",
+   "name": "Mesalamine (5-ASA)",
+   "class": "rx:aminosalicylate",
+   "facets": {
+    "use": "Mild-moderate ulcerative colitis",
+    "mechanism": "Topical anti-inflammatory 5-ASA",
+    "adverse": "Rare nephrotoxicity, diarrhea"
+   },
+   "ref": {
+    "topic": "IBD pharmacology",
+    "guide": "W30_07_IBD_Pharmacology.html",
+    "week": "Week 30 · GI II — Diarrhea & Lower GI"
+   }
+  },
+  {
+   "id": "rx:azathioprine",
+   "name": "Azathioprine",
+   "class": "rx:antimetabolite-immunosuppressant",
+   "facets": {
+    "use": "Steroid-sparing IBD maintenance",
+    "mechanism": "Purine antimetabolite immunosuppressant",
+    "adverse": "Myelosuppression, hepatotoxicity",
+    "monitoring": "Check TPMT; CBC/LFTs"
+   },
+   "ref": {
+    "topic": "IBD pharmacology",
+    "guide": "W30_07_IBD_Pharmacology.html",
+    "week": "Week 30 · GI II — Diarrhea & Lower GI"
+   }
+  },
+  {
+   "id": "rx:methotrexate",
+   "name": "Methotrexate",
+   "class": "rx:antimetabolite-immunosuppressant",
+   "facets": {
+    "use": "Crohn maintenance",
+    "mechanism": "Antifolate immunomodulator",
+    "adverse": "Myelosuppression, hepatotoxic, pneumonitis",
+    "contra": "Pregnancy (teratogen)"
+   },
+   "ref": {
+    "topic": "IBD pharmacology",
+    "guide": "W30_07_IBD_Pharmacology.html",
+    "week": "Week 30 · GI II — Diarrhea & Lower GI"
+   }
+  },
+  {
+   "id": "rx:infliximab",
+   "name": "Infliximab",
+   "class": "rx:tnf-inhibitor",
+   "facets": {
+    "use": "Moderate-severe / fistulizing IBD",
+    "mechanism": "Anti-TNF-α monoclonal antibody (IV)",
+    "adverse": "Infection, infusion reactions",
+    "monitoring": "Screen TB and hepatitis B first"
+   },
+   "ref": {
+    "topic": "IBD pharmacology",
+    "guide": "W30_07_IBD_Pharmacology.html",
+    "week": "Week 30 · GI II — Diarrhea & Lower GI"
+   }
+  },
+  {
+   "id": "rx:adalimumab",
+   "name": "Adalimumab (anti-TNF)",
+   "class": "rx:tnf-inhibitor",
+   "facets": {
+    "use": "Moderate-severe IBD",
+    "mechanism": "Anti-TNF-α monoclonal antibody (SC)",
+    "adverse": "Infection, injection-site reactions",
+    "monitoring": "Screen TB/HBV"
+   },
+   "ref": {
+    "topic": "IBD pharmacology",
+    "guide": "W30_07_IBD_Pharmacology.html",
+    "week": "Week 30 · GI II — Diarrhea & Lower GI"
+   }
+  },
+  {
+   "id": "rx:vedolizumab",
+   "name": "Vedolizumab",
+   "class": "rx:anti-integrin",
+   "facets": {
+    "use": "Moderate-severe IBD",
+    "mechanism": "Anti-integrin (gut-selective) biologic",
+    "adverse": "Infection (less systemic immunosuppression)"
+   },
+   "ref": {
+    "topic": "IBD pharmacology",
+    "guide": "W30_07_IBD_Pharmacology.html",
+    "week": "Week 30 · GI II — Diarrhea & Lower GI"
+   }
+  },
+  {
+   "id": "rx:ustekinumab",
+   "name": "Ustekinumab",
+   "class": "rx:il-inhibitor",
+   "facets": {
+    "use": "Moderate-severe IBD",
+    "mechanism": "Anti-IL-12/23 monoclonal antibody",
+    "adverse": "Infection risk"
+   },
+   "ref": {
+    "topic": "IBD pharmacology",
+    "guide": "W30_07_IBD_Pharmacology.html",
+    "week": "Week 30 · GI II — Diarrhea & Lower GI"
+   }
+  },
+  {
+   "id": "rx:rifaximin",
+   "name": "Rifaximin",
+   "class": "rx:rifamycin",
+   "facets": {
+    "use": "IBS-D; also hepatic encephalopathy",
+    "mechanism": "Non-absorbed gut antibiotic",
+    "adverse": "Generally well tolerated"
+   },
+   "ref": {
+    "topic": "IBS",
+    "guide": "W30_05_IBS.html",
+    "week": "Week 30 · GI II — Diarrhea & Lower GI"
+   }
+  },
+  {
+   "id": "rx:amitriptyline",
+   "name": "Amitriptyline",
+   "class": "rx:tca",
+   "facets": {
+    "use": "Pain-predominant IBS (neuromodulator)",
+    "mechanism": "Tricyclic — central + visceral pain modulation",
+    "adverse": "Anticholinergic effects, sedation; slows transit (useful in IBS-D)"
+   },
+   "ref": {
+    "topic": "IBS",
+    "guide": "W30_05_IBS.html",
+    "week": "Week 30 · GI II — Diarrhea & Lower GI"
+   }
+  },
+  {
+   "id": "rx:psyllium",
+   "name": "Psyllium",
+   "class": "rx:bulk-laxative",
+   "facets": {
+    "use": "Constipation; soluble fiber in IBS",
+    "mechanism": "Bulk-forming laxative",
+    "adverse": "Bloating if increased too fast"
+   },
+   "ref": {
+    "topic": "Constipation",
+    "guide": "W30_08_Constipation_Incontinence.html",
+    "week": "Week 30 · GI II — Diarrhea & Lower GI"
+   }
+  },
+  {
+   "id": "rx:polyethylene-glycol",
+   "name": "Polyethylene glycol (PEG)",
+   "class": "rx:laxative",
+   "facets": {
+    "use": "Constipation; IBS-C",
+    "mechanism": "Osmotic laxative",
+    "adverse": "Bloating, diarrhea if over-dosed"
+   },
+   "ref": {
+    "topic": "Constipation",
+    "guide": "W30_08_Constipation_Incontinence.html",
+    "week": "Week 30 · GI II — Diarrhea & Lower GI"
+   }
+  },
+  {
+   "id": "rx:senna",
+   "name": "Senna",
+   "class": "rx:stimulant-laxative",
+   "facets": {
+    "use": "Constipation (short-term)",
+    "mechanism": "Stimulant laxative — stimulates enteric motility",
+    "adverse": "Cramping"
+   },
+   "ref": {
+    "topic": "Constipation",
+    "guide": "W30_08_Constipation_Incontinence.html",
+    "week": "Week 30 · GI II — Diarrhea & Lower GI"
+   }
+  },
+  {
+   "id": "rx:linaclotide",
+   "name": "Linaclotide",
+   "class": "rx:secretagogue-laxative",
+   "facets": {
+    "use": "Chronic constipation / IBS-C",
+    "mechanism": "Guanylate cyclase-C agonist — increases intestinal secretion",
+    "adverse": "Diarrhea"
+   },
+   "ref": {
+    "topic": "Constipation",
+    "guide": "W30_08_Constipation_Incontinence.html",
+    "week": "Week 30 · GI II — Diarrhea & Lower GI"
+   }
+  },
+  {
+   "id": "rx:prucalopride",
+   "name": "Prucalopride",
+   "class": "rx:5ht4-agonist",
+   "facets": {
+    "use": "Refractory chronic constipation",
+    "mechanism": "5-HT4 agonist — promotes colonic motility",
+    "adverse": "Headache, nausea"
+   },
+   "ref": {
+    "topic": "Constipation",
+    "guide": "W30_08_Constipation_Incontinence.html",
+    "week": "Week 30 · GI II — Diarrhea & Lower GI"
+   }
+  },
+  {
+   "id": "rx:naloxegol",
+   "name": "Naloxegol",
+   "class": "rx:pamora",
+   "facets": {
+    "use": "Opioid-induced constipation",
+    "mechanism": "Peripherally-acting mu-opioid antagonist (PAMORA)",
+    "adverse": "Abdominal pain; preserves central analgesia"
+   },
+   "ref": {
+    "topic": "Constipation",
+    "guide": "W30_08_Constipation_Incontinence.html",
+    "week": "Week 30 · GI II — Diarrhea & Lower GI"
+   }
+  }
+ ]
+}

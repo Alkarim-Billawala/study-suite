@@ -1,0 +1,1672 @@
+{
+ "pack": "Week 34 — KU II (Fluids/Electrolytes)",
+ "id": "wk34",
+ "formatVersion": "2.0",
+ "version": "1.0",
+ "author": "Alkarim Billawala / alkarim.billawala.ca",
+ "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
+ "created": "2026-06-16",
+ "updated": "2026-06-16",
+ "school": "UofT — Temerty Medicine",
+ "year": "Year 1",
+ "course": "CPC 2",
+ "weeks": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology",
+ "questions": [
+  {
+   "id": "wk34_q01",
+   "sys": "Renal",
+   "topic": "Renal · Hyperkalemia",
+   "difficulty": "hard",
+   "stem": "A 52-year-old with diabetic nephropathy (baseline creatinine 210) has profound weakness after a gastroenteritis during which he kept taking ramipril. K is 7.6; ECG shows peaked T waves and widened QRS. Most appropriate FIRST step?",
+   "options": [
+    "IV regular insulin and 50% dextrose",
+    "IV calcium gluconate",
+    "IV furosemide",
+    "Urgent hemodialysis"
+   ],
+   "correct": 1,
+   "explain": "With hyperkalemic ECG changes (widened QRS), the immediate life-saving step is to <b>stabilize the myocardium with IV calcium gluconate</b> (raises threshold potential; doesn't lower K). Insulin/glucose, furosemide, and dialysis follow.",
+   "guide": {
+    "f": "W34_05_Hyperkalemia.html",
+    "t": "5 · Four steps",
+    "s": "calcium first"
+   }
+  },
+  {
+   "id": "wk34_q02",
+   "sys": "Renal",
+   "topic": "Renal · Toxic alcohol",
+   "difficulty": "hard",
+   "stem": "A 35-year-old mechanic is found confused in his garage. He has a high anion-gap metabolic acidosis, an osmolar gap of 38, and envelope-shaped urine crystals. Which toxic metabolite explains his renal findings?",
+   "options": [
+    "Formic acid",
+    "Lactic acid",
+    "Oxalic acid",
+    "Glycolic acid"
+   ],
+   "correct": 2,
+   "explain": "Garage setting + high osmolar/anion gaps + <b>envelope-shaped (calcium-oxalate) crystals</b> = <b>ethylene glycol</b>. It is metabolized to <b>oxalic acid</b>, which precipitates calcium-oxalate in the tubules → acute kidney injury. Formic acid is the methanol metabolite (blindness).",
+   "guide": {
+    "f": "W34_06_AcidBase_Toxic.html",
+    "t": "6 · Toxic alcohols",
+    "s": "ethylene glycol → oxalate"
+   }
+  },
+  {
+   "id": "wk34_q03",
+   "sys": "Renal",
+   "topic": "Renal · Hypokalemia",
+   "difficulty": "medium",
+   "stem": "A 71-year-old on high-dose furosemide infusion for heart failure develops palpitations on day 3; ECG shows flattened T waves and prominent U waves. By what mechanism is the diuretic causing this?",
+   "options": [
+    "Inhibits Na-Cl cotransporter in the DCT",
+    "Inhibits Na-K-2Cl cotransporter in the ascending loop",
+    "Antagonizes aldosterone in the collecting duct",
+    "Inhibits carbonic anhydrase in the PCT"
+   ],
+   "correct": 1,
+   "explain": "Furosemide blocks the <b>Na-K-2Cl cotransporter</b> in the thick ascending limb, causing urinary potassium wasting → <b>hypokalemia</b> (flattened T waves, U waves). The DCT Na-Cl description is thiazides; aldosterone antagonism is K-sparing.",
+   "guide": {
+    "f": "W34_07_Diuretics.html",
+    "t": "7 · Loop",
+    "s": "Na-K-2Cl → hypokalemia"
+   }
+  },
+  {
+   "id": "wk34_q04",
+   "sys": "Renal",
+   "topic": "Renal · Hypernatremia",
+   "difficulty": "medium",
+   "stem": "An 82-year-old with advanced dementia, dependent for hydration, is progressively unresponsive with dry mucous membranes and Na 158. What is the primary derangement?",
+   "options": [
+    "Absolute excess of total body sodium",
+    "Relative deficit of total body water",
+    "Inappropriate non-osmotic ADH secretion",
+    "Failure of distal potassium excretion"
+   ],
+   "correct": 1,
+   "explain": "Hypernatremia is a concentration problem from a <b>relative water deficit</b>. Thirst normally prevents it, so it occurs in those who can't access/drink water (dementia, infants, bed-bound). Replace water (oral/NG or D5W).",
+   "guide": {
+    "f": "W34_03_Hypernatremia_Volume.html",
+    "t": "3 · Hypernatremia",
+    "s": "water deficit, can't drink"
+   }
+  },
+  {
+   "id": "wk34_q05",
+   "sys": "Renal",
+   "topic": "Renal · BPH pharmacology",
+   "difficulty": "medium",
+   "stem": "A 64-year-old with a few weeks of weak stream and nocturia is offered a drug that relaxes bladder-neck and prostate smooth muscle for rapid relief. Which adverse effect should he be counseled about?",
+   "options": [
+    "Gynecomastia",
+    "First-dose hypotension and dizziness",
+    "Dry mouth and constipation",
+    "Blue-tinted vision"
+   ],
+   "correct": 1,
+   "explain": "This is an <b>α1-blocker</b> (e.g. tamsulosin). Because α1 receptors also control vascular tone, the key adverse effect is <b>first-dose orthostatic hypotension/dizziness</b> (also retrograde ejaculation). Gynecomastia is a 5-ARI effect.",
+   "guide": {
+    "f": "W34_08_Urologic_Pharmacology.html",
+    "t": "8 · α1-blocker",
+    "s": "first-dose hypotension"
+   }
+  },
+  {
+   "id": "wk34_q06",
+   "sys": "Renal",
+   "topic": "Renal · Spironolactone",
+   "difficulty": "medium",
+   "stem": "A woman on amlodipine and HCTZ has suboptimal BP; the physician considers adding spironolactone, but her K is 5.3. Why is spironolactone contraindicated here?",
+   "options": [
+    "It induces CYP3A4, clearing amlodipine",
+    "It will dangerously lower her sodium",
+    "It antagonizes aldosterone, decreasing distal potassium secretion",
+    "It increases calcium-oxalate stone risk"
+   ],
+   "correct": 2,
+   "explain": "Spironolactone blocks the mineralocorticoid receptor → less ENaC/ROMK-mediated <b>potassium secretion</b> → potassium rises. In a patient already hyperkalemic (5.3) this is contraindicated.",
+   "guide": {
+    "f": "W34_07_Diuretics.html",
+    "t": "7 · MRA",
+    "s": "hyperkalemia"
+   }
+  },
+  {
+   "id": "wk34_q07",
+   "sys": "Renal",
+   "topic": "Renal · DKA potassium",
+   "difficulty": "medium",
+   "stem": "A 21-year-old rationing insulin presents with Kussmaul breathing, pH 7.15, HCO₃ 12, ketonuria, and K 5.8. What explains the hyperkalemia on presentation?",
+   "options": [
+    "Aldosterone hypersecretion from volume depletion",
+    "Shift of potassium out of cells from insulin deficiency and acidemia",
+    "AKI preventing potassium filtration",
+    "Excess potassium intake"
+   ],
+   "correct": 1,
+   "explain": "In DKA, <b>insulin deficiency</b> reduces Na/K-ATPase activity and <b>acidemia</b> drives K out of cells (H+/K+ exchange) → transient hyperkalemia <b>despite total-body potassium depletion</b> (which is unmasked once insulin is given).",
+   "guide": {
+    "f": "W34_05_Hyperkalemia.html",
+    "t": "5 · Causes",
+    "s": "DKA shift out"
+   }
+  },
+  {
+   "id": "wk34_q08",
+   "sys": "Renal",
+   "topic": "Renal · OAB contraindication",
+   "difficulty": "easy",
+   "stem": "A 68-year-old with overactive bladder is to be prescribed oxybutynin. Which pre-existing condition is an absolute contraindication?",
+   "options": [
+    "Narrow-angle glaucoma",
+    "Severe osteoporosis",
+    "Bilateral renal artery stenosis",
+    "Type 2 diabetes"
+   ],
+   "correct": 0,
+   "explain": "Oxybutynin is an <b>antimuscarinic</b>; anticholinergic mydriasis can precipitate an acute attack in <b>narrow-angle glaucoma</b> — an absolute contraindication. (Renal artery stenosis matters for ACEi/ARBs.)",
+   "guide": {
+    "f": "W34_08_Urologic_Pharmacology.html",
+    "t": "8 · Anticholinergics",
+    "s": "glaucoma"
+   }
+  },
+  {
+   "id": "wk34_q09",
+   "sys": "Renal",
+   "topic": "Renal · Volume depletion labs",
+   "difficulty": "medium",
+   "stem": "A 45-year-old with 3 days of severe watery diarrhea has HR 115, BP 95/60 (80/50 standing), undetectable JVP. Which lab set fits best?",
+   "options": [
+    "High urine Na, high urine Cl, metabolic alkalosis",
+    "Low urine Na, low urine Cl, normal acid-base",
+    "Low urine Na, low urine Cl, non-anion-gap metabolic acidosis",
+    "High urine Na, low urine Cl, high-anion-gap acidosis"
+   ],
+   "correct": 2,
+   "explain": "Hypovolemia activates RAAS → kidneys avidly reabsorb sodium and chloride (<b>low urine Na/Cl</b>). Lower-GI (diarrheal) fluid is <b>bicarbonate-rich</b>, so its loss causes a <b>non-anion-gap metabolic acidosis</b>.",
+   "guide": {
+    "f": "W34_03_Hypernatremia_Volume.html",
+    "t": "3 · Volume depletion",
+    "s": "low urine Na/Cl, NAGMA"
+   }
+  },
+  {
+   "id": "wk34_q10",
+   "sys": "Renal",
+   "topic": "Renal · ADH site",
+   "difficulty": "easy",
+   "stem": "A patient with central diabetes insipidus takes a vasopressin agonist to reduce urine volume. Where in the nephron does it act?",
+   "options": [
+    "Proximal convoluted tubule",
+    "Descending limb of the loop",
+    "Distal convoluted tubule",
+    "Collecting duct"
+   ],
+   "correct": 3,
+   "explain": "Vasopressin/ADH (and desmopressin) act on V2 receptors in the <b>collecting duct</b>, inserting aquaporin-2 channels to reabsorb water.",
+   "guide": {
+    "f": "W34_01_Sodium_Water.html",
+    "t": "1 · ADH",
+    "s": "collecting duct / aquaporin-2"
+   }
+  },
+  {
+   "id": "wk34_q11",
+   "sys": "Renal",
+   "topic": "Renal · Hyponatremia correction",
+   "difficulty": "hard",
+   "stem": "A 70-year-old on 3 weeks of furosemide has weakness, orthostatic hypotension, JVP 1 cm, Na 126, K 2.8, HCO₃ 34. What is the most appropriate primary step to correct her hyponatremia?",
+   "options": [
+    "IV hypertonic (3%) saline",
+    "Fluid restriction <1 L/day",
+    "IV isotonic saline",
+    "Spironolactone"
+   ],
+   "correct": 2,
+   "explain": "This is <b>hypovolemic</b> hyponatremia from diuretic-induced volume loss driving non-osmotic ADH. <b>Isotonic saline</b> restores volume, shuts off ADH, and lets the kidney excrete the retained free water. Hypertonic saline is only for acute severe neurologic symptoms (seizures).",
+   "guide": {
+    "f": "W34_02_Hyponatremia.html",
+    "t": "2 · Correction",
+    "s": "hypovolemic → isotonic saline"
+   }
+  },
+  {
+   "id": "wk34_q12",
+   "sys": "Renal",
+   "topic": "Renal · Acid-base mixed",
+   "difficulty": "hard",
+   "stem": "A T1DM patient vomiting for 3 days has pH 7.27, pCO₂ 26, Na 132, Cl 83, HCO₃ 10, glucose 19, urea 7, measured osm 290. What is the complete acid-base diagnosis?",
+   "options": [
+    "Pure AGMA with appropriate compensation",
+    "Non-AG metabolic acidosis + respiratory alkalosis",
+    "Anion-gap metabolic acidosis + concurrent metabolic alkalosis",
+    "Pure respiratory alkalosis"
+   ],
+   "correct": 2,
+   "explain": "AG = 132−(83+10)=39 (high → AGMA from DKA). Winter's: expected pCO₂ ≈1.5(10)+8=23±2 ~ matches (appropriate compensation). Osmolar gap 0. <b>Delta-delta:</b> ΔAG=27 but HCO₃ only fell 14 → more base than expected → a <b>concurrent metabolic alkalosis</b> (from vomiting).",
+   "guide": {
+    "f": "W34_06_AcidBase_Toxic.html",
+    "t": "6 · Delta-delta",
+    "s": "AGMA + metabolic alkalosis"
+   }
+  },
+  {
+   "id": "wk34_q13",
+   "sys": "Renal",
+   "topic": "Renal · Thiazide lithium",
+   "difficulty": "medium",
+   "stem": "A patient on lithium for bipolar disorder is started on hydrochlorothiazide for hypertension and develops a tremor, confusion, and a high lithium level. What is the mechanism?",
+   "options": [
+    "Thiazide induces lithium metabolism",
+    "Thiazide reduces proximal lithium clearance, raising serum lithium",
+    "Lithium blocks thiazide action",
+    "Thiazide chelates lithium"
+   ],
+   "correct": 1,
+   "explain": "Thiazides cause volume contraction and increased proximal sodium (and lithium) reabsorption, <b>raising serum lithium to toxic levels</b>. Monitor levels closely or avoid the combination.",
+   "guide": {
+    "f": "W34_07_Diuretics.html",
+    "t": "7 · Thiazide",
+    "s": "raises lithium"
+   }
+  },
+  {
+   "id": "wk34_q14",
+   "sys": "Renal",
+   "topic": "Renal · Hyponatremia pathophysiology",
+   "difficulty": "medium",
+   "stem": "Which single factor is required for the kidney to excrete free water and prevent hyponatremia?",
+   "options": [
+    "High aldosterone",
+    "Suppressed (switched-off) ADH",
+    "High serum potassium",
+    "Elevated PTH"
+   ],
+   "correct": 1,
+   "explain": "Free-water excretion requires adequate GFR, urinary solute, and crucially <b>suppressed ADH</b>. Inappropriate ADH (SIADH or non-osmotic stimuli) prevents water excretion → hyponatremia.",
+   "guide": {
+    "f": "W34_02_Hyponatremia.html",
+    "t": "2 · Pathophysiology",
+    "s": "ADH must be off"
+   }
+  },
+  {
+   "id": "wk34_q15",
+   "sys": "Renal",
+   "topic": "Renal · Finasteride",
+   "difficulty": "medium",
+   "stem": "A man with BPH is started on finasteride. Which counseling point is correct?",
+   "options": [
+    "It relieves symptoms within hours",
+    "It shrinks the prostate over ~6 months and lowers PSA",
+    "It commonly causes first-dose hypotension",
+    "It is safe for pregnant partners to handle crushed tablets"
+   ],
+   "correct": 1,
+   "explain": "<b>Finasteride (5-α reductase inhibitor)</b> blocks testosterone→DHT, <b>shrinking the prostate over ~6 months</b> and roughly halving PSA. It is <b>teratogenic</b> (pregnant caregivers must not handle crushed/split tablets); α1-blockers give the fast relief.",
+   "guide": {
+    "f": "W34_08_Urologic_Pharmacology.html",
+    "t": "8 · 5-ARI",
+    "s": "shrinks prostate, lowers PSA"
+   }
+  },
+  {
+   "id": "wk34_q16",
+   "sys": "Renal",
+   "topic": "Renal · PDE5 nitrate",
+   "difficulty": "easy",
+   "stem": "A man with erectile dysfunction and stable angina on nitrates asks about sildenafil. What is the key issue?",
+   "options": [
+    "It works only with nitrates",
+    "It is absolutely contraindicated with nitrates (severe hypotension)",
+    "It raises PSA",
+    "It causes hyperkalemia"
+   ],
+   "correct": 1,
+   "explain": "PDE5 inhibitors plus nitrates cause <b>refractory, life-threatening hypotension</b> (additive cGMP-mediated vasodilation) — an absolute contraindication.",
+   "guide": {
+    "f": "W34_08_Urologic_Pharmacology.html",
+    "t": "8 · PDE5",
+    "s": "nitrate contraindication"
+   }
+  },
+  {
+   "id": "wk34_q17",
+   "sys": "Renal",
+   "topic": "Renal · Sodium principle",
+   "difficulty": "medium",
+   "stem": "A patient with heart failure has a serum sodium of 130 and obvious peripheral edema. What does the low sodium tell you about his ECF volume?",
+   "options": [
+    "He is volume-depleted",
+    "Nothing directly — sodium concentration doesn't predict ECF volume",
+    "He has too little total body sodium",
+    "He needs salt tablets"
+   ],
+   "correct": 1,
+   "explain": "Sodium <b>concentration</b> reflects water balance, not volume. This patient is <b>hypervolemic</b> (edema, high total-body sodium) yet hyponatremic because RAAS/ADH retain even more water. Concentration ≠ volume.",
+   "guide": {
+    "f": "W34_01_Sodium_Water.html",
+    "t": "1 · Principle",
+    "s": "concentration ≠ volume"
+   }
+  },
+  {
+   "id": "wk34_q18",
+   "sys": "Renal",
+   "topic": "Renal · Acetazolamide",
+   "difficulty": "medium",
+   "stem": "Which diuretic acts at the proximal tubule, promotes bicarbonate wasting, and can cause a metabolic acidosis?",
+   "options": [
+    "Furosemide",
+    "Hydrochlorothiazide",
+    "Acetazolamide",
+    "Spironolactone"
+   ],
+   "correct": 2,
+   "explain": "<b>Acetazolamide</b> inhibits carbonic anhydrase in the proximal tubule, blocking NaHCO₃ reabsorption → bicarbonate wasting and a <b>metabolic acidosis</b> (used for glaucoma, altitude sickness, and metabolic alkalosis).",
+   "guide": {
+    "f": "W34_07_Diuretics.html",
+    "t": "7 · CA inhibitor",
+    "s": "PCT, acidosis"
+   }
+  },
+  {
+   "id": "wk34_q19",
+   "sys": "Renal",
+   "topic": "Renal · Hypokalemia refractory",
+   "difficulty": "medium",
+   "stem": "A patient's hypokalemia (K 2.9) fails to correct despite repeated KCl. Which electrolyte must be checked and replaced?",
+   "options": [
+    "Calcium",
+    "Magnesium",
+    "Phosphate",
+    "Sodium"
+   ],
+   "correct": 1,
+   "explain": "<b>Hypomagnesemia</b> increases renal potassium wasting (via ROMK) and makes hypokalemia <b>refractory</b> — potassium won't correct until magnesium is replaced.",
+   "guide": {
+    "f": "W34_04_Potassium_Hypokalemia.html",
+    "t": "4 · Replacement",
+    "s": "check magnesium"
+   }
+  },
+  {
+   "id": "wk34_q20",
+   "sys": "Renal",
+   "topic": "Renal · ODS",
+   "difficulty": "hard",
+   "stem": "A patient with chronic hyponatremia (Na 116 for days) is asymptomatic. Why must correction be slow?",
+   "options": [
+    "Rapid correction causes cerebral edema",
+    "Rapid overcorrection causes osmotic demyelination syndrome",
+    "Slow correction prevents seizures",
+    "Sodium can only be given orally"
+   ],
+   "correct": 1,
+   "explain": "In chronic hyponatremia the brain has adapted; <b>overly rapid correction causes osmotic demyelination syndrome</b> (central pontine myelinolysis) — permanent injury. Limit the daily rise. (Acute symptomatic hyponatremia is the scenario that justifies faster, hypertonic correction.)",
+   "guide": {
+    "f": "W34_02_Hyponatremia.html",
+    "t": "2 · Correction",
+    "s": "ODS risk"
+   }
+  }
+ ],
+ "cards": [
+  {
+   "id": "wk34_c01",
+   "sys": "Renal",
+   "topic": "Content vs concentration",
+   "type": "qa",
+   "guide": {
+    "f": "W34_01_Sodium_Water.html",
+    "t": "1 · Principle",
+    "s": "core"
+   },
+   "prompt": "What do sodium content vs sodium concentration each determine?",
+   "answer": "Sodium content determines ECF volume (edema vs hypovolemia); sodium concentration determines intracellular volume (cell swelling/shrinkage). Concentration does NOT predict ECF volume."
+  },
+  {
+   "id": "wk34_c02",
+   "sys": "Renal",
+   "topic": "Two systems",
+   "type": "qa",
+   "guide": {
+    "f": "W34_01_Sodium_Water.html",
+    "t": "1 · Control",
+    "s": "RAAS vs ADH"
+   },
+   "prompt": "Which systems control sodium balance vs water balance?",
+   "answer": "RAAS controls sodium (volume) — renin from low BP/low NaCl delivery. Thirst and ADH control water (concentration); ADH acts on the collecting duct via aquaporin-2."
+  },
+  {
+   "id": "wk34_c03",
+   "sys": "Renal",
+   "topic": "Hyponatremia mechanism",
+   "type": "qa",
+   "guide": {
+    "f": "W34_02_Hyponatremia.html",
+    "t": "2 · Mechanism",
+    "s": "water excess"
+   },
+   "prompt": "Why does hyponatremia occur, mechanistically?",
+   "answer": "Relative water excess — free-water excretion fails from low GFR, low urinary solute, or (usually) inappropriate ADH activity."
+  },
+  {
+   "id": "wk34_c04",
+   "sys": "Renal",
+   "topic": "ODS",
+   "type": "qa",
+   "guide": {
+    "f": "W34_02_Hyponatremia.html",
+    "t": "2 · Correction",
+    "s": "speed"
+   },
+   "prompt": "How fast should chronic vs acute symptomatic hyponatremia be corrected?",
+   "answer": "Acute/symptomatic (seizures) → hypertonic 3% saline for rapid partial correction. Chronic → correct slowly; overcorrection causes osmotic demyelination syndrome."
+  },
+  {
+   "id": "wk34_c05",
+   "sys": "Renal",
+   "topic": "Hypernatremia",
+   "type": "qa",
+   "guide": {
+    "f": "W34_03_Hypernatremia_Volume.html",
+    "t": "3 · Hypernatremia",
+    "s": "deficit"
+   },
+   "prompt": "Why is hypernatremia uncommon, and who gets it?",
+   "answer": "Thirst is a powerful defense, so it occurs mainly in those who can't access/drink water (infants, elderly, dementia, coma) or with large free-water losses (DI, osmotic diuresis)."
+  },
+  {
+   "id": "wk34_c06",
+   "sys": "Renal",
+   "topic": "Volume extremes",
+   "type": "qa",
+   "guide": {
+    "f": "W34_03_Hypernatremia_Volume.html",
+    "t": "3 · Volume",
+    "s": "expansion vs depletion"
+   },
+   "prompt": "Contrast ECF volume expansion vs depletion and their treatments.",
+   "answer": "Expansion (heart failure): ↑JVP, edema, crackles → restrict Na, diurese. Depletion (diarrhea): tachycardia, ↓JVP, low urine Na/Cl → isotonic saline resuscitation."
+  },
+  {
+   "id": "wk34_c07",
+   "sys": "Renal",
+   "topic": "Potassium gradient",
+   "type": "qa",
+   "guide": {
+    "f": "W34_04_Potassium_Hypokalemia.html",
+    "t": "4 · Physiology",
+    "s": "gradient"
+   },
+   "prompt": "Where is body potassium and what maintains the gradient?",
+   "answer": "98% is intracellular (~150 in vs ~4 out); the Na/K-ATPase maintains the gradient that sets the resting membrane potential for cardiac/nerve/muscle function."
+  },
+  {
+   "id": "wk34_c08",
+   "sys": "Renal",
+   "topic": "Aldosterone K",
+   "type": "qa",
+   "guide": {
+    "f": "W34_04_Potassium_Hypokalemia.html",
+    "t": "4 · Renal handling",
+    "s": "aldosterone"
+   },
+   "prompt": "How does aldosterone drive potassium excretion?",
+   "answer": "It inserts ENaC; sodium entry makes the lumen electronegative, which drives potassium secretion via ROMK channels in the distal nephron."
+  },
+  {
+   "id": "wk34_c09",
+   "sys": "Renal",
+   "topic": "Hypokalemia buckets",
+   "type": "qa",
+   "guide": {
+    "f": "W34_04_Potassium_Hypokalemia.html",
+    "t": "4 · Hypokalemia",
+    "s": "buckets"
+   },
+   "prompt": "What are the three mechanisms of hypokalemia?",
+   "answer": "Shift into cells (insulin, β2-agonists, alkalemia, refeeding), GI loss (diarrhea, laxatives), and renal loss (diuretics, hyperaldosteronism, Bartter/Gitelman)."
+  },
+  {
+   "id": "wk34_c10",
+   "sys": "Renal",
+   "topic": "Hypokalemia ECG",
+   "type": "qa",
+   "guide": {
+    "f": "W34_04_Potassium_Hypokalemia.html",
+    "t": "4 · ECG",
+    "s": "U waves"
+   },
+   "prompt": "What ECG changes occur in hypokalemia?",
+   "answer": "Flattened T waves, prominent U waves, ST depression, and prolonged QT predisposing to ventricular arrhythmias."
+  },
+  {
+   "id": "wk34_c11",
+   "sys": "Renal",
+   "topic": "Hyperkalemia steps",
+   "type": "qa",
+   "guide": {
+    "f": "W34_05_Hyperkalemia.html",
+    "t": "5 · Algorithm",
+    "s": "4 steps"
+   },
+   "prompt": "Outline the four steps of hyperkalemia management.",
+   "answer": "Stabilize (IV calcium — doesn't lower K), Shift (insulin+glucose, salbutamol, ± bicarbonate), Excrete (saline+furosemide or a K binder), Dialyze (if refractory/anuric)."
+  },
+  {
+   "id": "wk34_c12",
+   "sys": "Renal",
+   "topic": "Calcium in hyperkalemia",
+   "type": "qa",
+   "guide": {
+    "f": "W34_05_Hyperkalemia.html",
+    "t": "5 · Stabilize",
+    "s": "calcium"
+   },
+   "prompt": "Why give calcium in hyperkalemia if it doesn't lower potassium?",
+   "answer": "It raises the threshold potential, restoring the safety margin and stabilizing the myocardium to prevent fatal arrhythmia while other measures lower the potassium."
+  },
+  {
+   "id": "wk34_c13",
+   "sys": "Renal",
+   "topic": "Anion/osmolar gap",
+   "type": "qa",
+   "guide": {
+    "f": "W34_06_AcidBase_Toxic.html",
+    "t": "6 · Gaps",
+    "s": "two gaps"
+   },
+   "prompt": "How are the anion gap and osmolar gap calculated?",
+   "answer": "Anion gap = Na − (Cl + HCO₃) (normal ~12). Osmolar gap = measured − calculated osmolality [2(Na)+glucose+urea] (normal <10; high suggests toxic alcohols)."
+  },
+  {
+   "id": "wk34_c14",
+   "sys": "Renal",
+   "topic": "Toxic alcohols",
+   "type": "qa",
+   "guide": {
+    "f": "W34_06_AcidBase_Toxic.html",
+    "t": "6 · Toxic alcohols",
+    "s": "metabolites"
+   },
+   "prompt": "Contrast ethylene glycol and methanol toxicity and treatment.",
+   "answer": "Ethylene glycol → oxalic acid → calcium-oxalate crystals → renal failure. Methanol → formic acid → optic-nerve damage/blindness. Treat both with fomepizole (block alcohol dehydrogenase) + hemodialysis."
+  },
+  {
+   "id": "wk34_c15",
+   "sys": "Renal",
+   "topic": "Diuretic sites",
+   "type": "qa",
+   "guide": {
+    "f": "W34_07_Diuretics.html",
+    "t": "7 · Sites",
+    "s": "by nephron"
+   },
+   "prompt": "Match the diuretic class to its tubular site.",
+   "answer": "Acetazolamide → PCT; loop (furosemide) → thick ascending limb (Na-K-2Cl); thiazide → DCT (Na-Cl); amiloride/MRA → collecting duct (ENaC/aldosterone)."
+  },
+  {
+   "id": "wk34_c16",
+   "sys": "Renal",
+   "topic": "Urologic drugs",
+   "type": "qa",
+   "guide": {
+    "f": "W34_08_Urologic_Pharmacology.html",
+    "t": "8 · BPH",
+    "s": "two classes"
+   },
+   "prompt": "Compare the two BPH drug classes.",
+   "answer": "α1-blockers (tamsulosin) relax smooth muscle for rapid relief (orthostatic hypotension, retrograde ejaculation). 5-α reductase inhibitors (finasteride) shrink the prostate over ~6 months (lower PSA, teratogenic)."
+  },
+  {
+   "id": "wk34_c17",
+   "sys": "Renal",
+   "topic": "ADH site",
+   "type": "mcq",
+   "guide": {
+    "f": "W34_01_Sodium_Water.html",
+    "t": "1 · ADH",
+    "s": "site"
+   },
+   "prompt": "ADH acts on which nephron segment?",
+   "options": [
+    "Proximal tubule",
+    "Thick ascending limb",
+    "Distal convoluted tubule",
+    "Collecting duct"
+   ],
+   "correct": 3
+  },
+  {
+   "id": "wk34_c18",
+   "sys": "Renal",
+   "topic": "Acute hyponatremia Rx",
+   "type": "mcq",
+   "guide": {
+    "f": "W34_02_Hyponatremia.html",
+    "t": "2 · Correction",
+    "s": "symptomatic"
+   },
+   "prompt": "A seizing patient with acute hyponatremia is treated with:",
+   "options": [
+    "Fluid restriction",
+    "Hypertonic (3%) saline",
+    "Isotonic saline only",
+    "Desmopressin"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk34_c19",
+   "sys": "Renal",
+   "topic": "Hypernatremia fluid",
+   "type": "mcq",
+   "guide": {
+    "f": "W34_03_Hypernatremia_Volume.html",
+    "t": "3 · Treatment",
+    "s": "water"
+   },
+   "prompt": "Hypernatremia from water deficit is corrected with:",
+   "options": [
+    "Hypertonic saline",
+    "Free water / IV D5W",
+    "Spironolactone",
+    "Loop diuretics"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk34_c20",
+   "sys": "Renal",
+   "topic": "Hyperkalemia ECG",
+   "type": "mcq",
+   "guide": {
+    "f": "W34_05_Hyperkalemia.html",
+    "t": "5 · ECG",
+    "s": "first change"
+   },
+   "prompt": "The earliest ECG change of hyperkalemia is:",
+   "options": [
+    "U waves",
+    "Peaked T waves",
+    "Delta waves",
+    "Prolonged QT"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk34_c21",
+   "sys": "Renal",
+   "topic": "Loop transporter",
+   "type": "mcq",
+   "guide": {
+    "f": "W34_07_Diuretics.html",
+    "t": "7 · Loop",
+    "s": "target"
+   },
+   "prompt": "Loop diuretics inhibit which transporter?",
+   "options": [
+    "Na-Cl cotransporter",
+    "Na-K-2Cl cotransporter",
+    "ENaC",
+    "Carbonic anhydrase"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk34_c22",
+   "sys": "Renal",
+   "topic": "Thiazide calcium",
+   "type": "mcq",
+   "guide": {
+    "f": "W34_07_Diuretics.html",
+    "t": "7 · Thiazide",
+    "s": "calcium"
+   },
+   "prompt": "Compared with loop diuretics, thiazides affect calcium how?",
+   "options": [
+    "Both waste calcium",
+    "Thiazides retain calcium (loops waste it)",
+    "Both retain calcium",
+    "Neither affects calcium"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk34_c23",
+   "sys": "Renal",
+   "topic": "K-sparing AE",
+   "type": "mcq",
+   "guide": {
+    "f": "W34_07_Diuretics.html",
+    "t": "7 · K-sparing",
+    "s": "adverse"
+   },
+   "prompt": "The main risk of spironolactone/amiloride is:",
+   "options": [
+    "Hypokalemia",
+    "Hyperkalemia",
+    "Hypernatremia",
+    "Hypercalcemia"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk34_c24",
+   "sys": "Renal",
+   "topic": "Toxic alcohol Rx",
+   "type": "mcq",
+   "guide": {
+    "f": "W34_06_AcidBase_Toxic.html",
+    "t": "6 · Treatment",
+    "s": "ADH block"
+   },
+   "prompt": "The gold-standard antidote that blocks alcohol dehydrogenase is:",
+   "options": [
+    "Ethanol",
+    "Fomepizole",
+    "N-acetylcysteine",
+    "Naloxone"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk34_c25",
+   "sys": "Renal",
+   "topic": "OAB glaucoma",
+   "type": "mcq",
+   "guide": {
+    "f": "W34_08_Urologic_Pharmacology.html",
+    "t": "8 · Anticholinergic",
+    "s": "contraindication"
+   },
+   "prompt": "Oxybutynin is contraindicated in:",
+   "options": [
+    "Narrow-angle glaucoma",
+    "Hypertension",
+    "Diabetes",
+    "Osteoporosis"
+   ],
+   "correct": 0
+  },
+  {
+   "id": "wk34_c26",
+   "sys": "Renal",
+   "topic": "PDE5 contraindication",
+   "type": "mcq",
+   "guide": {
+    "f": "W34_08_Urologic_Pharmacology.html",
+    "t": "8 · PDE5",
+    "s": "nitrates"
+   },
+   "prompt": "PDE5 inhibitors are absolutely contraindicated with:",
+   "options": [
+    "Beta-blockers",
+    "Nitrates",
+    "Statins",
+    "ACE inhibitors"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk34_c27",
+   "sys": "Renal",
+   "topic": "Hyperkalemia causes",
+   "type": "multi",
+   "guide": {
+    "f": "W34_05_Hyperkalemia.html",
+    "t": "5 · Causes",
+    "s": "buckets"
+   },
+   "prompt": "Select causes of hyperkalemia:",
+   "options": [
+    "DKA (insulin deficiency)",
+    "Rhabdomyolysis / cell lysis",
+    "ACEi/ARB or spironolactone",
+    "Advanced CKD/AKI",
+    "Vomiting alone"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk34_c28",
+   "sys": "Renal",
+   "topic": "ADH non-osmotic",
+   "type": "multi",
+   "guide": {
+    "f": "W34_02_Hyponatremia.html",
+    "t": "2 · ADH triggers",
+    "s": "non-osmotic"
+   },
+   "prompt": "Select non-osmotic triggers of ADH release:",
+   "options": [
+    "Volume depletion",
+    "Pain",
+    "Nausea/vomiting",
+    "Certain drugs (SSRIs, carbamazepine)",
+    "Hyperosmolality only"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk34_c29",
+   "sys": "Renal",
+   "topic": "Loop AEs",
+   "type": "multi",
+   "guide": {
+    "f": "W34_07_Diuretics.html",
+    "t": "7 · Loop",
+    "s": "adverse"
+   },
+   "prompt": "Select adverse effects of loop diuretics:",
+   "options": [
+    "Hypokalemia",
+    "Hypomagnesemia",
+    "Hyperuricemia (gout)",
+    "Ototoxicity",
+    "Hyperkalemia"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk34_c30",
+   "sys": "Renal",
+   "topic": "Hypokalemia causes",
+   "type": "multi",
+   "guide": {
+    "f": "W34_04_Potassium_Hypokalemia.html",
+    "t": "4 · Hypokalemia",
+    "s": "mechanisms"
+   },
+   "prompt": "Select causes of hypokalemia:",
+   "options": [
+    "Insulin / β2-agonists (shift)",
+    "Diarrhea (GI loss)",
+    "Loop/thiazide diuretics (renal loss)",
+    "Hyperaldosteronism",
+    "ACE inhibitors"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk34_c31",
+   "sys": "Renal",
+   "topic": "High AG causes",
+   "type": "multi",
+   "guide": {
+    "f": "W34_06_AcidBase_Toxic.html",
+    "t": "6 · Anion gap",
+    "s": "GOLDMARK"
+   },
+   "prompt": "Select high-anion-gap metabolic acidosis causes:",
+   "options": [
+    "Lactate",
+    "Ketoacidosis",
+    "Methanol / ethylene glycol",
+    "Salicylates / renal failure",
+    "Diarrhea"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk34_c32",
+   "sys": "Renal",
+   "topic": "Anion gap formula",
+   "type": "cloze",
+   "guide": {
+    "f": "W34_06_AcidBase_Toxic.html",
+    "t": "6 · Anion gap",
+    "s": "formula"
+   },
+   "text": "Anion gap = Na − ({{Cl}} + {{HCO3}}); normal is about {{12}}.",
+   "explain": "Adjust for albumin (low albumin lowers the apparent gap)."
+  },
+  {
+   "id": "wk34_c33",
+   "sys": "Renal",
+   "topic": "Osmolar gap",
+   "type": "cloze",
+   "guide": {
+    "f": "W34_06_AcidBase_Toxic.html",
+    "t": "6 · Osmolar gap",
+    "s": "calc"
+   },
+   "text": "Calculated osmolality = 2(Na) + {{glucose}} + {{urea}}; a gap > {{10}} suggests a toxic alcohol.",
+   "explain": "A rapid screen while specific levels are pending."
+  },
+  {
+   "id": "wk34_c34",
+   "sys": "Renal",
+   "topic": "Hyperkalemia steps",
+   "type": "cloze",
+   "guide": {
+    "f": "W34_05_Hyperkalemia.html",
+    "t": "5 · Algorithm",
+    "s": "sequence"
+   },
+   "text": "Hyperkalemia: {{stabilize}} (calcium) → {{shift}} (insulin/glucose, salbutamol) → excrete → {{dialyze}}.",
+   "explain": "Calcium protects the heart but does not lower potassium."
+  },
+  {
+   "id": "wk34_c35",
+   "sys": "Renal",
+   "topic": "Potassium gradient",
+   "type": "cloze",
+   "guide": {
+    "f": "W34_04_Potassium_Hypokalemia.html",
+    "t": "4 · Physiology",
+    "s": "gradient"
+   },
+   "text": "About {{98}}% of body potassium is intracellular, maintained by the {{Na/K-ATPase}} pump.",
+   "explain": "This gradient sets the resting membrane potential."
+  },
+  {
+   "id": "wk34_c36",
+   "sys": "Renal",
+   "topic": "Diuretic sites cloze",
+   "type": "cloze",
+   "guide": {
+    "f": "W34_07_Diuretics.html",
+    "t": "7 · Sites",
+    "s": "map"
+   },
+   "text": "Loop diuretics act on the {{thick ascending limb}}; thiazides on the {{distal convoluted tubule}}.",
+   "explain": "Loops block Na-K-2Cl; thiazides block Na-Cl."
+  },
+  {
+   "id": "wk34_c37",
+   "sys": "Renal",
+   "topic": "Hyperkalemia order",
+   "type": "order",
+   "guide": {
+    "f": "W34_05_Hyperkalemia.html",
+    "t": "5 · Algorithm",
+    "s": "order"
+   },
+   "prompt": "Order the management of severe hyperkalemia:",
+   "items": [
+    "IV calcium gluconate (stabilize myocardium)",
+    "Insulin + glucose (± salbutamol) to shift K into cells",
+    "Furosemide / potassium binder to excrete",
+    "Hemodialysis if refractory or anuric"
+   ]
+  },
+  {
+   "id": "wk34_c38",
+   "sys": "Renal",
+   "topic": "Acid-base steps",
+   "type": "order",
+   "guide": {
+    "f": "W34_06_AcidBase_Toxic.html",
+    "t": "6 · Approach",
+    "s": "5 steps"
+   },
+   "prompt": "Order the acid-base interpretation steps:",
+   "items": [
+    "Assess the pH (acidemia vs alkalemia)",
+    "Identify the primary process (pCO2 vs HCO3)",
+    "Check compensation (e.g. Winter's formula)",
+    "Calculate the anion gap (± osmolar gap)",
+    "Apply delta-delta to find hidden disorders"
+   ]
+  },
+  {
+   "id": "wk34_c39",
+   "sys": "Renal",
+   "topic": "Toxic alcohol order",
+   "type": "order",
+   "guide": {
+    "f": "W34_06_AcidBase_Toxic.html",
+    "t": "6 · Toxic alcohols",
+    "s": "manage"
+   },
+   "prompt": "Order the management of suspected toxic-alcohol ingestion:",
+   "items": [
+    "Recognize high anion-gap acidosis + high osmolar gap",
+    "Block alcohol dehydrogenase with fomepizole",
+    "Hemodialysis to clear the toxin + correct acidosis",
+    "Continue until levels and acidosis resolve"
+   ]
+  },
+  {
+   "id": "wk34_c40",
+   "sys": "Renal",
+   "topic": "Diuretic → site",
+   "type": "match",
+   "guide": {
+    "f": "W34_07_Diuretics.html",
+    "t": "7 · Diuretics",
+    "s": "sites"
+   },
+   "prompt": "Match the diuretic to its site/mechanism:",
+   "pairs": [
+    [
+     "Acetazolamide",
+     "PCT — carbonic anhydrase"
+    ],
+    [
+     "Furosemide",
+     "Thick ascending limb — Na-K-2Cl"
+    ],
+    [
+     "Hydrochlorothiazide",
+     "DCT — Na-Cl"
+    ],
+    [
+     "Amiloride",
+     "Collecting duct — ENaC"
+    ],
+    [
+     "Spironolactone",
+     "Collecting duct — aldosterone receptor"
+    ]
+   ]
+  },
+  {
+   "id": "wk34_c41",
+   "sys": "Renal",
+   "topic": "Drug → urologic use",
+   "type": "match",
+   "guide": {
+    "f": "W34_08_Urologic_Pharmacology.html",
+    "t": "8 · Urologic",
+    "s": "drugs"
+   },
+   "prompt": "Match the urologic drug to its use:",
+   "pairs": [
+    [
+     "Oxybutynin",
+     "Overactive bladder (antimuscarinic)"
+    ],
+    [
+     "Mirabegron",
+     "Overactive bladder (β3-agonist)"
+    ],
+    [
+     "Tamsulosin",
+     "BPH — α1-blocker (rapid relief)"
+    ],
+    [
+     "Finasteride",
+     "BPH — 5-ARI (shrinks prostate)"
+    ],
+    [
+     "Sildenafil",
+     "Erectile dysfunction (PDE5)"
+    ]
+   ]
+  },
+  {
+   "id": "wk34_c42",
+   "sys": "Renal",
+   "topic": "Toxic alcohol → injury",
+   "type": "match",
+   "guide": {
+    "f": "W34_06_AcidBase_Toxic.html",
+    "t": "6 · Toxic alcohols",
+    "s": "injury"
+   },
+   "prompt": "Match the toxic alcohol to its injury:",
+   "pairs": [
+    [
+     "Ethylene glycol",
+     "Calcium-oxalate crystals → renal failure"
+    ],
+    [
+     "Methanol",
+     "Formic acid → blindness"
+    ],
+    [
+     "Both",
+     "Treated with fomepizole + dialysis"
+    ]
+   ]
+  },
+  {
+   "id": "wk34_c43",
+   "sys": "Renal",
+   "topic": "Electrolyte → ECG",
+   "type": "match",
+   "guide": {
+    "f": "W34_04_Potassium_Hypokalemia.html",
+    "t": "4 · ECG",
+    "s": "changes"
+   },
+   "prompt": "Match the disturbance to its ECG change:",
+   "pairs": [
+    [
+     "Hypokalemia",
+     "Flattened T, prominent U waves"
+    ],
+    [
+     "Hyperkalemia",
+     "Peaked T → wide QRS → sine wave"
+    ],
+    [
+     "Hypocalcemia",
+     "Prolonged QT"
+    ]
+   ]
+  },
+  {
+   "id": "wk34_c44",
+   "sys": "Renal",
+   "topic": "Hypovolemic hyponatremia",
+   "type": "qa",
+   "guide": {
+    "f": "W34_02_Hyponatremia.html",
+    "t": "2 · Treatment",
+    "s": "isotonic"
+   },
+   "prompt": "How does isotonic saline correct hypovolemic hyponatremia?",
+   "answer": "It restores effective circulating volume, switching off the non-osmotic ADH drive, so the kidney can excrete the retained free water and the sodium rises."
+  },
+  {
+   "id": "wk34_c45",
+   "sys": "Renal",
+   "topic": "Diabetes insipidus",
+   "type": "qa",
+   "guide": {
+    "f": "W34_03_Hypernatremia_Volume.html",
+    "t": "3 · DI",
+    "s": "central vs nephrogenic"
+   },
+   "prompt": "What distinguishes central from nephrogenic diabetes insipidus?",
+   "answer": "Central (AVP-deficient) lacks ADH and responds to desmopressin; nephrogenic (AVP-resistant) has ADH but unresponsive kidneys (lithium, hypercalcemia) and doesn't respond to desmopressin."
+  },
+  {
+   "id": "wk34_c46",
+   "sys": "Renal",
+   "topic": "NAGMA",
+   "type": "qa",
+   "guide": {
+    "f": "W34_06_AcidBase_Toxic.html",
+    "t": "6 · NAGMA",
+    "s": "diarrhea"
+   },
+   "prompt": "Why does severe diarrhea cause a non-anion-gap metabolic acidosis?",
+   "answer": "Lower-GI fluid is bicarbonate-rich, so its loss depletes bicarbonate without adding unmeasured anions — a hyperchloremic, normal-gap acidosis."
+  },
+  {
+   "id": "wk34_c47",
+   "sys": "Renal",
+   "topic": "Magnesium & K",
+   "type": "qa",
+   "guide": {
+    "f": "W34_04_Potassium_Hypokalemia.html",
+    "t": "4 · Refractory",
+    "s": "magnesium"
+   },
+   "prompt": "Why does hypomagnesemia cause refractory hypokalemia?",
+   "answer": "Low magnesium increases ROMK-mediated renal potassium secretion, so potassium keeps being lost until magnesium is replaced."
+  },
+  {
+   "id": "wk34_c48",
+   "sys": "Renal",
+   "topic": "Retrograde ejaculation",
+   "type": "qa",
+   "guide": {
+    "f": "W34_08_Urologic_Pharmacology.html",
+    "t": "8 · α1-blocker",
+    "s": "retrograde"
+   },
+   "prompt": "Why do α1-blockers cause retrograde ejaculation?",
+   "answer": "α1A receptors in the vas deferens/seminal vesicles/bladder neck normally close the bladder neck during ejaculation; blocking them lets semen flow backward into the bladder."
+  },
+  {
+   "id": "wk34_c49",
+   "sys": "Renal",
+   "topic": "Carbonic anhydrase",
+   "type": "qa",
+   "guide": {
+    "f": "W34_07_Diuretics.html",
+    "t": "7 · CA inhibitor",
+    "s": "uses"
+   },
+   "prompt": "What are the uses and key effect of acetazolamide?",
+   "answer": "It inhibits carbonic anhydrase in the PCT (bicarbonate wasting → metabolic acidosis); used for glaucoma, altitude sickness, and to treat a metabolic alkalosis."
+  },
+  {
+   "id": "wk34_c50",
+   "sys": "Renal",
+   "topic": "Mirabegron",
+   "type": "qa",
+   "guide": {
+    "f": "W34_08_Urologic_Pharmacology.html",
+    "t": "8 · β3-agonist",
+    "s": "mirabegron"
+   },
+   "prompt": "How does mirabegron treat overactive bladder, and its main caution?",
+   "answer": "It is a β3-adrenergic agonist that relaxes the detrusor to increase bladder capacity; watch for hypertension and tachycardia (a non-anticholinergic alternative useful when antimuscarinics are contraindicated)."
+  }
+ ],
+ "guides": [
+  {
+   "file": "W34_01_Sodium_Water.html",
+   "title": "Week 34 · 1 Sodium & Water Physiology",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Sodium &amp; Water Physiology</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Core principle</div><h1>Sodium &amp; Water Physiology</h1></div><div class='r'>Week 34 &middot; KU II &mdash; Fluids, Electrolytes &amp; Renal Pharmacology<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The single idea that unlocks every sodium problem — content vs concentration — and the RAAS/ADH systems that defend each.</p>\n<h2>The one principle</h2>\n<div class='band'><div class='t'>Content vs concentration</div>\n<b>Sodium CONTENT</b> determines <b>extracellular fluid (ECF) volume</b> (edema vs hypovolemia). <b>Sodium CONCENTRATION</b> determines <b>intracellular volume</b> (cell swelling vs shrinkage). The serum sodium <b>concentration does NOT tell you the ECF volume</b> — a patient can be hyponatremic and hypervolemic, euvolemic, or hypovolemic.</div>\n<h2>Two separate control systems</h2>\n<table>\n<tr><th>System</th><th>Senses</th><th>Effector</th></tr>\n<tr><td><b>Sodium balance</b> (volume)</td><td>Blood pressure / effective circulating volume (baroreceptors, macula densa)</td><td><b>RAAS</b> &mdash; low BP/low NaCl delivery → renin → angiotensin II + aldosterone → sodium retention</td></tr>\n<tr><td><b>Water balance</b> (concentration)</td><td>Osmolality (and non-osmotic triggers)</td><td><b>Thirst</b> (intake) and <b>ADH/vasopressin</b> (output)</td></tr>\n</table>\n<h2>ADH (vasopressin)</h2>\n<ul>\n<li>Released by <b>hyperosmolality</b>, profound ECF depletion, and <b>non-osmotic stimuli</b> (nausea, pain, drugs).</li>\n<li>Acts on the <b>collecting duct</b> → inserts <b>aquaporin-2</b> channels → water reabsorption (concentrated urine).</li>\n</ul>\n<div class='key'>Sodium content = volume; sodium concentration = water balance. RAAS defends volume; thirst + ADH defend concentration. ADH works at the collecting duct via aquaporin-2 — the key to DI and SIADH.</div>\n</div>"
+  },
+  {
+   "file": "W34_02_Hyponatremia.html",
+   "title": "Week 34 · 2 Hyponatremia",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Hyponatremia</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Too much water</div><h1>Hyponatremia</h1></div><div class='r'>Week 34 &middot; KU II &mdash; Fluids, Electrolytes &amp; Renal Pharmacology<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Why hyponatremia is always a water problem, the ADH triggers behind it, and the acute-vs-chronic correction rules.</p>\n<h2>It's always relative water excess</h2>\n<p>Hyponatremia (Na &lt;135) reflects <b>relative water retention</b>. Excreting free water requires GFR, urinary solute, and <b>switched-off ADH</b> — so hyponatremia means one of those failed: low GFR, low solute, or (usually) <b>inappropriate ADH</b>.</p>\n<h2>ADH triggers to hunt for</h2>\n<ul>\n<li><b>Non-osmotic ADH:</b> true/effective volume depletion (the body chooses BP over osmolality), <b>pain, nausea/vomiting</b>, intracranial/intrathoracic disease, <b>hypothyroidism, adrenal insufficiency</b>.</li>\n<li><b>Drugs:</b> thiazides, NSAIDs, SSRIs, carbamazepine, chemotherapy.</li>\n</ul>\n<h2>Presentation</h2>\n<p>A rapid fall causes <b>cellular (cerebral) swelling</b> → headache, confusion, seizures, coma. Chronic hyponatremia is better tolerated (brain adapts).</p>\n<div class='band warn'><div class='t'>Correct at the right speed</div>\n<b>Acute / severely symptomatic</b> (seizures): <b>hypertonic (3%) saline</b> for rapid partial correction to relieve cerebral edema. <b>Chronic (&gt;48 h) or severe (&lt;120):</b> correct <b>slowly</b> (limit the daily rise) — overcorrection causes <b>osmotic demyelination syndrome</b> (permanent brain injury). Hypovolemic hyponatremia: <b>isotonic saline</b> restores volume and shuts off the non-osmotic ADH drive.</div>\n<div class='key'>Hyponatremia = too much water (usually inappropriate ADH). Seizing → 3% saline; chronic → correct slowly (ODS risk). Hypovolemic hyponatremia → isotonic saline turns off ADH and the kidney dumps the free water.</div>\n</div>"
+  },
+  {
+   "file": "W34_03_Hypernatremia_Volume.html",
+   "title": "Week 34 · 3 Hypernatremia & ECF Volume Disorders",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Hypernatremia &amp; ECF Volume Disorders</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Too little water</div><h1>Hypernatremia &amp; ECF Volume Disorders</h1></div><div class='r'>Week 34 &middot; KU II &mdash; Fluids, Electrolytes &amp; Renal Pharmacology<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Why hypernatremia means a water deficit (and who can't drink), and how to read ECF volume extremes.</p>\n<h2>Hypernatremia = relative water deficit</h2>\n<p>Na &gt;145 implies <b>too little water</b>. Thirst is such a powerful defense that hypernatremia is uncommon <b>unless the patient can't access/drink water</b>: infants, the elderly, dementia, coma, stroke. Exacerbated by free-water losses — <b>diabetes insipidus</b> (central/AVP-deficient or nephrogenic/AVP-resistant) and osmotic diuresis (hyperglycemia).</p>\n<ul>\n<li><b>Presentation:</b> brain-cell shrinkage → confusion, decreased consciousness (and risk of intracranial bleeding with rapid shifts).</li>\n<li><b>Management:</b> replace water (oral/NG free water or IV <b>D5W</b>); correct at a controlled rate to avoid cerebral edema.</li>\n</ul>\n<h2>ECF volume extremes (a sodium-content problem)</h2>\n<table>\n<tr><th></th><th>Volume expansion (e.g. heart failure)</th><th>Volume depletion (e.g. diarrhea)</th></tr>\n<tr><td>Driver</td><td>Low effective circulating volume → RAAS retains Na</td><td>True fluid/solute loss</td></tr>\n<tr><td>Signs</td><td>Weight gain, ↑JVP, crackles, bilateral edema</td><td>Tachycardia, hypotension, ↓JVP, poor turgor</td></tr>\n<tr><td>Urine</td><td>Low urine Na (avid retention)</td><td><b>Low urine Na/Cl</b> (RAAS-driven reabsorption)</td></tr>\n<tr><td>Treat</td><td>Restrict Na, diurese, improve cardiac function</td><td><b>Isotonic (normal) saline</b> resuscitation</td></tr>\n</table>\n<div class='key'>Hypernatremia = water deficit in someone who can't drink (or has DI). ECF volume is a sodium-content story: heart failure retains Na (edema) → diurese; diarrhea loses volume (low urine Na/Cl) → normal saline.</div>\n</div>"
+  },
+  {
+   "file": "W34_04_Potassium_Hypokalemia.html",
+   "title": "Week 34 · 4 Potassium Physiology & Hypokalemia",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Potassium Physiology &amp; Hypokalemia</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Low K</div><h1>Potassium Physiology &amp; Hypokalemia</h1></div><div class='r'>Week 34 &middot; KU II &mdash; Fluids, Electrolytes &amp; Renal Pharmacology<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Why 98% of potassium hides in cells, how aldosterone sets renal excretion, and the three buckets of hypokalemia.</p>\n<h2>Why potassium matters</h2>\n<p><b>98% of body potassium is intracellular</b> (~150 mmol/L in vs ~4 out); the <b>Na/K-ATPase</b> maintains the gradient that sets the resting membrane potential for cardiac, nerve, and muscle function. Small serum changes have big electrical effects.</p>\n<h2>Renal handling</h2>\n<p>90% of filtered K is reabsorbed proximally; <b>final excretion is set in the distal nephron</b>. <b>Aldosterone</b> inserts <b>ENaC</b> → Na enters the principal cell → lumen-negative voltage → K secreted via <b>ROMK</b>.</p>\n<h2>Hypokalemia (K &lt;3.5) — three buckets</h2>\n<table>\n<tr><th>Bucket</th><th>Causes</th></tr>\n<tr><td><b>Shift into cells</b></td><td>Insulin, β2-agonists (salbutamol), alkalemia, refeeding, hypothermia</td></tr>\n<tr><td><b>GI loss</b></td><td>Diarrhea, laxative abuse (lower-GI fluid is K-rich)</td></tr>\n<tr><td><b>Renal loss</b></td><td>Loop/thiazide diuretics, hyperaldosteronism, Bartter/Gitelman</td></tr>\n</table>\n<ul>\n<li><b>Presentation:</b> weakness, hyporeflexia, palpitations. <b>ECG:</b> flattened T waves, <b>prominent U waves</b>, ST depression, long QT → ventricular arrhythmia.</li>\n<li><b>Replace:</b> oral KCl preferred; IV KCl for severe/NPO with cardiac monitoring and rate limits. <b>Always check and replace magnesium</b> (low Mg makes hypokalemia refractory).</li>\n</ul>\n<div class='key'>K is mostly intracellular; aldosterone (ENaC→ROMK) drives renal excretion. Hypokalemia = shift, GI loss, or renal loss → flattened T + U waves. Replace KCl (oral preferred) and fix magnesium.</div>\n</div>"
+  },
+  {
+   "file": "W34_05_Hyperkalemia.html",
+   "title": "Week 34 · 5 Hyperkalemia",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Hyperkalemia</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>High K</div><h1>Hyperkalemia</h1></div><div class='r'>Week 34 &middot; KU II &mdash; Fluids, Electrolytes &amp; Renal Pharmacology<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The causes, the lethal ECG march, and the four-step stabilize-shift-excrete-dialyze algorithm.</p>\n<h2>Causes (three buckets)</h2>\n<table>\n<tr><th>Bucket</th><th>Causes</th></tr>\n<tr><td><b>Shift out of cells</b></td><td>Insulin deficiency (DKA), acidemia, cell lysis (rhabdomyolysis, tumour lysis, hemolysis, burns)</td></tr>\n<tr><td><b>Decreased excretion</b></td><td>AKI, advanced CKD, low aldosterone effect (<b>ACEi/ARB, spironolactone, NSAIDs</b>)</td></tr>\n<tr><td>Increased intake</td><td>Rarely the sole cause unless renal function is poor</td></tr>\n</table>\n<h2>The lethal ECG march</h2>\n<p><b>Peaked, narrow T waves → flattening P wave + PR prolongation → widening QRS → sine wave → asystole/VF.</b> ECG changes (not just the number) drive urgency.</p>\n<div class='band warn'><div class='t'>Four sequential steps</div>\n<b>1. Stabilize</b> — <b>IV calcium gluconate</b> (raises the threshold potential; does <b>NOT</b> lower potassium — it buys time). <b>2. Shift</b> — <b>IV insulin + glucose</b>, inhaled <b>salbutamol</b>, &plusmn; sodium bicarbonate (if acidotic). <b>3. Excrete</b> — IV saline + <b>furosemide</b>, or a gut <b>potassium binder</b> (patiromer). <b>4. Dialyze</b> — definitive removal if anuric, refractory, or severe CKD.</div>\n<h2>Two practical points</h2>\n<ul>\n<li><b>Pseudohyperkalemia:</b> a hemolyzed sample, a tight tourniquet/fist-clenching, or marked thrombocytosis/leukocytosis can falsely elevate potassium &mdash; if there are no ECG changes and the result is unexpected, <b>repeat the sample</b> (whole-blood/blood-gas) before aggressive treatment.</li>\n<li><b>After the acute treatment:</b> recheck potassium and glucose (insulin can cause delayed hypoglycemia), look for and stop the cause (hold ACEi/ARB/spironolactone/NSAIDs, treat AKI), and remember the shift measures are temporary &mdash; potassium must still be <b>removed</b> (binder, diuresis, or dialysis).</li>\n</ul>\n<div class='key'>Hyperkalemia = shift out, decreased excretion (RAAS blockers!), or intake. Treat by the ECG: calcium to stabilize (doesn't lower K), insulin/glucose + salbutamol to shift, furosemide/binder to excrete, dialysis if refractory. Confirm an unexpected value (pseudohyperkalemia) and always remove the potassium after shifting it.</div>\n</div>"
+  },
+  {
+   "file": "W34_06_AcidBase_Toxic.html",
+   "title": "Week 34 · 6 Acid-Base & Toxic Alcohols",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Acid-Base &amp; Toxic Alcohols</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Gaps</div><h1>Acid-Base &amp; Toxic Alcohols</h1></div><div class='r'>Week 34 &middot; KU II &mdash; Fluids, Electrolytes &amp; Renal Pharmacology<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The anion gap and osmolar gap, the compensation check, and the toxic alcohols whose metabolites blind and poison.</p>\n<h2>The gaps</h2>\n<ul>\n<li><b>Anion gap</b> = Na − (Cl + HCO&#8323;); normal ~12 (adjust for albumin). High-AG causes: <b>GOLDMARK / MUDPILES</b> (glycols, lactate, methanol, aspirin, renal failure, ketoacidosis…).</li>\n<li><b>Osmolar gap</b> = measured − calculated osmolality [calc = 2(Na) + glucose + urea]; normal &lt;10. A high osmolar gap is a <b>rapid screen for toxic alcohols</b>.</li>\n<li><b>Compensation (Winter's):</b> expected pCO&#8322; = 1.5 &times; HCO&#8323; + 8 &plusmn; 2. <b>Delta-delta:</b> ΔAG should ≈ ΔHCO&#8323; — a mismatch reveals a concurrent metabolic alkalosis (e.g. DKA + vomiting) or non-AG acidosis.</li>\n</ul>\n<h2>Toxic alcohols — the metabolite is the poison</h2>\n<table>\n<tr><th>Alcohol</th><th>Toxic metabolite → injury</th></tr>\n<tr><td><b>Ethylene glycol</b> (antifreeze)</td><td>Glycolic acid (acidosis) + <b>oxalic acid → calcium-oxalate crystals → acute renal failure</b></td></tr>\n<tr><td><b>Methanol</b> (windshield fluid)</td><td><b>Formic acid → optic nerve/retina → blindness</b>; basal-ganglia necrosis</td></tr>\n</table>\n<div class='band warn'><div class='t'>Don't wait for levels</div>\nA high osmolar gap + high-AG acidosis is enough to act. <b>Block alcohol dehydrogenase with fomepizole</b> (gold standard; ethanol infusion is the alternative) to stop metabolite formation, and use <b>hemodialysis</b> to clear the small, water-soluble toxin and correct the acidosis. Waiting for confirmatory levels risks blindness or death.</div>\n<div class='key'>High anion gap → GOLDMARK; add an osmolar gap to catch toxic alcohols. Ethylene glycol → oxalate crystals + renal failure; methanol → blindness. Treat with fomepizole + dialysis before levels return.</div>\n</div>"
+  },
+  {
+   "file": "W34_07_Diuretics.html",
+   "title": "Week 34 · 7 Diuretics",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Diuretics</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>By the nephron</div><h1>Diuretics</h1></div><div class='r'>Week 34 &middot; KU II &mdash; Fluids, Electrolytes &amp; Renal Pharmacology<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Each diuretic class by its site, mechanism, and the electrolyte derangement it predictably causes.</p>\n<h2>Diuretics along the nephron</h2>\n<table>\n<tr><th>Class</th><th>Site / mechanism</th><th>Key adverse effects</th></tr>\n<tr><td><b>Carbonic anhydrase inhibitor</b> (acetazolamide)</td><td>PCT — blocks NaHCO&#8323; reabsorption</td><td>Metabolic acidosis, hypokalemia (glaucoma, altitude)</td></tr>\n<tr><td><b>Loop</b> (furosemide, bumetanide)</td><td>Thick ascending limb — blocks <b>Na-K-2Cl</b></td><td>Hypokalemia, hypomagnesemia, hypocalcemia, <b>hyperuricemia</b>, ototoxicity, contraction alkalosis; contraindicated in anuria</td></tr>\n<tr><td><b>Thiazide-like</b> (HCTZ, chlorthalidone)</td><td>DCT — blocks <b>Na-Cl</b></td><td><b>Hyponatremia</b>, hypokalemia, hyperuricemia, <b>hypercalcemia</b>; raises lithium levels</td></tr>\n<tr><td><b>K-sparing / ENaC blocker</b> (amiloride, triamterene)</td><td>Collecting duct — blocks ENaC</td><td>Hyperkalemia</td></tr>\n<tr><td><b>Aldosterone antagonist</b> (spironolactone, eplerenone)</td><td>Collecting duct — blocks mineralocorticoid receptor</td><td><b>Hyperkalemia</b>, gynecomastia (spironolactone); avoid in hyperkalemia/Addison's</td></tr>\n</table>\n<div class='band warn'><div class='t'>Two recurring traps</div>\n<b>Loops waste calcium; thiazides retain it</b> (\"loops lose calcium\"). <b>Thiazides raise lithium</b> to toxic levels (reduced proximal lithium clearance). Both loops and thiazides cause hypokalemia and hyperuricemia (gout flares).</div>\n<div class='key'>CA inhibitor → PCT (acidosis); loop → Na-K-2Cl (loses K/Mg/Ca, ototoxic); thiazide → Na-Cl (low Na, high Ca, lithium toxicity); K-sparing/MRA → collecting duct (hyperkalemia). NSAIDs blunt loop efficacy.</div>\n</div>"
+  },
+  {
+   "file": "W34_08_Urologic_Pharmacology.html",
+   "title": "Week 34 · 8 Urologic Pharmacology",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Urologic Pharmacology</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Bladder & prostate</div><h1>Urologic Pharmacology</h1></div><div class='r'>Week 34 &middot; KU II &mdash; Fluids, Electrolytes &amp; Renal Pharmacology<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The drugs for overactive bladder, BPH, and erectile dysfunction — by receptor, with their signature cautions.</p>\n<h2>Overactive bladder</h2>\n<table>\n<tr><th>Class</th><th>Mechanism</th><th>Caution</th></tr>\n<tr><td><b>Anticholinergics</b> (oxybutynin, solifenacin)</td><td>M3 antagonism → relax detrusor</td><td>Dry mouth, constipation, confusion (elderly); <b>contraindicated in narrow-angle glaucoma</b></td></tr>\n<tr><td><b>β3-agonist</b> (mirabegron)</td><td>Relaxes detrusor via β3 receptors</td><td>Hypertension, tachycardia</td></tr>\n</table>\n<h2>Benign prostatic hyperplasia</h2>\n<table>\n<tr><th>Class</th><th>Mechanism / effect</th><th>Caution</th></tr>\n<tr><td><b>α1-blockers</b> (tamsulosin, alfuzosin; doxazosin non-selective)</td><td>Relax prostate/bladder-neck smooth muscle → <b>rapid</b> symptom relief</td><td><b>First-dose orthostatic hypotension</b> (compounds other antihypertensives), retrograde (\"dry\") ejaculation</td></tr>\n<tr><td><b>5-α reductase inhibitors</b> (finasteride, dutasteride)</td><td>Block testosterone → DHT → <b>shrinks the prostate over ~6 months</b></td><td>Impotence, ↓libido, gynecomastia; lowers PSA; <b>teratogenic</b> (pregnant caregivers shouldn't handle)</td></tr>\n</table>\n<p>The two BPH classes are <b>complementary</b> (immediate dynamic relief + long-term size reduction) and are often combined.</p>\n<h2>Erectile dysfunction</h2>\n<div class='band warn'><div class='t'>PDE5 inhibitors + nitrates = danger</div>\nPDE5 inhibitors (sildenafil, tadalafil) block cGMP breakdown → vasodilation. AEs: flushing, headache, hypotension, priapism, blue-tinted vision (PDE6). <b>Absolutely contraindicated with nitrates</b> (refractory, life-threatening hypotension).</div>\n<div class='key'>OAB: antimuscarinics (avoid in glaucoma) or mirabegron. BPH: α1-blocker for fast relief (orthostatic hypotension, retrograde ejaculation) + 5-ARI to shrink the gland (teratogen, lowers PSA). PDE5 inhibitor + nitrate = forbidden.</div>\n</div>"
+  },
+  {
+   "file": "W34_09_Cram_Sheet.html",
+   "title": "Week 34 · 9 Cram Sheet",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Week 34 · 9 Cram Sheet</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.35;-webkit-font-smoothing:antialiased}\n.page{max-width:1180px;margin:0 auto;padding:18px 20px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:8px;margin-bottom:12px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:26px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.emerg{border:1.5px solid var(--hi);border-radius:6px;background:rgba(0,0,0,.02);padding:9px 12px;margin-bottom:13px}\n.emerg .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--hi);font-weight:600;margin-bottom:5px}\n.emerg .items{columns:3;column-gap:22px;font-size:12px;line-height:1.42}\n.emerg .items div{break-inside:avoid;margin-bottom:3px}\n.emerg b{color:var(--hi)}\n.cols{column-count:4;column-gap:14px}\n@media(max-width:1040px){.cols{column-count:3}}\n@media(max-width:760px){.cols{column-count:2}}\n@media(max-width:520px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(0,0,0,.02);padding:8px 9px 7px;margin:0 0 11px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;padding-bottom:4px;border-bottom:1.5px solid var(--line);color:var(--accent);display:flex;justify-content:space-between;align-items:baseline;gap:6px}\n.card h2 .wk{color:var(--soft);font-size:8.5px;font-weight:500;letter-spacing:.06em;white-space:nowrap}\n.row{margin:0 0 3.5px;font-size:11.5px;line-height:1.32}\n.row .tg{font-weight:600;color:var(--ink)}\n.row .ar{color:var(--soft)}\n.row .ar::before{content:\"\\2192 \";color:var(--accent);font-weight:600}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:5px 0}\n.dnm{color:var(--hi);font-weight:700}\n.foot{margin-top:10px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:landscape;margin:9mm}body{font-size:8.4px}.page{max-width:none;padding:0}.cols{column-count:4;column-gap:8px}.emerg .items{columns:3}.card{margin-bottom:6px}.head h1{font-size:19px}}\n</style><div class='page'><div class='head'><div><div class='k'>Night-Before High-Yield</div><h1>KU II — Fluids, Electrolytes &amp; Renal Pharmacology</h1></div><div class='r'>Week 34 &middot; KU II &mdash; Fluids, Electrolytes &amp; Renal Pharmacology<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><div class='emerg'><div class='t'>★ Do-not-miss &middot; first-step reflexes</div><div class='items'><div><b>Hyperkalemia with ECG changes</b> &rarr; IV calcium FIRST (stabilize), then insulin/glucose + salbutamol (shift), then excrete/dialyze</div><div><b>Acute symptomatic hyponatremia / seizures</b> &rarr; hypertonic (3%) saline; chronic &rarr; correct slowly (osmotic demyelination risk)</div><div><b>High anion-gap acidosis + high osmolar gap</b> &rarr; toxic alcohol &mdash; fomepizole + dialysis, don't wait for levels</div><div><b>Ethylene glycol</b> &rarr; oxalate crystals + renal failure; <b>methanol</b> &rarr; blindness</div><div><b>PDE5 inhibitor + nitrate</b> &rarr; life-threatening hypotension (absolute contraindication)</div><div><b>Refractory hypokalemia</b> &rarr; check and replace magnesium</div></div></div><div class='cols'><div class='card'><h2>Sodium &amp; water <span class='wk'>Na/water</span></h2><div class='row'><span class='tg'>Content</span> <span class='ar'>= ECF volume (edema/hypovolemia)</span></div><div class='row'><span class='tg'>Concentration</span> <span class='ar'>= cell volume (does NOT predict ECF volume)</span></div><div class='row'><span class='tg'>RAAS</span> <span class='ar'>defends volume (sodium)</span></div><div class='row'><span class='tg'>Thirst + ADH</span> <span class='ar'>defend concentration (water)</span></div><div class='row'><span class='tg'>ADH site</span> <span class='ar'>collecting duct → aquaporin-2</span></div></div><div class='card'><h2>Dysnatremias <span class='wk'>Na disorders</span></h2><div class='row'><span class='tg'>Hyponatremia</span> <span class='ar'>water excess (inappropriate ADH)</span></div><div class='row'><span class='tg'>Acute/seizing</span> <span class='ar'>hypertonic 3% saline</span></div><div class='row'><span class='tg'>Chronic</span> <span class='ar'>correct slowly → avoid ODS</span></div><div class='row'><span class='tg'>Hypovolemic hypoNa</span> <span class='ar'>isotonic saline shuts off ADH</span></div><div class='row'><span class='tg'>Hypernatremia</span> <span class='ar'>water deficit (can't drink / DI) → free water/D5W</span></div></div><div class='card'><h2>Potassium <span class='wk'>K+</span></h2><div class='row'><span class='tg'>98% intracellular</span> <span class='ar'>Na/K-ATPase gradient</span></div><div class='row'><span class='tg'>Aldosterone</span> <span class='ar'>ENaC → ROMK → K secretion</span></div><div class='row'><span class='tg'>Hypokalemia</span> <span class='ar'>shift / GI loss / renal loss; U waves</span></div><div class='row'><span class='tg'>Refractory hypoK</span> <span class='ar'>replace magnesium</span></div><div class='row'><span class='tg'>Hyperkalemia</span> <span class='ar'>shift out / ↓excretion (RAAS blockers)</span></div><div class='row'><span class='tg'>HyperK steps</span> <span class='ar'>stabilize → shift → excrete → dialyze</span></div></div><div class='card'><h2>Acid-base <span class='wk'>Acid-base</span></h2><div class='row'><span class='tg'>Anion gap</span> <span class='ar'>Na−(Cl+HCO3); ~12; GOLDMARK</span></div><div class='row'><span class='tg'>Osmolar gap</span> <span class='ar'>>10 → toxic alcohol</span></div><div class='row'><span class='tg'>Winter's</span> <span class='ar'>expected pCO2 = 1.5(HCO3)+8±2</span></div><div class='row'><span class='tg'>Delta-delta</span> <span class='ar'>ΔAG vs ΔHCO3 → hidden disorder</span></div><div class='row'><span class='tg'>Ethylene glycol</span> <span class='ar'>oxalate → renal failure</span></div><div class='row'><span class='tg'>Methanol</span> <span class='ar'>formate → blindness</span></div><div class='row'><span class='tg'>Antidote</span> <span class='ar'>fomepizole + dialysis</span></div></div><div class='card'><h2>Diuretics <span class='wk'>Diuretics</span></h2><div class='row'><span class='tg'>Acetazolamide</span> <span class='ar'>PCT; acidosis</span></div><div class='row'><span class='tg'>Loop</span> <span class='ar'>TAL Na-K-2Cl; loses K/Mg/Ca, ototoxic</span></div><div class='row'><span class='tg'>Thiazide</span> <span class='ar'>DCT Na-Cl; low Na, high Ca, ↑lithium</span></div><div class='row'><span class='tg'>K-sparing/MRA</span> <span class='ar'>collecting duct; hyperkalemia</span></div><div class='row'><span class='tg'>Loops vs thiazides</span> <span class='ar'>loops lose calcium, thiazides keep it</span></div></div><div class='card'><h2>Urologic Rx <span class='wk'>Urology Rx</span></h2><div class='row'><span class='tg'>OAB antimuscarinic</span> <span class='ar'>oxybutynin — avoid in glaucoma</span></div><div class='row'><span class='tg'>OAB β3</span> <span class='ar'>mirabegron — HTN/tachycardia</span></div><div class='row'><span class='tg'>BPH α1-blocker</span> <span class='ar'>tamsulosin — orthostatic, retrograde ejaculation</span></div><div class='row'><span class='tg'>BPH 5-ARI</span> <span class='ar'>finasteride — shrinks prostate, ↓PSA, teratogen</span></div><div class='row'><span class='tg'>ED PDE5</span> <span class='ar'>sildenafil — no nitrates</span></div></div></div><div class='foot'>Week 34 &middot; KU II &mdash; Fluids, Electrolytes &amp; Renal Pharmacology &middot; cram sheet &middot; cue &rarr; answer</div></div>"
+  }
+ ],
+ "drugs": [
+  {
+   "id": "rx:furosemide",
+   "name": "Furosemide",
+   "class": "rx:loop-diuretic",
+   "facets": {
+    "use": "Volume overload (heart failure, edema)",
+    "mechanism": "Loop diuretic — inhibits Na-K-2Cl in the thick ascending limb",
+    "adverse": "Hypokalemia, hypomagnesemia, hypocalcemia, hyperuricemia, ototoxicity, contraction alkalosis",
+    "contra": "Anuria; NSAIDs blunt efficacy"
+   },
+   "ref": {
+    "topic": "Diuretics",
+    "guide": "W34_07_Diuretics.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  },
+  {
+   "id": "rx:bumetanide",
+   "name": "Bumetanide",
+   "class": "rx:loop-diuretic",
+   "facets": {
+    "use": "Loop diuresis (furosemide alternative)",
+    "mechanism": "Loop diuretic (Na-K-2Cl)",
+    "adverse": "As for loop class"
+   },
+   "ref": {
+    "topic": "Diuretics",
+    "guide": "W34_07_Diuretics.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  },
+  {
+   "id": "rx:hydrochlorothiazide",
+   "name": "Hydrochlorothiazide",
+   "class": "rx:thiazide",
+   "facets": {
+    "use": "Hypertension; edema",
+    "mechanism": "Thiazide — inhibits Na-Cl in the DCT",
+    "adverse": "Hyponatremia, hypokalemia, hyperuricemia, hypercalcemia; raises lithium levels"
+   },
+   "ref": {
+    "topic": "Diuretics",
+    "guide": "W34_07_Diuretics.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  },
+  {
+   "id": "rx:chlorthalidone",
+   "name": "Chlorthalidone",
+   "class": "rx:thiazide",
+   "facets": {
+    "use": "Hypertension",
+    "mechanism": "Thiazide-like diuretic",
+    "adverse": "Hyponatremia, hypokalemia, hyperuricemia"
+   },
+   "ref": {
+    "topic": "Diuretics",
+    "guide": "W34_07_Diuretics.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  },
+  {
+   "id": "rx:acetazolamide",
+   "name": "Acetazolamide",
+   "class": "rx:carbonic-anhydrase-inhibitor",
+   "facets": {
+    "use": "Glaucoma, altitude sickness, metabolic alkalosis",
+    "mechanism": "Carbonic anhydrase inhibitor (PCT) — bicarbonate wasting",
+    "adverse": "Metabolic acidosis, hypokalemia, paresthesias"
+   },
+   "ref": {
+    "topic": "Diuretics",
+    "guide": "W34_07_Diuretics.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  },
+  {
+   "id": "rx:spironolactone",
+   "name": "Spironolactone",
+   "class": "rx:aldosterone-antagonist",
+   "facets": {
+    "use": "Heart failure, cirrhosis, resistant hypertension",
+    "mechanism": "Aldosterone receptor antagonist (collecting duct)",
+    "adverse": "Hyperkalemia, gynecomastia",
+    "contra": "Hyperkalemia, Addison's"
+   },
+   "ref": {
+    "topic": "Diuretics",
+    "guide": "W34_07_Diuretics.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  },
+  {
+   "id": "rx:eplerenone",
+   "name": "Eplerenone",
+   "class": "rx:aldosterone-antagonist",
+   "facets": {
+    "use": "Heart failure / hypertension",
+    "mechanism": "Selective aldosterone antagonist",
+    "adverse": "Hyperkalemia"
+   },
+   "ref": {
+    "topic": "Diuretics",
+    "guide": "W34_07_Diuretics.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  },
+  {
+   "id": "rx:amiloride",
+   "name": "Amiloride",
+   "class": "rx:enac-blocker",
+   "facets": {
+    "use": "Potassium-sparing diuresis (combination)",
+    "mechanism": "Blocks ENaC in the collecting duct",
+    "adverse": "Hyperkalemia"
+   },
+   "ref": {
+    "topic": "Diuretics",
+    "guide": "W34_07_Diuretics.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  },
+  {
+   "id": "rx:triamterene",
+   "name": "Triamterene",
+   "class": "rx:enac-blocker",
+   "facets": {
+    "use": "Potassium-sparing diuresis",
+    "mechanism": "ENaC blocker",
+    "adverse": "Hyperkalemia, renal stones"
+   },
+   "ref": {
+    "topic": "Diuretics",
+    "guide": "W34_07_Diuretics.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  },
+  {
+   "id": "rx:potassium-chloride",
+   "name": "Potassium chloride (KCl)",
+   "class": "rx:potassium-salt",
+   "facets": {
+    "use": "Hypokalemia replacement",
+    "mechanism": "Potassium salt",
+    "adverse": "GI irritation; rebound hyperkalemia / cardiac if over-infused",
+    "monitoring": "Oral preferred; IV needs rate limits + cardiac monitoring"
+   },
+   "ref": {
+    "topic": "Hypokalemia",
+    "guide": "W34_04_Potassium_Hypokalemia.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  },
+  {
+   "id": "rx:salbutamol",
+   "name": "Salbutamol (albuterol)",
+   "class": "rx:beta2-agonist",
+   "facets": {
+    "use": "Hyperkalemia (shift); bronchospasm",
+    "mechanism": "β2-agonist — drives potassium into cells",
+    "adverse": "Tremor, tachycardia"
+   },
+   "ref": {
+    "topic": "Hyperkalemia",
+    "guide": "W34_05_Hyperkalemia.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  },
+  {
+   "id": "rx:insulin-regular",
+   "name": "Insulin (regular, IV infusion)",
+   "class": "rx:insulin",
+   "facets": {
+    "use": "Hyperkalemia (with glucose)",
+    "mechanism": "Shifts potassium intracellularly",
+    "adverse": "Hypoglycemia"
+   },
+   "ref": {
+    "topic": "Hyperkalemia",
+    "guide": "W34_05_Hyperkalemia.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  },
+  {
+   "id": "rx:calcium-gluconate",
+   "name": "Calcium gluconate (IV)",
+   "class": "rx:calcium-salt",
+   "facets": {
+    "use": "Hyperkalemia with ECG changes",
+    "mechanism": "Raises threshold potential, stabilizes myocardium (does not lower K)",
+    "adverse": "Tissue necrosis on extravasation"
+   },
+   "ref": {
+    "topic": "Hyperkalemia",
+    "guide": "W34_05_Hyperkalemia.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  },
+  {
+   "id": "rx:sodium-bicarbonate",
+   "name": "Sodium bicarbonate",
+   "class": "rx:alkalinizing-agent",
+   "facets": {
+    "use": "Severe acidemia; adjunct hyperkalemia",
+    "mechanism": "Alkalinizing agent — shifts potassium into cells",
+    "adverse": "Volume/sodium load, hypocalcemia"
+   },
+   "ref": {
+    "topic": "Hyperkalemia",
+    "guide": "W34_05_Hyperkalemia.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  },
+  {
+   "id": "rx:patiromer",
+   "name": "Patiromer",
+   "class": "rx:potassium-binder",
+   "facets": {
+    "use": "Hyperkalemia (gut binding)",
+    "mechanism": "Potassium binder in the colon",
+    "adverse": "GI upset, hypomagnesemia"
+   },
+   "ref": {
+    "topic": "Hyperkalemia",
+    "guide": "W34_05_Hyperkalemia.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  },
+  {
+   "id": "rx:fomepizole",
+   "name": "Fomepizole",
+   "class": "rx:adh-enzyme-inhibitor",
+   "facets": {
+    "use": "Ethylene glycol / methanol poisoning",
+    "mechanism": "Inhibits alcohol dehydrogenase — blocks toxic metabolite formation",
+    "adverse": "Well tolerated; pair with hemodialysis"
+   },
+   "ref": {
+    "topic": "Toxic alcohols",
+    "guide": "W34_06_AcidBase_Toxic.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  },
+  {
+   "id": "rx:desmopressin",
+   "name": "Desmopressin (DDAVP)",
+   "class": "rx:vasopressin-analog",
+   "facets": {
+    "use": "Central diabetes insipidus",
+    "mechanism": "Vasopressin V2 agonist — collecting-duct water reabsorption",
+    "adverse": "Hyponatremia"
+   },
+   "ref": {
+    "topic": "Sodium & water",
+    "guide": "W34_02_Hyponatremia.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  },
+  {
+   "id": "rx:tolvaptan",
+   "name": "Tolvaptan",
+   "class": "rx:vaptan",
+   "facets": {
+    "use": "Hypervolemic/euvolemic hyponatremia (SIADH); ADPKD",
+    "mechanism": "Vasopressin V2 antagonist — free-water excretion",
+    "adverse": "Overly rapid correction, hepatotoxicity"
+   },
+   "ref": {
+    "topic": "Sodium & water",
+    "guide": "W34_02_Hyponatremia.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  },
+  {
+   "id": "rx:oxybutynin",
+   "name": "Oxybutynin",
+   "class": "rx:anticholinergic",
+   "facets": {
+    "use": "Overactive bladder",
+    "mechanism": "Antimuscarinic (M3) — relaxes detrusor",
+    "adverse": "Dry mouth, constipation, confusion",
+    "contra": "Narrow-angle glaucoma"
+   },
+   "ref": {
+    "topic": "Urologic pharmacology",
+    "guide": "W34_08_Urologic_Pharmacology.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  },
+  {
+   "id": "rx:mirabegron",
+   "name": "Mirabegron",
+   "class": "rx:beta3-agonist",
+   "facets": {
+    "use": "Overactive bladder",
+    "mechanism": "β3-adrenergic agonist — relaxes detrusor",
+    "adverse": "Hypertension, tachycardia"
+   },
+   "ref": {
+    "topic": "Urologic pharmacology",
+    "guide": "W34_08_Urologic_Pharmacology.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  },
+  {
+   "id": "rx:tamsulosin",
+   "name": "Tamsulosin",
+   "class": "rx:alpha-blocker",
+   "facets": {
+    "use": "BPH lower urinary tract symptoms",
+    "mechanism": "α1-blocker — relaxes prostate/bladder-neck smooth muscle",
+    "adverse": "Orthostatic hypotension, retrograde ejaculation"
+   },
+   "ref": {
+    "topic": "Urologic pharmacology",
+    "guide": "W34_08_Urologic_Pharmacology.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  },
+  {
+   "id": "rx:finasteride",
+   "name": "Finasteride",
+   "class": "rx:5ari",
+   "facets": {
+    "use": "BPH (gland reduction); androgenetic alopecia",
+    "mechanism": "5-α reductase inhibitor — blocks testosterone→DHT",
+    "adverse": "Impotence, ↓libido, gynecomastia; lowers PSA",
+    "contra": "Pregnancy (teratogen — don't handle if pregnant)"
+   },
+   "ref": {
+    "topic": "Urologic pharmacology",
+    "guide": "W34_08_Urologic_Pharmacology.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  },
+  {
+   "id": "rx:sildenafil",
+   "name": "Sildenafil",
+   "class": "rx:pde5-inhibitor",
+   "facets": {
+    "use": "Erectile dysfunction",
+    "mechanism": "PDE5 inhibitor — prevents cGMP breakdown",
+    "adverse": "Headache, flushing, blue-tinted vision, priapism",
+    "contra": "Concurrent nitrates"
+   },
+   "ref": {
+    "topic": "Urologic pharmacology",
+    "guide": "W34_08_Urologic_Pharmacology.html",
+    "week": "Week 34 · KU II — Fluids, Electrolytes & Renal Pharmacology"
+   }
+  }
+ ]
+}

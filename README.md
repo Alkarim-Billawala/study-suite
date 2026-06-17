@@ -64,9 +64,6 @@ the right format. The packs you create from your own material are entirely yours
   an *optional* paid add-on (it's the one feature that needs a server); everything you can do on
   your own device stays free. Your synced data will be end-to-end encrypted, so it can't be read
   by anyone but you. See the [FAQ](#faq) below for details.
-- **Pharmacology guide** — a cross-week drug index that builds itself from the packs you have
-  turned on, gathering every medication's uses, mechanism, cautions, and side effects in one place
-  with links back to each week and topic it appears in.
 
 ## FAQ
 

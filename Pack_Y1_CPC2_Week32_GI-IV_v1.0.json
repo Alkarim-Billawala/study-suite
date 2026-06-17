@@ -1,0 +1,1646 @@
+{
+ "pack": "Week 32 — GI IV (Liver & Cirrhosis)",
+ "id": "wk32",
+ "formatVersion": "2.0",
+ "version": "1.0",
+ "author": "Alkarim Billawala / alkarim.billawala.ca",
+ "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
+ "created": "2026-06-16",
+ "updated": "2026-06-16",
+ "school": "UofT — Temerty Medicine",
+ "year": "Year 1",
+ "course": "CPC 2",
+ "weeks": "Week 32 · GI IV — Liver & Cirrhosis",
+ "questions": [
+  {
+   "id": "wk32_q01",
+   "sys": "GI",
+   "topic": "Liver · Alcoholic hepatitis",
+   "difficulty": "hard",
+   "stem": "A 48-year-old heavy drinker has jaundice, ascites, and asterixis. ALT 120, AST 290, bilirubin 450, albumin 24, INR 2.9; paracentesis SAAG 14, neutrophils 150; Maddrey score 65. What is the most appropriate specific therapy and its mechanism?",
+   "options": [
+    "Ceftriaxone to prevent SBP",
+    "Lactulose to excrete ammonia",
+    "Prednisolone to suppress cytokine-mediated injury",
+    "Spironolactone to mobilize ascites"
+   ],
+   "correct": 2,
+   "explain": "Severe <b>alcoholic hepatitis</b> (AST:ALT &gt;2:1, <b>Maddrey &ge;32</b>) is treated with <b>prednisolone</b> to suppress cytokine-mediated injury. The ascitic neutrophil count is &lt;250 (no SBP), so steroids aren't contraindicated. (Lactulose, antibiotics, and diuretics treat complications, not the underlying hepatitis.)",
+   "guide": {
+    "f": "W32_02_Hepatitis.html",
+    "t": "2 · Alcoholic hepatitis",
+    "s": "prednisolone if Maddrey ≥32"
+   }
+  },
+  {
+   "id": "wk32_q02",
+   "sys": "GI",
+   "topic": "Liver · PBC",
+   "difficulty": "medium",
+   "stem": "A 54-year-old woman with Sjögren's has 6 months of fatigue and intense pruritus. ALT 45, AST 40, ALP 510, GGT 400, bilirubin 18; US shows no biliary dilation. Which test confirms the diagnosis and what is first-line treatment?",
+   "options": [
+    "ANA; prednisone",
+    "p-ANCA; biliary stenting",
+    "Anti-SMA; azathioprine",
+    "Anti-mitochondrial antibody; ursodeoxycholic acid"
+   ],
+   "correct": 3,
+   "explain": "A cholestatic pattern (ALP/GGT up, ALT/AST normal) with fatigue, pruritus, and autoimmune comorbidity in a middle-aged woman = <b>primary biliary cholangitis</b>. <b>AMA</b> confirms it; <b>ursodeoxycholic acid</b> is first-line.",
+   "guide": {
+    "f": "W32_03_Metabolic_Genetic.html",
+    "t": "3 · PBC",
+    "s": "AMA → UDCA"
+   }
+  },
+  {
+   "id": "wk32_q03",
+   "sys": "GI",
+   "topic": "Liver · Variceal bleed",
+   "difficulty": "hard",
+   "stem": "A 60-year-old with HCV cirrhosis vomits bright red blood and is tachycardic/hypotensive. After airway control and fluid/blood resuscitation, which three pharmacologic interventions are given before endoscopy?",
+   "options": [
+    "Propranolol, ceftriaxone, pantoprazole",
+    "Octreotide, ceftriaxone, pantoprazole",
+    "Octreotide, lactulose, furosemide",
+    "Vasopressin, norfloxacin, spironolactone"
+   ],
+   "correct": 1,
+   "explain": "Variceal bleeding temporizing trio: <b>octreotide</b> (splanchnic vasoconstriction), <b>ceftriaxone</b> (prophylactic antibiotics reduce SBP/mortality), and an <b>IV PPI (pantoprazole)</b> to cover a possible ulcer &mdash; then urgent band ligation.",
+   "guide": {
+    "f": "W32_06_Variceal_Bleeding.html",
+    "t": "6 · Before endoscopy",
+    "s": "octreotide + ceftriaxone + PPI"
+   }
+  },
+  {
+   "id": "wk32_q04",
+   "sys": "GI",
+   "topic": "Liver · Wilson",
+   "difficulty": "hard",
+   "stem": "A 24-year-old has acute hand tremors, new erratic psychiatric behavior, mildly elevated transaminases, and a Coombs-negative hemolytic anemia. What is the pathophysiology and the expected slit-lamp finding?",
+   "options": [
+    "HFE mutation; Kayser-Fleischer rings",
+    "PiZZ misfolded protein; band keratopathy",
+    "ATP7B mutation → impaired ceruloplasmin and copper overload; Kayser-Fleischer rings",
+    "Autoimmune bile-duct destruction; xanthelasma"
+   ],
+   "correct": 2,
+   "explain": "Young age + neuropsychiatric symptoms + Coombs-negative hemolysis = <b>Wilson disease</b>: an <b>ATP7B</b> defect impairs biliary copper excretion and ceruloplasmin synthesis &rarr; copper overload, with <b>Kayser-Fleischer rings</b> on slit-lamp. Treat with chelation (penicillamine/trientine) or zinc.",
+   "guide": {
+    "f": "W32_03_Metabolic_Genetic.html",
+    "t": "3 · Wilson",
+    "s": "ATP7B + KF rings"
+   }
+  },
+  {
+   "id": "wk32_q05",
+   "sys": "GI",
+   "topic": "Liver · Ascites",
+   "difficulty": "medium",
+   "stem": "A 55-year-old with MASH cirrhosis has worsening ascites despite a 1.5 g/day sodium diet, on furosemide 40 mg and spironolactone 100 mg daily. Creatinine and potassium are normal. Best next step?",
+   "options": [
+    "Immediate large-volume paracentesis",
+    "Titrate spironolactone to 200 mg and furosemide to 80 mg",
+    "Refer for TIPS now",
+    "Add hydrochlorothiazide"
+   ],
+   "correct": 1,
+   "explain": "With stable renal function and electrolytes, the next step is to <b>up-titrate the dual diuretics</b> (toward the max spironolactone 400 / furosemide 160 mg) before escalating to paracentesis or TIPS.",
+   "guide": {
+    "f": "W32_05_Ascites_SBP.html",
+    "t": "5 · Diuretics",
+    "s": "titrate up first"
+   }
+  },
+  {
+   "id": "wk32_q06",
+   "sys": "GI",
+   "topic": "Liver · AIH + HBV serology",
+   "difficulty": "hard",
+   "stem": "A 35-year-old woman has fatigue and RUQ pain. ALT 850, AST 700, ALP 140, bilirubin 40. Serology: HBsAg neg, anti-HBs pos, anti-HBc neg, anti-HCV neg, anti-HAV IgM neg. IgG 2.5× normal, anti-SMA positive. HBV status and diagnosis?",
+   "options": [
+    "Immune via natural infection; autoimmune hepatitis",
+    "Non-immune; acute hepatitis B",
+    "Immune via vaccination; type 1 autoimmune hepatitis",
+    "Chronic carrier; drug-induced injury"
+   ],
+   "correct": 2,
+   "explain": "<b>Anti-HBs positive with anti-HBc negative = vaccine-induced immunity</b>. The hepatocellular injury with high IgG and positive anti-SMA confirms <b>type 1 autoimmune hepatitis</b> (treat with steroids + azathioprine).",
+   "guide": {
+    "f": "W32_02_Hepatitis.html",
+    "t": "2 · HBV serology",
+    "s": "anti-HBs+/anti-HBc− = vaccinated"
+   }
+  },
+  {
+   "id": "wk32_q07",
+   "sys": "GI",
+   "topic": "Liver · SBP",
+   "difficulty": "medium",
+   "stem": "A 62-year-old cirrhotic with ascites and varices (no recent bleeding) has fever, abdominal pain, and new lethargy. Paracentesis: cloudy fluid, 450 neutrophils/mm³. Diagnosis and how to manage the encephalopathy?",
+   "options": [
+    "SBP; lactulose",
+    "SBP; octreotide",
+    "Malignant ascites; prednisolone",
+    "Transudative ascites; furosemide"
+   ],
+   "correct": 0,
+   "explain": "Ascitic <b>neutrophils &gt;250</b> = <b>spontaneous bacterial peritonitis</b> (treat with IV ceftriaxone). The infection triggered <b>encephalopathy</b>; manage that with <b>lactulose</b> while treating the SBP.",
+   "guide": {
+    "f": "W32_05_Ascites_SBP.html",
+    "t": "5 · SBP",
+    "s": "neutrophils >250"
+   }
+  },
+  {
+   "id": "wk32_q08",
+   "sys": "GI",
+   "topic": "Liver · Encephalopathy stage",
+   "difficulty": "medium",
+   "stem": "A cirrhotic is oriented to person and place but not time, with sleep-wake inversion and asterixis on wrist extension. What West Haven stage is this?",
+   "options": [
+    "Stage 0",
+    "Stage 1",
+    "Stage 2",
+    "Stage 3"
+   ],
+   "correct": 2,
+   "explain": "Disorientation to time, behavioral change, and especially <b>asterixis</b> (which first appears at this point) define <b>West Haven stage 2</b>.",
+   "guide": {
+    "f": "W32_07_Encephalopathy.html",
+    "t": "7 · West Haven",
+    "s": "asterixis = stage 2"
+   }
+  },
+  {
+   "id": "wk32_q09",
+   "sys": "GI",
+   "topic": "Liver · Cholestatic physiology",
+   "difficulty": "medium",
+   "stem": "A woman with PSC has RUQ pain, fever, scleral icterus, clay-colored stools, and dark tea-colored urine. What explains the stool and urine changes?",
+   "options": [
+    "Hemolysis with excess unconjugated bilirubin",
+    "Complete CBD obstruction preventing conjugated bilirubin reaching the intestine",
+    "Acute failure of bilirubin conjugation",
+    "Overproduction of urobilinogen by colonic bacteria"
+   ],
+   "correct": 1,
+   "explain": "<b>CBD obstruction</b> stops conjugated bilirubin reaching the gut &rarr; no stercobilinogen &rarr; <b>pale stools</b>; conjugated bilirubin spills into blood and is excreted renally &rarr; <b>dark urine</b>.",
+   "guide": {
+    "f": "W32_07_Encephalopathy.html",
+    "t": "7 · Cholestasis",
+    "s": "pale stool, dark urine"
+   }
+  },
+  {
+   "id": "wk32_q10",
+   "sys": "GI",
+   "topic": "Liver · Hyperacute failure",
+   "difficulty": "medium",
+   "stem": "A 20-year-old with depression is obtunded. AST 14,500, ALT 6,200, bilirubin 65, INR 3.1. Most likely diagnosis and syndrome?",
+   "options": [
+    "Severe alcoholic hepatitis; acute-on-chronic failure",
+    "Autoimmune hepatitis; chronic active hepatitis",
+    "Wilson disease; hemolytic crisis",
+    "Acetaminophen overdose; hyperacute liver failure"
+   ],
+   "correct": 3,
+   "explain": "Transaminases in the <b>thousands</b> with high bilirubin/INR within days = <b>hyperacute liver failure</b>, most commonly from <b>acetaminophen overdose</b> (treat with N-acetylcysteine).",
+   "guide": {
+    "f": "W32_01_Liver_Assessment.html",
+    "t": "1 · Hyperacute failure",
+    "s": "acetaminophen"
+   }
+  },
+  {
+   "id": "wk32_q11",
+   "sys": "GI",
+   "topic": "Liver · Transplant contraindication",
+   "difficulty": "hard",
+   "stem": "A 71-year-old with decompensated cirrhosis (MELD-Na 17), well-controlled HIV, hypertension, and a prior variceal bleed reports cutting alcohol to 'one glass of wine a month.' What is her absolute contraindication to transplant?",
+   "options": [
+    "Age >70",
+    "History of variceal bleeding",
+    "Well-controlled HIV",
+    "Active alcohol use"
+   ],
+   "correct": 3,
+   "explain": "Transplant requires <b>complete, permanent cessation of alcohol</b> — ongoing use (even 'one glass a month') is an <b>absolute contraindication</b>. Age &gt;70 is only relative; well-controlled HIV and prior variceal bleeding are not contraindications.",
+   "guide": {
+    "f": "W32_08_Transplant.html",
+    "t": "8 · Contraindications",
+    "s": "active alcohol use"
+   }
+  },
+  {
+   "id": "wk32_q12",
+   "sys": "GI",
+   "topic": "Liver · SAAG",
+   "difficulty": "medium",
+   "stem": "A 60-year-old with new ascites has an ascitic albumin of 34 g/L and serum albumin of 36 g/L. What is the SAAG and most likely etiology?",
+   "options": [
+    "2 g/L; portal hypertension from cirrhosis",
+    "2 g/L; exudative process (malignancy or infection)",
+    "70 g/L; transudate",
+    "11 g/L; heart failure"
+   ],
+   "correct": 1,
+   "explain": "SAAG = 36 &minus; 34 = <b>2 g/L</b>. A SAAG <b>&lt;11</b> indicates an <b>exudate</b> (intra-abdominal malignancy or infection), not portal hypertension (which gives a transudate, SAAG &ge;11).",
+   "guide": {
+    "f": "W32_05_Ascites_SBP.html",
+    "t": "5 · SAAG",
+    "s": "<11 = exudate"
+   }
+  },
+  {
+   "id": "wk32_q13",
+   "sys": "GI",
+   "topic": "Liver · Cirrhosis stage",
+   "difficulty": "medium",
+   "stem": "A 73-year-old with HCV had band ligation 2 years ago after hematemesis; he currently has no ascites and a normal neuro exam. What clinical stage of cirrhosis is he?",
+   "options": [
+    "Stage 1",
+    "Stage 2",
+    "Stage 3",
+    "Stage 4"
+   ],
+   "correct": 2,
+   "explain": "Varices <b>with a history of bleeding</b> (but no ascites/overt failure) defines <b>Stage 3</b>. Ascites or overt liver failure would move him to Stage 4.",
+   "guide": {
+    "f": "W32_04_Cirrhosis_Staging.html",
+    "t": "4 · Stages",
+    "s": "varices + prior bleed = 3"
+   }
+  },
+  {
+   "id": "wk32_q14",
+   "sys": "GI",
+   "topic": "Liver · LFT pattern",
+   "difficulty": "easy",
+   "stem": "A patient has ALP 480 and GGT 350 with ALT 40 and AST 38. Which pattern is this and what does it suggest?",
+   "options": [
+    "Hepatocellular; viral hepatitis",
+    "Cholestatic; impaired bile flow",
+    "Synthetic failure; cirrhosis",
+    "Normal LFTs"
+   ],
+   "correct": 1,
+   "explain": "ALP and GGT elevated out of proportion to ALT/AST is a <b>cholestatic</b> pattern, indicating interrupted bile flow (obstruction, PBC, PSC). GGT confirms the ALP is hepatic.",
+   "guide": {
+    "f": "W32_01_Liver_Assessment.html",
+    "t": "1 · Patterns",
+    "s": "cholestatic"
+   }
+  },
+  {
+   "id": "wk32_q15",
+   "sys": "GI",
+   "topic": "Liver · HBV chronic",
+   "difficulty": "medium",
+   "stem": "A patient with chronic active hepatitis B (HBsAg positive >6 months, elevated DNA and ALT) needs treatment. Which agent is appropriate first-line?",
+   "options": [
+    "Sofosbuvir/velpatasvir",
+    "Entecavir or tenofovir",
+    "Prednisolone",
+    "Ursodeoxycholic acid"
+   ],
+   "correct": 1,
+   "explain": "Chronic active HBV is treated with a <b>nucleos(t)ide analogue (entecavir or tenofovir)</b>, often lifelong. DAAs (sofosbuvir/velpatasvir) are for HCV; UDCA is for PBC.",
+   "guide": {
+    "f": "W32_02_Hepatitis.html",
+    "t": "2 · HBV",
+    "s": "entecavir/tenofovir"
+   }
+  },
+  {
+   "id": "wk32_q16",
+   "sys": "GI",
+   "topic": "Liver · Hemochromatosis",
+   "difficulty": "medium",
+   "stem": "A 50-year-old man has diabetes, arthropathy, bronzed skin, a high ferritin and high transferrin saturation, and is C282Y homozygous. What is the mainstay of treatment?",
+   "options": [
+    "Phlebotomy",
+    "Penicillamine",
+    "Corticosteroids",
+    "Ursodeoxycholic acid"
+   ],
+   "correct": 0,
+   "explain": "Hereditary <b>hemochromatosis</b> (C282Y, iron overload &mdash; 'bronze diabetes') is treated with <b>therapeutic phlebotomy</b> (target ferritin 50&ndash;100); chelation is for those who can't be phlebotomized.",
+   "guide": {
+    "f": "W32_03_Metabolic_Genetic.html",
+    "t": "3 · Hemochromatosis",
+    "s": "phlebotomy"
+   }
+  },
+  {
+   "id": "wk32_q17",
+   "sys": "GI",
+   "topic": "Liver · HCC surveillance",
+   "difficulty": "easy",
+   "stem": "A patient with compensated (Stage 1) cirrhosis asks about cancer screening. What surveillance is recommended?",
+   "options": [
+    "No screening until decompensation",
+    "Biannual liver ultrasound ± serum AFP",
+    "Annual CT only if symptomatic",
+    "Colonoscopy every 5 years"
+   ],
+   "correct": 1,
+   "explain": "All cirrhotics — at <b>any</b> stage — get <b>liver ultrasound every 6 months &plusmn; AFP</b> for hepatocellular carcinoma, which can arise even in compensated disease.",
+   "guide": {
+    "f": "W32_07_Encephalopathy.html",
+    "t": "7 · HCC",
+    "s": "US + AFP q6 months"
+   }
+  },
+  {
+   "id": "wk32_q18",
+   "sys": "GI",
+   "topic": "Liver · Paracentesis",
+   "difficulty": "medium",
+   "stem": "A cirrhotic with tense ascites undergoes a 6-litre therapeutic paracentesis. What should be co-administered and why?",
+   "options": [
+    "Nothing additional is needed",
+    "IV albumin to prevent post-paracentesis circulatory dysfunction / renal injury",
+    "IV antibiotics for all paracenteses",
+    "A bolus of normal saline only"
+   ],
+   "correct": 1,
+   "explain": "For large-volume paracentesis (&gt;4&ndash;5 L), give <b>IV albumin (~100 cc of 25% per 4&ndash;5 L removed)</b> to prevent post-paracentesis circulatory dysfunction and acute kidney injury.",
+   "guide": {
+    "f": "W32_05_Ascites_SBP.html",
+    "t": "5 · Paracentesis",
+    "s": "albumin per 4–5 L"
+   }
+  },
+  {
+   "id": "wk32_q19",
+   "sys": "GI",
+   "topic": "Liver · PSC",
+   "difficulty": "medium",
+   "stem": "A 40-year-old man with ulcerative colitis has a cholestatic LFT pattern and MRCP showing multifocal bile-duct strictures with beading. Which antibody and association fit, and what is the medical treatment?",
+   "options": [
+    "AMA; ursodeoxycholic acid cures it",
+    "p-ANCA; no disease-modifying drug — manage strictures (linked to IBD)",
+    "Anti-SMA; lifelong steroids",
+    "HFE; phlebotomy"
+   ],
+   "correct": 1,
+   "explain": "Multifocal bile-duct strictures (onion-skin fibrosis) in a patient with IBD = <b>primary sclerosing cholangitis</b>, associated with <b>p-ANCA</b>. There is <b>no disease-modifying medical therapy</b>; manage strictures and monitor for cholangiocarcinoma.",
+   "guide": {
+    "f": "W32_03_Metabolic_Genetic.html",
+    "t": "3 · PSC",
+    "s": "p-ANCA + IBD"
+   }
+  },
+  {
+   "id": "wk32_q20",
+   "sys": "GI",
+   "topic": "Liver · Synthetic function",
+   "difficulty": "medium",
+   "stem": "Which laboratory value is the earliest blood test indicator of declining liver synthetic function?",
+   "options": [
+    "ALT",
+    "Elevated INR (low factor II/prothrombin)",
+    "ALP",
+    "GGT"
+   ],
+   "correct": 1,
+   "explain": "A rising <b>INR</b> (from reduced synthesis of clotting factors, especially the short-lived factor VII/II) is the <b>earliest</b> indicator of failing synthetic function — earlier than albumin (longer half-life). Transaminases reflect injury, not function.",
+   "guide": {
+    "f": "W32_01_Liver_Assessment.html",
+    "t": "1 · Synthetic function",
+    "s": "INR earliest"
+   }
+  }
+ ],
+ "cards": [
+  {
+   "id": "wk32_c01",
+   "sys": "GI",
+   "topic": "LFT patterns",
+   "type": "qa",
+   "guide": {
+    "f": "W32_01_Liver_Assessment.html",
+    "t": "1 · Patterns",
+    "s": "hepatocellular vs cholestatic"
+   },
+   "prompt": "Distinguish the hepatocellular and cholestatic LFT patterns.",
+   "answer": "Hepatocellular: ALT/AST >> ALP/GGT (hepatocyte injury). Cholestatic: ALP/GGT >> ALT/AST (impaired bile flow). GGT confirms a hepatic source of a raised ALP."
+  },
+  {
+   "id": "wk32_c02",
+   "sys": "GI",
+   "topic": "Enzyme origins",
+   "type": "qa",
+   "guide": {
+    "f": "W32_01_Liver_Assessment.html",
+    "t": "1 · Enzymes",
+    "s": "origins"
+   },
+   "prompt": "Where do ALT, AST, ALP, and GGT come from?",
+   "answer": "ALT is liver-specific; AST is also in muscle/heart/RBCs; ALP is in liver, bone, placenta, gut; GGT comes from biliary epithelium and confirms a hepatic ALP."
+  },
+  {
+   "id": "wk32_c03",
+   "sys": "GI",
+   "topic": "Synthetic markers",
+   "type": "qa",
+   "guide": {
+    "f": "W32_01_Liver_Assessment.html",
+    "t": "1 · Function",
+    "s": "INR/albumin"
+   },
+   "prompt": "Which tests reflect liver function rather than injury?",
+   "answer": "Synthetic — INR (earliest indicator of failure) and albumin (low → ascites/edema) — and excretory — bilirubin. Transaminases reflect injury, not function."
+  },
+  {
+   "id": "wk32_c04",
+   "sys": "GI",
+   "topic": "Hyperacute failure",
+   "type": "qa",
+   "guide": {
+    "f": "W32_01_Liver_Assessment.html",
+    "t": "1 · Hyperacute",
+    "s": "cause"
+   },
+   "prompt": "What defines hyperacute liver failure and its commonest cause?",
+   "answer": "Massive transaminases (often >5000) with high bilirubin/INR within 1 week; most commonly acetaminophen overdose (treat with N-acetylcysteine)."
+  },
+  {
+   "id": "wk32_c05",
+   "sys": "GI",
+   "topic": "Alcoholic hepatitis",
+   "type": "qa",
+   "guide": {
+    "f": "W32_02_Hepatitis.html",
+    "t": "2 · Alcoholic",
+    "s": "Maddrey"
+   },
+   "prompt": "How is severe alcoholic hepatitis identified and treated?",
+   "answer": "AST:ALT ratio >2:1 with a Maddrey discriminant function ≥32 indicates high mortality → prednisolone (unless active GI bleeding or uncontrolled infection)."
+  },
+  {
+   "id": "wk32_c06",
+   "sys": "GI",
+   "topic": "HBV serology",
+   "type": "qa",
+   "guide": {
+    "f": "W32_02_Hepatitis.html",
+    "t": "2 · HBV",
+    "s": "markers"
+   },
+   "prompt": "Interpret HBsAg, anti-HBs, and anti-HBc.",
+   "answer": "HBsAg = current infection; anti-HBs = immunity (vaccine or past infection); anti-HBc IgM = acute infection. Anti-HBs+ with anti-HBc− means vaccinated."
+  },
+  {
+   "id": "wk32_c07",
+   "sys": "GI",
+   "topic": "HCV",
+   "type": "qa",
+   "guide": {
+    "f": "W32_02_Hepatitis.html",
+    "t": "2 · HCV",
+    "s": "cure"
+   },
+   "prompt": "How is hepatitis C diagnosed and treated?",
+   "answer": "Antibody screen, confirmed by HCV RNA PCR. It is curable with direct-acting antivirals (e.g. sofosbuvir/velpatasvir) over 8–12 weeks."
+  },
+  {
+   "id": "wk32_c08",
+   "sys": "GI",
+   "topic": "AIH",
+   "type": "qa",
+   "guide": {
+    "f": "W32_03_Metabolic_Genetic.html",
+    "t": "3 · AIH",
+    "s": "markers/treatment"
+   },
+   "prompt": "What markers and treatment define autoimmune hepatitis?",
+   "answer": "High IgG (>2×), ANA, anti-SMA (type 1) or anti-LKM (type 2), interface hepatitis on biopsy; treat with corticosteroids + azathioprine."
+  },
+  {
+   "id": "wk32_c09",
+   "sys": "GI",
+   "topic": "PBC vs PSC",
+   "type": "qa",
+   "guide": {
+    "f": "W32_03_Metabolic_Genetic.html",
+    "t": "3 · Cholestatic",
+    "s": "PBC vs PSC"
+   },
+   "prompt": "Contrast PBC and PSC.",
+   "answer": "PBC: AMA-positive, middle-aged woman, fatigue/pruritus → UDCA. PSC: p-ANCA, onion-skin fibrosis/duct strictures on MRCP, linked to IBD and cholangiocarcinoma → no disease-modifying drug."
+  },
+  {
+   "id": "wk32_c10",
+   "sys": "GI",
+   "topic": "Wilson",
+   "type": "qa",
+   "guide": {
+    "f": "W32_03_Metabolic_Genetic.html",
+    "t": "3 · Wilson",
+    "s": "features"
+   },
+   "prompt": "Describe Wilson disease.",
+   "answer": "ATP7B defect → impaired biliary copper excretion and low ceruloplasmin → copper overload. Young patient with neuropsychiatric symptoms, Coombs-negative hemolysis, and Kayser-Fleischer rings; treat with chelation (penicillamine/trientine) or zinc."
+  },
+  {
+   "id": "wk32_c11",
+   "sys": "GI",
+   "topic": "Hemochromatosis",
+   "type": "qa",
+   "guide": {
+    "f": "W32_03_Metabolic_Genetic.html",
+    "t": "3 · Hemochromatosis",
+    "s": "treatment"
+   },
+   "prompt": "How does hemochromatosis present and how is it treated?",
+   "answer": "C282Y mutation, high ferritin/transferrin saturation; 'bronze diabetes', arthropathy, cardiomyopathy. Treat with phlebotomy (target ferritin 50–100), or chelation."
+  },
+  {
+   "id": "wk32_c12",
+   "sys": "GI",
+   "topic": "Cirrhosis stages",
+   "type": "qa",
+   "guide": {
+    "f": "W32_04_Cirrhosis_Staging.html",
+    "t": "4 · Stages",
+    "s": "1-4"
+   },
+   "prompt": "State the four clinical stages of cirrhosis.",
+   "answer": "1: no complications; 2: varices, no bleeding; 3: varices with prior bleeding; 4: ascites and/or overt liver failure. Stages 1–2 compensated, 3–4 decompensated."
+  },
+  {
+   "id": "wk32_c13",
+   "sys": "GI",
+   "topic": "Child-Pugh/MELD",
+   "type": "qa",
+   "guide": {
+    "f": "W32_04_Cirrhosis_Staging.html",
+    "t": "4 · Scores",
+    "s": "components"
+   },
+   "prompt": "What goes into Child-Pugh vs MELD?",
+   "answer": "Child-Pugh: INR, albumin, bilirubin + ascites + encephalopathy. MELD: bilirubin, INR, creatinine (MELD-Na adds sodium) — used for transplant prioritization."
+  },
+  {
+   "id": "wk32_c14",
+   "sys": "GI",
+   "topic": "SAAG",
+   "type": "qa",
+   "guide": {
+    "f": "W32_05_Ascites_SBP.html",
+    "t": "5 · SAAG",
+    "s": "interpretation"
+   },
+   "prompt": "How is the SAAG calculated and interpreted?",
+   "answer": "SAAG = serum albumin − ascitic albumin. ≥11 g/L = transudate/portal hypertension (cirrhosis, heart failure); <11 g/L = exudate (infection, malignancy)."
+  },
+  {
+   "id": "wk32_c15",
+   "sys": "GI",
+   "topic": "SBP",
+   "type": "qa",
+   "guide": {
+    "f": "W32_05_Ascites_SBP.html",
+    "t": "5 · SBP",
+    "s": "diagnosis/treatment"
+   },
+   "prompt": "How is spontaneous bacterial peritonitis diagnosed and treated?",
+   "answer": "Ascitic neutrophils >250/mm³; treat empirically with IV ceftriaxone, then secondary prophylaxis with oral norfloxacin."
+  },
+  {
+   "id": "wk32_c16",
+   "sys": "GI",
+   "topic": "Variceal trio",
+   "type": "qa",
+   "guide": {
+    "f": "W32_06_Variceal_Bleeding.html",
+    "t": "6 · Acute",
+    "s": "three drugs"
+   },
+   "prompt": "What three drugs are given for a variceal bleed before endoscopy?",
+   "answer": "Octreotide (splanchnic vasoconstriction), prophylactic ceftriaxone (prevents SBP/lowers mortality), and an IV PPI (covers a possible ulcer); then band ligation."
+  },
+  {
+   "id": "wk32_c17",
+   "sys": "GI",
+   "topic": "Encephalopathy",
+   "type": "qa",
+   "guide": {
+    "f": "W32_07_Encephalopathy.html",
+    "t": "7 · HE",
+    "s": "management"
+   },
+   "prompt": "How is hepatic encephalopathy managed?",
+   "answer": "Identify and treat the trigger (GI bleed, infection, sedatives, electrolytes), and give lactulose (acidifies the colon, traps and evacuates ammonia) ± rifaximin."
+  },
+  {
+   "id": "wk32_c18",
+   "sys": "GI",
+   "topic": "Transplant timing",
+   "type": "qa",
+   "guide": {
+    "f": "W32_08_Transplant.html",
+    "t": "8 · Referral",
+    "s": "when"
+   },
+   "prompt": "When should a cirrhotic be referred for and listed for transplant?",
+   "answer": "Refer at a decompensating complication or MELD-Na ≥12; minimum to be evaluated for listing is MELD-Na >15 or Child-Pugh class B/C."
+  },
+  {
+   "id": "wk32_c19",
+   "sys": "GI",
+   "topic": "Earliest failure marker",
+   "type": "mcq",
+   "guide": {
+    "f": "W32_01_Liver_Assessment.html",
+    "t": "1 · Function",
+    "s": "earliest"
+   },
+   "prompt": "The earliest blood marker of failing liver synthetic function is:",
+   "options": [
+    "Albumin",
+    "Elevated INR",
+    "ALT",
+    "Bilirubin"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk32_c20",
+   "sys": "GI",
+   "topic": "Hyperacute cause",
+   "type": "mcq",
+   "guide": {
+    "f": "W32_01_Liver_Assessment.html",
+    "t": "1 · Hyperacute",
+    "s": "cause"
+   },
+   "prompt": "Transaminases in the thousands within a week most suggest:",
+   "options": [
+    "Alcoholic hepatitis",
+    "Acetaminophen toxicity",
+    "PBC",
+    "Hemochromatosis"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk32_c21",
+   "sys": "GI",
+   "topic": "Alcoholic ratio",
+   "type": "mcq",
+   "guide": {
+    "f": "W32_02_Hepatitis.html",
+    "t": "2 · Alcoholic",
+    "s": "ratio"
+   },
+   "prompt": "Alcoholic hepatitis classically shows an AST:ALT ratio of:",
+   "options": [
+    "1:2",
+    "1:1",
+    "2:1 or greater",
+    "10:1"
+   ],
+   "correct": 2
+  },
+  {
+   "id": "wk32_c22",
+   "sys": "GI",
+   "topic": "HBV vaccinated",
+   "type": "mcq",
+   "guide": {
+    "f": "W32_02_Hepatitis.html",
+    "t": "2 · HBV",
+    "s": "vaccinated"
+   },
+   "prompt": "Which serology indicates vaccine-induced (not infection) immunity to HBV?",
+   "options": [
+    "Anti-HBs+ and anti-HBc+",
+    "Anti-HBs+ and anti-HBc−",
+    "HBsAg+",
+    "Anti-HBc IgM+"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk32_c23",
+   "sys": "GI",
+   "topic": "PBC antibody",
+   "type": "mcq",
+   "guide": {
+    "f": "W32_03_Metabolic_Genetic.html",
+    "t": "3 · PBC",
+    "s": "antibody"
+   },
+   "prompt": "The diagnostic antibody for primary biliary cholangitis is:",
+   "options": [
+    "Anti-SMA",
+    "Anti-mitochondrial antibody",
+    "p-ANCA",
+    "Anti-LKM"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk32_c24",
+   "sys": "GI",
+   "topic": "Wilson eye",
+   "type": "mcq",
+   "guide": {
+    "f": "W32_03_Metabolic_Genetic.html",
+    "t": "3 · Wilson",
+    "s": "slit-lamp"
+   },
+   "prompt": "The slit-lamp finding in Wilson disease is:",
+   "options": [
+    "Band keratopathy",
+    "Kayser-Fleischer rings",
+    "Argyll Robertson pupil",
+    "Cataract"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk32_c25",
+   "sys": "GI",
+   "topic": "SAAG cutoff",
+   "type": "mcq",
+   "guide": {
+    "f": "W32_05_Ascites_SBP.html",
+    "t": "5 · SAAG",
+    "s": "cutoff"
+   },
+   "prompt": "A SAAG ≥ 11 g/L indicates:",
+   "options": [
+    "Exudate (malignancy/infection)",
+    "Transudate (portal hypertension)",
+    "Nephrotic syndrome",
+    "Normal fluid"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk32_c26",
+   "sys": "GI",
+   "topic": "SBP count",
+   "type": "mcq",
+   "guide": {
+    "f": "W32_05_Ascites_SBP.html",
+    "t": "5 · SBP",
+    "s": "threshold"
+   },
+   "prompt": "SBP is diagnosed when ascitic neutrophils exceed:",
+   "options": [
+    "100/mm³",
+    "250/mm³",
+    "500/mm³",
+    "1000/mm³"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk32_c27",
+   "sys": "GI",
+   "topic": "Asterixis stage",
+   "type": "mcq",
+   "guide": {
+    "f": "W32_07_Encephalopathy.html",
+    "t": "7 · HE",
+    "s": "asterixis"
+   },
+   "prompt": "Asterixis first appears at West Haven encephalopathy stage:",
+   "options": [
+    "1",
+    "2",
+    "3",
+    "4"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk32_c28",
+   "sys": "GI",
+   "topic": "HBV treatment",
+   "type": "mcq",
+   "guide": {
+    "f": "W32_02_Hepatitis.html",
+    "t": "2 · HBV",
+    "s": "drug"
+   },
+   "prompt": "Chronic active hepatitis B is treated with:",
+   "options": [
+    "Sofosbuvir/velpatasvir",
+    "Entecavir or tenofovir",
+    "Ursodeoxycholic acid",
+    "Prednisolone"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk32_c29",
+   "sys": "GI",
+   "topic": "Decompensation",
+   "type": "multi",
+   "guide": {
+    "f": "W32_04_Cirrhosis_Staging.html",
+    "t": "4 · Decompensation",
+    "s": "complications"
+   },
+   "prompt": "Select features of decompensated cirrhosis:",
+   "options": [
+    "Ascites",
+    "Variceal bleeding",
+    "Hepatic encephalopathy",
+    "Jaundice/overt failure",
+    "Asymptomatic with no varices"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk32_c30",
+   "sys": "GI",
+   "topic": "Encephalopathy triggers",
+   "type": "multi",
+   "guide": {
+    "f": "W32_07_Encephalopathy.html",
+    "t": "7 · HE",
+    "s": "triggers"
+   },
+   "prompt": "Select triggers of hepatic encephalopathy:",
+   "options": [
+    "GI bleeding",
+    "Infection (e.g. SBP)",
+    "Sedatives",
+    "Electrolyte disturbance/constipation",
+    "Lactulose"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk32_c31",
+   "sys": "GI",
+   "topic": "Variceal bleed bundle",
+   "type": "multi",
+   "guide": {
+    "f": "W32_06_Variceal_Bleeding.html",
+    "t": "6 · Acute",
+    "s": "bundle"
+   },
+   "prompt": "Select appropriate interventions for an acute variceal bleed:",
+   "options": [
+    "Octreotide",
+    "Prophylactic ceftriaxone",
+    "IV PPI",
+    "Endoscopic band ligation",
+    "Loperamide"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk32_c32",
+   "sys": "GI",
+   "topic": "Transplant absolute CI",
+   "type": "multi",
+   "guide": {
+    "f": "W32_08_Transplant.html",
+    "t": "8 · CI",
+    "s": "absolute"
+   },
+   "prompt": "Select ABSOLUTE contraindications to liver transplant:",
+   "options": [
+    "Active alcohol/drug use",
+    "Uncontrolled infection",
+    "Recent extrahepatic malignancy",
+    "Severe pulmonary hypertension",
+    "Well-controlled HIV"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk32_c33",
+   "sys": "GI",
+   "topic": "Genetic markers",
+   "type": "multi",
+   "guide": {
+    "f": "W32_03_Metabolic_Genetic.html",
+    "t": "3 · Genetic",
+    "s": "markers"
+   },
+   "prompt": "Select correct disease–marker pairs:",
+   "options": [
+    "Hemochromatosis — C282Y",
+    "Wilson — ATP7B / low ceruloplasmin",
+    "α1-antitrypsin deficiency — PiZZ",
+    "PBC — AMA",
+    "PSC — anti-SMA"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk32_c34",
+   "sys": "GI",
+   "topic": "SAAG cloze",
+   "type": "cloze",
+   "guide": {
+    "f": "W32_05_Ascites_SBP.html",
+    "t": "5 · SAAG",
+    "s": "formula"
+   },
+   "text": "SAAG = serum albumin − {{ascitic albumin}}; ≥ {{11}} g/L means portal hypertension (transudate).",
+   "explain": "<11 g/L points to infection or malignancy."
+  },
+  {
+   "id": "wk32_c35",
+   "sys": "GI",
+   "topic": "Child-Pugh cloze",
+   "type": "cloze",
+   "guide": {
+    "f": "W32_04_Cirrhosis_Staging.html",
+    "t": "4 · Child-Pugh",
+    "s": "components"
+   },
+   "text": "Child-Pugh uses {{INR}}, albumin, {{bilirubin}}, ascites, and {{encephalopathy}}.",
+   "explain": "MELD instead uses bilirubin, INR, and creatinine."
+  },
+  {
+   "id": "wk32_c36",
+   "sys": "GI",
+   "topic": "Cirrhosis stage cloze",
+   "type": "cloze",
+   "guide": {
+    "f": "W32_04_Cirrhosis_Staging.html",
+    "t": "4 · Stages",
+    "s": "key"
+   },
+   "text": "Cirrhosis stage {{2}} = varices without bleeding; stage {{3}} = varices with bleeding; stage {{4}} = ascites/overt failure.",
+   "explain": "Stage 1 is compensated and asymptomatic."
+  },
+  {
+   "id": "wk32_c37",
+   "sys": "GI",
+   "topic": "Paracentesis albumin",
+   "type": "cloze",
+   "guide": {
+    "f": "W32_05_Ascites_SBP.html",
+    "t": "5 · Paracentesis",
+    "s": "albumin"
+   },
+   "text": "Give IV {{albumin}} for every {{4-5}} litres of ascites removed by large-volume paracentesis.",
+   "explain": "Prevents post-paracentesis circulatory dysfunction / renal injury."
+  },
+  {
+   "id": "wk32_c38",
+   "sys": "GI",
+   "topic": "HCC surveillance cloze",
+   "type": "cloze",
+   "guide": {
+    "f": "W32_07_Encephalopathy.html",
+    "t": "7 · HCC",
+    "s": "interval"
+   },
+   "text": "All cirrhotics get a liver {{ultrasound}} every {{6}} months ± serum {{AFP}} for HCC.",
+   "explain": "HCC can occur at any cirrhosis stage."
+  },
+  {
+   "id": "wk32_c39",
+   "sys": "GI",
+   "topic": "Variceal order",
+   "type": "order",
+   "guide": {
+    "f": "W32_06_Variceal_Bleeding.html",
+    "t": "6 · Acute",
+    "s": "order"
+   },
+   "prompt": "Order the acute variceal-bleed management:",
+   "items": [
+    "Airway + aggressive fluid/blood resuscitation",
+    "Octreotide + prophylactic ceftriaxone + IV PPI",
+    "Urgent endoscopic band ligation",
+    "Balloon tamponade / TIPS if refractory"
+   ]
+  },
+  {
+   "id": "wk32_c40",
+   "sys": "GI",
+   "topic": "Ascites escalation",
+   "type": "order",
+   "guide": {
+    "f": "W32_05_Ascites_SBP.html",
+    "t": "5 · Ascites",
+    "s": "escalation"
+   },
+   "prompt": "Order the management escalation of cirrhotic ascites:",
+   "items": [
+    "Sodium restriction (<2 g/day)",
+    "Dual diuretics (spironolactone + furosemide), titrate up",
+    "Therapeutic paracentesis with IV albumin for tense ascites",
+    "TIPS or transplant for refractory ascites"
+   ]
+  },
+  {
+   "id": "wk32_c41",
+   "sys": "GI",
+   "topic": "HE workup",
+   "type": "order",
+   "guide": {
+    "f": "W32_07_Encephalopathy.html",
+    "t": "7 · HE",
+    "s": "approach"
+   },
+   "prompt": "Order the approach to hepatic encephalopathy:",
+   "items": [
+    "Recognize (asterixis, confusion, sleep-wake change)",
+    "Identify and treat the trigger (bleed, infection, electrolytes)",
+    "Start lactulose",
+    "Add rifaximin for recurrence"
+   ]
+  },
+  {
+   "id": "wk32_c42",
+   "sys": "GI",
+   "topic": "Disease → antibody",
+   "type": "match",
+   "guide": {
+    "f": "W32_03_Metabolic_Genetic.html",
+    "t": "3 · Autoimmune",
+    "s": "markers"
+   },
+   "prompt": "Match the autoimmune liver disease to its marker:",
+   "pairs": [
+    [
+     "Autoimmune hepatitis",
+     "Anti-SMA / high IgG"
+    ],
+    [
+     "Primary biliary cholangitis",
+     "Anti-mitochondrial antibody"
+    ],
+    [
+     "Primary sclerosing cholangitis",
+     "p-ANCA / onion-skin"
+    ],
+    [
+     "Wilson disease",
+     "Low ceruloplasmin / ATP7B"
+    ]
+   ]
+  },
+  {
+   "id": "wk32_c43",
+   "sys": "GI",
+   "topic": "Disease → treatment",
+   "type": "match",
+   "guide": {
+    "f": "W32_03_Metabolic_Genetic.html",
+    "t": "3 · Treatment",
+    "s": "match"
+   },
+   "prompt": "Match the disease to its treatment:",
+   "pairs": [
+    [
+     "Hemochromatosis",
+     "Phlebotomy"
+    ],
+    [
+     "Wilson disease",
+     "Chelation / zinc"
+    ],
+    [
+     "PBC",
+     "Ursodeoxycholic acid"
+    ],
+    [
+     "Autoimmune hepatitis",
+     "Steroids + azathioprine"
+    ],
+    [
+     "Chronic HBV",
+     "Entecavir / tenofovir"
+    ]
+   ]
+  },
+  {
+   "id": "wk32_c44",
+   "sys": "GI",
+   "topic": "Complication → therapy",
+   "type": "match",
+   "guide": {
+    "f": "W32_05_Ascites_SBP.html",
+    "t": "5 · Complications",
+    "s": "therapy"
+   },
+   "prompt": "Match the cirrhosis complication to its therapy:",
+   "pairs": [
+    [
+     "Ascites",
+     "Spironolactone + furosemide"
+    ],
+    [
+     "SBP",
+     "Ceftriaxone (+ norfloxacin prophylaxis)"
+    ],
+    [
+     "Variceal bleed",
+     "Octreotide + band ligation"
+    ],
+    [
+     "Encephalopathy",
+     "Lactulose ± rifaximin"
+    ]
+   ]
+  },
+  {
+   "id": "wk32_c45",
+   "sys": "GI",
+   "topic": "Drug → use",
+   "type": "match",
+   "guide": {
+    "f": "W32_02_Hepatitis.html",
+    "t": "2 · Drugs",
+    "s": "liver drugs"
+   },
+   "prompt": "Match the drug to its liver use:",
+   "pairs": [
+    [
+     "Prednisolone",
+     "Severe alcoholic hepatitis / AIH"
+    ],
+    [
+     "Ursodeoxycholic acid",
+     "Primary biliary cholangitis"
+    ],
+    [
+     "Sofosbuvir/velpatasvir",
+     "Hepatitis C cure"
+    ],
+    [
+     "N-acetylcysteine",
+     "Acetaminophen toxicity"
+    ],
+    [
+     "Penicillamine",
+     "Wilson disease"
+    ]
+   ]
+  },
+  {
+   "id": "wk32_c46",
+   "sys": "GI",
+   "topic": "MASLD/MASH",
+   "type": "qa",
+   "guide": {
+    "f": "W32_03_Metabolic_Genetic.html",
+    "t": "3 · MASLD",
+    "s": "management"
+   },
+   "prompt": "How is MASLD/MASH managed and why does it matter?",
+   "answer": "Weight loss (~10%), dietary change, and coffee; it's often asymptomatic but a major driver of cardiovascular mortality (and can progress to cirrhosis/HCC)."
+  },
+  {
+   "id": "wk32_c47",
+   "sys": "GI",
+   "topic": "Lactulose mechanism",
+   "type": "qa",
+   "guide": {
+    "f": "W32_07_Encephalopathy.html",
+    "t": "7 · Lactulose",
+    "s": "mechanism"
+   },
+   "prompt": "How does lactulose treat hepatic encephalopathy?",
+   "answer": "It is metabolized by colonic bacteria to acids that trap ammonia as non-absorbable ammonium, and it induces catharsis to evacuate it — lowering blood ammonia."
+  },
+  {
+   "id": "wk32_c48",
+   "sys": "GI",
+   "topic": "TIPS",
+   "type": "qa",
+   "guide": {
+    "f": "W32_06_Variceal_Bleeding.html",
+    "t": "6 · TIPS",
+    "s": "tradeoff"
+   },
+   "prompt": "What is TIPS and its main trade-off?",
+   "answer": "A transjugular intrahepatic portosystemic shunt that lowers portal pressure for refractory variceal bleeding or ascites, but it diverts blood past the liver and increases the risk of hepatic encephalopathy."
+  },
+  {
+   "id": "wk32_c49",
+   "sys": "GI",
+   "topic": "Transplant non-CI",
+   "type": "qa",
+   "guide": {
+    "f": "W32_08_Transplant.html",
+    "t": "8 · Contraindications",
+    "s": "not CI"
+   },
+   "prompt": "Which commonly-cited conditions are NOT contraindications to transplant?",
+   "answer": "Well-controlled HIV and a history of variceal bleeding are not contraindications; age >70 is only relative. Active alcohol/drug use is an absolute contraindication."
+  },
+  {
+   "id": "wk32_c50",
+   "sys": "GI",
+   "topic": "NSBB prophylaxis",
+   "type": "qa",
+   "guide": {
+    "f": "W32_06_Variceal_Bleeding.html",
+    "t": "6 · Prophylaxis",
+    "s": "NSBB"
+   },
+   "prompt": "How are varices prevented from bleeding?",
+   "answer": "Primary prophylaxis for large varices: a non-selective beta-blocker (nadolol/propranolol) or band ligation. Secondary prophylaxis (after a bleed): NSBB plus serial band ligation."
+  }
+ ],
+ "guides": [
+  {
+   "file": "W32_01_Liver_Assessment.html",
+   "title": "Week 32 · 1 Liver Assessment & LFT Patterns",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Liver Assessment &amp; LFT Patterns</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>LFTs</div><h1>Liver Assessment &amp; LFT Patterns</h1></div><div class='r'>Week 32 &middot; GI IV &mdash; Liver &amp; Cirrhosis<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Hepatocellular vs cholestatic patterns, what each enzyme means, the true markers of liver function, and hyperacute failure.</p>\n<h2>Two injury patterns</h2>\n<table>\n<tr><th>Pattern</th><th>Picture</th><th>Means</th></tr>\n<tr><td><b>Hepatocellular</b></td><td><b>ALT/AST &gt;&gt; ALP/GGT</b></td><td>Hepatocyte damage (viral, drugs, MASLD, ischemia, autoimmune)</td></tr>\n<tr><td><b>Cholestatic</b></td><td><b>ALP/GGT &gt;&gt; ALT/AST</b></td><td>Interrupted bile flow (obstruction, PBC/PSC)</td></tr>\n</table>\n<h2>Enzyme origins</h2>\n<ul>\n<li><b>ALT</b> = liver-specific. <b>AST</b> = also muscle/heart/RBCs. <b>ALP</b> = liver, bone, placenta, gut (GGT confirms a hepatic source). <b>GGT</b> = biliary epithelium.</li>\n</ul>\n<div class='band warn'><div class='t'>Enzymes are injury, not function</div>\nTrue liver <b>function</b> is reflected by <b>synthetic</b> and <b>excretory</b> markers: <b>INR</b> (low factor II/prothrombin &mdash; the <b>earliest</b> indicator of failure), <b>albumin</b> (low &rarr; ascites/edema from low oncotic pressure), and <b>bilirubin</b> (excretory). A normal ALT with a high INR/bilirubin and low albumin is a failing liver.</div>\n<h2>Fibrosis staging</h2>\n<ul>\n<li><b>Fibroscan (elastography):</b> &gt;13&ndash;14 kPa suggests cirrhosis. <b>Fibrotest</b> blood panel &gt;0.75 suggests cirrhosis.</li>\n<li><b>Platelets &lt;150</b> &rarr; hypersplenism from portal hypertension &mdash; a clue to cirrhosis.</li>\n</ul>\n<h2>Hyperacute liver failure</h2>\n<p>Massive transaminases (ALT/AST often &gt;5000, into the thousands) + severe dysfunction (high bilirubin, high INR) within <b>1 week</b>. The most common cause is <b>acetaminophen overdose</b> (treat with N-acetylcysteine).</p>\n<div class='key'>ALT/AST up = hepatocellular; ALP/GGT up = cholestatic. INR is the earliest functional marker. Transaminases in the thousands within a week = hyperacute failure, think acetaminophen.</div>\n</div>"
+  },
+  {
+   "file": "W32_02_Hepatitis.html",
+   "title": "Week 32 · 2 Hepatitis: Grading & Viral Disease",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Hepatitis: Grading &amp; Viral Disease</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Hepatitis</div><h1>Hepatitis: Grading &amp; Viral Disease</h1></div><div class='r'>Week 32 &middot; GI IV &mdash; Liver &amp; Cirrhosis<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Grading by ALT, the alcoholic-hepatitis numbers (AST:ALT, Maddrey, steroids), and viral serology with curative therapy.</p>\n<h2>Grading by ALT</h2>\n<table>\n<tr><th>Grade</th><th>ALT</th><th>Causes</th></tr>\n<tr><td>Mild</td><td>&lt; 300</td><td>Viral, MASLD, drugs</td></tr>\n<tr><td>Moderate</td><td>&gt; 300</td><td>Acute viral, autoimmune, ischemia, Budd-Chiari</td></tr>\n<tr><td>Severe</td><td>&gt; 1000</td><td>As above (and acetaminophen for the thousands)</td></tr>\n</table>\n<h2>Alcoholic hepatitis</h2>\n<div class='band warn'><div class='t'>The numbers that matter</div>\n<b>AST:ALT ratio &gt; 2:1</b> (ALT often 100&ndash;300). Severity by the <b>Maddrey Discriminant Function &ge; 32</b> = high short-term mortality &rarr; treat with <b>prednisolone 40 mg/day</b> (suppresses cytokine-mediated injury). <b>Absolute contraindications to steroids:</b> active GI bleeding or uncontrolled infection. (Pentoxifylline is an alternative TNF modulator.)</div>\n<h2>Viral hepatitis</h2>\n<table>\n<tr><th>Virus</th><th>Key facts</th></tr>\n<tr><td><b>HAV / HEV</b></td><td>RNA, fecal-oral, acute self-limited; diagnose by <b>IgM</b></td></tr>\n<tr><td><b>HBV</b></td><td>DNA, blood/sexual. <b>HBsAg</b> = current infection; <b>anti-HBs</b> = immunity; <b>anti-HBc IgM</b> = acute. Chronic &rarr; lifelong nucleos(t)ide (<b>entecavir</b>, tenofovir)</td></tr>\n<tr><td><b>HCV</b></td><td>RNA, high chronicity. Antibody screen &rarr; confirm with <b>HCV RNA PCR</b>. <b>Curable</b> with direct-acting antivirals (sofosbuvir/velpatasvir, glecaprevir/pibrentasvir) over 8&ndash;12 weeks</td></tr>\n</table>\n<div class='band'><div class='t'>HBV serology in one line</div>\n<b>Anti-HBs positive + anti-HBc negative = vaccinated</b> (immune, never infected). Anti-HBs <b>and</b> anti-HBc positive = immune from <b>past infection</b>. HBsAg positive = currently infected.</div>\n<div class='key'>AST:ALT &gt;2 + Maddrey &ge;32 &rarr; prednisolone (unless bleeding/infection). HBV: HBsAg = infected, anti-HBs = immune, anti-HBc IgM = acute. HCV is curable with DAAs.</div>\n</div>"
+  },
+  {
+   "file": "W32_03_Metabolic_Genetic.html",
+   "title": "Week 32 · 3 Metabolic, Autoimmune & Genetic Liver Disease",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Metabolic, Autoimmune &amp; Genetic Liver Disease</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Causes</div><h1>Metabolic, Autoimmune &amp; Genetic Liver Disease</h1></div><div class='r'>Week 32 &middot; GI IV &mdash; Liver &amp; Cirrhosis<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>MASLD/MASH, the autoimmune liver diseases by antibody, and the iron/copper/AAT overload syndromes.</p>\n<h2>MASLD / MASH</h2>\n<p>Hepatic steatosis associated with diabetes, obesity, dyslipidemia; often asymptomatic but a major cardiovascular-mortality driver. Treat with <b>weight loss (~10%)</b>, diet, and coffee.</p>\n<h2>Autoimmune liver disease &mdash; know the antibody</h2>\n<table>\n<tr><th>Disease</th><th>Marker</th><th>Clue</th><th>Treatment</th></tr>\n<tr><td><b>Autoimmune hepatitis</b></td><td>&uarr;IgG (&gt;2&times;), ANA, <b>anti-SMA</b> (type 1), anti-LKM (type 2)</td><td>Hepatocellular; interface hepatitis</td><td><b>Corticosteroids + azathioprine</b></td></tr>\n<tr><td><b>Primary biliary cholangitis</b></td><td><b>AMA</b> +, &uarr;IgM</td><td><b>Cholestatic</b>; fatigue + pruritus, middle-aged woman, autoimmune comorbidity (Sjögren)</td><td><b>Ursodeoxycholic acid</b> (1st); obeticholic acid 2nd</td></tr>\n<tr><td><b>Primary sclerosing cholangitis</b></td><td><b>p-ANCA</b>; \"onion-skin\" fibrosis, bile-duct strictures on MRCP</td><td>Cholestatic; strongly linked to <b>IBD</b> (and cholangiocarcinoma risk)</td><td>No disease-modifying drug; manage strictures</td></tr>\n</table>\n<h2>Genetic overload syndromes</h2>\n<table>\n<tr><th>Disease</th><th>Defect / labs</th><th>Clue</th><th>Treatment</th></tr>\n<tr><td><b>Hemochromatosis</b></td><td><b>C282Y</b> (HFE); &uarr;ferritin, &uarr;transferrin saturation</td><td>\"Bronze diabetes\", arthropathy, heart failure</td><td><b>Phlebotomy</b> (target ferritin 50&ndash;100); chelation</td></tr>\n<tr><td><b>Wilson disease</b></td><td><b>ATP7B</b>; &darr;ceruloplasmin, &uarr;urine copper</td><td>Young + neuropsychiatric + <b>Coombs-negative hemolysis</b>; <b>Kayser-Fleischer rings</b></td><td><b>Chelation</b> (penicillamine, trientine) or <b>zinc</b></td></tr>\n<tr><td><b>α1-antitrypsin deficiency</b></td><td><b>PiZZ</b>; low A1AT, PAS-positive globules</td><td>Emphysema + cirrhosis</td><td>No specific liver drug</td></tr>\n</table>\n<div class='key'>AIH = anti-SMA/IgG &rarr; steroids+azathioprine. PBC = AMA &rarr; UDCA. PSC = p-ANCA + IBD + onion-skin. Hemochromatosis = phlebotomy; Wilson = KF rings + chelation/zinc.</div>\n</div>"
+  },
+  {
+   "file": "W32_04_Cirrhosis_Staging.html",
+   "title": "Week 32 · 4 Cirrhosis: Staging & Prognosis",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Cirrhosis: Staging &amp; Prognosis</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Staging</div><h1>Cirrhosis: Staging &amp; Prognosis</h1></div><div class='r'>Week 32 &middot; GI IV &mdash; Liver &amp; Cirrhosis<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The four clinical stages keyed to varices/ascites, and the Child-Pugh and MELD scores that drive transplant timing.</p>\n<h2>Clinical stages</h2>\n<table>\n<tr><th>Stage</th><th>Defined by</th></tr>\n<tr><td><b>1</b></td><td>Compensated, no complications (asymptomatic)</td></tr>\n<tr><td><b>2</b></td><td><b>Varices present</b>, no bleeding</td></tr>\n<tr><td><b>3</b></td><td>Varices <b>with a history of bleeding</b></td></tr>\n<tr><td><b>4</b></td><td><b>Ascites and/or overt liver failure</b> &rarr; strongly consider transplant</td></tr>\n</table>\n<p>Stages 1&ndash;2 are <b>compensated</b>; 3&ndash;4 are <b>decompensated</b>. (A patient with prior variceal bleed but no ascites/encephalopathy is Stage 3.)</p>\n<h2>Prognostic scores</h2>\n<table>\n<tr><th>Score</th><th>Components</th><th>Use</th></tr>\n<tr><td><b>Child-Pugh-Turcotte</b></td><td>INR, <b>A</b>lbumin, <b>B</b>ilirubin + <b>A</b>scites, <b>E</b>ncephalopathy (\"pour another beer at eleven\")</td><td>Post-surgical mortality / survival (Class A/B/C)</td></tr>\n<tr><td><b>MELD / MELD-Na</b></td><td>Bilirubin, INR, Creatinine (MELD-Na adds <b>sodium</b>)</td><td>Transplant prioritization</td></tr>\n</table>\n<div class='band'><div class='t'>When to refer for transplant</div>\nRefer when a decompensating complication arises or <b>MELD-Na &ge; 12</b>. Minimum criteria to be <b>evaluated for listing</b>: <b>MELD-Na &gt; 15</b>, or <b>Child-Pugh class B or C</b>.</div>\n<div class='key'>Stages: 1 none, 2 varices, 3 varices+bleed, 4 ascites/failure. Child-Pugh = INR/albumin/bilirubin + ascites/encephalopathy. MELD = bilirubin/INR/creatinine (+Na). Refer at MELD-Na ≥12.</div>\n</div>"
+  },
+  {
+   "file": "W32_05_Ascites_SBP.html",
+   "title": "Week 32 · 5 Ascites & Spontaneous Bacterial Peritonitis",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Ascites &amp; Spontaneous Bacterial Peritonitis</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Fluid</div><h1>Ascites &amp; Spontaneous Bacterial Peritonitis</h1></div><div class='r'>Week 32 &middot; GI IV &mdash; Liver &amp; Cirrhosis<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Why portal hypertension causes ascites, the SAAG that splits the differential, diuretic and paracentesis rules, and SBP.</p>\n<h2>Mechanism &amp; the SAAG</h2>\n<p>Ascites is driven by <b>portal hypertension</b> + secondary renal <b>sodium retention</b>. The serum-ascites albumin gradient (<b>SAAG = serum albumin &minus; ascitic albumin</b>) splits the cause:</p>\n<table>\n<tr><th>SAAG</th><th>Process</th><th>Causes</th></tr>\n<tr><td><b>&ge; 11 g/L</b></td><td><b>Transudate</b> (portal hypertension)</td><td><b>Cirrhosis</b>, heart failure</td></tr>\n<tr><td><b>&lt; 11 g/L</b></td><td>Exudate</td><td><b>Infection or malignancy</b>, pancreatitis</td></tr>\n</table>\n<h2>Management</h2>\n<ul>\n<li><b>Low-sodium diet</b> (&lt;2 g/day) + <b>dual diuretics</b>: spironolactone (100&ndash;400 mg) + furosemide (40&ndash;160 mg), titrated (~100:40 ratio) keeping potassium/renal function safe.</li>\n<li><b>Tense ascites:</b> therapeutic paracentesis; give <b>IV albumin (25%, ~100 cc) per 4&ndash;5 L removed</b> to prevent post-paracentesis renal injury.</li>\n<li>Refractory ascites &rarr; consider <b>TIPS</b> (after maximizing diuretics) or transplant.</li>\n</ul>\n<div class='band warn'><div class='t'>Spontaneous bacterial peritonitis (SBP)</div>\nSuspect with fever, abdominal pain, or new encephalopathy in a cirrhotic with ascites. Diagnose by ascitic <b>neutrophils &gt; 250/mm&sup3;</b>. Treat empirically with <b>IV cephalosporin (ceftriaxone)</b>; then long-term secondary prophylaxis with oral <b>norfloxacin</b>. (A single high count with neutrophils &gt;250 is SBP; treat before culture returns.)</div>\n<div class='key'>SAAG ≥11 = portal hypertension (cirrhosis); &lt;11 = infection/malignancy. Spironolactone+furosemide; albumin with large paracentesis. Ascitic neutrophils &gt;250 = SBP → ceftriaxone + later norfloxacin prophylaxis.</div>\n</div>"
+  },
+  {
+   "file": "W32_06_Variceal_Bleeding.html",
+   "title": "Week 32 · 6 Variceal Bleeding & Portal Hypertension",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Variceal Bleeding &amp; Portal Hypertension</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Varices</div><h1>Variceal Bleeding &amp; Portal Hypertension</h1></div><div class='r'>Week 32 &middot; GI IV &mdash; Liver &amp; Cirrhosis<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>How portal hypertension makes varices, the three drugs before the scope, and primary vs secondary prophylaxis.</p>\n<h2>Mechanism</h2>\n<p>Portal hypertension &rarr; splanchnic vasodilation and portosystemic collaterals &rarr; <b>esophageal/gastric varices</b>. Rupture causes massive upper GI bleeding (hematemesis) in a cirrhotic.</p>\n<div class='band warn'><div class='t'>Three drugs before endoscopy</div>\nAfter airway + aggressive fluid/blood resuscitation, give the temporizing trio:\n<ul>\n<li><b>Octreotide</b> &mdash; splanchnic vasoconstriction, reduces portal inflow.</li>\n<li><b>Prophylactic IV antibiotics</b> (<b>ceftriaxone</b>) &mdash; reduce SBP and mortality.</li>\n<li><b>IV proton pump inhibitor</b> (pantoprazole) &mdash; covers a possible bleeding ulcer.</li>\n</ul>\nThen <b>urgent endoscopic band ligation</b>.</div>\n<h2>When banding fails</h2>\n<ul>\n<li>Balloon tamponade (<b>Sengstaken-Blakemore tube</b>) as a bridge, then a <b>TIPS</b> (transjugular intrahepatic portosystemic shunt) &mdash; effective but increases hepatic encephalopathy risk.</li>\n</ul>\n<h2>Prophylaxis</h2>\n<table>\n<tr><th>Setting</th><th>Strategy</th></tr>\n<tr><td><b>Primary</b> (large varices, never bled)</td><td>Non-selective beta-blocker (<b>nadolol/propranolol</b>) OR band ligation</td></tr>\n<tr><td><b>Secondary</b> (after a bleed)</td><td>NSBB <b>+</b> serial band ligation</td></tr>\n</table>\n<div class='key'>Variceal bleed = octreotide + ceftriaxone + IV PPI, then band ligation; TIPS if refractory. Non-selective beta-blockers (nadolol/propranolol) prevent first and recurrent bleeds.</div>\n</div>"
+  },
+  {
+   "file": "W32_07_Encephalopathy.html",
+   "title": "Week 32 · 7 Hepatic Encephalopathy & Other Complications",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Hepatic Encephalopathy &amp; Other Complications</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Brain & more</div><h1>Hepatic Encephalopathy &amp; Other Complications</h1></div><div class='r'>Week 32 &middot; GI IV &mdash; Liver &amp; Cirrhosis<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The West Haven stages, the ammonia-lowering drugs, the cholestatic bilirubin story, and HCC surveillance.</p>\n<h2>Hepatic encephalopathy</h2>\n<p>Neurotoxin (<b>ammonia</b>) accumulation. <b>Triggers</b>: GI bleeding, infection (e.g. SBP), sedatives, electrolyte abnormalities, constipation. Always <b>find and treat the trigger</b>.</p>\n<table>\n<tr><th>West Haven stage</th><th>Findings</th></tr>\n<tr><td>1</td><td>Mild cognitive change, euphoria, <b>sleep-wake reversal</b></td></tr>\n<tr><td><b>2</b></td><td>Disorientation, personality change, <b>asterixis appears</b></td></tr>\n<tr><td>3</td><td>Severe confusion, somnolence</td></tr>\n<tr><td>4</td><td>Coma</td></tr>\n</table>\n<ul>\n<li><b>Lactulose</b> (acidifies the colon, traps ammonia as ammonium, and induces evacuation) is first-line; add <b>rifaximin</b> (gut-bacteria ammonia production) for recurrence.</li>\n</ul>\n<h2>Cholestatic jaundice physiology</h2>\n<div class='band'><div class='t'>Pale stool, dark urine</div>\nCBD obstruction blocks <b>conjugated</b> bilirubin from reaching the gut &rarr; less stercobilinogen &rarr; <b>pale (clay) stools</b>; conjugated bilirubin backs up into blood and is excreted renally as urobilinogen &rarr; <b>dark urine</b>. Plus pruritus and biliary colic.</div>\n<h2>Hepatocellular carcinoma surveillance</h2>\n<ul>\n<li>All cirrhotics get <b>biannual (every 6 months) liver ultrasound &plusmn; serum AFP</b>. HCC can occur at <b>any</b> cirrhosis stage.</li>\n</ul>\n<div class='key'>Asterixis appears at West Haven stage 2. Find the trigger (often SBP/GI bleed) + lactulose ± rifaximin. CBD obstruction = pale stool + dark urine. Screen every cirrhotic with US + AFP every 6 months.</div>\n</div>"
+  },
+  {
+   "file": "W32_08_Transplant.html",
+   "title": "Week 32 · 8 Liver Transplantation",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Liver Transplantation</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Transplant</div><h1>Liver Transplantation</h1></div><div class='r'>Week 32 &middot; GI IV &mdash; Liver &amp; Cirrhosis<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>When to refer and list, and the absolute vs relative contraindications that get tested.</p>\n<h2>Indications &amp; timing</h2>\n<ul>\n<li>End-stage liver disease with portal-hypertensive complications (ascites, variceal bleeding, encephalopathy), <b>acute liver failure</b>, selected metabolic disease, or <b>HCC within criteria</b>.</li>\n<li><b>Refer</b> when a decompensating complication arises or <b>MELD-Na &ge; 12</b>.</li>\n<li><b>Minimum to be evaluated for listing:</b> MELD-Na &gt; 15, or <b>Child-Pugh class B or C</b>.</li>\n</ul>\n<h2>Absolute contraindications</h2>\n<div class='band warn'><div class='t'>Hard stops</div>\nUncontrolled bacterial/fungal infection; active <b>non-hepatobiliary malignancy</b> (within ~5 years); advanced non-correctable cardiopulmonary disease; <b>severe pulmonary hypertension (&gt;35 mmHg)</b>; and <b>active drug or alcohol use</b> (complete, permanent cessation is required).</div>\n<h2>Relative contraindications</h2>\n<ul>\n<li>Age &gt;70, noncompliance, severe hypoxemia (not from hepatopulmonary syndrome), psychiatric conditions impairing consent, HCC beyond criteria, cholangiocarcinoma.</li>\n<li><b>Well-controlled HIV is NOT a contraindication.</b> A history of variceal bleeding is not a contraindication. Age alone is only relative.</li>\n</ul>\n<h2>HCC and transplant</h2>\n<p>Hepatocellular carcinoma can be an <b>indication</b> for transplant when within accepted limits (e.g. <b>Milan criteria</b>: one lesion &le;5 cm, or up to three lesions each &le;3 cm, with no vascular invasion or extrahepatic spread). Such patients often receive <b>MELD exception points</b> to reflect their true risk; HCC <b>beyond</b> criteria is a relative contraindication.</p>\n<h2>Hepatorenal syndrome</h2>\n<div class='band warn'><div class='t'>A transplant-urgent complication</div>\n<b>Hepatorenal syndrome</b> is functional renal failure from splanchnic vasodilation in advanced cirrhosis (diagnosis of exclusion after stopping diuretics and an albumin challenge). Bridge with <b>albumin + vasoconstrictors</b> (terlipressin/octreotide+midodrine), but the <b>definitive treatment is liver transplantation</b>.</div>\n<h2>After transplant</h2>\n<p>Lifelong <b>immunosuppression</b> (typically a calcineurin inhibitor such as <b>tacrolimus</b>, &plusmn; an antimetabolite and tapering steroids) — balancing rejection against infection and malignancy risk; adherence is essential (and is why active substance use/noncompliance are barriers).</p>\n<div class='key'>Refer at MELD-Na ≥12; list at MELD-Na &gt;15 or Child-Pugh B/C. Absolute stop = active alcohol/drug use, uncontrolled infection, recent extrahepatic cancer, severe pulmonary HTN. HCC within Milan criteria is an indication (with exception points); hepatorenal syndrome is cured by transplant. Controlled HIV and prior variceal bleed are fine.</div>\n</div>"
+  },
+  {
+   "file": "W32_09_Cram_Sheet.html",
+   "title": "Week 32 · 9 Cram Sheet",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Week 32 · 9 Cram Sheet</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.35;-webkit-font-smoothing:antialiased}\n.page{max-width:1180px;margin:0 auto;padding:18px 20px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:8px;margin-bottom:12px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:26px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.emerg{border:1.5px solid var(--hi);border-radius:6px;background:rgba(0,0,0,.02);padding:9px 12px;margin-bottom:13px}\n.emerg .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--hi);font-weight:600;margin-bottom:5px}\n.emerg .items{columns:3;column-gap:22px;font-size:12px;line-height:1.42}\n.emerg .items div{break-inside:avoid;margin-bottom:3px}\n.emerg b{color:var(--hi)}\n.cols{column-count:4;column-gap:14px}\n@media(max-width:1040px){.cols{column-count:3}}\n@media(max-width:760px){.cols{column-count:2}}\n@media(max-width:520px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(0,0,0,.02);padding:8px 9px 7px;margin:0 0 11px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;padding-bottom:4px;border-bottom:1.5px solid var(--line);color:var(--accent);display:flex;justify-content:space-between;align-items:baseline;gap:6px}\n.card h2 .wk{color:var(--soft);font-size:8.5px;font-weight:500;letter-spacing:.06em;white-space:nowrap}\n.row{margin:0 0 3.5px;font-size:11.5px;line-height:1.32}\n.row .tg{font-weight:600;color:var(--ink)}\n.row .ar{color:var(--soft)}\n.row .ar::before{content:\"\\2192 \";color:var(--accent);font-weight:600}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:5px 0}\n.dnm{color:var(--hi);font-weight:700}\n.foot{margin-top:10px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:landscape;margin:9mm}body{font-size:8.4px}.page{max-width:none;padding:0}.cols{column-count:4;column-gap:8px}.emerg .items{columns:3}.card{margin-bottom:6px}.head h1{font-size:19px}}\n</style><div class='page'><div class='head'><div><div class='k'>Night-Before High-Yield</div><h1>GI IV — Liver &amp; Cirrhosis</h1></div><div class='r'>Week 32 &middot; GI IV &mdash; Liver &amp; Cirrhosis<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><div class='emerg'><div class='t'>★ Do-not-miss &middot; first-step reflexes</div><div class='items'><div><b>Variceal bleed</b> &rarr; resuscitate + octreotide + ceftriaxone + IV PPI, then urgent band ligation (TIPS if refractory)</div><div><b>Hyperacute liver failure</b> (transaminases in thousands, high INR) &rarr; think acetaminophen &mdash; give N-acetylcysteine</div><div><b>SBP</b> (ascitic neutrophils >250) &rarr; IV ceftriaxone now; often triggers encephalopathy (add lactulose)</div><div><b>Severe alcoholic hepatitis</b> (Maddrey ≥32) &rarr; prednisolone (NOT if active GI bleed or uncontrolled infection)</div><div><b>Tense ascites paracentesis</b> &rarr; give IV albumin per 4–5 L removed</div><div><b>Transplant</b> &rarr; active alcohol/drug use is an absolute contraindication (controlled HIV is fine)</div></div></div><div class='cols'><div class='card'><h2>Assessment <span class='wk'>LFTs</span></h2><div class='row'><span class='tg'>Hepatocellular</span> <span class='ar'>ALT/AST >> ALP/GGT</span></div><div class='row'><span class='tg'>Cholestatic</span> <span class='ar'>ALP/GGT >> ALT/AST</span></div><div class='row'><span class='tg'>Function</span> <span class='ar'>INR (earliest), albumin, bilirubin</span></div><div class='row'><span class='tg'>Cirrhosis clues</span> <span class='ar'>platelets <150, Fibroscan >13–14 kPa</span></div><div class='row'><span class='tg'>Hyperacute</span> <span class='ar'>ALT/AST in thousands → acetaminophen</span></div></div><div class='card'><h2>Hepatitis <span class='wk'>Hepatitis</span></h2><div class='row'><span class='tg'>Alcoholic</span> <span class='ar'>AST:ALT >2; Maddrey ≥32 → prednisolone</span></div><div class='row'><span class='tg'>HBsAg</span> <span class='ar'>current infection</span></div><div class='row'><span class='tg'>Anti-HBs+/anti-HBc−</span> <span class='ar'>vaccinated</span></div><div class='row'><span class='tg'>Anti-HBc IgM</span> <span class='ar'>acute HBV</span></div><div class='row'><span class='tg'>Chronic HBV</span> <span class='ar'>entecavir / tenofovir</span></div><div class='row'><span class='tg'>HCV</span> <span class='ar'>RNA PCR confirms; DAAs cure</span></div></div><div class='card'><h2>Metabolic/genetic <span class='wk'>Causes</span></h2><div class='row'><span class='tg'>AIH</span> <span class='ar'>anti-SMA/IgG → steroids + azathioprine</span></div><div class='row'><span class='tg'>PBC</span> <span class='ar'>AMA → UDCA</span></div><div class='row'><span class='tg'>PSC</span> <span class='ar'>p-ANCA + IBD, onion-skin</span></div><div class='row'><span class='tg'>Hemochromatosis</span> <span class='ar'>C282Y → phlebotomy</span></div><div class='row'><span class='tg'>Wilson</span> <span class='ar'>ATP7B, KF rings → chelation/zinc</span></div><div class='row'><span class='tg'>A1AT</span> <span class='ar'>PiZZ; emphysema + cirrhosis</span></div></div><div class='card'><h2>Cirrhosis staging <span class='wk'>Staging</span></h2><div class='row'><span class='tg'>Stage 1-4</span> <span class='ar'>none / varices / +bleed / ascites-failure</span></div><div class='row'><span class='tg'>Child-Pugh</span> <span class='ar'>INR, albumin, bilirubin, ascites, HE</span></div><div class='row'><span class='tg'>MELD</span> <span class='ar'>bilirubin, INR, creatinine (+Na)</span></div><div class='row'><span class='tg'>Refer</span> <span class='ar'>MELD-Na ≥12</span></div><div class='row'><span class='tg'>List</span> <span class='ar'>MELD-Na >15 or Child-Pugh B/C</span></div></div><div class='card'><h2>Ascites &amp; SBP <span class='wk'>Ascites</span></h2><div class='row'><span class='tg'>SAAG ≥11</span> <span class='ar'>portal hypertension (cirrhosis)</span></div><div class='row'><span class='tg'>SAAG <11</span> <span class='ar'>infection / malignancy</span></div><div class='row'><span class='tg'>Diuretics</span> <span class='ar'>spironolactone + furosemide</span></div><div class='row'><span class='tg'>Paracentesis</span> <span class='ar'>albumin per 4–5 L</span></div><div class='row'><span class='tg'>SBP</span> <span class='ar'>neutrophils >250 → ceftriaxone, then norfloxacin</span></div></div><div class='card'><h2>Varices &amp; HE <span class='wk'>Varices/HE</span></h2><div class='row'><span class='tg'>Bleed trio</span> <span class='ar'>octreotide + ceftriaxone + IV PPI</span></div><div class='row'><span class='tg'>Then</span> <span class='ar'>band ligation; TIPS if refractory</span></div><div class='row'><span class='tg'>Prophylaxis</span> <span class='ar'>non-selective beta-blocker</span></div><div class='row'><span class='tg'>HE trigger</span> <span class='ar'>bleed, infection, sedatives, electrolytes</span></div><div class='row'><span class='tg'>Asterixis</span> <span class='ar'>West Haven stage 2</span></div><div class='row'><span class='tg'>HE treat</span> <span class='ar'>lactulose ± rifaximin</span></div></div><div class='card'><h2>HCC &amp; transplant <span class='wk'>HCC/Tx</span></h2><div class='row'><span class='tg'>HCC screen</span> <span class='ar'>US ± AFP every 6 months (any stage)</span></div><div class='row'><span class='tg'>Cholestatic urine/stool</span> <span class='ar'>dark urine, pale stool</span></div><div class='row'><span class='tg'>Absolute CI</span> <span class='ar'>active alcohol/drug, uncontrolled infection</span></div><div class='row'><span class='tg'>Absolute CI</span> <span class='ar'>recent extrahepatic cancer, severe pulm HTN</span></div><div class='row'><span class='tg'>Not a CI</span> <span class='ar'>controlled HIV, prior variceal bleed</span></div></div></div><div class='foot'>Week 32 &middot; GI IV &mdash; Liver &amp; Cirrhosis &middot; cram sheet &middot; cue &rarr; answer</div></div>"
+  }
+ ],
+ "drugs": [
+  {
+   "id": "rx:prednisolone",
+   "name": "Prednisolone",
+   "class": "rx:corticosteroid",
+   "facets": {
+    "use": "Severe alcoholic hepatitis (Maddrey ≥32); autoimmune hepatitis",
+    "mechanism": "Corticosteroid — suppresses cytokine-mediated hepatic injury",
+    "adverse": "Infection, hyperglycemia",
+    "contra": "Active GI bleeding or uncontrolled infection (in alcoholic hepatitis)"
+   },
+   "ref": {
+    "topic": "Hepatitis",
+    "guide": "W32_02_Hepatitis.html",
+    "week": "Week 32 · GI IV — Liver & Cirrhosis"
+   }
+  },
+  {
+   "id": "rx:pentoxifylline",
+   "name": "Pentoxifylline",
+   "class": "rx:pde-tnf-inhibitor",
+   "facets": {
+    "use": "Alcoholic hepatitis (steroid alternative)",
+    "mechanism": "PDE inhibitor / TNF-α modulator",
+    "adverse": "GI upset"
+   },
+   "ref": {
+    "topic": "Hepatitis",
+    "guide": "W32_02_Hepatitis.html",
+    "week": "Week 32 · GI IV — Liver & Cirrhosis"
+   }
+  },
+  {
+   "id": "rx:entecavir",
+   "name": "Entecavir",
+   "class": "rx:hbv-antiviral",
+   "facets": {
+    "use": "Chronic hepatitis B",
+    "mechanism": "Nucleoside analogue — suppresses HBV replication",
+    "adverse": "Generally well tolerated; often lifelong"
+   },
+   "ref": {
+    "topic": "Hepatitis",
+    "guide": "W32_02_Hepatitis.html",
+    "week": "Week 32 · GI IV — Liver & Cirrhosis"
+   }
+  },
+  {
+   "id": "rx:tenofovir",
+   "name": "Tenofovir",
+   "class": "rx:nrti",
+   "facets": {
+    "use": "Chronic hepatitis B; HIV",
+    "mechanism": "Nucleotide reverse transcriptase inhibitor",
+    "adverse": "Renal, bone density"
+   },
+   "ref": {
+    "topic": "Hepatitis",
+    "guide": "W32_02_Hepatitis.html",
+    "week": "Week 32 · GI IV — Liver & Cirrhosis"
+   }
+  },
+  {
+   "id": "rx:sofosbuvir-velpatasvir",
+   "name": "Sofosbuvir/velpatasvir",
+   "class": "rx:daa",
+   "facets": {
+    "use": "Hepatitis C cure (pan-genotypic)",
+    "mechanism": "Direct-acting antiviral combination",
+    "adverse": "Well tolerated; 8–12 week course"
+   },
+   "ref": {
+    "topic": "Hepatitis",
+    "guide": "W32_02_Hepatitis.html",
+    "week": "Week 32 · GI IV — Liver & Cirrhosis"
+   }
+  },
+  {
+   "id": "rx:glecaprevir-pibrentasvir",
+   "name": "Glecaprevir/pibrentasvir",
+   "class": "rx:daa",
+   "facets": {
+    "use": "Hepatitis C cure (pan-genotypic)",
+    "mechanism": "Direct-acting antiviral combination",
+    "adverse": "Well tolerated"
+   },
+   "ref": {
+    "topic": "Hepatitis",
+    "guide": "W32_02_Hepatitis.html",
+    "week": "Week 32 · GI IV — Liver & Cirrhosis"
+   }
+  },
+  {
+   "id": "rx:ursodeoxycholic-acid",
+   "name": "Ursodeoxycholic acid (UDCA)",
+   "class": "rx:bile-acid",
+   "facets": {
+    "use": "Primary biliary cholangitis (first-line)",
+    "mechanism": "Hydrophilic bile acid — slows cholestatic progression",
+    "adverse": "Generally well tolerated"
+   },
+   "ref": {
+    "topic": "Cholestatic disease",
+    "guide": "W32_03_Metabolic_Genetic.html",
+    "week": "Week 32 · GI IV — Liver & Cirrhosis"
+   }
+  },
+  {
+   "id": "rx:azathioprine",
+   "name": "Azathioprine",
+   "class": "rx:antimetabolite-immunosuppressant",
+   "facets": {
+    "use": "Autoimmune hepatitis (steroid-sparing maintenance)",
+    "mechanism": "Purine antimetabolite immunosuppressant",
+    "adverse": "Myelosuppression, hepatotoxicity",
+    "monitoring": "Check TPMT; CBC/LFTs"
+   },
+   "ref": {
+    "topic": "Autoimmune hepatitis",
+    "guide": "W32_03_Metabolic_Genetic.html",
+    "week": "Week 32 · GI IV — Liver & Cirrhosis"
+   }
+  },
+  {
+   "id": "rx:penicillamine",
+   "name": "Penicillamine",
+   "class": "rx:copper-chelator",
+   "facets": {
+    "use": "Wilson disease",
+    "mechanism": "Copper chelator — promotes urinary copper excretion",
+    "adverse": "Nephrotoxicity, marrow suppression, neuro worsening early"
+   },
+   "ref": {
+    "topic": "Wilson disease",
+    "guide": "W32_03_Metabolic_Genetic.html",
+    "week": "Week 32 · GI IV — Liver & Cirrhosis"
+   }
+  },
+  {
+   "id": "rx:zinc",
+   "name": "Zinc",
+   "class": "rx:mineral-supplement",
+   "facets": {
+    "use": "Wilson disease (maintenance/alternative)",
+    "mechanism": "Blocks intestinal copper absorption (induces metallothionein)",
+    "adverse": "GI upset"
+   },
+   "ref": {
+    "topic": "Wilson disease",
+    "guide": "W32_03_Metabolic_Genetic.html",
+    "week": "Week 32 · GI IV — Liver & Cirrhosis"
+   }
+  },
+  {
+   "id": "rx:acetylcysteine",
+   "name": "N-acetylcysteine",
+   "class": "rx:antidote",
+   "facets": {
+    "use": "Acetaminophen overdose / hyperacute failure",
+    "mechanism": "Replenishes glutathione — detoxifies NAPQI",
+    "adverse": "Anaphylactoid reaction"
+   },
+   "ref": {
+    "topic": "Liver failure",
+    "guide": "W32_01_Liver_Assessment.html",
+    "week": "Week 32 · GI IV — Liver & Cirrhosis"
+   }
+  },
+  {
+   "id": "rx:spironolactone",
+   "name": "Spironolactone",
+   "class": "rx:aldosterone-antagonist",
+   "facets": {
+    "use": "Cirrhotic ascites (first diuretic)",
+    "mechanism": "Aldosterone antagonist (counters secondary hyperaldosteronism)",
+    "adverse": "Hyperkalemia, gynecomastia"
+   },
+   "ref": {
+    "topic": "Ascites",
+    "guide": "W32_05_Ascites_SBP.html",
+    "week": "Week 32 · GI IV — Liver & Cirrhosis"
+   }
+  },
+  {
+   "id": "rx:furosemide",
+   "name": "Furosemide",
+   "class": "rx:loop-diuretic",
+   "facets": {
+    "use": "Cirrhotic ascites (with spironolactone)",
+    "mechanism": "Loop diuretic",
+    "adverse": "Hypokalemia, volume depletion, renal injury",
+    "dosing": "~100:40 spironolactone:furosemide ratio"
+   },
+   "ref": {
+    "topic": "Ascites",
+    "guide": "W32_05_Ascites_SBP.html",
+    "week": "Week 32 · GI IV — Liver & Cirrhosis"
+   }
+  },
+  {
+   "id": "rx:albumin",
+   "name": "Albumin (IV)",
+   "class": "rx:volume-expander",
+   "facets": {
+    "use": "Large-volume paracentesis; SBP; hepatorenal syndrome",
+    "mechanism": "Volume expander — maintains oncotic pressure",
+    "adverse": "Volume overload"
+   },
+   "ref": {
+    "topic": "Ascites",
+    "guide": "W32_05_Ascites_SBP.html",
+    "week": "Week 32 · GI IV — Liver & Cirrhosis"
+   }
+  },
+  {
+   "id": "rx:ceftriaxone",
+   "name": "Ceftriaxone",
+   "class": "rx:cephalosporin",
+   "facets": {
+    "use": "SBP treatment; variceal-bleed prophylaxis",
+    "mechanism": "3rd-gen cephalosporin",
+    "adverse": "Allergy, C. difficile"
+   },
+   "ref": {
+    "topic": "Ascites",
+    "guide": "W32_05_Ascites_SBP.html",
+    "week": "Week 32 · GI IV — Liver & Cirrhosis"
+   }
+  },
+  {
+   "id": "rx:norfloxacin",
+   "name": "Norfloxacin",
+   "class": "rx:fluoroquinolone",
+   "facets": {
+    "use": "Secondary SBP prophylaxis",
+    "mechanism": "Fluoroquinolone (gut decontamination)",
+    "adverse": "Tendinopathy, QT, resistance"
+   },
+   "ref": {
+    "topic": "Ascites",
+    "guide": "W32_05_Ascites_SBP.html",
+    "week": "Week 32 · GI IV — Liver & Cirrhosis"
+   }
+  },
+  {
+   "id": "rx:octreotide",
+   "name": "Octreotide",
+   "class": "rx:somatostatin-analogue",
+   "facets": {
+    "use": "Acute variceal bleeding",
+    "mechanism": "Somatostatin analogue — splanchnic vasoconstriction reduces portal inflow",
+    "adverse": "Hyperglycemia, bradycardia"
+   },
+   "ref": {
+    "topic": "Variceal bleeding",
+    "guide": "W32_06_Variceal_Bleeding.html",
+    "week": "Week 32 · GI IV — Liver & Cirrhosis"
+   }
+  },
+  {
+   "id": "rx:pantoprazole",
+   "name": "Pantoprazole",
+   "class": "rx:ppi",
+   "facets": {
+    "use": "Variceal bleed (covers ulcer); ulcer bleeding",
+    "mechanism": "Proton pump inhibitor (IV)",
+    "adverse": "Generally safe short-term"
+   },
+   "ref": {
+    "topic": "Variceal bleeding",
+    "guide": "W32_06_Variceal_Bleeding.html",
+    "week": "Week 32 · GI IV — Liver & Cirrhosis"
+   }
+  },
+  {
+   "id": "rx:propranolol",
+   "name": "Propranolol",
+   "class": "rx:beta-blocker",
+   "facets": {
+    "use": "Variceal bleed prophylaxis",
+    "mechanism": "Non-selective beta-blocker — lowers portal pressure",
+    "adverse": "Bradycardia, fatigue, bronchospasm"
+   },
+   "ref": {
+    "topic": "Variceal bleeding",
+    "guide": "W32_06_Variceal_Bleeding.html",
+    "week": "Week 32 · GI IV — Liver & Cirrhosis"
+   }
+  },
+  {
+   "id": "rx:lactulose",
+   "name": "Lactulose",
+   "class": "rx:laxative",
+   "facets": {
+    "use": "Hepatic encephalopathy (first-line)",
+    "mechanism": "Acidifies colon → traps ammonia as ammonium + catharsis",
+    "adverse": "Diarrhea, bloating, electrolyte loss"
+   },
+   "ref": {
+    "topic": "Encephalopathy",
+    "guide": "W32_07_Encephalopathy.html",
+    "week": "Week 32 · GI IV — Liver & Cirrhosis"
+   }
+  },
+  {
+   "id": "rx:rifaximin",
+   "name": "Rifaximin",
+   "class": "rx:rifamycin",
+   "facets": {
+    "use": "Recurrent hepatic encephalopathy",
+    "mechanism": "Non-absorbed gut antibiotic — lowers ammonia-producing bacteria",
+    "adverse": "Well tolerated"
+   },
+   "ref": {
+    "topic": "Encephalopathy",
+    "guide": "W32_07_Encephalopathy.html",
+    "week": "Week 32 · GI IV — Liver & Cirrhosis"
+   }
+  }
+ ]
+}

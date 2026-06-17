@@ -1,0 +1,1643 @@
+{
+ "pack": "Week 33 — KU I (Renal/AKI/CKD)",
+ "id": "wk33",
+ "formatVersion": "2.0",
+ "version": "1.0",
+ "author": "Alkarim Billawala / alkarim.billawala.ca",
+ "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
+ "created": "2026-06-16",
+ "updated": "2026-06-16",
+ "school": "UofT — Temerty Medicine",
+ "year": "Year 1",
+ "course": "CPC 2",
+ "weeks": "Week 33 · KU I — Renal Function, AKI & CKD",
+ "questions": [
+  {
+   "id": "wk33_q01",
+   "sys": "Renal",
+   "topic": "Renal · Dialysis",
+   "difficulty": "hard",
+   "stem": "A 68-year-old with creatinine 550 (baseline 130), K 7.4, venous pH 7.05, pulmonary edema, and anuria remains hyperkalemic (7.2) and overloaded despite IV insulin/glucose and high-dose loop diuretics. Most definitive next step?",
+   "options": [
+    "Increase the furosemide dose",
+    "Give a potassium-binding resin",
+    "Initiate urgent hemodialysis",
+    "Emergent renal biopsy"
+   ],
+   "correct": 2,
+   "explain": "Refractory hyperkalemia + severe acidosis (pH &lt;7.1) + volume overload not responding to medical therapy are absolute dialysis indications (<b>AEIOU</b>). Resins/diuretics have failed &rarr; <b>urgent hemodialysis</b>.",
+   "guide": {
+    "f": "W33_06_CKD.html",
+    "t": "6 · Dialysis",
+    "s": "AEIOU"
+   }
+  },
+  {
+   "id": "wk33_q02",
+   "sys": "Renal",
+   "topic": "Renal · AIN",
+   "difficulty": "medium",
+   "stem": "A 76-year-old on IV levofloxacin for pneumonia has creatinine rise from 90 to 280 on day 7; she is euvolemic. Urinalysis: 1+ protein, blood, WBCs and WBC casts; FENa 2.5%. Most likely diagnosis?",
+   "options": [
+    "Acute tubular necrosis",
+    "Pre-renal azotemia",
+    "Acute interstitial nephritis",
+    "Post-infectious glomerulonephritis"
+   ],
+   "correct": 2,
+   "explain": "AKI ~7 days after a fluoroquinolone with <b>WBCs and WBC casts</b> is classic <b>acute interstitial nephritis</b> (allergic, drug-induced). ATN would show muddy-brown granular casts. Treatment is to stop the drug.",
+   "guide": {
+    "f": "W33_03_AKI_Intrinsic.html",
+    "t": "3 · AIN",
+    "s": "WBC casts, drug ~7 days"
+   }
+  },
+  {
+   "id": "wk33_q03",
+   "sys": "Renal",
+   "topic": "Renal · CKD progression",
+   "difficulty": "medium",
+   "stem": "A 55-year-old with 15-year T2DM and hypertension on metformin, amlodipine, atorvastatin has eGFR 42 and urine ACR 150 mg/mmol. Which addition best delays CKD progression?",
+   "options": [
+    "Chlorthalidone",
+    "Dapagliflozin",
+    "Diltiazem",
+    "Metoprolol"
+   ],
+   "correct": 1,
+   "explain": "Proteinuric diabetic CKD &rarr; an <b>SGLT2 inhibitor (dapagliflozin)</b> slows progression (DAPA-CKD). An <b>ACEi/ARB</b> would also be strongly indicated here (he's on neither). Diltiazem/metoprolol/chlorthalidone lower BP but aren't specifically renoprotective.",
+   "guide": {
+    "f": "W33_06_CKD.html",
+    "t": "6 · Renoprotection",
+    "s": "SGLT2 in proteinuric CKD"
+   }
+  },
+  {
+   "id": "wk33_q04",
+   "sys": "Renal",
+   "topic": "Renal · ANCA vasculitis",
+   "difficulty": "hard",
+   "stem": "A 62-year-old with fatigue, joint pain, new hemoptysis, BP 170/95, heavy hematuria with RBC casts has a NEGATIVE ANA and NORMAL C3/C4. Which mechanism is most likely?",
+   "options": [
+    "Subepithelial PLA2R immune complexes",
+    "Pauci-immune injury with autoantibodies to neutrophil cytoplasm (ANCA)",
+    "Mesangial IgA deposition",
+    "SLE complement consumption"
+   ],
+   "correct": 1,
+   "explain": "A pulmonary-renal nephritic syndrome with <b>negative ANA and normal complement</b> is <b>pauci-immune ANCA-associated vasculitis</b> (PR3/MPO antibodies). Low complement would suggest SLE; PLA2R is nephrotic (membranous).",
+   "guide": {
+    "f": "W33_05_Nephritic.html",
+    "t": "5 · ANCA",
+    "s": "pauci-immune, normal complement"
+   }
+  },
+  {
+   "id": "wk33_q05",
+   "sys": "Renal",
+   "topic": "Renal · Pregnancy HTN",
+   "difficulty": "easy",
+   "stem": "A 30-year-old at 24 weeks gestation has BP 155/95 on repeat readings (gestational hypertension). Which antihypertensive is strictly contraindicated?",
+   "options": [
+    "Ramipril",
+    "Labetalol",
+    "Methyldopa",
+    "Nifedipine XL"
+   ],
+   "correct": 0,
+   "explain": "<b>ACE inhibitors (ramipril)</b> and ARBs are teratogenic (renal dysgenesis) and contraindicated in pregnancy. Safe options are <b>labetalol, methyldopa, and nifedipine XL</b>.",
+   "guide": {
+    "f": "W33_07_HTN_Pharmacology.html",
+    "t": "7 · Pregnancy",
+    "s": "ACEi/ARB contraindicated"
+   }
+  },
+  {
+   "id": "wk33_q06",
+   "sys": "Renal",
+   "topic": "Renal · CKD-MBD",
+   "difficulty": "medium",
+   "stem": "A patient with ESRD missing dialysis has fatigue, pruritus, and bone pain. Which lab profile fits the expected mineral bone disorder?",
+   "options": [
+    "High Ca, low phosphate, low PTH",
+    "Low Ca, low phosphate, high PTH",
+    "Low Ca, high phosphate, high PTH",
+    "High Ca, high phosphate, low PTH"
+   ],
+   "correct": 2,
+   "explain": "CKD-MBD: loss of 1-α-hydroxylase &rarr; less active vitamin D &rarr; <b>hypocalcemia</b>; failure to excrete phosphate &rarr; <b>hyperphosphatemia</b>; both stimulate PTH &rarr; <b>secondary hyperparathyroidism (high PTH)</b>.",
+   "guide": {
+    "f": "W33_06_CKD.html",
+    "t": "6 · CKD-MBD",
+    "s": "low Ca, high PO4, high PTH"
+   }
+  },
+  {
+   "id": "wk33_q07",
+   "sys": "Renal",
+   "topic": "Renal · Pediatric nephrotic",
+   "difficulty": "medium",
+   "stem": "A 10-year-old has 1 week of periorbital and leg edema, normal BP, urine dipstick 4+ protein with NO blood. Best next step?",
+   "options": [
+    "Urgent kidney biopsy",
+    "IV cyclophosphamide",
+    "Start oral prednisone 1 mg/kg with close follow-up",
+    "ACE inhibitor + loop diuretic, reassess in 4 weeks"
+   ],
+   "correct": 2,
+   "explain": "Childhood nephrotic syndrome (heavy proteinuria, edema, <b>no hematuria</b>, normal BP) is almost always <b>minimal change disease</b>, which is steroid-responsive &rarr; start <b>empiric prednisone</b>; biopsy only if it fails to respond.",
+   "guide": {
+    "f": "W33_04_Nephrotic.html",
+    "t": "4 · MCD",
+    "s": "empiric steroids"
+   }
+  },
+  {
+   "id": "wk33_q08",
+   "sys": "Renal",
+   "topic": "Renal · RPGN",
+   "difficulty": "hard",
+   "stem": "A 78-year-old has 4 months of fatigue/weight loss, BP 185/110, creatinine 510 (baseline 85), new anemia, heavy hematuria with RBC casts and 3 g/L proteinuria. Which statement is most accurate?",
+   "options": [
+    "Empiric IV corticosteroids should be started urgently to preserve renal function",
+    "Withhold treatment until biopsy confirms the etiology",
+    "Start hemodialysis immediately to prevent nephron loss",
+    "A podocyte foot-process defect is the mechanism"
+   ],
+   "correct": 0,
+   "explain": "Nephritic syndrome with RBC casts and a rapidly rising creatinine = <b>rapidly progressive glomerulonephritis</b>, a renal emergency. Give <b>urgent empiric IV (pulse) corticosteroids</b> — do not delay for biopsy.",
+   "guide": {
+    "f": "W33_05_Nephritic.html",
+    "t": "5 · RPGN",
+    "s": "pulse steroids, don't wait"
+   }
+  },
+  {
+   "id": "wk33_q09",
+   "sys": "Renal",
+   "topic": "Renal · Anuria eGFR",
+   "difficulty": "medium",
+   "stem": "A 71-year-old is anuric (0 mL urine over 12 h) on post-op day 3 with creatinine 310 (baseline 95). What is his approximate eGFR?",
+   "options": [
+    "0 mL/min",
+    "15 mL/min",
+    "25 mL/min",
+    "Cannot be determined without 24-h urine"
+   ],
+   "correct": 0,
+   "explain": "An <b>anuric</b> kidney filters nothing, so the true eGFR is <b>0</b>. Estimating equations are invalid because they assume a steady-state creatinine, which isn't true in acute evolving AKI.",
+   "guide": {
+    "f": "W33_01_Renal_Physiology.html",
+    "t": "1 · Anuria",
+    "s": "eGFR = 0"
+   }
+  },
+  {
+   "id": "wk33_q10",
+   "sys": "Renal",
+   "topic": "Renal · EPO target",
+   "difficulty": "medium",
+   "stem": "A man with stage 4 CKD has Hb 88 (baseline 105), adequate iron, and exertional dyspnea. Starting an ESA, what Hb target is appropriate?",
+   "options": [
+    "90–100 g/L",
+    "110–120 g/L",
+    "130–140 g/L",
+    "> 140 g/L"
+   ],
+   "correct": 1,
+   "explain": "ESA is indicated for symptomatic anemia with Hb &lt;100; the target is <b>110&ndash;120 g/L</b>. <b>Normalizing</b> Hb (&gt;130) increases stroke risk, so it is avoided.",
+   "guide": {
+    "f": "W33_08_Special_Populations.html",
+    "t": "8 · EPO",
+    "s": "target 110–120"
+   }
+  },
+  {
+   "id": "wk33_q11",
+   "sys": "Renal",
+   "topic": "Renal · Pre-renal",
+   "difficulty": "medium",
+   "stem": "A dehydrated patient has AKI with bland urine, urine sodium 12 mmol/L, and FENa 0.5%. Which AKI category is this and what does the FENa indicate?",
+   "options": [
+    "ATN; tubular damage",
+    "Pre-renal; intact tubules avidly reabsorbing sodium",
+    "AIN; allergic reaction",
+    "Post-renal; obstruction"
+   ],
+   "correct": 1,
+   "explain": "A <b>FENa &lt;1%</b> with bland urine indicates intact tubules reabsorbing sodium hard in response to hypoperfusion = <b>pre-renal AKI</b>. Restore perfusion (volume) and it reverses.",
+   "guide": {
+    "f": "W33_02_AKI_Pre_Post.html",
+    "t": "2 · FENa",
+    "s": "<1% = pre-renal"
+   }
+  },
+  {
+   "id": "wk33_q12",
+   "sys": "Renal",
+   "topic": "Renal · ATN",
+   "difficulty": "medium",
+   "stem": "A patient develops AKI after prolonged hypotension and IV contrast. Urine microscopy shows muddy-brown granular casts; FENa is 3%. Most likely diagnosis?",
+   "options": [
+    "Pre-renal azotemia",
+    "Acute tubular necrosis",
+    "Acute interstitial nephritis",
+    "Minimal change disease"
+   ],
+   "correct": 1,
+   "explain": "Ischemia/nephrotoxin (contrast) injury with <b>muddy-brown granular casts</b> and <b>FENa &gt;1%</b> = <b>acute tubular necrosis</b>. The high FENa reflects tubules that can no longer reabsorb sodium.",
+   "guide": {
+    "f": "W33_03_AKI_Intrinsic.html",
+    "t": "3 · ATN",
+    "s": "muddy brown casts"
+   }
+  },
+  {
+   "id": "wk33_q13",
+   "sys": "Renal",
+   "topic": "Renal · Membranous",
+   "difficulty": "medium",
+   "stem": "An adult with nephrotic-range proteinuria has antibodies against the phospholipase A2 receptor on podocytes and subepithelial immune deposits on biopsy. Most likely diagnosis?",
+   "options": [
+    "Minimal change disease",
+    "Membranous nephropathy",
+    "IgA nephropathy",
+    "ANCA vasculitis"
+   ],
+   "correct": 1,
+   "explain": "Adult nephrotic syndrome with <b>anti-PLA2R</b> antibodies and subepithelial immune complexes ('spike and dome') is <b>membranous nephropathy</b>, the classic primary nephrotic disease of adults.",
+   "guide": {
+    "f": "W33_04_Nephrotic.html",
+    "t": "4 · Membranous",
+    "s": "PLA2R"
+   }
+  },
+  {
+   "id": "wk33_q14",
+   "sys": "Renal",
+   "topic": "Renal · IgA",
+   "difficulty": "medium",
+   "stem": "A 24-year-old develops visible hematuria 1–2 days after an upper respiratory infection, with mildly elevated BP and normal creatinine. What is the most likely diagnosis?",
+   "options": [
+    "IgA nephropathy",
+    "Minimal change disease",
+    "Membranous nephropathy",
+    "Anti-GBM disease"
+   ],
+   "correct": 0,
+   "explain": "Hematuria concurrent with (within 1&ndash;2 days of) an upper respiratory infection — <b>synpharyngitic</b> — in a young adult is classic <b>IgA nephropathy</b>, the most common glomerulonephritis worldwide.",
+   "guide": {
+    "f": "W33_05_Nephritic.html",
+    "t": "5 · IgA",
+    "s": "synpharyngitic hematuria"
+   }
+  },
+  {
+   "id": "wk33_q15",
+   "sys": "Renal",
+   "topic": "Renal · CKD definition",
+   "difficulty": "easy",
+   "stem": "Which finding meets the definition of chronic kidney disease?",
+   "options": [
+    "A single eGFR of 55 today",
+    "eGFR <60 or kidney damage markers present for ≥3 months",
+    "Any proteinuria on one sample",
+    "Serum creatinine above the lab range once"
+   ],
+   "correct": 1,
+   "explain": "CKD requires an <b>eGFR &lt;60 mL/min/1.73m² OR markers of kidney damage (e.g. albuminuria) for at least 3 months</b> — chronicity is essential to distinguish it from AKI.",
+   "guide": {
+    "f": "W33_06_CKD.html",
+    "t": "6 · Definition",
+    "s": "≥3 months"
+   }
+  },
+  {
+   "id": "wk33_q16",
+   "sys": "Renal",
+   "topic": "Renal · DASH",
+   "difficulty": "easy",
+   "stem": "A 45-year-old with new hypertension and T2DM wants the most effective single lifestyle change. What is the BP target and best lifestyle advice?",
+   "options": [
+    "<140/90; strict sodium restriction is best",
+    "<130/80; the DASH diet gives the greatest BP reduction",
+    "<120/80; aerobic exercise is best",
+    "<140/90; weight loss is best"
+   ],
+   "correct": 1,
+   "explain": "With diabetes the BP target is <b>&lt;130/80</b>. Among lifestyle changes, the <b>DASH diet</b> provides the greatest BP-lowering benefit (though sodium restriction, weight loss, and exercise all help).",
+   "guide": {
+    "f": "W33_07_HTN_Pharmacology.html",
+    "t": "7 · Lifestyle",
+    "s": "DASH; <130/80 in diabetes"
+   }
+  },
+  {
+   "id": "wk33_q17",
+   "sys": "Renal",
+   "topic": "Renal · Post-renal",
+   "difficulty": "easy",
+   "stem": "An older man with AKI, a distended bladder, and a history of urinary hesitancy is suspected of obstruction. What is the first-line investigation?",
+   "options": [
+    "Renal biopsy",
+    "Renal/bladder ultrasound for hydronephrosis",
+    "FENa",
+    "CT angiography"
+   ],
+   "correct": 1,
+   "explain": "Suspected post-renal (obstructive) AKI is investigated first with a <b>renal/bladder ultrasound</b> to detect <b>hydronephrosis</b>; relieving the obstruction (e.g. catheter for BPH) can reverse the AKI.",
+   "guide": {
+    "f": "W33_02_AKI_Pre_Post.html",
+    "t": "2 · Post-renal",
+    "s": "ultrasound first"
+   }
+  },
+  {
+   "id": "wk33_q18",
+   "sys": "Renal",
+   "topic": "Renal · ADPKD",
+   "difficulty": "medium",
+   "stem": "A 40-year-old with hypertension, progressive GFR decline, minimal proteinuria, and a strong family history of dialysis is found to have bilateral enlarged cystic kidneys. Which extrarenal complication should be considered?",
+   "options": [
+    "Pulmonary fibrosis",
+    "Intracranial (berry) aneurysm",
+    "Optic neuritis",
+    "Pheochromocytoma"
+   ],
+   "correct": 1,
+   "explain": "<b>ADPKD</b> (family history, big cysts, minimal proteinuria) is associated with hepatic cysts and <b>intracranial (berry) aneurysms</b> — screen selected patients given the risk of subarachnoid hemorrhage.",
+   "guide": {
+    "f": "W33_08_Special_Populations.html",
+    "t": "8 · ADPKD",
+    "s": "berry aneurysm"
+   }
+  },
+  {
+   "id": "wk33_q19",
+   "sys": "Renal",
+   "topic": "Renal · Geriatric dosing",
+   "difficulty": "medium",
+   "stem": "Before prescribing a renally-cleared antibiotic to an 84-year-old woman with a 'normal' serum creatinine, what is the most important step?",
+   "options": [
+    "Prescribe the standard dose; creatinine is normal",
+    "Estimate GFR (creatinine can be deceptively normal with low muscle mass)",
+    "Order a renal biopsy",
+    "Start dialysis prophylactically"
+   ],
+   "correct": 1,
+   "explain": "Low muscle mass keeps creatinine 'normal' despite a 30&ndash;50% drop in functional glomeruli with age. <b>Always estimate GFR</b> before dosing renally-cleared drugs in older adults to avoid toxicity.",
+   "guide": {
+    "f": "W33_08_Special_Populations.html",
+    "t": "8 · Geriatrics",
+    "s": "estimate GFR first"
+   }
+  },
+  {
+   "id": "wk33_q20",
+   "sys": "Renal",
+   "topic": "Renal · ACEi monitoring",
+   "difficulty": "medium",
+   "stem": "Two weeks after starting ramipril for proteinuric CKD, a patient's creatinine has risen 22% and potassium is 5.0. What is the appropriate action?",
+   "options": [
+    "Stop the ACE inhibitor — this is nephrotoxicity",
+    "Continue and monitor; a <30% creatinine rise is acceptable",
+    "Switch to an ARB immediately",
+    "Add a potassium supplement"
+   ],
+   "correct": 1,
+   "explain": "A creatinine rise of <b>&lt;30%</b> after starting an ACEi/ARB is expected and acceptable (reflects reduced intraglomerular pressure), provided potassium is tolerable. Continue and monitor; the drug is renoprotective.",
+   "guide": {
+    "f": "W33_07_HTN_Pharmacology.html",
+    "t": "7 · ACEi/ARB",
+    "s": "<30% rise acceptable"
+   }
+  }
+ ],
+ "cards": [
+  {
+   "id": "wk33_c01",
+   "sys": "Renal",
+   "topic": "GFR",
+   "type": "qa",
+   "guide": {
+    "f": "W33_01_Renal_Physiology.html",
+    "t": "1 · GFR",
+    "s": "estimation"
+   },
+   "prompt": "Why is serum creatinine used to estimate GFR, and what are its caveats?",
+   "answer": "It is endogenous and freely filtered; but it is also secreted by the proximal tubule and varies with age/sex/muscle mass, and estimating equations require a steady state."
+  },
+  {
+   "id": "wk33_c02",
+   "sys": "Renal",
+   "topic": "Anuria",
+   "type": "qa",
+   "guide": {
+    "f": "W33_01_Renal_Physiology.html",
+    "t": "1 · Anuria",
+    "s": "eGFR 0"
+   },
+   "prompt": "What is the eGFR of an anuric patient in acute AKI?",
+   "answer": "Effectively 0 mL/min — the kidney filters nothing; estimating equations are invalid because creatinine isn't at steady state."
+  },
+  {
+   "id": "wk33_c03",
+   "sys": "Renal",
+   "topic": "Endocrine roles",
+   "type": "qa",
+   "guide": {
+    "f": "W33_01_Renal_Physiology.html",
+    "t": "1 · Endocrine",
+    "s": "renin/EPO/vit D"
+   },
+   "prompt": "Which kidney hormones explain CKD's hypertension, anemia, and bone disease?",
+   "answer": "Renin (RAAS → hypertension), erythropoietin (loss → anemia), and 1-α-hydroxylase (loss → low active vitamin D → CKD-MBD)."
+  },
+  {
+   "id": "wk33_c04",
+   "sys": "Renal",
+   "topic": "AKI definition",
+   "type": "qa",
+   "guide": {
+    "f": "W33_02_AKI_Pre_Post.html",
+    "t": "2 · Definition",
+    "s": "criteria"
+   },
+   "prompt": "State the AKI diagnostic criteria.",
+   "answer": "Creatinine rise ≥50% within 7 days, an absolute rise ≥26.5 µmol/L within 48 h, or oliguria <0.5 mL/kg/h for 6 h."
+  },
+  {
+   "id": "wk33_c05",
+   "sys": "Renal",
+   "topic": "Pre-renal FENa",
+   "type": "qa",
+   "guide": {
+    "f": "W33_02_AKI_Pre_Post.html",
+    "t": "2 · Pre-renal",
+    "s": "FENa"
+   },
+   "prompt": "What urine findings indicate pre-renal AKI?",
+   "answer": "Bland sediment, low urine sodium (<20), and FENa <1% — intact tubules avidly reabsorbing sodium in response to hypoperfusion."
+  },
+  {
+   "id": "wk33_c06",
+   "sys": "Renal",
+   "topic": "Post-renal",
+   "type": "qa",
+   "guide": {
+    "f": "W33_02_AKI_Pre_Post.html",
+    "t": "2 · Post-renal",
+    "s": "ultrasound"
+   },
+   "prompt": "How is post-renal AKI diagnosed and treated?",
+   "answer": "Renal/bladder ultrasound for hydronephrosis (first-line); relieve the obstruction (catheter, stent, or nephrostomy)."
+  },
+  {
+   "id": "wk33_c07",
+   "sys": "Renal",
+   "topic": "ATN",
+   "type": "qa",
+   "guide": {
+    "f": "W33_03_AKI_Intrinsic.html",
+    "t": "3 · ATN",
+    "s": "casts"
+   },
+   "prompt": "What causes ATN and what does urine microscopy show?",
+   "answer": "Prolonged ischemia or nephrotoxins (aminoglycosides, IV contrast, myoglobin); muddy-brown hemegranular casts with FENa >1%."
+  },
+  {
+   "id": "wk33_c08",
+   "sys": "Renal",
+   "topic": "AIN",
+   "type": "qa",
+   "guide": {
+    "f": "W33_03_AKI_Intrinsic.html",
+    "t": "3 · AIN",
+    "s": "trigger/treatment"
+   },
+   "prompt": "Describe acute interstitial nephritis.",
+   "answer": "Allergic AKI ~7–10 days after a drug (penicillins, fluoroquinolones, PPIs, NSAIDs), ± rash/fever/eosinophilia, with WBCs and WBC casts; treat by stopping the drug (± steroids)."
+  },
+  {
+   "id": "wk33_c09",
+   "sys": "Renal",
+   "topic": "Casts",
+   "type": "qa",
+   "guide": {
+    "f": "W33_03_AKI_Intrinsic.html",
+    "t": "3 · Casts",
+    "s": "localize"
+   },
+   "prompt": "Match urinary casts to the lesion.",
+   "answer": "Muddy-brown granular → ATN; WBC casts → AIN; RBC casts → glomerulonephritis (nephritic); bland urine with FENa <1% → pre-renal."
+  },
+  {
+   "id": "wk33_c10",
+   "sys": "Renal",
+   "topic": "Nephrotic",
+   "type": "qa",
+   "guide": {
+    "f": "W33_04_Nephrotic.html",
+    "t": "4 · Nephrotic",
+    "s": "tetrad"
+   },
+   "prompt": "Define nephrotic syndrome.",
+   "answer": "Proteinuria >3.5 g/day, hypoalbuminemia, edema, and hyperlipidemia (from podocyte/filtration-barrier injury); also a hypercoagulable state."
+  },
+  {
+   "id": "wk33_c11",
+   "sys": "Renal",
+   "topic": "MCD",
+   "type": "qa",
+   "guide": {
+    "f": "W33_04_Nephrotic.html",
+    "t": "4 · MCD",
+    "s": "children"
+   },
+   "prompt": "What is the commonest pediatric nephrotic cause and its management?",
+   "answer": "Minimal change disease — normal light microscopy, foot-process effacement on EM; start empiric oral prednisone (biopsy only if steroid-unresponsive)."
+  },
+  {
+   "id": "wk33_c12",
+   "sys": "Renal",
+   "topic": "Nephritic",
+   "type": "qa",
+   "guide": {
+    "f": "W33_05_Nephritic.html",
+    "t": "5 · Nephritic",
+    "s": "features"
+   },
+   "prompt": "Define nephritic syndrome.",
+   "answer": "Hematuria with RBC casts, variable proteinuria, hypertension, and reduced GFR from glomerular inflammation/proliferation."
+  },
+  {
+   "id": "wk33_c13",
+   "sys": "Renal",
+   "topic": "Complement",
+   "type": "qa",
+   "guide": {
+    "f": "W33_05_Nephritic.html",
+    "t": "5 · Complement",
+    "s": "split"
+   },
+   "prompt": "How does complement help classify nephritic disease?",
+   "answer": "Low C3/C4 → immune-complex/complement-consuming (SLE, post-infectious GN); normal complement with pulmonary-renal disease → pauci-immune ANCA vasculitis or anti-GBM."
+  },
+  {
+   "id": "wk33_c14",
+   "sys": "Renal",
+   "topic": "RPGN",
+   "type": "qa",
+   "guide": {
+    "f": "W33_05_Nephritic.html",
+    "t": "5 · RPGN",
+    "s": "emergency"
+   },
+   "prompt": "Why is RPGN an emergency and how is it treated?",
+   "answer": "It can destroy kidneys within days (crescentic GN); give urgent empiric IV pulse corticosteroids without waiting for the biopsy (± cyclophosphamide/rituximab, plasma exchange)."
+  },
+  {
+   "id": "wk33_c15",
+   "sys": "Renal",
+   "topic": "CKD-MBD",
+   "type": "qa",
+   "guide": {
+    "f": "W33_06_CKD.html",
+    "t": "6 · CKD-MBD",
+    "s": "labs"
+   },
+   "prompt": "What is the CKD-MBD lab pattern and mechanism?",
+   "answer": "Low calcium, high phosphate, high PTH (secondary hyperparathyroidism) — from loss of 1-α-hydroxylase (low active vitamin D) and impaired phosphate excretion."
+  },
+  {
+   "id": "wk33_c16",
+   "sys": "Renal",
+   "topic": "Dialysis AEIOU",
+   "type": "qa",
+   "guide": {
+    "f": "W33_06_CKD.html",
+    "t": "6 · Dialysis",
+    "s": "AEIOU"
+   },
+   "prompt": "List the AEIOU indications for urgent dialysis.",
+   "answer": "Acidosis (pH <7.1), Electrolytes (refractory hyperkalemia), Intoxication (methanol, lithium, ASA), Overload (refractory pulmonary edema), Uremia (pericarditis, encephalopathy)."
+  },
+  {
+   "id": "wk33_c17",
+   "sys": "Renal",
+   "topic": "GFR normal",
+   "type": "mcq",
+   "guide": {
+    "f": "W33_01_Renal_Physiology.html",
+    "t": "1 · GFR",
+    "s": "normal"
+   },
+   "prompt": "A normal GFR is approximately:",
+   "options": [
+    ">60 mL/min",
+    ">90 mL/min",
+    ">120 mL/min",
+    ">30 mL/min"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk33_c18",
+   "sys": "Renal",
+   "topic": "FENa pre-renal",
+   "type": "mcq",
+   "guide": {
+    "f": "W33_02_AKI_Pre_Post.html",
+    "t": "2 · FENa",
+    "s": "value"
+   },
+   "prompt": "A FENa <1% with bland urine indicates:",
+   "options": [
+    "ATN",
+    "Pre-renal AKI",
+    "AIN",
+    "Post-renal AKI"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk33_c19",
+   "sys": "Renal",
+   "topic": "ATN casts",
+   "type": "mcq",
+   "guide": {
+    "f": "W33_03_AKI_Intrinsic.html",
+    "t": "3 · ATN",
+    "s": "casts"
+   },
+   "prompt": "Muddy-brown granular casts are characteristic of:",
+   "options": [
+    "Pre-renal AKI",
+    "Acute tubular necrosis",
+    "Acute interstitial nephritis",
+    "Minimal change disease"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk33_c20",
+   "sys": "Renal",
+   "topic": "AIN drugs",
+   "type": "mcq",
+   "guide": {
+    "f": "W33_03_AKI_Intrinsic.html",
+    "t": "3 · AIN",
+    "s": "drugs"
+   },
+   "prompt": "Which drug class classically causes acute interstitial nephritis?",
+   "options": [
+    "ACE inhibitors",
+    "PPIs / antibiotics / NSAIDs",
+    "Statins",
+    "Beta-blockers"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk33_c21",
+   "sys": "Renal",
+   "topic": "MCD age",
+   "type": "mcq",
+   "guide": {
+    "f": "W33_04_Nephrotic.html",
+    "t": "4 · MCD",
+    "s": "children"
+   },
+   "prompt": "Minimal change disease is the commonest nephrotic cause in:",
+   "options": [
+    "Older adults",
+    "Children",
+    "Pregnant women",
+    "Diabetics"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk33_c22",
+   "sys": "Renal",
+   "topic": "ANCA complement",
+   "type": "mcq",
+   "guide": {
+    "f": "W33_05_Nephritic.html",
+    "t": "5 · ANCA",
+    "s": "complement"
+   },
+   "prompt": "ANCA-associated vasculitis classically shows:",
+   "options": [
+    "Low C3/C4, positive ANA",
+    "Normal C3/C4, negative ANA (pauci-immune)",
+    "Anti-PLA2R antibodies",
+    "Subepithelial deposits"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk33_c23",
+   "sys": "Renal",
+   "topic": "CKD cause",
+   "type": "mcq",
+   "guide": {
+    "f": "W33_06_CKD.html",
+    "t": "6 · CKD",
+    "s": "commonest"
+   },
+   "prompt": "The most common cause of CKD is:",
+   "options": [
+    "Hypertension",
+    "Diabetes mellitus",
+    "Glomerulonephritis",
+    "Polycystic kidney disease"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk33_c24",
+   "sys": "Renal",
+   "topic": "EPO target",
+   "type": "mcq",
+   "guide": {
+    "f": "W33_08_Special_Populations.html",
+    "t": "8 · EPO",
+    "s": "target"
+   },
+   "prompt": "The target hemoglobin for ESA therapy in CKD is:",
+   "options": [
+    "90–100 g/L",
+    "110–120 g/L",
+    "130–140 g/L",
+    ">140 g/L"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk33_c25",
+   "sys": "Renal",
+   "topic": "Pregnancy CI",
+   "type": "mcq",
+   "guide": {
+    "f": "W33_07_HTN_Pharmacology.html",
+    "t": "7 · Pregnancy",
+    "s": "contraindicated"
+   },
+   "prompt": "Which antihypertensive is contraindicated in pregnancy?",
+   "options": [
+    "Labetalol",
+    "Methyldopa",
+    "Ramipril",
+    "Nifedipine XL"
+   ],
+   "correct": 2
+  },
+  {
+   "id": "wk33_c26",
+   "sys": "Renal",
+   "topic": "SGLT2 CKD",
+   "type": "mcq",
+   "guide": {
+    "f": "W33_06_CKD.html",
+    "t": "6 · Renoprotection",
+    "s": "SGLT2"
+   },
+   "prompt": "Which agent slows progression of proteinuric diabetic CKD?",
+   "options": [
+    "Diltiazem",
+    "Dapagliflozin",
+    "Metoprolol",
+    "Chlorthalidone"
+   ],
+   "correct": 1
+  },
+  {
+   "id": "wk33_c27",
+   "sys": "Renal",
+   "topic": "Nephrotoxins",
+   "type": "multi",
+   "guide": {
+    "f": "W33_03_AKI_Intrinsic.html",
+    "t": "3 · ATN",
+    "s": "toxins"
+   },
+   "prompt": "Select recognised causes of acute tubular necrosis:",
+   "options": [
+    "Aminoglycosides",
+    "IV contrast",
+    "Myoglobin (rhabdomyolysis)",
+    "Prolonged ischemia",
+    "Bland dehydration with FENa <1%"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk33_c28",
+   "sys": "Renal",
+   "topic": "Nephrotic tetrad",
+   "type": "multi",
+   "guide": {
+    "f": "W33_04_Nephrotic.html",
+    "t": "4 · Nephrotic",
+    "s": "tetrad"
+   },
+   "prompt": "Select features of nephrotic syndrome:",
+   "options": [
+    "Proteinuria >3.5 g/day",
+    "Hypoalbuminemia",
+    "Edema",
+    "Hyperlipidemia",
+    "RBC casts"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk33_c29",
+   "sys": "Renal",
+   "topic": "Nephritic causes",
+   "type": "multi",
+   "guide": {
+    "f": "W33_05_Nephritic.html",
+    "t": "5 · Nephritic",
+    "s": "causes"
+   },
+   "prompt": "Select nephritic (RBC-cast) glomerular diseases:",
+   "options": [
+    "IgA nephropathy",
+    "SLE nephritis",
+    "ANCA vasculitis",
+    "Anti-GBM disease",
+    "Minimal change disease"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk33_c30",
+   "sys": "Renal",
+   "topic": "CKD complications",
+   "type": "multi",
+   "guide": {
+    "f": "W33_06_CKD.html",
+    "t": "6 · CKD",
+    "s": "complications"
+   },
+   "prompt": "Select complications of CKD/uremia:",
+   "options": [
+    "Anemia",
+    "CKD-MBD (low Ca, high PO4, high PTH)",
+    "Hyperkalemia",
+    "Metabolic acidosis",
+    "Polycythemia"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk33_c31",
+   "sys": "Renal",
+   "topic": "Pregnancy-safe HTN",
+   "type": "multi",
+   "guide": {
+    "f": "W33_07_HTN_Pharmacology.html",
+    "t": "7 · Pregnancy",
+    "s": "safe"
+   },
+   "prompt": "Select antihypertensives safe in pregnancy:",
+   "options": [
+    "Labetalol",
+    "Methyldopa",
+    "Nifedipine XL",
+    "Ramipril",
+    "Candesartan"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "id": "wk33_c32",
+   "sys": "Renal",
+   "topic": "AKI criteria",
+   "type": "cloze",
+   "guide": {
+    "f": "W33_02_AKI_Pre_Post.html",
+    "t": "2 · Definition",
+    "s": "numbers"
+   },
+   "text": "AKI: creatinine rise ≥ {{50}}% in 7 days, or ≥ {{26.5}} µmol/L in 48 h, or oliguria <0.5 mL/kg/h for {{6}} h.",
+   "explain": "Any one criterion defines AKI."
+  },
+  {
+   "id": "wk33_c33",
+   "sys": "Renal",
+   "topic": "FENa cloze",
+   "type": "cloze",
+   "guide": {
+    "f": "W33_02_AKI_Pre_Post.html",
+    "t": "2 · FENa",
+    "s": "cutoff"
+   },
+   "text": "FENa < {{1}}% suggests pre-renal AKI; FENa > 1% suggests {{ATN}}.",
+   "explain": "Reflects whether tubules can still reabsorb sodium."
+  },
+  {
+   "id": "wk33_c34",
+   "sys": "Renal",
+   "topic": "CKD-MBD cloze",
+   "type": "cloze",
+   "guide": {
+    "f": "W33_06_CKD.html",
+    "t": "6 · CKD-MBD",
+    "s": "pattern"
+   },
+   "text": "CKD-MBD: {{low}} calcium, {{high}} phosphate, {{high}} PTH.",
+   "explain": "Secondary hyperparathyroidism from low active vitamin D + phosphate retention."
+  },
+  {
+   "id": "wk33_c35",
+   "sys": "Renal",
+   "topic": "CKD definition cloze",
+   "type": "cloze",
+   "guide": {
+    "f": "W33_06_CKD.html",
+    "t": "6 · CKD",
+    "s": "definition"
+   },
+   "text": "CKD = eGFR < {{60}} or kidney damage for ≥ {{3}} months.",
+   "explain": "Chronicity distinguishes it from AKI."
+  },
+  {
+   "id": "wk33_c36",
+   "sys": "Renal",
+   "topic": "ACEi creatinine",
+   "type": "cloze",
+   "guide": {
+    "f": "W33_07_HTN_Pharmacology.html",
+    "t": "7 · ACEi",
+    "s": "monitoring"
+   },
+   "text": "After starting an ACEi/ARB, a creatinine rise up to {{30}}% is acceptable; watch for {{hyperkalemia}}.",
+   "explain": "Reflects reduced intraglomerular pressure (renoprotective)."
+  },
+  {
+   "id": "wk33_c37",
+   "sys": "Renal",
+   "topic": "AKI approach",
+   "type": "order",
+   "guide": {
+    "f": "W33_02_AKI_Pre_Post.html",
+    "t": "2 · Approach",
+    "s": "localize"
+   },
+   "prompt": "Order the workup of AKI:",
+   "items": [
+    "Confirm AKI (creatinine/oliguria criteria)",
+    "Assess volume status + urinalysis/sediment",
+    "Compute FENa; ultrasound to exclude obstruction",
+    "Classify pre-renal / intrinsic / post-renal and treat the cause"
+   ]
+  },
+  {
+   "id": "wk33_c38",
+   "sys": "Renal",
+   "topic": "RPGN order",
+   "type": "order",
+   "guide": {
+    "f": "W33_05_Nephritic.html",
+    "t": "5 · RPGN",
+    "s": "act"
+   },
+   "prompt": "Order the response to suspected RPGN:",
+   "items": [
+    "Recognize nephritic syndrome with RBC casts + rising creatinine",
+    "Start empiric IV pulse corticosteroids urgently",
+    "Obtain serologies (ANCA, anti-GBM, complement) and biopsy",
+    "Add cyclophosphamide/rituximab ± plasma exchange per cause"
+   ]
+  },
+  {
+   "id": "wk33_c39",
+   "sys": "Renal",
+   "topic": "CKD management",
+   "type": "order",
+   "guide": {
+    "f": "W33_06_CKD.html",
+    "t": "6 · CKD",
+    "s": "manage"
+   },
+   "prompt": "Order CKD progression management:",
+   "items": [
+    "Control BP (ACEi/ARB, target per risk)",
+    "Add SGLT2 inhibitor for proteinuric CKD",
+    "Manage complications (anemia, CKD-MBD, K+/acid-base)",
+    "Dialysis/transplant planning as eGFR approaches ~8–9"
+   ]
+  },
+  {
+   "id": "wk33_c40",
+   "sys": "Renal",
+   "topic": "AKI type → clue",
+   "type": "match",
+   "guide": {
+    "f": "W33_02_AKI_Pre_Post.html",
+    "t": "2 · AKI",
+    "s": "clues"
+   },
+   "prompt": "Match the AKI type to its clue:",
+   "pairs": [
+    [
+     "Pre-renal",
+     "FENa <1%, bland urine"
+    ],
+    [
+     "ATN",
+     "Muddy-brown casts, FENa >1%"
+    ],
+    [
+     "AIN",
+     "WBC casts, recent new drug"
+    ],
+    [
+     "Post-renal",
+     "Hydronephrosis on ultrasound"
+    ]
+   ]
+  },
+  {
+   "id": "wk33_c41",
+   "sys": "Renal",
+   "topic": "GN → marker",
+   "type": "match",
+   "guide": {
+    "f": "W33_05_Nephritic.html",
+    "t": "5 · GN",
+    "s": "markers"
+   },
+   "prompt": "Match the glomerular disease to its marker:",
+   "pairs": [
+    [
+     "Membranous",
+     "Anti-PLA2R"
+    ],
+    [
+     "SLE nephritis",
+     "Low C3/C4, anti-dsDNA"
+    ],
+    [
+     "ANCA vasculitis",
+     "PR3/MPO, normal complement"
+    ],
+    [
+     "Anti-GBM",
+     "Anti-GBM antibody + hemoptysis"
+    ],
+    [
+     "IgA nephropathy",
+     "Synpharyngitic hematuria"
+    ]
+   ]
+  },
+  {
+   "id": "wk33_c42",
+   "sys": "Renal",
+   "topic": "Drug → use",
+   "type": "match",
+   "guide": {
+    "f": "W33_07_HTN_Pharmacology.html",
+    "t": "7 · Drugs",
+    "s": "antihypertensives"
+   },
+   "prompt": "Match the drug to its role:",
+   "pairs": [
+    [
+     "Ramipril",
+     "RAAS blockade / renoprotection"
+    ],
+    [
+     "Amlodipine",
+     "Dihydropyridine CCB"
+    ],
+    [
+     "Chlorthalidone",
+     "Thiazide-like diuretic"
+    ],
+    [
+     "Labetalol",
+     "Pregnancy-safe antihypertensive"
+    ],
+    [
+     "Dapagliflozin",
+     "SGLT2 inhibitor (proteinuric CKD)"
+    ]
+   ]
+  },
+  {
+   "id": "wk33_c43",
+   "sys": "Renal",
+   "topic": "Hormone → effect",
+   "type": "match",
+   "guide": {
+    "f": "W33_01_Renal_Physiology.html",
+    "t": "1 · Endocrine",
+    "s": "roles"
+   },
+   "prompt": "Match the renal hormone to its effect:",
+   "pairs": [
+    [
+     "Renin",
+     "RAAS / blood pressure"
+    ],
+    [
+     "Erythropoietin",
+     "Red cell production"
+    ],
+    [
+     "1-α-hydroxylase",
+     "Activates vitamin D"
+    ]
+   ]
+  },
+  {
+   "id": "wk33_c44",
+   "sys": "Renal",
+   "topic": "Anti-GBM",
+   "type": "qa",
+   "guide": {
+    "f": "W33_05_Nephritic.html",
+    "t": "5 · Anti-GBM",
+    "s": "Goodpasture"
+   },
+   "prompt": "What characterizes anti-GBM (Goodpasture) disease?",
+   "answer": "Antibodies to the GBM causing crescentic glomerulonephritis plus pulmonary hemorrhage (hemoptysis); treat with steroids, cyclophosphamide, and plasma exchange."
+  },
+  {
+   "id": "wk33_c45",
+   "sys": "Renal",
+   "topic": "Diabetic nephropathy",
+   "type": "qa",
+   "guide": {
+    "f": "W33_04_Nephrotic.html",
+    "t": "4 · Diabetic",
+    "s": "CKD"
+   },
+   "prompt": "Why is diabetic nephropathy so important?",
+   "answer": "It is the single most common cause of CKD; chronic hyperglycemia thickens the GBM, expands the mesangium, and causes glomerulosclerosis with progressive albuminuria."
+  },
+  {
+   "id": "wk33_c46",
+   "sys": "Renal",
+   "topic": "ADPKD",
+   "type": "qa",
+   "guide": {
+    "f": "W33_08_Special_Populations.html",
+    "t": "8 · ADPKD",
+    "s": "clues"
+   },
+   "prompt": "What clues point to ADPKD?",
+   "answer": "Strong family history of kidney failure/dialysis, progressive GFR loss with minimal proteinuria, hypertension, large cystic kidneys, hepatic cysts, and intracranial aneurysms."
+  },
+  {
+   "id": "wk33_c47",
+   "sys": "Renal",
+   "topic": "Biopsy risk",
+   "type": "qa",
+   "guide": {
+    "f": "W33_08_Special_Populations.html",
+    "t": "8 · Biopsy",
+    "s": "risk"
+   },
+   "prompt": "What is the main complication of renal biopsy and who is at higher risk?",
+   "answer": "Bleeding; risk is increased in the frail/elderly, severe hypertension, and small echogenic (chronically scarred) kidneys."
+  },
+  {
+   "id": "wk33_c48",
+   "sys": "Renal",
+   "topic": "Hyperkalemia mgmt",
+   "type": "qa",
+   "guide": {
+    "f": "W33_06_CKD.html",
+    "t": "6 · Hyperkalemia",
+    "s": "steps"
+   },
+   "prompt": "Outline acute hyperkalemia management.",
+   "answer": "Stabilize the myocardium with IV calcium (gluconate), shift potassium intracellularly (insulin + glucose, salbutamol, bicarbonate if acidotic), and remove it (potassium binder, diuresis, or dialysis if refractory)."
+  },
+  {
+   "id": "wk33_c49",
+   "sys": "Renal",
+   "topic": "Thiazide AEs",
+   "type": "qa",
+   "guide": {
+    "f": "W33_07_HTN_Pharmacology.html",
+    "t": "7 · Thiazide",
+    "s": "adverse"
+   },
+   "prompt": "What are the metabolic adverse effects of thiazide-like diuretics?",
+   "answer": "Hyponatremia, hypokalemia, and hyperuricemia (and hyperglycemia/hypercalcemia); they cause diuresis followed by vasodilation."
+  },
+  {
+   "id": "wk33_c50",
+   "sys": "Renal",
+   "topic": "Pre-renal hemodynamics",
+   "type": "qa",
+   "guide": {
+    "f": "W33_02_AKI_Pre_Post.html",
+    "t": "2 · Pre-renal",
+    "s": "drugs"
+   },
+   "prompt": "Which drugs precipitate pre-renal AKI by altering glomerular hemodynamics?",
+   "answer": "NSAIDs (constrict the afferent arteriole) and ACE inhibitors/ARBs (dilate the efferent arteriole) — both reduce filtration pressure, especially in volume depletion or renal-artery stenosis."
+  }
+ ],
+ "guides": [
+  {
+   "file": "W33_01_Renal_Physiology.html",
+   "title": "Week 33 · 1 Renal Physiology & Evaluation",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Renal Physiology &amp; Evaluation</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Foundations</div><h1>Renal Physiology &amp; Evaluation</h1></div><div class='r'>Week 33 &middot; KU I &mdash; Renal Function, AKI &amp; CKD<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>What the kidney does, how GFR is estimated (and when creatinine lies), and the endocrine roles that explain CKD's complications.</p>\n<h2>What the kidneys do</h2>\n<p>Regulate extracellular fluid volume, electrolytes, and acid-base; control blood pressure; support hemoglobin; <b>activate vitamin D</b>; and excrete metabolic waste.</p>\n<h2>GFR &mdash; the master index</h2>\n<ul>\n<li>Normal GFR &gt;90 mL/min; it is the best overall index of kidney health.</li>\n<li><b>Inulin clearance</b> is the gold standard; clinically we use <b>serum creatinine</b> (endogenous, freely filtered, but also secreted by the proximal tubule and varying with age/sex/muscle mass).</li>\n<li>Estimating equations (<b>Cockcroft-Gault, MDRD, CKD-EPI</b>) require creatinine to be in a <b>steady state</b>.</li>\n</ul>\n<div class='band warn'><div class='t'>Anuria → eGFR is 0</div>\nIn acute, evolving, <b>anuric</b> AKI the kidney is filtering nothing, so the true eGFR is <b>0 mL/min</b> regardless of what an equation calculates &mdash; the formulas are invalid because creatinine isn't at steady state. Don't be reassured by a \"normal\" calculated eGFR in an anuric patient.</div>\n<h2>Endocrine functions (explain CKD complications)</h2>\n<table>\n<tr><th>Secretion</th><th>Role</th><th>Lost in CKD →</th></tr>\n<tr><td><b>Renin</b></td><td>BP / sodium via RAAS</td><td>Hypertension</td></tr>\n<tr><td><b>Erythropoietin</b></td><td>RBC production (hypoxia sensor)</td><td>Anemia</td></tr>\n<tr><td><b>1-α-hydroxylase</b></td><td>Activates vitamin D (1,25-OH)</td><td>Hypocalcemia, CKD-MBD</td></tr>\n</table>\n<div class='key'>GFR is the master index; eGFR equations need a steady-state creatinine (useless in anuric AKI → eGFR 0). The kidney's renin/EPO/vitamin-D roles predict CKD's hypertension, anemia, and bone disease.</div>\n</div>"
+  },
+  {
+   "file": "W33_02_AKI_Pre_Post.html",
+   "title": "Week 33 · 2 Acute Kidney Injury: Pre-renal & Post-renal",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Acute Kidney Injury: Pre-renal &amp; Post-renal</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>AKI I</div><h1>Acute Kidney Injury: Pre-renal &amp; Post-renal</h1></div><div class='r'>Week 33 &middot; KU I &mdash; Renal Function, AKI &amp; CKD<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The AKI definition, the perfusion problem (and its urine signature), and the obstruction you confirm with ultrasound.</p>\n<h2>Defining AKI</h2>\n<p>Any of: serum creatinine rise <b>&ge;50% in 7 days</b>, an absolute rise <b>&ge;26.5 &micro;mol/L in 48 h</b>, or oliguria (<b>&lt;0.5 mL/kg/h for 6 h</b>).</p>\n<h2>Pre-renal AKI (a perfusion problem)</h2>\n<p>Decreased renal perfusion: absolute hypovolemia, decreased effective circulating volume (heart failure, cirrhosis), or altered hemodynamics (<b>NSAIDs, ACE inhibitors/ARBs</b>). The nephrons are intact and avidly reabsorb sodium and water.</p>\n<table>\n<tr><th>Urine finding</th><th>Pre-renal</th></tr>\n<tr><td>Sediment</td><td>Normal (bland)</td></tr>\n<tr><td>Urine sodium</td><td>Low (&lt;20 mmol/L)</td></tr>\n<tr><td><b>FENa</b></td><td><b>&lt;1%</b> (avid sodium reabsorption)</td></tr>\n</table>\n<div class='band'><div class='t'>FENa logic</div>\nA low FENa (&lt;1%) means the tubules are working hard to retain sodium &rarr; the kidney itself is fine and is responding to poor perfusion (pre-renal). A high FENa (&gt;1%) means the tubules can't reabsorb sodium &rarr; intrinsic damage (ATN).</div>\n<h2>Post-renal AKI (obstruction)</h2>\n<ul>\n<li>Physical obstruction to urine flow: <b>BPH</b>, nephrolithiasis, pelvic/abdominal malignancy.</li>\n<li><b>First-line investigation: renal/bladder ultrasound</b> to look for <b>hydronephrosis</b>; relieving the obstruction (catheter/stent/nephrostomy) can reverse it.</li>\n</ul>\n<div class='key'>AKI = creatinine up ≥50%/7d or ≥26.5 in 48h, or oliguria. Pre-renal: bland urine, FENa &lt;1% (perfusion). Post-renal: ultrasound for hydronephrosis, then relieve the obstruction.</div>\n</div>"
+  },
+  {
+   "file": "W33_03_AKI_Intrinsic.html",
+   "title": "Week 33 · 3 Intrinsic AKI: ATN & AIN",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Intrinsic AKI: ATN &amp; AIN</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>AKI II</div><h1>Intrinsic AKI: ATN &amp; AIN</h1></div><div class='r'>Week 33 &middot; KU I &mdash; Renal Function, AKI &amp; CKD<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The two intrinsic AKIs that get tested — ischemic/toxic tubular necrosis and allergic interstitial nephritis — by their casts and triggers.</p>\n<h2>Acute tubular necrosis (ATN)</h2>\n<p>Direct tubular injury from prolonged <b>ischemia</b> (a pre-renal state that wasn't corrected) or <b>nephrotoxins</b>: <b>aminoglycosides</b>, IV contrast, <b>myoglobin</b> (rhabdomyolysis), cisplatin. Damaged tubules can't concentrate urine or reabsorb sodium.</p>\n<table>\n<tr><th>Finding</th><th>ATN</th></tr>\n<tr><td>FENa</td><td><b>&gt;1%</b></td></tr>\n<tr><td>Urine microscopy</td><td><b>\"Muddy brown\" hemegranular casts</b></td></tr>\n<tr><td>Course</td><td>Oliguric → recovery (polyuric) phase</td></tr>\n</table>\n<h2>Acute interstitial nephritis (AIN)</h2>\n<div class='band warn'><div class='t'>An allergic, drug-induced AKI</div>\nTypically an allergic reaction to drugs &mdash; <b>penicillins, fluoroquinolones, PPIs, NSAIDs</b> (and other antibiotics). Onset <b>~7&ndash;10 days post-exposure</b>, sometimes with <b>rash, fever, eosinophilia</b>. Urinalysis shows <b>WBCs and WBC casts</b> (and sometimes eosinophiluria). <b>The most effective treatment is stopping the offending drug</b>; corticosteroids may be added.</div>\n<h2>Telling them apart</h2>\n<table>\n<tr><th>Clue</th><th>Points to</th></tr>\n<tr><td>Muddy brown granular casts, FENa &gt;1%</td><td>ATN</td></tr>\n<tr><td>WBC casts, eosinophilia, recent new drug</td><td>AIN</td></tr>\n<tr><td>RBC casts</td><td>Glomerulonephritis (nephritic)</td></tr>\n<tr><td>Bland urine, FENa &lt;1%</td><td>Pre-renal</td></tr>\n</table>\n<div class='key'>ATN: ischemia/toxins → muddy brown casts, FENa &gt;1%. AIN: a new drug ~1 week ago → WBC casts ± eosinophilia → stop the drug. The cast tells you the compartment.</div>\n</div>"
+  },
+  {
+   "file": "W33_04_Nephrotic.html",
+   "title": "Week 33 · 4 Glomerular Disease: Nephrotic Syndrome",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Glomerular Disease: Nephrotic Syndrome</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Nephrotic</div><h1>Glomerular Disease: Nephrotic Syndrome</h1></div><div class='r'>Week 33 &middot; KU I &mdash; Renal Function, AKI &amp; CKD<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Heavy proteinuria from podocyte injury — the defining tetrad and the causes from children to adults.</p>\n<h2>The nephrotic picture</h2>\n<p>Podocyte (filtration-barrier) injury &rarr; <b>heavy proteinuria &gt;3.5 g/day</b>, <b>hypoalbuminemia</b>, generalized <b>edema</b>, and <b>hyperlipidemia</b> (high LDL). Also a hypercoagulable state (loss of antithrombin) &rarr; VTE risk.</p>\n<table>\n<tr><th>Cause</th><th>Key feature</th></tr>\n<tr><td><b>Diabetic nephropathy</b></td><td>Most common overall; GBM thickening, mesangial expansion, glomerulosclerosis; the leading cause of CKD</td></tr>\n<tr><td><b>Membranous nephropathy</b></td><td>Adults; autoantibodies to <b>PLA2R</b> on podocytes → subepithelial immune complexes (\"spike and dome\")</td></tr>\n<tr><td><b>Minimal change disease</b></td><td>Most common in <b>children</b>; normal light microscopy, <b>podocyte foot-process effacement</b> on EM; <b>steroid-responsive</b></td></tr>\n<tr><td>FSGS</td><td>Common cause in adults (esp. certain populations); segmental scarring</td></tr>\n</table>\n<div class='band warn'><div class='t'>Pediatric nephrotic = treat empirically</div>\nIn a child with classic nephrotic syndrome (heavy proteinuria, edema, <b>no hematuria</b>, normal BP), the cause is almost always <b>minimal change disease</b>. Start <b>empiric oral prednisone (1 mg/kg)</b> as an outpatient &mdash; a biopsy is reserved for steroid non-responders.</div>\n<div class='key'>Nephrotic = proteinuria &gt;3.5 g + hypoalbuminemia + edema + hyperlipidemia. Kids → minimal change disease → empiric steroids (no biopsy first). Adults → membranous (PLA2R) / FSGS / diabetic.</div>\n</div>"
+  },
+  {
+   "file": "W33_05_Nephritic.html",
+   "title": "Week 33 · 5 Glomerular Disease: Nephritic Syndrome",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Glomerular Disease: Nephritic Syndrome</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Nephritic</div><h1>Glomerular Disease: Nephritic Syndrome</h1></div><div class='r'>Week 33 &middot; KU I &mdash; Renal Function, AKI &amp; CKD<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Inflammatory glomerular injury — hematuria with RBC casts — and how complement and antibodies split the causes.</p>\n<h2>The nephritic picture</h2>\n<p>Glomerular <b>inflammation/proliferation</b> &rarr; <b>hematuria with RBC casts</b>, variable proteinuria, <b>hypertension</b>, and a <b>falling GFR</b>.</p>\n<table>\n<tr><th>Cause</th><th>Clue</th></tr>\n<tr><td><b>IgA nephropathy</b></td><td><b>Most common GN worldwide</b>; hematuria (often synpharyngitic), can have normal BP/function early</td></tr>\n<tr><td><b>SLE nephritis</b></td><td>Anti-dsDNA, <b>low C3/C4</b> (complement-consuming), positive ANA</td></tr>\n<tr><td><b>ANCA-associated vasculitis</b></td><td><b>Pauci-immune</b>: PR3/MPO-ANCA, <b>normal C3/C4, negative ANA</b>; necrotizing GN</td></tr>\n<tr><td><b>Anti-GBM (Goodpasture)</b></td><td>Anti-GBM antibodies; crescentic GN + <b>pulmonary hemorrhage (hemoptysis)</b></td></tr>\n</table>\n<div class='band'><div class='t'>Complement splits the differential</div>\n<b>Low C3/C4</b> &rarr; immune-complex/complement-consuming (SLE, post-infectious GN). <b>Normal complement</b> with a pulmonary-renal syndrome &rarr; <b>pauci-immune ANCA vasculitis</b> (negative ANA) or anti-GBM disease.</div>\n<div class='band warn'><div class='t'>RPGN is a renal emergency</div>\nRapidly progressive GN (nephritic + RBC casts + creatinine rising over days, crescents on biopsy) can destroy kidneys within days. Give <b>urgent IV (\"pulse\") corticosteroids empirically</b> &mdash; <b>do not wait for the biopsy</b>. (Often plus cyclophosphamide or rituximab and plasma exchange for anti-GBM/severe ANCA.)</div>\n<div class='key'>Nephritic = hematuria + RBC casts + HTN. IgA is commonest; low complement = SLE/post-infectious; normal complement + hemoptysis = ANCA (pauci-immune) or anti-GBM. RPGN → pulse steroids now, biopsy doesn't delay treatment.</div>\n</div>"
+  },
+  {
+   "file": "W33_06_CKD.html",
+   "title": "Week 33 · 6 Chronic Kidney Disease & Complications",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Chronic Kidney Disease &amp; Complications</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>CKD</div><h1>Chronic Kidney Disease &amp; Complications</h1></div><div class='r'>Week 33 &middot; KU I &mdash; Renal Function, AKI &amp; CKD<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The CKD definition, the renoprotection package, and the predictable uremic complications — anemia, bone disease, and electrolytes.</p>\n<h2>Definition</h2>\n<p>eGFR <b>&lt;60 mL/min/1.73m&sup2;</b> or markers of kidney damage (e.g. albuminuria) present for <b>&ge;3 months</b>. <b>Diabetes is the most common cause of CKD.</b></p>\n<h2>Delaying progression (cardiovascular-risk reduction)</h2>\n<ul>\n<li>Strict <b>blood pressure</b> control (e.g. systolic &lt;120 for high-risk per SPRINT; &lt;130/80 in diabetes).</li>\n<li><b>ACE inhibitor or ARB</b> &mdash; slows progression independent of BP (especially with albuminuria).</li>\n<li>Optimize diabetes; add an <b>SGLT2 inhibitor</b> (dapagliflozin) for proteinuric CKD; consider a non-steroidal MRA (<b>finerenone</b>).</li>\n</ul>\n<h2>Complications of uremia/CKD</h2>\n<table>\n<tr><th>Complication</th><th>Mechanism</th></tr>\n<tr><td><b>Anemia</b></td><td>Loss of peritubular EPO production → treat with an ESA when Hb &lt;100, target <b>110&ndash;120</b> (not normal — stroke risk)</td></tr>\n<tr><td><b>CKD-MBD</b></td><td>↓1-α-hydroxylase → ↓active vitamin D → <b>low calcium, high phosphate, high PTH</b> (secondary hyperparathyroidism)</td></tr>\n<tr><td>Electrolyte/acid-base</td><td><b>Hyperkalemia</b> and metabolic acidosis (reduced tubular secretion)</td></tr>\n</table>\n<div class='band warn'><div class='t'>Dialysis indications (AEIOU)</div>\n<b>A</b>cidosis (pH &lt;7.1), <b>E</b>lectrolytes (refractory hyperkalemia), <b>I</b>ntoxication (methanol, lithium, ASA, ethylene glycol), <b>O</b>verload (refractory pulmonary edema), <b>U</b>remia (pericarditis, encephalopathy). In CKD, dialysis is typically started as eGFR falls below ~8&ndash;9 or for resistant hyperkalemia.</div>\n<div class='key'>CKD = eGFR &lt;60 or damage ≥3 months (diabetes #1). Renoprotect with BP control + ACEi/ARB + SGLT2 inhibitor. CKD-MBD = low Ca, high PO4, high PTH. Dialyze for AEIOU.</div>\n</div>"
+  },
+  {
+   "file": "W33_07_HTN_Pharmacology.html",
+   "title": "Week 33 · 7 Hypertension & Renoprotective Pharmacology",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Hypertension &amp; Renoprotective Pharmacology</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>BP drugs</div><h1>Hypertension &amp; Renoprotective Pharmacology</h1></div><div class='r'>Week 33 &middot; KU I &mdash; Renal Function, AKI &amp; CKD<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The first-line antihypertensive classes, the ACEi/ARB rules, and what's safe in pregnancy.</p>\n<h2>First-line classes</h2>\n<p>Long-acting <b>thiazide-like diuretics</b>, <b>ACE inhibitors</b>, <b>ARBs</b>, and long-acting <b>calcium-channel blockers</b>. Lifestyle: the <b>DASH diet</b> gives the greatest BP-lowering of any single lifestyle change.</p>\n<table>\n<tr><th>Class</th><th>Notes / adverse effects</th></tr>\n<tr><td><b>ACE inhibitors (\"-prils\") / ARBs (\"-sartans\")</b></td><td>Block RAAS, renoprotective. Watch <b>hyperkalemia</b> and creatinine (a &lt;30% rise is acceptable). ACEi cough/angioedema (bradykinin). <b>Both contraindicated in pregnancy.</b></td></tr>\n<tr><td><b>Thiazide-like</b> (indapamide, chlorthalidone)</td><td>Diuresis then vasodilation; <b>hyponatremia, hypokalemia, hyperuricemia</b></td></tr>\n<tr><td><b>Dihydropyridine CCB</b> (amlodipine)</td><td>Vasodilation; dose-dependent <b>peripheral edema</b></td></tr>\n<tr><td><b>Non-dihydropyridine CCB</b> (verapamil, diltiazem)</td><td>↓Heart rate; constipation. (Both classes can cause gingival hyperplasia.)</td></tr>\n</table>\n<div class='band warn'><div class='t'>Pregnancy</div>\n<b>Safe:</b> labetalol, methyldopa, nifedipine XL. <b>Contraindicated:</b> ACE inhibitors and ARBs (teratogenic — renal dysgenesis). This is a recurring exam point.</div>\n<h2>Renoprotection beyond BP</h2>\n<ul>\n<li><b>ACEi/ARB</b> (especially with albuminuria), <b>SGLT2 inhibitor</b> (dapagliflozin) for proteinuric CKD, and a non-steroidal MRA (<b>finerenone</b>) in diabetic CKD slow progression beyond their BP effect.</li>\n</ul>\n<div class='key'>First-line: thiazide-like, ACEi/ARB, CCB. ACEi/ARB are renoprotective but raise K+ and are contraindicated in pregnancy (use labetalol/methyldopa/nifedipine). DASH diet is the top lifestyle lever.</div>\n</div>"
+  },
+  {
+   "file": "W33_08_Special_Populations.html",
+   "title": "Week 33 · 8 Special Populations, Cystic Disease & Dialysis",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Special Populations, Cystic Disease &amp; Dialysis</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Edge cases</div><h1>Special Populations, Cystic Disease &amp; Dialysis</h1></div><div class='r'>Week 33 &middot; KU I &mdash; Renal Function, AKI &amp; CKD<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>ADPKD, the geriatric kidney and dosing, EPO targets, and renal-biopsy risk.</p>\n<h2>Autosomal dominant polycystic kidney disease (ADPKD)</h2>\n<ul>\n<li>Genetic tubulointerstitial CKD: abnormal <b>polycystin</b> &rarr; massive cysts compress normal tissue.</li>\n<li>Clues: strong <b>family history</b> of dialysis/kidney failure, progressive GFR loss, <b>minimal proteinuria</b>, hypertension, and extrarenal features (hepatic cysts, <b>intracranial aneurysms</b>).</li>\n<li>Tolvaptan (a vaptan) can slow cyst growth in selected rapidly-progressing patients.</li>\n</ul>\n<h2>The geriatric kidney</h2>\n<div class='band warn'><div class='t'>Dose by GFR, not by creatinine alone</div>\nAging reduces functional glomeruli by <b>30&ndash;50%</b>, but low muscle mass keeps creatinine deceptively \"normal.\" <b>Always estimate GFR before renally-cleared drugs</b> (e.g. antibiotics) in older adults. Pharmacokinetics shift: unpredictable absorption, larger volume of distribution for free drugs (low albumin), reduced hepatic/renal clearance.</div>\n<h2>EPO therapy targets</h2>\n<ul>\n<li>ESA for symptomatic anemia with <b>Hb &lt;100</b>, target <b>110&ndash;120 g/L</b>. <b>Do not normalize</b> Hb (&gt;130) &mdash; linked to increased stroke. Ensure iron stores are adequate first.</li>\n</ul>\n<h2>Dialysis in the elderly &amp; biopsy risk</h2>\n<ul>\n<li>In patients &gt;80 with ESRD, hemodialysis offers only <b>modest</b> longevity gains over conservative management &mdash; shared decision-making matters.</li>\n<li><b>Renal biopsy:</b> bleeding is the commonest complication; risk is much higher in the frail/elderly, severe hypertension, and small echogenic (chronic) kidneys.</li>\n</ul>\n<div class='key'>ADPKD: family history + big cysts + minimal proteinuria (± brain aneurysm). Estimate GFR before dosing in elders. EPO target 110–120 (never normalize). Biopsy's main risk is bleeding.</div>\n</div>"
+  },
+  {
+   "file": "W33_09_Cram_Sheet.html",
+   "title": "Week 33 · 9 Cram Sheet",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Week 33 · 9 Cram Sheet</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.35;-webkit-font-smoothing:antialiased}\n.page{max-width:1180px;margin:0 auto;padding:18px 20px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:8px;margin-bottom:12px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:26px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.emerg{border:1.5px solid var(--hi);border-radius:6px;background:rgba(0,0,0,.02);padding:9px 12px;margin-bottom:13px}\n.emerg .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--hi);font-weight:600;margin-bottom:5px}\n.emerg .items{columns:3;column-gap:22px;font-size:12px;line-height:1.42}\n.emerg .items div{break-inside:avoid;margin-bottom:3px}\n.emerg b{color:var(--hi)}\n.cols{column-count:4;column-gap:14px}\n@media(max-width:1040px){.cols{column-count:3}}\n@media(max-width:760px){.cols{column-count:2}}\n@media(max-width:520px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(0,0,0,.02);padding:8px 9px 7px;margin:0 0 11px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;padding-bottom:4px;border-bottom:1.5px solid var(--line);color:var(--accent);display:flex;justify-content:space-between;align-items:baseline;gap:6px}\n.card h2 .wk{color:var(--soft);font-size:8.5px;font-weight:500;letter-spacing:.06em;white-space:nowrap}\n.row{margin:0 0 3.5px;font-size:11.5px;line-height:1.32}\n.row .tg{font-weight:600;color:var(--ink)}\n.row .ar{color:var(--soft)}\n.row .ar::before{content:\"\\2192 \";color:var(--accent);font-weight:600}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:5px 0}\n.dnm{color:var(--hi);font-weight:700}\n.foot{margin-top:10px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:landscape;margin:9mm}body{font-size:8.4px}.page{max-width:none;padding:0}.cols{column-count:4;column-gap:8px}.emerg .items{columns:3}.card{margin-bottom:6px}.head h1{font-size:19px}}\n</style><div class='page'><div class='head'><div><div class='k'>Night-Before High-Yield</div><h1>KU I — Renal Function, AKI &amp; CKD</h1></div><div class='r'>Week 33 &middot; KU I &mdash; Renal Function, AKI &amp; CKD<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><div class='emerg'><div class='t'>★ Do-not-miss &middot; first-step reflexes</div><div class='items'><div><b>Refractory hyperkalemia / acidosis / overload / uremia</b> &rarr; urgent dialysis (AEIOU)</div><div><b>RPGN</b> (nephritic + RBC casts + rising creatinine) &rarr; urgent empiric IV pulse steroids — don't wait for biopsy</div><div><b>Pulmonary-renal syndrome + hemoptysis</b> &rarr; ANCA vasculitis or anti-GBM (check complement/ANCA/anti-GBM)</div><div><b>Acute hyperkalemia with ECG changes</b> &rarr; IV calcium first, then shift (insulin/glucose) + remove</div><div><b>ACEi/ARB in pregnancy</b> &rarr; contraindicated (teratogen) — use labetalol/methyldopa/nifedipine</div><div><b>Anuric AKI</b> &rarr; true eGFR is 0 regardless of the calculated value</div></div></div><div class='cols'><div class='card'><h2>Physiology <span class='wk'>Physiology</span></h2><div class='row'><span class='tg'>GFR</span> <span class='ar'>best index; normal >90</span></div><div class='row'><span class='tg'>Creatinine</span> <span class='ar'>needs steady state; secreted by PCT</span></div><div class='row'><span class='tg'>Anuria</span> <span class='ar'>eGFR = 0 (equations invalid)</span></div><div class='row'><span class='tg'>Renin/EPO/vit D</span> <span class='ar'>→ HTN / anemia / CKD-MBD</span></div></div><div class='card'><h2>AKI <span class='wk'>AKI</span></h2><div class='row'><span class='tg'>Definition</span> <span class='ar'>Cr ↑≥50%/7d, ≥26.5/48h, or oliguria</span></div><div class='row'><span class='tg'>Pre-renal</span> <span class='ar'>bland urine, FENa <1%</span></div><div class='row'><span class='tg'>ATN</span> <span class='ar'>muddy brown casts, FENa >1% (toxins/ischemia)</span></div><div class='row'><span class='tg'>AIN</span> <span class='ar'>WBC casts, drug ~7d, eosinophilia → stop drug</span></div><div class='row'><span class='tg'>Post-renal</span> <span class='ar'>ultrasound → hydronephrosis → relieve</span></div></div><div class='card'><h2>Nephrotic <span class='wk'>Nephrotic</span></h2><div class='row'><span class='tg'>Definition</span> <span class='ar'>proteinuria >3.5, low albumin, edema, ↑lipids</span></div><div class='row'><span class='tg'>Children</span> <span class='ar'>minimal change → empiric steroids</span></div><div class='row'><span class='tg'>Adults</span> <span class='ar'>membranous (PLA2R), FSGS, diabetic</span></div><div class='row'><span class='tg'>Diabetic nephropathy</span> <span class='ar'>#1 cause of CKD</span></div></div><div class='card'><h2>Nephritic <span class='wk'>Nephritic</span></h2><div class='row'><span class='tg'>Definition</span> <span class='ar'>hematuria + RBC casts + HTN + ↓GFR</span></div><div class='row'><span class='tg'>IgA</span> <span class='ar'>commonest GN; synpharyngitic</span></div><div class='row'><span class='tg'>Low complement</span> <span class='ar'>SLE, post-infectious</span></div><div class='row'><span class='tg'>Normal complement</span> <span class='ar'>ANCA (pauci-immune), anti-GBM</span></div><div class='row'><span class='tg'>RPGN</span> <span class='ar'>pulse steroids now, don't wait for biopsy</span></div></div><div class='card'><h2>CKD <span class='wk'>CKD</span></h2><div class='row'><span class='tg'>Definition</span> <span class='ar'>eGFR <60 or damage ≥3 months</span></div><div class='row'><span class='tg'>Renoprotect</span> <span class='ar'>BP + ACEi/ARB + SGLT2 (+ finerenone)</span></div><div class='row'><span class='tg'>CKD-MBD</span> <span class='ar'>low Ca, high PO4, high PTH</span></div><div class='row'><span class='tg'>Anemia</span> <span class='ar'>EPO when Hb <100, target 110–120</span></div><div class='row'><span class='tg'>Dialysis</span> <span class='ar'>AEIOU; CKD start ~eGFR 8–9</span></div></div><div class='card'><h2>HTN &amp; pregnancy <span class='wk'>BP</span></h2><div class='row'><span class='tg'>First-line</span> <span class='ar'>thiazide-like, ACEi/ARB, CCB</span></div><div class='row'><span class='tg'>ACEi/ARB</span> <span class='ar'>↑K, <30% Cr rise OK, cough/angioedema</span></div><div class='row'><span class='tg'>Pregnancy safe</span> <span class='ar'>labetalol, methyldopa, nifedipine XL</span></div><div class='row'><span class='tg'>Pregnancy avoid</span> <span class='ar'>ACEi/ARB (teratogen)</span></div><div class='row'><span class='tg'>Lifestyle</span> <span class='ar'>DASH diet best; diabetes target <130/80</span></div></div><div class='card'><h2>Special <span class='wk'>Edge cases</span></h2><div class='row'><span class='tg'>ADPKD</span> <span class='ar'>family hx, big cysts, minimal proteinuria, berry aneurysm</span></div><div class='row'><span class='tg'>Geriatrics</span> <span class='ar'>estimate GFR before dosing</span></div><div class='row'><span class='tg'>EPO</span> <span class='ar'>target 110–120, never normalize</span></div><div class='row'><span class='tg'>Biopsy</span> <span class='ar'>bleeding is the main risk</span></div></div></div><div class='foot'>Week 33 &middot; KU I &mdash; Renal Function, AKI &amp; CKD &middot; cram sheet &middot; cue &rarr; answer</div></div>"
+  }
+ ],
+ "drugs": [
+  {
+   "id": "rx:ramipril",
+   "name": "Ramipril (ACE inhibitor)",
+   "class": "rx:ace-inhibitor",
+   "facets": {
+    "use": "Hypertension; renoprotection in proteinuric/diabetic CKD",
+    "mechanism": "ACE inhibitor — blocks RAAS, dilates efferent arteriole",
+    "adverse": "Hyperkalemia, cough, angioedema; <30% creatinine rise acceptable",
+    "contra": "Pregnancy, bilateral renal artery stenosis"
+   },
+   "ref": {
+    "topic": "HTN pharmacology",
+    "guide": "W33_07_HTN_Pharmacology.html",
+    "week": "Week 33 · KU I — Renal Function, AKI & CKD"
+   }
+  },
+  {
+   "id": "rx:candesartan",
+   "name": "Candesartan",
+   "class": "rx:arb",
+   "facets": {
+    "use": "ACEi-intolerant; renoprotection",
+    "mechanism": "Angiotensin receptor blocker",
+    "adverse": "Hyperkalemia",
+    "contra": "Pregnancy"
+   },
+   "ref": {
+    "topic": "HTN pharmacology",
+    "guide": "W33_07_HTN_Pharmacology.html",
+    "week": "Week 33 · KU I — Renal Function, AKI & CKD"
+   }
+  },
+  {
+   "id": "rx:chlorthalidone",
+   "name": "Chlorthalidone",
+   "class": "rx:thiazide",
+   "facets": {
+    "use": "Hypertension",
+    "mechanism": "Thiazide-like diuretic (diuresis then vasodilation)",
+    "adverse": "Hyponatremia, hypokalemia, hyperuricemia"
+   },
+   "ref": {
+    "topic": "HTN pharmacology",
+    "guide": "W33_07_HTN_Pharmacology.html",
+    "week": "Week 33 · KU I — Renal Function, AKI & CKD"
+   }
+  },
+  {
+   "id": "rx:amlodipine",
+   "name": "Amlodipine",
+   "class": "rx:ccb",
+   "facets": {
+    "use": "Hypertension",
+    "mechanism": "Dihydropyridine calcium-channel blocker (vasodilation)",
+    "adverse": "Dose-dependent peripheral edema; gingival hyperplasia"
+   },
+   "ref": {
+    "topic": "HTN pharmacology",
+    "guide": "W33_07_HTN_Pharmacology.html",
+    "week": "Week 33 · KU I — Renal Function, AKI & CKD"
+   }
+  },
+  {
+   "id": "rx:nifedipine",
+   "name": "Nifedipine",
+   "class": "rx:ccb",
+   "facets": {
+    "use": "Hypertension (incl. pregnancy, XL form)",
+    "mechanism": "Dihydropyridine CCB",
+    "adverse": "Edema, flushing"
+   },
+   "ref": {
+    "topic": "HTN pharmacology",
+    "guide": "W33_07_HTN_Pharmacology.html",
+    "week": "Week 33 · KU I — Renal Function, AKI & CKD"
+   }
+  },
+  {
+   "id": "rx:labetalol",
+   "name": "Labetalol",
+   "class": "rx:alpha-beta-blocker",
+   "facets": {
+    "use": "Hypertension in pregnancy",
+    "mechanism": "Combined α/β blocker",
+    "adverse": "Bradycardia, fatigue"
+   },
+   "ref": {
+    "topic": "HTN pharmacology",
+    "guide": "W33_07_HTN_Pharmacology.html",
+    "week": "Week 33 · KU I — Renal Function, AKI & CKD"
+   }
+  },
+  {
+   "id": "rx:methyldopa",
+   "name": "Methyldopa",
+   "class": "rx:central-sympatholytic",
+   "facets": {
+    "use": "Hypertension in pregnancy",
+    "mechanism": "Central α2-agonist",
+    "adverse": "Sedation, positive Coombs/hemolysis, hepatitis"
+   },
+   "ref": {
+    "topic": "HTN pharmacology",
+    "guide": "W33_07_HTN_Pharmacology.html",
+    "week": "Week 33 · KU I — Renal Function, AKI & CKD"
+   }
+  },
+  {
+   "id": "rx:dapagliflozin",
+   "name": "Dapagliflozin",
+   "class": "rx:sglt2-inhibitor",
+   "facets": {
+    "use": "Proteinuric diabetic CKD (renoprotection); also HF",
+    "mechanism": "SGLT2 inhibitor — slows CKD progression",
+    "adverse": "Genital mycotic infection, euglycemic DKA"
+   },
+   "ref": {
+    "topic": "CKD",
+    "guide": "W33_06_CKD.html",
+    "week": "Week 33 · KU I — Renal Function, AKI & CKD"
+   }
+  },
+  {
+   "id": "rx:finerenone",
+   "name": "Finerenone",
+   "class": "rx:ns-mra",
+   "facets": {
+    "use": "Diabetic CKD with albuminuria",
+    "mechanism": "Non-steroidal mineralocorticoid receptor antagonist",
+    "adverse": "Hyperkalemia"
+   },
+   "ref": {
+    "topic": "CKD",
+    "guide": "W33_06_CKD.html",
+    "week": "Week 33 · KU I — Renal Function, AKI & CKD"
+   }
+  },
+  {
+   "id": "rx:furosemide",
+   "name": "Furosemide",
+   "class": "rx:loop-diuretic",
+   "facets": {
+    "use": "Volume overload in AKI/CKD",
+    "mechanism": "Loop diuretic",
+    "adverse": "Hypokalemia, volume depletion, ototoxicity"
+   },
+   "ref": {
+    "topic": "CKD",
+    "guide": "W33_06_CKD.html",
+    "week": "Week 33 · KU I — Renal Function, AKI & CKD"
+   }
+  },
+  {
+   "id": "rx:epoetin",
+   "name": "Epoetin alfa (ESA)",
+   "class": "rx:esa",
+   "facets": {
+    "use": "Anemia of CKD (Hb <100)",
+    "mechanism": "Erythropoiesis-stimulating agent",
+    "adverse": "Hypertension, thrombosis/stroke if over-corrected",
+    "monitoring": "Target Hb 110–120; ensure iron repletion"
+   },
+   "ref": {
+    "topic": "CKD",
+    "guide": "W33_06_CKD.html",
+    "week": "Week 33 · KU I — Renal Function, AKI & CKD"
+   }
+  },
+  {
+   "id": "rx:calcitriol",
+   "name": "Calcitriol (1,25-OH vitamin D)",
+   "class": "rx:active-vitamin-d",
+   "facets": {
+    "use": "CKD-MBD (low active vitamin D)",
+    "mechanism": "Active vitamin D — raises calcium, suppresses PTH",
+    "adverse": "Hypercalcemia"
+   },
+   "ref": {
+    "topic": "CKD",
+    "guide": "W33_06_CKD.html",
+    "week": "Week 33 · KU I — Renal Function, AKI & CKD"
+   }
+  },
+  {
+   "id": "rx:sevelamer",
+   "name": "Sevelamer",
+   "class": "rx:phosphate-binder",
+   "facets": {
+    "use": "Hyperphosphatemia in CKD",
+    "mechanism": "Non-calcium phosphate binder (binds dietary phosphate)",
+    "adverse": "GI upset"
+   },
+   "ref": {
+    "topic": "CKD",
+    "guide": "W33_06_CKD.html",
+    "week": "Week 33 · KU I — Renal Function, AKI & CKD"
+   }
+  },
+  {
+   "id": "rx:patiromer",
+   "name": "Patiromer",
+   "class": "rx:potassium-binder",
+   "facets": {
+    "use": "Chronic hyperkalemia (enables RAAS-blocker use)",
+    "mechanism": "Potassium binder in the gut",
+    "adverse": "GI upset, hypomagnesemia"
+   },
+   "ref": {
+    "topic": "CKD",
+    "guide": "W33_06_CKD.html",
+    "week": "Week 33 · KU I — Renal Function, AKI & CKD"
+   }
+  },
+  {
+   "id": "rx:calcium-gluconate",
+   "name": "Calcium gluconate (IV)",
+   "class": "rx:calcium-salt",
+   "facets": {
+    "use": "Acute hyperkalemia with ECG changes",
+    "mechanism": "Stabilizes the cardiac membrane (doesn't lower K)",
+    "adverse": "Tissue necrosis on extravasation"
+   },
+   "ref": {
+    "topic": "CKD",
+    "guide": "W33_06_CKD.html",
+    "week": "Week 33 · KU I — Renal Function, AKI & CKD"
+   }
+  },
+  {
+   "id": "rx:insulin-regular",
+   "name": "Insulin (regular, IV infusion)",
+   "class": "rx:insulin",
+   "facets": {
+    "use": "Acute hyperkalemia (with glucose)",
+    "mechanism": "Shifts potassium intracellularly",
+    "adverse": "Hypoglycemia — give glucose"
+   },
+   "ref": {
+    "topic": "CKD",
+    "guide": "W33_06_CKD.html",
+    "week": "Week 33 · KU I — Renal Function, AKI & CKD"
+   }
+  },
+  {
+   "id": "rx:prednisone",
+   "name": "Prednisone",
+   "class": "rx:corticosteroid",
+   "facets": {
+    "use": "Minimal change disease; glomerulonephritis",
+    "mechanism": "Corticosteroid (anti-inflammatory/immunosuppressive)",
+    "adverse": "Infection, hyperglycemia, osteoporosis, neuropsychiatric in elderly"
+   },
+   "ref": {
+    "topic": "Nephrotic",
+    "guide": "W33_04_Nephrotic.html",
+    "week": "Week 33 · KU I — Renal Function, AKI & CKD"
+   }
+  },
+  {
+   "id": "rx:cyclophosphamide",
+   "name": "Cyclophosphamide",
+   "class": "rx:alkylating",
+   "facets": {
+    "use": "Severe ANCA vasculitis / anti-GBM / proliferative lupus nephritis",
+    "mechanism": "Alkylating immunosuppressant",
+    "adverse": "Myelosuppression, hemorrhagic cystitis, infertility"
+   },
+   "ref": {
+    "topic": "Nephritic",
+    "guide": "W33_05_Nephritic.html",
+    "week": "Week 33 · KU I — Renal Function, AKI & CKD"
+   }
+  },
+  {
+   "id": "rx:rituximab",
+   "name": "Rituximab",
+   "class": "rx:anti-cd20",
+   "facets": {
+    "use": "Membranous nephropathy; ANCA vasculitis",
+    "mechanism": "Anti-CD20 monoclonal antibody (B-cell depletion)",
+    "adverse": "Infusion reactions; screen hepatitis B"
+   },
+   "ref": {
+    "topic": "Nephritic",
+    "guide": "W33_05_Nephritic.html",
+    "week": "Week 33 · KU I — Renal Function, AKI & CKD"
+   }
+  },
+  {
+   "id": "rx:gentamicin",
+   "name": "Gentamicin",
+   "class": "rx:aminoglycoside",
+   "facets": {
+    "use": "(Nephrotoxin) — cause of ATN",
+    "mechanism": "Aminoglycoside; accumulates in tubular cells",
+    "adverse": "Nephrotoxicity (ATN), ototoxicity",
+    "monitoring": "Levels/renal function"
+   },
+   "ref": {
+    "topic": "Intrinsic AKI",
+    "guide": "W33_03_AKI_Intrinsic.html",
+    "week": "Week 33 · KU I — Renal Function, AKI & CKD"
+   }
+  },
+  {
+   "id": "rx:tolvaptan",
+   "name": "Tolvaptan",
+   "class": "rx:vaptan",
+   "facets": {
+    "use": "Rapidly progressing ADPKD (slows cyst growth)",
+    "mechanism": "Vasopressin V2 receptor antagonist",
+    "adverse": "Aquaresis/thirst, hepatotoxicity",
+    "monitoring": "LFTs"
+   },
+   "ref": {
+    "topic": "Special populations",
+    "guide": "W33_08_Special_Populations.html",
+    "week": "Week 33 · KU I — Renal Function, AKI & CKD"
+   }
+  }
+ ]
+}
