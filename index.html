@@ -1,7 +1,12 @@
 <!--
-  Study Suite  ·  v0.2.67 (beta)
+  Study Suite  ·  v0.2.68 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.68: Pharmacology view gained a Topic-Guides-style LEFT-NAV drawer + search highlighting. The
+  "Pharmacology" title now toggles a drawer (`#pharmNav`) listing classes → drugs as jump links (scrollIntoView +
+  a brief highlight pulse on the target card); the in-drawer search filters to matching drugs (a results list with a
+  highlighted snippet) AND wraps matches in `<mark>` within the main cards. Reuses the reviewer's
+  `.revnav`/`.revsearch`/`.revgroup`/`.revitem`/`.revresult` styling; each drug card carries an anchor id. No schema change.
   Changelog v0.2.67: New PHARMACOLOGY view (Future-Features #15) — a cross-week drug index that builds itself
   from the optional `drugs[]` array now embedded in every pack. Sibling to Topic Guides: home panel (shown when
   active packs carry drug data) → a searchable view that aggregates drugs across ENABLED packs, merges/dedupes by
@@ -589,6 +594,9 @@ section{display:none}section.on{display:block}
 .srcchip:hover{background:var(--accent);color:var(--paper)}
 .srcchip:disabled{color:var(--ink-soft);cursor:default;border-style:dashed}
 @media(max-width:560px){.facet{grid-template-columns:1fr;gap:2px}}
+.drugcard.flash{animation:pharmflash 1.25s ease-out}
+@keyframes pharmflash{from{background:var(--accent-soft)}to{background:var(--paper)}}
+.facetval mark,.drugname mark{background:#ffe58a;color:inherit;padding:0 1px;border-radius:2px}
 /* features coming soon */
 .soon{margin-top:18px;border-top:1px dashed var(--line);padding-top:12px;text-align:center}
 .soon-t{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
@@ -972,10 +980,12 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
   </section>
 
   <section id="pharm">
-    <div class="revbar"><button class="minor backbtn" id="pharmBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2" id="pharmBackTo"></span></button><h2 class="revtitle">Pharmacology</h2></div>
-    <input type="search" id="pharmSearch" class="pharmsearch" placeholder="Search drugs, classes, effects…" aria-label="Search pharmacology">
+    <div class="revbar"><button class="minor backbtn" id="pharmBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2" id="pharmBackTo"></span></button><h2 class="revtitle" id="pharmTitle" role="button" tabindex="0" aria-expanded="false" aria-controls="pharmNav" title="Show or hide the drug list">Pharmacology <span class="revcaret" aria-hidden="true">▾</span></h2></div>
     <div class="pharmsub" id="pharmCount"></div>
-    <div class="pharmhost" id="pharmHost"></div>
+    <div class="revlayout" id="pharmLayout">
+      <nav class="revnav closed" id="pharmNav" aria-label="Drug index"></nav>
+      <div class="pharmhost" id="pharmHost"></div>
+    </div>
   </section>
 
   <!-- INSTALL (Add to Home Screen) MODAL -->
@@ -1075,7 +1085,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.67';
+const APP_VERSION='0.2.68';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1813,9 +1823,9 @@ const CLASS_LABELS={"bcr-abl-tki":"BCR-ABL tyrosine kinase inhibitor","hypomethy
 const FACET_ORDER=[['use','Use'],['mechanism','Mechanism'],['dosing','Dosing'],['contra','Cautions / contraindications'],['adverse','Adverse effects'],['monitoring','Monitoring'],['interactions','Interactions']];
 function pharmEscape(t){return String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function classLabel(cls){if(!cls)return 'Other';const slug=String(cls).replace(/^rx:/,'');if(CLASS_LABELS[slug])return CLASS_LABELS[slug];return slug.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());}
-let pharmReturn='home',pharmQuery='';
+function drugSlug(id){return 'drug_'+String(id).replace(/[^a-z0-9]+/gi,'_');}
+let pharmReturn='home',pharmQuery='',pharmNavOpen=null,pharmGroups=[];
 function drugCount(){const seen=new Set();activePacks().forEach(p=>(Array.isArray(p.drugs)?p.drugs:[]).forEach(d=>{if(d&&d.id)seen.add(d.id);}));return seen.size;}
-/* Merge drugs[] across ENABLED packs -> one entry per id; facets aggregated, identical text deduped with source list. */
 function buildDrugIndex(){const byId=new Map();
   activePacks().forEach(p=>{(Array.isArray(p.drugs)?p.drugs:[]).forEach(d=>{if(!d||!d.id)return;
     let e=byId.get(d.id);if(!e){e={id:d.id,name:d.name||d.id.replace(/^rx:/,''),cls:d.class||'',facets:{}};byId.set(d.id,e);}
@@ -1830,33 +1840,66 @@ function buildDrugIndex(){const byId=new Map();
   const out=[...groups.entries()].map(([cls,drugs])=>({cls,label:classLabel(cls),drugs:drugs.sort((a,b)=>a.name.localeCompare(b.name))}));
   out.sort((a,b)=>a.label.localeCompare(b.label));return out;}
 function srcLabel(s){const wk=((s.week||'').split('·')[0]||'').trim()||s.week||'source';return wk+(s.topic?' · '+s.topic:'');}
-function pharmMatch(d,label,q){if(d.name.toLowerCase().includes(q)||label.toLowerCase().includes(q))return true;
-  return Object.keys(d.facets).some(k=>d.facets[k].some(x=>x.norm.includes(q)));}
-function drugCard(d,label){const card=document.createElement('div');card.className='drugcard';
-  const h=document.createElement('div');h.className='drugname';h.appendChild(document.createTextNode(d.name));
+function pharmMatch(d,label,q){if(d.name.toLowerCase().includes(q)||label.toLowerCase().includes(q))return true;return Object.keys(d.facets).some(k=>d.facets[k].some(x=>x.norm.includes(q)));}
+/* append text to a node, wrapping case-insensitive matches of q (already lowercased) in <mark> */
+function markInto(node,text,q){if(!q){node.appendChild(document.createTextNode(text));return;}
+  const low=text.toLowerCase();let i=0,idx;
+  while((idx=low.indexOf(q,i))>=0){if(idx>i)node.appendChild(document.createTextNode(text.slice(i,idx)));
+    const mk=document.createElement('mark');mk.textContent=text.slice(idx,idx+q.length);node.appendChild(mk);i=idx+q.length;}
+  if(i<text.length)node.appendChild(document.createTextNode(text.slice(i)));}
+function drugCard(d,label,q){const card=document.createElement('div');card.className='drugcard';card.id=drugSlug(d.id);
+  const h=document.createElement('div');h.className='drugname';markInto(h,d.name,q);
   const ch=document.createElement('span');ch.className='drugclass';ch.textContent=label;h.appendChild(ch);card.appendChild(h);
   FACET_ORDER.forEach(([k,flabel])=>{const arr=d.facets[k];if(!arr||!arr.length)return;
     const row=document.createElement('div');row.className='facet';
     const fl=document.createElement('div');fl.className='facetlabel';fl.textContent=flabel;row.appendChild(fl);
     const fv=document.createElement('div');fv.className='facetval';
-    arr.forEach(x=>{const line=document.createElement('div');line.className='facetline';line.appendChild(document.createTextNode(x.text+' '));
+    arr.forEach(x=>{const line=document.createElement('div');line.className='facetline';markInto(line,x.text+' ',q);
       x.srcs.forEach(sc=>{if(!sc.week&&!sc.topic)return;const chip=document.createElement('button');chip.className='srcchip';chip.textContent=srcLabel(sc);
         if(sc.guide){chip.title='Open '+(sc.topic||'guide');chip.onclick=()=>openGuide(sc.guide,sc.topic||null);}else{chip.disabled=true;}
         line.appendChild(chip);});
       fv.appendChild(line);});
     row.appendChild(fv);card.appendChild(row);});
   return card;}
-function renderPharm(){const host=$('pharmHost');host.innerHTML='';const groups=buildDrugIndex();
-  const total=groups.reduce((n,g)=>n+g.drugs.length,0);
-  $('pharmCount').textContent=total?`${total} drug${total===1?'':'s'} · ${groups.length} class${groups.length===1?'':'es'} · merged across your active packs`:'';
-  if(!total){host.innerHTML='<div class="revempty">No pharmacology data in your active packs yet. Newer packs embed a drug index here — enable more packs to grow it.</div>';return;}
-  const q=pharmQuery.trim().toLowerCase();
-  groups.forEach(g=>{const drugs=q?g.drugs.filter(d=>pharmMatch(d,g.label,q)):g.drugs;if(!drugs.length)return;
+function renderPharmMain(){const host=$('pharmHost');host.innerHTML='';const q=pharmQuery.trim().toLowerCase();let shown=0;
+  pharmGroups.forEach(g=>{const drugs=q?g.drugs.filter(d=>pharmMatch(d,g.label,q)):g.drugs;if(!drugs.length)return;
     const gh=document.createElement('div');gh.className='pharmclass';gh.textContent=g.label;host.appendChild(gh);
-    drugs.forEach(d=>host.appendChild(drugCard(d,g.label)));});
-  if(!host.children.length)host.innerHTML='<div class="revempty">No drugs match “'+pharmEscape(pharmQuery)+'”.</div>';}
-function openPharm(){pharmReturn=currentSection();$('pharmBackTo').textContent='to Home';renderPharm();show('pharm');
-  const se=$('pharmSearch');if(se)se.value=pharmQuery;}
+    drugs.forEach(d=>{host.appendChild(drugCard(d,g.label,q));shown++;});});
+  if(!shown)host.innerHTML='<div class="revempty">No drugs match \u201c'+pharmEscape(pharmQuery)+'\u201d.</div>';}
+function renderPharmNavList(){const list=$('pharmNavList');if(!list)return;list.innerHTML='';const q=pharmQuery.trim().toLowerCase();
+  if(!q){pharmGroups.forEach(g=>{const wrap=document.createElement('div');wrap.className='revgroup';
+      const hh=document.createElement('div');hh.className='gname';hh.textContent=g.label;wrap.appendChild(hh);
+      g.drugs.forEach(d=>{const b=document.createElement('button');b.className='revitem';
+        const t=document.createElement('span');t.textContent=d.name;b.appendChild(t);
+        b.onclick=()=>jumpToDrug(d.id);wrap.appendChild(b);});
+      list.appendChild(wrap);});return;}
+  const hits=[];pharmGroups.forEach(g=>g.drugs.forEach(d=>{if(pharmMatch(d,g.label,q))hits.push({d,label:g.label});}));
+  const hd2=document.createElement('div');hd2.className='reshead';hd2.textContent=(hits.length?hits.length+' ':'No ')+'match'+(hits.length===1?'':'es');list.appendChild(hd2);
+  hits.forEach(({d,label})=>{const b=document.createElement('button');b.className='revresult';
+    const rt=document.createElement('span');rt.className='rt';rt.textContent=d.name+' · '+label;b.appendChild(rt);
+    let snip='';for(const pair of FACET_ORDER){const arr=d.facets[pair[0]];if(!arr)continue;const mm=arr.find(x=>x.norm.includes(q));if(mm){snip=mm.text;break;}}
+    if(!snip){for(const pair of FACET_ORDER){const arr=d.facets[pair[0]];if(arr&&arr[0]){snip=arr[0].text;break;}}}
+    if(snip){const rs=document.createElement('span');rs.className='rs';const idx=snip.toLowerCase().indexOf(q);
+      if(idx>=0){const st=Math.max(0,idx-30),en=Math.min(snip.length,idx+q.length+50);
+        rs.appendChild(document.createTextNode((st>0?'… ':'')+snip.slice(st,idx)));
+        const mk=document.createElement('mark');mk.textContent=snip.slice(idx,idx+q.length);rs.appendChild(mk);
+        rs.appendChild(document.createTextNode(snip.slice(idx+q.length,en)+(en<snip.length?' …':'')));}
+      else rs.textContent=snip.slice(0,90);
+      b.appendChild(rs);}
+    b.onclick=()=>jumpToDrug(d.id);list.appendChild(b);});}
+function renderPharmNav(){const nav=$('pharmNav');nav.innerHTML='';
+  const hd=document.createElement('button');hd.className='revhide';hd.textContent='◂ Hide drug list';hd.onclick=()=>{pharmNavOpen=false;applyPharmNav();};nav.appendChild(hd);
+  const se=document.createElement('input');se.type='search';se.className='revsearch';se.placeholder='Search drugs, classes, effects…';se.value=pharmQuery;
+  se.oninput=()=>{pharmQuery=se.value;renderPharmMain();renderPharmNavList();};nav.appendChild(se);
+  const list=document.createElement('div');list.id='pharmNavList';nav.appendChild(list);renderPharmNavList();}
+function jumpToDrug(id){pharmNavOpen=false;applyPharmNav();const el=document.getElementById(drugSlug(id));if(el){el.scrollIntoView({block:'start',behavior:'smooth'});el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');}}
+function applyPharmNav(){if(pharmNavOpen===null)pharmNavOpen=false;$('pharmNav').classList.toggle('closed',!pharmNavOpen);const t=$('pharmTitle');if(t){t.classList.toggle('open',pharmNavOpen);t.setAttribute('aria-expanded',pharmNavOpen?'true':'false');}}
+function togglePharmNav(){pharmNavOpen=!pharmNavOpen;applyPharmNav();}
+function renderPharm(){pharmGroups=buildDrugIndex();const total=pharmGroups.reduce((n,g)=>n+g.drugs.length,0);
+  $('pharmCount').textContent=total?total+' drug'+(total===1?'':'s')+' · '+pharmGroups.length+' class'+(pharmGroups.length===1?'':'es')+' · merged across your active packs · tap “Pharmacology” for the index':'';
+  if(!total){$('pharmHost').innerHTML='<div class="revempty">No pharmacology data in your active packs yet. Newer packs embed a drug index here — enable more packs to grow it.</div>';$('pharmNav').innerHTML='';return;}
+  renderPharmNav();renderPharmMain();}
+function openPharm(){pharmReturn=currentSection();$('pharmBackTo').textContent='to Home';pharmNavOpen=false;renderPharm();applyPharmNav();show('pharm');}
 
 let revQuery='';
 /* Unified search. Empty query → the normal grouped topic list. Query → a results view:
@@ -2163,7 +2206,8 @@ $('diffSeg').querySelectorAll('.seg').forEach(b=>b.addEventListener('click',()=>
 $('openReviewer').addEventListener('click',()=>{if(activeGuides().length)openReviewer();});
 $('openPharm').addEventListener('click',()=>{if(drugCount())openPharm();});
 $('pharmBack').addEventListener('click',()=>renderHome());
-$('pharmSearch').addEventListener('input',e=>{pharmQuery=e.target.value;renderPharm();});
+$('pharmTitle').addEventListener('click',togglePharmNav);
+$('pharmTitle').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();togglePharmNav();}});
 $('installBtn').addEventListener('click',openInstall);
 $('refreshBtn').addEventListener('click',reloadApp);
 $('installBackup').addEventListener('click',e=>{e.preventDefault();backup();});
