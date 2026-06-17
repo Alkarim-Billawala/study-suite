@@ -1,0 +1,1545 @@
+{
+  "pack": "Week 28 — Endocrine IV (Bone & Calcium)",
+  "id": "wk28",
+  "formatVersion": "2.0",
+  "version": "1.1",
+  "author": "Alkarim Billawala / alkarim.billawala.ca",
+  "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
+  "created": "2026-06-16",
+  "updated": "2026-06-17",
+  "school": "UofT — Temerty Medicine",
+  "year": "Year 1",
+  "course": "CPC 2",
+  "weeks": "Week 28 · Endocrine IV — Bone & Calcium",
+  "questions": [
+    {
+      "id": "wk28_q01",
+      "sys": "Endo",
+      "topic": "Bone · Hypocalcemia",
+      "difficulty": "hard",
+      "stem": "A 61-year-old woman presents 3 days after parathyroid adenoma resection with perioral numbness, hand cramping, and palpitations. Exam: carpopedal spasm after cuff inflation, facial twitch on tapping. ECG: prolonged QT. Calcium 1.72 mmol/L, albumin 39, phosphate 1.6, Mg 0.70. Best initial management?",
+      "options": [
+        "Oral vitamin D3 and outpatient follow-up",
+        "IV calcium gluconate with cardiac monitoring",
+        "IV bisphosphonate",
+        "Glucocorticoids and a loop diuretic"
+      ],
+      "correct": 1,
+      "explain": "Acute symptomatic hypocalcemia (tetany, long QT) from <b>hungry bone syndrome</b> after parathyroidectomy &rarr; <b>IV calcium gluconate</b> with monitoring (and correct magnesium). A bisphosphonate would worsen hypocalcemia.",
+      "guide": {
+        "f": "W28_05_Hypocalcemia.html",
+        "t": "5 · Hungry bone",
+        "s": "IV calcium"
+      }
+    },
+    {
+      "id": "wk28_q02",
+      "sys": "Endo",
+      "topic": "Bone · Hypercalcemia",
+      "difficulty": "medium",
+      "stem": "A 77-year-old man has fatigue, constipation, polyuria, and mild confusion. Calcium 3.05 mmol/L, albumin 40, phosphate low-normal, PTH 13 pmol/L (high), 25-OH vitamin D normal. Best next step in acute management?",
+      "options": [
+        "IV isotonic saline",
+        "Immediate parathyroidectomy",
+        "Oral calcium carbonate",
+        "Calcitriol"
+      ],
+      "correct": 0,
+      "explain": "PTH-dependent hypercalcemia (primary hyperparathyroidism). Acute symptomatic hypercalcemia is treated first with <b>IV isotonic saline</b> for volume + calciuresis. Surgery may be definitive later; it isn't the first acute step.",
+      "guide": {
+        "f": "W28_04_Calcium_Hypercalcemia.html",
+        "t": "4 · Acute hypercalcemia",
+        "s": "saline first"
+      }
+    },
+    {
+      "id": "wk28_q03",
+      "sys": "Endo",
+      "topic": "Thyroid · Nodule",
+      "difficulty": "medium",
+      "stem": "A 45-year-old woman has a 2.0 cm thyroid nodule with palpitations, heat intolerance, and tremor. TSH is suppressed. Ultrasound shows a solid nodule without microcalcifications or abnormal nodes. Next best investigation?",
+      "options": [
+        "Fine-needle aspiration",
+        "Radionuclide thyroid scan",
+        "CT neck with contrast",
+        "Repeat ultrasound in 12 months"
+      ],
+      "correct": 1,
+      "explain": "With a <b>suppressed TSH</b>, get a <b>radionuclide scan</b> first. A hot (functioning) nodule is rarely malignant, so FNA is not the immediate step — treat the thyrotoxicosis instead.",
+      "guide": {
+        "f": "W28_06_Thyroid_Nodules.html",
+        "t": "6 · Algorithm",
+        "s": "suppressed TSH → scan"
+      }
+    },
+    {
+      "id": "wk28_q04",
+      "sys": "Endo",
+      "topic": "Thyroid · Nodule",
+      "difficulty": "medium",
+      "stem": "A 42-year-old woman has a 1.2 cm thyroid nodule; TSH normal. Ultrasound: hypoechoic solid nodule with irregular margins and microcalcifications, no suspicious nodes. Next best step?",
+      "options": [
+        "Reassure and discharge",
+        "Radionuclide scan",
+        "Fine-needle aspiration biopsy",
+        "Total thyroidectomy without biopsy"
+      ],
+      "correct": 2,
+      "explain": "Normal TSH + a highly suspicious nodule (hypoechoic, irregular margins, microcalcifications) at &ge;1 cm &rarr; <b>FNA</b>. A radionuclide scan is for suppressed TSH; only cytology rules out cancer.",
+      "guide": {
+        "f": "W28_06_Thyroid_Nodules.html",
+        "t": "6 · FNA",
+        "s": "high suspicion ≥1 cm"
+      }
+    },
+    {
+      "id": "wk28_q05",
+      "sys": "Endo",
+      "topic": "Bone · Screening",
+      "difficulty": "easy",
+      "stem": "A 55-year-old postmenopausal woman (BMI 23, no fractures, minimal alcohol, non-smoker) asks about BMD testing. Her mother had a low-trauma hip fracture at 74. Which statement is most appropriate?",
+      "options": [
+        "No BMD until age 70 without a personal fracture",
+        "BMD is indicated: age 50–64 with a parental hip fracture is a clinical risk factor",
+        "BMD only if BMI <20",
+        "Start a bisphosphonate without BMD"
+      ],
+      "correct": 1,
+      "explain": "A <b>parental hip fracture</b> is a key clinical risk factor; with age 50&ndash;64 it supports BMD testing. Starting a drug without BMD or fracture-risk assessment would be premature.",
+      "guide": {
+        "f": "W28_02_Osteoporosis_Dx.html",
+        "t": "2 · Who gets BMD",
+        "s": "parental hip fracture"
+      }
+    },
+    {
+      "id": "wk28_q06",
+      "sys": "Endo",
+      "topic": "Bone · Osteoporosis",
+      "difficulty": "hard",
+      "stem": "A 76-year-old woman has femoral-neck T-score −1.4 and lumbar −1.8. She develops back pain; spine x-ray shows a T12 compression fracture after bending to lift a laundry basket. Basic labs normal. Best interpretation and added test?",
+      "options": [
+        "Osteopenia only; no therapy",
+        "Clinically significant osteoporosis; consider SPEP for myeloma",
+        "Primary hyperparathyroidism; parathyroid scan",
+        "Normal age-related loss; repeat DXA in 10 years"
+      ],
+      "correct": 1,
+      "explain": "A <b>low-trauma vertebral fracture is osteoporosis</b> regardless of an osteopenic T-score, and warrants treatment. Vertebral fractures can be the presentation of <b>multiple myeloma</b> &rarr; consider SPEP.",
+      "guide": {
+        "f": "W28_02_Osteoporosis_Dx.html",
+        "t": "2 · Fragility fracture",
+        "s": "fracture trumps T-score"
+      }
+    },
+    {
+      "id": "wk28_q07",
+      "sys": "Endo",
+      "topic": "Bone · Drugs",
+      "difficulty": "easy",
+      "stem": "A 70-year-old man with newly diagnosed osteoporosis, normal renal function, no esophageal disease, and no dental procedures planned needs first-line therapy. Best option and counseling?",
+      "options": [
+        "Alendronate weekly; take with water on an empty stomach and stay upright 30–60 min",
+        "Denosumab; stop whenever he feels better",
+        "Teriparatide; avoid calcium and vitamin D",
+        "Calcitonin nasal spray; first-line for hip-fracture prevention"
+      ],
+      "correct": 0,
+      "explain": "An oral <b>bisphosphonate (alendronate)</b> is first-line. Counsel: morning, empty stomach, full glass of water, remain <b>upright 30&ndash;60 min</b> to prevent esophagitis and aid absorption.",
+      "guide": {
+        "f": "W28_03_Osteoporosis_Mgmt.html",
+        "t": "3 · Bisphosphonates",
+        "s": "alendronate counseling"
+      }
+    },
+    {
+      "id": "wk28_q08",
+      "sys": "Endo",
+      "topic": "Bone · Denosumab",
+      "difficulty": "medium",
+      "stem": "A 79-year-old woman on denosumab q6 months is 4 months overdue for her injection and wants to stop because she feels well. What is the most important concern?",
+      "options": [
+        "No concern; denosumab stays in bone for decades",
+        "Rebound bone loss and vertebral fractures after stopping/delaying",
+        "It causes permanent hypoparathyroidism if continued",
+        "It causes irreversible renal failure"
+      ],
+      "correct": 1,
+      "explain": "Unlike bisphosphonates, denosumab is <b>not retained in bone</b>; stopping or delaying causes a rebound rise in turnover with <b>rapid bone loss and vertebral fractures</b>. Re-dose promptly or transition to a bisphosphonate.",
+      "guide": {
+        "f": "W28_03_Osteoporosis_Mgmt.html",
+        "t": "3 · Denosumab",
+        "s": "rebound on stopping"
+      }
+    },
+    {
+      "id": "wk28_q09",
+      "sys": "Endo",
+      "topic": "Bone · Paget",
+      "difficulty": "medium",
+      "stem": "A 70-year-old man has deep aching pain in a bowed, warm, mildly erythematous left tibia. X-ray: mixed lytic/sclerotic lesions with cortical thickening. ALP elevated; calcium and phosphate normal. Best diagnosis and treatment?",
+      "options": [
+        "Osteoporosis; raloxifene",
+        "Paget disease; one dose of IV zoledronic acid",
+        "Vitamin D deficiency; high-dose cholecalciferol",
+        "Osteomalacia; radioactive iodine"
+      ],
+      "correct": 1,
+      "explain": "Bowing, warmth, bone pain, mixed lytic/sclerotic cortical thickening, and an <b>isolated high ALP</b> with normal calcium/phosphate are classic for <b>Paget disease</b>. First-line is a <b>single IV zoledronic acid</b> dose.",
+      "guide": {
+        "f": "W28_08_Paget.html",
+        "t": "8 · Paget",
+        "s": "zoledronic acid"
+      }
+    },
+    {
+      "id": "wk28_q10",
+      "sys": "Endo",
+      "topic": "Thyroid · Cancer",
+      "difficulty": "medium",
+      "stem": "A 36-year-old woman had a total thyroidectomy and radioactive iodine for papillary thyroid carcinoma. Which surveillance best assesses biochemical and structural recurrence?",
+      "options": [
+        "Calcitonin and abdominal ultrasound",
+        "TSH only; no imaging",
+        "Thyroglobulin with anti-thyroglobulin antibodies plus neck ultrasound",
+        "Annual radionuclide scan indefinitely"
+      ],
+      "correct": 2,
+      "explain": "Differentiated thyroid cancer follow-up uses <b>thyroglobulin (+ anti-thyroglobulin antibodies)</b> for biochemical recurrence and <b>neck ultrasound</b> for structural recurrence. Calcitonin is the marker for medullary cancer.",
+      "guide": {
+        "f": "W28_07_Thyroid_Cancer.html",
+        "t": "7 · Surveillance",
+        "s": "thyroglobulin + US"
+      }
+    },
+    {
+      "id": "wk28_q11",
+      "sys": "Endo",
+      "topic": "Bone · Hypercalcemia",
+      "difficulty": "hard",
+      "stem": "A 52-year-old woman has calcium 2.70 mmol/L found incidentally, PTH high-normal, and a 24-hour urine calcium that is LOW. Her relatives have mild hypercalcemia. Which is most likely?",
+      "options": [
+        "Primary hyperparathyroidism",
+        "Familial hypocalciuric hypercalcemia (FHH)",
+        "Malignancy of bone",
+        "Vitamin D intoxication"
+      ],
+      "correct": 1,
+      "explain": "Mild PTH-dependent hypercalcemia with a <b>low urine calcium</b> and a family history points to <b>FHH</b> (a calcium-sensing receptor defect). Distinguishing it from primary HPT with the urine calcium / Ca-creatinine clearance ratio avoids unnecessary parathyroidectomy.",
+      "guide": {
+        "f": "W28_04_Calcium_Hypercalcemia.html",
+        "t": "4 · FHH vs HPT",
+        "s": "low urine calcium"
+      }
+    },
+    {
+      "id": "wk28_q12",
+      "sys": "Endo",
+      "topic": "Bone · Calcium correction",
+      "difficulty": "medium",
+      "stem": "A hospitalized patient with albumin 24 g/L (low) has a total calcium of 2.05 mmol/L and no symptoms. What is the most appropriate interpretation?",
+      "options": [
+        "True hypocalcemia; give IV calcium",
+        "Likely normal once corrected for albumin (or check ionized calcium)",
+        "Hypercalcemia of malignancy",
+        "Vitamin D toxicity"
+      ],
+      "correct": 1,
+      "explain": "Low albumin <b>falsely lowers total calcium</b>. Correct for albumin (~+0.2 mmol/L per 10 g/L below normal) or measure <b>ionized calcium</b>; the corrected value here is near-normal, and the patient is asymptomatic.",
+      "guide": {
+        "f": "W28_04_Calcium_Hypercalcemia.html",
+        "t": "4 · Calcium fractions",
+        "s": "correct for albumin"
+      }
+    },
+    {
+      "id": "wk28_q13",
+      "sys": "Endo",
+      "topic": "Bone · Hypocalcemia Mg",
+      "difficulty": "medium",
+      "stem": "A patient with chronic alcohol use has symptomatic hypocalcemia that fails to correct despite repeated IV calcium. Which electrolyte must be checked and replaced?",
+      "options": [
+        "Potassium",
+        "Magnesium",
+        "Phosphate",
+        "Sodium"
+      ],
+      "correct": 1,
+      "explain": "<b>Hypomagnesemia</b> impairs PTH secretion/action and causes <b>refractory hypocalcemia</b> — calcium won't correct until magnesium is replaced. Common in alcohol use and malnutrition.",
+      "guide": {
+        "f": "W28_05_Hypocalcemia.html",
+        "t": "5 · Management",
+        "s": "check magnesium"
+      }
+    },
+    {
+      "id": "wk28_q14",
+      "sys": "Endo",
+      "topic": "Bone · Drug mechanism",
+      "difficulty": "easy",
+      "stem": "Denosumab reduces bone resorption by which mechanism?",
+      "options": [
+        "Binding mineralized bone and triggering osteoclast apoptosis",
+        "Monoclonal antibody against RANKL",
+        "Intermittent PTH-receptor stimulation",
+        "Inhibiting sclerostin"
+      ],
+      "correct": 1,
+      "explain": "<b>Denosumab is an anti-RANKL monoclonal antibody</b> — it acts like OPG, blocking osteoclast formation/activity. Bisphosphonates bind bone and cause osteoclast apoptosis; teriparatide stimulates osteoblasts; romosozumab inhibits sclerostin.",
+      "guide": {
+        "f": "W28_01_Bone_Physiology.html",
+        "t": "1 · RANKL/OPG",
+        "s": "denosumab = anti-RANKL"
+      }
+    },
+    {
+      "id": "wk28_q15",
+      "sys": "Endo",
+      "topic": "Bone · Anabolic",
+      "difficulty": "medium",
+      "stem": "Which osteoporosis drug is an anabolic agent that stimulates bone formation and is avoided in Paget disease and prior skeletal radiation?",
+      "options": [
+        "Alendronate",
+        "Denosumab",
+        "Teriparatide",
+        "Raloxifene"
+      ],
+      "correct": 2,
+      "explain": "<b>Teriparatide</b> (intermittent PTH analog) is anabolic. It is avoided in hypercalcemia, Paget disease, prior skeletal radiation, and skeletal malignancy (osteosarcoma concern).",
+      "guide": {
+        "f": "W28_03_Osteoporosis_Mgmt.html",
+        "t": "3 · Teriparatide",
+        "s": "anabolic cautions"
+      }
+    },
+    {
+      "id": "wk28_q16",
+      "sys": "Endo",
+      "topic": "Thyroid · Medullary",
+      "difficulty": "medium",
+      "stem": "A thyroid FNA returns medullary carcinoma. Beyond surgery, which additional evaluation is essential?",
+      "options": [
+        "Screen for pheochromocytoma and RET mutation (MEN2)",
+        "Start levothyroxine suppression alone",
+        "Order thyroglobulin surveillance",
+        "Begin radioactive iodine"
+      ],
+      "correct": 0,
+      "explain": "<b>Medullary thyroid cancer</b> (C cells, calcitonin) is associated with <b>MEN2 (RET)</b> — screen for a <b>pheochromocytoma</b> (operate on it first) and test RET. Thyroglobulin and radioactive iodine apply to differentiated (follicular-cell) cancers, not medullary.",
+      "guide": {
+        "f": "W28_07_Thyroid_Cancer.html",
+        "t": "7 · Medullary",
+        "s": "MEN2 / RET / pheo"
+      }
+    },
+    {
+      "id": "wk28_q17",
+      "sys": "Endo",
+      "topic": "Bone · Glucocorticoid",
+      "difficulty": "medium",
+      "stem": "A 64-year-old woman starting long-term high-dose prednisone for vasculitis has no prior fracture. What is the most appropriate bone-health step?",
+      "options": [
+        "No action unless she fractures",
+        "Assess fracture risk and start calcium/vitamin D ± a bisphosphonate",
+        "Start teriparatide first-line",
+        "Order a radionuclide bone scan"
+      ],
+      "correct": 1,
+      "explain": "Chronic glucocorticoids markedly raise fracture risk (impaired formation + increased resorption). Optimize calcium/vitamin D and assess risk; many high-risk patients warrant a <b>bisphosphonate</b> as glucocorticoid-induced osteoporosis prophylaxis.",
+      "guide": {
+        "f": "W28_02_Osteoporosis_Dx.html",
+        "t": "2 · Secondary causes",
+        "s": "glucocorticoids"
+      }
+    },
+    {
+      "id": "wk28_q18",
+      "sys": "Endo",
+      "topic": "Bone · Romosozumab",
+      "difficulty": "hard",
+      "stem": "A very-high-risk osteoporosis patient is considered for romosozumab. Which history most strongly cautions against it?",
+      "options": [
+        "Prior wrist fracture",
+        "Recent myocardial infarction or stroke",
+        "Mild GERD",
+        "Vitamin D deficiency"
+      ],
+      "correct": 1,
+      "explain": "<b>Romosozumab</b> (sclerostin inhibitor) carries a <b>cardiovascular risk signal</b> — avoid with a recent MI or stroke. GERD favours avoiding oral bisphosphonates (not romosozumab), and vitamin D deficiency is corrected, not a contraindication.",
+      "guide": {
+        "f": "W28_03_Osteoporosis_Mgmt.html",
+        "t": "3 · Romosozumab",
+        "s": "CV caution"
+      }
+    },
+    {
+      "id": "wk28_q19",
+      "sys": "Endo",
+      "topic": "Bone · Hypercalcemia drugs",
+      "difficulty": "medium",
+      "stem": "Which medication is a recognised PTH-dependent cause of mild hypercalcemia?",
+      "options": [
+        "Furosemide",
+        "Thiazide diuretic",
+        "Calcitonin",
+        "Prednisone"
+      ],
+      "correct": 1,
+      "explain": "<b>Thiazides</b> reduce urinary calcium excretion and can unmask/cause mild hypercalcemia (a PTH-dependent-pattern cause, along with lithium). Loop diuretics do the opposite (calciuretic).",
+      "guide": {
+        "f": "W28_04_Calcium_Hypercalcemia.html",
+        "t": "4 · Differential",
+        "s": "thiazide, lithium"
+      }
+    },
+    {
+      "id": "wk28_q20",
+      "sys": "Endo",
+      "topic": "Bone · Paget vs osteomalacia",
+      "difficulty": "hard",
+      "stem": "Which biochemical pattern best distinguishes Paget disease from osteomalacia?",
+      "options": [
+        "Both have low calcium",
+        "Paget: normal calcium/phosphate with high ALP; osteomalacia: low/low-normal calcium and phosphate with high ALP",
+        "Paget has high calcium",
+        "Osteomalacia has a normal ALP"
+      ],
+      "correct": 1,
+      "explain": "<b>Paget</b> has an <b>isolated high ALP with normal calcium and phosphate</b>. <b>Osteomalacia</b> (defective mineralization, often vitamin D deficiency) tends to show low/low-normal calcium and phosphate with a high ALP and characteristic Looser zones.",
+      "guide": {
+        "f": "W28_08_Paget.html",
+        "t": "8 · Lab signature",
+        "s": "isolated ALP"
+      }
+    }
+  ],
+  "cards": [
+    {
+      "id": "wk28_c01",
+      "sys": "Endo",
+      "topic": "Bone types",
+      "type": "qa",
+      "guide": {
+        "f": "W28_01_Bone_Physiology.html",
+        "t": "1 · Bone types",
+        "s": "cortical vs trabecular"
+      },
+      "prompt": "Contrast cortical and trabecular bone and their clinical fracture relevance.",
+      "answer": "Cortical (compact, ~80% of mass) — long-bone shafts, hip, radius; preferentially lost in hyperparathyroidism. Trabecular (spongy, fast-remodeling) — vertebrae and hip; the classic osteoporotic fracture sites."
+    },
+    {
+      "id": "wk28_c02",
+      "sys": "Endo",
+      "topic": "RANKL/OPG",
+      "type": "qa",
+      "guide": {
+        "f": "W28_01_Bone_Physiology.html",
+        "t": "1 · RANKL/OPG",
+        "s": "switch"
+      },
+      "prompt": "What do RANKL and OPG do, and which drug mimics OPG?",
+      "answer": "RANKL drives osteoclast formation/activity; OPG is a decoy receptor that brakes it. Denosumab is an anti-RANKL antibody — a pharmacologic OPG."
+    },
+    {
+      "id": "wk28_c03",
+      "sys": "Endo",
+      "topic": "PTH effects",
+      "type": "qa",
+      "guide": {
+        "f": "W28_01_Bone_Physiology.html",
+        "t": "1 · PTH",
+        "s": "net effect"
+      },
+      "prompt": "Summarize PTH's net effects on calcium and phosphate.",
+      "answer": "Raises serum calcium and lowers phosphate: ↑bone resorption, ↑renal Ca reabsorption, ↑phosphate excretion, and ↑activation of vitamin D."
+    },
+    {
+      "id": "wk28_c04",
+      "sys": "Endo",
+      "topic": "Fragility fracture",
+      "type": "qa",
+      "guide": {
+        "f": "W28_02_Osteoporosis_Dx.html",
+        "t": "2 · Definition",
+        "s": "fragility fracture"
+      },
+      "prompt": "Why does a low-trauma hip or vertebral fracture diagnose osteoporosis?",
+      "answer": "It indicates bone fragility and high fracture risk regardless of the T-score, so it is clinically osteoporosis even when BMD is only osteopenic — and warrants treatment."
+    },
+    {
+      "id": "wk28_c05",
+      "sys": "Endo",
+      "topic": "T vs Z",
+      "type": "qa",
+      "guide": {
+        "f": "W28_02_Osteoporosis_Dx.html",
+        "t": "2 · DXA",
+        "s": "T vs Z"
+      },
+      "prompt": "What is the difference between a T-score and a Z-score?",
+      "answer": "T-score compares to a young-adult reference (used in postmenopausal women / men ≥50). Z-score compares to age/sex-matched peers; a low Z-score prompts a search for secondary causes."
+    },
+    {
+      "id": "wk28_c06",
+      "sys": "Endo",
+      "topic": "Osteoporosis labs",
+      "type": "qa",
+      "guide": {
+        "f": "W28_02_Osteoporosis_Dx.html",
+        "t": "2 · Workup",
+        "s": "secondary screen"
+      },
+      "prompt": "What baseline labs screen for secondary osteoporosis, and when add SPEP?",
+      "answer": "Calcium+albumin, creatinine/eGFR, ALP, CBC, TSH, 25-OH vitamin D; add SPEP especially with a vertebral fracture to evaluate for multiple myeloma."
+    },
+    {
+      "id": "wk28_c07",
+      "sys": "Endo",
+      "topic": "Bisphosphonate counseling",
+      "type": "qa",
+      "guide": {
+        "f": "W28_03_Osteoporosis_Mgmt.html",
+        "t": "3 · Alendronate",
+        "s": "counseling"
+      },
+      "prompt": "How should oral alendronate be taken, and why?",
+      "answer": "Morning, empty stomach, full glass of water, remain upright 30–60 min, avoid other food/drugs in that window — to prevent esophagitis and improve absorption."
+    },
+    {
+      "id": "wk28_c08",
+      "sys": "Endo",
+      "topic": "Denosumab rebound",
+      "type": "qa",
+      "guide": {
+        "f": "W28_03_Osteoporosis_Mgmt.html",
+        "t": "3 · Denosumab",
+        "s": "rebound"
+      },
+      "prompt": "Why can't denosumab simply be stopped?",
+      "answer": "It isn't retained in bone like bisphosphonates; stopping or delaying causes rebound bone turnover with rapid loss and vertebral fractures — transition to a bisphosphonate instead."
+    },
+    {
+      "id": "wk28_c09",
+      "sys": "Endo",
+      "topic": "Calcium fractions",
+      "type": "qa",
+      "guide": {
+        "f": "W28_04_Calcium_Hypercalcemia.html",
+        "t": "4 · Fractions",
+        "s": "albumin"
+      },
+      "prompt": "Why correct calcium for albumin?",
+      "answer": "Only ionized calcium is active; low albumin lowers total calcium without lowering ionized calcium. Correct total calcium for albumin or measure ionized calcium directly."
+    },
+    {
+      "id": "wk28_c10",
+      "sys": "Endo",
+      "topic": "Hypercalcemia PTH",
+      "type": "qa",
+      "guide": {
+        "f": "W28_04_Calcium_Hypercalcemia.html",
+        "t": "4 · Differential",
+        "s": "check PTH"
+      },
+      "prompt": "How does PTH split the hypercalcemia differential?",
+      "answer": "High/inappropriately normal PTH = PTH-dependent (primary/tertiary HPT, FHH, lithium, thiazides). Suppressed PTH = PTH-independent (malignancy via PTHrP/osteolysis, vitamin D excess, granulomatous disease)."
+    },
+    {
+      "id": "wk28_c11",
+      "sys": "Endo",
+      "topic": "Acute hypercalcemia",
+      "type": "qa",
+      "guide": {
+        "f": "W28_04_Calcium_Hypercalcemia.html",
+        "t": "4 · Acute",
+        "s": "sequence"
+      },
+      "prompt": "Outline acute hypercalcemia management.",
+      "answer": "IV isotonic saline first (volume + calciuresis); calcitonin for rapid short-term bridging; IV bisphosphonate for durable control; glucocorticoids for granulomatous/calcitriol causes; dialysis if severe/refractory; treat the cause."
+    },
+    {
+      "id": "wk28_c12",
+      "sys": "Endo",
+      "topic": "Hungry bone",
+      "type": "qa",
+      "guide": {
+        "f": "W28_05_Hypocalcemia.html",
+        "t": "5 · Hungry bone",
+        "s": "mechanism"
+      },
+      "prompt": "What is hungry bone syndrome?",
+      "answer": "Profound hypocalcemia after parathyroidectomy for severe hyperparathyroidism — removing chronic PTH excess lets high-turnover bone rapidly take up calcium and phosphate."
+    },
+    {
+      "id": "wk28_c13",
+      "sys": "Endo",
+      "topic": "Hypocalcemia signs",
+      "type": "qa",
+      "guide": {
+        "f": "W28_05_Hypocalcemia.html",
+        "t": "5 · Presentation",
+        "s": "signs"
+      },
+      "prompt": "Name the classic signs of hypocalcemia.",
+      "answer": "Perioral numbness, paresthesias, cramps, tetany, carpopedal spasm, positive Chvostek and Trousseau signs, seizures, and a prolonged QT (torsades risk)."
+    },
+    {
+      "id": "wk28_c14",
+      "sys": "Endo",
+      "topic": "Nodule algorithm",
+      "type": "qa",
+      "guide": {
+        "f": "W28_06_Thyroid_Nodules.html",
+        "t": "6 · Algorithm",
+        "s": "first tests"
+      },
+      "prompt": "What are the first two investigations for any thyroid nodule?",
+      "answer": "TSH and thyroid ultrasound. If TSH is suppressed → radionuclide scan (hot nodule = rarely cancer, no FNA); otherwise risk-stratify by ultrasound for FNA."
+    },
+    {
+      "id": "wk28_c15",
+      "sys": "Endo",
+      "topic": "Thyroid cancer types",
+      "type": "qa",
+      "guide": {
+        "f": "W28_07_Thyroid_Cancer.html",
+        "t": "7 · Types",
+        "s": "papillary/medullary"
+      },
+      "prompt": "Which thyroid cancer is most common, and which is C-cell derived?",
+      "answer": "Papillary is most common and usually indolent. Medullary arises from parafollicular C cells, secretes calcitonin, and is associated with MEN2/RET."
+    },
+    {
+      "id": "wk28_c16",
+      "sys": "Endo",
+      "topic": "Paget",
+      "type": "qa",
+      "guide": {
+        "f": "W28_08_Paget.html",
+        "t": "8 · Paget",
+        "s": "signature"
+      },
+      "prompt": "What is the lab and treatment signature of Paget disease?",
+      "answer": "Isolated elevated ALP with normal calcium and phosphate, mixed lytic/sclerotic x-ray changes; first-line treatment is a single dose of IV zoledronic acid."
+    },
+    {
+      "id": "wk28_c17",
+      "sys": "Endo",
+      "topic": "T-score",
+      "type": "mcq",
+      "guide": {
+        "f": "W28_02_Osteoporosis_Dx.html",
+        "t": "2 · DXA",
+        "s": "threshold"
+      },
+      "prompt": "Osteoporosis by BMD is a T-score of:",
+      "options": [
+        "≥ −1.0",
+        "−1.0 to −2.4",
+        "≤ −2.5",
+        "Any negative value"
+      ],
+      "correct": 2
+    },
+    {
+      "id": "wk28_c18",
+      "sys": "Endo",
+      "topic": "BMD screening",
+      "type": "mcq",
+      "guide": {
+        "f": "W28_02_Osteoporosis_Dx.html",
+        "t": "2 · Screening",
+        "s": "age 70"
+      },
+      "prompt": "At what age is BMD screening recommended for everyone?",
+      "options": [
+        "50",
+        "60",
+        "65",
+        "70"
+      ],
+      "correct": 3
+    },
+    {
+      "id": "wk28_c19",
+      "sys": "Endo",
+      "topic": "First-line drug",
+      "type": "mcq",
+      "guide": {
+        "f": "W28_03_Osteoporosis_Mgmt.html",
+        "t": "3 · Drugs",
+        "s": "first-line"
+      },
+      "prompt": "First-line pharmacologic therapy for most osteoporosis is:",
+      "options": [
+        "Teriparatide",
+        "An oral bisphosphonate",
+        "Calcitonin",
+        "Raloxifene"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "wk28_c20",
+      "sys": "Endo",
+      "topic": "Denosumab mechanism",
+      "type": "mcq",
+      "guide": {
+        "f": "W28_01_Bone_Physiology.html",
+        "t": "1 · Drugs",
+        "s": "RANKL"
+      },
+      "prompt": "Denosumab is a monoclonal antibody against:",
+      "options": [
+        "Sclerostin",
+        "RANKL",
+        "PTH receptor",
+        "Cathepsin K"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "wk28_c21",
+      "sys": "Endo",
+      "topic": "Acute hypercalcemia",
+      "type": "mcq",
+      "guide": {
+        "f": "W28_04_Calcium_Hypercalcemia.html",
+        "t": "4 · Acute",
+        "s": "first-line"
+      },
+      "prompt": "First-line treatment of acute symptomatic hypercalcemia:",
+      "options": [
+        "IV bisphosphonate",
+        "IV isotonic saline",
+        "Loop diuretic alone",
+        "Dialysis"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "wk28_c22",
+      "sys": "Endo",
+      "topic": "FHH",
+      "type": "mcq",
+      "guide": {
+        "f": "W28_04_Calcium_Hypercalcemia.html",
+        "t": "4 · FHH",
+        "s": "urine calcium"
+      },
+      "prompt": "Familial hypocalciuric hypercalcemia is distinguished from primary HPT by:",
+      "options": [
+        "High urine calcium",
+        "Low urine calcium",
+        "Suppressed PTH",
+        "High phosphate"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "wk28_c23",
+      "sys": "Endo",
+      "topic": "Hypocalcemia refractory",
+      "type": "mcq",
+      "guide": {
+        "f": "W28_05_Hypocalcemia.html",
+        "t": "5 · Management",
+        "s": "magnesium"
+      },
+      "prompt": "Hypocalcemia that won't correct despite calcium suggests low:",
+      "options": [
+        "Potassium",
+        "Magnesium",
+        "Sodium",
+        "Chloride"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "wk28_c24",
+      "sys": "Endo",
+      "topic": "Suppressed TSH nodule",
+      "type": "mcq",
+      "guide": {
+        "f": "W28_06_Thyroid_Nodules.html",
+        "t": "6 · Algorithm",
+        "s": "scan"
+      },
+      "prompt": "A thyroid nodule with a suppressed TSH should next have:",
+      "options": [
+        "FNA biopsy",
+        "Radionuclide thyroid scan",
+        "CT neck",
+        "Thyroglobulin"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "wk28_c25",
+      "sys": "Endo",
+      "topic": "Differentiated surveillance",
+      "type": "mcq",
+      "guide": {
+        "f": "W28_07_Thyroid_Cancer.html",
+        "t": "7 · Surveillance",
+        "s": "marker"
+      },
+      "prompt": "Biochemical surveillance after differentiated thyroid cancer uses:",
+      "options": [
+        "Calcitonin",
+        "Thyroglobulin (+ anti-Tg antibodies)",
+        "PTH",
+        "CEA"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "wk28_c26",
+      "sys": "Endo",
+      "topic": "Paget treatment",
+      "type": "mcq",
+      "guide": {
+        "f": "W28_08_Paget.html",
+        "t": "8 · Treatment",
+        "s": "first-line"
+      },
+      "prompt": "First-line treatment of symptomatic Paget disease is:",
+      "options": [
+        "Oral calcium",
+        "A single IV zoledronic acid dose",
+        "Calcitriol",
+        "Denosumab"
+      ],
+      "correct": 1
+    },
+    {
+      "id": "wk28_c27",
+      "sys": "Endo",
+      "topic": "Bisphosphonate AEs",
+      "type": "multi",
+      "guide": {
+        "f": "W28_03_Osteoporosis_Mgmt.html",
+        "t": "3 · Bisphosphonates",
+        "s": "adverse"
+      },
+      "prompt": "Select recognised bisphosphonate adverse effects/cautions:",
+      "options": [
+        "Esophagitis (oral)",
+        "Atypical femur fracture",
+        "Osteonecrosis of the jaw",
+        "Hypocalcemia",
+        "Hyperkalemia"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": "wk28_c28",
+      "sys": "Endo",
+      "topic": "PTH-independent causes",
+      "type": "multi",
+      "guide": {
+        "f": "W28_04_Calcium_Hypercalcemia.html",
+        "t": "4 · Differential",
+        "s": "PTH-independent"
+      },
+      "prompt": "Select PTH-INDEPENDENT causes of hypercalcemia:",
+      "options": [
+        "Malignancy (PTHrP)",
+        "Vitamin D intoxication",
+        "Granulomatous disease",
+        "Primary hyperparathyroidism",
+        "Familial hypocalciuric hypercalcemia"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "id": "wk28_c29",
+      "sys": "Endo",
+      "topic": "Hypocalcemia causes",
+      "type": "multi",
+      "guide": {
+        "f": "W28_05_Hypocalcemia.html",
+        "t": "5 · Causes",
+        "s": "list"
+      },
+      "prompt": "Select causes of hypocalcemia:",
+      "options": [
+        "Post-parathyroidectomy (hungry bone)",
+        "Vitamin D deficiency",
+        "CKD",
+        "Pancreatitis",
+        "Thiazide diuretics"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": "wk28_c30",
+      "sys": "Endo",
+      "topic": "Sonographic risk",
+      "type": "multi",
+      "guide": {
+        "f": "W28_06_Thyroid_Nodules.html",
+        "t": "6 · Ultrasound",
+        "s": "red flags"
+      },
+      "prompt": "Select sonographic features suggesting thyroid malignancy:",
+      "options": [
+        "Microcalcifications",
+        "Irregular margins",
+        "Taller-than-wide shape",
+        "Hypoechogenicity",
+        "Pure cystic (simple) appearance"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": "wk28_c31",
+      "sys": "Endo",
+      "topic": "Osteoporosis risk factors",
+      "type": "multi",
+      "guide": {
+        "f": "W28_02_Osteoporosis_Dx.html",
+        "t": "2 · Risk factors",
+        "s": "screen"
+      },
+      "prompt": "Select clinical risk factors that support BMD screening:",
+      "options": [
+        "Prior fragility fracture",
+        "Chronic glucocorticoids",
+        "Parental hip fracture",
+        "Current smoking",
+        "High BMI"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": "wk28_c32",
+      "sys": "Endo",
+      "topic": "T-score bands",
+      "type": "cloze",
+      "guide": {
+        "f": "W28_02_Osteoporosis_Dx.html",
+        "t": "2 · DXA",
+        "s": "bands"
+      },
+      "text": "DXA: normal ≥ {{−1.0}}; osteopenia −1.0 to −2.4; osteoporosis ≤ {{−2.5}}.",
+      "explain": "T-score thresholds for postmenopausal women / men ≥50."
+    },
+    {
+      "id": "wk28_c33",
+      "sys": "Endo",
+      "topic": "Calcium targets",
+      "type": "cloze",
+      "guide": {
+        "f": "W28_03_Osteoporosis_Mgmt.html",
+        "t": "3 · Targets",
+        "s": "intake"
+      },
+      "text": "Intake targets: calcium {{1000}}–{{1200}} mg/day and vitamin D {{600}}–{{800}} IU/day.",
+      "explain": "Diet first; supplement only the deficit."
+    },
+    {
+      "id": "wk28_c34",
+      "sys": "Endo",
+      "topic": "PTH chemistry",
+      "type": "cloze",
+      "guide": {
+        "f": "W28_04_Calcium_Hypercalcemia.html",
+        "t": "4 · Primary HPT",
+        "s": "pattern"
+      },
+      "text": "Primary hyperparathyroidism: calcium {{high}}, PTH high/inappropriately normal, phosphate {{low}}.",
+      "explain": "PTH lowers phosphate by increasing renal excretion."
+    },
+    {
+      "id": "wk28_c35",
+      "sys": "Endo",
+      "topic": "Paget labs",
+      "type": "cloze",
+      "guide": {
+        "f": "W28_08_Paget.html",
+        "t": "8 · Labs",
+        "s": "ALP"
+      },
+      "text": "Paget disease shows an isolated high {{ALP}} with normal {{calcium}} and {{phosphate}}.",
+      "explain": "ALP reflects the high bone turnover."
+    },
+    {
+      "id": "wk28_c36",
+      "sys": "Endo",
+      "topic": "FNA threshold",
+      "type": "cloze",
+      "guide": {
+        "f": "W28_06_Thyroid_Nodules.html",
+        "t": "6 · FNA",
+        "s": "size"
+      },
+      "text": "A highly suspicious thyroid nodule warrants FNA at ≥ {{1}} cm; moderately suspicious at ≥ {{1.5}} cm.",
+      "explain": "Higher suspicion → biopsy smaller nodules."
+    },
+    {
+      "id": "wk28_c37",
+      "sys": "Endo",
+      "topic": "Acute hypercalcemia order",
+      "type": "order",
+      "guide": {
+        "f": "W28_04_Calcium_Hypercalcemia.html",
+        "t": "4 · Acute",
+        "s": "sequence"
+      },
+      "prompt": "Order acute hypercalcemia treatment:",
+      "items": [
+        "IV isotonic saline (volume + calciuresis)",
+        "Calcitonin for rapid short-term lowering",
+        "IV bisphosphonate for durable control",
+        "Glucocorticoids / dialysis for selected refractory cases",
+        "Treat the underlying cause"
+      ]
+    },
+    {
+      "id": "wk28_c38",
+      "sys": "Endo",
+      "topic": "Nodule algorithm order",
+      "type": "order",
+      "guide": {
+        "f": "W28_06_Thyroid_Nodules.html",
+        "t": "6 · Algorithm",
+        "s": "sequence"
+      },
+      "prompt": "Order the thyroid-nodule workup:",
+      "items": [
+        "Check TSH and thyroid ultrasound",
+        "If TSH suppressed → radionuclide scan",
+        "If normal/high TSH → risk-stratify by ultrasound",
+        "FNA based on size + suspicious features"
+      ]
+    },
+    {
+      "id": "wk28_c39",
+      "sys": "Endo",
+      "topic": "Osteoporosis pathway",
+      "type": "order",
+      "guide": {
+        "f": "W28_03_Osteoporosis_Mgmt.html",
+        "t": "3 · Pathway",
+        "s": "manage"
+      },
+      "prompt": "Order osteoporosis management:",
+      "items": [
+        "Lifestyle + calcium/vitamin D for everyone",
+        "Assess fracture risk (BMD, FRAX/CAROC, fractures)",
+        "Start a bisphosphonate if treatment-indicated",
+        "Reassess response; don't lapse denosumab without transition"
+      ]
+    },
+    {
+      "id": "wk28_c40",
+      "sys": "Endo",
+      "topic": "Drug → target",
+      "type": "match",
+      "guide": {
+        "f": "W28_03_Osteoporosis_Mgmt.html",
+        "t": "3 · Drugs",
+        "s": "mechanisms"
+      },
+      "prompt": "Match the osteoporosis drug to its mechanism:",
+      "pairs": [
+        [
+          "Alendronate",
+          "Binds bone → osteoclast apoptosis"
+        ],
+        [
+          "Denosumab",
+          "Anti-RANKL antibody"
+        ],
+        [
+          "Teriparatide",
+          "Intermittent PTH analog (anabolic)"
+        ],
+        [
+          "Romosozumab",
+          "Sclerostin inhibitor"
+        ],
+        [
+          "Raloxifene",
+          "SERM"
+        ]
+      ]
+    },
+    {
+      "id": "wk28_c41",
+      "sys": "Endo",
+      "topic": "Hypercalcemia cause → PTH",
+      "type": "match",
+      "guide": {
+        "f": "W28_04_Calcium_Hypercalcemia.html",
+        "t": "4 · Differential",
+        "s": "PTH"
+      },
+      "prompt": "Match the cause to its PTH pattern:",
+      "pairs": [
+        [
+          "Primary hyperparathyroidism",
+          "High/inappropriately normal PTH"
+        ],
+        [
+          "Malignancy (PTHrP)",
+          "Suppressed PTH"
+        ],
+        [
+          "Familial hypocalciuric hypercalcemia",
+          "High-normal PTH, low urine Ca"
+        ],
+        [
+          "Vitamin D intoxication",
+          "Suppressed PTH"
+        ]
+      ]
+    },
+    {
+      "id": "wk28_c42",
+      "sys": "Endo",
+      "topic": "Thyroid cancer → feature",
+      "type": "match",
+      "guide": {
+        "f": "W28_07_Thyroid_Cancer.html",
+        "t": "7 · Types",
+        "s": "behaviour"
+      },
+      "prompt": "Match the thyroid cancer to a feature:",
+      "pairs": [
+        [
+          "Papillary",
+          "Most common, indolent, lymphatic"
+        ],
+        [
+          "Follicular",
+          "Hematogenous spread"
+        ],
+        [
+          "Medullary",
+          "C cells, calcitonin, MEN2"
+        ],
+        [
+          "Anaplastic",
+          "Rare, very aggressive, elderly"
+        ]
+      ]
+    },
+    {
+      "id": "wk28_c43",
+      "sys": "Endo",
+      "topic": "Drug → adverse",
+      "type": "match",
+      "guide": {
+        "f": "W28_03_Osteoporosis_Mgmt.html",
+        "t": "3 · Drugs",
+        "s": "cautions"
+      },
+      "prompt": "Match the drug to its key caution:",
+      "pairs": [
+        [
+          "Oral bisphosphonate",
+          "Esophagitis — stay upright"
+        ],
+        [
+          "Denosumab",
+          "Rebound fractures if stopped"
+        ],
+        [
+          "Teriparatide",
+          "Avoid in Paget / prior radiation"
+        ],
+        [
+          "Romosozumab",
+          "Recent MI/stroke"
+        ],
+        [
+          "Raloxifene",
+          "VTE risk"
+        ]
+      ]
+    },
+    {
+      "id": "wk28_c44",
+      "sys": "Endo",
+      "topic": "Calcitonin role",
+      "type": "qa",
+      "guide": {
+        "f": "W28_04_Calcium_Hypercalcemia.html",
+        "t": "4 · Acute",
+        "s": "calcitonin"
+      },
+      "prompt": "What is the role of calcitonin in acute hypercalcemia?",
+      "answer": "A rapid-onset but short-lived agent used as a bridge while slower, durable IV bisphosphonate therapy takes effect (tachyphylaxis limits prolonged use)."
+    },
+    {
+      "id": "wk28_c45",
+      "sys": "Endo",
+      "topic": "Teriparatide cautions",
+      "type": "qa",
+      "guide": {
+        "f": "W28_03_Osteoporosis_Mgmt.html",
+        "t": "3 · Teriparatide",
+        "s": "avoid in"
+      },
+      "prompt": "When is teriparatide avoided?",
+      "answer": "Hypercalcemia/hyperparathyroidism, Paget disease, prior skeletal radiation, and skeletal malignancy (osteosarcoma concern); use caution in renal stones/insufficiency."
+    },
+    {
+      "id": "wk28_c46",
+      "sys": "Endo",
+      "topic": "Medullary follow-up",
+      "type": "qa",
+      "guide": {
+        "f": "W28_07_Thyroid_Cancer.html",
+        "t": "7 · Medullary",
+        "s": "marker"
+      },
+      "prompt": "What tumour marker follows medullary thyroid cancer, and what syndrome must be excluded?",
+      "answer": "Calcitonin (and CEA); exclude MEN2 via RET testing and screen for pheochromocytoma before any surgery."
+    },
+    {
+      "id": "wk28_c47",
+      "sys": "Endo",
+      "topic": "Vitamin D effect",
+      "type": "qa",
+      "guide": {
+        "f": "W28_01_Bone_Physiology.html",
+        "t": "1 · Vitamin D",
+        "s": "effect"
+      },
+      "prompt": "What is vitamin D's main effect on calcium and phosphate?",
+      "answer": "It increases intestinal absorption of both calcium and phosphate, raising serum levels of each (PTH, by contrast, raises calcium but lowers phosphate)."
+    },
+    {
+      "id": "wk28_c48",
+      "sys": "Endo",
+      "topic": "Glucocorticoid bone",
+      "type": "qa",
+      "guide": {
+        "f": "W28_02_Osteoporosis_Dx.html",
+        "t": "2 · Secondary",
+        "s": "steroids"
+      },
+      "prompt": "Why do glucocorticoids cause osteoporosis?",
+      "answer": "They impair osteoblast bone formation and increase resorption (and reduce calcium absorption), making them a leading secondary cause — high-risk users need bone protection."
+    },
+    {
+      "id": "wk28_c49",
+      "sys": "Endo",
+      "topic": "Cinacalcet",
+      "type": "qa",
+      "guide": {
+        "f": "W28_04_Calcium_Hypercalcemia.html",
+        "t": "4 · Therapeutics",
+        "s": "calcimimetic"
+      },
+      "prompt": "How does cinacalcet lower calcium in hyperparathyroidism?",
+      "answer": "It is a calcimimetic that activates the parathyroid calcium-sensing receptor, suppressing PTH secretion — used in selected primary, secondary, and parathyroid-carcinoma hypercalcemia."
+    },
+    {
+      "id": "wk28_c50",
+      "sys": "Endo",
+      "topic": "Hard nodule features",
+      "type": "qa",
+      "guide": {
+        "f": "W28_06_Thyroid_Nodules.html",
+        "t": "6 · Assessment",
+        "s": "red flags"
+      },
+      "prompt": "Which clinical features of a thyroid nodule raise concern for malignancy?",
+      "answer": "Rapid growth, a hard fixed mass, hoarseness/dysphonia, dysphagia, prior neck radiation, family history of thyroid cancer/MEN2, and cervical lymphadenopathy."
+    }
+  ],
+  "guides": [
+    {
+      "file": "W28_01_Bone_Physiology.html",
+      "title": "Week 28 · 1 Bone Physiology & Remodeling",
+      "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Bone Physiology &amp; Remodeling</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Foundations</div><h1>Bone Physiology &amp; Remodeling</h1></div><div class='r'>Week 28 &middot; Endocrine IV &mdash; Bone &amp; Calcium<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Cortical vs trabecular bone, the cells and the RANKL/OPG axis that drug targets exploit, and what PTH and vitamin D do to calcium.</p>\n<h2>Two kinds of bone</h2>\n<table>\n<tr><th>Type</th><th>Features</th><th>Where / relevance</th></tr>\n<tr><td><b>Cortical (compact)</b></td><td>Dense, ~80% of skeletal mass</td><td>Shaft of long bones, distal radius, hip; preferentially lost in <b>hyperparathyroidism</b></td></tr>\n<tr><td><b>Trabecular (cancellous)</b></td><td>Spongy, metabolically active, remodels fast</td><td>Vertebrae, hip &mdash; the classic <b>osteoporotic fracture</b> sites</td></tr>\n</table>\n<h2>The cells and the remodeling cycle</h2>\n<ul>\n<li><b>Osteoclasts</b> resorb bone &mdash; inhibited by <b>bisphosphonates</b> and <b>denosumab</b>.</li>\n<li><b>Osteoblasts</b> form bone &mdash; stimulated by <b>intermittent PTH</b> (teriparatide).</li>\n<li><b>Osteocytes</b> sense load and regulate remodeling &mdash; produce <b>sclerostin</b> (target of romosozumab).</li>\n<li>Cycle: activation &rarr; resorption &rarr; reversal &rarr; formation &rarr; mineralization &rarr; rest.</li>\n</ul>\n<div class='band'><div class='t'>RANKL / OPG &mdash; the switch</div>\n<b>RANKL</b> (from osteoblasts) drives osteoclast formation/activity; <b>OPG</b> is a decoy receptor that mops up RANKL and brakes resorption. <b>Denosumab</b> is a monoclonal anti-RANKL antibody &mdash; a pharmacologic OPG.</div>\n<h2>Calcium hormones</h2>\n<table>\n<tr><th>Hormone</th><th>Net effect</th></tr>\n<tr><td><b>PTH</b></td><td>&uarr; serum calcium, &darr; phosphate; &uarr; bone resorption, &uarr; renal Ca reabsorption + phosphate excretion, &uarr; activation of vitamin D</td></tr>\n<tr><td><b>Vitamin D</b> (calcitriol)</td><td>&uarr; intestinal Ca &amp; phosphate absorption &rarr; &uarr; serum Ca and phosphate</td></tr>\n</table>\n<div class='key'>Antiresorptives (bisphosphonates, denosumab) hit osteoclasts; anabolics (teriparatide, romosozumab) push osteoblasts/sclerostin. PTH raises calcium and lowers phosphate &mdash; vitamin D raises both.</div>\n</div>"
+    },
+    {
+      "file": "W28_02_Osteoporosis_Dx.html",
+      "title": "Week 28 · 2 Osteoporosis: Diagnosis & Screening",
+      "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Osteoporosis: Diagnosis &amp; Screening</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>DXA &amp; risk</div><h1>Osteoporosis: Diagnosis &amp; Screening</h1></div><div class='r'>Week 28 &middot; Endocrine IV &mdash; Bone &amp; Calcium<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The fragility-fracture definition, the T-score thresholds, who needs a BMD, and the secondary-cause workup you must not skip.</p>\n<h2>Definitions</h2>\n<p>Osteoporosis = low bone mass + microarchitectural deterioration &rarr; fragility. A <b>fragility fracture</b> is one from standing height or less. A <b>hip or vertebral fragility fracture is osteoporosis clinically</b>, even if the BMD isn't in the osteoporotic range.</p>\n<h2>DXA: T-score vs Z-score</h2>\n<table>\n<tr><th>Category</th><th>T-score</th></tr>\n<tr><td>Normal</td><td>&ge; &minus;1.0</td></tr>\n<tr><td>Osteopenia</td><td>&minus;1.0 to &minus;2.4</td></tr>\n<tr><td>Osteoporosis</td><td>&le; &minus;2.5</td></tr>\n</table>\n<ul>\n<li><b>T-score</b> = vs young-adult reference (use in postmenopausal women and men &ge;50).</li>\n<li><b>Z-score</b> = vs age/sex-matched peers; a low Z-score &rarr; <b>hunt for a secondary cause</b>.</li>\n</ul>\n<h2>Who gets a BMD?</h2>\n<table>\n<tr><th>Age</th><th>Indication</th></tr>\n<tr><td>&ge; 70</td><td>Everyone</td></tr>\n<tr><td>65&ndash;69</td><td>&ge;1 clinical risk factor</td></tr>\n<tr><td>50&ndash;64</td><td>Prior fragility fracture, or &ge;2 risk factors (e.g. <b>parental hip fracture</b>, glucocorticoids, smoking, alcohol, low BMI)</td></tr>\n</table>\n<div class='band warn'><div class='t'>Always screen for secondary causes</div>\nBaseline labs: calcium + albumin, creatinine/eGFR, <b>ALP</b>, CBC, TSH, 25-OH vitamin D, and <b>SPEP</b> (especially with a vertebral fracture &mdash; multiple myeloma can present this way). A low Z-score or unexpected fracture demands this workup.</div>\n<div class='key'>A low-trauma vertebral or hip fracture is osteoporosis regardless of T-score. Parental hip fracture is a key risk factor that justifies BMD at 50&ndash;64. Vertebral fracture &rarr; think myeloma (SPEP).</div>\n</div>"
+    },
+    {
+      "file": "W28_03_Osteoporosis_Mgmt.html",
+      "title": "Week 28 · 3 Osteoporosis: Management & Drugs",
+      "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Osteoporosis: Management &amp; Drugs</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Treatment</div><h1>Osteoporosis: Management &amp; Drugs</h1></div><div class='r'>Week 28 &middot; Endocrine IV &mdash; Bone &amp; Calcium<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Who to treat, the first-line bisphosphonate and how to counsel it, and the denosumab-rebound trap plus the anabolic agents.</p>\n<h2>Non-pharmacologic (everyone)</h2>\n<p>Dietary calcium first (supplement only the deficit), vitamin D, weight-bearing + resistance exercise, balance/fall-prevention, smoking cessation, alcohol reduction, home-safety and medication review. Targets: <b>Ca 1000&ndash;1200 mg/day</b>, <b>vitamin D 600&ndash;800 IU/day</b>, protein ~0.8 g/kg/day.</p>\n<h2>When to start a drug</h2>\n<ul>\n<li>T-score &le; &minus;2.5, OR a hip/vertebral fragility fracture, OR &ge;2 fragility fractures, OR high 10-year risk (FRAX/CAROC), OR high-risk chronic glucocorticoids.</li>\n</ul>\n<h2>The drugs</h2>\n<table>\n<tr><th>Drug</th><th>Mechanism</th><th>Watch for</th></tr>\n<tr><td><b>Bisphosphonates</b> (alendronate, risedronate, zoledronic acid)</td><td>Bind bone &rarr; osteoclast apoptosis &mdash; first-line</td><td>GERD/esophagitis (oral), MSK pain, rare atypical femur fracture &amp; ONJ, hypocalcemia; caution in renal impairment</td></tr>\n<tr><td><b>Denosumab</b> (SC q6 months)</td><td>Anti-RANKL antibody</td><td>Hypocalcemia, infection; <b>rebound vertebral fractures if stopped/delayed</b></td></tr>\n<tr><td><b>Teriparatide</b> (daily SC)</td><td>Intermittent PTH analog &mdash; anabolic</td><td>Hypercalcemia, first-dose hypotension; avoid in hypercalcemia, Paget, prior skeletal radiation</td></tr>\n<tr><td><b>Romosozumab</b></td><td>Sclerostin inhibitor (anabolic + antiresorptive)</td><td>Cardiovascular risk &mdash; avoid with recent MI/stroke</td></tr>\n<tr><td><b>Raloxifene</b></td><td>SERM &mdash; reduces vertebral fractures</td><td>VTE risk, hot flashes</td></tr>\n</table>\n<div class='band warn'><div class='t'>Two traps</div>\n<b>Alendronate counseling:</b> take in the morning on an empty stomach with a full glass of water and <b>stay upright 30&ndash;60 min</b> (prevents esophagitis, aids absorption). <b>Denosumab is not retained in bone</b> like bisphosphonates &mdash; stopping or delaying it causes <b>rebound bone loss and vertebral fractures</b>; never just stop, transition to a bisphosphonate.</div>\n<div class='key'>Oral bisphosphonate is first-line for most. Denosumab must never lapse without a transition. Anabolics (teriparatide, romosozumab) are for very high-risk or antiresorptive failure.</div>\n</div>"
+    },
+    {
+      "file": "W28_04_Calcium_Hypercalcemia.html",
+      "title": "Week 28 · 4 Calcium Homeostasis & Hypercalcemia",
+      "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Calcium Homeostasis &amp; Hypercalcemia</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>High calcium</div><h1>Calcium Homeostasis &amp; Hypercalcemia</h1></div><div class='r'>Week 28 &middot; Endocrine IV &mdash; Bone &amp; Calcium<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Why you correct for albumin, the PTH-splits-the-cause rule, and how to bring an acutely high calcium down.</p>\n<h2>Calcium fractions</h2>\n<p>Total calcium = albumin-bound + anion-bound + <b>free ionized</b> (the only active fraction). <b>Low albumin falsely lowers total calcium</b> &mdash; measure ionized calcium or correct (add ~0.2 mmol/L per 10 g/L albumin below normal).</p>\n<h2>Presentation (\"stones, bones, groans, moans\")</h2>\n<p>Renal (polyuria, stones, nephrocalcinosis), bone pain, GI (constipation, nausea), neuropsychiatric (fatigue, confusion, depression), cardiac (<b>short QT</b>).</p>\n<h2>First check the PTH</h2>\n<table>\n<tr><th>PTH-dependent (high/inappropriately normal PTH)</th><th>PTH-independent (suppressed PTH)</th></tr>\n<tr><td>Primary &amp; tertiary hyperparathyroidism; familial hypocalciuric hypercalcemia (FHH); lithium, thiazides</td><td><b>Malignancy</b> (PTHrP, osteolysis, calcitriol-producing lymphoma); vitamin D intoxication; granulomatous disease; hyperthyroidism, immobilization</td></tr>\n</table>\n<ul>\n<li><b>Primary hyperparathyroidism:</b> high Ca, high/inappropriately normal PTH, <b>low phosphate</b>, often high urine Ca.</li>\n<li><b>FHH vs primary HPT:</b> use a 24-h urine calcium / Ca-creatinine clearance ratio (<b>low in FHH</b>). Parathyroid imaging is for surgical planning, not diagnosis.</li>\n</ul>\n<div class='band warn'><div class='t'>Acute hypercalcemia &mdash; in order</div>\n1) <b>IV isotonic saline</b> (volume + calciuresis) first-line. 2) <b>Calcitonin</b> for rapid but short-lived bridging. 3) <b>IV bisphosphonate</b> (zoledronic acid/pamidronate) for durable control (slower onset). 4) <b>Glucocorticoids</b> for granulomatous/calcitriol-mediated or some hematologic causes. 5) <b>Dialysis</b> if severe/refractory or renal failure. Then treat the cause.</div>\n<div class='key'>PTH splits the differential: high PTH = parathyroid (or lithium/thiazide/FHH); low PTH = malignancy or vitamin D. Acute treatment starts with saline, then calcitonin bridges to a bisphosphonate.</div>\n</div>"
+    },
+    {
+      "file": "W28_05_Hypocalcemia.html",
+      "title": "Week 28 · 5 Hypocalcemia",
+      "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Hypocalcemia</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Low calcium</div><h1>Hypocalcemia</h1></div><div class='r'>Week 28 &middot; Endocrine IV &mdash; Bone &amp; Calcium<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The neuromuscular signs, the cause list (including the post-parathyroidectomy hungry bone trap), and how to replace safely.</p>\n<h2>Presentation</h2>\n<p>Increased neuromuscular excitability: perioral numbness, paresthesias, cramps, <b>tetany</b>, carpopedal spasm, <b>positive Chvostek (facial tap)</b> and <b>Trousseau (cuff-induced spasm)</b> signs, seizures; cardiac <b>prolonged QT</b> with risk of torsades.</p>\n<h2>Causes</h2>\n<table>\n<tr><th>Category</th><th>Examples</th></tr>\n<tr><td><b>PTH deficiency</b></td><td>Post-thyroidectomy/parathyroidectomy, autoimmune hypoparathyroidism</td></tr>\n<tr><td><b>Vitamin D deficiency</b></td><td>Low intake/sun, malabsorption</td></tr>\n<tr><td><b>CKD</b></td><td>Low calcitriol + phosphate retention</td></tr>\n<tr><td><b>Sequestration</b></td><td>Pancreatitis, rhabdomyolysis, <b>hungry bone syndrome</b></td></tr>\n<tr><td><b>Drugs</b></td><td>Bisphosphonates, denosumab, cinacalcet</td></tr>\n</table>\n<div class='band warn'><div class='t'>Hungry bone syndrome</div>\nAfter parathyroidectomy for severe hyperparathyroidism, removing chronic PTH excess lets previously high-turnover bone <b>rapidly take up calcium and phosphate</b> &rarr; profound, symptomatic hypocalcemia within days. Recognize the tetany/long-QT picture post-op.</div>\n<h2>Management</h2>\n<ul>\n<li><b>Acute/symptomatic</b> (tetany, seizures, long QT): <b>IV calcium gluconate</b> with cardiac monitoring.</li>\n<li><b>Always check and replace magnesium</b> &mdash; low Mg causes refractory hypocalcemia.</li>\n<li><b>Chronic:</b> oral calcium + vitamin D3 if deficient; <b>calcitriol</b> if hypoparathyroidism or CKD (impaired activation).</li>\n</ul>\n<div class='key'>Post-parathyroidectomy tetany = hungry bone &rarr; IV calcium, not a bisphosphonate. Don't forget magnesium &mdash; hypocalcemia won't correct until Mg is replaced.</div>\n</div>"
+    },
+    {
+      "file": "W28_06_Thyroid_Nodules.html",
+      "title": "Week 28 · 6 Thyroid Nodules",
+      "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Thyroid Nodules</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Nodule workup</div><h1>Thyroid Nodules</h1></div><div class='r'>Week 28 &middot; Endocrine IV &mdash; Bone &amp; Calcium<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The TSH-then-ultrasound algorithm, the sonographic red flags, and the size thresholds that trigger an FNA.</p>\n<h2>Initial assessment</h2>\n<p>History red flags: dysphagia, hoarseness, rapid growth, prior neck radiation, family history of thyroid cancer / <b>MEN2</b>. Exam: hard fixed mass, cervical lymphadenopathy.</p>\n<div class='band'><div class='t'>The algorithm: TSH + ultrasound first</div>\nEvery nodule gets a <b>TSH</b> and a <b>thyroid ultrasound</b>. If TSH is <b>suppressed</b> &rarr; <b>radionuclide scan</b>: a <b>hot</b> (functioning) nodule is rarely malignant &mdash; treat the thyrotoxicosis, no FNA. If TSH is normal/high &rarr; risk-stratify by ultrasound and decide on <b>FNA</b> by size + features. <b>FNA is the only way to rule out cancer.</b></div>\n<h2>Sonographic risk factors for malignancy</h2>\n<ul>\n<li>Microcalcifications, irregular margins, <b>taller-than-wide</b> shape, hypoechogenicity, central vascularity, suspicious cervical nodes, larger size.</li>\n</ul>\n<h2>FNA size thresholds (by suspicion)</h2>\n<table>\n<tr><th>Sonographic suspicion</th><th>FNA at size</th></tr>\n<tr><td>Highly suspicious</td><td>&ge; 1 cm</td></tr>\n<tr><td>Moderately suspicious</td><td>&ge; 1.5 cm</td></tr>\n<tr><td>Mildly suspicious</td><td>&ge; 2.5 cm</td></tr>\n<tr><td>Very low suspicion / spongiform / pure cyst</td><td>Usually observe (consider &ge;2 cm or no FNA)</td></tr>\n</table>\n<h2>Interpreting the FNA (Bethesda)</h2>\n<table>\n<tr><th>Cytology</th><th>Typical action</th></tr>\n<tr><td>Non-diagnostic</td><td>Repeat FNA under ultrasound</td></tr>\n<tr><td>Benign</td><td>Reassure; surveillance ultrasound</td></tr>\n<tr><td>Indeterminate (AUS/FLUS, follicular neoplasm)</td><td>Molecular testing or diagnostic lobectomy &mdash; cytology can't separate follicular adenoma from carcinoma</td></tr>\n<tr><td>Suspicious / malignant</td><td>Surgery</td></tr>\n</table>\n<p><b>Follicular lesions</b> are the classic indeterminate trap: malignancy is defined by capsular/vascular invasion, which an aspirate cannot show &mdash; so a follicular neoplasm needs excision (lobectomy) to be classified.</p>\n<div class='key'>Suppressed TSH &rarr; scan before you biopsy (hot nodule = don't FNA). Normal TSH + a &ge;1 cm highly suspicious nodule &rarr; FNA. Imaging never replaces cytology, and a <b>follicular</b> cytology result needs surgery to distinguish adenoma from carcinoma.</div>\n</div>"
+    },
+    {
+      "file": "W28_07_Thyroid_Cancer.html",
+      "title": "Week 28 · 7 Thyroid Cancer",
+      "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Thyroid Cancer</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Malignancy</div><h1>Thyroid Cancer</h1></div><div class='r'>Week 28 &middot; Endocrine IV &mdash; Bone &amp; Calcium<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>The histologic types and what makes each behave, the management backbone, and how recurrence is monitored.</p>\n<h2>Most thyroid cancer is a painless nodule</h2>\n<p>Differentiated thyroid cancers usually present as an asymptomatic, firm, non-tender nodule with normal thyroid function.</p>\n<table>\n<tr><th>Type</th><th>Origin</th><th>Behaviour</th></tr>\n<tr><td><b>Papillary</b></td><td>Follicular cells</td><td>Most common; usually indolent; lymphatic spread</td></tr>\n<tr><td><b>Follicular</b></td><td>Follicular cells</td><td>Less common; hematogenous spread</td></tr>\n<tr><td>Poorly differentiated</td><td>Follicular cells</td><td>More aggressive</td></tr>\n<tr><td><b>Anaplastic</b></td><td>Follicular cells</td><td>Rare, very aggressive, elderly</td></tr>\n<tr><td><b>Medullary</b></td><td>Parafollicular <b>C cells</b></td><td><b>Calcitonin</b> marker; think <b>MEN2 / RET</b></td></tr>\n</table>\n<h2>Management</h2>\n<ul>\n<li><b>Surgery</b> is primary (lobectomy or total thyroidectomy by risk).</li>\n<li><b>Radioactive iodine</b>, TSH-suppressive levothyroxine, and external-beam radiation are used selectively for differentiated cancers.</li>\n</ul>\n<div class='band'><div class='t'>Surveillance after differentiated thyroid cancer</div>\n<b>Biochemical recurrence:</b> serum <b>thyroglobulin</b> + <b>anti-thyroglobulin antibodies</b> (the antibody can invalidate the thyroglobulin if present). <b>Structural recurrence:</b> neck/thyroid <b>ultrasound</b>. (Calcitonin is the marker for <b>medullary</b> cancer, not differentiated.)</div>\n<div class='key'>Papillary = commonest, indolent. Medullary = C cells, calcitonin, MEN2 &mdash; check for a pheo and RET. Differentiated-cancer follow-up = thyroglobulin (+ anti-Tg) and neck ultrasound.</div>\n</div>"
+    },
+    {
+      "file": "W28_08_Paget.html",
+      "title": "Week 28 · 8 Paget Disease of Bone",
+      "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Paget Disease of Bone</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>Remodeling gone wrong</div><h1>Paget Disease of Bone</h1></div><div class='r'>Week 28 &middot; Endocrine IV &mdash; Bone &amp; Calcium<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><p class='lede'>Focal disorganized bone turnover — how it presents, the isolated-ALP lab clue, and the single-dose treatment.</p>\n<h2>What it is</h2>\n<p>A <b>focal</b> disorder of excessive, disorganized bone remodeling (both resorption and formation) producing weak <b>woven bone</b> with increased vascularity. Common sites: skull, spine, pelvis, and long bones of the leg.</p>\n<h2>Presentation</h2>\n<ul>\n<li>Often <b>asymptomatic</b> (found on incidental ALP or x-ray).</li>\n<li>Deep aching bone pain, <b>warmth/erythema</b> over the bone, <b>bowing deformity</b>, secondary osteoarthritis, nerve impingement (e.g. hearing loss with skull involvement), fracture.</li>\n</ul>\n<div class='band warn'><div class='t'>The lab signature</div>\n<b>Isolated elevated ALP</b> with <b>normal calcium and phosphate</b> (unless immobilized or another process). High ALP reflects the bone turnover. X-ray: mixed lytic/sclerotic lesions, cortical thickening, pseudofractures. Bone scan maps the extent.</div>\n<h2>Complications</h2>\n<ul>\n<li><b>Deafness</b> (skull involvement compressing CN VIII), other nerve impingement, and headache.</li>\n<li><b>Secondary osteoarthritis</b> of adjacent joints; bowing &rarr; gait/mechanical problems; <b>fracture</b> through weak woven bone.</li>\n<li><b>High-output cardiac failure</b> from the hypervascular bone (extensive disease).</li>\n<li><b>Osteosarcoma</b> &mdash; rare but feared malignant transformation; new severe pain or a soft-tissue mass warrants imaging.</li>\n</ul>\n<h2>Treatment &amp; monitoring</h2>\n<ul>\n<li>Treat if <b>symptomatic</b>, at high risk of complications, or before surgery on Pagetic bone (reduces intra-op bleeding).</li>\n<li><b>First-line: a single dose of IV zoledronic acid</b> (oral alendronate for ~6 months is an alternative); ensure vitamin D/calcium replete first to avoid hypocalcemia.</li>\n<li><b>Track response with ALP</b> &mdash; a falling ALP reflects reduced bone turnover; a later rise can signal relapse.</li>\n</ul>\n<div class='key'>Bowing, warmth, bone pain + isolated high ALP with normal calcium/phosphate = Paget. One IV zoledronic acid dose is the treatment, and ALP tracks the response. New severe pain or a mass &rarr; exclude osteosarcoma. (Contrast: osteomalacia has low/normal calcium and phosphate with high ALP and Looser zones.)</div>\n</div>"
+    },
+    {
+      "file": "W28_09_Cram_Sheet.html",
+      "title": "Week 28 · 9 Cram Sheet",
+      "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Week 28 · 9 Cram Sheet</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.35;-webkit-font-smoothing:antialiased}\n.page{max-width:1180px;margin:0 auto;padding:18px 20px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:8px;margin-bottom:12px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:26px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.emerg{border:1.5px solid var(--hi);border-radius:6px;background:rgba(0,0,0,.02);padding:9px 12px;margin-bottom:13px}\n.emerg .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--hi);font-weight:600;margin-bottom:5px}\n.emerg .items{columns:3;column-gap:22px;font-size:12px;line-height:1.42}\n.emerg .items div{break-inside:avoid;margin-bottom:3px}\n.emerg b{color:var(--hi)}\n.cols{column-count:4;column-gap:14px}\n@media(max-width:1040px){.cols{column-count:3}}\n@media(max-width:760px){.cols{column-count:2}}\n@media(max-width:520px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(0,0,0,.02);padding:8px 9px 7px;margin:0 0 11px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;padding-bottom:4px;border-bottom:1.5px solid var(--line);color:var(--accent);display:flex;justify-content:space-between;align-items:baseline;gap:6px}\n.card h2 .wk{color:var(--soft);font-size:8.5px;font-weight:500;letter-spacing:.06em;white-space:nowrap}\n.row{margin:0 0 3.5px;font-size:11.5px;line-height:1.32}\n.row .tg{font-weight:600;color:var(--ink)}\n.row .ar{color:var(--soft)}\n.row .ar::before{content:\"\\2192 \";color:var(--accent);font-weight:600}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:5px 0}\n.dnm{color:var(--hi);font-weight:700}\n.foot{margin-top:10px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:landscape;margin:9mm}body{font-size:8.4px}.page{max-width:none;padding:0}.cols{column-count:4;column-gap:8px}.emerg .items{columns:3}.card{margin-bottom:6px}.head h1{font-size:19px}}\n</style><div class='page'><div class='head'><div><div class='k'>Night-Before High-Yield</div><h1>Endocrine IV &amp;mdash; Bone &amp; Calcium</h1></div><div class='r'>Week 28 &middot; Endocrine IV &mdash; Bone &amp; Calcium<br>CPC 2 &middot; Year 1<br>Study Suite</div></div><div class='emerg'><div class='t'>★ Do-not-miss &middot; first-step reflexes</div><div class='items'><div><b>Symptomatic hypocalcemia</b> (tetany, seizures, long QT) &rarr; IV calcium gluconate + cardiac monitoring; replace magnesium</div><div><b>Hungry bone syndrome</b> post-parathyroidectomy &rarr; profound hypocalcemia &mdash; IV calcium, NOT a bisphosphonate</div><div><b>Severe symptomatic hypercalcemia</b> &rarr; IV isotonic saline first, calcitonin bridge, then IV bisphosphonate</div><div><b>Vertebral fragility fracture</b> &rarr; clinically osteoporosis &mdash; treat; consider SPEP (myeloma)</div><div><b>Denosumab lapse</b> &rarr; rebound vertebral fractures &mdash; never just stop; transition to a bisphosphonate</div><div><b>Medullary thyroid cancer</b> &rarr; screen MEN2/RET + exclude pheochromocytoma before surgery</div></div></div><div class='cols'><div class='card'><h2>Bone physiology <span class='wk'>Physiology</span></h2><div class='row'><span class='tg'>Cortical bone</span> <span class='ar'>dense; lost in hyperparathyroidism</span></div><div class='row'><span class='tg'>Trabecular bone</span> <span class='ar'>spine/hip; osteoporotic fractures</span></div><div class='row'><span class='tg'>Osteoclast inhibitors</span> <span class='ar'>bisphosphonates, denosumab</span></div><div class='row'><span class='tg'>Osteoblast stimulators</span> <span class='ar'>teriparatide (intermittent PTH)</span></div><div class='row'><span class='tg'>RANKL vs OPG</span> <span class='ar'>RANKL drives resorption; denosumab = anti-RANKL</span></div><div class='row'><span class='tg'>PTH vs vitamin D</span> <span class='ar'>PTH ↑Ca ↓PO4; vit D ↑both</span></div></div><div class='card'><h2>Osteoporosis Dx <span class='wk'>Osteoporosis</span></h2><div class='row'><span class='tg'>T-score osteoporosis</span> <span class='ar'>≤ −2.5</span></div><div class='row'><span class='tg'>Fragility fracture</span> <span class='ar'>hip/vertebral = osteoporosis regardless of T</span></div><div class='row'><span class='tg'>BMD: everyone</span> <span class='ar'>age ≥70</span></div><div class='row'><span class='tg'>Low Z-score</span> <span class='ar'>look for secondary cause</span></div><div class='row'><span class='tg'>Workup</span> <span class='ar'>Ca/alb, Cr, ALP, CBC, TSH, 25-OH-D, SPEP</span></div><div class='row'><span class='tg'>Parental hip fracture</span> <span class='ar'>key risk factor (age 50–64)</span></div></div><div class='card'><h2>Osteoporosis drugs <span class='wk'>Drugs</span></h2><div class='row'><span class='tg'>First-line</span> <span class='ar'>oral bisphosphonate</span></div><div class='row'><span class='tg'>Alendronate</span> <span class='ar'>AM, empty stomach, upright 30–60 min</span></div><div class='row'><span class='tg'>Denosumab</span> <span class='ar'>anti-RANKL; never lapse (rebound)</span></div><div class='row'><span class='tg'>Teriparatide</span> <span class='ar'>anabolic; avoid Paget/radiation</span></div><div class='row'><span class='tg'>Romosozumab</span> <span class='ar'>avoid recent MI/stroke</span></div><div class='row'><span class='tg'>Raloxifene</span> <span class='ar'>SERM; VTE risk</span></div></div><div class='card'><h2>Hypercalcemia <span class='wk'>High Ca</span></h2><div class='row'><span class='tg'>Correct for albumin</span> <span class='ar'>ionized Ca is what matters</span></div><div class='row'><span class='tg'>Check PTH first</span> <span class='ar'>high = parathyroid; low = malignancy/vit D</span></div><div class='row'><span class='tg'>Primary HPT</span> <span class='ar'>high Ca, high PTH, low PO4</span></div><div class='row'><span class='tg'>FHH</span> <span class='ar'>low urine calcium; family history</span></div><div class='row'><span class='tg'>Acute</span> <span class='ar'>saline → calcitonin → IV bisphosphonate</span></div><div class='row'><span class='tg'>Thiazide/lithium</span> <span class='ar'>PTH-dependent-pattern drug causes</span></div></div><div class='card'><h2>Hypocalcemia <span class='wk'>Low Ca</span></h2><div class='row'><span class='tg'>Signs</span> <span class='ar'>Chvostek, Trousseau, tetany, long QT</span></div><div class='row'><span class='tg'>Hungry bone</span> <span class='ar'>post-parathyroidectomy</span></div><div class='row'><span class='tg'>Refractory</span> <span class='ar'>check and replace magnesium</span></div><div class='row'><span class='tg'>Acute</span> <span class='ar'>IV calcium gluconate + monitoring</span></div><div class='row'><span class='tg'>Chronic</span> <span class='ar'>oral calcium; calcitriol if hypoPTH/CKD</span></div></div><div class='card'><h2>Thyroid nodule/cancer <span class='wk'>Thyroid</span></h2><div class='row'><span class='tg'>First tests</span> <span class='ar'>TSH + ultrasound</span></div><div class='row'><span class='tg'>Suppressed TSH</span> <span class='ar'>radionuclide scan (hot = no FNA)</span></div><div class='row'><span class='tg'>FNA</span> <span class='ar'>only way to rule out cancer; ≥1 cm if high-suspicion</span></div><div class='row'><span class='tg'>Papillary</span> <span class='ar'>commonest, indolent</span></div><div class='row'><span class='tg'>Medullary</span> <span class='ar'>C cells, calcitonin, MEN2/RET</span></div><div class='row'><span class='tg'>DTC surveillance</span> <span class='ar'>thyroglobulin + anti-Tg, neck US</span></div></div><div class='card'><h2>Paget <span class='wk'>Paget</span></h2><div class='row'><span class='tg'>Picture</span> <span class='ar'>bone pain, warmth, bowing</span></div><div class='row'><span class='tg'>Labs</span> <span class='ar'>isolated high ALP; normal Ca/PO4</span></div><div class='row'><span class='tg'>X-ray</span> <span class='ar'>mixed lytic/sclerotic, cortical thickening</span></div><div class='row'><span class='tg'>Treat if</span> <span class='ar'>symptomatic / pre-op</span></div><div class='row'><span class='tg'>First-line</span> <span class='ar'>single IV zoledronic acid</span></div></div></div><div class='foot'>Week 28 &middot; Endocrine IV &mdash; Bone &amp; Calcium &middot; cram sheet &middot; cue &rarr; answer</div></div>"
+    }
+  ],
+  "drugs": [
+    {
+      "id": "rx:alendronate",
+      "name": "Alendronate",
+      "class": "rx:bisphosphonate",
+      "facets": {
+        "use": "First-line osteoporosis",
+        "mechanism": "Bisphosphonate — binds bone, induces osteoclast apoptosis",
+        "adverse": "Esophagitis, MSK pain, rare atypical femur fracture/ONJ, hypocalcemia",
+        "dosing": "AM, empty stomach, full water, upright 30–60 min",
+        "contra": "Esophageal disease, severe renal impairment"
+      },
+      "ref": {
+        "topic": "Osteoporosis drugs",
+        "guide": "W28_03_Osteoporosis_Mgmt.html",
+        "week": "Week 28 · Endocrine IV — Bone & Calcium"
+      }
+    },
+    {
+      "id": "rx:risedronate",
+      "name": "Risedronate",
+      "class": "rx:bisphosphonate",
+      "facets": {
+        "use": "Osteoporosis (bisphosphonate alternative)",
+        "mechanism": "Bisphosphonate",
+        "adverse": "GI upset, MSK pain"
+      },
+      "ref": {
+        "topic": "Osteoporosis drugs",
+        "guide": "W28_03_Osteoporosis_Mgmt.html",
+        "week": "Week 28 · Endocrine IV — Bone & Calcium"
+      }
+    },
+    {
+      "id": "rx:zoledronic-acid",
+      "name": "Zoledronic acid (IV)",
+      "class": "rx:bisphosphonate",
+      "facets": {
+        "use": "Osteoporosis (annual IV); Paget (single dose); acute hypercalcemia",
+        "mechanism": "IV bisphosphonate",
+        "adverse": "Acute-phase flu-like reaction, hypocalcemia, renal; rare ONJ/AFF"
+      },
+      "ref": {
+        "topic": "Osteoporosis drugs",
+        "guide": "W28_03_Osteoporosis_Mgmt.html",
+        "week": "Week 28 · Endocrine IV — Bone & Calcium"
+      }
+    },
+    {
+      "id": "rx:denosumab",
+      "name": "Denosumab",
+      "class": "rx:rankl-inhibitor",
+      "facets": {
+        "use": "Osteoporosis (antiresorptive alternative)",
+        "mechanism": "Anti-RANKL monoclonal antibody",
+        "adverse": "Hypocalcemia, infection, rare ONJ/AFF",
+        "monitoring": "Never lapse without transition (rebound vertebral fractures)"
+      },
+      "ref": {
+        "topic": "Osteoporosis drugs",
+        "guide": "W28_03_Osteoporosis_Mgmt.html",
+        "week": "Week 28 · Endocrine IV — Bone & Calcium"
+      }
+    },
+    {
+      "id": "rx:teriparatide",
+      "name": "Teriparatide",
+      "class": "rx:pth-analog",
+      "facets": {
+        "use": "Very high-risk osteoporosis; antiresorptive failure",
+        "mechanism": "Intermittent PTH analog — anabolic (stimulates osteoblasts)",
+        "adverse": "Hypercalcemia, first-dose hypotension",
+        "contra": "Paget, prior skeletal radiation, hypercalcemia, skeletal malignancy"
+      },
+      "ref": {
+        "topic": "Osteoporosis drugs",
+        "guide": "W28_03_Osteoporosis_Mgmt.html",
+        "week": "Week 28 · Endocrine IV — Bone & Calcium"
+      }
+    },
+    {
+      "id": "rx:romosozumab",
+      "name": "Romosozumab",
+      "class": "rx:sclerostin-inhibitor",
+      "facets": {
+        "use": "Very high-risk osteoporosis",
+        "mechanism": "Sclerostin inhibitor — anabolic + antiresorptive",
+        "adverse": "Cardiovascular events",
+        "contra": "Recent MI or stroke"
+      },
+      "ref": {
+        "topic": "Osteoporosis drugs",
+        "guide": "W28_03_Osteoporosis_Mgmt.html",
+        "week": "Week 28 · Endocrine IV — Bone & Calcium"
+      }
+    },
+    {
+      "id": "rx:raloxifene",
+      "name": "Raloxifene",
+      "class": "rx:serm",
+      "facets": {
+        "use": "Osteoporosis (vertebral fracture reduction)",
+        "mechanism": "SERM — estrogen agonist on bone",
+        "adverse": "VTE, hot flashes",
+        "contra": "Prior VTE"
+      },
+      "ref": {
+        "topic": "Osteoporosis drugs",
+        "guide": "W28_03_Osteoporosis_Mgmt.html",
+        "week": "Week 28 · Endocrine IV — Bone & Calcium"
+      }
+    },
+    {
+      "id": "rx:calcium-carbonate",
+      "name": "Calcium carbonate (oral)",
+      "class": "rx:calcium-salt",
+      "facets": {
+        "use": "Calcium supplementation / deficiency",
+        "mechanism": "Oral calcium salt",
+        "adverse": "Constipation; take with food (acid-dependent absorption)"
+      },
+      "ref": {
+        "topic": "Osteoporosis drugs",
+        "guide": "W28_03_Osteoporosis_Mgmt.html",
+        "week": "Week 28 · Endocrine IV — Bone & Calcium"
+      }
+    },
+    {
+      "id": "rx:calcium-gluconate",
+      "name": "Calcium gluconate (IV)",
+      "class": "rx:calcium-salt",
+      "facets": {
+        "use": "Acute symptomatic hypocalcemia",
+        "mechanism": "IV calcium salt",
+        "adverse": "Tissue necrosis on extravasation",
+        "monitoring": "Cardiac monitoring during infusion"
+      },
+      "ref": {
+        "topic": "Hypocalcemia",
+        "guide": "W28_05_Hypocalcemia.html",
+        "week": "Week 28 · Endocrine IV — Bone & Calcium"
+      }
+    },
+    {
+      "id": "rx:calcitriol",
+      "name": "Calcitriol (1,25-OH vitamin D)",
+      "class": "rx:active-vitamin-d",
+      "facets": {
+        "use": "Hypoparathyroidism; CKD-related hypocalcemia",
+        "mechanism": "Active vitamin D (1,25-OH) — boosts intestinal calcium absorption",
+        "adverse": "Hypercalcemia"
+      },
+      "ref": {
+        "topic": "Hypocalcemia",
+        "guide": "W28_05_Hypocalcemia.html",
+        "week": "Week 28 · Endocrine IV — Bone & Calcium"
+      }
+    },
+    {
+      "id": "rx:calcitonin",
+      "name": "Calcitonin (salmon)",
+      "class": "rx:calcitonin-hormone",
+      "facets": {
+        "use": "Acute hypercalcemia bridge; Paget (less used)",
+        "mechanism": "Inhibits osteoclasts + renal calcium reabsorption",
+        "adverse": "Tachyphylaxis, nausea"
+      },
+      "ref": {
+        "topic": "Hypercalcemia",
+        "guide": "W28_04_Calcium_Hypercalcemia.html",
+        "week": "Week 28 · Endocrine IV — Bone & Calcium"
+      }
+    },
+    {
+      "id": "rx:cinacalcet",
+      "name": "Cinacalcet",
+      "class": "rx:calcimimetic",
+      "facets": {
+        "use": "Hyperparathyroidism (primary unfit for surgery, secondary, parathyroid carcinoma)",
+        "mechanism": "Calcimimetic — activates the parathyroid calcium-sensing receptor → ↓PTH",
+        "adverse": "Hypocalcemia, nausea"
+      },
+      "ref": {
+        "topic": "Hypercalcemia",
+        "guide": "W28_04_Calcium_Hypercalcemia.html",
+        "week": "Week 28 · Endocrine IV — Bone & Calcium"
+      }
+    },
+    {
+      "id": "rx:hydrochlorothiazide",
+      "name": "Hydrochlorothiazide",
+      "class": "rx:thiazide",
+      "facets": {
+        "use": "Hypertension; reduces urinary calcium (stones)",
+        "mechanism": "Thiazide — ↓distal calcium excretion",
+        "adverse": "Can cause mild hypercalcemia, hypokalemia, hyponatremia"
+      },
+      "ref": {
+        "topic": "Hypercalcemia",
+        "guide": "W28_04_Calcium_Hypercalcemia.html",
+        "week": "Week 28 · Endocrine IV — Bone & Calcium"
+      }
+    },
+    {
+      "id": "rx:pamidronate",
+      "name": "Pamidronate (IV)",
+      "class": "rx:bisphosphonate",
+      "facets": {
+        "use": "Acute hypercalcemia of malignancy",
+        "mechanism": "IV bisphosphonate",
+        "adverse": "Flu-like reaction, hypocalcemia"
+      },
+      "ref": {
+        "topic": "Hypercalcemia",
+        "guide": "W28_04_Calcium_Hypercalcemia.html",
+        "week": "Week 28 · Endocrine IV — Bone & Calcium"
+      }
+    }
+  ]
+}
