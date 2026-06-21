@@ -1,7 +1,11 @@
 <!--
-  Study Suite  ·  v0.2.68 (beta)
+  Study Suite  ·  v0.2.69 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.69: Pharmacology search reworked — the search box is now a PERSISTENT bar at the top of the view
+  (with an inline search icon). Typing highlights matches in the cards AND slides in the results-drawer overlay, which
+  AUTO-HIDES when the box is empty (no manual title toggle / no chevron). Clicking a result jumps to the card + closes
+  the drawer. Added breathing room between the Back button and the "Pharmacology" header (`#pharm .revbar` gap). No schema change.
   Changelog v0.2.68: Pharmacology view gained a Topic-Guides-style LEFT-NAV drawer + search highlighting. The
   "Pharmacology" title now toggles a drawer (`#pharmNav`) listing classes → drugs as jump links (scrollIntoView +
   a brief highlight pulse on the target card); the in-drawer search filters to matching drugs (a results list with a
@@ -579,7 +583,11 @@ section{display:none}section.on{display:block}
 .toast-wrap{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
 .toast{background:var(--ink);color:var(--paper);font-family:var(--font-body);font-size:14.5px;line-height:1.4;padding:11px 18px;border-radius:9px;box-shadow:var(--shadow);max-width:90vw;text-align:center;opacity:0;transform:translateY(8px);transition:opacity .2s,transform .2s}
 .toast.show{opacity:1;transform:translateY(0)}
-.pharmsearch{width:100%;max-width:560px;margin:12px 0 4px;padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);font-size:14px}
+.pharmsearch{width:100%;margin:0;padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);font-size:14px;box-sizing:border-box}
+.pharmsearchwrap{position:relative;max-width:560px;margin:12px 0 4px}
+.pharmsearchicon{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--ink-soft);pointer-events:none}
+.pharmsearch.hasicon{padding-left:34px}
+#pharm .revbar{gap:26px}
 .pharmsub{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);margin:4px 0 14px}
 .pharmhost{display:flex;flex-direction:column;gap:12px}
 .pharmclass{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border-bottom:1px solid var(--line);padding-bottom:5px;margin-top:16px}
@@ -593,7 +601,7 @@ section{display:none}section.on{display:block}
 .srcchip{font-family:var(--font-mono);font-size:10px;border:1px solid var(--line);background:transparent;color:var(--accent);border-radius:999px;padding:1px 8px;margin-left:5px;cursor:pointer;white-space:nowrap;vertical-align:middle}
 .srcchip:hover{background:var(--accent);color:var(--paper)}
 .srcchip:disabled{color:var(--ink-soft);cursor:default;border-style:dashed}
-@media(max-width:560px){.facet{grid-template-columns:1fr;gap:2px}}
+@media(max-width:560px){.facet{grid-template-columns:1fr;gap:2px}#pharm .revbar{gap:14px}}
 .drugcard.flash{animation:pharmflash 1.25s ease-out}
 @keyframes pharmflash{from{background:var(--accent-soft)}to{background:var(--paper)}}
 .facetval mark,.drugname mark{background:#ffe58a;color:inherit;padding:0 1px;border-radius:2px}
@@ -980,10 +988,11 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
   </section>
 
   <section id="pharm">
-    <div class="revbar"><button class="minor backbtn" id="pharmBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2" id="pharmBackTo"></span></button><h2 class="revtitle" id="pharmTitle" role="button" tabindex="0" aria-expanded="false" aria-controls="pharmNav" title="Show or hide the drug list">Pharmacology <span class="revcaret" aria-hidden="true">▾</span></h2></div>
+    <div class="revbar"><button class="minor backbtn" id="pharmBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2" id="pharmBackTo"></span></button><h2>Pharmacology</h2></div>
+    <div class="pharmsearchwrap"><svg class="pharmsearchicon" viewBox="0 0 16 16" aria-hidden="true"><circle cx="6.6" cy="6.6" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="10.2" y1="10.2" x2="14.6" y2="14.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><input type="search" id="pharmSearch" class="pharmsearch hasicon" placeholder="Search drugs, classes, effects…" aria-label="Search pharmacology"></div>
     <div class="pharmsub" id="pharmCount"></div>
     <div class="revlayout" id="pharmLayout">
-      <nav class="revnav closed" id="pharmNav" aria-label="Drug index"></nav>
+      <nav class="revnav closed" id="pharmNav" aria-label="Search results"></nav>
       <div class="pharmhost" id="pharmHost"></div>
     </div>
   </section>
@@ -1085,7 +1094,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.68';
+const APP_VERSION='0.2.69';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1866,15 +1875,10 @@ function renderPharmMain(){const host=$('pharmHost');host.innerHTML='';const q=p
     const gh=document.createElement('div');gh.className='pharmclass';gh.textContent=g.label;host.appendChild(gh);
     drugs.forEach(d=>{host.appendChild(drugCard(d,g.label,q));shown++;});});
   if(!shown)host.innerHTML='<div class="revempty">No drugs match \u201c'+pharmEscape(pharmQuery)+'\u201d.</div>';}
-function renderPharmNavList(){const list=$('pharmNavList');if(!list)return;list.innerHTML='';const q=pharmQuery.trim().toLowerCase();
-  if(!q){pharmGroups.forEach(g=>{const wrap=document.createElement('div');wrap.className='revgroup';
-      const hh=document.createElement('div');hh.className='gname';hh.textContent=g.label;wrap.appendChild(hh);
-      g.drugs.forEach(d=>{const b=document.createElement('button');b.className='revitem';
-        const t=document.createElement('span');t.textContent=d.name;b.appendChild(t);
-        b.onclick=()=>jumpToDrug(d.id);wrap.appendChild(b);});
-      list.appendChild(wrap);});return;}
+function renderPharmResults(){const nav=$('pharmNav');nav.innerHTML='';const q=pharmQuery.trim().toLowerCase();
+  const hd=document.createElement('button');hd.className='revhide';hd.textContent='✕ Close results';hd.onclick=closePharmDrawer;nav.appendChild(hd);
   const hits=[];pharmGroups.forEach(g=>g.drugs.forEach(d=>{if(pharmMatch(d,g.label,q))hits.push({d,label:g.label});}));
-  const hd2=document.createElement('div');hd2.className='reshead';hd2.textContent=(hits.length?hits.length+' ':'No ')+'match'+(hits.length===1?'':'es');list.appendChild(hd2);
+  const hd2=document.createElement('div');hd2.className='reshead';hd2.textContent=(hits.length?hits.length+' ':'No ')+'match'+(hits.length===1?'':'es');nav.appendChild(hd2);
   hits.forEach(({d,label})=>{const b=document.createElement('button');b.className='revresult';
     const rt=document.createElement('span');rt.className='rt';rt.textContent=d.name+' · '+label;b.appendChild(rt);
     let snip='';for(const pair of FACET_ORDER){const arr=d.facets[pair[0]];if(!arr)continue;const mm=arr.find(x=>x.norm.includes(q));if(mm){snip=mm.text;break;}}
@@ -1886,20 +1890,17 @@ function renderPharmNavList(){const list=$('pharmNavList');if(!list)return;list.
         rs.appendChild(document.createTextNode(snip.slice(idx+q.length,en)+(en<snip.length?' …':'')));}
       else rs.textContent=snip.slice(0,90);
       b.appendChild(rs);}
-    b.onclick=()=>jumpToDrug(d.id);list.appendChild(b);});}
-function renderPharmNav(){const nav=$('pharmNav');nav.innerHTML='';
-  const hd=document.createElement('button');hd.className='revhide';hd.textContent='◂ Hide drug list';hd.onclick=()=>{pharmNavOpen=false;applyPharmNav();};nav.appendChild(hd);
-  const se=document.createElement('input');se.type='search';se.className='revsearch';se.placeholder='Search drugs, classes, effects…';se.value=pharmQuery;
-  se.oninput=()=>{pharmQuery=se.value;renderPharmMain();renderPharmNavList();};nav.appendChild(se);
-  const list=document.createElement('div');list.id='pharmNavList';nav.appendChild(list);renderPharmNavList();}
-function jumpToDrug(id){pharmNavOpen=false;applyPharmNav();const el=document.getElementById(drugSlug(id));if(el){el.scrollIntoView({block:'start',behavior:'smooth'});el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');}}
-function applyPharmNav(){if(pharmNavOpen===null)pharmNavOpen=false;$('pharmNav').classList.toggle('closed',!pharmNavOpen);const t=$('pharmTitle');if(t){t.classList.toggle('open',pharmNavOpen);t.setAttribute('aria-expanded',pharmNavOpen?'true':'false');}}
-function togglePharmNav(){pharmNavOpen=!pharmNavOpen;applyPharmNav();}
+    b.onclick=()=>jumpToDrug(d.id);nav.appendChild(b);});}
+function setPharmDrawer(open){$('pharmNav').classList.toggle('closed',!open);}
+function closePharmDrawer(){setPharmDrawer(false);const se=$('pharmSearch');if(se)se.focus();}
+function updatePharmDrawer(){if(pharmQuery.trim()){renderPharmResults();setPharmDrawer(true);}else{$('pharmNav').innerHTML='';setPharmDrawer(false);}}
+function jumpToDrug(id){setPharmDrawer(false);const el=document.getElementById(drugSlug(id));if(el){el.scrollIntoView({block:'start',behavior:'smooth'});el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');}}
+function onPharmSearch(v){pharmQuery=v;renderPharmMain();updatePharmDrawer();}
 function renderPharm(){pharmGroups=buildDrugIndex();const total=pharmGroups.reduce((n,g)=>n+g.drugs.length,0);
-  $('pharmCount').textContent=total?total+' drug'+(total===1?'':'s')+' · '+pharmGroups.length+' class'+(pharmGroups.length===1?'':'es')+' · merged across your active packs · tap “Pharmacology” for the index':'';
-  if(!total){$('pharmHost').innerHTML='<div class="revempty">No pharmacology data in your active packs yet. Newer packs embed a drug index here — enable more packs to grow it.</div>';$('pharmNav').innerHTML='';return;}
-  renderPharmNav();renderPharmMain();}
-function openPharm(){pharmReturn=currentSection();$('pharmBackTo').textContent='to Home';pharmNavOpen=false;renderPharm();applyPharmNav();show('pharm');}
+  $('pharmCount').textContent=total?total+' drug'+(total===1?'':'s')+' · '+pharmGroups.length+' class'+(pharmGroups.length===1?'':'es')+' · merged across your active packs':'';
+  if(!total){$('pharmHost').innerHTML='<div class="revempty">No pharmacology data in your active packs yet. Newer packs embed a drug index here — enable more packs to grow it.</div>';$('pharmNav').innerHTML='';setPharmDrawer(false);return;}
+  renderPharmMain();updatePharmDrawer();}
+function openPharm(){pharmReturn=currentSection();$('pharmBackTo').textContent='to Home';pharmQuery='';const se=$('pharmSearch');if(se)se.value='';renderPharm();show('pharm');}
 
 let revQuery='';
 /* Unified search. Empty query → the normal grouped topic list. Query → a results view:
@@ -2206,8 +2207,7 @@ $('diffSeg').querySelectorAll('.seg').forEach(b=>b.addEventListener('click',()=>
 $('openReviewer').addEventListener('click',()=>{if(activeGuides().length)openReviewer();});
 $('openPharm').addEventListener('click',()=>{if(drugCount())openPharm();});
 $('pharmBack').addEventListener('click',()=>renderHome());
-$('pharmTitle').addEventListener('click',togglePharmNav);
-$('pharmTitle').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();togglePharmNav();}});
+$('pharmSearch').addEventListener('input',e=>onPharmSearch(e.target.value));
 $('installBtn').addEventListener('click',openInstall);
 $('refreshBtn').addEventListener('click',reloadApp);
 $('installBackup').addEventListener('click',e=>{e.preventDefault();backup();});
