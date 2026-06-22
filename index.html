@@ -1,7 +1,11 @@
 <!--
-  Study Suite  ·  v0.2.69 (beta)
+  Study Suite  ·  v0.2.70 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.70: Topic Guides title gained a clickable search icon (`#revFind`, inline SVG magnifier) sitting
+  between the "Topic Guides" text and the ▾ chevron. Clicking/Enter opens the topic drawer (if closed) and focuses the
+  in-drawer search box; the handler stopPropagation's so it doesn't also fire the title's open/close toggle. New `.revfind`
+  styling (inherits ink-soft, accent on hover/focus). No schema change.
   Changelog v0.2.69: Pharmacology search reworked — the search box is now a PERSISTENT bar at the top of the view
   (with an inline search icon). Typing highlights matches in the cards AND slides in the results-drawer overlay, which
   AUTO-HIDES when the box is empty (no manual title toggle / no chevron). Clicking a result jumps to the card + closes
@@ -552,6 +556,8 @@ section{display:none}section.on{display:block}
 .revcaret{font-size:16px;color:var(--ink-soft);transition:transform .18s,color .12s}
 .revtitle:hover .revcaret,.revtitle.open .revcaret{color:var(--accent)}
 .revtitle.open .revcaret{transform:rotate(180deg)}
+.revfind{display:inline-flex;align-items:center;color:var(--ink-soft);cursor:pointer;transition:color .12s;outline:none}
+.revfind:hover,.revfind:focus-visible{color:var(--accent)}
 /* install button + modal */
 .installbtn{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;border:1.5px solid var(--line);background:var(--paper);border-radius:20px;padding:6px 12px;cursor:pointer;transition:.12s;color:var(--ink-soft);white-space:nowrap}
 .installbtn:hover{border-color:var(--accent-soft);color:var(--ink)}
@@ -968,7 +974,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
   <!-- CONTENT REVIEWER -->
   <section id="reviewer">
-    <div class="revbar"><button class="minor backbtn" id="revBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2" id="revBackTo"></span></button><h2 class="revtitle" id="revTitle" role="button" tabindex="0" aria-expanded="false" aria-controls="guideList" title="Show or hide the topic list">Topic Guides <span class="revcaret" aria-hidden="true">▾</span></h2>
+    <div class="revbar"><button class="minor backbtn" id="revBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2" id="revBackTo"></span></button><h2 class="revtitle" id="revTitle" role="button" tabindex="0" aria-expanded="false" aria-controls="guideList" title="Show or hide the topic list">Topic Guides <span class="revfind" id="revFind" role="button" tabindex="0" title="Search topics & content" aria-label="Search topics and content"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><line x1="21" y1="21" x2="15.5" y2="15.5"></line></svg></span> <span class="revcaret" aria-hidden="true">▾</span></h2>
       <div class="sizer">
         <div class="szgrp">
           <button class="minor" id="zoomOut" title="Smaller text">−</button>
@@ -2223,6 +2229,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('confirmOv').styl
 $('revBack').addEventListener('click',returnFromReviewer);
 $('revTitle').addEventListener('click',toggleRevNav);
 $('revTitle').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleRevNav();}});
+(function(){const fb=$('revFind');if(fb){const openSearch=e=>{e.stopPropagation();e.preventDefault();if(!revNavOpen){revNavOpen=true;applyRevNav();}const se=document.querySelector('#guideList .revsearch');if(se)se.focus();};fb.addEventListener('click',openSearch);fb.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')openSearch(e);});}})();
 $('zoomIn').addEventListener('click',()=>{guideZoom=Math.min(2,Math.round((guideZoom+0.1)*10)/10);applyGuideView();});
 $('zoomOut').addEventListener('click',()=>{guideZoom=Math.max(0.6,Math.round((guideZoom-0.1)*10)/10);applyGuideView();});
 $('fitBtn').addEventListener('click',()=>{guideFit=!guideFit;applyGuideView();});
