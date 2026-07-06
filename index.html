@@ -1,7 +1,16 @@
 <!--
-  Study Suite  ·  v0.2.70 (beta)
+  Study Suite  ·  v0.2.71 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.71: hardening + accessibility pass (audit fixes, no behaviour change in normal use).
+  (1) #revFind is now a real <button> SIBLING of the title h2 (was a role=button span nested inside the
+  h2's role=button — invalid ARIA) with a padded 28px hit area; focusing the drawer search also select()s
+  any previous query. stopPropagation no longer needed. (2) restore() uses eacArmed() instead of bare
+  EAC.on (latent ReferenceError if the EAC block is ever removed). (3) openGuide()'s external-link guard
+  is now case/whitespace-insensitive and also blocks data:/vbscript: (was startsWith('javascript') only).
+  (4) Store.set mirrors the KEY.eac unlock to localStorage even when window.storage handles it, so the
+  parse-time gate check never flashes in wrapper environments. (5) buildDrugIndex: dropped a dead
+  `if(!e.name...)` line (e.name is never empty). No schema change.
   Changelog v0.2.70: Topic Guides title gained a clickable search icon (`#revFind`, inline SVG magnifier) sitting
   between the "Topic Guides" text and the ▾ chevron. Clicking/Enter opens the topic drawer (if closed) and focuses the
   in-drawer search box; the handler stopPropagation's so it doesn't also fire the title's open/close toggle. New `.revfind`
@@ -556,7 +565,7 @@ section{display:none}section.on{display:block}
 .revcaret{font-size:16px;color:var(--ink-soft);transition:transform .18s,color .12s}
 .revtitle:hover .revcaret,.revtitle.open .revcaret{color:var(--accent)}
 .revtitle.open .revcaret{transform:rotate(180deg)}
-.revfind{display:inline-flex;align-items:center;color:var(--ink-soft);cursor:pointer;transition:color .12s;outline:none}
+.revfind{display:inline-flex;align-items:center;justify-content:center;background:none;border:0;padding:6px;margin-left:-8px;color:var(--ink-soft);cursor:pointer;transition:color .12s;outline:none}
 .revfind:hover,.revfind:focus-visible{color:var(--accent)}
 /* install button + modal */
 .installbtn{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;border:1.5px solid var(--line);background:var(--paper);border-radius:20px;padding:6px 12px;cursor:pointer;transition:.12s;color:var(--ink-soft);white-space:nowrap}
@@ -974,7 +983,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
   <!-- CONTENT REVIEWER -->
   <section id="reviewer">
-    <div class="revbar"><button class="minor backbtn" id="revBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2" id="revBackTo"></span></button><h2 class="revtitle" id="revTitle" role="button" tabindex="0" aria-expanded="false" aria-controls="guideList" title="Show or hide the topic list">Topic Guides <span class="revfind" id="revFind" role="button" tabindex="0" title="Search topics & content" aria-label="Search topics and content"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><line x1="21" y1="21" x2="15.5" y2="15.5"></line></svg></span> <span class="revcaret" aria-hidden="true">▾</span></h2>
+    <div class="revbar"><button class="minor backbtn" id="revBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2" id="revBackTo"></span></button><h2 class="revtitle" id="revTitle" role="button" tabindex="0" aria-expanded="false" aria-controls="guideList" title="Show or hide the topic list">Topic Guides <span class="revcaret" aria-hidden="true">▾</span></h2><button class="revfind" id="revFind" type="button" title="Search topics & content" aria-label="Search topics and content"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><line x1="21" y1="21" x2="15.5" y2="15.5"></line></svg></button>
       <div class="sizer">
         <div class="szgrp">
           <button class="minor" id="zoomOut" title="Smaller text">−</button>
@@ -1100,7 +1109,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.70';
+const APP_VERSION='0.2.71';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1111,7 +1120,7 @@ const KEY={packs:'suite_packs_v1',sched:'srs_sched_v2',daily:'srs_daily_v2',sett
 const memCache={};
 const Store={
   async get(k){try{if(window.storage){const r=await window.storage.get(k);if(r&&r.value!=null)return JSON.parse(r.value);}}catch(e){}try{const v=localStorage.getItem(k);if(v!=null)return JSON.parse(v);}catch(e){}return (k in memCache)?memCache[k]:null;},
-  async set(k,val){memCache[k]=val;let ok=false;try{if(window.storage){await window.storage.set(k,JSON.stringify(val));ok=true;}}catch(e){}if(!ok){try{localStorage.setItem(k,JSON.stringify(val));}catch(e){}}}
+  async set(k,val){memCache[k]=val;let ok=false;try{if(window.storage){await window.storage.set(k,JSON.stringify(val));ok=true;}}catch(e){}if(!ok||k===KEY.eac){try{localStorage.setItem(k,JSON.stringify(val));}catch(e){}}}
 };
 let STORAGE_MODE='memory';
 function detectStorage(){if(typeof window.storage!=='undefined'){STORAGE_MODE='persistent';}else{try{localStorage.setItem('__t','1');localStorage.removeItem('__t');STORAGE_MODE='local';}catch(e){STORAGE_MODE='memory';}}}
@@ -1844,7 +1853,7 @@ function drugCount(){const seen=new Set();activePacks().forEach(p=>(Array.isArra
 function buildDrugIndex(){const byId=new Map();
   activePacks().forEach(p=>{(Array.isArray(p.drugs)?p.drugs:[]).forEach(d=>{if(!d||!d.id)return;
     let e=byId.get(d.id);if(!e){e={id:d.id,name:d.name||d.id.replace(/^rx:/,''),cls:d.class||'',facets:{}};byId.set(d.id,e);}
-    if(!e.name&&d.name)e.name=d.name;if(!e.cls&&d.class)e.cls=d.class;
+    if(!e.cls&&d.class)e.cls=d.class;
     const ref=d.ref||{},fc=d.facets||{};
     Object.keys(fc).forEach(k=>{const text=String(fc[k]==null?'':fc[k]).trim();if(!text)return;
       const arr=e.facets[k]||(e.facets[k]=[]);const norm=text.toLowerCase();const hit=arr.find(x=>x.norm===norm);
@@ -1965,7 +1974,7 @@ function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();
   applyGuideView();};
   fr.srcdoc=g.html||'<p style=\"font-family:sans-serif;padding:24px\">This guide has no embedded content.</p>';
   host.appendChild(fr);}
-function openGuide(ref,section){const g=findGuide(ref);if(!g){if(ref&&!String(ref).startsWith('javascript')){window.open(String(ref).split('#')[0],'_blank');}return;}
+function openGuide(ref,section){const g=findGuide(ref);if(!g){if(ref&&!/^\s*(javascript|data|vbscript):/i.test(String(ref))){window.open(String(ref).split('#')[0],'_blank');}return;}
   reviewerReturn=currentSection();const anchor=String(ref).includes('#')?String(ref).split('#')[1]:null;
   revNavOpen=false;setBackLabel();show('reviewer');loadGuide(g,{anchor,section});}
 /* Where "← Back" will return — mirrors returnFromReviewer's branches so the subtitle never lies. */
@@ -2198,7 +2207,7 @@ async function eacTry(){
   else{if(err)err.textContent='That code wasn’t recognized. Double-check with whoever shared it.';if(inp)inp.select();}
 }
 function backup(){const data={suite:APP_VERSION,author:APP_AUTHOR,exported:new Date().toISOString(),packs,sched,daily,settings,eac};const blob=new Blob([JSON.stringify(data)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='study-suite-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}
-function restore(file){const r=new FileReader();r.onload=async()=>{try{const d=JSON.parse(r.result);if(d.packs)packs=d.packs;if(d.sched)sched=d.sched;if(d.daily)daily=d.daily;if(d.settings)settings=Object.assign(settings,d.settings);if(d.eac)eac=d.eac;deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});if(daily.date!==today())daily={date:today(),count:0};await persist();renderHome();applyGate();if(EAC.on&&!(eac&&eac.unlocked)){toast('Restored — but this backup isn’t from an unlocked copy.');}else{toast('Backup restored.');}}catch(e){toast('Could not read that file.');}};r.readAsText(file);}
+function restore(file){const r=new FileReader();r.onload=async()=>{try{const d=JSON.parse(r.result);if(d.packs)packs=d.packs;if(d.sched)sched=d.sched;if(d.daily)daily=d.daily;if(d.settings)settings=Object.assign(settings,d.settings);if(d.eac)eac=d.eac;deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});if(daily.date!==today())daily={date:today(),count:0};await persist();renderHome();applyGate();if(eacArmed()&&!(eac&&eac.unlocked)){toast('Restored — but this backup isn’t from an unlocked copy.');}else{toast('Backup restored.');}}catch(e){toast('Could not read that file.');}};r.readAsText(file);}
 
 /* ===== WIRE UP ===== */
 $('mReview').addEventListener('click',()=>{if(deck().length)openReview();});
@@ -2229,7 +2238,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('confirmOv').styl
 $('revBack').addEventListener('click',returnFromReviewer);
 $('revTitle').addEventListener('click',toggleRevNav);
 $('revTitle').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleRevNav();}});
-(function(){const fb=$('revFind');if(fb){const openSearch=e=>{e.stopPropagation();e.preventDefault();if(!revNavOpen){revNavOpen=true;applyRevNav();}const se=document.querySelector('#guideList .revsearch');if(se)se.focus();};fb.addEventListener('click',openSearch);fb.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')openSearch(e);});}})();
+(function(){const fb=$('revFind');if(fb)fb.addEventListener('click',()=>{if(!revNavOpen){revNavOpen=true;applyRevNav();}const se=document.querySelector('#guideList .revsearch');if(se){se.focus();se.select();}});})();
 $('zoomIn').addEventListener('click',()=>{guideZoom=Math.min(2,Math.round((guideZoom+0.1)*10)/10);applyGuideView();});
 $('zoomOut').addEventListener('click',()=>{guideZoom=Math.max(0.6,Math.round((guideZoom-0.1)*10)/10);applyGuideView();});
 $('fitBtn').addEventListener('click',()=>{guideFit=!guideFit;applyGuideView();});
