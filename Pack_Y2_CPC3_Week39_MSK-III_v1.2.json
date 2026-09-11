@@ -2,7 +2,7 @@
  "pack": "Week 39 — MSK III (OA, Spine & Pediatric Rheumatology)",
  "id": "wk39",
  "formatVersion": "2.0",
- "version": "1.1",
+ "version": "1.2",
  "author": "Alkarim Billawala / alkarim.billawala.ca",
  "createdBy": "Alkarim Billawala / alkarim.billawala.ca",
  "created": "2026-09-10",
@@ -1027,8 +1027,8 @@
    "correct": 2,
    "explain": "Gout confirmed with infection excluded. NSAIDs are contraindicated in CKD; colchicine works only within 12&ndash;36 h and is poorly cleared in renal disease; an <b>intra-articular steroid</b> is preferred over oral in monoarthritis. Acetaminophen doesn't treat the inflammation.",
    "guide": {
-    "f": "W39_10_Integrated_Review.html",
-    "t": "10 · ISAL case 1",
+    "f": "W39_11_Integrated_Review.html",
+    "t": "11 · ISAL case 1",
     "s": "IA steroid"
    }
   },
@@ -1047,8 +1047,8 @@
    "correct": 3,
    "explain": "<b>PMR</b>: age &gt;50, girdle pain and stiffness, constitutional symptoms, high ESR/CRP, anemia, thrombocytosis, <b>no weakness, normal CK</b>. Not myositis (painless weakness, high CK), not fibromyalgia (normal labs), not RA (wrong joints).",
    "guide": {
-    "f": "W39_10_Integrated_Review.html",
-    "t": "10 · ISAL case 3",
+    "f": "W39_11_Integrated_Review.html",
+    "t": "11 · ISAL case 3",
     "s": "PMR"
    }
   },
@@ -1067,9 +1067,169 @@
    "correct": 0,
    "explain": "Basic bloodwork excludes fibromyalgia mimics (hypothyroidism, hyperparathyroidism/hypercalcemia, systemic illness). Avoid ANA, RF and HLA-B27 at low pre-test probability: false positives cause harm (WFQ).",
    "guide": {
-    "f": "W39_10_Integrated_Review.html",
-    "t": "10 · Generalized pain",
+    "f": "W39_11_Integrated_Review.html",
+    "t": "11 · Generalized pain",
     "s": "workup"
+   }
+  },
+  {
+   "id": "wk39_q62",
+   "sys": "MSK Anatomy",
+   "topic": "MAPS lab · Forearm nerves",
+   "difficulty": "easy",
+   "stem": "Which two anterior forearm muscles are innervated by the ulnar nerve rather than the median nerve?",
+   "options": [
+    "Pronator teres and pronator quadratus",
+    "Flexor carpi ulnaris and the medial half of flexor digitorum profundus",
+    "Flexor digitorum superficialis and flexor pollicis longus",
+    "Palmaris longus and flexor carpi radialis"
+   ],
+   "correct": 1,
+   "explain": "The median nerve supplies most anterior forearm muscles; the <b>ulnar</b> supplies <b>FCU</b> and the <b>medial half of FDP</b> (the lab's Exercise 1B question).",
+   "guide": {
+    "f": "W39_10_MAPS_Anatomy_Lab.html",
+    "t": "10 · Exercise 1B",
+    "s": "ulnar muscles"
+   }
+  },
+  {
+   "id": "wk39_q63",
+   "sys": "MSK Anatomy",
+   "topic": "MAPS lab · Wrist joint",
+   "difficulty": "easy",
+   "stem": "Which carpal bones articulate with the distal radius and articular disc to form the wrist joint?",
+   "options": [
+    "Scaphoid, lunate and triquetrum",
+    "Scaphoid, lunate, triquetrum and pisiform",
+    "Trapezium, trapezoid, capitate and hamate",
+    "Scaphoid and lunate only"
+   ],
+   "correct": 0,
+   "explain": "The radiocarpal (condyloid) joint is the distal radius + articular disc against the <b>scaphoid, lunate and triquetrum</b>. The pisiform sits on the triquetrum and doesn't take part.",
+   "guide": {
+    "f": "W39_10_MAPS_Anatomy_Lab.html",
+    "t": "10 · Exercise 2A",
+    "s": "wrist joint"
+   }
+  },
+  {
+   "id": "wk39_q64",
+   "sys": "MSK Anatomy",
+   "topic": "MAPS lab · Carpal tunnel",
+   "difficulty": "medium",
+   "stem": "The flexor retinaculum converts the anteriorly open carpal arch into the carpal tunnel. Which bony features are labelled as its attachments in the MAPS lab figure?",
+   "options": [
+    "Radial and ulnar styloids",
+    "Hook of hamate and tubercle of trapezium",
+    "Lunate and capitate",
+    "Pisiform and first metacarpal base"
+   ],
+   "correct": 1,
+   "explain": "The retinaculum attaches medially to the <b>hook of hamate</b> (and pisiform) and laterally to the <b>tubercle of trapezium</b> (and scaphoid). The median nerve passes through and supplies the thenar muscles.",
+   "guide": {
+    "f": "W39_10_MAPS_Anatomy_Lab.html",
+    "t": "10 · Exercise 2A",
+    "s": "carpal tunnel"
+   }
+  },
+  {
+   "id": "wk39_q65",
+   "sys": "MSK Anatomy",
+   "topic": "MAPS lab · Cubital fossa",
+   "difficulty": "easy",
+   "stem": "In the MAPS dissection, what forms the roof of the cubital fossa?",
+   "options": [
+    "Brachioradialis and pronator teres",
+    "Antebrachial fascia and bicipital aponeurosis",
+    "Brachialis and supinator",
+    "Median cubital vein only"
+   ],
+   "correct": 1,
+   "explain": "The <b>roof</b> is the <b>antebrachial fascia + bicipital aponeurosis</b>. Brachioradialis (lateral) and pronator teres (medial) are the borders; the contents lateral to medial are biceps tendon, brachial artery, median nerve.",
+   "guide": {
+    "f": "W39_10_MAPS_Anatomy_Lab.html",
+    "t": "10 · Exercise 2B",
+    "s": "roof"
+   }
+  },
+  {
+   "id": "wk39_q66",
+   "sys": "MSK Anatomy",
+   "topic": "MAPS lab · Arm nerves",
+   "difficulty": "easy",
+   "stem": "Which nerve supplies the posterior compartment of the arm and the posterior (extensor) compartment of the forearm?",
+   "options": [
+    "Musculocutaneous",
+    "Median",
+    "Radial",
+    "Axillary"
+   ],
+   "correct": 2,
+   "explain": "The <b>radial</b> nerve (posterior cord) supplies triceps and the forearm extensors (via its deep/posterior interosseous branch), including the exceptions brachioradialis and supinator.",
+   "guide": {
+    "f": "W39_10_MAPS_Anatomy_Lab.html",
+    "t": "10 · Exercise 1B",
+    "s": "radial"
+   }
+  },
+  {
+   "id": "wk39_q67",
+   "sys": "MSK Anatomy",
+   "topic": "MAPS lab · Forearm layers",
+   "difficulty": "medium",
+   "stem": "Which muscles form the deep layer of the anterior forearm?",
+   "options": [
+    "Pronator teres, FCR, palmaris longus, FCU",
+    "Flexor digitorum superficialis",
+    "Flexor pollicis longus, flexor digitorum profundus, pronator quadratus",
+    "Brachioradialis, ECRL, ECRB"
+   ],
+   "correct": 2,
+   "explain": "Superficial: PT, FCR, PL, FCU. Intermediate: FDS. <b>Deep: FPL, FDP, pronator quadratus.</b> Brachioradialis and the wrist extensors are posterior compartment.",
+   "guide": {
+    "f": "W39_10_MAPS_Anatomy_Lab.html",
+    "t": "10 · Exercise 2B",
+    "s": "layers"
+   }
+  },
+  {
+   "id": "wk39_q68",
+   "sys": "MSK Anatomy",
+   "topic": "MAPS lab · POCUS",
+   "difficulty": "easy",
+   "stem": "When scanning the posterior elbow in long axis, how is the probe oriented and which landmark signals an effusion?",
+   "options": [
+    "Transverse, marker to the patient's right; the radial head",
+    "Along the humerus, marker toward the patient's head; an elevated posterior fat pad",
+    "Over the volar wrist; the pronator quadratus",
+    "Along the forearm, marker to the hand; the anterior fat pad"
+   ],
+   "correct": 1,
+   "explain": "Long axis: arm flexed, probe along the humerus over the olecranon fossa, <b>marker toward the head</b>. An <b>elevated posterior fat pad</b> means an effusion or lipohemarthrosis. Short axis: rotate 90&deg;, marker to the patient's right, to see both epicondyles.",
+   "guide": {
+    "f": "W39_10_MAPS_Anatomy_Lab.html",
+    "t": "10 · POCUS",
+    "s": "elbow"
+   }
+  },
+  {
+   "id": "wk39_q69",
+   "sys": "MSK Anatomy",
+   "topic": "MAPS lab · Shoulder",
+   "difficulty": "medium",
+   "stem": "In the lab you dislocate the humeral head from the glenoid on the teaching specimen to see inside the joint. Which structure will you see crossing inside the joint to its attachment above the glenoid?",
+   "options": [
+    "Short head of biceps",
+    "Long head of biceps tendon",
+    "Coracobrachialis",
+    "Subscapularis tendon"
+   ],
+   "correct": 1,
+   "explain": "The <b>long head of biceps</b> runs through the glenohumeral joint and helps reinforce it superiorly; the short head arises from the coracoid outside the joint. Dislocate by hyperextending and externally rotating the arm.",
+   "guide": {
+    "f": "W39_10_MAPS_Anatomy_Lab.html",
+    "t": "10 · Exercise 1A",
+    "s": "biceps"
    }
   },
   {
@@ -1630,8 +1790,8 @@
    "topic": "PMR vs myositis vs FM",
    "type": "qa",
    "guide": {
-    "f": "W39_10_Integrated_Review.html",
-    "t": "10 · Worksheet",
+    "f": "W39_11_Integrated_Review.html",
+    "t": "11 · Worksheet",
     "s": "differentiate"
    },
    "prompt": "Distinguish PMR, inflammatory myositis and fibromyalgia on exam and labs.",
@@ -2519,8 +2679,8 @@
    "topic": "Older adult match",
    "type": "match",
    "guide": {
-    "f": "W39_10_Integrated_Review.html",
-    "t": "10 · Older adults",
+    "f": "W39_11_Integrated_Review.html",
+    "t": "11 · Older adults",
     "s": "conditions"
    },
    "prompt": "Match the older-adult condition to its clue:",
@@ -2769,12 +2929,227 @@
   },
   {
    "id": "wk39_c89",
+   "sys": "MSK Anatomy",
+   "topic": "Plexus order",
+   "type": "order",
+   "guide": {
+    "f": "W39_10_MAPS_Anatomy_Lab.html",
+    "t": "10 · Exercise 1B",
+    "s": "plexus"
+   },
+   "prompt": "Put the parts of the brachial plexus in order from proximal to distal:",
+   "items": [
+    "Roots (C5–T1 anterior rami)",
+    "Trunks",
+    "Divisions",
+    "Cords",
+    "Terminal branches"
+   ]
+  },
+  {
+   "id": "wk39_c90",
+   "sys": "MSK Anatomy",
+   "topic": "Plexus M",
+   "type": "match",
+   "guide": {
+    "f": "W39_10_MAPS_Anatomy_Lab.html",
+    "t": "10 · Exercise 1B",
+    "s": "the M"
+   },
+   "prompt": "Match the terminal branch to its cord:",
+   "pairs": [
+    [
+     "Musculocutaneous",
+     "Lateral cord"
+    ],
+    [
+     "Ulnar",
+     "Medial cord"
+    ],
+    [
+     "Median",
+     "Lateral + medial cords"
+    ],
+    [
+     "Radial and axillary",
+     "Posterior cord"
+    ]
+   ]
+  },
+  {
+   "id": "wk39_c91",
+   "sys": "MSK Anatomy",
+   "topic": "Compartment nerves",
+   "type": "match",
+   "guide": {
+    "f": "W39_10_MAPS_Anatomy_Lab.html",
+    "t": "10 · Exercise 1B",
+    "s": "nerves"
+   },
+   "prompt": "Match the compartment to its main nerve:",
+   "pairs": [
+    [
+     "Anterior arm",
+     "Musculocutaneous"
+    ],
+    [
+     "Posterior arm",
+     "Radial"
+    ],
+    [
+     "Anterior forearm (most)",
+     "Median"
+    ],
+    [
+     "Posterior forearm",
+     "Radial"
+    ]
+   ]
+  },
+  {
+   "id": "wk39_c92",
+   "sys": "MSK Anatomy",
+   "topic": "Superior GH support",
+   "type": "multi",
+   "guide": {
+    "f": "W39_10_MAPS_Anatomy_Lab.html",
+    "t": "10 · Exercise 1A",
+    "s": "superior support"
+   },
+   "prompt": "Select structures that reinforce the superior glenohumeral joint:",
+   "options": [
+    "Coracoacromial arch",
+    "Coracohumeral ligament",
+    "Long head of biceps tendon",
+    "Teres major",
+    "Inferior glenohumeral ligament"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "id": "wk39_c93",
+   "sys": "MSK Anatomy",
+   "topic": "Carpal rows",
+   "type": "order",
+   "guide": {
+    "f": "W39_10_MAPS_Anatomy_Lab.html",
+    "t": "10 · Exercise 2A",
+    "s": "carpals"
+   },
+   "prompt": "Order the proximal carpal row from lateral (thumb side) to medial:",
+   "items": [
+    "Scaphoid",
+    "Lunate",
+    "Triquetrum",
+    "Pisiform"
+   ]
+  },
+  {
+   "id": "wk39_c94",
+   "sys": "MSK Anatomy",
+   "topic": "Wrist movements",
+   "type": "multi",
+   "guide": {
+    "f": "W39_10_MAPS_Anatomy_Lab.html",
+    "t": "10 · Exercise 2A",
+    "s": "movements"
+   },
+   "prompt": "Select the movements that occur at the radiocarpal (wrist) joint:",
+   "options": [
+    "Flexion",
+    "Extension",
+    "Radial deviation",
+    "Ulnar deviation",
+    "Pronation"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "wk39_c95",
+   "sys": "MSK Anatomy",
+   "topic": "Cubital fossa TAN",
+   "type": "order",
+   "guide": {
+    "f": "W39_10_MAPS_Anatomy_Lab.html",
+    "t": "10 · Exercise 2B",
+    "s": "contents"
+   },
+   "prompt": "Order the cubital fossa contents from lateral to medial:",
+   "items": [
+    "Biceps tendon",
+    "Brachial artery",
+    "Median nerve"
+   ]
+  },
+  {
+   "id": "wk39_c96",
+   "sys": "MSK Anatomy",
+   "topic": "Forearm flexor layers",
+   "type": "match",
+   "guide": {
+    "f": "W39_10_MAPS_Anatomy_Lab.html",
+    "t": "10 · Exercise 2B",
+    "s": "layers"
+   },
+   "prompt": "Match the anterior forearm layer to its muscles:",
+   "pairs": [
+    [
+     "Superficial",
+     "PT, FCR, palmaris longus, FCU"
+    ],
+    [
+     "Intermediate",
+     "FDS"
+    ],
+    [
+     "Deep",
+     "FPL, FDP, pronator quadratus"
+    ]
+   ]
+  },
+  {
+   "id": "wk39_c97",
+   "sys": "MSK Anatomy",
+   "topic": "Lateral wrist X-ray",
+   "type": "qa",
+   "guide": {
+    "f": "W39_10_MAPS_Anatomy_Lab.html",
+    "t": "10 · Exercise 2A",
+    "s": "radiographs"
+   },
+   "prompt": "On a lateral wrist radiograph, what alignment should you check, and what does a perilunate injury look like?",
+   "answer": "Radius, lunate and capitate should stack in a line. In a perilunate dislocation the capitate (and carpus) sits dorsal to the lunate. On the PA, trace the smooth carpal arcs: a step or gap means disruption."
+  },
+  {
+   "id": "wk39_c98",
+   "sys": "MSK Anatomy",
+   "topic": "Distal radius POCUS",
+   "type": "cloze",
+   "guide": {
+    "f": "W39_10_MAPS_Anatomy_Lab.html",
+    "t": "10 · POCUS",
+    "s": "distal radius"
+   },
+   "text": "Distal radius POCUS uses three longitudinal views: {{radial}}, {{dorsal}} and {{volar}}, looking for a buckle fracture or displaced cortex.",
+   "explain": "MAPS exit quiz Q1."
+  },
+  {
+   "id": "wk39_c99",
    "sys": "Rheumatology",
    "topic": "Steroid side effects",
    "type": "multi",
    "guide": {
-    "f": "W39_10_Integrated_Review.html",
-    "t": "10 · Glucocorticoids",
+    "f": "W39_11_Integrated_Review.html",
+    "t": "11 · Glucocorticoids",
     "s": "side effects"
    },
    "prompt": "Select recognized side effects of systemic glucocorticoids:",
@@ -2840,14 +3215,19 @@
    "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>MAPS: Upper Limb Imaging, POCUS &amp; Cytopathology</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>MAPS &middot; Anatomy</div><h1>MAPS: Upper Limb Imaging, POCUS &amp; Cytopathology</h1></div><div class='r'>Week 39 &middot; MSK III &mdash; OA, Spine &amp; Pediatric Rheumatology<br>CPC 3 &middot; Year 2<br>Study Suite</div></div><p class='lede'>The three multidisciplinary cases (cuff tear with CPPD, trans-scaphoid perilunate dislocation, gouty olecranon bursitis with ulnar neuropathy), plus POCUS and polarized-light microscopy.</p>\n<h2>Principles</h2>\n<ul>\n<li><b>Imaging of MSK injury always starts with plain X-rays</b> to rule out fracture; add US, CT or MRI as the case requires.</li>\n<li>For a suspected <b>rotator cuff tear</b>, MRI is the most sensitive and specific option (WFQ); ultrasound/POCUS is a quick bedside screen. (In the session, the resident thought X-ray + US was reasonable for this case and no further imaging was needed.)</li>\n<li>Share clinical information with the radiologist and pathologist: requisitions matter.</li>\n</ul>\n<h2>Case 1: the tennis player's shoulder</h2>\n<p>55-year-old woman, chronic right shoulder pain, sudden severe pain while serving, then <b>can't abduct</b>.</p>\n<ul>\n<li>X-ray: no fracture; amorphous density above the humeral head = <b>calcific tendinopathy</b> (supraspinatus). US: <b>full-thickness supraspinatus tear</b> with a complex (heterogeneous) effusion, i.e. abnormal fluid such as <b>hemarthrosis or infection</b>.</li>\n<li>History checklist the resident taught: hand dominance, occupation and hobbies, substance use, <b>anticoagulants</b> (the effusion could be a bleed). <b>Adhesive capsulitis</b> loses <b>both active and passive</b> range, so check passive ROM for a mechanical block. Chronic supraspinatus insufficiency lets the humeral head ride up against the acromion: <b>cuff tear arthropathy</b>.</li>\n<li>Posterior shoulder aspiration: find the tip of the acromion, go 2 fingerbreadths distal, then medial.</li>\n<li><b>Supraspinatus initiates abduction</b> (suprascapular nerve) and passes under the coracoacromial arch. The <b>coracoacromial arch</b> limits superior dislocation; superior GH support also comes from the coracohumeral and glenohumeral ligaments and the long head of biceps.</li>\n<li>Differential: OA flare, gout, CPPD, septic arthritis, Milwaukee shoulder (rare), cuff tear/arthropathy, impingement, bursitis; less likely fracture, dislocation/labral injury, AC injury.</li>\n<li><b>Requisition</b>: age/sex, history, imaging findings, aspiration site, volume and colour; request <b>Gram stain, culture, cell count, crystals</b>.</li>\n<li>Result: cloudy yellow fluid, <b>WBC ~25,000 (neutrophils)</b>, Gram stain/culture negative, normal glucose, high protein; <b>rhomboid, weakly positively birefringent</b> crystals = <b>CPPD</b>.</li>\n</ul>\n<h2>Synovial fluid analysis (cytopathology)</h2>\n<table>\n<tr><th>Component</th><th>What it tells you</th></tr>\n<tr><td>Gross</td><td>Volume, colour, viscosity, clarity (clear, cloudy, bloody, purulent)</td></tr>\n<tr><td>Cell count + differential</td><td>Low = non-inflammatory (OA); high with neutrophils = <b>infection or crystal arthritis</b></td></tr>\n<tr><td>Smear</td><td>Normal background: macrophages, synovial lining cells</td></tr>\n<tr><td>Microbiology</td><td>Gram stain, culture</td></tr>\n<tr><td>Chemistry</td><td>Glucose, protein, LDH (inflammation: high protein, normal glucose)</td></tr>\n<tr><td>Crystals</td><td>Polarized light microscopy</td></tr>\n</table>\n<h2>Polarized light, step by step</h2>\n<ol>\n<li>Brightfield first: find refractile structures.</li>\n<li>Add the <b>analyzer</b> (above the specimen) and <b>polarizer</b> (below), crossed: the background goes dark and <b>birefringent</b> crystals light up.</li>\n<li>Add the <b>red compensator</b>: colour relative to the compensator axis gives the sign.</li>\n</ol>\n<table>\n<tr><th></th><th>Gout (MSU)</th><th>Pseudogout (CPPD)</th></tr>\n<tr><td>Shape</td><td><b>Needle</b></td><td><b>Rhomboid</b>/blocky</td></tr>\n<tr><td>Birefringence</td><td><b>Strong negative</b></td><td><b>Weak positive</b></td></tr>\n<tr><td>Parallel to compensator</td><td><b>Yellow</b></td><td><b>Blue</b></td></tr>\n<tr><td>Perpendicular</td><td>Blue</td><td>Yellow</td></tr>\n<tr><td>Cytology</td><td>Often intracellular in neutrophils</td><td>Usually extracellular</td></tr>\n<tr><td>Setting</td><td>Middle-aged/older, first MTP</td><td>Elderly, knee/wrist/shoulder</td></tr>\n</table>\n<p><b>Tophus</b> histology = <b>granulomatous inflammation</b>: palisading histiocytes/giant cells around feathery amorphous crystal material (MSU often dissolves in processing). Tophi are removed for function, pain, cosmesis or infection.</p>\n<h2>Case 2: fall on an outstretched hand (FOOSH) from a ladder</h2>\n<p>20-year-old, high-energy FOOSH, dorsal wrist deformity, tender over lunate/capitate, <b>median nerve numbness</b>, positive Tinel's at the carpal tunnel, delayed capillary refill in digit 1.</p>\n<ul>\n<li>X-ray: dorsal dislocation of the carpus relative to the lunate + a fractured <b>scaphoid</b> = <b>trans-scaphoid perilunate fracture-dislocation</b>. In a <b>lunate dislocation</b> the lunate itself displaces volarly into the carpal tunnel.</li>\n<li>Median nerve symptoms: the displaced carpus/lunate compresses the carpal tunnel contents.</li>\n<li><b>Reading the wrist X-ray</b>: on a PA the ulnar styloid sits on the outer edge of the ulna; trace the smooth <b>carpal arcs</b> (proximal row, then the proximal edge of the distal row): a step or gap means the carpus is disrupted. In the injury, the capitate sits dorsal to the lunate on the lateral view. Perilunate injury is high-energy (young manual workers), <b>very commonly missed</b>, and does very poorly without surgery.</li>\n<li>Trauma history and exam: AMPLE with <b>last meal</b> (anaesthesia), head injury or neck pain (distracting injury), onset and progression of neuro symptoms, <b>open wounds</b> (prophylactic antibiotics), joint above and below, and <b>two-point discrimination</b> (5 vs 10 mm) in each nerve territory.</li>\n<li><b>Median nerve motor test (\"OK sign\")</b>: the patient makes a round \"O\" by flexing the <b>thumb IP (FPL)</b> and <b>index DIP (FDP)</b>; a flat pinch with the finger pads doesn't test the median nerve.</li>\n<li>Management: urgent <b>closed reduction</b> under sedation (likely highly unstable given the bony injury; wrist extension, traction in line with the deformity, then wrist flexion, keeping a thumb on the lunate), then reassess neurovascular status. If successful and the neuro deficit improves, the OR becomes less urgent. If it fails or is unstable: urgent <b>open reduction, fixation (scaphoid headless compression screw, K-wires)</b>. A <b>carpal tunnel release</b> is done for anyone with a perilunate injury and median symptoms regardless (non-acutely if reduction succeeds). A scapholunate repair is probably unnecessary when the energy went through the scaphoid.</li>\n<li>Don't-miss orthopaedic injuries: open injuries, dislocations, occult fractures (e.g. an undisplaced femoral neck fracture with a posterior hip dislocation), vascular injury, neurological compromise, <b>compartment syndrome</b> (tense compartments, pain out of proportion, pain on passive stretch). Also: distal radius, <b>Barton</b> (shear distal radius fracture with carpal subluxation) and <b>Galeazzi</b> (distal radial shaft fracture with DRUJ injury) fractures.</li>\n</ul>\n<h2>Case 3: hot elbow with numb ring and little fingers</h2>\n<p>71-year-old with HTN, T2DM, obesity on <b>hydrochlorothiazide</b>: sudden red, warm, swollen elbow, <b>firm nodules</b>, numb and weak 4th/5th digits.</p>\n<ul>\n<li>X-ray: posterior soft-tissue swelling with calcific densities and no joint effusion; US then MRI: a thick-walled enhancing <b>olecranon bursitis</b> with <b>no extension into the elbow joint</b> (so not septic arthritis). Aspirate: WBC ~40,000, <b>needle-shaped, strongly negatively birefringent intracellular</b> crystals = <b>gout</b> (tophi + thiazide).</li>\n<li><b>Ulnar nerve</b> is compressed as it passes behind the medial epicondyle through the <b>cubital tunnel</b>.</li>\n<li>Ulnar nerve exam: <b>Froment's sign</b> (thumb IP flexes via FPL to substitute for a weak adductor pollicis), <b>Wartenberg's sign</b> (little finger drifts into abduction). <b>High</b> lesion: FCU + ulnar FDP + intrinsics weak; sensory loss palmar and dorsal 5th and ulnar half of 4th. <b>Low</b> (wrist) lesion: intrinsics only; dorsal sensation may be spared (dorsal branch leaves ~8 cm proximal to the pisiform).</li>\n<li><b>Ulnar paradox</b>: clawing is <b>worse with a low lesion</b> because FDP is still working.</li>\n<li>A low lesion is at <b>Guyon's canal</b> (between the hook of hamate and the pisiform), e.g. mass effect from an ulnar artery thrombus.</li>\n</ul>\n<h2>Carpal tunnel anatomy (lab)</h2>\n<p>The carpal bones form an <b>arch open anteriorly</b>; the <b>flexor retinaculum</b> closes it into the tunnel, attaching to the <b>hook of hamate</b> and pisiform medially and the <b>scaphoid and trapezium tubercles</b> laterally (the lab figure labels the hook of hamate and trapezium). Elbow X-ray landmarks: olecranon, trochlea, capitulum, radial head, coronoid process.</p>\n<h2>POCUS</h2>\n<ul>\n<li><b>Elbow</b>: posterior long- and short-axis views over the olecranon fossa (distal humerus, olecranon, posterior fat pad, epicondyles). Elbow flexed; long axis with the probe marker to the patient's head, short axis rotated 90&deg; with the marker to the patient's right. An <b>elevated posterior fat pad</b> = <b>elbow effusion or lipohemarthrosis</b> (exit quiz: both). On X-ray, a raised anterior fat pad is the \"<b>sail sign</b>\", and any visible <b>posterior fat pad sign</b> also means an effusion.</li>\n<li><b>Distal radius</b>: three longitudinal views, <b>radial, dorsal and volar</b>, looking for cortical displacement or a buckle fracture.</li>\n</ul>\n<div class='key'>Plain X-ray first. Can't abduct after a tennis serve = supraspinatus tear (MRI most sensitive). Aspirate: Gram/culture, count, crystals; high neutrophils = <b>infection</b> or crystal arthritis. Gout = needle, strong negative, yellow parallel, intracellular; CPPD = rhomboid, weak positive, blue parallel. Perilunate + scaphoid fracture &rarr; median nerve compromise &rarr; reduce, then OR + carpal tunnel release. Gouty olecranon bursitis &rarr; ulnar nerve at the cubital tunnel.</div>\n</div>"
   },
   {
-   "file": "W39_10_Integrated_Review.html",
-   "title": "Week 39 · 10 Integrated Rheumatology Review (Weeks 38–39)",
+   "file": "W39_10_MAPS_Anatomy_Lab.html",
+   "title": "Week 39 · 10 MAPS Anatomy Lab: Upper Limb, Task by Task",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>MAPS Anatomy Lab: Upper Limb, Task by Task</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>MAPS &middot; Anatomy Lab</div><h1>MAPS Anatomy Lab: Upper Limb, Task by Task</h1></div><div class='r'>Week 39 &middot; MSK III &mdash; OA, Spine &amp; Pediatric Rheumatology<br>CPC 3 &middot; Year 2<br>Study Suite</div></div><p class='lede'>Every exercise in the Week 39 MAPS lab guide in order: the structures to identify on each model and specimen, the lab's questions with answers, the radiograph landmarks, and the POCUS technique. Anatomy/MAPS is 9&ndash;10 of the 40 exam questions.</p>\n<h2>How this lab fits</h2>\n<p>The 2.5-hour lab (Tue Sep 8) had no separate lecture: its prep was \"review all associated anatomy lectures\", i.e. Week 38's MSK anatomy lecture (<b>Week 38 &middot; 11 Upper Limb I</b> and <b>12 Upper Limb II</b>). Each exercise pairs a clinical case (answered in <b>guide 9</b>, the multidisciplinary rounds) with an \"anatomy application\" station. The exam breakdown gives <b>Anatomy/MAPS 9&ndash;10 of 40 questions</b>.</p>\n<table>\n<tr><th>Exercise</th><th>Case</th><th>Anatomy station</th></tr>\n<tr><td>1 / 1A / 1B</td><td>Tennis player who can't abduct (supraspinatus tear, CPPD)</td><td>Shoulder joint and cuff; arm and forearm compartments; brachial plexus</td></tr>\n<tr><td>2A</td><td>FOOSH from a ladder (trans-scaphoid perilunate)</td><td>Carpal bones, wrist joint, carpal tunnel; hand radiographs</td></tr>\n<tr><td>2B</td><td>Hot elbow, numb ring and little fingers (gouty olecranon bursitis)</td><td>Elbow radiograph; cubital fossa and anterior forearm dissection</td></tr>\n<tr><td>POCUS</td><td>&mdash;</td><td>Posterior elbow (effusion) and distal radius (fracture)</td></tr>\n</table>\n\n<h2>Exercise 1A: the shoulder</h2>\n<h3>Task 1: models (scapula and proximal humerus)</h3>\n<table>\n<tr><th>Structure</th><th>What to know</th></tr>\n<tr><td><b>Glenoid labrum</b></td><td>Fibrocartilage ring that deepens the shallow glenoid; the humeral head sits only about one-third in the socket, so the labrum and cuff matter for stability</td></tr>\n<tr><td><b>Acromioclavicular ligament</b></td><td>Capsular ligament of the small plane AC joint; the <b>coracoclavicular ligament</b> is the main AC stabilizer. Separated shoulder = AC disruption</td></tr>\n<tr><td><b>Glenohumeral ligaments</b></td><td>Superior, middle and inferior thickenings of the anterior capsule (static stabilizers)</td></tr>\n<tr><td><b>Coracohumeral ligament</b></td><td>Coracoid to the humerus; reinforces the <b>superior</b> capsule</td></tr>\n<tr><td><b>Biceps brachii tendon</b></td><td>The <b>long head</b> runs through the glenohumeral joint (intracapsular) and exits in the bicipital groove</td></tr>\n</table>\n<div class='band good'><div class='t'>Lab question: what reinforces the superior glenohumeral joint?</div>The <b>coracoacromial arch</b> (acromion + coracoacromial ligament + coracoid), which limits superior dislocation (exit quiz Q2), plus the <b>coracohumeral</b> and superior <b>glenohumeral</b> ligaments and the <b>long head of biceps</b>. Inferiorly there is no bone or cuff muscle, which is why most dislocations go down first.</div>\n<h3>Task 2: open shoulder specimen</h3>\n<table>\n<tr><th>Structure</th><th>Key facts</th></tr>\n<tr><td><b>Deltoid</b></td><td>Clavicle, acromion, scapular spine &rarr; deltoid tuberosity; abducts (anterior flexes, posterior extends); <b>axillary n.</b></td></tr>\n<tr><td><b>Pectoralis major</b></td><td>Inserts at the intertubercular sulcus (\"two majors and a lady\"); flexes (clavicular head), adducts and internally rotates</td></tr>\n<tr><td><b>Supraspinatus</b></td><td>Greater tubercle; <b>initiates abduction</b>; runs under the coracoacromial arch (impingement); suprascapular n.</td></tr>\n<tr><td><b>Infraspinatus</b></td><td>Greater tubercle; external rotation; suprascapular n.</td></tr>\n<tr><td><b>Teres minor</b></td><td>Greater tubercle; external rotation; <b>axillary n.</b></td></tr>\n<tr><td><b>Subscapularis</b></td><td><b>Lesser</b> tubercle; internal rotation; upper and lower subscapular nn.</td></tr>\n<tr><td><b>Axillary artery</b></td><td>Continuation of the subclavian; gives the anterior and posterior circumflex humeral arteries at the surgical neck; becomes the brachial artery at the lower border of teres major</td></tr>\n<tr><td><b>Cords</b></td><td>Lateral, medial, posterior: named by their position around the <b>axillary artery</b></td></tr>\n<tr><td><b>Terminal nerves</b></td><td>Musculocutaneous (lateral cord), median (lateral + medial), ulnar (medial), radial and axillary (posterior)</td></tr>\n</table>\n<p><b>Lab question: which muscle was affected in the case?</b> <b>Supraspinatus</b>: the tear sits at the greater tubercle and she can't initiate abduction (exit quiz Q3).</p>\n<h3>Task 3: inside the joint</h3>\n<p>Dislocate the humeral head from the glenoid by <b>hyperextending and externally rotating</b> the arm, then find the <b>glenoid cavity</b>, <b>head of humerus</b>, <b>glenoid labrum</b> and the <b>biceps tendon</b> crossing inside the joint.</p>\n\n<h2>Exercise 1B: arm, forearm and plexus</h2>\n<table>\n<tr><th>Region</th><th>Muscles to identify</th><th>Nerve</th></tr>\n<tr><td>Anterior arm</td><td>Biceps brachii, coracobrachialis, brachialis</td><td><b>Musculocutaneous</b> (it pierces coracobrachialis)</td></tr>\n<tr><td>Posterior arm</td><td>Triceps brachii</td><td><b>Radial</b></td></tr>\n<tr><td>Anterior forearm (flexors)</td><td>Flexor group including <b>pronator teres</b> and <b>pronator quadratus</b></td><td><b>Median</b>, except <b>FCU</b> and the <b>medial half of FDP</b> (ulnar)</td></tr>\n<tr><td>Posterior forearm (extensors)</td><td>Extensor group including <b>brachioradialis</b> and <b>supinator</b> (the two \"exceptions\" that don't extend the wrist)</td><td><b>Radial</b> (deep branch/posterior interosseous)</td></tr>\n</table>\n<div class='band good'><div class='t'>Lab questions</div>Anterior arm = <b>musculocutaneous</b>; posterior arm = <b>radial</b>; most anterior forearm muscles = <b>median</b>; posterior forearm = <b>radial</b>. The two anterior forearm muscles supplied by the <b>ulnar</b> nerve: <b>flexor carpi ulnaris</b> and the <b>medial half of flexor digitorum profundus</b>.</div>\n<h3>Task 2: draw the brachial plexus</h3>\n<ol>\n<li><b>Roots (rami)</b>: C5, C6, C7, C8, T1 (anterior rami), emerging between the <b>anterior and middle scalenes</b>.</li>\n<li><b>Trunks</b>: upper (C5&ndash;6), middle (C7), lower (C8&ndash;T1).</li>\n<li><b>Divisions</b>: each trunk splits into anterior and posterior divisions.</li>\n<li><b>Cords</b>: <b>posterior</b> = all three posterior divisions; <b>lateral</b> = anterior divisions of the upper and middle trunks; <b>medial</b> = anterior division of the lower trunk.</li>\n<li><b>Terminal branches</b>: draw the \"<b>M</b>\": musculocutaneous (lateral cord), median (a limb from each of lateral and medial), ulnar (medial cord); axillary and radial from the posterior cord.</li>\n</ol>\n<p>Mnemonic: \"<b>R</b>eally <b>T</b>ired? <b>D</b>rink <b>C</b>offee <b>B</b>lack\". Root values to know: musculocutaneous C5&ndash;7, axillary C5&ndash;6, radial C5&ndash;T1, ulnar C8&ndash;T1, median (lecture: C5&ndash;6 and C8&ndash;T1; standard texts include C7).</p>\n\n<h2>Exercise 2A: wrist and hand</h2>\n<p>Case answers (guide 9): plain <b>X-rays</b> first (PA + lateral); urgent <b>closed reduction</b> then neurovascular reassessment, open reduction and fixation if it fails, plus carpal tunnel release. Median sensory loss: the displaced carpus/lunate <b>compresses the carpal tunnel contents</b>; the delayed capillary refill reflects the deformity compromising circulation to the hand. The fractured carpal bone is the <b>scaphoid</b>.</p>\n<h3>Task 1: bones and the wrist joint</h3>\n<table>\n<tr><th>Structure</th><th>What to know</th></tr>\n<tr><td>Proximal row (lateral &rarr; medial)</td><td><b>Scaphoid, lunate, triquetrum, pisiform</b> (pisiform sits on the triquetrum, a sesamoid in FCU)</td></tr>\n<tr><td>Distal row (lateral &rarr; medial)</td><td><b>Trapezium, trapezoid, capitate, hamate</b> (\"Some Lovers Try Positions That They Can't Handle\"; trapezium at the thumb)</td></tr>\n<tr><td>Metacarpals I&ndash;V; phalanges</td><td>Proximal, middle and distal phalanges; the thumb has no middle phalanx</td></tr>\n<tr><td><b>Articular disc</b></td><td>Triangular fibrocartilage over the distal ulna; it, not the ulna, meets the carpus</td></tr>\n</table>\n<div class='band good'><div class='t'>Lab questions</div>The <b>scaphoid, lunate and triquetrum</b> articulate with the distal radius and articular disc to form the wrist (radiocarpal, condyloid) joint; the pisiform does not. Wrist movements: <b>flexion, extension, radial deviation (abduction), ulnar deviation (adduction)</b>.</div>\n<h3>Task 2: the carpal tunnel</h3>\n<ul>\n<li>Tighten the model's cord: the carpal bones form an <b>arch open anteriorly</b>, which the <b>flexor retinaculum</b> closes into a tunnel.</li>\n<li>Retinaculum attachments (the lab figure labels them): medially the <b>hook of hamate</b> (and pisiform); laterally the <b>tubercle of trapezium</b> (and scaphoid tubercle).</li>\n<li>The <b>median nerve</b> passes through, with the 4 FDS, 4 FDP and FPL tendons in their synovial sheaths. It supplies the <b>thenar muscles</b>. The palmar cutaneous branch runs superficial to the retinaculum, so palm sensation is spared in carpal tunnel syndrome.</li>\n<li>Contrast <b>Guyon's canal</b> (between the hook of hamate and pisiform): the ulnar nerve and artery at the wrist.</li>\n</ul>\n<h3>Task 3: hand radiographs (PA, oblique, lateral)</h3>\n<p>The lab asks you to identify structures 1&ndash;11 on the three views but gives <b>no answer key</b>; check the numbers with your TA or the source case (Radiopaedia rID 67074). What each view is for:</p>\n<table>\n<tr><th>View</th><th>Look for</th></tr>\n<tr><td>PA</td><td>All three phalanges of each finger and two in the thumb; metacarpals; both carpal rows; the <b>pisiform</b> as a round density overlapping the triquetrum; the <b>hook of hamate</b> as a ring over the hamate; the smooth <b>carpal arcs</b> (a step means disruption); the ulnar styloid on the outer edge of the ulna</td></tr>\n<tr><td>Oblique</td><td>Opens out the radial side: <b>trapezium, trapezoid</b> and the scaphoid, and the base of the thumb metacarpal (first CMC)</td></tr>\n<tr><td>Lateral</td><td><b>Radius, lunate and capitate</b> stacked in a line (in a perilunate injury the capitate sits dorsal to the lunate); the pisiform projects volarly; the scaphoid lies obliquely</td></tr>\n</table>\n\n<h2>Exercise 2B: elbow and anterior forearm</h2>\n<p>Case answers (guide 9): acute inflammation of the elbow/olecranon bursa with tophi (gout on hydrochlorothiazide); the <b>ulnar nerve</b> behind the medial epicondyle (cubital tunnel) explains the ring and little finger findings; plain X-ray first, then US/MRI; differential: gout, CPPD, septic bursitis or arthritis.</p>\n<p><b>Elbow radiograph (lateral)</b>: the lab numbers six structures without a key. Find the <b>humerus</b> with the <b>olecranon fossa</b>, the concentric circles of the <b>capitulum and trochlea</b>, the <b>olecranon</b> (where triceps inserts, and where the bursa sits), the <b>coronoid process</b>, and the <b>radial head and neck</b> with the <b>radial tuberosity</b> (biceps insertion). Fat pads: a raised anterior pad (sail sign) or any visible posterior pad means an effusion.</p>\n<h3>Task 1: cubital fossa and anterior forearm dissection</h3>\n<ol>\n<li>Skin incisions (G&ndash;E plus transverse cuts at the mid-arm, cubital fossa and wrist); remove the superficial veins with the subcutaneous tissue.</li>\n<li>The <b>roof</b> of the cubital fossa is the <b>antebrachial fascia + bicipital aponeurosis</b>; incise it.</li>\n<li>Identify the fossa: <b>brachioradialis</b> (lateral border; retract it to see the <b>radial nerve</b>), <b>pronator teres</b> (medial border), and lateral to medial the <b>biceps tendon, brachial artery, median nerve</b> (TAN).</li>\n<li>Open the antebrachial fascia to the wrist and separate the layers by blunt dissection.</li>\n</ol>\n<table>\n<tr><th>Layer</th><th>Muscles</th></tr>\n<tr><td>Superficial</td><td><b>Pronator teres, flexor carpi radialis, palmaris longus, flexor carpi ulnaris</b> (common flexor origin: medial epicondyle)</td></tr>\n<tr><td>Intermediate</td><td><b>Flexor digitorum superficialis</b></td></tr>\n<tr><td>Deep</td><td><b>Flexor pollicis longus, flexor digitorum profundus, pronator quadratus</b></td></tr>\n<tr><td>Neurovasculature</td><td><b>Radial and ulnar arteries</b>; <b>median and ulnar nerves</b></td></tr>\n</table>\n<div class='band good'><div class='t'>Lab question: which nerve is affected in the case, and why?</div>The <b>ulnar nerve</b>: numbness and weakness of the 4th and 5th digits, with the inflamed olecranon bursa and tophi next to where the nerve runs behind the medial epicondyle. It is not a cubital fossa structure (it enters the forearm between the heads of FCU). High (elbow) lesion: FCU and ulnar FDP weak plus the intrinsics, with palmar and dorsal sensory loss.</div>\n\n<h2>POCUS</h2>\n<table>\n<tr><th>Scan</th><th>Technique</th><th>Identify / interpret</th></tr>\n<tr><td><b>Posterior elbow, long axis</b></td><td>Arm flexed; probe along the humerus over the olecranon fossa, marker to the patient's head</td><td>Distal humerus, olecranon fossa, <b>posterior fat pad</b>, olecranon, triceps tendon</td></tr>\n<tr><td><b>Posterior elbow, short axis</b></td><td>Rotate 90&deg;, marker to the patient's right</td><td>Olecranon fossa between the <b>medial and lateral epicondyles</b>; effusion present or absent</td></tr>\n<tr><td>Interpretation</td><td colspan='2'>An <b>elevated posterior fat pad</b> = <b>effusion or lipohemarthrosis</b> (exit quiz Q5; the X-ray equivalents are the anterior and posterior fat pad signs)</td></tr>\n<tr><td><b>Distal radius</b></td><td>Longitudinal probe over the <b>radial (lateral), dorsal and volar (palmar)</b> aspects (exit quiz Q1)</td><td>Normal smooth cortex vs a <b>buckle</b> fracture or a displaced cortex</td></tr>\n</table>\n\n<h2>Exit quiz at a glance</h2>\n<table>\n<tr><th>Q</th><th>Answer</th></tr>\n<tr><td>1</td><td>Distal radius POCUS views: radial, dorsal, volar</td></tr>\n<tr><td>2</td><td>Superior shoulder dislocation is limited by the coracoacromial arch</td></tr>\n<tr><td>3</td><td>Greater-tubercle cuff tear: supraspinatus, initiates abduction</td></tr>\n<tr><td>4</td><td>Weak wrist flexion and grip: flexor digitorum superficialis, median nerve</td></tr>\n<tr><td>5</td><td>Elevated posterior fat pad on POCUS: effusion <b>and</b> lipohemarthrosis</td></tr>\n<tr><td>6</td><td>Anterior sail sign: displaced anterior fat pad</td></tr>\n<tr><td>7</td><td>Key aspiration step: record gross appearance, cell count, crystal analysis</td></tr>\n<tr><td>8</td><td>High neutrophils: infection or crystal arthritis</td></tr>\n<tr><td>9</td><td>First imaging for upper-limb soft-tissue trauma: plain X-ray</td></tr>\n</table>\n<div class='key'>Superior GH support = coracoacromial arch + coracohumeral/GH ligaments + long head of biceps. Anterior arm musculocutaneous, posterior radial; anterior forearm median except FCU + medial &frac12; FDP (ulnar); posterior forearm radial. Wrist joint = scaphoid, lunate, triquetrum + disc; 4 movements. Retinaculum: hook of hamate and trapezium tubercle; median nerve &rarr; thenar muscles. Cubital fossa roof = antebrachial fascia + bicipital aponeurosis; TAN. Forearm flexors: PT, FCR, PL, FCU / FDS / FDP, FPL, PQ. POCUS: fat pad up = effusion or lipohemarthrosis; distal radius radial/dorsal/volar.</div>\n</div>"
+  },
+  {
+   "file": "W39_11_Integrated_Review.html",
+   "title": "Week 39 · 11 Integrated Rheumatology Review (Weeks 38–39)",
    "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Integrated Rheumatology Review (Weeks 38–39)</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.2px;line-height:1.45;-webkit-font-smoothing:antialiased}\n.page{max-width:980px;margin:0 auto;padding:18px 22px 64px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:14px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:30px;letter-spacing:-.01em;margin:2px 0 0;line-height:1.02}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.lede{font-size:13.5px;color:var(--soft);margin:0 0 16px}\nh2{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--accent);margin:22px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--line)}\nh3{font-family:'IBM Plex Sans';font-weight:700;font-size:13px;letter-spacing:.02em;margin:14px 0 5px;color:var(--ink)}\np{margin:6px 0}ul{margin:6px 0;padding-left:18px}li{margin:3px 0}b{color:var(--ink)}\n.band{border:1.5px solid var(--ink);border-radius:6px;background:rgba(0,0,0,.02);padding:10px 13px;margin:12px 0}\n.band .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}\n.band.warn{border-color:var(--hi)}.band.warn .t{color:var(--hi)}\n.band.good{border-color:var(--green)}.band.good .t{color:var(--green)}\n.key{border-left:3px solid var(--accent);padding:8px 12px;margin:10px 0;background:rgba(0,0,0,.02)}\ntable{width:100%;border-collapse:collapse;font-size:11.6px;margin:8px 0}\nth,td{text-align:left;padding:4px 9px;border-bottom:1px solid var(--line);vertical-align:top}\nth{font-family:'IBM Plex Mono',monospace;font-size:8.8px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);font-weight:600;border-bottom:1.5px solid var(--ink)}\n.dnm{color:var(--hi);font-weight:700}\n</style><div class='page'><div class='head'><div><div class='k'>ISAL &middot; Worksheet</div><h1>Integrated Rheumatology Review (Weeks 38–39)</h1></div><div class='r'>Week 39 &middot; MSK III &mdash; OA, Spine &amp; Pediatric Rheumatology<br>CPC 3 &middot; Year 2<br>Study Suite</div></div><p class='lede'>The SLM05 comparison tables and the three ISAL cases: telling apart inflammatory arthritis, axial SpA, myositis, PMR and fibromyalgia; RA vs OA; and rheumatic disease in older adults.</p>\n<h2>The comparison worksheet (SLM05)</h2>\n<table>\n<tr><th>Condition</th><th>History</th><th>Exam</th><th>Investigations</th></tr>\n<tr><td><b>Inflammatory arthritis</b></td><td>Pain/stiffness worse with rest, better with activity (AM stiffness &ge;30 min); swelling; &plusmn; constitutional</td><td>Swelling, joint-line tenderness, limited ROM, EAMs</td><td>&plusmn; high ESR/CRP, abnormal CBC; RF/anti-CCP; abnormal X-ray</td></tr>\n<tr><td><b>Axial SpA</b></td><td>Inflammatory back/neck pain, &plusmn; hip; enthesitis, dactylitis, EAMs</td><td>&plusmn; limited spinal movement</td><td>&plusmn; ESR/CRP; HLA-B27; X-ray</td></tr>\n<tr><td><b>Inflammatory myositis</b></td><td><b>Proximal weakness</b>, &plusmn; rash, dyspnea</td><td>Proximal weakness, rash, ILD signs</td><td><b>High CK</b>, myositis antibodies, MRI, EMG</td></tr>\n<tr><td><b>PMR</b></td><td>Pain + AM stiffness &ge;30 min in &ge;2 of shoulder girdle, neck, hip girdle; constitutional</td><td>Limited shoulder/neck/hip movement (pain), <b>no weakness</b></td><td><b>High ESR/CRP</b>, anemia, thrombocytosis; <b>normal CK</b></td></tr>\n<tr><td><b>Fibromyalgia</b></td><td>Widespread pain + sleep/fatigue &ge;3 months; mood, cognitive symptoms</td><td>Diffuse tenderness only</td><td><b>Normal</b></td></tr>\n</table>\n<h3>RA vs OA</h3>\n<table>\n<tr><th></th><th>RA</th><th>OA</th></tr>\n<tr><td>Exam</td><td>Swelling, warmth, limited ROM, joint-line tenderness; boutonni&egrave;re, swan neck</td><td>Limited ROM, joint-line tenderness, <b>crepitus</b>; Heberden (DIP), Bouchard (PIP)</td></tr>\n<tr><td>X-ray</td><td><b>Periarticular osteopenia</b>, uniform narrowing, <b>erosions</b></td><td><b>Subchondral sclerosis, cysts, osteophytes</b>, non-uniform narrowing</td></tr>\n<tr><td>Joints</td><td>Symmetric MCP, PIP, wrist, MTP plus shoulders, elbows, knees, ankles; C-spine</td><td>DIP, PIP, CMC1, <b>first MTP</b>, knees, hips, C- and L-spine</td></tr>\n</table>\n<p>Seropositive vs seronegative: RA/lupus involve the C-spine only; SpA involves the SI joints &plusmn; the whole spine. Serology: RA = RF, anti-CCP; lupus = ANA, ENA, C3/C4; SpA = HLA-B27. Synovial fluid: non-inflammatory = clear, high viscosity, &lt;2000 &times;10<sup>6</sup>/L; inflammatory = turbid, low viscosity, &gt;2000; infection or crystals typically &gt;50,000 with ~90% PMN, but only as a guideline: the MAPS CPPD aspirate was 25,000.</p>\n<h2>ISAL case 1: a hot knee in CKD</h2>\n<p>50-year-old with <b>CKD</b>, febrile, 5 days of a red, hot, swollen right knee. Next step: <b>aspirate</b> (cell count, crystals, culture) rather than blind antibiotics, colchicine or referral. Fluid: <b>65,000 WBC</b> (80% PMN), culture negative, <b>needle-shaped negatively birefringent</b> crystals; creatinine 200 &rarr; <b>gout</b>.</p>\n<div class='band warn'><div class='t'>Best acute treatment here</div><b>Intra-articular glucocorticoid</b>: NSAIDs are contraindicated (CKD), colchicine only works within 12&ndash;36 h (Dr. Yang said \"~48 h\" aloud; either way, not at day 5) and is poorly cleared in renal disease, and IA steroid is preferred over oral in a monoarthritis because it exposes the patient only to local side effects. With <b>two</b> joints you could inject both; with a <b>polyarticular</b> flare (five or more joints) use <b>oral</b> glucocorticoids (the exam won't ask you to choose between injecting 2 and 3). Acetaminophen won't treat inflammation.</div>\n<p>Crystal colour check: CPPD is <b>blue when parallel</b> to the compensator (the ISAL audio says \"perpendicular\"; trust the table in the MAPS guide).</p>\n<h2>ISAL case 2: symmetric small-joint polyarthritis</h2>\n<p>32-year-old woman, 6 months of joint pain, 60 min AM stiffness, partial NSAID response, no back pain, symmetric small-joint synovitis &rarr; <b>RA</b>. First-line DMARD: <b>methotrexate</b> (not prednisone, which isn't disease-modifying; not a biologic first; not colchicine). Symptom relief: splint, ice, joint protection, NSAIDs, glucocorticoids.</p>\n<h2>ISAL case 3: an older woman who can't get dressed</h2>\n<p>66-year-old woman: 3 months of hip, then shoulder and neck pain and stiffness, 1 h in the morning, 10 lb weight loss, low energy, <b>no weakness</b> (just painful), normal exam otherwise. Hb 108, platelets 450, <b>ESR 60, CRP 72</b>; CK, calcium, PTH, TSH, SPEP normal &rarr; <b>PMR</b>.</p>\n<ul>\n<li>Not RA: wrong joint pattern. Not myositis: no weakness, painful, normal CK. Not fibromyalgia: labs show inflammation.</li>\n<li>Next: screen for GCA; low&ndash;medium dose glucocorticoid; refer to rheumatology.</li>\n</ul>\n<h2>Working up generalized pain</h2>\n<p>Basic bloodwork (<b>CBC, electrolytes, creatinine, calcium, TSH</b>, &plusmn; ESR/CRP, CK, SPEP) excludes most mimics of fibromyalgia: hypothyroidism, hyperparathyroidism/hypercalcemia, myeloma, infection, statin myopathy. Avoid ANA, RF and HLA-B27 at low pre-test probability (WFQ). Classic fibromyalgia: widespread tenderness, give-way weakness from pain, fatigue, headaches, IBS-like bowel symptoms, normal exam.</p>\n<h2>Rheumatic disease in older adults (CBL 39 objective)</h2>\n<table>\n<tr><th>Condition</th><th>Clues</th></tr>\n<tr><td>OA</td><td>&ge;45, activity pain, &lt;30 min stiffness, bony swelling, cool joints; X-ray LOSS</td></tr>\n<tr><td>PMR</td><td>&gt;50, girdle stiffness, high ESR/CRP, dramatic steroid response, normal CK</td></tr>\n<tr><td>GCA</td><td>&gt;50, headache, jaw claudication, vision; start high-dose steroids on suspicion, don't wait for the biopsy</td></tr>\n<tr><td>Late-onset RA</td><td>&gt;60, often abrupt or PMR-like onset; RF/CCP, CRP</td></tr>\n<tr><td>Gout</td><td>Diuretics, CKD, alcohol; favours damaged (OA) joints; serum urate may be normal in a flare</td></tr>\n<tr><td>CPPD</td><td>\"Elderly woman + swollen wrist = pseudogout\"; knee/wrist; chondrocalcinosis</td></tr>\n</table>\n<p>Safe prescribing in the elderly: prefer topical NSAIDs and scheduled acetaminophen; oral NSAIDs rarely safe (renal, CV, GI, anticoagulants, falls). Systemic glucocorticoid side effects depend on <b>duration</b>, so a short oral course is reasonable when many joints are involved.</p>\n<h3>Systemic glucocorticoid side effects (ISAL body map)</h3>\n<table>\n<tr><th>System</th><th>Effects</th></tr>\n<tr><td>Eye</td><td>Cataract, glaucoma, blurred vision</td></tr>\n<tr><td>Psychiatric</td><td>Sleep and mood disturbance, psychosis</td></tr>\n<tr><td>Cardiovascular / renal</td><td>Hypertension, raised lipoproteins; hypokalemia, edema</td></tr>\n<tr><td>GI</td><td>Gastritis, peptic ulcer</td></tr>\n<tr><td>Endocrine</td><td>Diabetes/hyperglycemia, <b>adrenal suppression</b></td></tr>\n<tr><td>MSK</td><td><b>Osteoporosis</b>, <b>avascular necrosis</b>, myopathy</td></tr>\n<tr><td>Fat / skin</td><td>Weight gain, Cushingoid redistribution; striae, acne, hirsutism</td></tr>\n<tr><td>Immune</td><td>Immunosuppression, lymphocytopenia, neutrophilia</td></tr>\n</table>\n<p>Scope notes from Dr. Yang: everything in the pre-week material, self-learning and lectures is fair game (including the antibody&ndash;disease pairs); drug <b>names</b> for biologics/tsDMARDs and the differences between drug families aren't expected; Sj&ouml;gren's and MCTD aren't a focus. Dr. Rozenblyum: the MSK I shoulder lecture isn't on this exam; the hip and knee are examined in a rheumatology context (not hip fracture); she couldn't confirm either way about Ortho 1 (extremities).</p>\n<div class='key'>Weakness + high CK = myositis; stiffness + high ESR/CRP + normal CK = PMR; widespread pain + normal labs = fibromyalgia. Hot knee: aspirate first; gout in CKD &rarr; IA steroid. RA first-line DMARD = methotrexate. RA X-ray = osteopenia + erosions; OA = sclerosis, cysts, osteophytes.</div>\n</div>"
   },
   {
-   "file": "W39_11_Cram_Sheet.html",
-   "title": "Week 39 · 11 Cram Sheet",
-   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Week 39 · 11 Cram Sheet</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.35;-webkit-font-smoothing:antialiased}\n.page{max-width:1180px;margin:0 auto;padding:18px 20px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:8px;margin-bottom:12px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:26px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.emerg{border:1.5px solid var(--hi);border-radius:6px;background:rgba(0,0,0,.02);padding:9px 12px;margin-bottom:13px}\n.emerg .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--hi);font-weight:600;margin-bottom:5px}\n.emerg .items{columns:3;column-gap:22px;font-size:12px;line-height:1.42}\n.emerg .items div{break-inside:avoid;margin-bottom:3px}\n.emerg b{color:var(--hi)}\n.cols{column-count:4;column-gap:14px}\n@media(max-width:1040px){.cols{column-count:3}}\n@media(max-width:760px){.cols{column-count:2}}\n@media(max-width:520px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(0,0,0,.02);padding:8px 9px 7px;margin:0 0 11px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;padding-bottom:4px;border-bottom:1.5px solid var(--line);color:var(--accent);display:flex;justify-content:space-between;align-items:baseline;gap:6px}\n.card h2 .wk{color:var(--soft);font-size:8.5px;font-weight:500;letter-spacing:.06em;white-space:nowrap}\n.row{margin:0 0 3.5px;font-size:11.5px;line-height:1.32}\n.row .tg{font-weight:600;color:var(--ink)}\n.row .ar{color:var(--soft)}\n.row .ar::before{content:\"\\2192 \";color:var(--accent);font-weight:600}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:5px 0}\n.dnm{color:var(--hi);font-weight:700}\n.foot{margin-top:10px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:landscape;margin:9mm}body{font-size:8.4px}.page{max-width:none;padding:0}.cols{column-count:4;column-gap:8px}.emerg .items{columns:3}.card{margin-bottom:6px}.head h1{font-size:19px}}\n</style><div class='page'><div class='head'><div><div class='k'>Night-Before High-Yield</div><h1>MSK III — OA, Spine &amp; Pediatric Rheumatology</h1></div><div class='r'>Week 39 &middot; MSK III &mdash; OA, Spine &amp; Pediatric Rheumatology<br>CPC 3 &middot; Year 2<br>Study Suite</div></div><div class='emerg'><div class='t'>★ Do-not-miss &middot; first-step reflexes</div><div class='items'><div><b>Cauda equina</b> (retention/overflow, fecal incontinence, saddle numbness; altered saddle sensation is early) &rarr; <b>ED</b>, urgent MRI + surgery; check PVR</div><div><b>Cervical myelopathy</b> (clumsy hands, gait, hyperreflexia, Hoffman/Babinski) &rarr; as urgent as cauda equina: MRI, surgical decompression</div><div><b>Back pain + fever/IVDU</b> &rarr; infection: X-ray + MRI</div><div><b>Child: fever + non-weight-bearing</b> (Kocher) &rarr; septic arthritis: aspirate + blood culture + orthopaedics</div><div><b>Child: night pain, bruising, weight loss</b> &rarr; leukemia: CBC + film</div><div><b>Baker's cyst rupture</b> &rarr; rule out DVT; <b>oligo JIA</b> &rarr; eye screening</div><div><b>Perilunate dislocation + median nerve deficit</b> &rarr; urgent reduction &plusmn; OR + carpal tunnel release</div></div></div><div class='cols'><div class='card'><h2>OA <span class='wk'>Pre-week</span></h2><div class='row'><span class='tg'>Definition</span> <span class='ar'>failed repair of whole joint, not wear and tear</span></div><div class='row'><span class='tg'>Top modifiable RF</span> <span class='ar'>body mass (5 kg &asymp; 50% less risk)</span></div><div class='row'><span class='tg'>Injury</span> <span class='ar'>ACL &rarr; ~50% OA at 10&ndash;20 y; menisc. 4&ndash;6&times;</span></div><div class='row'><span class='tg'>Serious</span> <span class='ar'>disability, comorbidity, CV mortality</span></div><div class='row'><span class='tg'>X-ray</span> <span class='ar'>LOSS; correlates poorly with pain</span></div></div><div class='card'><h2>Knee <span class='wk'>SLM01</span></h2><div class='row'><span class='tg'>4 Qs</span> <span class='ar'>inflamed? malignant? referred (hip/L-spine)? where?</span></div><div class='row'><span class='tg'>Meniscus</span> <span class='ar'>young, twist, locking, point tender &rarr; physio</span></div><div class='row'><span class='tg'>Bulge sign</span> <span class='ar'>SMALL effusion (large: ballottement)</span></div><div class='row'><span class='tg'>ITB / pes / PFPS</span> <span class='ar'>lateral 30&deg; / medial 5 cm below / anterior</span></div><div class='row'><span class='tg'>Baker's</span> <span class='ar'>rupture mimics DVT</span></div></div><div class='card'><h2>OA treatment <span class='wk'>Lecture</span></h2><div class='row'><span class='tg'>Core</span> <span class='ar'>exercise (most effective) + weight + self-mgmt</span></div><div class='row'><span class='tg'>Pain rule</span> <span class='ar'>&le;2&ndash;3/10 rise (GLA:D &le;5), settles in 24 h</span></div><div class='row'><span class='tg'>Drug ladder</span> <span class='ar'>topical NSAID &rarr; acetaminophen &rarr; NSAID/COX-2; IA steroid, duloxetine</span></div><div class='row'><span class='tg'>Acetaminophen</span> <span class='ar'>1 g scheduled, 2-week trial</span></div><div class='row'><span class='tg'>Avoid</span> <span class='ar'>opioids, chondroitin (glucosamine uncertain), oral NSAID in CKD/ACEi/anticoag</span></div><div class='row'><span class='tg'>Tylenol</span> <span class='ar'>ES 500 mg; Arthritis 650 mg ER (label 2 q8h; tutor 2 BID)</span></div><div class='row'><span class='tg'>Celecoxib</span> <span class='ar'>sulfonamide</span></div></div><div class='card'><h2>CBL 39 <span class='wk'>Mr. H</span></h2><div class='row'><span class='tg'>Dx</span> <span class='ar'>clinical; labs only for drug safety</span></div><div class='row'><span class='tg'>Skip</span> <span class='ar'>ESR/CRP at low pre-test</span></div><div class='row'><span class='tg'>TKA when</span> <span class='ar'>QoL &darr;, failed max non-op, fit, wants it</span></div><div class='row'><span class='tg'>TKA</span> <span class='ar'>85% satisfied, 20&ndash;30% pain, infection ~1%</span></div><div class='row'><span class='tg'>Semaglutide</span> <span class='ar'>helps knee pain (mechanism unclear), off-label for OA</span></div></div><div class='card'><h2>Low back <span class='wk'>CORE</span></h2><div class='row'><span class='tg'>Qs</span> <span class='ar'>where worst? constant? what aggravates? can't do? B/B? stiff &lt;45?</span></div><div class='row'><span class='tg'>P1</span> <span class='ar'>back, flexion &rarr; disc &rarr; extension exercises</span></div><div class='row'><span class='tg'>P2</span> <span class='ar'>back, extension &rarr; facet &rarr; flexion exercises</span></div><div class='row'><span class='tg'>P3</span> <span class='ar'>constant leg + neuro/SLR &rarr; herniation</span></div><div class='row'><span class='tg'>P4</span> <span class='ar'>walking leg pain, relieved sitting &rarr; stenosis</span></div><div class='row'><span class='tg'>NIFTI</span> <span class='ar'>neuro, infection, fracture, tumour, inflammation</span></div><div class='row'><span class='tg'>Surgery</span> <span class='ar'>&ge;12 wk failed, limb/neuro; not back pain alone</span></div><div class='row'><span class='tg'>Analgesia</span> <span class='ar'>NSAID first (acetaminophen struck out); no bed rest</span></div><div class='row'><span class='tg'>Downstream</span> <span class='ar'>lumbar lesion never causes hand symptoms</span></div><div class='row'><span class='tg'>Disc herniation</span> <span class='ar'>80&ndash;90% settle without surgery</span></div></div><div class='card'><h2>Neck <span class='wk'>CORE</span></h2><div class='row'><span class='tg'>Intermittent arm pain</span> <span class='ar'>CORE: referred; Rampersaud P-IV: foraminal stenosis</span></div><div class='row'><span class='tg'>Neck Rx</span> <span class='ar'>NSAID; no collars/electrical; relaxant acute only</span></div><div class='row'><span class='tg'>DOWN</span> <span class='ar'>dropping, off-balance, weakness, numbness</span></div><div class='row'><span class='tg'>Spurling / distraction</span> <span class='ar'>reproduces / relieves arm pain</span></div><div class='row'><span class='tg'>Roots</span> <span class='ar'>C5 deltoid, C6 thumb, C7 middle/triceps, C8 little</span></div><div class='row'><span class='tg'>Postural</span> <span class='ar'>better on vacation, normal exam</span></div></div><div class='card'><h2>SpA <span class='wk'>Yang</span></h2><div class='row'><span class='tg'>IBP</span> <span class='ar'>&lt;45, insidious, &gt;3 mo, AM &gt;30 min, better w/ exercise</span></div><div class='row'><span class='tg'>Clues</span> <span class='ar'>heel enthesitis, dactylitis, uveitis, psoriasis, IBD</span></div><div class='row'><span class='tg'>X-ray</span> <span class='ar'>sacroiliitis, syndesmophytes; MRI if normal</span></div><div class='row'><span class='tg'>HLA-B27</span> <span class='ar'>1/50 carriers get AS; moderate PTP only</span></div><div class='row'><span class='tg'>Axial Rx</span> <span class='ar'>NSAID &rarr; TNF/IL-17 (no csDMARD); NSAID is disease-modifying here</span></div><div class='row'><span class='tg'>Schober</span> <span class='ar'>10 cm above PSIS line; &lt;5 cm gain abnormal</span></div><div class='row'><span class='tg'>Delay</span> <span class='ar'>9 years on average</span></div></div><div class='card'><h2>Limping child <span class='wk'>SLM04</span></h2><div class='row'><span class='tg'>Kocher</span> <span class='ar'>NWB, T &gt;38.5, WBC &gt;12k, ESR &gt;40 (3/4 = 93%)</span></div><div class='row'><span class='tg'>Transient synovitis</span> <span class='ar'>3&ndash;10, boys, post-viral, afebrile &rarr; NSAID</span></div><div class='row'><span class='tg'>Leukemia</span> <span class='ar'>night pain, bruising, metaphyseal bands</span></div><div class='row'><span class='tg'>Growing pains</span> <span class='ar'>bilateral evening pain, well &rarr; watch and wait</span></div><div class='row'><span class='tg'>JIA</span> <span class='ar'>&lt;16, &ge;6 wk, exclusion</span></div><div class='row'><span class='tg'>Oligo</span> <span class='ar'>&le;4, girl &lt;5, knee, ANA+ 80%, eye screen q3&ndash;6 mo</span></div><div class='row'><span class='tg'>Poly / systemic</span> <span class='ar'>&ge;5 joints / fever + rash &rarr; IL-1/IL-6</span></div></div><div class='card'><h2>MAPS <span class='wk'>Upper limb</span></h2><div class='row'><span class='tg'>Imaging</span> <span class='ar'>plain X-ray first; MRI best for cuff tear</span></div><div class='row'><span class='tg'>Can't abduct</span> <span class='ar'>supraspinatus tear</span></div><div class='row'><span class='tg'>Gout</span> <span class='ar'>needle, strong &minus;, yellow when parallel, intracellular</span></div><div class='row'><span class='tg'>CPPD</span> <span class='ar'>rhomboid, weak +, blue when parallel</span></div><div class='row'><span class='tg'>Perilunate</span> <span class='ar'>scaphoid # + median nerve &rarr; reduce/OR + CTR</span></div><div class='row'><span class='tg'>Cubital tunnel</span> <span class='ar'>ulnar n.; Froment, Wartenberg; ulnar paradox</span></div><div class='row'><span class='tg'>Fat pad</span> <span class='ar'>elevated = effusion or lipohemarthrosis; sail sign</span></div><div class='row'><span class='tg'>OK sign</span> <span class='ar'>FPL + index FDP = median nerve motor</span></div><div class='row'><span class='tg'>High PMNs</span> <span class='ar'>infection or crystal arthritis</span></div></div><div class='card'><h2>Integrated <span class='wk'>ISAL</span></h2><div class='row'><span class='tg'>Gout + CKD</span> <span class='ar'>IA steroid</span></div><div class='row'><span class='tg'>RA 1st DMARD</span> <span class='ar'>methotrexate</span></div><div class='row'><span class='tg'>PMR</span> <span class='ar'>stiffness, &uarr;ESR/CRP, normal CK</span></div><div class='row'><span class='tg'>Widespread pain labs</span> <span class='ar'>CBC, lytes, Cr, Ca, TSH (WFQ); ISAL adds SPEP, ESR/CRP, CK</span></div><div class='row'><span class='tg'>Scope</span> <span class='ar'>no biologic names; MSK I shoulder lecture not examined</span></div></div></div><div class='foot'>Week 39 &middot; MSK III &mdash; OA, Spine &amp; Pediatric Rheumatology &middot; cram sheet &middot; cue &rarr; answer</div></div>"
+   "file": "W39_12_Cram_Sheet.html",
+   "title": "Week 39 · 12 Cram Sheet",
+   "html": "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Week 39 · 12 Cram Sheet</title><style>\n@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');\n:root{--paper:#f5f2ea;--ink:#1c1a15;--soft:#56524a;--line:#d8d2c2;--accent:#8a2e3b;--accent2:#2d5a6b;--green:#2f6b4f;--blue:#2d5a6b;--gold:#8a6d1f;--hi:#a23b2e;--lo:#2d5a6b;}\n*{box-sizing:border-box}html,body{margin:0;padding:0}\nbody{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13px;line-height:1.35;-webkit-font-smoothing:antialiased}\n.page{max-width:1180px;margin:0 auto;padding:18px 20px 60px}\n.head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2.5px solid var(--ink);padding-bottom:8px;margin-bottom:12px;gap:16px}\n.head .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}\n.head h1{font-family:'Fraunces',serif;font-weight:600;font-size:26px;letter-spacing:-.01em;margin:2px 0 0;line-height:1}\n.head .r{text-align:right;font-size:10px;color:var(--soft);font-family:'IBM Plex Mono',monospace;line-height:1.5}\n.emerg{border:1.5px solid var(--hi);border-radius:6px;background:rgba(0,0,0,.02);padding:9px 12px;margin-bottom:13px}\n.emerg .t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--hi);font-weight:600;margin-bottom:5px}\n.emerg .items{columns:3;column-gap:22px;font-size:12px;line-height:1.42}\n.emerg .items div{break-inside:avoid;margin-bottom:3px}\n.emerg b{color:var(--hi)}\n.cols{column-count:4;column-gap:14px}\n@media(max-width:1040px){.cols{column-count:3}}\n@media(max-width:760px){.cols{column-count:2}}\n@media(max-width:520px){.cols{column-count:1}}\n.card{break-inside:avoid;border:1px solid var(--line);border-radius:6px;background:rgba(0,0,0,.02);padding:8px 9px 7px;margin:0 0 11px}\n.card h2{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;padding-bottom:4px;border-bottom:1.5px solid var(--line);color:var(--accent);display:flex;justify-content:space-between;align-items:baseline;gap:6px}\n.card h2 .wk{color:var(--soft);font-size:8.5px;font-weight:500;letter-spacing:.06em;white-space:nowrap}\n.row{margin:0 0 3.5px;font-size:11.5px;line-height:1.32}\n.row .tg{font-weight:600;color:var(--ink)}\n.row .ar{color:var(--soft)}\n.row .ar::before{content:\"\\2192 \";color:var(--accent);font-weight:600}\nhr.mini{border:none;border-top:1px dashed var(--line);margin:5px 0}\n.dnm{color:var(--hi);font-weight:700}\n.foot{margin-top:10px;border-top:1px solid var(--line);padding-top:7px;font-size:10px;color:var(--soft);text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}\n@media print{@page{size:landscape;margin:9mm}body{font-size:8.4px}.page{max-width:none;padding:0}.cols{column-count:4;column-gap:8px}.emerg .items{columns:3}.card{margin-bottom:6px}.head h1{font-size:19px}}\n</style><div class='page'><div class='head'><div><div class='k'>Night-Before High-Yield</div><h1>MSK III — OA, Spine &amp; Pediatric Rheumatology</h1></div><div class='r'>Week 39 &middot; MSK III &mdash; OA, Spine &amp; Pediatric Rheumatology<br>CPC 3 &middot; Year 2<br>Study Suite</div></div><div class='emerg'><div class='t'>★ Do-not-miss &middot; first-step reflexes</div><div class='items'><div><b>Cauda equina</b> (retention/overflow, fecal incontinence, saddle numbness; altered saddle sensation is early) &rarr; <b>ED</b>, urgent MRI + surgery; check PVR</div><div><b>Cervical myelopathy</b> (clumsy hands, gait, hyperreflexia, Hoffman/Babinski) &rarr; as urgent as cauda equina: MRI, surgical decompression</div><div><b>Back pain + fever/IVDU</b> &rarr; infection: X-ray + MRI</div><div><b>Child: fever + non-weight-bearing</b> (Kocher) &rarr; septic arthritis: aspirate + blood culture + orthopaedics</div><div><b>Child: night pain, bruising, weight loss</b> &rarr; leukemia: CBC + film</div><div><b>Baker's cyst rupture</b> &rarr; rule out DVT; <b>oligo JIA</b> &rarr; eye screening</div><div><b>Perilunate dislocation + median nerve deficit</b> &rarr; urgent reduction &plusmn; OR + carpal tunnel release</div></div></div><div class='cols'><div class='card'><h2>OA <span class='wk'>Pre-week</span></h2><div class='row'><span class='tg'>Definition</span> <span class='ar'>failed repair of whole joint, not wear and tear</span></div><div class='row'><span class='tg'>Top modifiable RF</span> <span class='ar'>body mass (5 kg &asymp; 50% less risk)</span></div><div class='row'><span class='tg'>Injury</span> <span class='ar'>ACL &rarr; ~50% OA at 10&ndash;20 y; menisc. 4&ndash;6&times;</span></div><div class='row'><span class='tg'>Serious</span> <span class='ar'>disability, comorbidity, CV mortality</span></div><div class='row'><span class='tg'>X-ray</span> <span class='ar'>LOSS; correlates poorly with pain</span></div></div><div class='card'><h2>Knee <span class='wk'>SLM01</span></h2><div class='row'><span class='tg'>4 Qs</span> <span class='ar'>inflamed? malignant? referred (hip/L-spine)? where?</span></div><div class='row'><span class='tg'>Meniscus</span> <span class='ar'>young, twist, locking, point tender &rarr; physio</span></div><div class='row'><span class='tg'>Bulge sign</span> <span class='ar'>SMALL effusion (large: ballottement)</span></div><div class='row'><span class='tg'>ITB / pes / PFPS</span> <span class='ar'>lateral 30&deg; / medial 5 cm below / anterior</span></div><div class='row'><span class='tg'>Baker's</span> <span class='ar'>rupture mimics DVT</span></div></div><div class='card'><h2>OA treatment <span class='wk'>Lecture</span></h2><div class='row'><span class='tg'>Core</span> <span class='ar'>exercise (most effective) + weight + self-mgmt</span></div><div class='row'><span class='tg'>Pain rule</span> <span class='ar'>&le;2&ndash;3/10 rise (GLA:D &le;5), settles in 24 h</span></div><div class='row'><span class='tg'>Drug ladder</span> <span class='ar'>topical NSAID &rarr; acetaminophen &rarr; NSAID/COX-2; IA steroid, duloxetine</span></div><div class='row'><span class='tg'>Acetaminophen</span> <span class='ar'>1 g scheduled, 2-week trial</span></div><div class='row'><span class='tg'>Avoid</span> <span class='ar'>opioids, chondroitin (glucosamine uncertain), oral NSAID in CKD/ACEi/anticoag</span></div><div class='row'><span class='tg'>Tylenol</span> <span class='ar'>ES 500 mg; Arthritis 650 mg ER (label 2 q8h; tutor 2 BID)</span></div><div class='row'><span class='tg'>Celecoxib</span> <span class='ar'>sulfonamide</span></div></div><div class='card'><h2>CBL 39 <span class='wk'>Mr. H</span></h2><div class='row'><span class='tg'>Dx</span> <span class='ar'>clinical; labs only for drug safety</span></div><div class='row'><span class='tg'>Skip</span> <span class='ar'>ESR/CRP at low pre-test</span></div><div class='row'><span class='tg'>TKA when</span> <span class='ar'>QoL &darr;, failed max non-op, fit, wants it</span></div><div class='row'><span class='tg'>TKA</span> <span class='ar'>85% satisfied, 20&ndash;30% pain, infection ~1%</span></div><div class='row'><span class='tg'>Semaglutide</span> <span class='ar'>helps knee pain (mechanism unclear), off-label for OA</span></div></div><div class='card'><h2>Low back <span class='wk'>CORE</span></h2><div class='row'><span class='tg'>Qs</span> <span class='ar'>where worst? constant? what aggravates? can't do? B/B? stiff &lt;45?</span></div><div class='row'><span class='tg'>P1</span> <span class='ar'>back, flexion &rarr; disc &rarr; extension exercises</span></div><div class='row'><span class='tg'>P2</span> <span class='ar'>back, extension &rarr; facet &rarr; flexion exercises</span></div><div class='row'><span class='tg'>P3</span> <span class='ar'>constant leg + neuro/SLR &rarr; herniation</span></div><div class='row'><span class='tg'>P4</span> <span class='ar'>walking leg pain, relieved sitting &rarr; stenosis</span></div><div class='row'><span class='tg'>NIFTI</span> <span class='ar'>neuro, infection, fracture, tumour, inflammation</span></div><div class='row'><span class='tg'>Surgery</span> <span class='ar'>&ge;12 wk failed, limb/neuro; not back pain alone</span></div><div class='row'><span class='tg'>Analgesia</span> <span class='ar'>NSAID first (acetaminophen struck out); no bed rest</span></div><div class='row'><span class='tg'>Downstream</span> <span class='ar'>lumbar lesion never causes hand symptoms</span></div><div class='row'><span class='tg'>Disc herniation</span> <span class='ar'>80&ndash;90% settle without surgery</span></div></div><div class='card'><h2>Neck <span class='wk'>CORE</span></h2><div class='row'><span class='tg'>Intermittent arm pain</span> <span class='ar'>CORE: referred; Rampersaud P-IV: foraminal stenosis</span></div><div class='row'><span class='tg'>Neck Rx</span> <span class='ar'>NSAID; no collars/electrical; relaxant acute only</span></div><div class='row'><span class='tg'>DOWN</span> <span class='ar'>dropping, off-balance, weakness, numbness</span></div><div class='row'><span class='tg'>Spurling / distraction</span> <span class='ar'>reproduces / relieves arm pain</span></div><div class='row'><span class='tg'>Roots</span> <span class='ar'>C5 deltoid, C6 thumb, C7 middle/triceps, C8 little</span></div><div class='row'><span class='tg'>Postural</span> <span class='ar'>better on vacation, normal exam</span></div></div><div class='card'><h2>SpA <span class='wk'>Yang</span></h2><div class='row'><span class='tg'>IBP</span> <span class='ar'>&lt;45, insidious, &gt;3 mo, AM &gt;30 min, better w/ exercise</span></div><div class='row'><span class='tg'>Clues</span> <span class='ar'>heel enthesitis, dactylitis, uveitis, psoriasis, IBD</span></div><div class='row'><span class='tg'>X-ray</span> <span class='ar'>sacroiliitis, syndesmophytes; MRI if normal</span></div><div class='row'><span class='tg'>HLA-B27</span> <span class='ar'>1/50 carriers get AS; moderate PTP only</span></div><div class='row'><span class='tg'>Axial Rx</span> <span class='ar'>NSAID &rarr; TNF/IL-17 (no csDMARD); NSAID is disease-modifying here</span></div><div class='row'><span class='tg'>Schober</span> <span class='ar'>10 cm above PSIS line; &lt;5 cm gain abnormal</span></div><div class='row'><span class='tg'>Delay</span> <span class='ar'>9 years on average</span></div></div><div class='card'><h2>Limping child <span class='wk'>SLM04</span></h2><div class='row'><span class='tg'>Kocher</span> <span class='ar'>NWB, T &gt;38.5, WBC &gt;12k, ESR &gt;40 (3/4 = 93%)</span></div><div class='row'><span class='tg'>Transient synovitis</span> <span class='ar'>3&ndash;10, boys, post-viral, afebrile &rarr; NSAID</span></div><div class='row'><span class='tg'>Leukemia</span> <span class='ar'>night pain, bruising, metaphyseal bands</span></div><div class='row'><span class='tg'>Growing pains</span> <span class='ar'>bilateral evening pain, well &rarr; watch and wait</span></div><div class='row'><span class='tg'>JIA</span> <span class='ar'>&lt;16, &ge;6 wk, exclusion</span></div><div class='row'><span class='tg'>Oligo</span> <span class='ar'>&le;4, girl &lt;5, knee, ANA+ 80%, eye screen q3&ndash;6 mo</span></div><div class='row'><span class='tg'>Poly / systemic</span> <span class='ar'>&ge;5 joints / fever + rash &rarr; IL-1/IL-6</span></div></div><div class='card'><h2>MAPS <span class='wk'>Upper limb</span></h2><div class='row'><span class='tg'>Imaging</span> <span class='ar'>plain X-ray first; MRI best for cuff tear</span></div><div class='row'><span class='tg'>Can't abduct</span> <span class='ar'>supraspinatus tear</span></div><div class='row'><span class='tg'>Gout</span> <span class='ar'>needle, strong &minus;, yellow when parallel, intracellular</span></div><div class='row'><span class='tg'>CPPD</span> <span class='ar'>rhomboid, weak +, blue when parallel</span></div><div class='row'><span class='tg'>Perilunate</span> <span class='ar'>scaphoid # + median nerve &rarr; reduce/OR + CTR</span></div><div class='row'><span class='tg'>Cubital tunnel</span> <span class='ar'>ulnar n.; Froment, Wartenberg; ulnar paradox</span></div><div class='row'><span class='tg'>Fat pad</span> <span class='ar'>elevated = effusion or lipohemarthrosis; sail sign</span></div><div class='row'><span class='tg'>OK sign</span> <span class='ar'>FPL + index FDP = median nerve motor</span></div><div class='row'><span class='tg'>High PMNs</span> <span class='ar'>infection or crystal arthritis</span></div></div><div class='card'><h2>Anatomy lab <span class='wk'>MAPS</span></h2><div class='row'><span class='tg'>Superior GH</span> <span class='ar'>coracoacromial arch, CH/GH ligaments, long head biceps</span></div><div class='row'><span class='tg'>Ulnar in forearm</span> <span class='ar'>FCU + medial &frac12; FDP</span></div><div class='row'><span class='tg'>Wrist joint</span> <span class='ar'>scaphoid, lunate, triquetrum + disc</span></div><div class='row'><span class='tg'>Retinaculum</span> <span class='ar'>hook of hamate, trapezium tubercle; median &rarr; thenar</span></div><div class='row'><span class='tg'>Cubital fossa</span> <span class='ar'>roof = antebrachial fascia + bicipital aponeurosis; TAN</span></div><div class='row'><span class='tg'>Forearm layers</span> <span class='ar'>PT/FCR/PL/FCU; FDS; FDP/FPL/PQ</span></div></div><div class='card'><h2>Integrated <span class='wk'>ISAL</span></h2><div class='row'><span class='tg'>Gout + CKD</span> <span class='ar'>IA steroid</span></div><div class='row'><span class='tg'>RA 1st DMARD</span> <span class='ar'>methotrexate</span></div><div class='row'><span class='tg'>PMR</span> <span class='ar'>stiffness, &uarr;ESR/CRP, normal CK</span></div><div class='row'><span class='tg'>Widespread pain labs</span> <span class='ar'>CBC, lytes, Cr, Ca, TSH (WFQ); ISAL adds SPEP, ESR/CRP, CK</span></div><div class='row'><span class='tg'>Scope</span> <span class='ar'>no biologic names; MSK I shoulder lecture not examined</span></div></div></div><div class='foot'>Week 39 &middot; MSK III &mdash; OA, Spine &amp; Pediatric Rheumatology &middot; cram sheet &middot; cue &rarr; answer</div></div>"
   }
  ],
  "drugs": [
@@ -3215,7 +3595,7 @@
    },
    "ref": {
     "topic": "Gout",
-    "guide": "W39_10_Integrated_Review.html",
+    "guide": "W39_11_Integrated_Review.html",
     "week": "Week 39 · MSK III — OA, Spine & Pediatric Rheumatology"
    }
   }
