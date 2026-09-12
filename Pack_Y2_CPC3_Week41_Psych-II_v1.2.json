@@ -3836,7 +3836,7 @@
    "name": "Escitalopram",
    "class": "rx:ssri",
    "facets": {
-    "use": "First-line SSRI for generalized social anxiety disorder (also first line in GAD) &middot; First-line SSRI for GAD; equivalent efficacy to psychotherapy &middot; First-line SSRI for OCD (Cipralex)",
+    "use": "First-line SSRI for generalized social anxiety disorder (also first line in GAD) · First-line SSRI for GAD; equivalent efficacy to psychotherapy · First-line SSRI for OCD (Cipralex)",
     "adverse": "GI symptoms, headaches, weight gain, sexual dysfunction (module's SSRI list)",
     "dosing": "Start low, aim high; response 6–12 weeks; adequate trial 12–15 weeks; continue at least 1 year; taper very slowly"
    },
@@ -3851,7 +3851,7 @@
    "name": "Fluoxetine",
    "class": "rx:ssri",
    "facets": {
-    "use": "First-line SSRI for OCD (Prozac); also first line in PTSD &middot; First-line SSRI for PTSD",
+    "use": "First-line SSRI for OCD (Prozac); also first line in PTSD · First-line SSRI for PTSD",
     "dosing": "Start low, aim high; adequate trial 12–15 weeks; continue at least 1 year"
    },
    "ref": {
@@ -3865,7 +3865,7 @@
    "name": "Fluvoxamine",
    "class": "rx:ssri",
    "facets": {
-    "use": "First-line SSRI for generalized social anxiety disorder; named in the SAD list but not the GAD list &middot; First-line SSRI for OCD (Luvox)",
+    "use": "First-line SSRI for generalized social anxiety disorder; named in the SAD list but not the GAD list · First-line SSRI for OCD (Luvox)",
     "dosing": "Start low, aim high; adequate trial 12–15 weeks; continue at least 1 year"
    },
    "ref": {
@@ -3893,7 +3893,7 @@
    "name": "Paroxetine",
    "class": "rx:ssri",
    "facets": {
-    "use": "First-line SSRI for generalized social anxiety disorder (also first line in GAD); an allergy (rash) to it is part of the GAD case &middot; First-line SSRI for GAD (ruled out for Peter by a rash) &middot; First-line SSRI for OCD (Paxil) &middot; First-line SSRI for PTSD",
+    "use": "First-line SSRI for generalized social anxiety disorder (also first line in GAD); an allergy (rash) to it is part of the GAD case · First-line SSRI for GAD (ruled out for Peter by a rash) · First-line SSRI for OCD (Paxil) · First-line SSRI for PTSD",
     "adverse": "GI symptoms, headaches, weight gain, sexual dysfunction (module's SSRI list)",
     "dosing": "Start low, aim high; adequate trial 12–15 weeks; continue at least 1 year"
    },
@@ -3908,7 +3908,7 @@
    "name": "Pregabalin",
    "class": "rx:gabapentinoid",
    "facets": {
-    "use": "First-line non-antidepressant option for generalized social anxiety disorder and for GAD &middot; First-line non-antidepressant option for GAD"
+    "use": "First-line non-antidepressant option for generalized social anxiety disorder and for GAD · First-line non-antidepressant option for GAD"
    },
    "ref": {
     "topic": "Social anxiety disorder / GAD",
@@ -3934,7 +3934,7 @@
    "name": "Sertraline",
    "class": "rx:ssri",
    "facets": {
-    "use": "First-line SSRI for generalized social anxiety disorder (also first line in GAD) &middot; First-line SSRI for GAD; the natural choice for Peter given prior response &middot; First-line SSRI for OCD (Zoloft) &middot; First-line SSRI for PTSD",
+    "use": "First-line SSRI for generalized social anxiety disorder (also first line in GAD) · First-line SSRI for GAD; the natural choice for Peter given prior response · First-line SSRI for OCD (Zoloft) · First-line SSRI for PTSD",
     "adverse": "GI symptoms, headaches, weight gain, sexual dysfunction (module's SSRI list)",
     "dosing": "Start low, aim high; adequate trial 12–15 weeks; continue at least 1 year"
    },
@@ -3949,7 +3949,7 @@
    "name": "Venlafaxine (XR)",
    "class": "rx:snri",
    "facets": {
-    "use": "First-line SNRI (extended release) for generalized social anxiety disorder; also first line in GAD &middot; First-line SNRI for GAD &middot; Second-line option for OCD (venlafaxine XR); first line for PTSD &middot; First-line SNRI (XR) for PTSD; second line in OCD"
+    "use": "First-line SNRI (extended release) for generalized social anxiety disorder; also first line in GAD · First-line SNRI for GAD · Second-line option for OCD (venlafaxine XR); first line for PTSD · First-line SNRI (XR) for PTSD; second line in OCD"
    },
    "ref": {
     "topic": "Social anxiety disorder / GAD / OCD / PTSD",
