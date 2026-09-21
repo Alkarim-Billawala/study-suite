@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.16 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.17 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.16)
+# Study Suite — Content Authoring Guide (v2.17)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,21 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.16 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **Authoring system version:** 2.17 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **What changed in guide v2.17:** quality rules distilled from building large packs from full lecture
+> transcripts, modules and case sessions. No schema change. (1) **Topic guides synthesize by concept**
+> (§6, §7): a guide gathers everything the week says about one concept wherever it lives — a lecture
+> segment, a module, a case, a practice quiz — never one guide per lecture or module. The old "6–10
+> narrow guides" rule of thumb is replaced by "as many guides as the week has concepts" with a
+> **10,000–20,000-character body** as the working band. (2) **Plain-text fields carry real characters,
+> never HTML entities** (§2, §7): the app renders HTML only in guide `html` and in `explain`; a `&middot;`
+> in a stem, option, topic, card field or guide title shows literally to the learner. (3) **The pack is
+> study material, not a report on the sources** (new §4a): no source tags, timestamps, slide numbers,
+> "the module says" reportage or working-notes markers in any reader-facing text; **declarative voice**, no
+> reader address or coaching. **Conflicts between sources are called out, not smoothed over**: each one gets
+> a short "Sources differ" callout, adjudicated against an external reference. (4) **Larger packs are welcome** (§3): the volume targets are floors that
+> scale with the material, not ceilings. (5) The §7a validator gains lints for entities in plain fields,
+> leaked source apparatus, reader address and guide size.
 > **What changed in guide v2.16:** packs may now carry an **optional `drugs[]` array** that powers the app's new
 > **Pharmacology** view — a cross-week drug index built from every active pack (new §6b). It's additive and optional
 > (packs without it are unaffected); when present, the app merges drug records across enabled packs by a stable
@@ -181,7 +195,9 @@ Convert the user's study material into **one valid pack `.json` per week or topi
 each topic guide embedded inline**. The pack is the **only deliverable** — do not produce standalone
 guide `.html` files unless the user explicitly asks for printable copies. Rate every question's
 `difficulty`. Validate everything against §7 before output. Prefer **novel** vignettes over
-reproductions of any practice material you're given (§4).
+reproductions of any practice material you're given (§4). Write the pack as **study material, not a
+report on the sources** (§4a) — calling out and adjudicating any conflicts between them — and keep
+plain-text fields free of HTML entities (§2).
 
 ---
 
@@ -271,6 +287,14 @@ if the level weren't there, so leaving it out costs nothing.
 | `explain` | strongly recommended | Teaching/answer text. **HTML allowed** (`<b>`, `<i>`, `<br>`). |
 | `guide` | optional | `{ "f": "file.html", "t": "short title", "s": "section pointer" }`. `f` **must exactly match** the `file` of an embedded guide in `guides[]` (see §6). |
 | `id` | recommended | Stable unique id (e.g. `"wk12_c01"`) so review progress survives reloads/edits. |
+
+> **Plain text vs HTML — know which fields render markup.** The app renders HTML in exactly two places:
+> a guide's `html` and an item's `explain`. **Everything else is plain text**: question `stem` and
+> `options`, `topic`, every card field (`prompt`, `answer`, `text`, `items`, `pairs`, `options`), guide
+> `title`, and the placement fields. In plain-text fields write **real characters** — `·`, `—`, `≥`, `×`,
+> `→` — **never HTML entities** (`&middot;`, `&ge;`, `&rarr;`): an entity there is shown literally to the
+> learner. Entities and tags are fine inside `html` and `explain`. (The §7a validator flags entities in
+> plain fields.)
 
 ### Question schema (exam / practice) — now with `difficulty`
 
@@ -365,6 +389,13 @@ and associations over trivia.
 > you produced against the weeks before delivering (the §7 checklist asks you to confirm this). A
 > two-week pack with one tiny guide and 15 cards is not a complete pack.
 
+> **Targets are floors, not ceilings — larger packs are welcome.** When the source material is rich (full
+> lecture transcripts, several modules, case sessions and a practice quiz for one week), a pack that runs
+> to **100+ questions and 250+ cards for a single week** is a good pack, not an over-built one: the
+> learner filters by difficulty and topic, and Review paces itself. Scale to the material and to the
+> learner's available usage; agree the size with the user up front (§3) and build in one pass rather than
+> trimming good items to hit the default.
+
 ---
 
 ## 3a. Card-type mix — vary the retrieval, don't go cloze-heavy
@@ -409,6 +440,48 @@ When in doubt: same *concept*, new *vignette*.
 > from new angles. Do **not** silently reproduce or lightly paraphrase them. The only exception is when
 > the user *explicitly* asks for a faithful conversion of an existing question set — then say so and
 > convert. Default = novel.
+
+---
+
+## 4a. The pack is study material, not a report on the sources
+
+Everything the learner reads — guide bodies, `explain` text, stems, cards, the cram sheet — is **teaching
+text**, written as if by the course. The sources shape the content; their **apparatus stays out**:
+
+- **No source tags or locators.** No `[Lecture 2 · 14:45]`, `[Module 3 §6]`, `[std]`, `[WFQ Q7 key]`,
+  no `slide 12`, no `m:ss` timestamps, no "tx" / transcript references. If you keep such tags in your own
+  working notes while you read, strip them before anything goes into the pack.
+- **No source reportage.** Not "the module states", "according to the lecture", "the key says", "keyed
+  as". State the material: *"Lithium's therapeutic window is 0.6–1.2 mmol/L"*, not *"the module says the
+  window is…"*. **Attribution only where it genuinely helps the learner**, in plain words and sparingly
+  (a few per guide at most): *"Dr. Byrne stressed…"*, *"the practice quiz keys this as…"* — lecturer
+  emphasis is worth passing on; provenance is not.
+- **Conflicts between sources are called out, not hidden — and adjudicated.** Lecturers misspeak, slides
+  lag guidelines, module text and quiz keys disagree. When two sources differ on an **examinable fact** (a
+  threshold, dose, duration, first-line choice, criterion count), the pack says so **explicitly**, in a
+  short callout of a consistent form that opens with **Sources differ:** and gives (a) what each source
+  says, (b) which is correct, **checked against an external reference and naming it** — DSM-5-TR, a current
+  guideline, a standard textbook, a drug monograph — and (c) what to expect on the exam (usually the slide
+  or key value, since that is what the examiner wrote). Example: *"Sources differ: the lecture gave 48 h;
+  the slides and the CPS monograph give 12–36 h. Use 12–36 h; expect the slide value."* Do the external
+  check before adjudicating; if nothing settles it, say both values remain in play. Questions and cards test
+  the adjudicated value, and `explain` may carry the same one-line note. **What stays out is the
+  working-notes apparatus** — no ⚠, no "CONFLICT" tags, no "source caution" labels, no "(standard
+  knowledge, not in the module)"; the callout replaces them. If a standard fact is worth teaching, teach
+  it plainly.
+- **No meta text.** No orientation paragraphs ("this guide covers…", "how to use this guide"), no
+  verification or "not captured / gaps in the export" blocks, no notes to the maintainer. Open with the
+  content.
+- **Declarative voice.** Statements of fact, as a textbook writes them. No reader address (*you, your, we,
+  let's*) outside quoted interview or patient lines, no coaching imperatives (*"learn this", "don't be
+  thrown", "worth memorizing"*), no rhetorical questions. Checklists and procedures may use the imperative
+  mood (*"Assess airway first"*). Use the learner's spelling convention (Canadian for the default packs).
+- **Warning boxes are for real clinical traps and "Sources differ" callouts** — *"don't confuse X with
+  Y"*, or a genuine conflict adjudicated as above — a handful per guide, not decoration.
+
+Before delivering, **scan for leaks** (the §7a validator does this): timestamps, bracketed tags, slide
+references, "standard knowledge", "CONFLICT" and ⚠ should all be absent from reader-facing text — the
+adjudicated "Sources differ" callouts are the only trace a conflict leaves.
 
 ---
 
@@ -498,15 +571,24 @@ Even though no file is written, each guide still needs a **filename-style key** 
 > **Guides must be substantive — one real guide per topic block.** The template below is a **minimum
 > skeleton, not the target.** A guide that is one heading and a sentence (or a single sparse page for a
 > whole week) wastes the feature and short-changes the learner. Aim for:
-> - **One guide per major topic block** of the week's material (so a typical week has several guides,
->   and a multi-week pack has more) — not a single mega-guide covering everything. As a rule of thumb,
->   **a dense one-week medical pack lands around 6–10 narrow guides**, each with a tight title — not
->   3–4 broad guides that staple unrelated topics together (e.g. split "Lymphadenopathy & Lymphoma"
->   and "Plasma-cell disorders" rather than one "everything-lymphoid" guide).
+> - **One guide per concept, synthesized across sources.** A topic guide takes the high-level view of the
+>   whole week and gathers **everything the week says about one concept, wherever it lives** — a segment
+>   of a lecture, a self-learning module, the case session, the practice quiz — into one place. It is
+>   **never a source unit under a topic title**: not one guide per lecture, per module or per session
+>   (the two exceptions are clinical-skills sessions and pure anatomy, which stand alone naturally). Split
+>   unrelated concepts rather than stapling them together (e.g. "Lymphadenopathy & Lymphoma" and
+>   "Plasma-cell disorders" are two guides, not one "everything-lymphoid" guide), and give each a tight
+>   title. **The count follows the week's concepts** — a dense one-week medical pack commonly lands at
+>   8–15 guides; there is no cap, and fewer than ~6 usually means concepts have been merged.
 > - **Real teaching content in each:** multiple `<h2>`/`<h3>` sections, at least one or two `<table>`s
 >   or key-point boxes, covering the high-yield facts, mechanisms, associations, and "do-not-miss"
->   items of that block. Match the depth of the source material; a guide should stand on its own as a
->   revision sheet.
+>   items of that concept. Match the depth of the source material; a guide should stand on its own as a
+>   revision sheet. **Working band: 10,000–20,000 characters of HTML body per guide** (the maintainer's
+>   packs average ~14k). Under ~5,000 is thin; if the material would run past ~20,000, select the
+>   examinable content and split by concept rather than transcribing the source.
+> - **Open with the content.** A one-sentence lede stating the topic is fine; orientation paragraphs and
+>   reading instructions are not (§4a). Close with a take-home box (`key`) and, where real traps exist, a
+>   short discriminators / exam-traps section.
 >
 > **Link items to their guide.** Most questions and cards should carry a `guide` pointer
 > (`{ "f": …, "t": …, "s": … }`) into the relevant embedded guide so the app can deep-link from an
@@ -572,7 +654,7 @@ with sensible **light** defaults; the app swaps them per theme automatically.
   .key{border-left:3px solid var(--accent);background:var(--paper);padding:10px 14px;margin:10px 0}
 </style>
 <h1>C1 · Arrhythmias</h1>
-<p>One-line orientation.</p>
+<p>One-sentence lede stating the topic — content, not reading instructions.</p>
 <h2 id="atrial-fibrillation">Atrial fibrillation — rate control</h2>
 <div class="key">Irregularly irregular, no P waves → <b>beta-blocker</b> or non-DHP CCB first-line.</div>
 ```
@@ -670,8 +752,9 @@ every `guides[]` entry has non-empty `html`; **the LAST guide is the pack's cram
 citation/grounding/footnote markers** anywhere (see §8). Run it through a strict JSON parser — if it
 doesn't parse, it won't import.
 
-**Substance & coverage:** **6–10 narrow topic guides for a dense one-week pack** (not a single sparse
-page), each with real sections/tables, **plus a cram sheet as the final guide (§6a)**; **most questions
+**Substance & coverage:** **topic guides synthesized by concept (§6) — typically 8–15 for a dense one-week
+pack, each 10,000–20,000 characters of body** (not a single sparse page, not one guide per lecture),
+each with real sections/tables, **plus a cram sheet as the final guide (§6a)**; **most questions
 and cards carry a `guide` pointer**; counts meet the
 targets and are **scaled to the weeks covered** (10–20 questions — favour the upper end, 18–20, for a
 dense week — and 40–60 cards *per week*); difficulty lands near the **~30 / 55 / 15** easy/medium/hard
@@ -682,6 +765,13 @@ longer stems).
 `"the first option"`) — options are shuffled at render (§2). ("All/None of the above" are fine — the app
 anchors them.) Card types are **varied, not cloze-heavy** (cloze ≲ 35% of the deck); **every `multi` card
 has ≥1 false option** (never all-correct, never "all-but-the-last").
+
+**Reader-facing text & plain fields (§2, §4a):** no HTML entities in any plain-text field (stems, options,
+topics, card fields, guide titles); no source tags, timestamps, slide numbers, reportage ("the module
+says"), working-notes conflict markers or meta/orientation text anywhere the learner reads; declarative
+voice with no reader address outside quoted dialogue. **Every conflict between sources on an examinable
+fact is called out in a "Sources differ" callout, adjudicated against a named external reference (§4a).**
+Run the §7a leak and entity lints and clear them.
 
 **Placement filled:** `school` / `year` / (`term`) / `course` / `weeks` are present (ask if unknown,
 don't leave null), and **`course` is the grouping block shared across weeks (e.g. a course/block name),
@@ -721,6 +811,22 @@ from collections import Counter
 
 CARD_TYPES = {"mcq", "multi", "cloze", "order", "match", "qa"}
 ARTIFACTS  = ["start_span", "end_span", "【", "】", "```"]  # any of these breaks the import
+# §2: these fields are rendered as PLAIN TEXT — an HTML entity in them shows literally to the learner.
+ENTITY     = re.compile(r"&(#\d+|#x[0-9a-fA-F]+|[a-zA-Z]+);")
+PLAIN_Q    = ("stem", "topic")                       # + every string in options[]
+PLAIN_C    = ("prompt", "answer", "text", "topic")   # + options[], items[], pairs[][]
+# §4a: source apparatus that must not reach reader-facing text (warn — a clinical "14:00" can be legit).
+LEAK       = re.compile(r"\b\d{1,2}:\d{2}\b|\bslides? \d+\b|\[[A-Z][^\]]{1,40}\]|standard knowledge|"
+                        r"(?-i:CONFLICT|⚠)|\bthe (module|lecture|slides?|transcript) (says|states|keys)\b|\bkeyed as\b", re.I)
+# ("CONFLICT" stays case-sensitive: lower-case "conflict" is ordinary prose, e.g. intrapsychic conflict.)
+# §4a: reader address / coaching outside quoted dialogue (warn when frequent). Guides that quote interview
+# scripts legitimately trip this — read the hits before rewriting.
+ADDRESS    = re.compile(r"\b(you|your|you're|let's|we|we're|our)\b", re.I)
+
+def _strings(v):
+    if isinstance(v, str): yield v
+    elif isinstance(v, list):
+        for x in v: yield from _strings(x)
 # Options that REFERENCE specific other options break when the app shuffles. ("All/None of the above|
 # these" are NOT flagged — the app v0.2.63+ anchors them to their slot.) Conservative on purpose, so it
 # won't false-positive on legit answers like "Hepatitis A and B" or "Vitamin A and D".
@@ -750,6 +856,13 @@ def validate_pack(pack):
         if q.get("guide", {}).get("f") and q["guide"]["f"] not in gfiles:
             errs.append(f"{qid}: guide.f '{q['guide']['f']}' matches no guide")
         if len(q.get("explain", "")) < 80: warns.append(f"{qid}: explanation looks thin")
+        for fld in PLAIN_Q + ("options",):
+            for s in _strings(q.get(fld)):
+                if ENTITY.search(s): errs.append(f"{qid}: HTML entity in plain-text field {fld!r} — use real characters (§2)")
+        for fld in ("stem", "explain", "options"):
+            for s in _strings(q.get(fld)):
+                m = LEAK.search(s)
+                if m: warns.append(f"{qid}: source apparatus in {fld!r}: {m.group(0)!r} (§4a)")
         for o in opts:
             if isinstance(o, str) and POSITIONAL.search(o):
                 warns.append(f"{qid}: position-dependent option {o!r} — reword (options are shuffled)")
@@ -780,10 +893,27 @@ def validate_pack(pack):
             errs.append(f"{cid}: match pairs must be 2-element arrays")
         if c.get("guide", {}).get("f") and c["guide"]["f"] not in gfiles:
             errs.append(f"{cid}: guide.f '{c['guide']['f']}' matches no guide")
+        for fld in PLAIN_C + ("options", "items", "pairs"):
+            for s in _strings(c.get(fld)):
+                if ENTITY.search(s): errs.append(f"{cid}: HTML entity in plain-text field {fld!r} — use real characters (§2)")
+                m = LEAK.search(s)
+                if m: warns.append(f"{cid}: source apparatus in {fld!r}: {m.group(0)!r} (§4a)")
 
     for g in gs:
-        if not g.get("html"): errs.append(f"guide {g.get('file')}: empty html")
-        elif len(g["html"]) < 1500: warns.append(f"guide {g.get('file')}: looks thin (<1500 chars)")
+        gid, h = g.get("file"), g.get("html") or ""
+        if ENTITY.search(g.get("title") or ""): errs.append(f"guide {gid}: HTML entity in title — titles are plain text (§2)")
+        if not h: errs.append(f"guide {gid}: empty html"); continue
+        is_cram = "cram" in (g.get("title", "") or "").lower()
+        if len(h) < 1500: warns.append(f"guide {gid}: looks thin (<1500 chars)")
+        elif len(h) < 5000 and not is_cram: warns.append(f"guide {gid}: thin ({len(h)} chars; working band 10–20k, §6)")
+        elif len(h) > 22000 and not is_cram: warns.append(f"guide {gid}: very long ({len(h)} chars) — select examinable content or split by concept (§6)")
+        body = re.sub(r"<style>.*?</style>", "", h, flags=re.S)
+        leaks = [m.group(0) for m in LEAK.finditer(body)]
+        if leaks: warns.append(f"guide {gid}: source apparatus leaked: {sorted(set(leaks))[:6]} (§4a)")
+        text = re.sub(r"<[^>]+>", " ", body)
+        words = max(1, len(text.split()))
+        addr = len(ADDRESS.findall(text))
+        if addr / words > 0.004: warns.append(f"guide {gid}: reader address {addr}x in {words} words — declarative voice (§4a)")
     if gs and not any("cram" in (g.get("title","") or "").lower() for g in gs):
         warns.append("no cram-sheet guide — every pack should end with a one-page cram sheet (§6a)")
 
@@ -795,7 +925,7 @@ def validate_pack(pack):
     if cs and types.get("cloze", 0) > 0.35 * len(cs):
         warns.append(f"cloze cards {types['cloze']}/{len(cs)} (>35%) — vary the card mix (more qa/mcq/order)")
     if len(gs) < 6:
-        warns.append(f"only {len(gs)} guide(s) — a dense one-week pack usually wants ~6–10 narrow guides")
+        warns.append(f"only {len(gs)} guide(s) — a dense one-week pack usually has 8–15 concept guides (§6); check for merged concepts")
 
     diffs = Counter(q.get("difficulty") for q in qs)
     print(f"questions={len(qs)} cards={len(cs)} guides={len(gs)} "
