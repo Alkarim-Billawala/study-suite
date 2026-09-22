@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.17 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.18 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.17)
+# Study Suite — Content Authoring Guide (v2.18)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,13 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.17 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **Authoring system version:** 2.18 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **What changed in guide v2.18:** no schema change. §4a's ban on **source reportage** is now spelled out as a
+> list of banned sentence frames ("the module says", "the lecture's deck…", "as taught", "in the slide's order")
+> with rewrites, and the §7a validator lints for them. The only reader-facing place a source may be named is a
+> **Sources differ** callout — and conflicts between sources remain *required* there, adjudicated against a named
+> external reference (unchanged from v2.17). Reason: packs built under v2.17 still carried hundreds of
+> "the module states…" sentences because only tags and locators were being checked.
 > **What changed in guide v2.17:** quality rules distilled from building large packs from full lecture
 > transcripts, modules and case sessions. No schema change. (1) **Topic guides synthesize by concept**
 > (§6, §7): a guide gathers everything the week says about one concept wherever it lives — a lecture
@@ -456,6 +462,16 @@ text**, written as if by the course. The sources shape the content; their **appa
   window is…"*. **Attribution only where it genuinely helps the learner**, in plain words and sparingly
   (a few per guide at most): *"Dr. Byrne stressed…"*, *"the practice quiz keys this as…"* — lecturer
   emphasis is worth passing on; provenance is not.
+  **The frames that count as reportage** (v2.18) — a source as the subject or the frame of a sentence, in a
+  body, an `explain`, a stem or a card: *the/this lecture, lecturer, deck, slide(s), module, transcript,
+  handout, session, workshop, panel, quiz, manual* + *says, states, gives, lists, prints, keys, names, calls,
+  puts, teaches, describes, defines, own, version, order, script, example*; *"as taught"*, *"as printed"*,
+  *"verbatim"*, *"aloud"*, *"Dr. X's deck"*. Rewrites: *"The lecture rejects the category"* → *"The
+  typical/atypical category does not hold up"*; *"What does the module say about cannabis?"* → *"What is the
+  effect of cannabis in ADHD?"*; *"Put the strategies in the module's order"* → *"Put the strategies in order,
+  from least to most disruptive"*; *"The lecture's deck turns that into a four-box algorithm"* → *"For
+  refractory illness the algorithm has four steps."* The one exception is the **Sources differ** callout
+  below, where sources are named by design.
 - **Conflicts between sources are called out, not hidden — and adjudicated.** Lecturers misspeak, slides
   lag guidelines, module text and quiz keys disagree. When two sources differ on an **examinable fact** (a
   threshold, dose, duration, first-line choice, criterion count), the pack says so **explicitly**, in a
@@ -817,7 +833,10 @@ PLAIN_Q    = ("stem", "topic")                       # + every string in options
 PLAIN_C    = ("prompt", "answer", "text", "topic")   # + options[], items[], pairs[][]
 # §4a: source apparatus that must not reach reader-facing text (warn — a clinical "14:00" can be legit).
 LEAK       = re.compile(r"\b\d{1,2}:\d{2}\b|\bslides? \d+\b|\[[A-Z][^\]]{1,40}\]|standard knowledge|"
-                        r"(?-i:CONFLICT|⚠)|\bthe (module|lecture|slides?|transcript) (says|states|keys)\b|\bkeyed as\b", re.I)
+                        r"(?-i:CONFLICT|⚠)|\bkeyed as\b|\bas (taught|printed)\b|"
+                        # v2.18: source reportage frames (§4a) — a "Sources differ" callout is the only legitimate hit
+                        r"\b(the|this) (module|lecture|lecturer|deck|slides?|transcript|handout|session|workshop|panel|quiz|manual)(?:'s)? "
+                        r"(says|states|keys|gives|lists|prints|calls|names|puts|adds|teaches|describes|presents|defines|own|version|answer|order|script|example|feedback|quiz)\b", re.I)
 # ("CONFLICT" stays case-sensitive: lower-case "conflict" is ordinary prose, e.g. intrapsychic conflict.)
 # §4a: reader address / coaching outside quoted dialogue (warn when frequent). Guides that quote interview
 # scripts legitimately trip this — read the hits before rewriting.
