@@ -60,8 +60,6 @@ the right format. The packs you create from your own material are entirely yours
 ## Coming soon
 
 - **Flashcard import** — bring your decks in from that other flashcard app.
-- **Question history** — Practice and Exam remember what you've answered, so you can revisit it or
-  pick only fresh questions.
 
 ## FAQ
 
@@ -169,7 +167,7 @@ free.
 <summary><strong>How do I create an account?</strong></summary>
 
 From the welcome screen or the account menu, choose **Create an account**. During early access you'll
-need your class code. You'll get a **recovery code** straight away — save it in a password manager or
+need your access code. You'll get a **recovery code** straight away — save it in a password manager or
 somewhere safe.
 </details>
 

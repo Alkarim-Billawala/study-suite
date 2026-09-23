@@ -1,8 +1,28 @@
 <!--
-  Study Suite  ·  v0.4.0 (beta)
+  Study Suite  ·  v0.4.1 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
-  Changelog v0.4.0 (accounts launch): accounts + sync on for everyone — the #beta flag is retired (ACCT_ON is constant; old #beta/
+  Changelog v0.4.1: SETUP SCREENS — Practice and Exam each open a setup sheet (#setupOv) before a fresh session: Exam = difficulty,
+  question selection (+ "N not answered yet"), weighting (auto / group by / per-group counts / length), timer; Practice = difficulty,
+  unanswered only, shuffle, timer. Choices are remembered. The home difficulty bar is gone; Settings loses Exam composition +
+  Timers (moved, same element IDs). Difficulty is now per mode (settings.pracDiffs / examDiffs, migrated from sessionDiffs).
+  EXAMS RESUME: an unsubmitted exam is saved (KEY.exam; backup + sync). Tapping Exam asks Resume / Start fresh (timer paused
+  while away). Start fresh submits the answered questions (history + Past exams) and opens setup. PAST EXAMS (KEY.exams; last 20,
+  full + partial; backup + sync): "Past exams (n)" on the Exam card → list with date/score → Review (read-only review mode).
+  QUESTION HISTORY — qhist (KEY.qhist; in backup/restore and the sync payload) records per question the last
+  pick, correct?, time, count and last exam. Seen = an answer was selected or submitted (practice: on submit, or selected-but-not-
+  submitted when the session ends/restarts; exam: every answered question on submit). New Skip button (Practice + Exam) clears
+  the selection and moves on — not counted. Practice: never-answered first, previously answered last (wrong-last-time first,
+  oldest first); dashed map cells with a green/red dot; "↺ Answered before · view your prior answer" (date, pick, result —
+  viewing doesn't count); setting "Practice — unanswered questions only". Exam: Settings → Question selection = Any / Prefer
+  fresh (default) / Fresh only, weighting kept per group; weights show "N fresh"; a short Fresh-only exam says so. Settings →
+  Question history → clear all or one pack.
+  Also: welcome screen decluttered — Create an account | Sign in side by side (Sign in on the right, primary); the
+  access code gets a small → button inside the field (Enter still works) instead of a big Continue; Restore a backup and
+  Request an access code moved to one small muted line at the bottom. Wording — welcome-screen subtitle (sign in or create an account to keep progress synced, or use without an
+  account, saved only on this device); "class code" → "access code" in every user-facing string (gate placeholder, sign-up field
+  + its errors, FAQ). No behaviour change.
+  Changelog v0.4.0 (accounts launch, deployed 2026-09-22): accounts + sync on for everyone — the #beta flag is retired (ACCT_ON is constant; old #beta/
   #nobeta links tidied, stored flag removed). Privacy Policy + Terms published as privacy.html / terms.html (Legal/*_v1.0.md), linked
   from the footer and the create-account screen. In-app FAQ: accounts section rewritten for the live feature (free during beta; 30
   days' notice before any paid plan); Coming soon: accounts removed, question history added. Which-copy dialog — the two summary boxes are tappable (keyboard too):
@@ -672,6 +692,14 @@ section{display:none}section.on{display:block}
 .acct-legal{font-size:12.5px;color:var(--ink-soft);margin-top:10px;line-height:1.5;text-align:center}.acct-legal a{color:var(--accent)}
 .acct-list{margin:0 0 12px;padding-left:18px;font-size:14px;line-height:1.5;color:var(--ink)}.acct-list li{margin-bottom:6px}
 .acct-card{max-width:400px;position:relative}
+.setup-card{max-width:520px;position:relative}.setup-card h3{font-family:var(--font-head);font-weight:600;font-size:22px;margin:0 0 10px;padding-right:28px}
+.setup-card .setsub{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin:16px 0 2px;border-top:1px solid var(--line);padding-top:12px}
+.setup-card .note{text-align:left}.setup-fresh{margin:-4px 0 6px;font-size:13px}.setup-card .btn.wide{width:100%;margin-top:16px}
+.segctl.sdiff .seg{padding:7px 11px;font-size:14px}.segctl.sdiff .seg i{font-style:normal;font-family:var(--font-mono);font-size:11px;opacity:.7;margin-left:3px}
+@media (max-width:480px){.setup-card .setrow{flex-wrap:wrap}}
+.pastrow{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding:10px 0}.pastrow .pt{font-size:15px;color:var(--ink)}.pastrow .pd{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-soft);margin-top:2px}
+.pastpart{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);border:1px solid var(--gold);border-radius:4px;padding:0 5px;margin-left:4px}
+#featExam a{color:var(--accent);text-decoration:underline;cursor:pointer}
 .acct-x{position:absolute;top:8px;right:12px;background:none;border:none;font-size:24px;line-height:1;color:var(--ink-soft);cursor:pointer;padding:4px}
 .acct-card h3{font-family:var(--font-head);font-weight:600;font-size:22px;margin:0 0 6px;padding-right:28px}
 .acct-sub{color:var(--ink-soft);font-size:14.5px;line-height:1.5;margin:0 0 14px}
@@ -848,6 +876,9 @@ section{display:none}section.on{display:block}
 .grid{display:grid;grid-template-columns:repeat(10,1fr);gap:7px}@media(max-width:560px){.grid{grid-template-columns:repeat(8,1fr)}}
 .cell{aspect-ratio:1;border:1.5px solid var(--line);background:var(--paper);border-radius:5px;font-family:var(--font-mono);font-size:12px;cursor:pointer;color:var(--ink-soft);display:grid;place-items:center;position:relative;transition:all .12s}
 .cell:hover{border-color:var(--ink)}.cell.answered{background:var(--ink);color:var(--paper);border-color:var(--ink)}.cell.current{outline:2px solid var(--accent);outline-offset:1px}
+.cell.prior{border-style:dashed}.cell.prior::before{content:"";position:absolute;bottom:3px;right:3px;width:6px;height:6px;border-radius:50%;background:var(--green)}.cell.prior.pno::before{background:var(--red)}
+.priorwrap{margin-top:14px}.priorbtn{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.03em;background:transparent;border:1.5px dashed var(--line);color:var(--ink-soft);border-radius:6px;padding:6px 10px;cursor:pointer}.priorbtn:hover{border-color:var(--accent);color:var(--ink)}
+.priorbox{margin-top:8px;font-size:15px;line-height:1.5;color:var(--ink);background:var(--paper2);border-radius:8px;padding:8px 12px}.priorbox .pok{color:var(--green)}.priorbox .pno{color:var(--red)}
 .cell.flagged::after{content:"";position:absolute;top:3px;right:3px;width:6px;height:6px;background:var(--gold);border-radius:50%}
 .cell.r-correct{background:color-mix(in srgb,var(--green) 16%,var(--paper2));border-color:var(--green);color:var(--green)}.cell.r-wrong{background:color-mix(in srgb,var(--red) 16%,var(--paper2));border-color:var(--red);color:var(--red)}
 .submitbar{display:flex;justify-content:center;margin-top:24px}
@@ -889,7 +920,7 @@ section{display:none}section.on{display:block}
 .eacbrand{font-family:var(--font-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
 .eactitle{font-family:var(--font-head);font-weight:600;font-size:30px;margin:10px 0 6px}
 .eacsub{color:var(--ink-soft);font-size:15px;line-height:1.5;margin:0 0 20px}
-.eacform{display:flex;gap:8px;align-items:stretch}
+.eacform{position:relative;display:flex}
 .eacinput{flex:1;min-width:0;font-family:var(--font-mono);font-size:15px;letter-spacing:.04em;text-align:center;padding:11px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink)}
 .eacinput:focus{outline:none;border-color:var(--accent)}
 .eacgate .btn{white-space:nowrap}
@@ -902,7 +933,13 @@ section{display:none}section.on{display:block}
 .eacnoacct{font-size:15px;color:var(--ink);margin:0 0 10px;display:flex;align-items:center;justify-content:center;gap:8px}
 .eachelp{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);background:transparent;color:var(--ink-soft);font-size:12px;font-weight:700;cursor:pointer;padding:0;line-height:1}
 .eachelp:hover{border-color:var(--accent);color:var(--accent)}
-@media(max-width:560px){.eacform{flex-direction:column}.eactitle{font-size:26px}}
+.eacform .eacinput{padding-right:50px}
+.eacgo{position:absolute;right:5px;top:50%;transform:translateY(-50%);width:36px;height:36px;border:0;border-radius:8px;background:var(--accent);color:var(--paper);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.eacgo svg{width:18px;height:18px}.eacgo:hover{filter:brightness(1.1)}
+.eacdoors{flex-wrap:nowrap}.eacdoors .btn{flex:1 1 0;min-width:0;font-size:16px;padding:11px 10px;white-space:nowrap}
+.eacmore{margin-top:40px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;color:var(--ink-soft)}
+.eacmore a{color:var(--ink-soft);text-decoration:underline;cursor:pointer}.eacmore a:hover{color:var(--accent)}
+@media(max-width:560px){.eactitle{font-size:26px}}
 </style>
 
 <div id="eacGate" class="eacgate" hidden>
@@ -911,17 +948,16 @@ section{display:none}section.on{display:block}
     <h1 class="eactitle">Early access</h1>
     <p class="eacsub">Study Suite is in private early access. Enter your access code to continue.</p>
     <div id="eacAcct" hidden>
-      <div class="eacdoors"><button type="button" class="btn" id="eacSignIn">Sign in</button><button type="button" class="btn ghost" id="eacSignUp">Create an account</button></div>
+      <div class="eacdoors"><button type="button" class="btn ghost" id="eacSignUp">Create an account</button><button type="button" class="btn" id="eacSignIn">Sign in</button></div>
       <div class="eacor"><span>or</span></div>
       <div class="eacnoacct">Use without an account <button type="button" class="eachelp" id="eacHelp" aria-label="What does using it without an account mean?">?</button></div>
     </div>
     <form id="eacForm" class="eacform" autocomplete="off">
       <input id="eacInput" class="eacinput" type="text" inputmode="text" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="Access code" aria-label="Access code">
-      <button type="submit" class="btn" id="eacUnlock">Unlock</button>
+      <button type="submit" class="eacgo" id="eacUnlock" aria-label="Continue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </form>
     <div class="eacerr" id="eacErr" role="alert"></div>
-    <div class="eacalt">Returning on a new device? <a href="#" id="eacRestore">Restore a backup</a> from an unlocked copy.</div>
-    <a class="btn ghost sm" id="eacRequest" href="mailto:accesscodes@studysuite.app?subject=Study%20Suite%20Access%20Code%20Request&body=Hi!%20I'd%20like%20to%20request%20an%20access%20code%20for%20Study%20Suite.%0D%0A%0D%0AName%3A%20%0D%0ASchool%20%2F%20Occupation%3A%20%0D%0AProgram%20%2F%20Year%20(if%20a%20student)%3A%20%0D%0AHow%20I%20heard%20about%20Study%20Suite%3A%20%0D%0A%0D%0AThanks!" style="display:inline-block;text-decoration:none;margin-top:16px">Request an access code</a>
+    <div class="eacmore"><a href="#" id="eacRestore">Restore a backup</a><span aria-hidden="true">·</span><a id="eacRequest" href="#">Request an access code</a></div>
   </div>
 </div>
 <script>/* Show the gate at parse time (before content paints) when armed; skip if this browser already
@@ -955,15 +991,6 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="mode" id="mExam"><div class="mt">Exam</div><div class="md">A timed, scored test sampled to your weighting and chosen difficulty. Answers hidden until you submit.</div><div class="feat" id="featExam">— per test</div></div>
     </div>
 
-    <div class="diffsel">
-      <span class="ds-l">Session difficulty — pick any mix · applies to Practice &amp; Exam</span>
-      <div class="segctl" id="diffSeg">
-        <button class="seg" data-d="easy">Easy <i id="dcEasy">0</i></button>
-        <button class="seg" data-d="medium">Medium <i id="dcMed">0</i></button>
-        <button class="seg" data-d="hard">Hard <i id="dcHard">0</i></button>
-        <button class="seg on" data-d="all">All <i id="dcAll">0</i></button>
-      </div>
-    </div>
 
     <div class="revpanel" id="revPanel">
       <div><div class="rp-t">Topic Guides</div><div class="rp-d" id="revPanelDesc">Read the topic guides bundled in your active packs.</div></div>
@@ -1009,7 +1036,6 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       </div>
       <div class="infopanel" id="comingPanel" style="display:none">
         <div class="soon-i">· Flashcard import — bring decks in from that other flashcard app</div>
-        <div class="soon-i">· Question history — Practice and Exam remember what you’ve answered, so you can revisit it or pick fresh questions</div>
       </div>
       <div class="infopanel" id="faqPanel" style="display:none">
         <div class="faqbody">
@@ -1038,7 +1064,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
           <h4>Does sync cost anything?</h4>
           <p>Sync is free during the beta. It's the one feature that needs a server running around the clock, so it may become a paid option one day. If it does, you'll get at least 30 days' notice in the app, your account stays, and the app keeps working without sync. Everything you can do on your own device stays free.</p>
           <h4>How do I create an account?</h4>
-          <p>From the welcome screen or the account menu, choose <b>Create an account</b>. During early access you'll need your class code. You'll get a <b>recovery code</b> straight away — save it in a password manager or somewhere safe.</p>
+          <p>From the welcome screen or the account menu, choose <b>Create an account</b>. During early access you'll need your access code. You'll get a <b>recovery code</b> straight away — save it in a password manager or somewhere safe.</p>
           <h4>Can you see my synced data?</h4>
           <p>No. Sync is <b>end-to-end encrypted</b>: your data is scrambled on your device <i>before</i> it's uploaded, and only the scrambled version is stored. The key that unlocks it never leaves your devices. That means <b>I can't read your synced data</b> — not for support, not for anything — because I simply don't have the key.</p>
           <h4>What if I forget my password?</h4>
@@ -1149,6 +1175,47 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="confirm-actions"><button class="btn ghost sm" id="confirmCopy" style="display:none">Close and Copy</button><button class="btn ghost sm" id="confirmCancel">Cancel</button><button class="btn sm" id="confirmOk">Confirm</button></div>
     </div>
   </div>
+  <!-- SESSION SETUP (v0.4.1): Practice / Exam options live here, not in Settings -->
+  <div class="modal-ov" id="setupOv" style="display:none">
+    <div class="modal-card setup-card" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
+      <button class="acct-x" id="setupX" type="button" aria-label="Close">×</button>
+      <h3 id="setupTitle">Set up your exam</h3>
+      <div id="setupExam">
+      <div class="setrow"><span>Difficulty</span><div class="segctl sdiff" id="exDiff"><button class="seg" data-d="easy">Easy <i>0</i></button><button class="seg" data-d="medium">Medium <i>0</i></button><button class="seg" data-d="hard">Hard <i>0</i></button></div></div>
+      <div class="setrow"><span>Question selection</span>
+        <select id="setExamFresh"><option value="any">Any</option><option value="prefer">Prefer fresh</option><option value="only">Fresh only</option></select>
+      </div>
+      <div class="note" style="text-align:left;margin:-2px 0 8px">Prefer fresh uses questions you haven’t answered first, keeping your weighting, then tops up with the ones you saw longest ago. Fresh only never repeats — a group may come up short.</div>
+      <div class="note setup-fresh" id="exFreshNote"></div>
+      <div class="setsub">Weighting</div>
+      <div class="setrow"><span>Auto-balance equally across active packs</span><button class="switch" id="setExamAuto">on</button></div>
+      <div class="setrow"><span>Group weights by</span>
+        <select id="setGroupBy"><option value="system">System</option><option value="pack">Pack / week</option><option value="topic">Topic</option></select>
+      </div>
+      <div class="weights" id="weightRows"></div>
+      <div class="wtot"><span>Total test length: <b id="weightTotal">0</b> questions</span>
+        <span><input type="number" id="autoTarget" min="1" value="40" style="width:60px;font-family:var(--font-mono);padding:4px 6px;border:1.5px solid var(--line);border-radius:5px;background:var(--paper2);color:var(--ink)"> <button class="minor" id="autoBalanceBtn">Reset to equal</button></span>
+      </div>
+      <div class="note" id="weightNote" style="text-align:left;margin-top:8px">On by default — the exam splits evenly across your active packs and updates as packs change, so you never have to set this. Edit any value to customize.</div>
+      <div class="setrow"><span>Timer — total minutes</span><span><input type="number" id="setExamMins" min="1" max="300" value="60"> <button class="switch" id="setExamTimer">on</button></span></div>
+      </div>
+      <div id="setupPrac">
+      <div class="setrow"><span>Difficulty</span><div class="segctl sdiff" id="prDiff"><button class="seg" data-d="easy">Easy <i>0</i></button><button class="seg" data-d="medium">Medium <i>0</i></button><button class="seg" data-d="hard">Hard <i>0</i></button></div></div>
+      <div class="setrow"><span>Unanswered questions only</span><button class="switch" id="setPracOnlyNew">off</button></div>
+      <div class="note setup-fresh" id="prFreshNote"></div>
+      <div class="setrow"><span>Shuffle questions</span><button class="switch" id="setPracShuffle">on</button></div>
+      <div class="setrow"><span>Timer — seconds per question</span><span><input type="number" id="setPracSecs" min="5" max="600" value="90"> <button class="switch" id="setPracTimer">on</button></span></div>
+      </div>
+      <button class="btn wide" id="setupGo" type="button">Start exam</button>
+    </div>
+  </div>
+  <!-- PAST EXAMS (v0.4.1) -->
+  <div class="modal-ov" id="pastOv" style="display:none">
+    <div class="modal-card setup-card" role="dialog" aria-modal="true" aria-labelledby="pastTitle">
+      <button class="acct-x" id="pastX" type="button" aria-label="Close">×</button>
+      <h3 id="pastTitle">Past exams</h3><div id="pastBody"></div>
+    </div>
+  </div>
   <!-- ACCOUNT PANEL (v0.3.0) -->
   <div class="modal-ov" id="acctOv" style="display:none">
     <div class="modal-card acct-card" role="dialog" aria-modal="true" aria-label="Account"><button class="acct-x" id="acctX" type="button" aria-label="Close">×</button><div id="acctBody"></div></div>
@@ -1172,7 +1239,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
     <div class="qcard" id="qcard"></div>
     <div class="controls">
       <button class="nbtn" id="prevBtn">← Previous</button>
-      <div class="mid"><button class="nbtn flagbtn" id="flagBtn">⚑ Flag</button><button class="nbtn primary" id="submitAnsBtn" style="display:none">Submit answer</button></div>
+      <div class="mid"><button class="nbtn" id="skipBtn" title="Move on without answering — it won’t count as seen">Skip</button><button class="nbtn flagbtn" id="flagBtn">⚑ Flag</button><button class="nbtn primary" id="submitAnsBtn" style="display:none">Submit answer</button></div>
       <button class="nbtn" id="nextBtn">Next →</button>
     </div>
     <div class="palette"><div class="ttl"><span id="paletteTitle">Question map</span><span id="answeredCount"></span></div><div class="grid" id="grid"></div><div class="submitbar"><button class="btn" id="finishBtn"></button></div></div>
@@ -1208,22 +1275,9 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="note" style="text-align:left;margin-top:8px">Auto follows your device. The footer shows the live version.</div>
     </div>
     <div class="setsec">
-      <div class="sh">Exam composition</div>
-      <div class="setrow"><span>Auto-balance equally across active packs</span><button class="switch" id="setExamAuto">on</button></div>
-      <div class="setrow"><span>Group weights by</span>
-        <select id="setGroupBy"><option value="system">System</option><option value="pack">Pack / week</option><option value="topic">Topic</option></select>
-      </div>
-      <div class="weights" id="weightRows"></div>
-      <div class="wtot"><span>Total test length: <b id="weightTotal">0</b> questions</span>
-        <span><input type="number" id="autoTarget" min="1" value="40" style="width:60px;font-family:var(--font-mono);padding:4px 6px;border:1.5px solid var(--line);border-radius:5px;background:var(--paper2);color:var(--ink)"> <button class="minor" id="autoBalanceBtn">Reset to equal</button></span>
-      </div>
-      <div class="note" id="weightNote" style="text-align:left;margin-top:8px">On by default — the exam splits evenly across your active packs and updates as packs change, so you never have to set this. Edit any value to customize.</div>
-    </div>
-    <div class="setsec">
-      <div class="sh">Timers</div>
-      <div class="setrow"><span>Practice — seconds per question</span><span><input type="number" id="setPracSecs" min="5" max="600" value="90"> <button class="switch" id="setPracTimer">on</button></span></div>
-      <div class="setrow"><span>Exam — total minutes</span><span><input type="number" id="setExamMins" min="1" max="300" value="60"> <button class="switch" id="setExamTimer">on</button></span></div>
-      <div class="setrow"><span>Shuffle practice questions</span><button class="switch" id="setPracShuffle">on</button></div>
+      <div class="sh">Question history</div>
+      <div class="setrow"><span>Clear what you’ve answered in</span><span><select id="histPack"></select> <button class="minor" id="histClear">Clear</button></span></div>
+      <div class="note" style="text-align:left;margin-top:8px">Practice puts questions you’ve answered last and lets you view your prior answer; exams can pick fresh questions. Clearing makes every question count as new again. Your review cards aren’t affected.</div>
     </div>
     <div class="setsec">
       <div class="sh">Review (spaced repetition)</div>
@@ -1236,14 +1290,14 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.4.0';
+const APP_VERSION='0.4.1';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
 const APP_AUTHOR='Alkarim Billawala / alkarim.billawala.ca';
 
 /* ===== STORAGE ===== */
-const KEY={packs:'suite_packs_v1',sched:'srs_sched_v2',daily:'srs_daily_v2',settings:'suite_settings_v1',eac:'suite_eac_v1',prac:'suite_prac_v1',acct:'suite_acct_v1',sync:'suite_sync_v1',localAt:'suite_localat_v1'};
+const KEY={packs:'suite_packs_v1',sched:'srs_sched_v2',daily:'srs_daily_v2',settings:'suite_settings_v1',eac:'suite_eac_v1',prac:'suite_prac_v1',acct:'suite_acct_v1',sync:'suite_sync_v1',localAt:'suite_localat_v1',qhist:'suite_qhist_v1',exam:'suite_exam_v1',exams:'suite_exams_v1'};
 const memCache={};
 const Store={
   async get(k){try{if(window.storage){const r=await window.storage.get(k);if(r&&r.value!=null)return JSON.parse(r.value);}}catch(e){}try{const v=localStorage.getItem(k);if(v!=null)return JSON.parse(v);}catch(e){}return (k in memCache)?memCache[k]:null;},
@@ -1449,8 +1503,8 @@ function humanDelta(ms){if(ms<MIN)return '<1m';if(ms<60*MIN)return Math.round(ms
 function humanFromNow(due,now){if(due<=now)return 'due';return 'in '+humanDelta(due-now);}
 
 /* ===== STATE ===== */
-let packs=[], sched={}, daily={date:'',count:0}, eac=null, prac=null;
-let settings={theme:'auto',autoDark:'dark',themeFamily:'navy',examGroupBy:'system',examAuto:true,examTarget:40,examCounts:{},practiceSecs:90,practiceTimer:true,practiceShuffle:true,examMinutes:60,examTimer:true,srsNewPerDay:20,sessionDiffs:['easy','medium','hard'],revNavCollapsed:false};
+let packs=[], sched={}, daily={date:'',count:0}, eac=null, prac=null, qhist={}, examSave=null, examLog=[];
+let settings={theme:'auto',autoDark:'dark',themeFamily:'navy',examGroupBy:'system',examAuto:true,examFresh:'prefer',practiceOnlyNew:false,examTarget:40,examCounts:{},practiceSecs:90,practiceTimer:true,practiceShuffle:true,examMinutes:60,examTimer:true,srsNewPerDay:20,sessionDiffs:['easy','medium','hard'],revNavCollapsed:false};
 /* ===== APPEARANCE / THEME ===== */
 function resolveMode(){const t=settings.theme||'auto';
   if(t==='light'||t==='dark'||t==='black')return t;
@@ -1501,13 +1555,15 @@ function sysLabel(s){return SYS_LABEL[s]||s;}
 function systemsPresent(set){const arr=[...set];return SYS_ORDER.filter(s=>set.has(s)).concat(arr.filter(s=>!SYS_ORDER.includes(s)));}
 /* difficulty */
 function diffRank(q){return DIFFS.indexOf(q&&q.difficulty);}
-function selDiffs(){const s=Array.isArray(settings.sessionDiffs)?settings.sessionDiffs.filter(d=>DIFFS.includes(d)):[];return s.length?s:DIFFS.slice();}
-function matchDiff(q){const s=selDiffs();if(s.length===DIFFS.length)return true;const r=diffRank(q);return r>=0&&s.includes(DIFFS[r]);}
-function qTestPool(){return qpool().filter(matchDiff);}
+/* v0.4.1: Practice and Exam each keep their own difficulty mix (settings.pracDiffs / examDiffs), chosen on their setup screens. */
+function selDiffs(m){const v=settings[m==='prac'?'pracDiffs':'examDiffs'];const s=Array.isArray(v)?v.filter(d=>DIFFS.includes(d)):[];return s.length?s:DIFFS.slice();}
+function matchDiff(q,m){const s=selDiffs(m);if(s.length===DIFFS.length)return true;const r=diffRank(q);return r>=0&&s.includes(DIFFS[r]);}
+function qTestPool(m){return qpool().filter(q=>matchDiff(q,m||'exam'));}
+function selDiffsLegacy(){const s=Array.isArray(settings.sessionDiffs)?settings.sessionDiffs.filter(d=>DIFFS.includes(d)):[];return s.length?s:DIFFS.slice();}
 function diffCounts(){const pool=qpool();const c={easy:0,medium:0,hard:0,all:pool.length};pool.forEach(q=>{const r=diffRank(q);if(r>=0)c[DIFFS[r]]++;});return c;}
 function diffBadge(q){if(!q||diffRank(q)<0)return '';return `<span class="diffbadge ${q.difficulty}">${q.difficulty}</span>`;}
 
-async function persist(){await Store.set(KEY.packs,packs);await Store.set(KEY.sched,sched);await Store.set(KEY.daily,daily);await Store.set(KEY.settings,settings);if(eac)await Store.set(KEY.eac,eac);await Store.set(KEY.prac,prac);SSSync.changed();}
+async function persist(){await Store.set(KEY.packs,packs);await Store.set(KEY.sched,sched);await Store.set(KEY.daily,daily);await Store.set(KEY.settings,settings);if(eac)await Store.set(KEY.eac,eac);await Store.set(KEY.prac,prac);await Store.set(KEY.qhist,qhist);await Store.set(KEY.exam,examSave);await Store.set(KEY.exams,examLog);SSSync.changed();}
 /* ===== SYNC (v0.3.0) — local-first; the cloud copy is one encrypted blob per account =====
    Payload = {v,app,sched,daily,settings,eac,prac,packs[]} where a published pack (its id is in packs-manifest.json)
    travels as a light {ref:1,id,version,…placement,enabled} and is refetched by id on a device that lacks it; any
@@ -1526,7 +1582,7 @@ const SSSync=(()=>{
   async function manifest(){if(defaultManifest)return defaultManifest;
     try{const r=await fetch('packs-manifest.json',{cache:'no-store'});if(r.ok){const m=await r.json();if(m&&Array.isArray(m.packs))return m;}}catch(e){}return null;}
   const publicIds=m=>new Set(((m&&m.packs)||[]).filter(x=>x&&x.id&&x.file).map(x=>x.id));
-  function payload(pub){return {v:1,app:APP_VERSION,sched,daily,settings,eac,prac,
+  function payload(pub){return {v:1,app:APP_VERSION,sched,daily,settings,eac,prac,qhist,exam:examSave,exams:examLog,
     packs:packs.map(p=>pub.has(p.id)?Object.assign({ref:1},pick(p,LIGHT)):p).concat((meta&&meta.missing)||[])};}
   /* Fetch a published pack by id and run it through ingestPack in isolation (so `packs` isn't touched). */
   async function fetchPublic(id,m){const mp=m&&m.packs.find(x=>x&&x.id===id&&x.file);if(!mp)return null;
@@ -1570,6 +1626,8 @@ const SSSync=(()=>{
       sched=d.sched||{};daily=d.daily||{date:today(),count:0};if(d.settings)settings=Object.assign(settings,d.settings);
       if(d.eac&&d.eac.unlocked)eac=Object.assign({},eac||{},d.eac); /* keep a remembered class code the account copy lacks */
       prac=(d.prac&&d.prac.mode==='practice'&&Array.isArray(d.prac.qorder))?d.prac:null;
+      if(d.qhist&&typeof d.qhist==='object')qhist=d.qhist; /* older account copies have none — keep this device's */
+      if('exam' in d)examSave=(d.exam&&Array.isArray(d.exam.qorder))?d.exam:null;if(Array.isArray(d.exams))examLog=d.exams;
       packs=r.out;meta.missing=r.miss;
       deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});rollDaily();
       await persist();applyTheme();applyGate();renderHome();
@@ -1680,7 +1738,7 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
     '<form id="acctForm" autocomplete="on"><label class="f">Email<input class="fi" type="email" id="acctEmail" autocomplete="username" required value="'+acctEsc(acctEmail)+'"></label>'+
     '<label class="f">Password (8+ characters)<input class="fi" type="password" id="acctPw" autocomplete="new-password" minlength="8" required></label>'+
     '<label class="f">Password again<input class="fi" type="password" id="acctPw2" autocomplete="new-password" required></label>'+
-    '<label class="f" id="acctCodeWrap">Class code<input class="fi" type="text" id="acctCode" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="The code you used to open the app"></label>'+
+    '<label class="f" id="acctCodeWrap">Access code<input class="fi" type="text" id="acctCode" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="The code you used to open the app"></label>'+
     '<div class="acct-err" id="acctErr"></div><button class="btn sm wide" type="submit" id="acctGo">Create account</button>'+
     '<div class="acct-legal">By creating an account you agree to the <a href="terms.html" target="_blank" rel="noopener">Terms</a> and <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</div></form>'+
     '<div class="acct-alt">Already have one? <a id="acctToIn">Sign in</a></div>';
@@ -1689,10 +1747,10 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
     SSAccount.policy().then(p=>{if(p&&p.requiresEac===false&&$('acctCodeWrap'))$('acctCodeWrap').style.display='none';}).catch(()=>{});
     $('acctForm').onsubmit=async e=>{e.preventDefault();acctErr('');
       if($('acctPw').value!==$('acctPw2').value){acctErr('The two passwords don’t match.');return;}
-      const cw=$('acctCodeWrap');if(cw.style.display!=='none'&&!$('acctCode').value.trim()){acctErr('Enter your class code.');return;}
+      const cw=$('acctCodeWrap');if(cw.style.display!=='none'&&!$('acctCode').value.trim()){acctErr('Enter your access code.');return;}
       const go=$('acctGo');acctBusy(go,true,'Creating your account…');
       try{const r=await SSAccount.signUp($('acctEmail').value,$('acctPw').value,$('acctCode').value.trim());acctTypedCode=eacCanon($('acctCode').value);acctRc=r.recoveryCode;acctEmail='';renderAcct('recovery');SSAccount.requestVerification(SSAccount.session().email).catch(()=>{});}
-      catch(err){if(/access code/i.test(err.message)&&cw.style.display==='none'){cw.style.display='';$('acctCode').value='';err.message='Enter your class code.';}acctErr(err.message);acctBusy(go,false);}};}
+      catch(err){if(/access code/i.test(err.message)&&cw.style.display==='none'){cw.style.display='';$('acctCode').value='';err.message='Enter your access code.';}acctErr(err.message);acctBusy(go,false);}};}
   else if(view==='recovery'){b.innerHTML='<h3>Save your recovery code</h3><p class="acct-sub">If you ever forget your password, this code is the only way back into your synced data. Nobody else can recover it for you. Keep it in a password manager, or write it down somewhere safe.</p>'+
     '<div class="acct-rc" id="acctRc">'+acctEsc(acctRc).split('-').map(g=>'<span>'+g+'</span>').join('-<wbr>')+'</div><div class="acct-row"><button class="btn ghost sm" id="acctRcCopy">Copy</button><button class="btn ghost sm" id="acctRcDl">Download</button></div>'+
     '<label class="acct-chk"><input type="checkbox" id="acctRcOk"><span>I’ve saved my recovery code somewhere safe.</span></label><button class="btn sm wide" id="acctRcDone" disabled>Done</button>';
@@ -1814,8 +1872,8 @@ let acctTypedCode='';
 async function acctUnlockDevice(){if(eac&&eac.unlocked)return;const s=SSAccount.session();if(!s)return;
   eac={unlocked:true,via:s.tag||'account',admin:s.tag==='master',at:new Date().toISOString(),viaAccount:true};if(acctTypedCode&&s.tag!=='master')eac.code=acctTypedCode;await Store.set(KEY.eac,eac);applyGate();}
 if(ACCT_ON){$('eacAcct').hidden=false;document.querySelector('#eacGate .eactitle').textContent='Welcome to Study Suite';
-  document.querySelector('#eacGate .eacsub').textContent='Sign in to pick up where you left off, or start with your class code.';
-  $('eacInput').placeholder='Class code';$('eacUnlock').textContent='Continue';
+  document.querySelector('#eacGate .eacsub').textContent='Sign in or create an account to keep your progress synced across your devices — or use Study Suite without an account, saved only on this device.';
+  $('eacInput').placeholder='Access code';
   $('eacSignIn').onclick=()=>{renderAcct('signin');$('acctOv').style.display='flex';};
   $('eacSignUp').onclick=()=>{renderAcct('signup');$('acctOv').style.display='flex';};
   $('eacHelp').onclick=()=>{renderAcct('noacct');$('acctOv').style.display='flex';};}
@@ -2056,7 +2114,10 @@ async function init(){
   if(!SUPPORT_URL.includes('CHANGEME')){$('supportLink').href=SUPPORT_URL;$('supportWrap').style.display='';}
   packs=await Store.get(KEY.packs)||[];
   sched=await Store.get(KEY.sched)||{};
-  prac=await Store.get(KEY.prac)||null;if(!(prac&&prac.mode==='practice'&&Array.isArray(prac.qorder)))prac=null;
+  prac=await Store.get(KEY.prac)||null;
+  qhist=await Store.get(KEY.qhist)||{};
+  examSave=await Store.get(KEY.exam)||null;if(!examInProgress())examSave=null;
+  examLog=await Store.get(KEY.exams)||[];if(!Array.isArray(examLog))examLog=[];if(!(prac&&prac.mode==='practice'&&Array.isArray(prac.qorder)))prac=null;
   daily=await Store.get(KEY.daily)||{date:today(),count:0};
   const sv=await Store.get(KEY.settings);if(sv)settings=Object.assign(settings,sv);
   applyTheme();
@@ -2064,6 +2125,7 @@ async function init(){
   if(!Array.isArray(settings.sessionDiffs)){const old=settings.sessionDifficulty;
     settings.sessionDiffs=(old==='easy')?['easy']:(old==='medium')?['easy','medium']:DIFFS.slice();}
   delete settings.sessionDifficulty;
+  ['pracDiffs','examDiffs'].forEach(k=>{if(!Array.isArray(settings[k]))settings[k]=selDiffsLegacy();});
   deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});
   rollDaily();
   $('saveState').textContent=STORAGE_MODE==='persistent'?'✓ packs + progress saved across sessions':STORAGE_MODE==='local'?'✓ saved in this browser':'⚠ in-memory only — use Backup to keep data';
@@ -2159,7 +2221,7 @@ window.addEventListener('popstate',e=>{
   const cur=currentSection();
   if(target===cur)return;
   const inSession=(cur==='quiz'&&!qTestSubmitted)||cur==='study';
-  const doNav=()=>{if(cur==='quiz'||cur==='study')clearInterval(qTimerId);navLock=true;try{gotoSec(target);}finally{navLock=false;}};
+  const doNav=()=>{if(cur==='quiz'||cur==='study'){clearInterval(qTimerId);if(cur==='quiz')savePrac();}navLock=true;try{gotoSec(target);}finally{navLock=false;}};
   if(inSession){
     // Re-pin the current entry so the back gesture is cancelled while the (async) dialog is open;
     // confirming then navigates forward to the intended target.
@@ -2175,19 +2237,19 @@ window.addEventListener('popstate',e=>{
 function renderHome(){
   backfillPlacement(); // repair any library packs missing school/year/course/weeks (copied from the manifest by id)
   updateHeaderButtons(); // PWA: swap "Add to home" for a Refresh/Update button, reflecting app/pack updates
-  const nC=deck().length,nP=packs.length,aP=activePacks().length,tp=qTestPool().length,nG=activeGuides().length;
+  const nC=deck().length,nP=packs.length,aP=activePacks().length,tp=qpool().length,nG=activeGuides().length;
   $('libCount').textContent=nP?`${aP} of ${nP} active · ${qpool().length} questions · ${nC} cards`:'empty';
   $('libActions').style.display=nP?'':'none';
   const nUpd=pendingUpdates().length;const ua=$('updateAll');if(ua){ua.style.display=nUpd?'':'none';if(nUpd)ua.textContent='↑ Update all ('+nUpd+')';}
   $('featReview').textContent=nC+' cards';
   $('featPractice').textContent=tp+' questions'+(pracInProgress()?` · session in progress (${(prac.qsub||[]).filter(Boolean).length} of ${prac.qorder.length} submitted)`:'');
-  $('featExam').textContent=examTotal()+' per test';
+  const past=examLog.length?` · <a id="examPast">Past exams (${examLog.length})</a>`:'';
+  if(examInProgress()){const N=examSave.qorder.length,a=(examSave.qans||[]).filter(x=>x!=null).length;$('featExam').innerHTML=`exam in progress · ${a} of ${N} answered${past}`;}
+  else $('featExam').innerHTML=examTotal()+' per test'+past;
+  if($('examPast'))$('examPast').onclick=e=>{e.stopPropagation();openPastExams();};
   $('mReview').classList.toggle('dim',nC===0);
   $('mPractice').classList.toggle('dim',tp===0);
   $('mExam').classList.toggle('dim',tp===0);
-  // difficulty selector
-  const dc=diffCounts();$('dcEasy').textContent=dc.easy;$('dcMed').textContent=dc.medium;$('dcHard').textContent=dc.hard;$('dcAll').textContent=dc.all;
-  const sd=selDiffs();$('diffSeg').querySelectorAll('.seg').forEach(b=>b.classList.toggle('on',b.dataset.d==='all'?sd.length===DIFFS.length:sd.includes(b.dataset.d)));
   // topic-guides panel — hidden entirely when no active pack bundles guides
   $('revPanel').style.display=nG?'':'none';
   $('revPanelDesc').textContent=`${nG} topic guide${nG===1?'':'s'} bundled in your active packs.`;
@@ -2686,7 +2748,7 @@ function toggleInfo(which){const items={coming:['comingBtn','comingPanel'],faq:[
 
 /* ===== EXAM WEIGHTING ===== */
 function groupKeyOf(q){const by=settings.examGroupBy;return by==='system'?q.sys:by==='pack'?q._packName:q.topic;}
-function examGroups(){const m=new Map();qTestPool().forEach(q=>{const k=groupKeyOf(q);if(!m.has(k))m.set(k,[]);m.get(k).push(q.id);});return m;}
+function examGroups(){const m=new Map();qTestPool('exam').forEach(q=>{const k=groupKeyOf(q);if(!m.has(k))m.set(k,[]);m.get(k).push(q.id);});return m;}
 function autoBalance(target){const g=examGroups();let total=0;g.forEach(ids=>total+=ids.length);if(!total)return;const t=Math.min(target,total);
   const entries=[...g.entries()];let counts={},sum=0;
   entries.forEach(([k,ids])=>{counts[k]=Math.min(ids.length,Math.round(t*ids.length/total));sum+=counts[k];});
@@ -2698,38 +2760,99 @@ function autoBalance(target){const g=examGroups();let total=0;g.forEach(ids=>tot
 let qmode,qorder=[],qmap={},qans=[],qsub=[],qflag=[],qelapsed=[],qopt=[],qcur=0,qTimerId=null,qTimeLeft=0,qTestSubmitted=false,timerWanted=false;
 function fmt(s){s=Math.max(0,Math.round(s));return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;}
 function buildQmap(){qmap={};qpool().forEach(q=>qmap[q.id]=q);}
+/* ---- Question history (v0.4.1): what you last did with each question, across sessions (KEY.qhist; rides in backup + sync).
+   qhist[id] = {n: times answered, k: times correct, p: last pick (original option index), ok, at: ms, ex: last exam ms}.
+   "Seen" = you selected or submitted an answer. Skip moves on without marking a question. qPrior = this session's snapshot
+   of history from BEFORE it started (drives the practice badges + "View prior answer"). ---- */
+let qT0=0,qPrior={};
+function histSeen(id){return !!qhist[id];}
+function histRecord(id,pick,ok,mode){if(pick==null||!id)return;const h=qhist[id]||{n:0,k:0};h.n++;if(ok)h.k++;h.p=pick;h.ok=!!ok;h.at=Date.now();if(mode==='e')h.ex=h.at;qhist[id]=h;}
+function saveHist(){Store.set(KEY.qhist,qhist);SSSync.changed();}
+function buildPrior(t0){qPrior={};qorder.forEach(id=>{const h=qhist[id];if(h&&h.at<t0)qPrior[id]=Object.assign({},h);});}
+/* A practice session's selected-but-never-submitted answers still count as seen when the session ends. */
+function flushPrac(p){if(!p||!Array.isArray(p.qorder))return;const m={};qpool().forEach(q=>m[q.id]=q);
+  p.qorder.forEach((id,i)=>{const a=p.qans&&p.qans[i];if(a!=null&&!(p.qsub&&p.qsub[i])&&m[id])histRecord(id,a,a===m[id].correct,'p');});saveHist();}
 /* ---- Practice persistence (v0.2.72): the in-progress session lives in Store (KEY.prac) ---- */
 function pracInProgress(){return !!(prac&&prac.mode==='practice'&&Array.isArray(prac.qorder)&&prac.qorder.length);}
-function savePrac(){if(qmode!=='practice'||qTestSubmitted||!qorder.length)return;prac={mode:'practice',v:1,at:Date.now(),qorder:qorder.slice(),qans:qans.slice(),qsub:qsub.slice(),qflag:qflag.slice(),qelapsed:qelapsed.slice(),qopt:qopt.map(a=>Array.isArray(a)?a.slice():a),qcur};Store.set(KEY.prac,prac);}
+function savePrac(){if(qTestSubmitted||!qorder.length)return;if(qmode==='test'){saveExam();return;}if(qmode!=='practice')return;prac={mode:'practice',v:1,at:Date.now(),qorder:qorder.slice(),qans:qans.slice(),qsub:qsub.slice(),qflag:qflag.slice(),qelapsed:qelapsed.slice(),qopt:qopt.map(a=>Array.isArray(a)?a.slice():a),qcur,t0:qT0};Store.set(KEY.prac,prac);}
 function clearPrac(){prac=null;Store.set(KEY.prac,null);}
+/* ---- Exam persistence (v0.4.1): leaving an exam without submitting keeps it; tapping Exam resumes it. The timer pauses while away. ---- */
+function examInProgress(){return !!(examSave&&Array.isArray(examSave.qorder)&&examSave.qorder.length);}
+function saveExam(){if(qmode!=='test'||qTestSubmitted||!qorder.length)return;
+  examSave={v:1,at:Date.now(),qorder:qorder.slice(),qans:qans.slice(),qflag:qflag.slice(),qopt:qopt.map(a=>Array.isArray(a)?a.slice():a),qcur,left:qTimeLeft,t0:qT0};Store.set(KEY.exam,examSave);}
+function clearExam(){examSave=null;Store.set(KEY.exam,null);}
+/* Past exams (v0.4.1): the last 20 exams — full or partial (started fresh over) — kept for review. */
+function logExam(e,partial){const m={};qpool().forEach(q=>m[q.id]=q);let answered=0,correct=0;
+  e.qorder.forEach((id,i)=>{const a=e.qans[i];if(a!=null){answered++;if(m[id]&&a===m[id].correct)correct++;}});
+  examLog.unshift({at:Date.now(),partial:!!partial,qorder:e.qorder.slice(),qans:e.qans.slice(),qopt:(e.qopt||[]).map(a=>Array.isArray(a)?a.slice():a),total:e.qorder.length,answered,correct});
+  examLog=examLog.slice(0,20);Store.set(KEY.exams,examLog);SSSync.changed();}
+/* Start fresh over an unfinished exam: its answered questions are submitted (history + Past exams), then a new one is set up. */
+function finishPartialExam(){const e=examSave;if(!e)return;const m={};qpool().forEach(q=>m[q.id]=q);
+  e.qorder.forEach((id,i)=>{const a=e.qans&&e.qans[i];if(a!=null&&m[id])histRecord(id,a,a===m[id].correct,'e');});saveHist();
+  if((e.qans||[]).some(a=>a!=null))logExam(e,true);clearExam();}
+function openPastExams(){const b=$('pastBody');
+  if(!examLog.length){b.innerHTML='<p class="acct-sub">No past exams yet. Finished exams — and any you start fresh over — show up here.</p>';}
+  else b.innerHTML=examLog.map((x,i)=>{const d=new Date(x.at).toLocaleString([],{dateStyle:'medium',timeStyle:'short'});
+    return `<div class="pastrow"><div><div class="pt">${d}${x.partial?' <span class="pastpart">partial</span>':''}</div><div class="pd">${x.partial?`${x.answered} of ${x.total} answered · ${x.correct} correct`:`${x.correct} / ${x.total} · ${Math.round(x.correct/x.total*100)}%`}</div></div><button class="btn ghost sm" data-i="${i}">Review</button></div>`;}).join('');
+  b.querySelectorAll('button[data-i]').forEach(bt=>bt.onclick=()=>{$('pastOv').style.display='none';reviewPastExam(examLog[+bt.dataset.i]);});
+  $('pastOv').style.display='flex';}
+function reviewPastExam(x){buildQmap();const keep=[];x.qorder.forEach((id,i)=>{if(qmap[id])keep.push(i);});
+  if(!keep.length){toast('None of that exam’s questions are loaded any more.');return;}
+  qorder=keep.map(i=>x.qorder[i]);qmode='test';qTestSubmitted=true;qPrior={};qans=keep.map(i=>x.qans[i]!=null?x.qans[i]:null);qflag=keep.map(()=>false);qsub=keep.map(()=>true);qelapsed=keep.map(()=>0);
+  qopt=keep.map(i=>{const opts=qmap[x.qorder[i]].options||[];const a=x.qopt&&x.qopt[i];return (Array.isArray(a)&&a.length===opts.length)?a:optPerm(opts);});
+  qcur=0;clearInterval(qTimerId);timerWanted=false;$('timer').style.display='none';$('flagBtn').style.display='none';$('submitAnsBtn').style.display='none';$('skipBtn').style.display='none';$('finishBtn').style.display='none';
+  $('paletteTitle').textContent='Question map · past exam';const dropped=x.qorder.length-keep.length;if(dropped)toast(`${dropped} question${dropped===1?'':'s'} from that exam aren’t loaded any more and were left out.`);
+  renderQuiz();show('quiz');}
+function resumeExam(){const p=examSave;buildQmap();const keep=[];p.qorder.forEach((id,i)=>{if(qmap[id])keep.push(i);});
+  if(!keep.length){toast('None of that exam’s questions are loaded any more — set up a new one.');clearExam();openSetup('exam');return;}
+  qorder=keep.map(i=>p.qorder[i]);qmode='test';qTestSubmitted=false;qPrior={};qT0=p.t0||Date.now();
+  qans=keep.map(i=>(Array.isArray(p.qans)&&p.qans[i]!==undefined)?p.qans[i]:null);qflag=keep.map(i=>!!(p.qflag&&p.qflag[i]));qsub=keep.map(()=>false);qelapsed=keep.map(()=>0);
+  qopt=keep.map(i=>{const opts=qmap[p.qorder[i]].options||[];const a=Array.isArray(p.qopt)?p.qopt[i]:null;return (Array.isArray(a)&&a.length===opts.length)?a:optPerm(opts);});
+  const c=keep.indexOf(p.qcur);qcur=c>=0?c:0;qTimeLeft=typeof p.left==='number'?p.left:settings.examMinutes*60;
+  timerWanted=!!settings.examTimer;$('flagBtn').style.display='';$('submitAnsBtn').style.display='none';
+  $('finishBtn').textContent='Submit examination';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map';
+  $('timer').classList.remove('over','warn');toast('Exam resumed'+(settings.examTimer?' — the timer picks up where you left it.':'.'));renderQuiz();startQTick();show('quiz');}
 function startPractice(){
   if(pracInProgress()){const N=prac.qorder.length,n=(prac.qsub||[]).filter(Boolean).length,a=(prac.qans||[]).filter(x=>x!=null).length;
     confirmDialog(`You have a practice session in progress — ${n} of ${N} submitted${a>n?` (${a-n} more answered, not yet submitted)`:''}. Resume it, or start fresh?`,
-      {confirmText:'Resume',cancelText:'Start fresh',onCancel:()=>{clearPrac();startPracticeFresh();}},resumePractice);
+      {confirmText:'Resume',cancelText:'Start fresh',onCancel:()=>{flushPrac(prac);clearPrac();openSetup('prac');}},resumePractice);
     return;}
-  startPracticeFresh();}
+  openSetup('prac');}
 function resumePractice(){const p=prac;buildQmap();
-  const keep=[];p.qorder.forEach((id,i)=>{if(qmap[id]&&matchDiff(qmap[id]))keep.push(i);});
+  const keep=[];p.qorder.forEach((id,i)=>{if(qmap[id])keep.push(i);}); /* the session's own mix — difficulty was chosen when it started */
   if(!keep.length){toast('None of that session’s questions are loaded any more — starting fresh.');clearPrac();startPracticeFresh();return;}
   const pick=(arr,fill)=>keep.map(i=>(Array.isArray(arr)&&arr[i]!==undefined&&arr[i]!==null)?arr[i]:fill);
   qorder=keep.map(i=>p.qorder[i]);qmode='practice';qTestSubmitted=false;
   qans=keep.map(i=>(Array.isArray(p.qans)&&p.qans[i]!==undefined)?p.qans[i]:null);qsub=pick(p.qsub,false);qflag=pick(p.qflag,false);qelapsed=pick(p.qelapsed,0);
   qopt=keep.map(i=>{const opts=qmap[p.qorder[i]].options||[];const a=Array.isArray(p.qopt)?p.qopt[i]:null;return (Array.isArray(a)&&a.length===opts.length)?a:optPerm(opts);});
-  const c=keep.indexOf(p.qcur);qcur=c>=0?c:0;
+  const c=keep.indexOf(p.qcur);qcur=c>=0?c:0;qT0=p.t0||0;buildPrior(qT0);
   timerWanted=!!settings.practiceTimer;$('flagBtn').style.display='none';$('submitAnsBtn').style.display='';
   $('finishBtn').textContent='Finish & summary';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map · practice';
   const dropped=p.qorder.length-keep.length;toast(dropped?`Practice resumed — ${dropped} question${dropped===1?'':'s'} no longer loaded ${dropped===1?'was':'were'} skipped.`:'Practice resumed.');
   renderQuiz();startQTick();show('quiz');savePrac();}
-function startPracticeFresh(){const pool=qTestPool();if(!pool.length){toast('No questions match the current session difficulty.');return;}buildQmap();
-  let ids=pool.map(q=>q.id);if(settings.practiceShuffle)shuffle(ids);qorder=ids;qmode='practice';
+function startPracticeFresh(){const pool=qTestPool('prac');if(!pool.length){toast('No questions match that difficulty.');return;}buildQmap();
+  let ids=pool.map(q=>q.id);
+  if(settings.practiceOnlyNew){ids=ids.filter(id=>!histSeen(id));
+    if(!ids.length){toast('You’ve answered every question in your active packs. Turn off “Unanswered only” in Settings to practise them again.');return;}}
+  /* never-answered first; previously answered last — wrong last time before right, oldest first */
+  const fresh=ids.filter(id=>!histSeen(id)),old=ids.filter(histSeen);if(settings.practiceShuffle)shuffle(fresh);
+  old.sort((a,b)=>(qhist[a].ok===qhist[b].ok?0:(qhist[a].ok?1:-1))||(qhist[a].at-qhist[b].at));
+  qorder=fresh.concat(old);qmode='practice';qT0=Date.now();buildPrior(qT0);
   qinit();qTestSubmitted=false;
   timerWanted=!!settings.practiceTimer;$('flagBtn').style.display='none';$('submitAnsBtn').style.display='';
   $('finishBtn').textContent='Finish & summary';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map · practice';
   renderQuiz();startQTick();show('quiz');}
-function startExam(){const pool=qTestPool();if(!pool.length){toast('No questions match the current session difficulty.');return;}buildQmap();
-  const counts=currentCounts();const g=examGroups();let picks=[];g.forEach((ids,k)=>{picks=picks.concat(shuffle([...ids]).slice(0,Math.min(ids.length,counts[k]||0)));});
-  if(!picks.length){toast('No questions available for an exam. Load a study pack (or widen the session difficulty).');return;}
-  qorder=shuffle(picks);qmode='test';qinit();qTestSubmitted=false;qTimeLeft=settings.examMinutes*60;
+function startExam(){const pool=qTestPool('exam');if(!pool.length){toast('No questions match that difficulty.');return;}buildQmap();
+  const counts=currentCounts();const g=examGroups();let picks=[],short=0;const mode=settings.examFresh||'prefer';
+  /* Weighting is kept per group; "fresh" = never answered (practice or exam). Prefer tops up with the longest-unseen. */
+  g.forEach((ids,k)=>{const want=Math.min(ids.length,counts[k]||0);let take;
+    if(mode==='any')take=shuffle([...ids]).slice(0,want);
+    else{const fr=shuffle(ids.filter(id=>!histSeen(id)));take=fr.slice(0,want);
+      if(take.length<want){if(mode==='prefer'){const last=id=>qhist[id].ex||qhist[id].at;take=take.concat(ids.filter(histSeen).sort((a,b)=>last(a)-last(b)).slice(0,want-take.length));}else short+=want-take.length;}}
+    picks=picks.concat(take);});
+  if(!picks.length){toast(mode==='only'?'No fresh questions left in your active packs. Set Question selection to “Prefer fresh” in Settings.':'No questions available for an exam. Load a study pack (or widen the session difficulty).');return;}
+  if(short)toast(`Only ${picks.length} fresh question${picks.length===1?'':'s'} fit your weighting, so this exam is ${short} short.`);
+  qorder=shuffle(picks);qmode='test';qPrior={};qT0=Date.now();qinit();qTestSubmitted=false;qTimeLeft=settings.examMinutes*60;saveExam();
   timerWanted=!!settings.examTimer;$('flagBtn').style.display='';$('submitAnsBtn').style.display='none';
   $('finishBtn').textContent='Submit examination';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map';
   $('timer').classList.remove('over','warn');renderQuiz();startQTick();show('quiz');}
@@ -2737,7 +2860,7 @@ function qinit(){qcur=0;qans=new Array(qorder.length).fill(null);qsub=new Array(
   qopt=qorder.map(id=>optPerm(qmap[id].options||[]));}
 function qRevealed(slot){return qmode==='practice'?qsub[slot]:qTestSubmitted;}
 function startQTick(){clearInterval(qTimerId);qTimerId=setInterval(()=>{
-  if(qmode==='test'){if(!settings.examTimer)return;qTimeLeft--;$('tclock').textContent=fmt(qTimeLeft);$('timer').classList.toggle('warn',qTimeLeft<=300&&qTimeLeft>0);if(qTimeLeft<=0){clearInterval(qTimerId);submitExam(true);}}
+  if(qmode==='test'){if(!settings.examTimer)return;qTimeLeft--;if(qTimeLeft%15===0)saveExam();$('tclock').textContent=fmt(qTimeLeft);$('timer').classList.toggle('warn',qTimeLeft<=300&&qTimeLeft>0);if(qTimeLeft<=0){clearInterval(qTimerId);submitExam(true);}}
   else{if(!settings.practiceTimer)return;if(!qsub[qcur])qelapsed[qcur]++;updatePracClock();}
 },1000);}
 function updatePracClock(){const rem=settings.practiceSecs-qelapsed[qcur];const t=$('timer');if(rem>=0){t.classList.remove('over');t.classList.toggle('warn',rem<=15);$('tclock').textContent=fmt(rem);}else{t.classList.add('over');t.classList.remove('warn');$('tclock').textContent='+'+fmt(-rem);}}
@@ -2750,28 +2873,34 @@ function renderQuiz(){const q=qmap[qorder[qcur]],sel=qans[qcur],done=qRevealed(q
   html+='</div>';
   if(done){const ok=sel===q.correct;html+=`<div class="verdictline ${ok?'ok':'no'}">${ok?'✓ Correct':(sel==null?'— Not answered':'✗ Incorrect')}</div>`;
     html+=`<div class="answerbox"><div class="h">Explanation · ${q.topic}${diffRank(q)>=0?' · '+q.difficulty:''}</div>${q.explain||''}</div>`+guideHTML(q.guide);}
+  const pr=qmode==='practice'?qPrior[qorder[qcur]]:null;
+  if(pr&&!done){const di=perm.indexOf(pr.p);html+=`<div class="priorwrap"><button class="priorbtn" id="priorBtn" aria-expanded="false">↺ Answered before · view your prior answer</button><div class="priorbox" id="priorBox" hidden>${new Date(pr.at).toLocaleDateString([],{month:'short',day:'numeric'})} · you picked <b>${di>=0?LETTERS[di]+'. ':''}${q.options[pr.p]!=null?q.options[pr.p]:'—'}</b> · <span class="${pr.ok?'pok':'pno'}">${pr.ok?'✓ correct':'✗ incorrect'}</span>. This time starts clear.</div></div>`;}
   $('qcard').innerHTML=html;
+  if($('priorBtn'))$('priorBtn').onclick=()=>{const b=$('priorBox'),open=b.hidden;b.hidden=!open;$('priorBtn').setAttribute('aria-expanded',open?'true':'false');};
   if(!done)$('qcard').querySelectorAll('.opt').forEach(el=>el.addEventListener('click',()=>{qans[qcur]=+el.dataset.i;renderQuiz();renderGrid();savePrac();}));
   else wireGuideLinks($('qcard'));
   $('prevBtn').disabled=(qcur===0);$('nextBtn').disabled=(qcur===qorder.length-1);
+  $('skipBtn').style.display=qRevealed(qcur)?'none':'';
   if(qmode==='practice'){$('submitAnsBtn').style.display=qsub[qcur]?'none':'';$('submitAnsBtn').disabled=(qans[qcur]==null);if(settings.practiceTimer)updatePracClock();}
   else{$('flagBtn').classList.toggle('on',qflag[qcur]);$('flagBtn').textContent=qflag[qcur]?'⚑ Flagged':'⚑ Flag';}
   renderGrid();}
 function renderGrid(){const g=$('grid');g.innerHTML='';let answered=0,correct=0;
   for(let i=0;i<qorder.length;i++){const c=document.createElement('div');c.className='cell';c.textContent=i+1;
     if(qans[i]!==null)answered++;if(i===qcur)c.classList.add('current');if(qflag[i])c.classList.add('flagged');
+    const pr=qmode==='practice'&&qPrior[qorder[i]];if(pr){c.classList.add('prior',pr.ok?'pok':'pno');c.title='Answered before — '+(pr.ok?'correct':'incorrect')+' last time';}
     if(qRevealed(i)){if(qans[i]===qmap[qorder[i]].correct){c.classList.add('r-correct');correct++;}else c.classList.add('r-wrong');}
     else if(qans[i]!==null)c.classList.add('answered');
     c.addEventListener('click',()=>{qcur=i;renderQuiz();window.scrollTo({top:0,behavior:'smooth'});});g.appendChild(c);}
   $('answeredCount').textContent=qmode==='practice'?`${qsub.filter(Boolean).length} submitted · ${correct} correct`:(qTestSubmitted?'review mode':`${answered} answered`);}
-function submitAnswer(){if(qans[qcur]==null)return;qsub[qcur]=true;renderQuiz();renderGrid();savePrac();}
+function submitAnswer(){if(qans[qcur]==null)return;qsub[qcur]=true;const id=qorder[qcur];histRecord(id,qans[qcur],qans[qcur]===qmap[id].correct,'p');saveHist();renderQuiz();renderGrid();savePrac();}
 function qPrev(){if(qcur>0){qcur--;renderQuiz();savePrac();window.scrollTo({top:0,behavior:'smooth'});}}
 function qNext(){if(qcur<qorder.length-1){qcur++;renderQuiz();savePrac();window.scrollTo({top:0,behavior:'smooth'});}}
 function submitExam(auto){if(qTestSubmitted)return;const un=qans.filter(a=>a===null).length;
   if(!auto&&un>0){confirmDialog(`${un} unanswered. Submit anyway?`,{confirmText:'Submit'},()=>doSubmitExam(auto));return;}
   doSubmitExam(auto);}
-function doSubmitExam(auto){if(qTestSubmitted)return;qTestSubmitted=true;clearInterval(qTimerId);showResults(auto);}
-function finishPractice(){if(qsub.filter(Boolean).length===0){toast('Submit at least one question first.');return;}clearInterval(qTimerId);clearPrac();showResults(false);}
+function doSubmitExam(auto){if(qTestSubmitted)return;qTestSubmitted=true;clearInterval(qTimerId);clearExam();logExam({qorder,qans,qopt},false);
+  qorder.forEach((id,i)=>{if(qans[i]!=null)histRecord(id,qans[i],qans[i]===qmap[id].correct,'e');});saveHist();showResults(auto);}
+function finishPractice(){if(qsub.filter(Boolean).length===0){toast('Submit at least one question first.');return;}clearInterval(qTimerId);flushPrac({qorder,qans,qsub});clearPrac();showResults(false);}
 function showResults(auto){let total=0,correct=0;const byT={};
   if(qmode==='test'){total=qorder.length;for(let i=0;i<qorder.length;i++){const q=qmap[qorder[i]];byT[q.sys]=byT[q.sys]||{c:0,t:0};byT[q.sys].t++;if(qans[i]===q.correct){correct++;byT[q.sys].c++;}}}
   else{for(let i=0;i<qorder.length;i++){if(!qsub[i])continue;const q=qmap[qorder[i]];byT[q.sys]=byT[q.sys]||{c:0,t:0};byT[q.sys].t++;total++;if(qans[i]===q.correct){correct++;byT[q.sys].c++;}}}
@@ -2786,12 +2915,38 @@ function showResults(auto){let total=0,correct=0;const byT={};
   const bd=$('breakdown');bd.innerHTML='';Object.keys(SYS_LABEL).concat(Object.keys(byT).filter(k=>!SYS_LABEL[k])).forEach(s=>{if(!byT[s])return;const {c,t}=byT[s],p=Math.round(c/t*100);bd.innerHTML+=`<div class="brow2"><div class="top"><span class="name">${sysLabel(s)}</span><span class="sc">${c}/${t} · ${p}%</span></div><div class="bar ${p>=70?'good':''}"><i style="width:${p}%"></i></div></div>`;});
   const ra=$('resActions');ra.innerHTML='';
   const rb=document.createElement('button');rb.className='btn';rb.textContent='Review every question →';rb.onclick=enterReview;ra.appendChild(rb);
-  const ag=document.createElement('button');ag.className='btn ghost';ag.textContent=qmode==='test'?'New test':'Restart practice';ag.onclick=()=>{qmode==='test'?startExam():startPractice();};ra.appendChild(ag);
+  const ag=document.createElement('button');ag.className='btn ghost';ag.textContent=qmode==='test'?'New test':'Restart practice';ag.onclick=()=>{qmode==='test'?openSetup('exam'):startPractice();};ra.appendChild(ag);
   const hb=document.createElement('button');hb.className='btn ghost';hb.textContent='Home';hb.onclick=()=>renderHome();ra.appendChild(hb);
   $('resNote').textContent=qmode==='test'?(auto?'Time expired — auto-submitted.':(settings.examTimer?`Time used: ${fmt(settings.examMinutes*60-qTimeLeft)} of ${fmt(settings.examMinutes*60)}.`:'Untimed test.')):'';
   show('results');}
 function enterReview(){qTestSubmitted=true;if(qmode==='practice')for(let i=0;i<qorder.length;i++)qsub[i]=true;
-  timerWanted=false;$('timer').style.display='none';$('submitAnsBtn').style.display='none';$('finishBtn').style.display='none';qcur=0;renderQuiz();show('quiz');}
+  timerWanted=false;$('timer').style.display='none';$('submitAnsBtn').style.display='none';$('skipBtn').style.display='none';$('finishBtn').style.display='none';qcur=0;renderQuiz();show('quiz');}
+
+/* ===== SESSION SETUP (v0.4.1) ===== */
+let setupMode=null;
+function setupFreshNotes(){const ep=qTestPool('exam'),pp=qTestPool('prac');
+  const ef=ep.filter(q=>!histSeen(q.id)).length,pf=pp.filter(q=>!histSeen(q.id)).length;
+  $('exFreshNote').textContent=`${ef} of ${ep.length} question${ep.length===1?'':'s'} not answered yet.`;
+  $('prFreshNote').textContent=`${pf} of ${pp.length} not answered yet.`;}
+function renderSetupDiff(){const m=setupMode==='exam'?'exam':'prac',el=$(m==='exam'?'exDiff':'prDiff'),sd=selDiffs(m),dc=diffCounts();
+  el.querySelectorAll('.seg').forEach(b=>{b.classList.toggle('on',sd.includes(b.dataset.d));b.querySelector('i').textContent=dc[b.dataset.d];});}
+function openSetup(m){setupMode=m;const ex=m==='exam';
+  $('setupTitle').textContent=ex?'Set up your exam':'Set up practice';$('setupExam').style.display=ex?'':'none';$('setupPrac').style.display=ex?'none':'';
+  $('setupGo').textContent=ex?'Start exam':'Start practice';
+  if(ex){$('setGroupBy').value=settings.examGroupBy;$('autoTarget').value=Math.max(1,settings.examTarget||40);toggleSwitch($('setExamAuto'),settings.examAuto);
+    $('setExamMins').value=settings.examMinutes;toggleSwitch($('setExamTimer'),settings.examTimer);$('setExamFresh').value=settings.examFresh||'prefer';renderWeights();}
+  else{$('setPracSecs').value=settings.practiceSecs;toggleSwitch($('setPracTimer'),settings.practiceTimer);toggleSwitch($('setPracShuffle'),settings.practiceShuffle);toggleSwitch($('setPracOnlyNew'),!!settings.practiceOnlyNew);}
+  renderSetupDiff();setupFreshNotes();$('setupOv').style.display='flex';}
+function closeSetup(){$('setupOv').style.display='none';setupMode=null;renderHome();}
+['exDiff','prDiff'].forEach(id=>$(id).querySelectorAll('.seg').forEach(b=>b.addEventListener('click',()=>{
+  const m=id==='exDiff'?'exam':'prac',k=m==='exam'?'examDiffs':'pracDiffs',d=b.dataset.d,s=selDiffs(m);
+  if(s.includes(d)){if(s.length===1)return;settings[k]=s.filter(x=>x!==d);}else settings[k]=DIFFS.filter(x=>s.includes(x)||x===d);
+  renderSetupDiff();setupFreshNotes();if(m==='exam')renderWeights();persist();})));
+$('setupX').addEventListener('click',closeSetup);
+$('pastX').addEventListener('click',()=>{$('pastOv').style.display='none';});$('pastOv').addEventListener('click',e=>{if(e.target===$('pastOv'))$('pastOv').style.display='none';});
+$('setupOv').addEventListener('click',e=>{if(e.target===$('setupOv'))closeSetup();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('setupOv').style.display!=='none')closeSetup();});
+$('setupGo').addEventListener('click',()=>{const m=setupMode;$('setupOv').style.display='none';setupMode=null;m==='exam'?startExam():startPracticeFresh();});
 
 /* ===== SETTINGS ===== */
 function openSettings(){
@@ -2801,6 +2956,8 @@ function openSettings(){
   $('autoTarget').value=Math.max(1,settings.examTarget||40);
   toggleSwitch($('setExamAuto'),settings.examAuto);
   toggleSwitch($('setPracTimer'),settings.practiceTimer);toggleSwitch($('setExamTimer'),settings.examTimer);toggleSwitch($('setPracShuffle'),settings.practiceShuffle);
+  toggleSwitch($('setPracOnlyNew'),!!settings.practiceOnlyNew);$('setExamFresh').value=settings.examFresh||'prefer';
+  $('histPack').innerHTML='<option value="">All packs</option>'+packs.map(p=>`<option value="${acctEsc(p.id)}">${acctEsc(p.pack||p.id)}</option>`).join('');
   renderWeights();$('setMsg').textContent='';$('settingsModal').classList.add('show');}
 function toggleSwitch(el,on){el.classList.toggle('on',on);el.setAttribute('role','switch');el.setAttribute('aria-checked',on?'true':'false');}
 function renderWeights(){const wr=$('weightRows');wr.innerHTML='';const g=examGroups();
@@ -2809,7 +2966,8 @@ function renderWeights(){const wr=$('weightRows');wr.innerHTML='';const g=examGr
   const disp=currentCounts();
   if(!auto){const nc={};g.forEach((ids,k)=>{nc[k]=Math.min(ids.length,disp[k]||0);});settings.examCounts=nc;}
   g.forEach((ids,k)=>{const row=document.createElement('div');row.className='wrow';
-    row.innerHTML=`<span class="wn">${sysLabel(k)}</span><span class="wc">${ids.length} avail</span>`;
+    const fr=(settings.examFresh||'prefer')==='any'?'':` · ${ids.filter(id=>!histSeen(id)).length} fresh`;
+    row.innerHTML=`<span class="wn">${sysLabel(k)}</span><span class="wc">${ids.length} avail${fr}</span>`;
     const inp=document.createElement('input');inp.type='number';inp.min=0;inp.max=ids.length;inp.value=disp[k]||0;
     inp.disabled=auto;if(auto)inp.style.opacity='.55';
     inp.addEventListener('input',()=>{if(settings.examAuto){settings.examAuto=false;toggleSwitch($('setExamAuto'),false);const cur=currentCounts();g.forEach((i2,k2)=>settings.examCounts[k2]=cur[k2]||0);}
@@ -2869,19 +3027,18 @@ async function eacTry(){
   if(m){eac={unlocked:true,via:m.tag||'code',admin:!!m.admin,at:new Date().toISOString()};if(!m.admin)eac.code=eacCanon(code); /* v0.3.0: fills sign-up */await Store.set(KEY.eac,eac);if(err)err.textContent='';hideGate();toast('Welcome to Study Suite.');}
   else{if(err)err.textContent='That code wasn’t recognized. Double-check with whoever shared it.';if(inp)inp.select();}
 }
-function backup(){const data={suite:APP_VERSION,author:APP_AUTHOR,exported:new Date().toISOString(),packs,sched,daily,settings,eac,prac};const blob=new Blob([JSON.stringify(data)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='study-suite-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}
-function restore(file){const r=new FileReader();r.onload=async()=>{try{const d=JSON.parse(r.result);if(d.packs)packs=d.packs;if(d.sched)sched=d.sched;if(d.daily)daily=d.daily;if(d.settings)settings=Object.assign(settings,d.settings);if(d.eac)eac=d.eac;if('prac' in d)prac=(d.prac&&d.prac.mode==='practice'&&Array.isArray(d.prac.qorder))?d.prac:null;deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});rollDaily();await persist();renderHome();applyGate();if(eacArmed()&&!(eac&&eac.unlocked)){toast('Restored — but this backup isn’t from an unlocked copy.');}else{toast('Backup restored.');}}catch(e){toast('Could not read that file.');}};r.readAsText(file);}
+function backup(){const data={suite:APP_VERSION,author:APP_AUTHOR,exported:new Date().toISOString(),packs,sched,daily,settings,eac,prac,qhist,exam:examSave,exams:examLog};const blob=new Blob([JSON.stringify(data)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='study-suite-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}
+function restore(file){const r=new FileReader();r.onload=async()=>{try{const d=JSON.parse(r.result);if(d.packs)packs=d.packs;if(d.sched)sched=d.sched;if(d.daily)daily=d.daily;if(d.settings)settings=Object.assign(settings,d.settings);if(d.eac)eac=d.eac;if(d.qhist&&typeof d.qhist==='object')qhist=d.qhist;if('exam' in d)examSave=(d.exam&&Array.isArray(d.exam.qorder))?d.exam:null;if(Array.isArray(d.exams))examLog=d.exams;if('prac' in d)prac=(d.prac&&d.prac.mode==='practice'&&Array.isArray(d.prac.qorder))?d.prac:null;deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});rollDaily();await persist();renderHome();applyGate();if(eacArmed()&&!(eac&&eac.unlocked)){toast('Restored — but this backup isn’t from an unlocked copy.');}else{toast('Backup restored.');}}catch(e){toast('Could not read that file.');}};r.readAsText(file);}
 
 /* ===== WIRE UP ===== */
 $('mReview').addEventListener('click',()=>{if(deck().length)openReview();});
-$('mPractice').addEventListener('click',()=>{if(qTestPool().length)startPractice();});
-$('mExam').addEventListener('click',()=>{if(qTestPool().length)startExam();});
-$('diffSeg').querySelectorAll('.seg').forEach(b=>b.addEventListener('click',()=>{
-  const d=b.dataset.d,s=selDiffs();
-  if(d==='all')settings.sessionDiffs=DIFFS.slice();
-  else if(s.includes(d)){if(s.length===1)return;settings.sessionDiffs=s.filter(x=>x!==d);}
-  else settings.sessionDiffs=DIFFS.filter(x=>s.includes(x)||x===d);
-  persist();renderHome();}));
+$('mPractice').addEventListener('click',()=>{if(qpool().length)startPractice();});
+$('mExam').addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#examPast'))return;if(!qpool().length)return;
+  if(!examInProgress()){openSetup('exam');return;}
+  const N=examSave.qorder.length,a=(examSave.qans||[]).filter(x=>x!=null).length;
+  confirmDialog(`You have an exam in progress — ${a} of ${N} answered. Resume it, or start fresh?${a?` Starting fresh submits the ${a} you answered; you can review them under Past exams.`:''}`,
+    {confirmText:'Resume',cancelText:'Start fresh',onCancel:()=>{finishPartialExam();renderHome();openSetup('exam');}},resumeExam);});
+
 $('openReviewer').addEventListener('click',()=>{if(activeGuides().length)openReviewer();});
 $('openPharm').addEventListener('click',()=>{if(drugCount())openPharm();});
 $('pharmBack').addEventListener('click',()=>renderHome());
@@ -2907,7 +3064,7 @@ $('zoomIn').addEventListener('click',()=>{guideZoom=Math.min(2,Math.round((guide
 $('zoomOut').addEventListener('click',()=>{guideZoom=Math.max(0.6,Math.round((guideZoom-0.1)*10)/10);applyGuideView();});
 $('fitBtn').addEventListener('click',()=>{guideFit=!guideFit;applyGuideView();});
 $('printBtn').addEventListener('click',()=>{const fr=document.querySelector('.guideframe');if(fr&&fr.contentWindow){try{fr.contentWindow.focus();fr.contentWindow.print();}catch(e){window.print();}}else{window.print();}});
-$('homebtn').addEventListener('click',()=>{if($('quiz').classList.contains('on')||$('study').classList.contains('on')){const keep=$('quiz').classList.contains('on')&&qmode==='practice'&&!qTestSubmitted;confirmDialog(keep?'Return home? Your practice progress is saved — resume it any time from the Practice card.':'Leave this session and return home?',{confirmText:'Leave'},()=>{clearInterval(qTimerId);savePrac();renderHome();});}else renderHome();});
+$('homebtn').addEventListener('click',()=>{if($('quiz').classList.contains('on')||$('study').classList.contains('on')){const keep=$('quiz').classList.contains('on')&&!qTestSubmitted;confirmDialog(keep?(qmode==='test'?'Return home? Your exam is saved — tap Exam to pick up where you left off. The timer pauses until then.':'Return home? Your practice progress is saved — resume it any time from the Practice card.'):'Leave this session and return home?',{confirmText:'Leave'},()=>{clearInterval(qTimerId);savePrac();renderHome();});}else renderHome();});
 $('studyBtn').addEventListener('click',startSession);
 $('browseBtn').addEventListener('click',renderBrowse);
 $('doneHome').addEventListener('click',openReview);
@@ -2916,6 +3073,7 @@ $('topicToggle').addEventListener('click',()=>{const p=$('topicPanel');p.classLi
 $('allTopics').addEventListener('click',()=>{filter=null;renderSrs();}); // ALL ⇒ every chip on, studies all
 $('noneTopics').addEventListener('click',()=>{filter=new Set();renderSrs();}); // none ⇒ no chips on, studies nothing
 $('prevBtn').addEventListener('click',qPrev);$('nextBtn').addEventListener('click',qNext);
+$('skipBtn').addEventListener('click',()=>{if(qRevealed(qcur))return;qans[qcur]=null;if(qcur<qorder.length-1)qNext();else{renderQuiz();savePrac();}});
 $('submitAnsBtn').addEventListener('click',submitAnswer);
 $('flagBtn').addEventListener('click',()=>{qflag[qcur]=!qflag[qcur];renderQuiz();});
 $('finishBtn').addEventListener('click',()=>{qmode==='test'?submitExam(false):finishPractice();});
@@ -2937,6 +3095,13 @@ $('autoBalanceBtn').addEventListener('click',()=>{settings.examTarget=Math.max(1
 $('setPracTimer').addEventListener('click',()=>{settings.practiceTimer=!settings.practiceTimer;toggleSwitch($('setPracTimer'),settings.practiceTimer);persist();});
 $('setExamTimer').addEventListener('click',()=>{settings.examTimer=!settings.examTimer;toggleSwitch($('setExamTimer'),settings.examTimer);persist();});
 $('setPracShuffle').addEventListener('click',()=>{settings.practiceShuffle=!settings.practiceShuffle;toggleSwitch($('setPracShuffle'),settings.practiceShuffle);persist();});
+$('setPracOnlyNew').addEventListener('click',()=>{settings.practiceOnlyNew=!settings.practiceOnlyNew;toggleSwitch($('setPracOnlyNew'),settings.practiceOnlyNew);setupFreshNotes();persist();});
+$('setExamFresh').addEventListener('change',e=>{settings.examFresh=e.target.value;renderWeights();persist();});
+$('histClear').addEventListener('click',()=>{const pid=$('histPack').value,pk=pid?packs.find(p=>p.id===pid):null;
+  const ids=pk?(pk.questions||[]).map(q=>q.id):Object.keys(qhist),n=ids.filter(id=>qhist[id]).length;
+  if(!n){toast('Nothing to clear — no answered questions '+(pk?'in that pack':'yet')+'.');return;}
+  confirmDialog(`Clear your history for ${n} question${n===1?'':'s'}${pk?' in '+(pk.pack||pk.id):''}? They’ll count as new again. Review cards aren’t affected.`,{confirmText:'Clear',danger:true},
+    ()=>{ids.forEach(id=>delete qhist[id]);saveHist();renderWeights();toast('Question history cleared.');});});
 $('setPracSecs').addEventListener('change',e=>{settings.practiceSecs=Math.max(5,parseInt(e.target.value)||90);persist();});
 $('setExamMins').addEventListener('change',e=>{settings.examMinutes=Math.max(1,parseInt(e.target.value)||60);persist();});
 $('setNewPerDay').addEventListener('change',e=>{settings.srsNewPerDay=Math.max(0,parseInt(e.target.value)||0);persist();});
@@ -2951,7 +3116,7 @@ $('eacRestore').addEventListener('click',e=>{e.preventDefault();$('restoreFile')
 document.addEventListener('keydown',e=>{
   /* v0.3.0: typing in a field or an open dialog (account panel, sync choice) must never grade/answer cards */
   if(e.target&&e.target.closest&&e.target.closest('input,textarea,select,[contenteditable]'))return;
-  if(['acctOv','syncCfOv','confirmOv'].some(id=>$(id)&&$(id).style.display!=='none'))return;
+  if(['acctOv','syncCfOv','confirmOv','setupOv','pastOv'].some(id=>$(id)&&$(id).style.display!=='none'))return;
   if($('study').classList.contains('on')){if(!revealed){if(e.key===' '||e.key==='Enter'){e.preventDefault();revealed=true;renderCard();}}else if(['1','2','3','4'].includes(e.key))grade(+e.key);return;}
   if($('quiz').classList.contains('on')){const done=qRevealed(qcur);if(!done){const disp=LETTERS.indexOf(e.key.toUpperCase());const perm=qopt[qcur]||[...qmap[qorder[qcur]].options.keys()];if(disp>=0&&disp<perm.length){qans[qcur]=perm[disp];renderQuiz();renderGrid();savePrac();}}if(e.key==='ArrowLeft')qPrev();if(e.key==='ArrowRight')qNext();if(qmode==='practice'&&e.key==='Enter'&&!qsub[qcur]&&qans[qcur]!=null)submitAnswer();}
 });
