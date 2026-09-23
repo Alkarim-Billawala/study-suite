@@ -1,7 +1,10 @@
 <!--
-  Study Suite  ·  v0.4.12 (beta)
+  Study Suite  ·  v0.4.13 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.4.13: mergePacks keeps the LATER ts when both sides have the pack. A device holding a pre-v0.4.7 copy (no ts)
+  made the account lose Week 41's ts on 2026-09-23 (iPhone PWA's first sync): ts isn't part of packSig, so equal sigs took the
+  local entry as-is. ts is only a tie-break, but a lost one makes that pack lose every future tie.
   Changelog v0.4.12: UPDATE CHECK ON A SCHEDULE — checkAppVersion() ran only at page load, so a window left open never showed
   Update (Dia stayed on v0.4.10). Now also every 5 min while visible, on return to the app (≥60 s since the last check), on
   'online', and at once when sync downloads data written by a newer app version (d.app). Works without an account.
@@ -1423,7 +1426,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.4.12';
+const APP_VERSION='0.4.13';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1885,6 +1888,7 @@ const SSSync=(()=>{
         else{v=pr;if(bsig!==undefined)notes.push('“'+(pr.pack||id)+'” kept — it was missing on '+(lp?'the other device':'this device'));}}
       else if(ls===cs||cs===bsig)v=lp;else if(ls===bsig)v=cp;
       else{const lt=lp.ts||0,ct=cp.ts||0;v=lt===ct?(side?lp:cp):(lt>ct?lp:cp);notes.push('“'+(v.pack||id)+'” changed on both — kept the later change');}
+      if(v&&lp&&cp){const t=Math.max(lp.ts||0,cp.ts||0);if(t&&v.ts!==t)v=Object.assign({},v,{ts:t});} /* v0.4.13: never lose the later change time */
       if(v)out.push(v);});
     return out;}
   function mergeLog(b,l,c){const bs=new Set((b||[]).map(e=>e&&e.at)),ls=new Set((l||[]).map(e=>e&&e.at)),cs=new Set((c||[]).map(e=>e&&e.at)),m=new Map();
