@@ -1,7 +1,12 @@
 <!--
-  Study Suite  ·  v0.6.0 (beta)
+  Study Suite  ·  v0.6.1 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.6.1: (1) a newly updated device's first sync opens the pack list with the keys ARRIVING in that sync
+  (d.eac.keys) before resolving pack references — the iPhone briefly said "2 packs couldn't be downloaded" (it resolved
+  before taking in the key; kept them pending; fixed itself next sync). Used only for that resolve step, so the
+  studied-mid-pull guard is unaffected. (2) Removal records (packGone) from a download are combined with the device's
+  (latest wins), never replaced — an old-version writer can't erase them.
   Changelog v0.6.0 (content access checkpoint 2 — Content_Access_Plan.md §8): PACKS ARE ENCRYPTED. The site publishes
   content-keys.json (one AES-GCM entry per code, opened by PBKDF2-SHA256(code, 600k)), packs-manifest.json v2 (one
   encrypted section per scope, carrying every pack field + its key `pk`) and p/<opaque>.json packs (AES-GCM of gzip).
@@ -1478,7 +1483,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.6.0';
+const APP_VERSION='0.6.1';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1986,12 +1991,14 @@ const SSSync=(()=>{
       exam,exams,gone,packs:mergePacks(b,l.packs||[],c.packs||[],notes,side,gone)};
     return {out,notes};}
   async function applyCloud(d,rec,m,guard){suppress=true;
-    try{const r=await resolvePacks(d.packs,m);
+    try{let mr=m;const dk=(d&&d.eac&&d.eac.keys)||{},hk=heldKeys(); /* v0.6.1: keys arriving in this sync open the pack list first */
+      if(Object.keys(dk).some(k=>!hk[k])){const m2=await manifestWithKeys(Object.assign({},hk,dk));if(m2&&m2.packs.length)mr=m2;}
+      const r=await resolvePacks(d.packs,mr);
       if(guard&&await hash(payload(publicIds(m)))!==guard)return false; /* studied during the pull → re-run (now dirty → dialog) */
       sched=d.sched||{};daily=d.daily||{date:today(),count:0};if(d.settings)settings=Object.assign(settings,d.settings);
       if(d.eac&&d.eac.unlocked){const a=eacNorm(eac)||{},b=eacNorm(d.eac);const hadK=Object.keys(a.keys||{}).length;eac=Object.assign({},a,b,{codes:[...new Set([...(a.codes||[]),...b.codes])],tags:[...new Set([...(a.tags||[]),...b.tags])],admin:!!(a.admin||b.admin),keys:Object.assign({},a.keys||{},b.keys||{})});if(Object.keys(eac.keys).length>hadK)setTimeout(initPackLinks,0);} /* v0.5.0: codes/groups are a union; v0.6.0: keys too */
       prac=(d.prac&&d.prac.mode==='practice'&&Array.isArray(d.prac.qorder))?d.prac:null;
-      if(d.gone&&typeof d.gone==='object')packGone=Object.assign({},d.gone);
+      if(d.gone&&typeof d.gone==='object'){const g=Object.assign({},packGone||{});Object.entries(d.gone).forEach(([k,t])=>{if(!(g[k]>=t))g[k]=t;});packGone=g;} /* v0.6.1: combine, latest wins */
       if(d.devices&&typeof d.devices==='object'){devNames=Object.assign({},d.devices);if(!devNames[DEVICE_ID])devNames[DEVICE_ID]=guessDeviceName();}
       if(d.qhist&&typeof d.qhist==='object')qhist=d.qhist; /* older account copies have none — keep this device's */
       if('exam' in d)examSave=(d.exam&&Array.isArray(d.exam.qorder))?d.exam:null;if(Array.isArray(d.exams))examLog=d.exams;
@@ -2089,7 +2096,7 @@ const SSSync=(()=>{
     if(document.visibilityState==='hidden'){clearTimeout(timer);sync();}
     else if(Date.now()-lastRun>15000)sync();});
   async function reset(){clearTimeout(timer);meta=null;lastOk=0;pendingSince=0;await Store.set(KEY.sync,null);await Store.set(BASE_KEY,null);setState('off');}
-  return {start,sync,changed,schedule,reset,status:()=>Object.assign({view:viewOf(),lastOk},state),meta:()=>meta,_hash:hash,_payload:payload,_merge3:merge3,_baseOf:baseOf,_resolvePacks:resolvePacks,_pulled:()=>pulled,_mergePacks:mergePacks};
+  return {start,sync,changed,schedule,reset,status:()=>Object.assign({view:viewOf(),lastOk},state),meta:()=>meta,_hash:hash,_payload:payload,_merge3:merge3,_baseOf:baseOf,_resolvePacks:resolvePacks,_applyCloud:applyCloud,_loadMeta:loadMeta,_pulled:()=>pulled,_mergePacks:mergePacks};
 })();
 
 
@@ -2431,15 +2438,17 @@ function updateHeaderButtons(){const pwa=isStandalone();const ib=$('installBtn')
    Add-to-library fetches the pack and runs it through the normal ingestPack path.
    If the manifest is missing/unreachable (e.g. local file://), the panel stays hidden. */
 let defaultManifest=null;
+/* v0.6.0/0.6.1: decrypt the v2 pack list's sections for the given scope keys → the usual {packs:[…]} shape. */
+async function openManifest(m,keys){const seen=new Map();
+  for(const [sid,sec] of Object.entries(m.sections||{})){if(!keys[sid])continue;
+    try{(JSON.parse(new TextDecoder().decode(await aesOpen(keys[sid],sec.iv,sec.ct))).packs||[]).forEach(p=>{if(p&&p.id&&!seen.has(p.id))seen.set(p.id,p);});}catch(e){}}
+  return {v:2,packs:[...seen.values()],authoring:m.authoring};}
+async function manifestWithKeys(keys){try{const r=await fetch('packs-manifest.json',{cache:'no-store'});if(!r.ok)return null;const m=await r.json();return (m&&m.v===2)?openManifest(m,keys):null;}catch(e){return null;}}
 async function initPackLinks(){
   try{
     const r=await fetch('packs-manifest.json',{cache:'no-store'});if(!r.ok)return;
     const m=await r.json();
-    if(m&&m.v===2){ /* v0.6.0: open the sections this device holds keys for */
-      const keys=heldKeys(),seen=new Map();
-      for(const [sid,sec] of Object.entries(m.sections||{})){if(!keys[sid])continue;
-        try{(JSON.parse(new TextDecoder().decode(await aesOpen(keys[sid],sec.iv,sec.ct))).packs||[]).forEach(p=>{if(p&&p.id&&!seen.has(p.id))seen.set(p.id,p);});}catch(e){}}
-      defaultManifest={v:2,packs:[...seen.values()],authoring:m.authoring};}
+    if(m&&m.v===2)defaultManifest=await openManifest(m,heldKeys()); /* v0.6.0: the sections this device holds keys for */
     else{if(!m||!Array.isArray(m.packs)||!m.packs.length)return;defaultManifest=m;}
     backfillPlacement();renderLibrary();renderDefaultPacks();maybeApplyQueuedUpdates();
   }catch(e){}
