@@ -1,7 +1,13 @@
 <!--
-  Study Suite  ·  v0.5.0 (beta)
+  Study Suite  ·  v0.5.1 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.5.1: ONE-TAP UPDATES. (1) Update button: new app → sessionStorage 'suite_apply_updates' + reload, then
+  maybeApplyQueuedUpdates() runs updateAllPacks() once packs (DATA_READY) and the manifest are loaded; packs only → applied
+  at once, no reload. It used to only reload, so a pending pack update left the button lit. (2) A pack update accepted on
+  one device follows by sync: resolvePacks fetches the published pack when the account entry's version is newer than this
+  device's copy (was: kept the local copy and could re-upload the older version number); a newer local copy is kept.
+  Still one tap to accept (Alkarim, 2026-09-23) — never silently on the first device.
   Changelog v0.5.0 (content access, checkpoint 1 — Content_Access_Plan.md): a device and an account can hold SEVERAL access
   codes. eac.codes / eac.tags lists (the old single eac.code / via migrate in); session tags from users.eac_tags (server,
   migration 1758720000). Default packs are filtered by SCOPE: packs-manifest.json now carries each pack's scopes and a
@@ -1437,7 +1443,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.5.0';
+const APP_VERSION='0.5.1';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1831,10 +1837,13 @@ const SSSync=(()=>{
     try{const r=await fetch(encodeURI(String(mp.file)),{cache:'no-store'});if(!r.ok)return null;const j=await r.json();
       const saved=packs;packs=[];try{ingestPack(j,(mp.label||mp.file).replace(/\.json$/i,''));return packs[0]||null;}finally{packs=saved;}}catch(e){return null;}}
   /* Payload packs[] → full packs (refs resolved from this device, else the manifest). Unresolved refs are returned too. */
+  let pulled=[];
   async function resolvePacks(list,m){const have=new Map(packs.map(p=>[p.id,p])),out=[],miss=[];
     for(const e of (list||[])){if(!e||!e.id)continue;
       if(!e.ref){out.push(e);continue;}
-      const p0=have.get(e.id),p=p0?Object.assign({},p0):await fetchPublic(e.id,m);
+      const p0=have.get(e.id);let p=p0?Object.assign({},p0):await fetchPublic(e.id,m);
+      /* v0.5.1: another device accepted a newer version of this published pack → fetch it (one tap covers every device) */
+      if(p0&&e.version&&verCmp(e.version,p0.version)>0){const up=await fetchPublic(e.id,m);if(up&&verCmp(up.version,p0.version)>0){p=up;pulled.push((up.pack||e.id)+' → v'+up.version);}}
       if(p){LIGHT.forEach(k=>{if(k!=='version'&&k in e)p[k]=e[k];});if(!('ts' in e))delete p.ts; /* v0.4.8: the account's ts, never the fetch time */
         out.push(p);}else miss.push(e);}
     return {out,miss};}
@@ -1948,6 +1957,7 @@ const SSSync=(()=>{
       deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});rollDaily();
       await persist();applyTheme();applyGate();renderHome();
       const np=payload(publicIds(m));Object.assign(meta,{stateId:rec.id,lastUpdated:rec.updated,lastHash:await hash(np)});await saveMeta();await saveBase(np);
+      if(pulled.length){toast('Updated from your other device: '+pulled.join(', ')+'.');pulled=[];}
       if(r.miss.length)toast(r.miss.length+' pack'+(r.miss.length===1?'':'s')+' from your account couldn’t be downloaded yet — they’ll be kept in your account.');
       return true;}
     finally{suppress=false;}}
@@ -2037,7 +2047,7 @@ const SSSync=(()=>{
     if(document.visibilityState==='hidden'){clearTimeout(timer);sync();}
     else if(Date.now()-lastRun>15000)sync();});
   async function reset(){clearTimeout(timer);meta=null;lastOk=0;pendingSince=0;await Store.set(KEY.sync,null);await Store.set(BASE_KEY,null);setState('off');}
-  return {start,sync,changed,schedule,reset,status:()=>Object.assign({view:viewOf(),lastOk},state),meta:()=>meta,_hash:hash,_payload:payload,_merge3:merge3,_baseOf:baseOf};
+  return {start,sync,changed,schedule,reset,status:()=>Object.assign({view:viewOf(),lastOk},state),meta:()=>meta,_hash:hash,_payload:payload,_merge3:merge3,_baseOf:baseOf,_resolvePacks:resolvePacks,_pulled:()=>pulled};
 })();
 
 
@@ -2382,7 +2392,7 @@ async function initPackLinks(){
   try{
     const r=await fetch('packs-manifest.json',{cache:'no-store'});if(!r.ok)return;
     const m=await r.json();if(!m||!Array.isArray(m.packs)||!m.packs.length)return;
-    defaultManifest=m;backfillPlacement();renderLibrary();renderDefaultPacks();
+    defaultManifest=m;backfillPlacement();renderLibrary();renderDefaultPacks();maybeApplyQueuedUpdates();
   }catch(e){}
 }
 let dpOpen=null; // Set of expanded "year³course" keys; null until first render
@@ -2441,8 +2451,10 @@ async function applyPackUpdate(p,mp){const r=await fetch(encodeURI(String(mp.fil
 function updatePack(p,mp,btn){if(btn){btn.disabled=true;btn.textContent='Updating…';}
   applyPackUpdate(p,mp).then(async()=>{await persist();renderHome();toast('Updated '+(p.pack||p.id)+' to v'+mp.version+'.');})
     .catch(()=>{if(btn){btn.disabled=false;btn.textContent='↑ Update';}toast('Could not update — check your connection and try again.');});}
+function maybeApplyQueuedUpdates(){if(!DATA_READY||!defaultManifest)return;let q=null;try{q=sessionStorage.getItem('suite_apply_updates');sessionStorage.removeItem('suite_apply_updates');}catch(e){}
+  if(q&&pendingUpdates().length)updateAllPacks();}
 function updateAllPacks(){const todo=pendingUpdates();if(!todo.length)return;
-  (async()=>{let n=0;for(const e of todo){try{await applyPackUpdate(e[0],e[1]);n++;}catch(err){}}await persist();renderHome();
+  (async()=>{let n=0;for(const e of todo){try{await applyPackUpdate(e[0],e[1]);n++;}catch(err){}}await persist();renderHome();updateHeaderButtons();
     toast(n?('Updated '+n+' pack'+(n===1?'':'s')+'.'):'Could not update — check your connection.');})();}
 let dpSchool=null; // selected school label; null until first render
 let dpSectionOpen=null; // Default-packs section collapse state for this session; null until first render
@@ -2546,7 +2558,7 @@ async function init(){
   packGone=await Store.get(KEY.gone)||{};
   devNames=await Store.get(KEY.devnames)||{};if(!devNames[DEVICE_ID]){devNames[DEVICE_ID]=guessDeviceName();Store.set(KEY.devnames,devNames);}
   const sv=await Store.get(KEY.settings);if(sv)settings=Object.assign(settings,sv);
-  DATA_READY=true;if(persistPending){persistPending=false;persist();}
+  DATA_READY=true;if(persistPending){persistPending=false;persist();}maybeApplyQueuedUpdates();
   applyTheme();
   // migrate pre-v0.2.8 cumulative sessionDifficulty -> multi-select sessionDiffs
   if(!Array.isArray(settings.sessionDiffs)){const old=settings.sessionDifficulty;
@@ -3497,7 +3509,9 @@ $('openPharm').addEventListener('click',()=>{if(drugCount())openPharm();});
 $('pharmBack').addEventListener('click',()=>renderHome());
 $('pharmSearch').addEventListener('input',e=>onPharmSearch(e.target.value));
 $('installBtn').addEventListener('click',openInstall);
-$('refreshBtn').addEventListener('click',reloadApp);
+/* v0.5.1: one tap — a new app reloads and then applies waiting pack updates; pack updates alone apply straight away. */
+$('refreshBtn').addEventListener('click',()=>{if(appUpdateAvailable){try{sessionStorage.setItem('suite_apply_updates','1');}catch(e){}reloadApp();}
+  else if(pendingUpdates().length)updateAllPacks();else reloadApp();});
 $('installBackup').addEventListener('click',e=>{e.preventDefault();backup();});
 $('installClose').addEventListener('click',closeInstall);
 $('installOv').addEventListener('click',e=>{if(e.target===$('installOv'))closeInstall();});
