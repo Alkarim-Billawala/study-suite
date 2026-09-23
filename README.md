@@ -2,8 +2,8 @@
 
 **Spaced repetition, practice questions, and timed exams — from your own content.**
 
-A self-contained study app that runs entirely in your web browser. There's nothing to install
-and no account to create. The app holds no content of its own — you load **packs** (small files
+A self-contained study app that runs entirely in your web browser. There's nothing to install,
+and an account is optional. The app holds no content of its own — you load **packs** (small files
 of questions, flashcards, and topic guides) and it gives you focused ways to study them.
 
 **▶ Use it now: [studysuite.app](https://studysuite.app)**
@@ -60,10 +60,8 @@ the right format. The packs you create from your own material are entirely yours
 ## Coming soon
 
 - **Flashcard import** — bring your decks in from that other flashcard app.
-- **Accounts & sync** — save your progress and study across devices automatically. Sync will be
-  an *optional* paid add-on (it's the one feature that needs a server); everything you can do on
-  your own device stays free. Your synced data will be end-to-end encrypted, so it can't be read
-  by anyone but you. See the [FAQ](#faq) below for details.
+- **Question history** — Practice and Exam remember what you've answered, so you can revisit it or
+  pick only fresh questions.
 
 ## FAQ
 
@@ -81,8 +79,9 @@ questions, cards, and guides. It's currently in beta.
 <details>
 <summary><strong>Is it really free?</strong></summary>
 
-Yes — completely free, with no ads, no tracking, and no account required. Everything the app does
-today runs entirely in your own browser, so there's nothing to charge for. There's an optional
+Yes — completely free, with no ads, no tracking, and no account required. Studying runs entirely in
+your own browser, so there's nothing to charge for — and sync, the optional account feature, is free
+during the beta. There's an optional
 "Support development" link if you'd like to chip in toward the costs of building it, but it's never
 required and unlocks nothing — the whole app is yours to use.
 </details>
@@ -91,16 +90,16 @@ required and unlocks nothing — the whole app is yours to use.
 <summary><strong>Where is my data stored? Can you see it?</strong></summary>
 
 Everything — your packs, review progress, scores, and settings — is stored locally in your own
-browser, on your own device. **None of it is sent anywhere.** There's no server collecting your
-study data, no analytics, and no tracking cookies. The author genuinely can't see what you study,
-because that information never leaves your device.
+browser, on your own device. Without an account, **none of it is sent anywhere.** There's no
+analytics and no tracking cookies. If you turn on sync, your data is end-to-end encrypted on your
+device before it's uploaded — so either way, the author genuinely can't see what you study.
 </details>
 
 <details>
 <summary><strong>How do I back up my progress or move to another device?</strong></summary>
 
 Use **Backup all** to save a file with everything in it, then **Restore backup** on your other
-device (or after clearing your browser). Today this is manual — automatic sync is coming (below).
+device (or after clearing your browser). Or create a free account and turn on sync (below).
 It's worth backing up now and then, since your progress lives in your browser and clearing site
 data would wipe it.
 </details>
@@ -138,81 +137,87 @@ advice, and never a basis for real decisions about real patients. It's also in b
 contain errors or go out of date. Always check against your own curriculum and trusted sources.
 </details>
 
-### Accounts &amp; Sync — coming, not available yet
-
-> These features aren't live yet. Here's how they'll work when they launch.
+### Accounts &amp; sync
 
 <details>
-<summary><strong>What will Sync do?</strong></summary>
+<summary><strong>What does sync do?</strong></summary>
 
-Sync will let you save your progress to your account and pick up exactly where you left off on any
-device — phone, laptop, tablet — without manually backing up and restoring. It's the convenient,
-automatic version of Backup all.
-</details>
-
-<details>
-<summary><strong>If the rest of the app is free, why will Sync cost money?</strong></summary>
-
-Because Sync is the one feature that can't run on your device alone. Everything else happens right
-in your browser, which costs very little to run — so the app is free today, and keeping the core app free is the plan. (That's straightforward while it runs entirely on your own device; if it ever grows to need its own servers, I'll work out how to keep it sustainable then.) Sync
-needs a server running around the clock to hold your (encrypted) data and pass it between your
-devices, and that has a real, ongoing cost. So only the server-backed features are paid; anything
-you can do entirely on your own device stays free. If you never want Sync, you lose nothing.
-</details>
-
-<details>
-<summary><strong>How much will Sync cost?</strong></summary>
-
-No price is set yet — Sync is still being tested and made reliable, bulletproof, and secure before
-anyone depends on it. Whatever it ends up costing will reflect what it actually takes to run the
-cloud side: servers, backups, networking, credentials management, storage, and so on. The aim is to
-keep it **affordable** — far less than many of the study tools you already pay for (you know, that
-one notoriously overpriced question bank). When Sync launches you'll be notified, and early beta testers will get a special access
-price. And to say it once more: Sync is entirely optional — you never need to use it.
-</details>
-
-<details>
-<summary><strong>Will you be able to see my synced data?</strong></summary>
-
-No. Sync will be **end-to-end encrypted**: your data is scrambled on your device *before* it's
-uploaded, and only the scrambled version is stored. The key that unlocks it never leaves your
-device. That means the author **can't read your synced data** — not for support, not for
-troubleshooting, not under any circumstances — because the key simply isn't theirs to hold.
-</details>
-
-<details>
-<summary><strong>What if I forget my password?</strong></summary>
-
-When you create an account you'll be given a one-time **recovery code** (and a chance to save it).
-If you forget your password, that code lets you get back in and set a new one. Keep it somewhere
-safe — a password manager, or written down where you'll find it.
-</details>
-
-<details>
-<summary><strong>What happens if I lose both my password and my recovery code?</strong></summary>
-
-Your **synced** copy can't be recovered by anyone — that's the whole point of end-to-end encryption
-(no one else holds your key, so no one can unlock or reset it). But here's the reassuring part:
-**your studying isn't gone.** The data on your own device is completely unaffected, and any
-**Backup all** file you've saved still works. You'd just set up a fresh account and re-sync from
-your device. So the worst case is an inconvenience, not lost progress — which is exactly why keeping
-your recovery code and an occasional backup is worth it.
-</details>
-
-<details>
-<summary><strong>What data will an account actually store, and is it private?</strong></summary>
-
-The bare minimum to make Sync work — essentially your email (to sign in) and your encrypted study
-blob. No selling data, no ads, no tracking. You'll be able to export everything at any time
-(**Backup all**) and delete your account and its data yourself, instantly. A full privacy policy
-will be published before accounts launch.
+Sign in on each of your devices — phone, laptop, tablet — and your packs and progress stay in step
+automatically. Changes sync in the background a few seconds after you make them, and whenever you open
+the app. Offline? Keep studying; it catches up when you're back online. It's the automatic version of
+**Backup all**.
 </details>
 
 <details>
 <summary><strong>Do I have to make an account?</strong></summary>
 
-No. Accounts exist only for Sync. The app will stay completely usable — free, offline, and
-account-free — for anyone who just wants to study on one device or back up manually.
+No. Choose **Use without an account** and everything works exactly as before — free, offline, on your
+device. Your progress just stays in that one browser, so use **Backup all** now and then. You can create
+an account any time from the account menu at the top right of the homepage.
+</details>
+
+<details>
+<summary><strong>Does sync cost anything?</strong></summary>
+
+Sync is free during the beta. It's the one feature that needs a server running around the clock, so it
+may become a paid option one day. If it does, you'll get at least 30 days' notice in the app, your
+account stays, and the app keeps working without sync. Everything you can do on your own device stays
+free.
+</details>
+
+<details>
+<summary><strong>How do I create an account?</strong></summary>
+
+From the welcome screen or the account menu, choose **Create an account**. During early access you'll
+need your class code. You'll get a **recovery code** straight away — save it in a password manager or
+somewhere safe.
+</details>
+
+<details>
+<summary><strong>Can the author see my synced data?</strong></summary>
+
+No. Sync is **end-to-end encrypted**: your data is scrambled on your device *before* it's uploaded, and
+only the scrambled version is stored. The key that unlocks it never leaves your devices, so the author
+**can't read your synced data** — not for support, not for anything.
+</details>
+
+<details>
+<summary><strong>What if I forget my password?</strong></summary>
+
+Choose **Forgot password?** when signing in and you'll get an email with a link to set a new one. Then
+enter your **recovery code** to unlock your synced data — nothing is lost.
+</details>
+
+<details>
+<summary><strong>What if I lose both my password and my recovery code?</strong></summary>
+
+Your **synced** copy can't be unlocked by anyone — that's the whole point of end-to-end encryption. But
+**your studying isn't gone:** the data on your devices is untouched, and any **Backup all** file still
+works. Reset your password, choose **Start fresh**, and sign in on the device where you last studied —
+its data becomes your new account copy.
+</details>
+
+<details>
+<summary><strong>What if two devices change at the same time?</strong></summary>
+
+Nothing is overwritten without asking. You'll see both copies side by side — when each last changed,
+how many cards you've studied, and the size — and choose which to keep. **Keep both** saves the account
+copy as a backup file first.
+</details>
+
+<details>
+<summary><strong>What does an account store, and is it private?</strong></summary>
+
+The minimum: your email address, your encrypted study data, and a few details needed to run the
+account. No selling data, no ads, no tracking. The [Privacy Policy](https://studysuite.app/privacy.html)
+lists everything; see also the [Terms](https://studysuite.app/terms.html).
+</details>
+
+<details>
+<summary><strong>How do I delete my account?</strong></summary>
+
+Account menu → **Delete account**. It's instant and permanent, and your data on your devices stays where
+it is.
 </details>
 
 ## A note on the content

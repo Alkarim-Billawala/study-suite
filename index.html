@@ -1,8 +1,13 @@
 <!--
-  Study Suite  ·  v0.3.1 (beta)
+  Study Suite  ·  v0.4.0 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
-  Changelog v0.3.1: sync status polish (Alkarim, first live test). The footer status line draws its own cloud icon
+  Changelog v0.4.0 (accounts launch): accounts + sync on for everyone — the #beta flag is retired (ACCT_ON is constant; old #beta/
+  #nobeta links tidied, stored flag removed). Privacy Policy + Terms published as privacy.html / terms.html (Legal/*_v1.0.md), linked
+  from the footer and the create-account screen. In-app FAQ: accounts section rewritten for the live feature (free during beta; 30
+  days' notice before any paid plan); Coming soon: accounts removed, question history added. Which-copy dialog — the two summary boxes are tappable (keyboard too):
+  tapping one selects it (outline) and turns its matching button solid; the button confirms. No button is pre-selected.
+  Changelog v0.3.1 (deployed 2026-09-22): sync status polish (Alkarim, first live test). The footer status line draws its own cloud icon
   (inline SVG — the ☁ glyph rendered malformed in the mono font on iOS), coloured by state: green synced, gold
   syncing/offline/waiting, red needs sign-in/paused. The account button no longer carries a permanent green dot: it
   flashes green once when the first sync after opening succeeds, and shows a dot only when something needs the user
@@ -639,7 +644,9 @@ section{display:none}section.on{display:block}
 .confirm-card{max-width:420px}
 .syncstate{margin-top:4px}
 .sync-cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:-6px 0 12px}
-.sync-col{border:1.5px solid var(--line);border-radius:8px;padding:10px 12px;font-size:14px;line-height:1.55;color:var(--ink)}
+.sync-col{border:1.5px solid var(--line);border-radius:8px;padding:10px 12px;font-size:14px;line-height:1.55;color:var(--ink);cursor:pointer;transition:border-color .12s,box-shadow .12s}
+.sync-col:hover,.sync-col:focus-visible{border-color:var(--accent-soft);outline:none}
+.sync-col.sel{border-color:var(--accent);box-shadow:0 0 0 1.5px var(--accent) inset}
 .sync-h{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px}
 .sync-note{font-size:13px;line-height:1.5;color:var(--ink-soft);margin-bottom:16px}
 .sync-actions{flex-wrap:wrap}
@@ -662,6 +669,7 @@ section{display:none}section.on{display:block}
 .acct-verify a{color:var(--accent);cursor:pointer;text-decoration:underline}
 .acct-sec a{display:block;color:var(--accent);cursor:pointer;text-decoration:underline;font-size:14px;margin:6px 0}.acct-sec a.danger{color:var(--red)}
 .acct-card .btn.danger{background:var(--red);color:#fff}
+.acct-legal{font-size:12.5px;color:var(--ink-soft);margin-top:10px;line-height:1.5;text-align:center}.acct-legal a{color:var(--accent)}
 .acct-list{margin:0 0 12px;padding-left:18px;font-size:14px;line-height:1.5;color:var(--ink)}.acct-list li{margin-bottom:6px}
 .acct-card{max-width:400px;position:relative}
 .acct-x{position:absolute;top:8px;right:12px;background:none;border:none;font-size:24px;line-height:1;color:var(--ink-soft);cursor:pointer;padding:4px}
@@ -1001,7 +1009,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       </div>
       <div class="infopanel" id="comingPanel" style="display:none">
         <div class="soon-i">· Flashcard import — bring decks in from that other flashcard app</div>
-        <div class="soon-i">· Accounts &amp; sync — save your progress and study across devices (optional)</div>
+        <div class="soon-i">· Question history — Practice and Exam remember what you’ve answered, so you can revisit it or pick fresh questions</div>
       </div>
       <div class="infopanel" id="faqPanel" style="display:none">
         <div class="faqbody">
@@ -1009,9 +1017,9 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
           <h4>What is Study Suite?</h4>
           <p>A study tool built around four things: <b>Review</b> (spaced-repetition flashcards), <b>Practice</b> (one question at a time with instant feedback), <b>Exam</b> (timed, scored mock tests), and <b>Topic Guides</b> (readable summaries). The app itself is empty — you load <b>study packs</b> that hold the questions, cards, and guides. It's currently in beta.</p>
           <h4>Is it really free?</h4>
-          <p>Yes — completely free, with no ads, no tracking, and no account required. Everything the app does today runs entirely in your own browser, so there's nothing for me to charge for. If you want to chip in toward the costs of building it, there's an optional "Support development" link, but it's never required and unlocks nothing — the whole app is yours to use.</p>
+          <p>Yes — completely free, with no ads, no tracking, and no account required. Studying runs entirely in your own browser, so there's nothing to charge for — and sync, the optional account feature, is free during the beta. If you want to chip in toward the costs of building it, there's an optional "Support development" link, but it's never required and unlocks nothing — the whole app is yours to use.</p>
           <h4>Where is my data stored? Can you see it?</h4>
-          <p>Everything — your packs, review progress, scores, and settings — is stored locally in your own browser, on your own device. <b>None of it is sent anywhere.</b> There's no server collecting your study data, no analytics, and no tracking cookies. I genuinely can't see what you study or how you're doing, because that information never leaves your device.</p>
+          <p>Everything — your packs, review progress, scores, and settings — is stored locally in your own browser, on your own device. Without an account, <b>none of it is sent anywhere.</b> There's no analytics and no tracking cookies. If you turn on sync, your data is end-to-end encrypted on your device before it's uploaded — so either way, I genuinely can't see what you study or how you're doing.</p>
           <h4>How do I back up my progress or move to another device?</h4>
           <p>Use <b>Backup all</b> to save a file with everything in it, then <b>Restore backup</b> on your other device (or after clearing your browser). Today this is manual — automatic sync across devices is coming (see below). It's worth backing up now and then, since your progress lives in your browser and clearing site data would wipe it.</p>
           <h4>Does it work offline?</h4>
@@ -1022,24 +1030,27 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
           <p>Absolutely — that's encouraged. Download the <a href="https://studysuite.app/Study_Suite_Authoring_Guide_latest.md" download><b>instruction set</b></a> (also linked on the home screen) and hand it to the AI assistant of your choice; it walks the assistant through turning your own material into a pack you can load. Packs you make from your own content are <b>yours</b>. (The app, its design, and the pack format are mine, but the content you bring into it is entirely your own.)</p>
           <h4>Is any of this medical advice?</h4>
           <p>No. Study Suite and its packs are <b>educational material for exam preparation only</b> — not medical advice, and never a basis for real decisions about real patients. It's also in beta, so content can contain errors or go out of date. Always check against your own curriculum and trusted sources.</p>
-          <div class="faq-sec">Accounts &amp; Sync — coming, not available yet</div>
-          <p class="faq-note">These features aren't live yet. Here's how they'll work when they launch.</p>
-          <h4>What will Sync do?</h4>
-          <p>Sync will let you save your progress to your account and pick up exactly where you left off on any device — phone, laptop, tablet — without manually backing up and restoring. It's the convenient, automatic version of Backup all.</p>
-          <h4>If the rest of the app is free, why will Sync cost money?</h4>
-          <p>Because Sync is the one feature that can't run on your device alone. Everything else happens right in your browser, which costs very little to run — so the app is free today, and keeping the core app free is the plan. (That's straightforward while it runs entirely on your own device; if it ever grows to need its own servers, I'll work out how to keep it sustainable then.) Sync needs a server running around the clock to hold your (encrypted) data and pass it between your devices, and that has a real, ongoing cost. So only the server-backed features are paid; anything you can do entirely on your own device stays free. If you never want Sync, you lose nothing.</p>
-          <h4>How much will Sync cost?</h4>
-          <p>I haven't set a price yet — I'm still testing Sync and working to make it reliable, bulletproof, and secure before anyone depends on it. Whatever it ends up costing will reflect what it actually takes to run the cloud side: servers, backups, networking, credentials management, storage, and so on. What I can promise is that I'm determined to keep it <b>affordable</b> — it will cost far less than many of the study tools you already pay for (you know, that one notoriously overpriced question bank). When Sync launches you'll be notified, and as an early beta tester you'll get a special access price. And to say it once more: Sync is entirely optional — you never need to use it.</p>
-          <h4>Will you be able to see my synced data?</h4>
-          <p>No. Sync will be <b>end-to-end encrypted</b>: your data is scrambled on your device <i>before</i> it's uploaded, and only the scrambled version is stored. The key that unlocks it never leaves your device. That means <b>I can't read your synced data</b> — not for support, not for troubleshooting, not under any circumstances — because I simply don't have the key.</p>
-          <h4>What if I forget my password?</h4>
-          <p>When you create an account you'll be given a one-time <b>recovery code</b> (and a chance to save it). If you forget your password, that code lets you get back in and set a new one. Keep it somewhere safe — a password manager, or written down where you'll find it.</p>
-          <h4>What happens if I lose both my password and my recovery code?</h4>
-          <p>Your <b>synced</b> copy can't be recovered by anyone — including me. That's not a gap; it's the whole point of end-to-end encryption (I never hold your key, so I can never unlock or reset it). But here's the reassuring part: <b>your studying isn't gone.</b> The data on your own device is completely unaffected, and any <b>Backup all</b> file you've saved still works. You'd just set up a fresh account and re-sync from your device. So the worst case is an inconvenience, not lost progress — which is exactly why keeping your recovery code and an occasional backup is worth it.</p>
-          <h4>What data will an account actually store, and is it private?</h4>
-          <p>The bare minimum to make Sync work — essentially your email (to sign in) and your encrypted study blob. No selling data, no ads, no tracking. You'll be able to export everything at any time (<b>Backup all</b>) and delete your account and its data yourself, instantly. A full privacy policy will be published before accounts launch.</p>
+          <div class="faq-sec">Accounts &amp; sync</div>
+          <h4>What does sync do?</h4>
+          <p>Sign in on each of your devices — phone, laptop, tablet — and your packs and progress stay in step automatically. Changes sync in the background a few seconds after you make them, and whenever you open the app. Offline? Keep studying; it catches up when you're back online. It's the automatic version of Backup all.</p>
           <h4>Do I have to make an account?</h4>
-          <p>No. Accounts exist only for Sync. The app will stay completely usable — free, offline, and account-free — for anyone who just wants to study on one device or back up manually.</p>
+          <p>No. Choose <b>Use without an account</b> and everything works exactly as before — free, offline, on your device. Your progress just stays in that one browser, so use <b>Backup all</b> now and then. You can create an account any time from the account menu at the top right of the homepage.</p>
+          <h4>Does sync cost anything?</h4>
+          <p>Sync is free during the beta. It's the one feature that needs a server running around the clock, so it may become a paid option one day. If it does, you'll get at least 30 days' notice in the app, your account stays, and the app keeps working without sync. Everything you can do on your own device stays free.</p>
+          <h4>How do I create an account?</h4>
+          <p>From the welcome screen or the account menu, choose <b>Create an account</b>. During early access you'll need your class code. You'll get a <b>recovery code</b> straight away — save it in a password manager or somewhere safe.</p>
+          <h4>Can you see my synced data?</h4>
+          <p>No. Sync is <b>end-to-end encrypted</b>: your data is scrambled on your device <i>before</i> it's uploaded, and only the scrambled version is stored. The key that unlocks it never leaves your devices. That means <b>I can't read your synced data</b> — not for support, not for anything — because I simply don't have the key.</p>
+          <h4>What if I forget my password?</h4>
+          <p>Choose <b>Forgot password?</b> when signing in and we'll email you a link to set a new one. Then enter your <b>recovery code</b> to unlock your synced data — nothing is lost.</p>
+          <h4>What if I lose both my password and my recovery code?</h4>
+          <p>Your <b>synced</b> copy can't be unlocked by anyone — including me. That's the whole point of end-to-end encryption. But <b>your studying isn't gone:</b> the data on your devices is untouched, and any <b>Backup all</b> file still works. Reset your password, choose <b>Start fresh</b>, and sign in on the device where you last studied — its data becomes your new account copy.</p>
+          <h4>What if two devices change at the same time?</h4>
+          <p>Nothing is overwritten without asking. You'll see both copies side by side — when each last changed, how many cards you've studied, and the size — and choose which to keep. <b>Keep both</b> saves the account copy as a backup file first.</p>
+          <h4>What does an account store, and is it private?</h4>
+          <p>The minimum: your email address, your encrypted study data, and a few details needed to run the account. No selling data, no ads, no tracking. The <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> lists everything.</p>
+          <h4>How do I delete my account?</h4>
+          <p>Account menu → <b>Delete account</b>. It's instant and permanent, and your data on your devices stays where it is.</p>
         </div>
       </div>
     </div>
@@ -1048,7 +1059,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="foot-row">built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
       <div class="foot-row" id="supportWrap" style="display:none"><a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></div>
     </div>
-    <div class="footlinks"><a href="mailto:support@studysuite.app">Support</a> · <a href="mailto:feedback@studysuite.app">Feedback</a> · <a href="mailto:alkarim@studysuite.app">Contact me</a></div>
+    <div class="footlinks"><a href="mailto:support@studysuite.app">Support</a> · <a href="mailto:feedback@studysuite.app">Feedback</a> · <a href="mailto:alkarim@studysuite.app">Contact me</a> · <a href="privacy.html" target="_blank" rel="noopener">Privacy</a> · <a href="terms.html" target="_blank" rel="noopener">Terms</a></div>
   </section>
 
   <!-- SRS DECK -->
@@ -1225,7 +1236,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.3.1';
+const APP_VERSION='0.4.0';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1241,12 +1252,10 @@ const Store={
 let STORAGE_MODE='memory';
 function detectStorage(){if(typeof window.storage!=='undefined'){STORAGE_MODE='persistent';}else{try{localStorage.setItem('__t','1');localStorage.removeItem('__t');STORAGE_MODE='local';}catch(e){STORAGE_MODE='memory';}}}
 
-/* ===== ACCOUNTS BETA FLAG (v0.3.0) — accounts/sync are hidden until a device opts in by opening the app with
-   #beta (remembered in this browser; #nobeta turns it off). Without it the app looks and behaves as v0.2.72. */
-const ACCT_ON=(()=>{try{const h=location.hash,clean=()=>history.replaceState(history.state,'',location.pathname+location.search);
-  if(/^#beta$/i.test(h)){localStorage.setItem('suite_beta_v1','1');clean();}else if(/^#(verify|reset|email)=/i.test(h)){localStorage.setItem('suite_beta_v1','1');} /* mail link ⇒ account holder; mailLinkRoute() cleans */else if(/^#nobeta$/i.test(h)){localStorage.removeItem('suite_beta_v1');clean();}
-  return localStorage.getItem('suite_beta_v1')==='1';}catch(e){return false;}})();
-window.addEventListener('hashchange',()=>{if(/^#((no)?beta$|(verify|reset|email)=)/i.test(location.hash))location.reload();}); /* same-page #beta → reload so the flag applies */
+/* ===== ACCOUNTS (v0.4.0: launched for everyone) — ACCT_ON stays as the single switch; the v0.3.x #beta flag is retired
+   (old #beta / #nobeta links are tidied from the address bar and the stored flag removed). */
+const ACCT_ON=(()=>{try{if(/^#(no)?beta$/i.test(location.hash))history.replaceState(history.state,'',location.pathname+location.search);localStorage.removeItem('suite_beta_v1');}catch(e){}return true;})();
+window.addEventListener('hashchange',()=>{if(/^#(verify|reset|email)=/i.test(location.hash))location.reload();}); /* a mail link opened into an open tab */
 /* ===== CRYPTO (v0.3.0: end-to-end encryption for sync — WebCrypto only, no dependencies) =====
    passphrase --PBKDF2-SHA256(salt, iters)--> master --HKDF "studysuite/enc/v1"--> KEK (never leaves the device)
                                                     \--HKDF "studysuite/auth/v1"--> authPw (base64url; this is the PocketBase password)
@@ -1573,10 +1582,16 @@ const SSSync=(()=>{
   function askConflict(first,loc,cl){return new Promise(res=>{
     const fmtT=t=>isNaN(t)||!t?'not recorded':new Date(t).toLocaleString([],{dateStyle:'medium',timeStyle:'short'});
     const kb=b=>b>=1e6?(b/1e6).toFixed(1)+' MB':Math.max(1,Math.round(b/1e3))+' KB';
-    const col=(h,s,t,lbl)=>'<div class="sync-col"><div class="sync-h">'+h+'</div><div>'+lbl+' <b>'+fmtT(t)+'</b></div><div>'+s.packs+' pack'+(s.packs===1?'':'s')+' · '+s.studied.toLocaleString()+' cards studied</div><div>'+kb(s.bytes)+'</div></div>';
+    const col=(k,h,s,t,lbl)=>'<div class="sync-col" data-pick="'+k+'" role="button" tabindex="0" aria-label="Select '+h+'"><div class="sync-h">'+h+'</div><div>'+lbl+' <b>'+fmtT(t)+'</b></div><div>'+s.packs+' pack'+(s.packs===1?'':'s')+' · '+s.studied.toLocaleString()+' cards studied</div><div>'+kb(s.bytes)+'</div></div>';
     $('syncCfMsg').textContent=first?'This device already has study data, and so does your account. Which one should you keep?':'Your study data changed on this device and somewhere else since the last sync. Which one should you keep?';
     const newer=(loc.t||0)>=(cl.t||0)?'local':'cloud',bigger=loc.s.bytes>=cl.s.bytes?'local':'cloud';
-    $('syncCfCmp').innerHTML=col('This device',loc.s,loc.t,'Last change')+col('Your account',cl.s,cl.t,'Last saved');
+    $('syncCfCmp').innerHTML=col('local','This device',loc.s,loc.t,'Last change')+col('cloud','Your account',cl.s,cl.t,'Last saved');
+    /* Tapping a box selects it and makes its button the solid one; the button confirms (a stray tap never discards data). */
+    const sel=v=>{$('syncCfCmp').querySelectorAll('.sync-col').forEach(c=>c.classList.toggle('sel',c.dataset.pick===v));
+      $('syncCfLocal').classList.toggle('ghost',v!=='local');$('syncCfCloud').classList.toggle('ghost',v!=='cloud');};
+    $('syncCfCmp').querySelectorAll('.sync-col').forEach(c=>{c.onclick=()=>sel(c.dataset.pick);
+      c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();sel(c.dataset.pick);}};});
+    sel(null);
     $('syncCfNote').textContent=((newer!==bigger)?'Careful: the newer copy is the smaller one — if you just set up a new device, the bigger copy is usually the one to keep. ':'')+'Keep both saves your account copy as a backup file, then keeps this device’s data.';
     const done=v=>{$('syncCfOv').style.display='none';res(v);};
     $('syncCfLocal').onclick=()=>done('local');$('syncCfCloud').onclick=()=>done('cloud');$('syncCfBoth').onclick=()=>done('both');
@@ -1666,7 +1681,8 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
     '<label class="f">Password (8+ characters)<input class="fi" type="password" id="acctPw" autocomplete="new-password" minlength="8" required></label>'+
     '<label class="f">Password again<input class="fi" type="password" id="acctPw2" autocomplete="new-password" required></label>'+
     '<label class="f" id="acctCodeWrap">Class code<input class="fi" type="text" id="acctCode" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="The code you used to open the app"></label>'+
-    '<div class="acct-err" id="acctErr"></div><button class="btn sm wide" type="submit" id="acctGo">Create account</button></form>'+
+    '<div class="acct-err" id="acctErr"></div><button class="btn sm wide" type="submit" id="acctGo">Create account</button>'+
+    '<div class="acct-legal">By creating an account you agree to the <a href="terms.html" target="_blank" rel="noopener">Terms</a> and <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</div></form>'+
     '<div class="acct-alt">Already have one? <a id="acctToIn">Sign in</a></div>';
     $('acctToIn').onclick=()=>{acctEmail=$('acctEmail').value;renderAcct('signin');};
     if(eac&&eac.code){$('acctCode').value=eac.code;$('acctCodeWrap').style.display='none';} /* remembered from unlock */
