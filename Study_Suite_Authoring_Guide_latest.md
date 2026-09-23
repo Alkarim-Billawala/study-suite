@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.19 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.20 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.19)
+# Study Suite — Content Authoring Guide (v2.20)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,10 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.19 · **Pairs with:** Study Suite app v0.4.3+, pack `formatVersion` 2.0
+> **Authoring system version:** 2.20 · **Pairs with:** Study Suite app v0.4.4+, pack `formatVersion` 2.0
+> **What changed in guide v2.20:** no schema or rule change — §0's overview of the app (what you tell the user) now
+> describes the current app: setup screens, question history and fresh exams, topics, the Pharmacology index, and
+> optional encrypted sync. Nothing about how packs are built has changed since v2.19.
 > **What changed in guide v2.19:** **topics are real topics.** An item's `topic` is the concept-level group it belongs
 > to — chosen from a top-level view of the *whole* pack's material during synthesis — not a per-item label. A dense week
 > lands at roughly **8–20 topics, each spanning several items (≥3)**. Topics and guides are independent: one guide can
@@ -151,7 +154,7 @@ Specifically:
    - They give *you* their lecture material (notes, slides, transcripts, a syllabus, optionally past quizzes).
    - You turn it into **one content pack** — a single `.json` file — containing exam questions, spaced-repetition cards, and the topic guides embedded inside it.
    - They load that pack into the **Study Suite app** — at **https://studysuite.app** (or a local copy) — by dragging it onto the drop zone.
-   - The app then runs three modes over it: **Review** (spaced repetition), **Practice** (one-at-a-time with instant answers), and **Exam** (timed, scored). It also has a **Topic Guides** reader for the guides bundled in the pack.
+   - The app then runs three modes over it: **Review** (spaced repetition), **Practice** (one-at-a-time with instant answers — new questions first, prior answers viewable on repeats), and **Exam** (timed, scored, built from fresh questions and weighted by system, pack or topic; resumable). All three can be narrowed to chosen **topics**; Practice and Exam also by difficulty. It also has a **Topic Guides** reader for the guides bundled in the pack, a **Pharmacology** index built from the packs' drug records (§6b), and an optional account that syncs progress between devices, end-to-end encrypted.
 2. **Tell them what you need from them and what they'll get back:** their materials in → **one `.json` pack** out. That single file contains everything, topic guides included.
 3. **Then prompt them to upload** the lecture material they want turned into a pack, and ask the **scope question** in §3 (how many weeks the pack covers / how many questions they want). Mention that they can send material across **multiple messages** if it doesn't fit in one — you'll wait for all of it (§0a).
 

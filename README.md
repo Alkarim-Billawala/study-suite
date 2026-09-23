@@ -12,42 +12,64 @@ It's currently in **beta**.
 
 ---
 
-## How it works
+## Features
 
-Three study modes plus a built-in guide reader:
+### Study modes
 
-- **Review** — spaced-repetition flashcards. Mixed card types graded Again / Hard / Good / Easy
-  and scheduled across days. Filter to whichever topics you want.
-- **Practice** — work through the question bank one at a time. Submit to see the answer and
-  explanation instantly, with an optional per-question timer.
-- **Exam** — a timed, scored mock test sampled across your active packs. By default it balances
-  evenly across them automatically, so there's nothing to set up; answers stay hidden until you
-  submit.
-- **Topic Guides** — readable summaries embedded right in your packs. Open them inside the app,
-  search across their titles *and* their content, and jump straight to a match. In-answer "open
-  the topic guide" links land here too.
+- **Review** — spaced-repetition flashcards in six interactive card types. Grade each one Again /
+  Hard / Good / Easy and it's scheduled to come back across the following days. Choose which topics
+  to study, week by week.
+- **Practice** — the question bank one question at a time. Submit to see the answer, the
+  explanation and a link to the right topic guide. Questions you've never answered come first;
+  ones you've answered before come last — the ones you got wrong ahead of the ones you got right —
+  and **View prior answer** shows what you picked last time.
+- **Exam** — a timed, scored mock test with answers hidden until you submit. It picks questions
+  you haven't answered yet first, while keeping the weighting you chose.
+- **Topic Guides** — in-depth guides built into every pack, one per concept. Search their titles
+  *and* their content, print them, and jump straight in from any answer's guide link. Every week
+  ends with a one-page **cram sheet**.
+- **Pharmacology** — a drug index built from all your active packs: use, mechanism, dosing,
+  cautions, adverse effects, monitoring and interactions for each drug, grouped by class, with
+  links back to the week that teaches it.
 
-**Session difficulty** (on the home screen) filters Practice and Exam by rated difficulty —
-Easy, Medium, and Hard toggle independently, so you can drill just the hardest questions if you
-like. **Settings** lets you fine-tune exam composition, timers, and how many new cards per day.
+### Practice and exam tools
 
-## Your study library
+- **Set up before you start** — pick difficulty (Easy, Medium, Hard — any mix) and topics for each
+  mode. Exams also choose which questions (any, fresh first, or fresh only), how to weight them
+  (by system, pack or topic), their length and the timer. Your choices are remembered.
+- **Skip** a question without it counting as seen.
+- **Come back later** — leave Practice or an exam part-way and pick up where you left off; the exam
+  timer pauses while you're away. Start fresh instead, and what you'd answered is kept.
+- **Past exams** — your last 20 exams, including unfinished ones, with scores, ready to review
+  question by question.
+- **Question history** can be cleared for one pack or everything, whenever you want a clean slate.
 
-Loaded packs live in your library with an on/off toggle each, so you can keep every week loaded
-and switch on just the one or two you're studying. Every mode uses only the packs toggled **on**.
+### Your library
 
-## Your data stays yours
+- **Default study packs** organised by school, year and course — add one with a tap.
+- Toggle each pack **on or off**; every mode uses only the packs that are on, so you can keep every
+  week loaded and study just this one.
+- When a newer version of a pack is published, the app offers to **update** it — your progress
+  carries over.
+- Load your own packs by dropping in a file.
 
-Everything you do — your packs, review progress, scores, and settings — is stored locally in your
-own browser, on your own device. Nothing is sent anywhere: no servers, no analytics, no tracking,
-no ads. Use **Backup all** to save a single file with everything in it, and **Restore backup** on
-another device or browser. (Back up before clearing your browser data.)
+### Accounts and sync (optional)
 
-## Works offline & installs like an app
+- A free account keeps your packs and progress **in sync** across your phone, tablet and computer.
+- **End-to-end encrypted** — your data is locked on your device before it's uploaded, so nobody
+  else can read it.
+- A **recovery code**, password reset, email change and account deletion — all self-serve.
+- If two devices change at the same time, **you choose** which copy to keep — nothing is
+  overwritten without asking.
 
-The whole suite is a single self-contained file, so once it's loaded it keeps working with no
-internet connection. On the hosted site, **⊕ Add to Home Screen** walks you through installing it
-as an app on iPhone, iPad, Mac, Android, or Windows.
+### Private, offline, yours
+
+- No ads, no analytics, no tracking. Without an account, nothing leaves your device.
+- Works **offline** once loaded, and installs to your home screen or dock on iPhone, iPad, Mac,
+  Android and Windows.
+- **Backup all** / **Restore backup** save and restore a file copy of everything.
+- Two colour themes, **Navy** and **Warm**, each in light, dark or black — or following your
+  device.
 
 ## Bring your own content
 
@@ -59,7 +81,13 @@ the right format. The packs you create from your own material are entirely yours
 
 ## Coming soon
 
+- **Weak-spot practice** — see where your gaps are across topics, then drill exactly those
+  questions and cards.
+- **Easier pack-making** — a ready-made assistant you can hand your notes to, and later, making
+  packs right inside the app.
+- **Paste a pack** — load a pack by pasting its text, no file needed.
 - **Flashcard import** — bring your decks in from that other flashcard app.
+- **A gentle first-run guide** — quiet hints for new users that never get in the way.
 
 ## FAQ
 
@@ -68,10 +96,12 @@ the right format. The packs you create from your own material are entirely yours
 <details>
 <summary><strong>What is Study Suite?</strong></summary>
 
-A study tool built around four things: **Review** (spaced-repetition flashcards), **Practice**
-(one question at a time with instant feedback), **Exam** (timed, scored mock tests), and **Topic
-Guides** (readable summaries). The app itself is empty — you load **study packs** that hold the
-questions, cards, and guides. It's currently in beta.
+A study tool with three ways to study — **Review** (spaced-repetition flashcards), **Practice**
+(one question at a time with instant feedback) and **Exam** (timed, scored mock tests) — plus
+**Topic Guides** and a **Pharmacology** drug index to read from. The app itself is empty — you load
+**study packs** that hold the questions, cards and guides. An account is optional and adds
+encrypted sync between your devices. See [Features](#features) for everything it does. It's
+currently in beta.
 </details>
 
 <details>
@@ -113,8 +143,9 @@ installed to your home screen — it keeps working with no internet connection.
 <summary><strong>Can I add it to my phone or computer like a real app?</strong></summary>
 
 Yes — use **Add to Home Screen** (the app walks you through it for your device). One thing to know:
-an installed copy keeps its **own separate storage** from the browser version, so back up first and
-restore into the installed app so your progress comes along.
+an installed copy may keep its **own separate storage** from the browser version (on iPhone and iPad
+it always does). With an account, just sign in inside the installed app and everything syncs
+across. No account? **Backup all** first, then **Restore backup** inside the installed app.
 </details>
 
 <details>
@@ -133,6 +164,42 @@ pack format are the author's, but the content you bring into it is entirely your
 No. Study Suite and its packs are **educational material for exam preparation only** — not medical
 advice, and never a basis for real decisions about real patients. It's also in beta, so content can
 contain errors or go out of date. Always check against your own curriculum and trusted sources.
+</details>
+
+### Studying
+
+<details>
+<summary><strong>How does Practice decide the order of questions?</strong></summary>
+
+Questions you've never answered come first. Ones you've answered before go to the end — the ones
+you got wrong last time ahead of the ones you got right — and they're marked on the question map.
+Each starts clear, with **View prior answer** if you want to see what you picked before. Prefer
+only new ones? Turn on **Unanswered questions only** when you set up Practice. **Skip** moves on
+without counting a question as seen.
+</details>
+
+<details>
+<summary><strong>Can I leave an exam and come back to it?</strong></summary>
+
+Yes. Leave part-way and the exam is saved, with the timer paused. Tap **Exam** to **Resume** — or
+**Start fresh**, which keeps the questions you'd answered (you can look back at them under **Past
+exams**) and sets up a new exam that avoids them.
+</details>
+
+<details>
+<summary><strong>What are topics?</strong></summary>
+
+Topics are the main subjects each week covers — anywhere from about 6 to 20 per week. They're what you
+choose from in **Review**, what you can narrow **Practice** and **Exam** to, and one way to weight
+an exam. Each question and card also carries a smaller label for its exact point.
+</details>
+
+<details>
+<summary><strong>What's the Pharmacology view?</strong></summary>
+
+A drug index built from every pack you have switched on. Each drug gets its use, mechanism, dosing,
+cautions, adverse effects, monitoring and interactions, grouped by drug class, with links back to
+the week and topic guide that teach it.
 </details>
 
 ### Accounts &amp; sync

@@ -1,8 +1,16 @@
 <!--
-  Study Suite  ·  v0.4.3 (beta)
+  Study Suite  ·  v0.4.4 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
-  Changelog v0.4.3: TOPIC GROUPS — choosing and weighting use a section per item (secOf): packs marked groupBy:"topic" group by
+  Changelog v0.4.4: header cleaned up — just "Study Suite" (no kicker / subtitle); Home, Add to home, Refresh/Update share one
+  .hbtn style with the account button (34px, same border/colours, inline SVG icons instead of ⊕ ⟳ ↑); icon + label on desktop,
+  icon-only circles on phones (labels kept as aria-label/title); Update stays filled + pulsing; the timer is the same 34px pill;
+  the title never wraps. Skip is now a small "Skip →" link under the options (not in the control row), so Previous · Submit · Next fits
+  on phones again (Skip had pushed Next off-screen since v0.4.1). Also wording — mode-card descriptions + home subtitle describe the current features; FAQ "What is Study
+  Suite?" + "Add to phone" updated for accounts; new FAQ section "Studying" (practice order, leaving/resuming exams, topics,
+  Pharmacology); Coming soon lists the public roadmap (weak-spot practice, easier pack-making, paste a pack, flashcard import,
+  first-run guide). README / COMING_SOON.md mirrored. No behaviour change beyond the header.
+  Changelog v0.4.3 (deployed 2026-09-23): TOPIC GROUPS — choosing and weighting use a section per item (secOf): packs marked groupBy:"topic" group by
   real topics (from authoring guide v2.19); all other packs group by the topic guide each item links to (backport: their topic
   field is a per-item label — e.g. Week 38 went from 113 one-card topics to 14 guide topics). Topic-marked packs whose topics are
   still mostly one-item fall back to guides. Review → Choose topics lists them per week (collapsible, n of m selected); Exam
@@ -482,7 +490,7 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .brand .t{font-family:var(--font-head);font-weight:600;font-size:20px;letter-spacing:-.01em}
 .betatag{color:var(--accent);text-transform:uppercase;letter-spacing:.14em;border:1px solid var(--accent-soft);border-radius:8px;padding:0 5px}
 .top-right{display:flex;align-items:center;gap:10px}
-.timer{font-family:var(--font-mono);font-weight:600;font-size:21px;padding:6px 12px;border:1.5px solid var(--ink);border-radius:3px;background:var(--paper);display:flex;align-items:center;gap:8px;white-space:nowrap}
+.timer{font-family:var(--font-mono);font-weight:600;font-size:16px;height:34px;padding:0 13px;border:1.5px solid var(--line);border-radius:17px;background:var(--paper);color:var(--ink);display:flex;align-items:center;gap:8px;white-space:nowrap;flex:none}
 .timer .dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
 .timer.warn{color:var(--accent);border-color:var(--accent)}.timer.over{color:var(--red);border-color:var(--red)}
 .timer.over .dot,.timer.warn .dot{background:var(--red);animation:pulse 1.1s infinite}
@@ -689,6 +697,13 @@ section{display:none}section.on{display:block}
 .sync-actions2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.sync-actions2 .btn{width:100%;padding-left:8px;padding-right:8px}
 .sync-both{display:block;width:100%;margin-top:10px;font-size:14px;padding:8px}
 @media (max-width:480px){.sync-cmp,.sync-actions2{grid-template-columns:1fr}}
+.hbtn{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px 0 11px;flex:none;border:1.5px solid var(--line);border-radius:17px;background:var(--paper);color:var(--ink-soft);font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;cursor:pointer;white-space:nowrap;transition:border-color .12s,color .12s}
+.hbtn:hover{border-color:var(--accent-soft);color:var(--ink)}.hbtn svg{width:17px;height:17px;flex:none}
+.hbtn.upd{background:var(--accent);border-color:var(--accent);color:var(--paper);animation:updpulse 2.4s ease-in-out infinite}.hbtn.upd:hover{color:var(--paper);filter:brightness(1.08)}
+@media (max-width:560px){.hbtn{width:34px;padding:0;justify-content:center}.hbtn .hl{display:none}.top-right{gap:8px}.timer{font-size:15px;padding:0 11px}}
+.brand .t{white-space:nowrap}
+.skiprow{display:flex;justify-content:flex-end;margin-top:8px}.skiplink{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.06em;background:none;border:0;padding:4px 2px;color:var(--ink-soft);cursor:pointer;text-decoration:underline;text-underline-offset:3px}.skiplink:hover{color:var(--accent)}
+@media (max-width:560px){.controls{gap:6px}.controls .mid{gap:6px}.controls .nbtn{padding:9px 12px;font-size:15px;white-space:nowrap}.sa-long{display:none}}
 .acctbtn{position:relative;width:34px;height:34px;flex:none;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--ink-soft);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
 .acctbtn svg{width:20px;height:20px}
 .acctbtn:hover{border-color:var(--accent-soft);color:var(--ink)}
@@ -989,12 +1004,12 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <header class="top">
   <div class="top-inner">
-    <div class="brand"><span class="k">Study Suite</span><span class="t">Review · Practice · Exam</span></div>
+    <div class="brand"><span class="t">Study Suite</span></div>
     <div class="top-right">
       <div class="timer" id="timer" style="display:none"><span class="dot"></span><span id="tclock">--:--</span></div>
-      <button class="homebtn" id="homebtn" style="display:none"><svg class="hbico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.2 12 4.5l8 6.7M6.5 9.4V19.5h11V9.4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</button>
-      <button class="installbtn tile" id="installBtn" title="Add this app to your home screen"><span class="ic">⊕</span>Add to home</button>
-      <button class="installbtn tile ghost" id="refreshBtn" style="display:none"><span class="ic">⟳</span>Refresh</button>
+      <button class="hbtn" id="homebtn" type="button" style="display:none" aria-label="Home" title="Home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.2 12 4.5l8 6.7M6.5 9.4V19.5h11V9.4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">Home</span></button>
+      <button class="hbtn" id="installBtn" type="button" aria-label="Add to home screen" title="Add this app to your home screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 4.5h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3zM12 8.5v7M8.5 12h7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">Add to home</span></button>
+      <button class="hbtn" id="refreshBtn" type="button" style="display:none" aria-label="Refresh"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12a7 7 0 1 1-2.05-4.95M19 4.5V8h-3.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">Refresh</span></button>
       <button class="acctbtn" id="acctBtn" type="button" aria-label="Account" title="Account"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.2" r="3.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4.8 19.6c1.2-3.6 4-5.4 7.2-5.4s6 1.8 7.2 5.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span class="acctdot"></span></button>
     </div>
   </div>
@@ -1005,12 +1020,12 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
   <section id="home" class="on">
     <div class="crest">◇ Modular Study Suite ◇</div>
     <h1>Load a pack, pick a mode.</h1>
-    <p class="sub">One engine, your content. Drop in week packs and study them by spaced repetition, practice, or timed exams — with the topic guides bundled right in.</p>
+    <p class="sub">One engine, your content. Drop in week packs and study them by spaced repetition, practice or timed exams — with topic guides, a pharmacology index and optional sync built in.</p>
 
     <div class="modes">
-      <div class="mode" id="mReview"><div class="mt">Review</div><div class="md">Spaced repetition over the cards in your active packs — mixed interactive types, SM-2 scheduling, filter to any topics.</div><div class="feat" id="featReview">— cards</div></div>
-      <div class="mode" id="mPractice"><div class="mt">Practice</div><div class="md">Work the question bank one at a time. Submit to see the answer instantly, with its difficulty and a topic-guide link. Per-question timer.</div><div class="feat" id="featPractice">— questions</div></div>
-      <div class="mode" id="mExam"><div class="mt">Exam</div><div class="md">A timed, scored test sampled to your weighting and chosen difficulty. Answers hidden until you submit.</div><div class="feat" id="featExam">— per test</div></div>
+      <div class="mode" id="mReview"><div class="mt">Review</div><div class="md">Spaced repetition over the cards in your active packs — six interactive card types, scheduled across days. Choose the topics you want.</div><div class="feat" id="featReview">— cards</div></div>
+      <div class="mode" id="mPractice"><div class="mt">Practice</div><div class="md">The question bank one at a time — the answer and a topic-guide link the moment you submit. New questions first; see your prior answer on repeats.</div><div class="feat" id="featPractice">— questions</div></div>
+      <div class="mode" id="mExam"><div class="mt">Exam</div><div class="md">A timed, scored test built from fresh questions and weighted your way. Answers hidden until you submit; leave part-way and resume later.</div><div class="feat" id="featExam">— per test</div></div>
     </div>
 
 
@@ -1057,13 +1072,17 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
         <button class="infobtn" id="faqBtn" onclick="toggleInfo('faq')">FAQ</button>
       </div>
       <div class="infopanel" id="comingPanel" style="display:none">
+        <div class="soon-i">· Weak-spot practice — see where your gaps are across topics, then drill exactly those questions and cards</div>
+        <div class="soon-i">· Easier pack-making — a ready-made assistant you can hand your notes to, and later, making packs right inside the app</div>
+        <div class="soon-i">· Paste a pack — load a pack by pasting its text, no file needed</div>
         <div class="soon-i">· Flashcard import — bring decks in from that other flashcard app</div>
+        <div class="soon-i">· A gentle first-run guide — quiet hints for new users that never get in the way</div>
       </div>
       <div class="infopanel" id="faqPanel" style="display:none">
         <div class="faqbody">
           <div class="faq-sec">The basics — how it works today</div>
           <h4>What is Study Suite?</h4>
-          <p>A study tool built around four things: <b>Review</b> (spaced-repetition flashcards), <b>Practice</b> (one question at a time with instant feedback), <b>Exam</b> (timed, scored mock tests), and <b>Topic Guides</b> (readable summaries). The app itself is empty — you load <b>study packs</b> that hold the questions, cards, and guides. It's currently in beta.</p>
+          <p>A study tool with three ways to study — <b>Review</b> (spaced-repetition flashcards), <b>Practice</b> (one question at a time with instant feedback) and <b>Exam</b> (timed, scored mock tests) — plus <b>Topic Guides</b> and a <b>Pharmacology</b> drug index to read from. The app itself is empty — you load <b>study packs</b> that hold the questions, cards and guides. An account is optional and adds encrypted sync between your devices. It's currently in beta.</p>
           <h4>Is it really free?</h4>
           <p>Yes — completely free, with no ads, no tracking, and no account required. Studying runs entirely in your own browser, so there's nothing to charge for — and sync, the optional account feature, is free during the beta. If you want to chip in toward the costs of building it, there's an optional "Support development" link, but it's never required and unlocks nothing — the whole app is yours to use.</p>
           <h4>Where is my data stored? Can you see it?</h4>
@@ -1073,11 +1092,20 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
           <h4>Does it work offline?</h4>
           <p>Yes, fully. The app is a single self-contained file. Once it's loaded in your browser — or installed to your home screen — it keeps working with no internet connection. Your packs and progress are right there on your device.</p>
           <h4>Can I add it to my phone or computer like a real app?</h4>
-          <p>Yes — use <b>Add to Home Screen</b> (the app walks you through it for your device). One thing to know: an installed copy keeps its <b>own separate storage</b> from the browser version, so back up first and restore into the installed app so your progress comes along.</p>
+          <p>Yes — use <b>Add to Home Screen</b> (the app walks you through it for your device). One thing to know: an installed copy may keep its <b>own separate storage</b> from the browser version (on iPhone and iPad it always does). With an account, just sign in inside the installed app and everything syncs across. No account? <b>Backup all</b> first, then <b>Restore backup</b> inside the installed app.</p>
           <h4>Can I make my own study packs, or use my own notes?</h4>
           <p>Absolutely — that's encouraged. Download the <a href="https://studysuite.app/Study_Suite_Authoring_Guide_latest.md" download><b>instruction set</b></a> (also linked on the home screen) and hand it to the AI assistant of your choice; it walks the assistant through turning your own material into a pack you can load. Packs you make from your own content are <b>yours</b>. (The app, its design, and the pack format are mine, but the content you bring into it is entirely your own.)</p>
           <h4>Is any of this medical advice?</h4>
           <p>No. Study Suite and its packs are <b>educational material for exam preparation only</b> — not medical advice, and never a basis for real decisions about real patients. It's also in beta, so content can contain errors or go out of date. Always check against your own curriculum and trusted sources.</p>
+          <div class="faq-sec">Studying</div>
+          <h4>How does Practice decide the order of questions?</h4>
+          <p>Questions you've never answered come first. Ones you've answered before go to the end — the ones you got wrong last time ahead of the ones you got right — and they're marked on the question map. Each starts clear, with <b>View prior answer</b> if you want to see what you picked before. Prefer only new ones? Turn on <b>Unanswered questions only</b> when you set up Practice. <b>Skip</b> moves on without counting a question as seen.</p>
+          <h4>Can I leave an exam and come back to it?</h4>
+          <p>Yes. Leave part-way and the exam is saved, with the timer paused. Tap <b>Exam</b> to <b>Resume</b> — or <b>Start fresh</b>, which keeps the questions you'd answered (you can look back at them under <b>Past exams</b>) and sets up a new exam that avoids them.</p>
+          <h4>What are topics?</h4>
+          <p>Topics are the main subjects each week covers — anywhere from about 6 to 20 per week. They're what you choose from in <b>Review</b>, what you can narrow <b>Practice</b> and <b>Exam</b> to, and one way to weight an exam. Each question and card also carries a smaller label for its exact point.</p>
+          <h4>What's the Pharmacology view?</h4>
+          <p>A drug index built from every pack you have switched on. Each drug gets its use, mechanism, dosing, cautions, adverse effects, monitoring and interactions, grouped by drug class, with links back to the week and topic guide that teach it.</p>
           <div class="faq-sec">Accounts &amp; sync</div>
           <h4>What does sync do?</h4>
           <p>Sign in on each of your devices — phone, laptop, tablet — and your packs and progress stay in step automatically. Changes sync in the background a few seconds after you make them, and whenever you open the app. Offline? Keep studying; it catches up when you're back online. It's the automatic version of Backup all.</p>
@@ -1264,9 +1292,10 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
     <div class="qmeta"><span class="left"><span class="tag" id="qtag">—</span><span id="qdiff"></span></span><span class="pos" id="qpos"></span></div>
     <div class="progress"><i id="pbar" style="width:0%"></i></div>
     <div class="qcard" id="qcard"></div>
+    <div class="skiprow"><button class="skiplink" id="skipBtn" type="button" title="Move on without answering — it won’t count as seen">Skip →</button></div>
     <div class="controls">
       <button class="nbtn" id="prevBtn">← Previous</button>
-      <div class="mid"><button class="nbtn" id="skipBtn" title="Move on without answering — it won’t count as seen">Skip</button><button class="nbtn flagbtn" id="flagBtn">⚑ Flag</button><button class="nbtn primary" id="submitAnsBtn" style="display:none">Submit answer</button></div>
+      <div class="mid"><button class="nbtn flagbtn" id="flagBtn">⚑ Flag</button><button class="nbtn primary" id="submitAnsBtn" style="display:none">Submit<span class="sa-long"> answer</span></button></div>
       <button class="nbtn" id="nextBtn">Next →</button>
     </div>
     <div class="palette"><div class="ttl"><span id="paletteTitle">Question map</span><span id="answeredCount"></span></div><div class="grid" id="grid"></div><div class="submitbar"><button class="btn" id="finishBtn"></button></div></div>
@@ -1318,7 +1347,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.4.3';
+const APP_VERSION='0.4.4';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1996,8 +2025,8 @@ function updateHeaderButtons(){const pwa=isStandalone();const ib=$('installBtn')
   if(ib)ib.style.display=pwa?'none':'';
   if(!rb)return;rb.style.display=pwa?'':'none';
   if(pwa){const out=appUpdateAvailable||(typeof pendingUpdates==='function'&&pendingUpdates().length>0);
-    rb.className='installbtn tile'+(out?' upd':' ghost');
-    rb.innerHTML=out?'<span class="ic">↑</span>Update':'<span class="ic">⟳</span>Refresh';
+    rb.className='hbtn'+(out?' upd':'');rb.setAttribute('aria-label',out?'Update':'Refresh');
+    rb.innerHTML=out?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6.5 11.5 12 6l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">Update</span>':'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12a7 7 0 1 1-2.05-4.95M19 4.5V8h-3.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">Refresh</span>';
     rb.title=out?'A newer app or pack is available — tap to reload and update':'Reload to fetch the latest app';}}
 
 /* "Default study packs" panel — content-free: pack list comes from a same-origin
