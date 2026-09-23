@@ -46,11 +46,16 @@ It's currently in **beta**.
 
 ### Your library
 
-- **Default study packs** organised by school, year and course — add one with a tap.
+- **Study packs for your course**, unlocked by your access code and organised by school, year and course —
+  add one with a tap. Add more **access codes** any time: account menu → **Add an access code**, or
+  **Settings → Access codes** if you don't use an account.
 - Toggle each pack **on or off**; every mode uses only the packs that are on, so you can keep every
   week loaded and study just this one.
-- When a newer version of a pack is published, the app offers to **update** it — your progress
-  carries over.
+- When a newer version of a pack is published, the app shows **what's new** and offers to **update**
+  it — your progress carries over. One tap on **Update** brings in the new app and your pack updates
+  together, and updating a pack on one device updates it on your other devices too.
+- Switched-off packs can be **offloaded** to save space — they stay in your library with a download
+  button and come back in one tap (automatically after a week off; change it in **Settings → Storage**).
 - Load your own packs by dropping in a file.
 
 ### Accounts and sync (optional)
@@ -66,6 +71,7 @@ It's currently in **beta**.
 ### Private, offline, yours
 
 - No ads, no analytics, no tracking. Without an account, nothing leaves your device.
+- The shared study packs are **encrypted** — only an access code unlocks them.
 - Works **offline** once loaded, and installs to your home screen or dock on iPhone, iPad, Mac,
   Android and Windows.
 - **Backup all** / **Restore backup** save and restore a file copy of everything.

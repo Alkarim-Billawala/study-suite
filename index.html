@@ -1,7 +1,10 @@
 <!--
-  Study Suite  ·  v0.6.2 (beta)
+  Study Suite  ·  v0.6.3 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.6.3: "Request an access code" works again — the v0.4.1 welcome-screen declutter turned the button into a
+  text link and dropped its mailto (href="#", no handler); restored the v0.4.0 mailto (accesscodes@studysuite.app + template). The "Download the instruction set"
+  line is set up in initPackLinks for everyone (it sat in renderDefaultPacks, which exits early without a code since v0.5.0).
   Changelog v0.6.2 (also): HOME — "Your library" becomes a panel with a serif title once it has packs (empty: the small header +
   "Your library is empty — add a pack below or upload your own to start."); the default packs section is titled from the
   packs' schools ("UofT Med Study Packs"; ", etc." for several; short names = manifest schoolShort from content_scopes_LOCAL
@@ -1120,7 +1123,7 @@ section{display:none}section.on{display:block}
       <button type="submit" class="eacgo" id="eacUnlock" aria-label="Continue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </form>
     <div class="eacerr" id="eacErr" role="alert"></div>
-    <div class="eacmore"><a href="#" id="eacRestore">Restore a backup</a><span aria-hidden="true">·</span><a id="eacRequest" href="#">Request an access code</a></div>
+    <div class="eacmore"><a href="#" id="eacRestore">Restore a backup</a><span aria-hidden="true">·</span><a id="eacRequest" href="mailto:accesscodes@studysuite.app?subject=Study%20Suite%20Access%20Code%20Request&body=Hi!%20I'd%20like%20to%20request%20an%20access%20code%20for%20Study%20Suite.%0D%0A%0D%0AName%3A%20%0D%0ASchool%20%2F%20Occupation%3A%20%0D%0AProgram%20%2F%20Year%20(if%20a%20student)%3A%20%0D%0AHow%20I%20heard%20about%20Study%20Suite%3A%20%0D%0A%0D%0AThanks!">Request an access code</a></div>
     </div>
     <div id="eacS2" hidden>
       <button type="button" class="btn wide" id="eacSignUp">Create an account</button>
@@ -1501,7 +1504,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.6.2';
+const APP_VERSION='0.6.3';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -2479,6 +2482,7 @@ async function initPackLinks(){
     const m=await r.json();
     if(m&&m.v===2)defaultManifest=await openManifest(m,heldKeys()); /* v0.6.0: the sections this device holds keys for */
     else{if(!m||!Array.isArray(m.packs)||!m.packs.length)return;defaultManifest=m;}
+    if(defaultManifest&&defaultManifest.authoring){$('buildLink').href=encodeURI(String(defaultManifest.authoring));$('buildLink').setAttribute('download','');$('buildLine').style.display='';} /* v0.6.3: for everyone, code or not */
     backfillPlacement();renderLibrary();renderDefaultPacks();maybeApplyQueuedUpdates();
     try{if(SSSync.meta()&&(SSSync.meta().missing||[]).length)SSSync.retryMissing();}catch(e){} /* v0.6.2: a key just arrived → pending packs */
   }catch(e){}
