@@ -1,7 +1,12 @@
 <!--
-  Study Suite  ·  v0.4.7 (beta)
+  Study Suite  ·  v0.4.8 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.4.8: Sync activity rows show the app version (x.app, already logged). Pack merge fix (found in the first two-device test, 2026-09-23) — a pack counted as "changed" when any
+  field differed, including p.ts, which can differ between devices without anyone touching the pack (a v0.4.6 peer drops it;
+  a fetched pack was stamped at fetch time) → spurious "changed on both" and, in the wrong case, the wrong on/off winner.
+  Now packSig = on/off + version for published packs, content minus ts for custom packs; ts is only the tie-break.
+  resolvePacks takes ts from the account entry (never the fetch time). Base key → 'suite_syncbase_v2' (old bases ignored once).
   Changelog v0.4.7: SYNC MERGE — when this device and the account copy both changed, SSSync now merges them item by item
   (merge3, three-way against the last-synced base kept in Store 'suite_syncbase_v1'; custom packs kept there as fingerprints only)
   instead of asking which copy to keep. Both-changed rules: card → later review (sched[].at, stamped in schedule()); question →
@@ -1377,7 +1382,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.4.7';
+const APP_VERSION='0.4.8';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1703,7 +1708,7 @@ async function persist(){await Store.set(KEY.packs,packs);await Store.set(KEY.sc
 const SSSync=(()=>{
   const LIGHT=['id','pack','version','author','school','year','term','course','weeks','enabled','ts'],MAX_CT=7900000;
   let meta=null,timer=null,busy=null,again=false,suppress=false,lastRun=0,state={k:'off'},flashed=false;
-  let lastOk=0,staleTries=0,pendingSince=0;const POLL=5*60000,FRESH=6*60000,MAXWAIT=60000,BASE_KEY='suite_syncbase_v1';
+  let lastOk=0,staleTries=0,pendingSince=0;const POLL=5*60000,FRESH=6*60000,MAXWAIT=60000,BASE_KEY='suite_syncbase_v2';
   const CLOUD_SVG='<svg class="sico" viewBox="0 0 24 16" aria-hidden="true"><path d="M6.4 15.2h11.3a4.4 4.4 0 0 0 .5-8.8A6.1 6.1 0 0 0 6.6 5 5.1 5.1 0 0 0 6.4 15.2z" fill="currentColor"/></svg>';
   const pick=(o,ks)=>{const r={};ks.forEach(k=>{if(o[k]!==undefined)r[k]=o[k];});return r;};
   const parseTs=s=>s?Date.parse(String(s).replace(' ','T')):NaN;
@@ -1723,7 +1728,8 @@ const SSSync=(()=>{
     for(const e of (list||[])){if(!e||!e.id)continue;
       if(!e.ref){out.push(e);continue;}
       const p0=have.get(e.id),p=p0?Object.assign({},p0):await fetchPublic(e.id,m);
-      if(p){LIGHT.forEach(k=>{if(k!=='version'&&k in e)p[k]=e[k];});out.push(p);}else miss.push(e);}
+      if(p){LIGHT.forEach(k=>{if(k!=='version'&&k in e)p[k]=e[k];});if(!('ts' in e))delete p.ts; /* v0.4.8: the account's ts, never the fetch time */
+        out.push(p);}else miss.push(e);}
     return {out,miss};}
   const studied=s=>Object.values(s||{}).filter(x=>x&&x.phase&&x.phase!=='new').length;
   /* Sync activity (v0.4.5): this device's last 60 decisions, for diagnosing surprises. Not synced. */
@@ -1766,7 +1772,8 @@ const SSSync=(()=>{
      the first sync after updating) → the same rules, and counts take the larger instead of adding. */
   const J=x=>x===undefined?'\u0000':JSON.stringify(x);
   function strHash(t){let x=2166136261;for(let i=0;i<t.length;i++){x^=t.charCodeAt(i);x=Math.imul(x,16777619);}return (x>>>0).toString(36)+':'+t.length;}
-  const packSig=p=>strHash(JSON.stringify(p));
+  /* What counts as a change to a pack: on/off + version (published), or the content (custom). ts is only the tie-break. */
+  const packSig=p=>strHash(JSON.stringify(p.ref?{id:p.id,on:p.enabled!==false,v:p.version}:Object.assign({},p,{ts:undefined})));
   const baseOf=pl=>Object.assign({},pl,{packs:(pl.packs||[]).map(p=>({id:p.id,sig:packSig(p)}))}); /* custom packs as fingerprints only */
   async function saveBase(pl){if(meta)await Store.set(BASE_KEY,{uid:meta.uid,at:meta.lastUpdated,p:baseOf(pl)});}
   async function loadBase(){const x=await Store.get(BASE_KEY);return (x&&meta&&x.uid===meta.uid&&x.at&&x.at===meta.lastUpdated)?x.p:null;}
@@ -2009,7 +2016,7 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
     '<button class="btn sm wide" id="acctNoteOk">Got it</button>';$('acctNoteOk').onclick=()=>{acctView=null;closeAcct();};}
   else if(view==='synclog'){let L=[];try{L=JSON.parse(localStorage.getItem('suite_synclog_v1')||'[]');}catch(e){}
     b.innerHTML='<h3>Sync activity</h3><p class="acct-sub">What this device’s sync did recently, newest first. Only kept on this device.</p>'+
-      (L.length?'<div class="synclog">'+L.map(x=>'<div class="slrow"><div class="slt">'+new Date(x.t).toLocaleString([],{dateStyle:'medium',timeStyle:'short'})+'</div><div class="slw">'+acctEsc(x.what)+'</div>'+(x.local?'<div class="sld">This device: '+acctEsc(x.local)+'</div>':'')+(x.cloud?'<div class="sld">Account copy: '+acctEsc(x.cloud)+'</div>':'')+'</div>').join('')+'</div>':'<p class="acct-sub">Nothing yet.</p>')+
+      (L.length?'<div class="synclog">'+L.map(x=>'<div class="slrow"><div class="slt">'+new Date(x.t).toLocaleString([],{dateStyle:'medium',timeStyle:'short'})+(x.app?' · v'+acctEsc(x.app):'')+'</div><div class="slw">'+acctEsc(x.what)+'</div>'+(x.local?'<div class="sld">This device: '+acctEsc(x.local)+'</div>':'')+(x.cloud?'<div class="sld">Account copy: '+acctEsc(x.cloud)+'</div>':'')+'</div>').join('')+'</div>':'<p class="acct-sub">Nothing yet.</p>')+
       '<div class="acct-row" style="margin-top:12px"><button class="btn ghost sm" id="acctBack">Back</button></div>';
     $('acctBack').onclick=()=>renderAcct('account');}
   else if(view==='notice'){b.innerHTML='<h3>'+acctEsc(acctNote.t)+'</h3><p class="acct-sub">'+acctEsc(acctNote.b)+'</p>'+(acctNote.busy?'':'<button class="btn sm wide" id="acctNoteOk">OK</button>');
