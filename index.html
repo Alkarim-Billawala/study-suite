@@ -1,8 +1,10 @@
 <!--
-  Study Suite  ·  v0.4.1 (beta)
+  Study Suite  ·  v0.4.2 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
-  Changelog v0.4.1: SETUP SCREENS — Practice and Exam each open a setup sheet (#setupOv) before a fresh session: Exam = difficulty,
+  Changelog v0.4.2: which-copy dialog — buttons line up with their boxes (Keep this device under This device, Keep account copy
+  under Your account, same two columns; Keep both on its own line below; stacks in the same order on phones). "1 card studied".
+  Changelog v0.4.1 (deployed 2026-09-23): SETUP SCREENS — Practice and Exam each open a setup sheet (#setupOv) before a fresh session: Exam = difficulty,
   question selection (+ "N not answered yet"), weighting (auto / group by / per-group counts / length), timer; Practice = difficulty,
   unanswered only, shuffle, timer. Choices are remembered. The home difficulty bar is gone; Settings loses Exam composition +
   Timers (moved, same element IDs). Difficulty is now per mode (settings.pracDiffs / examDiffs, migrated from sessionDiffs).
@@ -670,7 +672,9 @@ section{display:none}section.on{display:block}
 .sync-h{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px}
 .sync-note{font-size:13px;line-height:1.5;color:var(--ink-soft);margin-bottom:16px}
 .sync-actions{flex-wrap:wrap}
-@media (max-width:480px){.sync-cmp{grid-template-columns:1fr}}
+.sync-actions2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.sync-actions2 .btn{width:100%;padding-left:8px;padding-right:8px}
+.sync-both{display:block;width:100%;margin-top:10px;font-size:14px;padding:8px}
+@media (max-width:480px){.sync-cmp,.sync-actions2{grid-template-columns:1fr}}
 .acctbtn{position:relative;width:34px;height:34px;flex:none;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--ink-soft);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
 .acctbtn svg{width:20px;height:20px}
 .acctbtn:hover{border-color:var(--accent-soft);color:var(--ink)}
@@ -1226,7 +1230,8 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="confirm-msg" id="syncCfMsg"></div>
       <div class="sync-cmp" id="syncCfCmp"></div>
       <div class="sync-note" id="syncCfNote"></div>
-      <div class="confirm-actions sync-actions"><button class="btn ghost sm" id="syncCfBoth">Keep both</button><button class="btn ghost sm" id="syncCfCloud">Keep account copy</button><button class="btn sm" id="syncCfLocal">Keep this device</button></div>
+      <div class="sync-actions2"><button class="btn ghost sm" id="syncCfLocal">Keep this device</button><button class="btn ghost sm" id="syncCfCloud">Keep account copy</button></div>
+      <button class="btn ghost sm sync-both" id="syncCfBoth">Keep both</button>
     </div>
   </div>
   <!-- TOASTS (in-app, replaces native alert()) -->
@@ -1290,7 +1295,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.4.1';
+const APP_VERSION='0.4.2';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1640,7 +1645,7 @@ const SSSync=(()=>{
   function askConflict(first,loc,cl){return new Promise(res=>{
     const fmtT=t=>isNaN(t)||!t?'not recorded':new Date(t).toLocaleString([],{dateStyle:'medium',timeStyle:'short'});
     const kb=b=>b>=1e6?(b/1e6).toFixed(1)+' MB':Math.max(1,Math.round(b/1e3))+' KB';
-    const col=(k,h,s,t,lbl)=>'<div class="sync-col" data-pick="'+k+'" role="button" tabindex="0" aria-label="Select '+h+'"><div class="sync-h">'+h+'</div><div>'+lbl+' <b>'+fmtT(t)+'</b></div><div>'+s.packs+' pack'+(s.packs===1?'':'s')+' · '+s.studied.toLocaleString()+' cards studied</div><div>'+kb(s.bytes)+'</div></div>';
+    const col=(k,h,s,t,lbl)=>'<div class="sync-col" data-pick="'+k+'" role="button" tabindex="0" aria-label="Select '+h+'"><div class="sync-h">'+h+'</div><div>'+lbl+' <b>'+fmtT(t)+'</b></div><div>'+s.packs+' pack'+(s.packs===1?'':'s')+' · '+s.studied.toLocaleString()+' card'+(s.studied===1?'':'s')+' studied</div><div>'+kb(s.bytes)+'</div></div>';
     $('syncCfMsg').textContent=first?'This device already has study data, and so does your account. Which one should you keep?':'Your study data changed on this device and somewhere else since the last sync. Which one should you keep?';
     const newer=(loc.t||0)>=(cl.t||0)?'local':'cloud',bigger=loc.s.bytes>=cl.s.bytes?'local':'cloud';
     $('syncCfCmp').innerHTML=col('local','This device',loc.s,loc.t,'Last change')+col('cloud','Your account',cl.s,cl.t,'Last saved');
