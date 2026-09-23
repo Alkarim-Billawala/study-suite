@@ -59,8 +59,9 @@ It's currently in **beta**.
 - **End-to-end encrypted** — your data is locked on your device before it's uploaded, so nobody
   else can read it.
 - A **recovery code**, password reset, email change and account deletion — all self-serve.
-- If two devices change at the same time, **you choose** which copy to keep — nothing is
-  overwritten without asking.
+- If two devices change between syncs, their changes are **combined** — cards, question history,
+  past exams, packs and settings — so there's nothing to choose.
+- **Your devices** and **Sync activity** in the account menu show which devices sync and what sync did.
 
 ### Private, offline, yours
 
@@ -208,9 +209,11 @@ the week and topic guide that teach it.
 <summary><strong>What does sync do?</strong></summary>
 
 Sign in on each of your devices — phone, laptop, tablet — and your packs and progress stay in step
-automatically. Changes sync in the background a few seconds after you make them, and whenever you open
-the app. Offline? Keep studying; it catches up when you're back online. It's the automatic version of
-**Backup all**.
+automatically. Changes sync in the background a few seconds after you make them, whenever you open or
+come back to the app, and every few minutes while it's open. Offline? Keep studying; it catches up as
+soon as you're back online. The cloud icon is **green** when you're in sync, **yellow** if the last sync
+is a few minutes old or you're offline, and **red** if something needs your attention. It's the
+automatic version of **Backup all**.
 </details>
 
 <details>
@@ -265,16 +268,27 @@ its data becomes your new account copy.
 <details>
 <summary><strong>What if two devices change at the same time?</strong></summary>
 
-Nothing is overwritten without asking. You'll see both copies side by side — when each last changed,
-how many cards you've studied, and the size — and choose which to keep. **Keep both** saves the account
-copy as a backup file first.
+They're combined — nothing to choose, and nothing studied is lost. If the same card was studied on
+both, the most recent review counts. Answers to the same question on both are all kept in your history.
+If a pack was switched on or off on both, the latest switch wins; a pack you removed stays removed. An
+unfinished exam that's replaced by a newer one moves to **Past exams**. **Sync activity** in the account
+menu lists what was combined.
+</details>
+
+<details>
+<summary><strong>How do I see which devices are syncing?</strong></summary>
+
+Account menu → **Your devices** lists each browser or installed app that syncs with your account, with
+its app version and when it last synced. Give the one you're on a name you'll recognise — names are
+saved inside your encrypted study data. **Sign out other devices** (under Security) signs out all the
+others at once.
 </details>
 
 <details>
 <summary><strong>What does an account store, and is it private?</strong></summary>
 
-The minimum: your email address, your encrypted study data, and a few details needed to run the
-account. No selling data, no ads, no tracking. The [Privacy Policy](https://studysuite.app/privacy.html)
+The minimum: your email address, your encrypted study data, a random ID for each device that syncs,
+and a few details needed to run the account. No selling data, no ads, no tracking. The [Privacy Policy](https://studysuite.app/privacy.html)
 lists everything; see also the [Terms](https://studysuite.app/terms.html).
 </details>
 
