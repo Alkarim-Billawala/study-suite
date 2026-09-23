@@ -1,7 +1,29 @@
 <!--
-  Study Suite  ·  v0.2.72 (beta)
+  Study Suite  ·  v0.3.0 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.3.0 (IN PROGRESS, checkpoint A): optional accounts + end-to-end-encrypted sync against
+  PocketBase at auth.studysuite.app. New blocks after STORAGE: SSCrypto (PBKDF2→HKDF keys, AES-GCM DEK wrapped by
+  password + recovery code, gzip+AES-GCM blob, non-extractable DEK in IndexedDB 'suite_keys') and SSAccount (fetch-only
+  REST client; session in KEY.acct). After persist(): SSSync — payload {sched,daily,settings,eac,prac,packs} with
+  published packs as refs (refetched by id from packs-manifest.json) and custom packs in full; content-hash dirty
+  check; pull on open/visible, push 5 s after persist() and on hide; conflict dialog #syncCfOv (time + packs + cards
+  studied + size; keep this device / keep account copy / keep both = account copy saved as a backup file); a pull
+  backs off if the device changed mid-pull. #syncState status line; #saveHint footer line now reflects local vs synced.
+  New keys: KEY.acct, KEY.sync, KEY.localAt. persist() calls SSSync.changed(); init() ends with SSSync.start().
+  Account panel: person button #acctBtn (far right of the header; status dot green/gold/red) → #acctOv with views
+  sign in · create account (class code field when the server requires it) · recovery code (shown once; Copy /
+  Download .txt; can't be dismissed until "saved" is ticked) · account (status, Sync now, Sign in again when the
+  session ended, Sign out with "also remove my packs and progress from this browser" — refused if unsynced).
+  Footer #saveHint: "Backup all still exports a copy." Local day: today() = UTC + TZ_OFF (the device's offset,
+  captured at open, re-checked on sync and when the app comes back into view); rollDaily() only rolls the new-card
+  counter FORWARD (a westward flight doesn't grant a second day), and pulls a pre-v0.3.0 UTC "tomorrow" back once (z:1).
+  Keyboard shortcuts (review/quiz) now ignore keys typed into fields or while a dialog is open.
+  ACCOUNTS ARE HIDDEN BY DEFAULT (ACCT_ON): a device opts in by opening the app with #beta (localStorage
+  'suite_beta_v1'; #nobeta turns it off; a same-page hash change reloads). Off = no account button, no sync, the
+  v0.2.72 footer wording — everyone else sees v0.2.72 behaviour plus the local-day and shortcut fixes.
+  Class code remembered at unlock (eac.code, canonical; never for admin codes) → sign-up hides the class-code field
+  and sends it; shown again if the server rejects it. The server still records the matched entry as users.eac_tag.
   Changelog v0.2.72: Practice sessions persist and resume. Every answer, submit and move in Practice is
   saved to Store (KEY.prac = 'suite_prac_v1': order, picks, submitted flags, per-question time, position),
   so closing the tab or going Home no longer wipes a half-done question bank. Opening Practice with a saved
@@ -600,6 +622,40 @@ section{display:none}section.on{display:block}
 .modal-note{font-size:12.5px;color:var(--ink-soft);margin-top:14px;border-top:1px solid var(--line);padding-top:10px}
 /* in-app confirm dialog + toasts (replace native confirm/alert) */
 .confirm-card{max-width:420px}
+.syncstate{margin-top:4px}
+.sync-cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:-6px 0 12px}
+.sync-col{border:1.5px solid var(--line);border-radius:8px;padding:10px 12px;font-size:14px;line-height:1.55;color:var(--ink)}
+.sync-h{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px}
+.sync-note{font-size:13px;line-height:1.5;color:var(--ink-soft);margin-bottom:16px}
+.sync-actions{flex-wrap:wrap}
+@media (max-width:480px){.sync-cmp{grid-template-columns:1fr}}
+.acctbtn{position:relative;width:34px;height:34px;flex:none;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--ink-soft);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.acctbtn svg{width:20px;height:20px}
+.acctbtn:hover{border-color:var(--accent-soft);color:var(--ink)}
+.acctbtn.on{border-color:var(--accent);color:var(--accent)}
+.acctdot{position:absolute;right:-2px;bottom:-2px;width:10px;height:10px;border-radius:50%;border:2px solid var(--paper);display:none;background:var(--green)}
+.acctbtn.on .acctdot{display:block}
+.acctbtn[data-st=syncing] .acctdot,.acctbtn[data-st=offline] .acctdot,.acctbtn[data-st=conflict] .acctdot{background:var(--gold)}
+.acctbtn[data-st=expired] .acctdot,.acctbtn[data-st=error] .acctdot{background:var(--red)}
+.acct-card{max-width:400px;position:relative}
+.acct-x{position:absolute;top:8px;right:12px;background:none;border:none;font-size:24px;line-height:1;color:var(--ink-soft);cursor:pointer;padding:4px}
+.acct-card h3{font-family:var(--font-head);font-weight:600;font-size:22px;margin:0 0 6px;padding-right:28px}
+.acct-sub{color:var(--ink-soft);font-size:14.5px;line-height:1.5;margin:0 0 14px}
+.acct-card label.f{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 10px}
+.acct-card .fi{display:block;width:100%;box-sizing:border-box;margin-top:4px;font-family:var(--font-body);font-size:16px;letter-spacing:0;text-transform:none;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink)}
+.acct-card .fi:focus{outline:none;border-color:var(--accent)}
+.acct-err{min-height:18px;color:var(--red);font-size:13.5px;line-height:1.45;margin:2px 0 10px}
+.acct-alt{font-size:14px;margin-top:14px;color:var(--ink-soft)}.acct-alt a{color:var(--accent);cursor:pointer;text-decoration:underline}
+.acct-note{font-size:12.5px;color:var(--ink-soft);margin-top:14px;border-top:1px solid var(--line);padding-top:12px;line-height:1.5}
+.acct-rc{font-family:var(--font-mono);font-size:19px;letter-spacing:.06em;text-align:center;padding:14px 10px;border:1.5px dashed var(--accent);border-radius:10px;margin:0 0 12px;user-select:all;-webkit-user-select:all;color:var(--ink)}
+.acct-rc span{white-space:nowrap}
+.acct-row{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 12px}
+.acct-chk{display:flex;gap:8px;align-items:flex-start;font-size:14px;line-height:1.45;margin:0 0 12px;cursor:pointer;color:var(--ink)}
+.acct-chk input{margin-top:3px;flex:none}
+.acct-email{font-weight:600;font-size:16px;word-break:break-all;color:var(--ink)}
+.acct-st{font-size:14px;color:var(--ink-soft);margin:4px 0 14px;line-height:1.45}
+.acct-card .btn.wide{width:100%}
+.acct-card .btn:disabled{opacity:.55;cursor:default}
 .confirm-msg{font-size:16px;line-height:1.5;color:var(--ink);margin-bottom:20px}
 .confirm-actions{display:flex;justify-content:flex-end;gap:10px}
 .confirm-actions .btn.danger{background:var(--red)}.confirm-actions .btn.danger:hover{background:var(--accent)}
@@ -836,6 +892,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <button class="homebtn" id="homebtn" style="display:none">⮌ Home</button>
       <button class="installbtn tile" id="installBtn" title="Add this app to your home screen"><span class="ic">⊕</span>Add to home</button>
       <button class="installbtn tile ghost" id="refreshBtn" style="display:none"><span class="ic">⟳</span>Refresh</button>
+      <button class="acctbtn" id="acctBtn" type="button" aria-label="Account" title="Account"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.2" r="3.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4.8 19.6c1.2-3.6 4-5.4 7.2-5.4s6 1.8 7.2 5.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span class="acctdot"></span></button>
     </div>
   </div>
 </header>
@@ -898,7 +955,8 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <input type="file" id="restoreFile" accept="application/json" style="display:none">
     </div>
     <div class="savestate" id="saveState"></div>
-    <div class="savehint">Progress lives in this browser — use <b>Backup all</b> / <b>Restore backup</b> to carry it across devices and browsers.</div>
+    <div class="savestate syncstate" id="syncState" style="display:none"></div>
+    <div class="savehint" id="saveHint">Progress lives in this browser — use <b>Backup all</b> / <b>Restore backup</b> to carry it across devices and browsers.</div>
     <div class="infosec">
       <div class="inforow">
         <button class="infobtn" id="comingBtn" onclick="toggleInfo('coming')">Coming soon</button>
@@ -1043,6 +1101,19 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="confirm-actions"><button class="btn ghost sm" id="confirmCopy" style="display:none">Close and Copy</button><button class="btn ghost sm" id="confirmCancel">Cancel</button><button class="btn sm" id="confirmOk">Confirm</button></div>
     </div>
   </div>
+  <!-- ACCOUNT PANEL (v0.3.0) -->
+  <div class="modal-ov" id="acctOv" style="display:none">
+    <div class="modal-card acct-card" role="dialog" aria-modal="true" aria-label="Account"><button class="acct-x" id="acctX" type="button" aria-label="Close">×</button><div id="acctBody"></div></div>
+  </div>
+  <!-- SYNC CHOICE (v0.3.0): device and account copies both changed -->
+  <div class="modal-ov" id="syncCfOv" style="display:none">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="syncCfMsg">
+      <div class="confirm-msg" id="syncCfMsg"></div>
+      <div class="sync-cmp" id="syncCfCmp"></div>
+      <div class="sync-note" id="syncCfNote"></div>
+      <div class="confirm-actions sync-actions"><button class="btn ghost sm" id="syncCfBoth">Keep both</button><button class="btn ghost sm" id="syncCfCloud">Keep account copy</button><button class="btn sm" id="syncCfLocal">Keep this device</button></div>
+    </div>
+  </div>
   <!-- TOASTS (in-app, replaces native alert()) -->
   <div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
 
@@ -1117,14 +1188,14 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.72';
+const APP_VERSION='0.3.0';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
 const APP_AUTHOR='Alkarim Billawala / alkarim.billawala.ca';
 
 /* ===== STORAGE ===== */
-const KEY={packs:'suite_packs_v1',sched:'srs_sched_v2',daily:'srs_daily_v2',settings:'suite_settings_v1',eac:'suite_eac_v1',prac:'suite_prac_v1'};
+const KEY={packs:'suite_packs_v1',sched:'srs_sched_v2',daily:'srs_daily_v2',settings:'suite_settings_v1',eac:'suite_eac_v1',prac:'suite_prac_v1',acct:'suite_acct_v1',sync:'suite_sync_v1',localAt:'suite_localat_v1'};
 const memCache={};
 const Store={
   async get(k){try{if(window.storage){const r=await window.storage.get(k);if(r&&r.value!=null)return JSON.parse(r.value);}}catch(e){}try{const v=localStorage.getItem(k);if(v!=null)return JSON.parse(v);}catch(e){}return (k in memCache)?memCache[k]:null;},
@@ -1132,6 +1203,134 @@ const Store={
 };
 let STORAGE_MODE='memory';
 function detectStorage(){if(typeof window.storage!=='undefined'){STORAGE_MODE='persistent';}else{try{localStorage.setItem('__t','1');localStorage.removeItem('__t');STORAGE_MODE='local';}catch(e){STORAGE_MODE='memory';}}}
+
+/* ===== ACCOUNTS BETA FLAG (v0.3.0) — accounts/sync are hidden until a device opts in by opening the app with
+   #beta (remembered in this browser; #nobeta turns it off). Without it the app looks and behaves as v0.2.72. */
+const ACCT_ON=(()=>{try{const h=location.hash,clean=()=>history.replaceState(history.state,'',location.pathname+location.search);
+  if(/^#beta$/i.test(h)){localStorage.setItem('suite_beta_v1','1');clean();}else if(/^#nobeta$/i.test(h)){localStorage.removeItem('suite_beta_v1');clean();}
+  return localStorage.getItem('suite_beta_v1')==='1';}catch(e){return false;}})();
+window.addEventListener('hashchange',()=>{if(/^#(no)?beta$/i.test(location.hash))location.reload();}); /* same-page #beta → reload so the flag applies */
+/* ===== CRYPTO (v0.3.0: end-to-end encryption for sync — WebCrypto only, no dependencies) =====
+   passphrase --PBKDF2-SHA256(salt, iters)--> master --HKDF "studysuite/enc/v1"--> KEK (never leaves the device)
+                                                    \--HKDF "studysuite/auth/v1"--> authPw (base64url; this is the PocketBase password)
+   DEK = random AES-GCM-256. wrapped_dek_pw = AES-GCM(KEK, DEK); wrapped_dek_rc = AES-GCM(RK, DEK) with
+   RK = HKDF(SHA-256(normalised recovery code), "studysuite/rc/v1"). Wrapped form = b64(iv12 || ct).
+   Blob = AES-GCM(DEK, iv random, AAD "studysuite/blob/v1", [flag byte 1=gzip|0=raw] + JSON). Server sees ciphertext only.
+   The DEK is kept on this device as a NON-extractable CryptoKey in IndexedDB (sign in once per device). */
+const SSCrypto=(()=>{
+  const C=crypto.subtle,te=new TextEncoder(),td=new TextDecoder();
+  const KDF_ITERS=600000,KDF_V=1,BLOB_AAD=te.encode('studysuite/blob/v1'),B32='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+  const rand=n=>crypto.getRandomValues(new Uint8Array(n));
+  const b64=u=>{let s='';for(let i=0;i<u.length;i+=0x8000)s+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(s);};
+  const unb64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+  const b64url=u=>b64(u).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  const cat=(a,b)=>{const o=new Uint8Array(a.length+b.length);o.set(a);o.set(b,a.length);return o;};
+  const hkdfBits=async(ikm,label)=>new Uint8Array(await C.deriveBits({name:'HKDF',hash:'SHA-256',salt:new Uint8Array(0),info:te.encode(label)},ikm,256));
+  const aesKey=(raw,usages)=>C.importKey('raw',raw,{name:'AES-GCM'},false,usages);
+  /* Passphrase -> {kek, authPw}. saltB64 = the user's kdf_salt (16 random bytes). */
+  async function deriveKeys(pass,saltB64,iters){
+    const pw=await C.importKey('raw',te.encode(String(pass).normalize('NFKC')),'PBKDF2',false,['deriveBits']);
+    const master=await C.deriveBits({name:'PBKDF2',hash:'SHA-256',salt:unb64(saltB64),iterations:iters||KDF_ITERS},pw,256);
+    const ikm=await C.importKey('raw',master,'HKDF',false,['deriveBits']);
+    const kek=await aesKey(await hkdfBits(ikm,'studysuite/enc/v1'),['encrypt','decrypt']);
+    const authPw=b64url(await hkdfBits(ikm,'studysuite/auth/v1'));
+    return {kek,authPw};}
+  /* Recovery code: 15 random bytes = 120 bits = 24 base32 chars, shown as 6 groups of 4. */
+  function newRecoveryCode(){const b=rand(15);let bits=0,val=0,out='';for(const x of b){val=((val<<8)|x)&0xffff;bits+=8;while(bits>=5){out+=B32[(val>>>(bits-5))&31];bits-=5;}}return out.match(/.{4}/g).join('-');}
+  function normRecoveryCode(s){return String(s||'').toUpperCase().replace(/[^A-Z0-9]/g,'').replace(/0/g,'O').replace(/1/g,'I').replace(/8/g,'B');}
+  async function recoveryKey(code){const n=normRecoveryCode(code);if(n.length!==24||/[^A-Z2-7]/.test(n))throw new Error('That recovery code doesn’t look right — it has 24 letters and numbers.');
+    const h=await C.digest('SHA-256',te.encode(n));const ikm=await C.importKey('raw',h,'HKDF',false,['deriveBits']);
+    return aesKey(await hkdfBits(ikm,'studysuite/rc/v1'),['encrypt','decrypt']);}
+  /* DEK: extractable only while it's being wrapped; the stored copy is non-extractable. */
+  const newDek=()=>C.generateKey({name:'AES-GCM',length:256},true,['encrypt','decrypt']);
+  async function wrapDek(wrapKey,dek){const raw=new Uint8Array(await C.exportKey('raw',dek));const iv=rand(12);
+    const ct=new Uint8Array(await C.encrypt({name:'AES-GCM',iv},wrapKey,raw));raw.fill(0);return b64(cat(iv,ct));}
+  async function unwrapDek(wrapKey,wrappedB64,extractable){const u=unb64(wrappedB64);let raw;
+    try{raw=new Uint8Array(await C.decrypt({name:'AES-GCM',iv:u.subarray(0,12)},wrapKey,u.subarray(12)));}catch(e){throw new Error('unwrap');}
+    const k=await C.importKey('raw',raw,{name:'AES-GCM'},!!extractable,['encrypt','decrypt']);raw.fill(0);return k;}
+  const hasGzip=typeof CompressionStream!=='undefined'&&typeof DecompressionStream!=='undefined';
+  const pipe=async(u,stream)=>new Uint8Array(await new Response(new Blob([u]).stream().pipeThrough(stream)).arrayBuffer());
+  /* obj -> {ciphertext,iv (b64), size_bytes (plaintext JSON bytes, for the conflict prompt)} */
+  async function encryptBlob(dek,obj){const json=te.encode(JSON.stringify(obj));
+    const body=hasGzip?cat(Uint8Array.of(1),await pipe(json,new CompressionStream('gzip'))):cat(Uint8Array.of(0),json);
+    const iv=rand(12);const ct=new Uint8Array(await C.encrypt({name:'AES-GCM',iv,additionalData:BLOB_AAD},dek,body));
+    return {ciphertext:b64(ct),iv:b64(iv),size_bytes:json.length};}
+  async function decryptBlob(dek,ctB64,ivB64){let body;
+    try{body=new Uint8Array(await C.decrypt({name:'AES-GCM',iv:unb64(ivB64),additionalData:BLOB_AAD},dek,unb64(ctB64)));}catch(e){throw new Error('decrypt');}
+    const json=body[0]===1?await pipe(body.subarray(1),new DecompressionStream('gzip')):body.subarray(1);
+    return JSON.parse(td.decode(json));}
+  /* IndexedDB keystore (CryptoKey objects survive structured clone; non-extractable stays non-extractable). */
+  const idb=mode=>new Promise((res,rej)=>{const r=indexedDB.open('suite_keys',1);r.onupgradeneeded=()=>r.result.createObjectStore('k');
+    r.onsuccess=()=>res(r.result.transaction('k',mode).objectStore('k'));r.onerror=()=>rej(r.error);});
+  const req=r=>new Promise((res,rej)=>{r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});
+  const keystore={
+    async put(id,v){try{await req((await idb('readwrite')).put(v,id));return true;}catch(e){return false;}},
+    async get(id){try{return (await req((await idb('readonly')).get(id)))||null;}catch(e){return null;}},
+    async del(id){try{await req((await idb('readwrite')).delete(id));}catch(e){}}};
+  return {KDF_ITERS,KDF_V,rand,b64,unb64,deriveKeys,newRecoveryCode,normRecoveryCode,recoveryKey,newDek,wrapDek,unwrapDek,encryptBlob,decryptBlob,keystore,hasGzip};
+})();
+
+/* ===== ACCOUNT CLIENT (v0.3.0: optional account at auth.studysuite.app — PocketBase REST via fetch, no SDK) =====
+   Session (token + a few record fields) lives in Store under KEY.acct; the DEK lives in the IndexedDB keystore as
+   'dek:<userId>'. The passphrase itself never leaves the device — PocketBase only ever sees SSCrypto's authPw. */
+const SSAccount=(()=>{
+  const API='https://auth.studysuite.app',FORMAT=1,MIN_PW=8;
+  let sess=null; /* {token,id,email,verified,sub,keyV} */
+  const normEmail=e=>String(e||'').trim().toLowerCase();
+  function niceError(status,j){
+    const d=(j&&j.data)||{};
+    if(d.email&&/unique/i.test(d.email.code||''))return 'An account with that email already exists — sign in instead.';
+    if(d.email)return 'That email address doesn’t look right.';
+    if(status===400&&/authenticate/i.test((j&&j.message)||''))return 'That email and password don’t match.';
+    if(status===429)return 'Too many tries — wait a minute and try again.';
+    const f=Object.keys(d).map(k=>d[k]&&d[k].message).filter(Boolean);
+    return (j&&j.message&&!/^Failed to (create|update) record\.?$/.test(j.message))?j.message:(f.join(' ')||'Something went wrong on the server ('+status+').');}
+  async function api(path,o){o=o||{};const ctl=new AbortController();const tm=setTimeout(()=>ctl.abort(),o.timeout||20000);
+    const h={};if(o.body)h['Content-Type']='application/json';if(o.auth!==false&&sess&&sess.token)h.Authorization=sess.token;
+    let r;try{r=await fetch(API+path,{method:o.method||'GET',headers:h,body:o.body?JSON.stringify(o.body):undefined,signal:ctl.signal,keepalive:!!o.keepalive});}
+    catch(e){const x=new Error('Can’t reach the sync server right now. Your data is safe on this device.');x.offline=true;throw x;}
+    finally{clearTimeout(tm);}
+    if(r.status===204)return null;let j=null;try{j=await r.json();}catch(e){}
+    if(!r.ok){const x=new Error(niceError(r.status,j));x.status=r.status;if(r.status===401&&sess)x.expired=true;if(j&&j.data&&j.data.owner&&/unique/i.test(j.data.owner.code||''))x.stateExists=true;throw x;}
+    return j;}
+  function adopt(token,rec){sess={token,id:rec.id,email:rec.email,verified:!!rec.verified,sub:rec.subscription_status||'',keyV:rec.key_v||1};return Store.set(KEY.acct,sess);}
+  async function load(){const s=await Store.get(KEY.acct);sess=(s&&s.token&&s.id)?s:null;return sess;}
+  const dekId=()=>'dek:'+(sess&&sess.id);
+  async function dek(){return sess?SSCrypto.keystore.get(dekId()):null;}
+  const policy=()=>api('/api/studysuite/signup-policy',{auth:false});
+  async function signIn(email,pass){email=normEmail(email);
+    const k=await api('/api/studysuite/kdf?email='+encodeURIComponent(email),{auth:false});
+    const {kek,authPw}=await SSCrypto.deriveKeys(pass,k.salt,k.iters);
+    const a=await api('/api/collections/users/auth-with-password',{method:'POST',auth:false,body:{identity:email,password:authPw}});
+    let key;try{key=await SSCrypto.unwrapDek(kek,a.record.wrapped_dek_pw,false);}
+    catch(e){throw new Error('Signed in, but this account’s encryption key couldn’t be unlocked with that password.');}
+    await adopt(a.token,a.record);if(!await SSCrypto.keystore.put(dekId(),key)){await signOut();throw new Error('This browser won’t let the app store its encryption key (private window?). Sync needs normal browsing.');}
+    return sess;}
+  /* Returns {recoveryCode} — the caller must show it once. */
+  async function signUp(email,pass,eacCode){email=normEmail(email);
+    if(String(pass||'').length<MIN_PW)throw new Error('Use a password of at least '+MIN_PW+' characters.');
+    const salt=SSCrypto.b64(SSCrypto.rand(16)),iters=SSCrypto.KDF_ITERS;
+    const {kek,authPw}=await SSCrypto.deriveKeys(pass,salt,iters);
+    const key=await SSCrypto.newDek(),rc=SSCrypto.newRecoveryCode();
+    const body={email,password:authPw,passwordConfirm:authPw,kdf_salt:salt,kdf_iters:iters,kdf_v:SSCrypto.KDF_V,
+      wrapped_dek_pw:await SSCrypto.wrapDek(kek,key),wrapped_dek_rc:await SSCrypto.wrapDek(await SSCrypto.recoveryKey(rc),key)};
+    if(eacCode)body.eac_code=String(eacCode).trim();
+    await api('/api/collections/users/records',{method:'POST',auth:false,body});
+    await signIn(email,pass);
+    return {recoveryCode:rc};}
+  async function signOut(){const id=dekId();sess=null;await Store.set(KEY.acct,null);await SSCrypto.keystore.del(id);}
+  /* Renews the token and the cached record fields. A 401 means the session ended elsewhere (e.g. a password change). */
+  async function refresh(){if(!sess)return null;const a=await api('/api/collections/users/auth-refresh',{method:'POST'});await adopt(a.token,a.record);return sess;}
+  /* user_state: one row per user. meta = no ciphertext (for cheap change checks). */
+  async function getState(metaOnly){const q=metaOnly?'&fields=id,updated,size_bytes,format_version':'';
+    const j=await api('/api/collections/user_state/records?perPage=1'+q);return (j&&j.items&&j.items[0])||null;}
+  async function putState(blob,id,o){const body={ciphertext:blob.ciphertext,iv:blob.iv,size_bytes:blob.size_bytes,format_version:FORMAT};
+    const q='?fields=id,updated,size_bytes,format_version';
+    if(id)return api('/api/collections/user_state/records/'+id+q,{method:'PATCH',body,keepalive:o&&o.keepalive});
+    body.owner=sess.id;return api('/api/collections/user_state/records'+q,{method:'POST',body,keepalive:o&&o.keepalive});}
+  async function deleteAccount(){await api('/api/collections/users/records/'+sess.id,{method:'DELETE'});await signOut();}
+  return {API,FORMAT,load,session:()=>sess,dek,policy,signIn,signUp,signOut,refresh,getState,putState,deleteAccount,normEmail};
+})();
 
 /* ===== SCHEDULER ===== */
 const MIN=60000,DAY=86400000,LEARN=[1,10],RELEARN=[10],GRAD_IVL=1,EASY_IVL=4,HARD_MULT=1.2,EASY_BONUS=1.3,MIN_EF=1.3,START_EF=2.5;
@@ -1173,7 +1372,15 @@ const SYS_LABEL={Endo:'Endocrine',GI:'Gastrointestinal',KU:'Renal / Urinary'};
 const TYPE_LABEL={mcq:'Best answer',multi:'Select all that apply',cloze:'Cloze',order:'Put in order',match:'Matching',qa:'Concept'};
 const LETTERS=['A','B','C','D','E','F'];
 const DIFFS=['easy','medium','hard'];
-function today(){return new Date().toISOString().slice(0,10);}
+/* "Today" follows the user's local clock, held as an offset from UTC (minutes east), captured when the app opens and
+   re-checked on sync and whenever the app comes back into view. The daily new-card counter only rolls FORWARD, so
+   flying west back across midnight never hands out a second day's new cards (and flying east just starts the day). */
+let TZ_OFF=-new Date().getTimezoneOffset();
+function refreshTz(){TZ_OFF=-new Date().getTimezoneOffset();}
+function today(){return new Date(Date.now()+TZ_OFF*60000).toISOString().slice(0,10);}
+/* z:1 marks a local-time counter; pre-v0.3.0 counters hold a UTC date that can be "tomorrow" in the evening — pull it back once. */
+function rollDaily(){const t=today();if(daily&&daily.date&&!daily.z){if(daily.date>t)daily.date=t;daily.z=1;}if(!daily||!daily.date||t>daily.date)daily={date:t,count:0,z:1};}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){refreshTz();rollDaily();}});
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 /* Some answer options must NOT move when options are shuffled: "All of the above" / "None of the above"
    (and the "…of these" variants) quantify over EVERY other option, so they're order-independent but read
@@ -1203,7 +1410,206 @@ function qTestPool(){return qpool().filter(matchDiff);}
 function diffCounts(){const pool=qpool();const c={easy:0,medium:0,hard:0,all:pool.length};pool.forEach(q=>{const r=diffRank(q);if(r>=0)c[DIFFS[r]]++;});return c;}
 function diffBadge(q){if(!q||diffRank(q)<0)return '';return `<span class="diffbadge ${q.difficulty}">${q.difficulty}</span>`;}
 
-async function persist(){await Store.set(KEY.packs,packs);await Store.set(KEY.sched,sched);await Store.set(KEY.daily,daily);await Store.set(KEY.settings,settings);if(eac)await Store.set(KEY.eac,eac);await Store.set(KEY.prac,prac);}
+async function persist(){await Store.set(KEY.packs,packs);await Store.set(KEY.sched,sched);await Store.set(KEY.daily,daily);await Store.set(KEY.settings,settings);if(eac)await Store.set(KEY.eac,eac);await Store.set(KEY.prac,prac);SSSync.changed();}
+/* ===== SYNC (v0.3.0) — local-first; the cloud copy is one encrypted blob per account =====
+   Payload = {v,app,sched,daily,settings,eac,prac,packs[]} where a published pack (its id is in packs-manifest.json)
+   travels as a light {ref:1,id,version,…placement,enabled} and is refetched by id on a device that lacks it; any
+   other pack travels in full. Change detection is by content hash (SHA-256 of the payload JSON), so stray persist()
+   calls never make the device "dirty". Meta (KEY.sync): {uid,stateId,lastUpdated,lastHash,missing[]} —
+   lastUpdated = the server's `updated` we last synced with. Cloud changed + device dirty → conflict dialog.
+   KEY.localAt = when this device's data last changed (for the dialog). Outages degrade to "will sync later". */
+const SSSync=(()=>{
+  const LIGHT=['id','pack','version','author','school','year','term','course','weeks','enabled'],MAX_CT=7900000;
+  let meta=null,timer=null,busy=null,again=false,suppress=false,lastRun=0,state={k:'off'};
+  const pick=(o,ks)=>{const r={};ks.forEach(k=>{if(o[k]!==undefined)r[k]=o[k];});return r;};
+  const parseTs=s=>s?Date.parse(String(s).replace(' ','T')):NaN;
+  async function hash(o){const d=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(JSON.stringify(o)));
+    return Array.from(new Uint8Array(d),b=>b.toString(16).padStart(2,'0')).join('');}
+  async function manifest(){if(defaultManifest)return defaultManifest;
+    try{const r=await fetch('packs-manifest.json',{cache:'no-store'});if(r.ok){const m=await r.json();if(m&&Array.isArray(m.packs))return m;}}catch(e){}return null;}
+  const publicIds=m=>new Set(((m&&m.packs)||[]).filter(x=>x&&x.id&&x.file).map(x=>x.id));
+  function payload(pub){return {v:1,app:APP_VERSION,sched,daily,settings,eac,prac,
+    packs:packs.map(p=>pub.has(p.id)?Object.assign({ref:1},pick(p,LIGHT)):p).concat((meta&&meta.missing)||[])};}
+  /* Fetch a published pack by id and run it through ingestPack in isolation (so `packs` isn't touched). */
+  async function fetchPublic(id,m){const mp=m&&m.packs.find(x=>x&&x.id===id&&x.file);if(!mp)return null;
+    try{const r=await fetch(encodeURI(String(mp.file)),{cache:'no-store'});if(!r.ok)return null;const j=await r.json();
+      const saved=packs;packs=[];try{ingestPack(j,(mp.label||mp.file).replace(/\.json$/i,''));return packs[0]||null;}finally{packs=saved;}}catch(e){return null;}}
+  /* Payload packs[] → full packs (refs resolved from this device, else the manifest). Unresolved refs are returned too. */
+  async function resolvePacks(list,m){const have=new Map(packs.map(p=>[p.id,p])),out=[],miss=[];
+    for(const e of (list||[])){if(!e||!e.id)continue;
+      if(!e.ref){out.push(e);continue;}
+      const p0=have.get(e.id),p=p0?Object.assign({},p0):await fetchPublic(e.id,m);
+      if(p){LIGHT.forEach(k=>{if(k!=='version'&&k in e)p[k]=e[k];});out.push(p);}else miss.push(e);}
+    return {out,miss};}
+  const studied=s=>Object.values(s||{}).filter(x=>x&&x.phase&&x.phase!=='new').length;
+  const localEmpty=()=>!packs.length&&!studied(sched);
+  async function saveMeta(){await Store.set(KEY.sync,meta);}
+  async function loadMeta(){const s=SSAccount.session();const m=await Store.get(KEY.sync);
+    meta=(m&&s&&m.uid===s.id)?m:{uid:s?s.id:null,stateId:null,lastUpdated:null,lastHash:null,missing:[]};if(!meta.missing)meta.missing=[];}
+  function setState(k,msg){state={k,msg,at:Date.now()};const el=$('syncState');if(!el)return;
+    const t={off:'',syncing:'☁ Syncing…',ok:'☁ Synced '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}),
+      offline:'☁ Offline — changes will sync later',expired:'☁ Sign in again to keep syncing',
+      conflict:'☁ Waiting for your choice',error:'☁ Sync paused — '+(msg||'try again later')}[k];
+    el.textContent=t||'';el.style.display=t?'':'none';renderSaveHint(k);if(typeof renderAcctBtn==='function')renderAcctBtn();}
+  function renderSaveHint(k){const el=$('saveHint');if(!el)return;
+    el.innerHTML={off:!ACCT_ON?'Progress lives in this browser — use <b>Backup all</b> / <b>Restore backup</b> to carry it across devices and browsers.':'Progress is saved in this browser only — use <b>Backup all</b> / <b>Restore backup</b> to move it, or sign in to sync it across your devices.',
+      ok:'Progress is saved in this browser and synced, encrypted, to your account. <b>Backup all</b> still exports a copy.',
+      offline:'Progress is saved in this browser. Sync will catch up when you’re back online.',
+      expired:'Progress is saved in this browser. Sign in again to keep syncing it.',
+      conflict:'Progress is saved in this browser. Choose which copy to keep to resume syncing.',
+      error:'Progress is saved in this browser. Sync is paused — <b>Backup all</b> keeps a file copy meanwhile.'}[k==='syncing'?'ok':k]||'';}
+  async function upload(dek,pl,h,id){const blob=await SSCrypto.encryptBlob(dek,pl);
+    if(blob.ciphertext.length>MAX_CT)throw new Error('your study data is too large to sync ('+Math.round(blob.ciphertext.length/1e6)+' MB)');
+    const small=blob.ciphertext.length<60000&&document.visibilityState==='hidden';
+    let rec;try{rec=await SSAccount.putState(blob,id,{keepalive:small});}
+    catch(e){if(!e.stateExists)throw e;const cm=await SSAccount.getState(true);rec=await SSAccount.putState(blob,cm.id);}
+    Object.assign(meta,{stateId:rec.id,lastUpdated:rec.updated,lastHash:h});await saveMeta();}
+  async function applyCloud(d,rec,m,guard){suppress=true;
+    try{const r=await resolvePacks(d.packs,m);
+      if(guard&&await hash(payload(publicIds(m)))!==guard)return false; /* studied during the pull → re-run (now dirty → dialog) */
+      sched=d.sched||{};daily=d.daily||{date:today(),count:0};if(d.settings)settings=Object.assign(settings,d.settings);
+      if(d.eac&&d.eac.unlocked)eac=Object.assign({},eac||{},d.eac); /* keep a remembered class code the account copy lacks */
+      prac=(d.prac&&d.prac.mode==='practice'&&Array.isArray(d.prac.qorder))?d.prac:null;
+      packs=r.out;meta.missing=r.miss;
+      deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});rollDaily();
+      await persist();applyTheme();applyGate();renderHome();
+      Object.assign(meta,{stateId:rec.id,lastUpdated:rec.updated,lastHash:await hash(payload(publicIds(m)))});await saveMeta();
+      if(r.miss.length)toast(r.miss.length+' pack'+(r.miss.length===1?'':'s')+' from your account couldn’t be downloaded yet — they’ll be kept in your account.');
+      return true;}
+    finally{suppress=false;}}
+  function summary(d,bytes){return {packs:(d.packs||[]).length,studied:studied(d.sched),bytes};}
+  /* Resolves to 'local' | 'cloud' | 'both'. */
+  function askConflict(first,loc,cl){return new Promise(res=>{
+    const fmtT=t=>isNaN(t)||!t?'not recorded':new Date(t).toLocaleString([],{dateStyle:'medium',timeStyle:'short'});
+    const kb=b=>b>=1e6?(b/1e6).toFixed(1)+' MB':Math.max(1,Math.round(b/1e3))+' KB';
+    const col=(h,s,t,lbl)=>'<div class="sync-col"><div class="sync-h">'+h+'</div><div>'+lbl+' <b>'+fmtT(t)+'</b></div><div>'+s.packs+' pack'+(s.packs===1?'':'s')+' · '+s.studied.toLocaleString()+' cards studied</div><div>'+kb(s.bytes)+'</div></div>';
+    $('syncCfMsg').textContent=first?'This device already has study data, and so does your account. Which one should you keep?':'Your study data changed on this device and somewhere else since the last sync. Which one should you keep?';
+    const newer=(loc.t||0)>=(cl.t||0)?'local':'cloud',bigger=loc.s.bytes>=cl.s.bytes?'local':'cloud';
+    $('syncCfCmp').innerHTML=col('This device',loc.s,loc.t,'Last change')+col('Your account',cl.s,cl.t,'Last saved');
+    $('syncCfNote').textContent=((newer!==bigger)?'Careful: the newer copy is the smaller one — if you just set up a new device, the bigger copy is usually the one to keep. ':'')+'Keep both saves your account copy as a backup file, then keeps this device’s data.';
+    const done=v=>{$('syncCfOv').style.display='none';res(v);};
+    $('syncCfLocal').onclick=()=>done('local');$('syncCfCloud').onclick=()=>done('cloud');$('syncCfBoth').onclick=()=>done('both');
+    $('syncCfOv').style.display='flex';});}
+  async function downloadCloudCopy(d,m){const r=await resolvePacks(d.packs,m);
+    const data={suite:APP_VERSION,author:APP_AUTHOR,exported:new Date().toISOString(),note:'Account copy saved during a sync choice',
+      packs:r.out,sched:d.sched,daily:d.daily,settings:d.settings,eac:d.eac,prac:d.prac};
+    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data)],{type:'application/json'}));
+    a.download='study-suite-account-copy-'+today()+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}
+  async function run(){refreshTz();
+    if(!SSAccount.session()){setState('off');return;}
+    const dek=await SSAccount.dek();if(!dek){setState('expired');return;}
+    if(!meta||meta.uid!==SSAccount.session().id)await loadMeta();
+    setState('syncing');
+    const m=await manifest(),pub=publicIds(m),pl=payload(pub),h=await hash(pl),dirty=h!==meta.lastHash;
+    const cm=await SSAccount.getState(true);
+    if(!cm){await SSAccount.refresh();await upload(dek,pl,h,null);} /* no row: confirm the account still exists (401 → sign in again) */
+    else if(cm.updated===meta.lastUpdated){if(dirty)await upload(dek,pl,h,cm.id);}
+    else{const full=await SSAccount.getState();const d=await SSCrypto.decryptBlob(dek,full.ciphertext,full.iv);
+      const first=!meta.lastUpdated;
+      if(await hash(d)===h){Object.assign(meta,{stateId:full.id,lastUpdated:full.updated,lastHash:h});await saveMeta();}
+      else if(!dirty||(first&&localEmpty())){if(!await applyCloud(d,full,m,h)){again=true;return;}}
+      else{setState('conflict');
+        const la=await Store.get(KEY.localAt);
+        const choice=await askConflict(first,{s:summary(pl,new TextEncoder().encode(JSON.stringify(pl)).length),t:la},{s:summary(d,full.size_bytes||0),t:parseTs(full.updated)});
+        setState('syncing');
+        if(choice==='cloud')await applyCloud(d,full,m);
+        else{if(choice==='both')await downloadCloudCopy(d,m);await upload(dek,pl,h,full.id);}}}
+    setState('ok');}
+  function sync(){if(busy){again=true;return busy;}lastRun=Date.now();
+    busy=run().catch(e=>{if(e&&e.expired)setState('expired');else if(e&&e.offline)setState('offline');
+        else if(e&&e.message==='decrypt')setState('error','this device’s key doesn’t match your account — sign out and in again');
+        else setState('error',e&&e.message);})
+      .finally(()=>{busy=null;if(again){again=false;schedule(1000);}});
+    return busy;}
+  function schedule(ms){clearTimeout(timer);timer=setTimeout(sync,ms==null?5000:ms);}
+  /* Called at the end of every persist(). */
+  function changed(){if(suppress)return;Store.set(KEY.localAt,Date.now());if(ACCT_ON&&SSAccount.session())schedule();}
+  async function start(){if(!ACCT_ON){setState('off');return;}await SSAccount.load();if(!SSAccount.session()){setState('off');return;}
+    await loadMeta();sync();
+    SSAccount.refresh().catch(e=>{if(e&&e.expired)setState('expired');});}
+  document.addEventListener('visibilitychange',()=>{if(!ACCT_ON||!SSAccount.session())return;
+    if(document.visibilityState==='hidden'){clearTimeout(timer);sync();}
+    else if(Date.now()-lastRun>15000)sync();});
+  async function reset(){clearTimeout(timer);meta=null;await Store.set(KEY.sync,null);setState('off');}
+  return {start,sync,changed,schedule,reset,status:()=>state,meta:()=>meta,_hash:hash,_payload:payload};
+})();
+
+
+
+/* ===== ACCOUNT PANEL (v0.3.0 checkpoint A) — person button top right (#acctBtn) → #acctOv =====
+   Views: signin · signup · recovery (shown once after sign-up; can't be dismissed until "saved" is ticked) · account.
+   Sync runs only after the panel closes, so a first-sync choice dialog never stacks on top of it. */
+let acctView=null,acctRc=null,acctEmail='';
+const acctEsc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function acctStatusText(){const st=SSSync.status();
+  return {ok:'Synced at '+new Date(st.at).toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+'.',syncing:'Syncing…',
+    offline:'Offline — your changes will sync when you’re back online.',expired:'You’ve been signed out on this device. Sign in again to keep syncing.',
+    conflict:'Waiting for you to choose which copy to keep.',error:'Sync paused — '+(st.msg||'try again later')+'.',off:''}[st.k]||'';}
+function renderAcctBtn(){const b=$('acctBtn');if(!b)return;const s=SSAccount.session();
+  b.classList.toggle('on',!!s);b.dataset.st=s?SSSync.status().k:'';
+  b.title=s?('Account — '+s.email):'Account — sign in to sync';
+  if(acctView==='account'&&$('acctSt')){$('acctSt').textContent=acctStatusText();const re=$('acctReauth');if(re)re.style.display=SSSync.status().k==='expired'?'':'none';}}
+function openAcct(){renderAcct(SSAccount.session()?'account':'signin');$('acctOv').style.display='flex';
+  const f=$('acctOv').querySelector('input');if(f&&!('ontouchstart' in window))f.focus();}
+function closeAcct(){if(acctView==='recovery')return;$('acctOv').style.display='none';acctView=null;}
+function acctErr(m){const e=$('acctErr');if(e)e.textContent=m||'';}
+function acctBusy(btn,on,label){if(!btn)return;if(on){btn.dataset.l=btn.textContent;btn.textContent=label;}else if(btn.dataset.l)btn.textContent=btn.dataset.l;btn.disabled=on;}
+function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.session();$('acctX').style.display=view==='recovery'?'none':'';
+  if(view==='signin'){b.innerHTML='<h3>Sign in</h3><p class="acct-sub">Keep your packs and progress in step across your devices. Your data is encrypted on this device before it’s uploaded — only you can read it.</p>'+
+    '<form id="acctForm" autocomplete="on"><label class="f">Email<input class="fi" type="email" id="acctEmail" autocomplete="username" required value="'+acctEsc(acctEmail||(s&&s.email)||'')+'"></label>'+
+    '<label class="f">Password<input class="fi" type="password" id="acctPw" autocomplete="current-password" required></label><div class="acct-err" id="acctErr"></div>'+
+    '<button class="btn sm wide" type="submit" id="acctGo">Sign in</button></form>'+
+    '<div class="acct-alt">New here? <a id="acctToUp">Create an account</a></div>'+
+    '<div class="acct-note">An account is optional. Without one, everything still works — your progress just stays in this browser.</div>';
+    $('acctToUp').onclick=()=>{acctEmail=$('acctEmail').value;renderAcct('signup');};
+    $('acctForm').onsubmit=async e=>{e.preventDefault();acctErr('');const go=$('acctGo');acctBusy(go,true,'Signing in…');
+      try{await SSAccount.signIn($('acctEmail').value,$('acctPw').value);acctEmail='';closeAcct();toast('Signed in — syncing now.');SSSync.start();}
+      catch(err){acctErr(err.message);acctBusy(go,false);}};}
+  else if(view==='signup'){b.innerHTML='<h3>Create an account</h3><p class="acct-sub">Your password also encrypts your study data, so nobody else can reset it — not even Study Suite. You’ll get a recovery code next.</p>'+
+    '<form id="acctForm" autocomplete="on"><label class="f">Email<input class="fi" type="email" id="acctEmail" autocomplete="username" required value="'+acctEsc(acctEmail)+'"></label>'+
+    '<label class="f">Password (8+ characters)<input class="fi" type="password" id="acctPw" autocomplete="new-password" minlength="8" required></label>'+
+    '<label class="f">Password again<input class="fi" type="password" id="acctPw2" autocomplete="new-password" required></label>'+
+    '<label class="f" id="acctCodeWrap">Class code<input class="fi" type="text" id="acctCode" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="The code you used to open the app"></label>'+
+    '<div class="acct-err" id="acctErr"></div><button class="btn sm wide" type="submit" id="acctGo">Create account</button></form>'+
+    '<div class="acct-alt">Already have one? <a id="acctToIn">Sign in</a></div>';
+    $('acctToIn').onclick=()=>{acctEmail=$('acctEmail').value;renderAcct('signin');};
+    if(eac&&eac.code){$('acctCode').value=eac.code;$('acctCodeWrap').style.display='none';} /* remembered from unlock */
+    SSAccount.policy().then(p=>{if(p&&p.requiresEac===false&&$('acctCodeWrap'))$('acctCodeWrap').style.display='none';}).catch(()=>{});
+    $('acctForm').onsubmit=async e=>{e.preventDefault();acctErr('');
+      if($('acctPw').value!==$('acctPw2').value){acctErr('The two passwords don’t match.');return;}
+      const cw=$('acctCodeWrap');if(cw.style.display!=='none'&&!$('acctCode').value.trim()){acctErr('Enter your class code.');return;}
+      const go=$('acctGo');acctBusy(go,true,'Creating your account…');
+      try{const r=await SSAccount.signUp($('acctEmail').value,$('acctPw').value,$('acctCode').value.trim());acctRc=r.recoveryCode;acctEmail='';renderAcct('recovery');}
+      catch(err){if(/access code/i.test(err.message)&&cw.style.display==='none'){cw.style.display='';$('acctCode').value='';err.message='Enter your class code.';}acctErr(err.message);acctBusy(go,false);}};}
+  else if(view==='recovery'){b.innerHTML='<h3>Save your recovery code</h3><p class="acct-sub">If you ever forget your password, this code is the only way back into your synced data. Nobody else can recover it for you. Keep it in a password manager, or write it down somewhere safe.</p>'+
+    '<div class="acct-rc" id="acctRc">'+acctEsc(acctRc).split('-').map(g=>'<span>'+g+'</span>').join('-<wbr>')+'</div><div class="acct-row"><button class="btn ghost sm" id="acctRcCopy">Copy</button><button class="btn ghost sm" id="acctRcDl">Download</button></div>'+
+    '<label class="acct-chk"><input type="checkbox" id="acctRcOk"><span>I’ve saved my recovery code somewhere safe.</span></label><button class="btn sm wide" id="acctRcDone" disabled>Done</button>';
+    $('acctRcCopy').onclick=()=>Promise.resolve(copyToClipboard(acctRc)).then(()=>toast('Recovery code copied.')).catch(()=>toast('Could not copy — select the code and copy it.'));
+    $('acctRcDl').onclick=()=>{const s2=SSAccount.session();const txt='Study Suite — recovery code\n\nAccount: '+(s2?s2.email:'')+'\nRecovery code: '+acctRc+'\nCreated: '+new Date().toLocaleString()+
+      '\n\nIf you forget your password, this code gets you back into your synced study data.\nKeep it private and somewhere safe. Nobody else can recover it for you.\n';
+      const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'text/plain'}));a.download='study-suite-recovery-code.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);};
+    $('acctRcOk').onchange=e=>{$('acctRcDone').disabled=!e.target.checked;};
+    $('acctRcDone').onclick=()=>{acctRc=null;acctView=null;closeAcct();toast('Account created — your data is syncing.');SSSync.start();};}
+  else{b.innerHTML='<h3>Your account</h3><div class="acct-email">'+acctEsc(s&&s.email)+'</div><div class="acct-st" id="acctSt"></div>'+
+    '<div class="acct-row"><button class="btn ghost sm" id="acctSyncNow">Sync now</button><button class="btn sm" id="acctReauth" style="display:none">Sign in again</button></div>'+
+    '<div class="acct-note" style="margin-top:4px"><label class="acct-chk"><input type="checkbox" id="acctWipe"><span>Also remove my packs and progress from this browser (for shared computers)</span></label>'+
+    '<div class="acct-err" id="acctErr"></div><button class="btn ghost sm" id="acctOut">Sign out</button>'+
+    '<div style="margin-top:10px">Your synced data stays in your account and comes back when you sign in again.</div></div>';
+    renderAcctBtn();
+    $('acctSyncNow').onclick=async()=>{const bt=$('acctSyncNow');acctBusy(bt,true,'Syncing…');await SSSync.sync();acctBusy(bt,false);};
+    $('acctReauth').onclick=()=>renderAcct('signin');
+    $('acctOut').onclick=async()=>{acctErr('');const bt=$('acctOut'),wipe=$('acctWipe').checked;acctBusy(bt,true,'Saving your latest changes…');
+      await SSSync.sync();const k=SSSync.status().k;
+      if(wipe&&k!=='ok'){acctErr('Your latest changes haven’t reached your account yet, so removing them here would lose them. Try again when sync works, or sign out without removing data.');acctBusy(bt,false);return;}
+      await SSAccount.signOut();await SSSync.reset();
+      if(wipe){packs=[];sched={};prac=null;daily={date:today(),count:0};await persist();}
+      renderHome();acctView=null;closeAcct();
+      toast(wipe?'Signed out. Your packs and progress were removed from this browser.':'Signed out. Your data stays on this device and in your account.');};}}
+if(!ACCT_ON)$('acctBtn').style.display='none';
+$('acctBtn').addEventListener('click',openAcct);
+$('acctX').addEventListener('click',closeAcct);
+$('acctOv').addEventListener('click',e=>{if(e.target===$('acctOv'))closeAcct();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('acctOv').style.display!=='none')closeAcct();});
 
 /* ===== ADD TO HOME SCREEN (PWA install) modal ===== */
 const INSTALL_STEPS={
@@ -1435,9 +1841,10 @@ async function init(){
     settings.sessionDiffs=(old==='easy')?['easy']:(old==='medium')?['easy','medium']:DIFFS.slice();}
   delete settings.sessionDifficulty;
   deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});
-  if(daily.date!==today())daily={date:today(),count:0};
+  rollDaily();
   $('saveState').textContent=STORAGE_MODE==='persistent'?'✓ packs + progress saved across sessions':STORAGE_MODE==='local'?'✓ saved in this browser':'⚠ in-memory only — use Backup to keep data';
   renderHome();
+  SSSync.start();
 }
 
 /* ===== VALIDATION ===== */
@@ -1748,7 +2155,7 @@ function renderGrades(c){const now=Date.now(),s=sched[c.id];const p=[1,2,3,4].ma
     <button class="gbtn easy" data-g="4"><div class="gl">Easy</div><div class="gi">${p[3]}</div></button></div>`;}
 function wireGrades(c){$('cardbox').querySelectorAll('.gbtn').forEach(b=>b.addEventListener('click',()=>grade(+b.dataset.g)));}
 async function grade(g){const c=cardOf(currentId),s=sched[c.id],wasNew=(s.phase==='new');
-  sched[c.id]=schedule(s,g,Date.now());if(wasNew)daily.count++;studiedThisSession++;await persist();
+  sched[c.id]=schedule(s,g,Date.now());if(wasNew){rollDaily();daily.count++;}studiedThisSession++;await persist();
   if(sched[c.id].phase!=='review'){sessionQueue.splice(Math.min(sessionQueue.length,g===1?1:3),0,currentId);}
   presentNext();}
 
@@ -2234,11 +2641,11 @@ async function eacTry(){
   await ensureEacCodes();
   const h=sha256hex((window.EAC.salt||'')+eacCanon(code));
   const m=(window.EAC.hashes||[]).find(x=>x.h===h);
-  if(m){eac={unlocked:true,via:m.tag||'code',admin:!!m.admin,at:new Date().toISOString()};await Store.set(KEY.eac,eac);if(err)err.textContent='';hideGate();toast('Welcome to Study Suite.');}
+  if(m){eac={unlocked:true,via:m.tag||'code',admin:!!m.admin,at:new Date().toISOString()};if(!m.admin)eac.code=eacCanon(code); /* v0.3.0: fills sign-up */await Store.set(KEY.eac,eac);if(err)err.textContent='';hideGate();toast('Welcome to Study Suite.');}
   else{if(err)err.textContent='That code wasn’t recognized. Double-check with whoever shared it.';if(inp)inp.select();}
 }
 function backup(){const data={suite:APP_VERSION,author:APP_AUTHOR,exported:new Date().toISOString(),packs,sched,daily,settings,eac,prac};const blob=new Blob([JSON.stringify(data)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='study-suite-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}
-function restore(file){const r=new FileReader();r.onload=async()=>{try{const d=JSON.parse(r.result);if(d.packs)packs=d.packs;if(d.sched)sched=d.sched;if(d.daily)daily=d.daily;if(d.settings)settings=Object.assign(settings,d.settings);if(d.eac)eac=d.eac;if('prac' in d)prac=(d.prac&&d.prac.mode==='practice'&&Array.isArray(d.prac.qorder))?d.prac:null;deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});if(daily.date!==today())daily={date:today(),count:0};await persist();renderHome();applyGate();if(eacArmed()&&!(eac&&eac.unlocked)){toast('Restored — but this backup isn’t from an unlocked copy.');}else{toast('Backup restored.');}}catch(e){toast('Could not read that file.');}};r.readAsText(file);}
+function restore(file){const r=new FileReader();r.onload=async()=>{try{const d=JSON.parse(r.result);if(d.packs)packs=d.packs;if(d.sched)sched=d.sched;if(d.daily)daily=d.daily;if(d.settings)settings=Object.assign(settings,d.settings);if(d.eac)eac=d.eac;if('prac' in d)prac=(d.prac&&d.prac.mode==='practice'&&Array.isArray(d.prac.qorder))?d.prac:null;deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});rollDaily();await persist();renderHome();applyGate();if(eacArmed()&&!(eac&&eac.unlocked)){toast('Restored — but this backup isn’t from an unlocked copy.');}else{toast('Backup restored.');}}catch(e){toast('Could not read that file.');}};r.readAsText(file);}
 
 /* ===== WIRE UP ===== */
 $('mReview').addEventListener('click',()=>{if(deck().length)openReview();});
@@ -2317,6 +2724,9 @@ $('restoreFile').addEventListener('change',e=>{if(e.target.files[0])restore(e.ta
 $('eacForm').addEventListener('submit',e=>{e.preventDefault();eacTry();});
 $('eacRestore').addEventListener('click',e=>{e.preventDefault();$('restoreFile').click();});
 document.addEventListener('keydown',e=>{
+  /* v0.3.0: typing in a field or an open dialog (account panel, sync choice) must never grade/answer cards */
+  if(e.target&&e.target.closest&&e.target.closest('input,textarea,select,[contenteditable]'))return;
+  if(['acctOv','syncCfOv','confirmOv'].some(id=>$(id)&&$(id).style.display!=='none'))return;
   if($('study').classList.contains('on')){if(!revealed){if(e.key===' '||e.key==='Enter'){e.preventDefault();revealed=true;renderCard();}}else if(['1','2','3','4'].includes(e.key))grade(+e.key);return;}
   if($('quiz').classList.contains('on')){const done=qRevealed(qcur);if(!done){const disp=LETTERS.indexOf(e.key.toUpperCase());const perm=qopt[qcur]||[...qmap[qorder[qcur]].options.keys()];if(disp>=0&&disp<perm.length){qans[qcur]=perm[disp];renderQuiz();renderGrid();savePrac();}}if(e.key==='ArrowLeft')qPrev();if(e.key==='ArrowRight')qNext();if(qmode==='practice'&&e.key==='Enter'&&!qsub[qcur]&&qans[qcur]!=null)submitAnswer();}
 });
