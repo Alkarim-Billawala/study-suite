@@ -1,7 +1,14 @@
 <!--
-  Study Suite  ·  v0.4.13 (beta)
+  Study Suite  ·  v0.5.0 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.5.0 (content access, checkpoint 1 — Content_Access_Plan.md): a device and an account can hold SEVERAL access
+  codes. eac.codes / eac.tags lists (the old single eac.code / via migrate in); session tags from users.eac_tags (server,
+  migration 1758720000). Default packs are filtered by SCOPE: packs-manifest.json now carries each pack's scopes and a
+  group → scopes map (from the private content_scopes_LOCAL.json at deploy); userScopes() = union over the device's and
+  the account's groups ('*' = all, e.g. master); no groups → no default packs. Add an access code: Account menu (checks the
+  code, POST /api/studysuite/add-code records the group on the account) and Settings → Access codes (device only, for
+  no-account use). eac merges codes/tags as a union across devices. Old manifests (no groups) keep the v0.4.10 rule.
   Changelog v0.4.13: mergePacks keeps the LATER ts when both sides have the pack. A device holding a pre-v0.4.7 copy (no ts)
   made the account lose Week 41's ts on 2026-09-23 (iPhone PWA's first sync): ts isn't part of packSig, so equal sigs took the
   local entry as-is. ts is only a tie-break, but a lost one makes that pack lose every future tie.
@@ -1419,6 +1426,10 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="sh">Review (spaced repetition)</div>
       <div class="setrow"><span>New cards per day</span><input type="number" id="setNewPerDay" min="0" max="500" value="20"></div>
     </div>
+    <div class="setsec">
+      <div class="sh">Access codes</div>
+      <div class="setrow"><span id="setGroups">Unlocks the default study packs shared with your group.</span><button class="minor" id="setAddCode" type="button">Add a code</button></div>
+    </div>
     <div class="mmsg" id="setMsg"></div>
     <div class="mrow"><button class="btn ghost sm" id="setClose">Done</button></div>
   </div>
@@ -1426,7 +1437,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.4.13';
+const APP_VERSION='0.5.0';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1584,7 +1595,7 @@ const SSAccount=(()=>{
     if(r.status===204)return null;let j=null;try{j=await r.json();}catch(e){}
     if(!r.ok){const x=new Error(niceError(r.status,j));x.status=r.status;if(r.status===401&&sess)x.expired=true;if(j&&j.data&&j.data.owner&&/unique/i.test(j.data.owner.code||''))x.stateExists=true;throw x;}
     return j;}
-  function adopt(token,rec){sess={token,id:rec.id,email:rec.email,verified:!!rec.verified,sub:rec.subscription_status||'',keyV:rec.key_v||1,tag:rec.eac_tag||''};return Store.set(KEY.acct,sess);}
+  function adopt(token,rec){sess={token,id:rec.id,email:rec.email,verified:!!rec.verified,sub:rec.subscription_status||'',keyV:rec.key_v||1,tag:rec.eac_tag||'',tags:Array.isArray(rec.eac_tags)&&rec.eac_tags.length?rec.eac_tags:(rec.eac_tag?[rec.eac_tag]:[])};return Store.set(KEY.acct,sess);}
   async function load(){const s=await Store.get(KEY.acct);sess=(s&&s.token&&s.id)?s:null;return sess;}
   const dekId=()=>'dek:'+(sess&&sess.id);
   async function dek(){return sess?SSCrypto.keystore.get(dekId()):null;}
@@ -1627,6 +1638,8 @@ const SSAccount=(()=>{
     if(devRow){try{return devRow=await api(q+'/'+devRow.id,{method:'PATCH',body:{app_version:ver}});}catch(e){if(e.status!==404)throw e;devRow=null;}}
     return devRow=await api(q,{method:'POST',body:{owner:sess.id,device_id:id,app_version:ver}});}
   const listDevices=()=>api('/api/collections/devices/records?perPage=50&sort=-updated').then(j=>(j&&j.items)||[]);
+  /* v0.5.0: add an access code to the account → its group joins users.eac_tags. */
+  async function addCode(code){const j=await api('/api/studysuite/add-code',{method:'POST',body:{code}});if(sess&&j&&Array.isArray(j.tags)){sess.tags=j.tags;if(!sess.tag)sess.tag=j.tag;await Store.set(KEY.acct,sess);}return j;}
   const patchMe=body=>api('/api/collections/users/records/'+sess.id,{method:'PATCH',body});
   /* Forgot password: the reset link carries a token; the new passphrase is derived with the account's existing salt. */
   const requestPasswordReset=email=>api('/api/collections/users/request-password-reset',{method:'POST',auth:false,body:{email:normEmail(email)}});
@@ -1679,7 +1692,7 @@ const SSAccount=(()=>{
   /* v0.4.5: rotate the account's token key server-side → every other session ends; this device gets a fresh token. */
   async function signOutOthers(){const j=await api('/api/studysuite/signout-others',{method:'POST'});sess.token=j.token;await Store.set(KEY.acct,sess);}
   async function deleteAccount(pass){if(pass!==undefined)await unlockWith(pass);await api('/api/collections/users/records/'+sess.id,{method:'DELETE'});await signOut();}
-  return {API,FORMAT,touchDevice,listDevices,load,session:()=>sess,dek,policy,signIn,signUp,signOut,refresh,getState,putState,deleteAccount,normEmail,requestVerification,confirmVerification,tokenClaims,requestPasswordReset,confirmPasswordReset,recoverWithCode,startFresh,needsRecovery:()=>!!pending,changePassword,newRecoveryCode,requestEmailChange,confirmEmailChange,signOutOthers};
+  return {API,FORMAT,touchDevice,listDevices,addCode,load,session:()=>sess,dek,policy,signIn,signUp,signOut,refresh,getState,putState,deleteAccount,normEmail,requestVerification,confirmVerification,tokenClaims,requestPasswordReset,confirmPasswordReset,recoverWithCode,startFresh,needsRecovery:()=>!!pending,changePassword,newRecoveryCode,requestEmailChange,confirmEmailChange,signOutOthers};
 })();
 
 /* ===== SCHEDULER ===== */
@@ -1915,7 +1928,8 @@ const SSSync=(()=>{
       sched:mergeMap(b.sched,l.sched,c.sched,newer,notes,'card(s) studied on both'),daily,
       settings:mergeMap(b.settings,l.settings,c.settings,pick,notes,'setting(s) changed on both'),
       devices:mergeMap(b.devices,l.devices,c.devices,pick,[],''),
-      eac:(l.eac&&l.eac.unlocked)?l.eac:(c.eac||l.eac||null),
+      eac:(()=>{const a=eacNorm(l.eac),b=eacNorm(c.eac);if(!a||!a.unlocked)return b||a||null;if(!b)return a;
+        return Object.assign({},b,a,{codes:[...new Set([...a.codes,...b.codes])],tags:[...new Set([...a.tags,...b.tags])],admin:!!(a.admin||b.admin)});})(),
       prac:whole(b.prac,l.prac,c.prac,(x,y)=>(!x||!y)?(x||y):newer(x,y)),
       qhist:mergeMap(b.qhist,l.qhist,c.qhist,qboth,notes,'question(s) answered on both'),
       exam,exams,gone,packs:mergePacks(b,l.packs||[],c.packs||[],notes,side,gone)};
@@ -1924,7 +1938,7 @@ const SSSync=(()=>{
     try{const r=await resolvePacks(d.packs,m);
       if(guard&&await hash(payload(publicIds(m)))!==guard)return false; /* studied during the pull → re-run (now dirty → dialog) */
       sched=d.sched||{};daily=d.daily||{date:today(),count:0};if(d.settings)settings=Object.assign(settings,d.settings);
-      if(d.eac&&d.eac.unlocked)eac=Object.assign({},eac||{},d.eac); /* keep a remembered class code the account copy lacks */
+      if(d.eac&&d.eac.unlocked){const a=eacNorm(eac)||{},b=eacNorm(d.eac);eac=Object.assign({},a,b,{codes:[...new Set([...(a.codes||[]),...b.codes])],tags:[...new Set([...(a.tags||[]),...b.tags])],admin:!!(a.admin||b.admin)});} /* v0.5.0: codes/groups are a union */
       prac=(d.prac&&d.prac.mode==='practice'&&Array.isArray(d.prac.qorder))?d.prac:null;
       if(d.gone&&typeof d.gone==='object')packGone=Object.assign({},d.gone);
       if(d.devices&&typeof d.devices==='object'){devNames=Object.assign({},d.devices);if(!devNames[DEVICE_ID])devNames[DEVICE_ID]=guessDeviceName();}
@@ -2130,6 +2144,16 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
       (L.length?'<div class="synclog">'+L.map(x=>'<div class="slrow"><div class="slt">'+new Date(x.t).toLocaleString([],{dateStyle:'medium',timeStyle:'short'})+(x.app?' · v'+acctEsc(x.app):'')+'</div><div class="slw">'+acctEsc(x.what)+'</div>'+(x.local?'<div class="sld">This device: '+acctEsc(x.local)+'</div>':'')+(x.cloud?'<div class="sld">Account copy'+(x.from&&x.from!==DEVICE_ID?' (from '+dn(x.from)+')':'')+': '+acctEsc(x.cloud)+'</div>':'')+'</div>').join('')+'</div>':'<p class="acct-sub">Nothing yet.</p>')+
       '<div class="acct-row" style="margin-top:12px"><button class="btn ghost sm" id="acctBack">Back</button></div>';
     $('acctBack').onclick=()=>renderAcct('account');}
+  else if(view==='addcode'){const acc=!!SSAccount.session(),gs=[...userGroups()];
+    b.innerHTML='<h3>Add an access code</h3><p class="acct-sub">An access code unlocks the study packs shared with its group — they appear under Default study packs'+(acc?' on all your devices.':' on this device.')+'</p>'+
+      (gs.length?'<p class="acct-sub">Groups you already have: <b>'+gs.map(acctEsc).join(', ')+'</b></p>':'')+
+      '<label class="f">Access code<input class="fi" type="text" id="addCodeIn" autocapitalize="characters" autocorrect="off" spellcheck="false" autocomplete="off"></label><div class="acct-err" id="acctErr"></div>'+
+      '<div class="acct-row"><button class="btn ghost sm" id="acctBack">'+(acc?'Back':'Close')+'</button><button class="btn sm" id="addCodeGo">Add code</button></div>';
+    $('acctBack').onclick=()=>{if(acc)renderAcct('account');else closeAcct();};
+    const go=async()=>{acctErr('');const bt=$('addCodeGo');acctBusy(bt,true,'Checking…');
+      try{const t=await addAccessCode($('addCodeIn').value);acctBusy(bt,false);toast('Access code added'+(t&&t!=='code'?' ('+t+')':'')+' — its packs are under Default study packs.');if(acc)renderAcct('account');else closeAcct();}
+      catch(e){acctErr(e.message);acctBusy(bt,false);}};
+    $('addCodeGo').onclick=go;$('addCodeIn').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();go();}};setTimeout(()=>$('addCodeIn').focus(),60);}
   else if(view==='devices'){
     b.innerHTML='<h3>Your devices</h3><p class="acct-sub">Each browser or installed app that syncs counts as a device. Names are saved inside your encrypted study data; our server only keeps a random ID, the app version and when it last synced.</p>'+
       '<div class="synclog" id="devList"><p class="acct-sub">Loading…</p></div>'+
@@ -2201,7 +2225,7 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
   else{b.innerHTML='<h3>Your account</h3><div class="acct-email">'+acctEsc(s&&s.email)+'</div><div class="acct-st" id="acctSt"></div>'+
     (s&&!s.verified?'<div class="acct-verify">Please confirm your email address — we sent you a link. <a id="acctResend">Resend it</a></div>':'')+
     '<div class="acct-row"><button class="btn ghost sm" id="acctSyncNow">Sync now</button><button class="btn sm" id="acctReauth" style="display:none">Sign in again</button></div>'+
-    '<div class="acct-links"><a id="acctToLog">Sync activity</a><a id="acctToDev">Your devices</a></div>'+
+    '<div class="acct-links"><a id="acctToLog">Sync activity</a><a id="acctToDev">Your devices</a><a id="acctToCode">Add an access code</a></div>'+
     '<div class="acct-note acct-sec"><div class="sync-h">Security</div><a id="acctToEmail">Change email</a><a id="acctToChPw">Change password</a><a id="acctToRc">New recovery code</a><a id="acctToOthers"'+(SIGNOUT_OTHERS_ON?'':' hidden')+'>Sign out other devices</a><a id="acctToDel" class="danger">Delete account</a></div>'+
     '<div class="acct-row" style="margin-top:14px"><button class="btn ghost sm" id="acctOut">Sign out</button></div>';
     renderAcctBtn();
@@ -2210,7 +2234,7 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
     if($('acctResend'))$('acctResend').onclick=async()=>{const a=$('acctResend');a.style.pointerEvents='none';a.textContent='Sending…';
       try{await SSAccount.requestVerification(s.email);a.textContent='Sent — check your inbox.';}catch(e){a.textContent=e.message;a.style.pointerEvents='';}};
     $('acctToChPw').onclick=()=>renderAcct('chpw');$('acctToRc').onclick=()=>renderAcct('newrc');
-    $('acctToEmail').onclick=()=>renderAcct('chemail');$('acctToDel').onclick=()=>renderAcct('delete');$('acctToLog').onclick=()=>renderAcct('synclog');$('acctToDev').onclick=()=>renderAcct('devices');
+    $('acctToEmail').onclick=()=>renderAcct('chemail');$('acctToDel').onclick=()=>renderAcct('delete');$('acctToLog').onclick=()=>renderAcct('synclog');$('acctToDev').onclick=()=>renderAcct('devices');$('acctToCode').onclick=()=>renderAcct('addcode');
     $('acctToOthers').onclick=()=>confirmDialog('Sign out of your account on every other device? They’ll need to sign in again to keep syncing. Their study data stays on them.',{confirmText:'Sign out others'},async()=>{
       try{await SSAccount.signOutOthers();toast('Signed out everywhere else. This device stays signed in.');}catch(e){toast(e.message);}});
     $('acctOut').onclick=()=>renderAcct('signout');}}
@@ -2220,7 +2244,8 @@ let acctTypedCode='';
 async function acctUnlockDevice(){const s=SSAccount.session();if(!s)return;
   if(eac&&eac.unlocked){if(!hasPackAccess()&&s.tag){eac=Object.assign({},eac,{via:s.tag});await Store.set(KEY.eac,eac);renderDefaultPacks();}return;} /* v0.4.10: a no-code device gains packs when its account has a code */
   const pc=eacPending();if(!acctTypedCode&&pc&&pc.code)acctTypedCode=pc.code;
-  eac={unlocked:true,via:s.tag||(pc&&pc.via)||'account',admin:s.tag==='master',at:new Date().toISOString(),viaAccount:true};if(acctTypedCode&&s.tag!=='master')eac.code=acctTypedCode;await Store.set(KEY.eac,eac);applyGate();}
+  eac={unlocked:true,via:s.tag||(pc&&pc.via)||'account',admin:s.tag==='master',at:new Date().toISOString(),viaAccount:true};if(acctTypedCode&&s.tag!=='master')eac.code=acctTypedCode;
+  eac=eacNorm(eac);(s.tags||[]).forEach(t=>{if(!NOT_GROUPS.has(t)&&!eac.tags.includes(t))eac.tags.push(t);});await Store.set(KEY.eac,eac);applyGate();}
 /* ---- Front door, two steps (v0.4.10) ----
    Screen 1: Sign in, or an access code (open sign-ups: Get started, the code box behind "Have an access code?").
    Screen 2 (after a valid code, or Get started): Create an account, or Use without an account. The device unlocks only
@@ -2231,6 +2256,27 @@ function eacPending(){try{return JSON.parse(sessionStorage.getItem(EAC_PENDING)|
 function eacPendingSet(v){try{if(v)sessionStorage.setItem(EAC_PENDING,JSON.stringify(v));else sessionStorage.removeItem(EAC_PENDING);}catch(e){}}
 /* Default packs belong to access-code holders: a code (or admin), or an account/unlock that carries a code's tag. */
 function hasPackAccess(){return !!(eac&&eac.unlocked&&(eac.code||eac.admin||(eac.via&&eac.via!=='open'&&eac.via!=='account')));}
+/* ---- Content access (v0.5.0, Content_Access_Plan.md) ----
+   A device holds codes + groups (eac.codes / eac.tags); an account holds groups (sess.tags). Groups unlock scopes via the
+   manifest's group map ('*' = everything); each default pack lists its scopes. Old manifest (no map) → the v0.4.10 rule. */
+const NOT_GROUPS=new Set(['open','account','']);
+function eacNorm(e){if(!e)return e;const c=new Set(e.codes||[]),t=new Set(e.tags||[]);if(e.code)c.add(e.code);if(e.via&&!NOT_GROUPS.has(e.via))t.add(e.via);
+  return Object.assign({},e,{codes:[...c],tags:[...t]});}
+function userGroups(){const g=new Set();const e=eacNorm(eac);if(e&&e.unlocked)(e.tags||[]).forEach(x=>g.add(x));
+  const s=typeof SSAccount!=='undefined'&&SSAccount.session();if(s)(s.tags||(s.tag?[s.tag]:[])).forEach(x=>{if(!NOT_GROUPS.has(x))g.add(x);});return g;}
+function userScopes(){const m=defaultManifest,gm=m&&m.groups;if(!gm)return hasPackAccess()?'*':new Set();
+  if(eac&&eac.admin)return '*';const out=new Set();for(const g of userGroups()){const sc=gm[g];if(sc==='*')return '*';if(Array.isArray(sc))sc.forEach(x=>out.add(x));}return out;}
+function packVisible(p){const u=userScopes();if(u==='*')return true;if(!u.size)return false;return Array.isArray(p.scopes)&&p.scopes.some(x=>u.has(x));}
+function visibleManifest(){const m=defaultManifest;return m?Object.assign({},m,{packs:m.packs.filter(p=>p&&packVisible(p))}):m;}
+/* Add a code: checked against the code list; on an account it's also recorded there (so every device gets it). */
+async function addAccessCode(raw){const code=eacCanon(raw);if(!code)throw new Error('Enter an access code.');
+  await ensureEacCodes();const h=sha256hex((window.EAC.salt||'')+code),m=(window.EAC.hashes||[]).find(x=>x.h===h);
+  if(!m)throw new Error('That code wasn’t recognized. Double-check with whoever shared it.');
+  const tag=m.tag||'code';if(SSAccount.session()){try{await SSAccount.addCode(code);}catch(e){throw new Error('Couldn’t add it to your account right now ('+e.message+'). Try again in a moment.');}}
+  const e=eacNorm(eac||{unlocked:true,at:new Date().toISOString()});e.unlocked=true;
+  if(!e.codes.includes(code)&&!m.admin)e.codes.push(code);if(!e.tags.includes(tag))e.tags.push(tag);if(m.admin)e.admin=true;
+  if(!e.via||NOT_GROUPS.has(e.via))e.via=tag;if(!e.code&&!m.admin)e.code=code;
+  eac=e;await Store.set(KEY.eac,eac);await persist();renderDefaultPacks();renderHome();return tag;}
 let eacOpen=false;
 function eacScreen(n){const two=n===2;$('eacS1').hidden=two;$('eacS2').hidden=!two;$('eacErr').textContent='';
   document.querySelector('#eacGate .eactitle').textContent=two?'You’re in.':'Welcome to Study Suite';
@@ -2401,8 +2447,8 @@ function updateAllPacks(){const todo=pendingUpdates();if(!todo.length)return;
 let dpSchool=null; // selected school label; null until first render
 let dpSectionOpen=null; // Default-packs section collapse state for this session; null until first render
 function renderDefaultPacks(){
-  if(!hasPackAccess()){const w=$('defPacks');if(w)w.style.display='none';return;} /* v0.4.10: no access code → no default packs */
-  const m=defaultManifest;if(!m)return;
+  const vm=visibleManifest();if(!vm||!vm.packs.length){const w=$('defPacks');if(w)w.style.display='none';return;} /* v0.5.0: only packs in the user's scopes */
+  const m=vm;
   // Collapse/badge state: expanded only while the library is empty; once the user has content it starts
   // collapsed each session. New (unseen) default packs raise a badge and auto-expand the section once on
   // first detection, then just badge on later sessions until the user opens it themselves.
@@ -3362,6 +3408,7 @@ function openSettings(){
   toggleSwitch($('setPracTimer'),settings.practiceTimer);toggleSwitch($('setExamTimer'),settings.examTimer);toggleSwitch($('setPracShuffle'),settings.practiceShuffle);
   toggleSwitch($('setPracOnlyNew'),!!settings.practiceOnlyNew);$('setExamFresh').value=settings.examFresh||'prefer';
   $('histPack').innerHTML='<option value="">All packs</option>'+packs.map(p=>`<option value="${acctEsc(p.id)}">${acctEsc(p.pack||p.id)}</option>`).join('');
+  {const gs=[...userGroups()];$('setGroups').textContent=gs.length?'Your groups: '+gs.join(', '):'No access code yet — add one to unlock your group’s default study packs.';}
   renderWeights();$('setMsg').textContent='';$('settingsModal').classList.add('show');}
 function toggleSwitch(el,on){el.classList.toggle('on',on);el.setAttribute('role','switch');el.setAttribute('aria-checked',on?'true':'false');}
 function renderWeights(){const wr=$('weightRows');wr.innerHTML='';const g=examGroups();
@@ -3489,6 +3536,7 @@ $('packFile').addEventListener('change',e=>{if(e.target.files.length)readFiles(e
 ['dragleave','drop'].forEach(ev=>$('dropzone').addEventListener(ev,e=>{e.preventDefault();$('dropzone').classList.remove('drag');}));
 $('dropzone').addEventListener('drop',e=>{if(e.dataTransfer.files.length)readFiles(e.dataTransfer.files);});
 $('settingsBtn').addEventListener('click',openSettings);
+$('setAddCode').addEventListener('click',()=>{$('settingsModal').classList.remove('show');renderAcct('addcode');$('acctOv').style.display='flex';});
 $('setClose').addEventListener('click',()=>{$('settingsModal').classList.remove('show');renderHome();});
 $('settingsModal').addEventListener('click',e=>{if(e.target.id==='settingsModal'){$('settingsModal').classList.remove('show');renderHome();}});
 $('famSeg').addEventListener('click',e=>{const b=e.target.closest('.seg');if(!b)return;settings.themeFamily=b.dataset.f;persist();applyTheme();updateThemeUI();});
