@@ -1,7 +1,17 @@
 <!--
-  Study Suite  ·  v0.4.10 (beta)
+  Study Suite  ·  v0.4.11 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.4.11: PACK-LOSS FIX (2026-09-23 incident: the Safari web app's localStorage (~2.5 M chars) couldn't hold a 5th
+  pack; Store.set swallowed the QuotaExceeded, the pack lived only in memory, the update reload came back with 4 and sync
+  uploaded 4 → Week 42 gone everywhere). (1) Store now keeps data in IndexedDB ('suite_data' / 'kv'), migrating each key from
+  localStorage on first read; settings + eac stay mirrored in localStorage (read before paint). (2) Store.set returns ok; a real
+  failure sets Store.failed, shows a toast once, and SSSync refuses to sync until a full persist() succeeds. (3) Pack removal
+  is explicit: removePack() records packGone[id]=time (synced as payload `gone`, merged by max); a pack missing on one side
+  WITHOUT a newer tombstone is restored, not removed; a device whose packs lack any the last-synced copy had (no tombstone)
+  merges with the account instead of uploading. Older versions' removals (no tombstone) get restored — they update soon.
+  (4) The v0.4.7 leftover 'suite_syncbase_v1' is deleted. (5) DATA_READY: persist() waits until init() has read the
+  stored data (IndexedDB reads are slower; the default-pack list arriving first used to save the empty starting state).
   Changelog v0.4.10: TWO-STEP FRONT DOOR — screen 1 (#eacS1): Sign in, or an access code (or "Get started" + "Have an access
   code?" when the server's signup policy needs no code); a valid code no longer unlocks — it goes to screen 2 (#eacS2): Create an
   account (code carried into sign-up) or Use without an account (?), + Back. The device unlocks only on one of those choices; the
@@ -1407,14 +1417,14 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.4.10';
+const APP_VERSION='0.4.11';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
 const APP_AUTHOR='Alkarim Billawala / alkarim.billawala.ca';
 
 /* ===== STORAGE ===== */
-const KEY={packs:'suite_packs_v1',sched:'srs_sched_v2',daily:'srs_daily_v2',settings:'suite_settings_v1',eac:'suite_eac_v1',prac:'suite_prac_v1',acct:'suite_acct_v1',sync:'suite_sync_v1',localAt:'suite_localat_v1',qhist:'suite_qhist_v1',exam:'suite_exam_v1',exams:'suite_exams_v1',devnames:'suite_devnames_v1'};
+const KEY={packs:'suite_packs_v1',sched:'srs_sched_v2',daily:'srs_daily_v2',settings:'suite_settings_v1',eac:'suite_eac_v1',prac:'suite_prac_v1',acct:'suite_acct_v1',sync:'suite_sync_v1',localAt:'suite_localat_v1',qhist:'suite_qhist_v1',exam:'suite_exam_v1',exams:'suite_exams_v1',devnames:'suite_devnames_v1',gone:'suite_packgone_v1'};
 const memCache={};
 /* ===== ONE ACTIVE COPY PER BROWSER (v0.4.5) =====
    Tabs / windows of the app share storage; two live copies overwrite each other (and sync spreads the stale copy).
@@ -1433,10 +1443,37 @@ function genFresh(){try{if((+localStorage.getItem('suite_gen')||0)!==myGen){paus
 try{const bc=new BroadcastChannel('studysuite-tabs');bc.onmessage=e=>{if(e.data&&e.data.t==='hello'&&e.data.id!==TAB_ID)pauseTab('other');};bc.postMessage({t:'hello',id:TAB_ID});}catch(e){}
 window.addEventListener('storage',e=>{if(e.key==='suite_gen'&&!TAB_PAUSED)pauseTab('stale');});
 const Store={
-  async get(k){try{if(window.storage){const r=await window.storage.get(k);if(r&&r.value!=null)return JSON.parse(r.value);}}catch(e){}try{const v=localStorage.getItem(k);if(v!=null)return JSON.parse(v);}catch(e){}return (k in memCache)?memCache[k]:null;},
-  async set(k,val){if(TAB_PAUSED)return;if(DATA_KEYS.has(k)&&!genOK())return;memCache[k]=val;let ok=false;try{if(window.storage){await window.storage.set(k,JSON.stringify(val));ok=true;}}catch(e){}if(!ok||k===KEY.eac){try{localStorage.setItem(k,JSON.stringify(val));}catch(e){}}}
+  failed:0,failKey:'',
+  async get(k){try{if(window.storage){const r=await window.storage.get(k);if(r&&r.value!=null)return JSON.parse(r.value);}}catch(e){}
+    if(IDB_KEYS.has(k)&&await IDB.ok()){try{const v=await IDB.get(k);if(v!==undefined)return v;}catch(e){}
+      /* v0.4.11: first read after updating — move the key over from localStorage (kept there only if mirrored) */
+      try{const t=localStorage.getItem(k);if(t!=null){const v=JSON.parse(t);try{await IDB.set(k,v);if(!MIRROR_KEYS.has(k))localStorage.removeItem(k);}catch(e){}return v;}}catch(e){}
+      return (k in memCache)?memCache[k]:null;}
+    try{const v=localStorage.getItem(k);if(v!=null)return JSON.parse(v);}catch(e){}return (k in memCache)?memCache[k]:null;},
+  /* Returns true if the value is saved (or deliberately not written: a paused/stale copy). A real failure is never silent. */
+  async set(k,val){if(TAB_PAUSED)return true;if(DATA_KEYS.has(k)&&!genOK())return true;memCache[k]=val;let ok=false,err=null;
+    try{if(window.storage){await window.storage.set(k,JSON.stringify(val));ok=true;}}catch(e){err=e;}
+    if(!ok&&IDB_KEYS.has(k)&&await IDB.ok()){try{await IDB.set(k,val);ok=true;}catch(e){err=e;}}
+    if(!ok||MIRROR_KEYS.has(k)){try{localStorage.setItem(k,JSON.stringify(val));ok=true;}catch(e){if(!ok)err=e;}}
+    if(!ok)storeFailed(k,err);return ok;}
 };
-const DATA_KEYS=new Set([KEY.packs,KEY.sched,KEY.daily,KEY.settings,KEY.eac,KEY.prac,KEY.qhist,KEY.exam,KEY.exams,KEY.devnames]);
+/* v0.4.11: IndexedDB for study data — localStorage is ~2.5 M characters in Safari, too small for several packs. */
+const IDB=(()=>{let dbp=null;
+  function db(){if(!dbp)dbp=new Promise((res,rej)=>{try{const r=indexedDB.open('suite_data',1);r.onupgradeneeded=()=>r.result.createObjectStore('kv');
+    r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);r.onblocked=()=>rej(new Error('blocked'));}catch(e){rej(e);}});return dbp;}
+  const run=(mode,fn)=>db().then(d=>new Promise((res,rej)=>{const t=d.transaction('kv',mode),rq=fn(t.objectStore('kv'));let out;
+    if(rq)rq.onsuccess=()=>{out=rq.result;};t.oncomplete=()=>res(out);t.onerror=()=>rej(t.error);t.onabort=()=>rej(t.error||new Error('aborted'));}));
+  let okp=null;
+  return {get:k=>run('readonly',st=>st.get(k)),set:(k,v)=>run('readwrite',st=>st.put(v,k)),del:k=>run('readwrite',st=>st.delete(k)),
+    ok:()=>okp||(okp=db().then(()=>true,()=>false))};})();
+let storeFailToast=0;
+function storeFailed(k,e){Store.failed=Date.now();Store.failKey=k;
+  if(Date.now()-storeFailToast>60000){storeFailToast=Date.now();
+    try{toast('Couldn’t save on this device — its storage is full or blocked. Sync is paused so nothing gets overwritten; don’t reload until it saves again.');}catch(x){}}
+  try{if(typeof SSSync!=='undefined')SSSync.sync();}catch(x){}}
+const DATA_KEYS=new Set([KEY.packs,KEY.sched,KEY.daily,KEY.settings,KEY.eac,KEY.prac,KEY.qhist,KEY.exam,KEY.exams,KEY.devnames,KEY.gone]);
+const IDB_KEYS=new Set([...DATA_KEYS,KEY.sync,'suite_syncbase_v2']),MIRROR_KEYS=new Set([KEY.eac,KEY.settings]); /* mirrored: read before the page paints */
+try{localStorage.removeItem('suite_syncbase_v1');}catch(e){} /* v0.4.7 leftover */
 /* Device ID (v0.4.9): random, 12 × [a-z0-9], made once per browser storage and never derived from the device or the person.
    The anchor for troubleshooting and the server's devices row; the readable name lives in devNames (encrypted, synced). */
 const DEVICE_ID=(()=>{const K='suite_device_v1';try{const v=localStorage.getItem(K);if(/^[a-z0-9]{12}$/.test(v||''))return v;}catch(e){}
@@ -1657,7 +1694,7 @@ function humanDelta(ms){if(ms<MIN)return '<1m';if(ms<60*MIN)return Math.round(ms
 function humanFromNow(due,now){if(due<=now)return 'due';return 'in '+humanDelta(due-now);}
 
 /* ===== STATE ===== */
-let packs=[], sched={}, daily={date:'',count:0}, eac=null, prac=null, qhist={}, examSave=null, examLog=[], devNames={};
+let packs=[], sched={}, daily={date:'',count:0}, eac=null, prac=null, qhist={}, examSave=null, examLog=[], devNames={}, packGone={};
 let settings={theme:'auto',autoDark:'dark',themeFamily:'navy',examGroupBy:'system',examAuto:true,examFresh:'prefer',practiceOnlyNew:false,examTarget:40,examCounts:{},practiceSecs:90,practiceTimer:true,practiceShuffle:true,examMinutes:60,examTimer:true,srsNewPerDay:20,sessionDiffs:['easy','medium','hard'],revNavCollapsed:false};
 /* ===== APPEARANCE / THEME ===== */
 function resolveMode(){const t=settings.theme||'auto';
@@ -1739,7 +1776,13 @@ function selDiffsLegacy(){const s=Array.isArray(settings.sessionDiffs)?settings.
 function diffCounts(){const pool=qpool();const c={easy:0,medium:0,hard:0,all:pool.length};pool.forEach(q=>{const r=diffRank(q);if(r>=0)c[DIFFS[r]]++;});return c;}
 function diffBadge(q){if(!q||diffRank(q)<0)return '';return `<span class="diffbadge ${q.difficulty}">${q.difficulty}</span>`;}
 
-async function persist(){await Store.set(KEY.packs,packs);await Store.set(KEY.sched,sched);await Store.set(KEY.daily,daily);await Store.set(KEY.settings,settings);if(eac)await Store.set(KEY.eac,eac);await Store.set(KEY.prac,prac);await Store.set(KEY.qhist,qhist);await Store.set(KEY.exam,examSave);await Store.set(KEY.exams,examLog);await Store.set(KEY.devnames,devNames);SSSync.changed();}
+/* v0.4.11: nothing is saved until init() has read the stored data — an early save (e.g. the default-pack list arriving)
+   would otherwise write the empty starting state over it. A save asked for meanwhile runs right after loading. */
+let DATA_READY=false,persistPending=false;
+async function persist(){if(!DATA_READY){persistPending=true;return;}let ok=true;const w=async(k,v)=>{ok=(await Store.set(k,v))&&ok;};
+  await w(KEY.packs,packs);await w(KEY.sched,sched);await w(KEY.daily,daily);await w(KEY.settings,settings);if(eac)await w(KEY.eac,eac);await w(KEY.prac,prac);await w(KEY.qhist,qhist);await w(KEY.exam,examSave);await w(KEY.exams,examLog);await w(KEY.devnames,devNames);await w(KEY.gone,packGone);
+  if(ok)Store.failed=0; /* a full save worked → sync may resume */
+  SSSync.changed();}
 /* ===== SYNC (v0.3.0) — local-first; the cloud copy is one encrypted blob per account =====
    Payload = {v,app,sched,daily,settings,eac,prac,packs[]} where a published pack (its id is in packs-manifest.json)
    travels as a light {ref:1,id,version,…placement,enabled} and is refetched by id on a device that lacks it; any
@@ -1759,7 +1802,7 @@ const SSSync=(()=>{
   async function manifest(){if(defaultManifest)return defaultManifest;
     try{const r=await fetch('packs-manifest.json',{cache:'no-store'});if(r.ok){const m=await r.json();if(m&&Array.isArray(m.packs))return m;}}catch(e){}return null;}
   const publicIds=m=>new Set(((m&&m.packs)||[]).filter(x=>x&&x.id&&x.file).map(x=>x.id));
-  function payload(pub){return {v:1,app:APP_VERSION,by:DEVICE_ID,devices:devNames,sched,daily,settings,eac,prac,qhist,exam:examSave,exams:examLog,
+  function payload(pub){return {v:1,app:APP_VERSION,by:DEVICE_ID,devices:devNames,gone:packGone,sched,daily,settings,eac,prac,qhist,exam:examSave,exams:examLog,
     packs:packs.map(p=>pub.has(p.id)?Object.assign({ref:1},pick(p,LIGHT)):p).concat((meta&&meta.missing)||[])};}
   /* Fetch a published pack by id and run it through ingestPack in isolation (so `packs` isn't touched). */
   async function fetchPublic(id,m){const mp=m&&m.packs.find(x=>x&&x.id===id&&x.file);if(!mp)return null;
@@ -1817,6 +1860,9 @@ const SSSync=(()=>{
   /* What counts as a change to a pack: on/off + version (published), or the content (custom). ts is only the tie-break. */
   const packSig=p=>strHash(JSON.stringify(p.ref?{id:p.id,on:p.enabled!==false,v:p.version}:Object.assign({},p,{ts:undefined})));
   const baseOf=pl=>Object.assign({},pl,{packs:(pl.packs||[]).map(p=>({id:p.id,sig:packSig(p)}))}); /* custom packs as fingerprints only */
+  /* v0.4.11: packs the last-synced copy had that this device no longer has, with no removal recorded — storage loss, not intent. */
+  async function lostPacks(pl){const b=await loadBase();if(!b)return false;const have=new Set((pl.packs||[]).map(p=>p.id));
+    const lost=(b.packs||[]).filter(p=>!have.has(p.id)&&!packGone[p.id]);if(lost.length)slog('This device is missing '+lost.length+' pack(s) the account has — merging instead of uploading',pl,null,meta.lastUpdated);return lost.length>0;}
   async function saveBase(pl){if(meta)await Store.set(BASE_KEY,{uid:meta.uid,at:meta.lastUpdated,p:baseOf(pl)});}
   async function loadBase(){const x=await Store.get(BASE_KEY);return (x&&meta&&x.uid===meta.uid&&x.at&&x.at===meta.lastUpdated)?x.p:null;}
   function mergeMap(b,l,c,both,notes,label){b=b||{};l=l||{};c=c||{};const out={};let n=0;
@@ -1824,10 +1870,14 @@ const SSSync=(()=>{
       if(lj===cj||cj===bj)v=lv;else if(lj===bj)v=cv;else{v=both(lv,cv,b[k]);n++;}
       if(v!==undefined)out[k]=v;});
     if(n)notes.push(n+' '+label);return out;}
-  function mergePacks(b,l,c,notes,side){const bs=new Map(((b&&b.packs)||[]).map(p=>[p.id,p.sig])),lm=new Map(l.map(p=>[p.id,p])),cm=new Map(c.map(p=>[p.id,p])),out=[];
+  /* v0.4.11: a pack on only one side is removed only if a tombstone (gone[id]) is at least as new as it; otherwise it was
+     merely missing on the other device (e.g. storage lost) and is kept — the device then downloads it again. */
+  function mergePacks(b,l,c,notes,side,gone){const bs=new Map(((b&&b.packs)||[]).map(p=>[p.id,p.sig])),lm=new Map(l.map(p=>[p.id,p])),cm=new Map(c.map(p=>[p.id,p])),out=[];gone=gone||{};
     [...new Set([...l.map(p=>p.id),...c.map(p=>p.id)])].forEach(id=>{const lp=lm.get(id),cp=cm.get(id),bsig=bs.get(id),ls=lp&&packSig(lp),cs=cp&&packSig(cp);let v;
-      if(ls===cs||cs===bsig)v=lp;else if(ls===bsig)v=cp;
-      else if(!lp||!cp){v=undefined;notes.push('“'+((lp||cp).pack||id)+'” stays removed');}
+      if(!lp||!cp){const pr=lp||cp,g=gone[id]||0;
+        if(g&&g>=(pr.ts||0)){v=undefined;notes.push('“'+(pr.pack||id)+'” removed');}
+        else{v=pr;if(bsig!==undefined)notes.push('“'+(pr.pack||id)+'” kept — it was missing on '+(lp?'the other device':'this device'));}}
+      else if(ls===cs||cs===bsig)v=lp;else if(ls===bsig)v=cp;
       else{const lt=lp.ts||0,ct=cp.ts||0;v=lt===ct?(side?lp:cp):(lt>ct?lp:cp);notes.push('“'+(v.pack||id)+'” changed on both — kept the later change');}
       if(v)out.push(v);});
     return out;}
@@ -1846,7 +1896,7 @@ const SSSync=(()=>{
       r.k=Math.min(r.k,r.n);const ex=Math.max(x.ex||0,y.ex||0);if(ex)r.ex=ex;return r;};
     const ld=l.daily||{},cd=c.daily||{},bd=b.daily;
     const daily=ld.date!==cd.date?((ld.date||'')>(cd.date||'')?ld:cd):Object.assign({},ld,{count:(bd&&bd.date===ld.date)?Math.max(0,(ld.count||0)+(cd.count||0)-(bd.count||0)):Math.max(ld.count||0,cd.count||0)});
-    const moved=[];
+    const moved=[],gone=Object.assign({},c.gone||{});Object.entries(l.gone||{}).forEach(([k,t])=>{if(!(gone[k]>=t))gone[k]=t;});
     const exam=whole(b.exam,l.exam,c.exam,(x,y)=>{if(!x||!y)return x||y;const w=newer(x,y),o=w===x?y:x;
       if(o.t0!==w.t0&&(o.qans||[]).some(a=>a!=null))moved.push(logEntry(o));return w;});
     const exams=mergeLog(b.exams,l.exams,c.exams).concat(moved).sort((x,y)=>y.at-x.at).slice(0,20);
@@ -1858,7 +1908,7 @@ const SSSync=(()=>{
       eac:(l.eac&&l.eac.unlocked)?l.eac:(c.eac||l.eac||null),
       prac:whole(b.prac,l.prac,c.prac,(x,y)=>(!x||!y)?(x||y):newer(x,y)),
       qhist:mergeMap(b.qhist,l.qhist,c.qhist,qboth,notes,'question(s) answered on both'),
-      exam,exams,packs:mergePacks(b,l.packs||[],c.packs||[],notes,side)};
+      exam,exams,gone,packs:mergePacks(b,l.packs||[],c.packs||[],notes,side,gone)};
     return {out,notes};}
   async function applyCloud(d,rec,m,guard){suppress=true;
     try{const r=await resolvePacks(d.packs,m);
@@ -1866,6 +1916,7 @@ const SSSync=(()=>{
       sched=d.sched||{};daily=d.daily||{date:today(),count:0};if(d.settings)settings=Object.assign(settings,d.settings);
       if(d.eac&&d.eac.unlocked)eac=Object.assign({},eac||{},d.eac); /* keep a remembered class code the account copy lacks */
       prac=(d.prac&&d.prac.mode==='practice'&&Array.isArray(d.prac.qorder))?d.prac:null;
+      if(d.gone&&typeof d.gone==='object')packGone=Object.assign({},d.gone);
       if(d.devices&&typeof d.devices==='object'){devNames=Object.assign({},d.devices);if(!devNames[DEVICE_ID])devNames[DEVICE_ID]=guessDeviceName();}
       if(d.qhist&&typeof d.qhist==='object')qhist=d.qhist; /* older account copies have none — keep this device's */
       if('exam' in d)examSave=(d.exam&&Array.isArray(d.exam.qorder))?d.exam:null;if(Array.isArray(d.exams))examLog=d.exams;
@@ -1903,6 +1954,7 @@ const SSSync=(()=>{
   async function run(){refreshTz();
     if(TAB_PAUSED||!genFresh())return; /* v0.4.5: a paused or stale copy never syncs */
     if(!SSAccount.session()){setState('off');return;}
+    if(Store.failed){setState('error','this device couldn’t save its data');return;} /* v0.4.11: never sync a state that isn't saved */
     const dek=await SSAccount.dek();if(!dek){setState('expired');return;}
     if(!meta||meta.uid!==SSAccount.session().id)await loadMeta();
     setState('syncing');
@@ -1911,7 +1963,7 @@ const SSSync=(()=>{
     if(cm&&meta.stateId&&cm.id!==meta.stateId){meta.lastUpdated=null;meta.lastHash=null;} /* account copy was replaced (fresh start) → treat as a first sync */
     const dirty2=h!==meta.lastHash;
     if(!cm){await SSAccount.refresh();if(!localEmpty()){await upload(dek,pl,h,null);slog('Uploaded (first copy in the account)',pl,null,meta.lastUpdated);}} /* no row: confirm the account still exists (401 → sign in again) */
-    else if(cm.updated===meta.lastUpdated){if(dirty2){await upload(dek,pl,h,cm.id,cm.updated);slog('Uploaded this device’s changes',pl,null,meta.lastUpdated);}}
+    else if(cm.updated===meta.lastUpdated&&!(dirty2&&await lostPacks(pl))){if(dirty2){await upload(dek,pl,h,cm.id,cm.updated);slog('Uploaded this device’s changes',pl,null,meta.lastUpdated);}}
     else{const full=await SSAccount.getState();const d=await SSCrypto.decryptBlob(dek,full.ciphertext,full.iv);
       const first=!meta.lastUpdated;
       if(await hash(d)===h){Object.assign(meta,{stateId:full.id,lastUpdated:full.updated,lastHash:h});await saveMeta();await saveBase(pl);slog('Already in step',pl,d,full.updated);}
@@ -2427,8 +2479,10 @@ async function init(){
   examSave=await Store.get(KEY.exam)||null;if(!examInProgress())examSave=null;
   examLog=await Store.get(KEY.exams)||[];if(!Array.isArray(examLog))examLog=[];if(!(prac&&prac.mode==='practice'&&Array.isArray(prac.qorder)))prac=null;
   daily=await Store.get(KEY.daily)||{date:today(),count:0};
+  packGone=await Store.get(KEY.gone)||{};
   devNames=await Store.get(KEY.devnames)||{};if(!devNames[DEVICE_ID]){devNames[DEVICE_ID]=guessDeviceName();Store.set(KEY.devnames,devNames);}
   const sv=await Store.get(KEY.settings);if(sv)settings=Object.assign(settings,sv);
+  DATA_READY=true;if(persistPending){persistPending=false;persist();}
   applyTheme();
   // migrate pre-v0.2.8 cumulative sessionDifficulty -> multi-select sessionDiffs
   if(!Array.isArray(settings.sessionDiffs)){const old=settings.sessionDifficulty;
@@ -2479,7 +2533,7 @@ function ingestPack(obj,sourceName){
   pk.questions.forEach((q,i)=>{if(!q.id)q.id=pk.id+'_q'+i;});
   pk.cards.forEach((c,i)=>{if(!c.id)c.id=pk.id+'_c'+i;});
   const idx=packs.findIndex(p=>p.id===pk.id);
-  pk.enabled=(idx>=0)?packs[idx].enabled!==false:true;pk.ts=Date.now(); /* v0.4.7: change time for sync merge */
+  pk.enabled=(idx>=0)?packs[idx].enabled!==false:true;pk.ts=Date.now();if(packGone&&packGone[pk.id])delete packGone[pk.id]; /* v0.4.7: change time for sync merge */
   if(idx>=0)packs[idx]=pk;else packs.push(pk);
   deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});
   return {pk,errs};
@@ -2497,7 +2551,7 @@ function readFiles(files){
     if(++done===arr.length){await persist();renderHome();if(reports.length)showPackErrors(reports);}
   };r.readAsText(f);});
 }
-function removePack(id){confirmDialog('Remove this pack? Your review progress is kept and will reapply if you reload it.',{confirmText:'Remove',danger:true},()=>{packs=packs.filter(p=>p.id!==id);persist().then(renderHome);});}
+function removePack(id){confirmDialog('Remove this pack? Your review progress is kept and will reapply if you reload it.',{confirmText:'Remove',danger:true},()=>{packs=packs.filter(p=>p.id!==id);packGone[id]=Date.now(); /* v0.4.11: explicit — a pack merely missing on a device is never a removal */persist().then(renderHome);});}
 
 /* ===== NAV ===== */
 function currentSection(){const s=document.querySelector('section.on');return s?s.id:'home';}
