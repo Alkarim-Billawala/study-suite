@@ -1,7 +1,11 @@
 <!--
-  Study Suite  ·  v0.4.5 (beta)
+  Study Suite  ·  v0.4.6 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.4.6: MODAL STACKING FIX — every .modal-ov shared z-index 50 (below Settings 60, the account panel 10000 and the
+  class-code gate 9999), so a confirm opened from the account panel ("Sign out others"), Settings ("Clear history"), Past exams or
+  the setup screen appeared BEHIND its parent. Now a MutationObserver (stackModals) puts whichever .modal-ov/.overlay opened last on
+  top (z from 10002 up, reset when none are open); #pausedOv (20000) and toasts (20001) stay above everything.
   Changelog v0.4.5 (+ sign-out step gains "Also sign out on all my other devices": signOutOthers() then local sign-out): SYNC FIX — two copies of the app in the same browser (tabs, or installed app + tab) overwrote each other's
   saved data and sync spread the stale copy (reproduced 2026-09-23). Now: (1) ONE ACTIVE COPY per browser — a newly opened copy
   announces itself on a BroadcastChannel and older copies pause behind #pausedOv ("Use it here" reloads and takes over); a paused
@@ -725,7 +729,7 @@ section{display:none}section.on{display:block}
 .syncstate[data-st=ok] .sico{color:var(--green)}
 .syncstate[data-st=syncing] .sico,.syncstate[data-st=offline] .sico,.syncstate[data-st=conflict] .sico{color:var(--gold)}
 .syncstate[data-st=expired] .sico,.syncstate[data-st=error] .sico{color:var(--red)}
-#pausedOv{z-index:10010}#acctOv,#syncCfOv{z-index:10000}#toastWrap{z-index:10001} /* above the class-code gate (9999) */
+#pausedOv{z-index:20000!important}#acctOv,#syncCfOv{z-index:10000}#toastWrap{z-index:20001} /* above the class-code gate (9999); stackModals() raises whichever modal opened last */
 .acct-verify{font-size:13.5px;line-height:1.5;color:var(--ink);background:color-mix(in srgb,var(--gold) 14%,transparent);border-radius:8px;padding:8px 10px;margin:-6px 0 14px}
 .acct-verify a{color:var(--accent);cursor:pointer;text-decoration:underline}
 .acct-sec a{display:block;color:var(--accent);cursor:pointer;text-decoration:underline;font-size:14px;margin:6px 0}.acct-sec a.danger{color:var(--red)}
@@ -1363,7 +1367,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.4.5';
+const APP_VERSION='0.4.6';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -2830,6 +2834,13 @@ function confirmDialog(msg,opts,onConfirm){if(typeof opts==='function'){onConfir
   $('confirmOk').classList.toggle('danger',!!opts.danger);
   confirmCb=typeof onConfirm==='function'?onConfirm:null;confirmCancelCb=typeof opts.onCancel==='function'?opts.onCancel:null;
   $('confirmOv').style.display='flex';$('confirmOk').focus();}
+/* Modal stacking (v0.4.6): whichever overlay opened last sits on top, so a confirm opened from the account panel,
+   Settings, Past exams or the setup screen is never hidden behind it. #pausedOv stays above everything (CSS). */
+(function stackModals(){let z=10002;const els=[...document.querySelectorAll('.modal-ov,.overlay')].filter(e=>e.id!=='pausedOv');
+  const vis=e=>getComputedStyle(e).display!=='none';const was=new Map(els.map(e=>[e,vis(e)]));
+  const mo=new MutationObserver(()=>{els.forEach(e=>{const v=vis(e);if(v&&!was.get(e))e.style.zIndex=String(++z);was.set(e,v);});
+    if(!els.some(vis))z=10002;});
+  els.forEach(e=>mo.observe(e,{attributes:true,attributeFilter:['style','class']}));})();
 /* Alert-style (OK only) modal, built from DOM nodes so user-derived text (filenames) can't inject HTML. */
 let copyPayload=null;
 function alertDialog(title,lines,opts){opts=opts||{};const box=$('confirmMsg');box.innerHTML='';
