@@ -1,7 +1,13 @@
 <!--
-  Study Suite  ·  v0.4.8 (beta)
+  Study Suite  ·  v0.4.9 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.4.9: DEVICE IDs — each browser storage gets a random 12-char [a-z0-9] DEVICE_ID (localStorage 'suite_device_v1',
+  never synced, kept across sign-outs). Names live in devNames (Store 'suite_devnames_v1', synced inside the encrypted payload as
+  `devices`, merged per key; default from guessDeviceName(), renamable under Account → Your devices). Payload carries `by` (the
+  writing device); Sync activity shows this device's name + ID, each row's app version, and which device wrote the account copy.
+  Server: new `devices` collection (owner, device_id, app_version, updated = last sync; migration 1758710000) — SSAccount.touchDevice()
+  after an upload or every 10 min of successful syncs; listDevices() for the account panel. Errors ignored (older server).
   Changelog v0.4.8: Sync activity rows show the app version (x.app, already logged). Pack merge fix (found in the first two-device test, 2026-09-23) — a pack counted as "changed" when any
   field differed, including p.ts, which can differ between devices without anyone touching the pack (a v0.4.6 peer drops it;
   a fetched pack was stamped at fetch time) → spurious "changed on both" and, in the wrong case, the wrong on/off winner.
@@ -1382,14 +1388,14 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.4.8';
+const APP_VERSION='0.4.9';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
 const APP_AUTHOR='Alkarim Billawala / alkarim.billawala.ca';
 
 /* ===== STORAGE ===== */
-const KEY={packs:'suite_packs_v1',sched:'srs_sched_v2',daily:'srs_daily_v2',settings:'suite_settings_v1',eac:'suite_eac_v1',prac:'suite_prac_v1',acct:'suite_acct_v1',sync:'suite_sync_v1',localAt:'suite_localat_v1',qhist:'suite_qhist_v1',exam:'suite_exam_v1',exams:'suite_exams_v1'};
+const KEY={packs:'suite_packs_v1',sched:'srs_sched_v2',daily:'srs_daily_v2',settings:'suite_settings_v1',eac:'suite_eac_v1',prac:'suite_prac_v1',acct:'suite_acct_v1',sync:'suite_sync_v1',localAt:'suite_localat_v1',qhist:'suite_qhist_v1',exam:'suite_exam_v1',exams:'suite_exams_v1',devnames:'suite_devnames_v1'};
 const memCache={};
 /* ===== ONE ACTIVE COPY PER BROWSER (v0.4.5) =====
    Tabs / windows of the app share storage; two live copies overwrite each other (and sync spreads the stale copy).
@@ -1411,7 +1417,17 @@ const Store={
   async get(k){try{if(window.storage){const r=await window.storage.get(k);if(r&&r.value!=null)return JSON.parse(r.value);}}catch(e){}try{const v=localStorage.getItem(k);if(v!=null)return JSON.parse(v);}catch(e){}return (k in memCache)?memCache[k]:null;},
   async set(k,val){if(TAB_PAUSED)return;if(DATA_KEYS.has(k)&&!genOK())return;memCache[k]=val;let ok=false;try{if(window.storage){await window.storage.set(k,JSON.stringify(val));ok=true;}}catch(e){}if(!ok||k===KEY.eac){try{localStorage.setItem(k,JSON.stringify(val));}catch(e){}}}
 };
-const DATA_KEYS=new Set([KEY.packs,KEY.sched,KEY.daily,KEY.settings,KEY.eac,KEY.prac,KEY.qhist,KEY.exam,KEY.exams]);
+const DATA_KEYS=new Set([KEY.packs,KEY.sched,KEY.daily,KEY.settings,KEY.eac,KEY.prac,KEY.qhist,KEY.exam,KEY.exams,KEY.devnames]);
+/* Device ID (v0.4.9): random, 12 × [a-z0-9], made once per browser storage and never derived from the device or the person.
+   The anchor for troubleshooting and the server's devices row; the readable name lives in devNames (encrypted, synced). */
+const DEVICE_ID=(()=>{const K='suite_device_v1';try{const v=localStorage.getItem(K);if(/^[a-z0-9]{12}$/.test(v||''))return v;}catch(e){}
+  const a='abcdefghijklmnopqrstuvwxyz0123456789';let id='';while(id.length<12){const r=crypto.getRandomValues(new Uint8Array(16));for(const x of r)if(x<252&&id.length<12)id+=a[x%36];}
+  try{localStorage.setItem(K,id);}catch(e){}return id;})();
+function guessDeviceName(){const u=navigator.userAgent||'',tp=navigator.maxTouchPoints||0;
+  const os=/iPhone/.test(u)?'iPhone':(/iPad/.test(u)||(/Macintosh/.test(u)&&tp>1))?'iPad':/Android/.test(u)?'Android':/Macintosh|Mac OS X/.test(u)?'Mac':/Windows/.test(u)?'Windows':/CrOS/.test(u)?'Chromebook':/Linux/.test(u)?'Linux':'Device';
+  const br=/Edg\//.test(u)?'Edge':/Firefox\//.test(u)?'Firefox':(/Chrome\//.test(u)||/CriOS/.test(u))?'Chrome':/Safari\//.test(u)?'Safari':'Browser';
+  const app=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone;
+  return os+' · '+(app?((os==='iPhone'||os==='iPad')?'Home Screen app':br+' app'):br);}
 let STORAGE_MODE='memory';
 function detectStorage(){if(typeof window.storage!=='undefined'){STORAGE_MODE='persistent';}else{try{localStorage.setItem('__t','1');localStorage.removeItem('__t');STORAGE_MODE='local';}catch(e){STORAGE_MODE='memory';}}}
 
@@ -1539,6 +1555,13 @@ const SSAccount=(()=>{
     const q='?fields=id,updated,size_bytes,format_version'+(o&&o.expect?'&expect_updated='+encodeURIComponent(o.expect):''); /* v0.4.7: 409 if the row changed since */
     if(id)return api('/api/collections/user_state/records/'+id+q,{method:'PATCH',body,keepalive:o&&o.keepalive});
     body.owner=sess.id;return api('/api/collections/user_state/records'+q,{method:'POST',body,keepalive:o&&o.keepalive});}
+  /* devices (v0.4.9): one row per device — its random ID, app version, and `updated` = when it last synced. */
+  let devRow=null;
+  async function touchDevice(id,ver){if(!sess)return null;const q='/api/collections/devices/records';
+    if(!devRow||devRow.owner!==sess.id){const j=await api(q+'?perPage=1&filter='+encodeURIComponent("device_id='"+id+"'"));devRow=(j&&j.items&&j.items[0])||null;}
+    if(devRow){try{return devRow=await api(q+'/'+devRow.id,{method:'PATCH',body:{app_version:ver}});}catch(e){if(e.status!==404)throw e;devRow=null;}}
+    return devRow=await api(q,{method:'POST',body:{owner:sess.id,device_id:id,app_version:ver}});}
+  const listDevices=()=>api('/api/collections/devices/records?perPage=50&sort=-updated').then(j=>(j&&j.items)||[]);
   const patchMe=body=>api('/api/collections/users/records/'+sess.id,{method:'PATCH',body});
   /* Forgot password: the reset link carries a token; the new passphrase is derived with the account's existing salt. */
   const requestPasswordReset=email=>api('/api/collections/users/request-password-reset',{method:'POST',auth:false,body:{email:normEmail(email)}});
@@ -1591,7 +1614,7 @@ const SSAccount=(()=>{
   /* v0.4.5: rotate the account's token key server-side → every other session ends; this device gets a fresh token. */
   async function signOutOthers(){const j=await api('/api/studysuite/signout-others',{method:'POST'});sess.token=j.token;await Store.set(KEY.acct,sess);}
   async function deleteAccount(pass){if(pass!==undefined)await unlockWith(pass);await api('/api/collections/users/records/'+sess.id,{method:'DELETE'});await signOut();}
-  return {API,FORMAT,load,session:()=>sess,dek,policy,signIn,signUp,signOut,refresh,getState,putState,deleteAccount,normEmail,requestVerification,confirmVerification,tokenClaims,requestPasswordReset,confirmPasswordReset,recoverWithCode,startFresh,needsRecovery:()=>!!pending,changePassword,newRecoveryCode,requestEmailChange,confirmEmailChange,signOutOthers};
+  return {API,FORMAT,touchDevice,listDevices,load,session:()=>sess,dek,policy,signIn,signUp,signOut,refresh,getState,putState,deleteAccount,normEmail,requestVerification,confirmVerification,tokenClaims,requestPasswordReset,confirmPasswordReset,recoverWithCode,startFresh,needsRecovery:()=>!!pending,changePassword,newRecoveryCode,requestEmailChange,confirmEmailChange,signOutOthers};
 })();
 
 /* ===== SCHEDULER ===== */
@@ -1615,7 +1638,7 @@ function humanDelta(ms){if(ms<MIN)return '<1m';if(ms<60*MIN)return Math.round(ms
 function humanFromNow(due,now){if(due<=now)return 'due';return 'in '+humanDelta(due-now);}
 
 /* ===== STATE ===== */
-let packs=[], sched={}, daily={date:'',count:0}, eac=null, prac=null, qhist={}, examSave=null, examLog=[];
+let packs=[], sched={}, daily={date:'',count:0}, eac=null, prac=null, qhist={}, examSave=null, examLog=[], devNames={};
 let settings={theme:'auto',autoDark:'dark',themeFamily:'navy',examGroupBy:'system',examAuto:true,examFresh:'prefer',practiceOnlyNew:false,examTarget:40,examCounts:{},practiceSecs:90,practiceTimer:true,practiceShuffle:true,examMinutes:60,examTimer:true,srsNewPerDay:20,sessionDiffs:['easy','medium','hard'],revNavCollapsed:false};
 /* ===== APPEARANCE / THEME ===== */
 function resolveMode(){const t=settings.theme||'auto';
@@ -1697,7 +1720,7 @@ function selDiffsLegacy(){const s=Array.isArray(settings.sessionDiffs)?settings.
 function diffCounts(){const pool=qpool();const c={easy:0,medium:0,hard:0,all:pool.length};pool.forEach(q=>{const r=diffRank(q);if(r>=0)c[DIFFS[r]]++;});return c;}
 function diffBadge(q){if(!q||diffRank(q)<0)return '';return `<span class="diffbadge ${q.difficulty}">${q.difficulty}</span>`;}
 
-async function persist(){await Store.set(KEY.packs,packs);await Store.set(KEY.sched,sched);await Store.set(KEY.daily,daily);await Store.set(KEY.settings,settings);if(eac)await Store.set(KEY.eac,eac);await Store.set(KEY.prac,prac);await Store.set(KEY.qhist,qhist);await Store.set(KEY.exam,examSave);await Store.set(KEY.exams,examLog);SSSync.changed();}
+async function persist(){await Store.set(KEY.packs,packs);await Store.set(KEY.sched,sched);await Store.set(KEY.daily,daily);await Store.set(KEY.settings,settings);if(eac)await Store.set(KEY.eac,eac);await Store.set(KEY.prac,prac);await Store.set(KEY.qhist,qhist);await Store.set(KEY.exam,examSave);await Store.set(KEY.exams,examLog);await Store.set(KEY.devnames,devNames);SSSync.changed();}
 /* ===== SYNC (v0.3.0) — local-first; the cloud copy is one encrypted blob per account =====
    Payload = {v,app,sched,daily,settings,eac,prac,packs[]} where a published pack (its id is in packs-manifest.json)
    travels as a light {ref:1,id,version,…placement,enabled} and is refetched by id on a device that lacks it; any
@@ -1708,7 +1731,7 @@ async function persist(){await Store.set(KEY.packs,packs);await Store.set(KEY.sc
 const SSSync=(()=>{
   const LIGHT=['id','pack','version','author','school','year','term','course','weeks','enabled','ts'],MAX_CT=7900000;
   let meta=null,timer=null,busy=null,again=false,suppress=false,lastRun=0,state={k:'off'},flashed=false;
-  let lastOk=0,staleTries=0,pendingSince=0;const POLL=5*60000,FRESH=6*60000,MAXWAIT=60000,BASE_KEY='suite_syncbase_v2';
+  let lastOk=0,staleTries=0,pendingSince=0,devAt=0,uploaded=false;const POLL=5*60000,FRESH=6*60000,MAXWAIT=60000,BASE_KEY='suite_syncbase_v2';
   const CLOUD_SVG='<svg class="sico" viewBox="0 0 24 16" aria-hidden="true"><path d="M6.4 15.2h11.3a4.4 4.4 0 0 0 .5-8.8A6.1 6.1 0 0 0 6.6 5 5.1 5.1 0 0 0 6.4 15.2z" fill="currentColor"/></svg>';
   const pick=(o,ks)=>{const r={};ks.forEach(k=>{if(o[k]!==undefined)r[k]=o[k];});return r;};
   const parseTs=s=>s?Date.parse(String(s).replace(' ','T')):NaN;
@@ -1717,7 +1740,7 @@ const SSSync=(()=>{
   async function manifest(){if(defaultManifest)return defaultManifest;
     try{const r=await fetch('packs-manifest.json',{cache:'no-store'});if(r.ok){const m=await r.json();if(m&&Array.isArray(m.packs))return m;}}catch(e){}return null;}
   const publicIds=m=>new Set(((m&&m.packs)||[]).filter(x=>x&&x.id&&x.file).map(x=>x.id));
-  function payload(pub){return {v:1,app:APP_VERSION,sched,daily,settings,eac,prac,qhist,exam:examSave,exams:examLog,
+  function payload(pub){return {v:1,app:APP_VERSION,by:DEVICE_ID,devices:devNames,sched,daily,settings,eac,prac,qhist,exam:examSave,exams:examLog,
     packs:packs.map(p=>pub.has(p.id)?Object.assign({ref:1},pick(p,LIGHT)):p).concat((meta&&meta.missing)||[])};}
   /* Fetch a published pack by id and run it through ingestPack in isolation (so `packs` isn't touched). */
   async function fetchPublic(id,m){const mp=m&&m.packs.find(x=>x&&x.id===id&&x.file);if(!mp)return null;
@@ -1735,7 +1758,7 @@ const SSSync=(()=>{
   /* Sync activity (v0.4.5): this device's last 60 decisions, for diagnosing surprises. Not synced. */
   const pkSum=list=>{const a=list||[];return a.length+' packs ('+a.filter(p=>p&&p.enabled!==false).length+' on)';};
   function slog(what,loc,cl,at){try{const L=JSON.parse(localStorage.getItem('suite_synclog_v1')||'[]');
-    L.unshift({t:Date.now(),what,local:loc?pkSum(loc.packs)+' · '+studied(loc.sched)+' studied':'',cloud:cl?pkSum(cl.packs)+' · '+studied(cl.sched)+' studied':'',at:at||'',app:APP_VERSION});
+    L.unshift({t:Date.now(),dev:DEVICE_ID,from:(cl&&cl.by)||'',what,local:loc?pkSum(loc.packs)+' · '+studied(loc.sched)+' studied':'',cloud:cl?pkSum(cl.packs)+' · '+studied(cl.sched)+' studied':'',at:at||'',app:APP_VERSION});
     localStorage.setItem('suite_synclog_v1',JSON.stringify(L.slice(0,60)));}catch(e){}}
   const localEmpty=()=>!packs.length&&!studied(sched);
   async function saveMeta(){await Store.set(KEY.sync,meta);}
@@ -1765,7 +1788,7 @@ const SSSync=(()=>{
     let rec;try{rec=await SSAccount.putState(blob,id,{keepalive:small,expect});}
     catch(e){if(e.status===409){const x=new Error('stale');x.stale=true;throw x;} /* the account copy changed since we read it → re-merge */
       if(!e.stateExists)throw e;const cm=await SSAccount.getState(true);rec=await SSAccount.putState(blob,cm.id);}
-    Object.assign(meta,{stateId:rec.id,lastUpdated:rec.updated,lastHash:h});await saveMeta();await saveBase(pl);}
+    Object.assign(meta,{stateId:rec.id,lastUpdated:rec.updated,lastHash:h});await saveMeta();await saveBase(pl);uploaded=true;}
   /* ---- Merge (v0.4.7) ----
      The base is the copy this device and the account last agreed on (saved after every sync, keyed to meta.lastUpdated).
      Per item: changed on one side only → that change; changed on both → the rules below. No base (first sync here, or
@@ -1812,6 +1835,7 @@ const SSSync=(()=>{
     const out={v:1,app:APP_VERSION,
       sched:mergeMap(b.sched,l.sched,c.sched,newer,notes,'card(s) studied on both'),daily,
       settings:mergeMap(b.settings,l.settings,c.settings,pick,notes,'setting(s) changed on both'),
+      devices:mergeMap(b.devices,l.devices,c.devices,pick,[],''),
       eac:(l.eac&&l.eac.unlocked)?l.eac:(c.eac||l.eac||null),
       prac:whole(b.prac,l.prac,c.prac,(x,y)=>(!x||!y)?(x||y):newer(x,y)),
       qhist:mergeMap(b.qhist,l.qhist,c.qhist,qboth,notes,'question(s) answered on both'),
@@ -1823,6 +1847,7 @@ const SSSync=(()=>{
       sched=d.sched||{};daily=d.daily||{date:today(),count:0};if(d.settings)settings=Object.assign(settings,d.settings);
       if(d.eac&&d.eac.unlocked)eac=Object.assign({},eac||{},d.eac); /* keep a remembered class code the account copy lacks */
       prac=(d.prac&&d.prac.mode==='practice'&&Array.isArray(d.prac.qorder))?d.prac:null;
+      if(d.devices&&typeof d.devices==='object'){devNames=Object.assign({},d.devices);if(!devNames[DEVICE_ID])devNames[DEVICE_ID]=guessDeviceName();}
       if(d.qhist&&typeof d.qhist==='object')qhist=d.qhist; /* older account copies have none — keep this device's */
       if('exam' in d)examSave=(d.exam&&Array.isArray(d.exam.qorder))?d.exam:null;if(Array.isArray(d.exams))examLog=d.exams;
       packs=r.out;meta.missing=r.miss;
@@ -1888,8 +1913,11 @@ const SSSync=(()=>{
         if(choice==='cloud')await applyCloud(d,full,m);
         else{if(choice==='both')await downloadCloudCopy(d,m);await upload(dek,pl,h,full.id);}}}
     setState('ok');}
+  /* v0.4.9: keep this device's server row current — after an upload, or every 10 min of successful syncs. Never blocks sync. */
+  function touchDev(){if(state.k!=='ok'||!(uploaded||Date.now()-devAt>600000))return;uploaded=false;devAt=Date.now();
+    SSAccount.touchDevice(DEVICE_ID,APP_VERSION).catch(()=>{});}
   function sync(){if(busy){again=true;return busy;}lastRun=Date.now();pendingSince=0;
-    busy=run().catch(e=>{if(e&&e.stale){if(++staleTries<=3){again=true;return;}setState('error','the account copy keeps changing — try Sync now');return;}
+    busy=run().then(touchDev).catch(e=>{if(e&&e.stale){if(++staleTries<=3){again=true;return;}setState('error','the account copy keeps changing — try Sync now');return;}
         if(e&&e.expired)setState('expired');else if(e&&e.offline)setState('offline');
         else if(e&&e.message==='decrypt')setState('error','this device’s key doesn’t match your account — sign out and in again');
         else setState('error',e&&e.message);})
@@ -2015,10 +2043,22 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
     '<li>An account keeps your devices in sync, encrypted so only you can read it. You can create one any time from the account menu at the top right of the homepage.</li></ul>'+
     '<button class="btn sm wide" id="acctNoteOk">Got it</button>';$('acctNoteOk').onclick=()=>{acctView=null;closeAcct();};}
   else if(view==='synclog'){let L=[];try{L=JSON.parse(localStorage.getItem('suite_synclog_v1')||'[]');}catch(e){}
-    b.innerHTML='<h3>Sync activity</h3><p class="acct-sub">What this device’s sync did recently, newest first. Only kept on this device.</p>'+
-      (L.length?'<div class="synclog">'+L.map(x=>'<div class="slrow"><div class="slt">'+new Date(x.t).toLocaleString([],{dateStyle:'medium',timeStyle:'short'})+(x.app?' · v'+acctEsc(x.app):'')+'</div><div class="slw">'+acctEsc(x.what)+'</div>'+(x.local?'<div class="sld">This device: '+acctEsc(x.local)+'</div>':'')+(x.cloud?'<div class="sld">Account copy: '+acctEsc(x.cloud)+'</div>':'')+'</div>').join('')+'</div>':'<p class="acct-sub">Nothing yet.</p>')+
+    const dn=id=>acctEsc(devNames[id]||'another device')+' · '+acctEsc(id);
+    b.innerHTML='<h3>Sync activity</h3><p class="acct-sub">What this device’s sync did recently, newest first. Only kept on this device.</p><p class="acct-sub">This device: <b>'+acctEsc(devNames[DEVICE_ID]||guessDeviceName())+'</b> · ID '+DEVICE_ID+'</p>'+
+      (L.length?'<div class="synclog">'+L.map(x=>'<div class="slrow"><div class="slt">'+new Date(x.t).toLocaleString([],{dateStyle:'medium',timeStyle:'short'})+(x.app?' · v'+acctEsc(x.app):'')+'</div><div class="slw">'+acctEsc(x.what)+'</div>'+(x.local?'<div class="sld">This device: '+acctEsc(x.local)+'</div>':'')+(x.cloud?'<div class="sld">Account copy'+(x.from&&x.from!==DEVICE_ID?' (from '+dn(x.from)+')':'')+': '+acctEsc(x.cloud)+'</div>':'')+'</div>').join('')+'</div>':'<p class="acct-sub">Nothing yet.</p>')+
       '<div class="acct-row" style="margin-top:12px"><button class="btn ghost sm" id="acctBack">Back</button></div>';
     $('acctBack').onclick=()=>renderAcct('account');}
+  else if(view==='devices'){
+    b.innerHTML='<h3>Your devices</h3><p class="acct-sub">Each browser or installed app that syncs counts as a device. Names are saved inside your encrypted study data; our server only keeps a random ID, the app version and when it last synced.</p>'+
+      '<div class="synclog" id="devList"><p class="acct-sub">Loading…</p></div>'+
+      '<label class="f" style="margin-top:14px">Name for this device<input class="fi" id="devName" maxlength="40" value="'+acctEsc(devNames[DEVICE_ID]||guessDeviceName())+'"></label>'+
+      '<div class="acct-row"><button class="btn ghost sm" id="acctBack">Back</button><button class="btn sm" id="devSave">Save name</button></div>';
+    $('acctBack').onclick=()=>renderAcct('account');
+    $('devSave').onclick=async()=>{devNames[DEVICE_ID]=$('devName').value.trim().slice(0,40)||guessDeviceName();await persist();toast('Device name saved.');renderAcct('devices');};
+    const when=t=>{const d=Date.parse(String(t||'').replace(' ','T'));return isNaN(d)?'—':new Date(d).toLocaleString([],{dateStyle:'medium',timeStyle:'short'});};
+    SSAccount.listDevices().then(L=>{const el=$('devList');if(!el)return;
+      el.innerHTML=L.length?L.map(r=>'<div class="slrow"><div class="slw">'+acctEsc(devNames[r.device_id]||'Unnamed device')+(r.device_id===DEVICE_ID?' <i>— this device</i>':'')+'</div><div class="sld">ID '+acctEsc(r.device_id)+' · v'+acctEsc(r.app_version||'?')+' · last synced '+when(r.updated)+'</div></div>').join(''):'<p class="acct-sub">No devices yet — they appear after their next sync.</p>';})
+      .catch(e=>{const el=$('devList');if(el)el.innerHTML='<p class="acct-sub">Couldn’t load your devices right now.</p>';});}
   else if(view==='notice'){b.innerHTML='<h3>'+acctEsc(acctNote.t)+'</h3><p class="acct-sub">'+acctEsc(acctNote.b)+'</p>'+(acctNote.busy?'':'<button class="btn sm wide" id="acctNoteOk">OK</button>');
     if(!acctNote.busy)$('acctNoteOk').onclick=()=>{acctView=null;closeAcct();};}
   else if(view==='signout'){b.innerHTML='<h3>Sign out of this browser?</h3><p class="acct-sub">Your synced data stays in your account and comes back when you sign in again.</p>'+
@@ -2079,7 +2119,7 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
   else{b.innerHTML='<h3>Your account</h3><div class="acct-email">'+acctEsc(s&&s.email)+'</div><div class="acct-st" id="acctSt"></div>'+
     (s&&!s.verified?'<div class="acct-verify">Please confirm your email address — we sent you a link. <a id="acctResend">Resend it</a></div>':'')+
     '<div class="acct-row"><button class="btn ghost sm" id="acctSyncNow">Sync now</button><button class="btn sm" id="acctReauth" style="display:none">Sign in again</button></div>'+
-    '<div class="acct-note acct-sec"><div class="sync-h">Security</div><a id="acctToChPw">Change password</a><a id="acctToRc">New recovery code</a><a id="acctToEmail">Change email</a><a id="acctToOthers"'+(SIGNOUT_OTHERS_ON?'':' hidden')+'>Sign out other devices</a><a id="acctToLog">Sync activity</a><a id="acctToDel" class="danger">Delete account</a></div>'+
+    '<div class="acct-note acct-sec"><div class="sync-h">Security</div><a id="acctToChPw">Change password</a><a id="acctToRc">New recovery code</a><a id="acctToEmail">Change email</a><a id="acctToOthers"'+(SIGNOUT_OTHERS_ON?'':' hidden')+'>Sign out other devices</a><a id="acctToDev">Your devices</a><a id="acctToLog">Sync activity</a><a id="acctToDel" class="danger">Delete account</a></div>'+
     '<div class="acct-row" style="margin-top:14px"><button class="btn ghost sm" id="acctOut">Sign out</button></div>';
     renderAcctBtn();
     $('acctSyncNow').onclick=async()=>{const bt=$('acctSyncNow');acctBusy(bt,true,'Syncing…');await SSSync.sync();acctBusy(bt,false);};
@@ -2087,7 +2127,7 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
     if($('acctResend'))$('acctResend').onclick=async()=>{const a=$('acctResend');a.style.pointerEvents='none';a.textContent='Sending…';
       try{await SSAccount.requestVerification(s.email);a.textContent='Sent — check your inbox.';}catch(e){a.textContent=e.message;a.style.pointerEvents='';}};
     $('acctToChPw').onclick=()=>renderAcct('chpw');$('acctToRc').onclick=()=>renderAcct('newrc');
-    $('acctToEmail').onclick=()=>renderAcct('chemail');$('acctToDel').onclick=()=>renderAcct('delete');$('acctToLog').onclick=()=>renderAcct('synclog');
+    $('acctToEmail').onclick=()=>renderAcct('chemail');$('acctToDel').onclick=()=>renderAcct('delete');$('acctToLog').onclick=()=>renderAcct('synclog');$('acctToDev').onclick=()=>renderAcct('devices');
     $('acctToOthers').onclick=()=>confirmDialog('Sign out of your account on every other device? They’ll need to sign in again to keep syncing. Their study data stays on them.',{confirmText:'Sign out others'},async()=>{
       try{await SSAccount.signOutOthers();toast('Signed out everywhere else. This device stays signed in.');}catch(e){toast(e.message);}});
     $('acctOut').onclick=()=>renderAcct('signout');}}
@@ -2344,6 +2384,7 @@ async function init(){
   examSave=await Store.get(KEY.exam)||null;if(!examInProgress())examSave=null;
   examLog=await Store.get(KEY.exams)||[];if(!Array.isArray(examLog))examLog=[];if(!(prac&&prac.mode==='practice'&&Array.isArray(prac.qorder)))prac=null;
   daily=await Store.get(KEY.daily)||{date:today(),count:0};
+  devNames=await Store.get(KEY.devnames)||{};if(!devNames[DEVICE_ID]){devNames[DEVICE_ID]=guessDeviceName();Store.set(KEY.devnames,devNames);}
   const sv=await Store.get(KEY.settings);if(sv)settings=Object.assign(settings,sv);
   applyTheme();
   // migrate pre-v0.2.8 cumulative sessionDifficulty -> multi-select sessionDiffs
