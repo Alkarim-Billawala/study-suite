@@ -1,7 +1,11 @@
 <!--
-  Study Suite  ·  v0.5.1 (beta)
+  Study Suite  ·  v0.5.2 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.5.2: a published pack's VERSION never goes backwards in a merge. Both-changed packs took the whole entry
+  from the later ts — on 2026-09-23 Dia (Week 42 v1.1, switched at 13:17) beat the pane's v1.2 and wrote v1.1 to the account,
+  so the v0.5.1 follow-up fetch never ran. Now for ref entries: content fields + version from the higher version, enabled
+  from the later switch, ts = the later of both. The older device then fetches the newer file (v0.5.1 resolvePacks).
   Changelog v0.5.1: ONE-TAP UPDATES. (1) Update button: new app → sessionStorage 'suite_apply_updates' + reload, then
   maybeApplyQueuedUpdates() runs updateAllPacks() once packs (DATA_READY) and the manifest are loaded; packs only → applied
   at once, no reload. It used to only reload, so a pending pack update left the button lit. (2) A pack update accepted on
@@ -1443,7 +1447,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.5.1';
+const APP_VERSION='0.5.2';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1910,6 +1914,8 @@ const SSSync=(()=>{
         else{v=pr;if(bsig!==undefined)notes.push('“'+(pr.pack||id)+'” kept — it was missing on '+(lp?'the other device':'this device'));}}
       else if(ls===cs||cs===bsig)v=lp;else if(ls===bsig)v=cp;
       else{const lt=lp.ts||0,ct=cp.ts||0;v=lt===ct?(side?lp:cp):(lt>ct?lp:cp);notes.push('“'+(v.pack||id)+'” changed on both — kept the later change');}
+      if(v&&lp&&cp&&lp.ref&&cp.ref){const hi=verCmp(lp.version,cp.version)>=0?lp:cp; /* v0.5.2: the version never goes backwards; on/off = the later switch */
+        if(hi!==v&&verCmp(hi.version,v.version)>0)v=Object.assign({},hi,{enabled:v.enabled});}
       if(v&&lp&&cp){const t=Math.max(lp.ts||0,cp.ts||0);if(t&&v.ts!==t)v=Object.assign({},v,{ts:t});} /* v0.4.13: never lose the later change time */
       if(v)out.push(v);});
     return out;}
@@ -2047,7 +2053,7 @@ const SSSync=(()=>{
     if(document.visibilityState==='hidden'){clearTimeout(timer);sync();}
     else if(Date.now()-lastRun>15000)sync();});
   async function reset(){clearTimeout(timer);meta=null;lastOk=0;pendingSince=0;await Store.set(KEY.sync,null);await Store.set(BASE_KEY,null);setState('off');}
-  return {start,sync,changed,schedule,reset,status:()=>Object.assign({view:viewOf(),lastOk},state),meta:()=>meta,_hash:hash,_payload:payload,_merge3:merge3,_baseOf:baseOf,_resolvePacks:resolvePacks,_pulled:()=>pulled};
+  return {start,sync,changed,schedule,reset,status:()=>Object.assign({view:viewOf(),lastOk},state),meta:()=>meta,_hash:hash,_payload:payload,_merge3:merge3,_baseOf:baseOf,_resolvePacks:resolvePacks,_pulled:()=>pulled,_mergePacks:mergePacks};
 })();
 
 
