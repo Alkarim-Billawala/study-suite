@@ -1,7 +1,8 @@
 <!--
-  Study Suite  ·  v0.5.2 (beta)
+  Study Suite  ·  v0.5.3 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.5.3: library rows show the pack's version (… · 21 guides · v1.2), before any "update to" note.
   Changelog v0.5.2: a published pack's VERSION never goes backwards in a merge. Both-changed packs took the whole entry
   from the later ts — on 2026-09-23 Dia (Week 42 v1.1, switched at 13:17) beat the pane's v1.2 and wrote v1.1 to the account,
   so the v0.5.1 follow-up fetch never ran. Now for ref entries: content fields + version from the higher version, enabled
@@ -1447,7 +1448,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.5.2';
+const APP_VERSION='0.5.3';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -2719,8 +2720,9 @@ function libRow(p){const on=p.enabled!==false;const upd=packUpdate(p);
   const sw=document.createElement('button');sw.className='switch'+(on?' on':'');sw.setAttribute('role','switch');sw.setAttribute('aria-checked',on?'true':'false');sw.setAttribute('aria-label','Enable pack');
   sw.onclick=()=>{p.enabled=!on;p.ts=Date.now();persist();renderHome();};
   const gtag=(p.guides&&p.guides.length)?` · ${p.guides.length} guides`:'';
+  const vtag=p.version?` · v${acctEsc(String(p.version))}`:''; /* v0.5.3 */
   const updtag=upd?` · <span class="updnote">update to v${upd.version}</span>`:'';
-  const info=document.createElement('div');info.innerHTML=`<div class="pn">${p.pack}</div><div class="pm">${p.questions.length} questions · ${p.cards.length} cards${gtag}${updtag}</div>`;
+  const info=document.createElement('div');info.innerHTML=`<div class="pn">${p.pack}</div><div class="pm">${p.questions.length} questions · ${p.cards.length} cards${gtag}${vtag}${updtag}</div>`;
   left.appendChild(sw);left.appendChild(info);
   const acts=document.createElement('div');acts.className='pkacts';
   if(upd){const u=document.createElement('button');u.className='upd';u.textContent='↑ Update';u.title='Update to v'+upd.version+' — your review progress is kept';u.onclick=()=>updatePack(p,upd,u);acts.appendChild(u);}
