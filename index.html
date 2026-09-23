@@ -1,7 +1,15 @@
 <!--
-  Study Suite  ·  v0.2.71 (beta)
+  Study Suite  ·  v0.2.72 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.2.72: Practice sessions persist and resume. Every answer, submit and move in Practice is
+  saved to Store (KEY.prac = 'suite_prac_v1': order, picks, submitted flags, per-question time, position),
+  so closing the tab or going Home no longer wipes a half-done question bank. Opening Practice with a saved
+  session asks "Resume (n of N submitted)" / "Start fresh"; resume drops questions no longer in the loaded
+  packs (IDs are stable across pack versions) and says how many were skipped. Finish & summary and Start
+  fresh clear it. The Practice card shows "session in progress (n submitted)"; the Home button's leave
+  prompt says the progress is kept. The session rides in Backup all / Restore backup (and, later, sync).
+  Exams are unchanged (timed, not resumable). confirmDialog gained opts.onCancel + cancelText use.
   Changelog v0.2.71: hardening + accessibility pass (audit fixes, no behaviour change in normal use).
   (1) #revFind is now a real <button> SIBLING of the title h2 (was a role=button span nested inside the
   h2's role=button — invalid ARIA) with a padded 28px hit area; focusing the drawer search also select()s
@@ -1109,14 +1117,14 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.2.71';
+const APP_VERSION='0.2.72';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
 const APP_AUTHOR='Alkarim Billawala / alkarim.billawala.ca';
 
 /* ===== STORAGE ===== */
-const KEY={packs:'suite_packs_v1',sched:'srs_sched_v2',daily:'srs_daily_v2',settings:'suite_settings_v1',eac:'suite_eac_v1'};
+const KEY={packs:'suite_packs_v1',sched:'srs_sched_v2',daily:'srs_daily_v2',settings:'suite_settings_v1',eac:'suite_eac_v1',prac:'suite_prac_v1'};
 const memCache={};
 const Store={
   async get(k){try{if(window.storage){const r=await window.storage.get(k);if(r&&r.value!=null)return JSON.parse(r.value);}}catch(e){}try{const v=localStorage.getItem(k);if(v!=null)return JSON.parse(v);}catch(e){}return (k in memCache)?memCache[k]:null;},
@@ -1145,7 +1153,7 @@ function humanDelta(ms){if(ms<MIN)return '<1m';if(ms<60*MIN)return Math.round(ms
 function humanFromNow(due,now){if(due<=now)return 'due';return 'in '+humanDelta(due-now);}
 
 /* ===== STATE ===== */
-let packs=[], sched={}, daily={date:'',count:0}, eac=null;
+let packs=[], sched={}, daily={date:'',count:0}, eac=null, prac=null;
 let settings={theme:'auto',autoDark:'dark',themeFamily:'navy',examGroupBy:'system',examAuto:true,examTarget:40,examCounts:{},practiceSecs:90,practiceTimer:true,practiceShuffle:true,examMinutes:60,examTimer:true,srsNewPerDay:20,sessionDiffs:['easy','medium','hard'],revNavCollapsed:false};
 /* ===== APPEARANCE / THEME ===== */
 function resolveMode(){const t=settings.theme||'auto';
@@ -1195,7 +1203,7 @@ function qTestPool(){return qpool().filter(matchDiff);}
 function diffCounts(){const pool=qpool();const c={easy:0,medium:0,hard:0,all:pool.length};pool.forEach(q=>{const r=diffRank(q);if(r>=0)c[DIFFS[r]]++;});return c;}
 function diffBadge(q){if(!q||diffRank(q)<0)return '';return `<span class="diffbadge ${q.difficulty}">${q.difficulty}</span>`;}
 
-async function persist(){await Store.set(KEY.packs,packs);await Store.set(KEY.sched,sched);await Store.set(KEY.daily,daily);await Store.set(KEY.settings,settings);if(eac)await Store.set(KEY.eac,eac);}
+async function persist(){await Store.set(KEY.packs,packs);await Store.set(KEY.sched,sched);await Store.set(KEY.daily,daily);await Store.set(KEY.settings,settings);if(eac)await Store.set(KEY.eac,eac);await Store.set(KEY.prac,prac);}
 
 /* ===== ADD TO HOME SCREEN (PWA install) modal ===== */
 const INSTALL_STEPS={
@@ -1418,6 +1426,7 @@ async function init(){
   if(!SUPPORT_URL.includes('CHANGEME')){$('supportLink').href=SUPPORT_URL;$('supportWrap').style.display='';}
   packs=await Store.get(KEY.packs)||[];
   sched=await Store.get(KEY.sched)||{};
+  prac=await Store.get(KEY.prac)||null;if(!(prac&&prac.mode==='practice'&&Array.isArray(prac.qorder)))prac=null;
   daily=await Store.get(KEY.daily)||{date:today(),count:0};
   const sv=await Store.get(KEY.settings);if(sv)settings=Object.assign(settings,sv);
   applyTheme();
@@ -1539,7 +1548,7 @@ function renderHome(){
   $('libActions').style.display=nP?'':'none';
   const nUpd=pendingUpdates().length;const ua=$('updateAll');if(ua){ua.style.display=nUpd?'':'none';if(nUpd)ua.textContent='↑ Update all ('+nUpd+')';}
   $('featReview').textContent=nC+' cards';
-  $('featPractice').textContent=tp+' questions';
+  $('featPractice').textContent=tp+' questions'+(pracInProgress()?` · session in progress (${(prac.qsub||[]).filter(Boolean).length} of ${prac.qorder.length} submitted)`:'');
   $('featExam').textContent=examTotal()+' per test';
   $('mReview').classList.toggle('dim',nC===0);
   $('mPractice').classList.toggle('dim',tp===0);
@@ -1987,14 +1996,14 @@ function setBackLabel(){const el=$('revBackTo');if(el)el.textContent='to '+backL
 function returnFromReviewer(){const r=reviewerReturn;if(r==='study'){show('study');renderCard();}else if(r==='quiz'){show('quiz');renderQuiz();}else if(r==='srs'){openReview();}else if(r==='pharm'){openPharm();}else renderHome();}
 /* In-app confirm dialog + toasts — replace native confirm()/alert() (which browsers throttle/block).
    confirmDialog(msg, opts?, onConfirm): opts = {confirmText, cancelText, danger}. */
-let confirmCb=null;
+let confirmCb=null,confirmCancelCb=null;
 function confirmDialog(msg,opts,onConfirm){if(typeof opts==='function'){onConfirm=opts;opts={};}opts=opts||{};
   $('confirmMsg').textContent=msg;
   $('confirmCancel').style.display='';$('confirmCopy').style.display='none';
   $('confirmOk').textContent=opts.confirmText||'Confirm';
   $('confirmCancel').textContent=opts.cancelText||'Cancel';
   $('confirmOk').classList.toggle('danger',!!opts.danger);
-  confirmCb=typeof onConfirm==='function'?onConfirm:null;
+  confirmCb=typeof onConfirm==='function'?onConfirm:null;confirmCancelCb=typeof opts.onCancel==='function'?opts.onCancel:null;
   $('confirmOv').style.display='flex';$('confirmOk').focus();}
 /* Alert-style (OK only) modal, built from DOM nodes so user-derived text (filenames) can't inject HTML. */
 let copyPayload=null;
@@ -2033,7 +2042,7 @@ function showPackErrors(reports){const lines=[];
   lines.push('Authoring guide: '+GUIDE_URL+'  — paste these lines to your assistant to fix the source pack.');
   const title=reports.length>1?'Some packs had problems loading':'There was a problem loading your pack';
   alertDialog(title,lines,{okText:'Close',copyText:'Study Suite — pack load error\n'+lines.join('\n')});}
-function closeConfirm(){$('confirmOv').style.display='none';confirmCb=null;}
+function closeConfirm(){$('confirmOv').style.display='none';confirmCb=null;confirmCancelCb=null;}
 function toast(msg,ms){const w=$('toastWrap');if(!w)return;const t=document.createElement('div');t.className='toast';t.textContent=msg;w.appendChild(t);
   requestAnimationFrame(()=>t.classList.add('show'));
   setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),250);},ms||2800);}
@@ -2057,7 +2066,29 @@ function autoBalance(target){const g=examGroups();let total=0;g.forEach(ids=>tot
 let qmode,qorder=[],qmap={},qans=[],qsub=[],qflag=[],qelapsed=[],qopt=[],qcur=0,qTimerId=null,qTimeLeft=0,qTestSubmitted=false,timerWanted=false;
 function fmt(s){s=Math.max(0,Math.round(s));return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;}
 function buildQmap(){qmap={};qpool().forEach(q=>qmap[q.id]=q);}
-function startPractice(){const pool=qTestPool();if(!pool.length){toast('No questions match the current session difficulty.');return;}buildQmap();
+/* ---- Practice persistence (v0.2.72): the in-progress session lives in Store (KEY.prac) ---- */
+function pracInProgress(){return !!(prac&&prac.mode==='practice'&&Array.isArray(prac.qorder)&&prac.qorder.length);}
+function savePrac(){if(qmode!=='practice'||qTestSubmitted||!qorder.length)return;prac={mode:'practice',v:1,at:Date.now(),qorder:qorder.slice(),qans:qans.slice(),qsub:qsub.slice(),qflag:qflag.slice(),qelapsed:qelapsed.slice(),qopt:qopt.map(a=>Array.isArray(a)?a.slice():a),qcur};Store.set(KEY.prac,prac);}
+function clearPrac(){prac=null;Store.set(KEY.prac,null);}
+function startPractice(){
+  if(pracInProgress()){const N=prac.qorder.length,n=(prac.qsub||[]).filter(Boolean).length,a=(prac.qans||[]).filter(x=>x!=null).length;
+    confirmDialog(`You have a practice session in progress — ${n} of ${N} submitted${a>n?` (${a-n} more answered, not yet submitted)`:''}. Resume it, or start fresh?`,
+      {confirmText:'Resume',cancelText:'Start fresh',onCancel:()=>{clearPrac();startPracticeFresh();}},resumePractice);
+    return;}
+  startPracticeFresh();}
+function resumePractice(){const p=prac;buildQmap();
+  const keep=[];p.qorder.forEach((id,i)=>{if(qmap[id]&&matchDiff(qmap[id]))keep.push(i);});
+  if(!keep.length){toast('None of that session’s questions are loaded any more — starting fresh.');clearPrac();startPracticeFresh();return;}
+  const pick=(arr,fill)=>keep.map(i=>(Array.isArray(arr)&&arr[i]!==undefined&&arr[i]!==null)?arr[i]:fill);
+  qorder=keep.map(i=>p.qorder[i]);qmode='practice';qTestSubmitted=false;
+  qans=keep.map(i=>(Array.isArray(p.qans)&&p.qans[i]!==undefined)?p.qans[i]:null);qsub=pick(p.qsub,false);qflag=pick(p.qflag,false);qelapsed=pick(p.qelapsed,0);
+  qopt=keep.map(i=>{const opts=qmap[p.qorder[i]].options||[];const a=Array.isArray(p.qopt)?p.qopt[i]:null;return (Array.isArray(a)&&a.length===opts.length)?a:optPerm(opts);});
+  const c=keep.indexOf(p.qcur);qcur=c>=0?c:0;
+  timerWanted=!!settings.practiceTimer;$('flagBtn').style.display='none';$('submitAnsBtn').style.display='';
+  $('finishBtn').textContent='Finish & summary';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map · practice';
+  const dropped=p.qorder.length-keep.length;toast(dropped?`Practice resumed — ${dropped} question${dropped===1?'':'s'} no longer loaded ${dropped===1?'was':'were'} skipped.`:'Practice resumed.');
+  renderQuiz();startQTick();show('quiz');savePrac();}
+function startPracticeFresh(){const pool=qTestPool();if(!pool.length){toast('No questions match the current session difficulty.');return;}buildQmap();
   let ids=pool.map(q=>q.id);if(settings.practiceShuffle)shuffle(ids);qorder=ids;qmode='practice';
   qinit();qTestSubmitted=false;
   timerWanted=!!settings.practiceTimer;$('flagBtn').style.display='none';$('submitAnsBtn').style.display='';
@@ -2088,7 +2119,7 @@ function renderQuiz(){const q=qmap[qorder[qcur]],sel=qans[qcur],done=qRevealed(q
   if(done){const ok=sel===q.correct;html+=`<div class="verdictline ${ok?'ok':'no'}">${ok?'✓ Correct':(sel==null?'— Not answered':'✗ Incorrect')}</div>`;
     html+=`<div class="answerbox"><div class="h">Explanation · ${q.topic}${diffRank(q)>=0?' · '+q.difficulty:''}</div>${q.explain||''}</div>`+guideHTML(q.guide);}
   $('qcard').innerHTML=html;
-  if(!done)$('qcard').querySelectorAll('.opt').forEach(el=>el.addEventListener('click',()=>{qans[qcur]=+el.dataset.i;renderQuiz();renderGrid();}));
+  if(!done)$('qcard').querySelectorAll('.opt').forEach(el=>el.addEventListener('click',()=>{qans[qcur]=+el.dataset.i;renderQuiz();renderGrid();savePrac();}));
   else wireGuideLinks($('qcard'));
   $('prevBtn').disabled=(qcur===0);$('nextBtn').disabled=(qcur===qorder.length-1);
   if(qmode==='practice'){$('submitAnsBtn').style.display=qsub[qcur]?'none':'';$('submitAnsBtn').disabled=(qans[qcur]==null);if(settings.practiceTimer)updatePracClock();}
@@ -2101,14 +2132,14 @@ function renderGrid(){const g=$('grid');g.innerHTML='';let answered=0,correct=0;
     else if(qans[i]!==null)c.classList.add('answered');
     c.addEventListener('click',()=>{qcur=i;renderQuiz();window.scrollTo({top:0,behavior:'smooth'});});g.appendChild(c);}
   $('answeredCount').textContent=qmode==='practice'?`${qsub.filter(Boolean).length} submitted · ${correct} correct`:(qTestSubmitted?'review mode':`${answered} answered`);}
-function submitAnswer(){if(qans[qcur]==null)return;qsub[qcur]=true;renderQuiz();renderGrid();}
-function qPrev(){if(qcur>0){qcur--;renderQuiz();window.scrollTo({top:0,behavior:'smooth'});}}
-function qNext(){if(qcur<qorder.length-1){qcur++;renderQuiz();window.scrollTo({top:0,behavior:'smooth'});}}
+function submitAnswer(){if(qans[qcur]==null)return;qsub[qcur]=true;renderQuiz();renderGrid();savePrac();}
+function qPrev(){if(qcur>0){qcur--;renderQuiz();savePrac();window.scrollTo({top:0,behavior:'smooth'});}}
+function qNext(){if(qcur<qorder.length-1){qcur++;renderQuiz();savePrac();window.scrollTo({top:0,behavior:'smooth'});}}
 function submitExam(auto){if(qTestSubmitted)return;const un=qans.filter(a=>a===null).length;
   if(!auto&&un>0){confirmDialog(`${un} unanswered. Submit anyway?`,{confirmText:'Submit'},()=>doSubmitExam(auto));return;}
   doSubmitExam(auto);}
 function doSubmitExam(auto){if(qTestSubmitted)return;qTestSubmitted=true;clearInterval(qTimerId);showResults(auto);}
-function finishPractice(){if(qsub.filter(Boolean).length===0){toast('Submit at least one question first.');return;}clearInterval(qTimerId);showResults(false);}
+function finishPractice(){if(qsub.filter(Boolean).length===0){toast('Submit at least one question first.');return;}clearInterval(qTimerId);clearPrac();showResults(false);}
 function showResults(auto){let total=0,correct=0;const byT={};
   if(qmode==='test'){total=qorder.length;for(let i=0;i<qorder.length;i++){const q=qmap[qorder[i]];byT[q.sys]=byT[q.sys]||{c:0,t:0};byT[q.sys].t++;if(qans[i]===q.correct){correct++;byT[q.sys].c++;}}}
   else{for(let i=0;i<qorder.length;i++){if(!qsub[i])continue;const q=qmap[qorder[i]];byT[q.sys]=byT[q.sys]||{c:0,t:0};byT[q.sys].t++;total++;if(qans[i]===q.correct){correct++;byT[q.sys].c++;}}}
@@ -2206,8 +2237,8 @@ async function eacTry(){
   if(m){eac={unlocked:true,via:m.tag||'code',admin:!!m.admin,at:new Date().toISOString()};await Store.set(KEY.eac,eac);if(err)err.textContent='';hideGate();toast('Welcome to Study Suite.');}
   else{if(err)err.textContent='That code wasn’t recognized. Double-check with whoever shared it.';if(inp)inp.select();}
 }
-function backup(){const data={suite:APP_VERSION,author:APP_AUTHOR,exported:new Date().toISOString(),packs,sched,daily,settings,eac};const blob=new Blob([JSON.stringify(data)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='study-suite-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}
-function restore(file){const r=new FileReader();r.onload=async()=>{try{const d=JSON.parse(r.result);if(d.packs)packs=d.packs;if(d.sched)sched=d.sched;if(d.daily)daily=d.daily;if(d.settings)settings=Object.assign(settings,d.settings);if(d.eac)eac=d.eac;deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});if(daily.date!==today())daily={date:today(),count:0};await persist();renderHome();applyGate();if(eacArmed()&&!(eac&&eac.unlocked)){toast('Restored — but this backup isn’t from an unlocked copy.');}else{toast('Backup restored.');}}catch(e){toast('Could not read that file.');}};r.readAsText(file);}
+function backup(){const data={suite:APP_VERSION,author:APP_AUTHOR,exported:new Date().toISOString(),packs,sched,daily,settings,eac,prac};const blob=new Blob([JSON.stringify(data)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='study-suite-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}
+function restore(file){const r=new FileReader();r.onload=async()=>{try{const d=JSON.parse(r.result);if(d.packs)packs=d.packs;if(d.sched)sched=d.sched;if(d.daily)daily=d.daily;if(d.settings)settings=Object.assign(settings,d.settings);if(d.eac)eac=d.eac;if('prac' in d)prac=(d.prac&&d.prac.mode==='practice'&&Array.isArray(d.prac.qorder))?d.prac:null;deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});if(daily.date!==today())daily={date:today(),count:0};await persist();renderHome();applyGate();if(eacArmed()&&!(eac&&eac.unlocked)){toast('Restored — but this backup isn’t from an unlocked copy.');}else{toast('Backup restored.');}}catch(e){toast('Could not read that file.');}};r.readAsText(file);}
 
 /* ===== WIRE UP ===== */
 $('mReview').addEventListener('click',()=>{if(deck().length)openReview();});
@@ -2230,9 +2261,10 @@ $('installClose').addEventListener('click',closeInstall);
 $('installOv').addEventListener('click',e=>{if(e.target===$('installOv'))closeInstall();});
 $('devSeg').querySelectorAll('.seg').forEach(b=>b.addEventListener('click',()=>{installDev=b.dataset.dev;renderInstall();}));
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('installOv').style.display!=='none')closeInstall();});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')savePrac();});
 $('confirmOk').addEventListener('click',()=>{const cb=confirmCb;closeConfirm();if(cb)cb();});
 $('confirmCopy').addEventListener('click',()=>{const t=copyPayload;Promise.resolve(t?copyToClipboard(t):null).then(()=>toast('Error details copied.')).catch(()=>toast('Could not copy — select and copy manually.')).finally(()=>closeConfirm());});
-$('confirmCancel').addEventListener('click',closeConfirm);
+$('confirmCancel').addEventListener('click',()=>{const cb=confirmCancelCb;closeConfirm();if(cb)cb();});
 $('confirmOv').addEventListener('click',e=>{if(e.target===$('confirmOv'))closeConfirm();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('confirmOv').style.display!=='none')closeConfirm();});
 $('revBack').addEventListener('click',returnFromReviewer);
@@ -2243,7 +2275,7 @@ $('zoomIn').addEventListener('click',()=>{guideZoom=Math.min(2,Math.round((guide
 $('zoomOut').addEventListener('click',()=>{guideZoom=Math.max(0.6,Math.round((guideZoom-0.1)*10)/10);applyGuideView();});
 $('fitBtn').addEventListener('click',()=>{guideFit=!guideFit;applyGuideView();});
 $('printBtn').addEventListener('click',()=>{const fr=document.querySelector('.guideframe');if(fr&&fr.contentWindow){try{fr.contentWindow.focus();fr.contentWindow.print();}catch(e){window.print();}}else{window.print();}});
-$('homebtn').addEventListener('click',()=>{if($('quiz').classList.contains('on')||$('study').classList.contains('on')){confirmDialog('Leave this session and return home?',{confirmText:'Leave'},()=>{clearInterval(qTimerId);renderHome();});}else renderHome();});
+$('homebtn').addEventListener('click',()=>{if($('quiz').classList.contains('on')||$('study').classList.contains('on')){const keep=$('quiz').classList.contains('on')&&qmode==='practice'&&!qTestSubmitted;confirmDialog(keep?'Return home? Your practice progress is saved — resume it any time from the Practice card.':'Leave this session and return home?',{confirmText:'Leave'},()=>{clearInterval(qTimerId);savePrac();renderHome();});}else renderHome();});
 $('studyBtn').addEventListener('click',startSession);
 $('browseBtn').addEventListener('click',renderBrowse);
 $('doneHome').addEventListener('click',openReview);
@@ -2286,7 +2318,7 @@ $('eacForm').addEventListener('submit',e=>{e.preventDefault();eacTry();});
 $('eacRestore').addEventListener('click',e=>{e.preventDefault();$('restoreFile').click();});
 document.addEventListener('keydown',e=>{
   if($('study').classList.contains('on')){if(!revealed){if(e.key===' '||e.key==='Enter'){e.preventDefault();revealed=true;renderCard();}}else if(['1','2','3','4'].includes(e.key))grade(+e.key);return;}
-  if($('quiz').classList.contains('on')){const done=qRevealed(qcur);if(!done){const disp=LETTERS.indexOf(e.key.toUpperCase());const perm=qopt[qcur]||[...qmap[qorder[qcur]].options.keys()];if(disp>=0&&disp<perm.length){qans[qcur]=perm[disp];renderQuiz();renderGrid();}}if(e.key==='ArrowLeft')qPrev();if(e.key==='ArrowRight')qNext();if(qmode==='practice'&&e.key==='Enter'&&!qsub[qcur]&&qans[qcur]!=null)submitAnswer();}
+  if($('quiz').classList.contains('on')){const done=qRevealed(qcur);if(!done){const disp=LETTERS.indexOf(e.key.toUpperCase());const perm=qopt[qcur]||[...qmap[qorder[qcur]].options.keys()];if(disp>=0&&disp<perm.length){qans[qcur]=perm[disp];renderQuiz();renderGrid();savePrac();}}if(e.key==='ArrowLeft')qPrev();if(e.key==='ArrowRight')qNext();if(qmode==='practice'&&e.key==='Enter'&&!qsub[qcur]&&qans[qcur]!=null)submitAnswer();}
 });
 
 init();
