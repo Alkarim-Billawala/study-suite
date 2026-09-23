@@ -1,7 +1,16 @@
 <!--
-  Study Suite  ·  v0.5.5 (beta)
+  Study Suite  ·  v0.6.0 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.6.0 (content access checkpoint 2 — Content_Access_Plan.md §8): PACKS ARE ENCRYPTED. The site publishes
+  content-keys.json (one AES-GCM entry per code, opened by PBKDF2-SHA256(code, 600k)), packs-manifest.json v2 (one
+  encrypted section per scope, carrying every pack field + its key `pk`) and p/<opaque>.json packs (AES-GCM of gzip).
+  tryCode() replaces the hash list: window.EAC.hashes is gone from the page and eac-codes.json from the site. Unlocked
+  scope keys live in eac.keys (device + the account's encrypted data → every device of the account); eac merges keys as a
+  union. initPackLinks() decrypts the sections this device holds keys for into the same defaultManifest shape, so the
+  library / default packs / update preview / what's-new / sync run unchanged. fetchPackJson() decrypts + gunzips
+  (DecompressionStream) for every pack download. Devices that stored codes derive keys by themselves
+  (refreshKeysFromCodes); a device with groups but no keys shows "enter your access code once".
   Changelog v0.5.5: (also: topic pickers on the Practice/Exam setup screens fold each pack's topics under a header with an
   'x of y' count — setupOpen keeps the open state while ticking; the Review picker folds from 2 packs, was 3) (also: off rows fade everything but the switch, so it reads as tappable.) PLACEHOLDER PACKS. A switched-off PUBLISHED pack can live on a device as a placeholder (p.stub: name,
   version, counts nq/nc/ng — no questions/cards/guides). Sync never downloads a switched-off published pack (resolvePacks
@@ -535,11 +544,7 @@ var r=document.documentElement;r.setAttribute('data-theme',m);r.setAttribute('da
 <script>/* Early-access gate. `on` arms the lock screen; only SHA-256(salt+CANON(code)) hashes are stored
    here — plaintext codes are NEVER committed (kept in Early_Access_Codes_LOCAL.md). Set on:false to
    disarm. CANON = strip spaces/hyphens + uppercase. Soft client-side gate (see code comment). */
-window.EAC={on:true,salt:'studysuite::eac::v1',hashes:[
-  {"h":"c8d24950df7e00b784c4a9be7c16784d3c894fc1058859859526a0f87e0a9cb3","tag":"2T9"},
-  {"h":"33985265e94305f3fa84f8a99a8ee8154c1479cfa2a4eef6f011664ee7330fa2","tag":"3T0"},
-  {"h":"4cd28d49501862ef3d3c9f48faf6f52e53e2de3428e1729fffcdea4f2e7a6448","tag":"master","admin":true}
-]};</script>
+window.EAC={on:true,salt:'studysuite::eac::v1',hashes:[]}; /* v0.6.0: codes are checked against content-keys.json — no hashes in the page */</script>
 <meta name="author" content="Alkarim Billawala / alkarim.billawala.ca">
 <title>Study Suite</title>
 <link rel="manifest" href="manifest.webmanifest">
@@ -1473,7 +1478,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.5.5';
+const APP_VERSION='0.6.0';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1857,14 +1862,14 @@ const SSSync=(()=>{
   const parseTs=s=>s?Date.parse(String(s).replace(' ','T')):NaN;
   async function hash(o){const d=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(JSON.stringify(o)));
     return Array.from(new Uint8Array(d),b=>b.toString(16).padStart(2,'0')).join('');}
-  async function manifest(){if(defaultManifest)return defaultManifest;
+  async function manifest(){if(!defaultManifest)await initPackLinks();if(defaultManifest)return defaultManifest;
     try{const r=await fetch('packs-manifest.json',{cache:'no-store'});if(r.ok){const m=await r.json();if(m&&Array.isArray(m.packs))return m;}}catch(e){}return null;}
   const publicIds=m=>new Set(((m&&m.packs)||[]).filter(x=>x&&x.id&&x.file).map(x=>x.id));
   function payload(pub){return {v:1,app:APP_VERSION,by:DEVICE_ID,devices:devNames,gone:packGone,sched,daily,settings,eac,prac,qhist,exam:examSave,exams:examLog,
     packs:packs.map(p=>(pub.has(p.id)||p.stub)?Object.assign({ref:1},pick(p,LIGHT)):p).concat((meta&&meta.missing)||[])};}
   /* Fetch a published pack by id and run it through ingestPack in isolation (so `packs` isn't touched). */
   async function fetchPublic(id,m){const mp=m&&m.packs.find(x=>x&&x.id===id&&x.file);if(!mp)return null;
-    try{const r=await fetch(encodeURI(String(mp.file)),{cache:'no-store'});if(!r.ok)return null;const j=await r.json();
+    try{const j=await fetchPackJson(mp);
       const saved=packs;packs=[];try{ingestPack(j,(mp.label||mp.file).replace(/\.json$/i,''));return packs[0]||null;}finally{packs=saved;}}catch(e){return null;}}
   /* Payload packs[] → full packs (refs resolved from this device, else the manifest). Unresolved refs are returned too. */
   let pulled=[];
@@ -1975,7 +1980,7 @@ const SSSync=(()=>{
       settings:mergeMap(b.settings,l.settings,c.settings,pick,notes,'setting(s) changed on both'),
       devices:mergeMap(b.devices,l.devices,c.devices,pick,[],''),
       eac:(()=>{const a=eacNorm(l.eac),b=eacNorm(c.eac);if(!a||!a.unlocked)return b||a||null;if(!b)return a;
-        return Object.assign({},b,a,{codes:[...new Set([...a.codes,...b.codes])],tags:[...new Set([...a.tags,...b.tags])],admin:!!(a.admin||b.admin)});})(),
+        return Object.assign({},b,a,{codes:[...new Set([...a.codes,...b.codes])],tags:[...new Set([...a.tags,...b.tags])],admin:!!(a.admin||b.admin),keys:Object.assign({},b.keys||{},a.keys||{})});})(),
       prac:whole(b.prac,l.prac,c.prac,(x,y)=>(!x||!y)?(x||y):newer(x,y)),
       qhist:mergeMap(b.qhist,l.qhist,c.qhist,qboth,notes,'question(s) answered on both'),
       exam,exams,gone,packs:mergePacks(b,l.packs||[],c.packs||[],notes,side,gone)};
@@ -1984,7 +1989,7 @@ const SSSync=(()=>{
     try{const r=await resolvePacks(d.packs,m);
       if(guard&&await hash(payload(publicIds(m)))!==guard)return false; /* studied during the pull → re-run (now dirty → dialog) */
       sched=d.sched||{};daily=d.daily||{date:today(),count:0};if(d.settings)settings=Object.assign(settings,d.settings);
-      if(d.eac&&d.eac.unlocked){const a=eacNorm(eac)||{},b=eacNorm(d.eac);eac=Object.assign({},a,b,{codes:[...new Set([...(a.codes||[]),...b.codes])],tags:[...new Set([...(a.tags||[]),...b.tags])],admin:!!(a.admin||b.admin)});} /* v0.5.0: codes/groups are a union */
+      if(d.eac&&d.eac.unlocked){const a=eacNorm(eac)||{},b=eacNorm(d.eac);const hadK=Object.keys(a.keys||{}).length;eac=Object.assign({},a,b,{codes:[...new Set([...(a.codes||[]),...b.codes])],tags:[...new Set([...(a.tags||[]),...b.tags])],admin:!!(a.admin||b.admin),keys:Object.assign({},a.keys||{},b.keys||{})});if(Object.keys(eac.keys).length>hadK)setTimeout(initPackLinks,0);} /* v0.5.0: codes/groups are a union; v0.6.0: keys too */
       prac=(d.prac&&d.prac.mode==='practice'&&Array.isArray(d.prac.qorder))?d.prac:null;
       if(d.gone&&typeof d.gone==='object')packGone=Object.assign({},d.gone);
       if(d.devices&&typeof d.devices==='object'){devNames=Object.assign({},d.devices);if(!devNames[DEVICE_ID])devNames[DEVICE_ID]=guessDeviceName();}
@@ -2292,7 +2297,7 @@ async function acctUnlockDevice(){const s=SSAccount.session();if(!s)return;
   if(eac&&eac.unlocked){if(!hasPackAccess()&&s.tag){eac=Object.assign({},eac,{via:s.tag});await Store.set(KEY.eac,eac);renderDefaultPacks();}return;} /* v0.4.10: a no-code device gains packs when its account has a code */
   const pc=eacPending();if(!acctTypedCode&&pc&&pc.code)acctTypedCode=pc.code;
   eac={unlocked:true,via:s.tag||(pc&&pc.via)||'account',admin:s.tag==='master',at:new Date().toISOString(),viaAccount:true};if(acctTypedCode&&s.tag!=='master')eac.code=acctTypedCode;
-  eac=eacNorm(eac);(s.tags||[]).forEach(t=>{if(!NOT_GROUPS.has(t)&&!eac.tags.includes(t))eac.tags.push(t);});await Store.set(KEY.eac,eac);applyGate();}
+  eac=eacNorm(eac);if(pc&&pc.keys)eac.keys=Object.assign({},eac.keys||{},pc.keys);(s.tags||[]).forEach(t=>{if(!NOT_GROUPS.has(t)&&!eac.tags.includes(t))eac.tags.push(t);});await Store.set(KEY.eac,eac);applyGate();initPackLinks();}
 /* ---- Front door, two steps (v0.4.10) ----
    Screen 1: Sign in, or an access code (open sign-ups: Get started, the code box behind "Have an access code?").
    Screen 2 (after a valid code, or Get started): Create an account, or Use without an account. The device unlocks only
@@ -2311,19 +2316,20 @@ function eacNorm(e){if(!e)return e;const c=new Set(e.codes||[]),t=new Set(e.tags
   return Object.assign({},e,{codes:[...c],tags:[...t]});}
 function userGroups(){const g=new Set();const e=eacNorm(eac);if(e&&e.unlocked)(e.tags||[]).forEach(x=>g.add(x));
   const s=typeof SSAccount!=='undefined'&&SSAccount.session();if(s)(s.tags||(s.tag?[s.tag]:[])).forEach(x=>{if(!NOT_GROUPS.has(x))g.add(x);});return g;}
-function userScopes(){const m=defaultManifest,gm=m&&m.groups;if(!gm)return hasPackAccess()?'*':new Set();
+function userScopes(){const m=defaultManifest,gm=m&&m.groups;if(m&&m.v===2)return (eac&&eac.unlocked)?'*':new Set(); /* v0.6.0: the decrypted list is already only what this device may see */
+  if(!gm)return hasPackAccess()?'*':new Set();
   if(eac&&eac.admin)return '*';const out=new Set();for(const g of userGroups()){const sc=gm[g];if(sc==='*')return '*';if(Array.isArray(sc))sc.forEach(x=>out.add(x));}return out;}
 function packVisible(p){const u=userScopes();if(u==='*')return true;if(!u.size)return false;return Array.isArray(p.scopes)&&p.scopes.some(x=>u.has(x));}
 function visibleManifest(){const m=defaultManifest;return m?Object.assign({},m,{packs:m.packs.filter(p=>p&&packVisible(p))}):m;}
 /* Add a code: checked against the code list; on an account it's also recorded there (so every device gets it). */
 async function addAccessCode(raw){const code=eacCanon(raw);if(!code)throw new Error('Enter an access code.');
-  await ensureEacCodes();const h=sha256hex((window.EAC.salt||'')+code),m=(window.EAC.hashes||[]).find(x=>x.h===h);
+  const m=await tryCode(code);
   if(!m)throw new Error('That code wasn’t recognized. Double-check with whoever shared it.');
   const tag=m.tag||'code';if(SSAccount.session()){try{await SSAccount.addCode(code);}catch(e){throw new Error('Couldn’t add it to your account right now ('+e.message+'). Try again in a moment.');}}
   const e=eacNorm(eac||{unlocked:true,at:new Date().toISOString()});e.unlocked=true;
-  if(!e.codes.includes(code)&&!m.admin)e.codes.push(code);if(!e.tags.includes(tag))e.tags.push(tag);if(m.admin)e.admin=true;
+  if(!e.codes.includes(code)&&!m.admin)e.codes.push(code);if(!e.tags.includes(tag))e.tags.push(tag);if(m.admin)e.admin=true;e.keys=Object.assign({},e.keys||{},m.scopes||{});
   if(!e.via||NOT_GROUPS.has(e.via))e.via=tag;if(!e.code&&!m.admin)e.code=code;
-  eac=e;await Store.set(KEY.eac,eac);await persist();renderDefaultPacks();renderHome();return tag;}
+  eac=e;await Store.set(KEY.eac,eac);await persist();await initPackLinks();renderHome();return tag;}
 let eacOpen=false;
 function eacScreen(n){const two=n===2;$('eacS1').hidden=two;$('eacS2').hidden=!two;$('eacErr').textContent='';
   document.querySelector('#eacGate .eactitle').textContent=two?'You’re in.':'Welcome to Study Suite';
@@ -2338,8 +2344,8 @@ if(ACCT_ON){$('eacAcct').hidden=false;$('eacInput').placeholder='Access code';ea
   $('eacBack').onclick=e=>{e.preventDefault();eacPendingSet(null);eacScreen(1);};
   $('eacSignUp').onclick=()=>{renderAcct('signup');$('acctOv').style.display='flex';};
   $('eacNoAcct').onclick=async()=>{const pc=eacPending()||{via:'open',code:''};
-    eac={unlocked:true,via:pc.via||'open',admin:!!pc.admin,at:new Date().toISOString()};if(pc.code)eac.code=pc.code;
-    await Store.set(KEY.eac,eac);eacPendingSet(null);applyGate();toast('Welcome to Study Suite.');};
+    eac={unlocked:true,via:pc.via||'open',admin:!!pc.admin,at:new Date().toISOString()};if(pc.code)eac.code=pc.code;if(pc.keys)eac.keys=pc.keys;
+    await Store.set(KEY.eac,eac);eacPendingSet(null);applyGate();initPackLinks();toast('Welcome to Study Suite.');};
   $('eacHelp').onclick=()=>{renderAcct('noacct');$('acctOv').style.display='flex';};}
 $('acctBtn').addEventListener('click',openAcct);
 /* Links in our emails land on studysuite.app/#verify=TOKEN · #reset=TOKEN · #email=TOKEN (PocketBase mail templates). */
@@ -2428,8 +2434,14 @@ let defaultManifest=null;
 async function initPackLinks(){
   try{
     const r=await fetch('packs-manifest.json',{cache:'no-store'});if(!r.ok)return;
-    const m=await r.json();if(!m||!Array.isArray(m.packs)||!m.packs.length)return;
-    defaultManifest=m;backfillPlacement();renderLibrary();renderDefaultPacks();maybeApplyQueuedUpdates();
+    const m=await r.json();
+    if(m&&m.v===2){ /* v0.6.0: open the sections this device holds keys for */
+      const keys=heldKeys(),seen=new Map();
+      for(const [sid,sec] of Object.entries(m.sections||{})){if(!keys[sid])continue;
+        try{(JSON.parse(new TextDecoder().decode(await aesOpen(keys[sid],sec.iv,sec.ct))).packs||[]).forEach(p=>{if(p&&p.id&&!seen.has(p.id))seen.set(p.id,p);});}catch(e){}}
+      defaultManifest={v:2,packs:[...seen.values()],authoring:m.authoring};}
+    else{if(!m||!Array.isArray(m.packs)||!m.packs.length)return;defaultManifest=m;}
+    backfillPlacement();renderLibrary();renderDefaultPacks();maybeApplyQueuedUpdates();
   }catch(e){}
 }
 let dpOpen=null; // Set of expanded "year³course" keys; null until first render
@@ -2444,8 +2456,7 @@ function dpRow(p,isNew){
   if(!inLib||outdated)btn.onclick=async()=>{
     btn.disabled=true;btn.textContent=outdated?'Updating…':'Adding…';
     try{
-      const r=await fetch(encodeURI(String(p.file)),{cache:'no-store'});if(!r.ok)throw 0;
-      ingestPack(await r.json(),(p.label||p.file).replace(/\.json$/i,''));
+      ingestPack(await fetchPackJson(p),(p.label||p.file).replace(/\.json$/i,''));
       await persist();renderHome();
     }catch(e){btn.disabled=false;btn.textContent=outdated?'↑ Update':'+ Add to library';toast('Could not load that pack — check your connection and try again.');}
   };
@@ -2487,7 +2498,7 @@ function makeStub(p,mp){const st={id:p.id,stub:1,questions:[],cards:[],guides:[]
   if(mp){if(mp.nq!=null&&st.nq==null)st.nq=mp.nq;if(mp.nc!=null&&st.nc==null)st.nc=mp.nc;if(mp.g&&st.ng==null)st.ng=Object.keys(mp.g).length;}return st;}
 /* Download a placeholder's pack (always the latest published version); turnOn = the user tapped download. */
 async function downloadPack(p,turnOn){const mp=manifestEntry(p.id);if(!mp)throw new Error('This pack isn’t available to download any more.');
-  let j;try{const r=await fetch(encodeURI(String(mp.file)),{cache:'no-store'});if(!r.ok)throw 0;j=await r.json();}catch(e){throw new Error('Couldn’t download it — check your connection and try again.');}
+  let j;try{j=await fetchPackJson(mp);}catch(e){throw new Error('Couldn’t download it — check your connection and try again.');}
   const was=p.enabled,ts=p.ts;const {pk}=ingestPack(j,(mp.label||mp.file).replace(/\.json$/i,''));
   if(pk){pk.enabled=turnOn?true:was!==false;pk.ts=turnOn?Date.now():ts;if(pk.ts===undefined)delete pk.ts;}return pk;}
 const OFF_KEY='suite_offsince_v1',OFFLOAD_MS=7*864e5;
@@ -2523,15 +2534,18 @@ function packNews(){try{return JSON.parse(localStorage.getItem(NEWS_KEY)||'{}')|
 function setPackNews(o){try{localStorage.setItem(NEWS_KEY,JSON.stringify(o));}catch(e){}}
 function recordPackNews(oldP,newP){try{const t=newsText(packDiff(oldP,newP));const o=packNews();o[newP.id]={title:newP.pack||newP.id,v:newP.version,text:t,at:Date.now()};setPackNews(o);}catch(e){}}
 /* Shown the first time the home screen is seen after an update, for that session; ✕ clears it. */
+function packsLocked(){const m=defaultManifest;return !!(m&&m.v===2&&eac&&eac.unlocked&&!Object.keys(heldKeys()).length&&(userGroups().size||eac.admin));}
 function renderPackNews(){const box=$('packNews');if(!box)return;const o=packNews(),ids=Object.keys(o).filter(id=>packs.some(p=>p.id===id));
   if(document.visibilityState==='visible'&&$('home')&&$('home').classList.contains('on'))ids.forEach(id=>{if(!o[id].seen){o[id].seen=true;newsShown.add(id);}});
   setPackNews(o);const show=ids.filter(id=>newsShown.has(id)||!o[id].seen);
   box.innerHTML=show.map(id=>'<div class="packnews"><div><b>'+acctEsc(o[id].title)+' updated to v'+acctEsc(String(o[id].v||''))+'</b>'+(o[id].text?': '+acctEsc(o[id].text)+'.':'.')+'</div><button type="button" aria-label="Dismiss" data-id="'+acctEsc(id)+'">×</button></div>').join('');
-  box.querySelectorAll('button').forEach(b=>b.onclick=()=>{const q=packNews();delete q[b.dataset.id];setPackNews(q);newsShown.delete(b.dataset.id);renderPackNews();renderLibrary();});}
+  if(packsLocked())box.insertAdjacentHTML('afterbegin','<div class="packnews"><div><b>Your study packs are now protected.</b> Enter your access code once to unlock them — with an account, on all your devices.</div><button type="button" class="minor" id="lockCode" style="font-size:12px">Enter code</button></div>');
+  const lc=$('lockCode');if(lc)lc.onclick=()=>{renderAcct('addcode');$('acctOv').style.display='flex';};
+  box.querySelectorAll('button:not(#lockCode)').forEach(b=>b.onclick=()=>{const q=packNews();delete q[b.dataset.id];setPackNews(q);newsShown.delete(b.dataset.id);renderPackNews();renderLibrary();});}
 /* Re-fetch the latest pack file and re-ingest. ingestPack replaces by id (keeping the enabled state),
    and review progress is keyed by card id in `sched`, so it survives the update. */
-async function applyPackUpdate(p,mp){const r=await fetch(encodeURI(String(mp.file)),{cache:'no-store'});if(!r.ok)throw 0;
-  const old=packs.find(x=>x.id===p.id)||p;const {pk}=ingestPack(await r.json(),(mp.label||mp.file).replace(/\.json$/i,''));if(pk)recordPackNews(old,pk);}
+async function applyPackUpdate(p,mp){const j=await fetchPackJson(mp);
+  const old=packs.find(x=>x.id===p.id)||p;const {pk}=ingestPack(j,(mp.label||mp.file).replace(/\.json$/i,''));if(pk)recordPackNews(old,pk);}
 function updatePack(p,mp,btn){if(btn){btn.disabled=true;btn.textContent='Updating…';}
   applyPackUpdate(p,mp).then(async()=>{await persist();renderHome();toast('Updated '+(p.pack||p.id)+' to v'+mp.version+'.');})
     .catch(()=>{if(btn){btn.disabled=false;btn.textContent='↑ Update';}toast('Could not update — check your connection and try again.');});}
@@ -2627,7 +2641,7 @@ function renderDefaultPacks(){
 async function init(){
   detectStorage();
   eac=await Store.get(KEY.eac)||null;applyGate();
-  if(eacArmed()&&!(eac&&eac.unlocked))ensureEacCodes();
+  if(eacArmed()&&!(eac&&eac.unlocked))ensureContentKeys();
   $('footVer').textContent='v'+APP_VERSION;$('footBeta').style.display=APP_BETA?'':'none';
   try{history.replaceState({sec:'home'},'');}catch(e){}
   initPackLinks();checkAppVersion();
@@ -2642,7 +2656,7 @@ async function init(){
   packGone=await Store.get(KEY.gone)||{};
   devNames=await Store.get(KEY.devnames)||{};if(!devNames[DEVICE_ID]){devNames[DEVICE_ID]=guessDeviceName();Store.set(KEY.devnames,devNames);}
   const sv=await Store.get(KEY.settings);if(sv)settings=Object.assign(settings,sv);
-  DATA_READY=true;if(persistPending){persistPending=false;persist();}maybeApplyQueuedUpdates();
+  DATA_READY=true;if(persistPending){persistPending=false;persist();}maybeApplyQueuedUpdates();setTimeout(()=>{refreshKeysFromCodes().catch(()=>{});},0);
   applyTheme();
   // migrate pre-v0.2.8 cumulative sessionDifficulty -> multi-select sessionDiffs
   if(!Array.isArray(settings.sessionDiffs)){const old=settings.sessionDifficulty;
@@ -3573,6 +3587,32 @@ function eacArmed(){return !!(window.EAC&&window.EAC.on);}
    embedded in window.EAC above are just an offline/first-run fallback. Loaded once, cached for
    offline. (On file:// a cross-origin fetch is blocked, so local testing uses the embedded list.) */
 let eacCodesP=null;
+/* ---- Content keys (v0.6.0): a code opens one entry of content-keys.json → its group + scope keys. ---- */
+const b64d=t=>Uint8Array.from(atob(t),c=>c.charCodeAt(0));
+async function aesOpen(key,iv,ct){const k=typeof key==='string'?await crypto.subtle.importKey('raw',b64d(key),'AES-GCM',false,['decrypt']):key;
+  return new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM',iv:b64d(iv)},k,b64d(ct)));}
+let contentKeysP=null;
+async function loadContentKeys(){try{const r=await fetch('content-keys.json',{cache:'no-store'});if(r.ok){const j=await r.json();try{localStorage.setItem('suite_ck_v1',JSON.stringify(j));}catch(e){}return j;}}catch(e){}
+  try{return JSON.parse(localStorage.getItem('suite_ck_v1')||'null');}catch(e){return null;}}
+function ensureContentKeys(){if(!contentKeysP)contentKeysP=loadContentKeys().then(j=>{if(!j)contentKeysP=null;return j;});return contentKeysP;}
+/* One slow key step (PBKDF2, 600k), then a fast try per entry. → {tag, admin, scopes:{id: key}} or null. */
+async function tryCode(raw){const code=eacCanon(raw);if(!code)return null;const ck=await ensureContentKeys();
+  if(!ck||!ck.kdf||!Array.isArray(ck.entries))throw new Error('Couldn’t check the code right now — check your connection and try again.');
+  const base=await crypto.subtle.importKey('raw',new TextEncoder().encode(code),'PBKDF2',false,['deriveKey']);
+  const k=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b64d(ck.kdf.salt),iterations:ck.kdf.iters,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['decrypt']);
+  for(const e of ck.entries){try{return JSON.parse(new TextDecoder().decode(await aesOpen(k,e.iv,e.ct)));}catch(x){}}return null;}
+/* A published pack file: encrypted + gzipped (v0.6.0) or plain (older site). */
+async function fetchPackJson(mp){const r=await fetch(encodeURI(String(mp.file)),{cache:'no-store'});if(!r.ok)throw new Error('fetch');const j=await r.json();
+  if(!j||!j.enc)return j;if(!mp.pk)throw new Error('locked');
+  if(typeof DecompressionStream==='undefined')throw new Error('This browser is too old to open study packs — please update it.');
+  const raw=await aesOpen(mp.pk,j.iv,j.ct);return JSON.parse(await new Response(new Blob([raw]).stream().pipeThrough(new DecompressionStream('gzip'))).text());}
+function heldKeys(){const e=eacNorm(eac);return (e&&e.unlocked&&e.keys)||{};}
+/* Devices that already stored their codes turn them into keys by themselves. */
+let keysBusy=false;
+async function refreshKeysFromCodes(){if(keysBusy)return;const e=eacNorm(eac);if(!e||!e.unlocked||!(e.codes||[]).length)return;
+  const have=Object.keys(e.keys||{}).length;if(have)return;keysBusy=true;
+  try{const keys={};let admin=!!e.admin;for(const c of e.codes){try{const r=await tryCode(c);if(r){Object.assign(keys,r.scopes||{});if(r.admin)admin=true;}}catch(x){}}
+    if(Object.keys(keys).length){eac=Object.assign({},eacNorm(eac),{keys,admin});await Store.set(KEY.eac,eac);persist();initPackLinks();}}finally{keysBusy=false;}}
 async function loadEacCodes(){
   try{const r=await fetch('eac-codes.json',{cache:'no-store'});
     if(r.ok){const j=await r.json();const a=(j&&Array.isArray(j.hashes))?j.hashes:(Array.isArray(j)?j:null);
@@ -3587,11 +3627,10 @@ function applyGate(){ if(eacArmed()&&!(eac&&eac.unlocked))showGate(); else{hideG
 async function eacTry(){
   const inp=$('eacInput'),err=$('eacErr');const code=inp?inp.value:'';
   if(!eacCanon(code)){if(err)err.textContent='Enter your access code.';return;}
-  await ensureEacCodes();
-  const h=sha256hex((window.EAC.salt||'')+eacCanon(code));
-  const m=(window.EAC.hashes||[]).find(x=>x.h===h);
-  if(m&&ACCT_ON){if(err)err.textContent='';eacPendingSet({via:m.tag||'code',admin:!!m.admin,code:m.admin?'':eacCanon(code)});eacScreen(2);}
-  else if(m){eac={unlocked:true,via:m.tag||'code',admin:!!m.admin,at:new Date().toISOString()};if(!m.admin)eac.code=eacCanon(code); /* v0.3.0: fills sign-up */await Store.set(KEY.eac,eac);if(err)err.textContent='';hideGate();toast('Welcome to Study Suite.');}
+  let m=null;const go=$('eacUnlock');if(go)go.disabled=true;if(err)err.textContent='Checking…';
+  try{m=await tryCode(code);}catch(x){if(err)err.textContent=x.message;if(go)go.disabled=false;return;}finally{if(go)go.disabled=false;}
+  if(m&&ACCT_ON){if(err)err.textContent='';eacPendingSet({via:m.tag||'code',admin:!!m.admin,code:m.admin?'':eacCanon(code),keys:m.scopes||{}});eacScreen(2);}
+  else if(m){eac={unlocked:true,via:m.tag||'code',admin:!!m.admin,at:new Date().toISOString(),keys:m.scopes||{}};if(!m.admin)eac.code=eacCanon(code); /* v0.3.0: fills sign-up */await Store.set(KEY.eac,eac);if(err)err.textContent='';hideGate();initPackLinks();toast('Welcome to Study Suite.');}
   else{if(err)err.textContent='That code wasn’t recognized. Double-check with whoever shared it.';if(inp)inp.select();}
 }
 function backup(){const data={suite:APP_VERSION,author:APP_AUTHOR,exported:new Date().toISOString(),packs,sched,daily,settings,eac,prac,qhist,exam:examSave,exams:examLog};const blob=new Blob([JSON.stringify(data)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='study-suite-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}
