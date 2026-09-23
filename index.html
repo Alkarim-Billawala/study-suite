@@ -1,7 +1,17 @@
 <!--
-  Study Suite  ·  v0.4.6 (beta)
+  Study Suite  ·  v0.4.7 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.4.7: SYNC MERGE — when this device and the account copy both changed, SSSync now merges them item by item
+  (merge3, three-way against the last-synced base kept in Store 'suite_syncbase_v1'; custom packs kept there as fingerprints only)
+  instead of asking which copy to keep. Both-changed rules: card → later review (sched[].at, stamped in schedule()); question →
+  counts added over the base + latest answer; pack → later change (p.ts, stamped on add/update/on-off; 'ts' joins LIGHT);
+  removed on one side → stays removed; settings → per key, the side changed last; in-progress practice/exam → newer (.at), a
+  displaced unfinished exam goes to Past exams as partial. askConflict stays as the fallback if a merge throws. Uploads carry
+  ?expect_updated=<updated last read>; the server hook answers 409 if the row changed since → re-merge (max 3 tries).
+  Cadence: 5 s debounce now capped at 60 s of continuous changes; a check every 5 min while visible; sync on 'online'.
+  Status: green while the last sync is under 6 min old, gold when overdue/offline (view 'stale'), red for errors; background
+  checks no longer flash "Syncing…".
   Changelog v0.4.6: MODAL STACKING FIX — every .modal-ov shared z-index 50 (below Settings 60, the account panel 10000 and the
   class-code gate 9999), so a confirm opened from the account panel ("Sign out others"), Settings ("Clear history"), Past exams or
   the setup screen appeared BEHIND its parent. Now a MutationObserver (stackModals) puts whichever .modal-ov/.overlay opened last on
@@ -721,13 +731,13 @@ section{display:none}section.on{display:block}
 .acctbtn:hover{border-color:var(--accent-soft);color:var(--ink)}
 .acctbtn.on{border-color:var(--accent);color:var(--accent)}
 .acctdot{position:absolute;right:-2px;bottom:-2px;width:10px;height:10px;border-radius:50%;border:2px solid var(--paper);display:none;background:var(--green)}
-.acctbtn.on[data-st=conflict] .acctdot{display:block;background:var(--gold)}
+.acctbtn.on[data-st=conflict] .acctdot,.acctbtn.on[data-st=stale] .acctdot,.acctbtn.on[data-st=offline] .acctdot{display:block;background:var(--gold)}
 .acctbtn.on[data-st=expired] .acctdot,.acctbtn.on[data-st=error] .acctdot{display:block;background:var(--red)}
 .acctbtn.flash .acctdot{display:block;background:var(--green);animation:acctflash 2.5s ease forwards}
 @keyframes acctflash{0%{opacity:0;transform:scale(.4)}15%{opacity:1;transform:scale(1.15)}30%{transform:scale(1)}75%{opacity:1}100%{opacity:0}}
 .syncstate .sico{width:15px;height:10px;vertical-align:-1px;margin-right:7px;color:var(--ink-soft)}
 .syncstate[data-st=ok] .sico{color:var(--green)}
-.syncstate[data-st=syncing] .sico,.syncstate[data-st=offline] .sico,.syncstate[data-st=conflict] .sico{color:var(--gold)}
+.syncstate[data-st=syncing] .sico,.syncstate[data-st=offline] .sico,.syncstate[data-st=conflict] .sico,.syncstate[data-st=stale] .sico{color:var(--gold)}
 .syncstate[data-st=expired] .sico,.syncstate[data-st=error] .sico{color:var(--red)}
 #pausedOv{z-index:20000!important}#acctOv,#syncCfOv{z-index:10000}#toastWrap{z-index:20001} /* above the class-code gate (9999); stackModals() raises whichever modal opened last */
 .acct-verify{font-size:13.5px;line-height:1.5;color:var(--ink);background:color-mix(in srgb,var(--gold) 14%,transparent);border-radius:8px;padding:8px 10px;margin:-6px 0 14px}
@@ -1367,7 +1377,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.4.6';
+const APP_VERSION='0.4.7';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1521,7 +1531,7 @@ const SSAccount=(()=>{
   async function getState(metaOnly){const q=metaOnly?'&fields=id,updated,size_bytes,format_version':'';
     const j=await api('/api/collections/user_state/records?perPage=1'+q);return (j&&j.items&&j.items[0])||null;}
   async function putState(blob,id,o){const body={ciphertext:blob.ciphertext,iv:blob.iv,size_bytes:blob.size_bytes,format_version:FORMAT};
-    const q='?fields=id,updated,size_bytes,format_version';
+    const q='?fields=id,updated,size_bytes,format_version'+(o&&o.expect?'&expect_updated='+encodeURIComponent(o.expect):''); /* v0.4.7: 409 if the row changed since */
     if(id)return api('/api/collections/user_state/records/'+id+q,{method:'PATCH',body,keepalive:o&&o.keepalive});
     body.owner=sess.id;return api('/api/collections/user_state/records'+q,{method:'POST',body,keepalive:o&&o.keepalive});}
   const patchMe=body=>api('/api/collections/users/records/'+sess.id,{method:'PATCH',body});
@@ -1594,6 +1604,7 @@ function schedule(s0,g,now){const s=Object.assign({},s0);const setL=(arr,step)=>
       else{s.ef=s.ef+0.15;s.ivl=Math.max(s.ivl+1,Math.round(s.ivl*s.ef*EASY_BONUS));}
       s.reps=(s.reps||0)+1;s.due=now+s.ivl*DAY;}
   }else{if(g<=2){s.due=now+RELEARN[0]*MIN;}else{s.phase='review';let base=Math.max(1,Math.round((s.lapseFrom||1)*0.5));if(g===4)base=Math.max(base+1,Math.round(base*1.3));s.ivl=base;s.reps=(s.reps||0)+1;s.due=now+base*DAY;}}
+  s.at=now; /* v0.4.7: review time — sync merge keeps the later review when a card was studied on two devices */
   return s;}
 function humanDelta(ms){if(ms<MIN)return '<1m';if(ms<60*MIN)return Math.round(ms/MIN)+'m';if(ms<DAY)return Math.round(ms/3600000)+'h';const d=Math.round(ms/DAY);if(d<30)return d+'d';return Math.round(d/30)+'mo';}
 function humanFromNow(due,now){if(due<=now)return 'due';return 'in '+humanDelta(due-now);}
@@ -1690,8 +1701,9 @@ async function persist(){await Store.set(KEY.packs,packs);await Store.set(KEY.sc
    lastUpdated = the server's `updated` we last synced with. Cloud changed + device dirty → conflict dialog.
    KEY.localAt = when this device's data last changed (for the dialog). Outages degrade to "will sync later". */
 const SSSync=(()=>{
-  const LIGHT=['id','pack','version','author','school','year','term','course','weeks','enabled'],MAX_CT=7900000;
+  const LIGHT=['id','pack','version','author','school','year','term','course','weeks','enabled','ts'],MAX_CT=7900000;
   let meta=null,timer=null,busy=null,again=false,suppress=false,lastRun=0,state={k:'off'},flashed=false;
+  let lastOk=0,staleTries=0,pendingSince=0;const POLL=5*60000,FRESH=6*60000,MAXWAIT=60000,BASE_KEY='suite_syncbase_v1';
   const CLOUD_SVG='<svg class="sico" viewBox="0 0 24 16" aria-hidden="true"><path d="M6.4 15.2h11.3a4.4 4.4 0 0 0 .5-8.8A6.1 6.1 0 0 0 6.6 5 5.1 5.1 0 0 0 6.4 15.2z" fill="currentColor"/></svg>';
   const pick=(o,ks)=>{const r={};ks.forEach(k=>{if(o[k]!==undefined)r[k]=o[k];});return r;};
   const parseTs=s=>s?Date.parse(String(s).replace(' ','T')):NaN;
@@ -1723,12 +1735,16 @@ const SSSync=(()=>{
   async function saveMeta(){await Store.set(KEY.sync,meta);}
   async function loadMeta(){const s=SSAccount.session();const m=await Store.get(KEY.sync);
     meta=(m&&s&&m.uid===s.id)?m:{uid:s?s.id:null,stateId:null,lastUpdated:null,lastHash:null,missing:[]};if(!meta.missing)meta.missing=[];}
-  function setState(k,msg){state={k,msg,at:Date.now()};const el=$('syncState');if(!el)return;
-    const t={off:'',syncing:'Syncing…',ok:'Synced '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}),
+  /* v0.4.7: the icon shows a view, not the raw state — green while the last sync is under 6 min old (background checks
+     don't flash "Syncing…"), gold 'stale' when overdue. state.k itself is unchanged (sign-out checks k==='ok'). */
+  const viewOf=()=>{const fresh=lastOk&&Date.now()-lastOk<FRESH;return state.k==='syncing'&&fresh?'ok':state.k==='ok'&&!fresh?'stale':state.k;};
+  function setState(k,msg){if(k==='ok'){lastOk=Date.now();staleTries=0;}state={k,msg,at:Date.now()};paint();}
+  function paint(){const el=$('syncState');if(!el)return;const k=viewOf(),hm=new Date(lastOk||Date.now()).toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}),msg=state.msg;
+    const t={off:'',syncing:'Syncing…',ok:'Synced '+hm,stale:'Last synced '+hm+' — checking again shortly',
       offline:'Offline — changes will sync later',expired:'Sign in again to keep syncing',
       conflict:'Waiting for your choice',error:'Sync paused — '+(msg||'try again later')}[k];
     el.dataset.st=k;el.innerHTML=t?CLOUD_SVG+String(t).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])):'';el.style.display=t?'':'none';
-    renderSaveHint(k);if(typeof renderAcctBtn==='function')renderAcctBtn();
+    renderSaveHint(k==='stale'?'ok':k);if(typeof renderAcctBtn==='function')renderAcctBtn();
     if(k==='ok'&&!flashed){flashed=true;const b=$('acctBtn');if(b){b.classList.add('flash');setTimeout(()=>b.classList.remove('flash'),2600);}}}
   function renderSaveHint(k){const el=$('saveHint');if(!el)return;
     el.innerHTML={off:!ACCT_ON?'Progress lives in this browser — use <b>Backup all</b> / <b>Restore backup</b> to carry it across devices and browsers.':'Progress is saved in this browser only — use <b>Backup all</b> / <b>Restore backup</b> to move it, or sign in to sync it across your devices.',
@@ -1737,12 +1753,63 @@ const SSSync=(()=>{
       expired:'Progress is saved in this browser. Sign in again to keep syncing it.',
       conflict:'Progress is saved in this browser. Choose which copy to keep to resume syncing.',
       error:'Progress is saved in this browser. Sync is paused — <b>Backup all</b> keeps a file copy meanwhile.'}[k==='syncing'?'ok':k]||'';}
-  async function upload(dek,pl,h,id){const blob=await SSCrypto.encryptBlob(dek,pl);
+  async function upload(dek,pl,h,id,expect){const blob=await SSCrypto.encryptBlob(dek,pl);
     if(blob.ciphertext.length>MAX_CT)throw new Error('your study data is too large to sync ('+Math.round(blob.ciphertext.length/1e6)+' MB)');
     const small=blob.ciphertext.length<60000&&document.visibilityState==='hidden';
-    let rec;try{rec=await SSAccount.putState(blob,id,{keepalive:small});}
-    catch(e){if(!e.stateExists)throw e;const cm=await SSAccount.getState(true);rec=await SSAccount.putState(blob,cm.id);}
-    Object.assign(meta,{stateId:rec.id,lastUpdated:rec.updated,lastHash:h});await saveMeta();}
+    let rec;try{rec=await SSAccount.putState(blob,id,{keepalive:small,expect});}
+    catch(e){if(e.status===409){const x=new Error('stale');x.stale=true;throw x;} /* the account copy changed since we read it → re-merge */
+      if(!e.stateExists)throw e;const cm=await SSAccount.getState(true);rec=await SSAccount.putState(blob,cm.id);}
+    Object.assign(meta,{stateId:rec.id,lastUpdated:rec.updated,lastHash:h});await saveMeta();await saveBase(pl);}
+  /* ---- Merge (v0.4.7) ----
+     The base is the copy this device and the account last agreed on (saved after every sync, keyed to meta.lastUpdated).
+     Per item: changed on one side only → that change; changed on both → the rules below. No base (first sync here, or
+     the first sync after updating) → the same rules, and counts take the larger instead of adding. */
+  const J=x=>x===undefined?'\u0000':JSON.stringify(x);
+  function strHash(t){let x=2166136261;for(let i=0;i<t.length;i++){x^=t.charCodeAt(i);x=Math.imul(x,16777619);}return (x>>>0).toString(36)+':'+t.length;}
+  const packSig=p=>strHash(JSON.stringify(p));
+  const baseOf=pl=>Object.assign({},pl,{packs:(pl.packs||[]).map(p=>({id:p.id,sig:packSig(p)}))}); /* custom packs as fingerprints only */
+  async function saveBase(pl){if(meta)await Store.set(BASE_KEY,{uid:meta.uid,at:meta.lastUpdated,p:baseOf(pl)});}
+  async function loadBase(){const x=await Store.get(BASE_KEY);return (x&&meta&&x.uid===meta.uid&&x.at&&x.at===meta.lastUpdated)?x.p:null;}
+  function mergeMap(b,l,c,both,notes,label){b=b||{};l=l||{};c=c||{};const out={};let n=0;
+    new Set([...Object.keys(l),...Object.keys(c)]).forEach(k=>{const lv=l[k],cv=c[k],lj=J(lv),cj=J(cv),bj=J(b[k]);let v;
+      if(lj===cj||cj===bj)v=lv;else if(lj===bj)v=cv;else{v=both(lv,cv,b[k]);n++;}
+      if(v!==undefined)out[k]=v;});
+    if(n)notes.push(n+' '+label);return out;}
+  function mergePacks(b,l,c,notes,side){const bs=new Map(((b&&b.packs)||[]).map(p=>[p.id,p.sig])),lm=new Map(l.map(p=>[p.id,p])),cm=new Map(c.map(p=>[p.id,p])),out=[];
+    [...new Set([...l.map(p=>p.id),...c.map(p=>p.id)])].forEach(id=>{const lp=lm.get(id),cp=cm.get(id),bsig=bs.get(id),ls=lp&&packSig(lp),cs=cp&&packSig(cp);let v;
+      if(ls===cs||cs===bsig)v=lp;else if(ls===bsig)v=cp;
+      else if(!lp||!cp){v=undefined;notes.push('“'+((lp||cp).pack||id)+'” stays removed');}
+      else{const lt=lp.ts||0,ct=cp.ts||0;v=lt===ct?(side?lp:cp):(lt>ct?lp:cp);notes.push('“'+(v.pack||id)+'” changed on both — kept the later change');}
+      if(v)out.push(v);});
+    return out;}
+  function mergeLog(b,l,c){const bs=new Set((b||[]).map(e=>e&&e.at)),ls=new Set((l||[]).map(e=>e&&e.at)),cs=new Set((c||[]).map(e=>e&&e.at)),m=new Map();
+    [...(l||[]),...(c||[])].forEach(e=>{if(!e||m.has(e.at))return;if(bs.has(e.at)&&(!ls.has(e.at)||!cs.has(e.at)))return;m.set(e.at,e);});
+    return [...m.values()].sort((x,y)=>y.at-x.at);}
+  function logEntry(e){const m={};qpool().forEach(q=>m[q.id]=q);let answered=0,correct=0;
+    e.qorder.forEach((id,i)=>{const a=(e.qans||[])[i];if(a!=null){answered++;if(m[id]&&a===m[id].correct)correct++;}});
+    return {at:e.at||Date.now(),partial:true,qorder:e.qorder.slice(),qans:(e.qans||[]).slice(),qopt:(e.qopt||[]).slice(),total:e.qorder.length,answered,correct};}
+  /* side = this device changed last (its localAt ≥ the account copy's `updated`) — the tie-breaker when nothing finer exists. */
+  function merge3(b,l,c,side){b=b||{};const notes=[],pick=(x,y)=>side?x:y;
+    const newer=(x,y)=>{if(!x||!y)return x||y;const xa=x.at||0,ya=y.at||0;return xa===ya?pick(x,y):(xa>ya?x:y);};
+    const whole=(bv,x,y,f)=>{const xj=J(x),yj=J(y),bj=J(bv);return (xj===yj||yj===bj)?x:(xj===bj)?y:f(x,y);};
+    const qboth=(x,y,bv)=>{if(!x||!y)return x||y;const r=Object.assign({},(x.at||0)>=(y.at||0)?x:y);
+      if(bv){r.n=Math.max(0,(x.n||0)+(y.n||0)-(bv.n||0));r.k=Math.max(0,(x.k||0)+(y.k||0)-(bv.k||0));}else{r.n=Math.max(x.n||0,y.n||0);r.k=Math.max(x.k||0,y.k||0);}
+      r.k=Math.min(r.k,r.n);const ex=Math.max(x.ex||0,y.ex||0);if(ex)r.ex=ex;return r;};
+    const ld=l.daily||{},cd=c.daily||{},bd=b.daily;
+    const daily=ld.date!==cd.date?((ld.date||'')>(cd.date||'')?ld:cd):Object.assign({},ld,{count:(bd&&bd.date===ld.date)?Math.max(0,(ld.count||0)+(cd.count||0)-(bd.count||0)):Math.max(ld.count||0,cd.count||0)});
+    const moved=[];
+    const exam=whole(b.exam,l.exam,c.exam,(x,y)=>{if(!x||!y)return x||y;const w=newer(x,y),o=w===x?y:x;
+      if(o.t0!==w.t0&&(o.qans||[]).some(a=>a!=null))moved.push(logEntry(o));return w;});
+    const exams=mergeLog(b.exams,l.exams,c.exams).concat(moved).sort((x,y)=>y.at-x.at).slice(0,20);
+    if(moved.length)notes.push('an unfinished exam moved to Past exams');
+    const out={v:1,app:APP_VERSION,
+      sched:mergeMap(b.sched,l.sched,c.sched,newer,notes,'card(s) studied on both'),daily,
+      settings:mergeMap(b.settings,l.settings,c.settings,pick,notes,'setting(s) changed on both'),
+      eac:(l.eac&&l.eac.unlocked)?l.eac:(c.eac||l.eac||null),
+      prac:whole(b.prac,l.prac,c.prac,(x,y)=>(!x||!y)?(x||y):newer(x,y)),
+      qhist:mergeMap(b.qhist,l.qhist,c.qhist,qboth,notes,'question(s) answered on both'),
+      exam,exams,packs:mergePacks(b,l.packs||[],c.packs||[],notes,side)};
+    return {out,notes};}
   async function applyCloud(d,rec,m,guard){suppress=true;
     try{const r=await resolvePacks(d.packs,m);
       if(guard&&await hash(payload(publicIds(m)))!==guard)return false; /* studied during the pull → re-run (now dirty → dialog) */
@@ -1754,7 +1821,7 @@ const SSSync=(()=>{
       packs=r.out;meta.missing=r.miss;
       deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});rollDaily();
       await persist();applyTheme();applyGate();renderHome();
-      Object.assign(meta,{stateId:rec.id,lastUpdated:rec.updated,lastHash:await hash(payload(publicIds(m)))});await saveMeta();
+      const np=payload(publicIds(m));Object.assign(meta,{stateId:rec.id,lastUpdated:rec.updated,lastHash:await hash(np)});await saveMeta();await saveBase(np);
       if(r.miss.length)toast(r.miss.length+' pack'+(r.miss.length===1?'':'s')+' from your account couldn’t be downloaded yet — they’ll be kept in your account.');
       return true;}
     finally{suppress=false;}}
@@ -1793,27 +1860,44 @@ const SSSync=(()=>{
     if(cm&&meta.stateId&&cm.id!==meta.stateId){meta.lastUpdated=null;meta.lastHash=null;} /* account copy was replaced (fresh start) → treat as a first sync */
     const dirty2=h!==meta.lastHash;
     if(!cm){await SSAccount.refresh();if(!localEmpty()){await upload(dek,pl,h,null);slog('Uploaded (first copy in the account)',pl,null,meta.lastUpdated);}} /* no row: confirm the account still exists (401 → sign in again) */
-    else if(cm.updated===meta.lastUpdated){if(dirty2){await upload(dek,pl,h,cm.id);slog('Uploaded this device’s changes',pl,null,meta.lastUpdated);}}
+    else if(cm.updated===meta.lastUpdated){if(dirty2){await upload(dek,pl,h,cm.id,cm.updated);slog('Uploaded this device’s changes',pl,null,meta.lastUpdated);}}
     else{const full=await SSAccount.getState();const d=await SSCrypto.decryptBlob(dek,full.ciphertext,full.iv);
       const first=!meta.lastUpdated;
-      if(await hash(d)===h){Object.assign(meta,{stateId:full.id,lastUpdated:full.updated,lastHash:h});await saveMeta();slog('Already in step',pl,d,full.updated);}
+      if(await hash(d)===h){Object.assign(meta,{stateId:full.id,lastUpdated:full.updated,lastHash:h});await saveMeta();await saveBase(pl);slog('Already in step',pl,d,full.updated);}
       else if(!dirty2||(first&&localEmpty())){if(!await applyCloud(d,full,m,h)){slog('Pull postponed — this device changed mid-pull',pl,d,full.updated);again=true;return;}slog('Downloaded the account copy',pl,d,full.updated);}
-      else{setState('conflict');
-        const la=await Store.get(KEY.localAt);
+      else{const la=await Store.get(KEY.localAt);let r=null;
+        try{r=merge3(await loadBase(),pl,d,(la||0)>=(parseTs(full.updated)||0));}catch(e){slog('Couldn’t merge ('+((e&&e.message)||e)+') — asked instead',pl,d,full.updated);}
+        if(r){ /* v0.4.7: merge instead of asking */
+          if(await hash(r.out)!==h&&!await applyCloud(r.out,full,m,h)){slog('Merge postponed — this device changed mid-merge',pl,d,full.updated);again=true;return;}
+          const np=payload(publicIds(m)),nh=await hash(np);
+          if(nh!==await hash(d))await upload(dek,np,nh,full.id,full.updated);
+          else{Object.assign(meta,{stateId:full.id,lastUpdated:full.updated,lastHash:nh});await saveMeta();await saveBase(np);}
+          slog('Merged with the account copy'+(r.notes.length?' — '+r.notes.join('; '):''),pl,d,meta.lastUpdated);
+          if(first)toast('Combined this device’s progress with your account.');
+          setState('ok');return;}
+        setState('conflict');
         const choice=await askConflict(first,{s:summary(pl,new TextEncoder().encode(JSON.stringify(pl)).length),t:la},{s:summary(d,full.size_bytes||0),t:parseTs(full.updated)});
         setState('syncing');slog('Asked which copy — chose '+({local:'this device',cloud:'the account copy',both:'keep both'}[choice]),pl,d,full.updated);
         if(choice==='cloud')await applyCloud(d,full,m);
         else{if(choice==='both')await downloadCloudCopy(d,m);await upload(dek,pl,h,full.id);}}}
     setState('ok');}
-  function sync(){if(busy){again=true;return busy;}lastRun=Date.now();
-    busy=run().catch(e=>{if(e&&e.expired)setState('expired');else if(e&&e.offline)setState('offline');
+  function sync(){if(busy){again=true;return busy;}lastRun=Date.now();pendingSince=0;
+    busy=run().catch(e=>{if(e&&e.stale){if(++staleTries<=3){again=true;return;}setState('error','the account copy keeps changing — try Sync now');return;}
+        if(e&&e.expired)setState('expired');else if(e&&e.offline)setState('offline');
         else if(e&&e.message==='decrypt')setState('error','this device’s key doesn’t match your account — sign out and in again');
         else setState('error',e&&e.message);})
       .finally(()=>{busy=null;if(again){again=false;schedule(1000);}});
     return busy;}
   function schedule(ms){clearTimeout(timer);timer=setTimeout(sync,ms==null?5000:ms);}
   /* Called at the end of every persist(). */
-  function changed(){if(suppress)return;Store.set(KEY.localAt,Date.now());if(ACCT_ON&&SSAccount.session())schedule();}
+  /* 5 s after the last change, but never more than 60 s after the first unsynced one (continuous studying still syncs). */
+  function changed(){if(suppress)return;const now=Date.now();Store.set(KEY.localAt,now);if(!(ACCT_ON&&SSAccount.session()))return;
+    if(!pendingSince)pendingSince=now;schedule(Math.max(0,Math.min(5000,pendingSince+MAXWAIT-now)));}
+  /* v0.4.7: a light check every 5 min while the app is on screen (metadata only; downloads only if the account copy changed),
+     and repaint so the icon turns gold if a sync is overdue. Plus a sync when the connection comes back. */
+  setInterval(()=>{if(!ACCT_ON||!SSAccount.session()||document.visibilityState!=='visible')return;
+    if(!busy&&Date.now()-lastRun>=POLL)sync();paint();},30000);
+  window.addEventListener('online',()=>{if(ACCT_ON&&SSAccount.session())sync();});
   async function start(){if(!ACCT_ON){setState('off');return;}await SSAccount.load();if(!SSAccount.session()){setState('off');return;}
     if(typeof acctUnlockDevice==='function')await acctUnlockDevice();
     await loadMeta();sync();
@@ -1821,8 +1905,8 @@ const SSSync=(()=>{
   document.addEventListener('visibilitychange',()=>{if(!ACCT_ON||!SSAccount.session())return;
     if(document.visibilityState==='hidden'){clearTimeout(timer);sync();}
     else if(Date.now()-lastRun>15000)sync();});
-  async function reset(){clearTimeout(timer);meta=null;await Store.set(KEY.sync,null);setState('off');}
-  return {start,sync,changed,schedule,reset,status:()=>state,meta:()=>meta,_hash:hash,_payload:payload};
+  async function reset(){clearTimeout(timer);meta=null;lastOk=0;pendingSince=0;await Store.set(KEY.sync,null);await Store.set(BASE_KEY,null);setState('off');}
+  return {start,sync,changed,schedule,reset,status:()=>Object.assign({view:viewOf(),lastOk},state),meta:()=>meta,_hash:hash,_payload:payload,_merge3:merge3,_baseOf:baseOf};
 })();
 
 
@@ -1833,12 +1917,12 @@ const SSSync=(()=>{
 let acctView=null,acctRc=null,acctEmail='',acctNote={t:'',b:''},acctResetTok=null,acctRcCtx='';
 function acctNotice(t,b,busy){acctNote={t,b,busy:!!busy};renderAcct('notice');$('acctOv').style.display='flex';}
 const acctEsc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function acctStatusText(){const st=SSSync.status();
-  return {ok:'Synced at '+new Date(st.at).toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+'.',syncing:'Syncing…',
+function acctStatusText(){const st=SSSync.status(),hm=new Date(st.lastOk||st.at).toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
+  return {ok:'Synced at '+hm+'.',stale:'Last synced at '+hm+' — checking again shortly.',syncing:'Syncing…',
     offline:'Offline — your changes will sync when you’re back online.',expired:'You’ve been signed out on this device. Sign in again to keep syncing.',
-    conflict:'Waiting for you to choose which copy to keep.',error:'Sync paused — '+(st.msg||'try again later')+'.',off:''}[st.k]||'';}
+    conflict:'Waiting for you to choose which copy to keep.',error:'Sync paused — '+(st.msg||'try again later')+'.',off:''}[st.view]||'';}
 function renderAcctBtn(){const b=$('acctBtn');if(!b)return;const s=SSAccount.session();
-  b.classList.toggle('on',!!s);b.dataset.st=s?SSSync.status().k:'';
+  b.classList.toggle('on',!!s);b.dataset.st=s?SSSync.status().view:'';
   b.title=s?('Account — '+s.email):'Account — sign in to sync';
   if(acctView==='account'&&$('acctSt')){$('acctSt').textContent=acctStatusText();const re=$('acctReauth');if(re)re.style.display=SSSync.status().k==='expired'?'':'none';}}
 function openAcct(){renderAcct(SSAccount.needsRecovery()?'recover':SSAccount.session()?'account':'signin');$('acctOv').style.display='flex';
@@ -2304,7 +2388,7 @@ function ingestPack(obj,sourceName){
   pk.questions.forEach((q,i)=>{if(!q.id)q.id=pk.id+'_q'+i;});
   pk.cards.forEach((c,i)=>{if(!c.id)c.id=pk.id+'_c'+i;});
   const idx=packs.findIndex(p=>p.id===pk.id);
-  pk.enabled=(idx>=0)?packs[idx].enabled!==false:true;
+  pk.enabled=(idx>=0)?packs[idx].enabled!==false:true;pk.ts=Date.now(); /* v0.4.7: change time for sync merge */
   if(idx>=0)packs[idx]=pk;else packs.push(pk);
   deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});
   return {pk,errs};
@@ -2406,7 +2490,7 @@ function libRow(p){const on=p.enabled!==false;const upd=packUpdate(p);
   const row=document.createElement('div');row.className='packrow'+(on?'':' off');
   const left=document.createElement('div');left.className='pkleft';
   const sw=document.createElement('button');sw.className='switch'+(on?' on':'');sw.setAttribute('role','switch');sw.setAttribute('aria-checked',on?'true':'false');sw.setAttribute('aria-label','Enable pack');
-  sw.onclick=()=>{p.enabled=!on;persist();renderHome();};
+  sw.onclick=()=>{p.enabled=!on;p.ts=Date.now();persist();renderHome();};
   const gtag=(p.guides&&p.guides.length)?` · ${p.guides.length} guides`:'';
   const updtag=upd?` · <span class="updnote">update to v${upd.version}</span>`:'';
   const info=document.createElement('div');info.innerHTML=`<div class="pn">${p.pack}</div><div class="pm">${p.questions.length} questions · ${p.cards.length} cards${gtag}${updtag}</div>`;
@@ -3264,8 +3348,8 @@ $('setPracSecs').addEventListener('change',e=>{settings.practiceSecs=Math.max(5,
 $('setExamMins').addEventListener('change',e=>{settings.examMinutes=Math.max(1,parseInt(e.target.value)||60);persist();});
 $('setNewPerDay').addEventListener('change',e=>{settings.srsNewPerDay=Math.max(0,parseInt(e.target.value)||0);persist();});
 $('updateAll').addEventListener('click',updateAllPacks);
-$('enableAll').addEventListener('click',()=>{packs.forEach(p=>p.enabled=true);persist();renderHome();});
-$('disableAll').addEventListener('click',()=>{packs.forEach(p=>p.enabled=false);persist();renderHome();});
+$('enableAll').addEventListener('click',()=>{const t=Date.now();packs.forEach(p=>{if(p.enabled===false){p.enabled=true;p.ts=t;}});persist();renderHome();});
+$('disableAll').addEventListener('click',()=>{const t=Date.now();packs.forEach(p=>{if(p.enabled!==false){p.enabled=false;p.ts=t;}});persist();renderHome();});
 $('backupBtn').addEventListener('click',backup);
 $('restoreBtn').addEventListener('click',()=>$('restoreFile').click());
 $('restoreFile').addEventListener('change',e=>{if(e.target.files[0])restore(e.target.files[0]);});
