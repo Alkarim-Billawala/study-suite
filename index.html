@@ -1,8 +1,19 @@
 <!--
-  Study Suite  ·  v0.4.2 (beta)
+  Study Suite  ·  v0.4.3 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
-  Changelog v0.4.2: which-copy dialog — buttons line up with their boxes (Keep this device under This device, Keep account copy
+  Changelog v0.4.3: TOPIC GROUPS — choosing and weighting use a section per item (secOf): packs marked groupBy:"topic" group by
+  real topics (from authoring guide v2.19); all other packs group by the topic guide each item links to (backport: their topic
+  field is a per-item label — e.g. Week 38 went from 113 one-card topics to 14 guide topics). Topic-marked packs whose topics are
+  still mostly one-item fall back to guides. Review → Choose topics lists them per week (collapsible, n of m selected); Exam
+  weighting "Topic" uses them (old topic weights reset once); Practice + Exam setup screens gain a Topics filter
+  (settings.pracTopics / examTopics; null = all; stale picks tidied). Item topic stays the card/question label.
+  Also: Home button + iOS Share step use inline SVG icons (the ⮌ / ⮭ glyphs aren't in iOS or desktop fonts and
+  drew as missing-character boxes). Add to Home Screen box reworded for accounts (sign in inside the installed app; backup/restore
+  if no account); its device tabs fit on phones. Settings → Question history layout — label on its own line; pack picker fills the row (long pack names
+  truncate instead of stretching it) with Clear beside it, styled like the other fields. Phones: Settings' segmented controls
+  (Mode, dark flavour) no longer clip their last option.
+  Changelog v0.4.2 (deployed 2026-09-23): which-copy dialog — buttons line up with their boxes (Keep this device under This device, Keep account copy
   under Your account, same two columns; Keep both on its own line below; stacks in the same order on phones). "1 card studied".
   Changelog v0.4.1 (deployed 2026-09-23): SETUP SCREENS — Practice and Exam each open a setup sheet (#setupOv) before a fresh session: Exam = difficulty,
   question selection (+ "N not answered yet"), weighting (auto / group by / per-group counts / length), timer; Practice = difficulty,
@@ -557,6 +568,9 @@ section{display:none}section.on{display:block}
 #topicPanel{margin-top:14px;display:none}#topicPanel.open{display:block}
 .tgroup{margin-bottom:14px}.tgroup .gname{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:7px}
 .tchips{display:flex;flex-wrap:wrap;gap:8px}
+.gtoggle{background:none;border:0;padding:0;cursor:pointer;text-align:left;width:100%;display:flex;justify-content:flex-start;gap:4px;align-items:center}.gtoggle .gsel{margin-left:auto;letter-spacing:.04em;text-transform:none;color:var(--ink-soft)}
+.gtoggle::before{content:'▾ ';}.tgroup.closed .gtoggle::before{content:'▸ ';}.tgroup.closed .tchips{display:none}
+.stopics{margin:4px 0 10px;max-height:46vh;overflow:auto;border:1px solid var(--line);border-radius:8px;padding:10px}.stopics .tchip{font-size:14px;padding:5px 11px}
 .tchip{font-family:var(--font-body);font-size:15px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:20px;padding:6px 13px;cursor:pointer;transition:.12s;display:flex;align-items:center;gap:7px}
 .tchip:hover{border-color:var(--accent-soft)}.tchip.on{border-color:var(--accent);background:var(--accent);color:var(--paper)}
 .tchip .ct{font-family:var(--font-mono);font-size:10px;color:var(--ink-soft);background:var(--paper2);border-radius:10px;padding:1px 6px}
@@ -701,6 +715,10 @@ section{display:none}section.on{display:block}
 .setup-card .note{text-align:left}.setup-fresh{margin:-4px 0 6px;font-size:13px}.setup-card .btn.wide{width:100%;margin-top:16px}
 .segctl.sdiff .seg{padding:7px 11px;font-size:14px}.segctl.sdiff .seg i{font-style:normal;font-family:var(--font-mono);font-size:11px;opacity:.7;margin-left:3px}
 @media (max-width:480px){.setup-card .setrow{flex-wrap:wrap}}
+.histlbl{font-size:15px;margin:9px 0 6px}.histrow{display:flex;gap:8px;align-items:center}.histrow select{flex:1 1 auto;min-width:0;width:100%;text-overflow:ellipsis;font-family:var(--font-body);font-size:15px;padding:6px 8px;border:1.5px solid var(--line);border-radius:5px;background:var(--paper2);color:var(--ink)}
+@media (max-width:480px){.setsec .segctl{flex:none}.setsec .segctl .seg{padding:8px 10px;font-size:14px}}
+@media (max-width:480px){#devSeg{display:flex;width:100%}#devSeg .seg{flex:1 1 0;min-width:0;padding:8px 4px;font-size:13.5px;line-height:1.2}}.histrow .minor{flex:none}
+.hbico{width:13px;height:13px;vertical-align:-2px;margin-right:6px}.shareico svg{width:14px;height:14px;vertical-align:-2px}
 .pastrow{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding:10px 0}.pastrow .pt{font-size:15px;color:var(--ink)}.pastrow .pd{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-soft);margin-top:2px}
 .pastpart{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);border:1px solid var(--gold);border-radius:4px;padding:0 5px;margin-left:4px}
 #featExam a{color:var(--accent);text-decoration:underline;cursor:pointer}
@@ -974,7 +992,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
     <div class="brand"><span class="k">Study Suite</span><span class="t">Review · Practice · Exam</span></div>
     <div class="top-right">
       <div class="timer" id="timer" style="display:none"><span class="dot"></span><span id="tclock">--:--</span></div>
-      <button class="homebtn" id="homebtn" style="display:none">⮌ Home</button>
+      <button class="homebtn" id="homebtn" style="display:none"><svg class="hbico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.2 12 4.5l8 6.7M6.5 9.4V19.5h11V9.4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</button>
       <button class="installbtn tile" id="installBtn" title="Add this app to your home screen"><span class="ic">⊕</span>Add to home</button>
       <button class="installbtn tile ghost" id="refreshBtn" style="display:none"><span class="ic">⟳</span>Refresh</button>
       <button class="acctbtn" id="acctBtn" type="button" aria-label="Account" title="Account"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.2" r="3.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4.8 19.6c1.2-3.6 4-5.4 7.2-5.4s6 1.8 7.2 5.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span class="acctdot"></span></button>
@@ -1160,7 +1178,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
   <div class="modal-ov" id="installOv" style="display:none">
     <div class="modal-card" role="dialog" aria-label="Add to Home Screen">
       <div class="modal-bar"><h3>Add to Home Screen</h3><button class="minor" id="installClose">✕ Close</button></div>
-      <div class="warnbox"><b>First: back up your progress.</b> The installed app keeps its <i>own</i> separate progress. Tap <a href="#" id="installBackup"><b>Backup all</b></a> before installing, then <b>Restore backup</b> inside the installed app to carry everything over.</div>
+      <div class="warnbox"><b>Carry your progress over.</b> The installed app may keep its <i>own</i> separate storage — on iPhone and iPad it always does. <b>With an account,</b> just sign in inside the installed app and everything syncs across. <b>No account?</b> Tap <a href="#" id="installBackup"><b>Backup all</b></a> before installing, then <b>Restore backup</b> inside the installed app.</div>
       <div class="segctl" id="devSeg">
         <button class="seg" data-dev="ios">iPhone / iPad</button>
         <button class="seg" data-dev="mac">Mac</button>
@@ -1185,6 +1203,8 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <button class="acct-x" id="setupX" type="button" aria-label="Close">×</button>
       <h3 id="setupTitle">Set up your exam</h3>
       <div id="setupExam">
+      <div class="setrow"><span>Topics</span><button class="minor stoggle" type="button" data-m="exam" id="exTopBtn">All topics ▸</button></div>
+      <div class="stopics" id="exTopics" hidden></div>
       <div class="setrow"><span>Difficulty</span><div class="segctl sdiff" id="exDiff"><button class="seg" data-d="easy">Easy <i>0</i></button><button class="seg" data-d="medium">Medium <i>0</i></button><button class="seg" data-d="hard">Hard <i>0</i></button></div></div>
       <div class="setrow"><span>Question selection</span>
         <select id="setExamFresh"><option value="any">Any</option><option value="prefer">Prefer fresh</option><option value="only">Fresh only</option></select>
@@ -1204,6 +1224,8 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="setrow"><span>Timer — total minutes</span><span><input type="number" id="setExamMins" min="1" max="300" value="60"> <button class="switch" id="setExamTimer">on</button></span></div>
       </div>
       <div id="setupPrac">
+      <div class="setrow"><span>Topics</span><button class="minor stoggle" type="button" data-m="prac" id="prTopBtn">All topics ▸</button></div>
+      <div class="stopics" id="prTopics" hidden></div>
       <div class="setrow"><span>Difficulty</span><div class="segctl sdiff" id="prDiff"><button class="seg" data-d="easy">Easy <i>0</i></button><button class="seg" data-d="medium">Medium <i>0</i></button><button class="seg" data-d="hard">Hard <i>0</i></button></div></div>
       <div class="setrow"><span>Unanswered questions only</span><button class="switch" id="setPracOnlyNew">off</button></div>
       <div class="note setup-fresh" id="prFreshNote"></div>
@@ -1281,7 +1303,8 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
     </div>
     <div class="setsec">
       <div class="sh">Question history</div>
-      <div class="setrow"><span>Clear what you’ve answered in</span><span><select id="histPack"></select> <button class="minor" id="histClear">Clear</button></span></div>
+      <div class="histlbl">Clear what you’ve answered in</div>
+      <div class="histrow"><select id="histPack"></select><button class="minor" id="histClear">Clear</button></div>
       <div class="note" style="text-align:left;margin-top:8px">Practice puts questions you’ve answered last and lets you view your prior answer; exams can pick fresh questions. Clearing makes every question count as new again. Your review cards aren’t affected.</div>
     </div>
     <div class="setsec">
@@ -1295,7 +1318,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.4.2';
+const APP_VERSION='0.4.3';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1552,8 +1575,29 @@ function optPerm(options){const n=(options||[]).length;const anchored=new Set();
   const perm=new Array(n);let k=0;for(let pos=0;pos<n;pos++)perm[pos]=anchored.has(pos)?pos:free[k++];
   return perm;}
 function activePacks(){return packs.filter(p=>p.enabled!==false);}
-function deck(){return activePacks().flatMap(p=>p.cards.map(c=>Object.assign({_pack:p.id,_packName:p.pack},c)));}
-function qpool(){return activePacks().flatMap(p=>p.questions.map(q=>Object.assign({_pack:p.id,_packName:p.pack},q)));}
+/* ===== TOPIC GROUPS (v0.4.3) — what "topic" means when choosing what to study or weighting an exam.
+   A pack marked groupBy:"topic" groups by each item's topic (real topics — how packs are authored from guide v2.19);
+   every other pack groups by the topic guide each item links to (the backport: older packs use topic as a fine per-item
+   label). A topic-marked pack whose topics are still mostly one-item falls back to guides. The item's own topic stays its label. */
+const _secCache=new Map(),SEC_LABEL={},SEC_PACK={},SEC_ORD={};
+function packSecInfo(p){const key=(p.version||'')+'|'+(p.cards||[]).length+'|'+(p.questions||[]).length+'|'+(p.groupBy||'');let v=_secCache.get(p.id);if(v&&v.key===key)return v;
+  const titles={};(p.guides||[]).forEach((g,i)=>{if(g&&g.file)titles[g.file]={t:String(g.title||g.file).replace(/^Week\s*[\d–-]+\s*·\s*/i,''),i};});
+  let useTopic=false;if(p.groupBy==='topic'){const c={};[...(p.cards||[]),...(p.questions||[])].forEach(x=>{if(x&&x.topic)c[x.topic]=(c[x.topic]||0)+1;});
+    const n=Object.keys(c).length,single=Object.values(c).filter(v2=>v2===1).length;useTopic=n>=2&&single/n<=0.5;}
+  v={key,titles,useTopic,short:String(p.pack||p.id).split(' — ')[0]};_secCache.set(p.id,v);return v;}
+function guideFile(x){const g=x&&x.guide;return g&&typeof g==='object'?g.f:(typeof g==='string'?g:null);}
+function secOf(p,x){const info=packSecInfo(p);let k,l,o;
+  if(info.useTopic&&x.topic){k=p.id+'|t|'+x.topic;l=x.topic;o=0;}
+  else{const f=guideFile(x),t=f&&info.titles[f];if(t){k=p.id+'|g|'+f;l=t.t;o=t.i;}else{k=p.id+'|other';l='Other';o=1e6;}}
+  SEC_LABEL[k]=l;SEC_PACK[k]=info.short;SEC_ORD[k]=o;return {k,l,o};}
+function secName(k,withPack){const l=SEC_LABEL[k]||k;return withPack&&SEC_PACK[k]?SEC_PACK[k]+' · '+l:l;}
+function withSec(p,x){const s2=secOf(p,x);return Object.assign({_pack:p.id,_packName:p.pack,_sec:s2.k,_secO:s2.o},x);}
+function deck(){return activePacks().flatMap(p=>p.cards.map(c=>withSec(p,c)));}
+function qpool(){return activePacks().flatMap(p=>p.questions.map(q=>withSec(p,q)));}
+/* Sections of a list of items, grouped by pack, in guide order: [{pack,name,secs:[{k,l,n}]}] */
+function secGroups(items){const byPack=new Map();items.forEach(x=>{if(!byPack.has(x._pack))byPack.set(x._pack,{name:SEC_PACK[x._sec]||x._packName,secs:new Map()});
+    const g=byPack.get(x._pack);const e=g.secs.get(x._sec)||{k:x._sec,l:SEC_LABEL[x._sec]||x._sec,o:x._secO,n:0,items:[]};e.n++;e.items.push(x);g.secs.set(x._sec,e);});
+  return [...byPack.values()].map(g=>({name:g.name,secs:[...g.secs.values()].sort((a,b)=>a.o-b.o||natCmp(a.l,b.l))}));}
 function activeGuides(){const seen=new Set(),out=[];activePacks().forEach(p=>(p.guides||[]).forEach(g=>{const key=g.file||g.title||g.id;if(key&&!seen.has(key)){seen.add(key);out.push(Object.assign({_pack:p.id,_packName:p.pack||p.id},g));}}));return out;}
 function cardOf(id){return deck().find(c=>c.id===id);}
 function sysLabel(s){return SYS_LABEL[s]||s;}
@@ -1561,9 +1605,10 @@ function systemsPresent(set){const arr=[...set];return SYS_ORDER.filter(s=>set.h
 /* difficulty */
 function diffRank(q){return DIFFS.indexOf(q&&q.difficulty);}
 /* v0.4.1: Practice and Exam each keep their own difficulty mix (settings.pracDiffs / examDiffs), chosen on their setup screens. */
+function selTopics(m){const v=settings[m==='prac'?'pracTopics':'examTopics'];return Array.isArray(v)?new Set(v):null;}
 function selDiffs(m){const v=settings[m==='prac'?'pracDiffs':'examDiffs'];const s=Array.isArray(v)?v.filter(d=>DIFFS.includes(d)):[];return s.length?s:DIFFS.slice();}
 function matchDiff(q,m){const s=selDiffs(m);if(s.length===DIFFS.length)return true;const r=diffRank(q);return r>=0&&s.includes(DIFFS[r]);}
-function qTestPool(m){return qpool().filter(q=>matchDiff(q,m||'exam'));}
+function qTestPool(m){m=m||'exam';const t=selTopics(m);return qpool().filter(q=>matchDiff(q,m)&&(!t||t.has(q._sec)));}
 function selDiffsLegacy(){const s=Array.isArray(settings.sessionDiffs)?settings.sessionDiffs.filter(d=>DIFFS.includes(d)):[];return s.length?s:DIFFS.slice();}
 function diffCounts(){const pool=qpool();const c={easy:0,medium:0,hard:0,all:pool.length};pool.forEach(q=>{const r=diffRank(q);if(r>=0)c[DIFFS[r]]++;});return c;}
 function diffBadge(q){if(!q||diffRank(q)<0)return '';return `<span class="diffbadge ${q.difficulty}">${q.difficulty}</span>`;}
@@ -1902,7 +1947,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('acctOv').style.d
 const INSTALL_STEPS={
   ios:`<ol>
     <li>Open this site in <b>Safari</b> on your iPhone or iPad.</li>
-    <li>Tap the <b>Share</b> button <kbd>&#x2BAD;</kbd> (square with an arrow, in the toolbar).</li>
+    <li>Tap the <b>Share</b> button <kbd class="shareico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v11M8 7.2l4-3.7 4 3.7M7.5 10.5H6v10h12v-10h-1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></kbd> (square with an arrow, in the toolbar).</li>
     <li>Scroll down and tap <b>Add to Home Screen</b>.</li>
     <li>Tap <b>Add</b> — the Study Suite icon appears on your home screen and opens full-screen.</li>
   </ol>`,
@@ -2130,6 +2175,7 @@ async function init(){
   if(!Array.isArray(settings.sessionDiffs)){const old=settings.sessionDifficulty;
     settings.sessionDiffs=(old==='easy')?['easy']:(old==='medium')?['easy','medium']:DIFFS.slice();}
   delete settings.sessionDifficulty;
+  if(!settings.secV){if(settings.examGroupBy==='topic'){settings.examCounts={};settings.examAuto=true;}settings.secV=1;} /* v0.4.3: topic keys changed */
   ['pracDiffs','examDiffs'].forEach(k=>{if(!Array.isArray(settings[k]))settings[k]=selDiffsLegacy();});
   deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});
   rollDaily();
@@ -2167,7 +2213,7 @@ function validateQuestion(q,i){
 function ingestPack(obj,sourceName){
   let pk;
   if(Array.isArray(obj)){const isCards=obj.some(x=>x&&x.type&&KNOWN_TYPES.includes(x.type));pk={id:'pack_'+Date.now().toString(36),pack:sourceName||'Imported',questions:isCards?[]:obj,cards:isCards?obj:[],guides:[]};}
-  else {pk={id:obj.id||('pack_'+Date.now().toString(36)),pack:obj.pack||sourceName||'Imported',questions:Array.isArray(obj.questions)?obj.questions:[],cards:Array.isArray(obj.cards)?obj.cards:[],guides:Array.isArray(obj.guides)?obj.guides:[],version:obj.version,author:obj.author||obj.createdBy,school:obj.school,year:obj.year,term:obj.term,course:obj.course,weeks:obj.weeks,drugs:Array.isArray(obj.drugs)?obj.drugs:[]};}
+  else {pk={id:obj.id||('pack_'+Date.now().toString(36)),pack:obj.pack||sourceName||'Imported',questions:Array.isArray(obj.questions)?obj.questions:[],cards:Array.isArray(obj.cards)?obj.cards:[],guides:Array.isArray(obj.guides)?obj.guides:[],version:obj.version,author:obj.author||obj.createdBy,school:obj.school,year:obj.year,term:obj.term,course:obj.course,weeks:obj.weeks,groupBy:obj.groupBy,drugs:Array.isArray(obj.drugs)?obj.drugs:[]};}
   const errs=[];
   pk.questions=pk.questions.filter((q,i)=>{const v=validateQuestion(q,i);if(v){errs.push(v);return false;}return true;});
   pk.cards=pk.cards.filter((c,i)=>{const v=validateCard(c,i);if(v){errs.push(v);return false;}return true;});
@@ -2344,7 +2390,7 @@ function examTotal(){const c=currentCounts();let t=0;for(const k in c)t+=c[k];re
 
 /* ===== SRS DECK ===== */
 let filter=null, sessionQueue=[], currentId=null, revealed=false, work={}, studiedThisSession=0; // filter=null ⇒ ALL topics; empty Set ⇒ none; Set with members ⇒ that subset
-function inScope(c){return !filter||filter.has(c.topic);}
+function inScope(c){return !filter||filter.has(c._sec);}
 function counts(){const now=Date.now();let nw=0,lr=0,rv=0,nwTot=0;
   deck().forEach(c=>{if(!inScope(c))return;const s=sched[c.id];if(s.phase==='new')nwTot++;else if(s.due<=now){(s.phase==='review'?rv++:lr++);}});
   return {nw:Math.min(nwTot,Math.max(0,settings.srsNewPerDay-daily.count)),lr,rv};}
@@ -2353,7 +2399,7 @@ function renderSrs(){
   const c=counts();
   $('cNew').textContent=c.nw;$('cLearn').textContent=c.lr;$('cRev').textContent=c.rv;
   $('studyBtn').disabled=(c.nw+c.lr+c.rv===0);
-  const scope=!filter?'All topics':(filter.size===0?'No topics selected':(filter.size+' topic'+(filter.size>1?'s':'')+' — '+[...filter].slice(0,3).join(', ')+(filter.size>3?'…':'')));
+  const scope=!filter?'All topics':(filter.size===0?'No topics selected':(filter.size+' topic'+(filter.size>1?'s':'')+' — '+[...filter].slice(0,3).map(k=>secName(k)).join(', ')+(filter.size>3?'…':'')));
   $('scopeline').innerHTML='Studying: <b>'+scope+'</b>';
   $('topicSummary').textContent=!filter?'all selected':(filter.size===0?'none selected':filter.size+' selected');
   renderTopics();renderSysbreak();
@@ -2361,14 +2407,14 @@ function renderSrs(){
 function renderSysbreak(){const sb=$('sysbreak');sb.innerHTML='';const set=new Set(deck().map(c=>c.sys));
   systemsPresent(set).forEach(sys=>{const list=deck().filter(c=>c.sys===sys);const seen=list.filter(c=>sched[c.id].phase!=='new').length;const p=list.length?Math.round(seen/list.length*100):0;
     sb.innerHTML+=`<div class="sysrow"><div class="top"><span class="name">${sysLabel(sys)}</span><span class="sc">${seen}/${list.length} started · ${p}%</span></div><div class="sbar"><i style="width:${p}%"></i></div></div>`;});}
-function renderTopics(){const now=Date.now();const tl=$('topicList');tl.innerHTML='';const set=new Set(deck().map(c=>c.sys));
-  systemsPresent(set).forEach(sys=>{const topics=[];const seen=new Set();
-    deck().filter(c=>c.sys===sys).forEach(c=>{if(!seen.has(c.topic)){seen.add(c.topic);topics.push(c.topic);}});
-    let chips='';topics.forEach(t=>{let due=0;deck().forEach(c=>{if(c.topic===t){const s=sched[c.id];if(s.phase==='new'||s.due<=now)due++;}});
-      chips+=`<button class="tchip ${(!filter||filter.has(t))?'on':''}" data-t="${encodeURIComponent(t)}">${t}<span class="ct ${due?'':'zero'}">${due}</span></button>`;});
-    tl.innerHTML+=`<div class="tgroup"><div class="gname">${sysLabel(sys)}</div><div class="tchips">${chips}</div></div>`;});
+function renderTopics(){const now=Date.now();const tl=$('topicList');const groups=secGroups(deck());const open=groups.length<=2;tl.innerHTML='';
+  groups.forEach((g,gi)=>{let chips='';g.secs.forEach(sec=>{const due=sec.items.filter(c=>{const s2=sched[c.id];return s2&&(s2.phase==='new'||s2.due<=now);}).length;
+      chips+=`<button class="tchip ${(!filter||filter.has(sec.k))?'on':''}" data-t="${encodeURIComponent(sec.k)}">${acctEsc(sec.l)}<span class="ct ${due?'':'zero'}">${due}</span></button>`;});
+    const on=g.secs.filter(sec=>!filter||filter.has(sec.k)).length;
+    tl.innerHTML+=`<div class="tgroup ${open||tl.dataset['o'+gi]==='1'?'':'closed'}" data-gi="${gi}"><button class="gname gtoggle" type="button">${acctEsc(g.name)} <span class="gsel">${on} of ${g.secs.length}</span></button><div class="tchips">${chips}</div></div>`;});
+  tl.querySelectorAll('.gtoggle').forEach(el=>el.addEventListener('click',()=>{const gr=el.closest('.tgroup');gr.classList.toggle('closed');tl.dataset['o'+gr.dataset.gi]=gr.classList.contains('closed')?'0':'1';}));
   tl.querySelectorAll('.tchip').forEach(el=>el.addEventListener('click',()=>{const t=decodeURIComponent(el.dataset.t);
-    const all=[...new Set(deck().map(c=>c.topic))];
+    const all=[...new Set(deck().map(c=>c._sec))];
     if(!filter)filter=new Set(all); // expand 'ALL' to an explicit set before toggling one off
     filter.has(t)?filter.delete(t):filter.add(t);
     if(filter.size===all.length)filter=null; // re-selected everything ⇒ collapse back to 'ALL'
@@ -2752,7 +2798,7 @@ function toggleInfo(which){const items={coming:['comingBtn','comingPanel'],faq:[
     $(panel).style.display=open?'':'none';$(btn).classList.toggle('on',open);});}
 
 /* ===== EXAM WEIGHTING ===== */
-function groupKeyOf(q){const by=settings.examGroupBy;return by==='system'?q.sys:by==='pack'?q._packName:q.topic;}
+function groupKeyOf(q){const by=settings.examGroupBy;return by==='system'?q.sys:by==='pack'?q._packName:q._sec;}
 function examGroups(){const m=new Map();qTestPool('exam').forEach(q=>{const k=groupKeyOf(q);if(!m.has(k))m.set(k,[]);m.get(k).push(q.id);});return m;}
 function autoBalance(target){const g=examGroups();let total=0;g.forEach(ids=>total+=ids.length);if(!total)return;const t=Math.min(target,total);
   const entries=[...g.entries()];let counts={},sum=0;
@@ -2835,7 +2881,7 @@ function resumePractice(){const p=prac;buildQmap();
   $('finishBtn').textContent='Finish & summary';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map · practice';
   const dropped=p.qorder.length-keep.length;toast(dropped?`Practice resumed — ${dropped} question${dropped===1?'':'s'} no longer loaded ${dropped===1?'was':'were'} skipped.`:'Practice resumed.');
   renderQuiz();startQTick();show('quiz');savePrac();}
-function startPracticeFresh(){const pool=qTestPool('prac');if(!pool.length){toast('No questions match that difficulty.');return;}buildQmap();
+function startPracticeFresh(){const pool=qTestPool('prac');if(!pool.length){toast('No questions match those topics and difficulty.');return;}buildQmap();
   let ids=pool.map(q=>q.id);
   if(settings.practiceOnlyNew){ids=ids.filter(id=>!histSeen(id));
     if(!ids.length){toast('You’ve answered every question in your active packs. Turn off “Unanswered only” in Settings to practise them again.');return;}}
@@ -2847,7 +2893,7 @@ function startPracticeFresh(){const pool=qTestPool('prac');if(!pool.length){toas
   timerWanted=!!settings.practiceTimer;$('flagBtn').style.display='none';$('submitAnsBtn').style.display='';
   $('finishBtn').textContent='Finish & summary';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map · practice';
   renderQuiz();startQTick();show('quiz');}
-function startExam(){const pool=qTestPool('exam');if(!pool.length){toast('No questions match that difficulty.');return;}buildQmap();
+function startExam(){const pool=qTestPool('exam');if(!pool.length){toast('No questions match those topics and difficulty.');return;}buildQmap();
   const counts=currentCounts();const g=examGroups();let picks=[],short=0;const mode=settings.examFresh||'prefer';
   /* Weighting is kept per group; "fresh" = never answered (practice or exam). Prefer tops up with the longest-unseen. */
   g.forEach((ids,k)=>{const want=Math.min(ids.length,counts[k]||0);let take;
@@ -2934,8 +2980,23 @@ function setupFreshNotes(){const ep=qTestPool('exam'),pp=qTestPool('prac');
   $('exFreshNote').textContent=`${ef} of ${ep.length} question${ep.length===1?'':'s'} not answered yet.`;
   $('prFreshNote').textContent=`${pf} of ${pp.length} not answered yet.`;}
 function renderSetupDiff(){const m=setupMode==='exam'?'exam':'prac',el=$(m==='exam'?'exDiff':'prDiff'),sd=selDiffs(m),dc=diffCounts();
-  el.querySelectorAll('.seg').forEach(b=>{b.classList.toggle('on',sd.includes(b.dataset.d));b.querySelector('i').textContent=dc[b.dataset.d];});}
-function openSetup(m){setupMode=m;const ex=m==='exam';
+  el.querySelectorAll('.seg').forEach(b=>{b.classList.toggle('on',sd.includes(b.dataset.d));b.querySelector('i').textContent=dc[b.dataset.d];});
+  const box=$(m==='exam'?'exTopics':'prTopics');if(!box.hidden)renderSetupTopics(m);}
+function setupTopicSummary(m){const btn=$(m==='exam'?'exTopBtn':'prTopBtn'),box=$(m==='exam'?'exTopics':'prTopics'),t=selTopics(m);
+  const all=new Set(qpool().map(q=>q._sec)).size;btn.textContent=(t?`${t.size} of ${all} topics`:'All topics')+(box.hidden?' ▸':' ▾');}
+function renderSetupTopics(m){const box=$(m==='exam'?'exTopics':'prTopics'),key=m==='exam'?'examTopics':'pracTopics';
+  const pool=qpool().filter(q=>matchDiff(q,m)),t=selTopics(m),groups=secGroups(pool);
+  box.innerHTML=groups.map(g=>`<div class="tgroup"><div class="gname">${acctEsc(g.name)}</div><div class="tchips">${g.secs.map(sec=>`<button class="tchip ${(!t||t.has(sec.k))?'on':''}" data-t="${encodeURIComponent(sec.k)}">${acctEsc(sec.l)}<span class="ct">${sec.n}</span></button>`).join('')}</div></div>`).join('')
+    +'<div class="topicactions"><button class="minor" data-all="1">Select all</button><button class="minor" data-none="1">Clear</button></div>';
+  const done=()=>{renderSetupTopics(m);setupTopicSummary(m);setupFreshNotes();if(m==='exam')renderWeights();persist();};
+  box.querySelectorAll('.tchip').forEach(el=>el.onclick=()=>{const k=decodeURIComponent(el.dataset.t),all=[...new Set(qpool().map(q=>q._sec))];
+    const cur=selTopics(m)||new Set(all);cur.has(k)?cur.delete(k):cur.add(k);settings[key]=cur.size===all.length?null:[...cur];done();});
+  box.querySelector('[data-all]').onclick=()=>{settings[key]=null;done();};box.querySelector('[data-none]').onclick=()=>{settings[key]=[];done();};}
+['exTopBtn','prTopBtn'].forEach(id=>$(id).addEventListener('click',()=>{const m=$(id).dataset.m,box=$(m==='exam'?'exTopics':'prTopics');box.hidden=!box.hidden;if(!box.hidden)renderSetupTopics(m);setupTopicSummary(m);}));
+/* drop topic picks that no longer exist (pack removed/updated); nothing left = all topics */
+function tidyTopics(m){const key=m==='exam'?'examTopics':'pracTopics';if(!Array.isArray(settings[key]))return;const have=new Set(qpool().map(q=>q._sec));
+  const kept=settings[key].filter(k=>have.has(k));settings[key]=kept.length||settings[key].length===0?kept:null;}
+function openSetup(m){setupMode=m;const ex=m==='exam';tidyTopics(m);$(ex?'exTopics':'prTopics').hidden=true;setupTopicSummary(m);
   $('setupTitle').textContent=ex?'Set up your exam':'Set up practice';$('setupExam').style.display=ex?'':'none';$('setupPrac').style.display=ex?'none':'';
   $('setupGo').textContent=ex?'Start exam':'Start practice';
   if(ex){$('setGroupBy').value=settings.examGroupBy;$('autoTarget').value=Math.max(1,settings.examTarget||40);toggleSwitch($('setExamAuto'),settings.examAuto);
@@ -2970,9 +3031,10 @@ function renderWeights(){const wr=$('weightRows');wr.innerHTML='';const g=examGr
   if(g.size===0){wr.innerHTML='<div class="note" style="text-align:left">Load a pack (and pick a difficulty) to set exam weights.</div>';$('weightTotal').textContent='0';return;}
   const disp=currentCounts();
   if(!auto){const nc={};g.forEach((ids,k)=>{nc[k]=Math.min(ids.length,disp[k]||0);});settings.examCounts=nc;}
-  g.forEach((ids,k)=>{const row=document.createElement('div');row.className='wrow';
+  const ents=[...g.entries()];if(settings.examGroupBy==='topic')ents.sort((a,b)=>natCmp(SEC_PACK[a[0]]||'',SEC_PACK[b[0]]||'')||((SEC_ORD[a[0]]||0)-(SEC_ORD[b[0]]||0)));
+  ents.forEach(([k,ids])=>{const row=document.createElement('div');row.className='wrow';
     const fr=(settings.examFresh||'prefer')==='any'?'':` · ${ids.filter(id=>!histSeen(id)).length} fresh`;
-    row.innerHTML=`<span class="wn">${sysLabel(k)}</span><span class="wc">${ids.length} avail${fr}</span>`;
+    row.innerHTML=`<span class="wn">${settings.examGroupBy==='topic'?acctEsc(secName(k,true)):sysLabel(k)}</span><span class="wc">${ids.length} avail${fr}</span>`;
     const inp=document.createElement('input');inp.type='number';inp.min=0;inp.max=ids.length;inp.value=disp[k]||0;
     inp.disabled=auto;if(auto)inp.style.opacity='.55';
     inp.addEventListener('input',()=>{if(settings.examAuto){settings.examAuto=false;toggleSwitch($('setExamAuto'),false);const cur=currentCounts();g.forEach((i2,k2)=>settings.examCounts[k2]=cur[k2]||0);}

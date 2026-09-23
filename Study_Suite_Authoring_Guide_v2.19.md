@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.18 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.19 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.18)
+# Study Suite — Content Authoring Guide (v2.19)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,15 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.18 · **Pairs with:** Study Suite app v2.17+, pack `formatVersion` 2.0
+> **Authoring system version:** 2.19 · **Pairs with:** Study Suite app v0.4.3+, pack `formatVersion` 2.0
+> **What changed in guide v2.19:** **topics are real topics.** An item's `topic` is the concept-level group it belongs
+> to — chosen from a top-level view of the *whole* pack's material during synthesis — not a per-item label. A dense week
+> lands at roughly **8–20 topics, each spanning several items (≥3)**. Topics and guides are independent: one guide can
+> span several topics, and a topic can draw on several guides. Declare it with a new top-level field
+> **`"groupBy": "topic"`** (§2). The app groups Review's topic picker, the Practice/Exam topic filters and the exam
+> "Topic" weighting by it. Without `groupBy` — or if most topics still hold a single item — the app groups by the
+> **linked guide** instead, so every item should carry a `guide` pointer. Packs built before v2.19 are not reworked:
+> the app groups them by guide automatically. The §7a validator warns on fragmented topics.
 > **What changed in guide v2.18:** no schema change. §4a's ban on **source reportage** is now spelled out as a
 > list of banned sentence frames ("the module says", "the lecture's deck…", "as taught", "in the slide's order")
 > with rewrites, and the §7a validator lints for them. The only reader-facing place a source may be named is a
@@ -238,6 +246,7 @@ A pack is a single JSON object:
 | `created` / `updated` | recommended | ISO date strings. |
 | `questions` / `cards` | arrays | Either may be empty, but a useful pack has both. |
 | `guides` | yes if any item links a guide | Embedded topic guides — see §6. |
+| `groupBy` | yes (new packs and updates) | `"topic"` — declares that items' `topic` values are **real topics** (v2.19; see the `topic` field below). Omit it only for a pack whose topics can't be grouped; the app then groups by each item's linked guide. |
 | `drugs` | optional | Pharmacology records that feed the app's cross-week **Pharmacology** view. Additive/optional — omit it and nothing changes. See **§6b**. |
 | `school` / `year` / `term` / `course` / `weeks` | optional | Curriculum placement, e.g. `"UofT — Temerty Medicine"` / `"Year 1"` / `"Fall"` (term — optional) / `"CPC 2"` / `"Weeks 25–28"`. Used to **group and chronologically sort** packs in the hosted site's Default study packs panel and the user's Content library; ignored otherwise. `term` sits **between `year` and `course`** and is omitted by most packs (harmless when absent — the level simply doesn't render). Ask the user how their program is organized — see *Organizational hierarchy & sorting* below — and include the fields that apply. |
 
@@ -289,9 +298,9 @@ if the level weren't there, so leaving it out costs nothing.
 | field | required | notes |
 |---|---|---|
 | `sys` | yes | Short system/group code, e.g. `"Cardio"`. Drives the system breakdown and exam weighting. The app shows friendly labels for `"Endo"`→Endocrine, `"GI"`→Gastrointestinal, `"KU"`→Renal/Urinary; any other string shows as-is. |
-| `topic` | yes | Free-text topic, e.g. `"Arrhythmias"`. Appears in the Review topic filter and as a weighting dimension. You may encode a sub-block: `"Cardio I · Arrhythmias"`. |
+| `topic` | yes | A **real topic** — the concept-level group the item belongs to, e.g. `"Arrhythmias"`, `"Heart failure"`. Decide the pack's topic list **once, from the whole pack's material** (during synthesis, before writing items), then assign every item to one of them: roughly **8–20 topics for a dense week, each spanning several items (≥3)**. It is *not* a per-item label (`"Symmetry"`, `"Bayes & serology"` are sub-points, not topics). Topics are independent of guides — a guide may span several topics. The topic is shown as the item's tag, drives Review's topic picker and the Practice/Exam topic filters, and is the exam's "Topic" weighting (with `groupBy:"topic"`). |
 | `explain` | strongly recommended | Teaching/answer text. **HTML allowed** (`<b>`, `<i>`, `<br>`). |
-| `guide` | optional | `{ "f": "file.html", "t": "short title", "s": "section pointer" }`. `f` **must exactly match** the `file` of an embedded guide in `guides[]` (see §6). |
+| `guide` | strongly recommended | `{ "f": "file.html", "t": "short title", "s": "section pointer" }`. `f` **must exactly match** the `file` of an embedded guide in `guides[]` (see §6). Also the app's **grouping fallback** when a pack's topics aren't real topics. |
 | `id` | recommended | Stable unique id (e.g. `"wk12_c01"`) so review progress survives reloads/edits. |
 
 > **Plain text vs HTML — know which fields render markup.** The app renders HTML in exactly two places:
@@ -770,6 +779,7 @@ doesn't parse, it won't import.
 
 **Substance & coverage:** **topic guides synthesized by concept (§6) — typically 8–15 for a dense one-week
 pack, each 10,000–20,000 characters of body** (not a single sparse page, not one guide per lecture),
+**`groupBy:"topic"` with real topics — ~8–20 for a dense week, each spanning ≥3 items (§2, v2.19)**,
 each with real sections/tables, **plus a cram sheet as the final guide (§6a)**; **most questions
 and cards carry a `guide` pointer**; counts meet the
 targets and are **scaled to the weeks covered** (10–20 questions — favour the upper end, 18–20, for a
@@ -945,6 +955,14 @@ def validate_pack(pack):
         warns.append(f"cloze cards {types['cloze']}/{len(cs)} (>35%) — vary the card mix (more qa/mcq/order)")
     if len(gs) < 6:
         warns.append(f"only {len(gs)} guide(s) — a dense one-week pack usually has 8–15 concept guides (§6); check for merged concepts")
+
+    # §2 (v2.19): topics are real topics. Fragmented topics (mostly one item each) defeat the topic picker and weighting.
+    tc = Counter(x.get("topic") for x in qs + cs if x.get("topic"))
+    if pack.get("groupBy") != "topic":
+        warns.append("no groupBy:'topic' — new packs and updates declare real topics (§2, v2.19); the app will group by guide")
+    elif tc and sum(1 for v in tc.values() if v == 1) / len(tc) > 0.5:
+        warns.append(f"groupBy 'topic' but {sum(1 for v in tc.values() if v == 1)}/{len(tc)} topics hold one item — "
+                     "consolidate into real topics (§2); the app falls back to guide grouping")
 
     diffs = Counter(q.get("difficulty") for q in qs)
     print(f"questions={len(qs)} cards={len(cs)} guides={len(gs)} "

@@ -2,23 +2,58 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Terms of Service — Study Suite</title><meta name="description" content="Terms of Service for Study Suite (studysuite.app).">
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon.ico" sizes="any">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Space+Mono&display=swap">
+<script>/* the app's saved theme, applied before paint (same keys as the app) */
+(function(){var s={};try{s=JSON.parse(localStorage.getItem('suite_settings_v1')||'{}')||{};}catch(e){}
+var r=document.documentElement,f=s.themeFamily||'navy';function mode(){var t=s.theme||'auto';if(t==='light'||t==='dark'||t==='black')return t;
+var d=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches;return d?(s.autoDark==='black'?'black':'dark'):'light';}
+function apply(){r.setAttribute('data-theme',mode());r.setAttribute('data-family',f);}apply();
+if(window.matchMedia)try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',apply);}catch(e){}})();</script>
 <style>
-:root{--paper:#f3efe6;--ink:#1d1b16;--soft:#524f45;--line:#cfc8b6;--accent:#7c2d2d;--card:#ece7da}
-@media (prefers-color-scheme:dark){:root{--paper:#1b1916;--ink:#ece7da;--soft:#a89f90;--line:#3b362c;--accent:#c98a6a;--card:#262320}}
-*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:'Newsreader',Georgia,serif;font-size:17px;line-height:1.6}
-main{max-width:760px;margin:0 auto;padding:28px 18px 64px}
-.top{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px}.top a{color:var(--accent);text-decoration:none}
-h1{font-family:'Playfair Display',serif;font-weight:600;font-size:30px;line-height:1.2;margin:0 0 12px}
-h2{font-family:'Playfair Display',serif;font-weight:600;font-size:21px;margin:30px 0 8px}
-a{color:var(--accent)}hr{border:0;border-top:1px solid var(--line);margin:22px 0}
-table{width:100%;border-collapse:collapse;font-size:15px;margin:10px 0 16px;display:block;overflow-x:auto}
-th,td{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:8px 10px}th{background:var(--card);font-weight:600}
-ul{padding-left:22px}li{margin:4px 0}
-.foot{margin-top:36px;font-family:'Space Mono',monospace;font-size:11px;color:var(--soft)}
-</style></head><body><main>
-<div class="top"><a href="./">← Back to Study Suite</a></div>
-<h1>Study Suite — Terms of Service</h1>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Playfair+Display:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
+/* ===== THEME SYSTEM: two families (navy default / warm) × three modes (light/dark/black).
+   Driven by data-family + data-theme on <html>. Each block redefines ALL palette colors so the
+   most-specific matching block wins cleanly. Fonts are per-family vars. ===== */
+:root{ /* Navy · Light (default) */
+  --font-head:'Playfair Display',serif;--font-body:'Newsreader',Georgia,serif;--font-mono:'Space Mono',monospace;
+  --paper:#ffffff;--paper2:#f5f5f5;--ink:#1d1b16;--ink-soft:#343127;--line:#002a5d;--accent:#002a5d;--accent-soft:#38698f;--green:#1f754d;--red:#9b2c2c;--gold:#9a7b27;--blue:#2a6bb2;
+  --shadow:0 1px 0 rgba(0,0,0,.04), 0 8px 28px -16px rgba(20,30,50,.26);}
+:root[data-family="warm"]{ /* Warm · Light */
+  --font-head:'Fraunces',serif;--font-mono:'IBM Plex Mono',monospace;
+  --paper:#f3efe6;--paper2:#ece7da;--ink:#1d1b16;--ink-soft:#524f45;--line:#cfc8b6;--accent:#7c2d2d;--accent-soft:#a8534f;--green:#2f6b4f;--red:#9b2c2c;--gold:#9a7b27;--blue:#2d5a6b;}
+:root[data-theme="dark"]{ /* Navy · Dark */
+  --paper:#14171d;--paper2:#1d2330;--ink:#e9ebef;--ink-soft:#caced3;--line:#33415c;--accent:#5ba0dc;--accent-soft:#2c6396;--green:#4fae80;--red:#df6f6f;--gold:#caa44f;--blue:#78bae2;}
+:root[data-theme="black"]{ /* Navy · Black (OLED) */
+  --paper:#000000;--paper2:#101319;--ink:#eceef2;--ink-soft:#aeb6c2;--line:#2a3346;--accent:#5ba0dc;--accent-soft:#2c6396;--green:#4fae80;--red:#df6f6f;--gold:#caa44f;--blue:#78bae2;}
+:root[data-family="warm"][data-theme="dark"]{ /* Warm · Dark */
+  --paper:#1b1916;--paper2:#262320;--ink:#ece7da;--ink-soft:#a89f90;--line:#3b362c;--accent:#c98a6a;--accent-soft:#b5705f;--green:#5fae82;--red:#df6f6f;--gold:#c9a44f;--blue:#6aa6cc;}
+:root[data-family="warm"][data-theme="black"]{ /* Warm · Black */
+  --paper:#000000;--paper2:#151208;--ink:#ece7da;--ink-soft:#b0a796;--line:#332e22;--accent:#cf8e6e;--accent-soft:#b5705f;--green:#5fae82;--red:#df6f6f;--gold:#c9a44f;--blue:#6aa6cc;}
+:root[data-theme="dark"],:root[data-theme="black"]{color-scheme:dark;--shadow:0 1px 0 rgba(0,0,0,.3), 0 10px 30px -16px rgba(0,0,0,.6)}
+
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{background:radial-gradient(120% 90% at 100% 0%, color-mix(in srgb,var(--accent) 6%,transparent), transparent 55%),var(--paper);color:var(--ink);font-family:var(--font-body);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased}
+header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--line)}
+.top-inner{max-width:860px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:14px;justify-content:space-between}
+.brand{display:flex;flex-direction:column;line-height:1}
+.brand .k{font-family:var(--font-mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
+.brand .t{font-family:var(--font-head);font-weight:600;font-size:20px;letter-spacing:-.01em}
+.homebtn{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;background:transparent;border:1.5px solid var(--ink);color:var(--ink);border-radius:4px;padding:7px 12px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.homebtn:hover{background:var(--ink);color:var(--paper)}.homebtn svg{width:13px;height:13px}
+.wrap{max-width:860px;margin:0 auto;padding:26px 22px 90px}
+.crest{font-family:var(--font-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-soft);margin-bottom:6px}
+h1{font-family:var(--font-head);font-weight:600;font-size:36px;line-height:1.15;letter-spacing:-.01em;margin:0 0 14px}
+h2{font-family:var(--font-head);font-weight:600;font-size:23px;margin:34px 0 8px}
+p{margin:0 0 12px}a{color:var(--accent)}ul{padding-left:22px;margin:0 0 12px}li{margin:5px 0}
+hr{border:0;border-top:1px solid color-mix(in srgb,var(--line) 45%,transparent);margin:24px 0}
+.tbl{overflow-x:auto;margin:10px 0 16px}table{width:100%;border-collapse:collapse;font-size:15.5px}
+th,td{text-align:left;vertical-align:top;padding:9px 11px;border-bottom:1px solid color-mix(in srgb,var(--line) 35%,transparent)}
+th{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:400;border-bottom:1.5px solid var(--line)}
+.foot{margin-top:40px;padding-top:14px;border-top:1px solid color-mix(in srgb,var(--line) 45%,transparent);font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;color:var(--ink-soft)}.foot a{color:var(--ink-soft)}
+@media (max-width:560px){h1{font-size:29px}.wrap{padding:20px 16px 80px}.top-inner{padding:12px 16px}}
+</style></head><body>
+<header class="top"><div class="top-inner"><div class="brand"><span class="k">Study Suite</span><span class="t">Terms of Service</span></div>
+<a class="homebtn" href="./"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.2 12 4.5l8 6.7M6.5 9.4V19.5h11V9.4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</a></div></header>
+<main class="wrap"><div class="crest">◇ Legal ◇</div><h1>Terms of Service</h1>
 <p><b>Effective date:</b> September 22, 2026</p>
 <p><b>Operator:</b> Alkarim Billawala, an individual based in Alberta, Canada.</p>
 <p><b>Contact:</b> <a href="mailto:support@studysuite.app">support@studysuite.app</a></p>
@@ -42,5 +77,5 @@ ul{padding-left:22px}li{margin:4px 0}
 <p><b>13. Changes to the service, and ending it.</b> We may change or discontinue features with reasonable notice. If sync is discontinued, we'll tell you in advance; your data stays on your devices, and <b>Backup all</b> exports it at any time. We may suspend accounts that break these terms.</p>
 <p><b>14. Beta features.</b> Beta features come with no availability promise. Sync is built so that an outage never stops the app: it keeps working on your device and catches up later. Availability is best effort.</p>
 <p><b>15. Changes to these terms.</b> We'll announce material changes in the app at least 30 days before they take effect. Continuing to use the app after that means you accept them. If you don't, stop using the service, and delete your account if you have one.</p>
-<div class="foot">Study Suite · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+<div class="foot">Study Suite · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="./">Back to the app</a></div>
 </main></body></html>
