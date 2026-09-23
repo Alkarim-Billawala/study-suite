@@ -1,7 +1,17 @@
 <!--
-  Study Suite  ·  v0.5.4 (beta)
+  Study Suite  ·  v0.5.5 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.5.5: (also: topic pickers on the Practice/Exam setup screens fold each pack's topics under a header with an
+  'x of y' count — setupOpen keeps the open state while ticking; the Review picker folds from 2 packs, was 3) (also: off rows fade everything but the switch, so it reads as tappable.) PLACEHOLDER PACKS. A switched-off PUBLISHED pack can live on a device as a placeholder (p.stub: name,
+  version, counts nq/nc/ng — no questions/cards/guides). Sync never downloads a switched-off published pack (resolvePacks
+  makes a placeholder; one switched on elsewhere is downloaded). Library: a placeholder row is greyed with a download button
+  (cloud ↓) instead of the switch; tapping it downloads the latest version and switches it on (downloadPack). Auto-offload:
+  a published pack off for 7 days becomes a placeholder (offloadIdle; off-since = p.ts, else first seen off,
+  localStorage 'suite_offsince_v1'); Settings → Storage switch (settings.autoOffload, default on). Custom packs are never
+  offloaded (their content lives only in the synced bundle until the future split). Progress is keyed by card id → kept.
+  Payload: placeholders always go as references. Enable all downloads placeholders first. Backups keep placeholders. An off published pack has an Offload
+  button under its switch (manual offload).
   Changelog v0.5.4: WHAT'S NEW IN PACK UPDATES. The manifest carries nq/nc + a fingerprint per guide (g: file → guideFp,
   FNV-1a over UTF-16 of title+"\n"+html, same as the deploy script); a waiting update previews "+24 questions · +49 cards ·
   4 new guides, 5 updated" beside it. After an update (tap or sync follow-up) packDiff(old,new) gives the exact counts, kept in
@@ -617,7 +627,9 @@ section{display:none}section.on{display:block}
 .packrow .pn{font-weight:600}
 .packrow .pm{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em}
 .packrow .pkleft{display:flex;align-items:center;gap:13px}
-.packrow.off{opacity:.5}
+.packrow.off{border-color:color-mix(in srgb,var(--line) 50%,transparent);background:color-mix(in srgb,var(--paper) 50%,transparent)}.packrow.off .pn,.packrow.off .pm,.packrow.off .pkacts{opacity:.5} /* v0.5.5: off/placeholder rows fade — but the switch / download button stays full strength so it reads as tappable */
+.swcol{display:flex;flex-direction:column;align-items:center;gap:3px;flex:none}.offl{font-family:var(--font-mono);font-size:10px;letter-spacing:.04em;background:none;border:0;padding:0;color:var(--ink-soft);text-decoration:underline;text-underline-offset:2px;cursor:pointer}.offl:hover{color:var(--accent)}
+.dlbtn{width:44px;height:30px;flex:none;border:1.5px solid var(--line);border-radius:16px;background:var(--paper2);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0}.dlbtn svg{width:20px;height:20px}.dlbtn:hover{border-color:var(--accent);color:var(--accent)}.dlbtn.busy{opacity:.6;cursor:progress}.dlbtn.busy svg{animation:dlpulse 1s ease-in-out infinite}@keyframes dlpulse{50%{transform:translateY(2px)}}
 .packrow .switch{flex:none}
 .packrow .rm{font-family:var(--font-mono);font-size:11px;border:1px solid var(--line);background:transparent;color:var(--ink-soft);border-radius:5px;padding:6px 10px;cursor:pointer}
 .packrow .rm:hover{border-color:var(--red);color:var(--red)}
@@ -1446,6 +1458,11 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="setrow"><span>New cards per day</span><input type="number" id="setNewPerDay" min="0" max="500" value="20"></div>
     </div>
     <div class="setsec">
+      <div class="sh">Storage</div>
+      <div class="setrow"><span>Offload packs that have been off for a week</span><button class="switch" id="setOffload" type="button">on</button></div>
+      <div class="note" style="text-align:left;margin:-2px 0 4px">They stay in your library with a download button and come back in one tap, with your progress. Your own custom packs are never offloaded.</div>
+    </div>
+    <div class="setsec">
       <div class="sh">Access codes</div>
       <div class="setrow"><span id="setGroups">Unlocks the default study packs shared with your group.</span><button class="minor" id="setAddCode" type="button">Add a code</button></div>
     </div>
@@ -1456,7 +1473,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.5.4';
+const APP_VERSION='0.5.5';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1844,7 +1861,7 @@ const SSSync=(()=>{
     try{const r=await fetch('packs-manifest.json',{cache:'no-store'});if(r.ok){const m=await r.json();if(m&&Array.isArray(m.packs))return m;}}catch(e){}return null;}
   const publicIds=m=>new Set(((m&&m.packs)||[]).filter(x=>x&&x.id&&x.file).map(x=>x.id));
   function payload(pub){return {v:1,app:APP_VERSION,by:DEVICE_ID,devices:devNames,gone:packGone,sched,daily,settings,eac,prac,qhist,exam:examSave,exams:examLog,
-    packs:packs.map(p=>pub.has(p.id)?Object.assign({ref:1},pick(p,LIGHT)):p).concat((meta&&meta.missing)||[])};}
+    packs:packs.map(p=>(pub.has(p.id)||p.stub)?Object.assign({ref:1},pick(p,LIGHT)):p).concat((meta&&meta.missing)||[])};}
   /* Fetch a published pack by id and run it through ingestPack in isolation (so `packs` isn't touched). */
   async function fetchPublic(id,m){const mp=m&&m.packs.find(x=>x&&x.id===id&&x.file);if(!mp)return null;
     try{const r=await fetch(encodeURI(String(mp.file)),{cache:'no-store'});if(!r.ok)return null;const j=await r.json();
@@ -1854,9 +1871,14 @@ const SSSync=(()=>{
   async function resolvePacks(list,m){const have=new Map(packs.map(p=>[p.id,p])),out=[],miss=[];
     for(const e of (list||[])){if(!e||!e.id)continue;
       if(!e.ref){out.push(e);continue;}
-      const p0=have.get(e.id);let p=p0?Object.assign({},p0):await fetchPublic(e.id,m);
+      const p0=have.get(e.id);
+      /* v0.5.5: a switched-off published pack is never downloaded — a placeholder instead (download button in the library) */
+      if(e.enabled===false&&(!p0||p0.stub)){const mp=m&&m.packs.find(x=>x&&x.id===e.id&&x.file);
+        if(mp||p0){const st=makeStub(p0||{id:e.id,pack:e.pack},mp);LIGHT.forEach(k=>{if(k in e)st[k]=e[k];});if(!('ts' in e))delete st.ts;out.push(st);continue;}}
+      let p=(p0&&!p0.stub)?Object.assign({},p0):await fetchPublic(e.id,m);
+      if(!p&&p0&&p0.stub)p=Object.assign({},p0); /* switched on elsewhere but not downloadable right now — try again next sync */
       /* v0.5.1: another device accepted a newer version of this published pack → fetch it (one tap covers every device) */
-      if(p0&&e.version&&verCmp(e.version,p0.version)>0){const up=await fetchPublic(e.id,m);if(up&&verCmp(up.version,p0.version)>0){p=up;pulled.push((up.pack||e.id)+' → v'+up.version);recordPackNews(p0,up);}}
+      if(p0&&!p0.stub&&e.version&&verCmp(e.version,p0.version)>0){const up=await fetchPublic(e.id,m);if(up&&verCmp(up.version,p0.version)>0){p=up;pulled.push((up.pack||e.id)+' → v'+up.version);recordPackNews(p0,up);}}
       if(p){LIGHT.forEach(k=>{if(k!=='version'&&k in e)p[k]=e[k];});if(!('ts' in e))delete p.ts; /* v0.4.8: the account's ts, never the fetch time */
         out.push(p);}else miss.push(e);}
     return {out,miss};}
@@ -2456,7 +2478,27 @@ function backfillPlacement(){const m=defaultManifest;if(!m||!Array.isArray(m.pac
    (added at deploy time); when absent (old manifest) nothing is flagged — graceful. */
 function verCmp(a,b){const pa=String(a==null?0:a).split('.').map(n=>parseInt(n,10)||0),pb=String(b==null?0:b).split('.').map(n=>parseInt(n,10)||0);
   for(let i=0;i<Math.max(pa.length,pb.length);i++){const x=pa[i]||0,y=pb[i]||0;if(x!==y)return x-y;}return 0;}
-function packUpdate(p){const m=defaultManifest;if(!m||!Array.isArray(m.packs)||!p)return null;
+/* ---- Placeholder packs (v0.5.5): a switched-off published pack without its content; downloaded again in one tap. ---- */
+const PACK_META=['pack','version','author','school','year','term','course','weeks','enabled','ts'];
+function manifestEntry(id){const m=defaultManifest;return (m&&Array.isArray(m.packs))?m.packs.find(x=>x&&x.id===id&&x.file)||null:null;}
+function makeStub(p,mp){const st={id:p.id,stub:1,questions:[],cards:[],guides:[]};PACK_META.forEach(k=>{if(p[k]!==undefined)st[k]=p[k];});
+  if(!st.pack)st.pack=(mp&&mp.label)||p.id;
+  st.nq=p.stub?p.nq:(p.questions||[]).length;st.nc=p.stub?p.nc:(p.cards||[]).length;st.ng=p.stub?p.ng:(p.guides||[]).length;
+  if(mp){if(mp.nq!=null&&st.nq==null)st.nq=mp.nq;if(mp.nc!=null&&st.nc==null)st.nc=mp.nc;if(mp.g&&st.ng==null)st.ng=Object.keys(mp.g).length;}return st;}
+/* Download a placeholder's pack (always the latest published version); turnOn = the user tapped download. */
+async function downloadPack(p,turnOn){const mp=manifestEntry(p.id);if(!mp)throw new Error('This pack isn’t available to download any more.');
+  let j;try{const r=await fetch(encodeURI(String(mp.file)),{cache:'no-store'});if(!r.ok)throw 0;j=await r.json();}catch(e){throw new Error('Couldn’t download it — check your connection and try again.');}
+  const was=p.enabled,ts=p.ts;const {pk}=ingestPack(j,(mp.label||mp.file).replace(/\.json$/i,''));
+  if(pk){pk.enabled=turnOn?true:was!==false;pk.ts=turnOn?Date.now():ts;if(pk.ts===undefined)delete pk.ts;}return pk;}
+const OFF_KEY='suite_offsince_v1',OFFLOAD_MS=7*864e5;
+function offloadIdle(){if(!DATA_READY||!defaultManifest||settings.autoOffload===false)return;let map={};try{map=JSON.parse(localStorage.getItem(OFF_KEY)||'{}')||{};}catch(e){}
+  const now=Date.now();let n=0;
+  packs.forEach((p,i)=>{if(p.enabled!==false||p.stub){delete map[p.id];return;}const mp=manifestEntry(p.id);if(!mp)return; /* custom packs are never offloaded */
+    const since=p.ts||map[p.id]||(map[p.id]=now);if(now-since>=OFFLOAD_MS){packs[i]=makeStub(p,mp);delete map[p.id];n++;}});
+  try{localStorage.setItem(OFF_KEY,JSON.stringify(map));}catch(e){}
+  if(n){persist();renderHome();}}
+setInterval(()=>{try{offloadIdle();}catch(e){}},3600000);
+function packUpdate(p){const m=defaultManifest;if(!m||!Array.isArray(m.packs)||!p||p.stub)return null;
   const mp=m.packs.find(x=>x&&x.id===p.id&&x.version&&x.file);return (mp&&verCmp(mp.version,p.version)>0)?mp:null;}
 function pendingUpdates(){return packs.map(p=>[p,packUpdate(p)]).filter(e=>e[1]);}
 /* ---- What's new in pack updates (v0.5.4) ---- */
@@ -2494,7 +2536,7 @@ function updatePack(p,mp,btn){if(btn){btn.disabled=true;btn.textContent='Updatin
   applyPackUpdate(p,mp).then(async()=>{await persist();renderHome();toast('Updated '+(p.pack||p.id)+' to v'+mp.version+'.');})
     .catch(()=>{if(btn){btn.disabled=false;btn.textContent='↑ Update';}toast('Could not update — check your connection and try again.');});}
 function maybeApplyQueuedUpdates(){if(!DATA_READY||!defaultManifest)return;let q=null;try{q=sessionStorage.getItem('suite_apply_updates');sessionStorage.removeItem('suite_apply_updates');}catch(e){}
-  if(q&&pendingUpdates().length)updateAllPacks();}
+  if(q&&pendingUpdates().length)updateAllPacks();try{offloadIdle();}catch(e){}}
 function updateAllPacks(){const todo=pendingUpdates();if(!todo.length)return;
   (async()=>{let n=0;for(const e of todo){try{await applyPackUpdate(e[0],e[1]);n++;}catch(err){}}await persist();renderHome();updateHeaderButtons();
     toast(n?('Updated '+n+' pack'+(n===1?'':'s')+'.'):'Could not update — check your connection.');})();}
@@ -2749,17 +2791,28 @@ function renderHome(){
    across the top ('Other' for packs without a school), then year → course → packs beneath the
    selected school. Enabled packs sort to the top of their subsection. Course groups default open. */
 let libSchool=null, libOpen=null;
-function libRow(p){const on=p.enabled!==false;const upd=packUpdate(p);
-  const row=document.createElement('div');row.className='packrow'+(on?'':' off');
+function libRow(p){const on=p.enabled!==false;const upd=packUpdate(p),stub=!!p.stub;
+  const row=document.createElement('div');row.className='packrow'+(stub?' off stubrow':(on?'':' off'));
   const left=document.createElement('div');left.className='pkleft';
   const sw=document.createElement('button');sw.className='switch'+(on?' on':'');sw.setAttribute('role','switch');sw.setAttribute('aria-checked',on?'true':'false');sw.setAttribute('aria-label','Enable pack');
   sw.onclick=()=>{p.enabled=!on;p.ts=Date.now();persist();renderHome();};
-  const gtag=(p.guides&&p.guides.length)?` · ${p.guides.length} guides`:'';
-  const vtag=p.version?` · v${acctEsc(String(p.version))}`:''; /* v0.5.3 */
+  const ng=stub?(p.ng||0):(p.guides||[]).length,gtag=ng?` · ${ng} guides`:'';
+  const smp=stub?manifestEntry(p.id):null,ver=(smp&&smp.version)||p.version;
+  const vtag=ver?` · v${acctEsc(String(ver))}`:''; /* v0.5.3 */
   const pv=upd?updatePreview(p,upd):'',nw=packNews()[p.id];
   const updtag=upd?` · <span class="updnote">update to v${upd.version}${pv?' ('+acctEsc(pv)+')':''}</span>`:(nw&&nw.text&&newsShown.has(p.id)?` · <span class="newsnote">${acctEsc(nw.text)}</span>`:'');
-  const info=document.createElement('div');info.innerHTML=`<div class="pn">${p.pack}</div><div class="pm">${p.questions.length} questions · ${p.cards.length} cards${gtag}${vtag}${updtag}</div>`;
-  left.appendChild(sw);left.appendChild(info);
+  const nq=stub?(p.nq||0):p.questions.length,nc=stub?(p.nc||0):p.cards.length,sttag=stub?(on?' · switched on elsewhere — tap to download':' · not downloaded'):'';
+  const info=document.createElement('div');info.innerHTML=`<div class="pn">${p.pack}</div><div class="pm">${nq} questions · ${nc} cards${gtag}${vtag}${stub?sttag:updtag}</div>`;
+  if(stub){const dl=document.createElement('button');dl.className='dlbtn';dl.type='button';dl.setAttribute('aria-label','Download '+(p.pack||'pack'));dl.title='Download and switch on';
+    dl.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18.5h9.8a4.2 4.2 0 0 0 .6-8.36A5.8 5.8 0 0 0 6.3 9 4.8 4.8 0 0 0 7 18.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 10.5v6M9.5 14l2.5 2.5 2.5-2.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    dl.onclick=async()=>{dl.disabled=true;dl.classList.add('busy');try{const pk=await downloadPack(p,true);await persist();renderHome();toast('Downloaded '+((pk&&pk.pack)||p.pack)+'.');}catch(e){dl.disabled=false;dl.classList.remove('busy');toast(e.message);}};
+    left.appendChild(dl);}
+  else if(!on&&manifestEntry(p.id)){const col=document.createElement('div');col.className='swcol';col.appendChild(sw);
+    const ob=document.createElement('button');ob.className='offl';ob.type='button';ob.textContent='Offload';ob.title='Free up space — it stays in your library with a download button';
+    ob.onclick=()=>{const i=packs.findIndex(x=>x.id===p.id);if(i<0)return;packs[i]=makeStub(packs[i],manifestEntry(p.id));persist();renderHome();toast('Offloaded '+(p.pack||'the pack')+' — tap its download button to bring it back.');};
+    col.appendChild(ob);left.appendChild(col);} /* v0.5.5: manual offload for a switched-off published pack */
+  else left.appendChild(sw);
+  left.appendChild(info);
   const acts=document.createElement('div');acts.className='pkacts';
   if(upd){const u=document.createElement('button');u.className='upd';u.textContent='↑ Update';u.title='Update to v'+upd.version+' — your review progress is kept';u.onclick=()=>updatePack(p,upd,u);acts.appendChild(u);}
   const b=document.createElement('button');b.className='rm';b.textContent='Remove';b.onclick=()=>removePack(p.id);acts.appendChild(b);
@@ -2840,7 +2893,7 @@ function renderSrs(){
 function renderSysbreak(){const sb=$('sysbreak');sb.innerHTML='';const set=new Set(deck().map(c=>c.sys));
   systemsPresent(set).forEach(sys=>{const list=deck().filter(c=>c.sys===sys);const seen=list.filter(c=>sched[c.id].phase!=='new').length;const p=list.length?Math.round(seen/list.length*100):0;
     sb.innerHTML+=`<div class="sysrow"><div class="top"><span class="name">${sysLabel(sys)}</span><span class="sc">${seen}/${list.length} started · ${p}%</span></div><div class="sbar"><i style="width:${p}%"></i></div></div>`;});}
-function renderTopics(){const now=Date.now();const tl=$('topicList');const groups=secGroups(deck());const open=groups.length<=2;tl.innerHTML='';
+function renderTopics(){const now=Date.now();const tl=$('topicList');const groups=secGroups(deck());const open=groups.length<=1; /* v0.5.5: fold from 2 packs */tl.innerHTML='';
   groups.forEach((g,gi)=>{let chips='';g.secs.forEach(sec=>{const due=sec.items.filter(c=>{const s2=sched[c.id];return s2&&(s2.phase==='new'||s2.due<=now);}).length;
       chips+=`<button class="tchip ${(!filter||filter.has(sec.k))?'on':''}" data-t="${encodeURIComponent(sec.k)}">${acctEsc(sec.l)}<span class="ct ${due?'':'zero'}">${due}</span></button>`;});
     const on=g.secs.filter(sec=>!filter||filter.has(sec.k)).length;
@@ -3424,13 +3477,17 @@ function renderSetupDiff(){const m=setupMode==='exam'?'exam':'prac',el=$(m==='ex
   const box=$(m==='exam'?'exTopics':'prTopics');if(!box.hidden)renderSetupTopics(m);}
 function setupTopicSummary(m){const btn=$(m==='exam'?'exTopBtn':'prTopBtn'),box=$(m==='exam'?'exTopics':'prTopics'),t=selTopics(m);
   const all=new Set(qpool().map(q=>q._sec)).size;btn.textContent=(t?`${t.size} of ${all} topics`:'All topics')+(box.hidden?' ▸':' ▾');}
+const setupOpen={exam:new Set(),prac:new Set()};
 function renderSetupTopics(m){const box=$(m==='exam'?'exTopics':'prTopics'),key=m==='exam'?'examTopics':'pracTopics';
   const pool=qpool().filter(q=>matchDiff(q,m)),t=selTopics(m),groups=secGroups(pool);
-  box.innerHTML=groups.map(g=>`<div class="tgroup"><div class="gname">${acctEsc(g.name)}</div><div class="tchips">${g.secs.map(sec=>`<button class="tchip ${(!t||t.has(sec.k))?'on':''}" data-t="${encodeURIComponent(sec.k)}">${acctEsc(sec.l)}<span class="ct">${sec.n}</span></button>`).join('')}</div></div>`).join('')
+  /* v0.5.5: each pack's topics fold under their pack (open state kept while ticking); a single pack opens directly */
+  const op=setupOpen[m];box.innerHTML=groups.map(g=>{const on=g.secs.filter(sec=>!t||t.has(sec.k)).length,open=groups.length===1||op.has(g.name);
+    return `<div class="tgroup${open?'':' closed'}"><button type="button" class="gname gtoggle" data-g="${encodeURIComponent(g.name)}">${acctEsc(g.name)} <span class="gsel">${on} of ${g.secs.length}</span></button><div class="tchips">${g.secs.map(sec=>`<button class="tchip ${(!t||t.has(sec.k))?'on':''}" data-t="${encodeURIComponent(sec.k)}">${acctEsc(sec.l)}<span class="ct">${sec.n}</span></button>`).join('')}</div></div>`;}).join('')
     +'<div class="topicactions"><button class="minor" data-all="1">Select all</button><button class="minor" data-none="1">Clear</button></div>';
   const done=()=>{renderSetupTopics(m);setupTopicSummary(m);setupFreshNotes();if(m==='exam')renderWeights();persist();};
   box.querySelectorAll('.tchip').forEach(el=>el.onclick=()=>{const k=decodeURIComponent(el.dataset.t),all=[...new Set(qpool().map(q=>q._sec))];
     const cur=selTopics(m)||new Set(all);cur.has(k)?cur.delete(k):cur.add(k);settings[key]=cur.size===all.length?null:[...cur];done();});
+  box.querySelectorAll('.gtoggle').forEach(el=>el.onclick=()=>{const g=decodeURIComponent(el.dataset.g),gr=el.closest('.tgroup');gr.classList.toggle('closed');gr.classList.contains('closed')?op.delete(g):op.add(g);});
   box.querySelector('[data-all]').onclick=()=>{settings[key]=null;done();};box.querySelector('[data-none]').onclick=()=>{settings[key]=[];done();};}
 ['exTopBtn','prTopBtn'].forEach(id=>$(id).addEventListener('click',()=>{const m=$(id).dataset.m,box=$(m==='exam'?'exTopics':'prTopics');box.hidden=!box.hidden;if(!box.hidden)renderSetupTopics(m);setupTopicSummary(m);}));
 /* drop topic picks that no longer exist (pack removed/updated); nothing left = all topics */
@@ -3464,6 +3521,7 @@ function openSettings(){
   toggleSwitch($('setPracTimer'),settings.practiceTimer);toggleSwitch($('setExamTimer'),settings.examTimer);toggleSwitch($('setPracShuffle'),settings.practiceShuffle);
   toggleSwitch($('setPracOnlyNew'),!!settings.practiceOnlyNew);$('setExamFresh').value=settings.examFresh||'prefer';
   $('histPack').innerHTML='<option value="">All packs</option>'+packs.map(p=>`<option value="${acctEsc(p.id)}">${acctEsc(p.pack||p.id)}</option>`).join('');
+  toggleSwitch($('setOffload'),settings.autoOffload!==false);
   {const gs=[...userGroups()];$('setGroups').textContent=gs.length?'Your groups: '+gs.join(', '):'No access code yet — add one to unlock your group’s default study packs.';}
   renderWeights();$('setMsg').textContent='';$('settingsModal').classList.add('show');}
 function toggleSwitch(el,on){el.classList.toggle('on',on);el.setAttribute('role','switch');el.setAttribute('aria-checked',on?'true':'false');}
@@ -3594,6 +3652,7 @@ $('packFile').addEventListener('change',e=>{if(e.target.files.length)readFiles(e
 ['dragleave','drop'].forEach(ev=>$('dropzone').addEventListener(ev,e=>{e.preventDefault();$('dropzone').classList.remove('drag');}));
 $('dropzone').addEventListener('drop',e=>{if(e.dataTransfer.files.length)readFiles(e.dataTransfer.files);});
 $('settingsBtn').addEventListener('click',openSettings);
+$('setOffload').addEventListener('click',()=>{settings.autoOffload=settings.autoOffload===false;toggleSwitch($('setOffload'),settings.autoOffload!==false);persist();offloadIdle();});
 $('setAddCode').addEventListener('click',()=>{$('settingsModal').classList.remove('show');renderAcct('addcode');$('acctOv').style.display='flex';});
 $('setClose').addEventListener('click',()=>{$('settingsModal').classList.remove('show');renderHome();});
 $('settingsModal').addEventListener('click',e=>{if(e.target.id==='settingsModal'){$('settingsModal').classList.remove('show');renderHome();}});
@@ -3618,7 +3677,9 @@ $('setPracSecs').addEventListener('change',e=>{settings.practiceSecs=Math.max(5,
 $('setExamMins').addEventListener('change',e=>{settings.examMinutes=Math.max(1,parseInt(e.target.value)||60);persist();});
 $('setNewPerDay').addEventListener('change',e=>{settings.srsNewPerDay=Math.max(0,parseInt(e.target.value)||0);persist();});
 $('updateAll').addEventListener('click',updateAllPacks);
-$('enableAll').addEventListener('click',()=>{const t=Date.now();packs.forEach(p=>{if(p.enabled===false){p.enabled=true;p.ts=t;}});persist();renderHome();});
+$('enableAll').addEventListener('click',async()=>{const t=Date.now();packs.forEach(p=>{if(p.enabled===false&&!p.stub){p.enabled=true;p.ts=t;}});
+  const st=packs.filter(p=>p.stub);let bad=0;for(const p of st){try{await downloadPack(p,true);}catch(e){bad++;}}
+  persist();renderHome();if(st.length)toast(bad?('Couldn’t download '+bad+' pack'+(bad===1?'':'s')+' — check your connection.'):('Downloaded '+st.length+' pack'+(st.length===1?'':'s')+'.'));});
 $('disableAll').addEventListener('click',()=>{const t=Date.now();packs.forEach(p=>{if(p.enabled!==false){p.enabled=false;p.ts=t;}});persist();renderHome();});
 $('backupBtn').addEventListener('click',backup);
 $('restoreBtn').addEventListener('click',()=>$('restoreFile').click());
