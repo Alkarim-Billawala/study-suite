@@ -1,7 +1,13 @@
 <!--
-  Study Suite  ·  v0.4.9 (beta)
+  Study Suite  ·  v0.4.10 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.4.10: TWO-STEP FRONT DOOR — screen 1 (#eacS1): Sign in, or an access code (or "Get started" + "Have an access
+  code?" when the server's signup policy needs no code); a valid code no longer unlocks — it goes to screen 2 (#eacS2): Create an
+  account (code carried into sign-up) or Use without an account (?), + Back. The device unlocks only on one of those choices; the
+  pending code is kept in sessionStorage 'suite_eac_pending' so a reload returns to screen 2. hasPackAccess(): default packs panel
+  only for devices unlocked by an access code (eac.code / admin / a tag); an open, no-code device ('open' / 'account' with no tag)
+  sees no default packs. Signing in to an account with a tag upgrades such a device.
   Changelog v0.4.9: DEVICE IDs — each browser storage gets a random 12-char [a-z0-9] DEVICE_ID (localStorage 'suite_device_v1',
   never synced, kept across sign-outs). Names live in devNames (Store 'suite_devnames_v1', synced inside the encrypted payload as
   `devices`, merged per key; default from guessDeviceName(), renamable under Account → Your devices). Payload carries `by` (the
@@ -1008,6 +1014,10 @@ section{display:none}section.on{display:block}
 .eacgo{position:absolute;right:5px;top:50%;transform:translateY(-50%);width:36px;height:36px;border:0;border-radius:8px;background:var(--accent);color:var(--paper);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
 .eacgo svg{width:18px;height:18px}.eacgo:hover{filter:brightness(1.1)}
 .eacdoors{flex-wrap:nowrap}.eacdoors .btn{flex:1 1 0;min-width:0;font-size:16px;padding:11px 10px;white-space:nowrap}
+.eacnote{font-size:14px;line-height:1.45;color:var(--ink-soft);margin:10px 0 0}
+.eachave{display:block;margin:4px auto 0;text-align:center;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink-soft);text-decoration:underline;cursor:pointer}.eachave:hover{color:var(--accent)}
+#eacS2 .btn{box-sizing:border-box;font-size:17px;padding:12px 16px}#eacS2 #eacSignUp{width:100%}#eacS2 .eacnoacct{margin:0}#eacS2 .eacnoacct .btn{flex:1}
+#eacGate [hidden]{display:none!important} /* the gate's own display rules would otherwise override [hidden] */
 .eacmore{margin-top:40px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;color:var(--ink-soft)}
 .eacmore a{color:var(--ink-soft);text-decoration:underline;cursor:pointer}.eacmore a:hover{color:var(--accent)}
 @media(max-width:560px){.eactitle{font-size:26px}}
@@ -1018,10 +1028,11 @@ section{display:none}section.on{display:block}
     <div class="eacbrand">Study Suite</div>
     <h1 class="eactitle">Early access</h1>
     <p class="eacsub">Study Suite is in private early access. Enter your access code to continue.</p>
+    <div id="eacS1">
     <div id="eacAcct" hidden>
-      <div class="eacdoors"><button type="button" class="btn ghost" id="eacSignUp">Create an account</button><button type="button" class="btn" id="eacSignIn">Sign in</button></div>
-      <div class="eacor"><span>or</span></div>
-      <div class="eacnoacct">Use without an account <button type="button" class="eachelp" id="eacHelp" aria-label="What does using it without an account mean?">?</button></div>
+      <div class="eacdoors"><button type="button" class="btn" id="eacSignIn">Sign in</button><button type="button" class="btn ghost" id="eacStart" hidden>Get started</button></div>
+      <div class="eacor" id="eacOr"><span>or</span></div>
+      <a href="#" class="eachave" id="eacHaveCode" hidden>Have an access code?</a>
     </div>
     <form id="eacForm" class="eacform" autocomplete="off">
       <input id="eacInput" class="eacinput" type="text" inputmode="text" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="Access code" aria-label="Access code">
@@ -1029,6 +1040,14 @@ section{display:none}section.on{display:block}
     </form>
     <div class="eacerr" id="eacErr" role="alert"></div>
     <div class="eacmore"><a href="#" id="eacRestore">Restore a backup</a><span aria-hidden="true">·</span><a id="eacRequest" href="#">Request an access code</a></div>
+    </div>
+    <div id="eacS2" hidden>
+      <button type="button" class="btn wide" id="eacSignUp">Create an account</button>
+      <p class="eacnote">Keeps your progress safe and synced across your devices.</p>
+      <div class="eacor"><span>or</span></div>
+      <div class="eacnoacct"><button type="button" class="btn ghost wide" id="eacNoAcct">Use without an account</button><button type="button" class="eachelp" id="eacHelp" aria-label="What does using it without an account mean?">?</button></div>
+      <a href="#" class="eachave" id="eacBack">← Back</a>
+    </div>
   </div>
 </div>
 <script>/* Show the gate at parse time (before content paints) when armed; skip if this browser already
@@ -1388,7 +1407,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.4.9';
+const APP_VERSION='0.4.10';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1986,7 +2005,7 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
     '<div class="acct-legal">By creating an account you agree to the <a href="terms.html" target="_blank" rel="noopener">Terms</a> and <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</div></form>'+
     '<div class="acct-alt">Already have one? <a id="acctToIn">Sign in</a></div>';
     $('acctToIn').onclick=()=>{acctEmail=$('acctEmail').value;renderAcct('signin');};
-    if(eac&&eac.code){$('acctCode').value=eac.code;$('acctCodeWrap').style.display='none';} /* remembered from unlock */
+    {const pc=(eac&&eac.code)||((eacPending()||{}).code);if(pc){$('acctCode').value=pc;$('acctCodeWrap').style.display='none';}} /* remembered from unlock / screen 1 */
     SSAccount.policy().then(p=>{if(p&&p.requiresEac===false&&$('acctCodeWrap'))$('acctCodeWrap').style.display='none';}).catch(()=>{});
     $('acctForm').onsubmit=async e=>{e.preventDefault();acctErr('');
       if($('acctPw').value!==$('acctPw2').value){acctErr('The two passwords don’t match.');return;}
@@ -2134,13 +2153,36 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
 if(!ACCT_ON)$('acctBtn').style.display='none';
 /* Front door (accounts on): sign in · create an account · use without an account (class code) — B5. */
 let acctTypedCode='';
-async function acctUnlockDevice(){if(eac&&eac.unlocked)return;const s=SSAccount.session();if(!s)return;
-  eac={unlocked:true,via:s.tag||'account',admin:s.tag==='master',at:new Date().toISOString(),viaAccount:true};if(acctTypedCode&&s.tag!=='master')eac.code=acctTypedCode;await Store.set(KEY.eac,eac);applyGate();}
-if(ACCT_ON){$('eacAcct').hidden=false;document.querySelector('#eacGate .eactitle').textContent='Welcome to Study Suite';
-  document.querySelector('#eacGate .eacsub').textContent='Sign in or create an account to keep your progress synced across your devices — or use Study Suite without an account, saved only on this device.';
-  $('eacInput').placeholder='Access code';
+async function acctUnlockDevice(){const s=SSAccount.session();if(!s)return;
+  if(eac&&eac.unlocked){if(!hasPackAccess()&&s.tag){eac=Object.assign({},eac,{via:s.tag});await Store.set(KEY.eac,eac);renderDefaultPacks();}return;} /* v0.4.10: a no-code device gains packs when its account has a code */
+  const pc=eacPending();if(!acctTypedCode&&pc&&pc.code)acctTypedCode=pc.code;
+  eac={unlocked:true,via:s.tag||(pc&&pc.via)||'account',admin:s.tag==='master',at:new Date().toISOString(),viaAccount:true};if(acctTypedCode&&s.tag!=='master')eac.code=acctTypedCode;await Store.set(KEY.eac,eac);applyGate();}
+/* ---- Front door, two steps (v0.4.10) ----
+   Screen 1: Sign in, or an access code (open sign-ups: Get started, the code box behind "Have an access code?").
+   Screen 2 (after a valid code, or Get started): Create an account, or Use without an account. The device unlocks only
+   on one of those, so nobody enters a code and skips the account choice by accident. The pending code lives for this
+   browser session only. */
+const EAC_PENDING='suite_eac_pending';
+function eacPending(){try{return JSON.parse(sessionStorage.getItem(EAC_PENDING)||'null');}catch(e){return null;}}
+function eacPendingSet(v){try{if(v)sessionStorage.setItem(EAC_PENDING,JSON.stringify(v));else sessionStorage.removeItem(EAC_PENDING);}catch(e){}}
+/* Default packs belong to access-code holders: a code (or admin), or an account/unlock that carries a code's tag. */
+function hasPackAccess(){return !!(eac&&eac.unlocked&&(eac.code||eac.admin||(eac.via&&eac.via!=='open'&&eac.via!=='account')));}
+let eacOpen=false;
+function eacScreen(n){const two=n===2;$('eacS1').hidden=two;$('eacS2').hidden=!two;$('eacErr').textContent='';
+  document.querySelector('#eacGate .eactitle').textContent=two?'You’re in.':'Welcome to Study Suite';
+  document.querySelector('#eacGate .eacsub').textContent=two?'How do you want to use Study Suite?':(eacOpen?'Sign in to your account, or get started — it takes a minute.':'Sign in to your account, or enter your access code to get started.');
+  if(two)setTimeout(()=>$('eacSignUp').focus(),60);}
+function eacOpenMode(on){eacOpen=!!on;$('eacStart').hidden=!eacOpen;$('eacOr').hidden=eacOpen;$('eacHaveCode').hidden=!eacOpen;$('eacForm').hidden=eacOpen;if($('eacS2').hidden)eacScreen(1);}
+if(ACCT_ON){$('eacAcct').hidden=false;$('eacInput').placeholder='Access code';eacScreen(eacPending()?2:1);
+  SSAccount.policy().then(p=>{if(p&&p.requiresEac===false)eacOpenMode(true);}).catch(()=>{});
   $('eacSignIn').onclick=()=>{renderAcct('signin');$('acctOv').style.display='flex';};
+  $('eacStart').onclick=()=>{eacPendingSet({via:'open',code:''});eacScreen(2);};
+  $('eacHaveCode').onclick=e=>{e.preventDefault();$('eacForm').hidden=false;$('eacHaveCode').hidden=true;setTimeout(()=>$('eacInput').focus(),60);};
+  $('eacBack').onclick=e=>{e.preventDefault();eacPendingSet(null);eacScreen(1);};
   $('eacSignUp').onclick=()=>{renderAcct('signup');$('acctOv').style.display='flex';};
+  $('eacNoAcct').onclick=async()=>{const pc=eacPending()||{via:'open',code:''};
+    eac={unlocked:true,via:pc.via||'open',admin:!!pc.admin,at:new Date().toISOString()};if(pc.code)eac.code=pc.code;
+    await Store.set(KEY.eac,eac);eacPendingSet(null);applyGate();toast('Welcome to Study Suite.');};
   $('eacHelp').onclick=()=>{renderAcct('noacct');$('acctOv').style.display='flex';};}
 $('acctBtn').addEventListener('click',openAcct);
 /* Links in our emails land on studysuite.app/#verify=TOKEN · #reset=TOKEN · #email=TOKEN (PocketBase mail templates). */
@@ -2289,6 +2331,7 @@ function updateAllPacks(){const todo=pendingUpdates();if(!todo.length)return;
 let dpSchool=null; // selected school label; null until first render
 let dpSectionOpen=null; // Default-packs section collapse state for this session; null until first render
 function renderDefaultPacks(){
+  if(!hasPackAccess()){const w=$('defPacks');if(w)w.style.display='none';return;} /* v0.4.10: no access code → no default packs */
   const m=defaultManifest;if(!m)return;
   // Collapse/badge state: expanded only while the library is empty; once the user has content it starts
   // collapsed each session. New (unseen) default packs raise a badge and auto-expand the section once on
@@ -3305,16 +3348,17 @@ async function loadEacCodes(){
   try{const c=localStorage.getItem('suite_eac_codes');if(c){const a=JSON.parse(c);if(Array.isArray(a)&&a.length)window.EAC.hashes=a;}}catch(e){}
 }
 function ensureEacCodes(){if(!eacCodesP)eacCodesP=loadEacCodes();return eacCodesP;}
-function showGate(){const g=$('eacGate');if(g){g.hidden=false;const i=$('eacInput');if(i)setTimeout(()=>i.focus(),60);}}
+function showGate(){const g=$('eacGate');if(g){g.hidden=false;if(ACCT_ON&&eacPending())eacScreen(2);else{if(ACCT_ON)eacScreen(1);const i=$('eacInput');if(i)setTimeout(()=>i.focus(),60);}}}
 function hideGate(){const g=$('eacGate');if(g)g.hidden=true;}
-function applyGate(){ if(eacArmed()&&!(eac&&eac.unlocked))showGate(); else hideGate(); }
+function applyGate(){ if(eacArmed()&&!(eac&&eac.unlocked))showGate(); else{hideGate();eacPendingSet(null);} if(typeof renderDefaultPacks==='function')renderDefaultPacks(); }
 async function eacTry(){
   const inp=$('eacInput'),err=$('eacErr');const code=inp?inp.value:'';
   if(!eacCanon(code)){if(err)err.textContent='Enter your access code.';return;}
   await ensureEacCodes();
   const h=sha256hex((window.EAC.salt||'')+eacCanon(code));
   const m=(window.EAC.hashes||[]).find(x=>x.h===h);
-  if(m){eac={unlocked:true,via:m.tag||'code',admin:!!m.admin,at:new Date().toISOString()};if(!m.admin)eac.code=eacCanon(code); /* v0.3.0: fills sign-up */await Store.set(KEY.eac,eac);if(err)err.textContent='';hideGate();toast('Welcome to Study Suite.');}
+  if(m&&ACCT_ON){if(err)err.textContent='';eacPendingSet({via:m.tag||'code',admin:!!m.admin,code:m.admin?'':eacCanon(code)});eacScreen(2);}
+  else if(m){eac={unlocked:true,via:m.tag||'code',admin:!!m.admin,at:new Date().toISOString()};if(!m.admin)eac.code=eacCanon(code); /* v0.3.0: fills sign-up */await Store.set(KEY.eac,eac);if(err)err.textContent='';hideGate();toast('Welcome to Study Suite.');}
   else{if(err)err.textContent='That code wasn’t recognized. Double-check with whoever shared it.';if(inp)inp.select();}
 }
 function backup(){const data={suite:APP_VERSION,author:APP_AUTHOR,exported:new Date().toISOString(),packs,sched,daily,settings,eac,prac,qhist,exam:examSave,exams:examLog};const blob=new Blob([JSON.stringify(data)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='study-suite-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}
