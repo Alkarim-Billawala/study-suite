@@ -1,8 +1,16 @@
 <!--
-  Study Suite  ·  v0.4.4 (beta)
+  Study Suite  ·  v0.4.5 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
-  Changelog v0.4.4: header cleaned up — just "Study Suite" (no kicker / subtitle); Home, Add to home, Refresh/Update share one
+  Changelog v0.4.5 (+ sign-out step gains "Also sign out on all my other devices": signOutOthers() then local sign-out): SYNC FIX — two copies of the app in the same browser (tabs, or installed app + tab) overwrote each other's
+  saved data and sync spread the stale copy (reproduced 2026-09-23). Now: (1) ONE ACTIVE COPY per browser — a newly opened copy
+  announces itself on a BroadcastChannel and older copies pause behind #pausedOv ("Use it here" reloads and takes over); a paused
+  copy never writes (Store.set) or syncs. (2) WRITE-GENERATION GUARD — localStorage 'suite_gen' is bumped on every data write; a
+  copy whose storage changed underneath it (gen ≠ what it last saw, or a storage event) pauses instead of writing/syncing.
+  (3) SYNC ACTIVITY LOG — per-device ring buffer (localStorage 'suite_synclog_v1', 60 entries: pushed / pulled / asked + choice,
+  with pack counts) in Account → Sync activity. (4) Account → Security → "Sign out other devices" (server route
+  /api/studysuite/signout-others rotates the account's token key and returns a fresh token for this device).
+  Changelog v0.4.4 (deployed 2026-09-23): header cleaned up — just "Study Suite" (no kicker / subtitle); Home, Add to home, Refresh/Update share one
   .hbtn style with the account button (34px, same border/colours, inline SVG icons instead of ⊕ ⟳ ↑); icon + label on desktop,
   icon-only circles on phones (labels kept as aria-label/title); Update stays filled + pulsing; the timer is the same 34px pill;
   the title never wraps. Skip is now a small "Skip →" link under the options (not in the control row), so Previous · Submit · Next fits
@@ -717,7 +725,7 @@ section{display:none}section.on{display:block}
 .syncstate[data-st=ok] .sico{color:var(--green)}
 .syncstate[data-st=syncing] .sico,.syncstate[data-st=offline] .sico,.syncstate[data-st=conflict] .sico{color:var(--gold)}
 .syncstate[data-st=expired] .sico,.syncstate[data-st=error] .sico{color:var(--red)}
-#acctOv,#syncCfOv{z-index:10000}#toastWrap{z-index:10001} /* above the class-code gate (9999) */
+#pausedOv{z-index:10010}#acctOv,#syncCfOv{z-index:10000}#toastWrap{z-index:10001} /* above the class-code gate (9999) */
 .acct-verify{font-size:13.5px;line-height:1.5;color:var(--ink);background:color-mix(in srgb,var(--gold) 14%,transparent);border-radius:8px;padding:8px 10px;margin:-6px 0 14px}
 .acct-verify a{color:var(--accent);cursor:pointer;text-decoration:underline}
 .acct-sec a{display:block;color:var(--accent);cursor:pointer;text-decoration:underline;font-size:14px;margin:6px 0}.acct-sec a.danger{color:var(--red)}
@@ -734,6 +742,7 @@ section{display:none}section.on{display:block}
 @media (max-width:480px){.setsec .segctl{flex:none}.setsec .segctl .seg{padding:8px 10px;font-size:14px}}
 @media (max-width:480px){#devSeg{display:flex;width:100%}#devSeg .seg{flex:1 1 0;min-width:0;padding:8px 4px;font-size:13.5px;line-height:1.2}}.histrow .minor{flex:none}
 .hbico{width:13px;height:13px;vertical-align:-2px;margin-right:6px}.shareico svg{width:14px;height:14px;vertical-align:-2px}
+.synclog{max-height:50vh;overflow:auto;border-top:1px solid var(--line)}.slrow{padding:8px 0;border-bottom:1px solid color-mix(in srgb,var(--line) 40%,transparent)}.slt{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft)}.slw{font-size:15px;color:var(--ink)}.sld{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft)}
 .pastrow{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding:10px 0}.pastrow .pt{font-size:15px;color:var(--ink)}.pastrow .pd{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-soft);margin-top:2px}
 .pastpart{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);border:1px solid var(--gold);border-radius:4px;padding:0 5px;margin-left:4px}
 #featExam a{color:var(--accent);text-decoration:underline;cursor:pointer}
@@ -1263,6 +1272,13 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <button class="btn wide" id="setupGo" type="button">Start exam</button>
     </div>
   </div>
+  <!-- ONE ACTIVE COPY (v0.4.5) -->
+  <div class="modal-ov" id="pausedOv" style="display:none">
+    <div class="modal-card confirm-card" role="alertdialog" aria-modal="true" aria-labelledby="pausedMsg">
+      <div class="confirm-msg" id="pausedMsg"></div>
+      <div class="confirm-actions"><button class="btn sm" id="pausedGo" type="button" onclick="location.reload()">Use it here</button></div>
+    </div>
+  </div>
   <!-- PAST EXAMS (v0.4.1) -->
   <div class="modal-ov" id="pastOv" style="display:none">
     <div class="modal-card setup-card" role="dialog" aria-modal="true" aria-labelledby="pastTitle">
@@ -1347,7 +1363,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.4.4';
+const APP_VERSION='0.4.5';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1356,10 +1372,27 @@ const APP_AUTHOR='Alkarim Billawala / alkarim.billawala.ca';
 /* ===== STORAGE ===== */
 const KEY={packs:'suite_packs_v1',sched:'srs_sched_v2',daily:'srs_daily_v2',settings:'suite_settings_v1',eac:'suite_eac_v1',prac:'suite_prac_v1',acct:'suite_acct_v1',sync:'suite_sync_v1',localAt:'suite_localat_v1',qhist:'suite_qhist_v1',exam:'suite_exam_v1',exams:'suite_exams_v1'};
 const memCache={};
+/* ===== ONE ACTIVE COPY PER BROWSER (v0.4.5) =====
+   Tabs / windows of the app share storage; two live copies overwrite each other (and sync spreads the stale copy).
+   The newest copy wins: it says hello on a BroadcastChannel and older copies pause. As a safety net every data write bumps
+   'suite_gen'; a copy that finds the counter moved underneath it pauses instead of writing or syncing. */
+/* Server route /api/studysuite/signout-others — deployed + verified 2026-09-23. Kept as a switch in case the route is ever missing. */
+const SIGNOUT_OTHERS_ON=true;
+const TAB_ID=Math.random().toString(36).slice(2);let TAB_PAUSED=false,myGen=0;
+try{myGen=+localStorage.getItem('suite_gen')||0;}catch(e){}
+function pauseTab(why){if(TAB_PAUSED)return;TAB_PAUSED=true;try{if(typeof qTimerId!=='undefined')clearInterval(qTimerId);}catch(e){}
+  const show=()=>{const ov=document.getElementById('pausedOv');if(!ov){setTimeout(show,50);return;}
+    document.getElementById('pausedMsg').textContent=why==='stale'?'Your study data was just changed in another tab or window. Reload to pick up the latest — this copy has stopped saving so nothing gets overwritten.':'Study Suite is open in another tab or window. Only one copy can be used at a time, so nothing gets overwritten.';
+    document.getElementById('pausedGo').textContent=why==='stale'?'Reload':'Use it here';ov.style.display='flex';};show();}
+function genOK(){try{const cur=+localStorage.getItem('suite_gen')||0;if(cur!==myGen){pauseTab('stale');return false;}myGen=cur+1;localStorage.setItem('suite_gen',String(myGen));}catch(e){}return true;}
+function genFresh(){try{if((+localStorage.getItem('suite_gen')||0)!==myGen){pauseTab('stale');return false;}}catch(e){}return true;}
+try{const bc=new BroadcastChannel('studysuite-tabs');bc.onmessage=e=>{if(e.data&&e.data.t==='hello'&&e.data.id!==TAB_ID)pauseTab('other');};bc.postMessage({t:'hello',id:TAB_ID});}catch(e){}
+window.addEventListener('storage',e=>{if(e.key==='suite_gen'&&!TAB_PAUSED)pauseTab('stale');});
 const Store={
   async get(k){try{if(window.storage){const r=await window.storage.get(k);if(r&&r.value!=null)return JSON.parse(r.value);}}catch(e){}try{const v=localStorage.getItem(k);if(v!=null)return JSON.parse(v);}catch(e){}return (k in memCache)?memCache[k]:null;},
-  async set(k,val){memCache[k]=val;let ok=false;try{if(window.storage){await window.storage.set(k,JSON.stringify(val));ok=true;}}catch(e){}if(!ok||k===KEY.eac){try{localStorage.setItem(k,JSON.stringify(val));}catch(e){}}}
+  async set(k,val){if(TAB_PAUSED)return;if(DATA_KEYS.has(k)&&!genOK())return;memCache[k]=val;let ok=false;try{if(window.storage){await window.storage.set(k,JSON.stringify(val));ok=true;}}catch(e){}if(!ok||k===KEY.eac){try{localStorage.setItem(k,JSON.stringify(val));}catch(e){}}}
 };
+const DATA_KEYS=new Set([KEY.packs,KEY.sched,KEY.daily,KEY.settings,KEY.eac,KEY.prac,KEY.qhist,KEY.exam,KEY.exams]);
 let STORAGE_MODE='memory';
 function detectStorage(){if(typeof window.storage!=='undefined'){STORAGE_MODE='persistent';}else{try{localStorage.setItem('__t','1');localStorage.removeItem('__t');STORAGE_MODE='local';}catch(e){STORAGE_MODE='memory';}}}
 
@@ -1536,8 +1569,10 @@ const SSAccount=(()=>{
     try{await api('/api/collections/users/confirm-email-change',{method:'POST',auth:false,body:{token,password:d.authPw}});}
     catch(e){if(e.offline)throw e;throw new Error('This link has expired or was already used. Request the change again from your account.');}
     return signIn(c.newEmail,pass);}
+  /* v0.4.5: rotate the account's token key server-side → every other session ends; this device gets a fresh token. */
+  async function signOutOthers(){const j=await api('/api/studysuite/signout-others',{method:'POST'});sess.token=j.token;await Store.set(KEY.acct,sess);}
   async function deleteAccount(pass){if(pass!==undefined)await unlockWith(pass);await api('/api/collections/users/records/'+sess.id,{method:'DELETE'});await signOut();}
-  return {API,FORMAT,load,session:()=>sess,dek,policy,signIn,signUp,signOut,refresh,getState,putState,deleteAccount,normEmail,requestVerification,confirmVerification,tokenClaims,requestPasswordReset,confirmPasswordReset,recoverWithCode,startFresh,needsRecovery:()=>!!pending,changePassword,newRecoveryCode,requestEmailChange,confirmEmailChange};
+  return {API,FORMAT,load,session:()=>sess,dek,policy,signIn,signUp,signOut,refresh,getState,putState,deleteAccount,normEmail,requestVerification,confirmVerification,tokenClaims,requestPasswordReset,confirmPasswordReset,recoverWithCode,startFresh,needsRecovery:()=>!!pending,changePassword,newRecoveryCode,requestEmailChange,confirmEmailChange,signOutOthers};
 })();
 
 /* ===== SCHEDULER ===== */
@@ -1675,6 +1710,11 @@ const SSSync=(()=>{
       if(p){LIGHT.forEach(k=>{if(k!=='version'&&k in e)p[k]=e[k];});out.push(p);}else miss.push(e);}
     return {out,miss};}
   const studied=s=>Object.values(s||{}).filter(x=>x&&x.phase&&x.phase!=='new').length;
+  /* Sync activity (v0.4.5): this device's last 60 decisions, for diagnosing surprises. Not synced. */
+  const pkSum=list=>{const a=list||[];return a.length+' packs ('+a.filter(p=>p&&p.enabled!==false).length+' on)';};
+  function slog(what,loc,cl,at){try{const L=JSON.parse(localStorage.getItem('suite_synclog_v1')||'[]');
+    L.unshift({t:Date.now(),what,local:loc?pkSum(loc.packs)+' · '+studied(loc.sched)+' studied':'',cloud:cl?pkSum(cl.packs)+' · '+studied(cl.sched)+' studied':'',at:at||'',app:APP_VERSION});
+    localStorage.setItem('suite_synclog_v1',JSON.stringify(L.slice(0,60)));}catch(e){}}
   const localEmpty=()=>!packs.length&&!studied(sched);
   async function saveMeta(){await Store.set(KEY.sync,meta);}
   async function loadMeta(){const s=SSAccount.session();const m=await Store.get(KEY.sync);
@@ -1739,6 +1779,7 @@ const SSSync=(()=>{
     const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data)],{type:'application/json'}));
     a.download='study-suite-account-copy-'+today()+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}
   async function run(){refreshTz();
+    if(TAB_PAUSED||!genFresh())return; /* v0.4.5: a paused or stale copy never syncs */
     if(!SSAccount.session()){setState('off');return;}
     const dek=await SSAccount.dek();if(!dek){setState('expired');return;}
     if(!meta||meta.uid!==SSAccount.session().id)await loadMeta();
@@ -1747,16 +1788,16 @@ const SSSync=(()=>{
     const cm=await SSAccount.getState(true);
     if(cm&&meta.stateId&&cm.id!==meta.stateId){meta.lastUpdated=null;meta.lastHash=null;} /* account copy was replaced (fresh start) → treat as a first sync */
     const dirty2=h!==meta.lastHash;
-    if(!cm){await SSAccount.refresh();if(!localEmpty())await upload(dek,pl,h,null);} /* no row: confirm the account still exists (401 → sign in again) */
-    else if(cm.updated===meta.lastUpdated){if(dirty2)await upload(dek,pl,h,cm.id);}
+    if(!cm){await SSAccount.refresh();if(!localEmpty()){await upload(dek,pl,h,null);slog('Uploaded (first copy in the account)',pl,null,meta.lastUpdated);}} /* no row: confirm the account still exists (401 → sign in again) */
+    else if(cm.updated===meta.lastUpdated){if(dirty2){await upload(dek,pl,h,cm.id);slog('Uploaded this device’s changes',pl,null,meta.lastUpdated);}}
     else{const full=await SSAccount.getState();const d=await SSCrypto.decryptBlob(dek,full.ciphertext,full.iv);
       const first=!meta.lastUpdated;
-      if(await hash(d)===h){Object.assign(meta,{stateId:full.id,lastUpdated:full.updated,lastHash:h});await saveMeta();}
-      else if(!dirty2||(first&&localEmpty())){if(!await applyCloud(d,full,m,h)){again=true;return;}}
+      if(await hash(d)===h){Object.assign(meta,{stateId:full.id,lastUpdated:full.updated,lastHash:h});await saveMeta();slog('Already in step',pl,d,full.updated);}
+      else if(!dirty2||(first&&localEmpty())){if(!await applyCloud(d,full,m,h)){slog('Pull postponed — this device changed mid-pull',pl,d,full.updated);again=true;return;}slog('Downloaded the account copy',pl,d,full.updated);}
       else{setState('conflict');
         const la=await Store.get(KEY.localAt);
         const choice=await askConflict(first,{s:summary(pl,new TextEncoder().encode(JSON.stringify(pl)).length),t:la},{s:summary(d,full.size_bytes||0),t:parseTs(full.updated)});
-        setState('syncing');
+        setState('syncing');slog('Asked which copy — chose '+({local:'this device',cloud:'the account copy',both:'keep both'}[choice]),pl,d,full.updated);
         if(choice==='cloud')await applyCloud(d,full,m);
         else{if(choice==='both')await downloadCloudCopy(d,m);await upload(dek,pl,h,full.id);}}}
     setState('ok');}
@@ -1878,19 +1919,27 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
     '<li><b>Backup all</b> saves a file you can restore anywhere.</li>'+
     '<li>An account keeps your devices in sync, encrypted so only you can read it. You can create one any time from the account menu at the top right of the homepage.</li></ul>'+
     '<button class="btn sm wide" id="acctNoteOk">Got it</button>';$('acctNoteOk').onclick=()=>{acctView=null;closeAcct();};}
+  else if(view==='synclog'){let L=[];try{L=JSON.parse(localStorage.getItem('suite_synclog_v1')||'[]');}catch(e){}
+    b.innerHTML='<h3>Sync activity</h3><p class="acct-sub">What this device’s sync did recently, newest first. Only kept on this device.</p>'+
+      (L.length?'<div class="synclog">'+L.map(x=>'<div class="slrow"><div class="slt">'+new Date(x.t).toLocaleString([],{dateStyle:'medium',timeStyle:'short'})+'</div><div class="slw">'+acctEsc(x.what)+'</div>'+(x.local?'<div class="sld">This device: '+acctEsc(x.local)+'</div>':'')+(x.cloud?'<div class="sld">Account copy: '+acctEsc(x.cloud)+'</div>':'')+'</div>').join('')+'</div>':'<p class="acct-sub">Nothing yet.</p>')+
+      '<div class="acct-row" style="margin-top:12px"><button class="btn ghost sm" id="acctBack">Back</button></div>';
+    $('acctBack').onclick=()=>renderAcct('account');}
   else if(view==='notice'){b.innerHTML='<h3>'+acctEsc(acctNote.t)+'</h3><p class="acct-sub">'+acctEsc(acctNote.b)+'</p>'+(acctNote.busy?'':'<button class="btn sm wide" id="acctNoteOk">OK</button>');
     if(!acctNote.busy)$('acctNoteOk').onclick=()=>{acctView=null;closeAcct();};}
   else if(view==='signout'){b.innerHTML='<h3>Sign out of this browser?</h3><p class="acct-sub">Your synced data stays in your account and comes back when you sign in again.</p>'+
     '<label class="acct-chk"><input type="checkbox" id="acctWipe"><span>Also remove my packs and progress from this browser (for shared computers)</span></label>'+
+    (SIGNOUT_OTHERS_ON?'<label class="acct-chk"><input type="checkbox" id="acctAll"><span>Also sign out on all my other devices</span></label>':'')+
     '<div class="acct-err" id="acctErr"></div><div class="acct-row"><button class="btn ghost sm" id="acctBack">Cancel</button><button class="btn sm" id="acctOut">Sign out</button></div>';
     $('acctBack').onclick=()=>renderAcct('account');
     $('acctOut').onclick=async()=>{acctErr('');const bt=$('acctOut'),wipe=$('acctWipe').checked;acctBusy(bt,true,'Saving your latest changes…');
       await SSSync.sync();const k=SSSync.status().k;
       if(wipe&&k!=='ok'){acctErr('Your latest changes haven’t reached your account yet, so removing them here would lose them. Try again when sync works, or sign out without removing data.');acctBusy(bt,false);return;}
+      const all=!!($('acctAll')&&$('acctAll').checked);
+      if(all){try{await SSAccount.signOutOthers();}catch(e){acctErr('Couldn’t sign out your other devices ('+e.message+'). This device is still signed in — try again.');acctBusy(bt,false);return;}}
       await SSAccount.signOut();await SSSync.reset();
       if(wipe){packs=[];sched={};prac=null;daily={date:today(),count:0};await persist();}
       renderHome();acctView=null;closeAcct();
-      toast(wipe?'Signed out. Your packs and progress were removed from this browser.':'Signed out. Your data stays on this device and in your account.');};}
+      toast((all?'Signed out on every device. ':'Signed out. ')+(wipe?'Your packs and progress were removed from this browser.':'Your data stays on this device and in your account.'));};}
   else if(view==='chpw'){b.innerHTML='<h3>Change password</h3><p class="acct-sub">Your other devices will ask you to sign in again with the new password. Your study data isn’t affected.</p>'+
     '<form id="acctForm"><input type="email" autocomplete="username" value="'+acctEsc(s&&s.email)+'" hidden>'+
     '<label class="f">Current password<input class="fi" type="password" id="acctPw0" autocomplete="current-password" required></label>'+
@@ -1935,7 +1984,7 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
   else{b.innerHTML='<h3>Your account</h3><div class="acct-email">'+acctEsc(s&&s.email)+'</div><div class="acct-st" id="acctSt"></div>'+
     (s&&!s.verified?'<div class="acct-verify">Please confirm your email address — we sent you a link. <a id="acctResend">Resend it</a></div>':'')+
     '<div class="acct-row"><button class="btn ghost sm" id="acctSyncNow">Sync now</button><button class="btn sm" id="acctReauth" style="display:none">Sign in again</button></div>'+
-    '<div class="acct-note acct-sec"><div class="sync-h">Security</div><a id="acctToChPw">Change password</a><a id="acctToRc">New recovery code</a><a id="acctToEmail">Change email</a><a id="acctToDel" class="danger">Delete account</a></div>'+
+    '<div class="acct-note acct-sec"><div class="sync-h">Security</div><a id="acctToChPw">Change password</a><a id="acctToRc">New recovery code</a><a id="acctToEmail">Change email</a><a id="acctToOthers"'+(SIGNOUT_OTHERS_ON?'':' hidden')+'>Sign out other devices</a><a id="acctToLog">Sync activity</a><a id="acctToDel" class="danger">Delete account</a></div>'+
     '<div class="acct-row" style="margin-top:14px"><button class="btn ghost sm" id="acctOut">Sign out</button></div>';
     renderAcctBtn();
     $('acctSyncNow').onclick=async()=>{const bt=$('acctSyncNow');acctBusy(bt,true,'Syncing…');await SSSync.sync();acctBusy(bt,false);};
@@ -1943,7 +1992,9 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
     if($('acctResend'))$('acctResend').onclick=async()=>{const a=$('acctResend');a.style.pointerEvents='none';a.textContent='Sending…';
       try{await SSAccount.requestVerification(s.email);a.textContent='Sent — check your inbox.';}catch(e){a.textContent=e.message;a.style.pointerEvents='';}};
     $('acctToChPw').onclick=()=>renderAcct('chpw');$('acctToRc').onclick=()=>renderAcct('newrc');
-    $('acctToEmail').onclick=()=>renderAcct('chemail');$('acctToDel').onclick=()=>renderAcct('delete');
+    $('acctToEmail').onclick=()=>renderAcct('chemail');$('acctToDel').onclick=()=>renderAcct('delete');$('acctToLog').onclick=()=>renderAcct('synclog');
+    $('acctToOthers').onclick=()=>confirmDialog('Sign out of your account on every other device? They’ll need to sign in again to keep syncing. Their study data stays on them.',{confirmText:'Sign out others'},async()=>{
+      try{await SSAccount.signOutOthers();toast('Signed out everywhere else. This device stays signed in.');}catch(e){toast(e.message);}});
     $('acctOut').onclick=()=>renderAcct('signout');}}
 if(!ACCT_ON)$('acctBtn').style.display='none';
 /* Front door (accounts on): sign in · create an account · use without an account (class code) — B5. */
