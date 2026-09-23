@@ -1,8 +1,23 @@
 <!--
-  Study Suite  ·  v0.3.0 (beta)
+  Study Suite  ·  v0.3.1 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
-  Changelog v0.3.0 (IN PROGRESS, checkpoint A): optional accounts + end-to-end-encrypted sync against
+  Changelog v0.3.1: sync status polish (Alkarim, first live test). The footer status line draws its own cloud icon
+  (inline SVG — the ☁ glyph rendered malformed in the mono font on iOS), coloured by state: green synced, gold
+  syncing/offline/waiting, red needs sign-in/paused. The account button no longer carries a permanent green dot: it
+  flashes green once when the first sync after opening succeeds, and shows a dot only when something needs the user
+  (red: sign in again / sync paused; gold: waiting for the which-copy choice). Accounts still behind #beta.
+  Checkpoint B (still behind #beta): mail links handled in-app — mailLinkRoute() for #verify / #reset / #email (a mail link
+  turns the beta flag on for that device); verification mail at sign-up + "Resend it" nudge. Forgot password → reset mail →
+  new password (existing salt) → signIn flags needsRecovery → recovery code re-locks the same data key, or "Start fresh"
+  (new key + recovery code, old account copy deleted) with the "your studying isn't gone" screen. Sync treats a replaced
+  account copy (row id changed) as a first sync — dialog, never a silent overwrite; an empty device never uploads. Account
+  view: Security — change password (new salt, same key; other devices sign in again), new recovery code (password-gated),
+  change email (link to the new address; password on confirm; works from any device), delete account (type DELETE +
+  password). Sign-out is two-step. Front door (gate, when accounts are on): Sign in · Create an account · Use without an
+  account (class code) + "?" popup; signing in unlocks the device from the account's server-set code tag (master = admin).
+  Dialogs + toasts sit above the gate. Class code typed at sign-up is remembered (eac.code).
+  Changelog v0.3.0 (deployed 2026-09-22; accounts behind #beta — checkpoint A): optional accounts + end-to-end-encrypted sync against
   PocketBase at auth.studysuite.app. New blocks after STORAGE: SSCrypto (PBKDF2→HKDF keys, AES-GCM DEK wrapped by
   password + recovery code, gzip+AES-GCM blob, non-extractable DEK in IndexedDB 'suite_keys') and SSAccount (fetch-only
   REST client; session in KEY.acct). After persist(): SSSync — payload {sched,daily,settings,eac,prac,packs} with
@@ -634,9 +649,20 @@ section{display:none}section.on{display:block}
 .acctbtn:hover{border-color:var(--accent-soft);color:var(--ink)}
 .acctbtn.on{border-color:var(--accent);color:var(--accent)}
 .acctdot{position:absolute;right:-2px;bottom:-2px;width:10px;height:10px;border-radius:50%;border:2px solid var(--paper);display:none;background:var(--green)}
-.acctbtn.on .acctdot{display:block}
-.acctbtn[data-st=syncing] .acctdot,.acctbtn[data-st=offline] .acctdot,.acctbtn[data-st=conflict] .acctdot{background:var(--gold)}
-.acctbtn[data-st=expired] .acctdot,.acctbtn[data-st=error] .acctdot{background:var(--red)}
+.acctbtn.on[data-st=conflict] .acctdot{display:block;background:var(--gold)}
+.acctbtn.on[data-st=expired] .acctdot,.acctbtn.on[data-st=error] .acctdot{display:block;background:var(--red)}
+.acctbtn.flash .acctdot{display:block;background:var(--green);animation:acctflash 2.5s ease forwards}
+@keyframes acctflash{0%{opacity:0;transform:scale(.4)}15%{opacity:1;transform:scale(1.15)}30%{transform:scale(1)}75%{opacity:1}100%{opacity:0}}
+.syncstate .sico{width:15px;height:10px;vertical-align:-1px;margin-right:7px;color:var(--ink-soft)}
+.syncstate[data-st=ok] .sico{color:var(--green)}
+.syncstate[data-st=syncing] .sico,.syncstate[data-st=offline] .sico,.syncstate[data-st=conflict] .sico{color:var(--gold)}
+.syncstate[data-st=expired] .sico,.syncstate[data-st=error] .sico{color:var(--red)}
+#acctOv,#syncCfOv{z-index:10000}#toastWrap{z-index:10001} /* above the class-code gate (9999) */
+.acct-verify{font-size:13.5px;line-height:1.5;color:var(--ink);background:color-mix(in srgb,var(--gold) 14%,transparent);border-radius:8px;padding:8px 10px;margin:-6px 0 14px}
+.acct-verify a{color:var(--accent);cursor:pointer;text-decoration:underline}
+.acct-sec a{display:block;color:var(--accent);cursor:pointer;text-decoration:underline;font-size:14px;margin:6px 0}.acct-sec a.danger{color:var(--red)}
+.acct-card .btn.danger{background:var(--red);color:#fff}
+.acct-list{margin:0 0 12px;padding-left:18px;font-size:14px;line-height:1.5;color:var(--ink)}.acct-list li{margin-bottom:6px}
 .acct-card{max-width:400px;position:relative}
 .acct-x{position:absolute;top:8px;right:12px;background:none;border:none;font-size:24px;line-height:1;color:var(--ink-soft);cursor:pointer;padding:4px}
 .acct-card h3{font-family:var(--font-head);font-weight:600;font-size:22px;margin:0 0 6px;padding-right:28px}
@@ -862,6 +888,12 @@ section{display:none}section.on{display:block}
 .eacerr{min-height:18px;color:var(--lo);font-size:13px;margin:10px 2px 0}
 .eacalt{color:var(--ink-soft);font-size:13px;margin-top:22px;line-height:1.5}
 .eacalt a{color:var(--accent);cursor:pointer}
+.eacdoors{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.eacor{display:flex;align-items:center;gap:10px;color:var(--ink-soft);font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin:22px 0 14px}
+.eacor::before,.eacor::after{content:'';flex:1;height:1px;background:var(--line)}
+.eacnoacct{font-size:15px;color:var(--ink);margin:0 0 10px;display:flex;align-items:center;justify-content:center;gap:8px}
+.eachelp{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);background:transparent;color:var(--ink-soft);font-size:12px;font-weight:700;cursor:pointer;padding:0;line-height:1}
+.eachelp:hover{border-color:var(--accent);color:var(--accent)}
 @media(max-width:560px){.eacform{flex-direction:column}.eactitle{font-size:26px}}
 </style>
 
@@ -870,6 +902,11 @@ section{display:none}section.on{display:block}
     <div class="eacbrand">Study Suite</div>
     <h1 class="eactitle">Early access</h1>
     <p class="eacsub">Study Suite is in private early access. Enter your access code to continue.</p>
+    <div id="eacAcct" hidden>
+      <div class="eacdoors"><button type="button" class="btn" id="eacSignIn">Sign in</button><button type="button" class="btn ghost" id="eacSignUp">Create an account</button></div>
+      <div class="eacor"><span>or</span></div>
+      <div class="eacnoacct">Use without an account <button type="button" class="eachelp" id="eacHelp" aria-label="What does using it without an account mean?">?</button></div>
+    </div>
     <form id="eacForm" class="eacform" autocomplete="off">
       <input id="eacInput" class="eacinput" type="text" inputmode="text" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="Access code" aria-label="Access code">
       <button type="submit" class="btn" id="eacUnlock">Unlock</button>
@@ -1188,7 +1225,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.3.0';
+const APP_VERSION='0.3.1';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1207,9 +1244,9 @@ function detectStorage(){if(typeof window.storage!=='undefined'){STORAGE_MODE='p
 /* ===== ACCOUNTS BETA FLAG (v0.3.0) — accounts/sync are hidden until a device opts in by opening the app with
    #beta (remembered in this browser; #nobeta turns it off). Without it the app looks and behaves as v0.2.72. */
 const ACCT_ON=(()=>{try{const h=location.hash,clean=()=>history.replaceState(history.state,'',location.pathname+location.search);
-  if(/^#beta$/i.test(h)){localStorage.setItem('suite_beta_v1','1');clean();}else if(/^#nobeta$/i.test(h)){localStorage.removeItem('suite_beta_v1');clean();}
+  if(/^#beta$/i.test(h)){localStorage.setItem('suite_beta_v1','1');clean();}else if(/^#(verify|reset|email)=/i.test(h)){localStorage.setItem('suite_beta_v1','1');} /* mail link ⇒ account holder; mailLinkRoute() cleans */else if(/^#nobeta$/i.test(h)){localStorage.removeItem('suite_beta_v1');clean();}
   return localStorage.getItem('suite_beta_v1')==='1';}catch(e){return false;}})();
-window.addEventListener('hashchange',()=>{if(/^#(no)?beta$/i.test(location.hash))location.reload();}); /* same-page #beta → reload so the flag applies */
+window.addEventListener('hashchange',()=>{if(/^#((no)?beta$|(verify|reset|email)=)/i.test(location.hash))location.reload();}); /* same-page #beta → reload so the flag applies */
 /* ===== CRYPTO (v0.3.0: end-to-end encryption for sync — WebCrypto only, no dependencies) =====
    passphrase --PBKDF2-SHA256(salt, iters)--> master --HKDF "studysuite/enc/v1"--> KEK (never leaves the device)
                                                     \--HKDF "studysuite/auth/v1"--> authPw (base64url; this is the PocketBase password)
@@ -1276,6 +1313,7 @@ const SSCrypto=(()=>{
 const SSAccount=(()=>{
   const API='https://auth.studysuite.app',FORMAT=1,MIN_PW=8;
   let sess=null; /* {token,id,email,verified,sub,keyV} */
+  let pending=null; /* after a password reset: {kek,salt,iters,rec} until the data key is re-locked */
   const normEmail=e=>String(e||'').trim().toLowerCase();
   function niceError(status,j){
     const d=(j&&j.data)||{};
@@ -1293,7 +1331,7 @@ const SSAccount=(()=>{
     if(r.status===204)return null;let j=null;try{j=await r.json();}catch(e){}
     if(!r.ok){const x=new Error(niceError(r.status,j));x.status=r.status;if(r.status===401&&sess)x.expired=true;if(j&&j.data&&j.data.owner&&/unique/i.test(j.data.owner.code||''))x.stateExists=true;throw x;}
     return j;}
-  function adopt(token,rec){sess={token,id:rec.id,email:rec.email,verified:!!rec.verified,sub:rec.subscription_status||'',keyV:rec.key_v||1};return Store.set(KEY.acct,sess);}
+  function adopt(token,rec){sess={token,id:rec.id,email:rec.email,verified:!!rec.verified,sub:rec.subscription_status||'',keyV:rec.key_v||1,tag:rec.eac_tag||''};return Store.set(KEY.acct,sess);}
   async function load(){const s=await Store.get(KEY.acct);sess=(s&&s.token&&s.id)?s:null;return sess;}
   const dekId=()=>'dek:'+(sess&&sess.id);
   async function dek(){return sess?SSCrypto.keystore.get(dekId()):null;}
@@ -1303,8 +1341,9 @@ const SSAccount=(()=>{
     const {kek,authPw}=await SSCrypto.deriveKeys(pass,k.salt,k.iters);
     const a=await api('/api/collections/users/auth-with-password',{method:'POST',auth:false,body:{identity:email,password:authPw}});
     let key;try{key=await SSCrypto.unwrapDek(kek,a.record.wrapped_dek_pw,false);}
-    catch(e){throw new Error('Signed in, but this account’s encryption key couldn’t be unlocked with that password.');}
-    await adopt(a.token,a.record);if(!await SSCrypto.keystore.put(dekId(),key)){await signOut();throw new Error('This browser won’t let the app store its encryption key (private window?). Sync needs normal browsing.');}
+    catch(e){/* password was reset but the key wasn't re-locked yet → the caller offers recovery code / fresh start */
+      await adopt(a.token,a.record);pending={kek,salt:k.salt,iters:k.iters,rec:a.record};const x=new Error('needs-recovery');x.needsRecovery=true;throw x;}
+    pending=null;await adopt(a.token,a.record);if(!await SSCrypto.keystore.put(dekId(),key)){await signOut();throw new Error('This browser won’t let the app store its encryption key (private window?). Sync needs normal browsing.');}
     return sess;}
   /* Returns {recoveryCode} — the caller must show it once. */
   async function signUp(email,pass,eacCode){email=normEmail(email);
@@ -1328,8 +1367,57 @@ const SSAccount=(()=>{
     const q='?fields=id,updated,size_bytes,format_version';
     if(id)return api('/api/collections/user_state/records/'+id+q,{method:'PATCH',body,keepalive:o&&o.keepalive});
     body.owner=sess.id;return api('/api/collections/user_state/records'+q,{method:'POST',body,keepalive:o&&o.keepalive});}
-  async function deleteAccount(){await api('/api/collections/users/records/'+sess.id,{method:'DELETE'});await signOut();}
-  return {API,FORMAT,load,session:()=>sess,dek,policy,signIn,signUp,signOut,refresh,getState,putState,deleteAccount,normEmail};
+  const patchMe=body=>api('/api/collections/users/records/'+sess.id,{method:'PATCH',body});
+  /* Forgot password: the reset link carries a token; the new passphrase is derived with the account's existing salt. */
+  const requestPasswordReset=email=>api('/api/collections/users/request-password-reset',{method:'POST',auth:false,body:{email:normEmail(email)}});
+  async function confirmPasswordReset(token,pass){if(String(pass||'').length<MIN_PW)throw new Error('Use a password of at least '+MIN_PW+' characters.');
+    const email=tokenClaims(token).email;if(!email)throw new Error('That reset link looks incomplete — request a new one.');
+    const k=await api('/api/studysuite/kdf?email='+encodeURIComponent(email),{auth:false});
+    const {authPw}=await SSCrypto.deriveKeys(pass,k.salt,k.iters);
+    await api('/api/collections/users/confirm-password-reset',{method:'POST',auth:false,body:{token,password:authPw,passwordConfirm:authPw}});
+    return signIn(email,pass);} /* throws needsRecovery — expected right after a reset */
+  /* Recovery code → the same data key, re-locked under the new password. Nothing is lost. */
+  async function recoverWithCode(code){if(!pending)throw new Error('Sign in first.');
+    const rk=await SSCrypto.recoveryKey(code);let dk;
+    try{dk=await SSCrypto.unwrapDek(rk,pending.rec.wrapped_dek_rc,true);}catch(e){throw new Error('That recovery code doesn’t match this account. Check it and try again.');}
+    const w=await SSCrypto.wrapDek(pending.kek,dk);await patchMe({kdf_salt:pending.salt,wrapped_dek_pw:w});
+    await SSCrypto.keystore.put(dekId(),await SSCrypto.unwrapDek(pending.kek,w,false));pending=null;return sess;}
+  /* No recovery code → a new data key + recovery code; the old (unreadable) cloud copy is removed. Device data is untouched. */
+  async function startFresh(){if(!pending)throw new Error('Sign in first.');
+    const dk=await SSCrypto.newDek(),rc=SSCrypto.newRecoveryCode();
+    const w=await SSCrypto.wrapDek(pending.kek,dk);
+    await patchMe({kdf_salt:pending.salt,wrapped_dek_pw:w,wrapped_dek_rc:await SSCrypto.wrapDek(await SSCrypto.recoveryKey(rc),dk)});
+    const old=await getState(true);if(old)await api('/api/collections/user_state/records/'+old.id,{method:'DELETE'});
+    await SSCrypto.keystore.put(dekId(),await SSCrypto.unwrapDek(pending.kek,w,false));pending=null;return {recoveryCode:rc};}
+  /* Mail flows. request-* always answer 204 (PocketBase doesn't reveal whether an address exists). */
+  const requestVerification=email=>api('/api/collections/users/request-verification',{method:'POST',auth:false,body:{email:normEmail(email)}});
+  const confirmVerification=token=>api('/api/collections/users/confirm-verification',{method:'POST',auth:false,body:{token}});
+  /* Mail-link tokens are JWTs; the payload names the account (email / newEmail) so the app can look up its KDF salt. */
+  function tokenClaims(t){try{const p=String(t).split('.')[1].replace(/-/g,'+').replace(/_/g,'/');return JSON.parse(decodeURIComponent(escape(atob(p+'==='.slice((p.length+3)%4)))));}catch(e){return {};}}
+  /* Re-derive from a typed password and prove it by unlocking the current key (no server round-trip needed to check). */
+  async function unlockWith(pass){const k=await api('/api/studysuite/kdf?email='+encodeURIComponent(sess.email),{auth:false});
+    const d=await SSCrypto.deriveKeys(pass,k.salt,k.iters);const rec=await api('/api/collections/users/records/'+sess.id);
+    let dk;try{dk=await SSCrypto.unwrapDek(d.kek,rec.wrapped_dek_pw,true);}catch(e){throw new Error('That password isn’t right.');}
+    return {k,d,rec,dk};}
+  /* New salt + new keys; the same data key is re-locked. PocketBase ends every other session (they'll "sign in again"). */
+  async function changePassword(oldPass,newPass){if(String(newPass||'').length<MIN_PW)throw new Error('Use a password of at least '+MIN_PW+' characters.');
+    const {d,dk}=await unlockWith(oldPass).catch(e=>{throw new Error(e.message==='That password isn’t right.'?'Your current password isn’t right.':e.message);});
+    const salt=SSCrypto.b64(SSCrypto.rand(16)),nw=await SSCrypto.deriveKeys(newPass,salt,SSCrypto.KDF_ITERS);
+    await patchMe({oldPassword:d.authPw,password:nw.authPw,passwordConfirm:nw.authPw,kdf_salt:salt,kdf_iters:SSCrypto.KDF_ITERS,kdf_v:SSCrypto.KDF_V,wrapped_dek_pw:await SSCrypto.wrapDek(nw.kek,dk)});
+    return signIn(sess.email,newPass);}
+  async function newRecoveryCode(pass){const {dk}=await unlockWith(pass);const rc=SSCrypto.newRecoveryCode();
+    await patchMe({wrapped_dek_rc:await SSCrypto.wrapDek(await SSCrypto.recoveryKey(rc),dk)});return rc;}
+  const requestEmailChange=newEmail=>api('/api/collections/users/request-email-change',{method:'POST',body:{newEmail:normEmail(newEmail)}});
+  /* The link can be opened on any device: the token names both addresses; the password is derived with the account's salt. */
+  async function confirmEmailChange(token,pass){const c=tokenClaims(token);if(!c.email||!c.newEmail)throw new Error('That link looks incomplete — request the change again.');
+    const k=await api('/api/studysuite/kdf?email='+encodeURIComponent(c.email),{auth:false});const d=await SSCrypto.deriveKeys(pass,k.salt,k.iters);
+    try{await api('/api/collections/users/auth-with-password',{method:'POST',auth:false,body:{identity:c.email,password:d.authPw}});}
+    catch(e){if(e.offline)throw e;throw new Error('That password isn’t right.');}
+    try{await api('/api/collections/users/confirm-email-change',{method:'POST',auth:false,body:{token,password:d.authPw}});}
+    catch(e){if(e.offline)throw e;throw new Error('This link has expired or was already used. Request the change again from your account.');}
+    return signIn(c.newEmail,pass);}
+  async function deleteAccount(pass){if(pass!==undefined)await unlockWith(pass);await api('/api/collections/users/records/'+sess.id,{method:'DELETE'});await signOut();}
+  return {API,FORMAT,load,session:()=>sess,dek,policy,signIn,signUp,signOut,refresh,getState,putState,deleteAccount,normEmail,requestVerification,confirmVerification,tokenClaims,requestPasswordReset,confirmPasswordReset,recoverWithCode,startFresh,needsRecovery:()=>!!pending,changePassword,newRecoveryCode,requestEmailChange,confirmEmailChange};
 })();
 
 /* ===== SCHEDULER ===== */
@@ -1420,7 +1508,8 @@ async function persist(){await Store.set(KEY.packs,packs);await Store.set(KEY.sc
    KEY.localAt = when this device's data last changed (for the dialog). Outages degrade to "will sync later". */
 const SSSync=(()=>{
   const LIGHT=['id','pack','version','author','school','year','term','course','weeks','enabled'],MAX_CT=7900000;
-  let meta=null,timer=null,busy=null,again=false,suppress=false,lastRun=0,state={k:'off'};
+  let meta=null,timer=null,busy=null,again=false,suppress=false,lastRun=0,state={k:'off'},flashed=false;
+  const CLOUD_SVG='<svg class="sico" viewBox="0 0 24 16" aria-hidden="true"><path d="M6.4 15.2h11.3a4.4 4.4 0 0 0 .5-8.8A6.1 6.1 0 0 0 6.6 5 5.1 5.1 0 0 0 6.4 15.2z" fill="currentColor"/></svg>';
   const pick=(o,ks)=>{const r={};ks.forEach(k=>{if(o[k]!==undefined)r[k]=o[k];});return r;};
   const parseTs=s=>s?Date.parse(String(s).replace(' ','T')):NaN;
   async function hash(o){const d=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(JSON.stringify(o)));
@@ -1447,10 +1536,12 @@ const SSSync=(()=>{
   async function loadMeta(){const s=SSAccount.session();const m=await Store.get(KEY.sync);
     meta=(m&&s&&m.uid===s.id)?m:{uid:s?s.id:null,stateId:null,lastUpdated:null,lastHash:null,missing:[]};if(!meta.missing)meta.missing=[];}
   function setState(k,msg){state={k,msg,at:Date.now()};const el=$('syncState');if(!el)return;
-    const t={off:'',syncing:'☁ Syncing…',ok:'☁ Synced '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}),
-      offline:'☁ Offline — changes will sync later',expired:'☁ Sign in again to keep syncing',
-      conflict:'☁ Waiting for your choice',error:'☁ Sync paused — '+(msg||'try again later')}[k];
-    el.textContent=t||'';el.style.display=t?'':'none';renderSaveHint(k);if(typeof renderAcctBtn==='function')renderAcctBtn();}
+    const t={off:'',syncing:'Syncing…',ok:'Synced '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}),
+      offline:'Offline — changes will sync later',expired:'Sign in again to keep syncing',
+      conflict:'Waiting for your choice',error:'Sync paused — '+(msg||'try again later')}[k];
+    el.dataset.st=k;el.innerHTML=t?CLOUD_SVG+String(t).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])):'';el.style.display=t?'':'none';
+    renderSaveHint(k);if(typeof renderAcctBtn==='function')renderAcctBtn();
+    if(k==='ok'&&!flashed){flashed=true;const b=$('acctBtn');if(b){b.classList.add('flash');setTimeout(()=>b.classList.remove('flash'),2600);}}}
   function renderSaveHint(k){const el=$('saveHint');if(!el)return;
     el.innerHTML={off:!ACCT_ON?'Progress lives in this browser — use <b>Backup all</b> / <b>Restore backup</b> to carry it across devices and browsers.':'Progress is saved in this browser only — use <b>Backup all</b> / <b>Restore backup</b> to move it, or sign in to sync it across your devices.',
       ok:'Progress is saved in this browser and synced, encrypted, to your account. <b>Backup all</b> still exports a copy.',
@@ -1502,12 +1593,14 @@ const SSSync=(()=>{
     setState('syncing');
     const m=await manifest(),pub=publicIds(m),pl=payload(pub),h=await hash(pl),dirty=h!==meta.lastHash;
     const cm=await SSAccount.getState(true);
-    if(!cm){await SSAccount.refresh();await upload(dek,pl,h,null);} /* no row: confirm the account still exists (401 → sign in again) */
-    else if(cm.updated===meta.lastUpdated){if(dirty)await upload(dek,pl,h,cm.id);}
+    if(cm&&meta.stateId&&cm.id!==meta.stateId){meta.lastUpdated=null;meta.lastHash=null;} /* account copy was replaced (fresh start) → treat as a first sync */
+    const dirty2=h!==meta.lastHash;
+    if(!cm){await SSAccount.refresh();if(!localEmpty())await upload(dek,pl,h,null);} /* no row: confirm the account still exists (401 → sign in again) */
+    else if(cm.updated===meta.lastUpdated){if(dirty2)await upload(dek,pl,h,cm.id);}
     else{const full=await SSAccount.getState();const d=await SSCrypto.decryptBlob(dek,full.ciphertext,full.iv);
       const first=!meta.lastUpdated;
       if(await hash(d)===h){Object.assign(meta,{stateId:full.id,lastUpdated:full.updated,lastHash:h});await saveMeta();}
-      else if(!dirty||(first&&localEmpty())){if(!await applyCloud(d,full,m,h)){again=true;return;}}
+      else if(!dirty2||(first&&localEmpty())){if(!await applyCloud(d,full,m,h)){again=true;return;}}
       else{setState('conflict');
         const la=await Store.get(KEY.localAt);
         const choice=await askConflict(first,{s:summary(pl,new TextEncoder().encode(JSON.stringify(pl)).length),t:la},{s:summary(d,full.size_bytes||0),t:parseTs(full.updated)});
@@ -1525,6 +1618,7 @@ const SSSync=(()=>{
   /* Called at the end of every persist(). */
   function changed(){if(suppress)return;Store.set(KEY.localAt,Date.now());if(ACCT_ON&&SSAccount.session())schedule();}
   async function start(){if(!ACCT_ON){setState('off');return;}await SSAccount.load();if(!SSAccount.session()){setState('off');return;}
+    if(typeof acctUnlockDevice==='function')await acctUnlockDevice();
     await loadMeta();sync();
     SSAccount.refresh().catch(e=>{if(e&&e.expired)setState('expired');});}
   document.addEventListener('visibilitychange',()=>{if(!ACCT_ON||!SSAccount.session())return;
@@ -1539,7 +1633,8 @@ const SSSync=(()=>{
 /* ===== ACCOUNT PANEL (v0.3.0 checkpoint A) — person button top right (#acctBtn) → #acctOv =====
    Views: signin · signup · recovery (shown once after sign-up; can't be dismissed until "saved" is ticked) · account.
    Sync runs only after the panel closes, so a first-sync choice dialog never stacks on top of it. */
-let acctView=null,acctRc=null,acctEmail='';
+let acctView=null,acctRc=null,acctEmail='',acctNote={t:'',b:''},acctResetTok=null,acctRcCtx='';
+function acctNotice(t,b,busy){acctNote={t,b,busy:!!busy};renderAcct('notice');$('acctOv').style.display='flex';}
 const acctEsc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function acctStatusText(){const st=SSSync.status();
   return {ok:'Synced at '+new Date(st.at).toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+'.',syncing:'Syncing…',
@@ -1549,7 +1644,7 @@ function renderAcctBtn(){const b=$('acctBtn');if(!b)return;const s=SSAccount.ses
   b.classList.toggle('on',!!s);b.dataset.st=s?SSSync.status().k:'';
   b.title=s?('Account — '+s.email):'Account — sign in to sync';
   if(acctView==='account'&&$('acctSt')){$('acctSt').textContent=acctStatusText();const re=$('acctReauth');if(re)re.style.display=SSSync.status().k==='expired'?'':'none';}}
-function openAcct(){renderAcct(SSAccount.session()?'account':'signin');$('acctOv').style.display='flex';
+function openAcct(){renderAcct(SSAccount.needsRecovery()?'recover':SSAccount.session()?'account':'signin');$('acctOv').style.display='flex';
   const f=$('acctOv').querySelector('input');if(f&&!('ontouchstart' in window))f.focus();}
 function closeAcct(){if(acctView==='recovery')return;$('acctOv').style.display='none';acctView=null;}
 function acctErr(m){const e=$('acctErr');if(e)e.textContent=m||'';}
@@ -1559,12 +1654,13 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
     '<form id="acctForm" autocomplete="on"><label class="f">Email<input class="fi" type="email" id="acctEmail" autocomplete="username" required value="'+acctEsc(acctEmail||(s&&s.email)||'')+'"></label>'+
     '<label class="f">Password<input class="fi" type="password" id="acctPw" autocomplete="current-password" required></label><div class="acct-err" id="acctErr"></div>'+
     '<button class="btn sm wide" type="submit" id="acctGo">Sign in</button></form>'+
-    '<div class="acct-alt">New here? <a id="acctToUp">Create an account</a></div>'+
+    '<div class="acct-alt"><a id="acctToForgot">Forgot password?</a> · New here? <a id="acctToUp">Create an account</a></div>'+
     '<div class="acct-note">An account is optional. Without one, everything still works — your progress just stays in this browser.</div>';
     $('acctToUp').onclick=()=>{acctEmail=$('acctEmail').value;renderAcct('signup');};
+    $('acctToForgot').onclick=()=>{acctEmail=$('acctEmail').value;renderAcct('forgot');};
     $('acctForm').onsubmit=async e=>{e.preventDefault();acctErr('');const go=$('acctGo');acctBusy(go,true,'Signing in…');
       try{await SSAccount.signIn($('acctEmail').value,$('acctPw').value);acctEmail='';closeAcct();toast('Signed in — syncing now.');SSSync.start();}
-      catch(err){acctErr(err.message);acctBusy(go,false);}};}
+      catch(err){if(err.needsRecovery){renderAcct('recover');return;}acctErr(err.message);acctBusy(go,false);}};}
   else if(view==='signup'){b.innerHTML='<h3>Create an account</h3><p class="acct-sub">Your password also encrypts your study data, so nobody else can reset it — not even Study Suite. You’ll get a recovery code next.</p>'+
     '<form id="acctForm" autocomplete="on"><label class="f">Email<input class="fi" type="email" id="acctEmail" autocomplete="username" required value="'+acctEsc(acctEmail)+'"></label>'+
     '<label class="f">Password (8+ characters)<input class="fi" type="password" id="acctPw" autocomplete="new-password" minlength="8" required></label>'+
@@ -1579,7 +1675,7 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
       if($('acctPw').value!==$('acctPw2').value){acctErr('The two passwords don’t match.');return;}
       const cw=$('acctCodeWrap');if(cw.style.display!=='none'&&!$('acctCode').value.trim()){acctErr('Enter your class code.');return;}
       const go=$('acctGo');acctBusy(go,true,'Creating your account…');
-      try{const r=await SSAccount.signUp($('acctEmail').value,$('acctPw').value,$('acctCode').value.trim());acctRc=r.recoveryCode;acctEmail='';renderAcct('recovery');}
+      try{const r=await SSAccount.signUp($('acctEmail').value,$('acctPw').value,$('acctCode').value.trim());acctTypedCode=eacCanon($('acctCode').value);acctRc=r.recoveryCode;acctEmail='';renderAcct('recovery');SSAccount.requestVerification(SSAccount.session().email).catch(()=>{});}
       catch(err){if(/access code/i.test(err.message)&&cw.style.display==='none'){cw.style.display='';$('acctCode').value='';err.message='Enter your class code.';}acctErr(err.message);acctBusy(go,false);}};}
   else if(view==='recovery'){b.innerHTML='<h3>Save your recovery code</h3><p class="acct-sub">If you ever forget your password, this code is the only way back into your synced data. Nobody else can recover it for you. Keep it in a password manager, or write it down somewhere safe.</p>'+
     '<div class="acct-rc" id="acctRc">'+acctEsc(acctRc).split('-').map(g=>'<span>'+g+'</span>').join('-<wbr>')+'</div><div class="acct-row"><button class="btn ghost sm" id="acctRcCopy">Copy</button><button class="btn ghost sm" id="acctRcDl">Download</button></div>'+
@@ -1589,24 +1685,136 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
       '\n\nIf you forget your password, this code gets you back into your synced study data.\nKeep it private and somewhere safe. Nobody else can recover it for you.\n';
       const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'text/plain'}));a.download='study-suite-recovery-code.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);};
     $('acctRcOk').onchange=e=>{$('acctRcDone').disabled=!e.target.checked;};
-    $('acctRcDone').onclick=()=>{acctRc=null;acctView=null;closeAcct();toast('Account created — your data is syncing.');SSSync.start();};}
-  else{b.innerHTML='<h3>Your account</h3><div class="acct-email">'+acctEsc(s&&s.email)+'</div><div class="acct-st" id="acctSt"></div>'+
-    '<div class="acct-row"><button class="btn ghost sm" id="acctSyncNow">Sync now</button><button class="btn sm" id="acctReauth" style="display:none">Sign in again</button></div>'+
-    '<div class="acct-note" style="margin-top:4px"><label class="acct-chk"><input type="checkbox" id="acctWipe"><span>Also remove my packs and progress from this browser (for shared computers)</span></label>'+
-    '<div class="acct-err" id="acctErr"></div><button class="btn ghost sm" id="acctOut">Sign out</button>'+
-    '<div style="margin-top:10px">Your synced data stays in your account and comes back when you sign in again.</div></div>';
-    renderAcctBtn();
-    $('acctSyncNow').onclick=async()=>{const bt=$('acctSyncNow');acctBusy(bt,true,'Syncing…');await SSSync.sync();acctBusy(bt,false);};
-    $('acctReauth').onclick=()=>renderAcct('signin');
+    const fromAcct=acctRcCtx==='acct',fresh=acctRcCtx==='fresh';acctRcCtx='';
+    $('acctRcDone').onclick=()=>{acctRc=null;if(fromAcct){renderAcct('account');toast('New recovery code saved. The old one no longer works.');return;}acctView=null;closeAcct();toast(fresh?'Fresh start done — your data is syncing.':'Account created — your data is syncing.');SSSync.start();};}
+  else if(view==='forgot'){b.innerHTML='<h3>Reset your password</h3><p class="acct-sub">We’ll email you a link to choose a new password. You’ll need your recovery code afterwards to unlock your synced data — if you don’t have it, your study data on your devices is still safe.</p>'+
+    '<form id="acctForm"><label class="f">Email<input class="fi" type="email" id="acctEmail" autocomplete="username" required value="'+acctEsc(acctEmail)+'"></label>'+
+    '<div class="acct-err" id="acctErr"></div><button class="btn sm wide" type="submit" id="acctGo">Send reset link</button></form><div class="acct-alt"><a id="acctToIn">Back to sign in</a></div>';
+    $('acctToIn').onclick=()=>{acctEmail=$('acctEmail').value;renderAcct('signin');};
+    $('acctForm').onsubmit=async e=>{e.preventDefault();acctErr('');const go=$('acctGo'),em=$('acctEmail').value.trim();acctBusy(go,true,'Sending…');
+      try{await SSAccount.requestPasswordReset(em);acctNotice('Check your email','If there’s an account for '+em+', a link to reset its password is on its way. Open it on this device or any other.');}
+      catch(err){acctErr(err.message);acctBusy(go,false);}};}
+  else if(view==='reset'){const em=SSAccount.tokenClaims(acctResetTok).email||'';
+    b.innerHTML='<h3>Choose a new password</h3><p class="acct-sub">For <b>'+acctEsc(em)+'</b>.</p>'+
+    '<form id="acctForm"><input type="email" autocomplete="username" value="'+acctEsc(em)+'" hidden>'+
+    '<label class="f">New password (8+ characters)<input class="fi" type="password" id="acctPw" autocomplete="new-password" minlength="8" required></label>'+
+    '<label class="f">New password again<input class="fi" type="password" id="acctPw2" autocomplete="new-password" required></label>'+
+    '<div class="acct-err" id="acctErr"></div><button class="btn sm wide" type="submit" id="acctGo">Save new password</button></form>';
+    $('acctForm').onsubmit=async e=>{e.preventDefault();acctErr('');if($('acctPw').value!==$('acctPw2').value){acctErr('The two passwords don’t match.');return;}
+      const go=$('acctGo');acctBusy(go,true,'Saving…');
+      try{await SSAccount.confirmPasswordReset(acctResetTok,$('acctPw').value);acctResetTok=null;closeAcct();toast('Password changed — syncing now.');SSSync.start();}
+      catch(err){if(err.needsRecovery){acctResetTok=null;renderAcct('recover');return;}
+        acctErr(err.status===400?'This reset link has expired or was already used. Request a new one from “Forgot password?”.':err.message);acctBusy(go,false);}};}
+  else if(view==='recover'){b.innerHTML='<h3>Unlock your synced data</h3><p class="acct-sub">Your password was reset. Enter your recovery code to unlock the study data in your account.</p>'+
+    '<form id="acctForm"><label class="f">Recovery code<input class="fi" type="text" id="acctRcIn" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="XXXX-XXXX-XXXX-XXXX-XXXX-XXXX" required></label>'+
+    '<div class="acct-err" id="acctErr"></div><button class="btn sm wide" type="submit" id="acctGo">Unlock</button></form><div class="acct-alt"><a id="acctNoRc">I don’t have my recovery code</a></div>';
+    $('acctNoRc').onclick=()=>renderAcct('fresh');
+    $('acctForm').onsubmit=async e=>{e.preventDefault();acctErr('');const go=$('acctGo');acctBusy(go,true,'Unlocking…');
+      try{await SSAccount.recoverWithCode($('acctRcIn').value);acctView=null;closeAcct();toast('Unlocked — your synced data is back.');SSSync.start();}
+      catch(err){acctErr(err.message);acctBusy(go,false);}};}
+  else if(view==='fresh'){b.innerHTML='<h3>Don’t worry — your studying isn’t gone</h3><p class="acct-sub">Without the recovery code, the copy in your account can’t be unlocked by anyone. That’s what keeps it private. Everything on your devices is untouched:</p>'+
+    '<ul class="acct-list"><li>Your packs and progress are still in the browser where you last studied. Sign in there and they become your new account copy.</li><li>Any <b>Backup all</b> file you’ve saved still works — <b>Restore backup</b> brings it back.</li></ul>'+
+    '<p class="acct-sub">We’ll start a fresh account copy and give you a new recovery code.</p><div class="acct-err" id="acctErr"></div>'+
+    '<div class="acct-row"><button class="btn ghost sm" id="acctBack">Back</button><button class="btn sm" id="acctGo">Start fresh</button></div>';
+    $('acctBack').onclick=()=>renderAcct('recover');
+    $('acctGo').onclick=async()=>{const go=$('acctGo');acctBusy(go,true,'Starting fresh…');
+      try{const r=await SSAccount.startFresh();acctRc=r.recoveryCode;acctRcCtx='fresh';renderAcct('recovery');}catch(err){acctErr(err.message);acctBusy(go,false);}};}
+  else if(view==='noacct'){b.innerHTML='<h3>Using Study Suite without an account</h3><ul class="acct-list">'+
+    '<li>Everything works: packs, review, practice and exams.</li>'+
+    '<li>Your progress is saved only in this browser. Clearing its site data, or switching browser or phone, loses it.</li>'+
+    '<li><b>Backup all</b> saves a file you can restore anywhere.</li>'+
+    '<li>An account keeps your devices in sync, encrypted so only you can read it. You can create one any time from the account menu at the top right of the homepage.</li></ul>'+
+    '<button class="btn sm wide" id="acctNoteOk">Got it</button>';$('acctNoteOk').onclick=()=>{acctView=null;closeAcct();};}
+  else if(view==='notice'){b.innerHTML='<h3>'+acctEsc(acctNote.t)+'</h3><p class="acct-sub">'+acctEsc(acctNote.b)+'</p>'+(acctNote.busy?'':'<button class="btn sm wide" id="acctNoteOk">OK</button>');
+    if(!acctNote.busy)$('acctNoteOk').onclick=()=>{acctView=null;closeAcct();};}
+  else if(view==='signout'){b.innerHTML='<h3>Sign out of this browser?</h3><p class="acct-sub">Your synced data stays in your account and comes back when you sign in again.</p>'+
+    '<label class="acct-chk"><input type="checkbox" id="acctWipe"><span>Also remove my packs and progress from this browser (for shared computers)</span></label>'+
+    '<div class="acct-err" id="acctErr"></div><div class="acct-row"><button class="btn ghost sm" id="acctBack">Cancel</button><button class="btn sm" id="acctOut">Sign out</button></div>';
+    $('acctBack').onclick=()=>renderAcct('account');
     $('acctOut').onclick=async()=>{acctErr('');const bt=$('acctOut'),wipe=$('acctWipe').checked;acctBusy(bt,true,'Saving your latest changes…');
       await SSSync.sync();const k=SSSync.status().k;
       if(wipe&&k!=='ok'){acctErr('Your latest changes haven’t reached your account yet, so removing them here would lose them. Try again when sync works, or sign out without removing data.');acctBusy(bt,false);return;}
       await SSAccount.signOut();await SSSync.reset();
       if(wipe){packs=[];sched={};prac=null;daily={date:today(),count:0};await persist();}
       renderHome();acctView=null;closeAcct();
-      toast(wipe?'Signed out. Your packs and progress were removed from this browser.':'Signed out. Your data stays on this device and in your account.');};}}
+      toast(wipe?'Signed out. Your packs and progress were removed from this browser.':'Signed out. Your data stays on this device and in your account.');};}
+  else if(view==='chpw'){b.innerHTML='<h3>Change password</h3><p class="acct-sub">Your other devices will ask you to sign in again with the new password. Your study data isn’t affected.</p>'+
+    '<form id="acctForm"><input type="email" autocomplete="username" value="'+acctEsc(s&&s.email)+'" hidden>'+
+    '<label class="f">Current password<input class="fi" type="password" id="acctPw0" autocomplete="current-password" required></label>'+
+    '<label class="f">New password (8+ characters)<input class="fi" type="password" id="acctPw" autocomplete="new-password" minlength="8" required></label>'+
+    '<label class="f">New password again<input class="fi" type="password" id="acctPw2" autocomplete="new-password" required></label>'+
+    '<div class="acct-err" id="acctErr"></div><div class="acct-row"><button class="btn ghost sm" type="button" id="acctBack">Cancel</button><button class="btn sm" type="submit" id="acctGo">Change password</button></div></form>';
+    $('acctBack').onclick=()=>renderAcct('account');
+    $('acctForm').onsubmit=async e=>{e.preventDefault();acctErr('');if($('acctPw').value!==$('acctPw2').value){acctErr('The two new passwords don’t match.');return;}
+      const go=$('acctGo');acctBusy(go,true,'Changing…');
+      try{await SSAccount.changePassword($('acctPw0').value,$('acctPw').value);acctNotice('Password changed','Your other devices will ask you to sign in again with the new password.');SSSync.sync();}
+      catch(err){acctErr(err.message);acctBusy(go,false);}};}
+  else if(view==='newrc'){b.innerHTML='<h3>New recovery code</h3><p class="acct-sub">Your current recovery code will stop working. Enter your password to make a new one.</p>'+
+    '<form id="acctForm"><input type="email" autocomplete="username" value="'+acctEsc(s&&s.email)+'" hidden><label class="f">Password<input class="fi" type="password" id="acctPw0" autocomplete="current-password" required></label>'+
+    '<div class="acct-err" id="acctErr"></div><div class="acct-row"><button class="btn ghost sm" type="button" id="acctBack">Cancel</button><button class="btn sm" type="submit" id="acctGo">Make a new code</button></div></form>';
+    $('acctBack').onclick=()=>renderAcct('account');
+    $('acctForm').onsubmit=async e=>{e.preventDefault();acctErr('');const go=$('acctGo');acctBusy(go,true,'Working…');
+      try{acctRc=await SSAccount.newRecoveryCode($('acctPw0').value);acctRcCtx='acct';renderAcct('recovery');}catch(err){acctErr(err.message);acctBusy(go,false);}};}
+  else if(view==='chemail'){b.innerHTML='<h3>Change email</h3><p class="acct-sub">We’ll send a confirmation link to the new address. Your email stays <b>'+acctEsc(s&&s.email)+'</b> until you open it.</p>'+
+    '<form id="acctForm"><label class="f">New email<input class="fi" type="email" id="acctEmail" autocomplete="email" required></label>'+
+    '<div class="acct-err" id="acctErr"></div><div class="acct-row"><button class="btn ghost sm" type="button" id="acctBack">Cancel</button><button class="btn sm" type="submit" id="acctGo">Send confirmation</button></div></form>';
+    $('acctBack').onclick=()=>renderAcct('account');
+    $('acctForm').onsubmit=async e=>{e.preventDefault();acctErr('');const go=$('acctGo'),ne=$('acctEmail').value.trim();acctBusy(go,true,'Sending…');
+      try{await SSAccount.requestEmailChange(ne);acctNotice('Check your new inbox','Open the link we sent to '+ne+' to finish changing your email.');}catch(err){acctErr(err.message);acctBusy(go,false);}};}
+  else if(view==='confirmemail'){const c=SSAccount.tokenClaims(acctResetTok);
+    b.innerHTML='<h3>Confirm your new email</h3><p class="acct-sub">Change <b>'+acctEsc(c.email)+'</b> to <b>'+acctEsc(c.newEmail)+'</b>. Enter your password to confirm.</p>'+
+    '<form id="acctForm"><input type="email" autocomplete="username" value="'+acctEsc(c.email)+'" hidden><label class="f">Password<input class="fi" type="password" id="acctPw0" autocomplete="current-password" required></label>'+
+    '<div class="acct-err" id="acctErr"></div><button class="btn sm wide" type="submit" id="acctGo">Confirm new email</button></form>';
+    $('acctForm').onsubmit=async e=>{e.preventDefault();acctErr('');const go=$('acctGo');acctBusy(go,true,'Confirming…');
+      try{await SSAccount.confirmEmailChange(acctResetTok,$('acctPw0').value);acctResetTok=null;acctNotice('Email changed','You’re signed in as '+c.newEmail+'. Use it to sign in on your other devices.');SSSync.start();}
+      catch(err){acctErr(err.message);acctBusy(go,false);}};}
+  else if(view==='delete'){b.innerHTML='<h3>Delete your account</h3><p class="acct-sub">This permanently deletes your account and the synced copy of your study data. It can’t be undone.</p>'+
+    '<p class="acct-sub">Your packs and progress on this device — and any <b>Backup all</b> files — stay where they are.</p>'+
+    '<form id="acctForm"><input type="email" autocomplete="username" value="'+acctEsc(s&&s.email)+'" hidden>'+
+    '<label class="f">Type DELETE to confirm<input class="fi" type="text" id="acctDel" autocapitalize="characters" autocorrect="off" spellcheck="false" required></label>'+
+    '<label class="f">Password<input class="fi" type="password" id="acctPw0" autocomplete="current-password" required></label>'+
+    '<div class="acct-err" id="acctErr"></div><div class="acct-row"><button class="btn ghost sm" type="button" id="acctBack">Cancel</button><button class="btn sm danger" type="submit" id="acctGo">Delete my account</button></div></form>';
+    $('acctBack').onclick=()=>renderAcct('account');
+    $('acctForm').onsubmit=async e=>{e.preventDefault();acctErr('');if($('acctDel').value.trim()!=='DELETE'){acctErr('Type DELETE in capitals to confirm.');return;}
+      const go=$('acctGo');acctBusy(go,true,'Deleting…');
+      try{await SSAccount.deleteAccount($('acctPw0').value);await SSSync.reset();acctNotice('Account deleted','Your account and its synced copy are gone. Your study data on this device is untouched.');}
+      catch(err){acctErr(err.message);acctBusy(go,false);}};}
+  else{b.innerHTML='<h3>Your account</h3><div class="acct-email">'+acctEsc(s&&s.email)+'</div><div class="acct-st" id="acctSt"></div>'+
+    (s&&!s.verified?'<div class="acct-verify">Please confirm your email address — we sent you a link. <a id="acctResend">Resend it</a></div>':'')+
+    '<div class="acct-row"><button class="btn ghost sm" id="acctSyncNow">Sync now</button><button class="btn sm" id="acctReauth" style="display:none">Sign in again</button></div>'+
+    '<div class="acct-note acct-sec"><div class="sync-h">Security</div><a id="acctToChPw">Change password</a><a id="acctToRc">New recovery code</a><a id="acctToEmail">Change email</a><a id="acctToDel" class="danger">Delete account</a></div>'+
+    '<div class="acct-row" style="margin-top:14px"><button class="btn ghost sm" id="acctOut">Sign out</button></div>';
+    renderAcctBtn();
+    $('acctSyncNow').onclick=async()=>{const bt=$('acctSyncNow');acctBusy(bt,true,'Syncing…');await SSSync.sync();acctBusy(bt,false);};
+    $('acctReauth').onclick=()=>renderAcct('signin');
+    if($('acctResend'))$('acctResend').onclick=async()=>{const a=$('acctResend');a.style.pointerEvents='none';a.textContent='Sending…';
+      try{await SSAccount.requestVerification(s.email);a.textContent='Sent — check your inbox.';}catch(e){a.textContent=e.message;a.style.pointerEvents='';}};
+    $('acctToChPw').onclick=()=>renderAcct('chpw');$('acctToRc').onclick=()=>renderAcct('newrc');
+    $('acctToEmail').onclick=()=>renderAcct('chemail');$('acctToDel').onclick=()=>renderAcct('delete');
+    $('acctOut').onclick=()=>renderAcct('signout');}}
 if(!ACCT_ON)$('acctBtn').style.display='none';
+/* Front door (accounts on): sign in · create an account · use without an account (class code) — B5. */
+let acctTypedCode='';
+async function acctUnlockDevice(){if(eac&&eac.unlocked)return;const s=SSAccount.session();if(!s)return;
+  eac={unlocked:true,via:s.tag||'account',admin:s.tag==='master',at:new Date().toISOString(),viaAccount:true};if(acctTypedCode&&s.tag!=='master')eac.code=acctTypedCode;await Store.set(KEY.eac,eac);applyGate();}
+if(ACCT_ON){$('eacAcct').hidden=false;document.querySelector('#eacGate .eactitle').textContent='Welcome to Study Suite';
+  document.querySelector('#eacGate .eacsub').textContent='Sign in to pick up where you left off, or start with your class code.';
+  $('eacInput').placeholder='Class code';$('eacUnlock').textContent='Continue';
+  $('eacSignIn').onclick=()=>{renderAcct('signin');$('acctOv').style.display='flex';};
+  $('eacSignUp').onclick=()=>{renderAcct('signup');$('acctOv').style.display='flex';};
+  $('eacHelp').onclick=()=>{renderAcct('noacct');$('acctOv').style.display='flex';};}
 $('acctBtn').addEventListener('click',openAcct);
+/* Links in our emails land on studysuite.app/#verify=TOKEN · #reset=TOKEN · #email=TOKEN (PocketBase mail templates). */
+async function mailLinkRoute(){const m=location.hash.match(/^#(verify|reset|email)=([A-Za-z0-9._-]+)$/);if(!m)return;
+  try{history.replaceState(history.state,'',location.pathname+location.search);}catch(e){}
+  const kind=m[1],tok=m[2];
+  if(kind==='verify'){acctNotice('Confirming your email…','',true);
+    try{await SSAccount.confirmVerification(tok);if(SSAccount.session())await SSAccount.refresh().catch(()=>{});
+      acctNotice('Email confirmed','Thanks — your email address is confirmed.');}
+    catch(e){acctNotice('That link didn’t work',e.offline?e.message:'This confirmation link has expired or was already used. Open your account (the person icon, top right) and choose “Resend it”.');}}
+  else if(kind==='reset'){acctResetTok=tok;renderAcct('reset');$('acctOv').style.display='flex';}
+  else if(kind==='email'){acctResetTok=tok;renderAcct('confirmemail');$('acctOv').style.display='flex';}
+}
 $('acctX').addEventListener('click',closeAcct);
 $('acctOv').addEventListener('click',e=>{if(e.target===$('acctOv'))closeAcct();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('acctOv').style.display!=='none')closeAcct();});
@@ -1845,6 +2053,7 @@ async function init(){
   $('saveState').textContent=STORAGE_MODE==='persistent'?'✓ packs + progress saved across sessions':STORAGE_MODE==='local'?'✓ saved in this browser':'⚠ in-memory only — use Backup to keep data';
   renderHome();
   SSSync.start();
+  mailLinkRoute();
 }
 
 /* ===== VALIDATION ===== */
