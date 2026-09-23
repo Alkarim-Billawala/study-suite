@@ -1,7 +1,16 @@
 <!--
-  Study Suite  ·  v0.6.1 (beta)
+  Study Suite  ·  v0.6.2 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.6.2 (also): HOME — "Your library" becomes a panel with a serif title once it has packs (empty: the small header +
+  "Your library is empty — add a pack below or upload your own to start."); the default packs section is titled from the
+  packs' schools ("UofT Med Study Packs"; ", etc." for several; short names = manifest schoolShort from content_scopes_LOCAL
+  names), tinted with an accent border, a "N packs · N in your library" summary, a new description and per-course
+  "N packs · N added". makeStub counts: a placeholder built from a pack-list entry (not a pack) takes the entry's counts
+  (were 0). Changelog v0.6.2: pending packs (meta.missing — account references this device couldn't resolve) are retried on every
+  sync and whenever a key arrives (retryMissing): switched off → placeholder, switched on → downloaded. Found on Dia, which
+  was on v0.5.4 when the site went encrypted: it parked Weeks 38/39 as pending (plain files gone), and after updating it only
+  uploaded — pending packs were only retried on a download — so the placeholders appeared only after a reload.
   Changelog v0.6.1: (1) a newly updated device's first sync opens the pack list with the keys ARRIVING in that sync
   (d.eac.keys) before resolving pack references — the iPhone briefly said "2 packs couldn't be downloaded" (it resolved
   before taking in the key; kept them pending; fixed itself next sync). Used only for that resolve step, so the
@@ -907,12 +916,18 @@ section{display:none}section.on{display:block}
 .faqbody b{color:var(--ink);font-weight:600}
 @media(max-width:560px){.installbtn{font-size:9px;padding:5px 9px}}
 /* default-packs panel (only shown when a packs-manifest.json is served alongside the app) */
-.defpacks{margin:14px 0;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);padding:14px 16px}
+.defpacks{margin:18px 0;border:1.5px solid color-mix(in srgb,var(--accent) 45%,var(--line));border-radius:10px;background:color-mix(in srgb,var(--accent) 4%,var(--paper));padding:18px 20px} /* v0.6.2: a real section, below the library */
 .defpacks .dp-t{display:flex;align-items:center;gap:7px;width:100%;text-align:left;background:transparent;border:none;cursor:pointer;padding:0;font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
-.defpacks .dp-t .tri{font-size:12px}
+.defpacks .dp-t .tri{font-size:14px;color:var(--accent)}
+.defpacks .dp-t{font-family:var(--font-head);font-size:21px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink);gap:9px}
+.defpacks .dp-t .dp-badge{margin-left:4px}.dp-sum{margin-left:auto;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.05em;color:var(--ink-soft);font-weight:400;white-space:nowrap}
+.libpanel.has{border:1.5px solid var(--line);border-radius:10px;padding:18px 20px;background:var(--paper);margin:14px 0}
+.libpanel.has .libhdr{align-items:baseline;gap:9px;margin-bottom:12px}.libpanel.has .libhdr .lt:first-child{font-family:var(--font-head);font-size:21px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink)}.libpanel.has #libCount{margin-left:auto;font-size:10.5px}
+.libempty{font-size:15px;color:var(--ink-soft);margin:4px 0 2px}
+@media (max-width:560px){.libpanel.has .libhdr .lt:first-child,.defpacks .dp-t{font-size:18.5px}.libpanel.has,.defpacks{padding:12px 10px}.libpanel.has{margin-left:-6px;margin-right:-6px}.libpanel.has .libhdr{flex-wrap:wrap;row-gap:2px}.libpanel.has #libCount{margin-left:0;width:100%}.defpacks .dp-t{flex-wrap:wrap;row-gap:2px}.defpacks .dp-sum{margin-left:23px;width:100%}.dp-coursebody{padding-left:8px;margin-left:4px}.packrow{padding:10px 10px}.packrow .pkleft{gap:10px}}
 .defpacks .dp-badge{margin-left:auto;font-family:var(--font-mono);font-size:9px;letter-spacing:.06em;text-transform:none;color:var(--paper);background:var(--accent);border-radius:10px;padding:2px 8px}
 .defpacks .dp-badge.mini{margin-left:6px;font-size:8.5px;padding:1px 6px;vertical-align:middle}
-.defpacks .dp-d{font-size:14px;color:var(--ink-soft);margin:3px 0 10px}
+.defpacks .dp-d{font-size:15px;color:var(--ink-soft);margin:6px 0 12px}
 .dp-schools{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;margin:0 0 12px;padding-bottom:4px}
 .dp-schools:empty{display:none}
 .dp-school{font-family:var(--font-body);font-size:15px;border:1.5px solid var(--line);background:var(--paper);border-radius:20px;padding:6px 14px;cursor:pointer;transition:.12s;white-space:nowrap;color:var(--ink)}
@@ -1158,14 +1173,17 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
     </div>
 
     <div class="rule"></div>
-    <div class="libhdr"><span class="lt">▸ Content library</span><span class="lt" id="libCount"></span></div>
+    <div class="libpanel" id="libPanel">
+    <div class="libhdr"><span class="lt" id="libTitle">▸ Content library</span><span class="lt" id="libCount"></span></div>
     <div id="libActions" style="display:none;margin-bottom:10px"><button class="minor" id="enableAll">Enable all</button> <button class="minor" id="disableAll">Set all aside</button> <button class="minor upd" id="updateAll" style="display:none">↑ Update all</button></div>
     <div id="packNews"></div>
     <div id="packList"></div>
+    <p class="libempty" id="libEmpty" hidden>Your library is empty — add a pack below or upload your own to start.</p>
+    </div>
     <div class="defpacks" id="defPacks" style="display:none">
-      <button class="dp-t" id="dpToggle" type="button"><span class="tri" id="dpTri">▸</span> Default study packs <span class="dp-badge" id="dpBadge" style="display:none"></span></button>
+      <button class="dp-t" id="dpToggle" type="button"><span class="tri" id="dpTri">▸</span> <span id="dpTitle">Study packs</span> <span class="dp-badge" id="dpBadge" style="display:none"></span><span class="dp-sum" id="dpSum"></span></button>
       <div id="dpBody">
-        <div class="dp-d">Curated packs by the author — add them straight to your library.</div>
+        <div class="dp-d">Curated by the author and unlocked by your access code. Add any of them to your library — your progress is kept.</div>
         <div class="dp-schools" id="dpSchools"></div>
         <div class="dp-list" id="dpList"></div>
       </div>
@@ -1483,7 +1501,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.6.1';
+const APP_VERSION='0.6.2';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1939,6 +1957,16 @@ const SSSync=(()=>{
   /* v0.4.11: packs the last-synced copy had that this device no longer has, with no removal recorded — storage loss, not intent. */
   async function lostPacks(pl){const b=await loadBase();if(!b)return false;const have=new Set((pl.packs||[]).map(p=>p.id));
     const lost=(b.packs||[]).filter(p=>!have.has(p.id)&&!packGone[p.id]);if(lost.length)slog('This device is missing '+lost.length+' pack(s) the account has — merging instead of uploading',pl,null,meta.lastUpdated);return lost.length>0;}
+  /* v0.6.2: account references this device couldn't resolve earlier (meta.missing — e.g. it was on an old version when the
+     site switched to encrypted packs) are retried on every sync and when a key arrives: off → placeholder, on → downloaded. */
+  let retrying=false;
+  async function retryMissing(){if(retrying||!meta||!(meta.missing||[]).length)return false;retrying=true;
+    try{const m=await manifest();if(!m||!m.packs||!m.packs.length)return false;const have=new Set(packs.map(p=>p.id));
+      const todo=meta.missing.filter(e=>e&&e.id&&!have.has(e.id)),r=await resolvePacks(todo,m);
+      if(!r.out.length){if(todo.length!==meta.missing.length){meta.missing=r.miss;await saveMeta();}return false;}
+      packs=packs.concat(r.out);meta.missing=r.miss;await saveMeta();suppress=true;try{await persist();}finally{suppress=false;}
+      renderHome();slog('Restored '+r.out.length+' pending pack'+(r.out.length===1?'':'s')+' ('+r.out.map(p=>p.id).join(', ')+')',null,null,meta.lastUpdated);return true;}
+    finally{retrying=false;}}
   async function saveBase(pl){if(meta)await Store.set(BASE_KEY,{uid:meta.uid,at:meta.lastUpdated,p:baseOf(pl)});}
   async function loadBase(){const x=await Store.get(BASE_KEY);return (x&&meta&&x.uid===meta.uid&&x.at&&x.at===meta.lastUpdated)?x.p:null;}
   function mergeMap(b,l,c,both,notes,label){b=b||{};l=l||{};c=c||{};const out={};let n=0;
@@ -2041,6 +2069,7 @@ const SSSync=(()=>{
     const dek=await SSAccount.dek();if(!dek){setState('expired');return;}
     if(!meta||meta.uid!==SSAccount.session().id)await loadMeta();
     setState('syncing');
+    await retryMissing(); /* v0.6.2 */
     const m=await manifest(),pub=publicIds(m),pl=payload(pub),h=await hash(pl),dirty=h!==meta.lastHash;
     const cm=await SSAccount.getState(true);
     if(cm&&meta.stateId&&cm.id!==meta.stateId){meta.lastUpdated=null;meta.lastHash=null;} /* account copy was replaced (fresh start) → treat as a first sync */
@@ -2096,7 +2125,7 @@ const SSSync=(()=>{
     if(document.visibilityState==='hidden'){clearTimeout(timer);sync();}
     else if(Date.now()-lastRun>15000)sync();});
   async function reset(){clearTimeout(timer);meta=null;lastOk=0;pendingSince=0;await Store.set(KEY.sync,null);await Store.set(BASE_KEY,null);setState('off');}
-  return {start,sync,changed,schedule,reset,status:()=>Object.assign({view:viewOf(),lastOk},state),meta:()=>meta,_hash:hash,_payload:payload,_merge3:merge3,_baseOf:baseOf,_resolvePacks:resolvePacks,_applyCloud:applyCloud,_loadMeta:loadMeta,_pulled:()=>pulled,_mergePacks:mergePacks};
+  return {start,sync,changed,schedule,reset,status:()=>Object.assign({view:viewOf(),lastOk},state),meta:()=>meta,_hash:hash,_payload:payload,_merge3:merge3,_baseOf:baseOf,_resolvePacks:resolvePacks,_applyCloud:applyCloud,_loadMeta:loadMeta,retryMissing,_pulled:()=>pulled,_mergePacks:mergePacks};
 })();
 
 
@@ -2451,6 +2480,7 @@ async function initPackLinks(){
     if(m&&m.v===2)defaultManifest=await openManifest(m,heldKeys()); /* v0.6.0: the sections this device holds keys for */
     else{if(!m||!Array.isArray(m.packs)||!m.packs.length)return;defaultManifest=m;}
     backfillPlacement();renderLibrary();renderDefaultPacks();maybeApplyQueuedUpdates();
+    try{if(SSSync.meta()&&(SSSync.meta().missing||[]).length)SSSync.retryMissing();}catch(e){} /* v0.6.2: a key just arrived → pending packs */
   }catch(e){}
 }
 let dpOpen=null; // Set of expanded "year³course" keys; null until first render
@@ -2503,8 +2533,10 @@ const PACK_META=['pack','version','author','school','year','term','course','week
 function manifestEntry(id){const m=defaultManifest;return (m&&Array.isArray(m.packs))?m.packs.find(x=>x&&x.id===id&&x.file)||null:null;}
 function makeStub(p,mp){const st={id:p.id,stub:1,questions:[],cards:[],guides:[]};PACK_META.forEach(k=>{if(p[k]!==undefined)st[k]=p[k];});
   if(!st.pack)st.pack=(mp&&mp.label)||p.id;
-  st.nq=p.stub?p.nq:(p.questions||[]).length;st.nc=p.stub?p.nc:(p.cards||[]).length;st.ng=p.stub?p.ng:(p.guides||[]).length;
-  if(mp){if(mp.nq!=null&&st.nq==null)st.nq=mp.nq;if(mp.nc!=null&&st.nc==null)st.nc=mp.nc;if(mp.g&&st.ng==null)st.ng=Object.keys(mp.g).length;}return st;}
+  const real=Array.isArray(p.questions)||Array.isArray(p.cards); /* a pack; otherwise a pack-list entry (v0.6.2: counts came out 0) */
+  st.nq=p.stub?p.nq:real?(p.questions||[]).length:undefined;st.nc=p.stub?p.nc:real?(p.cards||[]).length:undefined;st.ng=p.stub?p.ng:real?(p.guides||[]).length:undefined;
+  if(mp){if(mp.nq!=null&&st.nq==null)st.nq=mp.nq;if(mp.nc!=null&&st.nc==null)st.nc=mp.nc;if(mp.g&&st.ng==null)st.ng=Object.keys(mp.g).length;}
+  ['nq','nc','ng'].forEach(k=>{if(st[k]==null)st[k]=0;});return st;}
 /* Download a placeholder's pack (always the latest published version); turnOn = the user tapped download. */
 async function downloadPack(p,turnOn){const mp=manifestEntry(p.id);if(!mp)throw new Error('This pack isn’t available to download any more.');
   let j;try{j=await fetchPackJson(mp);}catch(e){throw new Error('Couldn’t download it — check your connection and try again.');}
@@ -2568,6 +2600,10 @@ let dpSectionOpen=null; // Default-packs section collapse state for this session
 function renderDefaultPacks(){
   const vm=visibleManifest();if(!vm||!vm.packs.length){const w=$('defPacks');if(w)w.style.display='none';return;} /* v0.5.0: only packs in the user's scopes */
   const m=vm;
+  /* v0.6.2: titled from the packs' schools (short names when the deploy provides them); summary on the right */
+  {const sch=[...new Set(m.packs.map(p=>p.schoolShort||p.school).filter(Boolean))],inL=new Set(packs.map(p=>p.id)),have=m.packs.filter(p=>inL.has(p.id)).length;
+   $('dpTitle').textContent=sch.length?(sch[0]+(sch.length>1?', etc.':'')+' Study Packs'):'Study packs';
+   $('dpSum').textContent=m.packs.length+' pack'+(m.packs.length===1?'':'s')+(have?' · '+have+' in your library':'');}
   // Collapse/badge state: expanded only while the library is empty; once the user has content it starts
   // collapsed each session. New (unseen) default packs raise a badge and auto-expand the section once on
   // first detection, then just badge on later sessions until the user opens it themselves.
@@ -2623,7 +2659,8 @@ function renderDefaultPacks(){
           const key=y+'³'+t+'³'+c,open=dpOpen.has(key);
           const tg=document.createElement('button');tg.className='dp-course'+(open?' open':'');
           const cBadge=cNew?`<span class="dp-badge mini">${cNew} new</span>`:'';
-          tg.innerHTML=`<span class="tri">${open?'▾':'▸'}</span> ${c} ${cBadge}<span class="cnt">${plist.length} pack${plist.length===1?'':'s'}</span>`;
+          const added=plist.filter(p=>packs.some(x=>x.id===p.id)).length; /* v0.6.2 */
+          tg.innerHTML=`<span class="tri">${open?'▾':'▸'}</span> ${c} ${cBadge}<span class="cnt">${plist.length} pack${plist.length===1?'':'s'}${added?' · '+added+' added':''}</span>`;
           tg.onclick=()=>{open?dpOpen.delete(key):dpOpen.add(key);renderDefaultPacks();};
           host.appendChild(tg);
           if(!open)return;
@@ -2786,6 +2823,7 @@ function renderHome(){
   updateHeaderButtons(); // PWA: swap "Add to home" for a Refresh/Update button, reflecting app/pack updates
   const nC=deck().length,nP=packs.length,aP=activePacks().length,tp=qpool().length,nG=activeGuides().length;
   $('libCount').textContent=nP?`${aP} of ${nP} active · ${qpool().length} questions · ${nC} cards`:'empty';
+  $('libPanel').classList.toggle('has',!!nP);$('libTitle').textContent=nP?'Your library':'▸ Content library';$('libEmpty').hidden=!!nP; /* v0.6.2 */
   $('libActions').style.display=nP?'':'none';
   const nUpd=pendingUpdates().length;const ua=$('updateAll');if(ua){ua.style.display=nUpd?'':'none';if(nUpd)ua.textContent='↑ Update all ('+nUpd+')';}
   $('featReview').textContent=nC+' cards';
