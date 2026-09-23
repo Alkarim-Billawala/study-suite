@@ -1,7 +1,13 @@
 <!--
-  Study Suite  ·  v0.4.11 (beta)
+  Study Suite  ·  v0.4.12 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.4.12: UPDATE CHECK ON A SCHEDULE — checkAppVersion() ran only at page load, so a window left open never showed
+  Update (Dia stayed on v0.4.10). Now also every 5 min while visible, on return to the app (≥60 s since the last check), on
+  'online', and at once when sync downloads data written by a newer app version (d.app). Works without an account.
+  The Update button now also appears in a browser tab (it used to exist only in the installed app).
+  ACCOUNT PANEL REORDER — Sync activity + Your devices sit under Sync now (above the divider); Security: Change email,
+  Change password, New recovery code, Sign out other devices, Delete account; Sign out button stays at the bottom.
   Changelog v0.4.11: PACK-LOSS FIX (2026-09-23 incident: the Safari web app's localStorage (~2.5 M chars) couldn't hold a 5th
   pack; Store.set swallowed the QuotaExceeded, the pack lived only in memory, the update reload came back with 4 and sync
   uploaded 4 → Week 42 gone everywhere). (1) Store now keeps data in IndexedDB ('suite_data' / 'kv'), migrating each key from
@@ -769,7 +775,7 @@ section{display:none}section.on{display:block}
 #pausedOv{z-index:20000!important}#acctOv,#syncCfOv{z-index:10000}#toastWrap{z-index:20001} /* above the class-code gate (9999); stackModals() raises whichever modal opened last */
 .acct-verify{font-size:13.5px;line-height:1.5;color:var(--ink);background:color-mix(in srgb,var(--gold) 14%,transparent);border-radius:8px;padding:8px 10px;margin:-6px 0 14px}
 .acct-verify a{color:var(--accent);cursor:pointer;text-decoration:underline}
-.acct-sec a{display:block;color:var(--accent);cursor:pointer;text-decoration:underline;font-size:14px;margin:6px 0}.acct-sec a.danger{color:var(--red)}
+.acct-links{margin-top:12px}.acct-sec a,.acct-links a{display:block;color:var(--accent);cursor:pointer;text-decoration:underline;font-size:14px;margin:6px 0}.acct-sec a.danger{color:var(--red)}
 .acct-card .btn.danger{background:var(--red);color:#fff}
 .acct-legal{font-size:12.5px;color:var(--ink-soft);margin-top:10px;line-height:1.5;text-align:center}.acct-legal a{color:var(--accent)}
 .acct-list{margin:0 0 12px;padding-left:18px;font-size:14px;line-height:1.5;color:var(--ink)}.acct-list li{margin-bottom:6px}
@@ -1417,7 +1423,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.4.11';
+const APP_VERSION='0.4.12';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1965,6 +1971,7 @@ const SSSync=(()=>{
     if(!cm){await SSAccount.refresh();if(!localEmpty()){await upload(dek,pl,h,null);slog('Uploaded (first copy in the account)',pl,null,meta.lastUpdated);}} /* no row: confirm the account still exists (401 → sign in again) */
     else if(cm.updated===meta.lastUpdated&&!(dirty2&&await lostPacks(pl))){if(dirty2){await upload(dek,pl,h,cm.id,cm.updated);slog('Uploaded this device’s changes',pl,null,meta.lastUpdated);}}
     else{const full=await SSAccount.getState();const d=await SSCrypto.decryptBlob(dek,full.ciphertext,full.iv);
+      try{if(d&&d.app)noteNewerApp(d.app);}catch(e){} /* v0.4.12: another device is already on a newer version */
       const first=!meta.lastUpdated;
       if(await hash(d)===h){Object.assign(meta,{stateId:full.id,lastUpdated:full.updated,lastHash:h});await saveMeta();await saveBase(pl);slog('Already in step',pl,d,full.updated);}
       else if(!dirty2||(first&&localEmpty())){if(!await applyCloud(d,full,m,h)){slog('Pull postponed — this device changed mid-pull',pl,d,full.updated);again=true;return;}slog('Downloaded the account copy',pl,d,full.updated);}
@@ -2190,7 +2197,8 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
   else{b.innerHTML='<h3>Your account</h3><div class="acct-email">'+acctEsc(s&&s.email)+'</div><div class="acct-st" id="acctSt"></div>'+
     (s&&!s.verified?'<div class="acct-verify">Please confirm your email address — we sent you a link. <a id="acctResend">Resend it</a></div>':'')+
     '<div class="acct-row"><button class="btn ghost sm" id="acctSyncNow">Sync now</button><button class="btn sm" id="acctReauth" style="display:none">Sign in again</button></div>'+
-    '<div class="acct-note acct-sec"><div class="sync-h">Security</div><a id="acctToChPw">Change password</a><a id="acctToRc">New recovery code</a><a id="acctToEmail">Change email</a><a id="acctToOthers"'+(SIGNOUT_OTHERS_ON?'':' hidden')+'>Sign out other devices</a><a id="acctToDev">Your devices</a><a id="acctToLog">Sync activity</a><a id="acctToDel" class="danger">Delete account</a></div>'+
+    '<div class="acct-links"><a id="acctToLog">Sync activity</a><a id="acctToDev">Your devices</a></div>'+
+    '<div class="acct-note acct-sec"><div class="sync-h">Security</div><a id="acctToEmail">Change email</a><a id="acctToChPw">Change password</a><a id="acctToRc">New recovery code</a><a id="acctToOthers"'+(SIGNOUT_OTHERS_ON?'':' hidden')+'>Sign out other devices</a><a id="acctToDel" class="danger">Delete account</a></div>'+
     '<div class="acct-row" style="margin-top:14px"><button class="btn ghost sm" id="acctOut">Sign out</button></div>';
     renderAcctBtn();
     $('acctSyncNow').onclick=async()=>{const bt=$('acctSyncNow');acctBusy(bt,true,'Syncing…');await SSSync.sync();acctBusy(bt,false);};
@@ -2296,15 +2304,21 @@ function openInstall(){installDev=installDev||detectDevice();renderInstall();$('
 function closeInstall(){$('installOv').style.display='none';}
 function isStandalone(){return (window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;}
 let appUpdateAvailable=false;
-async function checkAppVersion(){try{const r=await fetch('app-version.json',{cache:'no-store'});if(!r.ok)return;const j=await r.json();if(j&&j.appVersion&&verCmp(j.appVersion,APP_VERSION)>0){appUpdateAvailable=true;updateHeaderButtons();}}catch(e){}}
+let lastVerCheck=0;
+async function checkAppVersion(){lastVerCheck=Date.now();try{const r=await fetch('app-version.json',{cache:'no-store'});if(!r.ok)return;const j=await r.json();if(j&&j.appVersion)noteNewerApp(j.appVersion);}catch(e){}}
+function noteNewerApp(v){if(!appUpdateAvailable&&v&&verCmp(v,APP_VERSION)>0){appUpdateAvailable=true;updateHeaderButtons();}}
+/* v0.4.12: keep checking while the app stays open — every 5 min on screen, on coming back, and when the connection returns. */
+setInterval(()=>{if(document.visibilityState==='visible'&&Date.now()-lastVerCheck>=5*60000)checkAppVersion();},60000);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&Date.now()-lastVerCheck>=60000)checkAppVersion();});
+window.addEventListener('online',()=>checkAppVersion());
 function reloadApp(){try{location.href=location.pathname+'?r='+Date.now();}catch(e){location.reload();}}
 /* In an installed PWA, "Add to home" is pointless — swap it for a Refresh/Update button (the only way
    to pick up a new app or manifest in a standalone PWA is to reload). Shows "↑ Update" + a pulse when
    the app or a loaded pack is behind. */
 function updateHeaderButtons(){const pwa=isStandalone();const ib=$('installBtn'),rb=$('refreshBtn');
   if(ib)ib.style.display=pwa?'none':'';
-  if(!rb)return;rb.style.display=pwa?'':'none';
-  if(pwa){const out=appUpdateAvailable||(typeof pendingUpdates==='function'&&pendingUpdates().length>0);
+  if(!rb)return;const show=pwa||appUpdateAvailable;rb.style.display=show?'':'none'; /* v0.4.12: a browser tab shows Update too when a new version is out */
+  if(show){const out=appUpdateAvailable||(pwa&&typeof pendingUpdates==='function'&&pendingUpdates().length>0);
     rb.className='hbtn'+(out?' upd':'');rb.setAttribute('aria-label',out?'Update':'Refresh');
     rb.innerHTML=out?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6.5 11.5 12 6l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">Update</span>':'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12a7 7 0 1 1-2.05-4.95M19 4.5V8h-3.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">Refresh</span>';
     rb.title=out?'A newer app or pack is available — tap to reload and update':'Reload to fetch the latest app';}}
