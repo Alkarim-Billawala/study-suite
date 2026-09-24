@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.20 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.21 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.20)
+# Study Suite — Content Authoring Guide (v2.21)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,11 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.20 · **Pairs with:** Study Suite app v0.4.4+, pack `formatVersion` 2.0
+> **Authoring system version:** 2.21 · **Pairs with:** Study Suite app v0.4.4+, pack `formatVersion` 2.0
+> **What changed in guide v2.21:** no schema change. A drug's `ref.topic` (§6b) is shown as a small source tag on
+> every line of that drug in the Pharmacology view, so it must be **one short topic name (40 characters or fewer)** — the
+> topic the drug is mainly taught under — never a list of every topic it appears in joined together. The §7a validator
+> warns on long or joined topics.
 > **What changed in guide v2.20:** no schema or rule change — §0's overview of the app (what you tell the user) now
 > describes the current app: setup screens, question history and fresh exams, topics, the Pharmacology index, and
 > optional encrypted sync. Nothing about how packs are built has changed since v2.19.
@@ -745,13 +749,16 @@ A pack **may** include a top-level **`drugs[]`** array. It is **optional and add
 | `name` | yes | Human-readable display name (e.g. `"Metformin"`). |
 | `class` | optional | A class id, `rx:<class-slug>` (e.g. `rx:statin`, `rx:ace-inhibitor`, `rx:sglt2-inhibitor`). The view groups drugs under their class heading. Use a consistent slug across packs; omit if no sensible class. |
 | `facets` | yes | An object holding **only the facets your source covers**, drawn from exactly these keys: `use`, `mechanism`, `dosing`, `contra` (cautions/contraindications), `adverse` (adverse effects), `monitoring`, `interactions`. Each value is a **short phrase, not prose** — it renders as a faceted line. Include 2–5 of them; never invent keys. |
-| `ref` | yes | `{ week, topic, guide }` locating the source so the view can link back. `week` = this pack's `weeks` string (or just the week label); `topic` = the topic/section; **`guide` MUST equal the `file` of a real `guides[]` entry** in this pack — the app deep-links to it. |
+| `ref` | yes | `{ week, topic, guide }` locating the source so the view can link back. `week` = this pack's `weeks` string (or just the week label); `topic` = the **one** topic/section it's mainly taught under — **short (≤40 characters), never several topics joined with " / "** (it shows as a small source tag on the drug's lines); **`guide` MUST equal the `file` of a real `guides[]` entry** in this pack — the app deep-links to it. |
 
 **Rules of thumb:**
 
 - **Reuse ids; that's the whole point.** Consistent `rx:` ids across weeks are what let the index consolidate a drug; inconsistent ids produce duplicates. Pick the obvious generic-name slug.
 - **One record per drug per pack** — don't repeat the same drug twice in one pack's `drugs[]`. (Across *different* packs is expected and is what merges.)
 - **Short facet values.** Aim for the one high-yield phrase per facet, like the cram sheet's cue→answer density — not a paragraph.
+- **One short `ref.topic`.** A drug drawn from several topics still names just the main one — e.g. `"GAD"`, not
+  `"Social anxiety disorder / GAD / OCD / PTSD / Depression"`. The tag sits beside every facet line; a long one crowds
+  the card, especially on a phone.
 - **Point `ref.guide` at the guide that teaches the drug** (often a pharmacology or therapeutics guide). If you have no matching guide, you can still include the drug, but a valid `guide` file makes the back-link work.
 - **It's optional.** If the week isn't drug-heavy, skip `drugs[]` entirely — an empty or absent array is fine and never fails validation.
 
@@ -966,6 +973,12 @@ def validate_pack(pack):
     elif tc and sum(1 for v in tc.values() if v == 1) / len(tc) > 0.5:
         warns.append(f"groupBy 'topic' but {sum(1 for v in tc.values() if v == 1)}/{len(tc)} topics hold one item — "
                      "consolidate into real topics (§2); the app falls back to guide grouping")
+
+    # §6b (v2.21): a drug's ref.topic is a small source tag — one short topic, never a joined list.
+    for d in pack.get("drugs", []) or []:
+        t = ((d.get("ref") or {}).get("topic") or "")
+        if len(t) > 40 or " / " in t:
+            warns.append(f"drug {d.get('id')}: ref.topic too long or joined ({len(t)} chars) — name the one main topic (§6b)")
 
     diffs = Counter(q.get("difficulty") for q in qs)
     print(f"questions={len(qs)} cards={len(cs)} guides={len(gs)} "

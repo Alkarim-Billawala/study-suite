@@ -1,7 +1,11 @@
 <!--
-  Study Suite  ·  v0.6.4 (beta)
+  Study Suite  ·  v0.6.5 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.6.5: PHARMACOLOGY ON PHONES — a long source chip (Week 41 lists every topic, "… / GAD / OCD / PTSD / …") had
+  white-space:nowrap and the facet grid's 1fr column can't shrink below it, so the card overflowed the screen; iPhone Safari then
+  zoomed the page out and inflated the overflowing text. Chips now wrap (max-width 100%, overflow-wrap:anywhere), the facet
+  columns are minmax(0,1fr), facet text breaks long words, and html sets text-size-adjust:100% (no automatic text inflation).
   Changelog v0.6.4: SYNC ACTIVITY ACROSS DEVICES — each device's Sync activity log (localStorage 'suite_synclog_v1', now 100
   entries) travels inside the encrypted account copy as payload `logs` = {deviceId:{sent,app,L[]}}. The log is NOT part of the
   change check: SSSync hash() drops `logs`, so a log line never makes a device dirty and never causes an upload by itself —
@@ -602,6 +606,7 @@ window.EAC={on:true,salt:'studysuite::eac::v1',hashes:[]}; /* v0.6.0: codes are 
   --paper:#000000;--paper2:#151208;--ink:#ece7da;--ink-soft:#b0a796;--line:#332e22;--accent:#cf8e6e;--accent-soft:#b5705f;--green:#5fae82;--red:#df6f6f;--gold:#c9a44f;--blue:#6aa6cc;}
 :root[data-theme="dark"],:root[data-theme="black"]{color-scheme:dark;--shadow:0 1px 0 rgba(0,0,0,.3), 0 10px 30px -16px rgba(0,0,0,.6)}
 *{box-sizing:border-box}html,body{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%} /* v0.6.5: no iOS text inflation */
 body{background:radial-gradient(120% 90% at 100% 0%, color-mix(in srgb,var(--accent) 6%,transparent), transparent 55%),var(--paper);color:var(--ink);font-family:var(--font-body);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
 .wrap{max-width:860px;margin:0 auto;padding:0 22px 120px}
 header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--line)}
@@ -896,14 +901,14 @@ section{display:none}section.on{display:block}
 .drugcard{border:1.5px solid var(--line);border-radius:10px;background:var(--paper);padding:12px 15px}
 .drugname{font-family:var(--font-head);font-weight:600;font-size:17px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 .drugclass{font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);font-weight:400}
-.facet{display:grid;grid-template-columns:160px 1fr;gap:10px;margin-top:9px}
+.facet{display:grid;grid-template-columns:160px minmax(0,1fr);gap:10px;margin-top:9px}
 .facetlabel{font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft)}
-.facetval{font-size:14px;line-height:1.5}
+.facetval{font-size:14px;line-height:1.5;min-width:0;overflow-wrap:anywhere}
 .facetline{margin:0 0 5px}
-.srcchip{font-family:var(--font-mono);font-size:10px;border:1px solid var(--line);background:transparent;color:var(--accent);border-radius:999px;padding:1px 8px;margin-left:5px;cursor:pointer;white-space:nowrap;vertical-align:middle}
+.srcchip{font-family:var(--font-mono);font-size:10px;border:1px solid var(--line);background:transparent;color:var(--accent);border-radius:9px;padding:1px 8px;margin-left:5px;cursor:pointer;white-space:normal;max-width:100%;overflow-wrap:anywhere;text-align:left;vertical-align:middle}
 .srcchip:hover{background:var(--accent);color:var(--paper)}
 .srcchip:disabled{color:var(--ink-soft);cursor:default;border-style:dashed}
-@media(max-width:560px){.facet{grid-template-columns:1fr;gap:2px}#pharm .revbar{gap:14px}}
+@media(max-width:560px){.facet{grid-template-columns:minmax(0,1fr);gap:2px}#pharm .revbar{gap:14px}}
 .drugcard.flash{animation:pharmflash 1.25s ease-out}
 @keyframes pharmflash{from{background:var(--accent-soft)}to{background:var(--paper)}}
 .facetval mark,.drugname mark{background:#ffe58a;color:inherit;padding:0 1px;border-radius:2px}
@@ -1512,7 +1517,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.6.4';
+const APP_VERSION='0.6.5';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
