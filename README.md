@@ -66,7 +66,8 @@ It's currently in **beta**.
 - A **recovery code**, password reset, email change and account deletion — all self-serve.
 - If two devices change between syncs, their changes are **combined** — cards, question history,
   past exams, packs and settings — so there's nothing to choose.
-- **Your devices** and **Sync activity** in the account menu show which devices sync and what sync did.
+- **Your devices** and **Sync activity** in the account menu show which devices sync and what sync did on each one.
+  **Copy for troubleshooting** copies it all as text if you need to report a sync problem.
 
 ### Private, offline, yours
 
@@ -278,7 +279,7 @@ They're combined — nothing to choose, and nothing studied is lost. If the same
 both, the most recent review counts. Answers to the same question on both are all kept in your history.
 If a pack was switched on or off on both, the latest switch wins; a pack you removed stays removed. An
 unfinished exam that's replaced by a newer one moves to **Past exams**. **Sync activity** in the account
-menu lists what was combined.
+menu lists what was combined, on any of your devices.
 </details>
 
 <details>

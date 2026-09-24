@@ -1,7 +1,15 @@
 <!--
-  Study Suite  ·  v0.6.3 (beta)
+  Study Suite  ·  v0.6.4 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.6.4: SYNC ACTIVITY ACROSS DEVICES — each device's Sync activity log (localStorage 'suite_synclog_v1', now 100
+  entries) travels inside the encrypted account copy as payload `logs` = {deviceId:{sent,app,L[]}}. The log is NOT part of the
+  change check: SSSync hash() drops `logs`, so a log line never makes a device dirty and never causes an upload by itself —
+  it rides along with real uploads. Other devices' logs are kept in Store 'suite_devlogs_v1' (takeLogs: newest `sent` per
+  device wins; own entry always rebuilt from localStorage; dropped after 90 days unseen; cleared by SSSync.reset). Older
+  apps ignore `logs`, and a device that drops it just gets it re-added on the next upload. Account → Sync activity: device
+  picker, "Copy for troubleshooting" (every device's log as plain text) and a small "Force sync" link (SSSync.forceSync:
+  a normal sync, then one upload even with no changes, so this device's log is shared now).
   Changelog v0.6.3: "Request an access code" works again — the v0.4.1 welcome-screen declutter turned the button into a
   text link and dropped its mailto (href="#", no handler); restored the v0.4.0 mailto (accesscodes@studysuite.app + template). The "Download the instruction set"
   line is set up in initPackLinks for everyone (it sat in renderDefaultPacks, which exits early without a code since v0.5.0).
@@ -1504,14 +1512,14 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.6.3';
+const APP_VERSION='0.6.4';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
 const APP_AUTHOR='Alkarim Billawala / alkarim.billawala.ca';
 
 /* ===== STORAGE ===== */
-const KEY={packs:'suite_packs_v1',sched:'srs_sched_v2',daily:'srs_daily_v2',settings:'suite_settings_v1',eac:'suite_eac_v1',prac:'suite_prac_v1',acct:'suite_acct_v1',sync:'suite_sync_v1',localAt:'suite_localat_v1',qhist:'suite_qhist_v1',exam:'suite_exam_v1',exams:'suite_exams_v1',devnames:'suite_devnames_v1',gone:'suite_packgone_v1'};
+const KEY={packs:'suite_packs_v1',sched:'srs_sched_v2',daily:'srs_daily_v2',settings:'suite_settings_v1',eac:'suite_eac_v1',prac:'suite_prac_v1',acct:'suite_acct_v1',sync:'suite_sync_v1',localAt:'suite_localat_v1',qhist:'suite_qhist_v1',exam:'suite_exam_v1',exams:'suite_exams_v1',devnames:'suite_devnames_v1',gone:'suite_packgone_v1',devlogs:'suite_devlogs_v1'};
 const memCache={};
 /* ===== ONE ACTIVE COPY PER BROWSER (v0.4.5) =====
    Tabs / windows of the app share storage; two live copies overwrite each other (and sync spreads the stale copy).
@@ -1559,7 +1567,7 @@ function storeFailed(k,e){Store.failed=Date.now();Store.failKey=k;
     try{toast('Couldn’t save on this device — its storage is full or blocked. Sync is paused so nothing gets overwritten; don’t reload until it saves again.');}catch(x){}}
   try{if(typeof SSSync!=='undefined')SSSync.sync();}catch(x){}}
 const DATA_KEYS=new Set([KEY.packs,KEY.sched,KEY.daily,KEY.settings,KEY.eac,KEY.prac,KEY.qhist,KEY.exam,KEY.exams,KEY.devnames,KEY.gone]);
-const IDB_KEYS=new Set([...DATA_KEYS,KEY.sync,'suite_syncbase_v2']),MIRROR_KEYS=new Set([KEY.eac,KEY.settings]); /* mirrored: read before the page paints */
+const IDB_KEYS=new Set([...DATA_KEYS,KEY.sync,'suite_syncbase_v2',KEY.devlogs]),MIRROR_KEYS=new Set([KEY.eac,KEY.settings]); /* mirrored: read before the page paints */
 try{localStorage.removeItem('suite_syncbase_v1');}catch(e){} /* v0.4.7 leftover */
 /* Device ID (v0.4.9): random, 12 × [a-z0-9], made once per browser storage and never derived from the device or the person.
    The anchor for troubleshooting and the server's devices row; the readable name lives in devNames (encrypted, synced). */
@@ -1882,16 +1890,18 @@ async function persist(){if(!DATA_READY){persistPending=true;return;}let ok=true
 const SSSync=(()=>{
   const LIGHT=['id','pack','version','author','school','year','term','course','weeks','enabled','ts'],MAX_CT=7900000;
   let meta=null,timer=null,busy=null,again=false,suppress=false,lastRun=0,state={k:'off'},flashed=false;
-  let lastOk=0,staleTries=0,pendingSince=0,devAt=0,uploaded=false;const POLL=5*60000,FRESH=6*60000,MAXWAIT=60000,BASE_KEY='suite_syncbase_v2';
+  let lastOk=0,staleTries=0,pendingSince=0,devAt=0,uploaded=false,force=false,forced=false,devLogs=null;const POLL=5*60000,FRESH=6*60000,MAXWAIT=60000,BASE_KEY='suite_syncbase_v2';
   const CLOUD_SVG='<svg class="sico" viewBox="0 0 24 16" aria-hidden="true"><path d="M6.4 15.2h11.3a4.4 4.4 0 0 0 .5-8.8A6.1 6.1 0 0 0 6.6 5 5.1 5.1 0 0 0 6.4 15.2z" fill="currentColor"/></svg>';
   const pick=(o,ks)=>{const r={};ks.forEach(k=>{if(o[k]!==undefined)r[k]=o[k];});return r;};
   const parseTs=s=>s?Date.parse(String(s).replace(' ','T')):NaN;
-  async function hash(o){const d=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(JSON.stringify(o)));
+  /* v0.6.4: `logs` is left out, so sync activity never makes a device dirty (no upload loop). */
+  async function hash(o){if(o&&typeof o==='object'&&'logs' in o)o=Object.assign({},o,{logs:undefined});
+    const d=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(JSON.stringify(o)));
     return Array.from(new Uint8Array(d),b=>b.toString(16).padStart(2,'0')).join('');}
   async function manifest(){if(!defaultManifest)await initPackLinks();if(defaultManifest)return defaultManifest;
     try{const r=await fetch('packs-manifest.json',{cache:'no-store'});if(r.ok){const m=await r.json();if(m&&Array.isArray(m.packs))return m;}}catch(e){}return null;}
   const publicIds=m=>new Set(((m&&m.packs)||[]).filter(x=>x&&x.id&&x.file).map(x=>x.id));
-  function payload(pub){return {v:1,app:APP_VERSION,by:DEVICE_ID,devices:devNames,gone:packGone,sched,daily,settings,eac,prac,qhist,exam:examSave,exams:examLog,
+  function payload(pub){return {v:1,app:APP_VERSION,by:DEVICE_ID,devices:devNames,logs:allLogs(),gone:packGone,sched,daily,settings,eac,prac,qhist,exam:examSave,exams:examLog,
     packs:packs.map(p=>(pub.has(p.id)||p.stub)?Object.assign({ref:1},pick(p,LIGHT)):p).concat((meta&&meta.missing)||[])};}
   /* Fetch a published pack by id and run it through ingestPack in isolation (so `packs` isn't touched). */
   async function fetchPublic(id,m){const mp=m&&m.packs.find(x=>x&&x.id===id&&x.file);if(!mp)return null;
@@ -1914,15 +1924,29 @@ const SSSync=(()=>{
         out.push(p);}else miss.push(e);}
     return {out,miss};}
   const studied=s=>Object.values(s||{}).filter(x=>x&&x.phase&&x.phase!=='new').length;
-  /* Sync activity (v0.4.5): this device's last 60 decisions, for diagnosing surprises. Not synced. */
+  /* Sync activity (v0.4.5): this device's last decisions, for diagnosing surprises. v0.6.4: 100 kept, and shared with the
+     account copy as `logs` (see hash — never a reason to upload by itself). */
+  const LOG_MAX=100,LOG_KEEP=90*864e5;
+  const myLog=()=>{try{const L=JSON.parse(localStorage.getItem('suite_synclog_v1')||'[]');return Array.isArray(L)?L:[];}catch(e){return [];}};
+  const allLogs=()=>Object.assign({},devLogs||{},{[DEVICE_ID]:{sent:Date.now(),app:APP_VERSION,L:myLog().slice(0,LOG_MAX)}});
+  async function loadLogs(){if(!devLogs){const x=await Store.get(KEY.devlogs);devLogs=(x&&typeof x==='object')?x:{};}return devLogs;}
+  /* Other devices' logs from an account copy: newest `sent` per device wins; this device's own is never taken. */
+  async function takeLogs(d){await loadLogs();const lg=d&&d.logs,now=Date.now();let ch=false;
+    if(lg&&typeof lg==='object')Object.entries(lg).forEach(([id,v])=>{
+      if(id===DEVICE_ID||!/^[a-z0-9]{12}$/.test(id)||!v||!Array.isArray(v.L)||!(v.sent>0))return;
+      if(devLogs[id]&&devLogs[id].sent>=v.sent)return;
+      devLogs[id]={sent:v.sent,app:String(v.app||'').slice(0,20),L:v.L.slice(0,LOG_MAX)};ch=true;});
+    Object.keys(devLogs).forEach(id=>{if(!(devLogs[id].sent>now-LOG_KEEP)){delete devLogs[id];ch=true;}});
+    if(ch)await Store.set(KEY.devlogs,devLogs);}
   const pkSum=list=>{const a=list||[];return a.length+' packs ('+a.filter(p=>p&&p.enabled!==false).length+' on)';};
   function slog(what,loc,cl,at){try{const L=JSON.parse(localStorage.getItem('suite_synclog_v1')||'[]');
     L.unshift({t:Date.now(),dev:DEVICE_ID,from:(cl&&cl.by)||'',what,local:loc?pkSum(loc.packs)+' · '+studied(loc.sched)+' studied':'',cloud:cl?pkSum(cl.packs)+' · '+studied(cl.sched)+' studied':'',at:at||'',app:APP_VERSION});
-    localStorage.setItem('suite_synclog_v1',JSON.stringify(L.slice(0,60)));}catch(e){}}
+    localStorage.setItem('suite_synclog_v1',JSON.stringify(L.slice(0,LOG_MAX)));}catch(e){}}
   const localEmpty=()=>!packs.length&&!studied(sched);
   async function saveMeta(){await Store.set(KEY.sync,meta);}
   async function loadMeta(){const s=SSAccount.session();const m=await Store.get(KEY.sync);
-    meta=(m&&s&&m.uid===s.id)?m:{uid:s?s.id:null,stateId:null,lastUpdated:null,lastHash:null,missing:[]};if(!meta.missing)meta.missing=[];}
+    meta=(m&&s&&m.uid===s.id)?m:{uid:s?s.id:null,stateId:null,lastUpdated:null,lastHash:null,missing:[]};if(!meta.missing)meta.missing=[];
+    await loadLogs();}
   /* v0.4.7: the icon shows a view, not the raw state — green while the last sync is under 6 min old (background checks
      don't flash "Syncing…"), gold 'stale' when overdue. state.k itself is unchanged (sign-out checks k==='ok'). */
   const viewOf=()=>{const fresh=lastOk&&Date.now()-lastOk<FRESH;return state.k==='syncing'&&fresh?'ok':state.k==='ok'&&!fresh?'stale':state.k;};
@@ -1956,7 +1980,7 @@ const SSSync=(()=>{
   function strHash(t){let x=2166136261;for(let i=0;i<t.length;i++){x^=t.charCodeAt(i);x=Math.imul(x,16777619);}return (x>>>0).toString(36)+':'+t.length;}
   /* What counts as a change to a pack: on/off + version (published), or the content (custom). ts is only the tie-break. */
   const packSig=p=>strHash(JSON.stringify(p.ref?{id:p.id,on:p.enabled!==false,v:p.version}:Object.assign({},p,{ts:undefined})));
-  const baseOf=pl=>Object.assign({},pl,{packs:(pl.packs||[]).map(p=>({id:p.id,sig:packSig(p)}))}); /* custom packs as fingerprints only */
+  const baseOf=pl=>Object.assign({},pl,{logs:undefined,packs:(pl.packs||[]).map(p=>({id:p.id,sig:packSig(p)}))}); /* custom packs as fingerprints only */
   /* v0.4.11: packs the last-synced copy had that this device no longer has, with no removal recorded — storage loss, not intent. */
   async function lostPacks(pl){const b=await loadBase();if(!b)return false;const have=new Set((pl.packs||[]).map(p=>p.id));
     const lost=(b.packs||[]).filter(p=>!have.has(p.id)&&!packGone[p.id]);if(lost.length)slog('This device is missing '+lost.length+' pack(s) the account has — merging instead of uploading',pl,null,meta.lastUpdated);return lost.length>0;}
@@ -2073,13 +2097,16 @@ const SSSync=(()=>{
     if(!meta||meta.uid!==SSAccount.session().id)await loadMeta();
     setState('syncing');
     await retryMissing(); /* v0.6.2 */
+    await loadLogs(); /* v0.6.4: never upload without the other devices' logs */
     const m=await manifest(),pub=publicIds(m),pl=payload(pub),h=await hash(pl),dirty=h!==meta.lastHash;
     const cm=await SSAccount.getState(true);
     if(cm&&meta.stateId&&cm.id!==meta.stateId){meta.lastUpdated=null;meta.lastHash=null;} /* account copy was replaced (fresh start) → treat as a first sync */
     const dirty2=h!==meta.lastHash;
     if(!cm){await SSAccount.refresh();if(!localEmpty()){await upload(dek,pl,h,null);slog('Uploaded (first copy in the account)',pl,null,meta.lastUpdated);}} /* no row: confirm the account still exists (401 → sign in again) */
-    else if(cm.updated===meta.lastUpdated&&!(dirty2&&await lostPacks(pl))){if(dirty2){await upload(dek,pl,h,cm.id,cm.updated);slog('Uploaded this device’s changes',pl,null,meta.lastUpdated);}}
+    else if(cm.updated===meta.lastUpdated&&!(dirty2&&await lostPacks(pl))){if(dirty2){await upload(dek,pl,h,cm.id,cm.updated);slog('Uploaded this device’s changes',pl,null,meta.lastUpdated);}
+      else if(force){slog('Force sync — shared this device’s sync activity',pl,null,meta.lastUpdated);await upload(dek,payload(pub),h,cm.id,cm.updated);forced=true;}} /* v0.6.4 */
     else{const full=await SSAccount.getState();const d=await SSCrypto.decryptBlob(dek,full.ciphertext,full.iv);
+      try{await takeLogs(d);}catch(e){} /* v0.6.4 */
       try{if(d&&d.app)noteNewerApp(d.app);}catch(e){} /* v0.4.12: another device is already on a newer version */
       const first=!meta.lastUpdated;
       if(await hash(d)===h){Object.assign(meta,{stateId:full.id,lastUpdated:full.updated,lastHash:h});await saveMeta();await saveBase(pl);slog('Already in step',pl,d,full.updated);}
@@ -2111,6 +2138,11 @@ const SSSync=(()=>{
       .finally(()=>{busy=null;if(again){again=false;schedule(1000);}});
     return busy;}
   function schedule(ms){clearTimeout(timer);timer=setTimeout(sync,ms==null?5000:ms);}
+  /* v0.6.4 (Sync activity → Force sync): a normal sync, then one upload even with nothing changed, so this device's log
+     reaches the account now. Resolves true if that upload happened. */
+  async function forceSync(){await sync();if(state.k!=='ok')return false;force=true;forced=false;
+    try{await sync();}finally{force=false;}return forced&&state.k==='ok';}
+  async function otherLogs(){await loadLogs();return devLogs;}
   /* Called at the end of every persist(). */
   /* 5 s after the last change, but never more than 60 s after the first unsynced one (continuous studying still syncs). */
   function changed(){if(suppress)return;const now=Date.now();Store.set(KEY.localAt,now);if(!(ACCT_ON&&SSAccount.session()))return;
@@ -2127,8 +2159,8 @@ const SSSync=(()=>{
   document.addEventListener('visibilitychange',()=>{if(!ACCT_ON||!SSAccount.session())return;
     if(document.visibilityState==='hidden'){clearTimeout(timer);sync();}
     else if(Date.now()-lastRun>15000)sync();});
-  async function reset(){clearTimeout(timer);meta=null;lastOk=0;pendingSince=0;await Store.set(KEY.sync,null);await Store.set(BASE_KEY,null);setState('off');}
-  return {start,sync,changed,schedule,reset,status:()=>Object.assign({view:viewOf(),lastOk},state),meta:()=>meta,_hash:hash,_payload:payload,_merge3:merge3,_baseOf:baseOf,_resolvePacks:resolvePacks,_applyCloud:applyCloud,_loadMeta:loadMeta,retryMissing,_pulled:()=>pulled,_mergePacks:mergePacks};
+  async function reset(){clearTimeout(timer);meta=null;lastOk=0;pendingSince=0;devLogs=null;await Store.set(KEY.sync,null);await Store.set(BASE_KEY,null);await Store.set(KEY.devlogs,null);setState('off');}
+  return {start,sync,forceSync,otherLogs,myLog,changed,schedule,reset,status:()=>Object.assign({view:viewOf(),lastOk},state),meta:()=>meta,_hash:hash,_payload:payload,_merge3:merge3,_baseOf:baseOf,_resolvePacks:resolvePacks,_applyCloud:applyCloud,_loadMeta:loadMeta,retryMissing,_pulled:()=>pulled,_mergePacks:mergePacks};
 })();
 
 
@@ -2229,12 +2261,33 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
     '<li><b>Backup all</b> saves a file you can restore anywhere.</li>'+
     '<li>An account keeps your devices in sync, encrypted so only you can read it. You can create one any time from the account menu at the top right of the homepage.</li></ul>'+
     '<button class="btn sm wide" id="acctNoteOk">Got it</button>';$('acctNoteOk').onclick=()=>{acctView=null;closeAcct();};}
-  else if(view==='synclog'){let L=[];try{L=JSON.parse(localStorage.getItem('suite_synclog_v1')||'[]');}catch(e){}
-    const dn=id=>acctEsc(devNames[id]||'another device')+' · '+acctEsc(id);
-    b.innerHTML='<h3>Sync activity</h3><p class="acct-sub">What this device’s sync did recently, newest first. Only kept on this device.</p><p class="acct-sub">This device: <b>'+acctEsc(devNames[DEVICE_ID]||guessDeviceName())+'</b> · ID '+DEVICE_ID+'</p>'+
-      (L.length?'<div class="synclog">'+L.map(x=>'<div class="slrow"><div class="slt">'+new Date(x.t).toLocaleString([],{dateStyle:'medium',timeStyle:'short'})+(x.app?' · v'+acctEsc(x.app):'')+'</div><div class="slw">'+acctEsc(x.what)+'</div>'+(x.local?'<div class="sld">This device: '+acctEsc(x.local)+'</div>':'')+(x.cloud?'<div class="sld">Account copy'+(x.from&&x.from!==DEVICE_ID?' (from '+dn(x.from)+')':'')+': '+acctEsc(x.cloud)+'</div>':'')+'</div>').join('')+'</div>':'<p class="acct-sub">Nothing yet.</p>')+
-      '<div class="acct-row" style="margin-top:12px"><button class="btn ghost sm" id="acctBack">Back</button></div>';
-    $('acctBack').onclick=()=>renderAcct('account');}
+  else if(view==='synclog'){ /* v0.6.4: every device's log (shared inside the encrypted account copy), copy, force sync */
+    b.innerHTML='<h3>Sync activity</h3><p class="acct-sub">Loading…</p>';
+    SSSync.otherLogs().then(others=>{if(acctView!=='synclog')return;
+      const nm=id=>devNames[id]||(id===DEVICE_ID?guessDeviceName():'Unnamed device');
+      const fmt=t=>new Date(t).toLocaleString([],{dateStyle:'medium',timeStyle:'short'});
+      const devs=[{id:DEVICE_ID,L:SSSync.myLog()}].concat(Object.entries(others||{}).sort((a,b)=>b[1].sent-a[1].sent).map(([id,v])=>({id,L:v.L||[],sent:v.sent,app:v.app})));
+      let cur=acctLogDev&&devs.some(d=>d.id===acctLogDev)?acctLogDev:DEVICE_ID;
+      const rows=d=>{const who=d.id===DEVICE_ID?'This device':acctEsc(nm(d.id));
+        return d.L.length?'<div class="synclog">'+d.L.map(x=>'<div class="slrow"><div class="slt">'+fmt(x.t)+(x.app?' · v'+acctEsc(x.app):'')+'</div><div class="slw">'+acctEsc(x.what)+'</div>'+(x.local?'<div class="sld">'+who+': '+acctEsc(x.local)+'</div>':'')+(x.cloud?'<div class="sld">Account copy'+(x.from&&x.from!==d.id?' (from '+acctEsc(nm(x.from))+')':'')+': '+acctEsc(x.cloud)+'</div>':'')+'</div>').join('')+'</div>':'<p class="acct-sub">Nothing yet.</p>';};
+      const head=d=>d.id===DEVICE_ID?'This device · ID '+DEVICE_ID:'ID '+acctEsc(d.id)+(d.app?' · v'+acctEsc(d.app):'')+' · shared '+fmt(d.sent);
+      const text=()=>['Study Suite sync activity — copied '+new Date().toISOString()+' on '+nm(DEVICE_ID)+' ('+DEVICE_ID+') · v'+APP_VERSION]
+        .concat(...devs.map(d=>['','== '+nm(d.id)+' ('+d.id+')'+(d.id===DEVICE_ID?' — this device':' — shared '+new Date(d.sent).toISOString()+(d.app?' · v'+d.app:''))]
+          .concat(d.L.length?d.L.map(x=>new Date(x.t).toISOString()+(x.app?' v'+x.app:'')+' — '+x.what+(x.local?' | device: '+x.local:'')+(x.cloud?' | account copy'+(x.from&&x.from!==d.id?' from '+nm(x.from)+' ('+x.from+')':'')+': '+x.cloud:'')+(x.at?' | at '+x.at:'')):['(nothing yet)']))).join('\n');
+      const draw=()=>{const d=devs.find(x=>x.id===cur);
+        b.innerHTML='<h3>Sync activity</h3><p class="acct-sub">What sync did recently on each of your devices, newest first. Another device’s activity arrives with its next change, or when you tap Force sync on it.</p>'+
+          (devs.length>1?'<label class="f">Device<select class="fi" id="logDev">'+devs.map(x=>'<option value="'+x.id+'"'+(x.id===cur?' selected':'')+'>'+acctEsc(nm(x.id))+(x.id===DEVICE_ID?' (this device)':'')+'</option>').join('')+'</select></label>':'')+
+          '<p class="acct-sub"><b>'+acctEsc(nm(d.id))+'</b> · '+head(d)+'</p>'+rows(d)+
+          '<div class="acct-row" style="margin-top:12px"><button class="btn ghost sm" id="acctBack">Back</button><button class="btn sm" id="logCopy">Copy for troubleshooting</button></div>'+
+          (SSAccount.session()?'<div class="acct-links"><a id="logForce">Force sync — share this device’s activity now</a></div>':'');
+        $('acctBack').onclick=()=>{acctLogDev=null;renderAcct('account');};
+        if($('logDev'))$('logDev').onchange=e=>{cur=acctLogDev=e.target.value;draw();};
+        $('logCopy').onclick=()=>copyToClipboard(text()).then(()=>toast('Sync activity copied.'),()=>toast('Couldn’t copy — your browser blocked it.'));
+        if($('logForce'))$('logForce').onclick=async()=>{const a=$('logForce');if(a.dataset.busy)return;a.dataset.busy=1;a.textContent='Syncing…';
+          const ok=await SSSync.forceSync().catch(()=>false);
+          toast(ok?'Shared. Your other devices will see it after their next sync.':'Couldn’t sync right now — '+((SSSync.status().msg)||'try again shortly')+'.');
+          if(acctView==='synclog')renderAcct('synclog');};};
+      draw();});}
   else if(view==='addcode'){const acc=!!SSAccount.session(),gs=[...userGroups()];
     b.innerHTML='<h3>Add an access code</h3><p class="acct-sub">An access code unlocks the study packs shared with its group — they appear under Default study packs'+(acc?' on all your devices.':' on this device.')+'</p>'+
       (gs.length?'<p class="acct-sub">Groups you already have: <b>'+gs.map(acctEsc).join(', ')+'</b></p>':'')+
@@ -3320,6 +3373,7 @@ function alertDialog(title,lines,opts){opts=opts||{};const box=$('confirmMsg');b
   $('confirmCopy').style.display=copyPayload?'':'none';
   $('confirmOk').textContent=opts.okText||'OK';$('confirmOk').classList.remove('danger');
   confirmCb=null;$('confirmOv').style.display='flex';$('confirmOk').focus();}
+let acctLogDev=null; /* v0.6.4: device picked in Sync activity */
 function copyToClipboard(text){
   try{if(navigator.clipboard&&navigator.clipboard.writeText){return navigator.clipboard.writeText(text);}}catch(e){}
   return new Promise((res,rej)=>{try{const ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;left:-9999px;top:0';
