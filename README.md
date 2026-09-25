@@ -56,8 +56,8 @@ It's currently in **beta**.
   sources is on; guides hide only the sections that are off. Questions and cards show their sources under
   the guide link.
 - When a newer version of a pack is published, the app shows **what's new** and offers to **update**
-  it — your progress carries over. One tap on **Update** brings in the new app and your pack updates
-  together, and updating a pack on one device updates it on your other devices too.
+  it — your progress carries over. Updating a pack on one device updates it on your other devices too.
+  The header **Update** button is for new versions of the app itself; pack updates are accepted in the library.
 - Switched-off packs can be **offloaded** to save space — they stay in your library with a download
   button and come back in one tap (automatically after a week off; change it in **Settings → Storage**).
 - Load your own packs by dropping in a file.

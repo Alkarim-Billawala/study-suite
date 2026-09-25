@@ -1,7 +1,14 @@
 <!--
-  Study Suite  ·  v0.6.6 (beta)
+  Study Suite  ·  v0.6.7 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.6.7: HEADER UPDATE BUTTON = APP ONLY. The header button lights "Update" only when a newer app is out; a pack
+  update that is merely available in the manifest no longer lights it and is no longer applied by its tap (v0.5.1 did both — a
+  tap meant as a refresh took Week 41 to v1.6 on the phone, 2026-09-25). Tapping it reloads; the sync after the reload still
+  fetches any pack version already accepted on another device (resolvePacks, unchanged). The app-update reload no longer
+  queues updateAllPacks (sessionStorage 'suite_apply_updates' is no longer set; a stale flag is discarded). Accepting a
+  published pack update is now only the library's per-pack "↑ Update" / "↑ Update all" — one tap on the first device, then
+  every other device follows by sync. (Alkarim, 2026-09-25: only what already sits in the account is pulled without a tap.)
   Changelog v0.6.6: CONTENT SOURCES — a pack may carry `sources` {code: label} and every question / card / guide / drug a
   `src` [codes] list. The library row of such a pack gets a "Sources" link that opens a panel of switches (one per code, with
   the number of items that draw on it); the row's counts are what is visible. Switches live in settings['srcoff:'+packId]
@@ -1546,7 +1553,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.6.6';
+const APP_VERSION='0.6.7';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -2576,10 +2583,10 @@ function reloadApp(){try{location.href=location.pathname+'?r='+Date.now();}catch
 function updateHeaderButtons(){const pwa=isStandalone();const ib=$('installBtn'),rb=$('refreshBtn');
   if(ib)ib.style.display=pwa?'none':'';
   if(!rb)return;const show=pwa||appUpdateAvailable;rb.style.display=show?'':'none'; /* v0.4.12: a browser tab shows Update too when a new version is out */
-  if(show){const out=appUpdateAvailable||(pwa&&typeof pendingUpdates==='function'&&pendingUpdates().length>0);
+  if(show){const out=!!appUpdateAvailable; /* v0.6.7: a newer app only — pack updates are accepted in the library */
     rb.className='hbtn'+(out?' upd':'');rb.setAttribute('aria-label',out?'Update':'Refresh');
     rb.innerHTML=out?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6.5 11.5 12 6l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">Update</span>':'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12a7 7 0 1 1-2.05-4.95M19 4.5V8h-3.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">Refresh</span>';
-    rb.title=out?'A newer app or pack is available — tap to reload and update':'Reload to fetch the latest app';}}
+    rb.title=out?'A newer version of Study Suite is available — tap to reload and update':'Reload to fetch the latest app';}}
 
 /* "Default study packs" panel — content-free: pack list comes from a same-origin
    packs-manifest.json generated at deploy time ({packs:[{file,label,id}],authoring}).
@@ -2714,8 +2721,8 @@ async function applyPackUpdate(p,mp){const j=await fetchPackJson(mp);
 function updatePack(p,mp,btn){if(btn){btn.disabled=true;btn.textContent='Updating…';}
   applyPackUpdate(p,mp).then(async()=>{await persist();renderHome();toast('Updated '+(p.pack||p.id)+' to v'+mp.version+'.');})
     .catch(()=>{if(btn){btn.disabled=false;btn.textContent='↑ Update';}toast('Could not update — check your connection and try again.');});}
-function maybeApplyQueuedUpdates(){if(!DATA_READY||!defaultManifest)return;let q=null;try{q=sessionStorage.getItem('suite_apply_updates');sessionStorage.removeItem('suite_apply_updates');}catch(e){}
-  if(q&&pendingUpdates().length)updateAllPacks();try{offloadIdle();}catch(e){}}
+function maybeApplyQueuedUpdates(){if(!DATA_READY||!defaultManifest)return;try{sessionStorage.removeItem('suite_apply_updates');}catch(e){} /* v0.6.7: a pre-0.6.7 flag is discarded — pack updates are accepted in the library only */
+  try{offloadIdle();}catch(e){}}
 function updateAllPacks(){const todo=pendingUpdates();if(!todo.length)return;
   (async()=>{let n=0;for(const e of todo){try{await applyPackUpdate(e[0],e[1]);n++;}catch(err){}}await persist();renderHome();updateHeaderButtons();
     toast(n?('Updated '+n+' pack'+(n===1?'':'s')+'.'):'Could not update — check your connection.');})();}
@@ -3832,8 +3839,7 @@ $('pharmBack').addEventListener('click',()=>renderHome());
 $('pharmSearch').addEventListener('input',e=>onPharmSearch(e.target.value));
 $('installBtn').addEventListener('click',openInstall);
 /* v0.5.1: one tap — a new app reloads and then applies waiting pack updates; pack updates alone apply straight away. */
-$('refreshBtn').addEventListener('click',()=>{if(appUpdateAvailable){try{sessionStorage.setItem('suite_apply_updates','1');}catch(e){}reloadApp();}
-  else if(pendingUpdates().length)updateAllPacks();else reloadApp();});
+$('refreshBtn').addEventListener('click',()=>{reloadApp();}); /* v0.6.7: reload only; the sync after it brings pack versions accepted elsewhere */
 $('installBackup').addEventListener('click',e=>{e.preventDefault();backup();});
 $('installClose').addEventListener('click',closeInstall);
 $('installOv').addEventListener('click',e=>{if(e.target===$('installOv'))closeInstall();});
