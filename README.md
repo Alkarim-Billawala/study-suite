@@ -18,7 +18,7 @@ It's currently in **beta**.
 
 - **Review** — spaced-repetition flashcards in six interactive card types. Grade each one Again /
   Hard / Good / Easy and it's scheduled to come back across the following days. Choose which topics
-  to study, week by week.
+  to study, week by week — or a whole week in one tap with **All / None**.
 - **Practice** — the question bank one question at a time. Submit to see the answer, the
   explanation and a link to the right topic guide. Questions you've never answered come first;
   ones you've answered before come last — the ones you got wrong ahead of the ones you got right —
@@ -51,6 +51,10 @@ It's currently in **beta**.
   **Settings → Access codes** if you don't use an account.
 - Toggle each pack **on or off**; every mode uses only the packs that are on, so you can keep every
   week loaded and study just this one.
+- Packs that name their **sources** (a lecture, a case, a module, a quiz) get a **Sources** button under their
+  counts: switch any source off to set its material aside everywhere. An item stays as long as one of its
+  sources is on; guides hide only the sections that are off. Questions and cards show their sources under
+  the guide link.
 - When a newer version of a pack is published, the app shows **what's new** and offers to **update**
   it — your progress carries over. One tap on **Update** brings in the new app and your pack updates
   together, and updating a pack on one device updates it on your other devices too.

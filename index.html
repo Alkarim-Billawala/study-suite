@@ -1,7 +1,19 @@
 <!--
-  Study Suite  ·  v0.6.5 (beta)
+  Study Suite  ·  v0.6.6 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.6.6: CONTENT SOURCES — a pack may carry `sources` {code: label} and every question / card / guide / drug a
+  `src` [codes] list. The library row of such a pack gets a "Sources" link that opens a panel of switches (one per code, with
+  the number of items that draw on it); the row's counts are what is visible. Switches live in settings['srcoff:'+packId]
+  (the codes that are OFF; empty = all on) so they sync and merge per pack like any setting and survive pack updates, offload
+  and re-download. An item is hidden only when EVERY code in its src is off (srcOn); applied once in deck() / qpool() /
+  activeGuides() / buildDrugIndex(), so Review, Practice, Exam, the topic pickers, the guide list and Pharmacology all follow.
+  Items and packs without src / sources are never filtered. Headings inside a guide may carry data-src="CODE [CODE…]": a
+  section whose codes are all off is hidden when the guide opens (a note at the top says so) and the guide list shows
+  "N sections hidden". Questions and cards show their source codes as chips under the guide link (tap = full label).
+  Sessions already running keep their items (cardOf falls back to allCards()). Also: ingestPack keeps `sources`; packDiff
+  pairs a removed + added guide by title stem so a renumber reads "updated", not "removed"; topic pickers (Review, Practice,
+  Exam setup) get an All / None control per week heading (Future-Features #23).
   Changelog v0.6.5: PHARMACOLOGY ON PHONES — a long source chip (Week 41 lists every topic, "… / GAD / OCD / PTSD / …") had
   white-space:nowrap and the facet grid's 1fr column can't shrink below it, so the card overflowed the screen; iPhone Safari then
   zoomed the page out and inflated the overflowing text. Chips now wrap (max-width 100%, overflow-wrap:anywhere), the facet
@@ -1118,6 +1130,23 @@ section{display:none}section.on{display:block}
 .eacmore{margin-top:40px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;color:var(--ink-soft)}
 .eacmore a{color:var(--ink-soft);text-decoration:underline;cursor:pointer}.eacmore a:hover{color:var(--accent)}
 @media(max-width:560px){.eactitle{font-size:26px}}
+/* v0.6.6: content sources */
+.packrow .srcrow{margin-top:7px}
+.packrow .srcbtn{font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--line);background:var(--paper2);color:var(--accent);border-radius:5px;padding:5px 10px;cursor:pointer}
+.packrow .srcbtn:hover,.packrow .srcbtn.on{border-color:var(--accent)}.packrow.srcopen{border-radius:8px 8px 0 0;margin-bottom:0}
+.srcpanel{border:1px solid var(--line);border-top:0;border-radius:0 0 8px 8px;background:var(--paper);margin:0 0 8px;padding:8px 14px 12px}
+.srchdr{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:2px}
+.srchdr .lt{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.srchdr .minor{padding:4px 9px}.srchdr .minor:disabled{opacity:.4;cursor:default}
+.srcline{display:flex;align-items:center;gap:10px;padding:6px 0;border-top:1px solid color-mix(in srgb,var(--line) 60%,transparent)}
+.switch.sm{width:36px;height:20px}.switch.sm::after{width:13px;height:13px}.switch.sm.on::after{transform:translateX(16px)}
+.srclbl{flex:1;font-size:14px;line-height:1.3;min-width:0;overflow-wrap:anywhere}.srcline.off .srclbl{color:var(--ink-soft)}
+.srcn{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);flex:none}
+.srcfoot{font-size:12px;color:var(--ink-soft);margin-top:8px;font-style:italic}
+.revitem .gsub{display:block;font-family:var(--font-mono);font-size:10px;color:var(--ink-soft);margin-top:2px;letter-spacing:.03em}.revitem.on .gsub{color:rgba(255,255,255,.7)}
+.srcline2{margin-top:10px;display:flex;flex-wrap:wrap;align-items:center;gap:4px}.srcline2 .gt{font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin-right:4px}.srcline2 .srcchip{margin-left:0}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:7px}.ghead .gname{margin-bottom:0}
+.gall{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:5px;color:var(--accent);cursor:pointer;padding:2px 7px;flex:none}
 </style>
 
 <div id="eacGate" class="eacgate" hidden>
@@ -1517,7 +1546,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.6.5';
+const APP_VERSION='0.6.6';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1840,6 +1869,34 @@ function optPerm(options){const n=(options||[]).length;const anchored=new Set();
   const perm=new Array(n);let k=0;for(let pos=0;pos<n;pos++)perm[pos]=anchored.has(pos)?pos:free[k++];
   return perm;}
 function activePacks(){return packs.filter(p=>p.enabled!==false);}
+/* v0.6.6: content sources — settings['srcoff:'+packId] = codes switched OFF (empty/absent = all on). An item is visible
+   while ANY code in its src is on; items without src, and packs without a sources table, are never filtered. */
+const srcOpen=new Set();
+function srcOff(p){const v=p&&settings['srcoff:'+p.id];return new Set(Array.isArray(v)?v:[]);}
+function srcOn(p,x){if(!p||!p.sources||!x||!Array.isArray(x.src)||!x.src.length)return true;const off=srcOff(p);return x.src.some(c=>!off.has(c));}
+function srcName(p,c){return (p&&p.sources&&p.sources[c])||c;}
+function setSrcOff(p,codes){settings['srcoff:'+p.id]=[...codes].filter(c=>p.sources&&p.sources[c]);allCards().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});persist();}
+function srcVisible(p){const off=srcOff(p),codes=Object.keys(p.sources||{}),per={};codes.forEach(c=>per[c]=0);
+  const vis=L=>(L||[]).filter(x=>{(x&&Array.isArray(x.src)?x.src:[]).forEach(c=>{if(c in per)per[c]++;});return srcOn(p,x);}).length;
+  return {q:vis(p.questions),c:vis(p.cards),g:vis(p.guides),d:vis(p.drugs),per,total:codes.length,off:codes.filter(c=>off.has(c)).length,on:codes.filter(c=>!off.has(c)).length};}
+function srcPanel(p,sv){const off=srcOff(p),el=document.createElement('div');el.className='srcpanel';
+  el.innerHTML=`<div class="srchdr"><span class="lt">Sources · ${sv.on} of ${sv.total} on</span><button class="minor" type="button" data-allon="1"${sv.off?'':' disabled'}>All on</button></div>`
+   +Object.keys(p.sources).map(c=>`<div class="srcline${off.has(c)?' off':''}"><button class="switch sm${off.has(c)?'':' on'}" type="button" role="switch" aria-checked="${off.has(c)?'false':'true'}" data-c="${encodeURIComponent(c)}" aria-label="${acctEsc(srcName(p,c))}"></button><span class="srclbl">${acctEsc(srcName(p,c))}</span><span class="srcn">${sv.per[c]||0}</span></div>`).join('')
+   +`<div class="srcfoot">Whole pack: ${(p.questions||[]).length} questions · ${(p.cards||[]).length} cards · ${(p.guides||[]).length} guides${(p.drugs||[]).length?' · '+(p.drugs||[]).length+' drugs':''}. An item stays until every source it draws on is off.</div>`;
+  el.querySelectorAll('.switch').forEach(b=>b.onclick=()=>{const c=decodeURIComponent(b.dataset.c);off.has(c)?off.delete(c):off.add(c);setSrcOff(p,off);renderHome();});
+  el.querySelector('[data-allon]').onclick=()=>{setSrcOff(p,[]);renderHome();};return el;}
+function srcHTML(x){const p=packs.find(q=>q.id===x._pack);if(!p||!p.sources||!Array.isArray(x.src)||!x.src.length)return '';
+  return `<div class="srcline2"><span class="gt">Sources</span>${x.src.map(c=>`<button type="button" class="srcchip" title="${acctEsc(srcName(p,c))}" onclick="toast(this.title)">${acctEsc(c)}</button>`).join('')}</div>`;}
+function hiddenSections(g){const p=packs.find(x=>x.id===g._pack);if(!p||!p.sources)return {hidden:0,codes:[]};const off=srcOff(p);if(!off.size)return {hidden:0,codes:[]};
+  let hidden=0;const gone=new Set();String(g.html||'').replace(/<h[1-6][^>]*\sdata-src="([^"]*)"/gi,(m,v)=>{const codes=v.split(/[\s,]+/).filter(Boolean);if(codes.length&&codes.every(c=>off.has(c))){hidden++;codes.forEach(c=>gone.add(c));}return m;});
+  return {hidden,codes:[...gone]};}
+function hideOffSections(d,g){const p=packs.find(x=>x.id===g._pack);if(!p||!p.sources)return;const off=srcOff(p);if(!off.size)return;let n=0;const gone=new Set();
+  [...d.querySelectorAll('h1[data-src],h2[data-src],h3[data-src],h4[data-src]')].forEach(h=>{const codes=String(h.getAttribute('data-src')||'').split(/[\s,]+/).filter(Boolean);if(!codes.length||codes.some(c=>!off.has(c)))return;
+    const lv=+h.tagName[1];let el=h;while(el){const nx=el.nextElementSibling;el.style.display='none';el=nx;if(!el||(/^H[1-6]$/.test(el.tagName)&&+el.tagName[1]<=lv))break;}n++;codes.forEach(c=>gone.add(c));});
+  if(!n)return;const root=d.body||d.documentElement,note=d.createElement('div');note.setAttribute('data-suite-note','');
+  note.style.cssText='font:13px/1.45 system-ui,sans-serif;opacity:.7;border-left:3px solid currentColor;padding:4px 10px;margin:0 0 16px';
+  note.textContent=n+(n===1?' section is':' sections are')+' hidden because '+[...gone].map(c=>srcName(p,c)).join(', ')+(gone.size===1?' is':' are')+' switched off in your library.';
+  root.insertBefore(note,root.firstChild);}
 /* ===== TOPIC GROUPS (v0.4.3) — what "topic" means when choosing what to study or weighting an exam.
    A pack marked groupBy:"topic" groups by each item's topic (real topics — how packs are authored from guide v2.19);
    every other pack groups by the topic guide each item links to (the backport: older packs use topic as a fine per-item
@@ -1857,14 +1914,15 @@ function secOf(p,x){const info=packSecInfo(p);let k,l,o;
   SEC_LABEL[k]=l;SEC_PACK[k]=info.short;SEC_ORD[k]=o;return {k,l,o};}
 function secName(k,withPack){const l=SEC_LABEL[k]||k;return withPack&&SEC_PACK[k]?SEC_PACK[k]+' · '+l:l;}
 function withSec(p,x){const s2=secOf(p,x);return Object.assign({_pack:p.id,_packName:p.pack,_sec:s2.k,_secO:s2.o},x);}
-function deck(){return activePacks().flatMap(p=>p.cards.map(c=>withSec(p,c)));}
-function qpool(){return activePacks().flatMap(p=>p.questions.map(q=>withSec(p,q)));}
+function allCards(){return activePacks().flatMap(p=>p.cards.map(c=>withSec(p,c)));} /* v0.6.6: before the source switches */
+function deck(){return activePacks().flatMap(p=>p.cards.filter(c=>srcOn(p,c)).map(c=>withSec(p,c)));}
+function qpool(){return activePacks().flatMap(p=>p.questions.filter(q=>srcOn(p,q)).map(q=>withSec(p,q)));}
 /* Sections of a list of items, grouped by pack, in guide order: [{pack,name,secs:[{k,l,n}]}] */
 function secGroups(items){const byPack=new Map();items.forEach(x=>{if(!byPack.has(x._pack))byPack.set(x._pack,{name:SEC_PACK[x._sec]||x._packName,secs:new Map()});
     const g=byPack.get(x._pack);const e=g.secs.get(x._sec)||{k:x._sec,l:SEC_LABEL[x._sec]||x._sec,o:x._secO,n:0,items:[]};e.n++;e.items.push(x);g.secs.set(x._sec,e);});
   return [...byPack.values()].map(g=>({name:g.name,secs:[...g.secs.values()].sort((a,b)=>a.o-b.o||natCmp(a.l,b.l))}));}
-function activeGuides(){const seen=new Set(),out=[];activePacks().forEach(p=>(p.guides||[]).forEach(g=>{const key=g.file||g.title||g.id;if(key&&!seen.has(key)){seen.add(key);out.push(Object.assign({_pack:p.id,_packName:p.pack||p.id},g));}}));return out;}
-function cardOf(id){return deck().find(c=>c.id===id);}
+function activeGuides(){const seen=new Set(),out=[];activePacks().forEach(p=>(p.guides||[]).filter(g=>srcOn(p,g)).forEach(g=>{const key=g.file||g.title||g.id;if(key&&!seen.has(key)){seen.add(key);out.push(Object.assign({_pack:p.id,_packName:p.pack||p.id},g));}}));return out;}
+function cardOf(id){return deck().find(c=>c.id===id)||allCards().find(c=>c.id===id);} /* v0.6.6: a running session keeps its cards */
 function sysLabel(s){return SYS_LABEL[s]||s;}
 function systemsPresent(set){const arr=[...set];return SYS_ORDER.filter(s=>set.has(s)).concat(arr.filter(s=>!SYS_ORDER.includes(s)));}
 /* difficulty */
@@ -2063,7 +2121,7 @@ const SSSync=(()=>{
       if(d.qhist&&typeof d.qhist==='object')qhist=d.qhist; /* older account copies have none — keep this device's */
       if('exam' in d)examSave=(d.exam&&Array.isArray(d.exam.qorder))?d.exam:null;if(Array.isArray(d.exams))examLog=d.exams;
       packs=r.out;meta.missing=r.miss;
-      deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});rollDaily();
+      allCards().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});rollDaily();
       await persist();applyTheme();applyGate();renderHome();
       const np=payload(publicIds(m));Object.assign(meta,{stateId:rec.id,lastUpdated:rec.updated,lastHash:await hash(np)});await saveMeta();await saveBase(np);
       if(pulled.length){toast('Updated from your other device: '+pulled.join(', ')+'.');pulled=[];}
@@ -2626,7 +2684,11 @@ function newsText(d){const a=[];if(d.q>0)a.push(plural(d.q,'new question'));if(d
 function packDiff(o,n){const ids=L=>new Set((L||[]).map(x=>x&&x.id)),oq=ids(o.questions),nq=ids(n.questions),oc=ids(o.cards),nc=ids(n.cards);
   const og=new Map((o.guides||[]).map((g,i)=>[gKey(g,i),guideFp(g)])),ng=new Map((n.guides||[]).map((g,i)=>[gKey(g,i),guideFp(g)]));
   const cnt=(a,b)=>[...a].filter(x=>!b.has(x)).length;
-  return {q:cnt(nq,oq),qr:cnt(oq,nq),c:cnt(nc,oc),cr:cnt(oc,nc),ga:[...ng.keys()].filter(k=>!og.has(k)).length,gr:[...og.keys()].filter(k=>!ng.has(k)).length,gu:[...ng.keys()].filter(k=>og.has(k)&&og.get(k)!==ng.get(k)).length};}
+  let ga=[...ng.keys()].filter(k=>!og.has(k)),gr=[...og.keys()].filter(k=>!ng.has(k)),gu=[...ng.keys()].filter(k=>og.has(k)&&og.get(k)!==ng.get(k)).length;
+  /* v0.6.6: a renumbered guide (same title stem, new file) is updated or unchanged, not removed + added */
+  const gStem=g=>guideMeta(g).label.toLowerCase().replace(/^\s*0*\d+\s*[-–—:·.]?\s*/,'').replace(/\s+/g,' ').trim(),oS=new Map((o.guides||[]).map((g,i)=>[gKey(g,i),gStem(g)])),nS=new Map((n.guides||[]).map((g,i)=>[gKey(g,i),gStem(g)]));
+  gr=gr.filter(k=>{const st=oS.get(k),j=st?ga.findIndex(a=>nS.get(a)===st):-1;if(j<0)return true;const a=ga.splice(j,1)[0];if(og.get(k)!==ng.get(a))gu++;return false;});
+  return {q:cnt(nq,oq),qr:cnt(oq,nq),c:cnt(nc,oc),cr:cnt(oc,nc),ga:ga.length,gr:gr.length,gu};}
 /* Preview of a waiting update from the pack list (counts + guide fingerprints) — no download. */
 function updatePreview(p,mp){if(!mp||mp.nq==null)return '';const og=new Map((p.guides||[]).map((g,i)=>[gKey(g,i),guideFp(g)])),ng=mp.g||{},a=[];
   const dq=mp.nq-(p.questions||[]).length,dc=mp.nc-(p.cards||[]).length;if(dq>0)a.push('+'+plural(dq,'question'));if(dc>0)a.push('+'+plural(dc,'card'));
@@ -2772,7 +2834,7 @@ async function init(){
   delete settings.sessionDifficulty;
   if(!settings.secV){if(settings.examGroupBy==='topic'){settings.examCounts={};settings.examAuto=true;}settings.secV=1;} /* v0.4.3: topic keys changed */
   ['pracDiffs','examDiffs'].forEach(k=>{if(!Array.isArray(settings[k]))settings[k]=selDiffsLegacy();});
-  deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});
+  allCards().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});
   rollDaily();
   $('saveState').textContent=STORAGE_MODE==='persistent'?'✓ packs + progress saved across sessions':STORAGE_MODE==='local'?'✓ saved in this browser':'⚠ in-memory only — use Backup to keep data';
   renderHome();
@@ -2808,7 +2870,7 @@ function validateQuestion(q,i){
 function ingestPack(obj,sourceName){
   let pk;
   if(Array.isArray(obj)){const isCards=obj.some(x=>x&&x.type&&KNOWN_TYPES.includes(x.type));pk={id:'pack_'+Date.now().toString(36),pack:sourceName||'Imported',questions:isCards?[]:obj,cards:isCards?obj:[],guides:[]};}
-  else {pk={id:obj.id||('pack_'+Date.now().toString(36)),pack:obj.pack||sourceName||'Imported',questions:Array.isArray(obj.questions)?obj.questions:[],cards:Array.isArray(obj.cards)?obj.cards:[],guides:Array.isArray(obj.guides)?obj.guides:[],version:obj.version,author:obj.author||obj.createdBy,school:obj.school,year:obj.year,term:obj.term,course:obj.course,weeks:obj.weeks,groupBy:obj.groupBy,drugs:Array.isArray(obj.drugs)?obj.drugs:[]};}
+  else {pk={id:obj.id||('pack_'+Date.now().toString(36)),pack:obj.pack||sourceName||'Imported',questions:Array.isArray(obj.questions)?obj.questions:[],cards:Array.isArray(obj.cards)?obj.cards:[],guides:Array.isArray(obj.guides)?obj.guides:[],version:obj.version,author:obj.author||obj.createdBy,school:obj.school,year:obj.year,term:obj.term,course:obj.course,weeks:obj.weeks,groupBy:obj.groupBy,drugs:Array.isArray(obj.drugs)?obj.drugs:[],sources:(obj.sources&&typeof obj.sources==='object'&&!Array.isArray(obj.sources))?obj.sources:undefined};} /* v0.6.6: sources */
   const errs=[];
   pk.questions=pk.questions.filter((q,i)=>{const v=validateQuestion(q,i);if(v){errs.push(v);return false;}return true;});
   pk.cards=pk.cards.filter((c,i)=>{const v=validateCard(c,i);if(v){errs.push(v);return false;}return true;});
@@ -2817,7 +2879,7 @@ function ingestPack(obj,sourceName){
   const idx=packs.findIndex(p=>p.id===pk.id);
   pk.enabled=(idx>=0)?packs[idx].enabled!==false:true;pk.ts=Date.now();if(packGone&&packGone[pk.id])delete packGone[pk.id]; /* v0.4.7: change time for sync merge */
   if(idx>=0)packs[idx]=pk;else packs.push(pk);
-  deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});
+  allCards().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});
   return {pk,errs};
 }
 function readFiles(files){
@@ -2833,7 +2895,7 @@ function readFiles(files){
     if(++done===arr.length){await persist();renderHome();if(reports.length)showPackErrors(reports);}
   };r.readAsText(f);});
 }
-function removePack(id){confirmDialog('Remove this pack? Your review progress is kept and will reapply if you reload it.',{confirmText:'Remove',danger:true},()=>{packs=packs.filter(p=>p.id!==id);packGone[id]=Date.now(); /* v0.4.11: explicit — a pack merely missing on a device is never a removal */persist().then(renderHome);});}
+function removePack(id){confirmDialog('Remove this pack? Your review progress is kept and will reapply if you reload it.',{confirmText:'Remove',danger:true},()=>{packs=packs.filter(p=>p.id!==id);packGone[id]=Date.now();if(settings['srcoff:'+id])settings['srcoff:'+id]=[]; /* v0.6.6 */ /* v0.4.11: explicit — a pack merely missing on a device is never a removal */persist().then(renderHome);});}
 
 /* ===== NAV ===== */
 function currentSection(){const s=document.querySelector('section.on');return s?s.id:'home';}
@@ -2925,7 +2987,10 @@ function libRow(p){const on=p.enabled!==false;const upd=packUpdate(p),stub=!!p.s
   const pv=upd?updatePreview(p,upd):'',nw=packNews()[p.id];
   const updtag=upd?` · <span class="updnote">update to v${upd.version}${pv?' ('+acctEsc(pv)+')':''}</span>`:(nw&&nw.text&&newsShown.has(p.id)?` · <span class="newsnote">${acctEsc(nw.text)}</span>`:'');
   const nq=stub?(p.nq||0):p.questions.length,nc=stub?(p.nc||0):p.cards.length,sttag=stub?(on?' · switched on elsewhere — tap to download':' · not downloaded'):'';
-  const info=document.createElement('div');info.innerHTML=`<div class="pn">${p.pack}</div><div class="pm">${nq} questions · ${nc} cards${gtag}${vtag}${stub?sttag:updtag}</div>`;
+  const sv=(!stub&&on&&p.sources&&typeof p.sources==='object')?srcVisible(p):null; /* v0.6.6: what the source switches leave visible */
+  const srcline=sv?`<div class="srcrow"><button type="button" class="srcbtn${srcOpen.has(p.id)?' on':''}" aria-expanded="${srcOpen.has(p.id)?'true':'false'}">${sv.off?sv.on+' of '+sv.total+' sources':'Sources'} ${srcOpen.has(p.id)?'▴':'▾'}</button></div>`:'';
+  const info=document.createElement('div');info.innerHTML=`<div class="pn">${p.pack}</div><div class="pm">${sv?sv.q:nq} questions · ${sv?sv.c:nc} cards${sv&&ng?` · ${sv.g} guides`:gtag}${vtag}${stub?sttag:updtag}</div>${srcline}`;
+  const sl=info.querySelector('.srcbtn');if(sl)sl.onclick=()=>{srcOpen.has(p.id)?srcOpen.delete(p.id):srcOpen.add(p.id);renderHome();};
   if(stub){const dl=document.createElement('button');dl.className='dlbtn';dl.type='button';dl.setAttribute('aria-label','Download '+(p.pack||'pack'));dl.title='Download and switch on';
     dl.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18.5h9.8a4.2 4.2 0 0 0 .6-8.36A5.8 5.8 0 0 0 6.3 9 4.8 4.8 0 0 0 7 18.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 10.5v6M9.5 14l2.5 2.5 2.5-2.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     dl.onclick=async()=>{dl.disabled=true;dl.classList.add('busy');try{const pk=await downloadPack(p,true);await persist();renderHome();toast('Downloaded '+((pk&&pk.pack)||p.pack)+'.');}catch(e){dl.disabled=false;dl.classList.remove('busy');toast(e.message);}};
@@ -2939,7 +3004,8 @@ function libRow(p){const on=p.enabled!==false;const upd=packUpdate(p),stub=!!p.s
   const acts=document.createElement('div');acts.className='pkacts';
   if(upd){const u=document.createElement('button');u.className='upd';u.textContent='↑ Update';u.title='Update to v'+upd.version+' — your review progress is kept';u.onclick=()=>updatePack(p,upd,u);acts.appendChild(u);}
   const b=document.createElement('button');b.className='rm';b.textContent='Remove';b.onclick=()=>removePack(p.id);acts.appendChild(b);
-  row.appendChild(left);row.appendChild(acts);return row;}
+  row.appendChild(left);row.appendChild(acts);if(!(sv&&srcOpen.has(p.id)))return row;
+  const wrap=document.createElement('div');wrap.className='packwrap';row.classList.add('srcopen');wrap.appendChild(row);wrap.appendChild(srcPanel(p,sv));return wrap;}
 function renderLibrary(){try{renderPackNews();}catch(e){}
   const pl=$('packList');pl.innerHTML='';
   if(!packs.length)return;
@@ -3020,7 +3086,9 @@ function renderTopics(){const now=Date.now();const tl=$('topicList');const group
   groups.forEach((g,gi)=>{let chips='';g.secs.forEach(sec=>{const due=sec.items.filter(c=>{const s2=sched[c.id];return s2&&(s2.phase==='new'||s2.due<=now);}).length;
       chips+=`<button class="tchip ${(!filter||filter.has(sec.k))?'on':''}" data-t="${encodeURIComponent(sec.k)}">${acctEsc(sec.l)}<span class="ct ${due?'':'zero'}">${due}</span></button>`;});
     const on=g.secs.filter(sec=>!filter||filter.has(sec.k)).length;
-    tl.innerHTML+=`<div class="tgroup ${open||tl.dataset['o'+gi]==='1'?'':'closed'}" data-gi="${gi}"><button class="gname gtoggle" type="button">${acctEsc(g.name)} <span class="gsel">${on} of ${g.secs.length}</span></button><div class="tchips">${chips}</div></div>`;});
+    tl.innerHTML+=`<div class="tgroup ${open||tl.dataset['o'+gi]==='1'?'':'closed'}" data-gi="${gi}"><div class="ghead"><button class="gname gtoggle" type="button">${acctEsc(g.name)} <span class="gsel">${on} of ${g.secs.length}</span></button><button class="gall" type="button" data-gi="${gi}">${on===g.secs.length?'None':'All'}</button></div><div class="tchips">${chips}</div></div>`;});
+  tl.querySelectorAll('.gall').forEach(el=>el.addEventListener('click',()=>{const g=groups[+el.dataset.gi];if(!g)return;const all=[...new Set(deck().map(c=>c._sec))];if(!filter)filter=new Set(all); /* v0.6.6: a week's topics on/off in one tap */
+    const keys=g.secs.map(s=>s.k),anyOff=keys.some(k=>!filter.has(k));keys.forEach(k=>anyOff?filter.add(k):filter.delete(k));if(filter.size===all.length)filter=null;renderSrs();}));
   tl.querySelectorAll('.gtoggle').forEach(el=>el.addEventListener('click',()=>{const gr=el.closest('.tgroup');gr.classList.toggle('closed');tl.dataset['o'+gr.dataset.gi]=gr.classList.contains('closed')?'0':'1';}));
   tl.querySelectorAll('.tchip').forEach(el=>el.addEventListener('click',()=>{const t=decodeURIComponent(el.dataset.t);
     const all=[...new Set(deck().map(c=>c._sec))];
@@ -3092,7 +3160,7 @@ function wireGuideLinks(container){container.querySelectorAll('.guideopen').forE
 function renderAnswer(c){let h='';const res=gotCorrect(c);
   if(res!==null)h+=`<div class="banner ${res?'ok':'no'}">${res?'✓ Correct':'✗ Not quite'}</div>`;
   let ans=c.type==='qa'?(c.answer+(c.explain?`<div style="margin-top:8px;color:var(--ink-soft);font-size:14.5px">${c.explain}</div>`:'')):(c.explain||'');
-  h+=`<div class="answerbox"><div class="h">Answer · ${c.topic}</div>${ans}</div>`+guideHTML(c.guide);
+  h+=`<div class="answerbox"><div class="h">Answer · ${c.topic}</div>${ans}</div>`+guideHTML(c.guide)+srcHTML(c); /* v0.6.6 */
   return h;}
 function renderGrades(c){const now=Date.now(),s=sched[c.id];const p=[1,2,3,4].map(g=>humanDelta(Math.max(0,schedule(s,g,now).due-now)));
   return `<div class="grades">
@@ -3214,7 +3282,7 @@ function drugSlug(id){return 'drug_'+String(id).replace(/[^a-z0-9]+/gi,'_');}
 let pharmReturn='home',pharmQuery='',pharmNavOpen=null,pharmGroups=[];
 function drugCount(){const seen=new Set();activePacks().forEach(p=>(Array.isArray(p.drugs)?p.drugs:[]).forEach(d=>{if(d&&d.id)seen.add(d.id);}));return seen.size;}
 function buildDrugIndex(){const byId=new Map();
-  activePacks().forEach(p=>{(Array.isArray(p.drugs)?p.drugs:[]).forEach(d=>{if(!d||!d.id)return;
+  activePacks().forEach(p=>{(Array.isArray(p.drugs)?p.drugs:[]).forEach(d=>{if(!d||!d.id||!srcOn(p,d))return; /* v0.6.6 */
     let e=byId.get(d.id);if(!e){e={id:d.id,name:d.name||d.id.replace(/^rx:/,''),cls:d.class||'',facets:{}};byId.set(d.id,e);}
     if(!e.cls&&d.class)e.cls=d.class;
     const ref=d.ref||{},fc=d.facets||{};
@@ -3320,6 +3388,7 @@ function renderGuideList(){const gl=$('guideList');gl.innerHTML='';
     grp.items.forEach(it=>{const b=document.createElement('button');b.className='revitem'+(guideKey(it.g)===curGuideKey?' on':'');
       if(it.badge){const s=document.createElement('span');s.className='gn';s.textContent=it.badge;b.appendChild(s);}
       const t=document.createElement('span');t.textContent=it.label;b.appendChild(t);
+      const hs=hiddenSections(it.g);if(hs.hidden){const s2=document.createElement('span');s2.className='gsub';s2.textContent=plural(hs.hidden,'section')+' hidden · '+hs.codes.join(', ')+' off';t.appendChild(s2);} /* v0.6.6 */
       b.onclick=()=>{revNavOpen=false;loadGuide(it.g,null);};wrap.appendChild(b);});
     gl.appendChild(wrap);});
   filterGuideList();
@@ -3327,7 +3396,7 @@ function renderGuideList(){const gl=$('guideList');gl.innerHTML='';
 function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();
   const host=$('guideHost');host.innerHTML='';
   const fr=document.createElement('iframe');fr.className='guideframe';fr.setAttribute('sandbox','allow-same-origin allow-modals');
-  fr.onload=()=>{try{const d=fr.contentDocument;if(!d)return;let el=null;
+  fr.onload=()=>{try{const d=fr.contentDocument;if(!d)return;try{hideOffSections(d,g);}catch(e){}let el=null; /* v0.6.6 */
     const anchor=anchorOrSection&&anchorOrSection.anchor;const section=anchorOrSection&&anchorOrSection.section;const search=anchorOrSection&&anchorOrSection.search;
     if(anchor)el=d.getElementById(anchor);
     if(!el&&section){el=[...d.querySelectorAll('h1,h2,h3,h4,[id]')].find(h=>(h.textContent||'').toLowerCase().includes(String(section).toLowerCase()));}
@@ -3540,7 +3609,7 @@ function renderQuiz(){const q=qmap[qorder[qcur]],sel=qans[qcur],done=qRevealed(q
     html+=`<button class="${cls}" data-i="${oi}" ${done?'disabled':''}><span class="letter">${LETTERS[disp]}</span><span>${o}</span></button>`;});
   html+='</div>';
   if(done){const ok=sel===q.correct;html+=`<div class="verdictline ${ok?'ok':'no'}">${ok?'✓ Correct':(sel==null?'— Not answered':'✗ Incorrect')}</div>`;
-    html+=`<div class="answerbox"><div class="h">Explanation · ${q.topic}${diffRank(q)>=0?' · '+q.difficulty:''}</div>${q.explain||''}</div>`+guideHTML(q.guide);}
+    html+=`<div class="answerbox"><div class="h">Explanation · ${q.topic}${diffRank(q)>=0?' · '+q.difficulty:''}</div>${q.explain||''}</div>`+guideHTML(q.guide)+srcHTML(q);} /* v0.6.6 */
   const pr=qmode==='practice'?qPrior[qorder[qcur]]:null;
   if(pr&&!done){const di=perm.indexOf(pr.p);html+=`<div class="priorwrap"><button class="priorbtn" id="priorBtn" aria-expanded="false">↺ Answered before · view your prior answer</button><div class="priorbox" id="priorBox" hidden>${new Date(pr.at).toLocaleDateString([],{month:'short',day:'numeric'})} · you picked <b>${di>=0?LETTERS[di]+'. ':''}${q.options[pr.p]!=null?q.options[pr.p]:'—'}</b> · <span class="${pr.ok?'pok':'pno'}">${pr.ok?'✓ correct':'✗ incorrect'}</span>. This time starts clear.</div></div>`;}
   $('qcard').innerHTML=html;
@@ -3606,12 +3675,14 @@ function renderSetupTopics(m){const box=$(m==='exam'?'exTopics':'prTopics'),key=
   const pool=qpool().filter(q=>matchDiff(q,m)),t=selTopics(m),groups=secGroups(pool);
   /* v0.5.5: each pack's topics fold under their pack (open state kept while ticking); a single pack opens directly */
   const op=setupOpen[m];box.innerHTML=groups.map(g=>{const on=g.secs.filter(sec=>!t||t.has(sec.k)).length,open=groups.length===1||op.has(g.name);
-    return `<div class="tgroup${open?'':' closed'}"><button type="button" class="gname gtoggle" data-g="${encodeURIComponent(g.name)}">${acctEsc(g.name)} <span class="gsel">${on} of ${g.secs.length}</span></button><div class="tchips">${g.secs.map(sec=>`<button class="tchip ${(!t||t.has(sec.k))?'on':''}" data-t="${encodeURIComponent(sec.k)}">${acctEsc(sec.l)}<span class="ct">${sec.n}</span></button>`).join('')}</div></div>`;}).join('')
+    return `<div class="tgroup${open?'':' closed'}"><div class="ghead"><button type="button" class="gname gtoggle" data-g="${encodeURIComponent(g.name)}">${acctEsc(g.name)} <span class="gsel">${on} of ${g.secs.length}</span></button><button type="button" class="gall" data-ga="${encodeURIComponent(g.name)}">${on===g.secs.length?'None':'All'}</button></div><div class="tchips">${g.secs.map(sec=>`<button class="tchip ${(!t||t.has(sec.k))?'on':''}" data-t="${encodeURIComponent(sec.k)}">${acctEsc(sec.l)}<span class="ct">${sec.n}</span></button>`).join('')}</div></div>`;}).join('')
     +'<div class="topicactions"><button class="minor" data-all="1">Select all</button><button class="minor" data-none="1">Clear</button></div>';
   const done=()=>{renderSetupTopics(m);setupTopicSummary(m);setupFreshNotes();if(m==='exam')renderWeights();persist();};
   box.querySelectorAll('.tchip').forEach(el=>el.onclick=()=>{const k=decodeURIComponent(el.dataset.t),all=[...new Set(qpool().map(q=>q._sec))];
     const cur=selTopics(m)||new Set(all);cur.has(k)?cur.delete(k):cur.add(k);settings[key]=cur.size===all.length?null:[...cur];done();});
   box.querySelectorAll('.gtoggle').forEach(el=>el.onclick=()=>{const g=decodeURIComponent(el.dataset.g),gr=el.closest('.tgroup');gr.classList.toggle('closed');gr.classList.contains('closed')?op.delete(g):op.add(g);});
+  box.querySelectorAll('.gall').forEach(el=>el.onclick=()=>{const nm=decodeURIComponent(el.dataset.ga),g=groups.find(x=>x.name===nm);if(!g)return; /* v0.6.6: Future-Features #23 */
+    const all=[...new Set(qpool().map(q=>q._sec))],cur=selTopics(m)||new Set(all),keys=g.secs.map(s=>s.k),anyOff=keys.some(k=>!cur.has(k));keys.forEach(k=>anyOff?cur.add(k):cur.delete(k));settings[key]=cur.size===all.length?null:[...cur];done();});
   box.querySelector('[data-all]').onclick=()=>{settings[key]=null;done();};box.querySelector('[data-none]').onclick=()=>{settings[key]=[];done();};}
 ['exTopBtn','prTopBtn'].forEach(id=>$(id).addEventListener('click',()=>{const m=$(id).dataset.m,box=$(m==='exam'?'exTopics':'prTopics');box.hidden=!box.hidden;if(!box.hidden)renderSetupTopics(m);setupTopicSummary(m);}));
 /* drop topic picks that no longer exist (pack removed/updated); nothing left = all topics */
@@ -3744,7 +3815,7 @@ async function eacTry(){
   else{if(err)err.textContent='That code wasn’t recognized. Double-check with whoever shared it.';if(inp)inp.select();}
 }
 function backup(){const data={suite:APP_VERSION,author:APP_AUTHOR,exported:new Date().toISOString(),packs,sched,daily,settings,eac,prac,qhist,exam:examSave,exams:examLog};const blob=new Blob([JSON.stringify(data)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='study-suite-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}
-function restore(file){const r=new FileReader();r.onload=async()=>{try{const d=JSON.parse(r.result);if(d.packs)packs=d.packs;if(d.sched)sched=d.sched;if(d.daily)daily=d.daily;if(d.settings)settings=Object.assign(settings,d.settings);if(d.eac)eac=d.eac;if(d.qhist&&typeof d.qhist==='object')qhist=d.qhist;if('exam' in d)examSave=(d.exam&&Array.isArray(d.exam.qorder))?d.exam:null;if(Array.isArray(d.exams))examLog=d.exams;if('prac' in d)prac=(d.prac&&d.prac.mode==='practice'&&Array.isArray(d.prac.qorder))?d.prac:null;deck().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});rollDaily();await persist();renderHome();applyGate();if(eacArmed()&&!(eac&&eac.unlocked)){toast('Restored — but this backup isn’t from an unlocked copy.');}else{toast('Backup restored.');}}catch(e){toast('Could not read that file.');}};r.readAsText(file);}
+function restore(file){const r=new FileReader();r.onload=async()=>{try{const d=JSON.parse(r.result);if(d.packs)packs=d.packs;if(d.sched)sched=d.sched;if(d.daily)daily=d.daily;if(d.settings)settings=Object.assign(settings,d.settings);if(d.eac)eac=d.eac;if(d.qhist&&typeof d.qhist==='object')qhist=d.qhist;if('exam' in d)examSave=(d.exam&&Array.isArray(d.exam.qorder))?d.exam:null;if(Array.isArray(d.exams))examLog=d.exams;if('prac' in d)prac=(d.prac&&d.prac.mode==='practice'&&Array.isArray(d.prac.qorder))?d.prac:null;allCards().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});rollDaily();await persist();renderHome();applyGate();if(eacArmed()&&!(eac&&eac.unlocked)){toast('Restored — but this backup isn’t from an unlocked copy.');}else{toast('Backup restored.');}}catch(e){toast('Could not read that file.');}};r.readAsText(file);}
 
 /* ===== WIRE UP ===== */
 $('mReview').addEventListener('click',()=>{if(deck().length)openReview();});

@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.21 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.22 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.21)
+# Study Suite — Content Authoring Guide (v2.22)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,15 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.21 · **Pairs with:** Study Suite app v0.4.4+, pack `formatVersion` 2.0
+> **Authoring system version:** 2.22 · **Pairs with:** Study Suite app v0.4.4+ (source switches need v0.6.6+), pack `formatVersion` 2.0
+> **What changed in guide v2.22:** **content sources** (additive, optional; no `formatVersion` change). A pack may carry a
+> top-level **`sources`** table — `{code: label}`, one entry per course material the pack was built from (a lecture, a
+> module, a case, a quiz, a pre-reading) — and every question, card, guide and drug then carries **`src`: [codes]**, the
+> sources it draws on. The app (v0.6.6+) shows the table as per-pack on/off switches in the library; an item is hidden only
+> when **every** code in its `src` is off, so a synthesis item stays while any of its sources is on. Headings inside a
+> guide may carry **`data-src="CODE"`** (one or more codes) to hide just that section when its sources are off — use it
+> only where a section genuinely comes from a subset of the guide's sources; untagged sections always show with the
+> guide. Packs without `sources` are unchanged. The §7a validator lints missing / unknown codes. See §2 "Content sources".
 > **What changed in guide v2.21:** no schema change. A drug's `ref.topic` (§6b) is shown as a small source tag on
 > every line of that drug in the Pharmacology view, so it must be **one short topic name (40 characters or fewer)** — the
 > topic the drug is mainly taught under — never a list of every topic it appears in joined together. The §7a validator
@@ -239,7 +247,8 @@ A pack is a single JSON object:
   "questions": [ /* exam questions, each with a difficulty */ ],
   "cards":     [ /* spaced-repetition cards */ ],
   "guides":    [ /* embedded topic guides: {file, title, html} */ ],
-  "drugs":     [ /* OPTIONAL — pharmacology records for the Pharmacology view; see §6b */ ]
+  "drugs":     [ /* OPTIONAL — pharmacology records for the Pharmacology view; see §6b */ ],
+  "sources":   { /* OPTIONAL (v2.22) — {code: label} table behind the app's per-pack source switches; see "Content sources" below */ }
 }
 ```
 
@@ -255,6 +264,7 @@ A pack is a single JSON object:
 | `guides` | yes if any item links a guide | Embedded topic guides — see §6. |
 | `groupBy` | yes (new packs and updates) | `"topic"` — declares that items' `topic` values are **real topics** (v2.19; see the `topic` field below). Omit it only for a pack whose topics can't be grouped; the app then groups by each item's linked guide. |
 | `drugs` | optional | Pharmacology records that feed the app's cross-week **Pharmacology** view. Additive/optional — omit it and nothing changes. See **§6b**. |
+| `sources` | optional (v2.22; recommended for new packs and updates) | `{code: label}` — one entry per source the pack was built from, e.g. `"L1-L2": "L1–L2 · Schizophrenia (Wong)"`, `"CBL42": "CBL 42 · Psychosis cases"`. The app lists them as on/off switches under the pack in the library. Codes are short, stable and unique within the pack; labels are what the learner reads. See **Content sources** below. |
 | `school` / `year` / `term` / `course` / `weeks` | optional | Curriculum placement, e.g. `"UofT — Temerty Medicine"` / `"Year 1"` / `"Fall"` (term — optional) / `"CPC 2"` / `"Weeks 25–28"`. Used to **group and chronologically sort** packs in the hosted site's Default study packs panel and the user's Content library; ignored otherwise. `term` sits **between `year` and `course`** and is omitted by most packs (harmless when absent — the level simply doesn't render). Ask the user how their program is organized — see *Organizational hierarchy & sorting* below — and include the fields that apply. |
 
 ### Organizational hierarchy & sorting
@@ -309,6 +319,7 @@ if the level weren't there, so leaving it out costs nothing.
 | `explain` | strongly recommended | Teaching/answer text. **HTML allowed** (`<b>`, `<i>`, `<br>`). |
 | `guide` | strongly recommended | `{ "f": "file.html", "t": "short title", "s": "section pointer" }`. `f` **must exactly match** the `file` of an embedded guide in `guides[]` (see §6). Also the app's **grouping fallback** when a pack's topics aren't real topics. |
 | `id` | recommended | Stable unique id (e.g. `"wk12_c01"`) so review progress survives reloads/edits. |
+| `src` | yes when the pack has `sources` (v2.22) | `["L1-L2", "CBL42"]` — every source code the item draws on, each present in the pack's `sources`. A synthesis item that could be answered from any of several materials lists all of them. The app hides the item only when **all** of them are off. Guides and drugs carry the same field. |
 
 > **Plain text vs HTML — know which fields render markup.** The app renders HTML in exactly two places:
 > a guide's `html` and an item's `explain`. **Everything else is plain text**: question `stem` and
@@ -317,6 +328,34 @@ if the level weren't there, so leaving it out costs nothing.
 > `→` — **never HTML entities** (`&middot;`, `&ge;`, `&rarr;`): an entity there is shown literally to the
 > learner. Entities and tags are fine inside `html` and `explain`. (The §7a validator flags entities in
 > plain fields.)
+
+### Content sources (`sources` · `src` · `data-src`) — v2.22
+
+A pack can tell the learner **where each piece of content came from** and let them **set a source aside**
+(a lecture they've already mastered, a module they haven't done yet, a pre-reading that isn't examinable).
+Three pieces, all optional and additive:
+
+1. **`sources`** (top level): `{code: label}`. Codes are short and stable (`"L3"`, `"SLM02"`, `"CBL42"`,
+   `"ICE"`, `"WFQ"`); labels are reader-facing (`"L3 · Patient Interviews (Agrawal)"`). One entry per
+   course material the pack was built from — the same set the master guide's source ledger lists, at the
+   granularity the learner would switch (a lecture, a module, a case session, a quiz), not per file.
+2. **`src`** on every question, card, guide and drug: the list of codes it draws on. Rules:
+   - A **synthesis item** lists every source that teaches the fact (it stays visible while any one is on).
+   - A **single-source item** (a quiz reproduction, a case detail, a module exercise) lists just that code.
+   - A **guide** lists every source it synthesizes; the **cram sheet** and any integrated review list all of them.
+   - A **drug** lists the sources its facets came from.
+   - Every code used must exist in `sources`; every item should carry `src` when the pack has `sources`
+     (untagged items are simply never hidden — the validator warns).
+3. **`data-src`** on a heading inside a guide's `html` (`<h2 data-src="HSR">`, or several codes separated
+   by spaces): the section — that heading and everything up to the next heading of the same or higher level —
+   is hidden when **all** its codes are off, and the guide shows a note saying so. Tag a section **only when it
+   genuinely comes from a subset of the guide's sources** (an appraisal exercise inside a clinical-skills guide,
+   a lab-session block inside an anatomy guide, a case walkthrough inside a concept guide). Sections of a
+   concept guide that blend the week's sources stay untagged — tagging them with every code hides nothing,
+   and tagging them with one is wrong. Codes in `data-src` must be a subset of the guide's own `src`.
+
+The app never filters a pack without `sources`, and filtering is by item — review progress, question history
+and running sessions are untouched when a source is switched off.
 
 ### Question schema (exam / practice) — now with `difficulty`
 
@@ -693,6 +732,11 @@ with sensible **light** defaults; the app swaps them per theme automatically.
 
 Embed the full HTML (escaped for JSON) as the `html` value of the matching `guides[]` entry.
 
+> **Sources inside a guide (v2.22).** Give every guide a `src` list (the sources it synthesizes). Where a section
+> comes from a subset of them, put `data-src="CODE"` on its heading (`<h2 data-src="ICE">`, or `data-src="HSR CASP"`
+> for several) so the app can hide just that section when those sources are switched off. Leave blended sections
+> untagged. See §2 "Content sources".
+
 ---
 
 ## 6a. The cram sheet — the LAST guide in every pack
@@ -756,6 +800,7 @@ A pack **may** include a top-level **`drugs[]`** array. It is **optional and add
 - **Reuse ids; that's the whole point.** Consistent `rx:` ids across weeks are what let the index consolidate a drug; inconsistent ids produce duplicates. Pick the obvious generic-name slug.
 - **One record per drug per pack** — don't repeat the same drug twice in one pack's `drugs[]`. (Across *different* packs is expected and is what merges.)
 - **Short facet values.** Aim for the one high-yield phrase per facet, like the cram sheet's cue→answer density — not a paragraph.
+- **`src` (v2.22).** When the pack has `sources`, each drug lists the codes its facets came from (`"src": ["L1-L2", "ICE"]`); the Pharmacology view hides a drug only when all of them are off.
 - **One short `ref.topic`.** A drug drawn from several topics still names just the main one — e.g. `"GAD"`, not
   `"Social anxiety disorder / GAD / OCD / PTSD / Depression"`. The tag sits beside every facet line; a long one crowds
   the card, especially on a phone.
@@ -812,6 +857,10 @@ Run the §7a leak and entity lints and clear them.
 **Placement filled:** `school` / `year` / (`term`) / `course` / `weeks` are present (ask if unknown,
 don't leave null), and **`course` is the grouping block shared across weeks (e.g. a course/block name),
 not the week's subject.**
+
+**Content sources (v2.22):** if the pack has `sources`, every question, card, guide and drug carries `src` with
+codes from that table; `data-src` headings use only codes from their guide's `src`; the cram sheet and any
+integrated review carry every code. Run the §7a source lints and clear them.
 
 ---
 
@@ -979,6 +1028,21 @@ def validate_pack(pack):
         t = ((d.get("ref") or {}).get("topic") or "")
         if len(t) > 40 or " / " in t:
             warns.append(f"drug {d.get('id')}: ref.topic too long or joined ({len(t)} chars) — name the one main topic (§6b)")
+
+    # §2 (v2.22): content sources — src codes on items/guides/drugs, data-src on guide headings.
+    srcs = pack.get("sources") or {}
+    if srcs:
+        ds = pack.get("drugs", []) or []
+        nosrc = [x.get("id") or x.get("file") for x in qs + cs + gs + ds if not x.get("src")]
+        if nosrc: warns.append(f"{len(nosrc)} items/guides/drugs carry no src (first: {nosrc[:3]}) — tag every one (§2)")
+        unknown = sorted({c for x in qs + cs + gs + ds for c in (x.get("src") or []) if c not in srcs})
+        if unknown: errs.append(f"src codes not in sources: {unknown}")
+        for g in gs:
+            codes = {c for m in re.finditer(r'<h[1-6][^>]*\sdata-src="([^"]*)"', g.get("html", "")) for c in m.group(1).split()}
+            bad = sorted(codes - set(g.get("src") or []))
+            if bad: warns.append(f"guide {g.get('file')}: data-src codes outside the guide's src: {bad}")
+    elif any(x.get("src") for x in qs + cs + gs):
+        warns.append("items carry src but the pack has no sources table — add sources {code: label} (§2, v2.22)")
 
     diffs = Counter(q.get("difficulty") for q in qs)
     print(f"questions={len(qs)} cards={len(cs)} guides={len(gs)} "
