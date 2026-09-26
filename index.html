@@ -1,7 +1,13 @@
 <!--
-  Study Suite  ·  v0.6.8 (beta)
+  Study Suite  ·  v0.6.9 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.6.9: THE UPDATE BUTTON PEEKS ON PHONES. Below 560px the header buttons are icons only, so a waiting app
+  update was just a lit arrow. Now, when the Update state lights (at open if a newer app is already out, or the moment a
+  check first finds one), the button widens to show "Update" beside the arrow for 4 s, then eases back to the arrow
+  (.hbtn.peek; width transition, none under prefers-reduced-motion). Once per page load (updPeeked); the plain Refresh
+  state never peeks; desktop is unchanged (the label is always visible there). The Update button now sits outside-left of
+  Add-to-home in the header (was between it and Account), so its growth moves nothing else. Alkarim's idea, 2026-09-26.
   Changelog v0.6.8: PACK LIST KEPT FRESH. A device re-reads packs-manifest.json (a) when a synced pack reference is not
   in the list it holds (resolvePacks → freshManifest, once per resolve; the refreshed list is then the one used for refs
   and the saved base), and (b) on the existing 5-minute app-version check (initPackLinks({ifChanged:true}) — re-renders
@@ -854,7 +860,8 @@ section{display:none}section.on{display:block}
 .hbtn{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px 0 11px;flex:none;border:1.5px solid var(--line);border-radius:17px;background:var(--paper);color:var(--ink-soft);font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;cursor:pointer;white-space:nowrap;transition:border-color .12s,color .12s}
 .hbtn:hover{border-color:var(--accent-soft);color:var(--ink)}.hbtn svg{width:17px;height:17px;flex:none}
 .hbtn.upd{background:var(--accent);border-color:var(--accent);color:var(--paper);animation:updpulse 2.4s ease-in-out infinite}.hbtn.upd:hover{color:var(--paper);filter:brightness(1.08)}
-@media (max-width:560px){.hbtn{width:34px;padding:0;justify-content:center}.hbtn .hl{display:none}.top-right{gap:8px}.timer{font-size:15px;padding:0 11px}}
+@media (max-width:560px){.hbtn{width:34px;padding:0;justify-content:center;overflow:hidden;transition:width .35s ease,border-color .12s,color .12s}.hbtn .hl{display:none}.hbtn.peek{width:98px;padding:0 12px 0 10px;justify-content:flex-start}.hbtn.peek .hl{display:inline}.top-right{gap:8px}.timer{font-size:15px;padding:0 11px}}
+@media (prefers-reduced-motion:reduce){.hbtn{transition:none}} /* v0.6.9 */
 .brand .t{white-space:nowrap}
 .skiprow{display:flex;justify-content:flex-end;margin-top:8px}.skiplink{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.06em;background:none;border:0;padding:4px 2px;color:var(--ink-soft);cursor:pointer;text-decoration:underline;text-underline-offset:3px}.skiplink:hover{color:var(--accent)}
 @media (max-width:560px){.controls{gap:6px}.controls .mid{gap:6px}.controls .nbtn{padding:9px 12px;font-size:15px;white-space:nowrap}.sa-long{display:none}}
@@ -1201,8 +1208,8 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
     <div class="top-right">
       <div class="timer" id="timer" style="display:none"><span class="dot"></span><span id="tclock">--:--</span></div>
       <button class="hbtn" id="homebtn" type="button" style="display:none" aria-label="Home" title="Home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.2 12 4.5l8 6.7M6.5 9.4V19.5h11V9.4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">Home</span></button>
-      <button class="hbtn" id="installBtn" type="button" aria-label="Add to home screen" title="Add this app to your home screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 4.5h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3zM12 8.5v7M8.5 12h7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">Add to home</span></button>
       <button class="hbtn" id="refreshBtn" type="button" style="display:none" aria-label="Refresh"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12a7 7 0 1 1-2.05-4.95M19 4.5V8h-3.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">Refresh</span></button>
+      <button class="hbtn" id="installBtn" type="button" aria-label="Add to home screen" title="Add this app to your home screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 4.5h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3zM12 8.5v7M8.5 12h7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">Add to home</span></button>
       <button class="acctbtn" id="acctBtn" type="button" aria-label="Account" title="Account"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.2" r="3.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4.8 19.6c1.2-3.6 4-5.4 7.2-5.4s6 1.8 7.2 5.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span class="acctdot"></span></button>
     </div>
   </div>
@@ -1560,7 +1567,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.6.8';
+const APP_VERSION='0.6.9';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -2578,7 +2585,7 @@ function renderInstall(){const d=installDev||detectDevice();
 function openInstall(){installDev=installDev||detectDevice();renderInstall();$('installOv').style.display='flex';}
 function closeInstall(){$('installOv').style.display='none';}
 function isStandalone(){return (window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;}
-let appUpdateAvailable=false;
+let appUpdateAvailable=false,updPeeked=false; /* v0.6.9: the header button shows its label once per page load when an update lights */
 let lastVerCheck=0;
 async function checkAppVersion(){lastVerCheck=Date.now();try{const r=await fetch('app-version.json',{cache:'no-store'});if(r.ok){const j=await r.json();if(j&&j.appVersion)noteNewerApp(j.appVersion);}}catch(e){}
   try{if(DATA_READY)await initPackLinks({ifChanged:true});}catch(e){}} /* v0.6.8: new or updated packs show up without a reload */
@@ -2595,7 +2602,8 @@ function updateHeaderButtons(){const pwa=isStandalone();const ib=$('installBtn')
   if(ib)ib.style.display=pwa?'none':'';
   if(!rb)return;const show=pwa||appUpdateAvailable;rb.style.display=show?'':'none'; /* v0.4.12: a browser tab shows Update too when a new version is out */
   if(show){const out=!!appUpdateAvailable; /* v0.6.7: a newer app only — pack updates are accepted in the library */
-    rb.className='hbtn'+(out?' upd':'');rb.setAttribute('aria-label',out?'Update':'Refresh');
+    const peek=rb.classList.contains('peek');rb.className='hbtn'+(out?' upd':'')+(out&&peek?' peek':'');rb.setAttribute('aria-label',out?'Update':'Refresh');
+    if(out&&!updPeeked){updPeeked=true;requestAnimationFrame(()=>{rb.classList.add('peek');setTimeout(()=>rb.classList.remove('peek'),4000);});} /* v0.6.9 */
     rb.innerHTML=out?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6.5 11.5 12 6l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">Update</span>':'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12a7 7 0 1 1-2.05-4.95M19 4.5V8h-3.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">Refresh</span>';
     rb.title=out?'A newer version of Study Suite is available — tap to reload and update':'Reload to fetch the latest app';}}
 
