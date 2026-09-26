@@ -1,7 +1,14 @@
 <!--
-  Study Suite  ·  v0.6.7 (beta)
+  Study Suite  ·  v0.6.8 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.6.8: PACK LIST KEPT FRESH. A device re-reads packs-manifest.json (a) when a synced pack reference is not
+  in the list it holds (resolvePacks → freshManifest, once per resolve; the refreshed list is then the one used for refs
+  and the saved base), and (b) on the existing 5-minute app-version check (initPackLinks({ifChanged:true}) — re-renders
+  only when the list changed, then retries pending packs). Before: the list was read only at startup or when a key
+  arrived, so a pack added on the phone right after a deploy stayed "couldn't be downloaded yet" on a Mac PWA that had
+  been open all day, and the every-sync retry re-used the same stale list (2026-09-26, wk43 v1.0). Also: a placeholder row
+  reads "offloaded" (was "not downloaded"), matching the Offload button. Nothing else changes.
   Changelog v0.6.7: HEADER UPDATE BUTTON = APP ONLY. The header button lights "Update" only when a newer app is out; a pack
   update that is merely available in the manifest no longer lights it and is no longer applied by its tap (v0.5.1 did both — a
   tap meant as a refresh took Week 41 to v1.6 on the phone, 2026-09-25). Tapping it reloads; the sync after the reload still
@@ -1553,7 +1560,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.6.7';
+const APP_VERSION='0.6.8';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1979,10 +1986,13 @@ const SSSync=(()=>{
       const saved=packs;packs=[];try{ingestPack(j,(mp.label||mp.file).replace(/\.json$/i,''));return packs[0]||null;}finally{packs=saved;}}catch(e){return null;}}
   /* Payload packs[] → full packs (refs resolved from this device, else the manifest). Unresolved refs are returned too. */
   let pulled=[];
-  async function resolvePacks(list,m){const have=new Map(packs.map(p=>[p.id,p])),out=[],miss=[];
+  async function freshManifest(){try{await initPackLinks({inSync:true});}catch(e){}return defaultManifest;} /* v0.6.8 */
+  async function resolvePacks(list,m){const have=new Map(packs.map(p=>[p.id,p])),out=[],miss=[];let refreshed=false;
     for(const e of (list||[])){if(!e||!e.id)continue;
       if(!e.ref){out.push(e);continue;}
       const p0=have.get(e.id);
+      /* v0.6.8: a published pack this device's list doesn't know (added elsewhere after this device read the list) → re-read once */
+      if(!refreshed&&!(m&&Array.isArray(m.packs)&&m.packs.some(x=>x&&x.id===e.id&&x.file))){refreshed=true;const m2=await freshManifest();if(m2&&Array.isArray(m2.packs)&&m2.packs.length)m=m2;}
       /* v0.5.5: a switched-off published pack is never downloaded — a placeholder instead (download button in the library) */
       if(e.enabled===false&&(!p0||p0.stub)){const mp=m&&m.packs.find(x=>x&&x.id===e.id&&x.file);
         if(mp||p0){const st=makeStub(p0||{id:e.id,pack:e.pack},mp);LIGHT.forEach(k=>{if(k in e)st[k]=e[k];});if(!('ts' in e))delete st.ts;out.push(st);continue;}}
@@ -1992,7 +2002,7 @@ const SSSync=(()=>{
       if(p0&&!p0.stub&&e.version&&verCmp(e.version,p0.version)>0){const up=await fetchPublic(e.id,m);if(up&&verCmp(up.version,p0.version)>0){p=up;pulled.push((up.pack||e.id)+' → v'+up.version);recordPackNews(p0,up);}}
       if(p){LIGHT.forEach(k=>{if(k!=='version'&&k in e)p[k]=e[k];});if(!('ts' in e))delete p.ts; /* v0.4.8: the account's ts, never the fetch time */
         out.push(p);}else miss.push(e);}
-    return {out,miss};}
+    return {out,miss,m};} /* v0.6.8: m = the list actually used (it may have been refreshed) */
   const studied=s=>Object.values(s||{}).filter(x=>x&&x.phase&&x.phase!=='new').length;
   /* Sync activity (v0.4.5): this device's last decisions, for diagnosing surprises. v0.6.4: 100 kept, and shared with the
      account copy as `logs` (see hash — never a reason to upload by itself). */
@@ -2130,7 +2140,7 @@ const SSSync=(()=>{
       packs=r.out;meta.missing=r.miss;
       allCards().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});rollDaily();
       await persist();applyTheme();applyGate();renderHome();
-      const np=payload(publicIds(m));Object.assign(meta,{stateId:rec.id,lastUpdated:rec.updated,lastHash:await hash(np)});await saveMeta();await saveBase(np);
+      const np=payload(publicIds(r.m||m));Object.assign(meta,{stateId:rec.id,lastUpdated:rec.updated,lastHash:await hash(np)});await saveMeta();await saveBase(np); /* v0.6.8: refs against the list actually used */
       if(pulled.length){toast('Updated from your other device: '+pulled.join(', ')+'.');pulled=[];}
       if(r.miss.length)toast(r.miss.length+' pack'+(r.miss.length===1?'':'s')+' from your account couldn’t be downloaded yet — they’ll be kept in your account.');
       return true;}
@@ -2185,7 +2195,7 @@ const SSSync=(()=>{
         try{r=merge3(await loadBase(),pl,d,(la||0)>=(parseTs(full.updated)||0));}catch(e){slog('Couldn’t merge ('+((e&&e.message)||e)+') — asked instead',pl,d,full.updated);}
         if(r){ /* v0.4.7: merge instead of asking */
           if(await hash(r.out)!==h&&!await applyCloud(r.out,full,m,h)){slog('Merge postponed — this device changed mid-merge',pl,d,full.updated);again=true;return;}
-          const np=payload(publicIds(m)),nh=await hash(np);
+          const np=payload(publicIds(defaultManifest||m)),nh=await hash(np); /* v0.6.8 */
           if(nh!==await hash(d))await upload(dek,np,nh,full.id,full.updated);
           else{Object.assign(meta,{stateId:full.id,lastUpdated:full.updated,lastHash:nh});await saveMeta();await saveBase(np);}
           slog('Merged with the account copy'+(r.notes.length?' — '+r.notes.join('; '):''),pl,d,meta.lastUpdated);
@@ -2570,7 +2580,8 @@ function closeInstall(){$('installOv').style.display='none';}
 function isStandalone(){return (window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;}
 let appUpdateAvailable=false;
 let lastVerCheck=0;
-async function checkAppVersion(){lastVerCheck=Date.now();try{const r=await fetch('app-version.json',{cache:'no-store'});if(!r.ok)return;const j=await r.json();if(j&&j.appVersion)noteNewerApp(j.appVersion);}catch(e){}}
+async function checkAppVersion(){lastVerCheck=Date.now();try{const r=await fetch('app-version.json',{cache:'no-store'});if(r.ok){const j=await r.json();if(j&&j.appVersion)noteNewerApp(j.appVersion);}}catch(e){}
+  try{if(DATA_READY)await initPackLinks({ifChanged:true});}catch(e){}} /* v0.6.8: new or updated packs show up without a reload */
 function noteNewerApp(v){if(!appUpdateAvailable&&v&&verCmp(v,APP_VERSION)>0){appUpdateAvailable=true;updateHeaderButtons();}}
 /* v0.4.12: keep checking while the app stays open — every 5 min on screen, on coming back, and when the connection returns. */
 setInterval(()=>{if(document.visibilityState==='visible'&&Date.now()-lastVerCheck>=5*60000)checkAppVersion();},60000);
@@ -2599,16 +2610,21 @@ async function openManifest(m,keys){const seen=new Map();
     try{(JSON.parse(new TextDecoder().decode(await aesOpen(keys[sid],sec.iv,sec.ct))).packs||[]).forEach(p=>{if(p&&p.id&&!seen.has(p.id))seen.set(p.id,p);});}catch(e){}}
   return {v:2,packs:[...seen.values()],authoring:m.authoring};}
 async function manifestWithKeys(keys){try{const r=await fetch('packs-manifest.json',{cache:'no-store'});if(!r.ok)return null;const m=await r.json();return (m&&m.v===2)?openManifest(m,keys):null;}catch(e){return null;}}
-async function initPackLinks(){
+let manifestText=''; /* v0.6.8: the pack list as last read, so a periodic re-read only re-renders on a change */
+async function initPackLinks(opts){opts=opts||{};
   try{
-    const r=await fetch('packs-manifest.json',{cache:'no-store'});if(!r.ok)return;
-    const m=await r.json();
+    const r=await fetch('packs-manifest.json',{cache:'no-store'});if(!r.ok)return false;
+    const txt=await r.text();if(opts.ifChanged&&defaultManifest&&txt===manifestText)return false;
+    const m=JSON.parse(txt);
     if(m&&m.v===2)defaultManifest=await openManifest(m,heldKeys()); /* v0.6.0: the sections this device holds keys for */
-    else{if(!m||!Array.isArray(m.packs)||!m.packs.length)return;defaultManifest=m;}
+    else{if(!m||!Array.isArray(m.packs)||!m.packs.length)return false;defaultManifest=m;}
+    manifestText=txt;
     if(defaultManifest&&defaultManifest.authoring){$('buildLink').href=encodeURI(String(defaultManifest.authoring));$('buildLink').setAttribute('download','');$('buildLine').style.display='';} /* v0.6.3: for everyone, code or not */
-    backfillPlacement();renderLibrary();renderDefaultPacks();maybeApplyQueuedUpdates();
-    try{if(SSSync.meta()&&(SSSync.meta().missing||[]).length)SSSync.retryMissing();}catch(e){} /* v0.6.2: a key just arrived → pending packs */
-  }catch(e){}
+    backfillPlacement();renderLibrary();renderDefaultPacks();
+    if(!opts.inSync){maybeApplyQueuedUpdates(); /* v0.6.8: inside a sync the caller is already resolving refs */
+      try{if(SSSync.meta()&&(SSSync.meta().missing||[]).length)SSSync.retryMissing();}catch(e){}} /* v0.6.2: a key just arrived → pending packs */
+    return true;
+  }catch(e){return false;}
 }
 let dpOpen=null; // Set of expanded "year³course" keys; null until first render
 function dpRow(p,isNew){
@@ -2993,7 +3009,7 @@ function libRow(p){const on=p.enabled!==false;const upd=packUpdate(p),stub=!!p.s
   const vtag=ver?` · v${acctEsc(String(ver))}`:''; /* v0.5.3 */
   const pv=upd?updatePreview(p,upd):'',nw=packNews()[p.id];
   const updtag=upd?` · <span class="updnote">update to v${upd.version}${pv?' ('+acctEsc(pv)+')':''}</span>`:(nw&&nw.text&&newsShown.has(p.id)?` · <span class="newsnote">${acctEsc(nw.text)}</span>`:'');
-  const nq=stub?(p.nq||0):p.questions.length,nc=stub?(p.nc||0):p.cards.length,sttag=stub?(on?' · switched on elsewhere — tap to download':' · not downloaded'):'';
+  const nq=stub?(p.nq||0):p.questions.length,nc=stub?(p.nc||0):p.cards.length,sttag=stub?(on?' · switched on elsewhere — tap to download':' · offloaded') /* v0.6.8: matches the Offload button */:'';
   const sv=(!stub&&on&&p.sources&&typeof p.sources==='object')?srcVisible(p):null; /* v0.6.6: what the source switches leave visible */
   const srcline=sv?`<div class="srcrow"><button type="button" class="srcbtn${srcOpen.has(p.id)?' on':''}" aria-expanded="${srcOpen.has(p.id)?'true':'false'}">${sv.off?sv.on+' of '+sv.total+' sources':'Sources'} ${srcOpen.has(p.id)?'▴':'▾'}</button></div>`:'';
   const info=document.createElement('div');info.innerHTML=`<div class="pn">${p.pack}</div><div class="pm">${sv?sv.q:nq} questions · ${sv?sv.c:nc} cards${sv&&ng?` · ${sv.g} guides`:gtag}${vtag}${stub?sttag:updtag}</div>${srcline}`;
