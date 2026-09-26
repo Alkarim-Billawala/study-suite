@@ -1,7 +1,17 @@
 <!--
-  Study Suite  ·  v0.6.9 (beta)
+  Study Suite  ·  v0.7.0 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.7.0: THE HEADER SHOWS WAITING PACK UPDATES — WITHOUT APPLYING THEM. Four states of the one button
+  (updateHeaderButtons): Refresh (installed app, nothing waiting) · app update (lit "↑ Update", tap reloads) · pack updates
+  only (.hbtn.pk: accent tinted 16% into the paper, accent-soft border, pack icon, "Packs" + a badge with the count; tap
+  = show('home') and scroll to the library's "↑ Update all (N)" — nothing is applied) · both (lit "↑ Update" + the badge;
+  tap reloads, the pack state remains after). The badge (.hbtn .bdg) is ink on paper with a paper ring, so it reads on the
+  tinted and on the lit button in all six palettes. Hover titles name both ("A newer Study Suite (vX) is ready — tap to
+  reload. N pack updates are waiting in your library."). The phone peek (v0.6.9) fires once per page load for each of the
+  app and the pack state (updPeeked, pkPeeked). renderHome refreshes the header (the count follows the pack list, kept
+  fresh by v0.6.8). The v0.6.7 rule stands: a pack update is accepted in the library only (per pack or Update all), then
+  follows by sync. Partial reversion of v0.6.7 at Alkarim's request, 2026-09-26 (design A+C: tint + numbered badge).
   Changelog v0.6.9: THE UPDATE BUTTON PEEKS ON PHONES. Below 560px the header buttons are icons only, so a waiting app
   update was just a lit arrow. Now, when the Update state lights (at open if a newer app is already out, or the moment a
   check first finds one), the button widens to show "Update" beside the arrow for 4 s, then eases back to the arrow
@@ -860,8 +870,10 @@ section{display:none}section.on{display:block}
 .hbtn{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px 0 11px;flex:none;border:1.5px solid var(--line);border-radius:17px;background:var(--paper);color:var(--ink-soft);font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;cursor:pointer;white-space:nowrap;transition:border-color .12s,color .12s}
 .hbtn:hover{border-color:var(--accent-soft);color:var(--ink)}.hbtn svg{width:17px;height:17px;flex:none}
 .hbtn.upd{background:var(--accent);border-color:var(--accent);color:var(--paper);animation:updpulse 2.4s ease-in-out infinite}.hbtn.upd:hover{color:var(--paper);filter:brightness(1.08)}
-@media (max-width:560px){.hbtn{width:34px;padding:0;justify-content:center;overflow:hidden;transition:width .35s ease,border-color .12s,color .12s}.hbtn .hl{display:none}.hbtn.peek{width:98px;padding:0 12px 0 10px;justify-content:flex-start}.hbtn.peek .hl{display:inline}.top-right{gap:8px}.timer{font-size:15px;padding:0 11px}}
-@media (prefers-reduced-motion:reduce){.hbtn{transition:none}} /* v0.6.9 */
+.hbtn.pk{background:color-mix(in srgb,var(--accent) 16%,var(--paper));border-color:var(--accent-soft);color:var(--accent)}.hbtn.pk:hover{color:var(--accent);filter:brightness(1.04)} /* v0.7.0: pack updates waiting */
+.hbtn{position:relative}.hbtn .bdg{position:absolute;top:-7px;right:-7px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--ink);color:var(--paper);border:1.5px solid var(--paper);font-family:var(--font-sans);font-size:11px;font-weight:600;letter-spacing:0;line-height:15px;text-align:center;box-sizing:border-box;pointer-events:none}
+@media (max-width:560px){.top-right .hbtn{width:auto;min-width:34px;padding:0 8.5px;justify-content:center} /* .top-right: outranks the library's .upd padding */.hbtn .hl{display:inline;max-width:0;opacity:0;margin-left:-7px;overflow:hidden;transition:max-width .35s ease,opacity .25s ease,margin-left .35s ease}.hbtn.peek .hl{max-width:64px;opacity:1;margin-left:0} /* v0.6.9/v0.7.0: the label peeks by growing, so nothing overflows and the badge stays visible */#libPanel{scroll-margin-top:68px} /* v0.7.0: the header tap lands the library below the sticky header */.top-right{gap:8px}.timer{font-size:15px;padding:0 11px}}
+@media (prefers-reduced-motion:reduce){.hbtn,.hbtn .hl{transition:none}} /* v0.6.9 */
 .brand .t{white-space:nowrap}
 .skiprow{display:flex;justify-content:flex-end;margin-top:8px}.skiplink{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.06em;background:none;border:0;padding:4px 2px;color:var(--ink-soft);cursor:pointer;text-decoration:underline;text-underline-offset:3px}.skiplink:hover{color:var(--accent)}
 @media (max-width:560px){.controls{gap:6px}.controls .mid{gap:6px}.controls .nbtn{padding:9px 12px;font-size:15px;white-space:nowrap}.sa-long{display:none}}
@@ -1567,7 +1579,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.6.9';
+const APP_VERSION='0.7.0';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -2585,11 +2597,11 @@ function renderInstall(){const d=installDev||detectDevice();
 function openInstall(){installDev=installDev||detectDevice();renderInstall();$('installOv').style.display='flex';}
 function closeInstall(){$('installOv').style.display='none';}
 function isStandalone(){return (window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;}
-let appUpdateAvailable=false,updPeeked=false; /* v0.6.9: the header button shows its label once per page load when an update lights */
+let appUpdateAvailable=false,updPeeked=false,pkPeeked=false; /* v0.6.9/v0.7.0: the header button shows its label once per page load when the app state, and once when the pack state, lights */
 let lastVerCheck=0;
 async function checkAppVersion(){lastVerCheck=Date.now();try{const r=await fetch('app-version.json',{cache:'no-store'});if(r.ok){const j=await r.json();if(j&&j.appVersion)noteNewerApp(j.appVersion);}}catch(e){}
   try{if(DATA_READY)await initPackLinks({ifChanged:true});}catch(e){}} /* v0.6.8: new or updated packs show up without a reload */
-function noteNewerApp(v){if(!appUpdateAvailable&&v&&verCmp(v,APP_VERSION)>0){appUpdateAvailable=true;updateHeaderButtons();}}
+let newerAppVersion='';function noteNewerApp(v){if(!appUpdateAvailable&&v&&verCmp(v,APP_VERSION)>0){appUpdateAvailable=true;newerAppVersion=String(v);updateHeaderButtons();}}
 /* v0.4.12: keep checking while the app stays open — every 5 min on screen, on coming back, and when the connection returns. */
 setInterval(()=>{if(document.visibilityState==='visible'&&Date.now()-lastVerCheck>=5*60000)checkAppVersion();},60000);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&Date.now()-lastVerCheck>=60000)checkAppVersion();});
@@ -2600,12 +2612,17 @@ function reloadApp(){try{location.href=location.pathname+'?r='+Date.now();}catch
    the app or a loaded pack is behind. */
 function updateHeaderButtons(){const pwa=isStandalone();const ib=$('installBtn'),rb=$('refreshBtn');
   if(ib)ib.style.display=pwa?'none':'';
-  if(!rb)return;const show=pwa||appUpdateAvailable;rb.style.display=show?'':'none'; /* v0.4.12: a browser tab shows Update too when a new version is out */
-  if(show){const out=!!appUpdateAvailable; /* v0.6.7: a newer app only — pack updates are accepted in the library */
-    const peek=rb.classList.contains('peek');rb.className='hbtn'+(out?' upd':'')+(out&&peek?' peek':'');rb.setAttribute('aria-label',out?'Update':'Refresh');
-    if(out&&!updPeeked){updPeeked=true;requestAnimationFrame(()=>{rb.classList.add('peek');setTimeout(()=>rb.classList.remove('peek'),4000);});} /* v0.6.9 */
-    rb.innerHTML=out?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6.5 11.5 12 6l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">Update</span>':'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12a7 7 0 1 1-2.05-4.95M19 4.5V8h-3.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">Refresh</span>';
-    rb.title=out?'A newer version of Study Suite is available — tap to reload and update':'Reload to fetch the latest app';}}
+  if(!rb)return;const out=!!appUpdateAvailable;let nPk=0;try{if(DATA_READY&&defaultManifest)nPk=pendingUpdates().length;}catch(e){} /* v0.7.0: waiting pack updates (shown, never applied here) */
+  const show=pwa||out||nPk>0;rb.style.display=show?'':'none'; /* v0.4.12: a browser tab shows Update too when a new version is out */
+  if(show){const pk=!out&&nPk>0; /* v0.6.7: the tap applies the app update only — pack updates are accepted in the library */
+    const peek=rb.classList.contains('peek');rb.className='hbtn'+(out?' upd':pk?' pk':'')+((out||pk)&&peek?' peek':'');rb.setAttribute('aria-label',out?'Update':pk?'Pack updates':'Refresh');
+    if(((out&&!updPeeked)||(pk&&!pkPeeked))){if(out)updPeeked=true;else pkPeeked=true;requestAnimationFrame(()=>{rb.classList.add('peek');setTimeout(()=>rb.classList.remove('peek'),4000);});} /* v0.6.9 */
+    const badge=nPk>0?'<span class="bdg" aria-hidden="true">'+nPk+'</span>':'',pkWord=nPk+' pack update'+(nPk===1?'':'s');
+    rb.innerHTML=out?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6.5 11.5 12 6l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">Update</span>'+badge
+      :pk?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 4.5 7.5v9L12 20.5l7.5-4v-9zM4.5 7.5 12 11.5l7.5-4M12 11.5v9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span class="hl">Packs</span>'+badge
+      :'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12a7 7 0 1 1-2.05-4.95M19 4.5V8h-3.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">Refresh</span>';
+    rb.title=out?('A newer Study Suite'+(newerAppVersion?' (v'+newerAppVersion+')':'')+' is ready — tap to reload.'+(nPk?' '+pkWord+' are waiting in your library.':''))
+      :pk?(pkWord+(nPk===1?' is':' are')+' waiting in your library — tap to open it.'):'Reload to fetch the latest app';}}
 
 /* "Default study packs" panel — content-free: pack list comes from a same-origin
    packs-manifest.json generated at deploy time ({packs:[{file,label,id}],authoring}).
@@ -2629,6 +2646,7 @@ async function initPackLinks(opts){opts=opts||{};
     manifestText=txt;
     if(defaultManifest&&defaultManifest.authoring){$('buildLink').href=encodeURI(String(defaultManifest.authoring));$('buildLink').setAttribute('download','');$('buildLine').style.display='';} /* v0.6.3: for everyone, code or not */
     backfillPlacement();renderLibrary();renderDefaultPacks();
+    try{const nU=pendingUpdates().length,ua=$('updateAll');if(ua){ua.style.display=nU?'':'none';if(nU)ua.textContent='↑ Update all ('+nU+')';}updateHeaderButtons();}catch(e){} /* v0.7.0: a changed list updates the header and the Update-all count at once */
     if(!opts.inSync){maybeApplyQueuedUpdates(); /* v0.6.8: inside a sync the caller is already resolving refs */
       try{if(SSSync.meta()&&(SSSync.meta().missing||[]).length)SSSync.retryMissing();}catch(e){}} /* v0.6.2: a key just arrived → pending packs */
     return true;
@@ -2981,6 +2999,7 @@ function renderHome(){
   $('libPanel').classList.toggle('has',!!nP);$('libTitle').textContent=nP?'Your library':'▸ Content library';$('libEmpty').hidden=!!nP; /* v0.6.2 */
   $('libActions').style.display=nP?'':'none';
   const nUpd=pendingUpdates().length;const ua=$('updateAll');if(ua){ua.style.display=nUpd?'':'none';if(nUpd)ua.textContent='↑ Update all ('+nUpd+')';}
+  try{updateHeaderButtons();}catch(e){} /* v0.7.0: the header's pack count follows the library */
   $('featReview').textContent=nC+' cards';
   $('featPractice').textContent=tp+' questions'+(pracInProgress()?` · session in progress (${(prac.qsub||[]).filter(Boolean).length} of ${prac.qorder.length} submitted)`:'');
   const past=examLog.length?` · <a id="examPast">Past exams (${examLog.length})</a>`:'';
@@ -3863,7 +3882,7 @@ $('pharmBack').addEventListener('click',()=>renderHome());
 $('pharmSearch').addEventListener('input',e=>onPharmSearch(e.target.value));
 $('installBtn').addEventListener('click',openInstall);
 /* v0.5.1: one tap — a new app reloads and then applies waiting pack updates; pack updates alone apply straight away. */
-$('refreshBtn').addEventListener('click',()=>{reloadApp();}); /* v0.6.7: reload only; the sync after it brings pack versions accepted elsewhere */
+$('refreshBtn').addEventListener('click',()=>{if(!appUpdateAvailable&&pendingUpdates().length){show('home');const lp=$('libPanel');if(lp){lp.scrollIntoView({behavior:'smooth',block:'start'});}return;}reloadApp();}); /* v0.6.7: reload only for the app; v0.7.0: pack updates → the library (never applied from here) */
 $('installBackup').addEventListener('click',e=>{e.preventDefault();backup();});
 $('installClose').addEventListener('click',closeInstall);
 $('installOv').addEventListener('click',e=>{if(e.target===$('installOv'))closeInstall();});
