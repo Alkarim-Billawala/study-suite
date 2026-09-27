@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.22 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.23 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.22)
+# Study Suite — Content Authoring Guide (v2.23)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,16 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.22 · **Pairs with:** Study Suite app v0.4.4+ (source switches need v0.6.6+), pack `formatVersion` 2.0
+> **Authoring system version:** 2.23 · **Pairs with:** Study Suite app v0.4.4+ (source switches need v0.6.6+, Extras v0.7.1+), pack `formatVersion` 2.0
+> **What changed in guide v2.23:** **size by the material, one item per fact, and Extras.** §3's "targets are floors"
+> line is gone: a pack is as large as the week's *examinable* material, and each fact gets the number of items its
+> emphasis earns — usually one question and at most one card, more only for a fact the course stresses repeatedly. New
+> **§3b** sets out the rules an audit of four oversized packs produced (2026-09-27): no card that restates a question, no
+> second item on a fact already tested (across guides too), case and review guides *apply* concepts rather than re-ask
+> them, and exact figures, dates, names, case narrative, source structure and common sense are not core items. Items
+> that are correct and still useful but lower-yield take a reserved source code, **`EXTRA`** (§2 "Extras"): they ship
+> in the pack, the app (v0.7.1+) keeps them off by default and out of every count, and one switch per pack turns them
+> on. Exact duplicates and absurd, ambiguous or incorrect items are not shipped at all. The §7a validator lints Extras.
 > **What changed in guide v2.22:** **content sources** (additive, optional; no `formatVersion` change). A pack may carry a
 > top-level **`sources`** table — `{code: label}`, one entry per course material the pack was built from (a lecture, a
 > module, a case, a quiz, a pre-reading) — and every question, card, guide and drug then carries **`src`: [codes]**, the
@@ -357,6 +366,16 @@ Three pieces, all optional and additive:
 The app never filters a pack without `sources`, and filtering is by item — review progress, question history
 and running sessions are untouched when a source is switched off.
 
+**Extras (`EXTRA`) — v2.23.** One code is reserved: **`"EXTRA"`**, listed in `sources` as `"EXTRA": "Extras"`. Add it
+to a question's or card's `src` *alongside its real source codes* to mark the item as lower-yield. The app (v0.7.1+)
+hides extras by default, leaves them out of every count and total, and gives the pack one **Extras** switch, separate
+from the source switches ("All on" does not touch it). With Extras on, an extra behaves like any other item, so it
+still needs one of its real sources on. Use it for items that are correct and could help a keen learner but would not
+earn a place in a block exam: peripheral detail, exact figures, historical or case narrative, and cards that mirror a
+question in another format (§3b). Only questions and cards take `EXTRA`; guides, guide sections and drugs never do.
+An item that should not exist — an exact duplicate, a joke or giveaway option, a disputable key, a wrong fact — is
+removed or rewritten, never parked in Extras.
+
 ### Question schema (exam / practice) — now with `difficulty`
 
 ```json
@@ -450,12 +469,12 @@ and associations over trivia.
 > you produced against the weeks before delivering (the §7 checklist asks you to confirm this). A
 > two-week pack with one tiny guide and 15 cards is not a complete pack.
 
-> **Targets are floors, not ceilings — larger packs are welcome.** When the source material is rich (full
-> lecture transcripts, several modules, case sessions and a practice quiz for one week), a pack that runs
-> to **100+ questions and 250+ cards for a single week** is a good pack, not an over-built one: the
-> learner filters by difficulty and topic, and Review paces itself. Scale to the material and to the
-> learner's available usage; agree the size with the user up front (§3) and build in one pass rather than
-> trimming good items to hit the default.
+> **Size by the material, not by a target (v2.23).** The numbers above are a starting point for an ordinary week,
+> not a floor to beat. A dense week (lectures, several modules, a case session and a practice quiz) earns more — but
+> only as many items as it has **examinable facts and skills**, weighted by how much the course stresses each (§3b).
+> Never grow a pack to match an earlier pack's size, and never add items to fill out a guide: a dense week covered by
+> ~100 questions and ~150 cards is better than 240 and 500 that test the same facts three ways. Items that are still
+> worth keeping but lower-yield go to Extras (§2), outside the core the learner sees by default.
 
 ---
 
@@ -479,6 +498,36 @@ roughly like:
 These are guides, not quotas — but if your deck is >35% cloze or has multi cards with no false option,
 rebalance. (`mcq`/`multi` options are shuffled at render, so author them in any order; "all/none of the
 above" are anchored and fine, but never use position-*referencing* options like "both of the above" — see §2.)
+
+---
+
+## 3b. One item per fact — curation rules (v2.23)
+
+These rules come from an audit of four week packs (2026-09-27) that had grown to two to five times the size of
+earlier weeks. Their questions were mostly sound; about two thirds of their cards were not. Apply the rules while
+writing, and check against them before shipping:
+
+1. **One item per fact, weighted by emphasis.** A fact gets one question, and at most one card in a *different*
+   retrieval style. A fact the course stresses repeatedly (the lecture, the module, the case and the quiz all return to
+   it) can earn more — a second vignette from a different angle, a harder application — but a fact mentioned once gets
+   one item. This is a judgement, not a count: how likely is it to be examined, and how much is it stressed?
+2. **No mirror cards.** A card that restates a question's stem and answer in another format is not a new item. If the
+   second format still helps, the card goes to Extras.
+3. **No repeats across guides.** Case guides (CBL, ICE), integrated reviews and the cram sheet **apply** the week's
+   concepts to the case or pull them together; they do not re-ask the concept guides' items. Before writing an item,
+   check whether the pack already tests that fact.
+4. **Not core items:** exact percentages, rates, hazard ratios and dose schedules where only the direction or rough
+   size is examinable; dates, names, eponyms and history; a particular case patient's details (vitals, timeline) rather
+   than the transferable concept; how a lecture, module or quiz is structured; common sense a medical student already
+   has; soft-skill platitudes. Keep what aids understanding in the guide; as items these belong in Extras at most.
+5. **Never ship:** exact duplicates (keep the better-formed copy), joke or giveaway options, keys a careful reader could
+   dispute, `order` cards for things that are not a sequence, `match` cards with two identical answers or ambiguous
+   pairs, cloze blanks on non-key words, and `qa` answers too long to recall. Rewrite them or leave them out.
+6. **Correct over faithful.** When a slide or lecturer states something standard references contradict, the item
+   teaches the standard answer and the guide carries a "Sources differ" callout (§4a); an item never keys the
+   non-standard claim as the only right answer.
+7. **Updates retire as well as add.** When new material arrives, check new items against the existing ones and move or
+   remove the weaker copy instead of appending a second.
 
 ---
 
@@ -836,9 +885,8 @@ doesn't parse, it won't import.
 pack, each 10,000–20,000 characters of body** (not a single sparse page, not one guide per lecture),
 **`groupBy:"topic"` with real topics — ~8–20 for a dense week, each spanning ≥3 items (§2, v2.19)**,
 each with real sections/tables, **plus a cram sheet as the final guide (§6a)**; **most questions
-and cards carry a `guide` pointer**; counts meet the
-targets and are **scaled to the weeks covered** (10–20 questions — favour the upper end, 18–20, for a
-dense week — and 40–60 cards *per week*); difficulty lands near the **~30 / 55 / 15** easy/medium/hard
+and cards carry a `guide` pointer**; counts are **sized by the examinable material, scaled to the weeks covered and curated per §3b** (one item
+per fact weighted by emphasis, no mirror cards, no repeats across guides, lower-yield items in Extras); difficulty lands near the **~30 / 55 / 15** easy/medium/hard
 spread, with **hard** items testing contraindications, emergencies, or multi-step reasoning (not just
 longer stems).
 
@@ -857,6 +905,10 @@ Run the §7a leak and entity lints and clear them.
 **Placement filled:** `school` / `year` / (`term`) / `course` / `weeks` are present (ask if unknown,
 don't leave null), and **`course` is the grouping block shared across weeks (e.g. a course/block name),
 not the week's subject.**
+
+**Extras (v2.23):** lower-yield questions and cards carry `EXTRA` beside their real codes and the pack lists
+`"EXTRA": "Extras"`; no guide, section or drug carries it; no exact duplicate, joke option or disputable key is in the
+pack at all, in the core or in Extras (§3b).
 
 **Content sources (v2.22):** if the pack has `sources`, every question, card, guide and drug carries `src` with
 codes from that table; `data-src` headings use only codes from their guide's `src`; the cram sheet and any
@@ -1041,6 +1093,15 @@ def validate_pack(pack):
             codes = {c for m in re.finditer(r'<h[1-6][^>]*\sdata-src="([^"]*)"', g.get("html", "")) for c in m.group(1).split()}
             bad = sorted(codes - set(g.get("src") or []))
             if bad: warns.append(f"guide {g.get('file')}: data-src codes outside the guide's src: {bad}")
+        # §2 / §3b (v2.23): Extras — the reserved code EXTRA marks lower-yield questions and cards.
+        if "EXTRA" in srcs:
+            xs = [x for x in qs + cs if "EXTRA" in (x.get("src") or [])]
+            only = [x.get("id") for x in xs if not [c for c in x.get("src") if c != "EXTRA"]]
+            if only: warns.append(f"{len(only)} items carry only EXTRA (first: {only[:3]}) — keep their real source codes too (§2)")
+            xgd = [x.get("id") or x.get("file") for x in gs + ds if "EXTRA" in (x.get("src") or [])]
+            if xgd: warns.append(f"guides/drugs carry EXTRA {xgd[:3]} — Extras are for questions and cards only (§2)")
+            if qs + cs and len(xs) > 0.6 * len(qs + cs):
+                warns.append(f"{len(xs)} of {len(qs + cs)} items are Extras — cut the pack rather than park most of it (§3b)")
     elif any(x.get("src") for x in qs + cs + gs):
         warns.append("items carry src but the pack has no sources table — add sources {code: label} (§2, v2.22)")
 

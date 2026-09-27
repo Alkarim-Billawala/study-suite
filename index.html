@@ -1,7 +1,17 @@
 <!--
-  Study Suite  ·  v0.7.0 (beta)
+  Study Suite  ·  v0.7.1 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.7.1: EXTRAS — a reserved source code "EXTRA" (SRCX). A pack marks lower-yield items and cards that repeat a
+  question by adding "EXTRA" to their src (beside their real codes) and lists "EXTRA": "<label>" in `sources`. Extras are OFF
+  unless switched on per pack: settings['srcx:'+packId] === true (absent = off; syncs and merges per key like any setting;
+  never stored in the srcoff array). srcOn → srcCodesOn: an item carrying EXTRA is hidden while extras are off; otherwise
+  the v0.6.6 rule runs on its other codes (an EXTRA-only item shows iff extras are on). Guide headings with data-src follow
+  the same rule. Counts leave hidden extras out: library row (also for switched-off packs, and offloaded rows via nqx/ncx),
+  srcVisible per-code counts, the Sources header (EXTRA is not a source: never in "N of M on"), the panel footer ("Whole
+  pack" without extras, then "+X extras (off|on)"), drugCount, and packDiff's "what's new" text. The panel shows Extras as
+  its own row after a divider with a one-line hint; "All on" never touches it. A pack whose sources hold only EXTRA still
+  gets the Sources link. Chips name extras by their label. Packs without EXTRA behave exactly as before.
   Changelog v0.7.0: THE HEADER SHOWS WAITING PACK UPDATES — WITHOUT APPLYING THEM. Four states of the one button
   (updateHeaderButtons): Refresh (installed app, nothing waiting) · app update (lit "↑ Update", tap reloads) · pack updates
   only (.hbtn.pk: accent tinted 16% into the paper, accent-soft border, pack icon, "Packs" + a badge with the count; tap
@@ -43,7 +53,8 @@
   "N sections hidden". Questions and cards show their source codes as chips under the guide link (tap = full label).
   Sessions already running keep their items (cardOf falls back to allCards()). Also: ingestPack keeps `sources`; packDiff
   pairs a removed + added guide by title stem so a renumber reads "updated", not "removed"; topic pickers (Review, Practice,
-  Exam setup) get an All / None control per week heading (Future-Features #23).
+  Exam setup) get an All / None control per week heading (Future-Features #23). v0.7.1: the reserved code "EXTRA" is the
+  exception — off unless settings['srcx:'+packId] is true, not a normal source (see v0.7.1 above).
   Changelog v0.6.5: PHARMACOLOGY ON PHONES — a long source chip (Week 41 lists every topic, "… / GAD / OCD / PTSD / …") had
   white-space:nowrap and the facet grid's 1fr column can't shrink below it, so the card overflowed the screen; iPhone Safari then
   zoomed the page out and inflated the overflowing text. Chips now wrap (max-width 100%, overflow-wrap:anywhere), the facet
@@ -1176,6 +1187,7 @@ section{display:none}section.on{display:block}
 .srclbl{flex:1;font-size:14px;line-height:1.3;min-width:0;overflow-wrap:anywhere}.srcline.off .srclbl{color:var(--ink-soft)}
 .srcn{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);flex:none}
 .srcfoot{font-size:12px;color:var(--ink-soft);margin-top:8px;font-style:italic}
+.srcxhint{border-top:1px solid var(--line);margin-top:8px;padding-top:8px;font-size:12px;color:var(--ink-soft)}.srcline.srcx{border-top:0} /* v0.7.1: Extras row */
 .revitem .gsub{display:block;font-family:var(--font-mono);font-size:10px;color:var(--ink-soft);margin-top:2px;letter-spacing:.03em}.revitem.on .gsub{color:rgba(255,255,255,.7)}
 .srcline2{margin-top:10px;display:flex;flex-wrap:wrap;align-items:center;gap:4px}.srcline2 .gt{font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin-right:4px}.srcline2 .srcchip{margin-left:0}
 .ghead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:7px}.ghead .gname{margin-bottom:0}
@@ -1579,7 +1591,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.7.0';
+const APP_VERSION='0.7.1';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1903,28 +1915,43 @@ function optPerm(options){const n=(options||[]).length;const anchored=new Set();
   return perm;}
 function activePacks(){return packs.filter(p=>p.enabled!==false);}
 /* v0.6.6: content sources — settings['srcoff:'+packId] = codes switched OFF (empty/absent = all on). An item is visible
-   while ANY code in its src is on; items without src, and packs without a sources table, are never filtered. */
-const srcOpen=new Set();
+   while ANY code in its src is on; items without src, and packs without a sources table, are never filtered.
+   v0.7.1: EXTRA (SRCX) is reserved — off unless settings['srcx:'+packId]===true; an item carrying it is hidden while extras
+   are off, else the rule above runs on its other codes. It is never a normal source (not in srcoff, not in "N of M on"). */
+const srcOpen=new Set(),SRCX='EXTRA';
 function srcOff(p){const v=p&&settings['srcoff:'+p.id];return new Set(Array.isArray(v)?v:[]);}
-function srcOn(p,x){if(!p||!p.sources||!x||!Array.isArray(x.src)||!x.src.length)return true;const off=srcOff(p);return x.src.some(c=>!off.has(c));}
+function srcHasX(p){return !!(p&&p.sources&&typeof p.sources==='object'&&p.sources[SRCX]);} /* v0.7.1: the pack lists EXTRA */
+function srcXOn(p){return !!(p&&settings['srcx:'+p.id]===true);}
+function srcIsX(p,x){return srcHasX(p)&&!!x&&Array.isArray(x.src)&&x.src.includes(SRCX);}
+function srcXHid(p,x){return srcIsX(p,x)&&!srcXOn(p);} /* an extra that is hidden right now */
+function srcCodes(p){return Object.keys((p&&p.sources)||{}).filter(c=>c!==SRCX);} /* the normal sources */
+function srcCodesOn(p,codes){const hx=srcHasX(p);if(hx&&codes.includes(SRCX)&&!srcXOn(p))return false;const off=srcOff(p),r=hx?codes.filter(c=>c!==SRCX):codes;return !r.length||r.some(c=>!off.has(c));}
+function srcOn(p,x){if(!p||!p.sources||!x||!Array.isArray(x.src)||!x.src.length)return true;return srcCodesOn(p,x.src);}
 function srcName(p,c){return (p&&p.sources&&p.sources[c])||c;}
-function setSrcOff(p,codes){settings['srcoff:'+p.id]=[...codes].filter(c=>p.sources&&p.sources[c]);allCards().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});persist();}
-function srcVisible(p){const off=srcOff(p),codes=Object.keys(p.sources||{}),per={};codes.forEach(c=>per[c]=0);
-  const vis=L=>(L||[]).filter(x=>{(x&&Array.isArray(x.src)?x.src:[]).forEach(c=>{if(c in per)per[c]++;});return srcOn(p,x);}).length;
-  return {q:vis(p.questions),c:vis(p.cards),g:vis(p.guides),d:vis(p.drugs),per,total:codes.length,off:codes.filter(c=>off.has(c)).length,on:codes.filter(c=>!off.has(c)).length};}
+function srcSched(){allCards().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});}
+function setSrcOff(p,codes){settings['srcoff:'+p.id]=[...codes].filter(c=>c!==SRCX&&p.sources&&p.sources[c]);srcSched();persist();}
+function setSrcX(p,on){settings['srcx:'+p.id]=!!on;srcSched();persist();} /* v0.7.1 */
+function srcVisible(p){const off=srcOff(p),codes=srcCodes(p),per={},hx=srcHasX(p);codes.forEach(c=>per[c]=0);if(hx)per[SRCX]=0;
+  const vis=L=>(L||[]).filter(x=>{const xh=srcXHid(p,x);(x&&Array.isArray(x.src)?x.src:[]).forEach(c=>{if(c in per&&(c===SRCX||!xh))per[c]++;});return srcOn(p,x);}).length,
+    nx=L=>hx?(L||[]).filter(x=>srcIsX(p,x)).length:0;
+  return {q:vis(p.questions),c:vis(p.cards),g:vis(p.guides),d:vis(p.drugs),per,total:codes.length,off:codes.filter(c=>off.has(c)).length,on:codes.filter(c=>!off.has(c)).length,
+    hx,xon:srcXOn(p),xq:nx(p.questions),xc:nx(p.cards),xg:nx(p.guides),xd:nx(p.drugs)};}
 function srcPanel(p,sv){const off=srcOff(p),el=document.createElement('div');el.className='srcpanel';
-  el.innerHTML=`<div class="srchdr"><span class="lt">Sources · ${sv.on} of ${sv.total} on</span><button class="minor" type="button" data-allon="1"${sv.off?'':' disabled'}>All on</button></div>`
-   +Object.keys(p.sources).map(c=>`<div class="srcline${off.has(c)?' off':''}"><button class="switch sm${off.has(c)?'':' on'}" type="button" role="switch" aria-checked="${off.has(c)?'false':'true'}" data-c="${encodeURIComponent(c)}" aria-label="${acctEsc(srcName(p,c))}"></button><span class="srclbl">${acctEsc(srcName(p,c))}</span><span class="srcn">${sv.per[c]||0}</span></div>`).join('')
-   +`<div class="srcfoot">Whole pack: ${(p.questions||[]).length} questions · ${(p.cards||[]).length} cards · ${(p.guides||[]).length} guides${(p.drugs||[]).length?' · '+(p.drugs||[]).length+' drugs':''}. An item stays until every source it draws on is off.</div>`;
-  el.querySelectorAll('.switch').forEach(b=>b.onclick=()=>{const c=decodeURIComponent(b.dataset.c);off.has(c)?off.delete(c):off.add(c);setSrcOff(p,off);renderHome();});
+  const wq=(p.questions||[]).length-sv.xq,wc=(p.cards||[]).length-sv.xc,wg=(p.guides||[]).length-sv.xg,wd=(p.drugs||[]).length-sv.xd,nX=sv.xq+sv.xc+sv.xg+sv.xd;
+  el.innerHTML=`<div class="srchdr"><span class="lt">Sources${sv.total?` · ${sv.on} of ${sv.total} on`:''}</span><button class="minor" type="button" data-allon="1"${sv.off?'':' disabled'}>All on</button></div>`
+   +srcCodes(p).map(c=>`<div class="srcline${off.has(c)?' off':''}"><button class="switch sm${off.has(c)?'':' on'}" type="button" role="switch" aria-checked="${off.has(c)?'false':'true'}" data-c="${encodeURIComponent(c)}" aria-label="${acctEsc(srcName(p,c))}"></button><span class="srclbl">${acctEsc(srcName(p,c))}</span><span class="srcn">${sv.per[c]||0}</span></div>`).join('')
+   +(sv.hx?`<div class="srcxhint">Extras: lower-yield items and cards that repeat a question. Off by default.</div><div class="srcline srcx${sv.xon?'':' off'}"><button class="switch sm${sv.xon?' on':''}" type="button" role="switch" aria-checked="${sv.xon?'true':'false'}" data-x="1" aria-label="${acctEsc(srcName(p,SRCX))}"></button><span class="srclbl">${acctEsc(srcName(p,SRCX))}</span><span class="srcn">${sv.per[SRCX]||0}</span></div>`:'') /* v0.7.1 */
+   +`<div class="srcfoot">Whole pack: ${wq} questions · ${wc} cards · ${wg} guides${wd?' · '+wd+' drugs':''}${nX?` · +${nX} extras (${sv.xon?'on':'off'})`:''}. An item stays until every source it draws on is off.</div>`;
+  el.querySelectorAll('.switch[data-c]').forEach(b=>b.onclick=()=>{const c=decodeURIComponent(b.dataset.c);off.has(c)?off.delete(c):off.add(c);setSrcOff(p,off);renderHome();});
+  const xb=el.querySelector('.switch[data-x]');if(xb)xb.onclick=()=>{setSrcX(p,!srcXOn(p));renderHome();};
   el.querySelector('[data-allon]').onclick=()=>{setSrcOff(p,[]);renderHome();};return el;}
 function srcHTML(x){const p=packs.find(q=>q.id===x._pack);if(!p||!p.sources||!Array.isArray(x.src)||!x.src.length)return '';
-  return `<div class="srcline2"><span class="gt">Sources</span>${x.src.map(c=>`<button type="button" class="srcchip" title="${acctEsc(srcName(p,c))}" onclick="toast(this.title)">${acctEsc(c)}</button>`).join('')}</div>`;}
-function hiddenSections(g){const p=packs.find(x=>x.id===g._pack);if(!p||!p.sources)return {hidden:0,codes:[]};const off=srcOff(p);if(!off.size)return {hidden:0,codes:[]};
-  let hidden=0;const gone=new Set();String(g.html||'').replace(/<h[1-6][^>]*\sdata-src="([^"]*)"/gi,(m,v)=>{const codes=v.split(/[\s,]+/).filter(Boolean);if(codes.length&&codes.every(c=>off.has(c))){hidden++;codes.forEach(c=>gone.add(c));}return m;});
+  return `<div class="srcline2"><span class="gt">Sources</span>${x.src.map(c=>`<button type="button" class="srcchip" title="${acctEsc(srcName(p,c))}" onclick="toast(this.title)">${acctEsc(c===SRCX&&srcHasX(p)?srcName(p,c):c)}</button>`).join('')}</div>`;} /* v0.7.1: an extra's chip reads its label */
+function hiddenSections(g){const p=packs.find(x=>x.id===g._pack);if(!p||!p.sources)return {hidden:0,codes:[]};const off=srcOff(p);if(!off.size&&!(srcHasX(p)&&!srcXOn(p)))return {hidden:0,codes:[]};
+  let hidden=0;const gone=new Set();String(g.html||'').replace(/<h[1-6][^>]*\sdata-src="([^"]*)"/gi,(m,v)=>{const codes=v.split(/[\s,]+/).filter(Boolean);if(codes.length&&!srcCodesOn(p,codes)){hidden++;codes.forEach(c=>gone.add(c));}return m;});
   return {hidden,codes:[...gone]};}
-function hideOffSections(d,g){const p=packs.find(x=>x.id===g._pack);if(!p||!p.sources)return;const off=srcOff(p);if(!off.size)return;let n=0;const gone=new Set();
-  [...d.querySelectorAll('h1[data-src],h2[data-src],h3[data-src],h4[data-src]')].forEach(h=>{const codes=String(h.getAttribute('data-src')||'').split(/[\s,]+/).filter(Boolean);if(!codes.length||codes.some(c=>!off.has(c)))return;
+function hideOffSections(d,g){const p=packs.find(x=>x.id===g._pack);if(!p||!p.sources)return;const off=srcOff(p);if(!off.size&&!(srcHasX(p)&&!srcXOn(p)))return;let n=0;const gone=new Set();
+  [...d.querySelectorAll('h1[data-src],h2[data-src],h3[data-src],h4[data-src]')].forEach(h=>{const codes=String(h.getAttribute('data-src')||'').split(/[\s,]+/).filter(Boolean);if(!codes.length||srcCodesOn(p,codes))return;
     const lv=+h.tagName[1];let el=h;while(el){const nx=el.nextElementSibling;el.style.display='none';el=nx;if(!el||(/^H[1-6]$/.test(el.tagName)&&+el.tagName[1]<=lv))break;}n++;codes.forEach(c=>gone.add(c));});
   if(!n)return;const root=d.body||d.documentElement,note=d.createElement('div');note.setAttribute('data-suite-note','');
   note.style.cssText='font:13px/1.45 system-ui,sans-serif;opacity:.7;border-left:3px solid currentColor;padding:4px 10px;margin:0 0 16px';
@@ -2704,6 +2731,7 @@ function makeStub(p,mp){const st={id:p.id,stub:1,questions:[],cards:[],guides:[]
   if(!st.pack)st.pack=(mp&&mp.label)||p.id;
   const real=Array.isArray(p.questions)||Array.isArray(p.cards); /* a pack; otherwise a pack-list entry (v0.6.2: counts came out 0) */
   st.nq=p.stub?p.nq:real?(p.questions||[]).length:undefined;st.nc=p.stub?p.nc:real?(p.cards||[]).length:undefined;st.ng=p.stub?p.ng:real?(p.guides||[]).length:undefined;
+  if(p.stub){if(p.nqx)st.nqx=p.nqx;if(p.ncx)st.ncx=p.ncx;}else if(real&&srcHasX(p)){st.nqx=(p.questions||[]).filter(x=>srcIsX(p,x)).length;st.ncx=(p.cards||[]).filter(x=>srcIsX(p,x)).length;} /* v0.7.1: extras in the counts */
   if(mp){if(mp.nq!=null&&st.nq==null)st.nq=mp.nq;if(mp.nc!=null&&st.nc==null)st.nc=mp.nc;if(mp.g&&st.ng==null)st.ng=Object.keys(mp.g).length;}
   ['nq','nc','ng'].forEach(k=>{if(st[k]==null)st[k]=0;});return st;}
 /* Download a placeholder's pack (always the latest published version); turnOn = the user tapped download. */
@@ -2728,16 +2756,19 @@ const gKey=(g,i)=>String((g&&(g.file||g.title))||i);
 const plural=(n,w)=>n+' '+w+(n===1?'':'s');
 function newsText(d){const a=[];if(d.q>0)a.push(plural(d.q,'new question'));if(d.c>0)a.push(plural(d.c,'new card'));if(d.ga>0)a.push(plural(d.ga,'new guide'));
   if(d.gu>0)a.push(d.gu+(d.gu===1?' guide':' guides')+' updated');if(d.qr>0)a.push(plural(d.qr,'question')+' removed');if(d.cr>0)a.push(plural(d.cr,'card')+' removed');
-  if(d.gr>0)a.push(plural(d.gr,'guide')+' removed');return a.join(', ');}
+  if(d.gr>0)a.push(plural(d.gr,'guide')+' removed');if(d.x>0)a.push(plural(d.x,'item')+' moved to Extras');return a.join(', ');} /* v0.7.1 */
 /* Exact difference between the copy this device had and the new one. Edited cards/questions aren't counted. */
-function packDiff(o,n){const ids=L=>new Set((L||[]).map(x=>x&&x.id)),oq=ids(o.questions),nq=ids(n.questions),oc=ids(o.cards),nc=ids(n.cards);
+function packDiff(o,n){const ids=(p,L)=>new Set((L||[]).filter(x=>!srcXHid(p,x)).map(x=>x&&x.id)),oq=ids(o,o.questions),nq=ids(n,n.questions),oc=ids(o,o.cards),nc=ids(n,n.cards); /* v0.7.1: hidden extras aren't news */
   const og=new Map((o.guides||[]).map((g,i)=>[gKey(g,i),guideFp(g)])),ng=new Map((n.guides||[]).map((g,i)=>[gKey(g,i),guideFp(g)]));
   const cnt=(a,b)=>[...a].filter(x=>!b.has(x)).length;
   let ga=[...ng.keys()].filter(k=>!og.has(k)),gr=[...og.keys()].filter(k=>!ng.has(k)),gu=[...ng.keys()].filter(k=>og.has(k)&&og.get(k)!==ng.get(k)).length;
   /* v0.6.6: a renumbered guide (same title stem, new file) is updated or unchanged, not removed + added */
   const gStem=g=>guideMeta(g).label.toLowerCase().replace(/^\s*0*\d+\s*[-–—:·.]?\s*/,'').replace(/\s+/g,' ').trim(),oS=new Map((o.guides||[]).map((g,i)=>[gKey(g,i),gStem(g)])),nS=new Map((n.guides||[]).map((g,i)=>[gKey(g,i),gStem(g)]));
   gr=gr.filter(k=>{const st=oS.get(k),j=st?ga.findIndex(a=>nS.get(a)===st):-1;if(j<0)return true;const a=ga.splice(j,1)[0];if(og.get(k)!==ng.get(a))gu++;return false;});
-  return {q:cnt(nq,oq),qr:cnt(oq,nq),c:cnt(nc,oc),cr:cnt(oc,nc),ga:ga.length,gr:gr.length,gu};}
+  /* v0.7.1: an item still in the pack but now a hidden extra was moved, not removed */
+  const all=L=>new Set((L||[]).map(x=>x&&x.id)),aq=all(n.questions),ac=all(n.cards),gone=(a,b,al)=>[...a].filter(x=>!b.has(x)&&!al.has(x)).length,
+    x=[...oq].filter(i=>!nq.has(i)&&aq.has(i)).length+[...oc].filter(i=>!nc.has(i)&&ac.has(i)).length;
+  return {q:cnt(nq,oq),qr:gone(oq,nq,aq),c:cnt(nc,oc),cr:gone(oc,nc,ac),ga:ga.length,gr:gr.length,gu,x};}
 /* Preview of a waiting update from the pack list (counts + guide fingerprints) — no download. */
 function updatePreview(p,mp){if(!mp||mp.nq==null)return '';const og=new Map((p.guides||[]).map((g,i)=>[gKey(g,i),guideFp(g)])),ng=mp.g||{},a=[];
   const dq=mp.nq-(p.questions||[]).length,dc=mp.nc-(p.cards||[]).length;if(dq>0)a.push('+'+plural(dq,'question'));if(dc>0)a.push('+'+plural(dc,'card'));
@@ -2944,7 +2975,7 @@ function readFiles(files){
     if(++done===arr.length){await persist();renderHome();if(reports.length)showPackErrors(reports);}
   };r.readAsText(f);});
 }
-function removePack(id){confirmDialog('Remove this pack? Your review progress is kept and will reapply if you reload it.',{confirmText:'Remove',danger:true},()=>{packs=packs.filter(p=>p.id!==id);packGone[id]=Date.now();if(settings['srcoff:'+id])settings['srcoff:'+id]=[]; /* v0.6.6 */ /* v0.4.11: explicit — a pack merely missing on a device is never a removal */persist().then(renderHome);});}
+function removePack(id){confirmDialog('Remove this pack? Your review progress is kept and will reapply if you reload it.',{confirmText:'Remove',danger:true},()=>{packs=packs.filter(p=>p.id!==id);packGone[id]=Date.now();if(settings['srcoff:'+id])settings['srcoff:'+id]=[]; /* v0.6.6 */if(settings['srcx:'+id])settings['srcx:'+id]=false; /* v0.7.1 */ /* v0.4.11: explicit — a pack merely missing on a device is never a removal */persist().then(renderHome);});}
 
 /* ===== NAV ===== */
 function currentSection(){const s=document.querySelector('section.on');return s?s.id:'home';}
@@ -3036,10 +3067,10 @@ function libRow(p){const on=p.enabled!==false;const upd=packUpdate(p),stub=!!p.s
   const vtag=ver?` · v${acctEsc(String(ver))}`:''; /* v0.5.3 */
   const pv=upd?updatePreview(p,upd):'',nw=packNews()[p.id];
   const updtag=upd?` · <span class="updnote">update to v${upd.version}${pv?' ('+acctEsc(pv)+')':''}</span>`:(nw&&nw.text&&newsShown.has(p.id)?` · <span class="newsnote">${acctEsc(nw.text)}</span>`:'');
-  const nq=stub?(p.nq||0):p.questions.length,nc=stub?(p.nc||0):p.cards.length,sttag=stub?(on?' · switched on elsewhere — tap to download':' · offloaded') /* v0.6.8: matches the Offload button */:'';
-  const sv=(!stub&&on&&p.sources&&typeof p.sources==='object')?srcVisible(p):null; /* v0.6.6: what the source switches leave visible */
+  const xoff=!srcXOn(p),nq=stub?Math.max(0,(p.nq||0)-(xoff&&p.nqx||0)):p.questions.length,nc=stub?Math.max(0,(p.nc||0)-(xoff&&p.ncx||0)):p.cards.length,sttag=stub?(on?' · switched on elsewhere — tap to download':' · offloaded') /* v0.6.8: matches the Offload button */:'';
+  const sv0=(!stub&&p.sources&&typeof p.sources==='object')?srcVisible(p):null,sv=on?sv0:null; /* v0.6.6: what the source switches leave visible; v0.7.1: a switched-off pack's counts too */
   const srcline=sv?`<div class="srcrow"><button type="button" class="srcbtn${srcOpen.has(p.id)?' on':''}" aria-expanded="${srcOpen.has(p.id)?'true':'false'}">${sv.off?sv.on+' of '+sv.total+' sources':'Sources'} ${srcOpen.has(p.id)?'▴':'▾'}</button></div>`:'';
-  const info=document.createElement('div');info.innerHTML=`<div class="pn">${p.pack}</div><div class="pm">${sv?sv.q:nq} questions · ${sv?sv.c:nc} cards${sv&&ng?` · ${sv.g} guides`:gtag}${vtag}${stub?sttag:updtag}</div>${srcline}`;
+  const info=document.createElement('div');info.innerHTML=`<div class="pn">${p.pack}</div><div class="pm">${sv0?sv0.q:nq} questions · ${sv0?sv0.c:nc} cards${sv0&&ng?` · ${sv0.g} guides`:gtag}${vtag}${stub?sttag:updtag}</div>${srcline}`;
   const sl=info.querySelector('.srcbtn');if(sl)sl.onclick=()=>{srcOpen.has(p.id)?srcOpen.delete(p.id):srcOpen.add(p.id);renderHome();};
   if(stub){const dl=document.createElement('button');dl.className='dlbtn';dl.type='button';dl.setAttribute('aria-label','Download '+(p.pack||'pack'));dl.title='Download and switch on';
     dl.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18.5h9.8a4.2 4.2 0 0 0 .6-8.36A5.8 5.8 0 0 0 6.3 9 4.8 4.8 0 0 0 7 18.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 10.5v6M9.5 14l2.5 2.5 2.5-2.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -3330,7 +3361,7 @@ function pharmEscape(t){return String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':
 function classLabel(cls){if(!cls)return 'Other';const slug=String(cls).replace(/^rx:/,'');if(CLASS_LABELS[slug])return CLASS_LABELS[slug];return slug.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());}
 function drugSlug(id){return 'drug_'+String(id).replace(/[^a-z0-9]+/gi,'_');}
 let pharmReturn='home',pharmQuery='',pharmNavOpen=null,pharmGroups=[];
-function drugCount(){const seen=new Set();activePacks().forEach(p=>(Array.isArray(p.drugs)?p.drugs:[]).forEach(d=>{if(d&&d.id)seen.add(d.id);}));return seen.size;}
+function drugCount(){const seen=new Set();activePacks().forEach(p=>(Array.isArray(p.drugs)?p.drugs:[]).forEach(d=>{if(d&&d.id&&srcOn(p,d))seen.add(d.id);}));return seen.size;} /* v0.7.1: follows the switches */
 function buildDrugIndex(){const byId=new Map();
   activePacks().forEach(p=>{(Array.isArray(p.drugs)?p.drugs:[]).forEach(d=>{if(!d||!d.id||!srcOn(p,d))return; /* v0.6.6 */
     let e=byId.get(d.id);if(!e){e={id:d.id,name:d.name||d.id.replace(/^rx:/,''),cls:d.class||'',facets:{}};byId.set(d.id,e);}
