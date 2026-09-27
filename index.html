@@ -1,7 +1,9 @@
 <!--
-  Study Suite  ·  v0.7.1 (beta)
+  Study Suite  ·  v0.7.2 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.7.2: a pack whose only source is Extras (older packs, e.g. MSK) shows just the Extras switch: no "All on"
+  button and no "every source it draws on" footer line, since there are no normal sources to switch (srcPanel).
   Changelog v0.7.1: EXTRAS — a reserved source code "EXTRA" (SRCX). A pack marks lower-yield items and cards that repeat a
   question by adding "EXTRA" to their src (beside their real codes) and lists "EXTRA": "<label>" in `sources`. Extras are OFF
   unless switched on per pack: settings['srcx:'+packId] === true (absent = off; syncs and merges per key like any setting;
@@ -1591,7 +1593,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.7.1';
+const APP_VERSION='0.7.2';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1938,13 +1940,13 @@ function srcVisible(p){const off=srcOff(p),codes=srcCodes(p),per={},hx=srcHasX(p
     hx,xon:srcXOn(p),xq:nx(p.questions),xc:nx(p.cards),xg:nx(p.guides),xd:nx(p.drugs)};}
 function srcPanel(p,sv){const off=srcOff(p),el=document.createElement('div');el.className='srcpanel';
   const wq=(p.questions||[]).length-sv.xq,wc=(p.cards||[]).length-sv.xc,wg=(p.guides||[]).length-sv.xg,wd=(p.drugs||[]).length-sv.xd,nX=sv.xq+sv.xc+sv.xg+sv.xd;
-  el.innerHTML=`<div class="srchdr"><span class="lt">Sources${sv.total?` · ${sv.on} of ${sv.total} on`:''}</span><button class="minor" type="button" data-allon="1"${sv.off?'':' disabled'}>All on</button></div>`
+  el.innerHTML=`<div class="srchdr"><span class="lt">Sources${sv.total?` · ${sv.on} of ${sv.total} on`:''}</span>${sv.total?`<button class="minor" type="button" data-allon="1"${sv.off?'':' disabled'}>All on</button>`:''}</div>`
    +srcCodes(p).map(c=>`<div class="srcline${off.has(c)?' off':''}"><button class="switch sm${off.has(c)?'':' on'}" type="button" role="switch" aria-checked="${off.has(c)?'false':'true'}" data-c="${encodeURIComponent(c)}" aria-label="${acctEsc(srcName(p,c))}"></button><span class="srclbl">${acctEsc(srcName(p,c))}</span><span class="srcn">${sv.per[c]||0}</span></div>`).join('')
    +(sv.hx?`<div class="srcxhint">Extras: lower-yield items and cards that repeat a question. Off by default.</div><div class="srcline srcx${sv.xon?'':' off'}"><button class="switch sm${sv.xon?' on':''}" type="button" role="switch" aria-checked="${sv.xon?'true':'false'}" data-x="1" aria-label="${acctEsc(srcName(p,SRCX))}"></button><span class="srclbl">${acctEsc(srcName(p,SRCX))}</span><span class="srcn">${sv.per[SRCX]||0}</span></div>`:'') /* v0.7.1 */
-   +`<div class="srcfoot">Whole pack: ${wq} questions · ${wc} cards · ${wg} guides${wd?' · '+wd+' drugs':''}${nX?` · +${nX} extras (${sv.xon?'on':'off'})`:''}. An item stays until every source it draws on is off.</div>`;
+   +`<div class="srcfoot">Whole pack: ${wq} questions · ${wc} cards · ${wg} guides${wd?' · '+wd+' drugs':''}${nX?` · +${nX} extras (${sv.xon?'on':'off'})`:''}.${sv.total?' An item stays until every source it draws on is off.':''}</div>`; /* v0.7.2 */
   el.querySelectorAll('.switch[data-c]').forEach(b=>b.onclick=()=>{const c=decodeURIComponent(b.dataset.c);off.has(c)?off.delete(c):off.add(c);setSrcOff(p,off);renderHome();});
   const xb=el.querySelector('.switch[data-x]');if(xb)xb.onclick=()=>{setSrcX(p,!srcXOn(p));renderHome();};
-  el.querySelector('[data-allon]').onclick=()=>{setSrcOff(p,[]);renderHome();};return el;}
+  const ab=el.querySelector('[data-allon]');if(ab)ab.onclick=()=>{setSrcOff(p,[]);renderHome();};return el;}
 function srcHTML(x){const p=packs.find(q=>q.id===x._pack);if(!p||!p.sources||!Array.isArray(x.src)||!x.src.length)return '';
   return `<div class="srcline2"><span class="gt">Sources</span>${x.src.map(c=>`<button type="button" class="srcchip" title="${acctEsc(srcName(p,c))}" onclick="toast(this.title)">${acctEsc(c===SRCX&&srcHasX(p)?srcName(p,c):c)}</button>`).join('')}</div>`;} /* v0.7.1: an extra's chip reads its label */
 function hiddenSections(g){const p=packs.find(x=>x.id===g._pack);if(!p||!p.sources)return {hidden:0,codes:[]};const off=srcOff(p);if(!off.size&&!(srcHasX(p)&&!srcXOn(p)))return {hidden:0,codes:[]};

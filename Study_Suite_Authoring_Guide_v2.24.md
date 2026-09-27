@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.23 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.24 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.23)
+# Study Suite — Content Authoring Guide (v2.24)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,10 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.23 · **Pairs with:** Study Suite app v0.4.4+ (source switches need v0.6.6+, Extras v0.7.1+), pack `formatVersion` 2.0
+> **Authoring system version:** 2.24 · **Pairs with:** Study Suite app v0.4.4+ (source switches need v0.6.6+, Extras v0.7.1+), pack `formatVersion` 2.0
+> **What changed in guide v2.24:** a pack with no source table of its own can still use Extras: its `sources` may hold
+> only `"EXTRA": "Extras"`, and then only the extra items carry `src` (§2 "Extras"). The §7a validator no longer asks
+> for `src` on every item in that case. No other change.
 > **What changed in guide v2.23:** **size by the material, one item per fact, and Extras.** §3's "targets are floors"
 > line is gone: a pack is as large as the week's *examinable* material, and each fact gets the number of items its
 > emphasis earns — usually one question and at most one card, more only for a fact the course stresses repeatedly. New
@@ -375,6 +378,8 @@ earn a place in a block exam: peripheral detail, exact figures, historical or ca
 question in another format (§3b). Only questions and cards take `EXTRA`; guides, guide sections and drugs never do.
 An item that should not exist — an exact duplicate, a joke or giveaway option, a disputable key, a wrong fact — is
 removed or rewritten, never parked in Extras.
+A pack built before source tables existed (no real codes) may still use Extras (v2.24): its `sources` is just
+`{"EXTRA": "Extras"}`, only the extra items carry `src: ["EXTRA"]`, and every untagged item stays visible.
 
 ### Question schema (exam / practice) — now with `difficulty`
 
@@ -1086,6 +1091,7 @@ def validate_pack(pack):
     if srcs:
         ds = pack.get("drugs", []) or []
         nosrc = [x.get("id") or x.get("file") for x in qs + cs + gs + ds if not x.get("src")]
+        if set(srcs) == {"EXTRA"}: nosrc = []  # v2.24: a pack without source codes may carry Extras only
         if nosrc: warns.append(f"{len(nosrc)} items/guides/drugs carry no src (first: {nosrc[:3]}) — tag every one (§2)")
         unknown = sorted({c for x in qs + cs + gs + ds for c in (x.get("src") or []) if c not in srcs})
         if unknown: errs.append(f"src codes not in sources: {unknown}")
@@ -1096,7 +1102,7 @@ def validate_pack(pack):
         # §2 / §3b (v2.23): Extras — the reserved code EXTRA marks lower-yield questions and cards.
         if "EXTRA" in srcs:
             xs = [x for x in qs + cs if "EXTRA" in (x.get("src") or [])]
-            only = [x.get("id") for x in xs if not [c for c in x.get("src") if c != "EXTRA"]]
+            only = [] if set(srcs) == {"EXTRA"} else [x.get("id") for x in xs if not [c for c in x.get("src") if c != "EXTRA"]]
             if only: warns.append(f"{len(only)} items carry only EXTRA (first: {only[:3]}) — keep their real source codes too (§2)")
             xgd = [x.get("id") or x.get("file") for x in gs + ds if "EXTRA" in (x.get("src") or [])]
             if xgd: warns.append(f"guides/drugs carry EXTRA {xgd[:3]} — Extras are for questions and cards only (§2)")
