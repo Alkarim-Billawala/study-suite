@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.24 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.25 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.24)
+# Study Suite — Content Authoring Guide (v2.25)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,13 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.24 · **Pairs with:** Study Suite app v0.4.4+ (source switches need v0.6.6+, Extras v0.7.1+), pack `formatVersion` 2.0
+> **Authoring system version:** 2.25 · **Pairs with:** Study Suite app v0.4.4+ (source switches need v0.6.6+, Extras v0.7.1+), pack `formatVersion` 2.0
+> **What changed in guide v2.25:** **option length is not a cue.** A student's feedback (2026-09-30): "for a lot of the
+> questions, the longest answer is the right one" — and it was, in 70–79% of the core items of four packs (chance is
+> 25%). New **§3b rule 8**: distractors carry the key's specificity and length, an over-long key is trimmed, and across a
+> pack the key is the single longest option in about a quarter of core items — never ≥ 1.5× its longest distractor, and
+> not never-longest either. §7 checks it; the §7a validator warns on the pack share and lists lopsided items. No schema
+> change.
 > **What changed in guide v2.24:** a pack with no source table of its own can still use Extras: its `sources` may hold
 > only `"EXTRA": "Extras"`, and then only the extra items carry `src` (§2 "Extras"). The §7a validator no longer asks
 > for `src` on every item in that case. No other change.
@@ -506,7 +512,7 @@ above" are anchored and fine, but never use position-*referencing* options like 
 
 ---
 
-## 3b. One item per fact — curation rules (v2.23)
+## 3b. One item per fact — curation rules (v2.23; rule 8 added v2.25)
 
 These rules come from an audit of four week packs (2026-09-27) that had grown to two to five times the size of
 earlier weeks. Their questions were mostly sound; about two thirds of their cards were not. Apply the rules while
@@ -533,6 +539,14 @@ writing, and check against them before shipping:
    non-standard claim as the only right answer.
 7. **Updates retire as well as add.** When new material arrives, check new items against the existing ones and move or
    remove the weaker copy instead of appending a second.
+8. **Option length is not a cue (v2.25).** The right answer tends to be written with its qualifier ("…, plus at least one
+   month of worry about further attacks") while the wrong ones are bare labels — so the longest option is the key, and a
+   student who notices scores without knowing the material. Write every distractor at the key's level of specificity and
+   length: give it its own qualifier, mechanism or consequence (plausible-sounding, still wrong per the explanation), and
+   trim a key that over-explains (the explanation carries the detail). Vary which option is longest. Across a pack the key
+   is the single longest option in about a quarter of core items — chance — never ≥ 1.5× its longest distractor, and not
+   never-longest either, which is a cue the other way. Extend distractors rather than replacing them, so the explanation's
+   "Not the others" stays true; the key's index, the concept and the explanation do not change.
 
 ---
 
@@ -895,7 +909,8 @@ per fact weighted by emphasis, no mirror cards, no repeats across guides, lower-
 spread, with **hard** items testing contraindications, emergencies, or multi-step reasoning (not just
 longer stems).
 
-**Options & card mix:** **no position-REFERENCING options** anywhere (`"A and B"`, `"both of the above"`,
+**Options & card mix:** **option length is not a cue (§3b.8):** distractors as specific and as long as the key, the key
+the single longest option in ~25% of core items and never ≥ 1.5× its longest distractor; **no position-REFERENCING options** anywhere (`"A and B"`, `"both of the above"`,
 `"the first option"`) — options are shuffled at render (§2). ("All/None of the above" are fine — the app
 anchors them.) Card types are **varied, not cloze-heavy** (cloze ≲ 35% of the deck); **every `multi` card
 has ≥1 false option** (never all-correct, never "all-but-the-last").
@@ -1114,6 +1129,19 @@ def validate_pack(pack):
     diffs = Counter(q.get("difficulty") for q in qs)
     print(f"questions={len(qs)} cards={len(cs)} guides={len(gs)} "
           f"difficulty={dict(diffs)} cardtypes={dict(types)}")
+    # §3b.8 (v2.25): option length must not be a cue. Core (non-EXTRA) questions + mcq cards: the key is the single longest
+    # option in about a quarter of items (chance); flag a share above 40% and any key ≥ 1.5× its longest distractor.
+    core = [x for x in qs + [c for c in cs if c.get("type") == "mcq"] if "EXTRA" not in (x.get("src") or [])]
+    longest, lop = 0, []
+    for x in core:
+        L = [len(o) for o in x.get("options", [])]; k = x.get("correct", -1)
+        if not (isinstance(k, int) and 0 <= k < len(L)) or len(L) < 2: continue
+        rest = max(v for i, v in enumerate(L) if i != k)
+        if L[k] > rest: longest += 1
+        if L[k] >= 1.5 * rest: lop.append(x.get("id"))
+    if core and longest / len(core) > 0.40:
+        warns.append(f"key is the longest option in {round(100 * longest / len(core))}% of {len(core)} core items (chance ~25%) — rebalance the options (§3b.8)")
+    if lop: warns.append(f"{len(lop)} lopsided item(s), key ≥ 1.5× its longest distractor (first: {lop[:3]}) — give the distractors the key's length (§3b.8)")
     return errs, warns
 
 # usage:
