@@ -1,7 +1,13 @@
 <!--
-  Study Suite  ·  v0.7.3 (beta)
+  Study Suite  ·  v0.7.4 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.7.4: Topic Guides pager. A nav (#guidePager) under the guide frame, outside the iframe: Previous on the
+  left, Next on the right (each with the neighbouring guide's title), page numbers for the current pack's guides in the
+  middle (1 … c-2..c+2 … N; ±1 under 760px) with "Week NN · n of N"; on phones (≤560px) arrows + short word at the edges
+  and an "n / N" counter, no numbers. Order = organizeGuides(); Previous/Next cross into the neighbouring pack at its
+  ends and say so ("Week 44 · Next →"). Frame height shortened so the pager stays on screen (195→251px desktop,
+  168→222px phone). Phone header: "Fit width" reads "Fit" (.prn-d/.prn-m swap). Print/Save is "⤓ Download" on wider screens and the arrow alone on phones.
   Changelog v0.7.3: a pack version's release note. The packs manifest may carry a plain-text `note` on an entry
   (Pack Tools/pack_notes.json → encrypt_deploy.py, 2026-09-30). recordPackNews() keeps it with the update's what's-new
   (localStorage suite_packnews_v1, this device only); the home what's-new card shows it under the counts, and the library
@@ -1064,13 +1070,41 @@ section{display:none}section.on{display:block}
 .revitem .gn{font-family:var(--font-mono);font-size:10px;color:var(--ink-soft);background:var(--paper2);border-radius:9px;padding:1px 6px;flex:0 0 auto}
 .revitem.on .gn{color:var(--paper);background:rgba(255,255,255,.18)}
 .revmain{width:100%}
-.guideframe{width:100%;height:calc(100vh - 195px);min-height:420px;border:1.5px solid var(--line);border-radius:10px;background:#fff}
+.guideframe{width:100%;height:calc(100vh - 251px);min-height:420px;border:1.5px solid var(--line);border-radius:10px;background:#fff}
 .sizer{margin-left:auto;display:flex;align-items:center;gap:6px}
 .szgrp{display:flex;align-items:center;gap:6px}
 .sizer .pct{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);min-width:42px;text-align:center}
 .backbtn .bka{font-size:16px}
 .prn-m{display:none}
 .revempty{color:var(--ink-soft);font-size:15px;border:1px dashed var(--line);border-radius:8px;padding:22px;text-align:center}
+/* Topic Guides pager (v0.7.4): Previous / page numbers / Next under the guide frame */
+.gpager{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:14px;margin-top:12px}
+.gpager[hidden]{display:none}
+.gp-btn{display:flex;flex-direction:column;gap:3px;min-width:0;max-width:min(300px,100%);background:var(--paper);border:1.5px solid var(--line);color:var(--ink);border-radius:8px;padding:9px 14px;cursor:pointer;font:inherit;text-align:left;transition:border-color .12s,background .12s}
+.gp-btn:hover:not(:disabled){border-color:var(--accent-soft);background:var(--paper2)}
+.gp-btn:disabled{opacity:.35;cursor:default}
+.gp-prev{justify-self:start}
+.gp-next{justify-self:end;text-align:right;align-items:flex-end}
+.gp-dir{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);white-space:nowrap}
+.gp-dir .wkx{color:var(--ink-soft);letter-spacing:.06em}
+.gp-ttl{font-size:14px;line-height:1.25;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.gp-mid{display:flex;flex-direction:column;align-items:center;gap:6px}
+.gp-pages{display:flex;align-items:center;gap:4px}
+.gp-pg{font-family:var(--font-mono);font-size:12px;min-width:30px;height:30px;padding:0 6px;border-radius:6px;border:1px solid transparent;background:none;color:var(--ink-soft);cursor:pointer}
+.gp-pg:hover{border-color:var(--accent-soft)}
+.gp-pg.on{background:var(--ink);color:var(--paper);border-color:var(--ink);cursor:default}
+.gp-gap{font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);padding:0 3px;opacity:.7}
+.gp-where{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap}
+.gp-count{display:none;font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);white-space:nowrap}
+#printBtn{display:inline-flex;align-items:center;gap:6px}.dlico svg{display:block}
+@media(max-width:760px){.gp-btn{max-width:min(200px,100%)}}
+@media(max-width:560px){
+  .gpager{gap:8px;margin-top:10px}
+  .gp-btn{padding:8px 12px;flex-direction:row;align-items:center}
+  .gp-ttl,.gp-dir .wkx,.gp-pages,.gp-where{display:none}
+  .gp-dir{font-size:11px}
+  .gp-count{display:block}
+}
 /* Topic Guides viewer — mobile: arrow-only Back, smaller title, 2-row control cluster, full-bleed guide */
 @media(max-width:560px){
   .revbar{gap:8px}
@@ -1082,7 +1116,7 @@ section{display:none}section.on{display:block}
   .sizer{flex-direction:column;align-items:flex-end;gap:5px}
   .szgrp{gap:5px}
   .revmain{margin-left:-22px;margin-right:-22px}
-  .guideframe{height:calc(100dvh - 168px);min-height:340px;border-radius:0;border-left:none;border-right:none}
+  .guideframe{height:calc(100dvh - 222px);min-height:340px;border-radius:0;border-left:none;border-right:none}
   .prn-d{display:none}
   .prn-m{display:inline}
 }
@@ -1416,8 +1450,8 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
           <button class="minor" id="zoomIn" title="Larger text">+</button>
         </div>
         <div class="szgrp">
-          <button class="minor" id="fitBtn" title="Stretch the guide to the full width">Fit width</button>
-          <button class="minor" id="printBtn" title="Print or save this guide as PDF"><span class="prn-d">⎙ Print</span><span class="prn-m">⎙ Save</span></button>
+          <button class="minor" id="fitBtn" title="Stretch the guide to the full width"><span class="prn-d">Fit width</span><span class="prn-m">Fit</span></button>
+          <button class="minor" id="printBtn" title="Print or save this guide as PDF" aria-label="Print or save this guide as PDF"><span class="dlico"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="M7 10.5l5 5 5-5"/><path d="M5 20h14"/></svg></span><span class="prn-d">Download</span></button>
         </div>
       </div>
     </div>
@@ -1425,6 +1459,11 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <nav class="revnav closed" id="guideList" aria-label="Topic guides"></nav>
       <div class="revmain" id="guideHost"></div>
     </div>
+    <nav class="gpager" id="guidePager" aria-label="Previous and next guide" hidden>
+      <button class="gp-btn gp-prev" id="gpPrev" type="button"><span class="gp-dir" id="gpPrevDir"></span><span class="gp-ttl" id="gpPrevTtl"></span></button>
+      <div class="gp-mid"><div class="gp-pages" id="gpPages"></div><div class="gp-where" id="gpWhere"></div><div class="gp-count" id="gpCount"></div></div>
+      <button class="gp-btn gp-next" id="gpNext" type="button"><span class="gp-dir" id="gpNextDir"></span><span class="gp-ttl" id="gpNextTtl"></span></button>
+    </nav>
   </section>
 
   <section id="pharm">
@@ -1598,7 +1637,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.7.3';
+const APP_VERSION='0.7.4';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3337,7 +3376,7 @@ function toggleRevNav(){revNavOpen=!revNavOpen;applyRevNav();}
 let guideZoom=1,guideFit=false;
 function applyGuideView(){
   $('zoomPct').textContent=Math.round(guideZoom*100)+'%';
-  $('fitBtn').textContent=guideFit?'✓ Fit width':'Fit width';
+  {const ck=guideFit?'✓ ':'';$('fitBtn').innerHTML='<span class="prn-d">'+ck+'Fit width</span><span class="prn-m">'+ck+'Fit</span>';}
   const fr=document.querySelector('.guideframe');if(!fr)return;
   try{
     const d=fr.contentDocument;if(!d||!d.documentElement)return;
@@ -3496,7 +3535,34 @@ function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();
   }catch(e){}
   applyGuideView();};
   fr.srcdoc=g.html||'<p style=\"font-family:sans-serif;padding:24px\">This guide has no embedded content.</p>';
-  host.appendChild(fr);}
+  host.appendChild(fr);renderGuidePager();}
+/* v0.7.4 — pager under the guide: Previous / page numbers (current pack) / Next; crosses packs at their ends */
+function grpShort(l){if(!l)return '';const m=String(l).match(/\bWeeks?\s*\d+(?:\s*[-–]\s*\d+)?/i);return m?m[0]:String(l).split(/\s[—–-]\s/)[0];}
+function pagerPages(n,c,sib){const s=new Set([1,n]);for(let i=c-sib;i<=c+sib;i++)if(i>=1&&i<=n)s.add(i);
+  const a=[...s].sort((x,y)=>x-y),out=[];a.forEach((p,i)=>{if(i){const gap=p-a[i-1];if(gap===2)out.push(p-1);else if(gap>2)out.push('…');}out.push(p);});return out;}
+function gotoGuideFromPager(g){revNavOpen=false;loadGuide(g,null);const r=$('reviewer');if(r&&r.getBoundingClientRect().top<0)r.scrollIntoView({block:'start'});}
+function renderGuidePager(){const pg=$('guidePager');if(!pg)return;
+  const flat=[];organizeGuides().forEach(grp=>grp.items.forEach((it,i)=>flat.push({it,n:i+1,of:grp.items.length,wk:grpShort(grp.label)})));
+  const ci=flat.findIndex(x=>guideKey(x.it.g)===curGuideKey);
+  if(ci<0||flat.length<2){pg.hidden=true;return;}pg.hidden=false;
+  const cur=flat[ci],phone=window.innerWidth<=560;
+  const side=(o,isPrev)=>{const b=$(isPrev?'gpPrev':'gpNext'),d=$(isPrev?'gpPrevDir':'gpNextDir'),t=$(isPrev?'gpPrevTtl':'gpNextTtl');
+    const word=phone?(isPrev?'Prev':'Next'):(isPrev?'Previous':'Next');
+    b.disabled=!o;b.onclick=o?()=>gotoGuideFromPager(o.it.g):null;
+    if(!o){d.textContent=isPrev?'← '+word:word+' →';t.textContent=isPrev?'First guide':'Last guide';b.removeAttribute('title');return;}
+    d.textContent='';const cross=o.wk&&o.wk!==cur.wk;const wx=document.createElement('span');wx.className='wkx';
+    if(isPrev){d.append('← '+word);if(cross){wx.textContent=' · '+o.wk;d.append(wx);}}
+    else{if(cross){wx.textContent=o.wk+' · ';d.append(wx);}d.append(word+' →');}
+    t.textContent=o.it.label;b.title=(o.wk?o.wk+' · ':'')+o.it.label;};
+  side(flat[ci-1],true);side(flat[ci+1],false);
+  const pages=$('gpPages');pages.innerHTML='';
+  pagerPages(cur.of,cur.n,window.innerWidth<760?1:2).forEach(x=>{
+    if(x==='…'){const s=document.createElement('span');s.className='gp-gap';s.textContent='…';pages.appendChild(s);return;}
+    const tgt=flat[ci-cur.n+x];const b=document.createElement('button');b.type='button';b.className='gp-pg'+(x===cur.n?' on':'');b.textContent=x;b.title=tgt.it.label;
+    if(x===cur.n)b.setAttribute('aria-current','page');else b.onclick=()=>gotoGuideFromPager(tgt.it.g);pages.appendChild(b);});
+  $('gpWhere').textContent=(cur.wk?cur.wk+' · ':'')+cur.n+' of '+cur.of;
+  $('gpCount').textContent=cur.n+' / '+cur.of;}
+window.addEventListener('resize',()=>{const pg=$('guidePager');if(pg&&!pg.hidden)renderGuidePager();});
 function openGuide(ref,section){const g=findGuide(ref);if(!g){if(ref&&!/^\s*(javascript|data|vbscript):/i.test(String(ref))){window.open(String(ref).split('#')[0],'_blank');}return;}
   reviewerReturn=currentSection();const anchor=String(ref).includes('#')?String(ref).split('#')[1]:null;
   revNavOpen=false;setBackLabel();show('reviewer');loadGuide(g,{anchor,section});}
