@@ -1,7 +1,14 @@
 <!--
-  Study Suite  ·  v0.7.5 (beta)
+  Study Suite  ·  v0.7.6 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.7.6: Download in the iPhone/iPad home-screen app. iOS ignores print() in a standalone web app (tested on
+  Alkarim's iPhone 2026-10-01: the iframe's print() and the page's own both return without a dialog, no beforeprint).
+  iosStandalone() (isStandalone() + iPhone/iPad UA, iPadOS = Macintosh with touch) → printBtn opens a copy of the open
+  guide as a blob: URL in a new window, which iOS shows in a Safari view with Share → Print / Save to Files. The copy is
+  the frame's current document (hidden sections stay hidden) minus the app's theme, fit and zoom (so it prints in the
+  guide's own light design), titled with the guide's name, with a one-line "tap Share, then Print" note hidden in print.
+  The previous blob URL is revoked on the next use. Everywhere else the button prints as before.
   Changelog v0.7.5: Topic Guides resume. settings.guidepos = {gp:1, pack, key, label, sec, head, frac, at}: the last guide
   read and where in it — section = index + text of the visible h1–h3 above the top of the view, frac = how far into that
   section (width- and zoom-independent across devices). Saved on every guide open (synced at once) and 1.5 s after
@@ -1656,7 +1663,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.7.5';
+const APP_VERSION='0.7.6';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3622,6 +3629,21 @@ function resumeTarget(){const p=settings.guidepos;if(!p||!p.key)return null;cons
   const stem=x=>String(x||'').replace(/^\s*\d+\s*[-–—:·.]?\s*/,'').trim().toLowerCase();
   return flat.find(x=>x.it.g._pack===p.pack&&guideKey(x.it.g)===p.key)
     ||(p.label?flat.find(x=>x.it.g._pack===p.pack&&stem(x.it.label)===stem(p.label)):null)||null;}
+/* v0.7.6 — iOS home-screen apps ignore print(). There, Download opens a copy of the guide in a Safari view (blob: URL),
+   whose Share button has Print and Save to Files. Everywhere else the button prints as before. */
+function iosStandalone(){const ua=navigator.userAgent||'';return isStandalone()&&(/iPhone|iPad|iPod/.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1));}
+let guideCopyUrl=null;
+function openGuideCopy(fr){try{const d=fr.contentDocument;if(!d||!d.documentElement)return false;
+  const root=d.documentElement.cloneNode(true);root.style.zoom='';
+  root.querySelectorAll('#ssTheme,#ssFit').forEach(x=>x.remove());
+  const head=root.querySelector('head')||root,body=root.querySelector('body')||root;
+  let t=root.querySelector('title');if(!t){t=d.createElement('title');head.appendChild(t);}
+  const g=(organizeGuides().flatMap(x=>x.items)).find(x=>guideKey(x.g)===curGuideKey);t.textContent=g?g.title:'Topic guide';
+  const st=d.createElement('style');st.textContent='.ss-sharenote{font:14px/1.4 -apple-system,system-ui,sans-serif;background:#f3efe6;color:#1d1b16;border:1px solid #cfc8b6;border-radius:8px;padding:9px 12px;margin:10px 12px 14px}@media print{.ss-sharenote{display:none!important}}';head.appendChild(st);
+  const note=d.createElement('div');note.className='ss-sharenote';note.textContent='To save this guide as a PDF, tap Share, then Print.';body.insertBefore(note,body.firstChild);
+  if(guideCopyUrl)URL.revokeObjectURL(guideCopyUrl);
+  guideCopyUrl=URL.createObjectURL(new Blob(['<!doctype html>'+root.outerHTML],{type:'text/html'}));
+  return !!window.open(guideCopyUrl,'_blank');}catch(e){return false;}}
 /* A toast with one action button (stays 7 s; a new one replaces it). */
 function toastAct(msg,label,fn,ms){const w=$('toastWrap');if(!w)return;w.querySelectorAll('.toastact').forEach(x=>x.remove()); /* one at a time */
   const t=document.createElement('div');t.className='toast toastact';
@@ -4073,7 +4095,8 @@ $('revTitle').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.
 $('zoomIn').addEventListener('click',()=>{guideZoom=Math.min(2,Math.round((guideZoom+0.1)*10)/10);applyGuideView();saveGuideView();});
 $('zoomOut').addEventListener('click',()=>{guideZoom=Math.max(0.6,Math.round((guideZoom-0.1)*10)/10);applyGuideView();saveGuideView();});
 $('fitBtn').addEventListener('click',()=>{guideFit=!guideFit;applyGuideView();saveGuideView();});
-$('printBtn').addEventListener('click',()=>{const fr=document.querySelector('.guideframe');if(fr&&fr.contentWindow){try{fr.contentWindow.focus();fr.contentWindow.print();}catch(e){window.print();}}else{window.print();}});
+$('printBtn').addEventListener('click',()=>{const fr=document.querySelector('.guideframe');if(fr&&iosStandalone()&&openGuideCopy(fr))return; /* v0.7.6 */
+  if(fr&&fr.contentWindow){try{fr.contentWindow.focus();fr.contentWindow.print();}catch(e){window.print();}}else{window.print();}});
 $('homebtn').addEventListener('click',()=>{if($('quiz').classList.contains('on')||$('study').classList.contains('on')){const keep=$('quiz').classList.contains('on')&&!qTestSubmitted;confirmDialog(keep?(qmode==='test'?'Return home? Your exam is saved — tap Exam to pick up where you left off. The timer pauses until then.':'Return home? Your practice progress is saved — resume it any time from the Practice card.'):'Leave this session and return home?',{confirmText:'Leave'},()=>{clearInterval(qTimerId);savePrac();renderHome();});}else renderHome();});
 $('studyBtn').addEventListener('click',startSession);
 $('browseBtn').addEventListener('click',renderBrowse);
