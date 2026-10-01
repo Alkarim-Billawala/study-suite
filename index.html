@@ -1,7 +1,20 @@
 <!--
-  Study Suite  ·  v0.7.4 (beta)
+  Study Suite  ·  v0.7.5 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.7.5: Topic Guides resume. settings.guidepos = {gp:1, pack, key, label, sec, head, frac, at}: the last guide
+  read and where in it — section = index + text of the visible h1–h3 above the top of the view, frac = how far into that
+  section (width- and zoom-independent across devices). Saved on every guide open (synced at once) and 1.5 s after
+  scrolling stops (Store only; SSSync.changed() at most every 45 s — the hide-sync uploads the rest). It is a setting so
+  older clients carry it through merges; new clients merge it newest-wins (merge3 settings, gp flag). openReviewer:
+  resumeTarget() finds the guide among organizeGuides() (active packs, source switches applied) by pack + key, else pack
+  + title stem (pack updates renumber); found → loadGuide(g,{resume}) + a toast with "Start from the top" (top of that
+  guide); not found → first guide as before, opened with nosave so the saved spot survives a pack/source being off until
+  another guide is read. A saved section that no longer shows (source off, removed) → top of the guide. Home card shows
+  "Continue: …" only when resumeTarget() finds it. Zoom/Fit remembered per device (localStorage suite_guideview_local,
+  never synced). toastAct(): a toast with one button, one at a time. Every toast is now a card in the theme's own
+  colours (--paper, --paper2 on dark/black; --ink text; --line border) instead of inverted colours. .toast-wrap spans the
+  width (16px gutters) instead of left:50% + translate, which capped a toast at half the screen on phones.
   Changelog v0.7.4: Topic Guides pager. A nav (#guidePager) under the guide frame, outside the iframe: Previous on the
   left, Next on the right (each with the neighbouring guide's title), page numbers for the current pack's guides in the
   middle (1 … c-2..c+2 … N; ±1 under 760px) with "Week NN · n of N"; on phones (≤560px) arrows + short word at the edges
@@ -956,9 +969,15 @@ section{display:none}section.on{display:block}
 .confirm-msg{font-size:16px;line-height:1.5;color:var(--ink);margin-bottom:20px}
 .confirm-actions{display:flex;justify-content:flex-end;gap:10px}
 .confirm-actions .btn.danger{background:var(--red)}.confirm-actions .btn.danger:hover{background:var(--accent)}
-.toast-wrap{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
-.toast{background:var(--ink);color:var(--paper);font-family:var(--font-body);font-size:14.5px;line-height:1.4;padding:11px 18px;border-radius:9px;box-shadow:var(--shadow);max-width:90vw;text-align:center;opacity:0;transform:translateY(8px);transition:opacity .2s,transform .2s}
+.toast-wrap{position:fixed;left:16px;right:16px;bottom:26px;z-index:60;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
+.toast{background:var(--paper);color:var(--ink);border:1px solid var(--line);font-family:var(--font-body);font-size:14.5px;line-height:1.4;padding:11px 18px;border-radius:9px;box-shadow:0 10px 30px -12px rgba(20,30,50,.38);max-width:90vw;text-align:center;opacity:0;transform:translateY(8px);transition:opacity .2s,transform .2s}
 .toast.show{opacity:1;transform:translateY(0)}
+/* v0.7.5: toasts are a card in the theme's own colours (was inverted: a dark box on light themes, a bright white one on dark) */
+:root[data-theme="dark"] .toast,:root[data-theme="black"] .toast{background:var(--paper2);box-shadow:0 10px 30px -10px rgba(0,0,0,.8)}
+.toastact{pointer-events:auto;display:flex;align-items:center;gap:14px;text-align:left;width:max-content;max-width:min(92vw,560px);box-sizing:border-box}
+@media(max-width:560px){.toastact{flex-direction:column;align-items:stretch;gap:10px;width:88vw}.toastact button{padding:8px 10px}}
+.toastact button{font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;background:transparent;color:inherit;border:1px solid currentColor;border-radius:5px;padding:6px 10px;cursor:pointer;white-space:nowrap;flex:none}
+.rp-cont{margin-top:4px;font-size:14px;color:var(--accent)}
 .pharmsearch{width:100%;margin:0;padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);font-size:14px;box-sizing:border-box}
 .pharmsearchwrap{position:relative;max-width:560px;margin:12px 0 4px}
 .pharmsearchicon{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--ink-soft);pointer-events:none}
@@ -1637,7 +1656,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.7.4';
+const APP_VERSION='0.7.5';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -2209,7 +2228,7 @@ const SSSync=(()=>{
     if(moved.length)notes.push('an unfinished exam moved to Past exams');
     const out={v:1,app:APP_VERSION,
       sched:mergeMap(b.sched,l.sched,c.sched,newer,notes,'card(s) studied on both'),daily,
-      settings:mergeMap(b.settings,l.settings,c.settings,pick,notes,'setting(s) changed on both'),
+      settings:mergeMap(b.settings,l.settings,c.settings,(x,y)=>(x&&y&&x.gp&&y.gp)?newer(x,y):pick(x,y),notes,'setting(s) changed on both'),
       devices:mergeMap(b.devices,l.devices,c.devices,pick,[],''),
       eac:(()=>{const a=eacNorm(l.eac),b=eacNorm(c.eac);if(!a||!a.unlocked)return b||a||null;if(!b)return a;
         return Object.assign({},b,a,{codes:[...new Set([...a.codes,...b.codes])],tags:[...new Set([...a.tags,...b.tags])],admin:!!(a.admin||b.admin),keys:Object.assign({},b.keys||{},a.keys||{})});})(),
@@ -3091,6 +3110,7 @@ function renderHome(){
   // topic-guides panel — hidden entirely when no active pack bundles guides
   $('revPanel').style.display=nG?'':'none';
   $('revPanelDesc').textContent=`${nG} topic guide${nG===1?'':'s'} bundled in your active packs.`;
+  {const rt=nG?resumeTarget():null;if(rt){const c=document.createElement('div');c.className='rp-cont';c.textContent='Continue: '+(rt.wk?rt.wk+' · ':'')+rt.it.label;$('revPanelDesc').appendChild(c);}} /* v0.7.5 */
   $('openReviewer').disabled=(nG===0);
   // pharmacology panel — shown when any active pack carries drug data
   const nD=drugCount();
@@ -3374,6 +3394,10 @@ function applyRevNav(){
 function toggleRevNav(){revNavOpen=!revNavOpen;applyRevNav();}
 /* — guide zoom / fit-width (applies inside the sandboxed iframe) — */
 let guideZoom=1,guideFit=false;
+/* v0.7.5: zoom / fit width remembered on this device only (never synced — a laptop and an iPad want different sizes) */
+const GVIEW_KEY='suite_guideview_local';
+try{const v=JSON.parse(localStorage.getItem(GVIEW_KEY)||'null');if(v){if(typeof v.z==='number')guideZoom=Math.min(2,Math.max(0.6,v.z));guideFit=!!v.f;}}catch(e){}
+function saveGuideView(){try{localStorage.setItem(GVIEW_KEY,JSON.stringify({z:guideZoom,f:guideFit}));}catch(e){}}
 function applyGuideView(){
   $('zoomPct').textContent=Math.round(guideZoom*100)+'%';
   {const ck=guideFit?'✓ ':'';$('fitBtn').innerHTML='<span class="prn-d">'+ck+'Fit width</span><span class="prn-m">'+ck+'Fit</span>';}
@@ -3402,7 +3426,7 @@ function themeGuideFrame(){
   let st=d.getElementById('ssTheme');if(!st){st=d.createElement('style');st.id='ssTheme';(d.head||d.documentElement).appendChild(st);}
   if(st.textContent!==css)st.textContent=css;
 }
-function openReviewer(){reviewerReturn=currentSection();guideTextCache={};revNavOpen=false;setBackLabel();const org=organizeGuides();renderGuideList();if(org.length){loadGuide(org[0].items[0].g,null);}else{$('guideHost').innerHTML='<div class="revempty">No topic guides are bundled in your active packs. Newer packs embed their guides here; older packs link to <code>Topic_*.html</code> files kept in this folder.</div>';}show('reviewer');}
+function openReviewer(){reviewerReturn=currentSection();guideTextCache={};revNavOpen=false;setBackLabel();const org=organizeGuides();renderGuideList();const rt=resumeTarget();if(rt){loadGuide(rt.it.g,{resume:settings.guidepos});toastAct('Back where you left off: '+(rt.wk?rt.wk+' · ':'')+rt.it.label,'Start from the top',()=>{try{document.querySelector('.guideframe').contentWindow.scrollTo(0,0);}catch(e){}});}else if(org.length){loadGuide(org[0].items[0].g,{nosave:true});}else{$('guideHost').innerHTML='<div class="revempty">No topic guides are bundled in your active packs. Newer packs embed their guides here; older packs link to <code>Topic_*.html</code> files kept in this folder.</div>';}show('reviewer');}
 /* ===== Pharmacology view (Future-Features #15) — cross-week drug index from active packs' drugs[] ===== */
 const CLASS_LABELS={"bcr-abl-tki":"BCR-ABL tyrosine kinase inhibitor","hypomethylating":"Hypomethylating agent","imid":"Immunomodulatory drug (IMiD)","jak-inhibitor":"JAK inhibitor","btk-inhibitor":"BTK inhibitor","bcl2-inhibitor":"BCL-2 inhibitor","anti-cd20":"Anti-CD20 monoclonal antibody","anti-cd38":"Anti-CD38 monoclonal antibody","proteasome-inhibitor":"Proteasome inhibitor","anthracycline":"Anthracycline","vinca-alkaloid":"Vinca alkaloid","alkylating":"Alkylating agent","antitumor-antibiotic":"Antitumour antibiotic","differentiating-agent":"Differentiating agent","urate-oxidase":"Recombinant urate oxidase","xanthine-oxidase-inhibitor":"Xanthine oxidase inhibitor","cytoreductive":"Cytoreductive antimetabolite","growth-factor":"Myeloid growth factor","antipseudomonal-betalactam":"Antipseudomonal \u03b2-lactam","carbapenem":"Carbapenem","glycopeptide":"Glycopeptide","corticosteroid":"Corticosteroid","antiplatelet":"Antiplatelet","heparin":"Unfractionated heparin","lmwh":"Low-molecular-weight heparin","doac-xa":"Direct factor Xa inhibitor (DOAC)","doac-iia":"Direct thrombin inhibitor (DOAC)","vka":"Vitamin K antagonist","p2y12-inhibitor":"P2Y12 inhibitor","gp2b3a-inhibitor":"GP IIb/IIIa inhibitor","antifibrinolytic":"Antifibrinolytic","reversal-agent":"Reversal agent","vasopressin-analog":"Vasopressin analogue","oral-iron":"Oral iron","iv-iron":"Intravenous iron","b-vitamin":"B-vitamin supplement","esa":"Erythropoiesis-stimulating agent","statin":"Statin (HMG-CoA reductase inhibitor)","cholesterol-absorption-inhibitor":"Cholesterol-absorption inhibitor","pcsk9-inhibitor":"PCSK9 inhibitor","glp1-agonist":"GLP-1 receptor agonist","lipase-inhibitor":"Pancreatic lipase inhibitor","antipyretic":"Antipyretic / analgesic","nsaid":"NSAID","aminopenicillin":"Aminopenicillin","vitamin-d":"Vitamin D","topical-corticosteroid":"Topical corticosteroid","retinoid":"Retinoid","tetracycline":"Tetracycline","allylamine-antifungal":"Allylamine antifungal","azole-antifungal":"Azole antifungal","polyene-antifungal":"Polyene antifungal","topical-keratolytic":"Topical antimicrobial / keratolytic","scabicide":"Scabicide","antihistamine":"H1 antihistamine","sympathomimetic":"Sympathomimetic","antimetabolite-immunosuppressant":"Antimetabolite immunosuppressant","calcineurin-inhibitor":"Calcineurin inhibitor","antimalarial-dmard":"Antimalarial DMARD","tnf-inhibitor":"TNF-\u03b1 inhibitor","anti-ige":"Anti-IgE monoclonal antibody","ivig":"Pooled immunoglobulin (IVIG)","cephalosporin":"Cephalosporin","macrolide":"Macrolide","fluoroquinolone":"Fluoroquinolone","nitroimidazole":"Nitroimidazole","folate-antagonist-abx":"Folate-pathway antibiotic","lincosamide":"Lincosamide","aminoglycoside":"Aminoglycoside","nucleoside-antiviral":"Nucleoside antiviral","neuraminidase-inhibitor":"Neuraminidase inhibitor","rifamycin":"Rifamycin","antitubercular":"Antitubercular","nrti":"Nucleos(t)ide reverse transcriptase inhibitor","beta2-agonist":"\u03b22-agonist (bronchodilator)","antiemetic":"Antiemetic","topical-antibiotic":"Topical antibiotic","natural-penicillin":"Natural penicillin","nitrofuran":"Nitrofuran","complement-inhibitor":"C1-esterase inhibitor","bradykinin-antagonist":"Bradykinin B2 receptor antagonist","smoking-cessation":"Smoking-cessation aid","biguanide":"Biguanide","ace-inhibitor":"ACE inhibitor","laxative":"Osmotic laxative","sglt2-inhibitor":"SGLT2 inhibitor","dpp4-inhibitor":"DPP-4 inhibitor","sulfonylurea":"Sulfonylurea","alpha-glucosidase-inhibitor":"\u03b1-glucosidase inhibitor","dual-incretin":"Dual GIP/GLP-1 receptor agonist","arb":"Angiotensin receptor blocker (ARB)","insulin":"Insulin","counter-regulatory":"Counter-regulatory hormone","dopamine-agonist":"Dopamine agonist","somatostatin-analogue":"Somatostatin analogue","gh-receptor-antagonist":"GH receptor antagonist","thionamide":"Thionamide (antithyroid)","thyroid-hormone":"Thyroid hormone replacement","mineralocorticoid":"Mineralocorticoid","aldosterone-antagonist":"Aldosterone receptor antagonist","enac-blocker":"ENaC (epithelial Na channel) blocker","alpha-blocker":"\u03b1-adrenergic blocker","beta-blocker":"\u03b2-adrenergic blocker","vaptan":"Vasopressin receptor antagonist","aromatase-inhibitor":"Aromatase inhibitor","estrogen":"Estrogen","progestogen":"Progestogen","androgen":"Androgen (testosterone)","anti-androgen":"Anti-androgen","gnrh-agonist":"GnRH agonist","serm":"Selective estrogen receptor modulator (SERM)","pde5-inhibitor":"PDE5 inhibitor","odc-inhibitor":"Ornithine decarboxylase inhibitor","combined-oc":"Combined oral contraceptive","prostaglandin":"Prostaglandin (vasodilator)","progesterone-modulator":"Selective progesterone receptor modulator","bisphosphonate":"Bisphosphonate","rankl-inhibitor":"RANKL inhibitor","pth-analog":"PTH analogue (anabolic)","sclerostin-inhibitor":"Sclerostin inhibitor","calcitonin-hormone":"Calcitonin","calcimimetic":"Calcimimetic","active-vitamin-d":"Active vitamin D (calcitriol)","calcium-salt":"Calcium salt","thiazide":"Thiazide diuretic","ppi":"Proton pump inhibitor","h2-blocker":"H2 receptor antagonist","prokinetic":"Prokinetic","d2-antiemetic":"Dopamine (D2) antagonist antiemetic","anticholinergic":"Anticholinergic (antimuscarinic)","nk1-antagonist":"NK1 receptor antagonist","bismuth":"Bismuth salt","mucosal-protectant":"Mucosal protectant","prostaglandin-analog":"Prostaglandin analogue","opioid-antimotility":"Opioid antimotility agent","aminosalicylate":"Aminosalicylate (5-ASA)","anti-integrin":"Anti-integrin biologic","il-inhibitor":"Interleukin inhibitor (biologic)","bile-acid-sequestrant":"Bile-acid sequestrant","tca":"Tricyclic antidepressant (neuromodulator)","bulk-laxative":"Bulk-forming laxative","stimulant-laxative":"Stimulant laxative","secretagogue-laxative":"Intestinal secretagogue","5ht4-agonist":"5-HT4 agonist (prokinetic)","pamora":"Peripheral opioid antagonist (PAMORA)","nitrate":"Nitrate (smooth-muscle relaxant)","ccb":"Calcium-channel blocker","cholinesterase-inhibitor":"Acetylcholinesterase inhibitor","opioid":"Opioid analgesic","neurotoxin":"Neurotoxin (botulinum)","pde-tnf-inhibitor":"PDE inhibitor / TNF-\u03b1 modulator","hbv-antiviral":"HBV nucleos(t)ide analogue","daa":"Direct-acting antiviral (HCV)","bile-acid":"Bile acid (ursodeoxycholic acid)","copper-chelator":"Copper chelator","mineral-supplement":"Mineral supplement","loop-diuretic":"Loop diuretic","volume-expander":"Volume expander","antidote":"Antidote","ns-mra":"Non-steroidal mineralocorticoid receptor antagonist","alpha-beta-blocker":"Combined \u03b1/\u03b2 blocker","central-sympatholytic":"Central \u03b12-agonist","potassium-binder":"Potassium binder","phosphate-binder":"Phosphate binder","carbonic-anhydrase-inhibitor":"Carbonic anhydrase inhibitor","potassium-salt":"Potassium salt","alkalinizing-agent":"Alkalinizing agent","adh-enzyme-inhibitor":"Alcohol dehydrogenase inhibitor","beta3-agonist":"\u03b23-adrenergic agonist","5ari":"5-\u03b1 reductase inhibitor","urinary-alkalinizer":"Urinary alkalinizer","phosphonic-antibiotic":"Phosphonic-acid antibiotic","snri":"Serotonin-norepinephrine reuptake inhibitor"};
 const FACET_ORDER=[['use','Use'],['mechanism','Mechanism'],['dosing','Dosing'],['contra','Cautions / contraindications'],['adverse','Adverse effects'],['monitoring','Monitoring'],['interactions','Interactions']];
@@ -3533,7 +3557,13 @@ function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();
     if(!el&&search){el=highlightInDoc(d,search);}
     if(el)el.scrollIntoView({block:'center'});
   }catch(e){}
-  applyGuideView();};
+  applyGuideView();
+  /* v0.7.5: resume a saved spot, or record this open; scrolling keeps the spot current */
+  try{const w=fr.contentWindow,res=anchorOrSection&&anchorOrSection.resume;
+    if(res){const go=()=>goToSpot(fr,res);requestAnimationFrame(go);try{fr.contentDocument.fonts.ready.then(()=>requestAnimationFrame(go));}catch(e){}}
+    else if(!(anchorOrSection&&anchorOrSection.nosave))saveGuidePos(g,guideSpot(fr),true);
+    w.addEventListener('scroll',()=>{clearTimeout(gpTimer);gpTimer=setTimeout(()=>{if(curGuideKey===guideKey(g)&&fr.isConnected)saveGuidePos(g,guideSpot(fr),false);},1500);},{passive:true});
+  }catch(e){}};
   fr.srcdoc=g.html||'<p style=\"font-family:sans-serif;padding:24px\">This guide has no embedded content.</p>';
   host.appendChild(fr);renderGuidePager();}
 /* v0.7.4 — pager under the guide: Previous / page numbers (current pack) / Next; crosses packs at their ends */
@@ -3563,6 +3593,41 @@ function renderGuidePager(){const pg=$('guidePager');if(!pg)return;
   $('gpWhere').textContent=(cur.wk?cur.wk+' · ':'')+cur.n+' of '+cur.of;
   $('gpCount').textContent=cur.n+' / '+cur.of;}
 window.addEventListener('resize',()=>{const pg=$('guidePager');if(pg&&!pg.hidden)renderGuidePager();});
+/* v0.7.5 — guide resume. A spot = {sec, head, frac}: the visible h1–h3 at or above the top of the view (index + text; -1 =
+   before the first heading) and how far into that section the view is, so it carries across widths, zoom and devices. */
+let gpTimer=null,gpAnnounced=0;
+function guideHeads(d){return [...d.querySelectorAll('h1,h2,h3')].filter(h=>h.getClientRects().length);}
+function headText(h){return (h.textContent||'').replace(/\s+/g,' ').trim().slice(0,120);}
+function guideSpot(fr){try{const w=fr.contentWindow,d=fr.contentDocument;if(!w||!d)return null;const y=w.scrollY||0;
+  const hs=guideHeads(d).map(h=>({h,top:h.getBoundingClientRect().top+y}));let i=-1;
+  for(let k=0;k<hs.length;k++){if(hs[k].top<=y+8)i=k;else break;}
+  const a=i<0?0:hs[i].top,b=i+1<hs.length?hs[i+1].top:d.documentElement.scrollHeight;
+  return {sec:i,head:i<0?'':headText(hs[i].h),frac:Math.max(0,Math.min(1,(y-a)/Math.max(1,b-a)))};}catch(e){return null;}}
+function goToSpot(fr,pos){try{const w=fr.contentWindow,d=fr.contentDocument;if(!w||!d||!pos)return false;const y0=w.scrollY||0;
+  const hs=guideHeads(d).map(h=>({t:headText(h),top:h.getBoundingClientRect().top+y0}));let i=null;
+  if(pos.sec===-1)i=-1;
+  else if(pos.head){const c=hs.map((x,k)=>x.t===pos.head?k:-1).filter(k=>k>=0);if(c.length)i=c.reduce((p,k)=>Math.abs(k-pos.sec)<Math.abs(p-pos.sec)?k:p);}
+  if(i===null)return false; /* that section no longer shows (source off, guide changed) → stay at the top */
+  const a=i<0?0:hs[i].top,b=i+1<hs.length?hs[i+1].top:d.documentElement.scrollHeight;
+  w.scrollTo(0,Math.max(0,a+(+pos.frac||0)*(b-a)));return true;}catch(e){return false;}}
+function saveGuidePos(g,spot,announce){
+  settings.guidepos={gp:1,pack:g._pack,key:guideKey(g),label:guideMeta(g).label,sec:spot?spot.sec:-1,head:spot?spot.head:'',
+    frac:spot?Math.round(spot.frac*1000)/1000:0,at:Date.now()};
+  Store.set(KEY.settings,settings);
+  if(announce||Date.now()-gpAnnounced>45000){gpAnnounced=Date.now();SSSync.changed();}}
+/* The saved guide, if it is readable here now: an active pack, not hidden by source switches (organizeGuides = the topic
+   list). Matched by pack + key, else pack + title without its number (a pack update can renumber guides). */
+function resumeTarget(){const p=settings.guidepos;if(!p||!p.key)return null;const flat=[];
+  organizeGuides().forEach(grp=>grp.items.forEach(it=>flat.push({it,wk:grpShort(grp.label)})));
+  const stem=x=>String(x||'').replace(/^\s*\d+\s*[-–—:·.]?\s*/,'').trim().toLowerCase();
+  return flat.find(x=>x.it.g._pack===p.pack&&guideKey(x.it.g)===p.key)
+    ||(p.label?flat.find(x=>x.it.g._pack===p.pack&&stem(x.it.label)===stem(p.label)):null)||null;}
+/* A toast with one action button (stays 7 s; a new one replaces it). */
+function toastAct(msg,label,fn,ms){const w=$('toastWrap');if(!w)return;w.querySelectorAll('.toastact').forEach(x=>x.remove()); /* one at a time */
+  const t=document.createElement('div');t.className='toast toastact';
+  const sp=document.createElement('span');sp.textContent=msg;const b=document.createElement('button');b.type='button';b.textContent=label;
+  const close=()=>{t.classList.remove('show');setTimeout(()=>t.remove(),250);};b.onclick=()=>{fn();close();};
+  t.append(sp,b);w.appendChild(t);requestAnimationFrame(()=>t.classList.add('show'));setTimeout(close,ms||7000);}
 function openGuide(ref,section){const g=findGuide(ref);if(!g){if(ref&&!/^\s*(javascript|data|vbscript):/i.test(String(ref))){window.open(String(ref).split('#')[0],'_blank');}return;}
   reviewerReturn=currentSection();const anchor=String(ref).includes('#')?String(ref).split('#')[1]:null;
   revNavOpen=false;setBackLabel();show('reviewer');loadGuide(g,{anchor,section});}
@@ -4005,9 +4070,9 @@ $('revBack').addEventListener('click',returnFromReviewer);
 $('revTitle').addEventListener('click',toggleRevNav);
 $('revTitle').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleRevNav();}});
 (function(){const fb=$('revFind');if(fb)fb.addEventListener('click',()=>{if(!revNavOpen){revNavOpen=true;applyRevNav();}const se=document.querySelector('#guideList .revsearch');if(se){se.focus();se.select();}});})();
-$('zoomIn').addEventListener('click',()=>{guideZoom=Math.min(2,Math.round((guideZoom+0.1)*10)/10);applyGuideView();});
-$('zoomOut').addEventListener('click',()=>{guideZoom=Math.max(0.6,Math.round((guideZoom-0.1)*10)/10);applyGuideView();});
-$('fitBtn').addEventListener('click',()=>{guideFit=!guideFit;applyGuideView();});
+$('zoomIn').addEventListener('click',()=>{guideZoom=Math.min(2,Math.round((guideZoom+0.1)*10)/10);applyGuideView();saveGuideView();});
+$('zoomOut').addEventListener('click',()=>{guideZoom=Math.max(0.6,Math.round((guideZoom-0.1)*10)/10);applyGuideView();saveGuideView();});
+$('fitBtn').addEventListener('click',()=>{guideFit=!guideFit;applyGuideView();saveGuideView();});
 $('printBtn').addEventListener('click',()=>{const fr=document.querySelector('.guideframe');if(fr&&fr.contentWindow){try{fr.contentWindow.focus();fr.contentWindow.print();}catch(e){window.print();}}else{window.print();}});
 $('homebtn').addEventListener('click',()=>{if($('quiz').classList.contains('on')||$('study').classList.contains('on')){const keep=$('quiz').classList.contains('on')&&!qTestSubmitted;confirmDialog(keep?(qmode==='test'?'Return home? Your exam is saved — tap Exam to pick up where you left off. The timer pauses until then.':'Return home? Your practice progress is saved — resume it any time from the Practice card.'):'Leave this session and return home?',{confirmText:'Leave'},()=>{clearInterval(qTimerId);savePrac();renderHome();});}else renderHome();});
 $('studyBtn').addEventListener('click',startSession);
