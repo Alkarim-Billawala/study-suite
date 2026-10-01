@@ -1,7 +1,16 @@
 <!--
-  Study Suite  ·  v0.7.7 (beta)
+  Study Suite  ·  v0.7.8 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.7.8: Topic Guides. (1) Resume is reliable and "Start from the top" works. openReviewer loaded the guide
+  before show('reviewer'), so the frame could lay out while hidden: goToSpot found no visible headings and gave up
+  (the guide opened at the top under a "Back where you left off" toast, so "Start from the top" visibly did nothing);
+  and the fonts.ready retry (guides @import web fonts) could land after the tap and drag the view back. loadGuide now
+  retries goToSpot (rAF, fonts.ready, 150/500/1200/2500 ms) until one lands while the frame is visible, and stops for
+  good when cancelled: fr._stopResume() is called by "Start from the top" (which also saves the top as the spot), by
+  the reader's own wheel/touch/key/pointer input in the guide, and by loading another guide. (2) The topic list opens
+  at the current guide: applyRevNav centres .revitem.on in #guideList (its own scrollTop, so the page never moves)
+  each time the list opens, unless a search is showing results.
   Changelog v0.7.7: pack updates follow to other devices again, and the sync log shows versions. (1) resolvePacks: when the
   account holds a newer version of a published pack than the pack list this device has in memory (a PWA left in the
   background keeps the list it read before a deploy; every deploy renames the encrypted files, so the follow-up fetch of the
@@ -1671,7 +1680,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.7.7';
+const APP_VERSION='0.7.8';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3411,9 +3420,13 @@ let revNavOpen=null; // overlay drawer state (session); first render seeds from 
 function applyRevNav(){
   if(revNavOpen===null)revNavOpen=false; // drawer defaults closed so the guide is never obstructed
   $('guideList').classList.toggle('closed',!revNavOpen);
+  if(revNavOpen&&!revQuery.trim())centreGuideListOn(); /* v0.7.8 */
   const t=$('revTitle');if(t){t.classList.toggle('open',revNavOpen);t.setAttribute('aria-expanded',revNavOpen?'true':'false');}
 }
 function toggleRevNav(){revNavOpen=!revNavOpen;applyRevNav();}
+/* v0.7.8: open the topic list at the guide being read (scroll the list itself, never the page) */
+function centreGuideListOn(){const gl=$('guideList');const on=gl&&gl.querySelector('.revitem.on');if(!on)return;
+  const glr=gl.getBoundingClientRect(),r=on.getBoundingClientRect();gl.scrollTop=Math.max(0,gl.scrollTop+(r.top-glr.top)-(gl.clientHeight-r.height)/2);}
 /* — guide zoom / fit-width (applies inside the sandboxed iframe) — */
 let guideZoom=1,guideFit=false;
 /* v0.7.5: zoom / fit width remembered on this device only (never synced — a laptop and an iPad want different sizes) */
@@ -3448,7 +3461,7 @@ function themeGuideFrame(){
   let st=d.getElementById('ssTheme');if(!st){st=d.createElement('style');st.id='ssTheme';(d.head||d.documentElement).appendChild(st);}
   if(st.textContent!==css)st.textContent=css;
 }
-function openReviewer(){reviewerReturn=currentSection();guideTextCache={};revNavOpen=false;setBackLabel();const org=organizeGuides();renderGuideList();const rt=resumeTarget();if(rt){loadGuide(rt.it.g,{resume:settings.guidepos});toastAct('Back where you left off: '+(rt.wk?rt.wk+' · ':'')+rt.it.label,'Start from the top',()=>{try{document.querySelector('.guideframe').contentWindow.scrollTo(0,0);}catch(e){}});}else if(org.length){loadGuide(org[0].items[0].g,{nosave:true});}else{$('guideHost').innerHTML='<div class="revempty">No topic guides are bundled in your active packs. Newer packs embed their guides here; older packs link to <code>Topic_*.html</code> files kept in this folder.</div>';}show('reviewer');}
+function openReviewer(){reviewerReturn=currentSection();guideTextCache={};revNavOpen=false;setBackLabel();const org=organizeGuides();renderGuideList();const rt=resumeTarget();if(rt){loadGuide(rt.it.g,{resume:settings.guidepos});toastAct('Back where you left off: '+(rt.wk?rt.wk+' · ':'')+rt.it.label,'Start from the top',()=>{try{const fr=document.querySelector('.guideframe');if(fr._stopResume)fr._stopResume();fr.contentWindow.scrollTo(0,0);saveGuidePos(rt.it.g,{sec:-1,head:'',frac:0},true);}catch(e){}});}else if(org.length){loadGuide(org[0].items[0].g,{nosave:true});}else{$('guideHost').innerHTML='<div class="revempty">No topic guides are bundled in your active packs. Newer packs embed their guides here; older packs link to <code>Topic_*.html</code> files kept in this folder.</div>';}show('reviewer');}
 /* ===== Pharmacology view (Future-Features #15) — cross-week drug index from active packs' drugs[] ===== */
 const CLASS_LABELS={"bcr-abl-tki":"BCR-ABL tyrosine kinase inhibitor","hypomethylating":"Hypomethylating agent","imid":"Immunomodulatory drug (IMiD)","jak-inhibitor":"JAK inhibitor","btk-inhibitor":"BTK inhibitor","bcl2-inhibitor":"BCL-2 inhibitor","anti-cd20":"Anti-CD20 monoclonal antibody","anti-cd38":"Anti-CD38 monoclonal antibody","proteasome-inhibitor":"Proteasome inhibitor","anthracycline":"Anthracycline","vinca-alkaloid":"Vinca alkaloid","alkylating":"Alkylating agent","antitumor-antibiotic":"Antitumour antibiotic","differentiating-agent":"Differentiating agent","urate-oxidase":"Recombinant urate oxidase","xanthine-oxidase-inhibitor":"Xanthine oxidase inhibitor","cytoreductive":"Cytoreductive antimetabolite","growth-factor":"Myeloid growth factor","antipseudomonal-betalactam":"Antipseudomonal \u03b2-lactam","carbapenem":"Carbapenem","glycopeptide":"Glycopeptide","corticosteroid":"Corticosteroid","antiplatelet":"Antiplatelet","heparin":"Unfractionated heparin","lmwh":"Low-molecular-weight heparin","doac-xa":"Direct factor Xa inhibitor (DOAC)","doac-iia":"Direct thrombin inhibitor (DOAC)","vka":"Vitamin K antagonist","p2y12-inhibitor":"P2Y12 inhibitor","gp2b3a-inhibitor":"GP IIb/IIIa inhibitor","antifibrinolytic":"Antifibrinolytic","reversal-agent":"Reversal agent","vasopressin-analog":"Vasopressin analogue","oral-iron":"Oral iron","iv-iron":"Intravenous iron","b-vitamin":"B-vitamin supplement","esa":"Erythropoiesis-stimulating agent","statin":"Statin (HMG-CoA reductase inhibitor)","cholesterol-absorption-inhibitor":"Cholesterol-absorption inhibitor","pcsk9-inhibitor":"PCSK9 inhibitor","glp1-agonist":"GLP-1 receptor agonist","lipase-inhibitor":"Pancreatic lipase inhibitor","antipyretic":"Antipyretic / analgesic","nsaid":"NSAID","aminopenicillin":"Aminopenicillin","vitamin-d":"Vitamin D","topical-corticosteroid":"Topical corticosteroid","retinoid":"Retinoid","tetracycline":"Tetracycline","allylamine-antifungal":"Allylamine antifungal","azole-antifungal":"Azole antifungal","polyene-antifungal":"Polyene antifungal","topical-keratolytic":"Topical antimicrobial / keratolytic","scabicide":"Scabicide","antihistamine":"H1 antihistamine","sympathomimetic":"Sympathomimetic","antimetabolite-immunosuppressant":"Antimetabolite immunosuppressant","calcineurin-inhibitor":"Calcineurin inhibitor","antimalarial-dmard":"Antimalarial DMARD","tnf-inhibitor":"TNF-\u03b1 inhibitor","anti-ige":"Anti-IgE monoclonal antibody","ivig":"Pooled immunoglobulin (IVIG)","cephalosporin":"Cephalosporin","macrolide":"Macrolide","fluoroquinolone":"Fluoroquinolone","nitroimidazole":"Nitroimidazole","folate-antagonist-abx":"Folate-pathway antibiotic","lincosamide":"Lincosamide","aminoglycoside":"Aminoglycoside","nucleoside-antiviral":"Nucleoside antiviral","neuraminidase-inhibitor":"Neuraminidase inhibitor","rifamycin":"Rifamycin","antitubercular":"Antitubercular","nrti":"Nucleos(t)ide reverse transcriptase inhibitor","beta2-agonist":"\u03b22-agonist (bronchodilator)","antiemetic":"Antiemetic","topical-antibiotic":"Topical antibiotic","natural-penicillin":"Natural penicillin","nitrofuran":"Nitrofuran","complement-inhibitor":"C1-esterase inhibitor","bradykinin-antagonist":"Bradykinin B2 receptor antagonist","smoking-cessation":"Smoking-cessation aid","biguanide":"Biguanide","ace-inhibitor":"ACE inhibitor","laxative":"Osmotic laxative","sglt2-inhibitor":"SGLT2 inhibitor","dpp4-inhibitor":"DPP-4 inhibitor","sulfonylurea":"Sulfonylurea","alpha-glucosidase-inhibitor":"\u03b1-glucosidase inhibitor","dual-incretin":"Dual GIP/GLP-1 receptor agonist","arb":"Angiotensin receptor blocker (ARB)","insulin":"Insulin","counter-regulatory":"Counter-regulatory hormone","dopamine-agonist":"Dopamine agonist","somatostatin-analogue":"Somatostatin analogue","gh-receptor-antagonist":"GH receptor antagonist","thionamide":"Thionamide (antithyroid)","thyroid-hormone":"Thyroid hormone replacement","mineralocorticoid":"Mineralocorticoid","aldosterone-antagonist":"Aldosterone receptor antagonist","enac-blocker":"ENaC (epithelial Na channel) blocker","alpha-blocker":"\u03b1-adrenergic blocker","beta-blocker":"\u03b2-adrenergic blocker","vaptan":"Vasopressin receptor antagonist","aromatase-inhibitor":"Aromatase inhibitor","estrogen":"Estrogen","progestogen":"Progestogen","androgen":"Androgen (testosterone)","anti-androgen":"Anti-androgen","gnrh-agonist":"GnRH agonist","serm":"Selective estrogen receptor modulator (SERM)","pde5-inhibitor":"PDE5 inhibitor","odc-inhibitor":"Ornithine decarboxylase inhibitor","combined-oc":"Combined oral contraceptive","prostaglandin":"Prostaglandin (vasodilator)","progesterone-modulator":"Selective progesterone receptor modulator","bisphosphonate":"Bisphosphonate","rankl-inhibitor":"RANKL inhibitor","pth-analog":"PTH analogue (anabolic)","sclerostin-inhibitor":"Sclerostin inhibitor","calcitonin-hormone":"Calcitonin","calcimimetic":"Calcimimetic","active-vitamin-d":"Active vitamin D (calcitriol)","calcium-salt":"Calcium salt","thiazide":"Thiazide diuretic","ppi":"Proton pump inhibitor","h2-blocker":"H2 receptor antagonist","prokinetic":"Prokinetic","d2-antiemetic":"Dopamine (D2) antagonist antiemetic","anticholinergic":"Anticholinergic (antimuscarinic)","nk1-antagonist":"NK1 receptor antagonist","bismuth":"Bismuth salt","mucosal-protectant":"Mucosal protectant","prostaglandin-analog":"Prostaglandin analogue","opioid-antimotility":"Opioid antimotility agent","aminosalicylate":"Aminosalicylate (5-ASA)","anti-integrin":"Anti-integrin biologic","il-inhibitor":"Interleukin inhibitor (biologic)","bile-acid-sequestrant":"Bile-acid sequestrant","tca":"Tricyclic antidepressant (neuromodulator)","bulk-laxative":"Bulk-forming laxative","stimulant-laxative":"Stimulant laxative","secretagogue-laxative":"Intestinal secretagogue","5ht4-agonist":"5-HT4 agonist (prokinetic)","pamora":"Peripheral opioid antagonist (PAMORA)","nitrate":"Nitrate (smooth-muscle relaxant)","ccb":"Calcium-channel blocker","cholinesterase-inhibitor":"Acetylcholinesterase inhibitor","opioid":"Opioid analgesic","neurotoxin":"Neurotoxin (botulinum)","pde-tnf-inhibitor":"PDE inhibitor / TNF-\u03b1 modulator","hbv-antiviral":"HBV nucleos(t)ide analogue","daa":"Direct-acting antiviral (HCV)","bile-acid":"Bile acid (ursodeoxycholic acid)","copper-chelator":"Copper chelator","mineral-supplement":"Mineral supplement","loop-diuretic":"Loop diuretic","volume-expander":"Volume expander","antidote":"Antidote","ns-mra":"Non-steroidal mineralocorticoid receptor antagonist","alpha-beta-blocker":"Combined \u03b1/\u03b2 blocker","central-sympatholytic":"Central \u03b12-agonist","potassium-binder":"Potassium binder","phosphate-binder":"Phosphate binder","carbonic-anhydrase-inhibitor":"Carbonic anhydrase inhibitor","potassium-salt":"Potassium salt","alkalinizing-agent":"Alkalinizing agent","adh-enzyme-inhibitor":"Alcohol dehydrogenase inhibitor","beta3-agonist":"\u03b23-adrenergic agonist","5ari":"5-\u03b1 reductase inhibitor","urinary-alkalinizer":"Urinary alkalinizer","phosphonic-antibiotic":"Phosphonic-acid antibiotic","snri":"Serotonin-norepinephrine reuptake inhibitor"};
 const FACET_ORDER=[['use','Use'],['mechanism','Mechanism'],['dosing','Dosing'],['contra','Cautions / contraindications'],['adverse','Adverse effects'],['monitoring','Monitoring'],['interactions','Interactions']];
@@ -3568,8 +3581,9 @@ function renderGuideList(){const gl=$('guideList');gl.innerHTML='';
       b.onclick=()=>{revNavOpen=false;loadGuide(it.g,null);};wrap.appendChild(b);});
     gl.appendChild(wrap);});
   filterGuideList();
-  const on=gl.querySelector('.revitem.on');if(on)on.scrollIntoView({block:'nearest'});applyRevNav();}
+  applyRevNav();} /* v0.7.8: applyRevNav centres the current guide when the list is open (scrollIntoView could move the page) */
 function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();
+  {const old=document.querySelector('.guideframe');if(old&&old._stopResume)old._stopResume();} /* v0.7.8 */
   const host=$('guideHost');host.innerHTML='';
   const fr=document.createElement('iframe');fr.className='guideframe';fr.setAttribute('sandbox','allow-same-origin allow-modals');
   fr.onload=()=>{try{const d=fr.contentDocument;if(!d)return;try{hideOffSections(d,g);}catch(e){}let el=null; /* v0.6.6 */
@@ -3582,7 +3596,12 @@ function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();
   applyGuideView();
   /* v0.7.5: resume a saved spot, or record this open; scrolling keeps the spot current */
   try{const w=fr.contentWindow,res=anchorOrSection&&anchorOrSection.resume;
-    if(res){const go=()=>goToSpot(fr,res);requestAnimationFrame(go);try{fr.contentDocument.fonts.ready.then(()=>requestAnimationFrame(go));}catch(e){}}
+    if(res){ /* v0.7.8: retry until it lands while the frame is visible; the reader's tap or input stops it for good */
+      let live=true;const tms=[];const stop=()=>{live=false;tms.forEach(clearTimeout);};fr._stopResume=stop;
+      const go=()=>{if(!live||!fr.isConnected)return;if(!fr.getClientRects().length)return;goToSpot(fr,res);};
+      requestAnimationFrame(go);try{fr.contentDocument.fonts.ready.then(()=>requestAnimationFrame(go));}catch(e){}
+      [150,500,1200,2500].forEach(ms=>tms.push(setTimeout(go,ms)));tms.push(setTimeout(stop,2600));
+      ['wheel','touchstart','keydown','pointerdown'].forEach(ev=>{try{w.addEventListener(ev,stop,{passive:true,once:true});}catch(e){}});}
     else if(!(anchorOrSection&&anchorOrSection.nosave))saveGuidePos(g,guideSpot(fr),true);
     w.addEventListener('scroll',()=>{clearTimeout(gpTimer);gpTimer=setTimeout(()=>{if(curGuideKey===guideKey(g)&&fr.isConnected)saveGuidePos(g,guideSpot(fr),false);},1500);},{passive:true});
   }catch(e){}};
