@@ -1,7 +1,15 @@
 <!--
-  Study Suite  ·  v0.7.6 (beta)
+  Study Suite  ·  v0.7.7 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.7.7: pack updates follow to other devices again, and the sync log shows versions. (1) resolvePacks: when the
+  account holds a newer version of a published pack than the pack list this device has in memory (a PWA left in the
+  background keeps the list it read before a deploy; every deploy renames the encrypted files, so the follow-up fetch of the
+  old file failed silently and the device later showed "update waiting" and needed a tap — iPhone, 2026-10-01 14:16Z and
+  15:07Z), the list is re-read once (freshManifest) before fetching. Same for a pack switched on elsewhere that is a
+  placeholder here. (2) Sync activity: pack summaries list each switched-on pack's id and version ("4 packs (4 on: wk40
+  v2.10 …)"); an update followed from another device is logged ("Followed from another device: … → v1.15"), and one that
+  could not be fetched is logged too instead of failing silently.
   Changelog v0.7.6: Download in the iPhone/iPad home-screen app. iOS ignores print() in a standalone web app (tested on
   Alkarim's iPhone 2026-10-01: the iframe's print() and the page's own both return without a dialog, no beforeprint).
   iosStandalone() (isStandalone() + iPhone/iPad UA, iPadOS = Macintosh with touch) → printBtn opens a copy of the open
@@ -1663,7 +1671,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.7.6';
+const APP_VERSION='0.7.7';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -2103,9 +2111,10 @@ const SSSync=(()=>{
     try{const j=await fetchPackJson(mp);
       const saved=packs;packs=[];try{ingestPack(j,(mp.label||mp.file).replace(/\.json$/i,''));return packs[0]||null;}finally{packs=saved;}}catch(e){return null;}}
   /* Payload packs[] → full packs (refs resolved from this device, else the manifest). Unresolved refs are returned too. */
-  let pulled=[];
+  let pulled=[],notPulled=[];
   async function freshManifest(){try{await initPackLinks({inSync:true});}catch(e){}return defaultManifest;} /* v0.6.8 */
-  async function resolvePacks(list,m){const have=new Map(packs.map(p=>[p.id,p])),out=[],miss=[];let refreshed=false;
+  async function resolvePacks(list,m){pulled=[];notPulled=[]; /* v0.7.7: a postponed pull's leftovers are not reported twice */
+    const have=new Map(packs.map(p=>[p.id,p])),out=[],miss=[];let refreshed=false;
     for(const e of (list||[])){if(!e||!e.id)continue;
       if(!e.ref){out.push(e);continue;}
       const p0=have.get(e.id);
@@ -2114,10 +2123,14 @@ const SSSync=(()=>{
       /* v0.5.5: a switched-off published pack is never downloaded — a placeholder instead (download button in the library) */
       if(e.enabled===false&&(!p0||p0.stub)){const mp=m&&m.packs.find(x=>x&&x.id===e.id&&x.file);
         if(mp||p0){const st=makeStub(p0||{id:e.id,pack:e.pack},mp);LIGHT.forEach(k=>{if(k in e)st[k]=e[k];});if(!('ts' in e))delete st.ts;out.push(st);continue;}}
+      /* v0.7.7: the account is ahead of the list this device holds → re-read it once (old encrypted files are gone after a deploy) */
+      if(!refreshed&&e.version){const lm=m&&Array.isArray(m.packs)&&m.packs.find(x=>x&&x.id===e.id&&x.file);
+        if(lm&&lm.version&&verCmp(e.version,lm.version)>0){refreshed=true;const m2=await freshManifest();if(m2&&Array.isArray(m2.packs)&&m2.packs.length)m=m2;}}
       let p=(p0&&!p0.stub)?Object.assign({},p0):await fetchPublic(e.id,m);
       if(!p&&p0&&p0.stub)p=Object.assign({},p0); /* switched on elsewhere but not downloadable right now — try again next sync */
       /* v0.5.1: another device accepted a newer version of this published pack → fetch it (one tap covers every device) */
-      if(p0&&!p0.stub&&e.version&&verCmp(e.version,p0.version)>0){const up=await fetchPublic(e.id,m);if(up&&verCmp(up.version,p0.version)>0){p=up;pulled.push((up.pack||e.id)+' → v'+up.version);recordPackNews(p0,up);}}
+      if(p0&&!p0.stub&&e.version&&verCmp(e.version,p0.version)>0){const up=await fetchPublic(e.id,m);if(up&&verCmp(up.version,p0.version)>0){p=up;pulled.push((up.pack||e.id)+' → v'+up.version);recordPackNews(p0,up);}
+        else notPulled.push(e.id+' v'+e.version);} /* v0.7.7: logged, not silent */
       if(p){LIGHT.forEach(k=>{if(k!=='version'&&k in e)p[k]=e[k];});if(!('ts' in e))delete p.ts; /* v0.4.8: the account's ts, never the fetch time */
         out.push(p);}else miss.push(e);}
     return {out,miss,m};} /* v0.6.8: m = the list actually used (it may have been refreshed) */
@@ -2136,7 +2149,8 @@ const SSSync=(()=>{
       devLogs[id]={sent:v.sent,app:String(v.app||'').slice(0,20),L:v.L.slice(0,LOG_MAX)};ch=true;});
     Object.keys(devLogs).forEach(id=>{if(!(devLogs[id].sent>now-LOG_KEEP)){delete devLogs[id];ch=true;}});
     if(ch)await Store.set(KEY.devlogs,devLogs);}
-  const pkSum=list=>{const a=list||[];return a.length+' packs ('+a.filter(p=>p&&p.enabled!==false).length+' on)';};
+  const pkSum=list=>{const a=list||[],on=a.filter(p=>p&&p.enabled!==false); /* v0.7.7: ids and versions of the packs that are on */
+    return a.length+' packs ('+on.length+' on'+(on.length?': '+on.map(p=>p.id+(p.version?' v'+p.version:'')).join(', '):'')+')';};
   function slog(what,loc,cl,at){try{const L=JSON.parse(localStorage.getItem('suite_synclog_v1')||'[]');
     L.unshift({t:Date.now(),dev:DEVICE_ID,from:(cl&&cl.by)||'',what,local:loc?pkSum(loc.packs)+' · '+studied(loc.sched)+' studied':'',cloud:cl?pkSum(cl.packs)+' · '+studied(cl.sched)+' studied':'',at:at||'',app:APP_VERSION});
     localStorage.setItem('suite_synclog_v1',JSON.stringify(L.slice(0,LOG_MAX)));}catch(e){}}
@@ -2259,7 +2273,8 @@ const SSSync=(()=>{
       allCards().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});rollDaily();
       await persist();applyTheme();applyGate();renderHome();
       const np=payload(publicIds(r.m||m));Object.assign(meta,{stateId:rec.id,lastUpdated:rec.updated,lastHash:await hash(np)});await saveMeta();await saveBase(np); /* v0.6.8: refs against the list actually used */
-      if(pulled.length){toast('Updated from your other device: '+pulled.join(', ')+'.');pulled=[];}
+      if(pulled.length){toast('Updated from your other device: '+pulled.join(', ')+'.');slog('Followed from another device: '+pulled.join(', '),null,null,rec.updated);pulled=[];}
+      if(notPulled.length){slog('Couldn’t fetch the newer version yet: '+notPulled.join(', ')+' — the library will offer it',null,null,rec.updated);notPulled=[];}
       if(r.miss.length)toast(r.miss.length+' pack'+(r.miss.length===1?'':'s')+' from your account couldn’t be downloaded yet — they’ll be kept in your account.');
       return true;}
     finally{suppress=false;}}
