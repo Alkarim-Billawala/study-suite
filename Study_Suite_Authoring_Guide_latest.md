@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.25 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.26 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.25)
+# Study Suite — Content Authoring Guide (v2.26)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,12 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.25 · **Pairs with:** Study Suite app v0.4.4+ (source switches need v0.6.6+, Extras v0.7.1+), pack `formatVersion` 2.0
+> **Authoring system version:** 2.26 · **Pairs with:** Study Suite app v0.4.4+ (source switches need v0.6.6+, Extras v0.7.1+), pack `formatVersion` 2.0
+> **What changed in guide v2.26:** **figures in topic guides.** New **§6c**: a guide may carry figures, slide or
+> course images cropped to the figure and drawn diagrams written as inline SVG, where a picture does work the text
+> can't (anatomy, imaging, circuits, curves, timelines, cycles), and nowhere else. No photo of an identifiable patient.
+> Captions restate the guide's own text, with a short credit. The §7a validator measures guide length on the text only
+> (figures excluded) and errors on a script, an inline event handler or any outside resource in a guide. No schema change.
 > **What changed in guide v2.25:** **option length is not a cue.** A student's feedback (2026-09-30): "for a lot of the
 > questions, the longest answer is the right one" — and it was, in 70–79% of the core items of four packs (chance is
 > 25%). New **§3b rule 8**: distractors carry the key's specificity and length, an over-long key is trimmed, and across a
@@ -831,6 +836,43 @@ same dark-mode-safe CSS contract from §6) — just purpose-built as a single hi
 > Density over completeness: the cram sheet distills, it doesn't re-teach. If it reads like a paragraph,
 > tighten it into cue → answer rows.
 
+## 6c. Figures in topic guides (v2.26)
+
+A guide may carry figures **only where a picture does work the text can't**: anatomy and its maps (dermatomes, the
+skull base, the ventricles), imaging (what a finding looks like), circuits and pathways, curves (dose–effect, onset by
+age), timelines and cycles. Clinical prose guides (interviewing, diagnosis, ethics, case write-ups) usually need none,
+and a comparison the guide already makes in a table does not get a picture of the same table. Anatomy-heavy guides may
+run well past a handful of figures; there is no fixed count, only "is this figure earning its place".
+
+**Two kinds.**
+- **Course images**: cropped from the week's slides, lab manual or handouts (allowed in packs), tight to the figure and
+  its labels, never the slide title or footer. WebP at about 1,100 px wide, quality ~72 (typically 20–80 KB), embedded
+  in the guide HTML as `<img src="data:image/webp;base64,…" alt="…">`. Re-crop or mask anything that doesn't belong
+  (another figure's corner, a stray inset). Skip an image too low-resolution to read; draw it instead.
+- **Drawn diagrams**: inline `<svg>` written by the author from the guide's own facts: real `<text>` labels, no
+  embedded raster, colours from the guide's CSS variables (`var(--ink)`, `--soft`, `--line`, `--accent`, `--blue`,
+  `--gold`, `--paper`) so they follow the app theme. Check them at phone width (~375 px): no overlapping labels, text
+  no smaller than ~10 px at that width.
+
+**Rules.**
+1. **No identifiable patient.** No faces or names; crop out a patient photo that sits beside a figure. Anonymised
+   scans and diagrams are fine.
+2. **Every figure is a `<figure class="fig">` with a `<figcaption>`.** The caption restates what *this guide* already
+   says (bold lead phrase, then one or two sentences) and ends with a one-line credit in a `<span class="cr">`
+   (e.g. "Slide: Neuroanatomy I (Lisk)"). A caption never teaches a new fact and never reports the source (§4a), so
+   no "the slide says"; a slide that prints an error is covered by the guide's "Sources differ" callout, not the caption.
+3. **Self-contained and inert.** No `<script>`, no `on…=` handlers, no `src`/`href` to anything outside the pack.
+   Images are `data:` URIs; links inside an SVG point only to `#ids` in the same document.
+4. **Placement:** directly after the paragraph or table the figure illustrates.
+5. **Size budget:** a figure-heavy week adds about 0.5–1 MB to its pack, which is a one-time download per device (packs never
+   go through sync). Above ~1.5 MB of images in one pack, prefer drawn diagrams or fewer images.
+6. **Items are untouched.** Adding figures to an existing pack is a version bump that changes guide HTML only;
+   question and card ids stay as they are.
+
+The figure CSS (frame, two-up `.pair` grid that stacks on phones, caption and SVG text classes) travels in a
+`<style>` block at the top of the guide body. Reference implementation and crop tools: Drive
+`Claude/StudySuite/images-pilot-2026-10-01/` (`figlib.py`, `autocrop.py`, `figs_all.py`, `figs_round2.py`).
+
 ---
 
 ## 6b. Pharmacology data (`drugs[]`) — optional, powers the Pharmacology view
@@ -930,6 +972,10 @@ not the week's subject.**
 `"EXTRA": "Extras"`; no guide, section or drug carries it; no exact duplicate, joke option or disputable key is in the
 pack at all, in the core or in Extras (§3b).
 
+**Figures (v2.26):** every figure has a caption restating the guide and a credit; no identifiable patient; no script,
+handler or outside resource in any guide; guide length is judged on the text without figures; drawn diagrams checked at
+phone width.
+
 **Content sources (v2.22):** if the pack has `sources`, every question, card, guide and drug carries `src` with
 codes from that table; `data-src` headings use only codes from their guide's `src`; the cram sheet and any
 integrated review carry every code. Run the §7a source lints and clear them.
@@ -970,6 +1016,9 @@ CARD_TYPES = {"mcq", "multi", "cloze", "order", "match", "qa"}
 ARTIFACTS  = ["start_span", "end_span", "【", "】", "```"]  # any of these breaks the import
 # §2: these fields are rendered as PLAIN TEXT — an HTML entity in them shows literally to the learner.
 ENTITY     = re.compile(r"&(#\d+|#x[0-9a-fA-F]+|[a-zA-Z]+);")
+# §6c (v2.26): figures are measured out of the guide length and must be inert and self-contained.
+FIGS       = re.compile(r"<figure\b.*?</figure>|<svg\b.*?</svg>|<style\b.*?</style>", re.S)
+EXT_SRC    = re.compile(r"""(?<![\w:-])(?:src|href|xlink:href)\s*=\s*["'](?!data:image/(?:webp|jpeg|png|svg\+xml);base64,|#)[^"']+["']""", re.I)
 PLAIN_Q    = ("stem", "topic")                       # + every string in options[]
 PLAIN_C    = ("prompt", "answer", "text", "topic")   # + options[], items[], pairs[][]
 # §4a: source apparatus that must not reach reader-facing text (warn — a clinical "14:00" can be legit).
@@ -1064,6 +1113,11 @@ def validate_pack(pack):
         if ENTITY.search(g.get("title") or ""): errs.append(f"guide {gid}: HTML entity in title — titles are plain text (§2)")
         if not h: errs.append(f"guide {gid}: empty html"); continue
         is_cram = "cram" in (g.get("title", "") or "").lower()
+        fbody = re.sub(r"^.*?</style>", "", h, count=1, flags=re.S)        # skip the template head (font @import)
+        if re.search(r"<script\b", fbody, re.I) or re.search(r"\son[a-z]+\s*=", fbody, re.I):
+            errs.append(f"guide {gid}: script or inline handler in the guide (§6c)")
+        if EXT_SRC.search(fbody): errs.append(f"guide {gid}: loads an outside resource (§6c)")
+        h = FIGS.sub("", h)                                                  # length and leak checks read text only
         if len(h) < 1500: warns.append(f"guide {gid}: looks thin (<1500 chars)")
         elif len(h) < 5000 and not is_cram: warns.append(f"guide {gid}: thin ({len(h)} chars; working band 10–20k, §6)")
         elif len(h) > 22000 and not is_cram: warns.append(f"guide {gid}: very long ({len(h)} chars) — select examinable content or split by concept (§6)")
