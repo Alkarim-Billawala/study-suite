@@ -1,7 +1,26 @@
 <!--
-  Study Suite  ·  v0.7.9 (beta)
+  Study Suite  ·  v0.8.0 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.8.0: flags. One saved, synced ⚑ per question and card, independent of right/wrong; item ids (wkNN_qNN,
+  wkNN_cNN) are stable across pack versions, so flags survive pack updates. Stored as settings['flag:'+id] =
+  {fl:1,on,at}; clearing writes on:false (a tombstone, never deleted) so the clear syncs. Settings, because older
+  clients carry settings through their merges (a new top-level field would be dropped); merge3's settings resolver
+  now takes fl entries newest-wins by `at`, as it does gp. isFlagged / setFlag(s) / flagOnIds; saved like
+  saveGuidePos (Store.set(KEY.settings) + SSSync.changed()). Practice and Exam: #flagBtn is the saved flag (now also
+  shown in Practice and past-exam review; icon only in Practice on phones), the grid dot reads it; qflag[] is still
+  saved and kept equal to it for older clients, and resumeExam/resumePractice adopt an older client's session flags
+  (qflag true, no flag entry yet). Review: a ⚑ Flag toggle in the card view (#cardFlagBtn). Setup filters: Practice
+  and Exam tick boxes Flagged / Incorrect (settings.pracFilt / examFilt = {f,w}; none = as before, one = only those,
+  both = either). Incorrect = the latest answer was wrong (qhist[id].ok===false). Applied inside qTestPool, so exam
+  weights, fresh notes and counts follow; a live count note (fltNote); exam length clamps to the pool (note + toast);
+  a zero pool keeps the setup open with a message. Review: Flagged only (session-only, like the topic filter) = every
+  flagged card in the chosen topics regardless of due date and the new-card limit (counts, buildSession, topic chips,
+  done screen); ratings schedule as normal. Flagged page (section#flagged; Home link "⚑ Flagged (N)" when N>0):
+  flaggedItems() over activePacks() with srcOn — source-hidden flags are counted and reported, not listed; flags for
+  items not loaded are kept and not shown. Grouped by pack, questions then cards; plain-text stem, type, last result,
+  Open guide (openGuide; Back returns to Flagged), ✕ clears one, Clear per pack and Clear all flags (confirmDialog).
+  gotoSec, backLabel and returnFromReviewer know 'flagged'.
   Changelog v0.7.9: the in-guide resume jump is withdrawn (Alkarim, 2026-10-01: still not working on his devices after
   v0.7.8 — "roll back the jumping behaviour"). openReviewer still opens the last guide read (resumeTarget(); Home's
   "Continue: …" card unchanged) but at its top: loadGuide(g,null), no resume, no "Back where you left off" toast, no
@@ -1191,6 +1210,34 @@ section{display:none}section.on{display:block}
 .nbtn{font-family:var(--font-body);font-size:16px;background:var(--paper);border:1.5px solid var(--line);color:var(--ink);padding:10px 20px;border-radius:5px;cursor:pointer;transition:all .15s}.nbtn:hover{border-color:var(--ink)}.nbtn:disabled{opacity:.35;cursor:not-allowed}
 .nbtn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink);font-family:var(--font-head);font-weight:600}.nbtn.primary:hover{background:var(--accent);border-color:var(--accent)}.nbtn.primary:disabled{opacity:.4}
 .flagbtn.on{background:var(--gold);color:#fff;border-color:var(--gold)}
+/* v0.8.0: flags */
+@media(max-width:560px){#quiz.prac .flagbtn .flw{display:none}}
+.sprog{gap:8px;flex-wrap:wrap}.sprog-r{display:inline-flex;align-items:center;gap:10px;margin-left:auto}
+.nbtn.cflag{font-size:13px;padding:5px 11px;letter-spacing:0;text-transform:none}
+.fltbox{display:flex;gap:6px 16px;flex-wrap:wrap;justify-content:flex-end}
+.fltchk{display:inline-flex;align-items:center;gap:7px;cursor:pointer;font-size:15px;color:var(--ink)}
+.fltchk input{accent-color:var(--accent);width:16px;height:16px;margin:0;flex:none}
+.srsflt{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.fltn{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft)}
+.flaghome{display:flex;justify-content:flex-end;margin:6px 0 0}.flaghome[hidden]{display:none}
+.flaglink{background:transparent;border:1px solid var(--line);border-radius:20px;padding:6px 13px;font-family:var(--font-mono);font-size:12px;letter-spacing:.03em;color:var(--ink);cursor:pointer}
+.flaglink:hover{border-color:var(--gold)}.flaglink .fi{color:var(--gold)}
+.flagtop{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:0 0 12px}
+.flagcount{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.flaghidden{font-size:13px;color:var(--ink-soft);border-left:3px solid var(--gold);padding:4px 10px;margin:0 0 14px}
+.flaggrp{margin:0 0 20px}
+.flaghd{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line);padding:0 0 6px;margin:0 0 8px}
+.flaghd .fgn{font-family:var(--font-head);font-weight:600;font-size:17px;color:var(--ink);flex:1;min-width:0;overflow-wrap:anywhere}
+.flaghd .fgc{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft)}.flaghd .minor{padding:5px 10px}
+.flagrow{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--line);background:var(--paper);border-radius:7px;padding:9px 9px 9px 13px;margin-bottom:7px}
+.flagrow .frm{flex:1;min-width:0}.flagrow .frt{font-size:15px;color:var(--ink);overflow-wrap:anywhere}
+.flagrow .frmeta{display:flex;flex-wrap:wrap;gap:3px 12px;margin-top:4px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.04em;color:var(--ink-soft);text-transform:uppercase}
+.fres.ok{color:var(--green)}.fres.no{color:var(--red)}
+.fguide{color:var(--accent);text-decoration:underline;cursor:pointer}
+.fx{flex:none;width:32px;height:32px;border:1px solid var(--line);background:transparent;color:var(--ink-soft);border-radius:6px;cursor:pointer;font-size:13px;line-height:1}
+.fx:hover{border-color:var(--red);color:var(--red)}
+.flagempty{color:var(--ink-soft);font-size:15px;text-align:center;margin:30px 0}
+@media(max-width:560px){.flaghd .fgn{font-size:15.5px}}
 .palette{margin:36px 0 0;border-top:1px solid var(--line);padding-top:20px}
 .palette .ttl{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:12px;display:flex;justify-content:space-between}
 .grid{display:grid;grid-template-columns:repeat(10,1fr);gap:7px}@media(max-width:560px){.grid{grid-template-columns:repeat(8,1fr)}}
@@ -1341,6 +1388,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="mode" id="mPractice"><div class="mt">Practice</div><div class="md">The question bank one at a time — the answer and a topic-guide link the moment you submit. New questions first; see your prior answer on repeats.</div><div class="feat" id="featPractice">— questions</div></div>
       <div class="mode" id="mExam"><div class="mt">Exam</div><div class="md">A timed, scored test built from fresh questions and weighted your way. Answers hidden until you submit; leave part-way and resume later.</div><div class="feat" id="featExam">— per test</div></div>
     </div>
+    <div class="flaghome" id="flagHome" hidden><button type="button" class="flaglink" id="flagHomeBtn"><span class="fi">⚑</span> Flagged (<span id="flagHomeN">0</span>)</button></div>
 
 
     <div class="revpanel" id="revPanel">
@@ -1464,6 +1512,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="cbox learnc"><div class="n" id="cLearn">0</div><div class="l">Learning</div></div>
       <div class="cbox revc"><div class="n" id="cRev">0</div><div class="l">To review</div></div>
     </div>
+    <div class="srsflt"><label class="fltchk"><input type="checkbox" id="srsFlt"><span>⚑ Flagged only</span></label><span class="fltn" id="srsFltN"></span></div>
     <div class="scopeline" id="scopeline"></div>
     <div class="studybar"><button class="btn" id="studyBtn">Study now</button><button class="btn ghost sm" id="browseBtn">Browse cards</button></div>
     <div class="panelhdr" id="topicToggle"><span class="ph-t">▸ Choose topics</span><span class="ph-r" id="topicSummary"></span></div>
@@ -1474,7 +1523,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
   <!-- SRS STUDY -->
   <section id="study">
-    <div class="sprog"><span class="tag" id="sTag">—</span><span id="sLeft"></span></div>
+    <div class="sprog"><span class="tag" id="sTag">—</span><span class="sprog-r"><span id="sLeft"></span><button class="nbtn flagbtn cflag" id="cardFlagBtn" type="button" aria-pressed="false" title="Flag this card — it is saved to your Flagged list">⚑ Flag</button></span></div>
     <div class="cardbox" id="cardbox"></div>
   </section>
 
@@ -1488,6 +1537,14 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
   <!-- BROWSE -->
   <section id="browse"><h2>All cards</h2><div id="browseList"></div></section>
+
+  <!-- FLAGGED (v0.8.0) -->
+  <section id="flagged">
+    <div class="revbar"><button class="minor backbtn" id="flagBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2">to Home</span></button><h2>Flagged</h2></div>
+    <div class="flagtop"><span class="flagcount" id="flagCount"></span><button class="minor" type="button" id="flagClearAll">Clear all flags</button></div>
+    <p class="flaghidden" id="flagHidden" hidden></p>
+    <div id="flagList"></div>
+  </section>
 
   <!-- CONTENT REVIEWER -->
   <section id="reviewer">
@@ -1557,6 +1614,8 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="setrow"><span>Topics</span><button class="minor stoggle" type="button" data-m="exam" id="exTopBtn">All topics ▸</button></div>
       <div class="stopics" id="exTopics" hidden></div>
       <div class="setrow"><span>Difficulty</span><div class="segctl sdiff" id="exDiff"><button class="seg" data-d="easy">Easy <i>0</i></button><button class="seg" data-d="medium">Medium <i>0</i></button><button class="seg" data-d="hard">Hard <i>0</i></button></div></div>
+      <div class="setrow"><span>Only</span><span class="fltbox"><label class="fltchk"><input type="checkbox" id="exFltF"><span>⚑ Flagged</span></label><label class="fltchk" title="Wrong the last time you answered it"><input type="checkbox" id="exFltW"><span>Incorrect</span></label></span></div>
+      <div class="note setup-fresh" id="exFltNote" hidden></div>
       <div class="setrow"><span>Question selection</span>
         <select id="setExamFresh"><option value="any">Any</option><option value="prefer">Prefer fresh</option><option value="only">Fresh only</option></select>
       </div>
@@ -1578,6 +1637,8 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="setrow"><span>Topics</span><button class="minor stoggle" type="button" data-m="prac" id="prTopBtn">All topics ▸</button></div>
       <div class="stopics" id="prTopics" hidden></div>
       <div class="setrow"><span>Difficulty</span><div class="segctl sdiff" id="prDiff"><button class="seg" data-d="easy">Easy <i>0</i></button><button class="seg" data-d="medium">Medium <i>0</i></button><button class="seg" data-d="hard">Hard <i>0</i></button></div></div>
+      <div class="setrow"><span>Only</span><span class="fltbox"><label class="fltchk"><input type="checkbox" id="prFltF"><span>⚑ Flagged</span></label><label class="fltchk" title="Wrong the last time you answered it"><input type="checkbox" id="prFltW"><span>Incorrect</span></label></span></div>
+      <div class="note setup-fresh" id="prFltNote" hidden></div>
       <div class="setrow"><span>Unanswered questions only</span><button class="switch" id="setPracOnlyNew">off</button></div>
       <div class="note setup-fresh" id="prFreshNote"></div>
       <div class="setrow"><span>Shuffle questions</span><button class="switch" id="setPracShuffle">on</button></div>
@@ -1686,7 +1747,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.7.9';
+const APP_VERSION='0.8.0';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -2086,7 +2147,40 @@ function diffRank(q){return DIFFS.indexOf(q&&q.difficulty);}
 function selTopics(m){const v=settings[m==='prac'?'pracTopics':'examTopics'];return Array.isArray(v)?new Set(v):null;}
 function selDiffs(m){const v=settings[m==='prac'?'pracDiffs':'examDiffs'];const s=Array.isArray(v)?v.filter(d=>DIFFS.includes(d)):[];return s.length?s:DIFFS.slice();}
 function matchDiff(q,m){const s=selDiffs(m);if(s.length===DIFFS.length)return true;const r=diffRank(q);return r>=0&&s.includes(DIFFS[r]);}
-function qTestPool(m){m=m||'exam';const t=selTopics(m);return qpool().filter(q=>matchDiff(q,m)&&(!t||t.has(q._sec)));}
+function qTestPool(m){m=m||'exam';const t=selTopics(m);return qpool().filter(q=>matchDiff(q,m)&&(!t||t.has(q._sec))&&fltMatch(q,m));} /* v0.8.0: + Flagged / Incorrect */
+/* ===== FLAGS (v0.8.0) — one saved, synced flag per question or card, independent of right/wrong.
+   settings['flag:'+itemId] = {fl:1,on,at}. A clear writes on:false (a tombstone, so the clear syncs); never deleted.
+   Kept in settings so older clients carry it through merges; merge3 resolves fl entries newest-wins by `at`. ===== */
+const FLAGK='flag:';
+function isFlagged(id){const v=id&&settings[FLAGK+id];return !!(v&&v.fl&&v.on);}
+function saveFlags(){Store.set(KEY.settings,settings);SSSync.changed();}
+function setFlags(ids,on){const t=Date.now();ids.forEach(id=>{if(id)settings[FLAGK+id]={fl:1,on:!!on,at:t};});saveFlags();}
+function setFlag(id,on){setFlags([id],on);}
+function flagOnIds(){return Object.keys(settings).filter(k=>k.startsWith(FLAGK)&&settings[k]&&settings[k].fl&&settings[k].on).map(k=>k.slice(FLAGK.length));}
+/* A session saved by an older client may carry its own session flags (qflag) — adopt them unless this id already has an entry. */
+function flagMigrate(ids,fl){const t=Date.now();let n=0;(ids||[]).forEach((id,i)=>{if(fl&&fl[i]&&id&&!settings[FLAGK+id]){settings[FLAGK+id]={fl:1,on:true,at:t};n++;}});if(n)saveFlags();}
+function lastWrong(id){const h=qhist[id];return !!h&&h.ok===false;} /* "Incorrect" = the most recent answer was wrong */
+function fltOf(m){const v=settings[m==='prac'?'pracFilt':'examFilt'];return {f:!!(v&&v.f),w:!!(v&&v.w)};}
+function fltOn(m){const f=fltOf(m);return f.f||f.w;}
+function fltMatch(q,m){const f=fltOf(m);if(!f.f&&!f.w)return true;return (f.f&&isFlagged(q.id))||(f.w&&lastWrong(q.id));}
+function fltWhat(m){const f=fltOf(m);return f.f&&f.w?'flagged or incorrect last time':f.f?'flagged':'incorrect last time';}
+function fltEmptyMsg(m){return fltOn(m)?`No questions match (${fltWhat(m)}) in these topics. Untick a filter or choose more topics.`:'No questions match those topics and difficulty.';}
+function fltPaint(m){const p=m==='exam'?'ex':'pr',f=fltOf(m);$(p+'FltF').checked=f.f;$(p+'FltW').checked=f.w;fltNote(m);}
+function fltNote(m){const el=$(m==='exam'?'exFltNote':'prFltNote');if(!el)return;if(!fltOn(m)){el.textContent='';el.hidden=true;return;}el.hidden=false;
+  const n=qTestPool(m).length;if(!n){el.textContent=fltEmptyMsg(m);return;}
+  let s=`${n} question${n===1?'':'s'} match (${fltWhat(m)}).`;
+  if(m==='exam'&&settings.examAuto&&n<(settings.examTarget||40))s+=` The exam will use all ${n}.`;
+  el.textContent=s;}
+/* Flagged items in the active packs: listed = sources on; hidden = switched off by source settings (or Extras off). */
+function flaggedItems(){const on=new Set(flagOnIds()),groups=[],hiddenIds=[];if(!on.size)return {groups,hiddenIds,hidden:0,n:0};
+  activePacks().forEach(p=>{const qs=[],cs=[];
+    (p.questions||[]).forEach(q=>{if(!q||!on.has(q.id))return;if(srcOn(p,q))qs.push(q);else hiddenIds.push(q.id);});
+    (p.cards||[]).forEach(c=>{if(!c||!on.has(c.id))return;if(srcOn(p,c))cs.push(c);else hiddenIds.push(c.id);});
+    if(qs.length||cs.length)groups.push({p,qs,cs});});
+  groups.sort((a,b)=>natCmp(String(a.p.pack||a.p.id),String(b.p.pack||b.p.id))); /* by week */
+  return {groups,hiddenIds,hidden:hiddenIds.length,n:groups.reduce((s,g)=>s+g.qs.length+g.cs.length,0)};}
+function plainText(h,max){const tp=document.createElement('template');tp.innerHTML=String(h||'').replace(/\{\{(.+?)\}\}/g,'____'); /* inert: nothing loads or runs */
+  const s=(tp.content.textContent||'').replace(/\s+/g,' ').trim();max=max||120;return s.length>max?s.slice(0,max-1).trimEnd()+'…':s;}
 function selDiffsLegacy(){const s=Array.isArray(settings.sessionDiffs)?settings.sessionDiffs.filter(d=>DIFFS.includes(d)):[];return s.length?s:DIFFS.slice();}
 function diffCounts(){const pool=qpool();const c={easy:0,medium:0,hard:0,all:pool.length};pool.forEach(q=>{const r=diffRank(q);if(r>=0)c[DIFFS[r]]++;});return c;}
 function diffBadge(q){if(!q||diffRank(q)<0)return '';return `<span class="diffbadge ${q.difficulty}">${q.difficulty}</span>`;}
@@ -2264,7 +2358,7 @@ const SSSync=(()=>{
     if(moved.length)notes.push('an unfinished exam moved to Past exams');
     const out={v:1,app:APP_VERSION,
       sched:mergeMap(b.sched,l.sched,c.sched,newer,notes,'card(s) studied on both'),daily,
-      settings:mergeMap(b.settings,l.settings,c.settings,(x,y)=>(x&&y&&x.gp&&y.gp)?newer(x,y):pick(x,y),notes,'setting(s) changed on both'),
+      settings:mergeMap(b.settings,l.settings,c.settings,(x,y)=>(x&&y&&((x.gp&&y.gp)||(x.fl&&y.fl)))?newer(x,y):pick(x,y),notes,'setting(s) changed on both'), /* v0.8.0: flags (fl) newest-wins too */
       devices:mergeMap(b.devices,l.devices,c.devices,pick,[],''),
       eac:(()=>{const a=eacNorm(l.eac),b=eacNorm(c.eac);if(!a||!a.unlocked)return b||a||null;if(!b)return a;
         return Object.assign({},b,a,{codes:[...new Set([...a.codes,...b.codes])],tags:[...new Set([...a.tags,...b.tags])],admin:!!(a.admin||b.admin),keys:Object.assign({},b.keys||{},a.keys||{})});})(),
@@ -3105,6 +3199,7 @@ function gotoSec(t){
     case 'srs': case 'study': case 'srsdone': case 'browse':
       if(deck().length)openReview();else renderHome();
       break;
+    case 'flagged': openFlagged(); break; /* v0.8.0 */
     default: renderHome();
   }
 }
@@ -3125,6 +3220,26 @@ window.addEventListener('popstate',e=>{
   doNav();
 });
 
+/* ===== FLAGGED (v0.8.0) — every flagged question and card in the active packs, by pack ===== */
+function openFlagged(){renderFlagged();show('flagged');}
+function flagRow(x,isQ){const h=isQ?qhist[x.id]:null,gf=guideFile(x),gs=(x.guide&&typeof x.guide==='object'&&x.guide.s)||'',gok=gf&&findGuide(gf);
+  const res=isQ?(h?(h.ok?'<span class="fres ok">✓ correct last time</span>':'<span class="fres no">✗ incorrect last time</span>'):'<span class="fres">not answered yet</span>'):'';
+  const ty=isQ?'Question':'Card · '+acctEsc(TYPE_LABEL[x.type]||x.type||'');
+  return `<div class="flagrow"><div class="frm"><div class="frt">${acctEsc(plainText(isQ?x.stem:(x.prompt||x.text)))||'—'}</div><div class="frmeta"><span>${ty}</span>${res}${gok?`<a class="fguide" href="javascript:void(0)" data-f="${encodeURIComponent(gf)}" data-s="${encodeURIComponent(gs)}">Open guide</a>`:''}</div></div><button class="fx" type="button" data-id="${encodeURIComponent(x.id)}" aria-label="Clear this flag" title="Clear this flag">✕</button></div>`;}
+function renderFlagged(){const fi=flaggedItems(),host=$('flagList');
+  $('flagCount').textContent=fi.n?`${fi.n} flagged item${fi.n===1?'':'s'}`:'';
+  const hd=$('flagHidden');hd.hidden=!fi.hidden;hd.textContent=fi.hidden?`${fi.hidden} flagged item${fi.hidden===1?' is':'s are'} hidden by your source settings.`:'';
+  $('flagClearAll').style.display=(fi.n||fi.hidden)?'':'none';
+  if(!fi.n){host.innerHTML='<p class="flagempty">Nothing flagged'+(fi.hidden?' that your sources show':'')+'. Tap ⚑ Flag on a question or card to keep it here.</p>';return;}
+  host.innerHTML=fi.groups.map((g,gi)=>`<div class="flaggrp"><div class="flaghd"><span class="fgn">${acctEsc(g.p.pack||g.p.id)}</span><span class="fgc">${g.qs.length+g.cs.length}</span><button class="minor" type="button" data-gclr="${gi}">Clear</button></div>${g.qs.map(q=>flagRow(q,true)).join('')}${g.cs.map(c=>flagRow(c,false)).join('')}</div>`).join('');
+  host.querySelectorAll('.fx').forEach(b=>b.onclick=()=>{setFlag(decodeURIComponent(b.dataset.id),false);renderFlagged();});
+  host.querySelectorAll('.fguide').forEach(a=>a.onclick=e=>{e.preventDefault();openGuide(decodeURIComponent(a.dataset.f),decodeURIComponent(a.dataset.s||''));});
+  host.querySelectorAll('[data-gclr]').forEach(b=>b.onclick=()=>{const g=fi.groups[+b.dataset.gclr];if(!g)return;const ids=[...g.qs,...g.cs].map(x=>x.id),n=ids.length;
+    confirmDialog(`Clear the ${n} flag${n===1?'':'s'} in ${g.p.pack||g.p.id}?`,{confirmText:'Clear',danger:true},()=>{setFlags(ids,false);renderFlagged();toast(`Cleared ${n} flag${n===1?'':'s'}.`);});});}
+function clearAllFlags(){const fi=flaggedItems(),ids=fi.groups.flatMap(g=>[...g.qs,...g.cs].map(x=>x.id)).concat(fi.hiddenIds),n=ids.length;if(!n)return;
+  confirmDialog(`Clear all ${n} flag${n===1?'':'s'}?${fi.hidden?` This includes ${fi.hidden} hidden by your source settings.`:''}`,{confirmText:'Clear all',danger:true},
+    ()=>{setFlags(ids,false);renderFlagged();toast('All flags cleared.');});}
+
 /* ===== HOME ===== */
 function renderHome(){
   backfillPlacement(); // repair any library packs missing school/year/course/weeks (copied from the manifest by id)
@@ -3144,6 +3259,7 @@ function renderHome(){
   $('mReview').classList.toggle('dim',nC===0);
   $('mPractice').classList.toggle('dim',tp===0);
   $('mExam').classList.toggle('dim',tp===0);
+  {const nF=flaggedItems().n;$('flagHome').hidden=!nF;$('flagHomeN').textContent=nF;} /* v0.8.0: the Flagged page link */
   // topic-guides panel — hidden entirely when no active pack bundles guides
   $('revPanel').style.display=nG?'':'none';
   $('revPanelDesc').textContent=`${nG} topic guide${nG===1?'':'s'} bundled in your active packs.`;
@@ -3251,9 +3367,11 @@ function currentCounts(){const g=examGroups();
 function examTotal(){const c=currentCounts();let t=0;for(const k in c)t+=c[k];return t;}
 
 /* ===== SRS DECK ===== */
+let srsFlagOnly=false; /* v0.8.0: Review → Flagged only (this visit, like the topic choice) */
 let filter=null, sessionQueue=[], currentId=null, revealed=false, work={}, studiedThisSession=0; // filter=null ⇒ ALL topics; empty Set ⇒ none; Set with members ⇒ that subset
 function inScope(c){return !filter||filter.has(c._sec);}
 function counts(){const now=Date.now();let nw=0,lr=0,rv=0,nwTot=0;
+  if(srsFlagOnly){deck().forEach(c=>{if(!inScope(c)||!isFlagged(c.id))return;const s=sched[c.id];if(!s||s.phase==='new')nw++;else if(s.phase==='review')rv++;else lr++;});return {nw,lr,rv};} /* every flagged card, due or not */
   deck().forEach(c=>{if(!inScope(c))return;const s=sched[c.id];if(s.phase==='new')nwTot++;else if(s.due<=now){(s.phase==='review'?rv++:lr++);}});
   return {nw:Math.min(nwTot,Math.max(0,settings.srsNewPerDay-daily.count)),lr,rv};}
 function openReview(){renderSrs();show('srs');}
@@ -3262,7 +3380,8 @@ function renderSrs(){
   $('cNew').textContent=c.nw;$('cLearn').textContent=c.lr;$('cRev').textContent=c.rv;
   $('studyBtn').disabled=(c.nw+c.lr+c.rv===0);
   const scope=!filter?'All topics':(filter.size===0?'No topics selected':(filter.size+' topic'+(filter.size>1?'s':'')+' — '+[...filter].slice(0,3).map(k=>secName(k)).join(', ')+(filter.size>3?'…':'')));
-  $('scopeline').innerHTML='Studying: <b>'+scope+'</b>';
+  $('scopeline').innerHTML='Studying: <b>'+scope+'</b>'+(srsFlagOnly?' · <b>flagged cards only</b>':'');
+  {const nf=deck().filter(x=>inScope(x)&&isFlagged(x.id)).length;$('srsFlt').checked=srsFlagOnly;$('srsFltN').textContent=nf+' flagged'+(filter?' in these topics':'');} /* v0.8.0 */
   $('topicSummary').textContent=!filter?'all selected':(filter.size===0?'none selected':filter.size+' selected');
   renderTopics();renderSysbreak();
 }
@@ -3270,7 +3389,7 @@ function renderSysbreak(){const sb=$('sysbreak');sb.innerHTML='';const set=new S
   systemsPresent(set).forEach(sys=>{const list=deck().filter(c=>c.sys===sys);const seen=list.filter(c=>sched[c.id].phase!=='new').length;const p=list.length?Math.round(seen/list.length*100):0;
     sb.innerHTML+=`<div class="sysrow"><div class="top"><span class="name">${sysLabel(sys)}</span><span class="sc">${seen}/${list.length} started · ${p}%</span></div><div class="sbar"><i style="width:${p}%"></i></div></div>`;});}
 function renderTopics(){const now=Date.now();const tl=$('topicList');const groups=secGroups(deck());const open=groups.length<=1; /* v0.5.5: fold from 2 packs */tl.innerHTML='';
-  groups.forEach((g,gi)=>{let chips='';g.secs.forEach(sec=>{const due=sec.items.filter(c=>{const s2=sched[c.id];return s2&&(s2.phase==='new'||s2.due<=now);}).length;
+  groups.forEach((g,gi)=>{let chips='';g.secs.forEach(sec=>{const due=srsFlagOnly?sec.items.filter(c=>isFlagged(c.id)).length:sec.items.filter(c=>{const s2=sched[c.id];return s2&&(s2.phase==='new'||s2.due<=now);}).length;
       chips+=`<button class="tchip ${(!filter||filter.has(sec.k))?'on':''}" data-t="${encodeURIComponent(sec.k)}">${acctEsc(sec.l)}<span class="ct ${due?'':'zero'}">${due}</span></button>`;});
     const on=g.secs.filter(sec=>!filter||filter.has(sec.k)).length;
     tl.innerHTML+=`<div class="tgroup ${open||tl.dataset['o'+gi]==='1'?'':'closed'}" data-gi="${gi}"><div class="ghead"><button class="gname gtoggle" type="button">${acctEsc(g.name)} <span class="gsel">${on} of ${g.secs.length}</span></button><button class="gall" type="button" data-gi="${gi}">${on===g.secs.length?'None':'All'}</button></div><div class="tchips">${chips}</div></div>`;});
@@ -3286,19 +3405,22 @@ function renderTopics(){const now=Date.now();const tl=$('topicList');const group
 
 /* ===== SRS SESSION ===== */
 function buildSession(){const now=Date.now();const due=[],learn=[],news=[];
+  if(srsFlagOnly){deck().forEach(c=>{if(!inScope(c)||!isFlagged(c.id))return;const s=sched[c.id];(!s||s.phase==='new'?news:s.phase==='review'?due:learn).push(c.id);}); /* v0.8.0 */
+    const bd=(a,b)=>sched[a].due-sched[b].due;sessionQueue=[...learn.sort(bd),...due.sort(bd),...shuffle(news)];return;}
   deck().forEach(c=>{if(!inScope(c))return;const s=sched[c.id];if(s.phase==='new')news.push(c.id);else if(s.due<=now){(s.phase==='review'?due:learn).push(c.id);}});
   due.sort((a,b)=>sched[a].due-sched[b].due);learn.sort((a,b)=>sched[a].due-sched[b].due);
   sessionQueue=[...learn,...due,...shuffle(news).slice(0,Math.max(0,settings.srsNewPerDay-daily.count))];}
 function startSession(){buildSession();studiedThisSession=0;if(sessionQueue.length===0){renderSrs();return;}presentNext();}
 function presentNext(){if(sessionQueue.length===0){finishSession();return;}currentId=sessionQueue.shift();revealed=false;work={picks:new Set(),pick:null,order:[],pool:null,optorder:null};renderCard();show('study');}
-function finishSession(){$('doneSub').textContent='Nothing more due in this scope right now.';$('doneStats').textContent=`You reviewed ${studiedThisSession} card${studiedThisSession===1?'':'s'}.`;const m=counts();$('doneStudyMore').style.display=(m.nw+m.lr+m.rv>0)?'':'none';show('srsdone');}
+function finishSession(){$('doneSub').textContent=srsFlagOnly?'You’ve been through every flagged card in this scope.':'Nothing more due in this scope right now.';$('doneStats').textContent=`You reviewed ${studiedThisSession} card${studiedThisSession===1?'':'s'}.`;const m=counts();$('doneStudyMore').style.display=(!srsFlagOnly&&m.nw+m.lr+m.rv>0)?'':'none';show('srsdone');}
 function renderCard(){const c=cardOf(currentId);
   $('sTag').textContent=`${sysLabel(c.sys).split(' ')[0]} · ${c.topic}`;
-  $('sLeft').textContent=`${sessionQueue.length} left · ${TYPE_LABEL[c.type]||c.type}`;
+  $('sLeft').textContent=`${sessionQueue.length} left · ${TYPE_LABEL[c.type]||c.type}`;paintCardFlag();
   let body=`<div class="ctype">${TYPE_LABEL[c.type]||c.type} — ${c.topic}</div>`+renderInteractive(c);
   body+= !revealed ? `<div class="showbar"><button class="showbtn" id="showBtn">Show answer</button></div>` : renderAnswer(c)+renderGrades(c);
   $('cardbox').innerHTML=body;wireInteractive(c);wireGuideLinks($('cardbox'));
   if(!revealed)$('showBtn').addEventListener('click',()=>{revealed=true;renderCard();});else wireGrades(c);}
+function paintCardFlag(){const b=$('cardFlagBtn'),f=isFlagged(currentId);b.classList.toggle('on',f);b.setAttribute('aria-pressed',f?'true':'false');b.textContent=f?'⚑ Flagged':'⚑ Flag';} /* v0.8.0 */
 function renderInteractive(c){
   if(c.type==='mcq'||c.type==='multi'){const multi=c.type==='multi';let h=`<p class="prompt">${c.prompt}</p><div class="choices">`;
     if(!work.optorder)work.optorder=optPerm(c.options);
@@ -3697,10 +3819,11 @@ function openGuide(ref,section){const g=findGuide(ref);if(!g){if(ref&&!/^\s*(jav
 function backLabel(){const r=reviewerReturn;
   if(r==='quiz')return qmode==='test'?'Exam':'Practice';
   if(r==='pharm')return 'Pharmacology';
+  if(r==='flagged')return 'Flagged';
   if(r==='study'||r==='srs')return 'Review';
   return 'Home';}
 function setBackLabel(){const el=$('revBackTo');if(el)el.textContent='to '+backLabel();}
-function returnFromReviewer(){const r=reviewerReturn;if(r==='study'){show('study');renderCard();}else if(r==='quiz'){show('quiz');renderQuiz();}else if(r==='srs'){openReview();}else if(r==='pharm'){openPharm();}else renderHome();}
+function returnFromReviewer(){const r=reviewerReturn;if(r==='study'){show('study');renderCard();}else if(r==='quiz'){show('quiz');renderQuiz();}else if(r==='srs'){openReview();}else if(r==='pharm'){openPharm();}else if(r==='flagged'){openFlagged();}else renderHome();}
 /* In-app confirm dialog + toasts — replace native confirm()/alert() (which browsers throttle/block).
    confirmDialog(msg, opts?, onConfirm): opts = {confirmText, cancelText, danger}. */
 let confirmCb=null,confirmCancelCb=null;
@@ -3821,13 +3944,13 @@ function reviewPastExam(x){buildQmap();const keep=[];x.qorder.forEach((id,i)=>{i
   if(!keep.length){toast('None of that exam’s questions are loaded any more.');return;}
   qorder=keep.map(i=>x.qorder[i]);qmode='test';qTestSubmitted=true;qPrior={};qans=keep.map(i=>x.qans[i]!=null?x.qans[i]:null);qflag=keep.map(()=>false);qsub=keep.map(()=>true);qelapsed=keep.map(()=>0);
   qopt=keep.map(i=>{const opts=qmap[x.qorder[i]].options||[];const a=x.qopt&&x.qopt[i];return (Array.isArray(a)&&a.length===opts.length)?a:optPerm(opts);});
-  qcur=0;clearInterval(qTimerId);timerWanted=false;$('timer').style.display='none';$('flagBtn').style.display='none';$('submitAnsBtn').style.display='none';$('skipBtn').style.display='none';$('finishBtn').style.display='none';
+  qcur=0;clearInterval(qTimerId);timerWanted=false;$('timer').style.display='none';$('flagBtn').style.display='';$('submitAnsBtn').style.display='none';$('skipBtn').style.display='none';$('finishBtn').style.display='none';
   $('paletteTitle').textContent='Question map · past exam';const dropped=x.qorder.length-keep.length;if(dropped)toast(`${dropped} question${dropped===1?'':'s'} from that exam aren’t loaded any more and were left out.`);
   renderQuiz();show('quiz');}
 function resumeExam(){const p=examSave;buildQmap();const keep=[];p.qorder.forEach((id,i)=>{if(qmap[id])keep.push(i);});
   if(!keep.length){toast('None of that exam’s questions are loaded any more — set up a new one.');clearExam();openSetup('exam');return;}
   qorder=keep.map(i=>p.qorder[i]);qmode='test';qTestSubmitted=false;qPrior={};qT0=p.t0||Date.now();
-  qans=keep.map(i=>(Array.isArray(p.qans)&&p.qans[i]!==undefined)?p.qans[i]:null);qflag=keep.map(i=>!!(p.qflag&&p.qflag[i]));qsub=keep.map(()=>false);qelapsed=keep.map(()=>0);
+  qans=keep.map(i=>(Array.isArray(p.qans)&&p.qans[i]!==undefined)?p.qans[i]:null);qflag=keep.map(i=>!!(p.qflag&&p.qflag[i]));flagMigrate(qorder,qflag);qsub=keep.map(()=>false);qelapsed=keep.map(()=>0);
   qopt=keep.map(i=>{const opts=qmap[p.qorder[i]].options||[];const a=Array.isArray(p.qopt)?p.qopt[i]:null;return (Array.isArray(a)&&a.length===opts.length)?a:optPerm(opts);});
   const c=keep.indexOf(p.qcur);qcur=c>=0?c:0;qTimeLeft=typeof p.left==='number'?p.left:settings.examMinutes*60;
   timerWanted=!!settings.examTimer;$('flagBtn').style.display='';$('submitAnsBtn').style.display='none';
@@ -3844,26 +3967,26 @@ function resumePractice(){const p=prac;buildQmap();
   if(!keep.length){toast('None of that session’s questions are loaded any more — starting fresh.');clearPrac();startPracticeFresh();return;}
   const pick=(arr,fill)=>keep.map(i=>(Array.isArray(arr)&&arr[i]!==undefined&&arr[i]!==null)?arr[i]:fill);
   qorder=keep.map(i=>p.qorder[i]);qmode='practice';qTestSubmitted=false;
-  qans=keep.map(i=>(Array.isArray(p.qans)&&p.qans[i]!==undefined)?p.qans[i]:null);qsub=pick(p.qsub,false);qflag=pick(p.qflag,false);qelapsed=pick(p.qelapsed,0);
+  qans=keep.map(i=>(Array.isArray(p.qans)&&p.qans[i]!==undefined)?p.qans[i]:null);qsub=pick(p.qsub,false);qflag=pick(p.qflag,false);flagMigrate(qorder,qflag);qelapsed=pick(p.qelapsed,0);
   qopt=keep.map(i=>{const opts=qmap[p.qorder[i]].options||[];const a=Array.isArray(p.qopt)?p.qopt[i]:null;return (Array.isArray(a)&&a.length===opts.length)?a:optPerm(opts);});
   const c=keep.indexOf(p.qcur);qcur=c>=0?c:0;qT0=p.t0||0;buildPrior(qT0);
-  timerWanted=!!settings.practiceTimer;$('flagBtn').style.display='none';$('submitAnsBtn').style.display='';
+  timerWanted=!!settings.practiceTimer;$('flagBtn').style.display='';$('submitAnsBtn').style.display='';
   $('finishBtn').textContent='Finish & summary';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map · practice';
   const dropped=p.qorder.length-keep.length;toast(dropped?`Practice resumed — ${dropped} question${dropped===1?'':'s'} no longer loaded ${dropped===1?'was':'were'} skipped.`:'Practice resumed.');
   renderQuiz();startQTick();show('quiz');savePrac();}
-function startPracticeFresh(){const pool=qTestPool('prac');if(!pool.length){toast('No questions match those topics and difficulty.');return;}buildQmap();
+function startPracticeFresh(){const pool=qTestPool('prac');if(!pool.length){toast(fltEmptyMsg('prac'));return;}buildQmap();
   let ids=pool.map(q=>q.id);
   if(settings.practiceOnlyNew){ids=ids.filter(id=>!histSeen(id));
-    if(!ids.length){toast('You’ve answered every question in your active packs. Turn off “Unanswered only” in Settings to practise them again.');return;}}
+    if(!ids.length){toast(fltOn('prac')?'None of the matching questions are unanswered. Turn off “Unanswered questions only” to practise them.':'You’ve answered every question in your active packs. Turn off “Unanswered only” in Settings to practise them again.');return;}}
   /* never-answered first; previously answered last — wrong last time before right, oldest first */
   const fresh=ids.filter(id=>!histSeen(id)),old=ids.filter(histSeen);if(settings.practiceShuffle)shuffle(fresh);
   old.sort((a,b)=>(qhist[a].ok===qhist[b].ok?0:(qhist[a].ok?1:-1))||(qhist[a].at-qhist[b].at));
   qorder=fresh.concat(old);qmode='practice';qT0=Date.now();buildPrior(qT0);
   qinit();qTestSubmitted=false;
-  timerWanted=!!settings.practiceTimer;$('flagBtn').style.display='none';$('submitAnsBtn').style.display='';
+  timerWanted=!!settings.practiceTimer;$('flagBtn').style.display='';$('submitAnsBtn').style.display='';
   $('finishBtn').textContent='Finish & summary';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map · practice';
   renderQuiz();startQTick();show('quiz');}
-function startExam(){const pool=qTestPool('exam');if(!pool.length){toast('No questions match those topics and difficulty.');return;}buildQmap();
+function startExam(){const pool=qTestPool('exam');if(!pool.length){toast(fltEmptyMsg('exam'));return;}buildQmap();
   const counts=currentCounts();const g=examGroups();let picks=[],short=0;const mode=settings.examFresh||'prefer';
   /* Weighting is kept per group; "fresh" = never answered (practice or exam). Prefer tops up with the longest-unseen. */
   g.forEach((ids,k)=>{const want=Math.min(ids.length,counts[k]||0);let take;
@@ -3871,8 +3994,9 @@ function startExam(){const pool=qTestPool('exam');if(!pool.length){toast('No que
     else{const fr=shuffle(ids.filter(id=>!histSeen(id)));take=fr.slice(0,want);
       if(take.length<want){if(mode==='prefer'){const last=id=>qhist[id].ex||qhist[id].at;take=take.concat(ids.filter(histSeen).sort((a,b)=>last(a)-last(b)).slice(0,want-take.length));}else short+=want-take.length;}}
     picks=picks.concat(take);});
-  if(!picks.length){toast(mode==='only'?'No fresh questions left in your active packs. Set Question selection to “Prefer fresh” in Settings.':'No questions available for an exam. Load a study pack (or widen the session difficulty).');return;}
+  if(!picks.length){toast(mode==='only'&&fltOn('exam')?'None of the matching questions are fresh. Set Question selection to “Prefer fresh” or “Any”.':mode==='only'?'No fresh questions left in your active packs. Set Question selection to “Prefer fresh” in Settings.':'No questions available for an exam. Load a study pack (or widen the session difficulty).');return;}
   if(short)toast(`Only ${picks.length} fresh question${picks.length===1?'':'s'} fit your weighting, so this exam is ${short} short.`);
+  else if(fltOn('exam')&&settings.examAuto&&picks.length<(settings.examTarget||40))toast(`Only ${picks.length} question${picks.length===1?'':'s'} match your filters, so this exam has ${picks.length}.`); /* v0.8.0 */
   qorder=shuffle(picks);qmode='test';qPrior={};qT0=Date.now();qinit();qTestSubmitted=false;qTimeLeft=settings.examMinutes*60;saveExam();
   timerWanted=!!settings.examTimer;$('flagBtn').style.display='';$('submitAnsBtn').style.display='none';
   $('finishBtn').textContent='Submit examination';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map';
@@ -3903,11 +4027,12 @@ function renderQuiz(){const q=qmap[qorder[qcur]],sel=qans[qcur],done=qRevealed(q
   $('prevBtn').disabled=(qcur===0);$('nextBtn').disabled=(qcur===qorder.length-1);
   $('skipBtn').style.display=qRevealed(qcur)?'none':'';
   if(qmode==='practice'){$('submitAnsBtn').style.display=qsub[qcur]?'none':'';$('submitAnsBtn').disabled=(qans[qcur]==null);if(settings.practiceTimer)updatePracClock();}
-  else{$('flagBtn').classList.toggle('on',qflag[qcur]);$('flagBtn').textContent=qflag[qcur]?'⚑ Flagged':'⚑ Flag';}
+  {const f=isFlagged(qorder[qcur]),b=$('flagBtn');qflag[qcur]=f;b.classList.toggle('on',f);b.setAttribute('aria-pressed',f?'true':'false');b.title='Flag this question — it is saved to your Flagged list';
+    b.innerHTML='⚑<span class="flw"> '+(f?'Flagged':'Flag')+'</span>';$('quiz').classList.toggle('prac',qmode==='practice');} /* v0.8.0: the saved flag, every mode */
   renderGrid();}
 function renderGrid(){const g=$('grid');g.innerHTML='';let answered=0,correct=0;
   for(let i=0;i<qorder.length;i++){const c=document.createElement('div');c.className='cell';c.textContent=i+1;
-    if(qans[i]!==null)answered++;if(i===qcur)c.classList.add('current');if(qflag[i])c.classList.add('flagged');
+    if(qans[i]!==null)answered++;if(i===qcur)c.classList.add('current');qflag[i]=isFlagged(qorder[i]);if(qflag[i])c.classList.add('flagged');
     const pr=qmode==='practice'&&qPrior[qorder[i]];if(pr){c.classList.add('prior',pr.ok?'pok':'pno');c.title='Answered before — '+(pr.ok?'correct':'incorrect')+' last time';}
     if(qRevealed(i)){if(qans[i]===qmap[qorder[i]].correct){c.classList.add('r-correct');correct++;}else c.classList.add('r-wrong');}
     else if(qans[i]!==null)c.classList.add('answered');
@@ -3948,7 +4073,7 @@ let setupMode=null;
 function setupFreshNotes(){const ep=qTestPool('exam'),pp=qTestPool('prac');
   const ef=ep.filter(q=>!histSeen(q.id)).length,pf=pp.filter(q=>!histSeen(q.id)).length;
   $('exFreshNote').textContent=`${ef} of ${ep.length} question${ep.length===1?'':'s'} not answered yet.`;
-  $('prFreshNote').textContent=`${pf} of ${pp.length} not answered yet.`;}
+  $('prFreshNote').textContent=`${pf} of ${pp.length} not answered yet.`;fltNote('exam');fltNote('prac');}
 function renderSetupDiff(){const m=setupMode==='exam'?'exam':'prac',el=$(m==='exam'?'exDiff':'prDiff'),sd=selDiffs(m),dc=diffCounts();
   el.querySelectorAll('.seg').forEach(b=>{b.classList.toggle('on',sd.includes(b.dataset.d));b.querySelector('i').textContent=dc[b.dataset.d];});
   const box=$(m==='exam'?'exTopics':'prTopics');if(!box.hidden)renderSetupTopics(m);}
@@ -3978,7 +4103,7 @@ function openSetup(m){setupMode=m;const ex=m==='exam';tidyTopics(m);$(ex?'exTopi
   if(ex){$('setGroupBy').value=settings.examGroupBy;$('autoTarget').value=Math.max(1,settings.examTarget||40);toggleSwitch($('setExamAuto'),settings.examAuto);
     $('setExamMins').value=settings.examMinutes;toggleSwitch($('setExamTimer'),settings.examTimer);$('setExamFresh').value=settings.examFresh||'prefer';renderWeights();}
   else{$('setPracSecs').value=settings.practiceSecs;toggleSwitch($('setPracTimer'),settings.practiceTimer);toggleSwitch($('setPracShuffle'),settings.practiceShuffle);toggleSwitch($('setPracOnlyNew'),!!settings.practiceOnlyNew);}
-  renderSetupDiff();setupFreshNotes();$('setupOv').style.display='flex';}
+  fltPaint(m);renderSetupDiff();setupFreshNotes();$('setupOv').style.display='flex';}
 function closeSetup(){$('setupOv').style.display='none';setupMode=null;renderHome();}
 ['exDiff','prDiff'].forEach(id=>$(id).querySelectorAll('.seg').forEach(b=>b.addEventListener('click',()=>{
   const m=id==='exDiff'?'exam':'prac',k=m==='exam'?'examDiffs':'pracDiffs',d=b.dataset.d,s=selDiffs(m);
@@ -3988,7 +4113,9 @@ $('setupX').addEventListener('click',closeSetup);
 $('pastX').addEventListener('click',()=>{$('pastOv').style.display='none';});$('pastOv').addEventListener('click',e=>{if(e.target===$('pastOv'))$('pastOv').style.display='none';});
 $('setupOv').addEventListener('click',e=>{if(e.target===$('setupOv'))closeSetup();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('setupOv').style.display!=='none')closeSetup();});
-$('setupGo').addEventListener('click',()=>{const m=setupMode;$('setupOv').style.display='none';setupMode=null;m==='exam'?startExam():startPracticeFresh();});
+[['exFltF','exam','f'],['exFltW','exam','w'],['prFltF','prac','f'],['prFltW','prac','w']].forEach(([id,m,k])=>$(id).addEventListener('change',e=>{ /* v0.8.0 */
+  const v=fltOf(m);v[k]=!!e.target.checked;settings[m==='prac'?'pracFilt':'examFilt']=v;setupFreshNotes();if(m==='exam')renderWeights();persist();}));
+$('setupGo').addEventListener('click',()=>{const m=setupMode;if(m&&!qTestPool(m).length){toast(fltEmptyMsg(m));return;} /* v0.8.0: stay on setup */$('setupOv').style.display='none';setupMode=null;m==='exam'?startExam():startPracticeFresh();});
 
 /* ===== SETTINGS ===== */
 function openSettings(){
@@ -4113,6 +4240,9 @@ $('mExam').addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#
 $('openReviewer').addEventListener('click',()=>{if(activeGuides().length)openReviewer();});
 $('openPharm').addEventListener('click',()=>{if(drugCount())openPharm();});
 $('pharmBack').addEventListener('click',()=>renderHome());
+$('flagHomeBtn').addEventListener('click',openFlagged);$('flagBack').addEventListener('click',()=>renderHome());$('flagClearAll').addEventListener('click',clearAllFlags); /* v0.8.0 */
+$('srsFlt').addEventListener('change',e=>{srsFlagOnly=!!e.target.checked;renderSrs();});
+$('cardFlagBtn').addEventListener('click',()=>{if(!currentId)return;setFlag(currentId,!isFlagged(currentId));paintCardFlag();});
 $('pharmSearch').addEventListener('input',e=>onPharmSearch(e.target.value));
 $('installBtn').addEventListener('click',openInstall);
 /* v0.5.1: one tap — a new app reloads and then applies waiting pack updates; pack updates alone apply straight away. */
@@ -4148,7 +4278,7 @@ $('noneTopics').addEventListener('click',()=>{filter=new Set();renderSrs();}); /
 $('prevBtn').addEventListener('click',qPrev);$('nextBtn').addEventListener('click',qNext);
 $('skipBtn').addEventListener('click',()=>{if(qRevealed(qcur))return;qans[qcur]=null;if(qcur<qorder.length-1)qNext();else{renderQuiz();savePrac();}});
 $('submitAnsBtn').addEventListener('click',submitAnswer);
-$('flagBtn').addEventListener('click',()=>{qflag[qcur]=!qflag[qcur];renderQuiz();});
+$('flagBtn').addEventListener('click',()=>{const id=qorder[qcur];if(!id)return;setFlag(id,!isFlagged(id));qflag[qcur]=isFlagged(id);renderQuiz();savePrac();}); /* v0.8.0: saved + synced */
 $('finishBtn').addEventListener('click',()=>{qmode==='test'?submitExam(false):finishPractice();});
 $('dropzone').addEventListener('click',()=>$('packFile').click());
 $('packFile').addEventListener('change',e=>{if(e.target.files.length)readFiles(e.target.files);e.target.value='';});
