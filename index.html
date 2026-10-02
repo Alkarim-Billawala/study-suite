@@ -1,7 +1,12 @@
 <!--
-  Study Suite  ·  v0.8.2 (beta)
+  Study Suite  ·  v0.8.3 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.8.3: packs read by an older app are read again. ingestPack stamps readBy (APP_VERSION) and dropped (items
+  the validator rejected). repairPacks(), run after the pack list loads (maybeApplyQueuedUpdates), re-downloads a published,
+  non-stub pack whose copy has no readBy (read before 0.8.3; e.g. Week 44 v1.3 read by 0.8.0 lost its 11 label cards) or
+  was read by an older app that dropped items — only when the copy's version equals the list's (never accepts an update
+  silently); downloadPack keeps enabled and ts, and progress is keyed by card id, so nothing else changes.
   Changelog v0.8.2: the library row's sources button reads "All sources" when every source is on (was "Sources");
   with some off it still reads "N of M sources".
   Changelog v0.8.1: image cards. (1) Images inside existing fields: a data:image <img> may sit in a question stem or a
@@ -1796,7 +1801,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.8.2';
+const APP_VERSION='0.8.3';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3042,7 +3047,16 @@ function updatePack(p,mp,btn){if(btn){btn.disabled=true;btn.textContent='Updatin
   applyPackUpdate(p,mp).then(async()=>{await persist();renderHome();toast('Updated '+(p.pack||p.id)+' to v'+mp.version+'.');})
     .catch(()=>{if(btn){btn.disabled=false;btn.textContent='↑ Update';}toast('Could not update — check your connection and try again.');});}
 function maybeApplyQueuedUpdates(){if(!DATA_READY||!defaultManifest)return;try{sessionStorage.removeItem('suite_apply_updates');}catch(e){} /* v0.6.7: a pre-0.6.7 flag is discarded — pack updates are accepted in the library only */
-  try{offloadIdle();}catch(e){}}
+  try{offloadIdle();}catch(e){}
+  repairPacks();}
+/* v0.8.3: re-read a published pack whose copy came from an older app (no readBy, or items dropped by an older app).
+   Same version only, so an update is never accepted silently; downloadPack keeps enabled and ts; progress is keyed by id. */
+let repairBusy=false;
+async function repairPacks(){if(repairBusy||!DATA_READY||!defaultManifest)return;repairBusy=true;let n=0;
+  try{for(const p of packs.slice()){if(p.stub)continue;const mp=manifestEntry(p.id);if(!mp||!mp.version||verCmp(mp.version,p.version)!==0)continue;
+      if(p.readBy&&!(p.dropped>0&&verCmp(APP_VERSION,p.readBy)>0))continue;
+      try{if(await downloadPack(p,false))n++;}catch(e){}}
+    if(n){await persist();renderHome();}}finally{repairBusy=false;}}
 function updateAllPacks(){const todo=pendingUpdates();if(!todo.length)return;
   (async()=>{let n=0;for(const e of todo){try{await applyPackUpdate(e[0],e[1]);n++;}catch(err){}}await persist();renderHome();updateHeaderButtons();
     toast(n?('Updated '+n+' pack'+(n===1?'':'s')+'.'):'Could not update — check your connection.');})();}
@@ -3207,6 +3221,7 @@ function ingestPack(obj,sourceName){
   pk.cards=pk.cards.filter((c,i)=>{const v=validateCard(c,i);if(v){errs.push(v);return false;}return true;});
   pk.questions.forEach((q,i)=>{if(!q.id)q.id=pk.id+'_q'+i;});
   pk.cards.forEach((c,i)=>{if(!c.id)c.id=pk.id+'_c'+i;});
+  pk.readBy=APP_VERSION;pk.dropped=errs.length; /* v0.8.3: lets a newer app re-read what an older one could not */
   const idx=packs.findIndex(p=>p.id===pk.id);
   pk.enabled=(idx>=0)?packs[idx].enabled!==false:true;pk.ts=Date.now();if(packGone&&packGone[pk.id])delete packGone[pk.id]; /* v0.4.7: change time for sync merge */
   if(idx>=0)packs[idx]=pk;else packs.push(pk);
