@@ -1,7 +1,15 @@
 <!--
-  Study Suite  ·  v0.8.3 (beta)
+  Study Suite  ·  v0.8.4 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.8.4: Question map filter (practice + exam). A "Filter ▾" button (#qflBtn, aria-expanded) in the map title
+  row toggles an in-flow panel (#qflBox, .fltchk checkboxes): Unanswered (qans null), Answered, Flagged (isFlagged),
+  Incorrect / Correct (only slots where qRevealed; revealed-but-skipped = Incorrect) + Show all. OR across ticks, none =
+  all. Exam before submit: Incorrect/Correct disabled ("Available after you submit"), enabled once qTestSubmitted.
+  renderGrid skips non-matching cells (numbers kept; the current slot always shown), counter adds " · showing X of N"
+  ("X of N" at <=560px), empty note + Show all link when nothing matches, and sets Prev/Next disabled from qstep().
+  qPrev/qNext/Skip step through matching slots only (qstep); Finish/Submit unchanged. State is the in-memory Set qfl,
+  cleared by qflReset() in every start/resume/past-exam path; never saved. Closes on outside click / Escape.
   Changelog v0.8.3: packs read by an older app are read again. ingestPack stamps readBy (APP_VERSION) and dropped (items
   the validator rejected). repairPacks(), run after the pack list loads (maybeApplyQueuedUpdates), re-downloads a published,
   non-stub pack whose copy has no readBy (read before 0.8.3; e.g. Week 44 v1.3 read by 0.8.0 lost its 11 label cards) or
@@ -1294,6 +1302,14 @@ section{display:none}section.on{display:block}
 @media(max-width:560px){.flaghd .fgn{font-size:15.5px}}
 .palette{margin:36px 0 0;border-top:1px solid var(--line);padding-top:20px}
 .palette .ttl{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:12px;display:flex;justify-content:space-between}
+/* v0.8.4: question map filter */
+.palette .ttl{flex-wrap:wrap;align-items:center;gap:6px 12px}.qflhd{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap}
+.qflbtn{font:inherit;letter-spacing:.1em;text-transform:uppercase;background:transparent;border:1px solid var(--line);color:var(--ink-soft);border-radius:20px;padding:4px 10px;cursor:pointer;white-space:nowrap}
+.qflbtn:hover{border-color:var(--ink);color:var(--ink)}.qflbtn.on{border-color:var(--accent);color:var(--accent)}
+.qflbox{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;margin:0 0 12px;padding:10px 12px;border:1px solid var(--line);border-radius:7px;background:var(--paper)}.qflbox[hidden]{display:none}
+.qflbox .fltchk{font-size:14px}.qflbox .fltchk.dis{opacity:.45;cursor:default}.qflbox .minor{padding:5px 10px;margin-left:auto}
+.qflempty{grid-column:1/-1;font-size:14px;color:var(--ink-soft);padding:4px 0}.qflempty button{background:none;border:0;padding:0;font:inherit;color:var(--accent);text-decoration:underline;cursor:pointer}
+@media(max-width:560px){.qflw{display:none}}
 .grid{display:grid;grid-template-columns:repeat(10,1fr);gap:7px}@media(max-width:560px){.grid{grid-template-columns:repeat(8,1fr)}}
 .cell{aspect-ratio:1;border:1.5px solid var(--line);background:var(--paper);border-radius:5px;font-family:var(--font-mono);font-size:12px;cursor:pointer;color:var(--ink-soft);display:grid;place-items:center;position:relative;transition:all .12s}
 .cell:hover{border-color:var(--ink)}.cell.answered{background:var(--ink);color:var(--paper);border-color:var(--ink)}.cell.current{outline:2px solid var(--accent);outline-offset:1px}
@@ -1743,7 +1759,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="mid"><button class="nbtn flagbtn" id="flagBtn">⚑ Flag</button><button class="nbtn primary" id="submitAnsBtn" style="display:none">Submit<span class="sa-long"> answer</span></button></div>
       <button class="nbtn" id="nextBtn">Next →</button>
     </div>
-    <div class="palette"><div class="ttl"><span id="paletteTitle">Question map</span><span id="answeredCount"></span></div><div class="grid" id="grid"></div><div class="submitbar"><button class="btn" id="finishBtn"></button></div></div>
+    <div class="palette"><div class="ttl"><span class="qflhd"><span id="paletteTitle">Question map</span><button class="qflbtn" id="qflBtn" type="button" aria-expanded="false" aria-controls="qflBox">Filter ▾</button></span><span id="answeredCount"></span></div><div class="qflbox" id="qflBox" role="group" aria-label="Filter the question map" hidden><label class="fltchk"><input type="checkbox" data-f="u"><span>Unanswered</span></label><label class="fltchk"><input type="checkbox" data-f="a"><span>Answered</span></label><label class="fltchk"><input type="checkbox" data-f="f"><span>⚑ Flagged</span></label><label class="fltchk"><input type="checkbox" data-f="w"><span>Incorrect</span></label><label class="fltchk"><input type="checkbox" data-f="c"><span>Correct</span></label><button class="minor" id="qflAll" type="button">Show all</button></div><div class="grid" id="grid"></div><div class="submitbar"><button class="btn" id="finishBtn"></button></div></div>
   </section>
 
   <!-- RESULTS -->
@@ -1801,7 +1817,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.8.3';
+const APP_VERSION='0.8.4';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -4039,7 +4055,7 @@ function reviewPastExam(x){buildQmap();const keep=[];x.qorder.forEach((id,i)=>{i
   qopt=keep.map(i=>{const opts=qmap[x.qorder[i]].options||[];const a=x.qopt&&x.qopt[i];return (Array.isArray(a)&&a.length===opts.length)?a:optPerm(opts);});
   qcur=0;clearInterval(qTimerId);timerWanted=false;$('timer').style.display='none';$('flagBtn').style.display='';$('submitAnsBtn').style.display='none';$('skipBtn').style.display='none';$('finishBtn').style.display='none';
   $('paletteTitle').textContent='Question map · past exam';const dropped=x.qorder.length-keep.length;if(dropped)toast(`${dropped} question${dropped===1?'':'s'} from that exam aren’t loaded any more and were left out.`);
-  renderQuiz();show('quiz');}
+  qflReset();renderQuiz();show('quiz');}
 function resumeExam(){const p=examSave;buildQmap();const keep=[];p.qorder.forEach((id,i)=>{if(qmap[id])keep.push(i);});
   if(!keep.length){toast('None of that exam’s questions are loaded any more — set up a new one.');clearExam();openSetup('exam');return;}
   qorder=keep.map(i=>p.qorder[i]);qmode='test';qTestSubmitted=false;qPrior={};qT0=p.t0||Date.now();
@@ -4048,7 +4064,7 @@ function resumeExam(){const p=examSave;buildQmap();const keep=[];p.qorder.forEac
   const c=keep.indexOf(p.qcur);qcur=c>=0?c:0;qTimeLeft=typeof p.left==='number'?p.left:settings.examMinutes*60;
   timerWanted=!!settings.examTimer;$('flagBtn').style.display='';$('submitAnsBtn').style.display='none';
   $('finishBtn').textContent='Submit examination';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map';
-  $('timer').classList.remove('over','warn');toast('Exam resumed'+(settings.examTimer?' — the timer picks up where you left it.':'.'));renderQuiz();startQTick();show('quiz');}
+  $('timer').classList.remove('over','warn');toast('Exam resumed'+(settings.examTimer?' — the timer picks up where you left it.':'.'));qflReset();renderQuiz();startQTick();show('quiz');}
 function startPractice(){
   if(pracInProgress()){const N=prac.qorder.length,n=(prac.qsub||[]).filter(Boolean).length,a=(prac.qans||[]).filter(x=>x!=null).length;
     confirmDialog(`You have a practice session in progress — ${n} of ${N} submitted${a>n?` (${a-n} more answered, not yet submitted)`:''}. Resume it, or start fresh?`,
@@ -4066,7 +4082,7 @@ function resumePractice(){const p=prac;buildQmap();
   timerWanted=!!settings.practiceTimer;$('flagBtn').style.display='';$('submitAnsBtn').style.display='';
   $('finishBtn').textContent='Finish & summary';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map · practice';
   const dropped=p.qorder.length-keep.length;toast(dropped?`Practice resumed — ${dropped} question${dropped===1?'':'s'} no longer loaded ${dropped===1?'was':'were'} skipped.`:'Practice resumed.');
-  renderQuiz();startQTick();show('quiz');savePrac();}
+  qflReset();renderQuiz();startQTick();show('quiz');savePrac();}
 function startPracticeFresh(){const pool=qTestPool('prac');if(!pool.length){toast(fltEmptyMsg('prac'));return;}buildQmap();
   let ids=pool.map(q=>q.id);
   if(settings.practiceOnlyNew){ids=ids.filter(id=>!histSeen(id));
@@ -4078,7 +4094,7 @@ function startPracticeFresh(){const pool=qTestPool('prac');if(!pool.length){toas
   qinit();qTestSubmitted=false;
   timerWanted=!!settings.practiceTimer;$('flagBtn').style.display='';$('submitAnsBtn').style.display='';
   $('finishBtn').textContent='Finish & summary';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map · practice';
-  renderQuiz();startQTick();show('quiz');}
+  qflReset();renderQuiz();startQTick();show('quiz');}
 function startExam(){const pool=qTestPool('exam');if(!pool.length){toast(fltEmptyMsg('exam'));return;}buildQmap();
   const counts=currentCounts();const g=examGroups();let picks=[],short=0;const mode=settings.examFresh||'prefer';
   /* Weighting is kept per group; "fresh" = never answered (practice or exam). Prefer tops up with the longest-unseen. */
@@ -4093,7 +4109,7 @@ function startExam(){const pool=qTestPool('exam');if(!pool.length){toast(fltEmpt
   qorder=shuffle(picks);qmode='test';qPrior={};qT0=Date.now();qinit();qTestSubmitted=false;qTimeLeft=settings.examMinutes*60;saveExam();
   timerWanted=!!settings.examTimer;$('flagBtn').style.display='';$('submitAnsBtn').style.display='none';
   $('finishBtn').textContent='Submit examination';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map';
-  $('timer').classList.remove('over','warn');renderQuiz();startQTick();show('quiz');}
+  $('timer').classList.remove('over','warn');qflReset();renderQuiz();startQTick();show('quiz');}
 function qinit(){qcur=0;qans=new Array(qorder.length).fill(null);qsub=new Array(qorder.length).fill(false);qflag=new Array(qorder.length).fill(false);qelapsed=new Array(qorder.length).fill(0);
   qopt=qorder.map(id=>optPerm(qmap[id].options||[]));}
 function qRevealed(slot){return qmode==='practice'?qsub[slot]:qTestSubmitted;}
@@ -4117,23 +4133,40 @@ function renderQuiz(){const q=qmap[qorder[qcur]],sel=qans[qcur],done=qRevealed(q
   if($('priorBtn'))$('priorBtn').onclick=()=>{const b=$('priorBox'),open=b.hidden;b.hidden=!open;$('priorBtn').setAttribute('aria-expanded',open?'true':'false');};
   if(!done)$('qcard').querySelectorAll('.opt').forEach(el=>el.addEventListener('click',()=>{qans[qcur]=+el.dataset.i;renderQuiz();renderGrid();savePrac();}));
   else wireGuideLinks($('qcard'));
-  $('prevBtn').disabled=(qcur===0);$('nextBtn').disabled=(qcur===qorder.length-1);
   $('skipBtn').style.display=qRevealed(qcur)?'none':'';
   if(qmode==='practice'){$('submitAnsBtn').style.display=qsub[qcur]?'none':'';$('submitAnsBtn').disabled=(qans[qcur]==null);if(settings.practiceTimer)updatePracClock();}
   {const f=isFlagged(qorder[qcur]),b=$('flagBtn');qflag[qcur]=f;b.classList.toggle('on',f);b.setAttribute('aria-pressed',f?'true':'false');b.title='Flag this question — it is saved to your Flagged list';
     b.innerHTML='⚑<span class="flw"> '+(f?'Flagged':'Flag')+'</span>';$('quiz').classList.toggle('prac',qmode==='practice');} /* v0.8.0: the saved flag, every mode */
   renderGrid();}
-function renderGrid(){const g=$('grid');g.innerHTML='';let answered=0,correct=0;
-  for(let i=0;i<qorder.length;i++){const c=document.createElement('div');c.className='cell';c.textContent=i+1;
-    if(qans[i]!==null)answered++;if(i===qcur)c.classList.add('current');qflag[i]=isFlagged(qorder[i]);if(qflag[i])c.classList.add('flagged');
+function renderGrid(){const g=$('grid');g.innerHTML='';let answered=0,correct=0,hits=0;
+  for(let i=0;i<qorder.length;i++){
+    if(qans[i]!==null)answered++;qflag[i]=isFlagged(qorder[i]);if(qRevealed(i)&&qans[i]===qmap[qorder[i]].correct)correct++;
+    const hit=qflHit(i);if(hit)hits++;if(!hit&&i!==qcur)continue; /* v0.8.4: filtered out (the current slot always stays) */
+    const c=document.createElement('div');c.className='cell';c.textContent=i+1;
+    if(i===qcur)c.classList.add('current');if(qflag[i])c.classList.add('flagged');
     const pr=qmode==='practice'&&qPrior[qorder[i]];if(pr){c.classList.add('prior',pr.ok?'pok':'pno');c.title='Answered before — '+(pr.ok?'correct':'incorrect')+' last time';}
-    if(qRevealed(i)){if(qans[i]===qmap[qorder[i]].correct){c.classList.add('r-correct');correct++;}else c.classList.add('r-wrong');}
+    if(qRevealed(i))c.classList.add(qans[i]===qmap[qorder[i]].correct?'r-correct':'r-wrong');
     else if(qans[i]!==null)c.classList.add('answered');
     c.addEventListener('click',()=>{qcur=i;renderQuiz();window.scrollTo({top:0,behavior:'smooth'});});g.appendChild(c);}
-  $('answeredCount').textContent=qmode==='practice'?`${qsub.filter(Boolean).length} submitted · ${correct} correct`:(qTestSubmitted?'review mode':`${answered} answered`);}
+  const on=qflOn();if(on&&!hits){const e=document.createElement('div');e.className='qflempty';e.innerHTML='No questions match this filter. <button type="button">Show all</button>';e.querySelector('button').onclick=()=>{qfl.clear();renderGrid();};g.appendChild(e);}
+  $('answeredCount').innerHTML=(qmode==='practice'?`${qsub.filter(Boolean).length} submitted · ${correct} correct`:(qTestSubmitted?'review mode':`${answered} answered`))+(on?` · <span class="qflw">showing </span>${hits} of ${qorder.length}`:'');
+  $('prevBtn').disabled=qstep(-1)<0;$('nextBtn').disabled=qstep(1)<0;qflPaint();}
+/* v0.8.4: question map filter — in memory only; u answered-not / a answered / f flagged / w incorrect / c correct; OR across ticks */
+const qfl=new Set();
+function qflRes(){return qmode==='practice'||qTestSubmitted;} /* exam: right/wrong only after submitting */
+function qflOn(){return [...qfl].some(k=>(k!=='w'&&k!=='c')||qflRes());}
+function qflHit(i){if(!qflOn())return true;const a=qans[i];
+  if((qfl.has('u')&&a===null)||(qfl.has('a')&&a!==null)||(qfl.has('f')&&isFlagged(qorder[i])))return true;
+  if(qflRes()&&qRevealed(i)){const ok=a===qmap[qorder[i]].correct;if((qfl.has('w')&&!ok)||(qfl.has('c')&&ok))return true;}return false;}
+function qstep(d){for(let i=qcur+d;i>=0&&i<qorder.length;i+=d)if(qflHit(i))return i;return -1;}
+function qflPaint(){const r=qflRes(),b=$('qflBox'),n=[...qfl].filter(k=>(k!=='w'&&k!=='c')||r).length;
+  b.querySelectorAll('input[data-f]').forEach(x=>{const k=x.dataset.f,res=k==='w'||k==='c';x.checked=qfl.has(k);x.disabled=res&&!r;x.parentNode.classList.toggle('dis',res&&!r);x.parentNode.title=res&&!r?'Available after you submit':'';});
+  const t=$('qflBtn');t.textContent=`Filter${n?` (${n})`:''} ${b.hidden?'▾':'▴'}`;t.classList.toggle('on',n>0);t.setAttribute('aria-expanded',b.hidden?'false':'true');}
+function qflReset(){qfl.clear();$('qflBox').hidden=true;}
+function qflClose(){if($('qflBox').hidden)return;$('qflBox').hidden=true;qflPaint();}
 function submitAnswer(){if(qans[qcur]==null)return;qsub[qcur]=true;const id=qorder[qcur];histRecord(id,qans[qcur],qans[qcur]===qmap[id].correct,'p');saveHist();renderQuiz();renderGrid();savePrac();}
-function qPrev(){if(qcur>0){qcur--;renderQuiz();savePrac();window.scrollTo({top:0,behavior:'smooth'});}}
-function qNext(){if(qcur<qorder.length-1){qcur++;renderQuiz();savePrac();window.scrollTo({top:0,behavior:'smooth'});}}
+function qPrev(){const i=qstep(-1);if(i>=0){qcur=i;renderQuiz();savePrac();window.scrollTo({top:0,behavior:'smooth'});}} /* v0.8.4: matching slots only */
+function qNext(){const i=qstep(1);if(i>=0){qcur=i;renderQuiz();savePrac();window.scrollTo({top:0,behavior:'smooth'});}}
 function submitExam(auto){if(qTestSubmitted)return;const un=qans.filter(a=>a===null).length;
   if(!auto&&un>0){confirmDialog(`${un} unanswered. Submit anyway?`,{confirmText:'Submit'},()=>doSubmitExam(auto));return;}
   doSubmitExam(auto);}
@@ -4369,10 +4402,16 @@ $('topicToggle').addEventListener('click',()=>{const p=$('topicPanel');p.classLi
 $('allTopics').addEventListener('click',()=>{filter=null;renderSrs();}); // ALL ⇒ every chip on, studies all
 $('noneTopics').addEventListener('click',()=>{filter=new Set();renderSrs();}); // none ⇒ no chips on, studies nothing
 $('prevBtn').addEventListener('click',qPrev);$('nextBtn').addEventListener('click',qNext);
-$('skipBtn').addEventListener('click',()=>{if(qRevealed(qcur))return;qans[qcur]=null;if(qcur<qorder.length-1)qNext();else{renderQuiz();savePrac();}});
+$('skipBtn').addEventListener('click',()=>{if(qRevealed(qcur))return;qans[qcur]=null;if(qstep(1)>=0)qNext();else{renderQuiz();savePrac();}});
 $('submitAnsBtn').addEventListener('click',submitAnswer);
 $('flagBtn').addEventListener('click',()=>{const id=qorder[qcur];if(!id)return;setFlag(id,!isFlagged(id));qflag[qcur]=isFlagged(id);renderQuiz();savePrac();}); /* v0.8.0: saved + synced */
 $('finishBtn').addEventListener('click',()=>{qmode==='test'?submitExam(false):finishPractice();});
+/* v0.8.4: question map filter */
+$('qflBtn').addEventListener('click',()=>{const b=$('qflBox');b.hidden=!b.hidden;qflPaint();});
+$('qflBox').addEventListener('change',e=>{const k=e.target.dataset&&e.target.dataset.f;if(!k)return;e.target.checked?qfl.add(k):qfl.delete(k);renderGrid();});
+$('qflAll').addEventListener('click',()=>{qfl.clear();renderGrid();});
+document.addEventListener('click',e=>{if(!$('qflBox').hidden&&!(e.target.closest&&e.target.closest('#qflBox,#qflBtn')))qflClose();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('qflBox').hidden){qflClose();$('qflBtn').focus();}});
 $('dropzone').addEventListener('click',()=>$('packFile').click());
 $('packFile').addEventListener('change',e=>{if(e.target.files.length)readFiles(e.target.files);e.target.value='';});
 ['dragover','dragenter'].forEach(ev=>$('dropzone').addEventListener(ev,e=>{e.preventDefault();$('dropzone').classList.add('drag');}));
