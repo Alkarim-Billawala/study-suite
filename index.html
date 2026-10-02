@@ -1,7 +1,34 @@
 <!--
-  Study Suite  ·  v0.8.0 (beta)
+  Study Suite  ·  v0.8.1 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.8.1: image cards. (1) Images inside existing fields: a data:image <img> may sit in a question stem or a
+  card prompt / answer / explain; CSS (.cardbox img, .qcard img) fits it: block, centred, max-width 100%, height auto,
+  small radius, max-height 60vh (46vh at <=640px, object-fit contain). stripText (Browse rows) swaps an <img> for its alt
+  text before dropping tags; the Flagged page already uses plainText (inert template). No other rendering change.
+  (2) New card type `label` (label-this-structure): {type:'label',prompt,image:'data:image/(webp|jpeg|png|gif);base64,…',
+  labels:[{x,y,w,h,t}],explain?,guide?,src?}; x,y,w,h = fractions of the image box covering a printed label, t = its
+  text. validateCard: image must be a base64 data:image URI; labels a non-empty array, numeric x,y,w,h in [0,1],
+  x+w<=1.001, y+h<=1.001, non-empty t; prompt required as for other non-cloze types. renderInteractive: prompt, then
+  .labfig > .labwrap (inline-block, position:relative, sized by the image) with one absolutely placed button.lmask per
+  label in % (stays aligned at any width/rotation), filled var(--accent) with a numbered .lnum badge; tapping a mask
+  toggles it revealed (.on: transparent + accent ring) in place — work.lab (Set), no re-render. Show answer (button,
+  Space/Enter as before) reveals every mask; renderAnswer lists the labels (escaped t) as a numbered list + explain.
+  gotCorrect returns null (self-graded like qa; normal Again/Hard/Good/Easy). KNOWN_TYPES + TYPE_LABEL ('Label');
+  Browse text = prompt. Older apps (<=0.8.0) drop label cards at load in validateCard (counted as an import error,
+  nothing else affected); image-in-field items render in older apps unstyled (full natural size).
+  (3) Topic Guides list: the search box sits in a sticky .revsearchbar (top:-8px over the nav's 8px padding, paper
+  background, so nothing shows above or behind it) and stays visible however far the list is scrolled; in flow at the
+  top, so it never covers the first item. (4) Clearing a search keeps the reader's place. Topic Guides: revitem /
+  revresult carry data-k (guideKey); on the non-empty → empty transition se.oninput takes guideListAnchor() (the result
+  row for the open guide, else the first visible result) and restoreGuideListAnchor() scrolls the list so that guide's
+  row sits at the same offset (clamped under the search bar). Pharmacology: jumpToDrug records pharmFocusId;
+  onPharmSearch on clear takes pharmAnchor() (the jumped-to card if on screen, else the first visible card) and after
+  the full re-render scrolls the page by the card's moved distance (instant), so it stays where it was on screen.
+  For that the drug search is sticky too (.pharmsearchwrap under the header at --hdrh, set by setHdrH() on openPharm
+  and resize): otherwise clearing scrolls the input off-screen and the browser scrolls back to the caret. Drug cards
+  get scroll-margin-top so a jump lands below the header and search. Near the end of a list the place is kept as
+  far as the page can scroll.
   Changelog v0.8.0: flags. One saved, synced ⚑ per question and card, independent of right/wrong; item ids (wkNN_qNN,
   wkNN_cNN) are stable across pack versions, so flags survive pack updates. Stored as settings['flag:'+id] =
   {fl:1,on,at}; clearing writes on:false (a tombstone, never deleted) so the clear syncs. Settings, because older
@@ -860,6 +887,21 @@ section{display:none}section.on{display:block}
 .choice.wrong{border-color:var(--red);background:color-mix(in srgb,var(--red) 16%,var(--paper2))}.choice.wrong .box{background:var(--red);color:#fff;border-color:var(--red)}
 .choice[disabled]{cursor:default}
 .clozetext{font-size:21px;line-height:1.7;margin-top:16px}
+/* v0.8.1: images inside items (stem / prompt / answer / explain) and label cards */
+.cardbox img:not(.labimg),.qcard img{display:block;max-width:100%;height:auto;max-height:60vh;object-fit:contain;margin:12px auto;border-radius:6px}
+.labfig{text-align:center;margin:14px 0 4px}
+.labwrap{position:relative;display:inline-block;max-width:100%;vertical-align:top;line-height:0}
+.labimg{display:block;max-width:100%;height:auto;max-height:60vh;border-radius:6px}
+.lmask{position:absolute;padding:0;margin:0;border:0;border-radius:3px;background:var(--accent);cursor:pointer;box-shadow:0 0 0 1px var(--paper);transition:background .12s,box-shadow .12s;-webkit-tap-highlight-color:transparent}
+.lmask::after{content:'';position:absolute;inset:-6px}
+.lmask.on{background:transparent;box-shadow:0 0 0 2px var(--accent)}
+.lmask[disabled]{cursor:default;opacity:1}
+.lmask.on .lnum{transform:translate(-112%,-50%)} /* revealed: badge steps outside the box so it never covers the label's first letters */
+.lmask:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.lnum{position:absolute;left:0;top:50%;transform:translate(-55%,-50%);min-width:17px;height:17px;padding:0 4px;box-sizing:border-box;border-radius:9px;background:var(--accent);color:var(--paper);border:1.5px solid var(--paper);font:600 10px/14px var(--font-mono);text-align:center;pointer-events:none}
+.labhint{font-size:13px;color:var(--ink-soft);text-align:center;margin-top:8px}
+.lablist{margin:4px 0 0 1.4em;padding:0}.lablist li{margin:2px 0}
+@media (max-width:640px){.cardbox img:not(.labimg),.qcard img,.labimg{max-height:46vh}}
 .cz{border-bottom:2px solid var(--accent-soft);padding:0 3px;color:var(--ink-soft)}
 .cz.on{background:color-mix(in srgb,var(--green) 16%,var(--paper2));border-bottom-color:var(--green);color:var(--ink);font-weight:600;border-radius:3px}
 .orderwrap{margin-top:16px}.pool{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
@@ -1031,6 +1073,10 @@ section{display:none}section.on{display:block}
 .pharmsearchwrap{position:relative;max-width:560px;margin:12px 0 4px}
 .pharmsearchicon{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--ink-soft);pointer-events:none}
 .pharmsearch.hasicon{padding-left:34px}
+/* v0.8.1: the drug search stays on screen under the header, so clearing it can keep the reader's place below */
+.pharmsearchwrap{position:sticky;top:var(--hdrh,64px);z-index:7;max-width:none;margin:4px 0 0;padding:8px 0;background:color-mix(in srgb,var(--paper) 92%,transparent);-webkit-backdrop-filter:saturate(140%) blur(8px);backdrop-filter:saturate(140%) blur(8px)}
+.pharmsearch{max-width:560px}
+.drugcard{scroll-margin-top:calc(var(--hdrh,64px) + 66px)}
 #pharm .revbar{gap:26px}
 .pharmsub{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);margin:4px 0 14px}
 .pharmhost{display:flex;flex-direction:column;gap:12px}
@@ -1122,6 +1168,7 @@ section{display:none}section.on{display:block}
 .revhide:hover{border-color:var(--accent-soft)}
 .revsearch{width:100%;box-sizing:border-box;margin-bottom:8px;padding:7px 10px;font-family:var(--font-body);font-size:14px;border:1px solid var(--line);border-radius:8px;background:var(--paper2);color:var(--ink);outline:none}
 .revsearch:focus{border-color:var(--accent-soft)}
+.revsearchbar{position:sticky;top:-8px;z-index:3;background:var(--paper);margin:-8px -8px 0;padding:8px 8px 0} /* v0.8.1: search stays visible while the list scrolls */
 .revsearch::placeholder{color:var(--ink-soft)}
 .reshead{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin:10px 2px 6px}
 .resnone{font-size:13px;color:var(--ink-soft);padding:4px 2px 6px}
@@ -1747,7 +1794,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.8.0';
+const APP_VERSION='0.8.1';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -2043,7 +2090,7 @@ if(window.matchMedia){const mq=matchMedia('(prefers-color-scheme: dark)');const 
 const $=id=>document.getElementById(id);
 const SYS_ORDER=['Endo','GI','KU'];
 const SYS_LABEL={Endo:'Endocrine',GI:'Gastrointestinal',KU:'Renal / Urinary'};
-const TYPE_LABEL={mcq:'Best answer',multi:'Select all that apply',cloze:'Cloze',order:'Put in order',match:'Matching',qa:'Concept'};
+const TYPE_LABEL={mcq:'Best answer',multi:'Select all that apply',cloze:'Cloze',order:'Put in order',match:'Matching',qa:'Concept',label:'Label'};
 const LETTERS=['A','B','C','D','E','F'];
 const DIFFS=['easy','medium','hard'];
 /* "Today" follows the user's local clock, held as an offset from UTC (minutes east), captured when the app opens and
@@ -3121,7 +3168,7 @@ async function init(){
 }
 
 /* ===== VALIDATION ===== */
-const KNOWN_TYPES=['mcq','multi','cloze','order','match','qa'];
+const KNOWN_TYPES=['mcq','multi','cloze','order','match','qa','label'];
 function validateCard(c,i){
   if(typeof c!=='object'||!c)return `card#${i}: not an object`;
   if(!c.sys||typeof c.sys!=='string')return `card#${i}: missing sys`;
@@ -3133,6 +3180,10 @@ function validateCard(c,i){
   if(c.type==='order'){if(!Array.isArray(c.items)||c.items.length<2)return `card#${i}: order needs items[]`;}
   if(c.type==='match'){if(!Array.isArray(c.pairs)||c.pairs.some(p=>!Array.isArray(p)||p.length!==2))return `card#${i}: match needs pairs[]`;}
   if(c.type==='qa'){if(!c.answer)return `card#${i}: qa needs answer`;}
+  if(c.type==='label'){ /* v0.8.1 */
+    if(typeof c.image!=='string'||!/^data:image\/(webp|jpeg|png|gif);base64,[A-Za-z0-9+\/=]+$/.test(c.image))return `card#${i}: label needs a data:image`;
+    const num=v=>typeof v==='number'&&isFinite(v)&&v>=0&&v<=1;
+    if(!Array.isArray(c.labels)||!c.labels.length||c.labels.some(l=>!l||typeof l!=='object'||!num(l.x)||!num(l.y)||!num(l.w)||!num(l.h)||l.x+l.w>1.001||l.y+l.h>1.001||typeof l.t!=='string'||!l.t.trim()))return `card#${i}: label needs labels[{x,y,w,h,t}]`;}
   if(c.type!=='cloze'&&!c.prompt)return `card#${i}: needs prompt`;
   return null;}
 function validateQuestion(q,i){
@@ -3431,6 +3482,10 @@ function renderInteractive(c){
     return h+'</div>';}
   if(c.type==='cloze')return `<div class="clozetext">${c.text.replace(/\{\{(.+?)\}\}/g,(m,t)=>revealed?`<span class="cz on">${t}</span>`:`<span class="cz">\u2002\u2002\u2002\u2002\u2002\u2002</span>`)}</div>`;
   if(c.type==='qa')return `<p class="prompt">${c.prompt}</p>`;
+  if(c.type==='label'){let h=`<p class="prompt">${c.prompt}</p><div class="labfig"><div class="labwrap"><img class="labimg" src="${c.image}" alt="">`; /* v0.8.1 */
+    c.labels.forEach((l,i)=>{const on=revealed||!!(work.lab&&work.lab.has(i));
+      h+=`<button type="button" class="lmask${on?' on':''}" data-i="${i}" style="left:${l.x*100}%;top:${l.y*100}%;width:${l.w*100}%;height:${l.h*100}%" aria-pressed="${on}" aria-label="Label ${i+1}${on?': '+acctEsc(l.t):''}"${revealed?' disabled':''}><span class="lnum">${i+1}</span></button>`;});
+    return h+'</div></div>'+(revealed?'':'<div class="labhint">Tap a box to check one label.</div>');}
   if(c.type==='order'){if(!work.pool)work.pool=shuffle(c.items.map((t,i)=>({t,i})));
     let h=`<p class="prompt">${c.prompt}</p><div class="orderwrap">`;
     if(!revealed){h+='<div class="pool">';work.pool.forEach(it=>{const used=work.order.includes(it.i);h+=`<button class="chip" data-i="${it.i}" ${used?'disabled':''}>${it.t}</button>`;});h+='</div><div class="seq">';
@@ -3451,7 +3506,9 @@ function wireInteractive(c){if(revealed)return;
   if(c.type==='mcq')$('cardbox').querySelectorAll('.choice').forEach(el=>el.addEventListener('click',()=>{work.pick=+el.dataset.i;renderCard();}));
   if(c.type==='multi')$('cardbox').querySelectorAll('.choice').forEach(el=>el.addEventListener('click',()=>{const i=+el.dataset.i;work.picks.has(i)?work.picks.delete(i):work.picks.add(i);renderCard();}));
   if(c.type==='order'){$('cardbox').querySelectorAll('.chip').forEach(el=>el.addEventListener('click',()=>{if(!el.disabled){work.order.push(+el.dataset.i);renderCard();}}));const rb=$('orderReset');if(rb)rb.addEventListener('click',()=>{work.order=[];renderCard();});}
-  if(c.type==='match')$('cardbox').querySelectorAll('select').forEach(sel=>sel.addEventListener('change',()=>{work['m'+sel.dataset.i]=sel.value;}));}
+  if(c.type==='match')$('cardbox').querySelectorAll('select').forEach(sel=>sel.addEventListener('change',()=>{work['m'+sel.dataset.i]=sel.value;}));
+  if(c.type==='label')$('cardbox').querySelectorAll('.lmask').forEach(el=>el.addEventListener('click',()=>{const i=+el.dataset.i;if(!work.lab)work.lab=new Set(); /* v0.8.1: toggle in place */
+    const on=!work.lab.has(i);on?work.lab.add(i):work.lab.delete(i);el.classList.toggle('on',on);el.setAttribute('aria-pressed',on?'true':'false');el.setAttribute('aria-label','Label '+(i+1)+(on?': '+c.labels[i].t:''));}));}
 function gotCorrect(c){
   if(c.type==='mcq')return work.pick===c.correct;
   if(c.type==='multi')return [...work.picks].sort().join(',')===[...c.correct].sort().join(',');
@@ -3468,7 +3525,9 @@ function guideHTML(g){
 function wireGuideLinks(container){container.querySelectorAll('.guideopen').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();openGuide(decodeURIComponent(a.dataset.f),decodeURIComponent(a.dataset.s||''));}));}
 function renderAnswer(c){let h='';const res=gotCorrect(c);
   if(res!==null)h+=`<div class="banner ${res?'ok':'no'}">${res?'✓ Correct':'✗ Not quite'}</div>`;
-  let ans=c.type==='qa'?(c.answer+(c.explain?`<div style="margin-top:8px;color:var(--ink-soft);font-size:14.5px">${c.explain}</div>`:'')):(c.explain||'');
+  let ans=c.type==='qa'?(c.answer+(c.explain?`<div style="margin-top:8px;color:var(--ink-soft);font-size:14.5px">${c.explain}</div>`:'')):
+    c.type==='label'?(`<ol class="lablist">${c.labels.map(l=>`<li>${acctEsc(l.t)}</li>`).join('')}</ol>`+(c.explain?`<div style="margin-top:8px;color:var(--ink-soft);font-size:14.5px">${c.explain}</div>`:'')): /* v0.8.1 */
+    (c.explain||'');
   h+=`<div class="answerbox"><div class="h">Answer · ${c.topic}</div>${ans}</div>`+guideHTML(c.guide)+srcHTML(c); /* v0.6.6 */
   return h;}
 function renderGrades(c){const now=Date.now(),s=sched[c.id];const p=[1,2,3,4].map(g=>humanDelta(Math.max(0,schedule(s,g,now).due-now)));
@@ -3490,7 +3549,7 @@ function renderBrowse(){const now=Date.now();const list=$('browseList');list.inn
     row.innerHTML=`<div><div class="bsys">${sysLabel(sys).split(' ')[0]} · ${c.topic}</div><div class="bl">${stripText(c.prompt||c.text)}</div><div class="bmeta">${TYPE_LABEL[c.type]||c.type} · ${s.phase}</div></div><div class="bdue">${dueTxt}</div>`;
     row.addEventListener('click',()=>{sessionQueue=[c.id];studiedThisSession=0;presentNext();});list.appendChild(row);});});
   show('browse');}
-function stripText(t){t=(t||'').replace(/<[^>]+>/g,'').replace(/\{\{(.+?)\}\}/g,'____');return t.length>90?t.slice(0,90)+'…':t;}
+function stripText(t){t=(t||'').replace(/<img\b[^>]*?\balt="([^"]*)"[^>]*>/gi,' $1 ').replace(/<[^>]+>/g,'').replace(/\{\{(.+?)\}\}/g,'____');return t.length>90?t.slice(0,90)+'…':t;}
 
 /* ===== CONTENT REVIEWER ===== */
 let reviewerReturn='home', curGuideKey=null;
@@ -3657,13 +3716,23 @@ function renderPharmResults(){const nav=$('pharmNav');nav.innerHTML='';const q=p
 function setPharmDrawer(open){$('pharmNav').classList.toggle('closed',!open);}
 function closePharmDrawer(){setPharmDrawer(false);const se=$('pharmSearch');if(se)se.focus();}
 function updatePharmDrawer(){if(pharmQuery.trim()){renderPharmResults();setPharmDrawer(true);}else{$('pharmNav').innerHTML='';setPharmDrawer(false);}}
-function jumpToDrug(id){setPharmDrawer(false);const el=document.getElementById(drugSlug(id));if(el){el.scrollIntoView({block:'start',behavior:'smooth'});el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');}}
-function onPharmSearch(v){pharmQuery=v;renderPharmMain();updatePharmDrawer();}
+function jumpToDrug(id){pharmFocusId=id;setPharmDrawer(false);const el=document.getElementById(drugSlug(id));if(el){el.scrollIntoView({block:'start',behavior:'smooth'});el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');}}
+function onPharmSearch(v){const keep=(pharmQuery.trim()&&!String(v).trim())?pharmAnchor():null;pharmQuery=v;renderPharmMain();updatePharmDrawer();if(keep)restorePharmAnchor(keep);}
+/* v0.8.1: clearing the search keeps the place — the drug jumped to (if on screen), else the first visible card, stays put */
+let pharmFocusId=null;
+function pharmAnchor(){const cards=[...$('pharmHost').querySelectorAll('.drugcard')];if(!cards.length)return null;
+  const sw=document.querySelector('.pharmsearchwrap'),top0=sw?sw.getBoundingClientRect().bottom:0,vh=window.innerHeight;
+  const vis=c=>{const r=c.getBoundingClientRect();return r.bottom>top0+8&&r.top<vh;};
+  const f=pharmFocusId?document.getElementById(drugSlug(pharmFocusId)):null;
+  const el=(f&&cards.includes(f)&&vis(f))?f:cards.find(vis);return el?{id:el.id,top:el.getBoundingClientRect().top}:null;}
+function restorePharmAnchor(a){const el=document.getElementById(a.id);if(!el)return;const d=el.getBoundingClientRect().top-a.top;if(d)window.scrollBy({top:d,left:0,behavior:'instant'});}
 function renderPharm(){pharmGroups=buildDrugIndex();const total=pharmGroups.reduce((n,g)=>n+g.drugs.length,0);
   $('pharmCount').textContent=total?total+' drug'+(total===1?'':'s')+' · '+pharmGroups.length+' class'+(pharmGroups.length===1?'':'es')+' · merged across your active packs':'';
   if(!total){$('pharmHost').innerHTML='<div class="revempty">No pharmacology data in your active packs yet. Newer packs embed a drug index here — enable more packs to grow it.</div>';$('pharmNav').innerHTML='';setPharmDrawer(false);return;}
   renderPharmMain();updatePharmDrawer();}
-function openPharm(){pharmReturn=currentSection();$('pharmBackTo').textContent='to Home';pharmQuery='';const se=$('pharmSearch');if(se)se.value='';renderPharm();show('pharm');}
+function setHdrH(){const h=document.querySelector('header.top');if(h)document.documentElement.style.setProperty('--hdrh',h.offsetHeight+'px');} /* v0.8.1 */
+window.addEventListener('resize',setHdrH);
+function openPharm(){setHdrH();pharmFocusId=null;pharmReturn=currentSection();$('pharmBackTo').textContent='to Home';pharmQuery='';const se=$('pharmSearch');if(se)se.value='';renderPharm();show('pharm');}
 
 let revQuery='';
 /* Unified search. Empty query → the normal grouped topic list. Query → a results view:
@@ -3676,14 +3745,14 @@ function filterGuideList(){const raw=revQuery.trim();const q=raw.toLowerCase();c
   const metas=[];organizeGuides().forEach(grp=>grp.items.forEach(it=>metas.push(it)));
   const titleHits=metas.filter(it=>((it.badge+' '+it.label+' '+it.title).toLowerCase().includes(q)));
   if(titleHits.length){const h=document.createElement('div');h.className='reshead';h.textContent='Topics';res.appendChild(h);
-    titleHits.forEach(it=>{const b=document.createElement('button');b.className='revitem'+(guideKey(it.g)===curGuideKey?' on':'');
+    titleHits.forEach(it=>{const b=document.createElement('button');b.className='revitem'+(guideKey(it.g)===curGuideKey?' on':'');b.dataset.k=guideKey(it.g);
       if(it.badge){const s=document.createElement('span');s.className='gn';s.textContent=it.badge;b.appendChild(s);}
       const t=document.createElement('span');t.textContent=it.label;b.appendChild(t);
       b.onclick=()=>{revNavOpen=false;loadGuide(it.g,null);};res.appendChild(b);});}
   if(q.length>=2){const cHits=[];activeGuides().forEach(g=>{const gt=guideText(g);const idx=gt.lower.indexOf(q);if(idx>=0)cHits.push({g,gt,idx});});
     const h=document.createElement('div');h.className='reshead';h.textContent='In content'+(cHits.length?' ('+cHits.length+')':'');res.appendChild(h);
     if(!cHits.length){const none=document.createElement('div');none.className='resnone';none.textContent='No matches inside topics.';res.appendChild(none);}
-    cHits.forEach(({g,gt,idx})=>{const meta=guideMeta(g);const b=document.createElement('button');b.className='revresult';
+    cHits.forEach(({g,gt,idx})=>{const meta=guideMeta(g);const b=document.createElement('button');b.className='revresult';b.dataset.k=guideKey(g);
       const rt=document.createElement('span');rt.className='rt';rt.textContent=(meta.badge?meta.badge+' · ':'')+meta.label;b.appendChild(rt);
       const rs=document.createElement('span');rs.className='rs';
       const start=Math.max(0,idx-40),end=Math.min(gt.text.length,idx+raw.length+90);
@@ -3692,17 +3761,24 @@ function filterGuideList(){const raw=revQuery.trim();const q=raw.toLowerCase();c
       rs.appendChild(document.createTextNode(gt.text.slice(idx+raw.length,end)+(end<gt.text.length?' …':'')));b.appendChild(rs);
       b.onclick=()=>{revNavOpen=false;loadGuide(g,{search:raw});};res.appendChild(b);});}
   if(!titleHits.length&&q.length<2){const none=document.createElement('div');none.className='resnone';none.textContent='Type 2+ characters to search topic content.';res.appendChild(none);}}
+/* v0.8.1: clearing a search keeps the place — the open guide's row (else the first visible result) lands where its result row was */
+function guideListAnchor(){const gl=$('guideList'),res=$('guideResults');if(!gl||!res)return null;const els=[...res.querySelectorAll('[data-k]')];if(!els.length)return null;
+  const glr=gl.getBoundingClientRect(),vis=e=>{const r=e.getBoundingClientRect();return r.bottom>glr.top&&r.top<glr.bottom;};
+  const el=els.find(e=>e.dataset.k===curGuideKey)||els.find(vis)||els[0];return {k:el.dataset.k,off:el.getBoundingClientRect().top-glr.top};}
+function restoreGuideListAnchor(a){const gl=$('guideList');const el=[...gl.querySelectorAll('.revgroup .revitem')].find(e=>e.dataset.k===a.k);if(!el){centreGuideListOn();return;}
+  const glr=gl.getBoundingClientRect(),bar=gl.querySelector('.revsearchbar');const minOff=bar?bar.getBoundingClientRect().bottom-glr.top:0;
+  const off=Math.max(minOff,Math.min(a.off,gl.clientHeight-el.offsetHeight));gl.scrollTop=Math.max(0,gl.scrollTop+(el.getBoundingClientRect().top-glr.top)-off);}
 function renderGuideList(){const gl=$('guideList');gl.innerHTML='';
   const hd=document.createElement('button');hd.className='revhide';hd.textContent='◂ Hide topic list';
   hd.onclick=()=>{revNavOpen=false;applyRevNav();};
   gl.appendChild(hd);
   const se=document.createElement('input');se.type='search';se.className='revsearch';se.placeholder='Search topics & content…';se.value=revQuery;
-  se.oninput=()=>{revQuery=se.value;filterGuideList();};
-  gl.appendChild(se);
+  se.oninput=()=>{const keep=(revQuery.trim()&&!se.value.trim())?guideListAnchor():null;revQuery=se.value;filterGuideList();if(keep)restoreGuideListAnchor(keep);}; /* v0.8.1 */
+  const sb=document.createElement('div');sb.className='revsearchbar';sb.appendChild(se);gl.appendChild(sb);
   const res=document.createElement('div');res.id='guideResults';res.style.display='none';gl.appendChild(res);
   organizeGuides().forEach(grp=>{const wrap=document.createElement('div');wrap.className='revgroup';
     if(grp.label){const h=document.createElement('div');h.className='gname';h.textContent=grp.label;wrap.appendChild(h);}
-    grp.items.forEach(it=>{const b=document.createElement('button');b.className='revitem'+(guideKey(it.g)===curGuideKey?' on':'');
+    grp.items.forEach(it=>{const b=document.createElement('button');b.className='revitem'+(guideKey(it.g)===curGuideKey?' on':'');b.dataset.k=guideKey(it.g);
       if(it.badge){const s=document.createElement('span');s.className='gn';s.textContent=it.badge;b.appendChild(s);}
       const t=document.createElement('span');t.textContent=it.label;b.appendChild(t);
       const hs=hiddenSections(it.g);if(hs.hidden){const s2=document.createElement('span');s2.className='gsub';s2.textContent=plural(hs.hidden,'section')+' hidden · '+hs.codes.join(', ')+' off';t.appendChild(s2);} /* v0.6.6 */

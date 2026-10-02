@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.26 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.27 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.26)
+# Study Suite — Content Authoring Guide (v2.27)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,13 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.26 · **Pairs with:** Study Suite app v0.4.4+ (source switches need v0.6.6+, Extras v0.7.1+), pack `formatVersion` 2.0
+> **Authoring system version:** 2.27 · **Pairs with:** Study Suite app v0.4.4+ (source switches need v0.6.6+, Extras v0.7.1+, image cards v0.8.1+), pack `formatVersion` 2.0
+> **What changed in guide v2.27:** **images in questions and cards.** New **§6d**: an image may anchor a question or
+> card (a data: `<img>` in a stem, prompt, answer or explain), and a new card type **`label`** shows a figure with its
+> printed labels masked; the learner names each one, taps a box to check it, and self-grades as for `qa`. Data: URIs only
+> (WebP, ~700 px wide, quality ~60, ~25 KB per image, ~1 MB of card images per pack), no identifiable patient, and a stem
+> still stands alone in words. App v0.8.1+ shows them; older apps skip label cards. The §7a validator accepts `label`
+> and checks item images. No `formatVersion` change.
 > **What changed in guide v2.26:** **figures in topic guides.** New **§6c**: a guide may carry figures, slide or
 > course images cropped to the figure and drawn diagrams written as inline SVG, where a picture does work the text
 > can't (anatomy, imaging, circuits, curves, timelines, cycles), and nowhere else. No photo of an identifiable patient.
@@ -423,10 +429,11 @@ never on cards.**
 > options, which move when the rest shuffle. Those can't be safely shuffled or anchored. Write such an
 > option as a self-contained answer instead. (The §7a validator flags the position-referencing kind.)
 
-### Card schema (spaced repetition) — six types
+### Card schema (spaced repetition) — six types, plus `label` (v2.27)
 
 Cards carry `sys`, `topic`, `type`, `explain`, optional `guide`. **Cards do not take a difficulty**
-(Review shows everything regardless of difficulty). The six types are unchanged from v1:
+(Review shows everything regardless of difficulty). The six types are unchanged from v1; a seventh,
+**`label`** (an image with its printed labels masked), was added in v2.27 — see §6d:
 
 **1. `mcq`** — single best answer (`correct` = index).
 **2. `multi`** — select all (`correct` = array of indices).
@@ -434,6 +441,7 @@ Cards carry `sys`, `topic`, `type`, `explain`, optional `guide`. **Cards do not 
 **4. `order`** — `items` in the **correct** order (app shuffles).
 **5. `match`** — `pairs` of `[left, right]`.
 **6. `qa`** — `prompt` + `answer` (+ optional `explain`).
+**7. `label`** (v2.27, app v0.8.1+) — `prompt` + `image` (a data: URI) + `labels` = `[{x,y,w,h,t}]` (+ optional `explain`). §6d.
 
 ```json
 { "sys":"Cardio","topic":"ACS","type":"cloze",
@@ -875,6 +883,51 @@ The figure CSS (frame, two-up `.pair` grid that stacks on phones, caption and SV
 
 ---
 
+## 6d. Images in questions and cards (v2.27)
+
+Two ways an image can carry an item, both shown by app v0.8.1+.
+
+**1. Image-anchored questions and cards.** A question `stem`, or a card `prompt`, `answer` or `explain`, may include
+one image: `<img src="data:image/webp;base64,…" alt="Axial MRI at the level of the basal ganglia">`. The app fits it to
+the card (full width, centred, capped in height on phones). Use it where the image *is* the question: "what does this
+finding look like", "which structure is arrowed", a curve or an ECG strip. Rules:
+- **The stem still stands alone in words.** Say what the image is ("An axial T2 MRI at the level of the basal
+  ganglia shows a lesion at the arrow."); a reader without the picture, or with an older app, can still follow the item.
+- **Data: URIs only** — no links to images anywhere else. WebP at about **700 px wide, quality ~60** (typically
+  10–30 KB). Crop tight to what the item needs.
+- **No identifiable patient** (as §6c): no faces or names; anonymised scans and diagrams are fine.
+- Put the image in the field where it does its work: in the stem or prompt when it is the question, in the answer or
+  explain when it shows the answer.
+- Options stay text.
+
+**2. The `label` card (label this structure).** A figure with its own printed labels covered by numbered masks. The
+learner names each masked label, taps a mask to check that one, then **Show answer** uncovers all of them and lists the
+labels in order; the card is self-graded like `qa` (Again / Hard / Good / Easy).
+
+```json
+{ "type":"label", "sys":"Neuro", "topic":"Basal ganglia",
+  "prompt":"Name the labelled structures on this axial section.",
+  "image":"data:image/webp;base64,…",
+  "labels":[{"x":0.12,"y":0.30,"w":0.18,"h":0.05,"t":"Caudate nucleus (head)"},
+            {"x":0.66,"y":0.41,"w":0.16,"h":0.05,"t":"Putamen"}],
+  "explain":"The internal capsule separates the caudate from the lentiform nucleus.",
+  "guide":{"f":"…","t":"…","s":"…"}, "src":["…"] }
+```
+
+- `x`, `y`, `w`, `h` are **fractions (0–1) of the image's width and height** for the box that covers the label
+  **printed on the image** (its text, not the structure); `t` is that label's text. Boxes must stay on the image
+  (x+w ≤ 1, y+h ≤ 1). The masks are drawn in percentages, so they stay on their labels at any screen size.
+- Use a figure that already carries printed labels (a slide or atlas figure); the masks hide those labels. Pad each
+  box slightly so no letter shows round the edge.
+- **3–8 labels per card, one concept per card** (one section, one pathway, one region); a busy figure becomes two
+  cards, not one card with fifteen masks.
+- `t` is plain text with real characters, as in every plain field (§2). `explain` is optional.
+- Same image rules as above: data: URI, ~700 px wide WebP ~q60, no identifiable patient.
+- **Budget:** about **25 KB per image** and **about 1 MB of card images per pack**; the check warns above that.
+- **Older apps (before v0.8.1) skip label cards** when they load the pack; nothing else in the pack is affected.
+
+---
+
 ## 6b. Pharmacology data (`drugs[]`) — optional, powers the Pharmacology view
 
 A pack **may** include a top-level **`drugs[]`** array. It is **optional and additive** — leave it out and nothing changes; include it and the app's **Pharmacology** view builds a cross-week **drug index** from every *enabled* pack: it merges your records (and those from other packs) by a stable id, groups them by drug class, and shows the faceted fields with a link back to the week/guide each fact came from. This is content the learner reads alongside the topic guides — only add it when your source material actually covers the drug.
@@ -930,7 +983,11 @@ A pack **may** include a top-level **`drugs[]`** array. It is **optional and add
 **Each card:** `sys`, `topic`, valid `type`; and by type — `mcq` (`prompt`, `options` ≥2, `correct`
 in range) · `multi` (`prompt`, `options`, `correct` = array of in-range indices) · `cloze` (`text`
 with ≥1 `{{…}}`) · `order` (`prompt`, `items` ≥2, in correct order) · `match` (`prompt`, `pairs` of
-2-element arrays) · `qa` (`prompt`, `answer`). All non-`cloze` cards need a `prompt`.
+2-element arrays) · `qa` (`prompt`, `answer`) · `label` (`prompt`, `image` = data:image URI, `labels` = non-empty
+`[{x,y,w,h,t}]` with x, y, w, h in 0–1, x+w ≤ 1, y+h ≤ 1, non-empty `t`; §6d). All non-`cloze` cards need a `prompt`.
+
+**Item images (v2.27):** only `data:image/(webp|jpeg|png);base64` sources in a stem, prompt, answer or explain; no
+script, handler or outside resource; the stem reads on its own; ~25 KB per image, ~1 MB of card images per pack.
 
 **Guides:** every `guide.f` used anywhere **resolves to a `guides[]` entry whose `file` matches**;
 every `guides[]` entry has non-empty `html`; **the LAST guide is the pack's cram sheet (§6a)**.
@@ -1012,13 +1069,18 @@ The workflow that prevents all of the above:
 import json, re
 from collections import Counter
 
-CARD_TYPES = {"mcq", "multi", "cloze", "order", "match", "qa"}
+CARD_TYPES = {"mcq", "multi", "cloze", "order", "match", "qa", "label"}   # label: v2.27 (§6d)
 ARTIFACTS  = ["start_span", "end_span", "【", "】", "```"]  # any of these breaks the import
 # §2: these fields are rendered as PLAIN TEXT — an HTML entity in them shows literally to the learner.
 ENTITY     = re.compile(r"&(#\d+|#x[0-9a-fA-F]+|[a-zA-Z]+);")
 # §6c (v2.26): figures are measured out of the guide length and must be inert and self-contained.
 FIGS       = re.compile(r"<figure\b.*?</figure>|<svg\b.*?</svg>|<style\b.*?</style>", re.S)
 EXT_SRC    = re.compile(r"""(?<![\w:-])(?:src|href|xlink:href)\s*=\s*["'](?!data:image/(?:webp|jpeg|png|svg\+xml);base64,|#)[^"']+["']""", re.I)
+# §6d (v2.27): images inside items — data:image webp/jpeg/png only; the base64 is not text, so it is stripped
+# before the entity and leak checks.
+ITEM_IMG   = re.compile(r"<img\b[^>]*>", re.I)
+DATA_IMG   = re.compile(r"^data:image/(?:webp|jpeg|png);base64,[A-Za-z0-9+/=]+$")
+IMG_FIELDS = ("stem", "prompt", "answer", "explain")
 PLAIN_Q    = ("stem", "topic")                       # + every string in options[]
 PLAIN_C    = ("prompt", "answer", "text", "topic")   # + options[], items[], pairs[][]
 # §4a: source apparatus that must not reach reader-facing text (warn — a clinical "14:00" can be legit).
@@ -1033,9 +1095,40 @@ LEAK       = re.compile(r"\b\d{1,2}:\d{2}\b|\bslides? \d+\b|\[[A-Z][^\]]{1,40}\]
 ADDRESS    = re.compile(r"\b(you|your|you're|let's|we|we're|our)\b", re.I)
 
 def _strings(v):
-    if isinstance(v, str): yield v
+    if isinstance(v, str): yield ITEM_IMG.sub(" ", v)   # §6d: an item image is not text
     elif isinstance(v, list):
         for x in v: yield from _strings(x)
+
+def _item_img_errs(xid, x):
+    """§6d (v2.27): inline images in stem/prompt/answer/explain — data: webp/jpeg/png only, inert."""
+    out = []
+    for fld in IMG_FIELDS:
+        s = x.get(fld)
+        if not isinstance(s, str) or "<" not in s: continue
+        if re.search(r"<script\b", s, re.I) or re.search(r"\son[a-z]+\s*=", s, re.I):
+            out.append(f"{xid}: script or inline handler in {fld!r} (§6d)")
+        if EXT_SRC.search(s): out.append(f"{xid}: {fld!r} loads an outside resource (§6d)")
+        for tag in ITEM_IMG.findall(s):
+            m = re.search(r"""\bsrc\s*=\s*["']([^"']*)["']""", tag, re.I)
+            if not m or not DATA_IMG.match(m.group(1)): out.append(f"{xid}: <img> in {fld!r} must be a data:image webp/jpeg/png (§6d)")
+    return out
+
+def _label_errs(cid, c):
+    """§6d (v2.27): label card — image is a data: URI; labels are boxes on the image (fractions) with text."""
+    out = []
+    if not (isinstance(c.get("image"), str) and DATA_IMG.match(c["image"])):
+        out.append(f"{cid}: label image must be a data:image webp/jpeg/png URI (§6d)")
+    labels = c.get("labels")
+    if not isinstance(labels, list) or not labels:
+        return out + [f"{cid}: label needs a non-empty labels[] (§6d)"]
+    num = lambda v: isinstance(v, (int, float)) and not isinstance(v, bool) and 0 <= v <= 1
+    for i, l in enumerate(labels, 1):
+        if not isinstance(l, dict) or not all(num(l.get(k)) for k in ("x", "y", "w", "h")):
+            out.append(f"{cid}: label {i} needs numeric x,y,w,h in [0,1] (§6d)"); continue
+        if l["x"] + l["w"] > 1.001 or l["y"] + l["h"] > 1.001: out.append(f"{cid}: label {i} box runs off the image (§6d)")
+        if not (isinstance(l.get("t"), str) and l["t"].strip()): out.append(f"{cid}: label {i} needs text t (§6d)")
+        elif ENTITY.search(l["t"]): out.append(f"{cid}: HTML entity in label {i} text — use real characters (§2)")
+    return out
 # Options that REFERENCE specific other options break when the app shuffles. ("All/None of the above|
 # these" are NOT flagged — the app v0.2.63+ anchors them to their slot.) Conservative on purpose, so it
 # won't false-positive on legit answers like "Hepatitis A and B" or "Vitamin A and D".
@@ -1075,12 +1168,13 @@ def validate_pack(pack):
         for o in opts:
             if isinstance(o, str) and POSITIONAL.search(o):
                 warns.append(f"{qid}: position-dependent option {o!r} — reword (options are shuffled)")
+        errs += _item_img_errs(qid, q)
 
     for c in cs:
         cid, t = c.get("id", "?"), c.get("type")
         if t not in CARD_TYPES: errs.append(f"{cid}: bad card type {t!r}"); continue
         if "difficulty" in c: errs.append(f"{cid}: cards must NOT carry difficulty")
-        if t in {"mcq", "multi", "order", "match", "qa"} and not c.get("prompt"):
+        if t in {"mcq", "multi", "order", "match", "qa", "label"} and not c.get("prompt"):
             errs.append(f"{cid}: {t} needs a prompt")
         if t == "mcq" and not (0 <= c.get("correct", -1) < len(c.get("options", []))):
             errs.append(f"{cid}: bad mcq correct")
@@ -1098,6 +1192,8 @@ def validate_pack(pack):
             if txt.count("{{") != txt.count("}}") or txt.count("{{") == 0:
                 errs.append(f"{cid}: unbalanced/empty cloze blanks")
         if t == "qa" and not c.get("answer"): errs.append(f"{cid}: qa needs an answer")
+        if t == "label": errs += _label_errs(cid, c)
+        errs += _item_img_errs(cid, c)
         if t == "match" and (not c.get("pairs") or any(len(p) != 2 for p in c.get("pairs", []))):
             errs.append(f"{cid}: match pairs must be 2-element arrays")
         if c.get("guide", {}).get("f") and c["guide"]["f"] not in gfiles:
@@ -1179,6 +1275,11 @@ def validate_pack(pack):
                 warns.append(f"{len(xs)} of {len(qs + cs)} items are Extras — cut the pack rather than park most of it (§3b)")
     elif any(x.get("src") for x in qs + cs + gs):
         warns.append("items carry src but the pack has no sources table — add sources {code: label} (§2, v2.22)")
+
+    # §6d (v2.27): card-image budget — about 1 MB of images in questions + cards per pack.
+    ib = sum(len(m) for x in qs + cs for fld in IMG_FIELDS + ("image",) if isinstance(x.get(fld), str)
+             for m in re.findall(r"data:image/[a-z+]+;base64,[A-Za-z0-9+/=]+", x[fld]))
+    if ib > 1_000_000: warns.append(f"card images total {ib // 1024} KB (> ~1 MB) — shrink or drop some (§6d)")
 
     diffs = Counter(q.get("difficulty") for q in qs)
     print(f"questions={len(qs)} cards={len(cs)} guides={len(gs)} "
