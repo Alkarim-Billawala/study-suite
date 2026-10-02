@@ -1,7 +1,9 @@
 <!--
-  Study Suite  ·  v0.8.1 (beta)
+  Study Suite  ·  v0.8.2 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.8.2: the library row's sources button reads "All sources" when every source is on (was "Sources");
+  with some off it still reads "N of M sources".
   Changelog v0.8.1: image cards. (1) Images inside existing fields: a data:image <img> may sit in a question stem or a
   card prompt / answer / explain; CSS (.cardbox img, .qcard img) fits it: block, centred, max-width 100%, height auto,
   small radius, max-height 60vh (46vh at <=640px, object-fit contain). stripText (Browse rows) swaps an <img> for its alt
@@ -1794,7 +1796,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.8.1';
+const APP_VERSION='0.8.2';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3342,7 +3344,7 @@ function libRow(p){const on=p.enabled!==false;const upd=packUpdate(p),stub=!!p.s
   const updtag=upd?` · <span class="updnote"${un?' title="'+acctEsc(un)+'"':''}>update to v${upd.version}${pv?' ('+acctEsc(pv)+')':''}${un?' — '+acctEsc(noteLead(un)):''}</span>`:(nw&&(nw.text||nn)&&newsShown.has(p.id)?` · <span class="newsnote"${nn?' title="'+acctEsc(nn)+'"':''}>${acctEsc(nw.text||'')}${nn?(nw.text?' — ':'')+acctEsc(noteLead(nn)):''}</span>`:'');
   const xoff=!srcXOn(p),nq=stub?Math.max(0,(p.nq||0)-(xoff&&p.nqx||0)):p.questions.length,nc=stub?Math.max(0,(p.nc||0)-(xoff&&p.ncx||0)):p.cards.length,sttag=stub?(on?' · switched on elsewhere — tap to download':' · offloaded') /* v0.6.8: matches the Offload button */:'';
   const sv0=(!stub&&p.sources&&typeof p.sources==='object')?srcVisible(p):null,sv=on?sv0:null; /* v0.6.6: what the source switches leave visible; v0.7.1: a switched-off pack's counts too */
-  const srcline=sv?`<div class="srcrow"><button type="button" class="srcbtn${srcOpen.has(p.id)?' on':''}" aria-expanded="${srcOpen.has(p.id)?'true':'false'}">${sv.off?sv.on+' of '+sv.total+' sources':'Sources'} ${srcOpen.has(p.id)?'▴':'▾'}</button></div>`:'';
+  const srcline=sv?`<div class="srcrow"><button type="button" class="srcbtn${srcOpen.has(p.id)?' on':''}" aria-expanded="${srcOpen.has(p.id)?'true':'false'}">${sv.off?sv.on+' of '+sv.total+' sources':'All sources'} ${srcOpen.has(p.id)?'▴':'▾'}</button></div>`:'';
   const info=document.createElement('div');info.innerHTML=`<div class="pn">${p.pack}</div><div class="pm">${sv0?sv0.q:nq} questions · ${sv0?sv0.c:nc} cards${sv0&&ng?` · ${sv0.g} guides`:gtag}${vtag}${stub?sttag:updtag}</div>${srcline}`;
   const sl=info.querySelector('.srcbtn');if(sl)sl.onclick=()=>{srcOpen.has(p.id)?srcOpen.delete(p.id):srcOpen.add(p.id);renderHome();};
   if(stub){const dl=document.createElement('button');dl.className='dlbtn';dl.type='button';dl.setAttribute('aria-label','Download '+(p.pack||'pack'));dl.title='Download and switch on';
