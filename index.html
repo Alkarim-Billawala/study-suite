@@ -1,7 +1,9 @@
 <!--
-  Study Suite  ·  v0.10.1 (beta)
+  Study Suite  ·  v0.10.2 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.10.2 (2026-10-03): Atlas locator takes a per-level `loc` {plane, level, line|dot} (a beacon on any
+  thumbnail — sagittal and surface views keep the map); search results carry a clickable chip per slice.
   Changelog v0.10.1 (2026-10-03): Library order is newest week first (Your library and the default packs: years, terms,
   courses and packs all descend by week); a pack may carry `sortWeek` (a silent sort key, never shown — the atlas sorts as
   week 50 above the Neuro weeks); the course "Introduction to Medicine" is shown as "ITM" (COURSE_SHORT).
@@ -1833,7 +1835,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.10.1';
+const APP_VERSION='0.10.2';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
