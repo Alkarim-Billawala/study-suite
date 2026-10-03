@@ -1,7 +1,10 @@
 <!--
-  Study Suite  ·  v0.10.0 (beta)
+  Study Suite  ·  v0.10.1 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.10.1 (2026-10-03): Library order is newest week first (Your library and the default packs: years, terms,
+  courses and packs all descend by week); a pack may carry `sortWeek` (a silent sort key, never shown — the atlas sorts as
+  week 50 above the Neuro weeks); the course "Introduction to Medicine" is shown as "ITM" (COURSE_SHORT).
   Changelog v0.10.0 (2026-10-03): The `atlas` widget type ("The Brain"): planes, level stacks with zones, a shared structure
   registry (tap: name + gloss + on-N-slices cycling; search; Quiz me over the structures taught so far, honouring the pack's
   Sources switches), Labels / Territories / Reference / Outlines switches, Radiological-Anatomical convention toggle
@@ -1830,7 +1833,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.10.0';
+const APP_VERSION='0.10.1';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -2983,15 +2986,17 @@ function dpRow(p,isNew){
    pack's `weeks` field (e.g. ITM≈1–8 < CPC 1≈9–24 < CPC 2≈25+); each level sorts by its earliest
    week, tie-broken by a numeric-aware natural compare so "CPC 1" precedes "CPC 2". The `term` level
    is optional — packs without a term collapse into a single unlabelled group that renders no header. */
-function chronoWeek(w){if(!w)return Infinity;const m=String(w).match(/\d+/);return m?parseInt(m[0],10):Infinity;}
+function chronoWeek(w){if(!w)return -Infinity;const m=String(w).match(/\d+/);return m?parseInt(m[0],10):-Infinity;} /* v0.10.1: unknown weeks sort last (order is newest first) */
+function packWeek(p){return (p&&p.sortWeek!=null&&isFinite(+p.sortWeek))?+p.sortWeek:chronoWeek(p&&p.weeks);} /* v0.10.1: `sortWeek` = silent sort key */
+const COURSE_SHORT={'Introduction to Medicine':'ITM'};const courseLabel=c=>COURSE_SHORT[c]||c||''; /* v0.10.1 */
 function cmpW(a,b){return a===b?0:(a<b?-1:1);} // Infinity-safe numeric compare
 const natCmp=(a,b)=>String(a).localeCompare(String(b),undefined,{numeric:true,sensitivity:'base'});
-function courseWeek(plist){return plist.reduce((mn,p)=>Math.min(mn,chronoWeek(p.weeks)),Infinity);}     // plist: packs[]
-function termWeek(cs){return [...cs.values()].reduce((mn,pl)=>Math.min(mn,courseWeek(pl)),Infinity);}    // cs: Map(course→packs[])
-function yearWeek(ts){return [...ts.values()].reduce((mn,cs)=>Math.min(mn,termWeek(cs)),Infinity);}      // ts: Map(term→Map(course→packs[]))
-function sortedYears(years){return [...years.entries()].sort((A,B)=>cmpW(yearWeek(A[1]),yearWeek(B[1]))||natCmp(A[0],B[0]));}
-function sortedTerms(ts){return [...ts.entries()].sort((A,B)=>cmpW(termWeek(A[1]),termWeek(B[1]))||natCmp(A[0],B[0]));}
-function sortedCourses(cs){return [...cs.entries()].sort((A,B)=>cmpW(courseWeek(A[1]),courseWeek(B[1]))||natCmp(A[0],B[0]));}
+function courseWeek(plist){return plist.reduce((mx,p)=>Math.max(mx,packWeek(p)),-Infinity);}     // plist: packs[]
+function termWeek(cs){return [...cs.values()].reduce((mx,pl)=>Math.max(mx,courseWeek(pl)),-Infinity);}    // cs: Map(course→packs[])
+function yearWeek(ts){return [...ts.values()].reduce((mx,cs)=>Math.max(mx,termWeek(cs)),-Infinity);}      // ts: Map(term→Map(course→packs[]))
+function sortedYears(years){return [...years.entries()].sort((A,B)=>cmpW(yearWeek(B[1]),yearWeek(A[1]))||natCmp(B[0],A[0]));}
+function sortedTerms(ts){return [...ts.entries()].sort((A,B)=>cmpW(termWeek(B[1]),termWeek(A[1]))||natCmp(B[0],A[0]));}
+function sortedCourses(cs){return [...cs.entries()].sort((A,B)=>cmpW(courseWeek(B[1]),courseWeek(A[1]))||natCmp(B[0],A[0]));}
 /* Repair library packs that predate the school/year/course/weeks fields (or were stored before
    ingestPack carried them) by copying those fields from the default-packs manifest, matched by id. */
 function backfillPlacement(){const m=defaultManifest;if(!m||!Array.isArray(m.packs))return;let changed=false;
@@ -3128,7 +3133,7 @@ function renderDefaultPacks(){
   const years=new Map();
   m.packs.forEach(p=>{if(!p||!p.file)return;
     if((p.school||'Other')!==dpSchool)return;
-    const y=p.year||'Other packs',t=p.term||'',c=p.course||'';
+    const y=p.year||'Other packs',t=p.term||'',c=courseLabel(p.course);
     if(!years.has(y))years.set(y,new Map());
     const ts=years.get(y);if(!ts.has(t))ts.set(t,new Map());
     const cs=ts.get(t);if(!cs.has(c))cs.set(c,[]);
@@ -3531,7 +3536,7 @@ function validateQuestion(q,i){
 function ingestPack(obj,sourceName){
   let pk;
   if(Array.isArray(obj)){const isCards=obj.some(x=>x&&x.type&&KNOWN_TYPES.includes(x.type));pk={id:'pack_'+Date.now().toString(36),pack:sourceName||'Imported',questions:isCards?[]:obj,cards:isCards?obj:[],guides:[]};}
-  else {pk={id:obj.id||('pack_'+Date.now().toString(36)),pack:obj.pack||sourceName||'Imported',questions:Array.isArray(obj.questions)?obj.questions:[],cards:Array.isArray(obj.cards)?obj.cards:[],guides:Array.isArray(obj.guides)?obj.guides:[],version:obj.version,author:obj.author||obj.createdBy,school:obj.school,year:obj.year,term:obj.term,course:obj.course,weeks:obj.weeks,groupBy:obj.groupBy,drugs:Array.isArray(obj.drugs)?obj.drugs:[],sources:(obj.sources&&typeof obj.sources==='object'&&!Array.isArray(obj.sources))?obj.sources:undefined,widgets:(obj.widgets&&typeof obj.widgets==='object'&&!Array.isArray(obj.widgets))?obj.widgets:undefined};} /* v0.6.6: sources · v0.9.0: widgets */
+  else {pk={id:obj.id||('pack_'+Date.now().toString(36)),pack:obj.pack||sourceName||'Imported',questions:Array.isArray(obj.questions)?obj.questions:[],cards:Array.isArray(obj.cards)?obj.cards:[],guides:Array.isArray(obj.guides)?obj.guides:[],version:obj.version,author:obj.author||obj.createdBy,school:obj.school,year:obj.year,term:obj.term,course:obj.course,weeks:obj.weeks,groupBy:obj.groupBy,drugs:Array.isArray(obj.drugs)?obj.drugs:[],sources:(obj.sources&&typeof obj.sources==='object'&&!Array.isArray(obj.sources))?obj.sources:undefined,widgets:(obj.widgets&&typeof obj.widgets==='object'&&!Array.isArray(obj.widgets))?obj.widgets:undefined,sortWeek:(typeof obj.sortWeek==='number'?obj.sortWeek:undefined)};} /* v0.6.6: sources · v0.9.0: widgets */
   const errs=[];
   pk.questions=pk.questions.filter((q,i)=>{const v=validateQuestion(q,i);if(v){errs.push(v);return false;}return true;});
   pk.cards=pk.cards.filter((c,i)=>{const v=validateCard(c,i);if(v){errs.push(v);return false;}return true;});
@@ -3706,7 +3711,7 @@ function renderLibrary(){try{renderPackNews();}catch(e){}
   // group within the selected school: year → term → course → packs (term optional)
   const years=new Map();
   packs.forEach(p=>{if((p.school||'Other')!==libSchool)return;
-    const y=p.year||'Other packs',t=p.term||'',c=p.course||'';
+    const y=p.year||'Other packs',t=p.term||'',c=courseLabel(p.course);
     if(!years.has(y))years.set(y,new Map());
     const ts=years.get(y);if(!ts.has(t))ts.set(t,new Map());
     const cs=ts.get(t);if(!cs.has(c))cs.set(c,[]);
@@ -3719,7 +3724,7 @@ function renderLibrary(){try{renderPackNews();}catch(e){}
       if(t){const th=document.createElement('div');th.className='dp-term';th.textContent=t;host.appendChild(th);} // header only when a term is set
       sortedCourses(cs).forEach(([c,plist])=>{
         const nOn=plist.filter(p=>p.enabled!==false).length;
-        const byWeek=(a,b)=>cmpW(chronoWeek(a.weeks),chronoWeek(b.weeks))||natCmp(a.pack||a.id||'',b.pack||b.id||''); // chronological within a course
+        const byWeek=(a,b)=>cmpW(packWeek(b),packWeek(a))||natCmp(b.pack||b.id||'',a.pack||a.id||''); /* v0.10.1: newest first */ // chronological within a course
         const sorted=[...plist.filter(p=>p.enabled!==false).sort(byWeek),...plist.filter(p=>p.enabled===false).sort(byWeek)]; // enabled to top, then by week within each group
         if(c){
           const key=y+'³'+t+'³'+c,open=libOpen.has(key);
@@ -3911,7 +3916,7 @@ function organizeGuides(){const metas=activeGuides().map(guideMeta);
   // Order the per-pack groups by the curriculum hierarchy (school → year → term → week#), matching the
   // Content library / Default packs panels — not by import order. Missing fields sort last.
   const packCmp=(p,q)=>natCmp(p.school||'￿',q.school||'￿')||natCmp(p.year||'￿',q.year||'￿')
-    ||natCmp(p.term||'',q.term||'')||cmpW(chronoWeek(p.weeks),chronoWeek(q.weeks))||natCmp(p.pack||p.id||'',q.pack||q.id||'');
+    ||natCmp(p.term||'',q.term||'')||cmpW(packWeek(q),packWeek(p))||natCmp(q.pack||q.id||'',p.pack||p.id||'');
   const orderedPacks=activePacks().slice().sort(packCmp);
   const groups=[];
   orderedPacks.forEach(p=>{const items=metas.filter(x=>x.g._pack===p.id).sort(cmp);if(items.length)groups.push({label:p.pack||p.id,items});});
