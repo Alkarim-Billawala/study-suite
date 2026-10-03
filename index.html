@@ -3380,6 +3380,9 @@ const ATLAS_CSS=`.sswlive.ssw-atlas .sswplanes{display:flex;flex-wrap:wrap;gap:6
 .sswlive.ssw-atlas .sswhit{display:block;width:100%;text-align:left;font:inherit;font-size:13.5px;padding:7px 10px;border:0;background:transparent;color:var(--ink);cursor:pointer}
 .sswlive.ssw-atlas .sswhit:hover,.sswlive.ssw-atlas .sswhit:focus{background:var(--paper2,rgba(127,127,127,.12))}
 .sswlive.ssw-atlas .sswhit small{opacity:.65;margin-left:6px}
+.sswlive.ssw-atlas .sswhitrow{border-bottom:1px solid var(--line)}.sswlive.ssw-atlas .sswhitrow:last-child{border-bottom:0}
+.sswlive.ssw-atlas .sswchips{display:flex;flex-wrap:wrap;gap:4px;padding:0 10px 7px}
+.sswlive.ssw-atlas .sswchip{font:inherit;font-size:11.5px;padding:3px 8px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
 .sswlive.ssw-atlas .sswframe{position:relative}
 .sswlive.ssw-atlas .sswloc{position:absolute;right:6px;top:22px;width:72px;height:auto;opacity:.9;pointer-events:none}
 .sswlive.ssw-atlas .sswloc svg{display:block;width:100%;height:auto;background:transparent}
@@ -3421,8 +3424,10 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
     return photo+base+`<g${g}><g class="sswterr"${terr?'':' style="display:none"'}>${sswClean(l.terr||'')}</g>`+
       Object.keys(PW).map(k=>`<g class="sswpath" data-p="${sswEsc(k)}"${paths.has(k)?'':' style="display:none"'}>${sswClean((l.paths||{})[k]||'')}</g>`).join('')+
       (l.regions||[]).map(sswShape).join('')+'</g>'+`<g class="sswov">${labelSvg(l,flip)}</g>`+marksSvg(l,flip)+'<g class="sswmk"></g>';};
-  const locSvg=()=>{const l=lvl();if(!l.loc||!w.locator)return '';const L=P.find(p=>p.id===w.locator.plane),ll=L&&(L.levels||[]).find(x=>x.id===w.locator.level);if(!ll)return '';
-    return `<div class="sswloc"><svg viewBox="0 0 ${W} ${H}" aria-hidden="true">${sswClean(ll.svg||'')}<line x1="${l.loc[0]}" y1="${l.loc[1]}" x2="${l.loc[2]}" y2="${l.loc[3]}" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></div>`;};
+  const locSvg=()=>{const l=lvl();if(!l.loc||!w.locator)return '';const sp=Array.isArray(l.loc)?{plane:w.locator.plane,level:w.locator.level,line:l.loc}:l.loc;
+    const L=P.find(p=>p.id===sp.plane),ll=L&&(L.levels||[]).find(x=>x.id===sp.level);if(!ll)return '';
+    const mk=sp.line?`<line x1="${+sp.line[0]}" y1="${+sp.line[1]}" x2="${+sp.line[2]}" y2="${+sp.line[3]}" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/>`:sp.dot?`<circle cx="${+sp.dot[0]}" cy="${+sp.dot[1]}" r="${+(sp.dot[2]||12)}" style="fill:var(--accent);fill-opacity:.55;stroke:var(--accent);stroke-width:3"/>`:'';
+    return `<div class="sswloc"><svg viewBox="0 0 ${W} ${H}" aria-hidden="true">${sswClean(ll.svg||'')}${mk}</svg></div>`;}; /* v0.10.1: beacon — any thumbnail, line or dot */
   const zoneName=()=>{const z=P[pi].zones||[];let n='';z.forEach(x=>{if(li>=(x.from|0))n=x.name;});return n;};
   /* ---------- build ---------- */
   let h='';
@@ -3483,8 +3488,10 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
   const taught=sid=>atlasSrcOn(o.packId,S[sid].src);
   inp.addEventListener('input',()=>{const q=inp.value.trim().toLowerCase();hits.innerHTML='';if(q.length<2)return;
     const m=Object.keys(S).filter(k=>taught(k)&&atlasShows(w,k).length&&(S[k].name.toLowerCase().includes(q)||(S[k].gloss||'').toLowerCase().includes(q))).slice(0,8);
-    hits.innerHTML=m.map(k=>`<button type="button" class="sswhit" data-s="${sswEsc(k)}">${sswEsc(S[k].name)}<small>${atlasShows(w,k).map(x=>x.p.name.toLowerCase()).filter((v,i,a)=>a.indexOf(v)===i).join(', ')}</small></button>`).join('')||'<div class="sswhit">No match among the structures taught so far.</div>';
-    hits.querySelectorAll('.sswhit[data-s]').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.s,x=atlasShows(w,k)[0];hits.innerHTML='';inp.value=S[k].name;quizOff();go(x.pi,x.li,k);}));});
+    hits.innerHTML=m.map(k=>`<div class="sswhitrow"><button type="button" class="sswhit" data-s="${sswEsc(k)}">${sswEsc(S[k].name)}</button><div class="sswchips">${atlasShows(w,k).map(x=>`<button type="button" class="sswchip" data-s="${sswEsc(k)}" data-pi="${x.pi}" data-li="${x.li}">${sswEsc(x.p.name)} · ${sswEsc(x.l.label||'')}</button>`).join('')}</div></div>`).join('')||'<div class="sswhit">No match among the structures taught so far.</div>';
+    const pick=(k,pi_,li_)=>{hits.innerHTML='';inp.value=S[k].name;quizOff();go(pi_,li_,k);};
+    hits.querySelectorAll('.sswhit[data-s]').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.s,x=atlasShows(w,k)[0];pick(k,x.pi,x.li);}));
+    hits.querySelectorAll('.sswchip').forEach(b=>b.addEventListener('click',()=>pick(b.dataset.s,+b.dataset.pi,+b.dataset.li)));}); /* v0.10.1: slice chips */
   inp.addEventListener('blur',()=>setTimeout(()=>{hits.innerHTML='';},180));
   /* tap + quiz */
   const qb=host.querySelector('[data-a="quiz"]');
