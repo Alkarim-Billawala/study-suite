@@ -1,7 +1,12 @@
 <!--
-  Study Suite  ·  v0.9.0 (beta)
+  Study Suite  ·  v0.10.0 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.10.0 (2026-10-03): The `atlas` widget type ("The Brain"): planes, level stacks with zones, a shared structure
+  registry (tap: name + gloss + on-N-slices cycling; search; Quiz me over the structures taught so far, honouring the pack's
+  Sources switches), Labels / Territories / Reference / Outlines switches, Radiological-Anatomical convention toggle
+  (mirrors the drawing, swaps the side markers, re-lays the labels), pathway overlays, a locator thumbnail. Cards: spot
+  and widget with state {plane, level, …}. Guide links can open a widget in a state (#ssw=id:plane:level).
   Changelog v0.9.0 (2026-10-02): Interactive figures. A pack may carry `widgets` {id:{type,vb,…}} (data only, no
   script); the app draws and drives them (ssw_engine: mountWidget / mountGuideWidgets / mountCardWidget, SSW_CSS).
   Types: stack (slice scroller: range + swipe + label masks), layers (toggle chips), spot (tap a region; Quiz me),
@@ -1825,7 +1830,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.9.0';
+const APP_VERSION='0.10.0';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3261,12 +3266,13 @@ function sswShape(r){const a=`class="sswrg" data-id="${sswEsc(r.id)}"`;
 function sswMask(w,m){return Array.isArray(m)&&m.length?`<g class="sswmask">${m.map(r=>`<rect x="${+r[0]}" y="${+r[1]}" width="${+r[2]}" height="${+r[3]}" fill="${sswEsc(w.maskFill||'#fff')}"/>`).join('')}</g>`:'';}
 function sswSvg(w,inner){return `<svg class="sswsvg" viewBox="0 0 ${+w.vb[0]} ${+w.vb[1]}" role="img" aria-label="${sswEsc(w.alt||w.title||'Interactive figure')}">${inner}</svg>`;}
 const SSW_HINT={stack:'Drag the slider or swipe the picture to move through the levels.',layers:'Switch the layers on and off.',
-  spot:'Tap a structure to name it — or Quiz me.',lesion:'Tap a lesion site to see what it causes — or Quiz me.',curves:'Switch between the views.'};
+  spot:'Tap a structure to name it — or Quiz me.',lesion:'Tap a lesion site to see what it causes — or Quiz me.',curves:'Switch between the views.',atlas:'Pick a plane, move through the levels, tap a structure to name it — or search, or Quiz me.'};
 /* o: {card, reveal, state:{frame,labels,hideName,on,view,region,outlines}, pick, target, onPick} */
 function mountWidget(host,w,o){o=o||{};const st=o.state||{};
   if(!w||!Array.isArray(w.vb)||!SSW_HINT[w.type]){host.innerHTML='<div class="sswread">This figure needs a newer version of the app.</div>';return;}
   host.className='sswlive ssw-'+w.type+(o.card?' sswcard':'');const t=w.type,card=!!o.card,hideName=card&&!o.reveal&&!!st.hideName;let h='';
   const read=()=>host.querySelector('.sswread');
+  if(t==='atlas'){mountAtlas(host,w,Object.assign({packId:o.packId},o));return;} /* v0.10.0 */
   if(t==='stack'){const F=w.frames||[];let i=Math.max(0,Math.min(F.length-1,st.frame|0));
     h=sswSvg(w,F.map((f,k)=>`<g class="sswfr" data-i="${k}"${k===i?'':' style="display:none"'}>${sswArt(w,f.img||f.svg)}${sswMask(w,f.mask)}<g class="sswov">${sswClean(f.over||'')}</g></g>`).join(''));
     if(!card)h+=`<div class="sswbar"><button type="button" class="sswb" data-a="prev" aria-label="Previous">‹</button><input type="range" class="sswrange" min="0" max="${F.length-1}" step="1" value="${i}" aria-label="${sswEsc(w.axis||'Level')}"><button type="button" class="sswb" data-a="next" aria-label="Next">›</button></div>`;
@@ -3337,17 +3343,160 @@ function mountWidget(host,w,o){o=o||{};const st=o.state||{};
       read().innerHTML=(hideName||v<0||!V[v])?'':`<b>${sswEsc(V[v].name)}</b>${V[v].note?' — '+sswEsc(V[v].note):''}`;};
     show(v);if(card)return;host.querySelectorAll('.sswb[data-k]').forEach(b=>b.addEventListener('click',()=>show(+b.dataset.k)));return;}}
 /* guides: replace each poster with the live widget once the frame has loaded (the caption stays) */
-function mountGuideWidgets(d,g){const els=d.querySelectorAll('[data-ssw]');if(!els.length)return;
-  if(!d.getElementById('sswCss')){const s=d.createElement('style');s.id='sswCss';s.textContent=SSW_CSS;(d.head||d.documentElement).appendChild(s);}
+function mountGuideWidgets(d,g,opts){const els=d.querySelectorAll('[data-ssw]');if(!els.length)return;
+  const a=opts&&opts.anchor,m=a&&/^ssw=([^:]+)(?::([^:]*))?(?::(.*))?$/.exec(String(a));const want=m?{id:m[1],state:{plane:m[2]||undefined,level:m[3]||undefined}}:null; /* v0.10.0 */
+  if(!d.getElementById('sswCss')){const s=d.createElement('style');s.id='sswCss';s.textContent=SSW_CSS+ATLAS_CSS;(d.head||d.documentElement).appendChild(s);}
   els.forEach(el=>{const w=widgetById(el.getAttribute('data-ssw'),g&&g._pack);if(!w)return;const posters=el.querySelectorAll('.sswposter');
     const host=d.createElement('div');el.insertBefore(host,el.querySelector('figcaption'));
-    try{mountWidget(host,w,{});posters.forEach(p=>p.style.display='none');}catch(e){host.remove();}});}
+    const o={packId:g&&g._pack};if(want&&want.id===el.getAttribute('data-ssw')){o.state=want.state;setTimeout(()=>{try{el.scrollIntoView({block:'start'});}catch(_){}},50);}
+    try{mountWidget(host,w,o);posters.forEach(p=>p.style.display='none');}catch(e){host.remove();}});}
 /* cards: 'spot' and 'widget' draw into #cardWidget */
 function mountCardWidget(c){if(c.type!=='spot'&&c.type!=='widget')return;const host=$('cardWidget');if(!host)return;const w=widgetById(c.widget,c._pack);
-  if(c.type==='spot')mountWidget(host,w,{card:true,reveal:revealed,state:c.state||{},pick:work.spot,target:c.target,onPick:id=>{work.spot=id;}});
-  else mountWidget(host,w,{card:true,reveal:revealed,state:c.state||{}});}
+  if(c.type==='spot')mountWidget(host,w,{card:true,reveal:revealed,state:c.state||{},pick:work.spot,target:c.target,onPick:id=>{work.spot=id;},packId:c._pack});
+  else mountWidget(host,w,{card:true,reveal:revealed,state:c.state||{},packId:c._pack});}
 
-(function(){const st=document.createElement('style');st.id='sswCss';st.textContent=SSW_CSS+'.sswlive{--soft:var(--ink-soft)}';document.head.appendChild(st);})();
+/* ===== v0.10.0: the `atlas` widget type ("The Brain"). Pack data only (plan: Claude/StudySuite/brain-atlas/).
+   w = {type:'atlas', vb:[W,H], alt, title,
+        systems:{id:{name,color}}, structures:{id:{name,gloss,sys,src[],weeks[]}}, pathways:{id:{name,color,note,src[]}},
+        planes:[{id,name, zones:[{name,from}], levels:[{id,label,note, conv:'rad'|'none', marks:{t,b,l,r},
+                 svg, regions:[{id,d|poly|circle}], labels:[{x,y,a,n,g,t:[tx,ty]}], terr, paths:{pid:svg},
+                 ref:{img,credit,conv}, loc:[x1,y1,x2,y2]}]}],
+        locator:{plane, level}   — which drawing is the small thumbnail (a sagittal midline, usually)}
+   Behaviour: plane pills · level slider with zones · tap a region (name, gloss, "on N slices · Next") · search · Labels ·
+   Territories · Reference · Outlines · convention (Radiological / Anatomical; mirrors the drawing, swaps the side
+   markers, re-lays the labels) · pathway pills · Quiz me (structures taught so far: honours the pack's Sources switches).
+   Card states: {plane, level, labels:false, terr:true, paths:[…], region, conv:'ana', hideName:true}. — */
+const ATLAS_CSS=`.sswlive.ssw-atlas .sswplanes{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.sswlive.ssw-atlas .sswzone{font-size:12px;opacity:.7;min-width:70px}
+.sswlive.ssw-atlas .sswsearch{position:relative;margin-top:8px}
+.sswlive.ssw-atlas .sswsearch input{width:100%;box-sizing:border-box;font:inherit;font-size:14px;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
+.sswlive.ssw-atlas .sswhits{position:absolute;left:0;right:0;top:100%;z-index:5;background:var(--paper);border:1px solid var(--line);border-radius:8px;margin-top:3px;max-height:220px;overflow:auto;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.sswlive.ssw-atlas .sswhits:empty{display:none}
+.sswlive.ssw-atlas .sswhit{display:block;width:100%;text-align:left;font:inherit;font-size:13.5px;padding:7px 10px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.sswlive.ssw-atlas .sswhit:hover,.sswlive.ssw-atlas .sswhit:focus{background:var(--paper2,rgba(127,127,127,.12))}
+.sswlive.ssw-atlas .sswhit small{opacity:.65;margin-left:6px}
+.sswlive.ssw-atlas .sswframe{position:relative}
+.sswlive.ssw-atlas .sswloc{position:absolute;right:6px;top:22px;width:72px;height:auto;opacity:.9;pointer-events:none}
+.sswlive.ssw-atlas .sswloc svg{display:block;width:100%;height:auto;background:transparent}
+.sswlive.ssw-atlas .sswsvg .sswmk{pointer-events:none}
+.sswlive.ssw-atlas .sswtools+.sswtools{margin-top:6px}
+.sswlive.ssw-atlas .tk{fill:var(--soft);font-size:11px;letter-spacing:.08em}
+.sswlive.ssw-atlas .sswterr{opacity:.55}
+.sswlive.ssw-atlas .sswcredit{font-size:11px;opacity:.65;margin-top:4px}
+.sswlive.ssw-atlas .sswcredit:empty{display:none}`;
+function atlasLevels(w){const out=[];(w.planes||[]).forEach((p,pi)=>(p.levels||[]).forEach((l,li)=>out.push({p,pi,l,li})));return out;}
+function atlasShows(w,sid){return atlasLevels(w).filter(x=>(x.l.regions||[]).some(r=>r.id===sid));}
+/* srcOn is the app's per-pack source switch test; outside the app (or without a pack) everything counts as on */
+function atlasSrcOn(packId,src){try{const p=packId&&packs.find(x=>x.id===packId);return p?srcOn(p,{src:src||[]}):true;}catch(_){return true;}}
+function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w.vb[1],card=!!o.card,hideName=card&&!o.reveal&&!!st.hideName;
+  const P=w.planes||[],S=w.structures||{},PW=w.pathways||{},SYS=w.systems||{};
+  let pi=Math.max(0,P.findIndex(p=>p.id===st.plane));if(pi<0)pi=0;
+  let li=Math.max(0,(P[pi].levels||[]).findIndex(l=>l.id===st.level));if(li<0)li=0;
+  let labels=st.labels!==false,terr=!!st.terr,ref=st.ref===true?2:Math.max(0,Math.min(2,st.ref|0)),outl=st.outlines!=null?!!st.outlines:!card,conv=st.conv==='ana'?'ana':'rad';
+  const paths=new Set(Array.isArray(st.paths)?st.paths:[]);let quiz=null,lastQ=null,cycle=null;
+  const lvl=()=>P[pi].levels[li];
+  const flipFor=l=>l.conv==='rad'&&conv==='ana';
+  /* labels sit in the gutters beside the drawing: anchor 'end' = left gutter (text runs leftward from x), 'start' = right
+     gutter, 'middle' = above/below. The leader leaves the label on the side facing the drawing and ends at the target t. */
+  const labelSvg=(l,flip)=>(l.labels||[]).map(x=>{const X=flip?W-x.x:x.x,A=flip?(x.a==='start'?'end':x.a==='end'?'start':x.a||'start'):(x.a||'start');
+    const ax=A==='end'?X+3:A==='start'?X-3:X,ay=A==='middle'?(x.t&&x.t[1]<x.y?x.y-11:x.y+3):x.y-4;
+    const t=x.t?`<line x1="${flip?W-x.t[0]:x.t[0]}" y1="${x.t[1]}" x2="${ax}" y2="${ay}" class="ln"/><circle cx="${flip?W-x.t[0]:x.t[0]}" cy="${x.t[1]}" r="1.6" style="fill:var(--soft)"/>`:'';
+    return `${t}<text x="${X}" y="${x.y}" class="tb" text-anchor="${A}">${sswEsc(x.n)}</text>${x.g?`<text x="${X}" y="${x.y+12}" class="ts" text-anchor="${A}">${sswEsc(x.g)}</text>`:''}`;}).join('');
+  const marksSvg=(l,flip)=>{const m=l.marks||{};let s='';if(l.conv==='rad'){const r=flip?W-14:14,q=flip?14:W-14;s+=`<text x="${r}" y="13" class="tk" text-anchor="middle">R</text><text x="${q}" y="13" class="tk" text-anchor="middle">L</text>`;}
+    if(m.t)s+=`<text x="${W/2}" y="11" class="ts" text-anchor="middle">${sswEsc(m.t)}</text>`;if(m.b)s+=`<text x="${W/2}" y="${H-4}" class="ts" text-anchor="middle">${sswEsc(m.b)}</text>`;
+    if(m.l)s+=`<text x="12" y="${H-6}" class="ts" text-anchor="start">${sswEsc(flip?m.r||m.l:m.l)} →</text>`;
+    if(m.r)s+=`<text x="${W-12}" y="${H-6}" class="ts" text-anchor="end">← ${sswEsc(flip?m.l||m.r:m.r)}</text>`;return s;};
+  /* Reference is three-way: 0 drawing · 1 overlay (the real slice under a translucent drawing, at the box it was traced in)
+     · 2 photo. ref = {img, credit, conv, box:[x,y,w,h]}; without a box the image fills the viewBox. */
+  const art=l=>{const flip=flipFor(l),g=flip?` transform="translate(${W},0) scale(-1,1)"`:'';
+    const hasRef=!!(l.ref&&l.ref.img),mode=hasRef?ref:0;const rflip=hasRef&&((l.ref.conv||'rad')==='rad')!==(conv==='rad')&&l.conv==='rad';
+    const bx=(l.ref&&l.ref.box)||[0,0,W,H];
+    const photo=hasRef&&mode?`<g${rflip?` transform="translate(${W},0) scale(-1,1)"`:''}><image href="${l.ref.img}" x="${+bx[0]}" y="${+bx[1]}" width="${+bx[2]}" height="${+bx[3]}" preserveAspectRatio="xMidYMid meet"/></g>`:'';
+    const base=mode===2?'':`<g${g}${mode===1?' style="opacity:.55"':''}>${sswClean(l.svg||'')}</g>`;
+    return photo+base+`<g${g}><g class="sswterr"${terr?'':' style="display:none"'}>${sswClean(l.terr||'')}</g>`+
+      Object.keys(PW).map(k=>`<g class="sswpath" data-p="${sswEsc(k)}"${paths.has(k)?'':' style="display:none"'}>${sswClean((l.paths||{})[k]||'')}</g>`).join('')+
+      (l.regions||[]).map(sswShape).join('')+'</g>'+`<g class="sswov">${labelSvg(l,flip)}</g>`+marksSvg(l,flip)+'<g class="sswmk"></g>';};
+  const locSvg=()=>{const l=lvl();if(!l.loc||!w.locator)return '';const L=P.find(p=>p.id===w.locator.plane),ll=L&&(L.levels||[]).find(x=>x.id===w.locator.level);if(!ll)return '';
+    return `<div class="sswloc"><svg viewBox="0 0 ${W} ${H}" aria-hidden="true">${sswClean(ll.svg||'')}<line x1="${l.loc[0]}" y1="${l.loc[1]}" x2="${l.loc[2]}" y2="${l.loc[3]}" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></div>`;};
+  const zoneName=()=>{const z=P[pi].zones||[];let n='';z.forEach(x=>{if(li>=(x.from|0))n=x.name;});return n;};
+  /* ---------- build ---------- */
+  let h='';
+  if(!card)h+=`<div class="sswplanes" role="group">${P.map((p,k)=>`<button type="button" class="sswb" data-pl="${k}" aria-pressed="${k===pi}">${sswEsc(p.name)}</button>`).join('')}</div>`;
+  h+=`<div class="sswframe">${sswSvg(w,'')}${card?'':'<div class="sswlocbox"></div>'}</div>`;
+  if(!card){h+=`<div class="sswbar"><button type="button" class="sswb" data-a="prev" aria-label="Previous">‹</button><input type="range" class="sswrange" min="0" max="0" step="1" value="0" aria-label="Level"><button type="button" class="sswb" data-a="next" aria-label="Next">›</button></div>`;}
+  h+='<div class="sswread"></div><div class="sswcredit"></div>';
+  if(!card){h+=`<div class="sswtools"><button type="button" class="sswb" data-a="labels" aria-pressed="${labels}">Labels</button><button type="button" class="sswb" data-a="terr" aria-pressed="${terr}">Territories</button><button type="button" class="sswb" data-a="ref" aria-pressed="${ref>0}">${["Reference","Reference · overlay","Reference · photo"][ref]}</button><button type="button" class="sswb" data-a="outl" aria-pressed="${outl}">Outlines</button><button type="button" class="sswb" data-a="conv" aria-pressed="${conv==='ana'}">Anatomical view</button><button type="button" class="sswb" data-a="quiz" aria-pressed="false">Quiz me</button><button type="button" class="sswb" data-a="zin" aria-label="Zoom in">Zoom +</button><button type="button" class="sswb" data-a="zout" aria-label="Zoom out">Zoom −</button></div>`;
+    if(Object.keys(PW).length)h+=`<div class="sswtools">${Object.keys(PW).map(k=>`<button type="button" class="sswb" data-pw="${sswEsc(k)}" aria-pressed="${paths.has(k)}"><span class="sswdot" style="background:${sswEsc(PW[k].color||'var(--accent)')}"></span>${sswEsc(PW[k].name)}</button>`).join('')}</div>`;
+    h+=`<div class="sswsearch"><input type="search" placeholder="Find a structure…" aria-label="Find a structure" autocomplete="off"><div class="sswhits"></div></div><div class="sswhint">${SSW_HINT.atlas}</div>`;}
+  host.innerHTML=h;host.classList.toggle('outl',outl);if(!labels)host.classList.add('nolab');
+  const sv=host.querySelector('.sswsvg'),read=()=>host.querySelector('.sswread'),credit=()=>host.querySelector('.sswcredit');
+  const sel=id=>{host.querySelectorAll(`.sswrg[data-id="${CSS.escape(id)}"]`).forEach(e=>e.classList.add('sel'));};
+  const mark=(id,cls)=>{host.querySelectorAll(`.sswrg[data-id="${CSS.escape(id)}"]`).forEach(e=>e.classList.add(cls));};
+  const clear=()=>{host.querySelectorAll('.sswrg').forEach(e=>e.classList.remove('sel','ok','no'));const m=host.querySelector('.sswmk');if(m)m.innerHTML='';};
+  const missAt=e=>{try{const p=sv.createSVGPoint();p.x=e.clientX;p.y=e.clientY;const q=p.matrixTransform(sv.getScreenCTM().inverse());host.querySelector('.sswmk').innerHTML=`<circle class="sswmiss" cx="${q.x}" cy="${q.y}" r="${Math.max(4,W/80)}"/>`;}catch(_){}};
+  const sysDot=s=>{const y=s&&SYS[s.sys];return y?`<span class="sswdot" style="background:${sswEsc(y.color||'var(--accent)')};vertical-align:middle;margin-right:4px"></span>`:'';};
+  const tell=(sid,withNav)=>{const s=S[sid];if(!s)return '';const shows=atlasShows(w,sid);
+    return `${sysDot(s)}<b>${sswEsc(s.name)}</b>${s.gloss?' — '+sswEsc(s.gloss):''}${withNav&&shows.length>1?` <span class="sswpos">on ${shows.length} slices</span> <button type="button" class="sswb" data-a="cycle">Next slice</button>`:''}`;};
+  const levelLine=()=>{const l=lvl();return hideName?'':`<b>${sswEsc(l.label||'')}</b>${l.note?' — '+sswEsc(l.note):''}${card?'':` <span class="sswpos">${zoneName()?sswEsc(zoneName())+' · ':''}${li+1} / ${P[pi].levels.length}</span>`}`;};
+  const draw=()=>{const l=lvl();sv.innerHTML=art(l);const lb=host.querySelector('.sswlocbox');if(lb)lb.innerHTML=locSvg();
+    const r=host.querySelector('.sswrange');if(r){r.max=String(P[pi].levels.length-1);r.value=String(li);}
+    host.querySelectorAll('.sswb[data-pl]').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.pl===pi)));
+    const cb=host.querySelector('[data-a="conv"]');if(cb){cb.disabled=l.conv!=='rad';cb.setAttribute('aria-pressed',String(conv==='ana'&&l.conv==='rad'));}
+    credit().textContent=(ref>0&&l.ref&&l.ref.img)?('Reference: '+(l.ref.credit||'')):'';
+    if(!quiz)read().innerHTML=levelLine();};
+  const go=(p,k,sid)=>{pi=Math.max(0,Math.min(P.length-1,p));li=Math.max(0,Math.min(P[pi].levels.length-1,k));draw();if(sid){sel(sid);read().innerHTML=tell(sid,true)+' <span class="sswpos">'+sswEsc(lvl().label||'')+'</span>';wireCycle(sid);}};
+  const wireCycle=sid=>{const b=read().querySelector('[data-a="cycle"]');if(!b)return;b.addEventListener('click',()=>{const shows=atlasShows(w,sid);const at=shows.findIndex(x=>x.pi===pi&&x.li===li);const nx=shows[(at+1)%shows.length];go(nx.pi,nx.li,sid);});};
+  draw();
+  /* ---------- cards ---------- */
+  if(card){if(o.reveal&&o.target){mark(o.target,'ok');if(o.pick&&o.pick!==o.target&&o.pick!=='__miss')mark(o.pick,'no');read().innerHTML=tell(o.target);return;}
+    if(st.region){sel(st.region);if(o.reveal)read().innerHTML=tell(st.region);return;}
+    if(o.pick&&o.pick!=='__miss')sel(o.pick);if(o.reveal||!o.onPick)return;
+    sv.addEventListener('click',e=>{const el=e.target.closest&&e.target.closest('.sswrg');clear();if(el){sel(el.dataset.id);o.onPick(el.dataset.id);}else{missAt(e);o.onPick('__miss');}});return;}
+  /* ---------- guide mode ---------- */
+  host.querySelectorAll('.sswb[data-pl]').forEach(b=>b.addEventListener('click',()=>{quizOff();go(+b.dataset.pl,0);}));
+  const r=host.querySelector('.sswrange');r.addEventListener('input',()=>{if(!quiz)go(pi,+r.value);});
+  host.querySelector('[data-a="prev"]').addEventListener('click',()=>{if(!quiz)go(pi,li-1);});host.querySelector('[data-a="next"]').addEventListener('click',()=>{if(!quiz)go(pi,li+1);});
+  /* zoom: viewBox window (z = 1..4) centred on (px,py); drag pans when zoomed, swipes levels when not; double-tap resets */
+  let z=1,px=W/2,py=H/2,x0=null,y0=null,moved=false;const vbox=()=>{px=Math.max(W/2/z,Math.min(W-W/2/z,px));py=Math.max(H/2/z,Math.min(H-H/2/z,py));sv.setAttribute('viewBox',`${px-W/2/z} ${py-H/2/z} ${W/z} ${H/z}`);};
+  const zoom=f=>{z=Math.max(1,Math.min(4,z*f));if(z===1){px=W/2;py=H/2;}vbox();};
+  sv.addEventListener('pointerdown',e=>{x0=e.clientX;y0=e.clientY;moved=false;});sv.addEventListener('pointercancel',()=>{x0=null;});
+  sv.addEventListener('pointermove',e=>{if(x0===null||z===1||e.buttons===0)return;const r=sv.getBoundingClientRect(),k=(W/z)/r.width;px-=(e.clientX-x0)*k;py-=(e.clientY-y0)*k;x0=e.clientX;y0=e.clientY;moved=true;vbox();});
+  sv.addEventListener('pointerup',e=>{if(x0===null)return;const dx=e.clientX-x0;x0=null;if(z===1&&Math.abs(dx)>40&&!quiz)go(pi,li+(dx<0?1:-1));});
+  sv.addEventListener('dblclick',()=>{z=1;zoom(1);});
+  host.querySelector('[data-a="zin"]').addEventListener('click',()=>zoom(1.5));host.querySelector('[data-a="zout"]').addEventListener('click',()=>zoom(1/1.5));
+  const tog=(a,fn)=>{const b=host.querySelector(`[data-a="${a}"]`);b.addEventListener('click',()=>{const on=fn();b.setAttribute('aria-pressed',String(on));});};
+  tog('labels',()=>{labels=!labels;host.classList.toggle('nolab',!labels);return labels;});
+  tog('terr',()=>{terr=!terr;draw();return terr;});tog('ref',()=>{ref=(ref+1)%3;host.querySelector('[data-a="ref"]').textContent=['Reference','Reference · overlay','Reference · photo'][ref];
+    const l=lvl();if(l.ref&&l.ref.printedLabels){labels=!(ref>0);host.classList.toggle('nolab',!labels);const lb=host.querySelector('[data-a="labels"]');if(lb)lb.setAttribute('aria-pressed',String(labels));} /* a reference with its own printed labels hides the drawn ones */
+    draw();return ref>0;});
+  tog('outl',()=>{outl=!outl;host.classList.toggle('outl',outl);return outl;});
+  tog('conv',()=>{conv=conv==='rad'?'ana':'rad';draw();return conv==='ana';});
+  host.querySelectorAll('.sswb[data-pw]').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.pw,on=!paths.has(k);on?paths.add(k):paths.delete(k);b.setAttribute('aria-pressed',String(on));
+    host.querySelectorAll(`.sswpath[data-p="${CSS.escape(k)}"]`).forEach(g=>g.style.display=on?'':'none');if(on&&PW[k].note&&!quiz)read().innerHTML=`<span class="sswdot" style="background:${sswEsc(PW[k].color||'var(--accent)')};vertical-align:middle;margin-right:4px"></span><b>${sswEsc(PW[k].name)}</b> — ${sswEsc(PW[k].note)}`;}));
+  /* search */
+  const inp=host.querySelector('.sswsearch input'),hits=host.querySelector('.sswhits');
+  const taught=sid=>atlasSrcOn(o.packId,S[sid].src);
+  inp.addEventListener('input',()=>{const q=inp.value.trim().toLowerCase();hits.innerHTML='';if(q.length<2)return;
+    const m=Object.keys(S).filter(k=>taught(k)&&atlasShows(w,k).length&&(S[k].name.toLowerCase().includes(q)||(S[k].gloss||'').toLowerCase().includes(q))).slice(0,8);
+    hits.innerHTML=m.map(k=>`<button type="button" class="sswhit" data-s="${sswEsc(k)}">${sswEsc(S[k].name)}<small>${atlasShows(w,k).map(x=>x.p.name.toLowerCase()).filter((v,i,a)=>a.indexOf(v)===i).join(', ')}</small></button>`).join('')||'<div class="sswhit">No match among the structures taught so far.</div>';
+    hits.querySelectorAll('.sswhit[data-s]').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.s,x=atlasShows(w,k)[0];hits.innerHTML='';inp.value=S[k].name;quizOff();go(x.pi,x.li,k);}));});
+  inp.addEventListener('blur',()=>setTimeout(()=>{hits.innerHTML='';},180));
+  /* tap + quiz */
+  const qb=host.querySelector('[data-a="quiz"]');
+  const quizOff=()=>{if(!quiz)return;quiz=null;qb.setAttribute('aria-pressed','false');qb.textContent='Quiz me';clear();read().innerHTML=levelLine();};
+  const ask=()=>{const pool=Object.keys(S).filter(k=>k!==lastQ&&taught(k)&&atlasShows(w,k).length);if(!pool.length){quizOff();return;}
+    const k=pool[Math.floor(Math.random()*pool.length)],shows=atlasShows(w,k),here=shows.find(x=>x.pi===pi&&x.li===li)||shows[Math.floor(Math.random()*shows.length)];
+    quiz=k;lastQ=k;pi=here.pi;li=here.li;draw();clear();read().innerHTML=`Tap: <b>${sswEsc(S[k].name)}</b> <span class="sswpos">${sswEsc(lvl().label||'')}</span>`;};
+  qb.addEventListener('click',()=>{if(quiz)quizOff();else{qb.setAttribute('aria-pressed','true');qb.textContent='Stop quiz';ask();}});
+  sv.addEventListener('click',e=>{const el=e.target.closest&&e.target.closest('.sswrg');const id=el&&el.dataset.id;
+    if(!quiz){clear();if(id){sel(id);read().innerHTML=tell(id,true);wireCycle(id);}else read().innerHTML=levelLine();return;}
+    clear();if(!id){missAt(e);read().innerHTML=`<span class="sswno">Missed.</span> Find: <b>${sswEsc(S[quiz].name)}</b>`;return;}
+    if(id===quiz){mark(id,'ok');read().innerHTML=`<span class="sswok">✓</span> ${tell(id)} <button type="button" class="sswb" data-a="nextq">Next</button>`;read().querySelector('[data-a="nextq"]').addEventListener('click',ask);}
+    else{mark(id,'no');read().innerHTML=`<span class="sswno">✗ That’s ${sswEsc((S[id]||{}).name||id)}.</span> Try again — or <button type="button" class="sswb" data-a="show">Show me</button>`;
+      read().querySelector('[data-a="show"]').addEventListener('click',()=>{clear();mark(quiz,'ok');read().innerHTML=`${tell(quiz)} <button type="button" class="sswb" data-a="nextq">Next</button>`;read().querySelector('[data-a="nextq"]').addEventListener('click',ask);});}});
+}
+
+(function(){const st=document.createElement('style');st.id='sswCss';st.textContent=SSW_CSS+ATLAS_CSS+'.sswlive{--soft:var(--ink-soft)}';document.head.appendChild(st);})();
 /* ===== VALIDATION ===== */
 const KNOWN_TYPES=['mcq','multi','cloze','order','match','qa','label','spot','widget'];
 function validateCard(c,i){
@@ -3977,7 +4126,7 @@ function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();
   {const old=document.querySelector('.guideframe');if(old&&old._stopResume)old._stopResume();} /* v0.7.8 */
   const host=$('guideHost');host.innerHTML='';
   const fr=document.createElement('iframe');fr.className='guideframe';fr.setAttribute('sandbox','allow-same-origin allow-modals');
-  fr.onload=()=>{try{const d=fr.contentDocument;if(!d)return;try{mountGuideWidgets(d,g);}catch(e){} /* v0.9.0 */try{hideOffSections(d,g);}catch(e){}let el=null; /* v0.6.6 */
+  fr.onload=()=>{try{const d=fr.contentDocument;if(!d)return;try{mountGuideWidgets(d,g,anchorOrSection);}catch(e){} /* v0.9.0 · v0.10.0: state links */try{hideOffSections(d,g);}catch(e){}let el=null; /* v0.6.6 */
     const anchor=anchorOrSection&&anchorOrSection.anchor;const section=anchorOrSection&&anchorOrSection.section;const search=anchorOrSection&&anchorOrSection.search;
     if(anchor)el=d.getElementById(anchor);
     if(!el&&section){el=[...d.querySelectorAll('h1,h2,h3,h4,[id]')].find(h=>(h.textContent||'').toLowerCase().includes(String(section).toLowerCase()));}
