@@ -1,7 +1,15 @@
 <!--
-  Study Suite  ·  v0.8.4 (beta)
+  Study Suite  ·  v0.9.0 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.9.0 (2026-10-02): Interactive figures. A pack may carry `widgets` {id:{type,vb,…}} (data only, no
+  script); the app draws and drives them (ssw_engine: mountWidget / mountGuideWidgets / mountCardWidget, SSW_CSS).
+  Types: stack (slice scroller: range + swipe + label masks), layers (toggle chips), spot (tap a region; Quiz me),
+  lesion (sites -> deficit + body overlay; Quiz me), curves (segmented views, optional All). Guides: each
+  <figure data-ssw> gets a live widget after the frame loads; listeners attach from this window, so the guide
+  frame stays sandboxed without scripts (allow-same-origin allow-modals). Cards: 'spot' (tap the answer; graded by
+  work.spot === target) and 'widget' (a set state + self-graded answer). ingestPack keeps pack.widgets.
+  Older apps skip spot/widget cards and show the guide posters. Authoring Guide v2.28 §6e.
   Changelog v0.8.4: Question map filter (practice + exam). A "Filter ▾" button (#qflBtn, aria-expanded) in the map title
   row toggles an in-flow panel (#qflBox, .fltchk checkboxes): Unanswered (qans null), Answered, Flagged (isFlagged),
   Incorrect / Correct (only slots where qRevealed; revealed-but-skipped = Incorrect) + Show all. OR across ticks, none =
@@ -1817,7 +1825,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.8.4';
+const APP_VERSION='0.9.0';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -2113,7 +2121,7 @@ if(window.matchMedia){const mq=matchMedia('(prefers-color-scheme: dark)');const 
 const $=id=>document.getElementById(id);
 const SYS_ORDER=['Endo','GI','KU'];
 const SYS_LABEL={Endo:'Endocrine',GI:'Gastrointestinal',KU:'Renal / Urinary'};
-const TYPE_LABEL={mcq:'Best answer',multi:'Select all that apply',cloze:'Cloze',order:'Put in order',match:'Matching',qa:'Concept',label:'Label'};
+const TYPE_LABEL={mcq:'Best answer',multi:'Select all that apply',cloze:'Cloze',order:'Put in order',match:'Matching',qa:'Concept',label:'Label',spot:'Find it',widget:'Figure'};
 const LETTERS=['A','B','C','D','E','F'];
 const DIFFS=['easy','medium','hard'];
 /* "Today" follows the user's local clock, held as an offset from UTC (minutes east), captured when the app opens and
@@ -3199,8 +3207,149 @@ async function init(){
   mailLinkRoute();
 }
 
+/* ===== v0.9.0: interactive figures (widgets). A pack carries data only, in pack.widgets {id:{type,vb:[W,H],…}};
+   the app draws and drives them — in cards, and inside the script-free guide frame (listeners attached from this window,
+   as the scroll listener already is). Types: stack (slice scroller), layers (layered figure), spot (tap-the-spot),
+   lesion (lesion localiser), curves (switchable views). Guides: <figure class="fig ssw" data-ssw="ID"> with a poster
+   <img class="sswposter"> (what older apps and print show). Cards: type 'spot' (tap the answer, auto-graded) and
+   'widget' (a widget in a set state + a self-graded answer). SVG strings are drawn with the guide figure classes
+   (bx, t, ts, la, tint-a …), which SSW_CSS defines inside .sswlive so cards look the same as guides. — */
+const SSW_CSS=`.sswlive{margin:2px 0 4px;color:var(--ink);line-height:1.4}
+.sswlive .sswsvg{display:block;width:100%;height:auto;max-height:68vh;border-radius:6px;background:var(--paper);touch-action:pan-y;-webkit-user-select:none;user-select:none;font-family:'IBM Plex Sans',system-ui,sans-serif}
+.sswlive .sswbar{display:flex;align-items:center;gap:8px;margin-top:8px}
+.sswlive .sswrange{flex:1;min-width:0;accent-color:var(--accent);height:30px;margin:0}
+.sswlive .sswtools{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.sswlive .sswb{font:inherit;font-size:13px;line-height:1.2;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:6px;min-height:32px;-webkit-tap-highlight-color:transparent}
+.sswlive .sswb[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+.sswlive .sswb:disabled{opacity:.45;cursor:default}
+.sswlive .sswdot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none;border:1px solid var(--paper)}
+.sswlive .sswread{margin-top:7px;min-height:1.4em;font-size:14px}
+.sswlive .sswread:empty{display:none}
+.sswlive .sswpos{opacity:.65;font-size:12.5px;white-space:nowrap}
+.sswlive.sswcard .sswsvg{max-height:50vh}
+.sswlive .sswhint{font-size:12px;opacity:.7;margin-top:5px}
+.sswlive.nolab .sswov{display:none}
+.sswlive .sswmask{display:none}.sswlive.nolab .sswmask{display:inline}
+.sswlive .sswov,.sswlive .sswfx{pointer-events:none}
+.sswlive .sswrg{fill:transparent;stroke:transparent;cursor:pointer;pointer-events:all}
+.sswlive.outl .sswrg{stroke:var(--accent);stroke-width:1.6;stroke-dasharray:4 3;vector-effect:non-scaling-stroke}
+.sswlive .sswrg.sel{fill:var(--accent);fill-opacity:.28;stroke:var(--accent);stroke-dasharray:none;stroke-width:2.6;vector-effect:non-scaling-stroke}
+.sswlive .sswrg.ok{fill:var(--green);fill-opacity:.34;stroke:var(--green);stroke-dasharray:none;stroke-width:2.6;vector-effect:non-scaling-stroke}
+.sswlive .sswrg.no{fill:var(--gold);fill-opacity:.34;stroke:var(--gold);stroke-dasharray:none;stroke-width:2.6;vector-effect:non-scaling-stroke}
+.sswlive .sswmiss{fill:var(--gold);stroke:var(--paper);stroke-width:1.5;pointer-events:none}
+.sswlive .sswok{color:var(--green);font-weight:600}.sswlive .sswno{color:var(--gold);font-weight:600}
+.sswlive .t{fill:var(--ink);font-size:11.5px}.sswlive .ts{fill:var(--soft);font-size:11px}
+.sswlive .tb{fill:var(--ink);font-size:11.5px;font-weight:600}.sswlive .ta{fill:var(--accent);font-size:11.5px;font-weight:600}
+.sswlive .bx{fill:var(--paper);stroke:var(--line);stroke-width:1}.sswlive .bxa{fill:var(--paper);stroke:var(--accent);stroke-width:1.5}
+.sswlive .bxk{fill:var(--paper);stroke:var(--ink);stroke-width:1.2}
+.sswlive .ln{stroke:var(--soft);stroke-width:1.1;fill:none}.sswlive .la{stroke:var(--accent);stroke-width:1.3;fill:none}
+.sswlive .lk{stroke:var(--ink);stroke-width:1.2;fill:none}.sswlive .dash{stroke-dasharray:3 3}
+.sswlive .tint-a{fill:var(--accent);fill-opacity:.14}.sswlive .tint-b{fill:var(--blue);fill-opacity:.18}
+.sswlive .tint-g{fill:var(--gold);fill-opacity:.18}.sswlive .tint-n{fill:var(--soft);fill-opacity:.12}.sswlive .tint-k{fill:var(--soft);fill-opacity:.26}
+.sswlive .ar{fill:var(--soft)}.sswlive .ara{fill:var(--accent)}`;
+function sswEsc(t){return String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+/* packs are ours, but widget SVG still goes through innerHTML in the app's own document: drop scripts, handlers and outside links */
+function sswClean(s){return String(s||'').replace(/<script[\s\S]*?<\/script\s*>/gi,'').replace(/<foreignObject[\s\S]*?<\/foreignObject\s*>/gi,'')
+  .replace(/\son[a-z]+\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi,'').replace(/\s(?:xlink:)?(?:href|src)\s*=\s*("|')(?!data:image\/|#)[^"']*\1/gi,'');}
+function widgetById(id,packId){const p=packId&&packs.find(x=>x.id===packId);if(p&&p.widgets&&p.widgets[id])return p.widgets[id];
+  for(const q of packs)if(q.widgets&&q.widgets[id])return q.widgets[id];return null;}
+function sswArt(w,src){const W=w.vb[0],H=w.vb[1];if(!src)return '';
+  return /^data:image\//.test(src)?`<image href="${src}" x="0" y="0" width="${W}" height="${H}" preserveAspectRatio="xMidYMid meet"/>`:sswClean(src);}
+function sswShape(r){const a=`class="sswrg" data-id="${sswEsc(r.id)}"`;
+  if(Array.isArray(r.circle))return `<circle ${a} cx="${+r.circle[0]}" cy="${+r.circle[1]}" r="${+r.circle[2]}"/>`;
+  const d=r.d?String(r.d):(Array.isArray(r.poly)?'M'+r.poly.map(p=>(+p[0])+','+(+p[1])).join('L')+'Z':'');return `<path ${a} d="${sswEsc(d)}"/>`;}
+function sswMask(w,m){return Array.isArray(m)&&m.length?`<g class="sswmask">${m.map(r=>`<rect x="${+r[0]}" y="${+r[1]}" width="${+r[2]}" height="${+r[3]}" fill="${sswEsc(w.maskFill||'#fff')}"/>`).join('')}</g>`:'';}
+function sswSvg(w,inner){return `<svg class="sswsvg" viewBox="0 0 ${+w.vb[0]} ${+w.vb[1]}" role="img" aria-label="${sswEsc(w.alt||w.title||'Interactive figure')}">${inner}</svg>`;}
+const SSW_HINT={stack:'Drag the slider or swipe the picture to move through the levels.',layers:'Switch the layers on and off.',
+  spot:'Tap a structure to name it — or Quiz me.',lesion:'Tap a lesion site to see what it causes — or Quiz me.',curves:'Switch between the views.'};
+/* o: {card, reveal, state:{frame,labels,hideName,on,view,region,outlines}, pick, target, onPick} */
+function mountWidget(host,w,o){o=o||{};const st=o.state||{};
+  if(!w||!Array.isArray(w.vb)||!SSW_HINT[w.type]){host.innerHTML='<div class="sswread">This figure needs a newer version of the app.</div>';return;}
+  host.className='sswlive ssw-'+w.type+(o.card?' sswcard':'');const t=w.type,card=!!o.card,hideName=card&&!o.reveal&&!!st.hideName;let h='';
+  const read=()=>host.querySelector('.sswread');
+  if(t==='stack'){const F=w.frames||[];let i=Math.max(0,Math.min(F.length-1,st.frame|0));
+    h=sswSvg(w,F.map((f,k)=>`<g class="sswfr" data-i="${k}"${k===i?'':' style="display:none"'}>${sswArt(w,f.img||f.svg)}${sswMask(w,f.mask)}<g class="sswov">${sswClean(f.over||'')}</g></g>`).join(''));
+    if(!card)h+=`<div class="sswbar"><button type="button" class="sswb" data-a="prev" aria-label="Previous">‹</button><input type="range" class="sswrange" min="0" max="${F.length-1}" step="1" value="${i}" aria-label="${sswEsc(w.axis||'Level')}"><button type="button" class="sswb" data-a="next" aria-label="Next">›</button></div>`;
+    h+='<div class="sswread"></div>';
+    if(!card&&F.some(f=>f.over||f.mask))h+='<div class="sswtools"><button type="button" class="sswb" data-a="labels" aria-pressed="true">Labels</button></div>';
+    if(!card)h+=`<div class="sswhint">${SSW_HINT.stack}</div>`;
+    host.innerHTML=h;if(card&&st.labels===false&&!o.reveal)host.classList.add('nolab');
+    const show=k=>{i=Math.max(0,Math.min(F.length-1,k));host.querySelectorAll('.sswfr').forEach(g=>{g.style.display=(+g.dataset.i===i)?'':'none';});
+      const r=host.querySelector('.sswrange');if(r&&+r.value!==i)r.value=String(i);
+      read().innerHTML=hideName?'':`<b>${sswEsc(F[i].label||'')}</b>${F[i].note?' — '+sswEsc(F[i].note):''}${card?'':` <span class="sswpos">${i+1} / ${F.length}</span>`}`;};
+    show(i);if(card)return;
+    const r=host.querySelector('.sswrange');r.addEventListener('input',()=>show(+r.value));
+    host.querySelector('[data-a="prev"]').addEventListener('click',()=>show(i-1));host.querySelector('[data-a="next"]').addEventListener('click',()=>show(i+1));
+    const lb=host.querySelector('[data-a="labels"]');if(lb)lb.addEventListener('click',()=>{const off=host.classList.toggle('nolab');lb.setAttribute('aria-pressed',off?'false':'true');});
+    const sv=host.querySelector('.sswsvg');let x0=null;
+    sv.addEventListener('pointerdown',e=>{x0=e.clientX;});sv.addEventListener('pointerup',e=>{if(x0===null)return;const dx=e.clientX-x0;x0=null;if(Math.abs(dx)>28)show(i+(dx<0?1:-1));});
+    sv.addEventListener('pointercancel',()=>{x0=null;});return;}
+  if(t==='layers'){const L=w.layers||[];const on=new Set(Array.isArray(st.on)?st.on:L.map((l,k)=>l.on===false?-1:k).filter(k=>k>=0));
+    h=sswSvg(w,sswArt(w,w.base)+sswMask(w,w.masks)+L.map((l,k)=>`<g class="sswly" data-i="${k}"${on.has(k)?'':' style="display:none"'}>${sswClean(l.svg)}</g>`).join('')+(w.labels?`<g class="sswov">${sswClean(w.labels)}</g>`:''));
+    if(!card)h+=`<div class="sswtools">${L.map((l,k)=>`<button type="button" class="sswb" data-k="${k}" aria-pressed="${on.has(k)}"><span class="sswdot" style="background:${sswEsc(l.color||'var(--accent)')}"></span>${sswEsc(l.name)}</button>`).join('')}${(w.labels||w.masks)?'<button type="button" class="sswb" data-a="labels" aria-pressed="true">Labels</button>':''}</div>`;
+    h+='<div class="sswread"></div>';if(!card)h+=`<div class="sswhint">${SSW_HINT.layers}</div>`;
+    host.innerHTML=h;if(card&&st.labels===false&&!o.reveal)host.classList.add('nolab');
+    const say=k=>{read().innerHTML=(k==null||hideName)?'':`<b>${sswEsc(L[k].name)}</b>${L[k].note?' — '+sswEsc(L[k].note):''}`;};
+    if(card){const ks=[...on];say(o.reveal&&ks.length===1?ks[0]:null);return;}
+    host.querySelectorAll('.sswb[data-k]').forEach(b=>b.addEventListener('click',()=>{const k=+b.dataset.k,now=!on.has(k);now?on.add(k):on.delete(k);
+      b.setAttribute('aria-pressed',String(now));host.querySelector(`.sswly[data-i="${k}"]`).style.display=now?'':'none';say(now?k:null);}));
+    const lb=host.querySelector('[data-a="labels"]');if(lb)lb.addEventListener('click',()=>{const off=host.classList.toggle('nolab');lb.setAttribute('aria-pressed',off?'false':'true');});return;}
+  if(t==='spot'||t==='lesion'){const R=w.regions||[],byId=id=>R.find(r=>r.id===id),les=t==='lesion';
+    h=sswSvg(w,sswArt(w,w.base)+sswMask(w,w.masks)+R.map(r=>r.show?`<g class="sswfx" data-id="${sswEsc(r.id)}" style="display:none">${sswClean(r.show)}</g>`:'').join('')
+      +(w.labels?`<g class="sswov">${sswClean(w.labels)}</g>`:'')+R.map(sswShape).join('')+'<g class="sswmk"></g>');
+    h+='<div class="sswread"></div>';
+    if(!card)h+=`<div class="sswtools"><button type="button" class="sswb" data-a="quiz" aria-pressed="false">Quiz me</button><button type="button" class="sswb" data-a="outl" aria-pressed="${w.outlines!==false}">Outlines</button>${(w.labels||w.masks)?'<button type="button" class="sswb" data-a="labels" aria-pressed="true">Labels</button>':''}</div><div class="sswhint">${SSW_HINT[t]}</div>`;
+    host.innerHTML=h;const outl=card?(st.outlines!=null?!!st.outlines:les):(w.outlines!==false);host.classList.toggle('outl',outl);
+    if(card&&st.labels===false&&!o.reveal)host.classList.add('nolab');
+    const mark=(id,cls)=>{const el=host.querySelector(`.sswrg[data-id="${CSS.escape(id)}"]`);if(el)el.classList.add(cls);};
+    const clear=()=>{host.querySelectorAll('.sswrg').forEach(e=>e.classList.remove('sel','ok','no'));host.querySelectorAll('.sswfx').forEach(g=>g.style.display='none');host.querySelector('.sswmk').innerHTML='';};
+    const fx=id=>{const g=host.querySelector(`.sswfx[data-id="${CSS.escape(id)}"]`);if(g)g.style.display='';};
+    const lead=w.lead!=null?String(w.lead):(les?'Lesion: ':'');
+    const tell=r=>r?`<b>${sswEsc(lead)}${sswEsc(r.name)}</b>${(les?r.deficit:r.info)?' — '+sswEsc(les?r.deficit:r.info):''}`:'';
+    const sv=host.querySelector('.sswsvg');
+    const missAt=e=>{try{const p=sv.createSVGPoint();p.x=e.clientX;p.y=e.clientY;const q=p.matrixTransform(sv.getScreenCTM().inverse());
+      host.querySelector('.sswmk').innerHTML=`<circle class="sswmiss" cx="${q.x}" cy="${q.y}" r="${Math.max(4,w.vb[0]/80)}"/>`;}catch(_){}};
+    if(card){ /* spot card: pick one region, graded on reveal; widget card: a preset region, its meaning shown on reveal */
+      if(o.reveal&&o.target){mark(o.target,'ok');fx(o.target);if(o.pick&&o.pick!==o.target&&o.pick!=='__miss')mark(o.pick,'no');read().innerHTML=tell(byId(o.target));return;}
+      if(st.region){mark(st.region,'sel');if(o.reveal){fx(st.region);read().innerHTML=tell(byId(st.region));}return;}
+      if(o.pick&&o.pick!=='__miss')mark(o.pick,'sel');if(o.reveal||!o.onPick)return;
+      sv.addEventListener('click',e=>{const el=e.target.closest&&e.target.closest('.sswrg');clear();
+        if(el){el.classList.add('sel');o.onPick(el.dataset.id);}else{missAt(e);o.onPick('__miss');}});return;}
+    let quiz=null,last=null;const qb=host.querySelector('[data-a="quiz"]');
+    const ask=()=>{const pool=R.filter(r=>r.id!==last);quiz=pool[Math.floor(Math.random()*pool.length)]||R[0];last=quiz.id;clear();
+      read().innerHTML=les?`${sswEsc(w.ask||'Find the lesion')}: <b>${sswEsc(quiz.deficit||quiz.name)}</b>`:`Tap: <b>${sswEsc(quiz.name)}</b>`;};
+    qb.addEventListener('click',()=>{if(quiz){quiz=null;qb.setAttribute('aria-pressed','false');qb.textContent='Quiz me';clear();read().innerHTML='';}else{qb.setAttribute('aria-pressed','true');qb.textContent='Stop quiz';ask();}});
+    sv.addEventListener('click',e=>{const el=e.target.closest&&e.target.closest('.sswrg');const r=el&&byId(el.dataset.id);
+      if(!quiz){clear();if(r){el.classList.add('sel');fx(r.id);}read().innerHTML=tell(r);return;}
+      clear();if(!r){missAt(e);read().innerHTML=`<span class="sswno">Missed.</span> Find: <b>${sswEsc(les?(quiz.deficit||quiz.name):quiz.name)}</b>`;return;}
+      if(r.id===quiz.id){mark(r.id,'ok');fx(r.id);read().innerHTML=`<span class="sswok">✓</span> ${tell(r)} <button type="button" class="sswb" data-a="next">Next</button>`;
+        read().querySelector('[data-a="next"]').addEventListener('click',ask);}
+      else{mark(r.id,'no');read().innerHTML=`<span class="sswno">✗ That’s ${sswEsc(r.name)}.</span> Try again — or <button type="button" class="sswb" data-a="show">Show me</button>`;
+        read().querySelector('[data-a="show"]').addEventListener('click',()=>{clear();mark(quiz.id,'ok');fx(quiz.id);read().innerHTML=`${tell(quiz)} <button type="button" class="sswb" data-a="next">Next</button>`;read().querySelector('[data-a="next"]').addEventListener('click',ask);});}});
+    host.querySelector('[data-a="outl"]').addEventListener('click',e=>{const b=e.currentTarget,on=host.classList.toggle('outl');b.setAttribute('aria-pressed',String(on));});
+    const lb=host.querySelector('[data-a="labels"]');if(lb)lb.addEventListener('click',()=>{const off=host.classList.toggle('nolab');lb.setAttribute('aria-pressed',off?'false':'true');});return;}
+  if(t==='curves'){const V=w.views||[];let v=st.view!=null?+st.view:0;
+    h=sswSvg(w,sswArt(w,w.base)+V.map((x,k)=>`<g class="sswvw" data-i="${k}"${(k===v||v===-1)?'':' style="display:none"'}>${sswClean(x.svg)}</g>`).join('')+(w.labels?`<g class="sswov">${sswClean(w.labels)}</g>`:''));
+    if(!card)h+=`<div class="sswtools" role="group">${V.map((x,k)=>`<button type="button" class="sswb" data-k="${k}" aria-pressed="${k===v}">${x.color?`<span class="sswdot" style="background:${sswEsc(x.color)}"></span>`:''}${sswEsc(x.name)}</button>`).join('')}${w.all&&V.length>1?`<button type="button" class="sswb" data-k="-1" aria-pressed="${v===-1}">All</button>`:''}</div>`;
+    h+='<div class="sswread"></div>';if(!card)h+=`<div class="sswhint">${SSW_HINT.curves}</div>`;host.innerHTML=h;
+    const show=k=>{v=k;host.querySelectorAll('.sswvw').forEach(g=>{g.style.display=(+g.dataset.i===v||v===-1)?'':'none';});
+      host.querySelectorAll('.sswb[data-k]').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.k===v)));
+      read().innerHTML=(hideName||v<0||!V[v])?'':`<b>${sswEsc(V[v].name)}</b>${V[v].note?' — '+sswEsc(V[v].note):''}`;};
+    show(v);if(card)return;host.querySelectorAll('.sswb[data-k]').forEach(b=>b.addEventListener('click',()=>show(+b.dataset.k)));return;}}
+/* guides: replace each poster with the live widget once the frame has loaded (the caption stays) */
+function mountGuideWidgets(d,g){const els=d.querySelectorAll('[data-ssw]');if(!els.length)return;
+  if(!d.getElementById('sswCss')){const s=d.createElement('style');s.id='sswCss';s.textContent=SSW_CSS;(d.head||d.documentElement).appendChild(s);}
+  els.forEach(el=>{const w=widgetById(el.getAttribute('data-ssw'),g&&g._pack);if(!w)return;const posters=el.querySelectorAll('.sswposter');
+    const host=d.createElement('div');el.insertBefore(host,el.querySelector('figcaption'));
+    try{mountWidget(host,w,{});posters.forEach(p=>p.style.display='none');}catch(e){host.remove();}});}
+/* cards: 'spot' and 'widget' draw into #cardWidget */
+function mountCardWidget(c){if(c.type!=='spot'&&c.type!=='widget')return;const host=$('cardWidget');if(!host)return;const w=widgetById(c.widget,c._pack);
+  if(c.type==='spot')mountWidget(host,w,{card:true,reveal:revealed,state:c.state||{},pick:work.spot,target:c.target,onPick:id=>{work.spot=id;}});
+  else mountWidget(host,w,{card:true,reveal:revealed,state:c.state||{}});}
+
+(function(){const st=document.createElement('style');st.id='sswCss';st.textContent=SSW_CSS+'.sswlive{--soft:var(--ink-soft)}';document.head.appendChild(st);})();
 /* ===== VALIDATION ===== */
-const KNOWN_TYPES=['mcq','multi','cloze','order','match','qa','label'];
+const KNOWN_TYPES=['mcq','multi','cloze','order','match','qa','label','spot','widget'];
 function validateCard(c,i){
   if(typeof c!=='object'||!c)return `card#${i}: not an object`;
   if(!c.sys||typeof c.sys!=='string')return `card#${i}: missing sys`;
@@ -3212,6 +3361,8 @@ function validateCard(c,i){
   if(c.type==='order'){if(!Array.isArray(c.items)||c.items.length<2)return `card#${i}: order needs items[]`;}
   if(c.type==='match'){if(!Array.isArray(c.pairs)||c.pairs.some(p=>!Array.isArray(p)||p.length!==2))return `card#${i}: match needs pairs[]`;}
   if(c.type==='qa'){if(!c.answer)return `card#${i}: qa needs answer`;}
+  if(c.type==='spot'&&(typeof c.widget!=='string'||typeof c.target!=='string'||!c.prompt))return `card#${i}: spot needs widget, target and prompt`; /* v0.9.0 */
+  if(c.type==='widget'&&(typeof c.widget!=='string'||!c.prompt||!c.answer))return `card#${i}: widget needs widget, prompt and answer`;
   if(c.type==='label'){ /* v0.8.1 */
     if(typeof c.image!=='string'||!/^data:image\/(webp|jpeg|png|gif);base64,[A-Za-z0-9+\/=]+$/.test(c.image))return `card#${i}: label needs a data:image`;
     const num=v=>typeof v==='number'&&isFinite(v)&&v>=0&&v<=1;
@@ -3231,7 +3382,7 @@ function validateQuestion(q,i){
 function ingestPack(obj,sourceName){
   let pk;
   if(Array.isArray(obj)){const isCards=obj.some(x=>x&&x.type&&KNOWN_TYPES.includes(x.type));pk={id:'pack_'+Date.now().toString(36),pack:sourceName||'Imported',questions:isCards?[]:obj,cards:isCards?obj:[],guides:[]};}
-  else {pk={id:obj.id||('pack_'+Date.now().toString(36)),pack:obj.pack||sourceName||'Imported',questions:Array.isArray(obj.questions)?obj.questions:[],cards:Array.isArray(obj.cards)?obj.cards:[],guides:Array.isArray(obj.guides)?obj.guides:[],version:obj.version,author:obj.author||obj.createdBy,school:obj.school,year:obj.year,term:obj.term,course:obj.course,weeks:obj.weeks,groupBy:obj.groupBy,drugs:Array.isArray(obj.drugs)?obj.drugs:[],sources:(obj.sources&&typeof obj.sources==='object'&&!Array.isArray(obj.sources))?obj.sources:undefined};} /* v0.6.6: sources */
+  else {pk={id:obj.id||('pack_'+Date.now().toString(36)),pack:obj.pack||sourceName||'Imported',questions:Array.isArray(obj.questions)?obj.questions:[],cards:Array.isArray(obj.cards)?obj.cards:[],guides:Array.isArray(obj.guides)?obj.guides:[],version:obj.version,author:obj.author||obj.createdBy,school:obj.school,year:obj.year,term:obj.term,course:obj.course,weeks:obj.weeks,groupBy:obj.groupBy,drugs:Array.isArray(obj.drugs)?obj.drugs:[],sources:(obj.sources&&typeof obj.sources==='object'&&!Array.isArray(obj.sources))?obj.sources:undefined,widgets:(obj.widgets&&typeof obj.widgets==='object'&&!Array.isArray(obj.widgets))?obj.widgets:undefined};} /* v0.6.6: sources · v0.9.0: widgets */
   const errs=[];
   pk.questions=pk.questions.filter((q,i)=>{const v=validateQuestion(q,i);if(v){errs.push(v);return false;}return true;});
   pk.cards=pk.cards.filter((c,i)=>{const v=validateCard(c,i);if(v){errs.push(v);return false;}return true;});
@@ -3502,7 +3653,7 @@ function renderCard(){const c=cardOf(currentId);
   $('sLeft').textContent=`${sessionQueue.length} left · ${TYPE_LABEL[c.type]||c.type}`;paintCardFlag();
   let body=`<div class="ctype">${TYPE_LABEL[c.type]||c.type} — ${c.topic}</div>`+renderInteractive(c);
   body+= !revealed ? `<div class="showbar"><button class="showbtn" id="showBtn">Show answer</button></div>` : renderAnswer(c)+renderGrades(c);
-  $('cardbox').innerHTML=body;wireInteractive(c);wireGuideLinks($('cardbox'));
+  $('cardbox').innerHTML=body;wireInteractive(c);try{mountCardWidget(c);}catch(e){}wireGuideLinks($('cardbox'));
   if(!revealed)$('showBtn').addEventListener('click',()=>{revealed=true;renderCard();});else wireGrades(c);}
 function paintCardFlag(){const b=$('cardFlagBtn'),f=isFlagged(currentId);b.classList.toggle('on',f);b.setAttribute('aria-pressed',f?'true':'false');b.textContent=f?'⚑ Flagged':'⚑ Flag';} /* v0.8.0 */
 function renderInteractive(c){
@@ -3519,6 +3670,7 @@ function renderInteractive(c){
     c.labels.forEach((l,i)=>{const on=revealed||!!(work.lab&&work.lab.has(i));
       h+=`<button type="button" class="lmask${on?' on':''}" data-i="${i}" style="left:${l.x*100}%;top:${l.y*100}%;width:${l.w*100}%;height:${l.h*100}%" aria-pressed="${on}" aria-label="Label ${i+1}${on?': '+acctEsc(l.t):''}"${revealed?' disabled':''}><span class="lnum">${i+1}</span></button>`;});
     return h+'</div></div>'+(revealed?'':'<div class="labhint">Tap a box to check one label.</div>');}
+  if(c.type==='spot'||c.type==='widget')return `<p class="prompt">${c.prompt}</p><div id="cardWidget"></div>`+(c.type==='spot'&&!revealed?'<div class="labhint">Tap your answer on the figure, then Show answer.</div>':''); /* v0.9.0 */
   if(c.type==='order'){if(!work.pool)work.pool=shuffle(c.items.map((t,i)=>({t,i})));
     let h=`<p class="prompt">${c.prompt}</p><div class="orderwrap">`;
     if(!revealed){h+='<div class="pool">';work.pool.forEach(it=>{const used=work.order.includes(it.i);h+=`<button class="chip" data-i="${it.i}" ${used?'disabled':''}>${it.t}</button>`;});h+='</div><div class="seq">';
@@ -3547,6 +3699,7 @@ function gotCorrect(c){
   if(c.type==='multi')return [...work.picks].sort().join(',')===[...c.correct].sort().join(',');
   if(c.type==='order')return work.order.length===c.items.length&&work.order.every((v,i)=>v===i);
   if(c.type==='match')return c.pairs.every((p,i)=>work['m'+i]===p[1]);
+  if(c.type==='spot')return work.spot===c.target; /* v0.9.0 */
   return null;}
 function guideHTML(g){
   if(!g||!g.f)return '';
@@ -3559,6 +3712,7 @@ function wireGuideLinks(container){container.querySelectorAll('.guideopen').forE
 function renderAnswer(c){let h='';const res=gotCorrect(c);
   if(res!==null)h+=`<div class="banner ${res?'ok':'no'}">${res?'✓ Correct':'✗ Not quite'}</div>`;
   let ans=c.type==='qa'?(c.answer+(c.explain?`<div style="margin-top:8px;color:var(--ink-soft);font-size:14.5px">${c.explain}</div>`:'')):
+    c.type==='widget'?(c.answer+(c.explain?`<div style="margin-top:8px;color:var(--ink-soft);font-size:14.5px">${c.explain}</div>`:'')): /* v0.9.0 */
     c.type==='label'?(`<ol class="lablist">${c.labels.map(l=>`<li>${acctEsc(l.t)}</li>`).join('')}</ol>`+(c.explain?`<div style="margin-top:8px;color:var(--ink-soft);font-size:14.5px">${c.explain}</div>`:'')): /* v0.8.1 */
     (c.explain||'');
   h+=`<div class="answerbox"><div class="h">Answer · ${c.topic}</div>${ans}</div>`+guideHTML(c.guide)+srcHTML(c); /* v0.6.6 */
@@ -3823,7 +3977,7 @@ function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();
   {const old=document.querySelector('.guideframe');if(old&&old._stopResume)old._stopResume();} /* v0.7.8 */
   const host=$('guideHost');host.innerHTML='';
   const fr=document.createElement('iframe');fr.className='guideframe';fr.setAttribute('sandbox','allow-same-origin allow-modals');
-  fr.onload=()=>{try{const d=fr.contentDocument;if(!d)return;try{hideOffSections(d,g);}catch(e){}let el=null; /* v0.6.6 */
+  fr.onload=()=>{try{const d=fr.contentDocument;if(!d)return;try{mountGuideWidgets(d,g);}catch(e){} /* v0.9.0 */try{hideOffSections(d,g);}catch(e){}let el=null; /* v0.6.6 */
     const anchor=anchorOrSection&&anchorOrSection.anchor;const section=anchorOrSection&&anchorOrSection.section;const search=anchorOrSection&&anchorOrSection.search;
     if(anchor)el=d.getElementById(anchor);
     if(!el&&section){el=[...d.querySelectorAll('h1,h2,h3,h4,[id]')].find(h=>(h.textContent||'').toLowerCase().includes(String(section).toLowerCase()));}

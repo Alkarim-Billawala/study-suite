@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.27 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.28 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.27)
+# Study Suite — Content Authoring Guide (v2.28)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,7 +8,15 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.27 · **Pairs with:** Study Suite app v0.4.4+ (source switches need v0.6.6+, Extras v0.7.1+, image cards v0.8.1+), pack `formatVersion` 2.0
+> **Authoring system version:** 2.28 · **Pairs with:** Study Suite app v0.4.4+ (source switches need v0.6.6+, Extras v0.7.1+, image cards v0.8.1+, interactive figures v0.9.0+), pack `formatVersion` 2.0
+> **What changed in guide v2.28:** **interactive figures and drawn schematics.** New **§6e**: a pack may carry
+> `widgets` — data for five interactive figure types the app draws and drives (slice scroller, layered figure,
+> tap-the-spot, lesion localiser, switchable views) — placed in guides as `<figure class="fig ssw" data-ssw="…">` with a
+> still poster, and used by two new card types, **`spot`** (tap the answer on the figure, auto-graded) and **`widget`**
+> (the figure in a set state, self-graded). Packs still carry no script. **§6c** now asks for **custom-drawn schematics**
+> of the structure or mechanism itself (a simplified anatomical shape, a few colour-coded parts, leader-line labels with
+> a bold name and a short gloss), not only charts and slide crops. App v0.9.0+ runs them; older apps show the posters and
+> skip the two card types. The §7a validator accepts `spot` and `widget`. No `formatVersion` change.
 > **What changed in guide v2.27:** **images in questions and cards.** New **§6d**: an image may anchor a question or
 > card (a data: `<img>` in a stem, prompt, answer or explain), and a new card type **`label`** shows a figure with its
 > printed labels masked; the learner names each one, taps a box to check it, and self-grades as for `qa`. Data: URIs only
@@ -443,6 +451,12 @@ Cards carry `sys`, `topic`, `type`, `explain`, optional `guide`. **Cards do not 
 **6. `qa`** — `prompt` + `answer` (+ optional `explain`).
 **7. `label`** (v2.27, app v0.8.1+) — `prompt` + `image` (a data: URI) + `labels` = `[{x,y,w,h,t}]` (+ optional `explain`). §6d.
 
+**8. `spot`** (v2.28, app v0.9.0+) — `prompt` + `widget` (a `widgets` id of type spot or lesion) + `target` (one of its region
+ids) (+ optional `explain`): the learner taps the answer on the figure; auto-graded. §6e.
+
+**9. `widget`** (v2.28, app v0.9.0+) — `prompt` + `widget` (any `widgets` id) + `answer` (+ optional `state`, `explain`): the
+figure shown in a set state, self-graded like `qa`. §6e.
+
 ```json
 { "sys":"Cardio","topic":"ACS","type":"cloze",
   "text":"Primary PCI for STEMI within {{90 minutes}} of first medical contact; else fibrinolysis within {{30 minutes}}.",
@@ -852,7 +866,7 @@ age), timelines and cycles. Clinical prose guides (interviewing, diagnosis, ethi
 and a comparison the guide already makes in a table does not get a picture of the same table. Anatomy-heavy guides may
 run well past a handful of figures; there is no fixed count, only "is this figure earning its place".
 
-**Two kinds.**
+**Three kinds.**
 - **Course images**: cropped from the week's slides, lab manual or handouts (allowed in packs), tight to the figure and
   its labels, never the slide title or footer. WebP at about 1,100 px wide, quality ~72 (typically 20–80 KB), embedded
   in the guide HTML as `<img src="data:image/webp;base64,…" alt="…">`. Re-crop or mask anything that doesn't belong
@@ -861,6 +875,13 @@ run well past a handful of figures; there is no fixed count, only "is this figur
   embedded raster, colours from the guide's CSS variables (`var(--ink)`, `--soft`, `--line`, `--accent`, `--blue`,
   `--gold`, `--paper`) so they follow the app theme. Check them at phone width (~375 px): no overlapping labels, text
   no smaller than ~10 px at that width.
+- **Drawn schematics** (v2.28, Alkarim 2026-10-02): a custom drawing of the **structure or mechanism itself**, not a chart
+  about it — the medulla seen from behind with its tubercles, a hemisphere with the arterial territories and the body
+  parts they serve, the visual pathway with numbered lesion sites beside the field each loses. Style: a simplified
+  anatomical shape with smooth outlines, a few muted colour-coded parts, leader-line labels with a **bold name and a
+  short gloss**, a one-line caption on how to read it, and numbered sites tied to a table where a lesion maps to a
+  deficit. Look for these in every anatomy, pathway and mechanism section; they are also the best bases for §6e widgets.
+  Reference examples: Drive `Claude/StudySuite/interactive-figures-2026-10-02/style-examples/`.
 
 **Rules.**
 1. **No identifiable patient.** No faces or names; crop out a patient photo that sits beside a figure. Anonymised
@@ -925,6 +946,61 @@ labels in order; the card is self-graded like `qa` (Again / Hard / Good / Easy).
 - Same image rules as above: data: URI, ~700 px wide WebP ~q60, no identifiable patient.
 - **Budget:** about **25 KB per image** and **about 1 MB of card images per pack**; the check warns above that.
 - **Older apps (before v0.8.1) skip label cards** when they load the pack; nothing else in the pack is affected.
+
+## 6e. Interactive figures (`widgets`) — v2.28
+
+Where moving through, switching or tapping a figure teaches more than a still one, the pack carries the figure's
+**data** in a top-level `widgets` object and the app (v0.9.0+) draws and drives it — in the guide (inside the
+script-free guide frame) and in cards. **A pack never carries a script**: every SVG string is inert (no `<script>`, no
+`on…=` handler, no `<foreignObject>`, href/src only to `#id` or a data:image URI).
+
+```json
+"widgets": {
+  "w44_cordlevels": {"type":"stack", "vb":[410,186], "alt":"…", "axis":"Cord level",
+                     "frames":[{"img":"data:image/webp;base64,…", "label":"Cervical cord", "note":"…", "mask":[[x,y,w,h]]}, …]},
+  "w44_pathways":   {"type":"layers", "vb":[380,332], "alt":"…", "base":"<svg markup>",
+                     "layers":[{"name":"DCML", "color":"var(--gold)", "svg":"…", "note":"…", "on":true}, …]},
+  "w44_bgspot":     {"type":"spot", "vb":[400,320], "alt":"…", "base":"data:image/webp;base64,…",
+                     "regions":[{"id":"put", "name":"Putamen", "info":"…", "d":"M…Z"}, …]},
+  "w44_lesion":     {"type":"lesion", "vb":[380,400], "alt":"…", "base":"…",
+                     "regions":[{"id":"mm", "name":"Left medial medulla", "circle":[124,202,6.5], "deficit":"…", "show":"<svg overlay>"}, …]},
+  "w44_tremor":     {"type":"curves", "vb":[380,204], "alt":"…", "base":"…", "all":true,
+                     "views":[{"name":"Rest tremor", "color":"var(--accent)", "svg":"…", "note":"…"}, …]}
+}
+```
+
+| Type | What the learner does | Use it for |
+|---|---|---|
+| `stack` (slice scroller) | slider, swipe or ‹ › through frames; Labels switch hides printed labels via `mask` boxes | levels: cord or brainstem levels, an imaging series, a rotation |
+| `layers` (layered figure) | switches each layer on and off; the last one switched on shows its `note` | pathways, territories, drug sites on one diagram |
+| `spot` (tap-the-spot) | taps a region for its `name` + `info`; **Quiz me** asks for a region | structures on a section or a drawn schematic |
+| `lesion` (lesion localiser) | taps a site for its `deficit` and an overlay (`show`) on a body or map; Quiz me gives the deficit, asks for the site | lesion → deficit, generator → sign, region → disorder |
+| `curves` (switchable views) | segmented buttons between views; `all` adds an overlay of every view | before/after, normal vs disease, stages, step-throughs |
+
+**Rules.**
+1. **Coordinates:** every widget has `vb` `[W, H]`; all SVG, regions (`d` path, `poly` points or `circle` `[cx,cy,r]`) and
+   masks use it. Draw at ~380 wide so 11.5 px text stays ≥ 10 px on a phone. Colour with the guide variables
+   (`--ink`, `--soft`, `--accent`, `--gold`, `--green`, `--blue`, `--paper`) and the §6c drawing classes (`bx`, `t`,
+   `ts`, `la`, `tint-a` …), which the app supplies in cards too. **Accent and blue are near-identical in Navy dark**:
+   pair accent with gold or green, not blue. Check in both themes and at phone width.
+2. **In a guide:** `<figure class="fig ssw" data-ssw="ID">` holding a still **poster** (`<img class="sswposter">` or
+   `<svg class="sswposter">`, the default state) and a `<figcaption>` that restates the guide, says what to do with it,
+   and carries the §6c credit. Older apps and print show the poster. A widget may appear in more than one guide.
+3. **In cards:** `spot` for "tap the …" (structure, site, system); `widget` with a `state` for "what is this / what does
+   this cause" — `state` may set `frame` (stack), `on` (layers, indices), `view` (curves), `region` (spot/lesion,
+   a preset site), `labels:false` (hide printed labels), `hideName:true` (keep the frame/view/layer name hidden until
+   the answer), `outlines`. The prompt still stands alone in words. Optional widget fields: `title`, `labels` (an SVG
+   label overlay the Labels switch hides), `masks`, `maskFill`, `outlines`, `lead` / `ask` (lesion wording, e.g. a
+   generator rather than a lesion).
+4. **Facts** in names, notes, info and deficits restate the guide, in the reader-facing register (§4a): no source apparatus.
+5. **Size:** a figure-heavy week's widgets typically come to 100–300 KB; the checks warn above 300 KB per widget or
+   1.5 MB in total (then tap-to-load is the next step, not a smaller figure).
+6. **App first:** a pack's first widget needs app v0.9.0 live before the pack is deployed (memory.md §1f). Older apps
+   skip `spot` and `widget` cards and show the posters.
+
+Reference implementation: Drive `Claude/StudySuite/interactive-figures-2026-10-02/` (`ssw_engine.js`, the test pack) and
+`Claude/StudySuite/wk44-interactive-2026-10-02/` (Week 44: `w44_part1.py`, `w44_part2.py` with the smooth-outline
+helper `S()`, `place_widgets.py`, `build_widgets.py`; cards in `wk44_content/frag_20.py`).
 
 ---
 
@@ -1069,7 +1145,7 @@ The workflow that prevents all of the above:
 import json, re
 from collections import Counter
 
-CARD_TYPES = {"mcq", "multi", "cloze", "order", "match", "qa", "label"}   # label: v2.27 (§6d)
+CARD_TYPES = {"mcq", "multi", "cloze", "order", "match", "qa", "label", "spot", "widget"}   # label: v2.27 (§6d); spot, widget: v2.28 (§6e)
 ARTIFACTS  = ["start_span", "end_span", "【", "】", "```"]  # any of these breaks the import
 # §2: these fields are rendered as PLAIN TEXT — an HTML entity in them shows literally to the learner.
 ENTITY     = re.compile(r"&(#\d+|#x[0-9a-fA-F]+|[a-zA-Z]+);")
@@ -1193,6 +1269,13 @@ def validate_pack(pack):
                 errs.append(f"{cid}: unbalanced/empty cloze blanks")
         if t == "qa" and not c.get("answer"): errs.append(f"{cid}: qa needs an answer")
         if t == "label": errs += _label_errs(cid, c)
+        if t in {"spot", "widget"}:  # v2.28 (§6e): the figure must be in the pack; packbuilder checks the rest
+            w = (pack.get("widgets") or {}).get(c.get("widget"))
+            if not c.get("prompt"): errs.append(f"{cid}: {t} needs a prompt")
+            if not w: errs.append(f"{cid}: {t} names widget {c.get('widget')!r}, which is not in the pack's widgets (§6e)")
+            elif t == "spot" and c.get("target") not in {r.get("id") for r in w.get("regions", [])}:
+                errs.append(f"{cid}: spot target {c.get('target')!r} is not a region of {c.get('widget')!r} (§6e)")
+            if t == "widget" and not c.get("answer"): errs.append(f"{cid}: widget card needs an answer (§6e)")
         errs += _item_img_errs(cid, c)
         if t == "match" and (not c.get("pairs") or any(len(p) != 2 for p in c.get("pairs", []))):
             errs.append(f"{cid}: match pairs must be 2-element arrays")
