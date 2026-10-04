@@ -1,7 +1,19 @@
 <!--
-  Study Suite  ·  v0.10.2 (beta)
+  Study Suite  ·  v0.10.4 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.10.4 (2026-10-04): The atlas as its own full-width view (#atlas section; openAtlas(w,packId,state); Home panel
+  #atlasPanel; Back returns to the guide or Home; history case 'atlas'). Guides no longer mount the atlas inline: the poster stays
+  and a button opens the view (mountAtlas returns false in guide mode; mountWidget passes it on; mountGuideWidgets keeps the
+  poster). Engine phone layout when the full-width host is under 560 px (.phone): the viewBox crops to the drawing's own box
+  (getBBox of .sswart; zoom/pan work inside the base box B), gutter labels and SVG side marks are hidden and replaced by an
+  orientation text row above/below and tappable name chips under the readout (.sswlv; on wider screens behind a 'Structures on this slice' toggle — overlapping regions are hard to hit), Outlines/Anatomical view/pathways sit
+  behind a More button, the search input is 16px (iOS zooms the page on smaller fields); a ResizeObserver remounts on a width
+  flip. Gate: atlasAllowed() = atlasDesktop() || SUITE_BETA. #beta is back as a per-device flag (suite_beta_v1; #nobeta
+  clears it) — it lifts the phone/iPad gate on that device only; everyone else keeps the v0.10.3 notice.
+  Changelog v0.10.3 (2026-10-04): Atlas is desktop-only for now (a notice replaces the widget in guides on narrow or
+  touch screens; cards unaffected); the structure readout cycles both ways (Prev / Next, 'k of N'); Topic Guides keep
+  chronological pack order so Previous/Next walk the weeks in sequence while the library stays newest-first.
   Changelog v0.10.2 (2026-10-03): Atlas locator takes a per-level `loc` {plane, level, line|dot} (a beacon on any
   thumbnail — sagittal and surface views keep the map); search results carry a clickable chip per slice.
   Changelog v0.10.1 (2026-10-03): Library order is newest week first (Your library and the default packs: years, terms,
@@ -1487,6 +1499,10 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div><div class="rp-t">Pharmacology</div><div class="rp-d" id="pharmPanelDesc">A cross-week drug index built from your active packs.</div></div>
       <button class="btn ghost sm" id="openPharm">Open pharmacology</button>
     </div>
+    <div class="revpanel" id="atlasPanel" style="display:none">
+      <div><div class="rp-t">Atlas</div><div class="rp-d" id="atlasPanelDesc">Drawn sections and views, from your active packs.</div></div>
+      <button class="btn ghost sm" id="openAtlas">Open the atlas</button>
+    </div>
 
     <div class="rule"></div>
     <div class="libpanel" id="libPanel">
@@ -1670,6 +1686,14 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
     </div>
   </section>
 
+  <!-- ATLAS (v0.10.4): the `atlas` widget as its own full-width view, outside the guide frame -->
+  <section id="atlas">
+    <div class="revbar"><button class="minor backbtn" id="atlasBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2" id="atlasBackTo"></span></button><h2 id="atlasTitle">Atlas</h2></div>
+    <div class="pharmsub" id="atlasSub"></div>
+    <div id="atlasPick" class="sswtools" style="display:none"></div>
+    <div id="atlasHost"></div>
+  </section>
+
   <!-- INSTALL (Add to Home Screen) MODAL -->
   <div class="modal-ov" id="installOv" style="display:none">
     <div class="modal-card" role="dialog" aria-label="Add to Home Screen">
@@ -1835,7 +1859,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.10.2';
+const APP_VERSION='0.10.4';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -1907,8 +1931,12 @@ function detectStorage(){if(typeof window.storage!=='undefined'){STORAGE_MODE='p
 
 /* ===== ACCOUNTS (v0.4.0: launched for everyone) — ACCT_ON stays as the single switch; the v0.3.x #beta flag is retired
    (old #beta / #nobeta links are tidied from the address bar and the stored flag removed). */
-const ACCT_ON=(()=>{try{if(/^#(no)?beta$/i.test(location.hash))history.replaceState(history.state,'',location.pathname+location.search);localStorage.removeItem('suite_beta_v1');}catch(e){}return true;})();
-window.addEventListener('hashchange',()=>{if(/^#(verify|reset|email)=/i.test(location.hash))location.reload();}); /* a mail link opened into an open tab */
+/* v0.10.4: #beta is back as a per-device switch (localStorage suite_beta_v1; #nobeta clears it; the hash is then dropped).
+   It gates features in testing on that device only — today: the Atlas view on phones and iPads. Accounts are on for everyone. */
+const SUITE_BETA=(()=>{try{const h=location.hash;if(/^#beta$/i.test(h))localStorage.setItem('suite_beta_v1','1');else if(/^#nobeta$/i.test(h))localStorage.removeItem('suite_beta_v1');
+  if(/^#(no)?beta$/i.test(h))history.replaceState(history.state,'',location.pathname+location.search);return !!localStorage.getItem('suite_beta_v1');}catch(e){return false;}})();window.SUITE_BETA=SUITE_BETA;
+const ACCT_ON=true;
+window.addEventListener('hashchange',()=>{if(/^#(verify|reset|email)=/i.test(location.hash)||/^#(no)?beta$/i.test(location.hash))location.reload();}); /* a mail link opened into an open tab; v0.10.4: #beta / #nobeta typed into an open tab */
 /* ===== CRYPTO (v0.3.0: end-to-end encryption for sync — WebCrypto only, no dependencies) =====
    passphrase --PBKDF2-SHA256(salt, iters)--> master --HKDF "studysuite/enc/v1"--> KEK (never leaves the device)
                                                     \--HKDF "studysuite/auth/v1"--> authPw (base64url; this is the PocketBase password)
@@ -3279,7 +3307,7 @@ function mountWidget(host,w,o){o=o||{};const st=o.state||{};
   if(!w||!Array.isArray(w.vb)||!SSW_HINT[w.type]){host.innerHTML='<div class="sswread">This figure needs a newer version of the app.</div>';return;}
   host.className='sswlive ssw-'+w.type+(o.card?' sswcard':'');const t=w.type,card=!!o.card,hideName=card&&!o.reveal&&!!st.hideName;let h='';
   const read=()=>host.querySelector('.sswread');
-  if(t==='atlas'){mountAtlas(host,w,Object.assign({packId:o.packId},o));return;} /* v0.10.0 */
+  if(t==='atlas')return mountAtlas(host,w,Object.assign({packId:o.packId},o)); /* v0.10.0; v0.10.4: false = the poster stays */
   if(t==='stack'){const F=w.frames||[];let i=Math.max(0,Math.min(F.length-1,st.frame|0));
     h=sswSvg(w,F.map((f,k)=>`<g class="sswfr" data-i="${k}"${k===i?'':' style="display:none"'}>${sswArt(w,f.img||f.svg)}${sswMask(w,f.mask)}<g class="sswov">${sswClean(f.over||'')}</g></g>`).join(''));
     if(!card)h+=`<div class="sswbar"><button type="button" class="sswb" data-a="prev" aria-label="Previous">‹</button><input type="range" class="sswrange" min="0" max="${F.length-1}" step="1" value="${i}" aria-label="${sswEsc(w.axis||'Level')}"><button type="button" class="sswb" data-a="next" aria-label="Next">›</button></div>`;
@@ -3349,14 +3377,16 @@ function mountWidget(host,w,o){o=o||{};const st=o.state||{};
       host.querySelectorAll('.sswb[data-k]').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.k===v)));
       read().innerHTML=(hideName||v<0||!V[v])?'':`<b>${sswEsc(V[v].name)}</b>${V[v].note?' — '+sswEsc(V[v].note):''}`;};
     show(v);if(card)return;host.querySelectorAll('.sswb[data-k]').forEach(b=>b.addEventListener('click',()=>show(+b.dataset.k)));return;}}
+/* v0.10.4: the widget CSS goes into whichever document hosts a widget — a guide frame, the card, or the Atlas view */
+function sswEnsureCss(d){if(!d.getElementById('sswCss')){const s=d.createElement('style');s.id='sswCss';s.textContent=SSW_CSS+ATLAS_CSS;(d.head||d.documentElement).appendChild(s);}}
 /* guides: replace each poster with the live widget once the frame has loaded (the caption stays) */
 function mountGuideWidgets(d,g,opts){const els=d.querySelectorAll('[data-ssw]');if(!els.length)return;
   const a=opts&&opts.anchor,m=a&&/^ssw=([^:]+)(?::([^:]*))?(?::(.*))?$/.exec(String(a));const want=m?{id:m[1],state:{plane:m[2]||undefined,level:m[3]||undefined}}:null; /* v0.10.0 */
-  if(!d.getElementById('sswCss')){const s=d.createElement('style');s.id='sswCss';s.textContent=SSW_CSS+ATLAS_CSS;(d.head||d.documentElement).appendChild(s);}
+  sswEnsureCss(d);
   els.forEach(el=>{const w=widgetById(el.getAttribute('data-ssw'),g&&g._pack);if(!w)return;const posters=el.querySelectorAll('.sswposter');
     const host=d.createElement('div');el.insertBefore(host,el.querySelector('figcaption'));
     const o={packId:g&&g._pack};if(want&&want.id===el.getAttribute('data-ssw')){o.state=want.state;setTimeout(()=>{try{el.scrollIntoView({block:'start'});}catch(_){}},50);}
-    try{mountWidget(host,w,o);posters.forEach(p=>p.style.display='none');}catch(e){host.remove();}});}
+    try{if(mountWidget(host,w,o)!==false)posters.forEach(p=>p.style.display='none');}catch(e){host.remove();}});}
 /* cards: 'spot' and 'widget' draw into #cardWidget */
 function mountCardWidget(c){if(c.type!=='spot'&&c.type!=='widget')return;const host=$('cardWidget');if(!host)return;const w=widgetById(c.widget,c._pack);
   if(c.type==='spot')mountWidget(host,w,{card:true,reveal:revealed,state:c.state||{},pick:work.spot,target:c.target,onPick:id=>{work.spot=id;},packId:c._pack});
@@ -3376,7 +3406,7 @@ function mountCardWidget(c){if(c.type!=='spot'&&c.type!=='widget')return;const h
 const ATLAS_CSS=`.sswlive.ssw-atlas .sswplanes{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
 .sswlive.ssw-atlas .sswzone{font-size:12px;opacity:.7;min-width:70px}
 .sswlive.ssw-atlas .sswsearch{position:relative;margin-top:8px}
-.sswlive.ssw-atlas .sswsearch input{width:100%;box-sizing:border-box;font:inherit;font-size:14px;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
+.sswlive.ssw-atlas .sswsearch input{width:100%;box-sizing:border-box;font:inherit;font-size:16px;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
 .sswlive.ssw-atlas .sswhits{position:absolute;left:0;right:0;top:100%;z-index:5;background:var(--paper);border:1px solid var(--line);border-radius:8px;margin-top:3px;max-height:220px;overflow:auto;box-shadow:0 6px 18px rgba(0,0,0,.25)}
 .sswlive.ssw-atlas .sswhits:empty{display:none}
 .sswlive.ssw-atlas .sswhit{display:block;width:100%;text-align:left;font:inherit;font-size:13.5px;padding:7px 10px;border:0;background:transparent;color:var(--ink);cursor:pointer}
@@ -3393,12 +3423,38 @@ const ATLAS_CSS=`.sswlive.ssw-atlas .sswplanes{display:flex;flex-wrap:wrap;gap:6
 .sswlive.ssw-atlas .tk{fill:var(--soft);font-size:11px;letter-spacing:.08em}
 .sswlive.ssw-atlas .sswterr{opacity:.55}
 .sswlive.ssw-atlas .sswcredit{font-size:11px;opacity:.65;margin-top:4px}
-.sswlive.ssw-atlas .sswcredit:empty{display:none}`;
+.sswlive.ssw-atlas .sswcredit:empty{display:none}
+.sswlive.ssw-atlas.full .sswsvg{max-height:74vh}
+.sswlive.ssw-atlas .sswor{display:none;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);line-height:1.3;padding:0 4px}
+.sswlive.ssw-atlas .sswor:empty{display:none!important}
+.sswlive.ssw-atlas.phone .sswor{display:flex;justify-content:space-between;gap:8px}
+.sswlive.ssw-atlas.phone .sswor span{flex:1;text-align:center}.sswlive.ssw-atlas.phone .sswor span:first-child{text-align:left}.sswlive.ssw-atlas.phone .sswor span:last-child{text-align:right}
+.sswlive.ssw-atlas.phone .sswov,.sswlive.ssw-atlas.phone .sswmarks{display:none}
+.sswlive.ssw-atlas.phone .sswsvg{max-height:62vh}
+.sswlive.ssw-atlas.phone .sswloc{width:50px;top:4px;right:4px}
+.sswlive.ssw-atlas .sswlv{display:none;flex-wrap:wrap;gap:5px;margin-top:8px}
+.sswlive.ssw-atlas.phone .sswlv,.sswlive.ssw-atlas.showlist .sswlv{display:flex}.sswlive.ssw-atlas.phone.nolab .sswlv{display:none}
+.sswlive.ssw-atlas.phone .sswb[data-a="list"]{display:none}
+.sswlive.ssw-atlas .sswlv .sswchip{font-size:12.5px;padding:5px 10px}
+.sswlive.ssw-atlas .sswchip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+.sswlive.ssw-atlas .sswb[data-a="more"]{display:none}
+.sswlive.ssw-atlas.phone .sswb[data-a="more"]{display:inline-flex}
+.sswlive.ssw-atlas.phone .sswmore{display:none!important}
+.sswlive.ssw-atlas.phone.showmore .sswb.sswmore{display:inline-flex!important}.sswlive.ssw-atlas.phone.showmore .sswtools.sswmore{display:flex!important}`;
 function atlasLevels(w){const out=[];(w.planes||[]).forEach((p,pi)=>(p.levels||[]).forEach((l,li)=>out.push({p,pi,l,li})));return out;}
 function atlasShows(w,sid){return atlasLevels(w).filter(x=>(x.l.regions||[]).some(r=>r.id===sid));}
 /* srcOn is the app's per-pack source switch test; outside the app (or without a pack) everything counts as on */
 function atlasSrcOn(packId,src){try{const p=packId&&packs.find(x=>x.id===packId);return p?srcOn(p,{src:src||[]}):true;}catch(_){return true;}}
+function atlasDesktop(){try{return Math.min(window.innerWidth,screen.width)>=760&&!(navigator.maxTouchPoints>1&&Math.min(window.innerWidth,screen.width)<1100);}catch(_){return true;}}
+function atlasAllowed(){return atlasDesktop()||!!window.SUITE_BETA;} /* v0.10.4: #beta lifts the desktop gate on this device */
 function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w.vb[1],card=!!o.card,hideName=card&&!o.reveal&&!!st.hideName;
+  const full=!!o.full;
+  if(!card&&!full){host.className='sswlive ssw-atlas';const nm=sswEsc(w.title||'The atlas'); /* v0.10.4: guides keep the poster and link to the Atlas view (the inline widget was unusable inside the guide frame on phones) */
+    if(!atlasAllowed()){host.innerHTML=`<div class="sswread"><b>${nm}</b> works in a desktop browser for now. Phones and iPads are coming; the poster above shows one level.</div>`;}
+    else{host.innerHTML=`<div class="sswread"><b>${nm}</b> opens as its own full-width view. <button type="button" class="sswb" data-a="open">Open the atlas ›</button></div>`;
+      host.querySelector('[data-a="open"]').addEventListener('click',()=>{try{(o.onOpen||window.openAtlas)(w,o.packId,st);}catch(_){}});}
+    return false;}
+  const phone=full&&host.clientWidth>0&&host.clientWidth<560;host.classList.toggle('full',full);host.classList.toggle('phone',phone); /* v0.10.4: phone layout — crop to the drawing, names as chips below, orientation as text, tools behind More */
   const P=w.planes||[],S=w.structures||{},PW=w.pathways||{},SYS=w.systems||{};
   let pi=Math.max(0,P.findIndex(p=>p.id===st.plane));if(pi<0)pi=0;
   let li=Math.max(0,(P[pi].levels||[]).findIndex(l=>l.id===st.level));if(li<0)li=0;
@@ -3423,41 +3479,55 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
     const bx=(l.ref&&l.ref.box)||[0,0,W,H];
     const photo=hasRef&&mode?`<g${rflip?` transform="translate(${W},0) scale(-1,1)"`:''}><image href="${l.ref.img}" x="${+bx[0]}" y="${+bx[1]}" width="${+bx[2]}" height="${+bx[3]}" preserveAspectRatio="xMidYMid meet"/></g>`:'';
     const base=mode===2?'':`<g${g}${mode===1?' style="opacity:.55"':''}>${sswClean(l.svg||'')}</g>`;
-    return photo+base+`<g${g}><g class="sswterr"${terr?'':' style="display:none"'}>${sswClean(l.terr||'')}</g>`+
+    return '<g class="sswart">'+photo+base+'</g>'+`<g${g}><g class="sswterr"${terr?'':' style="display:none"'}>${sswClean(l.terr||'')}</g>`+
       Object.keys(PW).map(k=>`<g class="sswpath" data-p="${sswEsc(k)}"${paths.has(k)?'':' style="display:none"'}>${sswClean((l.paths||{})[k]||'')}</g>`).join('')+
-      (l.regions||[]).map(sswShape).join('')+'</g>'+`<g class="sswov">${labelSvg(l,flip)}</g>`+marksSvg(l,flip)+'<g class="sswmk"></g>';};
+      (l.regions||[]).map(sswShape).join('')+'</g>'+`<g class="sswov">${labelSvg(l,flip)}</g>`+'<g class="sswmarks">'+marksSvg(l,flip)+'</g><g class="sswmk"></g>';};
   const locSvg=()=>{const l=lvl();if(!l.loc||!w.locator)return '';const sp=Array.isArray(l.loc)?{plane:w.locator.plane,level:w.locator.level,line:l.loc}:l.loc;
     const L=P.find(p=>p.id===sp.plane),ll=L&&(L.levels||[]).find(x=>x.id===sp.level);if(!ll)return '';
     const mk=sp.line?`<line x1="${+sp.line[0]}" y1="${+sp.line[1]}" x2="${+sp.line[2]}" y2="${+sp.line[3]}" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/>`:sp.dot?`<circle cx="${+sp.dot[0]}" cy="${+sp.dot[1]}" r="${+(sp.dot[2]||12)}" style="fill:var(--accent);fill-opacity:.55;stroke:var(--accent);stroke-width:3"/>`:'';
     return `<div class="sswloc"><svg viewBox="0 0 ${W} ${H}" aria-hidden="true">${sswClean(ll.svg||'')}${mk}</svg></div>`;}; /* v0.10.1: beacon — any thumbnail, line or dot */
+  const orHtml=l=>{const m=l.marks||{},flip=flipFor(l);if(!phone)return ['',''];const sd=l.conv==='rad'?(flip?['L','R']:['R','L']):['',''];
+    const top=[sd[0],m.t||'',sd[1]],bot=[m.l?sswEsc(flip?m.r||m.l:m.l)+' →':'',m.b||'',m.r?'← '+sswEsc(flip?m.l||m.r:m.r):''];
+    const row=a=>a.some(x=>x)?a.map(x=>`<span>${x===sd[0]||x===sd[1]?x:sswEsc(x)}</span>`).join(''):'';return [row(top),row(bot)];};
+  const chipsHtml=l=>{if(card)return '';const seen=new Set();return (l.regions||[]).map(r=>r.id).filter(id=>S[id]&&!seen.has(id)&&seen.add(id)).map(id=>`<button type="button" class="sswchip" data-id="${sswEsc(id)}" aria-pressed="false">${sswEsc(S[id].name)}</button>`).join('');};
   const zoneName=()=>{const z=P[pi].zones||[];let n='';z.forEach(x=>{if(li>=(x.from|0))n=x.name;});return n;};
   /* ---------- build ---------- */
   let h='';
   if(!card)h+=`<div class="sswplanes" role="group">${P.map((p,k)=>`<button type="button" class="sswb" data-pl="${k}" aria-pressed="${k===pi}">${sswEsc(p.name)}</button>`).join('')}</div>`;
-  h+=`<div class="sswframe">${sswSvg(w,'')}${card?'':'<div class="sswlocbox"></div>'}</div>`;
+  if(!card)h+='<div class="sswor sswor-t"></div>';h+=`<div class="sswframe">${sswSvg(w,'')}${card?'':'<div class="sswlocbox"></div>'}</div>`;if(!card)h+='<div class="sswor sswor-b"></div>';
   if(!card){h+=`<div class="sswbar"><button type="button" class="sswb" data-a="prev" aria-label="Previous">‹</button><input type="range" class="sswrange" min="0" max="0" step="1" value="0" aria-label="Level"><button type="button" class="sswb" data-a="next" aria-label="Next">›</button></div>`;}
-  h+='<div class="sswread"></div><div class="sswcredit"></div>';
-  if(!card){h+=`<div class="sswtools"><button type="button" class="sswb" data-a="labels" aria-pressed="${labels}">Labels</button><button type="button" class="sswb" data-a="terr" aria-pressed="${terr}">Territories</button><button type="button" class="sswb" data-a="ref" aria-pressed="${ref>0}">${["Reference","Reference · overlay","Reference · photo"][ref]}</button><button type="button" class="sswb" data-a="outl" aria-pressed="${outl}">Outlines</button><button type="button" class="sswb" data-a="conv" aria-pressed="${conv==='ana'}">Anatomical view</button><button type="button" class="sswb" data-a="quiz" aria-pressed="false">Quiz me</button><button type="button" class="sswb" data-a="zin" aria-label="Zoom in">Zoom +</button><button type="button" class="sswb" data-a="zout" aria-label="Zoom out">Zoom −</button></div>`;
-    if(Object.keys(PW).length)h+=`<div class="sswtools">${Object.keys(PW).map(k=>`<button type="button" class="sswb" data-pw="${sswEsc(k)}" aria-pressed="${paths.has(k)}"><span class="sswdot" style="background:${sswEsc(PW[k].color||'var(--accent)')}"></span>${sswEsc(PW[k].name)}</button>`).join('')}</div>`;
+  h+='<div class="sswread"></div><div class="sswcredit"></div>'+(card?'':'<div class="sswlv"></div>');
+  if(!card){h+=`<div class="sswtools"><button type="button" class="sswb" data-a="labels" aria-pressed="${labels}">Labels</button><button type="button" class="sswb" data-a="terr" aria-pressed="${terr}">Territories</button><button type="button" class="sswb" data-a="ref" aria-pressed="${ref>0}">${["Reference","Reference · overlay","Reference · photo"][ref]}</button><button type="button" class="sswb sswmore" data-a="outl" aria-pressed="${outl}">Outlines</button><button type="button" class="sswb sswmore" data-a="conv" aria-pressed="${conv==='ana'}">Anatomical view</button><button type="button" class="sswb" data-a="quiz" aria-pressed="false">Quiz me</button><button type="button" class="sswb" data-a="zin" aria-label="Zoom in">Zoom +</button><button type="button" class="sswb" data-a="zout" aria-label="Zoom out">Zoom −</button><button type="button" class="sswb" data-a="list" aria-pressed="false">Structures on this slice ▾</button><button type="button" class="sswb" data-a="more" aria-pressed="false">More ▾</button></div>`;
+    if(Object.keys(PW).length)h+=`<div class="sswtools sswmore">${Object.keys(PW).map(k=>`<button type="button" class="sswb" data-pw="${sswEsc(k)}" aria-pressed="${paths.has(k)}"><span class="sswdot" style="background:${sswEsc(PW[k].color||'var(--accent)')}"></span>${sswEsc(PW[k].name)}</button>`).join('')}</div>`;
     h+=`<div class="sswsearch"><input type="search" placeholder="Find a structure…" aria-label="Find a structure" autocomplete="off"><div class="sswhits"></div></div><div class="sswhint">${SSW_HINT.atlas}</div>`;}
   host.innerHTML=h;host.classList.toggle('outl',outl);if(!labels)host.classList.add('nolab');
   const sv=host.querySelector('.sswsvg'),read=()=>host.querySelector('.sswread'),credit=()=>host.querySelector('.sswcredit');
-  const sel=id=>{host.querySelectorAll(`.sswrg[data-id="${CSS.escape(id)}"]`).forEach(e=>e.classList.add('sel'));};
+  const sel=id=>{host.querySelectorAll(`.sswrg[data-id="${CSS.escape(id)}"]`).forEach(e=>e.classList.add('sel'));host.querySelectorAll('.sswlv .sswchip').forEach(c=>c.setAttribute('aria-pressed',String(c.dataset.id===id)));};
   const mark=(id,cls)=>{host.querySelectorAll(`.sswrg[data-id="${CSS.escape(id)}"]`).forEach(e=>e.classList.add(cls));};
-  const clear=()=>{host.querySelectorAll('.sswrg').forEach(e=>e.classList.remove('sel','ok','no'));const m=host.querySelector('.sswmk');if(m)m.innerHTML='';};
+  const clear=()=>{host.querySelectorAll('.sswrg').forEach(e=>e.classList.remove('sel','ok','no'));host.querySelectorAll('.sswlv .sswchip').forEach(c=>c.setAttribute('aria-pressed','false'));const m=host.querySelector('.sswmk');if(m)m.innerHTML='';};
   const missAt=e=>{try{const p=sv.createSVGPoint();p.x=e.clientX;p.y=e.clientY;const q=p.matrixTransform(sv.getScreenCTM().inverse());host.querySelector('.sswmk').innerHTML=`<circle class="sswmiss" cx="${q.x}" cy="${q.y}" r="${Math.max(4,W/80)}"/>`;}catch(_){}};
   const sysDot=s=>{const y=s&&SYS[s.sys];return y?`<span class="sswdot" style="background:${sswEsc(y.color||'var(--accent)')};vertical-align:middle;margin-right:4px"></span>`:'';};
   const tell=(sid,withNav)=>{const s=S[sid];if(!s)return '';const shows=atlasShows(w,sid);
-    return `${sysDot(s)}<b>${sswEsc(s.name)}</b>${s.gloss?' — '+sswEsc(s.gloss):''}${withNav&&shows.length>1?` <span class="sswpos">on ${shows.length} slices</span> <button type="button" class="sswb" data-a="cycle">Next slice</button>`:''}`;};
+    const at=shows.findIndex(x=>x.pi===pi&&x.li===li);
+    return `${sysDot(s)}<b>${sswEsc(s.name)}</b>${s.gloss?' — '+sswEsc(s.gloss):''}${withNav&&shows.length>1?` <span class="sswpos">${at>=0?(at+1)+' of ':'on '}${shows.length} slices</span> <button type="button" class="sswb" data-a="cyclep" aria-label="Previous slice">‹ Prev</button> <button type="button" class="sswb" data-a="cycle">Next slice ›</button>`:''}`;};
   const levelLine=()=>{const l=lvl();return hideName?'':`<b>${sswEsc(l.label||'')}</b>${l.note?' — '+sswEsc(l.note):''}${card?'':` <span class="sswpos">${zoneName()?sswEsc(zoneName())+' · ':''}${li+1} / ${P[pi].levels.length}</span>`}`;};
-  const draw=()=>{const l=lvl();sv.innerHTML=art(l);const lb=host.querySelector('.sswlocbox');if(lb)lb.innerHTML=locSvg();
+  /* zoom: viewBox window (z = 1..4) centred on (px,py) inside the base box B (the whole frame, or on phones the drawing's own box) */
+  let B=[0,0,W,H],z=1,px=W/2,py=H/2,x0=null,y0=null,moved=false;
+  const vbox=()=>{const bw=B[2]/z,bh=B[3]/z;px=Math.max(B[0]+bw/2,Math.min(B[0]+B[2]-bw/2,px));py=Math.max(B[1]+bh/2,Math.min(B[1]+B[3]-bh/2,py));sv.setAttribute('viewBox',`${px-bw/2} ${py-bh/2} ${bw} ${bh}`);};
+  const zoom=f=>{z=Math.max(1,Math.min(4,z*f));if(z===1){px=B[0]+B[2]/2;py=B[1]+B[3]/2;}vbox();};
+  const crop=()=>{let b=null;try{const g=sv.querySelector('.sswart');b=g&&g.getBBox();}catch(_){}
+    let nb=[0,0,W,H];if(phone&&b&&b.width>20&&b.height>20){const m=Math.max(8,Math.round(Math.max(b.width,b.height)*0.05));const x=Math.max(0,b.x-m),y=Math.max(0,b.y-m);nb=[x,y,Math.min(W,b.x+b.width+m)-x,Math.min(H,b.y+b.height+m)-y];}
+    if(nb.join()!==B.join()){B=nb;z=1;px=B[0]+B[2]/2;py=B[1]+B[3]/2;}vbox();}; /* the zoom survives a level change unless the box moved */
+  const draw=()=>{const l=lvl();sv.innerHTML=art(l);const lb=host.querySelector('.sswlocbox');if(lb)lb.innerHTML=locSvg();crop();
+    if(!card){const o2=orHtml(l);host.querySelector('.sswor-t').innerHTML=o2[0];host.querySelector('.sswor-b').innerHTML=o2[1];const lv=host.querySelector('.sswlv');if(lv){lv.innerHTML=chipsHtml(l);lv.querySelectorAll('.sswchip').forEach(c=>c.addEventListener('click',()=>{if(quiz)return;clear();sel(c.dataset.id);read().innerHTML=tell(c.dataset.id,true);wireCycle(c.dataset.id);}));}}
     const r=host.querySelector('.sswrange');if(r){r.max=String(P[pi].levels.length-1);r.value=String(li);}
     host.querySelectorAll('.sswb[data-pl]').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.pl===pi)));
     const cb=host.querySelector('[data-a="conv"]');if(cb){cb.disabled=l.conv!=='rad';cb.setAttribute('aria-pressed',String(conv==='ana'&&l.conv==='rad'));}
     credit().textContent=(ref>0&&l.ref&&l.ref.img)?('Reference: '+(l.ref.credit||'')):'';
     if(!quiz)read().innerHTML=levelLine();};
   const go=(p,k,sid)=>{pi=Math.max(0,Math.min(P.length-1,p));li=Math.max(0,Math.min(P[pi].levels.length-1,k));draw();if(sid){sel(sid);read().innerHTML=tell(sid,true)+' <span class="sswpos">'+sswEsc(lvl().label||'')+'</span>';wireCycle(sid);}};
-  const wireCycle=sid=>{const b=read().querySelector('[data-a="cycle"]');if(!b)return;b.addEventListener('click',()=>{const shows=atlasShows(w,sid);const at=shows.findIndex(x=>x.pi===pi&&x.li===li);const nx=shows[(at+1)%shows.length];go(nx.pi,nx.li,sid);});};
+  const wireCycle=sid=>{const step=d=>{const shows=atlasShows(w,sid);const at=shows.findIndex(x=>x.pi===pi&&x.li===li);const nx=shows[(at+d+shows.length)%shows.length];go(nx.pi,nx.li,sid);};
+    const b=read().querySelector('[data-a="cycle"]'),p=read().querySelector('[data-a="cyclep"]');if(b)b.addEventListener('click',()=>step(1));if(p)p.addEventListener('click',()=>step(-1));}; /* v0.10.3: both ways */
   draw();
   /* ---------- cards ---------- */
   if(card){if(o.reveal&&o.target){mark(o.target,'ok');if(o.pick&&o.pick!==o.target&&o.pick!=='__miss')mark(o.pick,'no');read().innerHTML=tell(o.target);return;}
@@ -3468,14 +3538,16 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
   host.querySelectorAll('.sswb[data-pl]').forEach(b=>b.addEventListener('click',()=>{quizOff();go(+b.dataset.pl,0);}));
   const r=host.querySelector('.sswrange');r.addEventListener('input',()=>{if(!quiz)go(pi,+r.value);});
   host.querySelector('[data-a="prev"]').addEventListener('click',()=>{if(!quiz)go(pi,li-1);});host.querySelector('[data-a="next"]').addEventListener('click',()=>{if(!quiz)go(pi,li+1);});
-  /* zoom: viewBox window (z = 1..4) centred on (px,py); drag pans when zoomed, swipes levels when not; double-tap resets */
-  let z=1,px=W/2,py=H/2,x0=null,y0=null,moved=false;const vbox=()=>{px=Math.max(W/2/z,Math.min(W-W/2/z,px));py=Math.max(H/2/z,Math.min(H-H/2/z,py));sv.setAttribute('viewBox',`${px-W/2/z} ${py-H/2/z} ${W/z} ${H/z}`);};
-  const zoom=f=>{z=Math.max(1,Math.min(4,z*f));if(z===1){px=W/2;py=H/2;}vbox();};
+  /* drag pans when zoomed, swipes levels when not; double-tap resets */
   sv.addEventListener('pointerdown',e=>{x0=e.clientX;y0=e.clientY;moved=false;});sv.addEventListener('pointercancel',()=>{x0=null;});
-  sv.addEventListener('pointermove',e=>{if(x0===null||z===1||e.buttons===0)return;const r=sv.getBoundingClientRect(),k=(W/z)/r.width;px-=(e.clientX-x0)*k;py-=(e.clientY-y0)*k;x0=e.clientX;y0=e.clientY;moved=true;vbox();});
+  sv.addEventListener('pointermove',e=>{if(x0===null||z===1||e.buttons===0)return;const r=sv.getBoundingClientRect(),k=(B[2]/z)/r.width;px-=(e.clientX-x0)*k;py-=(e.clientY-y0)*k;x0=e.clientX;y0=e.clientY;moved=true;vbox();});
   sv.addEventListener('pointerup',e=>{if(x0===null)return;const dx=e.clientX-x0;x0=null;if(z===1&&Math.abs(dx)>40&&!quiz)go(pi,li+(dx<0?1:-1));});
   sv.addEventListener('dblclick',()=>{z=1;zoom(1);});
   host.querySelector('[data-a="zin"]').addEventListener('click',()=>zoom(1.5));host.querySelector('[data-a="zout"]').addEventListener('click',()=>zoom(1/1.5));
+  host.querySelector('[data-a="more"]').addEventListener('click',()=>{const on=host.classList.toggle('showmore');host.querySelector('[data-a="more"]').setAttribute('aria-pressed',String(on));host.querySelector('[data-a="more"]').textContent=on?'Less ▴':'More ▾';});
+  host.querySelector('[data-a="list"]').addEventListener('click',()=>{const on=host.classList.toggle('showlist');const b=host.querySelector('[data-a="list"]');b.setAttribute('aria-pressed',String(on));b.textContent=on?'Structures on this slice ▴':'Structures on this slice ▾';});
+  if(phone){const hn=host.querySelector('.sswhint');if(hn)hn.textContent='Swipe the picture or drag the slider to move through the levels; tap a structure, or a name below it — or search, or Quiz me.';}
+  if(full&&window.ResizeObserver){const ro=new ResizeObserver(()=>{if(!host.isConnected){ro.disconnect();return;}const now=host.clientWidth>0&&host.clientWidth<560;if(now!==phone){ro.disconnect();mountAtlas(host,w,Object.assign({},o,{state:{plane:P[pi].id,level:lvl().id,labels,terr,ref,outlines:outl,conv,paths:[...paths]}}));}});ro.observe(host);}
   const tog=(a,fn)=>{const b=host.querySelector(`[data-a="${a}"]`);b.addEventListener('click',()=>{const on=fn();b.setAttribute('aria-pressed',String(on));});};
   tog('labels',()=>{labels=!labels;host.classList.toggle('nolab',!labels);return labels;});
   tog('terr',()=>{terr=!terr;draw();return terr;});tog('ref',()=>{ref=(ref+1)%3;host.querySelector('[data-a="ref"]').textContent=['Reference','Reference · overlay','Reference · photo'][ref];
@@ -3509,8 +3581,6 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
     else{mark(id,'no');read().innerHTML=`<span class="sswno">✗ That’s ${sswEsc((S[id]||{}).name||id)}.</span> Try again — or <button type="button" class="sswb" data-a="show">Show me</button>`;
       read().querySelector('[data-a="show"]').addEventListener('click',()=>{clear();mark(quiz,'ok');read().innerHTML=`${tell(quiz)} <button type="button" class="sswb" data-a="nextq">Next</button>`;read().querySelector('[data-a="nextq"]').addEventListener('click',ask);});}});
 }
-
-(function(){const st=document.createElement('style');st.id='sswCss';st.textContent=SSW_CSS+ATLAS_CSS+'.sswlive{--soft:var(--ink-soft)}';document.head.appendChild(st);})();
 /* ===== VALIDATION ===== */
 const KNOWN_TYPES=['mcq','multi','cloze','order','match','qa','label','spot','widget'];
 function validateCard(c,i){
@@ -3598,6 +3668,7 @@ function gotoSec(t){
       if(deck().length)openReview();else renderHome();
       break;
     case 'flagged': openFlagged(); break; /* v0.8.0 */
+    case 'atlas': if(atlasWidgets().length)openAtlas();else renderHome(); break; /* v0.10.4 */
     default: renderHome();
   }
 }
@@ -3667,6 +3738,8 @@ function renderHome(){
   const nD=drugCount();
   $('pharmPanel').style.display=nD?'':'none';
   $('pharmPanelDesc').textContent=`${nD} drug${nD===1?'':'s'} indexed across your active packs.`;
+  // atlas panel (v0.10.4) — shown when any active pack carries an `atlas` widget; on phones only with #beta until the layout is signed off
+  {const aw=atlasWidgets();$('atlasPanel').style.display=aw.length&&atlasAllowed()?'':'none';if(aw.length)$('atlasPanelDesc').textContent=aw.map(x=>x.w.title||x.id).join(' · ')+' — drawn sections and views, full width.';}
   // library (hierarchical: school ▸ year ▸ course, mirroring the Default study packs panel)
   renderLibrary();
   renderDefaultPacks();
@@ -3925,7 +3998,7 @@ function organizeGuides(){const metas=activeGuides().map(guideMeta);
   // Order the per-pack groups by the curriculum hierarchy (school → year → term → week#), matching the
   // Content library / Default packs panels — not by import order. Missing fields sort last.
   const packCmp=(p,q)=>natCmp(p.school||'￿',q.school||'￿')||natCmp(p.year||'￿',q.year||'￿')
-    ||natCmp(p.term||'',q.term||'')||cmpW(packWeek(q),packWeek(p))||natCmp(q.pack||q.id||'',p.pack||p.id||'');
+    ||natCmp(p.term||'',q.term||'')||cmpW(packWeek(p),packWeek(q))||natCmp(p.pack||p.id||'',q.pack||q.id||'') /* v0.10.3: guides chronological */;
   const orderedPacks=activePacks().slice().sort(packCmp);
   const groups=[];
   orderedPacks.forEach(p=>{const items=metas.filter(x=>x.g._pack===p.id).sort(cmp);if(items.length)groups.push({label:p.pack||p.id,items});});
@@ -4082,6 +4155,22 @@ function renderPharm(){pharmGroups=buildDrugIndex();const total=pharmGroups.redu
   renderPharmMain();updatePharmDrawer();}
 function setHdrH(){const h=document.querySelector('header.top');if(h)document.documentElement.style.setProperty('--hdrh',h.offsetHeight+'px');} /* v0.8.1 */
 window.addEventListener('resize',setHdrH);
+/* ===== v0.10.4: the Atlas view — every `atlas` widget in the active packs, mounted full-width (o.full) with the phone layout
+   when the host is narrow. Opened from Home, from a guide's poster button (window.openAtlas) or by Back/forward. ===== */
+let atlasReturn='home',atlasCur=null;
+function atlasWidgets(){const out=[];activePacks().forEach(p=>Object.keys(p.widgets||{}).forEach(k=>{const w=p.widgets[k];if(w&&w.type==='atlas')out.push({id:k,w,packId:p.id});}));return out;}
+function atlasOpenable(){return atlasWidgets().length>0&&atlasAllowed();}
+function openAtlas(w,packId,state){const all=atlasWidgets();if(!all.length){renderHome();return;}
+  let cur=w?all.find(x=>x.w===w||(x.id===w.id&&x.packId===packId)):null;if(!cur)cur=atlasCur&&all.find(x=>x.id===atlasCur.id&&x.packId===atlasCur.packId)||all[0];atlasCur={id:cur.id,packId:cur.packId};
+  const from=currentSection();if(from!=='atlas')atlasReturn=from==='reviewer'?'reviewer':'home';
+  $('atlasBackTo').textContent='to '+(atlasReturn==='reviewer'?'the guide':'Home');$('atlasTitle').textContent=cur.w.title||'Atlas';
+  const pk=packs.find(p=>p.id===cur.packId);$('atlasSub').textContent=pk?(pk.pack||pk.title||''):'';
+  const pick=$('atlasPick');pick.style.display=all.length>1?'':'none';pick.innerHTML=all.length>1?all.map(x=>`<button type="button" class="sswb" data-i="${all.indexOf(x)}" aria-pressed="${x===cur}">${sswEsc(x.w.title||x.id)}</button>`).join(''):'';
+  pick.querySelectorAll('.sswb').forEach(b=>b.addEventListener('click',()=>openAtlas(all[+b.dataset.i].w,all[+b.dataset.i].packId)));
+  show('atlas');setHdrH();sswEnsureCss(document);const host=$('atlasHost');host.innerHTML='';
+  if(!atlasAllowed()){host.className='sswlive ssw-atlas';host.innerHTML=`<div class="sswread"><b>${sswEsc(cur.w.title||'The atlas')}</b> works in a desktop browser for now. Phones and iPads are coming.</div>`;return;}
+  mountWidget(host,cur.w,{full:true,packId:cur.packId,state:state||{}});}
+window.openAtlas=openAtlas;
 function openPharm(){setHdrH();pharmFocusId=null;pharmReturn=currentSection();$('pharmBackTo').textContent='to Home';pharmQuery='';const se=$('pharmSearch');if(se)se.value='';renderPharm();show('pharm');}
 
 let revQuery='';
@@ -4245,11 +4334,12 @@ function openGuide(ref,section){const g=findGuide(ref);if(!g){if(ref&&!/^\s*(jav
 function backLabel(){const r=reviewerReturn;
   if(r==='quiz')return qmode==='test'?'Exam':'Practice';
   if(r==='pharm')return 'Pharmacology';
+  if(r==='atlas')return 'Atlas';
   if(r==='flagged')return 'Flagged';
   if(r==='study'||r==='srs')return 'Review';
   return 'Home';}
 function setBackLabel(){const el=$('revBackTo');if(el)el.textContent='to '+backLabel();}
-function returnFromReviewer(){const r=reviewerReturn;if(r==='study'){show('study');renderCard();}else if(r==='quiz'){show('quiz');renderQuiz();}else if(r==='srs'){openReview();}else if(r==='pharm'){openPharm();}else if(r==='flagged'){openFlagged();}else renderHome();}
+function returnFromReviewer(){const r=reviewerReturn;if(r==='study'){show('study');renderCard();}else if(r==='quiz'){show('quiz');renderQuiz();}else if(r==='srs'){openReview();}else if(r==='pharm'){openPharm();}else if(r==='flagged'){openFlagged();}else if(r==='atlas'){openAtlas();}else renderHome();}
 /* In-app confirm dialog + toasts — replace native confirm()/alert() (which browsers throttle/block).
    confirmDialog(msg, opts?, onConfirm): opts = {confirmText, cancelText, danger}. */
 let confirmCb=null,confirmCancelCb=null;
@@ -4683,6 +4773,8 @@ $('mExam').addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#
 $('openReviewer').addEventListener('click',()=>{if(activeGuides().length)openReviewer();});
 $('openPharm').addEventListener('click',()=>{if(drugCount())openPharm();});
 $('pharmBack').addEventListener('click',()=>renderHome());
+$('atlasBack').addEventListener('click',()=>{if(atlasReturn==='reviewer'&&activeGuides().length){show('reviewer');}else renderHome();}); /* v0.10.4 */
+$('openAtlas').addEventListener('click',()=>{if(atlasWidgets().length)openAtlas();});
 $('flagHomeBtn').addEventListener('click',openFlagged);$('flagBack').addEventListener('click',()=>renderHome());$('flagClearAll').addEventListener('click',clearAllFlags); /* v0.8.0 */
 $('srsFlt').addEventListener('change',e=>{srsFlagOnly=!!e.target.checked;renderSrs();});
 $('cardFlagBtn').addEventListener('click',()=>{if(!currentId)return;setFlag(currentId,!isFlagged(currentId));paintCardFlag();});
