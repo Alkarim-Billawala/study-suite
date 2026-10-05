@@ -1,7 +1,10 @@
 <!--
-  Study Suite  ·  v0.10.12 (beta)
+  Study Suite  ·  v0.10.13 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.10.13 (2026-10-05, atlas): the 3D button moves into the plane row ("3D · Three planes", right-aligned); on a
+  wide host (≥ 900 px, not a card) the locator map sits large beside the drawing with every level of the plane tappable
+  (host class `wide`, the frame becomes a flex row); the 3D viewer lights alias structures too (registry `also`, pack v1.11).
   Changelog v0.10.12 (2026-10-05, hotfix): in the 3D view a real tap never selected a structure — the scene's pointer capture
   made the release report the scene as its target; the pressed element is kept from pointerdown (downT) and used on release.
   Changelog v0.10.11 (2026-10-05, atlas 2.5D viewer): a 3D button in the atlas view opens the three section planes' current slices
@@ -1903,7 +1906,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.10.12';
+const APP_VERSION='0.10.13';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3464,7 +3467,12 @@ function mountCardWidget(c){if(c.type!=='spot'&&c.type!=='widget')return;const h
    Territories · Reference · Outlines · convention (Radiological / Anatomical; mirrors the drawing, swaps the side
    markers, re-lays the labels) · pathway pills · Quiz me (structures taught so far: honours the pack's Sources switches).
    Card states: {plane, level, labels:false, terr:true, paths:[…], region, conv:'ana', hideName:true}. — */
-const ATLAS_CSS=`.sswlive.ssw-atlas .sswplanes{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+const ATLAS_CSS=`.sswlive.ssw-atlas .sswplanes{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;align-items:center}
+.sswlive.ssw-atlas .sswb3d{margin-left:auto;font-weight:600;border-width:2px}.sswlive.ssw-atlas.phone .sswb3d{margin-left:0}
+/* v0.10.13: on a wide host the locator map sits large beside the drawing, its level lines tappable; the thumbnail stays on narrow hosts */
+.sswlive.ssw-atlas.wide .sswframe{display:flex;align-items:flex-start;gap:10px}.sswlive.ssw-atlas.wide .sswsvg{flex:1 1 auto;min-width:0}
+.sswlive.ssw-atlas.wide .sswlocbox{flex:0 0 200px}.sswlive.ssw-atlas.wide .sswloc{position:static;width:200px;opacity:1;border:1px solid var(--line);padding:4px;background:var(--paper)}
+.sswlive.ssw-atlas.wide .sswloc .sswmapln{cursor:pointer}.sswlive.ssw-atlas.wide .sswloc .sswmapln:hover line{stroke:var(--accent);stroke-opacity:.9}
 .sswlive.ssw-atlas .sswzone{font-size:12px;opacity:.7;min-width:70px}
 .sswlive.ssw-atlas .sswsearch{position:relative;margin-top:8px}
 .sswlive.ssw-atlas .sswsearch input{width:100%;box-sizing:border-box;font:inherit;font-size:16px;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
@@ -3586,8 +3594,9 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
     return `<defs><radialGradient id="${id}" cx="${A[0]}" cy="${A[1]}" r="${r*1.08}" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="var(--accent)" stop-opacity=".6"/><stop offset=".55" stop-color="var(--accent)" stop-opacity=".28"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></radialGradient></defs><path d="M${A[0].toFixed(1)},${A[1].toFixed(1)} L${p1[0].toFixed(1)},${p1[1].toFixed(1)} A${(r*1.08).toFixed(1)},${(r*1.08).toFixed(1)} 0 0 1 ${p2[0].toFixed(1)},${p2[1].toFixed(1)} Z" fill="url(#${id})"/><circle cx="${A[0].toFixed(1)}" cy="${A[1].toFixed(1)}" r="${big?4:6}" style="fill:var(--accent);fill-opacity:.9"/>`;};
   const beacon=(lc,cur,big)=>{const sw=big?3.5:6,op=cur?1:.5,col=cur?'var(--accent)':'var(--ink-soft,var(--ink,#8a8f99))'; /* --soft is only set on .sswlive's own text classes; the overlay needs a global var */
     return lc.line?`<line x1="${+lc.line[0]}" y1="${+lc.line[1]}" x2="${+lc.line[2]}" y2="${+lc.line[3]}" stroke="${col}" stroke-opacity="${op}" stroke-width="${sw}" stroke-linecap="round"/>`:lc.dot?`<circle cx="${+lc.dot[0]}" cy="${+lc.dot[1]}" r="${+(lc.dot[2]||12)}" style="fill:${col};fill-opacity:${cur?.55:.25};stroke:${col};stroke-width:${big?2:3}"/>`:'';};
-  const locSvg=()=>{const l=lvl(),lc=locOf(l);if(!lc)return '';
-    return `<div class="sswloc" role="button" tabindex="0" title="Tap for the large map" aria-label="Where this level sits — tap for the large map"><svg viewBox="0 0 ${+lc.vb[0]} ${+lc.vb[1]}" aria-hidden="true">${sswClean(lc.svg||'')}${wedge(lc,l,false)}${beacon(lc,true,false)}</svg></div>`;};
+  const locSvg=()=>{const l=lvl(),lc=locOf(l);if(!lc)return '';const wide=host.classList.contains('wide');
+    const lines=wide?P[pi].levels.map((x,k)=>({x,k,lc:locOf(x)})).filter(s=>s.lc&&s.lc.key===lc.key&&s.k!==li).map(s=>`<g class="sswmapln" data-k="${s.k}">${beacon(s.lc,false,true)}${s.lc.line?`<line x1="${+s.lc.line[0]}" y1="${+s.lc.line[1]}" x2="${+s.lc.line[2]}" y2="${+s.lc.line[3]}" stroke="transparent" stroke-width="16"/>`:''}</g>`).join(''):'';
+    return `<div class="sswloc" role="button" tabindex="0" title="${wide?'Tap a level line to go there · tap the map for a larger one':'Tap for the large map'}" aria-label="Where this level sits"><svg viewBox="0 0 ${+lc.vb[0]} ${+lc.vb[1]}" aria-hidden="true">${sswClean(lc.svg||'')}${lines}${wedge(lc,l,false)}${beacon(lc,true,false)}</svg></div>`;};
   /* the large map: every level of the current plane that sits on the same map, each line tappable; the current one carries the wedge */
   const bigMap=()=>{const l=lvl(),lc=locOf(l);if(!lc)return;let ov=host.querySelector('.sswmapov');if(!ov){ov=document.createElement('div');ov.className='sswmapov';host.appendChild(ov);}
     const sibs=P[pi].levels.map((x,k)=>({x,k,lc:locOf(x)})).filter(s=>s.lc&&s.lc.key===lc.key);
@@ -3606,11 +3615,11 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
   const zoneName=()=>{const z=P[pi].zones||[];let n='';z.forEach(x=>{if(li>=(x.from|0))n=x.name;});return n;};
   /* ---------- build ---------- */
   let h='';
-  if(!card)h+=`<div class="sswplanes" role="group">${P.map((p,k)=>`<button type="button" class="sswb" data-pl="${k}" aria-pressed="${k===pi}">${sswEsc(p.name)}</button>`).join('')}</div>`;
+  if(!card)h+=`<div class="sswplanes" role="group">${P.map((p,k)=>`<button type="button" class="sswb" data-pl="${k}" aria-pressed="${k===pi}">${sswEsc(p.name)}</button>`).join('')}<button type="button" class="sswb sswb3d" data-a="v3d" title="The three section planes' current slices in 3D">3D · Three planes</button></div>`; /* v0.10.13: the 3D view sits with the planes */
   if(!card)h+='<div class="sswor sswor-t"></div>';h+=`<div class="sswframe">${sswSvg(w,'')}${card?'':'<div class="sswlocbox"></div>'}</div>`;if(!card)h+='<div class="sswor sswor-b"></div><div class="sswlabhint">Pinch in (or Zoom +) to see the names on the drawing — this slice has too many to show at once.</div>';
   if(!card){h+=`<div class="sswbar"><button type="button" class="sswb" data-a="prev" aria-label="Previous">‹</button><input type="range" class="sswrange" min="0" max="0" step="1" value="0" aria-label="Level"><button type="button" class="sswb" data-a="next" aria-label="Next">›</button></div>`;}
   h+='<div class="sswread"></div><div class="sswcredit"></div><div class="sswtk"></div>'+(card?'':'<div class="sswlv"></div>'); /* v0.10.7: .sswtk = the territory legend */
-  if(!card){h+=`<div class="sswtools"><button type="button" class="sswb" data-a="labels" aria-pressed="${labels}">Labels</button><button type="button" class="sswb" data-a="terr" aria-pressed="${terr}">Territories</button><button type="button" class="sswb" data-a="ref" aria-pressed="${ref>0}">${["Reference","Reference · overlay","Reference · photo"][ref]}</button><button type="button" class="sswb sswmore" data-a="outl" aria-pressed="${outl}">Outlines</button><button type="button" class="sswb sswmore" data-a="conv" aria-pressed="${conv==='ana'}">Anatomical view</button><button type="button" class="sswb" data-a="v3d" title="The three planes' current slices in 3D">3D</button><button type="button" class="sswb" data-a="quiz" aria-pressed="false">Quiz me</button><button type="button" class="sswb" data-a="zin" aria-label="Zoom in">Zoom +</button><button type="button" class="sswb" data-a="zout" aria-label="Zoom out">Zoom −</button><button type="button" class="sswb" data-a="more" aria-pressed="false">More ▾</button></div>`;
+  if(!card){h+=`<div class="sswtools"><button type="button" class="sswb" data-a="labels" aria-pressed="${labels}">Labels</button><button type="button" class="sswb" data-a="terr" aria-pressed="${terr}">Territories</button><button type="button" class="sswb" data-a="ref" aria-pressed="${ref>0}">${["Reference","Reference · overlay","Reference · photo"][ref]}</button><button type="button" class="sswb sswmore" data-a="outl" aria-pressed="${outl}">Outlines</button><button type="button" class="sswb sswmore" data-a="conv" aria-pressed="${conv==='ana'}">Anatomical view</button><button type="button" class="sswb" data-a="quiz" aria-pressed="false">Quiz me</button><button type="button" class="sswb" data-a="zin" aria-label="Zoom in">Zoom +</button><button type="button" class="sswb" data-a="zout" aria-label="Zoom out">Zoom −</button><button type="button" class="sswb" data-a="more" aria-pressed="false">More ▾</button></div>`;
     if(Object.keys(PW).length)h+=`<div class="sswtools sswmore">${Object.keys(PW).map(k=>`<button type="button" class="sswb" data-pw="${sswEsc(k)}" aria-pressed="${paths.has(k)}"><span class="sswdot" style="background:${sswEsc(PW[k].color||'var(--accent)')}"></span>${sswEsc(PW[k].name)}</button>`).join('')}</div>`;
     h+=`<div class="sswsearch"><input type="search" placeholder="Find a structure…" aria-label="Find a structure" autocomplete="off"><div class="sswhits"></div></div><div class="sswhint">${SSW_HINT.atlas}</div>`;}
   host.innerHTML=h;host.classList.toggle('outl',outl);if(!labels)host.classList.add('nolab');
@@ -3660,7 +3669,7 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
         for(const k of [0,2,4,7]){pt.x=tx+ux*k;pt.y=ty+uy*k;const hit=rg.find(e=>{try{return e.isPointInFill(pt);}catch(_){return false;}});if(hit){const b=N[hit.dataset.id];if(akin(a,b)&&kind(a)===kind(b))id=hit.dataset.id;break;}}}
       if(!id)return;
       sv.querySelectorAll(`.sswlab[data-i="${i}"],.ti[data-i="${i}"]`).forEach(e=>e.setAttribute('data-l',id));});}catch(_){}};
-  const draw=()=>{const l=lvl();sv.innerHTML=art(l);const lb=host.querySelector('.sswlocbox');if(lb)lb.innerHTML=locSvg();crop();fitLabels();mapLabels();
+  const draw=()=>{const l=lvl();sv.innerHTML=art(l);host.classList.toggle('wide',!card&&!phone&&host.clientWidth>=900);const lb=host.querySelector('.sswlocbox');if(lb)lb.innerHTML=locSvg();crop();fitLabels();mapLabels();
     const tk=host.querySelector('.sswtk');if(tk){tk.innerHTML=(terr&&Array.isArray(l.terrKey)?l.terrKey:[]).map(k=>`<span><span class="sswdot" style="background:var(--${sswEsc(String(k[1]||'accent').replace(/^var\(--|\)$/g,''))})"></span>${sswEsc(k[0])}</span>`).join('');host.classList.toggle('terron',!!terr);} /* v0.10.7: territory legend (pack v1.6 terrKey) */host.classList.toggle('dense',(l.labels||[]).filter(x=>x.t).length>10); /* v0.10.6: on a phone a dense slice shows in-place names only when zoomed */
     if(!card){const o2=orHtml(l);host.querySelectorAll('.sswor').forEach((e,i)=>{e.innerHTML=o2[i];e.classList.toggle('sswor-on',l.conv!=='rad');});host.classList.toggle('sswbanner',l.conv!=='rad'); /* v0.10.6: the orientation banner is always on for views without a radiological convention */const lv=host.querySelector('.sswlv');if(lv){lv.innerHTML=selHtml(l);const se=lv.querySelector('.sswsel');if(se)se.addEventListener('change',()=>{const id=se.value;if(quiz||!id)return;clear();sel(id);read().innerHTML=tell(id,true);wireCycle(id);});}
       /* v0.10.5: tools the slice cannot honour are greyed — no reference image, no territories, no drawing for a pathway */
@@ -3708,8 +3717,9 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
     let rx=-22,ry=-38,px0=null,py0=null,moved=false,downT=null;const apply=()=>{sc.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;};apply();
     fit.addEventListener('pointerdown',e=>{px0=e.clientX;py0=e.clientY;moved=false;downT=e.target;fit.setPointerCapture&&fit.setPointerCapture(e.pointerId);}); /* v0.10.12: with pointer capture the release reports the scene as its target — keep the pressed element */
     fit.addEventListener('pointermove',e=>{if(px0===null)return;const dx=e.clientX-px0,dy=e.clientY-py0;if(Math.abs(dx)+Math.abs(dy)>6)moved=true;ry+=dx*0.45;rx=Math.max(-85,Math.min(85,rx-dy*0.45));px0=e.clientX;py0=e.clientY;apply();});
-    let sel3=null;const show3=()=>{ov.querySelectorAll('.sswrg').forEach(el=>el.classList.toggle('sel',!!sel3&&el.dataset.id===sel3));const rd=ov.querySelector('.ssw3dread');const s=sel3&&S[sel3];
-      if(!s){rd.innerHTML='';return;}const on=[...new Set([...ov.querySelectorAll(`.sswrg[data-id="${CSS.escape(sel3)}"]`)].map(el=>el.closest('.ssw3dcard').dataset.pl))].map(id=>(P.find(p=>p.id===id)||{}).name).filter(Boolean);
+    let sel3=null;const show3=()=>{const s=sel3&&S[sel3];const ids=new Set(s?[sel3].concat(s.also||[]):[]); /* v0.10.13: aliases (the same structure under another id on another view) light too */
+      ov.querySelectorAll('.sswrg').forEach(el=>el.classList.toggle('sel',ids.has(el.dataset.id)));const rd=ov.querySelector('.ssw3dread');
+      if(!s){rd.innerHTML='';return;}const on=[...new Set([...ov.querySelectorAll('.sswrg.sel')].map(el=>el.closest('.ssw3dcard').dataset.pl))].map(id=>(P.find(p=>p.id===id)||{}).name).filter(Boolean);
       rd.innerHTML=`${sysDot(s)}<b>${sswEsc(s.name)}</b>${s.gloss?' — '+sswEsc(s.gloss):''} <span class="on">· on ${on.join(', ')}</span>`;};
     const up=e=>{if(px0===null)return;px0=null;if(moved)return;const t=downT||e.target;downT=null;
       if(t.closest&&t.closest('[data-a="open3"]')){const c=t.closest('.ssw3dcard');const p=P.findIndex(x=>x.id===c.dataset.pl);if(p>=0){ov.remove();quizOff();go(p,lvl3(P[p]));}return;}
@@ -3718,7 +3728,7 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
     ov.querySelectorAll('.ssw3dsl input').forEach(r=>r.addEventListener('input',()=>{const p=P.find(x=>x.id===r.dataset.pl);LAST[p.id]=+r.value;sc.innerHTML=cards3();show3();}));
     ov.querySelector('[data-a="close3"]').addEventListener('click',()=>ov.remove());ov.querySelector('[data-a="reset3"]').addEventListener('click',()=>{rx=-22;ry=-38;apply();});};
   const b3=host.querySelector('[data-a="v3d"]');if(b3)b3.addEventListener('click',view3d);
-  host.querySelector('.sswlocbox').addEventListener('click',e=>{if(e.target.closest('.sswloc'))bigMap();});host.querySelector('.sswlocbox').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.closest('.sswloc')){e.preventDefault();bigMap();}});
+  host.querySelector('.sswlocbox').addEventListener('click',e=>{const g=e.target.closest&&e.target.closest('.sswmapln');if(g){if(!quiz)go(pi,+g.dataset.k);return;}if(e.target.closest('.sswloc'))bigMap();});host.querySelector('.sswlocbox').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.closest('.sswloc')){e.preventDefault();bigMap();}});
   host.querySelectorAll('.sswb[data-pl]').forEach(b=>b.addEventListener('click',()=>{quizOff();go(+b.dataset.pl,0);}));
   const r=host.querySelector('.sswrange');r.addEventListener('input',()=>{if(!quiz)go(pi,+r.value);});
   host.querySelector('[data-a="prev"]').addEventListener('click',()=>{if(!quiz)go(pi,li-1);});host.querySelector('[data-a="next"]').addEventListener('click',()=>{if(!quiz)go(pi,li+1);});
