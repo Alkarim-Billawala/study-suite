@@ -1,7 +1,20 @@
 <!--
-  Study Suite  ·  v0.10.5 (beta)
+  Study Suite  ·  v0.10.6 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.10.6 (2026-10-04, atlas Phase 0): (1) Locator maps — a level's loc may be {map, line|dot, pov} on one of
+  w.maps (dedicated drawings: `spine` = lateral whole CNS with the vertebral column, `axial` = head from above), legacy
+  plane/level/array forms still work; pov (n/s/e/w) draws the observer's eye and a field-of-view cone opening toward the
+  slice, swapped to the opposite side by the Anatomical switch; the thumbnail is a button — tap for the large map
+  (.sswmapov overlay) with every level of the plane on that map tappable. (2) Zoom: two-finger pinch about the fingers'
+  midpoint, ⌘/ctrl-wheel and trackpad pinch (zoomAt keeps the point under the cursor); at zoom ≥ 2 the gutter labels give
+  way to in-place names at the target points (.sswin, constant on-screen size via --iz). (3) Gutter labels that overrun
+  the frame are compressed (textLength) or shrunk to fit (fitLabels) — the pack lint lists names over 26 chars.
+  (4) Phone layout now applies to cards too; a phone-sized full view starts with Labels off, and a dense slice (> 10
+  labels) shows in-place names only when zoomed, with a hint. (5) Views without a radiological convention (sagittal,
+  surface, skull) carry the orientation banner on every width (.sswor-on; the SVG marks hide under it — class
+  `sswbanner`, not `banner`, which the app already uses for its mono eyebrow style). (6) sswEnsureCss unchanged; the
+  overlay's sibling lines use --ink-soft (the --soft alias exists only on .sswlive text classes).
   Changelog v0.10.5 (2026-10-04): Atlas out of beta — atlasAllowed() is true everywhere (the #beta device flag stays as a
   mechanism; the Home panel and the guide button no longer check it). The structures list is a grouped dropdown (.sswsel:
   one optgroup per system, names sorted; picking one highlights it and shows the readout with Prev/Next; hidden while Labels
@@ -1865,7 +1878,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.10.5';
+const APP_VERSION='0.10.6';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3422,7 +3435,13 @@ const ATLAS_CSS=`.sswlive.ssw-atlas .sswplanes{display:flex;flex-wrap:wrap;gap:6
 .sswlive.ssw-atlas .sswchips{display:flex;flex-wrap:wrap;gap:4px;padding:0 10px 7px}
 .sswlive.ssw-atlas .sswchip{font:inherit;font-size:11.5px;padding:3px 8px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
 .sswlive.ssw-atlas .sswframe{position:relative}
-.sswlive.ssw-atlas .sswloc{position:absolute;right:6px;top:22px;width:72px;height:auto;opacity:.9;pointer-events:none}
+.sswlive.ssw-atlas .sswloc{position:absolute;right:6px;top:22px;width:60px;height:auto;opacity:.92;cursor:pointer;border-radius:6px}
+.sswlive.ssw-atlas .sswloc:hover,.sswlive.ssw-atlas .sswloc:focus{opacity:1;outline:2px solid var(--accent);outline-offset:2px}
+.sswlive.ssw-atlas .sswmapov{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:16px}
+.sswlive.ssw-atlas .sswmapcard{background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:12px 14px;max-width:min(92vw,520px);max-height:92vh;box-shadow:0 12px 40px rgba(0,0,0,.4);display:flex;flex-direction:column}
+.sswlive.ssw-atlas .sswmapcard svg{display:block;width:100%;height:auto;max-height:70vh;flex:1 1 auto}
+.sswlive.ssw-atlas .sswmaphd{display:flex;align-items:center;gap:8px;font-size:14px;margin-bottom:6px}.sswlive.ssw-atlas .sswmaphd .sswb{margin-left:auto}
+.sswlive.ssw-atlas .sswmapln{cursor:pointer}.sswlive.ssw-atlas .sswmapln:hover line{stroke:var(--accent);stroke-opacity:.9}
 .sswlive.ssw-atlas .sswloc svg{display:block;width:100%;height:auto;background:transparent}
 .sswlive.ssw-atlas .sswsvg .sswmk{pointer-events:none}
 .sswlive.ssw-atlas .sswtools+.sswtools{margin-top:6px}
@@ -3435,9 +3454,15 @@ const ATLAS_CSS=`.sswlive.ssw-atlas .sswplanes{display:flex;flex-wrap:wrap;gap:6
 .sswlive.ssw-atlas .sswor:empty{display:none!important}
 .sswlive.ssw-atlas.phone .sswor{display:flex;justify-content:space-between;gap:8px}
 .sswlive.ssw-atlas.phone .sswor span{flex:1;text-align:center}.sswlive.ssw-atlas.phone .sswor span:first-child{text-align:left}.sswlive.ssw-atlas.phone .sswor span:last-child{text-align:right}
-.sswlive.ssw-atlas.phone .sswov,.sswlive.ssw-atlas.phone .sswmarks{display:none}
+.sswlive.ssw-atlas.phone .sswov,.sswlive.ssw-atlas.phone .sswmarks,.sswlive.ssw-atlas.zoomed .sswov{display:none}
+.sswlive.ssw-atlas .sswin{display:none}.sswlive.ssw-atlas.phone .sswin,.sswlive.ssw-atlas.zoomed .sswin{display:block}.sswlive.ssw-atlas.nolab .sswin,.sswlive.ssw-atlas.phone.dense:not(.zoomed) .sswin{display:none}
+.sswlive.ssw-atlas .sswlabhint{display:none;font-size:12px;opacity:.7;margin-top:4px}.sswlive.ssw-atlas.phone.dense:not(.zoomed):not(.nolab) .sswlabhint{display:block}
+.sswlive.ssw-atlas .ti{fill:var(--ink);font-size:calc(9.5px * var(--iz,1));font-weight:600;paint-order:stroke;stroke:var(--paper);stroke-width:calc(3px * var(--iz,1));stroke-linejoin:round;pointer-events:none}
+.sswlive.ssw-atlas.sswbanner .sswmarks{display:none}
+.sswlive.ssw-atlas .sswor.sswor-on{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--ink);background:var(--paper2,rgba(127,127,127,.12));border-radius:6px;padding:4px 8px;margin:4px 0}
+.sswlive.ssw-atlas .sswor.sswor-on span{flex:1;text-align:center}.sswlive.ssw-atlas .sswor.sswor-on span:first-child{text-align:left}.sswlive.ssw-atlas .sswor.sswor-on span:last-child{text-align:right}
 .sswlive.ssw-atlas.phone .sswsvg{max-height:62vh}
-.sswlive.ssw-atlas.phone .sswloc{width:50px;top:4px;right:4px}
+.sswlive.ssw-atlas.phone .sswloc{width:44px;top:4px;right:4px}
 .sswlive.ssw-atlas .sswlv{margin-top:8px}
 .sswlive.ssw-atlas.nolab .sswlv,.sswlive.ssw-atlas.quizon .sswlv{display:none}
 .sswlive.ssw-atlas .sswsel{display:block;width:100%;max-width:440px;box-sizing:border-box;font:inherit;font-size:16px;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
@@ -3458,11 +3483,11 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
     else{host.innerHTML=`<div class="sswread"><b>${nm}</b> opens as its own full-width view. <button type="button" class="sswb" data-a="open">Open the atlas ›</button></div>`;
       host.querySelector('[data-a="open"]').addEventListener('click',()=>{try{(o.onOpen||window.openAtlas)(w,o.packId,st);}catch(_){}});}
     return false;}
-  const phone=full&&host.clientWidth>0&&host.clientWidth<560;host.classList.toggle('full',full);host.classList.toggle('phone',phone); /* v0.10.4: phone layout — crop to the drawing, names as chips below, orientation as text, tools behind More */
+  const phone=(full||card)&&host.clientWidth>0&&host.clientWidth<560;host.classList.toggle('full',full);host.classList.toggle('phone',phone); /* v0.10.4: phone layout — crop to the drawing, names in a dropdown, orientation as text, tools behind More; v0.10.6: cards too */
   const P=w.planes||[],S=w.structures||{},PW=w.pathways||{},SYS=w.systems||{};
   let pi=Math.max(0,P.findIndex(p=>p.id===st.plane));if(pi<0)pi=0;
   let li=Math.max(0,(P[pi].levels||[]).findIndex(l=>l.id===st.level));if(li<0)li=0;
-  let labels=st.labels!==false,terr=!!st.terr,ref=st.ref===true?2:Math.max(0,Math.min(2,st.ref|0)),outl=st.outlines!=null?!!st.outlines:!card,conv=st.conv==='ana'?'ana':'rad';
+  let labels=st.labels!=null?!!st.labels:!(full&&phone),terr=!!st.terr, /* v0.10.6: a phone-sized full view starts with Labels off (in-place names on demand) */ref=st.ref===true?2:Math.max(0,Math.min(2,st.ref|0)),outl=st.outlines!=null?!!st.outlines:!card,conv=st.conv==='ana'?'ana':'rad';
   const paths=new Set(Array.isArray(st.paths)?st.paths:[]);let quiz=null,lastQ=null,cycle=null;
   const lvl=()=>P[pi].levels[li];
   const flipFor=l=>l.conv==='rad'&&conv==='ana';
@@ -3472,6 +3497,7 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
     const ax=A==='end'?X+3:A==='start'?X-3:X,ay=A==='middle'?(x.t&&x.t[1]<x.y?x.y-11:x.y+3):x.y-4;
     const t=x.t?`<line x1="${flip?W-x.t[0]:x.t[0]}" y1="${x.t[1]}" x2="${ax}" y2="${ay}" class="ln"/><circle cx="${flip?W-x.t[0]:x.t[0]}" cy="${x.t[1]}" r="1.6" style="fill:var(--soft)"/>`:'';
     return `${t}<text x="${X}" y="${x.y}" class="tb" text-anchor="${A}">${sswEsc(x.n)}</text>${x.g?`<text x="${X}" y="${x.y+12}" class="ts" text-anchor="${A}">${sswEsc(x.g)}</text>`:''}`;}).join('');
+  const inSvg=(l,flip)=>(l.labels||[]).filter(x=>x.t).map(x=>{const tx=flip?W-x.t[0]:x.t[0],ty=x.t[1];return `<text x="${tx}" y="${ty-3}" class="ti" text-anchor="middle">${sswEsc(x.n)}</text>`;}).join(''); /* v0.10.6 */
   const marksSvg=(l,flip)=>{const m=l.marks||{};let s='';if(l.conv==='rad'){const r=flip?W-14:14,q=flip?14:W-14;s+=`<text x="${r}" y="13" class="tk" text-anchor="middle">R</text><text x="${q}" y="13" class="tk" text-anchor="middle">L</text>`;}
     if(m.t)s+=`<text x="${W/2}" y="11" class="ts" text-anchor="middle">${sswEsc(m.t)}</text>`;if(m.b)s+=`<text x="${W/2}" y="${H-4}" class="ts" text-anchor="middle">${sswEsc(m.b)}</text>`;
     if(m.l)s+=`<text x="12" y="${H-6}" class="ts" text-anchor="start">${sswEsc(flip?m.r||m.l:m.l)} →</text>`;
@@ -3485,12 +3511,32 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
     const base=mode===2?'':`<g${g}${mode===1?' style="opacity:.55"':''}>${sswClean(l.svg||'')}</g>`;
     return '<g class="sswart">'+photo+base+'</g>'+`<g${g}><g class="sswterr"${terr?'':' style="display:none"'}>${sswClean(l.terr||'')}</g>`+
       Object.keys(PW).map(k=>`<g class="sswpath" data-p="${sswEsc(k)}"${paths.has(k)?'':' style="display:none"'}>${sswClean((l.paths||{})[k]||'')}</g>`).join('')+
-      (l.regions||[]).map(sswShape).join('')+'</g>'+`<g class="sswov">${labelSvg(l,flip)}</g>`+'<g class="sswmarks">'+marksSvg(l,flip)+'</g><g class="sswmk"></g>';};
-  const locSvg=()=>{const l=lvl();if(!l.loc||!w.locator)return '';const sp=Array.isArray(l.loc)?{plane:w.locator.plane,level:w.locator.level,line:l.loc}:l.loc;
-    const L=P.find(p=>p.id===sp.plane),ll=L&&(L.levels||[]).find(x=>x.id===sp.level);if(!ll)return '';
-    const mk=sp.line?`<line x1="${+sp.line[0]}" y1="${+sp.line[1]}" x2="${+sp.line[2]}" y2="${+sp.line[3]}" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/>`:sp.dot?`<circle cx="${+sp.dot[0]}" cy="${+sp.dot[1]}" r="${+(sp.dot[2]||12)}" style="fill:var(--accent);fill-opacity:.55;stroke:var(--accent);stroke-width:3"/>`:'';
-    return `<div class="sswloc"><svg viewBox="0 0 ${W} ${H}" aria-hidden="true">${sswClean(ll.svg||'')}${mk}</svg></div>`;}; /* v0.10.1: beacon — any thumbnail, line or dot */
-  const orHtml=l=>{const m=l.marks||{},flip=flipFor(l);if(!phone)return ['',''];const sd=l.conv==='rad'?(flip?['L','R']:['R','L']):['',''];
+      (l.regions||[]).map(sswShape).join('')+'</g>'+`<g class="sswov">${labelSvg(l,flip)}</g><g class="sswin">${inSvg(l,flip)}</g>`+'<g class="sswmarks">'+marksSvg(l,flip)+'</g><g class="sswmk"></g>';};
+  /* the locator (v0.10.6): a level's loc = {map, line|dot, pov} on one of w.maps (dedicated drawings), or the older
+     {plane, level, line|dot} / [x1,y1,x2,y2] on a slice drawing. pov = the side the viewer stands on (n/s/e/w in map
+     coordinates); a shaded field-of-view wedge sits there and swaps sides with the convention switch. */
+  const MAPS=w.maps||{},POVF={n:'s',s:'n',e:'w',w:'e'};
+  const locOf=l=>{if(!l.loc)return null;const sp=Array.isArray(l.loc)?{plane:(w.locator||{}).plane,level:(w.locator||{}).level,line:l.loc}:l.loc;
+    if(sp.map&&MAPS[sp.map]){const m=MAPS[sp.map];return {key:'map:'+sp.map,vb:m.vb,svg:m.svg,name:m.name||'',line:sp.line,dot:sp.dot,pov:sp.pov};}
+    const L=P.find(p=>p.id===sp.plane),ll=L&&(L.levels||[]).find(x=>x.id===sp.level);if(!ll)return null;return {key:'lvl:'+sp.plane+':'+sp.level,vb:[W,H],svg:ll.svg,name:ll.label||'',line:sp.line,dot:sp.dot,pov:sp.pov};};
+  const wedge=(lc,l,big)=>{if(!lc.pov)return '';let d=lc.pov;if(flipFor(l))d=POVF[d]||d;const c=lc.line?[(+lc.line[0]+ +lc.line[2])/2,(+lc.line[1]+ +lc.line[3])/2]:lc.dot?[+lc.dot[0],+lc.dot[1]]:null;if(!c)return '';
+    /* the eye sits a distance r from the slice on the viewer's side; the cone opens from the eye toward the slice and fades out as it reaches it */
+    const r=Math.max(lc.vb[0],lc.vb[1])*(big?0.2:0.24),u={n:[0,-1],s:[0,1],e:[1,0],w:[-1,0]}[d],A=[c[0]+u[0]*r,c[1]+u[1]*r],back=Math.atan2(-u[1],-u[0])*180/Math.PI,sp=34;
+    const ang=t=>[A[0]+r*1.08*Math.cos(t*Math.PI/180),A[1]+r*1.08*Math.sin(t*Math.PI/180)],p1=ang(back-sp),p2=ang(back+sp),id='pov'+Math.random().toString(36).slice(2,7);
+    return `<defs><radialGradient id="${id}" cx="${A[0]}" cy="${A[1]}" r="${r*1.08}" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="var(--accent)" stop-opacity=".6"/><stop offset=".55" stop-color="var(--accent)" stop-opacity=".28"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></radialGradient></defs><path d="M${A[0].toFixed(1)},${A[1].toFixed(1)} L${p1[0].toFixed(1)},${p1[1].toFixed(1)} A${(r*1.08).toFixed(1)},${(r*1.08).toFixed(1)} 0 0 1 ${p2[0].toFixed(1)},${p2[1].toFixed(1)} Z" fill="url(#${id})"/><circle cx="${A[0].toFixed(1)}" cy="${A[1].toFixed(1)}" r="${big?4:6}" style="fill:var(--accent);fill-opacity:.9"/>`;};
+  const beacon=(lc,cur,big)=>{const sw=big?3.5:6,op=cur?1:.5,col=cur?'var(--accent)':'var(--ink-soft,var(--ink,#8a8f99))'; /* --soft is only set on .sswlive's own text classes; the overlay needs a global var */
+    return lc.line?`<line x1="${+lc.line[0]}" y1="${+lc.line[1]}" x2="${+lc.line[2]}" y2="${+lc.line[3]}" stroke="${col}" stroke-opacity="${op}" stroke-width="${sw}" stroke-linecap="round"/>`:lc.dot?`<circle cx="${+lc.dot[0]}" cy="${+lc.dot[1]}" r="${+(lc.dot[2]||12)}" style="fill:${col};fill-opacity:${cur?.55:.25};stroke:${col};stroke-width:${big?2:3}"/>`:'';};
+  const locSvg=()=>{const l=lvl(),lc=locOf(l);if(!lc)return '';
+    return `<div class="sswloc" role="button" tabindex="0" title="Tap for the large map" aria-label="Where this level sits — tap for the large map"><svg viewBox="0 0 ${+lc.vb[0]} ${+lc.vb[1]}" aria-hidden="true">${sswClean(lc.svg||'')}${wedge(lc,l,false)}${beacon(lc,true,false)}</svg></div>`;};
+  /* the large map: every level of the current plane that sits on the same map, each line tappable; the current one carries the wedge */
+  const bigMap=()=>{const l=lvl(),lc=locOf(l);if(!lc)return;let ov=host.querySelector('.sswmapov');if(!ov){ov=document.createElement('div');ov.className='sswmapov';host.appendChild(ov);}
+    const sibs=P[pi].levels.map((x,k)=>({x,k,lc:locOf(x)})).filter(s=>s.lc&&s.lc.key===lc.key);
+    const lines=sibs.filter(s=>s.k!==li).map(s=>`<g class="sswmapln" data-k="${s.k}">${beacon(s.lc,false,true)}${s.lc.line?`<line x1="${+s.lc.line[0]}" y1="${+s.lc.line[1]}" x2="${+s.lc.line[2]}" y2="${+s.lc.line[3]}" stroke="transparent" stroke-width="16"/>`:''}</g>`).join('');
+    ov.innerHTML=`<div class="sswmapcard" role="dialog" aria-label="Map"><div class="sswmaphd"><b>${sswEsc(P[pi].name)}</b> · ${sswEsc(l.label||'')}<span class="sswpos"> · ${sswEsc(lc.name)}</span><button type="button" class="sswb" data-a="mapclose" aria-label="Close">✕</button></div>
+      <svg viewBox="0 0 ${+lc.vb[0]} ${+lc.vb[1]}" aria-hidden="true">${sswClean(lc.svg||'')}${wedge(lc,l,true)}${lines}<g class="sswmapcur">${beacon(lc,true,true)}</g></svg><div class="sswhint">Tap a line to go to that level. The shaded wedge is where you are looking from.</div></div>`;
+    ov.querySelector('[data-a="mapclose"]').addEventListener('click',()=>ov.remove());ov.addEventListener('click',e=>{if(e.target===ov)ov.remove();});
+    ov.querySelectorAll('.sswmapln').forEach(g=>g.addEventListener('click',()=>{if(quiz)return;go(pi,+g.dataset.k);bigMap();}));};
+  const orHtml=l=>{const m=l.marks||{},flip=flipFor(l);if(!phone&&l.conv==='rad')return ['',''];const sd=l.conv==='rad'?(flip?['L','R']:['R','L']):['',''];
     const top=[sd[0],m.t||'',sd[1]],bot=[m.l?sswEsc(flip?m.r||m.l:m.l)+' →':'',m.b||'',m.r?'← '+sswEsc(flip?m.l||m.r:m.r):''];
     const row=a=>a.some(x=>x)?a.map(x=>`<span>${x===sd[0]||x===sd[1]?x:sswEsc(x)}</span>`).join(''):'';return [row(top),row(bot)];};
   const selHtml=l=>{if(card)return '';const seen=new Set(),ids=(l.regions||[]).map(r=>r.id).filter(id=>S[id]&&!seen.has(id)&&seen.add(id));if(!ids.length)return '';
@@ -3501,7 +3547,7 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
   /* ---------- build ---------- */
   let h='';
   if(!card)h+=`<div class="sswplanes" role="group">${P.map((p,k)=>`<button type="button" class="sswb" data-pl="${k}" aria-pressed="${k===pi}">${sswEsc(p.name)}</button>`).join('')}</div>`;
-  if(!card)h+='<div class="sswor sswor-t"></div>';h+=`<div class="sswframe">${sswSvg(w,'')}${card?'':'<div class="sswlocbox"></div>'}</div>`;if(!card)h+='<div class="sswor sswor-b"></div>';
+  if(!card)h+='<div class="sswor sswor-t"></div>';h+=`<div class="sswframe">${sswSvg(w,'')}${card?'':'<div class="sswlocbox"></div>'}</div>`;if(!card)h+='<div class="sswor sswor-b"></div><div class="sswlabhint">Pinch in (or Zoom +) to see the names on the drawing — this slice has too many to show at once.</div>';
   if(!card){h+=`<div class="sswbar"><button type="button" class="sswb" data-a="prev" aria-label="Previous">‹</button><input type="range" class="sswrange" min="0" max="0" step="1" value="0" aria-label="Level"><button type="button" class="sswb" data-a="next" aria-label="Next">›</button></div>`;}
   h+='<div class="sswread"></div><div class="sswcredit"></div>'+(card?'':'<div class="sswlv"></div>');
   if(!card){h+=`<div class="sswtools"><button type="button" class="sswb" data-a="labels" aria-pressed="${labels}">Labels</button><button type="button" class="sswb" data-a="terr" aria-pressed="${terr}">Territories</button><button type="button" class="sswb" data-a="ref" aria-pressed="${ref>0}">${["Reference","Reference · overlay","Reference · photo"][ref]}</button><button type="button" class="sswb sswmore" data-a="outl" aria-pressed="${outl}">Outlines</button><button type="button" class="sswb sswmore" data-a="conv" aria-pressed="${conv==='ana'}">Anatomical view</button><button type="button" class="sswb" data-a="quiz" aria-pressed="false">Quiz me</button><button type="button" class="sswb" data-a="zin" aria-label="Zoom in">Zoom +</button><button type="button" class="sswb" data-a="zout" aria-label="Zoom out">Zoom −</button><button type="button" class="sswb" data-a="more" aria-pressed="false">More ▾</button></div>`;
@@ -3520,13 +3566,19 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
   const levelLine=()=>{const l=lvl();return hideName?'':`<b>${sswEsc(l.label||'')}</b>${l.note?' — '+sswEsc(l.note):''}${card?'':` <span class="sswpos">${zoneName()?sswEsc(zoneName())+' · ':''}${li+1} / ${P[pi].levels.length}</span>`}`;};
   /* zoom: viewBox window (z = 1..4) centred on (px,py) inside the base box B (the whole frame, or on phones the drawing's own box) */
   let B=[0,0,W,H],z=1,px=W/2,py=H/2,x0=null,y0=null,moved=false;
-  const vbox=()=>{const bw=B[2]/z,bh=B[3]/z;px=Math.max(B[0]+bw/2,Math.min(B[0]+B[2]-bw/2,px));py=Math.max(B[1]+bh/2,Math.min(B[1]+B[3]-bh/2,py));sv.setAttribute('viewBox',`${px-bw/2} ${py-bh/2} ${bw} ${bh}`);};
+  const vbox=()=>{const bw=B[2]/z,bh=B[3]/z;px=Math.max(B[0]+bw/2,Math.min(B[0]+B[2]-bw/2,px));py=Math.max(B[1]+bh/2,Math.min(B[1]+B[3]-bh/2,py));sv.setAttribute('viewBox',`${px-bw/2} ${py-bh/2} ${bw} ${bh}`);
+    host.classList.toggle('zoomed',z>=2);sv.style.setProperty('--iz',String(1/z));};
+  const svgPt=(cx,cy)=>{try{const p=sv.createSVGPoint();p.x=cx;p.y=cy;return p.matrixTransform(sv.getScreenCTM().inverse());}catch(_){return {x:px,y:py};}};
+  const zoomAt=(f,cx,cy)=>{const q=svgPt(cx,cy);const z0=z;z=Math.max(1,Math.min(4,z*f));f=z/z0;px=q.x-(q.x-px)/f;py=q.y-(q.y-py)/f;if(z===1){px=B[0]+B[2]/2;py=B[1]+B[3]/2;}vbox();}; /* v0.10.6 */
   const zoom=f=>{z=Math.max(1,Math.min(4,z*f));if(z===1){px=B[0]+B[2]/2;py=B[1]+B[3]/2;}vbox();};
   const crop=()=>{let b=null;try{const g=sv.querySelector('.sswart');b=g&&g.getBBox();}catch(_){}
     let nb=[0,0,W,H];if(phone&&b&&b.width>20&&b.height>20){const m=Math.max(8,Math.round(Math.max(b.width,b.height)*0.05));const x=Math.max(0,b.x-m),y=Math.max(0,b.y-m);nb=[x,y,Math.min(W,b.x+b.width+m)-x,Math.min(H,b.y+b.height+m)-y];}
     if(nb.join()!==B.join()){B=nb;z=1;px=B[0]+B[2]/2;py=B[1]+B[3]/2;}vbox();}; /* the zoom survives a level change unless the box moved */
-  const draw=()=>{const l=lvl();sv.innerHTML=art(l);const lb=host.querySelector('.sswlocbox');if(lb)lb.innerHTML=locSvg();crop();
-    if(!card){const o2=orHtml(l);host.querySelector('.sswor-t').innerHTML=o2[0];host.querySelector('.sswor-b').innerHTML=o2[1];const lv=host.querySelector('.sswlv');if(lv){lv.innerHTML=selHtml(l);const se=lv.querySelector('.sswsel');if(se)se.addEventListener('change',()=>{const id=se.value;if(quiz||!id)return;clear();sel(id);read().innerHTML=tell(id,true);wireCycle(id);});}
+  const fitLabels=()=>{try{sv.querySelectorAll('.sswov text').forEach(t=>{const b=t.getBBox();if(!b.width)return;const over=Math.max(0,-b.x,b.x+b.width-W);if(over<0.5)return;
+    const k=(b.width-over)/b.width;if(k>=0.82){t.setAttribute('textLength',(b.width-over).toFixed(1));t.setAttribute('lengthAdjust','spacingAndGlyphs');}
+    else{const fs=parseFloat(getComputedStyle(t).fontSize)||11.5;t.style.fontSize=(fs*Math.max(k,0.82)).toFixed(2)+'px';const b2=t.getBBox();const over2=Math.max(0,-b2.x,b2.x+b2.width-W);if(over2>0.5){t.setAttribute('textLength',(b2.width-over2).toFixed(1));t.setAttribute('lengthAdjust','spacingAndGlyphs');}}});}catch(_){}}; /* v0.10.6 */
+  const draw=()=>{const l=lvl();sv.innerHTML=art(l);const lb=host.querySelector('.sswlocbox');if(lb)lb.innerHTML=locSvg();crop();fitLabels();host.classList.toggle('dense',(l.labels||[]).filter(x=>x.t).length>10); /* v0.10.6: on a phone a dense slice shows in-place names only when zoomed */
+    if(!card){const o2=orHtml(l);host.querySelectorAll('.sswor').forEach((e,i)=>{e.innerHTML=o2[i];e.classList.toggle('sswor-on',l.conv!=='rad');});host.classList.toggle('sswbanner',l.conv!=='rad'); /* v0.10.6: the orientation banner is always on for views without a radiological convention */const lv=host.querySelector('.sswlv');if(lv){lv.innerHTML=selHtml(l);const se=lv.querySelector('.sswsel');if(se)se.addEventListener('change',()=>{const id=se.value;if(quiz||!id)return;clear();sel(id);read().innerHTML=tell(id,true);wireCycle(id);});}
       /* v0.10.5: tools the slice cannot honour are greyed — no reference image, no territories, no drawing for a pathway */
       const dis=(q,on)=>{host.querySelectorAll(q).forEach(b=>{b.disabled=!!on;});};dis('[data-a="ref"]',!(l.ref&&l.ref.img));dis('[data-a="terr"]',!l.terr);
       Object.keys(PW).forEach(k=>dis(`.sswb[data-pw="${CSS.escape(k)}"]`,!((l.paths||{})[k])));}
@@ -3545,17 +3597,24 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
     if(o.pick&&o.pick!=='__miss')sel(o.pick);if(o.reveal||!o.onPick)return;
     sv.addEventListener('click',e=>{const el=e.target.closest&&e.target.closest('.sswrg');clear();if(el){sel(el.dataset.id);o.onPick(el.dataset.id);}else{missAt(e);o.onPick('__miss');}});return;}
   /* ---------- guide mode ---------- */
+  host.querySelector('.sswlocbox').addEventListener('click',e=>{if(e.target.closest('.sswloc'))bigMap();});host.querySelector('.sswlocbox').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.closest('.sswloc')){e.preventDefault();bigMap();}});
   host.querySelectorAll('.sswb[data-pl]').forEach(b=>b.addEventListener('click',()=>{quizOff();go(+b.dataset.pl,0);}));
   const r=host.querySelector('.sswrange');r.addEventListener('input',()=>{if(!quiz)go(pi,+r.value);});
   host.querySelector('[data-a="prev"]').addEventListener('click',()=>{if(!quiz)go(pi,li-1);});host.querySelector('[data-a="next"]').addEventListener('click',()=>{if(!quiz)go(pi,li+1);});
   /* drag pans when zoomed, swipes levels when not; double-tap resets */
-  sv.addEventListener('pointerdown',e=>{x0=e.clientX;y0=e.clientY;moved=false;});sv.addEventListener('pointercancel',()=>{x0=null;});
-  sv.addEventListener('pointermove',e=>{if(x0===null||z===1||e.buttons===0)return;const r=sv.getBoundingClientRect(),k=(B[2]/z)/r.width;px-=(e.clientX-x0)*k;py-=(e.clientY-y0)*k;x0=e.clientX;y0=e.clientY;moved=true;vbox();});
-  sv.addEventListener('pointerup',e=>{if(x0===null)return;const dx=e.clientX-x0;x0=null;if(z===1&&Math.abs(dx)>40&&!quiz)go(pi,li+(dx<0?1:-1));});
+  const pts=new Map();let d0=0,pinched=false; /* v0.10.6: two-finger pinch zooms about the fingers' midpoint; touch-action pan-y leaves the pinch to us */
+  const dist=()=>{const a=[...pts.values()];return a.length<2?0:Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);};
+  sv.addEventListener('pointerdown',e=>{pts.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pts.size===2){d0=dist();pinched=true;x0=null;return;}x0=e.clientX;y0=e.clientY;moved=false;});
+  const drop=e=>{pts.delete(e.pointerId);if(pts.size<2)d0=0;if(!pts.size)setTimeout(()=>{pinched=false;},50);};sv.addEventListener('pointercancel',e=>{x0=null;drop(e);});
+  sv.addEventListener('pointermove',e=>{if(pts.has(e.pointerId))pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(pts.size===2){const d=dist();if(d0>8&&d>8){const a=[...pts.values()];zoomAt(d/d0,(a[0].x+a[1].x)/2,(a[0].y+a[1].y)/2);d0=d;}return;}
+    if(x0===null||z===1||e.buttons===0)return;const r=sv.getBoundingClientRect(),k=(B[2]/z)/r.width;px-=(e.clientX-x0)*k;py-=(e.clientY-y0)*k;x0=e.clientX;y0=e.clientY;moved=true;vbox();});
+  sv.addEventListener('pointerup',e=>{const was=x0;drop(e);if(was===null||pinched)return;const dx=e.clientX-was;x0=null;if(z===1&&Math.abs(dx)>40&&!quiz)go(pi,li+(dx<0?1:-1));});
+  sv.addEventListener('wheel',e=>{if(!(e.ctrlKey||e.metaKey))return;e.preventDefault();zoomAt(Math.exp(-e.deltaY*0.01),e.clientX,e.clientY);},{passive:false}); /* ⌘/ctrl-wheel and trackpad pinch */
   sv.addEventListener('dblclick',()=>{z=1;zoom(1);});
   host.querySelector('[data-a="zin"]').addEventListener('click',()=>zoom(1.5));host.querySelector('[data-a="zout"]').addEventListener('click',()=>zoom(1/1.5));
   host.querySelector('[data-a="more"]').addEventListener('click',()=>{const on=host.classList.toggle('showmore');host.querySelector('[data-a="more"]').setAttribute('aria-pressed',String(on));host.querySelector('[data-a="more"]').textContent=on?'Less ▴':'More ▾';});
-  if(phone){const hn=host.querySelector('.sswhint');if(hn)hn.textContent='Swipe the picture or drag the slider to move through the levels; tap a structure, or pick one from the list — or search, or Quiz me.';}
+  if(phone){const hn=host.querySelector('.sswhint');if(hn)hn.textContent='Swipe the picture or drag the slider to move through the levels; pinch to zoom; tap a structure, or pick one from the list — or search, or Quiz me.';}
   if(full&&window.ResizeObserver){const ro=new ResizeObserver(()=>{if(!host.isConnected){ro.disconnect();return;}const now=host.clientWidth>0&&host.clientWidth<560;if(now!==phone){ro.disconnect();mountAtlas(host,w,Object.assign({},o,{state:{plane:P[pi].id,level:lvl().id,labels,terr,ref,outlines:outl,conv,paths:[...paths]}}));}});ro.observe(host);}
   const tog=(a,fn)=>{const b=host.querySelector(`[data-a="${a}"]`);b.addEventListener('click',()=>{const on=fn();b.setAttribute('aria-pressed',String(on));});};
   tog('labels',()=>{labels=!labels;host.classList.toggle('nolab',!labels);return labels;});
