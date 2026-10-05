@@ -1,7 +1,13 @@
 <!--
-  Study Suite  ·  v0.10.10 (beta)
+  Study Suite  ·  v0.10.11 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.10.11 (2026-10-05, atlas 2.5D viewer): a 3D button in the atlas view opens the three section planes' current slices
+  as intersecting glass cards in CSS 3D (view3d). Each card is drawn through a window computed from the level's `reg` (pack v1.10:
+  one uniform scale per plane plus offsets, fitted on the structures shared with the midline sagittal; the plane sits where those
+  structures sit in the reference drawing), so a structure meets itself across planes. Drag rotates; a slider per plane moves it
+  (the cord levels are left out — nothing to intersect); tapping a structure lights it on every card and names it in a readout;
+  a card's label opens that slice. Opaque backdrop on document.body (a translucent one is sorted behind the 3D context).
   Changelog v0.10.10 (2026-10-05, atlas read-more): a structure's registry entry may carry ref {f: guide file, s: section}
   (pack v1.9); the readout adds "Read: Week 43 · 20 — The basal nuclei ›" which opens that guide section (openGuide with
   {section}), across packs; when that week's pack is not in the library the line shows as plain text.
@@ -1895,7 +1901,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.10.10';
+const APP_VERSION='0.10.11';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3506,6 +3512,18 @@ const ATLAS_CSS=`.sswlive.ssw-atlas .sswplanes{display:flex;flex-wrap:wrap;gap:6
 .sswlive.ssw-atlas .sswld{fill:var(--soft)}
 .sswlive.ssw-atlas .sswlon .tb,.sswlive.ssw-atlas .sswlon .ts,.sswlive.ssw-atlas .ti.sswlon{fill:var(--accent);font-weight:700}
 .sswlive.ssw-atlas .sswlon .ln{stroke:var(--accent);stroke-width:2.2}.sswlive.ssw-atlas .sswlon .sswld{fill:var(--accent)}
+.sswlive.ssw-atlas.ssw3dov{position:fixed;inset:0;z-index:10001;margin:0;padding:0;border:0;border-radius:0;background:#0e1118;isolation:isolate;display:flex;flex-direction:column;align-items:center;justify-content:center;touch-action:none;user-select:none} /* opaque: a translucent backdrop is sorted behind the 3D context by the compositor */
+.sswlive.ssw-atlas .ssw3dhd{position:relative;z-index:3;display:flex;gap:8px;align-items:center;color:#fff;font-size:14px;margin:0 0 4px;padding:6px 12px;background:rgba(14,17,24,.92);border-radius:8px}.sswlive.ssw-atlas .ssw3dhd .sswb{margin-left:4px;color:#fff;border-color:#9aa3b2;background:transparent}
+.sswlive.ssw-atlas .ssw3dfit{width:560px;height:520px;perspective:1500px;perspective-origin:50% 45%;transform-origin:center;cursor:grab;margin:18px 0}
+.sswlive.ssw-atlas .ssw3dscene{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d}
+.sswlive.ssw-atlas .ssw3dcard{position:absolute;left:-144px;top:-178px;width:288px;height:356px;background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.75);border-radius:6px;backface-visibility:visible;box-shadow:0 8px 30px rgba(0,0,0,.35);cursor:pointer}
+.sswlive.ssw-atlas .ssw3dcard svg{--paper:rgba(255,255,255,.0)}
+.sswlive.ssw-atlas .ssw3dcard svg{display:block;width:100%;height:100%}.sswlive.ssw-atlas .ssw3dcard .ssw3dtag{position:absolute;left:6px;top:5px;font:inherit;font-size:11px;font-weight:600;color:#1d1b16;background:rgba(255,255,255,.85);border:0;padding:1px 6px;border-radius:3px;max-width:70%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+.sswlive.ssw-atlas .ssw3dcard .sswrg{cursor:pointer}.sswlive.ssw-atlas .ssw3dcard .sswrg.sel{fill:var(--accent);fill-opacity:.55;stroke:var(--accent);stroke-width:2.4;vector-effect:non-scaling-stroke}
+.sswlive.ssw-atlas .ssw3dread{color:#eee;font-size:14px;margin-top:6px;min-height:1.4em;max-width:640px;text-align:center}.sswlive.ssw-atlas .ssw3dread b{color:#fff}.sswlive.ssw-atlas .ssw3dread .on{color:#aab;font-size:12.5px}
+.sswlive.ssw-atlas .ssw3dft{position:relative;z-index:3;background:rgba(14,17,24,.92);border-radius:8px;padding:8px 14px;max-width:min(94vw,720px)}
+.sswlive.ssw-atlas .ssw3dhint{color:#bbb;font-size:12px;margin-top:6px;text-align:center}
+.sswlive.ssw-atlas .ssw3dsl{display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;color:#ddd;font-size:12.5px}.sswlive.ssw-atlas .ssw3dsl label{display:flex;align-items:center;gap:6px}.sswlive.ssw-atlas .ssw3dsl input{width:120px}
 .sswlive.ssw-atlas .sswb[data-a="more"]{display:none}
 .sswlive.ssw-atlas.phone .sswb[data-a="more"]{display:inline-flex}
 .sswlive.ssw-atlas.phone .sswmore{display:none!important}
@@ -3590,7 +3608,7 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
   if(!card)h+='<div class="sswor sswor-t"></div>';h+=`<div class="sswframe">${sswSvg(w,'')}${card?'':'<div class="sswlocbox"></div>'}</div>`;if(!card)h+='<div class="sswor sswor-b"></div><div class="sswlabhint">Pinch in (or Zoom +) to see the names on the drawing — this slice has too many to show at once.</div>';
   if(!card){h+=`<div class="sswbar"><button type="button" class="sswb" data-a="prev" aria-label="Previous">‹</button><input type="range" class="sswrange" min="0" max="0" step="1" value="0" aria-label="Level"><button type="button" class="sswb" data-a="next" aria-label="Next">›</button></div>`;}
   h+='<div class="sswread"></div><div class="sswcredit"></div><div class="sswtk"></div>'+(card?'':'<div class="sswlv"></div>'); /* v0.10.7: .sswtk = the territory legend */
-  if(!card){h+=`<div class="sswtools"><button type="button" class="sswb" data-a="labels" aria-pressed="${labels}">Labels</button><button type="button" class="sswb" data-a="terr" aria-pressed="${terr}">Territories</button><button type="button" class="sswb" data-a="ref" aria-pressed="${ref>0}">${["Reference","Reference · overlay","Reference · photo"][ref]}</button><button type="button" class="sswb sswmore" data-a="outl" aria-pressed="${outl}">Outlines</button><button type="button" class="sswb sswmore" data-a="conv" aria-pressed="${conv==='ana'}">Anatomical view</button><button type="button" class="sswb" data-a="quiz" aria-pressed="false">Quiz me</button><button type="button" class="sswb" data-a="zin" aria-label="Zoom in">Zoom +</button><button type="button" class="sswb" data-a="zout" aria-label="Zoom out">Zoom −</button><button type="button" class="sswb" data-a="more" aria-pressed="false">More ▾</button></div>`;
+  if(!card){h+=`<div class="sswtools"><button type="button" class="sswb" data-a="labels" aria-pressed="${labels}">Labels</button><button type="button" class="sswb" data-a="terr" aria-pressed="${terr}">Territories</button><button type="button" class="sswb" data-a="ref" aria-pressed="${ref>0}">${["Reference","Reference · overlay","Reference · photo"][ref]}</button><button type="button" class="sswb sswmore" data-a="outl" aria-pressed="${outl}">Outlines</button><button type="button" class="sswb sswmore" data-a="conv" aria-pressed="${conv==='ana'}">Anatomical view</button><button type="button" class="sswb" data-a="v3d" title="The three planes' current slices in 3D">3D</button><button type="button" class="sswb" data-a="quiz" aria-pressed="false">Quiz me</button><button type="button" class="sswb" data-a="zin" aria-label="Zoom in">Zoom +</button><button type="button" class="sswb" data-a="zout" aria-label="Zoom out">Zoom −</button><button type="button" class="sswb" data-a="more" aria-pressed="false">More ▾</button></div>`;
     if(Object.keys(PW).length)h+=`<div class="sswtools sswmore">${Object.keys(PW).map(k=>`<button type="button" class="sswb" data-pw="${sswEsc(k)}" aria-pressed="${paths.has(k)}"><span class="sswdot" style="background:${sswEsc(PW[k].color||'var(--accent)')}"></span>${sswEsc(PW[k].name)}</button>`).join('')}</div>`;
     h+=`<div class="sswsearch"><input type="search" placeholder="Find a structure…" aria-label="Find a structure" autocomplete="off"><div class="sswhits"></div></div><div class="sswhint">${SSW_HINT.atlas}</div>`;}
   host.innerHTML=h;host.classList.toggle('outl',outl);if(!labels)host.classList.add('nolab');
@@ -3651,7 +3669,8 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
     const cb=host.querySelector('[data-a="conv"]');if(cb){cb.disabled=l.conv!=='rad';cb.setAttribute('aria-pressed',String(conv==='ana'&&l.conv==='rad'));}
     credit().textContent=(ref>0&&l.ref&&l.ref.img)?('Reference: '+(l.ref.credit||'')):'';
     if(!quiz)read().innerHTML=levelLine();};
-  const go=(p,k,sid)=>{pi=Math.max(0,Math.min(P.length-1,p));li=Math.max(0,Math.min(P[pi].levels.length-1,k));draw();if(sid){sel(sid);read().innerHTML=tell(sid,true)+' <span class="sswpos">'+sswEsc(lvl().label||'')+'</span>';wireCycle(sid);}};
+  const LAST={};
+  const go=(p,k,sid)=>{pi=Math.max(0,Math.min(P.length-1,p));li=Math.max(0,Math.min(P[pi].levels.length-1,k));LAST[P[pi].id]=li;draw();if(sid){sel(sid);read().innerHTML=tell(sid,true)+' <span class="sswpos">'+sswEsc(lvl().label||'')+'</span>';wireCycle(sid);}};
   const wireCycle=sid=>{const step=d=>{const shows=atlasShows(w,sid);const at=shows.findIndex(x=>x.pi===pi&&x.li===li);const nx=shows[(at+d+shows.length)%shows.length];go(nx.pi,nx.li,sid);};
     const b=read().querySelector('[data-a="cycle"]'),p=read().querySelector('[data-a="cyclep"]');if(b)b.addEventListener('click',()=>step(1));if(p)p.addEventListener('click',()=>step(-1));}; /* v0.10.3: both ways */
   draw();
@@ -3662,6 +3681,41 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
     sv.addEventListener('click',e=>{const el=e.target.closest&&e.target.closest('.sswrg');clear();if(el){sel(el.dataset.id);o.onPick(el.dataset.id);}else{missAt(e);o.onPick('__miss');}});return;}
   /* ---------- guide mode ---------- */
   host.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a.sswref');if(!a)return;e.preventDefault();try{if(typeof openGuide==='function')openGuide(a.dataset.g,{section:a.dataset.s||undefined});}catch(_){}}); /* v0.10.10: read more */
+  /* v0.10.11 (Phase 3 prototype): the 2.5D viewer — the current slice of each section plane as a card in CSS 3D, placed from the
+     locator data in the sagittal drawing's frame (brain top y 18 → medulla y 300; anterior x 120 → posterior x 360; midline x 240).
+     Drag rotates; a tap on a card opens that slice. */
+  const frac3=l=>{const lc=locOf(l);if(!lc||!lc.line)return null;const [x1,y1,x2,y2]=lc.line.map(Number);
+    if(lc.map==='spine')return Math.abs(y1-y2)<Math.abs(x1-x2)?{h:((y1+y2)/2-14)/192}:{ap:((x1+x2)/2-24)/168};
+    if(lc.map==='axial')return {lr:((x1+x2)/2-120)/86};return null;};
+  /* each card is a 288×356 window on one 3D frame (the midline sagittal's: Y = y−190 down, Z = −(x−240) anterior, X lateral in
+     coronal units); a level's reg {a:[scale,offset] for its drawing axis along the frame, l: lateral scale, p: plane position}
+     comes from the builder's least-squares fit on the structures the level shares with the reference drawings (pack v1.10). */
+  const win3=(p,l)=>{const r=l.reg||{s:1,ox:0,oy:0,p:0},s=+r.s||1,ox=+r.ox||0,oy=+r.oy||0,f=v=>v.toFixed(1);
+    if(p.id==='ax')return {vb:`${f(240-144/s)} ${f((62-oy)/s)} ${f(288/s)} ${f(356/s)}`,tf:`translate3d(0px,${f(r.p-190)}px,0px) rotateX(90deg)`,flip:true};
+    if(p.id==='cor')return {vb:`${f(240-144/s)} ${f((12-oy)/s)} ${f(288/s)} ${f(356/s)}`,tf:`translate3d(0px,0px,${f(-(r.p-240))}px)`};
+    return {vb:`${f((96-ox)/s)} ${f((12-oy)/s)} ${f(288/s)} ${f(356/s)}`,tf:`translate3d(${f(+r.p)}px,0px,0px) rotateY(90deg)`};};
+  const card3=(p,l)=>{const w3=win3(p,l);return `<div class="ssw3dcard" data-pl="${sswEsc(p.id)}" style="transform:${w3.tf}"><svg viewBox="${w3.vb}" preserveAspectRatio="none"${w3.flip?' style="transform:scaleY(-1)"':''}>${sswClean(l.svg||'')}<g class="ssw3drg">${(l.regions||[]).map(sswShape).join('')}</g></svg><button type="button" class="ssw3dtag" data-a="open3">${sswEsc(p.name)} · ${sswEsc(l.label||l.id)} ›</button></div>`;};
+  const want3={ax:'ax02',cor:'cor03',sag:'sag01'};const lvl3=p=>LAST[p.id]!==undefined?LAST[p.id]:Math.max(0,p.levels.findIndex(x=>x.id===want3[p.id]));
+  const max3=p=>{const z=(p.zones||[]).find(z=>/cord/i.test(z.name||''));return z?Math.max(0,(z.from|0)-1):p.levels.length-1;}; /* the cord has no sagittal to meet */
+  const cards3=()=>P.filter(p=>p.id in want3).map(p=>card3(p,p.levels[Math.min(lvl3(p),max3(p))])).join('');
+  const view3d=()=>{const want=want3;
+    let ov=document.querySelector('.ssw3dov');if(ov)ov.remove();ov=document.createElement('div');ov.className='sswlive ssw-atlas ssw3dov';
+    ov.innerHTML=`<div class="ssw3dhd"><b>Three planes</b> <span>— the slice each plane is on</span><button type="button" class="sswb" data-a="reset3">Reset</button><button type="button" class="sswb" data-a="close3">Close</button></div><div class="ssw3dfit"><div class="ssw3dscene">${cards3()}</div></div><div class="ssw3dft"><div class="ssw3dsl">${P.filter(p=>p.id in want3).map(p=>`<label>${sswEsc(p.name)} <input type="range" data-pl="${sswEsc(p.id)}" min="0" max="${max3(p)}" value="${Math.min(lvl3(p),max3(p))}"></label>`).join('')}</div><div class="ssw3dread"></div><div class="ssw3dhint">Drag to turn · move a plane with its slider · tap a structure to name it on every card · a card's label opens that slice</div></div>`;
+    document.body.appendChild(ov);const fit=ov.querySelector('.ssw3dfit'),sc=ov.querySelector('.ssw3dscene');
+    const s=Math.min(1.35,(window.innerWidth*0.9)/560,(window.innerHeight*0.62)/520);fit.style.transform=`scale(${s.toFixed(3)})`;
+    let rx=-22,ry=-38,px0=null,py0=null,moved=false;const apply=()=>{sc.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;};apply();
+    fit.addEventListener('pointerdown',e=>{px0=e.clientX;py0=e.clientY;moved=false;fit.setPointerCapture&&fit.setPointerCapture(e.pointerId);});
+    fit.addEventListener('pointermove',e=>{if(px0===null)return;const dx=e.clientX-px0,dy=e.clientY-py0;if(Math.abs(dx)+Math.abs(dy)>6)moved=true;ry+=dx*0.45;rx=Math.max(-85,Math.min(85,rx-dy*0.45));px0=e.clientX;py0=e.clientY;apply();});
+    let sel3=null;const show3=()=>{ov.querySelectorAll('.sswrg').forEach(el=>el.classList.toggle('sel',!!sel3&&el.dataset.id===sel3));const rd=ov.querySelector('.ssw3dread');const s=sel3&&S[sel3];
+      if(!s){rd.innerHTML='';return;}const on=[...new Set([...ov.querySelectorAll(`.sswrg[data-id="${CSS.escape(sel3)}"]`)].map(el=>el.closest('.ssw3dcard').dataset.pl))].map(id=>(P.find(p=>p.id===id)||{}).name).filter(Boolean);
+      rd.innerHTML=`${sysDot(s)}<b>${sswEsc(s.name)}</b>${s.gloss?' — '+sswEsc(s.gloss):''} <span class="on">· on ${on.join(', ')}</span>`;};
+    const up=e=>{if(px0===null)return;px0=null;if(moved)return;const t=e.target;
+      if(t.closest&&t.closest('[data-a="open3"]')){const c=t.closest('.ssw3dcard');const p=P.findIndex(x=>x.id===c.dataset.pl);if(p>=0){ov.remove();quizOff();go(p,lvl3(P[p]));}return;}
+      const rg=t.closest&&t.closest('.sswrg');sel3=rg?(sel3===rg.dataset.id?null:rg.dataset.id):null;show3();};
+    fit.addEventListener('pointerup',up);fit.addEventListener('pointercancel',()=>{px0=null;});
+    ov.querySelectorAll('.ssw3dsl input').forEach(r=>r.addEventListener('input',()=>{const p=P.find(x=>x.id===r.dataset.pl);LAST[p.id]=+r.value;sc.innerHTML=cards3();show3();}));
+    ov.querySelector('[data-a="close3"]').addEventListener('click',()=>ov.remove());ov.querySelector('[data-a="reset3"]').addEventListener('click',()=>{rx=-22;ry=-38;apply();});};
+  const b3=host.querySelector('[data-a="v3d"]');if(b3)b3.addEventListener('click',view3d);
   host.querySelector('.sswlocbox').addEventListener('click',e=>{if(e.target.closest('.sswloc'))bigMap();});host.querySelector('.sswlocbox').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.closest('.sswloc')){e.preventDefault();bigMap();}});
   host.querySelectorAll('.sswb[data-pl]').forEach(b=>b.addEventListener('click',()=>{quizOff();go(+b.dataset.pl,0);}));
   const r=host.querySelector('.sswrange');r.addEventListener('input',()=>{if(!quiz)go(pi,+r.value);});
