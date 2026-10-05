@@ -1,7 +1,13 @@
 <!--
-  Study Suite  ·  v0.10.6 (beta)
+  Study Suite  ·  v0.10.7 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.10.7 (2026-10-05, atlas): a tapped (or picked, or quiz-revealed) structure lights up its label — gutter
+  labels are grouped (.sswlab, data-i) and in-place names carry data-i; after each render mapLabels() tests every label's
+  target point (nudged along the leader) with isPointInFill against the regions, topmost first (what a tap there selects),
+  else matches the label text to a structure name on the slice, and stamps data-l=<region id>; sel()/mark('ok') add
+  .sswlon (accent, bold text, accent leader and dot), clear() removes it. The selected region's fill is stronger
+  (fill-opacity .42, was .28 — faint over photos).
   Changelog v0.10.6 (2026-10-04, atlas Phase 0): (1) Locator maps — a level's loc may be {map, line|dot, pov} on one of
   w.maps (dedicated drawings: `spine` = lateral whole CNS with the vertebral column, `axial` = head from above), legacy
   plane/level/array forms still work; pov (n/s/e/w) draws the observer's eye and a field-of-view cone opening toward the
@@ -1878,7 +1884,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.10.6';
+const APP_VERSION='0.10.7';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3447,6 +3453,7 @@ const ATLAS_CSS=`.sswlive.ssw-atlas .sswplanes{display:flex;flex-wrap:wrap;gap:6
 .sswlive.ssw-atlas .sswtools+.sswtools{margin-top:6px}
 .sswlive.ssw-atlas .tk{fill:var(--soft);font-size:11px;letter-spacing:.08em}
 .sswlive.ssw-atlas .sswterr{opacity:.55}
+.sswlive.ssw-atlas .sswtk{display:none;flex-wrap:wrap;gap:4px 12px;font-size:12px;margin-top:5px}.sswlive.ssw-atlas .sswtk span{white-space:nowrap}.sswlive.ssw-atlas .sswtk .sswdot{vertical-align:middle;margin-right:4px}.sswlive.ssw-atlas.terron .sswtk:not(:empty){display:flex}
 .sswlive.ssw-atlas .sswcredit{font-size:11px;opacity:.65;margin-top:4px}
 .sswlive.ssw-atlas .sswcredit:empty{display:none}
 .sswlive.ssw-atlas.full .sswsvg{max-height:74vh}
@@ -3466,6 +3473,10 @@ const ATLAS_CSS=`.sswlive.ssw-atlas .sswplanes{display:flex;flex-wrap:wrap;gap:6
 .sswlive.ssw-atlas .sswlv{margin-top:8px}
 .sswlive.ssw-atlas.nolab .sswlv,.sswlive.ssw-atlas.quizon .sswlv{display:none}
 .sswlive.ssw-atlas .sswsel{display:block;width:100%;max-width:440px;box-sizing:border-box;font:inherit;font-size:16px;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
+.sswlive.ssw-atlas .sswrg.sel{fill-opacity:.42;stroke-width:3.2}
+.sswlive.ssw-atlas .sswld{fill:var(--soft)}
+.sswlive.ssw-atlas .sswlon .tb,.sswlive.ssw-atlas .sswlon .ts,.sswlive.ssw-atlas .ti.sswlon{fill:var(--accent);font-weight:700}
+.sswlive.ssw-atlas .sswlon .ln{stroke:var(--accent);stroke-width:2.2}.sswlive.ssw-atlas .sswlon .sswld{fill:var(--accent)}
 .sswlive.ssw-atlas .sswb[data-a="more"]{display:none}
 .sswlive.ssw-atlas.phone .sswb[data-a="more"]{display:inline-flex}
 .sswlive.ssw-atlas.phone .sswmore{display:none!important}
@@ -3493,11 +3504,11 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
   const flipFor=l=>l.conv==='rad'&&conv==='ana';
   /* labels sit in the gutters beside the drawing: anchor 'end' = left gutter (text runs leftward from x), 'start' = right
      gutter, 'middle' = above/below. The leader leaves the label on the side facing the drawing and ends at the target t. */
-  const labelSvg=(l,flip)=>(l.labels||[]).map(x=>{const X=flip?W-x.x:x.x,A=flip?(x.a==='start'?'end':x.a==='end'?'start':x.a||'start'):(x.a||'start');
+  const labelSvg=(l,flip)=>(l.labels||[]).map((x,i)=>{const X=flip?W-x.x:x.x,A=flip?(x.a==='start'?'end':x.a==='end'?'start':x.a||'start'):(x.a||'start');
     const ax=A==='end'?X+3:A==='start'?X-3:X,ay=A==='middle'?(x.t&&x.t[1]<x.y?x.y-11:x.y+3):x.y-4;
-    const t=x.t?`<line x1="${flip?W-x.t[0]:x.t[0]}" y1="${x.t[1]}" x2="${ax}" y2="${ay}" class="ln"/><circle cx="${flip?W-x.t[0]:x.t[0]}" cy="${x.t[1]}" r="1.6" style="fill:var(--soft)"/>`:'';
-    return `${t}<text x="${X}" y="${x.y}" class="tb" text-anchor="${A}">${sswEsc(x.n)}</text>${x.g?`<text x="${X}" y="${x.y+12}" class="ts" text-anchor="${A}">${sswEsc(x.g)}</text>`:''}`;}).join('');
-  const inSvg=(l,flip)=>(l.labels||[]).filter(x=>x.t).map(x=>{const tx=flip?W-x.t[0]:x.t[0],ty=x.t[1];return `<text x="${tx}" y="${ty-3}" class="ti" text-anchor="middle">${sswEsc(x.n)}</text>`;}).join(''); /* v0.10.6 */
+    const t=x.t?`<line x1="${flip?W-x.t[0]:x.t[0]}" y1="${x.t[1]}" x2="${ax}" y2="${ay}" class="ln"/><circle cx="${flip?W-x.t[0]:x.t[0]}" cy="${x.t[1]}" r="1.6" class="sswld"/>`:'';
+    return `<g class="sswlab" data-i="${i}">${t}<text x="${X}" y="${x.y}" class="tb" text-anchor="${A}">${sswEsc(x.n)}</text>${x.g?`<text x="${X}" y="${x.y+12}" class="ts" text-anchor="${A}">${sswEsc(x.g)}</text>`:''}</g>`;}).join(''); /* v0.10.7: one group per label so a tapped structure can light it */
+  const inSvg=(l,flip)=>(l.labels||[]).map((x,i)=>{if(!x.t)return '';const tx=flip?W-x.t[0]:x.t[0],ty=x.t[1];return `<text x="${tx}" y="${ty-3}" class="ti" data-i="${i}" text-anchor="middle">${sswEsc(x.n)}</text>`;}).join(''); /* v0.10.6 · v0.10.7 data-i */
   const marksSvg=(l,flip)=>{const m=l.marks||{};let s='';if(l.conv==='rad'){const r=flip?W-14:14,q=flip?14:W-14;s+=`<text x="${r}" y="13" class="tk" text-anchor="middle">R</text><text x="${q}" y="13" class="tk" text-anchor="middle">L</text>`;}
     if(m.t)s+=`<text x="${W/2}" y="11" class="ts" text-anchor="middle">${sswEsc(m.t)}</text>`;if(m.b)s+=`<text x="${W/2}" y="${H-4}" class="ts" text-anchor="middle">${sswEsc(m.b)}</text>`;
     if(m.l)s+=`<text x="12" y="${H-6}" class="ts" text-anchor="start">${sswEsc(flip?m.r||m.l:m.l)} →</text>`;
@@ -3549,15 +3560,16 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
   if(!card)h+=`<div class="sswplanes" role="group">${P.map((p,k)=>`<button type="button" class="sswb" data-pl="${k}" aria-pressed="${k===pi}">${sswEsc(p.name)}</button>`).join('')}</div>`;
   if(!card)h+='<div class="sswor sswor-t"></div>';h+=`<div class="sswframe">${sswSvg(w,'')}${card?'':'<div class="sswlocbox"></div>'}</div>`;if(!card)h+='<div class="sswor sswor-b"></div><div class="sswlabhint">Pinch in (or Zoom +) to see the names on the drawing — this slice has too many to show at once.</div>';
   if(!card){h+=`<div class="sswbar"><button type="button" class="sswb" data-a="prev" aria-label="Previous">‹</button><input type="range" class="sswrange" min="0" max="0" step="1" value="0" aria-label="Level"><button type="button" class="sswb" data-a="next" aria-label="Next">›</button></div>`;}
-  h+='<div class="sswread"></div><div class="sswcredit"></div>'+(card?'':'<div class="sswlv"></div>');
+  h+='<div class="sswread"></div><div class="sswcredit"></div><div class="sswtk"></div>'+(card?'':'<div class="sswlv"></div>'); /* v0.10.7: .sswtk = the territory legend */
   if(!card){h+=`<div class="sswtools"><button type="button" class="sswb" data-a="labels" aria-pressed="${labels}">Labels</button><button type="button" class="sswb" data-a="terr" aria-pressed="${terr}">Territories</button><button type="button" class="sswb" data-a="ref" aria-pressed="${ref>0}">${["Reference","Reference · overlay","Reference · photo"][ref]}</button><button type="button" class="sswb sswmore" data-a="outl" aria-pressed="${outl}">Outlines</button><button type="button" class="sswb sswmore" data-a="conv" aria-pressed="${conv==='ana'}">Anatomical view</button><button type="button" class="sswb" data-a="quiz" aria-pressed="false">Quiz me</button><button type="button" class="sswb" data-a="zin" aria-label="Zoom in">Zoom +</button><button type="button" class="sswb" data-a="zout" aria-label="Zoom out">Zoom −</button><button type="button" class="sswb" data-a="more" aria-pressed="false">More ▾</button></div>`;
     if(Object.keys(PW).length)h+=`<div class="sswtools sswmore">${Object.keys(PW).map(k=>`<button type="button" class="sswb" data-pw="${sswEsc(k)}" aria-pressed="${paths.has(k)}"><span class="sswdot" style="background:${sswEsc(PW[k].color||'var(--accent)')}"></span>${sswEsc(PW[k].name)}</button>`).join('')}</div>`;
     h+=`<div class="sswsearch"><input type="search" placeholder="Find a structure…" aria-label="Find a structure" autocomplete="off"><div class="sswhits"></div></div><div class="sswhint">${SSW_HINT.atlas}</div>`;}
   host.innerHTML=h;host.classList.toggle('outl',outl);if(!labels)host.classList.add('nolab');
   const sv=host.querySelector('.sswsvg'),read=()=>host.querySelector('.sswread'),credit=()=>host.querySelector('.sswcredit');
-  const sel=id=>{host.querySelectorAll(`.sswrg[data-id="${CSS.escape(id)}"]`).forEach(e=>e.classList.add('sel'));const se=host.querySelector('.sswsel');if(se)se.value=[...se.options].some(o=>o.value===id)?id:'';};
-  const mark=(id,cls)=>{host.querySelectorAll(`.sswrg[data-id="${CSS.escape(id)}"]`).forEach(e=>e.classList.add(cls));};
-  const clear=()=>{host.querySelectorAll('.sswrg').forEach(e=>e.classList.remove('sel','ok','no'));const se=host.querySelector('.sswsel');if(se)se.value='';const m=host.querySelector('.sswmk');if(m)m.innerHTML='';};
+  const lit=id=>{host.querySelectorAll(`[data-l="${CSS.escape(id)}"]`).forEach(e=>e.classList.add('sswlon'));}; /* v0.10.7 */
+  const sel=id=>{host.querySelectorAll(`.sswrg[data-id="${CSS.escape(id)}"]`).forEach(e=>e.classList.add('sel'));lit(id);const se=host.querySelector('.sswsel');if(se)se.value=[...se.options].some(o=>o.value===id)?id:'';};
+  const mark=(id,cls)=>{host.querySelectorAll(`.sswrg[data-id="${CSS.escape(id)}"]`).forEach(e=>e.classList.add(cls));if(cls==='ok')lit(id);};
+  const clear=()=>{host.querySelectorAll('.sswrg').forEach(e=>e.classList.remove('sel','ok','no'));host.querySelectorAll('.sswlon').forEach(e=>e.classList.remove('sswlon'));const se=host.querySelector('.sswsel');if(se)se.value='';const m=host.querySelector('.sswmk');if(m)m.innerHTML='';};
   const missAt=e=>{try{const p=sv.createSVGPoint();p.x=e.clientX;p.y=e.clientY;const q=p.matrixTransform(sv.getScreenCTM().inverse());host.querySelector('.sswmk').innerHTML=`<circle class="sswmiss" cx="${q.x}" cy="${q.y}" r="${Math.max(4,W/80)}"/>`;}catch(_){}};
   const sysDot=s=>{const y=s&&SYS[s.sys];return y?`<span class="sswdot" style="background:${sswEsc(y.color||'var(--accent)')};vertical-align:middle;margin-right:4px"></span>`:'';};
   const tell=(sid,withNav)=>{const s=S[sid];if(!s)return '';const shows=atlasShows(w,sid);
@@ -3577,7 +3589,27 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
   const fitLabels=()=>{try{sv.querySelectorAll('.sswov text').forEach(t=>{const b=t.getBBox();if(!b.width)return;const over=Math.max(0,-b.x,b.x+b.width-W);if(over<0.5)return;
     const k=(b.width-over)/b.width;if(k>=0.82){t.setAttribute('textLength',(b.width-over).toFixed(1));t.setAttribute('lengthAdjust','spacingAndGlyphs');}
     else{const fs=parseFloat(getComputedStyle(t).fontSize)||11.5;t.style.fontSize=(fs*Math.max(k,0.82)).toFixed(2)+'px';const b2=t.getBBox();const over2=Math.max(0,-b2.x,b2.x+b2.width-W);if(over2>0.5){t.setAttribute('textLength',(b2.width-over2).toFixed(1));t.setAttribute('lengthAdjust','spacingAndGlyphs');}}});}catch(_){}}; /* v0.10.6 */
-  const draw=()=>{const l=lvl();sv.innerHTML=art(l);const lb=host.querySelector('.sswlocbox');if(lb)lb.innerHTML=locSvg();crop();fitLabels();host.classList.toggle('dense',(l.labels||[]).filter(x=>x.t).length>10); /* v0.10.6: on a phone a dense slice shows in-place names only when zoomed */
+  /* v0.10.7: which region does each label point at? In order: the pack's own x.s (packs from v1.6); the label text against the
+     structure names on this slice (exact, then the label's words inside the name — "Head of caudate" → "Head of the caudate
+     nucleus" —, then the name's words inside the label — "Basal pons" → "Pons"); last, the target point (nudged along the leader
+     past the tip) tested against the regions, topmost first (what a tap there selects), accepted only when the two names share a
+     word stem and the same kind (a sulcus, nerve or artery label lands in its neighbour's fill and must not light with it).
+     The group/in-place text gets data-l=<region id>; sel()/mark() light those. */
+  const mapLabels=()=>{try{const l=lvl(),rg=[...sv.querySelectorAll('.sswrg')].reverse(),pt=sv.createSVGPoint();if(!rg.length)return;
+    const STOP={of:1,the:1,and:1,a:1},nm=s=>String(s||'').toLowerCase().replace(/[^a-z0-9 ]/g,' ').split(/\s+/).filter(x=>x&&!STOP[x]),name=id=>nm((S[id]||{}).name);
+    const KIND=/^(artery|arteries|vein|sinus|nerve|sulcus|fissure|root|canal|foramen|cistern|tract|nucleus|nuclei|cn|ganglion)$/,kind=t=>t.find(x=>KIND.test(x))||'';
+    const sub=(a,b)=>a.length&&a.every(x=>b.includes(x)),akin=(a,b)=>a.some(x=>x.length>3&&b.some(y=>y.startsWith(x.slice(0,5))));
+    const ids=rg.map(e=>e.dataset.id),N={};ids.forEach(k=>{N[k]=name(k);});
+    (l.labels||[]).forEach((x,i)=>{let id='';const a=nm(x.n);if(x.s&&ids.includes(x.s))id=x.s;
+      if(!id)id=ids.find(k=>N[k].join(' ')===a.join(' '))||'';
+      if(!id){const c=ids.filter(k=>sub(a,N[k])).sort((p,q)=>N[p].length-N[q].length);id=c[0]||'';}
+      if(!id){const c=ids.filter(k=>sub(N[k],a)).sort((p,q)=>N[q].length-N[p].length);id=c[0]||'';}
+      if(!id&&x.t){const tx=+x.t[0],ty=+x.t[1];let ux=tx-x.x,uy=ty-x.y;const m=Math.hypot(ux,uy)||1;ux/=m;uy/=m;
+        for(const k of [0,2,4,7]){pt.x=tx+ux*k;pt.y=ty+uy*k;const hit=rg.find(e=>{try{return e.isPointInFill(pt);}catch(_){return false;}});if(hit){const b=N[hit.dataset.id];if(akin(a,b)&&kind(a)===kind(b))id=hit.dataset.id;break;}}}
+      if(!id)return;
+      sv.querySelectorAll(`.sswlab[data-i="${i}"],.ti[data-i="${i}"]`).forEach(e=>e.setAttribute('data-l',id));});}catch(_){}};
+  const draw=()=>{const l=lvl();sv.innerHTML=art(l);const lb=host.querySelector('.sswlocbox');if(lb)lb.innerHTML=locSvg();crop();fitLabels();mapLabels();
+    const tk=host.querySelector('.sswtk');if(tk){tk.innerHTML=(terr&&Array.isArray(l.terrKey)?l.terrKey:[]).map(k=>`<span><span class="sswdot" style="background:var(--${sswEsc(String(k[1]||'accent').replace(/^var\(--|\)$/g,''))})"></span>${sswEsc(k[0])}</span>`).join('');host.classList.toggle('terron',!!terr);} /* v0.10.7: territory legend (pack v1.6 terrKey) */host.classList.toggle('dense',(l.labels||[]).filter(x=>x.t).length>10); /* v0.10.6: on a phone a dense slice shows in-place names only when zoomed */
     if(!card){const o2=orHtml(l);host.querySelectorAll('.sswor').forEach((e,i)=>{e.innerHTML=o2[i];e.classList.toggle('sswor-on',l.conv!=='rad');});host.classList.toggle('sswbanner',l.conv!=='rad'); /* v0.10.6: the orientation banner is always on for views without a radiological convention */const lv=host.querySelector('.sswlv');if(lv){lv.innerHTML=selHtml(l);const se=lv.querySelector('.sswsel');if(se)se.addEventListener('change',()=>{const id=se.value;if(quiz||!id)return;clear();sel(id);read().innerHTML=tell(id,true);wireCycle(id);});}
       /* v0.10.5: tools the slice cannot honour are greyed — no reference image, no territories, no drawing for a pathway */
       const dis=(q,on)=>{host.querySelectorAll(q).forEach(b=>{b.disabled=!!on;});};dis('[data-a="ref"]',!(l.ref&&l.ref.img));dis('[data-a="terr"]',!l.terr);
