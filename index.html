@@ -1,7 +1,9 @@
 <!--
-  Study Suite  ·  v0.10.11 (beta)
+  Study Suite  ·  v0.10.12 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.10.12 (2026-10-05, hotfix): in the 3D view a real tap never selected a structure — the scene's pointer capture
+  made the release report the scene as its target; the pressed element is kept from pointerdown (downT) and used on release.
   Changelog v0.10.11 (2026-10-05, atlas 2.5D viewer): a 3D button in the atlas view opens the three section planes' current slices
   as intersecting glass cards in CSS 3D (view3d). Each card is drawn through a window computed from the level's `reg` (pack v1.10:
   one uniform scale per plane plus offsets, fitted on the structures shared with the midline sagittal; the plane sits where those
@@ -1901,7 +1903,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.10.11';
+const APP_VERSION='0.10.12';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3703,13 +3705,13 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
     ov.innerHTML=`<div class="ssw3dhd"><b>Three planes</b> <span>— the slice each plane is on</span><button type="button" class="sswb" data-a="reset3">Reset</button><button type="button" class="sswb" data-a="close3">Close</button></div><div class="ssw3dfit"><div class="ssw3dscene">${cards3()}</div></div><div class="ssw3dft"><div class="ssw3dsl">${P.filter(p=>p.id in want3).map(p=>`<label>${sswEsc(p.name)} <input type="range" data-pl="${sswEsc(p.id)}" min="0" max="${max3(p)}" value="${Math.min(lvl3(p),max3(p))}"></label>`).join('')}</div><div class="ssw3dread"></div><div class="ssw3dhint">Drag to turn · move a plane with its slider · tap a structure to name it on every card · a card's label opens that slice</div></div>`;
     document.body.appendChild(ov);const fit=ov.querySelector('.ssw3dfit'),sc=ov.querySelector('.ssw3dscene');
     const s=Math.min(1.35,(window.innerWidth*0.9)/560,(window.innerHeight*0.62)/520);fit.style.transform=`scale(${s.toFixed(3)})`;
-    let rx=-22,ry=-38,px0=null,py0=null,moved=false;const apply=()=>{sc.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;};apply();
-    fit.addEventListener('pointerdown',e=>{px0=e.clientX;py0=e.clientY;moved=false;fit.setPointerCapture&&fit.setPointerCapture(e.pointerId);});
+    let rx=-22,ry=-38,px0=null,py0=null,moved=false,downT=null;const apply=()=>{sc.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;};apply();
+    fit.addEventListener('pointerdown',e=>{px0=e.clientX;py0=e.clientY;moved=false;downT=e.target;fit.setPointerCapture&&fit.setPointerCapture(e.pointerId);}); /* v0.10.12: with pointer capture the release reports the scene as its target — keep the pressed element */
     fit.addEventListener('pointermove',e=>{if(px0===null)return;const dx=e.clientX-px0,dy=e.clientY-py0;if(Math.abs(dx)+Math.abs(dy)>6)moved=true;ry+=dx*0.45;rx=Math.max(-85,Math.min(85,rx-dy*0.45));px0=e.clientX;py0=e.clientY;apply();});
     let sel3=null;const show3=()=>{ov.querySelectorAll('.sswrg').forEach(el=>el.classList.toggle('sel',!!sel3&&el.dataset.id===sel3));const rd=ov.querySelector('.ssw3dread');const s=sel3&&S[sel3];
       if(!s){rd.innerHTML='';return;}const on=[...new Set([...ov.querySelectorAll(`.sswrg[data-id="${CSS.escape(sel3)}"]`)].map(el=>el.closest('.ssw3dcard').dataset.pl))].map(id=>(P.find(p=>p.id===id)||{}).name).filter(Boolean);
       rd.innerHTML=`${sysDot(s)}<b>${sswEsc(s.name)}</b>${s.gloss?' — '+sswEsc(s.gloss):''} <span class="on">· on ${on.join(', ')}</span>`;};
-    const up=e=>{if(px0===null)return;px0=null;if(moved)return;const t=e.target;
+    const up=e=>{if(px0===null)return;px0=null;if(moved)return;const t=downT||e.target;downT=null;
       if(t.closest&&t.closest('[data-a="open3"]')){const c=t.closest('.ssw3dcard');const p=P.findIndex(x=>x.id===c.dataset.pl);if(p>=0){ov.remove();quizOff();go(p,lvl3(P[p]));}return;}
       const rg=t.closest&&t.closest('.sswrg');sel3=rg?(sel3===rg.dataset.id?null:rg.dataset.id):null;show3();};
     fit.addEventListener('pointerup',up);fit.addEventListener('pointercancel',()=>{px0=null;});
