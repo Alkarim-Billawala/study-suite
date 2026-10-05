@@ -1,7 +1,10 @@
 <!--
-  Study Suite  ·  v0.10.7 (beta)
+  Study Suite  ·  v0.10.8 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.10.8 (2026-10-05, atlas guides): a guide figure may carry data-ssw-state='{"plane":…,"level":…,…}' (JSON);
+  mountGuideWidgets passes it as the widget's initial state unless a #ssw= anchor names that figure (the anchor wins). Lets
+  the atlas pack's reading guides open the atlas at the slice they discuss (labels off, a pathway on, the reference up).
   Changelog v0.10.7 (2026-10-05, atlas): a tapped (or picked, or quiz-revealed) structure lights up its label — gutter
   labels are grouped (.sswlab, data-i) and in-place names carry data-i; after each render mapLabels() tests every label's
   target point (nudged along the leader) with isPointInFill against the regions, topmost first (what a tap there selects),
@@ -1884,7 +1887,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.10.7';
+const APP_VERSION='0.10.8';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3410,7 +3413,8 @@ function mountGuideWidgets(d,g,opts){const els=d.querySelectorAll('[data-ssw]');
   sswEnsureCss(d);
   els.forEach(el=>{const w=widgetById(el.getAttribute('data-ssw'),g&&g._pack);if(!w)return;const posters=el.querySelectorAll('.sswposter');
     const host=d.createElement('div');el.insertBefore(host,el.querySelector('figcaption'));
-    const o={packId:g&&g._pack};if(want&&want.id===el.getAttribute('data-ssw')){o.state=want.state;setTimeout(()=>{try{el.scrollIntoView({block:'start'});}catch(_){}},50);}
+    const o={packId:g&&g._pack};const ds=el.getAttribute('data-ssw-state');if(ds){try{o.state=JSON.parse(ds);}catch(_){}} /* v0.10.8 */
+    if(want&&want.id===el.getAttribute('data-ssw')){o.state=Object.assign({},o.state||{},want.state);setTimeout(()=>{try{el.scrollIntoView({block:'start'});}catch(_){}},50);}
     try{if(mountWidget(host,w,o)!==false)posters.forEach(p=>p.style.display='none');}catch(e){host.remove();}});}
 /* cards: 'spot' and 'widget' draw into #cardWidget */
 function mountCardWidget(c){if(c.type!=='spot'&&c.type!=='widget')return;const host=$('cardWidget');if(!host)return;const w=widgetById(c.widget,c._pack);
