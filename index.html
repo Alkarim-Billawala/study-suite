@@ -1,7 +1,10 @@
 <!--
-  Study Suite  ·  v0.10.9 (beta)
+  Study Suite  ·  v0.10.10 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.10.10 (2026-10-05, atlas read-more): a structure's registry entry may carry ref {f: guide file, s: section}
+  (pack v1.9); the readout adds "Read: Week 43 · 20 — The basal nuclei ›" which opens that guide section (openGuide with
+  {section}), across packs; when that week's pack is not in the library the line shows as plain text.
   Changelog v0.10.9 (2026-10-05, atlas links): any guide may carry <a data-atlas="plane:level[:flags]"> (flags joined by +:
   terr, nolab, ref, and pathway ids such as cst+dcml) or data-atlas='{json state}'; a tap opens the Brain atlas at that state
   from any pack (wireAtlasLinks on the guide frame; atlasWidgets() finds the atlas across the active packs; a toast when no
@@ -1892,7 +1895,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.10.9';
+const APP_VERSION='0.10.10';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3479,6 +3482,7 @@ const ATLAS_CSS=`.sswlive.ssw-atlas .sswplanes{display:flex;flex-wrap:wrap;gap:6
 .sswlive.ssw-atlas .tk{fill:var(--soft);font-size:11px;letter-spacing:.08em}
 .sswlive.ssw-atlas .sswterr{opacity:.55}
 .sswlive.ssw-atlas .sswtk{display:none;flex-wrap:wrap;gap:4px 12px;font-size:12px;margin-top:5px}.sswlive.ssw-atlas .sswtk span{white-space:nowrap}.sswlive.ssw-atlas .sswtk .sswdot{vertical-align:middle;margin-right:4px}.sswlive.ssw-atlas.terron .sswtk:not(:empty){display:flex}
+.sswlive.ssw-atlas .sswref{display:inline-block;font-size:12.5px;margin-left:6px;color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor;cursor:pointer}.sswlive.ssw-atlas .sswref.off{color:var(--soft);border-bottom:0;cursor:default}
 .sswlive.ssw-atlas .sswcredit{font-size:11px;opacity:.65;margin-top:4px}
 .sswlive.ssw-atlas .sswcredit:empty{display:none}
 .sswlive.ssw-atlas.full .sswsvg{max-height:74vh}
@@ -3597,9 +3601,12 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
   const clear=()=>{host.querySelectorAll('.sswrg').forEach(e=>e.classList.remove('sel','ok','no'));host.querySelectorAll('.sswlon').forEach(e=>e.classList.remove('sswlon'));const se=host.querySelector('.sswsel');if(se)se.value='';const m=host.querySelector('.sswmk');if(m)m.innerHTML='';};
   const missAt=e=>{try{const p=sv.createSVGPoint();p.x=e.clientX;p.y=e.clientY;const q=p.matrixTransform(sv.getScreenCTM().inverse());host.querySelector('.sswmk').innerHTML=`<circle class="sswmiss" cx="${q.x}" cy="${q.y}" r="${Math.max(4,W/80)}"/>`;}catch(_){}};
   const sysDot=s=>{const y=s&&SYS[s.sys];return y?`<span class="sswdot" style="background:${sswEsc(y.color||'var(--accent)')};vertical-align:middle;margin-right:4px"></span>`:'';};
+  const refHtml=s=>{const r=s&&s.ref;if(!r||!r.f||card)return '';let g=null;try{g=typeof findGuide==='function'?findGuide(r.f):null;}catch(_){}
+    const fm=/^W(\d+)_(\d+)_/.exec(String(r.f)),t=(g&&g.title?String(g.title).replace(/^(Week \d+)\s*·\s*(\d+).*$/,'$1 · $2'):'')||(fm?`Week ${+fm[1]} · ${+fm[2]}`:String(r.f).replace(/_.*$/,''));
+    return g?`<a class="sswref" data-g="${sswEsc(r.f)}" data-s="${sswEsc(r.s||'')}">Read: ${sswEsc(t)}${r.s?' — '+sswEsc(r.s):''} ›</a>`:`<span class="sswref off" title="that week's pack is not in your library">In ${sswEsc(t)}${r.s?' — '+sswEsc(r.s):''}</span>`;}; /* v0.10.10 */
   const tell=(sid,withNav)=>{const s=S[sid];if(!s)return '';const shows=atlasShows(w,sid);
     const at=shows.findIndex(x=>x.pi===pi&&x.li===li);
-    return `${sysDot(s)}<b>${sswEsc(s.name)}</b>${s.gloss?' — '+sswEsc(s.gloss):''}${withNav&&shows.length>1?` <span class="sswpos">${at>=0?(at+1)+' of ':'on '}${shows.length} slices</span> <button type="button" class="sswb" data-a="cyclep" aria-label="Previous slice">‹ Prev</button> <button type="button" class="sswb" data-a="cycle">Next slice ›</button>`:''}`;};
+    return `${sysDot(s)}<b>${sswEsc(s.name)}</b>${s.gloss?' — '+sswEsc(s.gloss):''}${withNav?refHtml(s):''}${withNav&&shows.length>1?` <span class="sswpos">${at>=0?(at+1)+' of ':'on '}${shows.length} slices</span> <button type="button" class="sswb" data-a="cyclep" aria-label="Previous slice">‹ Prev</button> <button type="button" class="sswb" data-a="cycle">Next slice ›</button>`:''}`;};
   const levelLine=()=>{const l=lvl();return hideName?'':`<b>${sswEsc(l.label||'')}</b>${l.note?' — '+sswEsc(l.note):''}${card?'':` <span class="sswpos">${zoneName()?sswEsc(zoneName())+' · ':''}${li+1} / ${P[pi].levels.length}</span>`}`;};
   /* zoom: viewBox window (z = 1..4) centred on (px,py) inside the base box B (the whole frame, or on phones the drawing's own box) */
   let B=[0,0,W,H],z=1,px=W/2,py=H/2,x0=null,y0=null,moved=false;
@@ -3654,6 +3661,7 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
     if(o.pick&&o.pick!=='__miss')sel(o.pick);if(o.reveal||!o.onPick)return;
     sv.addEventListener('click',e=>{const el=e.target.closest&&e.target.closest('.sswrg');clear();if(el){sel(el.dataset.id);o.onPick(el.dataset.id);}else{missAt(e);o.onPick('__miss');}});return;}
   /* ---------- guide mode ---------- */
+  host.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a.sswref');if(!a)return;e.preventDefault();try{if(typeof openGuide==='function')openGuide(a.dataset.g,{section:a.dataset.s||undefined});}catch(_){}}); /* v0.10.10: read more */
   host.querySelector('.sswlocbox').addEventListener('click',e=>{if(e.target.closest('.sswloc'))bigMap();});host.querySelector('.sswlocbox').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.closest('.sswloc')){e.preventDefault();bigMap();}});
   host.querySelectorAll('.sswb[data-pl]').forEach(b=>b.addEventListener('click',()=>{quizOff();go(+b.dataset.pl,0);}));
   const r=host.querySelector('.sswrange');r.addEventListener('input',()=>{if(!quiz)go(pi,+r.value);});
