@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.28 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.29 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.28)
+# Study Suite — Content Authoring Guide (v2.29)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,8 +8,9 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.28 · **Pairs with:** Study Suite app v0.4.4+ (source switches need v0.6.6+, Extras v0.7.1+, image cards v0.8.1+, interactive figures v0.9.0+), pack `formatVersion` 2.0
-> **What changed in guide v2.28:** **interactive figures and drawn schematics.** New **§6e**: a pack may carry
+> **Authoring system version:** 2.29 · **Pairs with:** Study Suite app v0.4.4+ (source switches need v0.6.6+, Extras v0.7.1+, image cards v0.8.1+, interactive figures v0.9.0+, atlas packs v0.10.0+ — links and read-more v0.10.9–v0.10.10), pack `formatVersion` 2.0
+> **What changed in guide v2.29:** **atlas packs.** New **§6f**: the `atlas` widget type — a reference pack of drawn sections and views with a shared structure registry, labels that light on tap, territories with a legend, pathways, course-image references, locator maps and read-more links — and the two guide hooks any pack can use: `data-ssw-state` on a figure and `data-atlas` links. The Brain (`neuro_brain`) is the reference implementation; the checks (`packbuilder.py`, `pack_checks.py`) know the type.
+> **What changed in guide v2.28 (previous):** **interactive figures and drawn schematics.** New **§6e**: a pack may carry
 > `widgets` — data for five interactive figure types the app draws and drives (slice scroller, layered figure,
 > tap-the-spot, lesion localiser, switchable views) — placed in guides as `<figure class="fig ssw" data-ssw="…">` with a
 > still poster, and used by two new card types, **`spot`** (tap the answer on the figure, auto-graded) and **`widget`**
@@ -1001,6 +1002,80 @@ script-free guide frame) and in cards. **A pack never carries a script**: every 
 Reference implementation: Drive `Claude/StudySuite/interactive-figures-2026-10-02/` (`ssw_engine.js`, the test pack) and
 `Claude/StudySuite/wk44-interactive-2026-10-02/` (Week 44: `w44_part1.py`, `w44_part2.py` with the smooth-outline
 helper `S()`, `place_widgets.py`, `build_widgets.py`; cards in `wk44_content/frag_20.py`).
+
+---
+
+## 6f. Atlas packs (`atlas` widgets) — v2.29
+
+An **atlas pack** is a reference pack, not an exam bank: one `atlas` widget (planes → levels → regions), a shared structure
+registry, a few short reading guides and spot / widget cards; no questions, no drugs. The app (v0.10.0+) draws it as its
+own full-width view (planes, a level slider with zones, tap a structure to name it, search, Labels / Territories /
+Reference / Outlines / Anatomical view switches, pathway pills, Quiz me, a locator map, pinch zoom), as a launcher figure
+in guides and as the widget behind cards. The reference implementation is **The Brain** (`neuro_brain`): builder and
+drawing modules in Drive `Claude/StudySuite/brain-atlas/` (`build_atlas_test.py`, `atlas_draw.py`, `slices/`, `atlas_guides.py`,
+`atlas_cards.py`, `HANDOFF.md`), engine `atlas_engine.js` (verbatim in the app). A cardiac or renal atlas follows the same data.
+
+```json
+"widgets": {"atlas": {"type":"atlas", "vb":[480,380], "title":"The Brain", "alt":"…",
+  "systems":  {"bg":{"name":"Basal ganglia","color":"var(--gold)"}, …},
+  "structures":{"put":{"name":"Putamen","gloss":"lateral part of the lentiform nucleus","sys":"bg","src":["MAPS-L2"],"weeks":[43],
+                       "ref":{"f":"W43_20_….html","s":"The basal nuclei"}}, …},
+  "pathways": {"cst":{"name":"Corticospinal","color":"var(--gold)","note":"…","src":["MAPS-L3"]}, …},
+  "maps":     {"spine":{"vb":[240,400],"svg":"…","name":"Side view, head to sacrum"}, "axial":{…}},
+  "planes":   [{"id":"ax","name":"Axial","zones":[{"name":"Whole head","from":0},{"name":"Brainstem","from":5}],
+               "levels":[{"id":"ax02","label":"Frontal horns and thalami","note":"…","conv":"rad","marks":{"t":"ANTERIOR","b":"POSTERIOR"},
+                          "svg":"…", "regions":[{"id":"put","d":"M…Z"}, …],
+                          "labels":[{"x":112,"y":153,"a":"end","n":"Head of caudate","g":null,"t":[227,126],"s":"caudh"}, …],
+                          "terr":"…", "terrKey":[["Anterior cerebral","green"],["Middle cerebral","gold"], …],
+                          "paths":{"cst":"…"}, "ref":{"img":"data:image/webp;base64,…","credit":"Lab 11 (Week 43) p2 — … — course material","conv":"rad","box":[94,98,291,153],"printedLabels":false},
+                          "loc":{"map":"spine","line":[24,100,196,100],"pov":"s"}, "src":["MAPS-L2","MAPS-Lab11"]}, …]}, …]}}
+```
+
+**Rules.**
+1. **One id per structure across the whole atlas**, every region id in `structures`, every `label.s` a region of its level.
+   The app cycles a structure through every slice it appears on ("on N slices"), so a duplicate id per zone breaks that.
+   Names are unified across modules; the builder's lints list duplicate-name groups and regions no label is akin to (how
+   four wrong-name collisions were found in v1.5).
+2. **Every label names its region** (`s`); a structure drawn only as a line (a sulcus, nerve, artery, root) gets a
+   tappable **hit ribbon** (`hit()` in `atlas_draw.py`: a closed path either side of the polyline, drawn invisible) so it can
+   be tapped and its label lights. The app (v0.10.7) lights a label when its region is tapped, picked or quiz-revealed.
+3. **Conventions:** `conv` is `rad` (radiological; the app can mirror it to anatomical and swaps the side marks) or `none`
+   (surface views and the sagittal: the `marks` banner states the orientation on every width). Symmetric course drawings
+   used as references get `conv: "rad"` so the app never mirrors them against the drawing.
+4. **References are course images only** (§6c), cropped tight, printed labels masked or `printedLabels: true`, each with a
+   credit that names the source and says *approximate* when the figure is a different cut or an oblique view; the `box`
+   is the viewBox rectangle the drawing was traced in (one transform per view = its box, so drawing and figure cannot
+   drift). Max side 540–640 px, WebP q 60–64: a 26-level atlas with every reference is ~1.4 MB and the line is 1.5 MB;
+   write the pack compact (no indent).
+5. **Territories** (`terr`, an SVG string) come with **`terrKey`** `[[name, colourVar], …]` — the app shows it as a legend
+   while Territories is on. One convention per atlas (The Brain: ACA green · MCA gold · PCA accent · lenticulostriate red ·
+   anterior choroidal blue · paramedian accent · circumferential gold · posterior spinal green).
+6. **Locator:** every level has `loc = {map, line|dot, pov}` on one of the pack's `maps` (dedicated drawings, so slices can
+   be redrawn without moving a beacon); `pov` (n/s/e/w) is the side the viewer stands on and draws the eye and field-of-view
+   cone. Keep a zone's beacons in order and at the heights of the levels they contain.
+7. **Read more:** a structure's `ref {f, s}` names the week-guide file and a substring of the section heading that teaches
+   it; the app (v0.10.10) adds "Read: Week 43 · 20 — The basal nuclei ›" to the readout and opens that section across packs
+   (plain text when that week's pack is not in the library). Verify every section string against the live guide headings.
+8. **Guides inside the atlas pack** are short reading guides (3–6k chars) that restate the week guides and never add
+   facts; their figures `<figure class="fig ssw" data-ssw="atlas" data-ssw-state='{"plane":"ax","level":"ax08","terr":true}'>`
+   open the atlas at that state (app v0.10.8; a `#ssw=atlas:plane:level` anchor on a card's `guide.f` still wins). The
+   pack's `sources` table must cover every `src` code used by structures, levels, guides and cards.
+9. **Links from any pack's guide:** `<a href="#" data-atlas="ax:ax08">See it in the atlas: … →</a>` opens the atlas at
+   that state (flags joined by `+`: `terr`, `nolab`, `ref`, `ana`, pathway ids — `ax:ax12:cst+dcml`; or a JSON state);
+   app v0.10.9. When the atlas pack is not in the library the link offers to add it and then opens the view; outside the
+   user's codes it says so. Put one line at the end of the sections that teach what a slice shows; nothing else changes.
+10. **Cards:** `spot` with `state {plane, level}` and a `target` that is a region of that level; `widget` with
+    `state {plane, level, labels:false, hideName:true}` for "which level is this?", `{region, labels:false}` for "what is
+    marked?", `{terr:true, region, labels:false}` for "which artery?"; `conv:"ana"`, `paths:[…]`, `ref:1|2` as needed. Ids
+    never change (review progress is keyed by them). About two per section level plus the level and territory sets.
+11. **Checks:** `packbuilder.py` knows the type (shape, registered ids, per-level regions for cards, `label.s` on the level,
+    `loc`, `conv`); `pack_checks.py` strips `#ssw=` anchors and allows an atlas widget up to 1.5 MB; the atlas builder adds
+    its own lints (unresolved labels, akin-less regions, long labels > 26 chars, > 14 labels per gutter side, territories
+    without a legend) and hard asserts (version, conv, loc, ids) before writing. Verify each zone against its references
+    (render with the real engine over the reference at its box) and have an independent verifier read the overlays
+    against the named course figures before a zone is frozen; Alkarim reviews by use.
+12. **App first** (memory.md §1f): a pack feature that needs engine support ships after the app version that reads it;
+    older apps ignore unknown fields (`s`, `terrKey`, `ref`, `data-ssw-state`, `data-atlas`) harmlessly.
 
 ---
 
