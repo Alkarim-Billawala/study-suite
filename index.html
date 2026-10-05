@@ -1,7 +1,12 @@
 <!--
-  Study Suite  ·  v0.10.8 (beta)
+  Study Suite  ·  v0.10.9 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.10.9 (2026-10-05, atlas links): any guide may carry <a data-atlas="plane:level[:flags]"> (flags joined by +:
+  terr, nolab, ref, and pathway ids such as cst+dcml) or data-atlas='{json state}'; a tap opens the Brain atlas at that state
+  from any pack (wireAtlasLinks on the guide frame; atlasWidgets() finds the atlas across the active packs; a toast when no
+  atlas pack is loaded → offerAtlasPack: a dialog with an Add-the-atlas button that fetches the pack from the user's visible
+  manifest like the library's + Add to library, then opens the requested state). Lets the Week 42–44 guides say "See it in the atlas".
   Changelog v0.10.8 (2026-10-05, atlas guides): a guide figure may carry data-ssw-state='{"plane":…,"level":…,…}' (JSON);
   mountGuideWidgets passes it as the widget's initial state unless a #ssw= anchor names that figure (the anchor wins). Lets
   the atlas pack's reading guides open the atlas at the slice they discuss (labels off, a pathway on, the reference up).
@@ -1887,7 +1892,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.10.8';
+const APP_VERSION='0.10.9';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3408,6 +3413,22 @@ function mountWidget(host,w,o){o=o||{};const st=o.state||{};
 /* v0.10.4: the widget CSS goes into whichever document hosts a widget — a guide frame, the card, or the Atlas view */
 function sswEnsureCss(d){if(!d.getElementById('sswCss')){const s=d.createElement('style');s.id='sswCss';s.textContent=SSW_CSS+ATLAS_CSS;(d.head||d.documentElement).appendChild(s);}}
 /* guides: replace each poster with the live widget once the frame has loaded (the caption stays) */
+/* v0.10.9: "See it in the atlas" links in any guide — <a data-atlas="ax:ax08">, "ax:ax02:terr+nolab", "ax:ax12:cst+dcml+stt", or a JSON state */
+function atlasLinkState(v){v=String(v||'').trim();if(v.startsWith('{')){try{return JSON.parse(v);}catch(_){return {};}}
+  const m=/^([a-z]+):([a-z0-9_]+)(?::(.*))?$/.exec(v);if(!m)return {};const st={plane:m[1],level:m[2]};const paths=[];
+  (m[3]||'').split('+').filter(Boolean).forEach(f=>{if(f==='terr')st.terr=true;else if(f==='nolab')st.labels=false;else if(f==='ref')st.ref=1;else if(f==='ana')st.conv='ana';else paths.push(f);});
+  if(paths.length)st.paths=paths;return st;}
+function wireAtlasLinks(d){if(!d||d.__atlasLinks)return;d.__atlasLinks=true;d.addEventListener('click',e=>{const a=e.target&&e.target.closest&&e.target.closest('[data-atlas]');if(!a)return;e.preventDefault();
+  const st=atlasLinkState(a.getAttribute('data-atlas'));const all=atlasWidgets();if(!all.length){offerAtlasPack(st);return;}
+  try{openAtlas(all[0].w,all[0].packId,st);}catch(_){}});}
+/* v0.10.9: the link's failure state — the atlas pack is not in the library: offer to add it (from the user's visible pack list, as the
+   library's + Add to library does), then open the atlas at the requested state; a pack outside the user's codes gets a plain message. */
+function offerAtlasPack(state){const vm=visibleManifest();const mp=((vm&&vm.packs)||[]).find(x=>x&&x.id==='neuro_brain'&&x.file)||null;
+  if(!mp){confirmDialog('This opens in The Brain atlas, a pack that isn’t available with your access codes yet. Add the code that covers it under Packs, then come back.',{confirmText:'OK'},null);return;}
+  confirmDialog('This opens in The Brain atlas, a pack that isn’t in your library yet. Add it now? It downloads once and stays in your library.',{confirmText:'Add the atlas'},async()=>{
+    try{ingestPack(await fetchPackJson(mp),(mp.label||mp.file).replace(/\.json$/i,''));await persist();renderHome();
+      const all=atlasWidgets();if(all.length)openAtlas(all[0].w,all[0].packId,state);else toast('The atlas was added — open it from the home screen.',4000);}
+    catch(e){toast('Couldn’t download the atlas — check your connection and try again.',4000);}});}
 function mountGuideWidgets(d,g,opts){const els=d.querySelectorAll('[data-ssw]');if(!els.length)return;
   const a=opts&&opts.anchor,m=a&&/^ssw=([^:]+)(?::([^:]*))?(?::(.*))?$/.exec(String(a));const want=m?{id:m[1],state:{plane:m[2]||undefined,level:m[3]||undefined}}:null; /* v0.10.0 */
   sswEnsureCss(d);
@@ -4333,7 +4354,7 @@ function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();
   {const old=document.querySelector('.guideframe');if(old&&old._stopResume)old._stopResume();} /* v0.7.8 */
   const host=$('guideHost');host.innerHTML='';
   const fr=document.createElement('iframe');fr.className='guideframe';fr.setAttribute('sandbox','allow-same-origin allow-modals');
-  fr.onload=()=>{try{const d=fr.contentDocument;if(!d)return;try{mountGuideWidgets(d,g,anchorOrSection);}catch(e){} /* v0.9.0 · v0.10.0: state links */try{hideOffSections(d,g);}catch(e){}let el=null; /* v0.6.6 */
+  fr.onload=()=>{try{const d=fr.contentDocument;if(!d)return;try{wireAtlasLinks(d);}catch(e){} /* v0.10.9 */ try{mountGuideWidgets(d,g,anchorOrSection);}catch(e){} /* v0.9.0 · v0.10.0: state links */try{hideOffSections(d,g);}catch(e){}let el=null; /* v0.6.6 */
     const anchor=anchorOrSection&&anchorOrSection.anchor;const section=anchorOrSection&&anchorOrSection.section;const search=anchorOrSection&&anchorOrSection.search;
     if(anchor)el=d.getElementById(anchor);
     if(!el&&section){el=[...d.querySelectorAll('h1,h2,h3,h4,[id]')].find(h=>(h.textContent||'').toLowerCase().includes(String(section).toLowerCase()));}
