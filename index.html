@@ -1,7 +1,11 @@
 <!--
-  Study Suite  ·  v0.10.13 (beta)
+  Study Suite  ·  v0.10.14 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.10.14 (2026-10-05, default packs order): inside each course the Default packs list runs newest first
+  (sortedPacks: packWeek descending, so an atlas with a high sortWeek sits on top, then the highest week down; ties
+  natural-compare descending). Before, rows followed the manifest's filename order (oldest week first). Years, terms
+  and courses keep their newest-first order.
   Changelog v0.10.13 (2026-10-05, atlas): the 3D button moves into the plane row ("3D · Three planes", right-aligned); on a
   wide host (≥ 900 px, not a card) the locator map sits large beside the drawing with every level of the plane tappable
   (host class `wide`, the frame becomes a flex row); the 3D viewer lights alias structures too (registry `also`, pack v1.11).
@@ -1906,7 +1910,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.10.13';
+const APP_VERSION='0.10.14';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3073,6 +3077,7 @@ function termWeek(cs){return [...cs.values()].reduce((mx,pl)=>Math.max(mx,course
 function yearWeek(ts){return [...ts.values()].reduce((mx,cs)=>Math.max(mx,termWeek(cs)),-Infinity);}      // ts: Map(term→Map(course→packs[]))
 function sortedYears(years){return [...years.entries()].sort((A,B)=>cmpW(yearWeek(B[1]),yearWeek(A[1]))||natCmp(B[0],A[0]));}
 function sortedTerms(ts){return [...ts.entries()].sort((A,B)=>cmpW(termWeek(B[1]),termWeek(A[1]))||natCmp(B[0],A[0]));}
+function sortedPacks(pl){return pl.slice().sort((a,b)=>cmpW(packWeek(b),packWeek(a))||natCmp(b.label||b.file,a.label||a.file));} /* v0.10.14: newest first within a course */
 function sortedCourses(cs){return [...cs.entries()].sort((A,B)=>cmpW(courseWeek(B[1]),courseWeek(A[1]))||natCmp(B[0],A[0]));}
 /* Repair library packs that predate the school/year/course/weeks fields (or were stored before
    ingestPack carried them) by copying those fields from the default-packs manifest, matched by id. */
@@ -3242,7 +3247,7 @@ function renderDefaultPacks(){
           if(!open)return;
         }
         const wrap=document.createElement('div');wrap.className='dp-coursebody';
-        plist.forEach(p=>{const isNew=!!(p.id&&newSet.has(p.id));if(isNew)revealed.push(p.id);wrap.appendChild(dpRow(p,isNew));});
+        sortedPacks(plist).forEach(p=>{const isNew=!!(p.id&&newSet.has(p.id));if(isNew)revealed.push(p.id);wrap.appendChild(dpRow(p,isNew));});
         host.appendChild(wrap);
       });
     });
