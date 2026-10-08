@@ -1,7 +1,14 @@
 <!--
-  Study Suite  ·  v0.10.14 (beta)
+  Study Suite  ·  v0.10.15 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.10.15 (2026-10-07, guide frame on WebKit): interactive figures in topic guides were dead on iPhone/iPad (and any
+  WebKit browser or home-screen app). WebKit drops event listeners on nodes in a document whose frame may not run scripts, and the
+  guide frame was sandboxed without allow-scripts, so every listener the app attached from this window (widgets, data-atlas links,
+  the frame's scroll/resume listeners) never fired; Chromium runs them, which is why the pane never showed it. Confirmed on
+  Alkarim's iPhone home-screen app with a three-frame test (2026-10-07). Fix: the frame gets allow-scripts, and guideSrcdoc()
+  puts <meta http-equiv="Content-Security-Policy" content="script-src 'none'"> at the top of the guide's <head>, so the
+  guide's own scripts and inline handlers still never run (same as before); the app's listeners are not subject to the CSP.
   Changelog v0.10.14 (2026-10-05, default packs order): inside each course the Default packs list runs newest first
   (sortedPacks: packWeek descending, so an atlas with a high sortWeek sits on top, then the highest week down; ties
   natural-compare descending). Before, rows followed the manifest's filename order (oldest week first). Years, terms
@@ -1910,7 +1917,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.10.14';
+const APP_VERSION='0.10.15';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -4432,7 +4439,7 @@ function renderGuideList(){const gl=$('guideList');gl.innerHTML='';
 function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();
   {const old=document.querySelector('.guideframe');if(old&&old._stopResume)old._stopResume();} /* v0.7.8 */
   const host=$('guideHost');host.innerHTML='';
-  const fr=document.createElement('iframe');fr.className='guideframe';fr.setAttribute('sandbox','allow-same-origin allow-modals');
+  const fr=document.createElement('iframe');fr.className='guideframe';fr.setAttribute('sandbox','allow-same-origin allow-scripts allow-modals'); /* v0.10.15: WebKit ignores listeners in a script-less frame; the CSP in guideSrcdoc keeps guide scripts off */
   fr.onload=()=>{try{const d=fr.contentDocument;if(!d)return;try{wireAtlasLinks(d);}catch(e){} /* v0.10.9 */ try{mountGuideWidgets(d,g,anchorOrSection);}catch(e){} /* v0.9.0 · v0.10.0: state links */try{hideOffSections(d,g);}catch(e){}let el=null; /* v0.6.6 */
     const anchor=anchorOrSection&&anchorOrSection.anchor;const section=anchorOrSection&&anchorOrSection.section;const search=anchorOrSection&&anchorOrSection.search;
     if(anchor)el=d.getElementById(anchor);
@@ -4452,8 +4459,13 @@ function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();
     else if(!(anchorOrSection&&anchorOrSection.nosave))saveGuidePos(g,guideSpot(fr),true);
     w.addEventListener('scroll',()=>{clearTimeout(gpTimer);gpTimer=setTimeout(()=>{if(curGuideKey===guideKey(g)&&fr.isConnected)saveGuidePos(g,guideSpot(fr),false);},1500);},{passive:true});
   }catch(e){}};
-  fr.srcdoc=g.html||'<p style=\"font-family:sans-serif;padding:24px\">This guide has no embedded content.</p>';
+  fr.srcdoc=guideSrcdoc(g.html||'<p style=\"font-family:sans-serif;padding:24px\">This guide has no embedded content.</p>');
   host.appendChild(fr);renderGuidePager();}
+/* v0.10.15: the guide frame may run scripts (so WebKit honours the app's listeners); this CSP keeps the guide's own scripts off.
+   Put inside <head> (or after <html>/doctype) so a doctype never ends up behind it (that would switch the guide to quirks mode). */
+const GUIDE_CSP='<meta http-equiv="Content-Security-Policy" content="script-src \'none\'">';
+function guideSrcdoc(h){h=String(h);let m=/<head(?:\s[^>]*)?>/i.exec(h);if(!m)m=/<html(?:\s[^>]*)?>/i.exec(h);if(!m)m=/<!doctype[^>]*>/i.exec(h);
+  return m?h.slice(0,m.index+m[0].length)+GUIDE_CSP+h.slice(m.index+m[0].length):GUIDE_CSP+h;}
 /* v0.7.4 — pager under the guide: Previous / page numbers (current pack) / Next; crosses packs at their ends */
 function grpShort(l){if(!l)return '';const m=String(l).match(/\bWeeks?\s*\d+(?:\s*[-–]\s*\d+)?/i);return m?m[0]:String(l).split(/\s[—–-]\s/)[0];}
 function pagerPages(n,c,sib){const s=new Set([1,n]);for(let i=c-sib;i<=c+sib;i++)if(i>=1&&i<=n)s.add(i);
