@@ -1,7 +1,12 @@
 <!--
-  Study Suite  ·  v0.10.15 (beta)
+  Study Suite  ·  v0.10.16 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.10.16 (2026-10-07, guide spot removed): the in-guide reading spot is gone (Alkarim: never got it to work
+  anywhere). Removed: loadGuide's resume branch and fr._stopResume, the frame scroll listener that kept saving the spot, gpTimer,
+  guideHeads/headText/guideSpot/goToSpot. Kept: which guide was read last — saveGuidePos(g) on open writes settings.guidepos
+  {gp, pack, key, label, at} (no sec/head/frac), synced as before; resumeTarget(), Home's "Continue: …" and openReviewer opening
+  the last guide at its top are unchanged.
   Changelog v0.10.15 (2026-10-07, guide frame on WebKit): interactive figures in topic guides were dead on iPhone/iPad (and any
   WebKit browser or home-screen app). WebKit drops event listeners on nodes in a document whose frame may not run scripts, and the
   guide frame was sandboxed without allow-scripts, so every listener the app attached from this window (widgets, data-atlas links,
@@ -1917,7 +1922,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.10.15';
+const APP_VERSION='0.10.16';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -4437,7 +4442,6 @@ function renderGuideList(){const gl=$('guideList');gl.innerHTML='';
   filterGuideList();
   applyRevNav();} /* v0.7.8: applyRevNav centres the current guide when the list is open (scrollIntoView could move the page) */
 function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();
-  {const old=document.querySelector('.guideframe');if(old&&old._stopResume)old._stopResume();} /* v0.7.8 */
   const host=$('guideHost');host.innerHTML='';
   const fr=document.createElement('iframe');fr.className='guideframe';fr.setAttribute('sandbox','allow-same-origin allow-scripts allow-modals'); /* v0.10.15: WebKit ignores listeners in a script-less frame; the CSP in guideSrcdoc keeps guide scripts off */
   fr.onload=()=>{try{const d=fr.contentDocument;if(!d)return;try{wireAtlasLinks(d);}catch(e){} /* v0.10.9 */ try{mountGuideWidgets(d,g,anchorOrSection);}catch(e){} /* v0.9.0 · v0.10.0: state links */try{hideOffSections(d,g);}catch(e){}let el=null; /* v0.6.6 */
@@ -4448,17 +4452,8 @@ function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();
     if(el)el.scrollIntoView({block:'center'});
   }catch(e){}
   applyGuideView();
-  /* v0.7.5: resume a saved spot, or record this open; scrolling keeps the spot current */
-  try{const w=fr.contentWindow,res=anchorOrSection&&anchorOrSection.resume;
-    if(res){ /* v0.7.8: retry until it lands while the frame is visible; the reader's tap or input stops it for good */
-      let live=true;const tms=[];const stop=()=>{live=false;tms.forEach(clearTimeout);};fr._stopResume=stop;
-      const go=()=>{if(!live||!fr.isConnected)return;if(!fr.getClientRects().length)return;goToSpot(fr,res);};
-      requestAnimationFrame(go);try{fr.contentDocument.fonts.ready.then(()=>requestAnimationFrame(go));}catch(e){}
-      [150,500,1200,2500].forEach(ms=>tms.push(setTimeout(go,ms)));tms.push(setTimeout(stop,2600));
-      ['wheel','touchstart','keydown','pointerdown'].forEach(ev=>{try{w.addEventListener(ev,stop,{passive:true,once:true});}catch(e){}});}
-    else if(!(anchorOrSection&&anchorOrSection.nosave))saveGuidePos(g,guideSpot(fr),true);
-    w.addEventListener('scroll',()=>{clearTimeout(gpTimer);gpTimer=setTimeout(()=>{if(curGuideKey===guideKey(g)&&fr.isConnected)saveGuidePos(g,guideSpot(fr),false);},1500);},{passive:true});
-  }catch(e){}};
+  try{if(!(anchorOrSection&&anchorOrSection.nosave))saveGuidePos(g);}catch(e){} /* v0.10.16: records which guide was read last (the in-guide spot is gone) */
+};
   fr.srcdoc=guideSrcdoc(g.html||'<p style=\"font-family:sans-serif;padding:24px\">This guide has no embedded content.</p>');
   host.appendChild(fr);renderGuidePager();}
 /* v0.10.15: the guide frame may run scripts (so WebKit honours the app's listeners); this CSP keeps the guide's own scripts off.
@@ -4493,28 +4488,10 @@ function renderGuidePager(){const pg=$('guidePager');if(!pg)return;
   $('gpWhere').textContent=(cur.wk?cur.wk+' · ':'')+cur.n+' of '+cur.of;
   $('gpCount').textContent=cur.n+' / '+cur.of;}
 window.addEventListener('resize',()=>{const pg=$('guidePager');if(pg&&!pg.hidden)renderGuidePager();});
-/* v0.7.5 — guide resume. A spot = {sec, head, frac}: the visible h1–h3 at or above the top of the view (index + text; -1 =
-   before the first heading) and how far into that section the view is, so it carries across widths, zoom and devices. */
-let gpTimer=null,gpAnnounced=0;
-function guideHeads(d){return [...d.querySelectorAll('h1,h2,h3')].filter(h=>h.getClientRects().length);}
-function headText(h){return (h.textContent||'').replace(/\s+/g,' ').trim().slice(0,120);}
-function guideSpot(fr){try{const w=fr.contentWindow,d=fr.contentDocument;if(!w||!d)return null;const y=w.scrollY||0;
-  const hs=guideHeads(d).map(h=>({h,top:h.getBoundingClientRect().top+y}));let i=-1;
-  for(let k=0;k<hs.length;k++){if(hs[k].top<=y+8)i=k;else break;}
-  const a=i<0?0:hs[i].top,b=i+1<hs.length?hs[i+1].top:d.documentElement.scrollHeight;
-  return {sec:i,head:i<0?'':headText(hs[i].h),frac:Math.max(0,Math.min(1,(y-a)/Math.max(1,b-a)))};}catch(e){return null;}}
-function goToSpot(fr,pos){try{const w=fr.contentWindow,d=fr.contentDocument;if(!w||!d||!pos)return false;const y0=w.scrollY||0;
-  const hs=guideHeads(d).map(h=>({t:headText(h),top:h.getBoundingClientRect().top+y0}));let i=null;
-  if(pos.sec===-1)i=-1;
-  else if(pos.head){const c=hs.map((x,k)=>x.t===pos.head?k:-1).filter(k=>k>=0);if(c.length)i=c.reduce((p,k)=>Math.abs(k-pos.sec)<Math.abs(p-pos.sec)?k:p);}
-  if(i===null)return false; /* that section no longer shows (source off, guide changed) → stay at the top */
-  const a=i<0?0:hs[i].top,b=i+1<hs.length?hs[i+1].top:d.documentElement.scrollHeight;
-  w.scrollTo(0,Math.max(0,a+(+pos.frac||0)*(b-a)));return true;}catch(e){return false;}}
-function saveGuidePos(g,spot,announce){
-  settings.guidepos={gp:1,pack:g._pack,key:guideKey(g),label:guideMeta(g).label,sec:spot?spot.sec:-1,head:spot?spot.head:'',
-    frac:spot?Math.round(spot.frac*1000)/1000:0,at:Date.now()};
-  Store.set(KEY.settings,settings);
-  if(announce||Date.now()-gpAnnounced>45000){gpAnnounced=Date.now();SSSync.changed();}}
+/* v0.7.5 — the last guide read (v0.10.16: the in-guide spot — sec/head/frac, goToSpot — is removed; it never worked). */
+function saveGuidePos(g){
+  settings.guidepos={gp:1,pack:g._pack,key:guideKey(g),label:guideMeta(g).label,at:Date.now()};
+  Store.set(KEY.settings,settings);SSSync.changed();}
 /* The saved guide, if it is readable here now: an active pack, not hidden by source switches (organizeGuides = the topic
    list). Matched by pack + key, else pack + title without its number (a pack update can renumber guides). */
 function resumeTarget(){const p=settings.guidepos;if(!p||!p.key)return null;const flat=[];
