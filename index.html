@@ -1,7 +1,11 @@
 <!--
-  Study Suite  ·  v0.10.16 (beta)
+  Study Suite  ·  v0.10.17 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.10.17 (2026-10-10, topic after the answer): the topic no longer shows before you answer (Alkarim: it can
+  give the answer away). renderQuiz: #qtag visibility follows done (= qRevealed: Practice after Submit, Exam once submitted).
+  renderCard: #sTag visibility follows revealed; the .ctype line drops ' — topic' until revealed. Difficulty badge, Q n / N,
+  timer and Flag unchanged; the explanation/answer header already names the topic.
   Changelog v0.10.16 (2026-10-07, guide spot removed): the in-guide reading spot is gone (Alkarim: never got it to work
   anywhere). Removed: loadGuide's resume branch and fr._stopResume, the frame scroll listener that kept saving the spot, gpTimer,
   guideHeads/headText/guideSpot/goToSpot. Kept: which guide was read last — saveGuidePos(g) on open writes settings.guidepos
@@ -1922,7 +1926,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.10.16';
+const APP_VERSION='0.10.17';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -4101,9 +4105,9 @@ function startSession(){buildSession();studiedThisSession=0;if(sessionQueue.leng
 function presentNext(){if(sessionQueue.length===0){finishSession();return;}currentId=sessionQueue.shift();revealed=false;work={picks:new Set(),pick:null,order:[],pool:null,optorder:null};renderCard();show('study');}
 function finishSession(){$('doneSub').textContent=srsFlagOnly?'You’ve been through every flagged card in this scope.':'Nothing more due in this scope right now.';$('doneStats').textContent=`You reviewed ${studiedThisSession} card${studiedThisSession===1?'':'s'}.`;const m=counts();$('doneStudyMore').style.display=(!srsFlagOnly&&m.nw+m.lr+m.rv>0)?'':'none';show('srsdone');}
 function renderCard(){const c=cardOf(currentId);
-  $('sTag').textContent=`${sysLabel(c.sys).split(' ')[0]} · ${c.topic}`;
+  $('sTag').textContent=`${sysLabel(c.sys).split(' ')[0]} · ${c.topic}`;$('sTag').style.visibility=revealed?'':'hidden'; /* v0.10.17 */
   $('sLeft').textContent=`${sessionQueue.length} left · ${TYPE_LABEL[c.type]||c.type}`;paintCardFlag();
-  let body=`<div class="ctype">${TYPE_LABEL[c.type]||c.type} — ${c.topic}</div>`+renderInteractive(c);
+  let body=`<div class="ctype">${TYPE_LABEL[c.type]||c.type}${revealed?' — '+c.topic:''}</div>`+renderInteractive(c);
   body+= !revealed ? `<div class="showbar"><button class="showbtn" id="showBtn">Show answer</button></div>` : renderAnswer(c)+renderGrades(c);
   $('cardbox').innerHTML=body;wireInteractive(c);try{mountCardWidget(c);}catch(e){}wireGuideLinks($('cardbox'));
   if(!revealed)$('showBtn').addEventListener('click',()=>{revealed=true;renderCard();});else wireGrades(c);}
@@ -4719,7 +4723,7 @@ function startQTick(){clearInterval(qTimerId);qTimerId=setInterval(()=>{
 },1000);}
 function updatePracClock(){const rem=settings.practiceSecs-qelapsed[qcur];const t=$('timer');if(rem>=0){t.classList.remove('over');t.classList.toggle('warn',rem<=15);$('tclock').textContent=fmt(rem);}else{t.classList.add('over');t.classList.remove('warn');$('tclock').textContent='+'+fmt(-rem);}}
 function renderQuiz(){const q=qmap[qorder[qcur]],sel=qans[qcur],done=qRevealed(qcur);
-  $('qtag').textContent=q.topic;$('qdiff').innerHTML=diffBadge(q);$('qpos').textContent=`Q${qcur+1} / ${qorder.length}`;$('pbar').style.width=((qcur+1)/qorder.length*100)+'%';
+  $('qtag').textContent=q.topic;$('qtag').style.visibility=done?'':'hidden'; /* v0.10.17: topic once the answer shows */$('qdiff').innerHTML=diffBadge(q);$('qpos').textContent=`Q${qcur+1} / ${qorder.length}`;$('pbar').style.width=((qcur+1)/qorder.length*100)+'%';
   let html=`<p class="stem"><span class="lead">${qcur+1}.</span> ${q.stem}</p><div class="opts">`;
   const perm=qopt[qcur]||[...q.options.keys()];
   perm.forEach((oi,disp)=>{const o=q.options[oi];let cls='opt';if(!done){if(sel===oi)cls+=' sel';}else{cls+=' locked';if(oi===q.correct)cls+=' correct';else if(sel===oi)cls+=' wrong';}
