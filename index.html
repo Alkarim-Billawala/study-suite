@@ -1,7 +1,17 @@
 <!--
-  Study Suite  ·  v0.11.2 (beta)
+  Study Suite  ·  v0.12.0 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.12.0 (2026-10-18, Future-Features #19 phase 2; Drive Claude/StudySuite/pharm-master-2026-10-18/NOTES.md):
+  the Pharmacology view reads the reference pack 'Pharmacology Index' (id rx_master, from Pack Tools/drug_master.py):
+  each drug card shows the master's Core (mechanism, cautions, adverse, monitoring, interactions), week Dosing lines,
+  then 'Taught in' — one line per switched-on week (week chip → guide, that week's use). Per-week lines the core covers
+  are hidden (Alkarim Q3). Drugs still come ONLY from switched-on week packs (Q4): rx_master never adds a drug and is
+  left out of drugCount/buildDrugIndex as a source. Without rx_master the view is unchanged. Facet text is HTML-decoded
+  (decodeEnt; 8 Year 1 lines showed '&lt;'). Banner with '+ Add' when the index is published but not in the library;
+  library row reads 'N drugs · reference for the Pharmacology view'. Search covers core and taught-in text.
+  Packs whose purpose isn't obvious (Pharmacology Index, The Brain) show a one-line caption from the manifest's `about`
+  (pack_notes.json "about", carried by encrypt_deploy.py) under their row in Study packs and in Your library (Alkarim).
   Changelog v0.11.2 (2026-10-18, queue item 4a — Alkarim: a bookmark, not a flag, for study content; icon only, no text):
   topic-guide bookmarks. settings['bm:'+guideKey] = {fl:1,on,at} (same shape as flags, so merge3 resolves them newest-wins;
   a clear is a tombstone). Bookmark icon (#revBm) beside the search icon in the guide viewer, filled gold when on; a small
@@ -1223,6 +1233,7 @@ section{display:none}section.on{display:block}
 .facetlabel{font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft)}
 .facetval{font-size:14px;line-height:1.5;min-width:0;overflow-wrap:anywhere}
 .facetline{margin:0 0 5px}
+.pharmidx{border:1px dashed var(--line);border-radius:7px;padding:10px 12px;margin:0 0 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:14px;color:var(--ink-soft)}.pharmidx span{flex:1;min-width:180px}.taughtline .srcchip{margin:0 6px 0 0} /* v0.12.0 */
 .srcchip{font-family:var(--font-mono);font-size:10px;border:1px solid var(--line);background:transparent;color:var(--accent);border-radius:9px;padding:1px 8px;margin-left:5px;cursor:pointer;white-space:normal;max-width:100%;overflow-wrap:anywhere;text-align:left;vertical-align:middle}
 .srcchip:hover{background:var(--accent);color:var(--paper)}
 .srcchip:disabled{color:var(--ink-soft);cursor:default;border-style:dashed}
@@ -1280,6 +1291,7 @@ section{display:none}section.on{display:block}
 .dp-course .cnt{margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--ink-soft);background:var(--paper2);border-radius:10px;padding:2px 8px}
 .dp-coursebody{display:flex;flex-direction:column;gap:6px;padding:2px 0 4px 18px;border-left:2px solid var(--line);margin-left:10px}
 .dp-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.dp-about,.pab{flex-basis:100%;font-size:13px;line-height:1.4;color:var(--ink-soft);margin-top:2px} /* v0.12.0 */
 .dp-name{font-family:var(--font-body);font-size:16px;flex:1 1 auto;min-width:180px}
 .dp-add{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;border:1.5px solid var(--accent-soft);background:var(--paper2);color:var(--ink);border-radius:20px;padding:5px 13px;cursor:pointer;transition:.12s}
 .dp-add:hover{background:var(--accent);border-color:var(--accent);color:var(--paper)}
@@ -1983,7 +1995,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.11.2';
+const APP_VERSION='0.12.0';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3139,6 +3151,7 @@ function dpRow(p,isNew){
     }catch(e){btn.disabled=false;btn.textContent=outdated?'↑ Update':'+ Add to library';toast('Could not load that pack — check your connection and try again.');}
   };
   row.appendChild(btn);
+  if(p.about){const ab=document.createElement('div');ab.className='dp-about';ab.textContent=p.about;row.appendChild(ab);} /* v0.12.0: what this pack gives you (pack_notes.json "about") */
   /* per-pack raw-file download — disabled v0.2.16 (packs are bundled; Add covers it). Revive by uncommenting:
   const dl=document.createElement('a');dl.className='dp-dl';dl.href=encodeURI(String(p.file));dl.setAttribute('download','');dl.textContent='⇣ file';row.appendChild(dl); */
   return row;
@@ -4116,7 +4129,8 @@ function libRow(p){const on=p.enabled!==false;const upd=packUpdate(p),stub=!!p.s
   const xoff=!srcXOn(p),nq=stub?Math.max(0,(p.nq||0)-(xoff&&p.nqx||0)):p.questions.length,nc=stub?Math.max(0,(p.nc||0)-(xoff&&p.ncx||0)):p.cards.length,sttag=stub?(on?' · switched on elsewhere — tap to download':' · offloaded') /* v0.6.8: matches the Offload button */:'';
   const sv0=(!stub&&p.sources&&typeof p.sources==='object')?srcVisible(p):null,sv=on?sv0:null; /* v0.6.6: what the source switches leave visible; v0.7.1: a switched-off pack's counts too */
   const srcline=sv?`<div class="srcrow"><button type="button" class="srcbtn${srcOpen.has(p.id)?' on':''}" aria-expanded="${srcOpen.has(p.id)?'true':'false'}">${sv.off?sv.on+' of '+sv.total+' sources':'All sources'} ${srcOpen.has(p.id)?'▴':'▾'}</button></div>`:'';
-  const info=document.createElement('div');info.innerHTML=`<div class="pn">${p.pack}</div><div class="pm">${sv0?sv0.q:nq} questions · ${sv0?sv0.c:nc} cards${sv0&&ng?` · ${sv0.g} guides`:gtag}${vtag}${stub?sttag:updtag}</div>${srcline}`;
+  const info=document.createElement('div');info.innerHTML=p.id===RX_MASTER?`<div class="pn">${p.pack}</div><div class="pm">${stub?"":(p.drugs||[]).length+" drugs · "}reference for the Pharmacology view${vtag}${stub?sttag:updtag}</div>`:`<div class="pn">${p.pack}</div><div class="pm">${sv0?sv0.q:nq} questions · ${sv0?sv0.c:nc} cards${sv0&&ng?` · ${sv0.g} guides`:gtag}${vtag}${stub?sttag:updtag}</div>${srcline}`;
+  {const ab=(manifestEntry(p.id)||{}).about;if(ab){const d2=document.createElement('div');d2.className='pab';d2.textContent=ab;info.appendChild(d2);}} /* v0.12.0 */
   const sl=info.querySelector('.srcbtn');if(sl)sl.onclick=()=>{srcOpen.has(p.id)?srcOpen.delete(p.id):srcOpen.add(p.id);renderHome();};
   if(stub){const dl=document.createElement('button');dl.className='dlbtn';dl.type='button';dl.setAttribute('aria-label','Download '+(p.pack||'pack'));dl.title='Download and switch on';
     dl.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18.5h9.8a4.2 4.2 0 0 0 .6-8.36A5.8 5.8 0 0 0 6.3 9 4.8 4.8 0 0 0 7 18.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 10.5v6M9.5 14l2.5 2.5 2.5-2.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -4447,22 +4461,39 @@ function pharmEscape(t){return String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':
 function classLabel(cls){if(!cls)return 'Other';const slug=String(cls).replace(/^rx:/,'');if(CLASS_LABELS[slug])return CLASS_LABELS[slug];return slug.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());}
 function drugSlug(id){return 'drug_'+String(id).replace(/[^a-z0-9]+/gi,'_');}
 let pharmReturn='home',pharmQuery='',pharmNavOpen=null,pharmGroups=[];
-function drugCount(){const seen=new Set();activePacks().forEach(p=>(Array.isArray(p.drugs)?p.drugs:[]).forEach(d=>{if(d&&d.id&&srcOn(p,d))seen.add(d.id);}));return seen.size;} /* v0.7.1: follows the switches */
+const RX_MASTER='rx_master'; /* v0.12.0: the Pharmacology Index reference pack */
+const _decEl=document.createElement('textarea');
+function decodeEnt(v){const t=String(v==null?'':v);if(!/&(#\d+|#x[0-9a-f]+|[a-z]+);/i.test(t))return t;_decEl.innerHTML=t;return _decEl.value;}
+function pharmMaster(){return packs.find(p=>p.id===RX_MASTER&&p.enabled!==false&&!p.stub&&Array.isArray(p.drugs)&&p.drugs.length)||null;}
+function weekPacks(){return activePacks().filter(p=>p.id!==RX_MASTER);}
+function srcChip(sc){const chip=document.createElement('button');chip.className='srcchip';chip.textContent=srcLabel(sc);
+  if(sc.guide){chip.title='Open '+(sc.topic||'guide');chip.onclick=()=>openGuide(sc.guide,sc.topic||null);}else{chip.disabled=true;}return chip;}
+function drugCardCore(card,d,q){ /* v0.12.0: the index's core first, then week dosing, then the weeks that teach it */
+  const row=(label,fill)=>{const r=document.createElement('div');r.className='facet';const fl=document.createElement('div');fl.className='facetlabel';fl.textContent=label;r.appendChild(fl);
+    const fv=document.createElement('div');fv.className='facetval';fill(fv);r.appendChild(fv);card.appendChild(r);};
+  FACET_ORDER.forEach(([k,flabel])=>{if(k==='use'||k==='dosing')return;const t=d.core[k];if(!t)return;
+    row(flabel,fv=>{const line=document.createElement('div');line.className='facetline';markInto(line,t,q);fv.appendChild(line);});});
+  const dos=d.facets.dosing;if(dos&&dos.length)row('Dosing',fv=>dos.forEach(x=>{const line=document.createElement('div');line.className='facetline';markInto(line,x.text+' ',q);x.srcs.forEach(sc=>{if(sc.week||sc.topic)line.appendChild(srcChip(sc));});fv.appendChild(line);}));
+  const tw=d.taught||[];if(tw.length)row('Taught in',fv=>tw.forEach(t=>{const line=document.createElement('div');line.className='facetline taughtline';line.appendChild(srcChip(t));if(t.use)markInto(line,t.use,q);fv.appendChild(line);}));}
+function drugCount(){const seen=new Set();weekPacks().forEach(p=>(Array.isArray(p.drugs)?p.drugs:[]).forEach(d=>{if(d&&d.id&&srcOn(p,d))seen.add(d.id);}));return seen.size;} /* v0.7.1: follows the switches */
 function buildDrugIndex(){const byId=new Map();
-  activePacks().forEach(p=>{(Array.isArray(p.drugs)?p.drugs:[]).forEach(d=>{if(!d||!d.id||!srcOn(p,d))return; /* v0.6.6 */
+  weekPacks().forEach(p=>{(Array.isArray(p.drugs)?p.drugs:[]).forEach(d=>{if(!d||!d.id||!srcOn(p,d))return; /* v0.6.6 */
     let e=byId.get(d.id);if(!e){e={id:d.id,name:d.name||d.id.replace(/^rx:/,''),cls:d.class||'',facets:{}};byId.set(d.id,e);}
     if(!e.cls&&d.class)e.cls=d.class;
-    const ref=d.ref||{},fc=d.facets||{};
-    Object.keys(fc).forEach(k=>{const text=String(fc[k]==null?'':fc[k]).trim();if(!text)return;
+    const ref=d.ref||{},fc=d.facets||{};(e.taught||(e.taught=[])).push({week:ref.week||p.weeks||p.pack||'',topic:ref.topic||'',guide:ref.guide||'',use:decodeEnt(fc.use).trim()}); /* v0.12.0 */
+    Object.keys(fc).forEach(k=>{const text=decodeEnt(fc[k]).trim(); /* v0.12.0: some packs stored entities */if(!text)return;
       const arr=e.facets[k]||(e.facets[k]=[]);const norm=text.toLowerCase();const hit=arr.find(x=>x.norm===norm);
       const src={week:ref.week||p.weeks||p.pack||'',topic:ref.topic||'',guide:ref.guide||''};
       if(hit){if(!hit.srcs.some(z=>z.week===src.week&&z.topic===src.topic&&z.guide===src.guide))hit.srcs.push(src);}
       else arr.push({text,norm,srcs:[src]});});});});
+  const M=pharmMaster();if(M){const mm=new Map(M.drugs.map(x=>[x.id,x]));byId.forEach(e=>{const x=mm.get(e.id);if(!x||!x.core)return;e.core=x.core;if(x.name)e.name=x.name;if(x.class)e.cls=x.class;});} /* v0.12.0 */
   const groups=new Map();byId.forEach(e=>{const k=e.cls||'';(groups.get(k)||groups.set(k,[]).get(k)).push(e);});
   const out=[...groups.entries()].map(([cls,drugs])=>({cls,label:classLabel(cls),drugs:drugs.sort((a,b)=>a.name.localeCompare(b.name))}));
   out.sort((a,b)=>a.label.localeCompare(b.label));return out;}
 function srcLabel(s){const wk=((s.week||'').split('·')[0]||'').trim()||s.week||'source';return wk+(s.topic?' · '+s.topic:'');}
-function pharmMatch(d,label,q){if(d.name.toLowerCase().includes(q)||label.toLowerCase().includes(q))return true;return Object.keys(d.facets).some(k=>d.facets[k].some(x=>x.norm.includes(q)));}
+function pharmMatch(d,label,q){if(d.name.toLowerCase().includes(q)||label.toLowerCase().includes(q))return true;
+  if(d.core){if(Object.values(d.core).some(t=>String(t).toLowerCase().includes(q)))return true;if((d.taught||[]).some(t=>(t.use||'').toLowerCase().includes(q)||(t.topic||'').toLowerCase().includes(q)))return true;return (d.facets.dosing||[]).some(x=>x.norm.includes(q));} /* v0.12.0: only what the card shows */
+  return Object.keys(d.facets).some(k=>d.facets[k].some(x=>x.norm.includes(q)));}
 /* append text to a node, wrapping case-insensitive matches of q (already lowercased) in <mark> */
 function markInto(node,text,q){if(!q){node.appendChild(document.createTextNode(text));return;}
   const low=text.toLowerCase();let i=0,idx;
@@ -4472,6 +4503,7 @@ function markInto(node,text,q){if(!q){node.appendChild(document.createTextNode(t
 function drugCard(d,label,q){const card=document.createElement('div');card.className='drugcard';card.id=drugSlug(d.id);
   const h=document.createElement('div');h.className='drugname';markInto(h,d.name,q);
   const ch=document.createElement('span');ch.className='drugclass';ch.textContent=label;h.appendChild(ch);card.appendChild(h);
+  if(d.core){drugCardCore(card,d,q);return card;} /* v0.12.0 */
   FACET_ORDER.forEach(([k,flabel])=>{const arr=d.facets[k];if(!arr||!arr.length)return;
     const row=document.createElement('div');row.className='facet';
     const fl=document.createElement('div');fl.className='facetlabel';fl.textContent=flabel;row.appendChild(fl);
@@ -4484,6 +4516,10 @@ function drugCard(d,label,q){const card=document.createElement('div');card.class
     row.appendChild(fv);card.appendChild(row);});
   return card;}
 function renderPharmMain(){const host=$('pharmHost');host.innerHTML='';const q=pharmQuery.trim().toLowerCase();let shown=0;
+  if(!pharmMaster()&&!packs.some(p=>p.id===RX_MASTER)){const mp=manifestEntry(RX_MASTER);if(mp){const b=document.createElement('div');b.className='pharmidx'; /* v0.12.0 */
+    b.innerHTML='<span>Add the <b>Pharmacology Index</b> for one summary per drug, with the weeks that teach it.</span>';const ab=document.createElement('button');ab.className='dp-add';ab.type='button';ab.textContent='+ Add';
+    ab.onclick=async()=>{ab.disabled=true;ab.textContent='Adding…';try{ingestPack(await fetchPackJson(mp),'Pharmacology Index');await persist();renderPharm();toast('Pharmacology Index added.');}catch(e){ab.disabled=false;ab.textContent='+ Add';toast('Couldn’t download it — check your connection and try again.');}};
+    b.appendChild(ab);host.appendChild(b);}}
   pharmGroups.forEach(g=>{const drugs=q?g.drugs.filter(d=>pharmMatch(d,g.label,q)):g.drugs;if(!drugs.length)return;
     const gh=document.createElement('div');gh.className='pharmclass';gh.textContent=g.label;host.appendChild(gh);
     drugs.forEach(d=>{host.appendChild(drugCard(d,g.label,q));shown++;});});
@@ -4494,7 +4530,8 @@ function renderPharmResults(){const nav=$('pharmNav');nav.innerHTML='';const q=p
   const hd2=document.createElement('div');hd2.className='reshead';hd2.textContent=(hits.length?hits.length+' ':'No ')+'match'+(hits.length===1?'':'es');nav.appendChild(hd2);
   hits.forEach(({d,label})=>{const b=document.createElement('button');b.className='revresult';
     const rt=document.createElement('span');rt.className='rt';rt.textContent=d.name+' · '+label;b.appendChild(rt);
-    let snip='';for(const pair of FACET_ORDER){const arr=d.facets[pair[0]];if(!arr)continue;const mm=arr.find(x=>x.norm.includes(q));if(mm){snip=mm.text;break;}}
+    let snip='';if(d.core){const pool=[...Object.values(d.core).map(String),...(d.taught||[]).map(t=>t.use||'')];snip=pool.find(t=>t.toLowerCase().includes(q))||'';} /* v0.12.0 */
+    if(!snip)for(const pair of FACET_ORDER){const arr=d.facets[pair[0]];if(!arr)continue;const mm=arr.find(x=>x.norm.includes(q));if(mm){snip=mm.text;break;}}
     if(!snip){for(const pair of FACET_ORDER){const arr=d.facets[pair[0]];if(arr&&arr[0]){snip=arr[0].text;break;}}}
     if(snip){const rs=document.createElement('span');rs.className='rs';const idx=snip.toLowerCase().indexOf(q);
       if(idx>=0){const st=Math.max(0,idx-30),en=Math.min(snip.length,idx+q.length+50);
@@ -4518,7 +4555,7 @@ function pharmAnchor(){const cards=[...$('pharmHost').querySelectorAll('.drugcar
   const el=(f&&cards.includes(f)&&vis(f))?f:cards.find(vis);return el?{id:el.id,top:el.getBoundingClientRect().top}:null;}
 function restorePharmAnchor(a){const el=document.getElementById(a.id);if(!el)return;const d=el.getBoundingClientRect().top-a.top;if(d)window.scrollBy({top:d,left:0,behavior:'instant'});}
 function renderPharm(){pharmGroups=buildDrugIndex();const total=pharmGroups.reduce((n,g)=>n+g.drugs.length,0);
-  $('pharmCount').textContent=total?total+' drug'+(total===1?'':'s')+' · '+pharmGroups.length+' class'+(pharmGroups.length===1?'':'es')+' · merged across your active packs':'';
+  $('pharmCount').textContent=total?total+' drug'+(total===1?'':'s')+' · '+pharmGroups.length+' class'+(pharmGroups.length===1?'':'es')+' · merged across your active packs'+(pharmMaster()?' · with the Pharmacology Index':''):'';
   if(!total){$('pharmHost').innerHTML='<div class="revempty">No pharmacology data in your active packs yet. Newer packs embed a drug index here — enable more packs to grow it.</div>';$('pharmNav').innerHTML='';setPharmDrawer(false);return;}
   renderPharmMain();updatePharmDrawer();}
 function setHdrH(){const h=document.querySelector('header.top');if(h)document.documentElement.style.setProperty('--hdrh',h.offsetHeight+'px');} /* v0.8.1 */
