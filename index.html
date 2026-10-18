@@ -1,7 +1,11 @@
 <!--
-  Study Suite  ·  v0.11.0 (beta)
+  Study Suite  ·  v0.11.1 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.11.1 (2026-10-18, queue item 3, parked since v0.6.8): packs your account has that this device couldn't
+  download yet (SSSync meta.missing) now show in Your library in their usual place (grouped and sorted as if present), as a
+  greyed 'waiting to download' row with a 'Tap to retry' button (pendingRefs/pendingRow → SSSync.retryMissing()).
+  Before, they were only a toast and otherwise invisible. (Alkarim: not a box at the top.)
   Changelog v0.11.0 (2026-10-18, Gaps — Future-Features #11; plan Drive Claude/StudySuite/next-queue-2026-10-18/
   deficit-mapping-plan-v1.1): (1) Gaps page (section#gaps): topics (item _sec) ranked worst first by
   (questions wrong last time + cards forgotten) / (questions answered + cards started), computed on the device, never
@@ -1259,6 +1263,8 @@ section{display:none}section.on{display:block}
 .dp-school:hover{border-color:var(--accent-soft)}
 .dp-school.on{border-color:var(--accent);background:var(--accent);color:var(--paper)}
 .dp-list{display:flex;flex-direction:column;gap:6px}
+/* v0.11.1: a pack waiting to download keeps its place in the library */
+.pendrow .pm{font-style:italic}.packrow.off.pendrow .pkacts{opacity:1} /* the retry button stays clearly tappable */
 .dp-year{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);border-bottom:1px solid var(--line);padding-bottom:4px;margin-top:4px}
 .dp-term{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:7px 0 2px 10px;padding-left:8px;border-left:2px solid var(--line)}
 .dp-year:first-child{margin-top:0}
@@ -1967,7 +1973,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.11.0';
+const APP_VERSION='0.11.1';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -4105,10 +4111,19 @@ function libRow(p){const on=p.enabled!==false;const upd=packUpdate(p),stub=!!p.s
   const b=document.createElement('button');b.className='rm';b.textContent='Remove';b.onclick=()=>removePack(p.id);acts.appendChild(b);
   row.appendChild(left);row.appendChild(acts);if(!(sv&&srcOpen.has(p.id)))return row;
   const wrap=document.createElement('div');wrap.className='packwrap';row.classList.add('srcopen');wrap.appendChild(row);wrap.appendChild(srcPanel(p,sv));return wrap;}
+function pendingRefs(){try{const m=SSSync.meta();return ((m&&m.missing)||[]).filter(e=>e&&e.id&&!packs.some(p=>p.id===e.id)).map(e=>Object.assign({},e,{_pending:true}));}catch(e){return [];}} /* v0.11.1 */
+function pendingRow(p){const row=document.createElement('div');row.className='packrow off stubrow pendrow';
+  const left=document.createElement('div');left.className='pkleft';const info=document.createElement('div');
+  info.innerHTML=`<div class="pn">${acctEsc(p.pack||p.id)}</div><div class="pm">waiting to download${p.version?' · v'+acctEsc(String(p.version)):''}</div>`;left.appendChild(info);
+  const acts=document.createElement('div');acts.className='pkacts';const b=document.createElement('button');b.className='upd';b.type='button';b.textContent='Tap to retry';
+  b.onclick=async()=>{b.disabled=true;b.textContent='Trying…';let ok=false;try{ok=await SSSync.retryMissing();}catch(e){}
+    if(ok){toast('Downloaded.');renderHome();}
+    else{b.disabled=false;b.textContent='Tap to retry';toast('Still couldn’t download it. Check your connection, or try again later.',4000);}};
+  acts.appendChild(b);row.appendChild(left);row.appendChild(acts);return row;}
 function renderLibrary(){try{renderPackNews();}catch(e){}
-  const pl=$('packList');pl.innerHTML='';
-  if(!packs.length)return;
-  const schools=[...new Set(packs.map(p=>p.school||'Other'))];
+  const pl=$('packList');pl.innerHTML='';const libItems=packs.concat(pendingRefs()); /* v0.11.1: waiting-to-download packs keep their place */
+  if(!libItems.length)return;
+  const schools=[...new Set(libItems.map(p=>p.school||'Other'))];
   if(libSchool===null||!schools.includes(libSchool))libSchool=schools[0]||null;
   if(schools.length){ // school chips across the top, mirroring the Default study packs panel
     const sh=document.createElement('div');sh.className='dp-schools';
@@ -4117,7 +4132,7 @@ function renderLibrary(){try{renderPackNews();}catch(e){}
     pl.appendChild(sh);}
   // group within the selected school: year → term → course → packs (term optional)
   const years=new Map();
-  packs.forEach(p=>{if((p.school||'Other')!==libSchool)return;
+  libItems.forEach(p=>{if((p.school||'Other')!==libSchool)return;
     const y=p.year||'Other packs',t=p.term||'',c=courseLabel(p.course);
     if(!years.has(y))years.set(y,new Map());
     const ts=years.get(y);if(!ts.has(t))ts.set(t,new Map());
@@ -4142,7 +4157,7 @@ function renderLibrary(){try{renderPackNews();}catch(e){}
           if(!open)return;
         }
         const wrap=document.createElement('div');wrap.className='dp-coursebody';
-        sorted.forEach(p=>wrap.appendChild(libRow(p)));
+        sorted.forEach(p=>wrap.appendChild(p._pending?pendingRow(p):libRow(p)));
         host.appendChild(wrap);
       });
     });
