@@ -1,7 +1,12 @@
 <!--
-  Study Suite  ·  v0.11.1 (beta)
+  Study Suite  ·  v0.11.2 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.11.2 (2026-10-18, queue item 4a — Alkarim: a bookmark, not a flag, for study content; icon only, no text):
+  topic-guide bookmarks. settings['bm:'+guideKey] = {fl:1,on,at} (same shape as flags, so merge3 resolves them newest-wins;
+  a clear is a tombstone). Bookmark icon (#revBm) beside the search icon in the guide viewer, filled gold when on; a small
+  bookmark mark in the guide list; a 'Bookmarked guides' section at the top of the Flagged page (Open, ✕); the Home
+  Flagged link adds the bookmark count and shows when there are only bookmarks. Guide-level only (no section bookmarks).
   Changelog v0.11.1 (2026-10-18, queue item 3, parked since v0.6.8): packs your account has that this device couldn't
   download yet (SSSync meta.missing) now show in Your library in their usual place (grouped and sorted as if present), as a
   greyed 'waiting to download' row with a 'Tap to retry' button (pendingRefs/pendingRow → SSSync.retryMissing()).
@@ -1316,6 +1321,11 @@ section{display:none}section.on{display:block}
 .revitem.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .revitem .gn{font-family:var(--font-mono);font-size:10px;color:var(--ink-soft);background:var(--paper2);border-radius:9px;padding:1px 6px;flex:0 0 auto}
 .revitem.on .gn{color:var(--paper);background:rgba(255,255,255,.18)}
+/* v0.11.2 bookmarks */
+.revbm[aria-pressed="true"]{color:var(--gold)}.revbm svg{display:block}
+.revitem .gbm{flex:0 0 auto;margin-left:auto;color:var(--gold);display:inline-flex;align-self:center}
+.bmi{display:inline-block;vertical-align:-2px;color:var(--gold)}
+.bmhd .fgn{display:flex;align-items:center;gap:6px}
 .revmain{width:100%}
 .guideframe{width:100%;height:calc(100vh - 251px);min-height:420px;border:1.5px solid var(--line);border-radius:10px;background:#fff}
 .sizer{margin-left:auto;display:flex;align-items:center;gap:6px}
@@ -1766,7 +1776,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
   <!-- CONTENT REVIEWER -->
   <section id="reviewer">
-    <div class="revbar"><button class="minor backbtn" id="revBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2" id="revBackTo"></span></button><h2 class="revtitle" id="revTitle" role="button" tabindex="0" aria-expanded="false" aria-controls="guideList" title="Show or hide the topic list">Topic Guides <span class="revcaret" aria-hidden="true">▾</span></h2><button class="revfind" id="revFind" type="button" title="Search topics & content" aria-label="Search topics and content"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><line x1="21" y1="21" x2="15.5" y2="15.5"></line></svg></button>
+    <div class="revbar"><button class="minor backbtn" id="revBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2" id="revBackTo"></span></button><h2 class="revtitle" id="revTitle" role="button" tabindex="0" aria-expanded="false" aria-controls="guideList" title="Show or hide the topic list">Topic Guides <span class="revcaret" aria-hidden="true">▾</span></h2><button class="revfind" id="revFind" type="button" title="Search topics & content" aria-label="Search topics and content"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><line x1="21" y1="21" x2="15.5" y2="15.5"></line></svg></button><button class="revfind revbm" id="revBm" type="button" title="Bookmark this guide" aria-label="Bookmark this guide" aria-pressed="false"></button>
       <div class="sizer">
         <div class="szgrp">
           <button class="minor" id="zoomOut" title="Smaller text">−</button>
@@ -1973,7 +1983,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.11.1';
+const APP_VERSION='0.11.2';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -2386,6 +2396,13 @@ function isFlagged(id){const v=id&&settings[FLAGK+id];return !!(v&&v.fl&&v.on);}
 function saveFlags(){Store.set(KEY.settings,settings);SSSync.changed();}
 function setFlags(ids,on){const t=Date.now();ids.forEach(id=>{if(id)settings[FLAGK+id]={fl:1,on:!!on,at:t};});saveFlags();}
 function setFlag(id,on){setFlags([id],on);}
+const BMK='bm:'; /* v0.11.2: topic-guide bookmarks — same {fl,on,at} shape as flags, so they sync and merge the same way */
+const BM_SVG=on=>`<svg viewBox="0 0 24 24" width="16" height="16" fill="${on?'currentColor':'none'}" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg>`;
+function isBookmarked(k){const v=k&&settings[BMK+k];return !!(v&&v.fl&&v.on);}
+function setBookmark(k,on){if(!k)return;settings[BMK+k]={fl:1,on:!!on,at:Date.now()};saveFlags();}
+function bookmarkOnKeys(){return Object.keys(settings).filter(k=>k.startsWith(BMK)&&settings[k]&&settings[k].fl&&settings[k].on).map(k=>k.slice(BMK.length));}
+function bookmarkedGuides(){const on=new Set(bookmarkOnKeys());return activeGuides().filter(g=>on.has(guideKey(g)));}
+function syncBmBtn(){const b=$('revBm');if(!b)return;const on=isBookmarked(curGuideKey);b.innerHTML=BM_SVG(on);b.setAttribute('aria-pressed',on?'true':'false');b.title=on?'Remove bookmark':'Bookmark this guide';b.setAttribute('aria-label',b.title);}
 function flagOnIds(){return Object.keys(settings).filter(k=>k.startsWith(FLAGK)&&settings[k]&&settings[k].fl&&settings[k].on).map(k=>k.slice(FLAGK.length));}
 /* A session saved by an older client may carry its own session flags (qflag) — adopt them unless this id already has an entry. */
 function flagMigrate(ids,fl){const t=Date.now();let n=0;(ids||[]).forEach((id,i)=>{if(fl&&fl[i]&&id&&!settings[FLAGK+id]){settings[FLAGK+id]={fl:1,on:true,at:t};n++;}});if(n)saveFlags();}
@@ -3965,13 +3982,17 @@ function flagRow(x,isQ){const h=isQ?qhist[x.id]:null,gf=guideFile(x),gs=(x.guide
   const ty=isQ?'Question':'Card · '+acctEsc(TYPE_LABEL[x.type]||x.type||'');
   return `<div class="flagrow"><div class="frm"><div class="frt">${acctEsc(plainText(isQ?x.stem:(x.prompt||x.text)))||'—'}</div><div class="frmeta"><span>${ty}</span>${res}${gok?`<a class="fguide" href="javascript:void(0)" data-f="${encodeURIComponent(gf)}" data-s="${encodeURIComponent(gs)}">Open guide</a>`:''}</div></div><button class="fx" type="button" data-id="${encodeURIComponent(x.id)}" aria-label="Clear this flag" title="Clear this flag">✕</button></div>`;}
 function renderFlagged(){const fi=flaggedItems(),host=$('flagList');
+  const bg=bookmarkedGuides(),bmBlock=bg.length?`<div class="flaggrp bmgrp"><div class="flaghd bmhd"><span class="fgn"><span class="bmi">${BM_SVG(true)}</span>Topic guides</span><span class="fgc">${bg.length}</span></div>${bg.map(g=>`<div class="flagrow"><div class="frm"><div class="frt">${acctEsc(String(g.title||g.file).replace(/^Week\s*[\d–-]+\s*·\s*/i,''))}</div><div class="frmeta"><span>${acctEsc(g._packName||'')}</span><a class="fguide bmopen" href="javascript:void(0)" data-k="${encodeURIComponent(guideKey(g))}">Open guide</a></div></div><button class="fx bmx" type="button" data-k="${encodeURIComponent(guideKey(g))}" aria-label="Remove bookmark" title="Remove bookmark">✕</button></div>`).join('')}</div>`:''; /* v0.11.2 */
+  const wireBm=()=>{host.querySelectorAll('.bmopen').forEach(a=>a.onclick=e=>{e.preventDefault();const g=activeGuides().find(x=>guideKey(x)===decodeURIComponent(a.dataset.k));if(g)openGuide(guideKey(g));});
+    host.querySelectorAll('.bmx').forEach(b=>b.onclick=()=>{setBookmark(decodeURIComponent(b.dataset.k),false);renderFlagged();});};
   $('flagCount').textContent=fi.n?`${fi.n} flagged item${fi.n===1?'':'s'}`:'';
   const hd=$('flagHidden');hd.hidden=!fi.hidden;hd.textContent=fi.hidden?`${fi.hidden} flagged item${fi.hidden===1?' is':'s are'} hidden by your source settings.`:'';
   $('flagClearAll').style.display=(fi.n||fi.hidden)?'':'none';
-  if(!fi.n){host.innerHTML='<p class="flagempty">Nothing flagged'+(fi.hidden?' that your sources show':'')+'. Tap ⚑ Flag on a question or card to keep it here.</p>';return;}
-  host.innerHTML=fi.groups.map((g,gi)=>`<div class="flaggrp"><div class="flaghd"><span class="fgn">${acctEsc(g.p.pack||g.p.id)}</span><span class="fgc">${g.qs.length+g.cs.length}</span><button class="minor" type="button" data-gclr="${gi}">Clear</button></div>${g.qs.map(q=>flagRow(q,true)).join('')}${g.cs.map(c=>flagRow(c,false)).join('')}</div>`).join('');
+  if(!fi.n){host.innerHTML=bmBlock+(bg.length?'':'<p class="flagempty">Nothing flagged'+(fi.hidden?' that your sources show':'')+'. Tap ⚑ Flag on a question or card to keep it here.</p>');wireBm();return;}
+  host.innerHTML=bmBlock+fi.groups.map((g,gi)=>`<div class="flaggrp"><div class="flaghd"><span class="fgn">${acctEsc(g.p.pack||g.p.id)}</span><span class="fgc">${g.qs.length+g.cs.length}</span><button class="minor" type="button" data-gclr="${gi}">Clear</button></div>${g.qs.map(q=>flagRow(q,true)).join('')}${g.cs.map(c=>flagRow(c,false)).join('')}</div>`).join('');
   host.querySelectorAll('.fx').forEach(b=>b.onclick=()=>{setFlag(decodeURIComponent(b.dataset.id),false);renderFlagged();});
   host.querySelectorAll('.fguide').forEach(a=>a.onclick=e=>{e.preventDefault();openGuide(decodeURIComponent(a.dataset.f),decodeURIComponent(a.dataset.s||''));});
+  wireBm(); /* v0.11.2 */
   host.querySelectorAll('[data-gclr]').forEach(b=>b.onclick=()=>{const g=fi.groups[+b.dataset.gclr];if(!g)return;const ids=[...g.qs,...g.cs].map(x=>x.id),n=ids.length;
     confirmDialog(`Clear the ${n} flag${n===1?'':'s'} in ${g.p.pack||g.p.id}?`,{confirmText:'Clear',danger:true},()=>{setFlags(ids,false);renderFlagged();toast(`Cleared ${n} flag${n===1?'':'s'}.`);});});}
 function clearAllFlags(){const fi=flaggedItems(),ids=fi.groups.flatMap(g=>[...g.qs,...g.cs].map(x=>x.id)).concat(fi.hiddenIds),n=ids.length;if(!n)return;
@@ -4056,10 +4077,11 @@ function renderHome(){
   $('mReview').classList.toggle('dim',nC===0);
   $('mPractice').classList.toggle('dim',tp===0);
   $('mExam').classList.toggle('dim',tp===0);
-  {const nF=flaggedItems().n;$('flagHomeBtn').hidden=!nF;$('flagHomeN').textContent=nF; /* v0.8.0: the Flagged page link */
+  {const nF=flaggedItems().n,nB=bookmarkedGuides().length;$('flagHomeBtn').hidden=!nF&&!nB; /* v0.8.0: the Flagged page link; v0.11.2: + bookmarks */
+   $('flagHomeBtn').innerHTML=(nF?'<span class="fi">⚑</span> Flagged (<span id="flagHomeN">'+nF+'</span>)':'')+(nB?(nF?' · ':'')+'<span class="bmi">'+BM_SVG(true)+'</span> '+nB:'');
    const gs=gapStats(),tried=gs.some(e=>e.qA||e.cS),nW=gs.filter(gapWeak).length; /* v0.11.0: the Gaps link, once anything has been tried */
    $('gapsHomeBtn').hidden=!tried;$('gapsHomeN').textContent=nW?` · ${nW} weak topic${nW===1?'':'s'}`:'';
-   $('flagHome').hidden=!nF&&!tried;}
+   $('flagHome').hidden=!nF&&!nB&&!tried;}
   // topic-guides panel — hidden entirely when no active pack bundles guides
   $('revPanel').style.display=nG?'':'none';
   $('revPanelDesc').textContent=`${nG} topic guide${nG===1?'':'s'} bundled in your active packs.`;
@@ -4566,12 +4588,13 @@ function renderGuideList(){const gl=$('guideList');gl.innerHTML='';
     grp.items.forEach(it=>{const b=document.createElement('button');b.className='revitem'+(guideKey(it.g)===curGuideKey?' on':'');b.dataset.k=guideKey(it.g);
       if(it.badge){const s=document.createElement('span');s.className='gn';s.textContent=it.badge;b.appendChild(s);}
       const t=document.createElement('span');t.textContent=it.label;b.appendChild(t);
+      if(isBookmarked(guideKey(it.g))){const bm=document.createElement('span');bm.className='gbm';bm.title='Bookmarked';bm.innerHTML=BM_SVG(true);b.appendChild(bm);} /* v0.11.2 */
       const hs=hiddenSections(it.g);if(hs.hidden){const s2=document.createElement('span');s2.className='gsub';s2.textContent=plural(hs.hidden,'section')+' hidden · '+hs.codes.join(', ')+' off';t.appendChild(s2);} /* v0.6.6 */
       b.onclick=()=>{revNavOpen=false;loadGuide(it.g,null);};wrap.appendChild(b);});
     gl.appendChild(wrap);});
   filterGuideList();
   applyRevNav();} /* v0.7.8: applyRevNav centres the current guide when the list is open (scrollIntoView could move the page) */
-function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();
+function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();syncBmBtn(); /* v0.11.2 */
   const host=$('guideHost');host.innerHTML='';
   const fr=document.createElement('iframe');fr.className='guideframe';fr.setAttribute('sandbox','allow-same-origin allow-scripts allow-modals'); /* v0.10.15: WebKit ignores listeners in a script-less frame; the CSP in guideSrcdoc keeps guide scripts off */
   fr.onload=()=>{try{const d=fr.contentDocument;if(!d)return;try{wireAtlasLinks(d);}catch(e){} /* v0.10.9 */ try{mountGuideWidgets(d,g,anchorOrSection);}catch(e){} /* v0.9.0 · v0.10.0: state links */try{hideOffSections(d,g);}catch(e){}let el=null; /* v0.6.6 */
@@ -5101,7 +5124,8 @@ $('openPharm').addEventListener('click',()=>{if(drugCount())openPharm();});
 $('pharmBack').addEventListener('click',()=>renderHome());
 $('atlasBack').addEventListener('click',()=>{if(atlasReturn==='reviewer'&&activeGuides().length){show('reviewer');}else renderHome();}); /* v0.10.4 */
 $('openAtlas').addEventListener('click',()=>{if(atlasWidgets().length)openAtlas();});
-$('flagHomeBtn').addEventListener('click',openFlagged);$('gapsHomeBtn').addEventListener('click',()=>openGaps('home'));$('srsGapsBtn').addEventListener('click',()=>openGaps('srs'));$('qGapsBtn').addEventListener('click',()=>openGaps('quiz'));$('gapsBack').addEventListener('click',gapsBack); /* v0.11.0 */
+$('flagHomeBtn').addEventListener('click',openFlagged);$('revBm').addEventListener('click',()=>{if(!curGuideKey)return;const on=!isBookmarked(curGuideKey);setBookmark(curGuideKey,on);syncBmBtn();renderGuideList();toast(on?'Bookmarked.':'Bookmark removed.');}); /* v0.11.2 */
+$('gapsHomeBtn').addEventListener('click',()=>openGaps('home'));$('srsGapsBtn').addEventListener('click',()=>openGaps('srs'));$('qGapsBtn').addEventListener('click',()=>openGaps('quiz'));$('gapsBack').addEventListener('click',gapsBack); /* v0.11.0 */
 document.querySelectorAll('#gaps [data-gv]').forEach(b=>b.addEventListener('click',()=>{gapsView=b.dataset.gv;renderGaps();}));
 $('srsAgain').addEventListener('change',e=>{srsAgainOnly=!!e.target.checked;renderSrs();});$('flagBack').addEventListener('click',()=>renderHome());$('flagClearAll').addEventListener('click',clearAllFlags); /* v0.8.0 */
 $('srsFlt').addEventListener('change',e=>{srsFlagOnly=!!e.target.checked;renderSrs();});
