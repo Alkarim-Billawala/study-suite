@@ -1,7 +1,17 @@
 <!--
-  Study Suite  ·  v0.10.18 (beta)
+  Study Suite  ·  v0.11.0 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.11.0 (2026-10-18, Gaps — Future-Features #11; plan Drive Claude/StudySuite/next-queue-2026-10-18/
+  deficit-mapping-plan-v1.1): (1) Gaps page (section#gaps): topics (item _sec) ranked worst first by
+  (questions wrong last time + cards forgotten) / (questions answered + cards started), computed on the device, never
+  stored; ranked once 5 items or a third of the topic are tried (GAPS_MIN / GAPS_FRAC), otherwise listed under
+  'Not enough answers yet'; untried items are coverage only. Views: by week, or worst first. Practise = 20 questions
+  (wrong last time, untried, oldest correct) via beginPractice(); Review cards = gapsQueue (forgotten, due, new; no
+  daily new cap). (2) sched[id].lg = last grade (1 Again … 4 Easy), set in grade(); rides the card merge (later review
+  wins); 'forgotten' = lg===1, or lapses>0 for cards graded before v0.11.0. (3) Review: 'Cards marked Again' toggle
+  (srsAgainOnly), combinable with Flagged only (srsPick). (4) Gaps links: Home (beside Flagged; 'N weak topics' =
+  ranked with score >= 25%), question map (not during an unsubmitted exam; practice is saved first), Review, results.
   Changelog v0.10.18 (2026-10-14, atlas UI): (1) Labels off no longer hides the "Structures on this slice" picker
   (.sswlv stays; only Quiz me hides it). (2) With Labels off, a selected structure shows just its own gutter label and
   leader on a wide view (.nolab shows .sswov, only .sswlab.sswlon), its in-place name (.ti.sswlon) on a phone or zoomed view.
@@ -1385,6 +1395,24 @@ section{display:none}section.on{display:block}
 .flaghome{display:flex;justify-content:flex-end;margin:6px 0 0}.flaghome[hidden]{display:none}
 .flaglink{background:transparent;border:1px solid var(--line);border-radius:20px;padding:6px 13px;font-family:var(--font-mono);font-size:12px;letter-spacing:.03em;color:var(--ink);cursor:pointer}
 .flaglink:hover{border-color:var(--gold)}.flaglink .fi{color:var(--gold)}
+/* v0.11.0 Gaps */
+.flaghome{gap:8px;flex-wrap:wrap}.flaglink .gi{color:var(--accent)}.flaglink[hidden]{display:none}
+.gapsintro{font-size:14px;color:var(--ink-soft);margin:0 0 12px;line-height:1.5}
+.gapsview{display:flex;gap:6px;margin:0 0 14px}.gapsview .minor.on{border-color:var(--accent);color:var(--accent)}
+.gapgrp{margin:0 0 20px}
+.gaphd{display:flex;align-items:baseline;gap:10px;border-bottom:1px solid var(--line);padding:0 0 6px;margin:0 0 8px;flex-wrap:wrap}
+.gaphd .ggn{font-family:var(--font-head);font-weight:600;font-size:17px;color:var(--ink);flex:1;min-width:0;overflow-wrap:anywhere}
+.gaphd .ggs{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft)}
+.gaprow{border:1px solid var(--line);background:var(--paper);border-radius:7px;padding:10px 12px;margin-bottom:7px}
+.gaprow .gtop{display:flex;align-items:baseline;gap:10px}.gaprow .gname{flex:1;min-width:0;font-weight:600;color:var(--ink);overflow-wrap:anywhere}
+.gaprow .gpct{font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);white-space:nowrap}
+.gaprow .gbar{height:6px;border-radius:3px;background:var(--paper2);margin:7px 0 6px;overflow:hidden}.gaprow .gbar i{display:block;height:100%;background:var(--green)}
+.gaprow.w1 .gbar i{background:var(--gold)}.gaprow.w2 .gbar i{background:var(--accent)}
+.gaprow .gmeta{font-size:12.5px;color:var(--ink-soft);line-height:1.45}
+.gaprow .gact{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}.gaprow .gact .minor{padding:6px 12px}
+.gapfew{margin:6px 0 0}.gapfew>summary{cursor:pointer;font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);padding:4px 0}
+.gapfew .gaprow{opacity:.85}
+.gapempty{font-size:14px;color:var(--ink-soft)}
 .flagtop{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:0 0 12px}
 .flagcount{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
 .flaghidden{font-size:13px;color:var(--ink-soft);border-left:3px solid var(--gold);padding:4px 10px;margin:0 0 14px}
@@ -1559,7 +1587,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="mode" id="mPractice"><div class="mt">Practice</div><div class="md">The question bank one at a time — the answer and a topic-guide link the moment you submit. New questions first; see your prior answer on repeats.</div><div class="feat" id="featPractice">— questions</div></div>
       <div class="mode" id="mExam"><div class="mt">Exam</div><div class="md">A timed, scored test built from fresh questions and weighted your way. Answers hidden until you submit; leave part-way and resume later.</div><div class="feat" id="featExam">— per test</div></div>
     </div>
-    <div class="flaghome" id="flagHome" hidden><button type="button" class="flaglink" id="flagHomeBtn"><span class="fi">⚑</span> Flagged (<span id="flagHomeN">0</span>)</button></div>
+    <div class="flaghome" id="flagHome" hidden><button type="button" class="flaglink" id="gapsHomeBtn" hidden><span class="gi">◔</span> Gaps<span id="gapsHomeN"></span></button><button type="button" class="flaglink" id="flagHomeBtn"><span class="fi">⚑</span> Flagged (<span id="flagHomeN">0</span>)</button></div>
 
 
     <div class="revpanel" id="revPanel">
@@ -1688,6 +1716,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="cbox revc"><div class="n" id="cRev">0</div><div class="l">To review</div></div>
     </div>
     <div class="srsflt"><label class="fltchk"><input type="checkbox" id="srsFlt"><span>⚑ Flagged only</span></label><span class="fltn" id="srsFltN"></span></div>
+    <div class="srsflt"><label class="fltchk"><input type="checkbox" id="srsAgain"><span>↺ Cards marked Again</span></label><span class="fltn" id="srsAgainN"></span><button type="button" class="flaglink" id="srsGapsBtn" style="margin-left:6px"><span class="gi">◔</span> Gaps</button></div>
     <div class="scopeline" id="scopeline"></div>
     <div class="studybar"><button class="btn" id="studyBtn">Study now</button><button class="btn ghost sm" id="browseBtn">Browse cards</button></div>
     <div class="panelhdr" id="topicToggle"><span class="ph-t">▸ Choose topics</span><span class="ph-r" id="topicSummary"></span></div>
@@ -1719,6 +1748,14 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
     <div class="flagtop"><span class="flagcount" id="flagCount"></span><button class="minor" type="button" id="flagClearAll">Clear all flags</button></div>
     <p class="flaghidden" id="flagHidden" hidden></p>
     <div id="flagList"></div>
+  </section>
+
+  <!-- GAPS (v0.11.0) -->
+  <section id="gaps">
+    <div class="revbar"><button class="minor backbtn" id="gapsBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2" id="gapsBackTo">to Home</span></button><h2>Gaps</h2></div>
+    <p class="gapsintro">Your weakest topics first, from the questions you got wrong last time and the cards you keep forgetting. Questions and cards you haven’t tried don’t count against you.</p>
+    <div class="gapsview" role="group" aria-label="How to list topics"><button class="minor on" type="button" data-gv="week">By week</button><button class="minor" type="button" data-gv="all">Worst first</button></div>
+    <div id="gapsList"></div>
   </section>
 
   <!-- CONTENT REVIEWER -->
@@ -1872,7 +1909,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="mid"><button class="nbtn flagbtn" id="flagBtn">⚑ Flag</button><button class="nbtn primary" id="submitAnsBtn" style="display:none">Submit<span class="sa-long"> answer</span></button></div>
       <button class="nbtn" id="nextBtn">Next →</button>
     </div>
-    <div class="palette"><div class="ttl"><span class="qflhd"><span id="paletteTitle">Question map</span><button class="qflbtn" id="qflBtn" type="button" aria-expanded="false" aria-controls="qflBox">Filter ▾</button></span><span id="answeredCount"></span></div><div class="qflbox" id="qflBox" role="group" aria-label="Filter the question map" hidden><label class="fltchk"><input type="checkbox" data-f="u"><span>Unanswered</span></label><label class="fltchk"><input type="checkbox" data-f="a"><span>Answered</span></label><label class="fltchk"><input type="checkbox" data-f="f"><span>⚑ Flagged</span></label><label class="fltchk"><input type="checkbox" data-f="w"><span>Incorrect</span></label><label class="fltchk"><input type="checkbox" data-f="c"><span>Correct</span></label><button class="minor" id="qflAll" type="button">Show all</button></div><div class="grid" id="grid"></div><div class="submitbar"><button class="btn" id="finishBtn"></button></div></div>
+    <div class="palette"><div class="ttl"><span class="qflhd"><span id="paletteTitle">Question map</span><button class="qflbtn" id="qflBtn" type="button" aria-expanded="false" aria-controls="qflBox">Filter ▾</button><button class="qflbtn" id="qGapsBtn" type="button" title="Your weakest topics">◔ Gaps</button></span><span id="answeredCount"></span></div><div class="qflbox" id="qflBox" role="group" aria-label="Filter the question map" hidden><label class="fltchk"><input type="checkbox" data-f="u"><span>Unanswered</span></label><label class="fltchk"><input type="checkbox" data-f="a"><span>Answered</span></label><label class="fltchk"><input type="checkbox" data-f="f"><span>⚑ Flagged</span></label><label class="fltchk"><input type="checkbox" data-f="w"><span>Incorrect</span></label><label class="fltchk"><input type="checkbox" data-f="c"><span>Correct</span></label><button class="minor" id="qflAll" type="button">Show all</button></div><div class="grid" id="grid"></div><div class="submitbar"><button class="btn" id="finishBtn"></button></div></div>
   </section>
 
   <!-- RESULTS -->
@@ -1930,7 +1967,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.10.18';
+const APP_VERSION='0.11.0';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3893,6 +3930,7 @@ function gotoSec(t){
       if(deck().length)openReview();else renderHome();
       break;
     case 'flagged': openFlagged(); break; /* v0.8.0 */
+    case 'gaps': renderGaps();show('gaps'); break; /* v0.11.0 */
     case 'atlas': if(atlasWidgets().length)openAtlas();else renderHome(); break; /* v0.10.4 */
     default: renderHome();
   }
@@ -3934,6 +3972,65 @@ function clearAllFlags(){const fi=flaggedItems(),ids=fi.groups.flatMap(g=>[...g.
   confirmDialog(`Clear all ${n} flag${n===1?'':'s'}?${fi.hidden?` This includes ${fi.hidden} hidden by your source settings.`:''}`,{confirmText:'Clear all',danger:true},
     ()=>{setFlags(ids,false);renderFlagged();toast('All flags cleared.');});}
 
+/* ===== GAPS (v0.11.0, Future-Features #11) — weakest topics first, from answers already given =====
+   A topic is an item's section key (_sec: the pack's real topic, or its guide). Per topic: questions answered / wrong
+   last time (qhist) and cards started / forgotten (sched: last rating Again, or lapses for cards graded before v0.11.0).
+   Score = (wrong + forgotten) / (answered + started). Computed here, never stored. */
+const GAPS_MIN=5,GAPS_FRAC=1/3,GAPS_SET=20,GAPS_WEAK=0.25;
+let gapsView='week',gapsFrom='home';
+function cardForgotten(s){return !!s&&s.phase!=='new'&&(s.lg!=null?s.lg===1:(s.lapses||0)>0);}
+function gapStats(){const m=new Map();
+  const get=x=>{let e=m.get(x._sec);if(!e){e={k:x._sec,l:SEC_LABEL[x._sec]||x._sec,pack:x._pack,pn:SEC_PACK[x._sec]||x._packName,o:x._secO,qN:0,qA:0,qW:0,cN:0,cS:0,cF:0};m.set(x._sec,e);}return e;};
+  qpool().forEach(q=>{const e=get(q);e.qN++;if(histSeen(q.id)){e.qA++;if(lastWrong(q.id))e.qW++;}});
+  deck().forEach(c=>{const e=get(c),s=sched[c.id];e.cN++;if(s&&s.phase!=='new'){e.cS++;if(cardForgotten(s))e.cF++;}});
+  const need=n=>Math.min(GAPS_MIN,Math.max(1,Math.ceil(n*GAPS_FRAC)));
+  m.forEach(e=>{e.ranked=(e.qN>0&&e.qA>=need(e.qN))||(e.cN>0&&e.cS>=need(e.cN));const d=e.qA+e.cS;e.score=d?(e.qW+e.cF)/d:0;e.untried=(e.qN-e.qA)+(e.cN-e.cS);});
+  return [...m.values()];}
+function gapWeak(e){return e.ranked&&e.score>=GAPS_WEAK;}
+function gapMeta(e){const p=[];
+  if(e.qN)p.push(e.qA?`${e.qW} of ${e.qA} question${e.qA===1?'':'s'} wrong last time`:`no questions answered yet`);
+  if(e.cN)p.push(e.cS?`${e.cF} of ${e.cS} card${e.cS===1?'':'s'} forgotten`:`no cards started yet`);
+  if(e.untried)p.push(`${e.untried} not tried`);return p.join(' · ');}
+function gapRow(e,withPack){const pct=Math.round(e.score*100),w=!e.ranked?'':e.score>=0.5?'w2':e.score>=GAPS_WEAK?'w1':'';
+  const name=(withPack?acctEsc(e.pn)+' · ':'')+acctEsc(e.l);
+  return `<div class="gaprow ${w}"><div class="gtop"><span class="gname">${name}</span>${e.ranked?`<span class="gpct">${pct}% missed</span>`:''}</div>`+
+    (e.ranked?`<div class="gbar"><i style="width:${Math.max(pct,2)}%"></i></div>`:'')+
+    `<div class="gmeta">${gapMeta(e)}</div><div class="gact">${e.qN?`<button class="minor" type="button" data-gp="${encodeURIComponent(e.k)}">Practise</button>`:''}${e.cN?`<button class="minor" type="button" data-gr="${encodeURIComponent(e.k)}">Review cards</button>`:''}</div></div>`;}
+const gapSort=(a,b)=>b.score-a.score||(b.qW+b.cF)-(a.qW+a.cF)||a.o-b.o||natCmp(a.l,b.l);
+function renderGaps(){const host=$('gapsList'),all=gapStats();
+  document.querySelectorAll('#gaps [data-gv]').forEach(b=>b.classList.toggle('on',b.dataset.gv===gapsView));
+  $('gapsBackTo').textContent={quiz:'to Practice',srs:'to Review',results:'to Results'}[gapsFrom]||'to Home';
+  if(!all.length){host.innerHTML='<p class="gapempty">Switch on a study pack to see your gaps.</p>';return;}
+  if(!all.some(e=>e.qA||e.cS)){host.innerHTML='<p class="gapempty">Nothing tried yet. Answer some questions in Practice or Exam, or review some cards, and your weakest topics will show here.</p>';return;}
+  const few=list=>list.length?`<details class="gapfew"><summary>Not enough answers yet (${list.length})</summary>${list.sort((a,b)=>a.o-b.o||natCmp(a.l,b.l)).map(e=>gapRow(e,gapsView==='all')).join('')}</details>`:'';
+  if(gapsView==='all'){const r=all.filter(e=>e.ranked).sort(gapSort);
+    host.innerHTML=(r.length?r.map(e=>gapRow(e,true)).join(''):'<p class="gapempty">No topic has enough answers to rank yet.</p>')+few(all.filter(e=>!e.ranked));}
+  else{const order=activePacks().map(p=>p.id),by=new Map();all.forEach(e=>{if(!by.has(e.pack))by.set(e.pack,[]);by.get(e.pack).push(e);});
+    host.innerHTML=[...by.entries()].sort((a,b)=>order.indexOf(a[0])-order.indexOf(b[0])).map(([pid,list])=>{
+      const qA=list.reduce((t,e)=>t+e.qA,0),cS=list.reduce((t,e)=>t+e.cS,0),miss=list.reduce((t,e)=>t+e.qW+e.cF,0),tot=list.reduce((t,e)=>t+e.qN+e.cN,0),d=qA+cS;
+      const r=list.filter(e=>e.ranked).sort(gapSort);
+      return `<div class="gapgrp"><div class="gaphd"><span class="ggn">${acctEsc(list[0].pn)}</span><span class="ggs">${d?Math.round(miss/d*100)+'% missed · ':''}${d} of ${tot} tried</span></div>${r.map(e=>gapRow(e,false)).join('')}${few(list.filter(e=>!e.ranked))}</div>`;}).join('');}
+  host.querySelectorAll('[data-gp]').forEach(b=>b.onclick=()=>gapsPractise(decodeURIComponent(b.dataset.gp)));
+  host.querySelectorAll('[data-gr]').forEach(b=>b.onclick=()=>gapsReview(decodeURIComponent(b.dataset.gr)));}
+function openGaps(from){gapsFrom=from||'home';if(currentSection()==='quiz'){clearInterval(qTimerId);savePrac();}renderGaps();show('gaps');}
+function gapsBack(){const f=gapsFrom;gapsFrom='home';
+  if(f==='quiz'&&qorder.length){show('quiz');renderQuiz();if(!qTestSubmitted)startQTick();}
+  else if(f==='results'&&qorder.length)show('results');
+  else if(f==='srs'&&deck().length)openReview();
+  else renderHome();}
+function gapsPractise(k){const pool=qpool().filter(q=>q._sec===k);if(!pool.length)return;
+  const go=()=>{buildQmap();const ids=pool.map(q=>q.id),byAt=(a,b)=>qhist[a].at-qhist[b].at;
+    const wrong=ids.filter(lastWrong).sort(byAt),fresh=ids.filter(id=>!histSeen(id)),right=ids.filter(id=>histSeen(id)&&!lastWrong(id)).sort(byAt);
+    if(settings.practiceShuffle)shuffle(fresh);
+    qorder=wrong.concat(fresh,right).slice(0,GAPS_SET);beginPractice('Question map · '+secName(k));};
+  if(pracInProgress()){confirmDialog('You have a practice session in progress. Replace it with a practice set on this topic? (Your answers so far are kept in your history.)',{confirmText:'Replace'},()=>{flushPrac(prac);clearPrac();go();});return;}
+  go();}
+function gapsReview(k){const cs=deck().filter(c=>c._sec===k);if(!cs.length)return;const now=Date.now(),forg=[],due=[],news=[],rest=[];
+  cs.forEach(c=>{const s=sched[c.id];if(!s||s.phase==='new')news.push(c.id);else if(cardForgotten(s))forg.push(c.id);else if(s.due<=now)due.push(c.id);else rest.push(c.id);});
+  const bd=(a,b)=>sched[a].due-sched[b].due;let q=[...forg.sort(bd),...due.sort(bd),...shuffle(news)];
+  if(!q.length)q=rest.sort(bd); /* everything up to date: go over the started cards anyway */
+  filter=new Set([k]);srsFlagOnly=false;srsAgainOnly=false;gapsQueue=q;startSession();}
+
 /* ===== HOME ===== */
 function renderHome(){
   backfillPlacement(); // repair any library packs missing school/year/course/weeks (copied from the manifest by id)
@@ -3953,7 +4050,10 @@ function renderHome(){
   $('mReview').classList.toggle('dim',nC===0);
   $('mPractice').classList.toggle('dim',tp===0);
   $('mExam').classList.toggle('dim',tp===0);
-  {const nF=flaggedItems().n;$('flagHome').hidden=!nF;$('flagHomeN').textContent=nF;} /* v0.8.0: the Flagged page link */
+  {const nF=flaggedItems().n;$('flagHomeBtn').hidden=!nF;$('flagHomeN').textContent=nF; /* v0.8.0: the Flagged page link */
+   const gs=gapStats(),tried=gs.some(e=>e.qA||e.cS),nW=gs.filter(gapWeak).length; /* v0.11.0: the Gaps link, once anything has been tried */
+   $('gapsHomeBtn').hidden=!tried;$('gapsHomeN').textContent=nW?` · ${nW} weak topic${nW===1?'':'s'}`:'';
+   $('flagHome').hidden=!nF&&!tried;}
   // topic-guides panel — hidden entirely when no active pack bundles guides
   $('revPanel').style.display=nG?'':'none';
   $('revPanelDesc').textContent=`${nG} topic guide${nG===1?'':'s'} bundled in your active packs.`;
@@ -4064,10 +4164,14 @@ function examTotal(){const c=currentCounts();let t=0;for(const k in c)t+=c[k];re
 
 /* ===== SRS DECK ===== */
 let srsFlagOnly=false; /* v0.8.0: Review → Flagged only (this visit, like the topic choice) */
+let srsAgainOnly=false,gapsQueue=null; /* v0.11.0: Review → Cards marked Again (last rating Again; combinable with Flagged); a Gaps topic session's own queue */
+function lastAgain(id){const s=sched[id];return !!s&&s.lg===1;}
+function srsSpecial(){return srsFlagOnly||srsAgainOnly;}
+function srsPick(c){return (!srsFlagOnly||isFlagged(c.id))&&(!srsAgainOnly||lastAgain(c.id));}
 let filter=null, sessionQueue=[], currentId=null, revealed=false, work={}, studiedThisSession=0; // filter=null ⇒ ALL topics; empty Set ⇒ none; Set with members ⇒ that subset
 function inScope(c){return !filter||filter.has(c._sec);}
 function counts(){const now=Date.now();let nw=0,lr=0,rv=0,nwTot=0;
-  if(srsFlagOnly){deck().forEach(c=>{if(!inScope(c)||!isFlagged(c.id))return;const s=sched[c.id];if(!s||s.phase==='new')nw++;else if(s.phase==='review')rv++;else lr++;});return {nw,lr,rv};} /* every flagged card, due or not */
+  if(srsSpecial()){deck().forEach(c=>{if(!inScope(c)||!srsPick(c))return;const s=sched[c.id];if(!s||s.phase==='new')nw++;else if(s.phase==='review')rv++;else lr++;});return {nw,lr,rv};} /* every flagged / Again card, due or not */
   deck().forEach(c=>{if(!inScope(c))return;const s=sched[c.id];if(s.phase==='new')nwTot++;else if(s.due<=now){(s.phase==='review'?rv++:lr++);}});
   return {nw:Math.min(nwTot,Math.max(0,settings.srsNewPerDay-daily.count)),lr,rv};}
 function openReview(){renderSrs();show('srs');}
@@ -4076,7 +4180,8 @@ function renderSrs(){
   $('cNew').textContent=c.nw;$('cLearn').textContent=c.lr;$('cRev').textContent=c.rv;
   $('studyBtn').disabled=(c.nw+c.lr+c.rv===0);
   const scope=!filter?'All topics':(filter.size===0?'No topics selected':(filter.size+' topic'+(filter.size>1?'s':'')+' — '+[...filter].slice(0,3).map(k=>secName(k)).join(', ')+(filter.size>3?'…':'')));
-  $('scopeline').innerHTML='Studying: <b>'+scope+'</b>'+(srsFlagOnly?' · <b>flagged cards only</b>':'');
+  $('scopeline').innerHTML='Studying: <b>'+scope+'</b>'+(srsFlagOnly?' · <b>flagged cards only</b>':'')+(srsAgainOnly?' · <b>cards marked Again</b>':'');
+  {const na=deck().filter(x=>inScope(x)&&lastAgain(x.id)).length;$('srsAgain').checked=srsAgainOnly;$('srsAgainN').textContent=na+' card'+(na===1?'':'s')+(filter?' in these topics':'');} /* v0.11.0 */
   {const nf=deck().filter(x=>inScope(x)&&isFlagged(x.id)).length;$('srsFlt').checked=srsFlagOnly;$('srsFltN').textContent=nf+' flagged'+(filter?' in these topics':'');} /* v0.8.0 */
   $('topicSummary').textContent=!filter?'all selected':(filter.size===0?'none selected':filter.size+' selected');
   renderTopics();renderSysbreak();
@@ -4085,7 +4190,7 @@ function renderSysbreak(){const sb=$('sysbreak');sb.innerHTML='';const set=new S
   systemsPresent(set).forEach(sys=>{const list=deck().filter(c=>c.sys===sys);const seen=list.filter(c=>sched[c.id].phase!=='new').length;const p=list.length?Math.round(seen/list.length*100):0;
     sb.innerHTML+=`<div class="sysrow"><div class="top"><span class="name">${sysLabel(sys)}</span><span class="sc">${seen}/${list.length} started · ${p}%</span></div><div class="sbar"><i style="width:${p}%"></i></div></div>`;});}
 function renderTopics(){const now=Date.now();const tl=$('topicList');const groups=secGroups(deck());const open=groups.length<=1; /* v0.5.5: fold from 2 packs */tl.innerHTML='';
-  groups.forEach((g,gi)=>{let chips='';g.secs.forEach(sec=>{const due=srsFlagOnly?sec.items.filter(c=>isFlagged(c.id)).length:sec.items.filter(c=>{const s2=sched[c.id];return s2&&(s2.phase==='new'||s2.due<=now);}).length;
+  groups.forEach((g,gi)=>{let chips='';g.secs.forEach(sec=>{const due=srsSpecial()?sec.items.filter(srsPick).length:sec.items.filter(c=>{const s2=sched[c.id];return s2&&(s2.phase==='new'||s2.due<=now);}).length;
       chips+=`<button class="tchip ${(!filter||filter.has(sec.k))?'on':''}" data-t="${encodeURIComponent(sec.k)}">${acctEsc(sec.l)}<span class="ct ${due?'':'zero'}">${due}</span></button>`;});
     const on=g.secs.filter(sec=>!filter||filter.has(sec.k)).length;
     tl.innerHTML+=`<div class="tgroup ${open||tl.dataset['o'+gi]==='1'?'':'closed'}" data-gi="${gi}"><div class="ghead"><button class="gname gtoggle" type="button">${acctEsc(g.name)} <span class="gsel">${on} of ${g.secs.length}</span></button><button class="gall" type="button" data-gi="${gi}">${on===g.secs.length?'None':'All'}</button></div><div class="tchips">${chips}</div></div>`;});
@@ -4101,14 +4206,15 @@ function renderTopics(){const now=Date.now();const tl=$('topicList');const group
 
 /* ===== SRS SESSION ===== */
 function buildSession(){const now=Date.now();const due=[],learn=[],news=[];
-  if(srsFlagOnly){deck().forEach(c=>{if(!inScope(c)||!isFlagged(c.id))return;const s=sched[c.id];(!s||s.phase==='new'?news:s.phase==='review'?due:learn).push(c.id);}); /* v0.8.0 */
+  if(gapsQueue){sessionQueue=gapsQueue.slice();gapsQueue=null;return;} /* v0.11.0: a Gaps topic session */
+  if(srsSpecial()){deck().forEach(c=>{if(!inScope(c)||!srsPick(c))return;const s=sched[c.id];(!s||s.phase==='new'?news:s.phase==='review'?due:learn).push(c.id);}); /* v0.8.0 */
     const bd=(a,b)=>sched[a].due-sched[b].due;sessionQueue=[...learn.sort(bd),...due.sort(bd),...shuffle(news)];return;}
   deck().forEach(c=>{if(!inScope(c))return;const s=sched[c.id];if(s.phase==='new')news.push(c.id);else if(s.due<=now){(s.phase==='review'?due:learn).push(c.id);}});
   due.sort((a,b)=>sched[a].due-sched[b].due);learn.sort((a,b)=>sched[a].due-sched[b].due);
   sessionQueue=[...learn,...due,...shuffle(news).slice(0,Math.max(0,settings.srsNewPerDay-daily.count))];}
 function startSession(){buildSession();studiedThisSession=0;if(sessionQueue.length===0){renderSrs();return;}presentNext();}
 function presentNext(){if(sessionQueue.length===0){finishSession();return;}currentId=sessionQueue.shift();revealed=false;work={picks:new Set(),pick:null,order:[],pool:null,optorder:null};renderCard();show('study');}
-function finishSession(){$('doneSub').textContent=srsFlagOnly?'You’ve been through every flagged card in this scope.':'Nothing more due in this scope right now.';$('doneStats').textContent=`You reviewed ${studiedThisSession} card${studiedThisSession===1?'':'s'}.`;const m=counts();$('doneStudyMore').style.display=(!srsFlagOnly&&m.nw+m.lr+m.rv>0)?'':'none';show('srsdone');}
+function finishSession(){$('doneSub').textContent=srsSpecial()?'You’ve been through every '+(srsFlagOnly&&srsAgainOnly?'flagged card marked Again':srsFlagOnly?'flagged card':'card marked Again')+' in this scope.':'Nothing more due in this scope right now.';$('doneStats').textContent=`You reviewed ${studiedThisSession} card${studiedThisSession===1?'':'s'}.`;const m=counts();$('doneStudyMore').style.display=(!srsSpecial()&&m.nw+m.lr+m.rv>0)?'':'none';show('srsdone');}
 function renderCard(){const c=cardOf(currentId);
   $('sTag').textContent=`${sysLabel(c.sys).split(' ')[0]} · ${c.topic}`;$('sTag').style.visibility=revealed?'':'hidden'; /* v0.10.17 */
   $('sLeft').textContent=`${sessionQueue.length} left · ${TYPE_LABEL[c.type]||c.type}`;paintCardFlag();
@@ -4186,7 +4292,7 @@ function renderGrades(c){const now=Date.now(),s=sched[c.id];const p=[1,2,3,4].ma
     <button class="gbtn easy" data-g="4"><div class="gl">Easy</div><div class="gi">${p[3]}</div></button></div>`;}
 function wireGrades(c){$('cardbox').querySelectorAll('.gbtn').forEach(b=>b.addEventListener('click',()=>grade(+b.dataset.g)));}
 async function grade(g){const c=cardOf(currentId),s=sched[c.id],wasNew=(s.phase==='new');
-  sched[c.id]=schedule(s,g,Date.now());if(wasNew){rollDaily();daily.count++;}studiedThisSession++;await persist();
+  sched[c.id]=schedule(s,g,Date.now());sched[c.id].lg=g; /* v0.11.0: last rating (Gaps, Cards marked Again) */if(wasNew){rollDaily();daily.count++;}studiedThisSession++;await persist();
   if(sched[c.id].phase!=='review'){sessionQueue.splice(Math.min(sessionQueue.length,g===1?1:3),0,currentId);}
   presentNext();}
 
@@ -4699,10 +4805,12 @@ function startPracticeFresh(){const pool=qTestPool('prac');if(!pool.length){toas
   /* never-answered first; previously answered last — wrong last time before right, oldest first */
   const fresh=ids.filter(id=>!histSeen(id)),old=ids.filter(histSeen);if(settings.practiceShuffle)shuffle(fresh);
   old.sort((a,b)=>(qhist[a].ok===qhist[b].ok?0:(qhist[a].ok?1:-1))||(qhist[a].at-qhist[b].at));
-  qorder=fresh.concat(old);qmode='practice';qT0=Date.now();buildPrior(qT0);
+  qorder=fresh.concat(old);beginPractice('Question map · practice');}
+function beginPractice(title){ /* v0.11.0: shared by Practice and Gaps (qorder already set) */
+  qmode='practice';qT0=Date.now();buildPrior(qT0);
   qinit();qTestSubmitted=false;
   timerWanted=!!settings.practiceTimer;$('flagBtn').style.display='';$('submitAnsBtn').style.display='';
-  $('finishBtn').textContent='Finish & summary';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map · practice';
+  $('finishBtn').textContent='Finish & summary';$('finishBtn').style.display='';$('paletteTitle').textContent=title;
   qflReset();renderQuiz();startQTick();show('quiz');}
 function startExam(){const pool=qTestPool('exam');if(!pool.length){toast(fltEmptyMsg('exam'));return;}buildQmap();
   const counts=currentCounts();const g=examGroups();let picks=[],short=0;const mode=settings.examFresh||'prefer';
@@ -4727,7 +4835,7 @@ function startQTick(){clearInterval(qTimerId);qTimerId=setInterval(()=>{
   else{if(!settings.practiceTimer)return;if(!qsub[qcur])qelapsed[qcur]++;updatePracClock();}
 },1000);}
 function updatePracClock(){const rem=settings.practiceSecs-qelapsed[qcur];const t=$('timer');if(rem>=0){t.classList.remove('over');t.classList.toggle('warn',rem<=15);$('tclock').textContent=fmt(rem);}else{t.classList.add('over');t.classList.remove('warn');$('tclock').textContent='+'+fmt(-rem);}}
-function renderQuiz(){const q=qmap[qorder[qcur]],sel=qans[qcur],done=qRevealed(qcur);
+function renderQuiz(){const q=qmap[qorder[qcur]],sel=qans[qcur],done=qRevealed(qcur);$('qGapsBtn').style.display=(qmode==='test'&&!qTestSubmitted)?'none':''; /* v0.11.0 */
   $('qtag').textContent=q.topic;$('qtag').style.visibility=done?'':'hidden'; /* v0.10.17: topic once the answer shows */$('qdiff').innerHTML=diffBadge(q);$('qpos').textContent=`Q${qcur+1} / ${qorder.length}`;$('pbar').style.width=((qcur+1)/qorder.length*100)+'%';
   let html=`<p class="stem"><span class="lead">${qcur+1}.</span> ${q.stem}</p><div class="opts">`;
   const perm=qopt[qcur]||[...q.options.keys()];
@@ -4797,6 +4905,7 @@ function showResults(auto){let total=0,correct=0;const byT={};
   const ra=$('resActions');ra.innerHTML='';
   const rb=document.createElement('button');rb.className='btn';rb.textContent='Review every question →';rb.onclick=enterReview;ra.appendChild(rb);
   const ag=document.createElement('button');ag.className='btn ghost';ag.textContent=qmode==='test'?'New test':'Restart practice';ag.onclick=()=>{qmode==='test'?openSetup('exam'):startPractice();};ra.appendChild(ag);
+  const gb=document.createElement('button');gb.className='btn ghost';gb.textContent='See your gaps';gb.onclick=()=>openGaps('results');ra.appendChild(gb); /* v0.11.0 */
   const hb=document.createElement('button');hb.className='btn ghost';hb.textContent='Home';hb.onclick=()=>renderHome();ra.appendChild(hb);
   $('resNote').textContent=qmode==='test'?(auto?'Time expired — auto-submitted.':(settings.examTimer?`Time used: ${fmt(settings.examMinutes*60-qTimeLeft)} of ${fmt(settings.examMinutes*60)}.`:'Untimed test.')):'';
   show('results');}
@@ -4977,7 +5086,9 @@ $('openPharm').addEventListener('click',()=>{if(drugCount())openPharm();});
 $('pharmBack').addEventListener('click',()=>renderHome());
 $('atlasBack').addEventListener('click',()=>{if(atlasReturn==='reviewer'&&activeGuides().length){show('reviewer');}else renderHome();}); /* v0.10.4 */
 $('openAtlas').addEventListener('click',()=>{if(atlasWidgets().length)openAtlas();});
-$('flagHomeBtn').addEventListener('click',openFlagged);$('flagBack').addEventListener('click',()=>renderHome());$('flagClearAll').addEventListener('click',clearAllFlags); /* v0.8.0 */
+$('flagHomeBtn').addEventListener('click',openFlagged);$('gapsHomeBtn').addEventListener('click',()=>openGaps('home'));$('srsGapsBtn').addEventListener('click',()=>openGaps('srs'));$('qGapsBtn').addEventListener('click',()=>openGaps('quiz'));$('gapsBack').addEventListener('click',gapsBack); /* v0.11.0 */
+document.querySelectorAll('#gaps [data-gv]').forEach(b=>b.addEventListener('click',()=>{gapsView=b.dataset.gv;renderGaps();}));
+$('srsAgain').addEventListener('change',e=>{srsAgainOnly=!!e.target.checked;renderSrs();});$('flagBack').addEventListener('click',()=>renderHome());$('flagClearAll').addEventListener('click',clearAllFlags); /* v0.8.0 */
 $('srsFlt').addEventListener('change',e=>{srsFlagOnly=!!e.target.checked;renderSrs();});
 $('cardFlagBtn').addEventListener('click',()=>{if(!currentId)return;setFlag(currentId,!isFlagged(currentId));paintCardFlag();});
 $('pharmSearch').addEventListener('input',e=>onPharmSearch(e.target.value));
