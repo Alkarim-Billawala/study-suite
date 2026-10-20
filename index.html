@@ -1,7 +1,11 @@
 <!--
-  Study Suite  ·  v0.12.1 (beta)
+  Study Suite  ·  v0.12.2 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.12.2 (2026-10-19, Alkarim: the Brain atlas moves to Reference, like the Pharmacology Index): the year
+  'Reference' always sorts last — in the Study packs / Your library trees (sortedYears; before, the atlas's sortWeek 50 would
+  have lifted Reference above Year 2) and in the Topic guides pack order (packCmp; else 'Reference' < 'Year 1' put the atlas
+  guides first). Atlas pack v1.16 carries year 'Reference', course 'Atlases', name 'The Brain' (id unchanged).
   Changelog v0.12.1 (2026-10-18, #19 open consolidation; Drive Claude/StudySuite/pharm-master-2026-10-18/NOTES.md):
   drug-class labels have one home. The Pharmacology Index (rx_master v1.1+) carries classes {slug: label} from
   Pack Tools/drug_vocab.CLASSES; ingestPack keeps it; classLabel() reads pharmMaster().classes first, then the built-in
@@ -2001,7 +2005,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.12.1';
+const APP_VERSION='0.12.2';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3174,7 +3178,8 @@ const natCmp=(a,b)=>String(a).localeCompare(String(b),undefined,{numeric:true,se
 function courseWeek(plist){return plist.reduce((mx,p)=>Math.max(mx,packWeek(p)),-Infinity);}     // plist: packs[]
 function termWeek(cs){return [...cs.values()].reduce((mx,pl)=>Math.max(mx,courseWeek(pl)),-Infinity);}    // cs: Map(course→packs[])
 function yearWeek(ts){return [...ts.values()].reduce((mx,cs)=>Math.max(mx,termWeek(cs)),-Infinity);}      // ts: Map(term→Map(course→packs[]))
-function sortedYears(years){return [...years.entries()].sort((A,B)=>cmpW(yearWeek(B[1]),yearWeek(A[1]))||natCmp(B[0],A[0]));}
+const refLast=y=>y==='Reference'?1:0; /* v0.12.2: the Reference year (Pharmacology Index, atlases) always sorts last */
+function sortedYears(years){return [...years.entries()].sort((A,B)=>refLast(A[0])-refLast(B[0])||cmpW(yearWeek(B[1]),yearWeek(A[1]))||natCmp(B[0],A[0]));}
 function sortedTerms(ts){return [...ts.entries()].sort((A,B)=>cmpW(termWeek(B[1]),termWeek(A[1]))||natCmp(B[0],A[0]));}
 function sortedPacks(pl){return pl.slice().sort((a,b)=>cmpW(packWeek(b),packWeek(a))||natCmp(b.label||b.file,a.label||a.file));} /* v0.10.14: newest first within a course */
 function sortedCourses(cs){return [...cs.entries()].sort((A,B)=>cmpW(courseWeek(B[1]),courseWeek(A[1]))||natCmp(B[0],A[0]));}
@@ -4385,7 +4390,7 @@ function organizeGuides(){const metas=activeGuides().map(guideMeta);
   const cmp=(a,b)=>a.num!==b.num?(a.num<b.num?-1:1):(a.key<b.key?-1:a.key>b.key?1:0); // within a pack: by guide title number
   // Order the per-pack groups by the curriculum hierarchy (school → year → term → week#), matching the
   // Content library / Default packs panels — not by import order. Missing fields sort last.
-  const packCmp=(p,q)=>natCmp(p.school||'￿',q.school||'￿')||natCmp(p.year||'￿',q.year||'￿')
+  const packCmp=(p,q)=>natCmp(p.school||'￿',q.school||'￿')||refLast(p.year)-refLast(q.year)||natCmp(p.year||'￿',q.year||'￿')
     ||natCmp(p.term||'',q.term||'')||cmpW(packWeek(p),packWeek(q))||natCmp(p.pack||p.id||'',q.pack||q.id||'') /* v0.10.3: guides chronological */;
   const orderedPacks=activePacks().slice().sort(packCmp);
   const groups=[];
