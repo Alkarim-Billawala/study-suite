@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.29 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.30 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.29)
+# Study Suite — Content Authoring Guide (v2.30)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,8 +8,13 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.29 · **Pairs with:** Study Suite app v0.4.4+ (source switches need v0.6.6+, Extras v0.7.1+, image cards v0.8.1+, interactive figures v0.9.0+, atlas packs v0.10.0+ — links and read-more v0.10.9–v0.10.10), pack `formatVersion` 2.0
-> **What changed in guide v2.29:** **atlas packs.** New **§6f**: the `atlas` widget type — a reference pack of drawn sections and views with a shared structure registry, labels that light on tap, territories with a legend, pathways, course-image references, locator maps and read-more links — and the two guide hooks any pack can use: `data-ssw-state` on a figure and `data-atlas` links. The Brain (`neuro_brain`) is the reference implementation; the checks (`packbuilder.py`, `pack_checks.py`) know the type.
+> **Authoring system version:** 2.30 · **Pairs with:** Study Suite app v0.4.4+ (source switches need v0.6.6+, Extras v0.7.1+, image cards v0.8.1+, interactive figures v0.9.0+, atlas packs v0.10.0+, default and paired packs and named atlas links v0.12.3+ — links and read-more v0.10.9–v0.10.10), pack `formatVersion` 2.0
+> **What changed in guide v2.30:** **packs the app adds by itself, and named atlas links** (§6f items 9 and 11). An atlas link may
+> name its atlas with `data-atlas-pack="<pack id>"` (absent = `neuro_brain`, so every earlier link is unchanged). A pack can be a
+> **default pack** (every user gets it once — listed in `pack_notes.json` `"default"`) or a **paired pack** (an atlas is added
+> once any pack whose guides link into it is in the library and switched on — worked out by the deploy from those links, plus
+> any ids in `pack_notes.json` `"paired"`). A removal sticks for both. App v0.12.3+.
+> **What changed in guide v2.29 (previous):** **atlas packs.** New **§6f**: the `atlas` widget type — a reference pack of drawn sections and views with a shared structure registry, labels that light on tap, territories with a legend, pathways, course-image references, locator maps and read-more links — and the two guide hooks any pack can use: `data-ssw-state` on a figure and `data-atlas` links. The Brain (`neuro_brain`) is the reference implementation; the checks (`packbuilder.py`, `pack_checks.py`) know the type.
 > **What changed in guide v2.28 (previous):** **interactive figures and drawn schematics.** New **§6e**: a pack may carry
 > `widgets` — data for five interactive figure types the app draws and drives (slice scroller, layered figure,
 > tap-the-spot, lesion localiser, switchable views) — placed in guides as `<figure class="fig ssw" data-ssw="…">` with a
@@ -1064,6 +1069,9 @@ drawing modules in Drive `Claude/StudySuite/brain-atlas/` (`build_atlas_test.py`
    that state (flags joined by `+`: `terr`, `nolab`, `ref`, `ana`, pathway ids — `ax:ax12:cst+dcml`; or a JSON state);
    app v0.10.9. When the atlas pack is not in the library the link offers to add it and then opens the view; outside the
    user's codes it says so. Put one line at the end of the sections that teach what a slice shows; nothing else changes.
+   **Naming the atlas (v2.30, app v0.12.3):** add `data-atlas-pack="<atlas pack id>"` to the link. Without it the link means
+   The Brain (`neuro_brain`). A link for any other atlas must name it — the link opens that atlas, the offer to add it uses its
+   name, and the link is what pairs the week with that atlas (item 11).
 10. **Cards:** `spot` with `state {plane, level}` and a `target` that is a region of that level; `widget` with
     `state {plane, level, labels:false, hideName:true}` for "which level is this?", `{region, labels:false}` for "what is
     marked?", `{terr:true, region, labels:false}` for "which artery?"; `conv:"ana"`, `paths:[…]`, `ref:1|2` as needed. Ids
@@ -1076,6 +1084,12 @@ drawing modules in Drive `Claude/StudySuite/brain-atlas/` (`build_atlas_test.py`
     against the named course figures before a zone is frozen; Alkarim reviews by use.
 12. **App first** (memory.md §1f): a pack feature that needs engine support ships after the app version that reads it;
     older apps ignore unknown fields (`s`, `terrKey`, `ref`, `data-ssw-state`, `data-atlas`) harmlessly.
+11. **Packs the app adds by itself (v2.30, app v0.12.3).** Two kinds, written into the pack list by `encrypt_deploy.py`:
+    a **default pack** (`"default": true` — the ids in `pack_notes.json` `"default"`, e.g. the Pharmacology Index) is added
+    once for every user; a **paired pack** (`"pairedWith": [ids]`) is added once any of those packs is in the library and
+    switched on. For an atlas the deploy works the list out from the weeks whose guides link into it (item 9), plus any
+    ids in `pack_notes.json` `"paired"`. Both respect a removal (it sticks and syncs); signed-in users get them only after
+    that session's first sync. Nothing else is needed from the author: write the atlas links and the pairing follows.
 
 ---
 
