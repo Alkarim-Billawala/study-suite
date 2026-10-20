@@ -1,7 +1,17 @@
 <!--
-  Study Suite  ·  v0.12.2 (beta)
+  Study Suite  ·  v0.12.3 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.12.3 (2026-10-19, Alkarim: "default packs and paired packs"): two kinds of pack the app adds by itself,
+  read from the pack list (packs-manifest entries; encrypt_deploy.py writes them). (1) DEFAULT — `default:true` (the Pharmacology
+  Index): every user gets it once. (2) PAIRED — `pairedWith:[ids]` (an atlas: the weeks whose guides link into it): added once
+  any of those packs is in the library and switched on. ensureAutoPacks() runs from renderHome (debounced) and after the
+  manifest arrives; it skips a pack already in the library (stub, switched off or not), one the user removed (packGone
+  tombstone — a removal sticks, and syncs), one outside the user's codes, and — when signed in — waits for this session's
+  first successful sync so a removal made on another device is known first. A failed download retries after 10 minutes;
+  a toast names what was added. Atlas links may name their atlas: data-atlas-pack="<pack id>" (absent = neuro_brain, so
+  every existing link is unchanged); the link opens that atlas, and offerAtlasPack(state, packId) offers that one by its
+  own name.
   Changelog v0.12.2 (2026-10-19, Alkarim: the Brain atlas moves to Reference, like the Pharmacology Index): the year
   'Reference' always sorts last — in the Study packs / Your library trees (sortedYears; before, the atlas's sortWeek 50 would
   have lifted Reference above Year 2) and in the Topic guides pack order (packCmp; else 'Reference' < 'Year 1' put the atlas
@@ -2005,7 +2015,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.12.2';
+const APP_VERSION='0.12.3';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3266,7 +3276,7 @@ async function applyPackUpdate(p,mp){const j=await fetchPackJson(mp);
 function updatePack(p,mp,btn){if(btn){btn.disabled=true;btn.textContent='Updating…';}
   applyPackUpdate(p,mp).then(async()=>{await persist();renderHome();toast('Updated '+(p.pack||p.id)+' to v'+mp.version+'.');})
     .catch(()=>{if(btn){btn.disabled=false;btn.textContent='↑ Update';}toast('Could not update — check your connection and try again.');});}
-function maybeApplyQueuedUpdates(){if(!DATA_READY||!defaultManifest)return;try{sessionStorage.removeItem('suite_apply_updates');}catch(e){} /* v0.6.7: a pre-0.6.7 flag is discarded — pack updates are accepted in the library only */
+var DEFAULT_ATLAS='neuro_brain'; /* v0.12.3: an atlas link without data-atlas-pack opens The Brain (var: renderHome may run before this line) */ var autoBusy=false,autoTimer=null,autoFail={}; function scheduleAutoPacks(){clearTimeout(autoTimer);autoTimer=setTimeout(()=>{ensureAutoPacks().catch(()=>{});},400);} /* v0.12.3: default packs (default:true) for everyone, paired packs (pairedWith) when a partner is on — each added once; a removal (packGone) sticks */ async function ensureAutoPacks(){if(autoBusy||!DATA_READY||!defaultManifest)return;   if(ACCT_ON&&SSAccount.session()&&!(SSSync.status().lastOk>0))return; /* signed in: wait for this session's first sync, so a removal on another device is known */   const vm=visibleManifest();if(!vm||!Array.isArray(vm.packs))return;const on=new Set(activePacks().map(p=>p.id));const now=Date.now();   const todo=vm.packs.filter(mp=>mp&&mp.file&&mp.id&&!packs.some(p=>p.id===mp.id)&&!(packGone&&packGone[mp.id])&&!(autoFail[mp.id]>now-600000)     &&(mp.default===true||(Array.isArray(mp.pairedWith)&&mp.pairedWith.some(id=>on.has(id)))));   if(!todo.length)return;autoBusy=true;const added=[];   try{for(const mp of todo){try{ingestPack(await fetchPackJson(mp),(mp.label||mp.file).replace(/\.json$/i,''));added.push(mp);}catch(e){autoFail[mp.id]=Date.now();}}     if(added.length){await persist();renderHome();const nm=mp=>mp.label||mp.id;       toast(added.length===1?(nm(added[0])+' added'+(added[0].default===true?'.':' — it goes with your '+(added[0].id===DEFAULT_ATLAS?'neuro weeks':'weeks')+'.')):('Added: '+added.map(nm).join(', ')+'.'),4000);}}   finally{autoBusy=false;}} function maybeApplyQueuedUpdates(){if(!DATA_READY||!defaultManifest)return;scheduleAutoPacks();try{sessionStorage.removeItem('suite_apply_updates');}catch(e){} /* v0.6.7: a pre-0.6.7 flag is discarded — pack updates are accepted in the library only */
   try{offloadIdle();}catch(e){}
   repairPacks();}
 /* v0.8.3: re-read a published pack whose copy came from an older app (no readBy, or items dropped by an older app).
@@ -3542,15 +3552,10 @@ function atlasLinkState(v){v=String(v||'').trim();if(v.startsWith('{')){try{retu
   (m[3]||'').split('+').filter(Boolean).forEach(f=>{if(f==='terr')st.terr=true;else if(f==='nolab')st.labels=false;else if(f==='ref')st.ref=1;else if(f==='ana')st.conv='ana';else paths.push(f);});
   if(paths.length)st.paths=paths;return st;}
 function wireAtlasLinks(d){if(!d||d.__atlasLinks)return;d.__atlasLinks=true;d.addEventListener('click',e=>{const a=e.target&&e.target.closest&&e.target.closest('[data-atlas]');if(!a)return;e.preventDefault();
-  const st=atlasLinkState(a.getAttribute('data-atlas'));const all=atlasWidgets();if(!all.length){offerAtlasPack(st);return;}
-  try{openAtlas(all[0].w,all[0].packId,st);}catch(_){}});}
+  const st=atlasLinkState(a.getAttribute('data-atlas'));const pid=a.getAttribute('data-atlas-pack')||DEFAULT_ATLAS; /* v0.12.3 */   const all=atlasWidgets().filter(x=>x.packId===pid);if(!all.length){offerAtlasPack(st,pid);return;}   try{openAtlas(all[0].w,all[0].packId,st);}catch(_){}});}
 /* v0.10.9: the link's failure state — the atlas pack is not in the library: offer to add it (from the user's visible pack list, as the
    library's + Add to library does), then open the atlas at the requested state; a pack outside the user's codes gets a plain message. */
-function offerAtlasPack(state){const vm=visibleManifest();const mp=((vm&&vm.packs)||[]).find(x=>x&&x.id==='neuro_brain'&&x.file)||null;
-  if(!mp){confirmDialog('This opens in The Brain atlas, a pack that isn’t available with your access codes yet. Add the code that covers it under Packs, then come back.',{confirmText:'OK'},null);return;}
-  confirmDialog('This opens in The Brain atlas, a pack that isn’t in your library yet. Add it now? It downloads once and stays in your library.',{confirmText:'Add the atlas'},async()=>{
-    try{ingestPack(await fetchPackJson(mp),(mp.label||mp.file).replace(/\.json$/i,''));await persist();renderHome();
-      const all=atlasWidgets();if(all.length)openAtlas(all[0].w,all[0].packId,state);else toast('The atlas was added — open it from the home screen.',4000);}
+function offerAtlasPack(state,pid){pid=pid||DEFAULT_ATLAS;const vm=visibleManifest();const mp=((vm&&vm.packs)||[]).find(x=>x&&x.id===pid&&x.file)||null; /* v0.12.3: the link's own atlas */   const nm=mp&&mp.label?mp.label:(pid===DEFAULT_ATLAS?'The Brain':'an atlas');const an=/atlas/i.test(nm)?nm:nm+' atlas';   if(!mp){confirmDialog('This opens in '+an+', a pack that isn’t available with your access codes yet. Add the code that covers it under Packs, then come back.',{confirmText:'OK'},null);return;}   confirmDialog('This opens in '+an+', a pack that isn’t in your library yet. Add it now? It downloads once and stays in your library.',{confirmText:'Add the atlas'},async()=>{     try{ingestPack(await fetchPackJson(mp),(mp.label||mp.file).replace(/\.json$/i,''));await persist();renderHome();       const all=atlasWidgets().filter(x=>x.packId===pid);if(all.length)openAtlas(all[0].w,all[0].packId,state);else toast('The atlas was added — open it from the home screen.',4000);}
     catch(e){toast('Couldn’t download the atlas — check your connection and try again.',4000);}});}
 function mountGuideWidgets(d,g,opts){const els=d.querySelectorAll('[data-ssw]');if(!els.length)return;
   const a=opts&&opts.anchor,m=a&&/^ssw=([^:]+)(?::([^:]*))?(?::(.*))?$/.exec(String(a));const want=m?{id:m[1],state:{plane:m[2]||undefined,level:m[3]||undefined}}:null; /* v0.10.0 */
@@ -4084,6 +4089,7 @@ function gapsReview(k){const cs=deck().filter(c=>c._sec===k);if(!cs.length)retur
 
 /* ===== HOME ===== */
 function renderHome(){
+  scheduleAutoPacks(); // v0.12.3: default and paired packs (debounced; adds only what's missing)
   backfillPlacement(); // repair any library packs missing school/year/course/weeks (copied from the manifest by id)
   updateHeaderButtons(); // PWA: swap "Add to home" for a Refresh/Update button, reflecting app/pack updates
   const nC=deck().length,nP=packs.length,aP=activePacks().length,tp=qpool().length,nG=activeGuides().length;
