@@ -93,12 +93,9 @@ the right format. The packs you create from your own material are entirely yours
 
 ## Coming soon
 
-- **Weak-spot practice** — see where your gaps are across topics, then drill exactly those
-  questions and cards.
-- **Easier pack-making** — a ready-made assistant you can hand your notes to, and later, making
-  packs right inside the app.
-- **Paste a pack** — load a pack by pasting its text, no file needed.
-- **Flashcard import** — bring your decks in from that other flashcard app.
+- **Easier pack-making** — a ready-made assistant you can hand your notes to, and later, making packs right inside the app.
+- **Paste a pack** — load a pack by pasting its text — no file needed.
+- **Flashcard import** — bring your decks in from that other flashcard app — straight into Review, alongside the suite's own packs.
 - **A gentle first-run guide** — quiet hints for new users that never get in the way.
 
 ## FAQ

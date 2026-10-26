@@ -1,7 +1,19 @@
 <!--
-  Study Suite  ·  v0.12.3 (beta)
+  Study Suite  ·  v0.12.4 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.12.4 (2026-10-26, Alkarim: "release notes for the app, like the packs"): WHAT'S NEW. The deploy writes
+  app-notes.json from RELEASE_NOTES.md (Pack Tools/public_copy.py: {notes:[{v,t,d,b:[['li'|'p', markdown]]}]}, newest first;
+  untitled old headings take their leading bold phrase). After an update, or on a fresh open of a newer version, a bottom
+  sheet (#anOv) shows the notes since the version last seen: the newest written out, earlier ones as headlines that open
+  on tap (10, then "and N earlier updates"). × / Got it / tap outside / Esc close it and mark the running version seen.
+  settings.notesSeen={nv} syncs; merge3 keeps the higher nv, so notes read on one device don't show again on another.
+  Marker missing: a fresh device (no saved settings, no packs) with no account marker is marked seen silently; otherwise
+  the versions since the newest older version in the sync logs (this device's, then the account's other devices'), else
+  the newest 3. It waits for Home, no open dialog or gate, and (signed in) the first sync or 12 s. The footer version link
+  opens every update in the same sheet (GitHub stays the fallback offline). When a newer version is detected, the header
+  shows its title for 6 s under the Update button and in its tooltip. Coming soon panel reads coming-soon.json (from
+  COMING_SOON.md at deploy; the README section is filled from it too) instead of a hand-kept copy.
   Changelog v0.12.3 (2026-10-19, Alkarim: "default packs and paired packs"): two kinds of pack the app adds by itself,
   read from the pack list (packs-manifest entries; encrypt_deploy.py writes them). (1) DEFAULT — `default:true` (the Pharmacology
   Index): every user gets it once. (2) PAIRED — `pairedWith:[ids]` (an atlas: the weeks whose guides link into it): added once
@@ -1261,6 +1273,27 @@ section{display:none}section.on{display:block}
 .drugcard.flash{animation:pharmflash 1.25s ease-out}
 @keyframes pharmflash{from{background:var(--accent-soft)}to{background:var(--paper)}}
 .facetval mark,.drugname mark{background:#ffe58a;color:inherit;padding:0 1px;border-radius:2px}
+/* v0.12.4: app release notes — bottom sheet (#anOv), all widths */
+.an-ov{position:fixed;inset:0;z-index:55;background:rgba(20,18,14,.38);display:none;align-items:flex-end;justify-content:center}
+.an-sheet{position:relative;box-sizing:border-box;width:100%;max-width:560px;max-height:min(80vh,680px);display:flex;flex-direction:column;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-bottom:0;border-radius:16px 16px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,.18);padding:16px 18px calc(12px + env(safe-area-inset-bottom));animation:anUp .28s ease-out}
+@keyframes anUp{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.an-sheet{animation:none}}
+.an-x{position:absolute;top:8px;right:10px;background:none;border:0;font-size:22px;line-height:1;color:var(--ink-soft);cursor:pointer;padding:6px 8px}.an-x:hover{color:var(--ink)}
+.an-k{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 36px 3px 0}
+.an-sheet h3{margin:0 36px 10px 0;font-size:18px;line-height:1.3}
+.an-body{overflow-y:auto;min-height:0;margin:0 -4px;padding:0 4px}
+.an-v{border-top:1px solid var(--line)}.an-v:first-child{border-top:0}
+.an-h{display:flex;align-items:baseline;gap:8px;width:100%;background:none;border:0;padding:9px 0;text-align:left;cursor:pointer;color:var(--ink);font:inherit}
+.an-ver{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);flex:none}
+.an-t{flex:1;min-width:0;font-weight:600;font-size:14.5px;line-height:1.35}
+.an-chev{flex:none;width:8px;height:8px;border-right:1.5px solid var(--ink-soft);border-bottom:1.5px solid var(--ink-soft);transform:rotate(45deg);margin:0 4px 0 6px;transition:transform .15s}
+.an-v.open .an-chev{transform:rotate(-135deg)}
+.an-b{font-size:14px;line-height:1.5;padding:0 0 10px}.an-b ul{margin:0;padding-left:20px}.an-b li{margin:0 0 6px}.an-b p{margin:0 0 8px}.an-b a{color:var(--accent)}
+.an-d{font-size:12px;color:var(--ink-soft)}
+.an-more{display:block;background:none;border:0;padding:10px 0;color:var(--accent);cursor:pointer;font:inherit;font-size:14px}
+.an-foot{display:flex;justify-content:flex-end;padding-top:12px;border-top:1px solid var(--line)}
+.upd-tip{position:fixed;z-index:62;max-width:min(280px,calc(100vw - 32px));box-sizing:border-box;background:var(--ink);color:var(--paper);font-size:13px;line-height:1.4;padding:8px 11px;border-radius:9px;box-shadow:0 4px 16px rgba(0,0,0,.2);opacity:0;transform:translateY(-4px);transition:opacity .2s,transform .2s;pointer-events:none}
+.upd-tip.on{opacity:1;transform:none;pointer-events:auto;cursor:pointer}
 /* features coming soon */
 .soon{margin-top:18px;border-top:1px dashed var(--line);padding-top:12px;text-align:center}
 .soon-t{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
@@ -1689,11 +1722,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
         <button class="infobtn" id="faqBtn" onclick="toggleInfo('faq')">FAQ</button>
       </div>
       <div class="infopanel" id="comingPanel" style="display:none">
-        <div class="soon-i">· Weak-spot practice — see where your gaps are across topics, then drill exactly those questions and cards</div>
-        <div class="soon-i">· Easier pack-making — a ready-made assistant you can hand your notes to, and later, making packs right inside the app</div>
-        <div class="soon-i">· Paste a pack — load a pack by pasting its text, no file needed</div>
-        <div class="soon-i">· Flashcard import — bring decks in from that other flashcard app</div>
-        <div class="soon-i">· A gentle first-run guide — quiet hints for new users that never get in the way</div>
+        <div id="soonList"><div class="soon-i">Loading…</div></div>
       </div>
       <div class="infopanel" id="faqPanel" style="display:none">
         <div class="faqbody">
@@ -1748,7 +1777,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       </div>
     </div>
     <div class="attrib">
-      <div class="foot-row foot-name">Study Suite <a id="footVer" href="https://github.com/Alkarim-Billawala/study-suite/releases" target="_blank" rel="noopener" title="See what's new — release notes on GitHub">v0.2.46</a> · <span class="betatag" id="footBeta">beta</span></div>
+      <div class="foot-row foot-name">Study Suite <a id="footVer" href="https://github.com/Alkarim-Billawala/study-suite/releases" target="_blank" rel="noopener" title="See what's new in each update">v0.2.46</a> · <span class="betatag" id="footBeta">beta</span></div>
       <div class="foot-row">built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
       <div class="foot-row" id="supportWrap" style="display:none"><a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></div>
     </div>
@@ -1867,6 +1896,15 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
   </div>
 
   <!-- CONFIRM DIALOG (in-app, replaces native confirm()) -->
+  <div class="an-ov" id="anOv">
+    <div class="an-sheet" role="dialog" aria-modal="true" aria-labelledby="anTitle">
+      <button type="button" class="an-x" aria-label="Close">×</button>
+      <div class="an-k">What's new</div>
+      <h3 id="anTitle"></h3>
+      <div class="an-body" id="anBody"></div>
+      <div class="an-foot"><button type="button" class="btn sm an-ok">Got it</button></div>
+    </div>
+  </div>
   <div class="modal-ov" id="confirmOv" style="display:none">
     <div class="modal-card confirm-card" role="dialog" aria-modal="true" aria-labelledby="confirmMsg">
       <div class="confirm-msg" id="confirmMsg"></div>
@@ -2015,7 +2053,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.12.3';
+const APP_VERSION='0.12.4';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -2550,7 +2588,7 @@ const SSSync=(()=>{
   /* v0.4.7: the icon shows a view, not the raw state — green while the last sync is under 6 min old (background checks
      don't flash "Syncing…"), gold 'stale' when overdue. state.k itself is unchanged (sign-out checks k==='ok'). */
   const viewOf=()=>{const fresh=lastOk&&Date.now()-lastOk<FRESH;return state.k==='syncing'&&fresh?'ok':state.k==='ok'&&!fresh?'stale':state.k;};
-  function setState(k,msg){if(k==='ok'){lastOk=Date.now();staleTries=0;}state={k,msg,at:Date.now()};paint();}
+  function setState(k,msg){if(k==='ok'){lastOk=Date.now();staleTries=0;}state={k,msg,at:Date.now()};paint();if(k!=='syncing')setTimeout(appNotesTick,0);} /* v0.12.4 */
   function paint(){const el=$('syncState');if(!el)return;const k=viewOf(),hm=new Date(lastOk||Date.now()).toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}),msg=state.msg;
     const t={off:'',syncing:'Syncing…',ok:'Synced '+hm,stale:'Last synced '+hm+' — checking again shortly',
       offline:'Offline — changes will sync later',expired:'Sign in again to keep syncing',
@@ -2637,7 +2675,7 @@ const SSSync=(()=>{
     if(moved.length)notes.push('an unfinished exam moved to Past exams');
     const out={v:1,app:APP_VERSION,
       sched:mergeMap(b.sched,l.sched,c.sched,newer,notes,'card(s) studied on both'),daily,
-      settings:mergeMap(b.settings,l.settings,c.settings,(x,y)=>(x&&y&&((x.gp&&y.gp)||(x.fl&&y.fl)))?newer(x,y):pick(x,y),notes,'setting(s) changed on both'), /* v0.8.0: flags (fl) newest-wins too */
+      settings:mergeMap(b.settings,l.settings,c.settings,(x,y)=>(x&&y&&x.nv&&y.nv)?(verCmp(x.nv,y.nv)>=0?x:y):(x&&y&&((x.gp&&y.gp)||(x.fl&&y.fl)))?newer(x,y):pick(x,y), /* v0.12.4: notesSeen — the higher version wins */notes,'setting(s) changed on both'), /* v0.8.0: flags (fl) newest-wins too */
       devices:mergeMap(b.devices,l.devices,c.devices,pick,[],''),
       eac:(()=>{const a=eacNorm(l.eac),b=eacNorm(c.eac);if(!a||!a.unlocked)return b||a||null;if(!b)return a;
         return Object.assign({},b,a,{codes:[...new Set([...a.codes,...b.codes])],tags:[...new Set([...a.tags,...b.tags])],admin:!!(a.admin||b.admin),keys:Object.assign({},b.keys||{},a.keys||{})});})(),
@@ -3103,12 +3141,66 @@ let appUpdateAvailable=false,updPeeked=false,pkPeeked=false; /* v0.6.9/v0.7.0: t
 let lastVerCheck=0;
 async function checkAppVersion(){lastVerCheck=Date.now();try{const r=await fetch('app-version.json',{cache:'no-store'});if(r.ok){const j=await r.json();if(j&&j.appVersion)noteNewerApp(j.appVersion);}}catch(e){}
   try{if(DATA_READY)await initPackLinks({ifChanged:true});}catch(e){}} /* v0.6.8: new or updated packs show up without a reload */
-let newerAppVersion='';function noteNewerApp(v){if(!appUpdateAvailable&&v&&verCmp(v,APP_VERSION)>0){appUpdateAvailable=true;newerAppVersion=String(v);updateHeaderButtons();}}
+let newerAppVersion='',newerAppTitle='';function noteNewerApp(v){if(!appUpdateAvailable&&v&&verCmp(v,APP_VERSION)>0){appUpdateAvailable=true;newerAppVersion=String(v);updateHeaderButtons();appNotesPeek(newerAppVersion);}}
 /* v0.4.12: keep checking while the app stays open — every 5 min on screen, on coming back, and when the connection returns. */
 setInterval(()=>{if(document.visibilityState==='visible'&&Date.now()-lastVerCheck>=5*60000)checkAppVersion();},60000);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&Date.now()-lastVerCheck>=60000)checkAppVersion();});
 window.addEventListener('online',()=>checkAppVersion());
 function reloadApp(){try{location.href=location.pathname+'?r='+Date.now();}catch(e){location.reload();}}
+/* ===== v0.12.4: APP RELEASE NOTES — "What's new" after an update; every update from the footer version link.
+   app-notes.json (deploy, from RELEASE_NOTES.md): {notes:[{v,t,d,b:[['li'|'p', markdown]]}]}. settings.notesSeen={nv} = the
+   newest version whose notes this person has seen (syncs; merge3 keeps the higher). See the v0.12.4 changelog. */
+let anFresh=false,anDone=false,anBusy=false,anWait=0,anCache=null,anPeekV='',anPeekT=0,anFocus=null;const anBoot=Date.now();
+async function appNotesLoad(fresh){if(anCache&&!fresh)return anCache;const r=await fetch('app-notes.json',{cache:'no-store'});if(!r.ok)throw new Error('notes '+r.status);
+  const j=await r.json();const n=(j&&Array.isArray(j.notes))?j.notes.filter(e=>e&&e.v&&e.t):[];n.sort((a,b)=>verCmp(b.v,a.v));anCache=n;return n;}
+const anSeen=()=>(settings.notesSeen&&settings.notesSeen.nv)||'';
+function anMark(v){if(verCmp(v,anSeen())>0){settings.notesSeen={nv:String(v)};persist();}}
+function anMd(t){return acctEsc(t).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/(^|[^*])\*([^*\s][^*]*?)\*(?!\*)/g,'$1<i>$2</i>')
+  .replace(/\[([^\]]+)\]\((https:\/\/[^)\s]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');}
+function anBlocks(b){let h='',ul=false;(b||[]).forEach(([k,t])=>{if(k==='li'){if(!ul){h+='<ul>';ul=true;}h+='<li>'+anMd(t)+'</li>';}else{if(ul){h+='</ul>';ul=false;}h+='<p>'+anMd(t)+'</p>';}});return h+(ul?'</ul>':'');}
+function anItem(e,open){return '<div class="an-v'+(open?' open':'')+'"><button type="button" class="an-h" aria-expanded="'+open+'"><span class="an-ver">v'+acctEsc(e.v)+'</span><span class="an-t">'+acctEsc(e.t)+'</span><span class="an-chev" aria-hidden="true"></span></button>'
+  +'<div class="an-b"'+(open?'':' hidden')+'>'+anBlocks(e.b)+(e.d?'<div class="an-d">'+acctEsc(e.d)+'</div>':'')+'</div></div>';}
+/* list = newest first; the first is written out, the next 10 are headlines, the rest behind "and N earlier updates". */
+function openAppNotes(list,o){o=o||{};if(!list.length)return;const first=list[0],rest=list.slice(1),cap=10,more=rest.slice(cap);
+  $('anTitle').textContent=o.all?'Every update':list.length===1?'Study Suite v'+first.v:o.from?'Since v'+o.from+' · '+list.length+' updates':'Recent updates';
+  $('anBody').innerHTML=anItem(first,true)+rest.slice(0,cap).map(e=>anItem(e,false)).join('')
+    +(more.length?'<button type="button" class="an-more">and '+more.length+' earlier update'+(more.length===1?'':'s')+'</button><div class="an-rest" hidden>'+more.map(e=>anItem(e,false)).join('')+'</div>':'');
+  anFocus=document.activeElement;const ov=$('anOv');ov.style.display='flex';$('anBody').scrollTop=0;try{ov.querySelector('.an-x').focus({preventScroll:true});}catch(e){}}
+function closeAppNotes(){const ov=$('anOv');if(ov.style.display!=='flex')return;ov.style.display='none';anMark(APP_VERSION);try{if(anFocus&&anFocus.focus)anFocus.focus({preventScroll:true});}catch(e){}}
+$('anOv').addEventListener('click',e=>{const ov=$('anOv');if(e.target===ov||e.target.closest('.an-x,.an-ok')){closeAppNotes();return;}
+  const h=e.target.closest('.an-h');if(h){const v=h.parentNode,op=!v.classList.contains('open');v.classList.toggle('open',op);h.setAttribute('aria-expanded',op);v.querySelector('.an-b').hidden=!op;return;}
+  const m=e.target.closest('.an-more');if(m){const r=ov.querySelector('.an-rest');if(r)r.hidden=false;m.remove();}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('anOv').style.display==='flex')closeAppNotes();});
+$('footVer').addEventListener('click',async e=>{e.preventDefault();const href=$('footVer').href;
+  try{const n=(await appNotesLoad()).filter(x=>verCmp(x.v,APP_VERSION)<=0);if(!n.length)throw 0;openAppNotes(n,{all:true});}catch(err){window.open(href,'_blank','noopener');}});
+/* The newest older version this person ran, from the sync logs: this device's, then the account's other devices'. */
+async function anPrevFromLogs(){const vs=[],ok=v=>/^\d+(\.\d+)*$/.test(v||'')&&verCmp(v,APP_VERSION)<0;
+  try{SSSync.myLog().forEach(x=>{if(x&&ok(x.app))vs.push(x.app);});}catch(e){}
+  try{const o=await SSSync.otherLogs();Object.values(o||{}).forEach(d=>{if(!d)return;if(ok(d.app))vs.push(d.app);(d.L||[]).forEach(x=>{if(x&&ok(x.app))vs.push(x.app);});});}catch(e){}
+  return vs.sort(verCmp).pop()||'';}
+function anSignedIn(){try{return !!(ACCT_ON&&SSAccount.session());}catch(e){return false;}}
+function anBlocked(){if(!DATA_READY||anDone||anBusy||document.visibilityState!=='visible')return true;
+  const h=$('home');if(!h||!h.classList.contains('on'))return true;const g=$('eacGate');if(g&&!g.hidden)return true;
+  if([...document.querySelectorAll('.modal-ov')].some(o=>o.style.display&&o.style.display!=='none'))return true;
+  return !!document.querySelector('.overlay.show');}
+async function appNotesTick(){if(anBlocked())return;
+  if(anSignedIn()&&Date.now()-anBoot<12000){const s=SSSync.status();if(!(s.lastOk>0)&&!['off','error','offline','expired','conflict'].includes(s.k)){clearTimeout(anWait);anWait=setTimeout(appNotesTick,3000);return;}} /* the account's marker first */
+  const seen=anSeen();if(seen&&verCmp(seen,APP_VERSION)>=0){anDone=true;return;}
+  anBusy=true;try{let from=seen;
+    if(!from){from=await anPrevFromLogs();if(!from&&anFresh){anDone=true;anMark(APP_VERSION);return;}} /* a fresh device: nothing it missed */
+    const list=(await appNotesLoad()).filter(e=>verCmp(e.v,APP_VERSION)<=0&&(!from||verCmp(e.v,from)>0)).slice(0,from?undefined:3);
+    if(!list.length){anDone=true;anMark(APP_VERSION);return;}
+    anBusy=false;if(anBlocked())return; /* something opened while the notes loaded: the next tick shows them */
+    anDone=true;openAppNotes(list,{from});
+  }catch(e){anDone=true;} /* offline or no notes file: nothing marked, so they show on a later open */
+  finally{anBusy=false;}}
+/* A newer version is out: its title under the Update button for 6 s, and in the button's tooltip. */
+async function appNotesPeek(v){if(!v||anPeekV===v)return;anPeekV=v;
+  try{const e=(await appNotesLoad(true)).find(x=>x.v===v);if(!e)return;newerAppTitle=e.t;updateHeaderButtons();
+    const rb=$('refreshBtn');if(!rb||rb.style.display==='none')return;let tip=$('updTip');
+    if(!tip){tip=document.createElement('div');tip.id='updTip';tip.className='upd-tip';tip.setAttribute('role','status');tip.onclick=()=>tip.classList.remove('on');document.body.appendChild(tip);}
+    tip.innerHTML='<b>New in v'+acctEsc(v)+'</b> · '+acctEsc(e.t);const r=rb.getBoundingClientRect(),w=tip.offsetWidth; /* under the button, its right edges lined up, never past the 16px margins */
+    tip.style.top=Math.round(r.bottom+8)+'px';tip.style.left=Math.round(Math.max(16,Math.min(r.right-w,innerWidth-16-w)))+'px';tip.classList.add('on');clearTimeout(anPeekT);anPeekT=setTimeout(()=>tip.classList.remove('on'),6000);}catch(e){}}
 /* In an installed PWA, "Add to home" is pointless — swap it for a Refresh/Update button (the only way
    to pick up a new app or manifest in a standalone PWA is to reload). Shows "↑ Update" + a pulse when
    the app or a loaded pack is behind. */
@@ -3123,7 +3215,7 @@ function updateHeaderButtons(){const pwa=isStandalone();const ib=$('installBtn')
     rb.innerHTML=out?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6.5 11.5 12 6l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">Update</span>'+badge
       :pk?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 4.5 7.5v9L12 20.5l7.5-4v-9zM4.5 7.5 12 11.5l7.5-4M12 11.5v9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span class="hl">Packs</span>'+badge
       :'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12a7 7 0 1 1-2.05-4.95M19 4.5V8h-3.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hl">Refresh</span>';
-    rb.title=out?('A newer Study Suite'+(newerAppVersion?' (v'+newerAppVersion+')':'')+' is ready — tap to reload.'+(nPk?' '+pkWord+' are waiting in your library.':''))
+    rb.title=out?('A newer Study Suite'+(newerAppVersion?' (v'+newerAppVersion+(newerAppTitle?': '+newerAppTitle:'')+')':'')+' is ready — tap to reload.'+(nPk?' '+pkWord+' are waiting in your library.':''))
       :pk?(pkWord+(nPk===1?' is':' are')+' waiting in your library — tap to open it.'):'Reload to fetch the latest app';}}
 
 /* "Default study packs" panel — content-free: pack list comes from a same-origin
@@ -3397,6 +3489,7 @@ async function init(){
   packGone=await Store.get(KEY.gone)||{};
   devNames=await Store.get(KEY.devnames)||{};if(!devNames[DEVICE_ID]){devNames[DEVICE_ID]=guessDeviceName();Store.set(KEY.devnames,devNames);}
   const sv=await Store.get(KEY.settings);if(sv)settings=Object.assign(settings,sv);
+  anFresh=!sv&&!packs.length; /* v0.12.4: never used on this device — no release notes for it */
   DATA_READY=true;if(persistPending){persistPending=false;persist();}maybeApplyQueuedUpdates();setTimeout(()=>{refreshKeysFromCodes().catch(()=>{});},0);
   applyTheme();
   // migrate pre-v0.2.8 cumulative sessionDifficulty -> multi-select sessionDiffs
@@ -3411,6 +3504,7 @@ async function init(){
   renderHome();
   SSSync.start();
   mailLinkRoute();
+  setTimeout(appNotesTick,1200); /* v0.12.4 */
 }
 
 /* ===== v0.9.0: interactive figures (widgets). A pack carries data only, in pack.widgets {id:{type,vb:[W,H],…}};
@@ -3960,7 +4054,7 @@ function removePack(id){confirmDialog('Remove this pack? Your review progress is
 /* ===== NAV ===== */
 function currentSection(){const s=document.querySelector('section.on');return s?s.id:'home';}
 let navLock=false; // true while a popstate is driving navigation (prevents double-push)
-function show(which){const switching=currentSection()!==which;document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===which));$('homebtn').style.display=(which==='home'?'none':'');$('timer').style.display=(which==='quiz'&&timerWanted)?'':'none';if(switching){if(!navLock){try{history.pushState({sec:which},'');}catch(e){}}window.scrollTo({top:0});}}
+function show(which){const switching=currentSection()!==which;document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===which));$('homebtn').style.display=(which==='home'?'none':'');$('timer').style.display=(which==='quiz'&&timerWanted)?'':'none';if(switching){if(!navLock){try{history.pushState({sec:which},'');}catch(e){}}window.scrollTo({top:0});}if(which==='home')setTimeout(appNotesTick,400);}
 /* Browser/mouse back-forward: map history entries onto app sections. */
 function gotoSec(t){
   switch(t){
@@ -4804,7 +4898,14 @@ function toast(msg,ms){const w=$('toastWrap');if(!w)return;const t=document.crea
 function toggleInfo(which){const items={coming:['comingBtn','comingPanel'],faq:['faqBtn','faqPanel']};
   const willOpen=$(items[which][1]).style.display==='none';
   Object.keys(items).forEach(k=>{const[btn,panel]=items[k];const open=(k===which)&&willOpen;
-    $(panel).style.display=open?'':'none';$(btn).classList.toggle('on',open);});}
+    $(panel).style.display=open?'':'none';$(btn).classList.toggle('on',open);});
+  if(which==='coming'&&willOpen)loadComingSoon();}
+/* v0.12.4: Coming soon comes from coming-soon.json (written at deploy from COMING_SOON.md) — one copy, never hand-kept here. */
+let soonLoaded=false;
+async function loadComingSoon(){if(soonLoaded)return;const box=$('soonList');if(!box)return;
+  try{const r=await fetch('coming-soon.json',{cache:'no-store'});if(!r.ok)throw 0;const j=await r.json();const it=(j&&Array.isArray(j.items))?j.items.filter(i=>i&&i.t):[];
+    box.innerHTML=it.length?it.map(i=>'<div class="soon-i">· '+acctEsc(i.t)+(i.s?' — '+acctEsc(i.s.replace(/^[A-Z](?=[a-z]| [a-z])/,c=>c.toLowerCase())):'')+'</div>').join(''):'<div class="soon-i">Nothing announced right now.</div>';soonLoaded=true;}
+  catch(e){box.innerHTML='<div class="soon-i">Couldn\'t load the list. Check your connection and open it again.</div>';}}
 
 /* ===== EXAM WEIGHTING ===== */
 function groupKeyOf(q){const by=settings.examGroupBy;return by==='system'?q.sys:by==='pack'?q._packName:q._sec;}
