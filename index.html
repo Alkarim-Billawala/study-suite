@@ -1,7 +1,13 @@
 <!--
-  Study Suite  ·  v0.13.0 (beta)
+  Study Suite  ·  v0.13.1 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.13.1 (2026-10-27, Alkarim: reference packs update in the background — Drive Claude/StudySuite/ref-packs-2026-10-26/):
+  packs in the Reference year (the Pharmacology Index and the atlases) are updated by quietRefUpdates() as soon as the pack list
+  shows a newer version — no ↑ Update tap, and they are left out of pendingUpdates() (header badge, Update all). It runs from
+  the same debounced timer as the default/paired packs (scheduleAutoPacks) and, signed in, only after this session's first sync.
+  A failed download is retried after 10 minutes; the library row keeps its ↑ Update button as the fallback meanwhile. What's new
+  still records the update and its note (applyPackUpdate → recordPackNews). Switched-off placeholders are left alone.
   Changelog v0.13.0 (2026-10-26, "The Heart" — Drive Claude/StudySuite/heart-atlas-2026-10-26/PROPOSAL.md v1.1 §5–§7, spec
   heart-atlas/working/ENGINE-SPEC-v0.13.0.md): HEAR IT, WATCH IT BEAT. (1) pack.sounds {id:{name,s1,s2,split,fixedSplit,extra[],murmurs[],
   note,audio?}} is kept by ingestPack; renderSound() is the listening prototype's synthesiser ported as is (seeded, so the same
@@ -2034,7 +2040,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.13.0';
+const APP_VERSION='0.13.1';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3302,7 +3308,7 @@ function offloadIdle(){if(!DATA_READY||!defaultManifest||settings.autoOffload===
 setInterval(()=>{try{offloadIdle();}catch(e){}},3600000);
 function packUpdate(p){const m=defaultManifest;if(!m||!Array.isArray(m.packs)||!p||p.stub)return null;
   const mp=m.packs.find(x=>x&&x.id===p.id&&x.version&&x.file);return (mp&&verCmp(mp.version,p.version)>0)?mp:null;}
-function pendingUpdates(){return packs.map(p=>[p,packUpdate(p)]).filter(e=>e[1]);}
+function pendingUpdates(){return packs.map(p=>[p,packUpdate(p)]).filter(e=>e[1]&&!isRefPack(e[0],e[1]));} /* v0.13.1: Reference packs update by themselves (quietRefUpdates) */
 /* ---- What's new in pack updates (v0.5.4) ---- */
 function guideFp(g){const t=String(g&&g.title||'')+'\n'+String(g&&g.html||'');let x=2166136261;for(let i=0;i<t.length;i++){x^=t.charCodeAt(i);x=Math.imul(x,16777619);}return (x>>>0).toString(36)+':'+t.length;}
 const gKey=(g,i)=>String((g&&(g.file||g.title))||i);
@@ -3349,7 +3355,7 @@ async function applyPackUpdate(p,mp){const j=await fetchPackJson(mp);
 function updatePack(p,mp,btn){if(btn){btn.disabled=true;btn.textContent='Updating…';}
   applyPackUpdate(p,mp).then(async()=>{await persist();renderHome();toast('Updated '+(p.pack||p.id)+' to v'+mp.version+'.');})
     .catch(()=>{if(btn){btn.disabled=false;btn.textContent='↑ Update';}toast('Could not update — check your connection and try again.');});}
-var DEFAULT_ATLAS='neuro_brain'; /* v0.12.3: an atlas link without data-atlas-pack opens The Brain (var: renderHome may run before this line) */ var autoBusy=false,autoTimer=null,autoFail={}; function scheduleAutoPacks(){clearTimeout(autoTimer);autoTimer=setTimeout(()=>{ensureAutoPacks().catch(()=>{});},400);} /* v0.12.3: default packs (default:true) for everyone, paired packs (pairedWith) when a partner is on — each added once; a removal (packGone) sticks */ async function ensureAutoPacks(){if(autoBusy||!DATA_READY||!defaultManifest)return;   if(ACCT_ON&&SSAccount.session()&&!(SSSync.status().lastOk>0))return; /* signed in: wait for this session's first sync, so a removal on another device is known */   const vm=visibleManifest();if(!vm||!Array.isArray(vm.packs))return;const on=new Set(activePacks().map(p=>p.id));const now=Date.now();   const todo=vm.packs.filter(mp=>mp&&mp.file&&mp.id&&!packs.some(p=>p.id===mp.id)&&!(packGone&&packGone[mp.id])&&!(autoFail[mp.id]>now-600000)     &&(mp.default===true||(Array.isArray(mp.pairedWith)&&mp.pairedWith.some(id=>on.has(id)))));   if(!todo.length)return;autoBusy=true;const added=[];   try{for(const mp of todo){try{ingestPack(await fetchPackJson(mp),(mp.label||mp.file).replace(/\.json$/i,''));added.push(mp);}catch(e){autoFail[mp.id]=Date.now();}}     if(added.length){await persist();renderHome();const nm=mp=>mp.label||mp.id;       toast(added.length===1?(nm(added[0])+' added'+(added[0].default===true?'.':' — it goes with your '+(added[0].id===DEFAULT_ATLAS?'neuro weeks':'weeks')+'.')):('Added: '+added.map(nm).join(', ')+'.'),4000);}}   finally{autoBusy=false;}} function maybeApplyQueuedUpdates(){if(!DATA_READY||!defaultManifest)return;scheduleAutoPacks();try{sessionStorage.removeItem('suite_apply_updates');}catch(e){} /* v0.6.7: a pre-0.6.7 flag is discarded — pack updates are accepted in the library only */
+var DEFAULT_ATLAS='neuro_brain'; /* v0.12.3: an atlas link without data-atlas-pack opens The Brain (var: renderHome may run before this line) */ var autoBusy=false,autoTimer=null,autoFail={}; function scheduleAutoPacks(){clearTimeout(autoTimer);autoTimer=setTimeout(()=>{ensureAutoPacks().catch(()=>{});quietRefUpdates().catch(()=>{});},400);} /* v0.12.3: default packs (default:true) for everyone, paired packs (pairedWith) when a partner is on — each added once; a removal (packGone) sticks */ async function ensureAutoPacks(){if(autoBusy||!DATA_READY||!defaultManifest)return;   if(ACCT_ON&&SSAccount.session()&&!(SSSync.status().lastOk>0))return; /* signed in: wait for this session's first sync, so a removal on another device is known */   const vm=visibleManifest();if(!vm||!Array.isArray(vm.packs))return;const on=new Set(activePacks().map(p=>p.id));const now=Date.now();   const todo=vm.packs.filter(mp=>mp&&mp.file&&mp.id&&!packs.some(p=>p.id===mp.id)&&!(packGone&&packGone[mp.id])&&!(autoFail[mp.id]>now-600000)     &&(mp.default===true||(Array.isArray(mp.pairedWith)&&mp.pairedWith.some(id=>on.has(id)))));   if(!todo.length)return;autoBusy=true;const added=[];   try{for(const mp of todo){try{ingestPack(await fetchPackJson(mp),(mp.label||mp.file).replace(/\.json$/i,''));added.push(mp);}catch(e){autoFail[mp.id]=Date.now();}}     if(added.length){await persist();renderHome();const nm=mp=>mp.label||mp.id;       toast(added.length===1?(nm(added[0])+' added'+(added[0].default===true?'.':' — it goes with your '+(added[0].id===DEFAULT_ATLAS?'neuro weeks':'weeks')+'.')):('Added: '+added.map(nm).join(', ')+'.'),4000);}}   finally{autoBusy=false;}} /* v0.13.1: Reference packs (Pharmacology Index, atlases) take a newer published version by themselves — no ↑ Update tap; What's new still shows it. Function declarations + var: pendingUpdates() may run before this line. */ function isRefPack(p,mp){return ((mp&&mp.year)||(p&&p.year))==='Reference';} var refBusy=false,refFail={}; async function quietRefUpdates(){if(refBusy||!DATA_READY||!defaultManifest)return;   if(ACCT_ON&&SSAccount.session()&&!(SSSync.status().lastOk>0))return; /* signed in: after this session's first sync, as for the auto packs */   const now=Date.now();const todo=packs.map(p=>[p,packUpdate(p)]).filter(e=>e[1]&&isRefPack(e[0],e[1])&&!(refFail[e[0].id]>now-600000));   if(!todo.length)return;refBusy=true;let n=0;   try{for(const [p,mp] of todo){try{await applyPackUpdate(p,mp);n++;}catch(e){refFail[p.id]=Date.now();}}     if(n){await persist();renderHome();updateHeaderButtons();}}finally{refBusy=false;}} function maybeApplyQueuedUpdates(){if(!DATA_READY||!defaultManifest)return;scheduleAutoPacks();try{sessionStorage.removeItem('suite_apply_updates');}catch(e){} /* v0.6.7: a pre-0.6.7 flag is discarded — pack updates are accepted in the library only */
   try{offloadIdle();}catch(e){}
   repairPacks();}
 /* v0.8.3: re-read a published pack whose copy came from an older app (no readBy, or items dropped by an older app).

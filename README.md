@@ -69,6 +69,8 @@ It's currently in **beta**.
 - When a newer version of a pack is published, the app shows **what's new** and offers to **update**
   it — your progress carries over. Updating a pack on one device updates it on your other devices too.
   The header **Update** button reloads for a new version of the app; when pack updates are waiting it shows a badge with the count (tinted when only packs are waiting) and takes you to the library, where you accept them per pack or all at once.
+- The **Pharmacology Index** and the atlases keep themselves up to date: a new version is taken by itself, with no
+  **Update** to tap, and **what's new** still says what changed.
 - Switched-off packs can be **offloaded** to save space — they stay in your library with a download
   button and come back in one tap (automatically after a week off; change it in **Settings → Storage**).
 - Load your own packs by dropping in a file.
