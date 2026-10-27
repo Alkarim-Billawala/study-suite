@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.31 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.32 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.31)
+# Study Suite — Content Authoring Guide (v2.32)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,8 +8,9 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.31 · **Pairs with:** Study Suite app v0.4.4+ (source switches need v0.6.6+, Extras v0.7.1+, image cards v0.8.1+, interactive figures v0.9.0+, atlas packs v0.10.0+, default and paired packs and named atlas links v0.12.3+, cycle widgets and sounds v0.13.0+ — links and read-more v0.10.9–v0.10.10), pack `formatVersion` 2.0
-> **What changed in guide v2.31:** **cycle widgets and heart sounds** (app v0.13.0+). New **§6g**: the `cycle` widget
+> **Authoring system version:** 2.32 · **Pairs with:** Study Suite app v0.4.4+ (source switches need v0.6.6+, Extras v0.7.1+, image cards v0.8.1+, interactive figures v0.9.0+, atlas packs v0.10.0+, default and paired packs and named atlas links v0.12.3+, cycle widgets and sounds v0.13.0+ — links and read-more v0.10.9–v0.10.10), pack `formatVersion` 2.0
+> **What changed in guide v2.32:** §6g now lists every **conduction site id** a `cycle` widget's view may name in `site` — `san`, `atria`, `av`, `his`, `rbb`, `lbb`, `accessory`, `re-entry-av` and **`ventricles`** (added with Week 20's rhythms; `packbuilder` `ECG_SITES`). The app lights whatever id the widget's own conduction inset defines. No app change.
+> **What changed in guide v2.31 (previous):** **cycle widgets and heart sounds** (app v0.13.0+). New **§6g**: the `cycle` widget
 > type — a moving figure over one beat (`kind:"cycle"`: pressures, volume, ECG and heart sounds — the Wiggers figure) or
 > an ECG the app composes from beat templates and a rhythm rule (`kind:"ecg"`: the twelve-lead, a strip or three strips).
 > New **§6h**: `pack.sounds` — heart sounds as data the app synthesises and draws as a phonocardiogram, an optional credited
@@ -1149,7 +1150,7 @@ strips. The pack carries data only; every time is in **seconds within `[0, dur]`
 
 "w20_rhythms": {"type":"cycle", "kind":"ecg", "vb":[380,330], "title":"Rhythms", "alt":"…", "layout":"12lead", "dur":10, "speed":25, "gain":10,
   "leads":["I","II","III","aVR","aVL","aVF","V1","V2","V3","V4","V5","V6"], "rhythm":"II", "atlasPack":"cardio_heart",
-  "conduction":"<svg viewBox=…>… elements with id san · atria · av · his · rbb · lbb · accessory …</svg>",
+  "conduction":"<svg viewBox=…>… elements with id san · atria · av · his · rbb · lbb · accessory · re-entry-av · ventricles</svg>",
   "beats":{"sinus":{"p":{"II":[[0,0],[0.05,0.15],[0.10,0]],…},"qrs":{"II":[[0.16,0],[0.175,-0.05],[0.195,1.1],[0.215,-0.15],[0.25,0]],…},
                     "t":{"II":[[0.28,0],[0.46,0.3],[0.58,0]],…},"pr":0.16,"qrsd":0.09,"qt":0.40},
            "escape":{…no p, pr 0…}, "pvc":{…wide…}},
