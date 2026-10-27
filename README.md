@@ -29,7 +29,7 @@ It's currently in **beta**.
 - **Topic Guides** — in-depth guides built into every pack, one per concept. Search their titles
   *and* their content, print them, and jump straight in from any answer's guide link. Every week
   ends with a one-page **cram sheet**. Some guides carry figures you can work with — step through
-  levels, tap a structure to name it, quiz yourself — and you can **bookmark** the ones you come back to.
+  levels, tap a structure to name it, quiz yourself, play heart sounds and watch a heartbeat or an ECG run, step by step — and you can **bookmark** the ones you come back to.
 - **Pharmacology** — a drug index built from all your active packs: use, mechanism, dosing,
   cautions, adverse effects, monitoring and interactions for each drug, grouped by class, with
   links back to the week that teaches it. The **Pharmacology Index** adds a core summary for each drug
@@ -164,6 +164,12 @@ No. Study Suite and its packs are **educational material for exam preparation on
 </details>
 
 ### Studying
+
+<details>
+<summary><strong>Why can't I hear the low heart sounds?</strong></summary>
+
+S3, S4 and the rumble of a narrowed mitral valve sit below what most phone and laptop speakers can play. Use earphones. Sounds are meant to play even with your phone's silent switch on.
+</details>
 
 <details>
 <summary><strong>How does Practice decide the order of questions?</strong></summary>

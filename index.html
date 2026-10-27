@@ -1,7 +1,27 @@
 <!--
-  Study Suite  ·  v0.12.5 (beta)
+  Study Suite  ·  v0.13.0 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.13.0 (2026-10-26, "The Heart" — Drive Claude/StudySuite/heart-atlas-2026-10-26/PROPOSAL.md v1.1 §5–§7, spec
+  heart-atlas/working/ENGINE-SPEC-v0.13.0.md): HEAR IT, WATCH IT BEAT. (1) pack.sounds {id:{name,s1,s2,split,fixedSplit,extra[],murmurs[],
+  note,audio?}} is kept by ingestPack; renderSound() is the listening prototype's synthesiser ported as is (seeded, so the same
+  description gives the same sound); soundBlob() wraps 4 cycles as a WAV played through ONE <audio loop> (#sswAudio) — the iPhone
+  silent switch mutes Web Audio but not <audio>. mountSoundPlayer(): Listen, the phonocardiogram with a playhead, rate, Breathing,
+  manoeuvre chips (louder ×1.6 / softer ×0.6), Normal for comparison, Real recording (sounds[id].audio, credit shown). One sound
+  at a time; it stops on a section change, a card advance, an atlas level change, or when its player leaves the page. Guides:
+  <a data-sound="as" data-sound-pack="…"> mounts the player under its paragraph (wireAtlasLinks; offerAtlasPack(state,pid,then,
+  what) now serves sounds too). Cards: a widget card with state.sound plays it ("Listen — what is this?" with hideName);
+  validateCard accepts one without a widget id. (2) The `cycle` widget type (mountCycle): kind 'cycle' = tracks over one beat
+  with phase bands, numbered events, a phonocardiogram lane, Sounds in step, Heart view scenes; kind 'ecg' = twelve-lead (3 × 4 +
+  lead II rhythm strip on the 25 mm/s grid), strip or 3 strips, composed from beat templates + a rhythm rule (regular, irregular,
+  dissociated, wenckebach, mobitz2, flutter, reentry, ectopic, vt, polymorphic, vf, pause) and per-lead morphs (st, tinv, q,
+  delta, wide, lvh, rbbb, lbbb); tap a lead to enlarge it, pinch/Zoom, Where it blocks, Territory. Play/Step/scrub; views by
+  weight; reduced motion starts paused with the whole trace; print shows the whole trace. (3) Atlas: level.sound → the player
+  under the drawing; level.cycle {widget,view} → a Cycle chip opening that widget in a sheet; level.states → a segmented
+  control swapping an overlay above the regions (links may add :state=<id>). Nothing of this is added to an atlas that does not
+  use it, so The Brain's markup is unchanged. A level's ref may be {use:'<levelId>', box?, credit?, conv?, printedLabels?}: it borrows that
+  level's photo (same plane first, then any plane) so views sharing one course figure carry it once. repairPacks re-reads a sounds pack an older app read. atlasLinkGo() is the
+  data-atlas action on its own (wireAtlasLinks calls it; behaviour unchanged).
   Changelog v0.12.5 (2026-10-26, Alkarim: "one source of truth across the app"): FAQ, COMING SOON AND MODE CARDS FROM
   THEIR MASTERS. The FAQ panel (FAQ.md), the Coming soon list (COMING_SOON.md) and the three mode-card descriptions
   (the "Home:" lines in FEATURES.md) are GEN spots (comment markers GEN:name … /GEN:name) that the deploy fills
@@ -1733,7 +1753,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       </div>
       <div class="infopanel" id="faqPanel" style="display:none">
         <div class="faqbody">
-          <!-- GEN:faq · filled from FAQ.md at deploy (Pack Tools/public_copy.py) --><div class="faq-sec">The basics — how it works today</div><h4>What is Study Suite?</h4><p>A study tool with three ways to study — <b>Review</b> (spaced-repetition flashcards), <b>Practice</b> (one question at a time with instant feedback) and <b>Exam</b> (timed, scored mock tests) — plus <b>Topic Guides</b> and a <b>Pharmacology</b> drug index to read from. The app itself is empty — you load <b>study packs</b> that hold the questions, cards and guides. An account is optional and adds encrypted sync between your devices. It's currently in beta.</p><h4>Is it really free?</h4><p>Yes — completely free, with no ads, no tracking, and no account required. Studying runs entirely in your own browser, so there's nothing to charge for — and sync, the optional account feature, is free during the beta. If you want to chip in toward the costs of building it, there's an optional "Support development" link, but it's never required and unlocks nothing — the whole app is yours to use.</p><h4>Where is my data stored? Can you see it?</h4><p>Everything — your packs, review progress, scores, and settings — is stored locally in your own browser, on your own device. Without an account, <b>none of it is sent anywhere.</b> There's no analytics and no tracking cookies. If you turn on sync, your data is end-to-end encrypted on your device before it's uploaded — so either way, I genuinely can't see what you study or how you're doing.</p><h4>How do I back up my progress or move to another device?</h4><p>Use <b>Backup all</b> to save a file with everything in it, then <b>Restore backup</b> on your other device (or after clearing your browser). Or create a free account and turn on sync (below). It's worth backing up now and then, since your progress lives in your browser and clearing site data would wipe it.</p><h4>Does it work offline?</h4><p>Yes, fully. The app is a single self-contained file. Once it's loaded in your browser — or installed to your home screen — it keeps working with no internet connection. Your packs and progress are right there on your device.</p><h4>Can I add it to my phone or computer like a real app?</h4><p>Yes — use <b>Add to Home Screen</b> (the app walks you through it for your device). One thing to know: an installed copy may keep its <b>own separate storage</b> from the browser version (on iPhone and iPad it always does). With an account, just sign in inside the installed app and everything syncs across. No account? <b>Backup all</b> first, then <b>Restore backup</b> inside the installed app.</p><h4>Can I make my own study packs, or use my own notes?</h4><p>Absolutely — that's encouraged. Download the <a href="Study_Suite_Authoring_Guide_latest.md" download><b>instruction set</b></a> (also linked on the home screen) and hand it to the AI assistant of your choice; it walks the assistant through turning your own material into a pack you can load. Packs you make from your own content are <b>yours</b>. (The app, its design, and the pack format are mine, but the content you bring into it is entirely your own.)</p><h4>Is any of this medical advice?</h4><p>No. Study Suite and its packs are <b>educational material for exam preparation only</b> — not medical advice, and never a basis for real decisions about real patients. It's also in beta, so content can contain errors or go out of date. Always check against your own curriculum and trusted sources.</p><div class="faq-sec">Studying</div><h4>How does Practice decide the order of questions?</h4><p>Questions you've never answered come first. Ones you've answered before go to the end — the ones you got wrong last time ahead of the ones you got right — and they're marked on the question map. Each starts clear, with <b>View prior answer</b> if you want to see what you picked before. Prefer only new ones? Turn on <b>Unanswered questions only</b> when you set up Practice. <b>Skip</b> moves on without counting a question as seen.</p><h4>Can I leave an exam and come back to it?</h4><p>Yes. Leave part-way and the exam is saved, with the timer paused. Tap <b>Exam</b> to <b>Resume</b> — or <b>Start fresh</b>, which keeps the questions you'd answered (you can look back at them under <b>Past exams</b>) and sets up a new exam that avoids them.</p><h4>What are topics?</h4><p>Topics are the main subjects each week covers — anywhere from about 6 to 20 per week. They're what you choose from in <b>Review</b>, what you can narrow <b>Practice</b> and <b>Exam</b> to, and one way to weight an exam. Each question and card also carries a smaller label for its exact point.</p><h4>What's the Pharmacology view?</h4><p>A drug index built from every pack you have switched on. Each drug gets its use, mechanism, dosing, cautions, adverse effects, monitoring and interactions, grouped by drug class, with links back to the week and topic guide that teach it.</p><div class="faq-sec">Accounts &amp; sync</div><h4>What does sync do?</h4><p>Sign in on each of your devices — phone, laptop, tablet — and your packs and progress stay in step automatically. Changes sync in the background a few seconds after you make them, whenever you open or come back to the app, and every few minutes while it's open. Offline? Keep studying; it catches up as soon as you're back online. The cloud icon is <b>green</b> when you're in sync, <b>yellow</b> if the last sync is a few minutes old or you're offline, and <b>red</b> if something needs your attention. It's the automatic version of <b>Backup all</b>.</p><h4>Do I have to make an account?</h4><p>No. Choose <b>Use without an account</b> and everything works exactly as before — free, offline, on your device. Your progress just stays in that one browser, so use <b>Backup all</b> now and then. You can create an account any time from the account menu at the top right of the homepage.</p><h4>Does sync cost anything?</h4><p>Sync is free during the beta. It's the one feature that needs a server running around the clock, so it may become a paid option one day. If it does, you'll get at least 30 days' notice in the app, your account stays, and the app keeps working without sync. Everything you can do on your own device stays free.</p><h4>How do I create an account?</h4><p>From the welcome screen or the account menu, choose <b>Create an account</b>. During early access you'll need your access code. You'll get a <b>recovery code</b> straight away — save it in a password manager or somewhere safe.</p><h4>Can you see my synced data?</h4><p>No. Sync is <b>end-to-end encrypted</b>: your data is scrambled on your device <i>before</i> it's uploaded, and only the scrambled version is stored. The key that unlocks it never leaves your devices. That means <b>I can't read your synced data</b> — not for support, not for anything — because I simply don't have the key.</p><h4>What if I forget my password?</h4><p>Choose <b>Forgot password?</b> when signing in and you'll get an email with a link to set a new one. Then enter your <b>recovery code</b> to unlock your synced data — nothing is lost.</p><h4>What if I lose both my password and my recovery code?</h4><p>Your <b>synced</b> copy can't be unlocked by anyone — including me. That's the whole point of end-to-end encryption. But <b>your studying isn't gone:</b> the data on your devices is untouched, and any <b>Backup all</b> file still works. Reset your password, choose <b>Start fresh</b>, and sign in on the device where you last studied — its data becomes your new account copy.</p><h4>What if two devices change at the same time?</h4><p>They're combined — nothing to choose, and nothing studied is lost. If the same card was studied on both, the most recent review counts. Answers to the same question on both are all kept in your history. If a pack was switched on or off on both, the latest switch wins; a pack you removed stays removed. An unfinished exam that's replaced by a newer one moves to <b>Past exams</b>. <b>Sync activity</b> in the account menu lists what was combined, on any of your devices.</p><h4>How do I see which devices are syncing?</h4><p>Account menu → <b>Your devices</b> lists each browser or installed app that syncs with your account, with its app version and when it last synced. Give the one you're on a name you'll recognise — names are saved inside your encrypted study data. <b>Sign out other devices</b> (under Security) signs out all the others at once.</p><h4>What does an account store, and is it private?</h4><p>The minimum: your email address, your encrypted study data, a random ID for each device that syncs, and a few details needed to run the account. No selling data, no ads, no tracking. The <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> lists everything; see also the <a href="terms.html" target="_blank" rel="noopener">Terms</a>.</p><h4>How do I delete my account?</h4><p>Account menu → <b>Delete account</b>. It's instant and permanent, and your data on your devices stays where it is.</p><!-- /GEN:faq -->
+          <!-- GEN:faq · filled from FAQ.md at deploy (Pack Tools/public_copy.py) --><div class="faq-sec">The basics — how it works today</div><h4>What is Study Suite?</h4><p>A study tool with three ways to study — <b>Review</b> (spaced-repetition flashcards), <b>Practice</b> (one question at a time with instant feedback) and <b>Exam</b> (timed, scored mock tests) — plus <b>Topic Guides</b> and a <b>Pharmacology</b> drug index to read from. The app itself is empty — you load <b>study packs</b> that hold the questions, cards and guides. An account is optional and adds encrypted sync between your devices. It's currently in beta.</p><h4>Is it really free?</h4><p>Yes — completely free, with no ads, no tracking, and no account required. Studying runs entirely in your own browser, so there's nothing to charge for — and sync, the optional account feature, is free during the beta. If you want to chip in toward the costs of building it, there's an optional "Support development" link, but it's never required and unlocks nothing — the whole app is yours to use.</p><h4>Where is my data stored? Can you see it?</h4><p>Everything — your packs, review progress, scores, and settings — is stored locally in your own browser, on your own device. Without an account, <b>none of it is sent anywhere.</b> There's no analytics and no tracking cookies. If you turn on sync, your data is end-to-end encrypted on your device before it's uploaded — so either way, I genuinely can't see what you study or how you're doing.</p><h4>How do I back up my progress or move to another device?</h4><p>Use <b>Backup all</b> to save a file with everything in it, then <b>Restore backup</b> on your other device (or after clearing your browser). Or create a free account and turn on sync (below). It's worth backing up now and then, since your progress lives in your browser and clearing site data would wipe it.</p><h4>Does it work offline?</h4><p>Yes, fully. The app is a single self-contained file. Once it's loaded in your browser — or installed to your home screen — it keeps working with no internet connection. Your packs and progress are right there on your device.</p><h4>Can I add it to my phone or computer like a real app?</h4><p>Yes — use <b>Add to Home Screen</b> (the app walks you through it for your device). One thing to know: an installed copy may keep its <b>own separate storage</b> from the browser version (on iPhone and iPad it always does). With an account, just sign in inside the installed app and everything syncs across. No account? <b>Backup all</b> first, then <b>Restore backup</b> inside the installed app.</p><h4>Can I make my own study packs, or use my own notes?</h4><p>Absolutely — that's encouraged. Download the <a href="Study_Suite_Authoring_Guide_latest.md" download><b>instruction set</b></a> (also linked on the home screen) and hand it to the AI assistant of your choice; it walks the assistant through turning your own material into a pack you can load. Packs you make from your own content are <b>yours</b>. (The app, its design, and the pack format are mine, but the content you bring into it is entirely your own.)</p><h4>Is any of this medical advice?</h4><p>No. Study Suite and its packs are <b>educational material for exam preparation only</b> — not medical advice, and never a basis for real decisions about real patients. It's also in beta, so content can contain errors or go out of date. Always check against your own curriculum and trusted sources.</p><div class="faq-sec">Studying</div><h4>Why can't I hear the low heart sounds?</h4><p>S3, S4 and the rumble of a narrowed mitral valve sit below what most phone and laptop speakers can play. Use earphones. Sounds are meant to play even with your phone's silent switch on.</p><h4>How does Practice decide the order of questions?</h4><p>Questions you've never answered come first. Ones you've answered before go to the end — the ones you got wrong last time ahead of the ones you got right — and they're marked on the question map. Each starts clear, with <b>View prior answer</b> if you want to see what you picked before. Prefer only new ones? Turn on <b>Unanswered questions only</b> when you set up Practice. <b>Skip</b> moves on without counting a question as seen.</p><h4>Can I leave an exam and come back to it?</h4><p>Yes. Leave part-way and the exam is saved, with the timer paused. Tap <b>Exam</b> to <b>Resume</b> — or <b>Start fresh</b>, which keeps the questions you'd answered (you can look back at them under <b>Past exams</b>) and sets up a new exam that avoids them.</p><h4>What are topics?</h4><p>Topics are the main subjects each week covers — anywhere from about 6 to 20 per week. They're what you choose from in <b>Review</b>, what you can narrow <b>Practice</b> and <b>Exam</b> to, and one way to weight an exam. Each question and card also carries a smaller label for its exact point.</p><h4>What's the Pharmacology view?</h4><p>A drug index built from every pack you have switched on. Each drug gets its use, mechanism, dosing, cautions, adverse effects, monitoring and interactions, grouped by drug class, with links back to the week and topic guide that teach it.</p><div class="faq-sec">Accounts &amp; sync</div><h4>What does sync do?</h4><p>Sign in on each of your devices — phone, laptop, tablet — and your packs and progress stay in step automatically. Changes sync in the background a few seconds after you make them, whenever you open or come back to the app, and every few minutes while it's open. Offline? Keep studying; it catches up as soon as you're back online. The cloud icon is <b>green</b> when you're in sync, <b>yellow</b> if the last sync is a few minutes old or you're offline, and <b>red</b> if something needs your attention. It's the automatic version of <b>Backup all</b>.</p><h4>Do I have to make an account?</h4><p>No. Choose <b>Use without an account</b> and everything works exactly as before — free, offline, on your device. Your progress just stays in that one browser, so use <b>Backup all</b> now and then. You can create an account any time from the account menu at the top right of the homepage.</p><h4>Does sync cost anything?</h4><p>Sync is free during the beta. It's the one feature that needs a server running around the clock, so it may become a paid option one day. If it does, you'll get at least 30 days' notice in the app, your account stays, and the app keeps working without sync. Everything you can do on your own device stays free.</p><h4>How do I create an account?</h4><p>From the welcome screen or the account menu, choose <b>Create an account</b>. During early access you'll need your access code. You'll get a <b>recovery code</b> straight away — save it in a password manager or somewhere safe.</p><h4>Can you see my synced data?</h4><p>No. Sync is <b>end-to-end encrypted</b>: your data is scrambled on your device <i>before</i> it's uploaded, and only the scrambled version is stored. The key that unlocks it never leaves your devices. That means <b>I can't read your synced data</b> — not for support, not for anything — because I simply don't have the key.</p><h4>What if I forget my password?</h4><p>Choose <b>Forgot password?</b> when signing in and you'll get an email with a link to set a new one. Then enter your <b>recovery code</b> to unlock your synced data — nothing is lost.</p><h4>What if I lose both my password and my recovery code?</h4><p>Your <b>synced</b> copy can't be unlocked by anyone — including me. That's the whole point of end-to-end encryption. But <b>your studying isn't gone:</b> the data on your devices is untouched, and any <b>Backup all</b> file still works. Reset your password, choose <b>Start fresh</b>, and sign in on the device where you last studied — its data becomes your new account copy.</p><h4>What if two devices change at the same time?</h4><p>They're combined — nothing to choose, and nothing studied is lost. If the same card was studied on both, the most recent review counts. Answers to the same question on both are all kept in your history. If a pack was switched on or off on both, the latest switch wins; a pack you removed stays removed. An unfinished exam that's replaced by a newer one moves to <b>Past exams</b>. <b>Sync activity</b> in the account menu lists what was combined, on any of your devices.</p><h4>How do I see which devices are syncing?</h4><p>Account menu → <b>Your devices</b> lists each browser or installed app that syncs with your account, with its app version and when it last synced. Give the one you're on a name you'll recognise — names are saved inside your encrypted study data. <b>Sign out other devices</b> (under Security) signs out all the others at once.</p><h4>What does an account store, and is it private?</h4><p>The minimum: your email address, your encrypted study data, a random ID for each device that syncs, and a few details needed to run the account. No selling data, no ads, no tracking. The <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> lists everything; see also the <a href="terms.html" target="_blank" rel="noopener">Terms</a>.</p><h4>How do I delete my account?</h4><p>Account menu → <b>Delete account</b>. It's instant and permanent, and your data on your devices stays where it is.</p><!-- /GEN:faq -->
         </div>
       </div>
     </div>
@@ -2014,7 +2034,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.12.5';
+const APP_VERSION='0.13.0';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3337,7 +3357,7 @@ var DEFAULT_ATLAS='neuro_brain'; /* v0.12.3: an atlas link without data-atlas-pa
 let repairBusy=false;
 async function repairPacks(){if(repairBusy||!DATA_READY||!defaultManifest)return;repairBusy=true;let n=0;
   try{for(const p of packs.slice()){if(p.stub)continue;const mp=manifestEntry(p.id);if(!mp||!mp.version||verCmp(mp.version,p.version)!==0)continue;
-      if(p.readBy&&!(p.dropped>0&&verCmp(APP_VERSION,p.readBy)>0)&&!(p.id===RX_MASTER&&!p.classes&&verCmp('0.12.1',p.readBy)>0))continue; /* v0.12.1: index copy read before classes were kept */
+      if(p.readBy&&!(p.dropped>0&&verCmp(APP_VERSION,p.readBy)>0)&&!(p.id===RX_MASTER&&!p.classes&&verCmp('0.12.1',p.readBy)>0)&&!(!p.sounds&&verCmp('0.13.0',p.readBy)>0&&sswWantsSounds(p)))continue; /* v0.12.1: index copy read before classes were kept */
       try{if(await downloadPack(p,false))n++;}catch(e){}}
     if(n){await persist();renderHome();}}finally{repairBusy=false;}}
 function updateAllPacks(){const todo=pendingUpdates();if(!todo.length)return;
@@ -3507,7 +3527,52 @@ const SSW_CSS=`.sswlive{margin:2px 0 4px;color:var(--ink);line-height:1.4}
 .sswlive .lk{stroke:var(--ink);stroke-width:1.2;fill:none}.sswlive .dash{stroke-dasharray:3 3}
 .sswlive .tint-a{fill:var(--accent);fill-opacity:.14}.sswlive .tint-b{fill:var(--blue);fill-opacity:.18}
 .sswlive .tint-g{fill:var(--gold);fill-opacity:.18}.sswlive .tint-n{fill:var(--soft);fill-opacity:.12}.sswlive .tint-k{fill:var(--soft);fill-opacity:.26}
-.sswlive .ar{fill:var(--soft)}.sswlive .ara{fill:var(--accent)}`;
+.sswlive .ar{fill:var(--soft)}.sswlive .ara{fill:var(--accent)}
+/* v0.13.0: heart sounds (the player) and the cycle widget. --soft, --red and --blue fall back to the names a guide frame or the app window defines */
+.sswlive .sswsnd{max-width:620px;margin:8px 0 4px;padding:8px 10px 6px;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.sswlive .sswsndhd{font-size:14px;margin-bottom:2px}.sswlive .sswsndhint{font-size:12px;opacity:.7;margin-top:5px}.sswlive .sswsndcr{font-size:11.5px;opacity:.7;margin-top:4px} /* not .sswhint: the atlas rewrites its first .sswhint on phones */.sswlive .sswsndwh{font-size:12.5px;opacity:.8;margin-top:3px}
+.sswlive .sswpcg,.sswlive .sswcsvg{display:block;width:100%;height:auto;font-family:'IBM Plex Sans',system-ui,sans-serif;-webkit-user-select:none;user-select:none}
+.sswlive .sswpcg .ts,.sswlive .sswcsvg .ts{fill:var(--soft,var(--ink-soft,#666));font-size:10px}
+.sswlive .sswbase{stroke:var(--line);stroke-width:.7}
+.sswlive .sswbu line{stroke:var(--ink);stroke-width:1.5}.sswlive .sswbu.lo line{stroke-dasharray:2 1.2}
+.sswlive .sswbl{fill:var(--ink);font-size:10px;font-weight:600}
+.sswlive .sswmur{fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:1}
+.sswlive .sswph,.sswlive .sswcpl{stroke:var(--gold);stroke-width:2;stroke-dasharray:5 4;vector-effect:non-scaling-stroke}
+.sswlive .sswcpd{fill:var(--gold)}
+.sswlive .sswrate{font:inherit;font-size:13px;line-height:1.2;padding:5px 8px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);min-height:32px;max-width:130px}
+.sswlive .sswrate:disabled{opacity:.45}
+.sswlive .sswplay{font-weight:600}
+.sswlive .sswsndbox{margin:6px 0 10px}
+.sswlive .sswcbody{display:flex;flex-direction:column;gap:8px}
+.sswlive.ssw-cycle:not(.phone) .sswcbody.scene{flex-direction:row;align-items:flex-start}
+.sswlive .sswcscene{display:none}.sswlive .sswcbody.scene .sswcscene{display:block;flex:0 0 32%;border:1px solid var(--line);border-radius:8px;padding:4px;background:var(--paper)}
+.sswlive.ssw-cycle.phone .sswcbody.scene .sswcscene{max-width:260px;align-self:center;width:70%}
+.sswlive .sswcfig{flex:1 1 auto;min-width:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;touch-action:pan-y;background:var(--paper);cursor:crosshair}
+.sswlive .sswctr{fill:none;stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
+.sswlive .sswcfade{fill:var(--paper);fill-opacity:.85;pointer-events:none}
+.sswlive .sswcpb{fill:var(--gold);fill-opacity:0}.sswlive .sswcpb.on{fill-opacity:.2}
+.sswlive .sswcpn{fill:var(--soft,var(--ink-soft,#666));font-size:9.5px}
+.sswlive .sswctn{font-size:10px;font-weight:600}
+.sswlive .sswcev line{stroke:var(--line);stroke-width:.7;stroke-dasharray:2 3}
+.sswlive .sswcev circle{fill:var(--paper);stroke:var(--line);stroke-width:1}.sswlive .sswcev text{fill:var(--ink);font-size:8.5px;font-weight:700}
+.sswlive .sswcev.on circle{fill:var(--gold);stroke:var(--gold)}.sswlive .sswcev.on line{stroke:var(--gold);stroke-dasharray:none;stroke-width:1}
+.sswlive.nocall .sswcev circle,.sswlive.nocall .sswcev text,.sswlive.nocall .sswccall,.sswlive.nocall .sswcco{display:none}
+.sswlive .sswccall{display:flex;flex-wrap:wrap;gap:3px 12px;font-size:12.5px;margin-top:6px}.sswlive .sswccall:empty{display:none}
+.sswlive .sswccall>span{cursor:pointer;white-space:nowrap}.sswlive .sswccall>span.on{font-weight:700;text-decoration:underline;text-decoration-color:var(--gold);text-decoration-thickness:2px}
+.sswlive .sswcn{display:inline-block;min-width:16px;height:16px;line-height:16px;border-radius:50%;border:1px solid var(--line);font-size:10px;font-weight:700;text-align:center}
+.sswlive .sswcevr{margin-top:3px}.sswlive .sswcvn{opacity:.8}
+.sswlive .sswcecg{fill:none;stroke:var(--ink);stroke-width:1.3;vector-effect:non-scaling-stroke;stroke-linejoin:round}
+.sswlive .sswcmk{stroke:var(--ink);stroke-width:1.2;vector-effect:non-scaling-stroke}
+.sswlive .sswcl{fill:var(--ink);font-weight:700;font-size:calc(10.5px * var(--k,1))}
+.sswlive .sswcls{fill:var(--soft,var(--ink-soft,#666));font-size:calc(9.5px * var(--k,1))}
+.sswlive .sswcco text,.sswlive text.sswcco{fill:var(--accent);font-weight:700;font-size:calc(9.5px * var(--k,1))}
+.sswlive .sswcv .sswcx:not([aria-pressed="true"]){display:none}.sswlive.sswcmore .sswcv .sswcx{display:inline-flex}
+.sswlive .sswccond{max-width:240px;margin:8px 0 2px;border:1px solid var(--line);border-radius:8px;padding:4px;background:var(--paper)}.sswlive .sswccond svg{display:block;width:100%;height:auto}
+.sswlive .sswccond .sswcsite{stroke:var(--gold)!important;stroke-width:3!important;fill:var(--gold)!important;fill-opacity:.4!important}
+.sswlive .sswclook{margin-top:4px;font-size:12.5px}.sswlive .sswclook span{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:1px 8px;margin:3px 4px 0 0}
+.sswlive a.sswb{text-decoration:none}
+.sswlive.ssw-cycle.phone .sswtools .sswb{padding:5px 9px;font-size:12.5px}
+@media print{.sswlive .sswcfade,.sswlive .sswcphd,.sswlive .sswph{display:none}}`;
 function sswEsc(t){return String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 /* packs are ours, but widget SVG still goes through innerHTML in the app's own document: drop scripts, handlers and outside links */
 function sswClean(s){return String(s||'').replace(/<script[\s\S]*?<\/script\s*>/gi,'').replace(/<foreignObject[\s\S]*?<\/foreignObject\s*>/gi,'')
@@ -3522,13 +3587,14 @@ function sswShape(r){const a=`class="sswrg" data-id="${sswEsc(r.id)}"`;
 function sswMask(w,m){return Array.isArray(m)&&m.length?`<g class="sswmask">${m.map(r=>`<rect x="${+r[0]}" y="${+r[1]}" width="${+r[2]}" height="${+r[3]}" fill="${sswEsc(w.maskFill||'#fff')}"/>`).join('')}</g>`:'';}
 function sswSvg(w,inner){return `<svg class="sswsvg" viewBox="0 0 ${+w.vb[0]} ${+w.vb[1]}" role="img" aria-label="${sswEsc(w.alt||w.title||'Interactive figure')}">${inner}</svg>`;}
 const SSW_HINT={stack:'Drag the slider or swipe the picture to move through the levels.',layers:'Switch the layers on and off.',
-  spot:'Tap a structure to name it — or Quiz me.',lesion:'Tap a lesion site to see what it causes — or Quiz me.',curves:'Switch between the views.',atlas:'Pick a plane, move through the levels, tap a structure to name it — or search, or Quiz me.'};
+  spot:'Tap a structure to name it — or Quiz me.',lesion:'Tap a lesion site to see what it causes — or Quiz me.',curves:'Switch between the views.',cycle:'Play, step or drag through the beat; switch the views.',atlas:'Pick a plane, move through the levels, tap a structure to name it — or search, or Quiz me.'};
 /* o: {card, reveal, state:{frame,labels,hideName,on,view,region,outlines}, pick, target, onPick} */
 function mountWidget(host,w,o){o=o||{};const st=o.state||{};
   if(!w||!Array.isArray(w.vb)||!SSW_HINT[w.type]){host.innerHTML='<div class="sswread">This figure needs a newer version of the app.</div>';return;}
   host.className='sswlive ssw-'+w.type+(o.card?' sswcard':'');const t=w.type,card=!!o.card,hideName=card&&!o.reveal&&!!st.hideName;let h='';
   const read=()=>host.querySelector('.sswread');
   if(t==='atlas')return mountAtlas(host,w,Object.assign({packId:o.packId},o)); /* v0.10.0; v0.10.4: false = the poster stays */
+  if(t==='cycle')return mountCycle(host,w,o); /* v0.13.0 */
   if(t==='stack'){const F=w.frames||[];let i=Math.max(0,Math.min(F.length-1,st.frame|0));
     h=sswSvg(w,F.map((f,k)=>`<g class="sswfr" data-i="${k}"${k===i?'':' style="display:none"'}>${sswArt(w,f.img||f.svg)}${sswMask(w,f.mask)}<g class="sswov">${sswClean(f.over||'')}</g></g>`).join(''));
     if(!card)h+=`<div class="sswbar"><button type="button" class="sswb" data-a="prev" aria-label="Previous">‹</button><input type="range" class="sswrange" min="0" max="${F.length-1}" step="1" value="${i}" aria-label="${sswEsc(w.axis||'Level')}"><button type="button" class="sswb" data-a="next" aria-label="Next">›</button></div>`;
@@ -3604,13 +3670,15 @@ function sswEnsureCss(d){if(!d.getElementById('sswCss')){const s=d.createElement
 /* v0.10.9: "See it in the atlas" links in any guide — <a data-atlas="ax:ax08">, "ax:ax02:terr+nolab", "ax:ax12:cst+dcml+stt", or a JSON state */
 function atlasLinkState(v){v=String(v||'').trim();if(v.startsWith('{')){try{return JSON.parse(v);}catch(_){return {};}}
   const m=/^([a-z]+):([a-z0-9_]+)(?::(.*))?$/.exec(v);if(!m)return {};const st={plane:m[1],level:m[2]};const paths=[];
-  (m[3]||'').split('+').filter(Boolean).forEach(f=>{if(f==='terr')st.terr=true;else if(f==='nolab')st.labels=false;else if(f==='ref')st.ref=1;else if(f==='ana')st.conv='ana';else paths.push(f);});
+  (m[3]||'').split('+').filter(Boolean).forEach(f=>{if(f==='terr')st.terr=true;else if(f==='nolab')st.labels=false;else if(f==='ref')st.ref=1;else if(f==='ana')st.conv='ana';else if(f.startsWith('state='))st.state=f.slice(6); /* v0.13.0 */else paths.push(f);});
   if(paths.length)st.paths=paths;return st;}
-function wireAtlasLinks(d){if(!d||d.__atlasLinks)return;d.__atlasLinks=true;d.addEventListener('click',e=>{const a=e.target&&e.target.closest&&e.target.closest('[data-atlas]');if(!a)return;e.preventDefault();
-  const st=atlasLinkState(a.getAttribute('data-atlas'));const pid=a.getAttribute('data-atlas-pack')||DEFAULT_ATLAS; /* v0.12.3 */   const all=atlasWidgets().filter(x=>x.packId===pid);if(!all.length){offerAtlasPack(st,pid);return;}   try{openAtlas(all[0].w,all[0].packId,st);}catch(_){}});}
+function wireAtlasLinks(d){if(!d||d.__atlasLinks)return;d.__atlasLinks=true;d.addEventListener('click',e=>{const s=e.target&&e.target.closest&&e.target.closest('[data-sound]');if(s){e.preventDefault();try{sswSoundLink(d,s);}catch(_){}return;} /* v0.13.0 */
+  const a=e.target&&e.target.closest&&e.target.closest('[data-atlas]');if(!a)return;e.preventDefault();atlasLinkGo(a);});}
+/* v0.13.0: the data-atlas action on its own, so a cycle widget's Territory link (in any document) opens the atlas the same way */
+function atlasLinkGo(a){const st=atlasLinkState(a.getAttribute('data-atlas'));const pid=a.getAttribute('data-atlas-pack')||DEFAULT_ATLAS; /* v0.12.3 */   const all=atlasWidgets().filter(x=>x.packId===pid);if(!all.length){offerAtlasPack(st,pid);return;}   try{openAtlas(all[0].w,all[0].packId,st);}catch(_){}}
 /* v0.10.9: the link's failure state — the atlas pack is not in the library: offer to add it (from the user's visible pack list, as the
    library's + Add to library does), then open the atlas at the requested state; a pack outside the user's codes gets a plain message. */
-function offerAtlasPack(state,pid){pid=pid||DEFAULT_ATLAS;const vm=visibleManifest();const mp=((vm&&vm.packs)||[]).find(x=>x&&x.id===pid&&x.file)||null; /* v0.12.3: the link's own atlas */   const nm=mp&&mp.label?mp.label:(pid===DEFAULT_ATLAS?'The Brain':'an atlas');const an=/atlas/i.test(nm)?nm:nm+' atlas';   if(!mp){confirmDialog('This opens in '+an+', a pack that isn’t available with your access codes yet. Add the code that covers it under Packs, then come back.',{confirmText:'OK'},null);return;}   confirmDialog('This opens in '+an+', a pack that isn’t in your library yet. Add it now? It downloads once and stays in your library.',{confirmText:'Add the atlas'},async()=>{     try{ingestPack(await fetchPackJson(mp),(mp.label||mp.file).replace(/\.json$/i,''));await persist();renderHome();       const all=atlasWidgets().filter(x=>x.packId===pid);if(all.length)openAtlas(all[0].w,all[0].packId,state);else toast('The atlas was added — open it from the home screen.',4000);}
+function offerAtlasPack(state,pid,then,what){ /* v0.13.0: then = what to do once added (a sound link); what='sound' words the offer */pid=pid||DEFAULT_ATLAS;const vm=visibleManifest();const mp=((vm&&vm.packs)||[]).find(x=>x&&x.id===pid&&x.file)||null; /* v0.12.3: the link's own atlas */   const nm=mp&&mp.label?mp.label:(pid===DEFAULT_ATLAS?'The Brain':'an atlas');const an=/atlas/i.test(nm)?nm:nm+' atlas';   if(!mp){confirmDialog((what==='sound'?'This sound is in ':'This opens in ')+an+', a pack that isn’t available with your access codes yet. Add the code that covers it under Packs, then come back.',{confirmText:'OK'},null);return;}   confirmDialog((what==='sound'?'This sound is in ':'This opens in ')+an+', a pack that isn’t in your library yet. Add it now? It downloads once and stays in your library.',{confirmText:'Add the atlas'},async()=>{     try{ingestPack(await fetchPackJson(mp),(mp.label||mp.file).replace(/\.json$/i,''));await persist();renderHome();if(then){try{then();}catch(_){}return;}       const all=atlasWidgets().filter(x=>x.packId===pid);if(all.length)openAtlas(all[0].w,all[0].packId,state);else toast('The atlas was added — open it from the home screen.',4000);}
     catch(e){toast('Couldn’t download the atlas — check your connection and try again.',4000);}});}
 function mountGuideWidgets(d,g,opts){const els=d.querySelectorAll('[data-ssw]');if(!els.length)return;
   const a=opts&&opts.anchor,m=a&&/^ssw=([^:]+)(?::([^:]*))?(?::(.*))?$/.exec(String(a));const want=m?{id:m[1],state:{plane:m[2]||undefined,level:m[3]||undefined}}:null; /* v0.10.0 */
@@ -3621,10 +3689,376 @@ function mountGuideWidgets(d,g,opts){const els=d.querySelectorAll('[data-ssw]');
     if(want&&want.id===el.getAttribute('data-ssw')){o.state=Object.assign({},o.state||{},want.state);setTimeout(()=>{try{el.scrollIntoView({block:'start'});}catch(_){}},50);}
     try{if(mountWidget(host,w,o)!==false)posters.forEach(p=>p.style.display='none');}catch(e){host.remove();}});}
 /* cards: 'spot' and 'widget' draw into #cardWidget */
-function mountCardWidget(c){if(c.type!=='spot'&&c.type!=='widget')return;const host=$('cardWidget');if(!host)return;const w=widgetById(c.widget,c._pack);
+function mountCardWidget(c){if(c.type!=='spot'&&c.type!=='widget')return;const host=$('cardWidget');if(!host)return;
+  if(c.type==='widget'&&c.state&&typeof c.state.sound==='string'){host.className='sswlive sswcard ssw-sound';mountSoundPlayer(host,c.state.sound,{card:true,reveal:revealed,hideName:!!c.state.hideName,packId:c._pack});return;} /* v0.13.0 */
+ const w=widgetById(c.widget,c._pack);
   if(c.type==='spot')mountWidget(host,w,{card:true,reveal:revealed,state:c.state||{},pick:work.spot,target:c.target,onPick:id=>{work.spot=id;},packId:c._pack});
   else mountWidget(host,w,{card:true,reveal:revealed,state:c.state||{},packId:c._pack});}
 
+/* ===== v0.13.0 ("The Heart", PROPOSAL v1.1 §5; spec Claude/StudySuite/heart-atlas/working/ENGINE-SPEC-v0.13.0.md): HEART SOUNDS.
+   pack.sounds = {id:{name, s1, s2, split, fixedSplit, extra:[{type:'s3'|'s4'|'snap'|'click', t, gain}],
+   murmurs:[{from, to, shape, pitch, gain, breath, where, radiates, louder:[], softer:[]}], note, src:[], audio?:{src, credit, licence, dur}}};
+   times are fractions of the cycle (0 = S1, S2 at 0.46; negative = before S1). renderSound() is the synthesiser of
+   prototype-heart-sounds.html ported as is (thud, murmur, envelope, pitch table, band-pass, normalised to 0.8), seeded per call so a
+   description always gives the same samples. soundBlob() wraps 4 cycles as a 16-bit WAV, low-passed at 900 Hz (the prototype's
+   playback filter), played through ONE shared <audio loop> (#sswAudio) — not Web Audio: the iPhone silent switch mutes Web Audio,
+   not <audio>, and the lock screen shows it. One sound at a time; it stops on a section change, a card advance, an atlas level
+   change, and when its player leaves the page. ===== */
+const SSW_SR=22050,SSW_PITCH={lo:[90,1.2],mid:[180,1.0],hi:[320,0.9],harsh:[220,0.45],scratch:[600,0.5]},SSW_SND={urls:new Map(),owner:null};
+function soundById(id,packId){const p=packId&&packs.find(x=>x.id===packId);if(p&&p.sounds&&p.sounds[id])return p.sounds[id];
+  for(const q of packs)if(q.sounds&&q.sounds[id])return q.sounds[id];return null;}
+function sswBiquad(f0,Q,lp){const w=2*Math.PI*f0/SSW_SR,a=Math.sin(w)/(2*Q),c=Math.cos(w);const b0=lp?(1-c)/2:a,b1=lp?1-c:0,b2=lp?(1-c)/2:-a,a0=1+a,a1=-2*c,a2=1-a;
+  let x1=0,x2=0,y1=0,y2=0;return x=>{const y=(b0*x+b1*x1+b2*x2-a1*y1-a2*y2)/a0;x2=x1;x1=x;y2=y1;y1=y;return y;};}
+function sswEnv(shape,u){switch(shape){case'diamond':return Math.sin(Math.PI*u)**1.3;case'decrescendo':return Math.pow(1-u,1.4);case'crescendo':return Math.pow(u,1.4);
+    case'machinery':return 0.45+0.55*Math.sin(Math.PI*Math.min(1,u*1.0))**2;default:return 1;}}
+/* sf = where S2 falls (fraction of the cycle). The player keeps the prototype's 0.46; the cycle widget passes its own S1→S2 gap, and
+   every time is re-mapped piecewise (systole [0,0.46] → [0,sf], diastole [0.46,1] → [sf,1]) so the murmurs stay where they belong */
+function sswTm(sf){const S2=0.46;if(!(sf>0&&sf<1)||sf===S2)return f=>f;const m=f=>f<0?m(1+f)-1:f>1?m(f-1)+1:(f<=S2?f*sf/S2:sf+(f-S2)*(1-sf)/(1-S2));return m;}
+function renderSound(d,bpm,breath,o){d=d||{};o=o||{};const cyc=60/(+bpm||72),buf=new Float32Array(Math.floor(cyc*SSW_SR)),sf=+o.sys||0.46,tm=sswTm(sf);
+  let seed=7;const rnd=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296*2-1;};
+  const thud=(t0,f,dur,amp,sharp)=>{ /* damped sinusoid + short band-noise = a heart sound */
+    const n0=Math.floor(t0*SSW_SR),n=Math.floor(dur*SSW_SR),bp=sswBiquad(f*2.2,1.5);
+    for(let i=0;i<n;i++){const t=i/SSW_SR,env=Math.exp(-t/(dur*0.28))*Math.min(1,t/0.004);
+      const v=Math.sin(2*Math.PI*f*t)*env+(sharp?bp(rnd())*env*0.9:bp(rnd())*env*0.35);const k=n0+i;if(k>=0&&k<buf.length)buf[k]+=v*amp;}};
+  const murmur=m=>{const [f,Q]=SSW_PITCH[m.pitch]||SSW_PITCH.mid,bp=sswBiquad(f,Q),bp2=sswBiquad(f*1.9,Q*1.2);
+    const n0=Math.floor(tm(+m.from||0)*cyc*SSW_SR),n1=Math.floor(tm(+m.to||0)*cyc*SSW_SR),g=(m.gain||0.5)*(breath&&m.breath?m.breath:1)*0.35;
+    for(let k=n0;k<n1;k++){const u=(k-n0)/(n1-n0),e=sswEnv(m.shape,u)*Math.min(1,(k-n0)/400,(n1-k)/400);
+      let v=bp(rnd())+0.5*bp2(rnd());if(m.pitch==='scratch')v=Math.sign(v)*Math.pow(Math.abs(v),0.6);
+      const i=((k%buf.length)+buf.length)%buf.length;buf[i]+=v*e*g;}};
+  const s1=d.s1||1,s2=d.s2||1,sys=sf*cyc;
+  thud(0.0,52,0.11,0.55*s1,false);thud(0.022,70,0.08,0.35*s1,true);                                  /* M1, T1 */
+  const split=(d.split||0)*(d.fixedSplit?1:(breath?1:0.25));
+  thud(sys,95,0.07,0.5*s2,true);thud(sys+(split||0.015),110,0.06,0.32*s2,true);                      /* A2, P2 */
+  (d.extra||[]).forEach(x=>{const g=x.gain||1,t=tm(x.t<0?1+x.t:x.t)*cyc;
+    if(x.type==='s3')thud(t,38,0.12,0.4*g,false);else if(x.type==='s4')thud(t,42,0.10,0.35*g,false);
+    else if(x.type==='snap')thud(t,180,0.035,0.5*g,true);else if(x.type==='click')thud(t,260,0.02,0.6*g,true);});
+  (d.murmurs||[]).forEach(murmur);
+  let mx=0;for(const v of buf)mx=Math.max(mx,Math.abs(v));const k=0.8/(mx||1);for(let i=0;i<buf.length;i++)buf[i]*=k;
+  return buf;}
+/* cycles of one rendered beat → a WAV Blob (16-bit PCM mono, 22 050 Hz). o.at = where S1 falls in the output cycle (0..1; the cycle widget) */
+function soundBlob(d,bpm,breath,cycles,o){o=o||{};cycles=cycles||4;const one=renderSound(d,bpm,breath,o),L=one.length,n=L*cycles,sh=Math.round((+o.at||0)*L);
+  const b=new ArrayBuffer(44+n*2),v=new DataView(b),ws=(p,s)=>{for(let i=0;i<s.length;i++)v.setUint8(p+i,s.charCodeAt(i));},lp=sswBiquad(900,0.707,true);
+  ws(0,'RIFF');v.setUint32(4,36+n*2,true);ws(8,'WAVE');ws(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);
+  v.setUint32(24,SSW_SR,true);v.setUint32(28,SSW_SR*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);ws(36,'data');v.setUint32(40,n*2,true);
+  for(let i=0;i<n;i++){const x=lp(one[(((i-sh)%L)+L)%L]);v.setInt16(44+i*2,Math.max(-32767,Math.min(32767,Math.round(x*32767))),true);}
+  return new Blob([b],{type:'audio/wav'});}
+function sswSoundUrl(k,make){const m=SSW_SND.urls;if(m.has(k))return m.get(k);const u=URL.createObjectURL(make());m.set(k,u);
+  if(m.size>24){const [k0,u0]=m.entries().next().value;if(u0!==sswAudio().getAttribute('src'))URL.revokeObjectURL(u0);m.delete(k0);}return u;}
+function sswAudio(){let a=document.getElementById('sswAudio');if(!a){a=document.createElement('audio');a.id='sswAudio';a.loop=true;a.preload='auto';a.setAttribute('playsinline','');a.style.display='none';document.body.appendChild(a);}return a;}
+/* owner = {key, stopped()}: whoever plays now; the previous owner is told it stopped (its button flips back) */
+function sswSoundPlay(url,owner,at){const a=sswAudio(),prev=SSW_SND.owner;SSW_SND.owner=owner;if(prev&&prev!==owner){try{prev.stopped();}catch(_){}}
+  if(a.getAttribute('src')!==url)a.setAttribute('src',url);a.loop=true;
+  if(at>0){const seek=()=>{try{a.currentTime=at;}catch(_){}};if(a.readyState>=1)seek();else a.addEventListener('loadedmetadata',seek,{once:true});}
+  const p=a.play();if(p&&p.catch)p.catch(()=>{});return a;}
+function sswSoundStop(){const a=document.getElementById('sswAudio');if(a&&!a.paused)a.pause();const o=SSW_SND.owner;SSW_SND.owner=null;if(o){try{o.stopped();}catch(_){}}}
+/* the phonocardiogram of a description: S1/S2/extra sounds as decaying bursts, murmurs as their envelope, over one cycle.
+   q = {X: fraction → x, y: midline, a: half-height, sys: S2 fraction, at: where S1 falls (0..1), breath, bpm, ly: label y, lx: label dx} */
+function sswPcgSvg(d,q){d=d||{};const sf=q.sys||0.46,tm=sswTm(sf),at=q.at||0,cyc=60/(q.bpm||72),A=q.a,ly=q.ly!=null?q.ly:q.y+A+11,lx=q.lx||0;let s='';
+  (d.murmurs||[]).forEach(m=>{const f0=tm(+m.from||0),f1=tm(+m.to||0);if(!(f1>f0))return;const g=Math.min(1,(m.gain||0.5)*(q.breath&&m.breath?m.breath:1)*1.1)*A;
+    let run=[],k0=null;const flush=()=>{if(run.length>1)s+=`<path class="sswmur" d="M${run.map(p=>p[0].toFixed(1)+','+(q.y-p[1]).toFixed(1)).join('L')}L${run.slice().reverse().map(p=>p[0].toFixed(1)+','+(q.y+p[1]).toFixed(1)).join('L')}Z"/>`;run=[];};
+    for(let i=0;i<=28;i++){const u=i/28,p=f0+u*(f1-f0)+at,k=Math.floor(p-1e-9);if(k0!==null&&k!==k0)flush();k0=k;run.push([q.X(p-k),Math.max(0.6,sswEnv(m.shape,u)*g)]);}flush();});
+  const wrap=f=>{f+=at;return f-Math.floor(f);};
+  const burst=(f,amp,lab,lo)=>{const x=q.X(wrap(f));let b='';for(let i=0;i<4;i++){const h=amp*(1-i/4.5),xx=(x+i*1.6).toFixed(1);b+=`<line x1="${xx}" y1="${(q.y-h).toFixed(1)}" x2="${xx}" y2="${(q.y+h).toFixed(1)}"/>`;}
+    return `<g class="sswbu${lo?' lo':''}">${b}</g>`+(lab?`<text class="sswbl" x="${(x+lx).toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="${lx?'start':'middle'}">${lab}</text>`:'');};
+  const s1=d.s1||1,s2=d.s2||1,split=(d.split||0)*(d.fixedSplit?1:(q.breath?1:0.25))/cyc;
+  s+=burst(0,A*Math.min(1,0.7*s1),'S1');
+  s+=split>0.03?burst(sf,A*Math.min(1,0.6*s2),'A2')+burst(sf+split,A*Math.min(1,0.4*s2),'P2'):burst(sf,A*Math.min(1,0.65*s2),'S2');
+  const XN={s3:'S3',s4:'S4',snap:'OS',click:'C'};
+  (d.extra||[]).forEach(x=>{const g=x.gain||1,f=tm(x.t<0?1+x.t:x.t);s+=burst(f,A*Math.min(1,(x.type==='snap'||x.type==='click'?0.5:0.4)*g),XN[x.type]||'',x.type==='s3'||x.type==='s4');});
+  return s;}
+/* the player: Listen/Pause, the phonocardiogram with a playhead, the rate, Breathing and each manoeuvre the murmurs name (×1.6 louder,
+   ×0.6 softer), Normal for comparison, Real recording (pack.sounds[id].audio, credit under the strip), the note as the readout.
+   o = {packId, card, reveal, hideName, bpm}. A player mounted while the same sound already plays (a card's reveal) takes it over. */
+function mountSoundPlayer(host,id,o){o=o||{};const doc=host.ownerDocument||document;sswEnsureCss(doc);if(!host.closest('.sswlive'))host.classList.add('sswlive');
+  const pid=o.packId,base=soundById(id,pid),card=!!o.card,hide=card&&!o.reveal&&!!o.hideName;
+  if(!base){host.innerHTML='<div class="sswread">This sound is in a pack that isn’t in your library.</div>';return;}
+  const nrm=id!=='normal'&&soundById('normal',pid),real=base.audio&&/^data:audio\/[a-z0-9.+-]+;base64,/i.test(String(base.audio.src||''))?base.audio:null;
+  const M=base.murmurs||[],canBr=!!(base.split||M.some(m=>m.breath)),cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+  const chips=[...new Set(M.reduce((a,m)=>a.concat(m.louder||[],m.softer||[]),[]).map(String))].filter(c=>!(canBr&&/^inspiration$/i.test(c)));
+  let bpm=+o.bpm||72,breath=false,cmp=false,rec=false,raf=0,msg='';const on=new Set(),me={key:'',stopped:()=>ui()};
+  const desc=()=>{const d=cmp?nrm:base;if(cmp||!on.size)return d;
+    return Object.assign({},d,{murmurs:(d.murmurs||[]).map(m=>{let g=m.gain||0.5;on.forEach(c=>{if((m.louder||[]).includes(c))g*=1.6;if((m.softer||[]).includes(c))g*=0.6;});return Object.assign({},m,{gain:g});})});};
+  const key=()=>rec?'rec|'+(pid||'')+'|'+id:[pid||'',cmp?'normal':id,bpm,breath?1:0,[...on].sort().join('+')].join('|');
+  const url=()=>rec?String(real.src):sswSoundUrl(key(),()=>soundBlob(desc(),bpm,breath));
+  const W=380,L=10,R=370,Y=44,X=f=>L+f*(R-L);
+  const strip=()=>`<svg class="sswpcg" viewBox="0 0 ${W} 92" role="img" aria-label="Phonocardiogram"><text class="ts" x="${X(0.23)}" y="10" text-anchor="middle">systole</text><text class="ts" x="${X(0.73)}" y="10" text-anchor="middle">diastole</text>`
+    +`<line class="sswbase" x1="${L}" y1="${Y}" x2="${R}" y2="${Y}"/>${sswPcgSvg(desc(),{X,y:Y,a:26,sys:0.46,at:0,breath,bpm})}<line class="sswph" x1="${L}" y1="14" x2="${L}" y2="84" style="display:none"/></svg>`;
+  const rates=[...new Set([60,72,90,110,bpm])].sort((a,b)=>a-b);
+  host.innerHTML=`<div class="sswsnd"><div class="sswsndhd"></div><div class="sswpcgbox"></div><div class="sswtools"><button type="button" class="sswb sswplay" data-a="play"></button>`
+    +`<select class="sswrate" aria-label="Heart rate">${rates.map(r=>`<option value="${r}"${r===bpm?' selected':''}>${r} bpm</option>`).join('')}</select>`
+    +(canBr&&!hide?'<button type="button" class="sswb" data-a="breath" aria-pressed="false">Breathing in</button>':'')
+    +(hide?[]:chips).map(c=>`<button type="button" class="sswb" data-c="${sswEsc(c)}" aria-pressed="false">${sswEsc(cap(c))}</button>`).join('') /* 2026-10-27: no manoeuvre chips on a card's question side — they name the lesion */
+    +(nrm?'<button type="button" class="sswb" data-a="cmp" aria-pressed="false">Normal for comparison</button>':'')
+    +(real?'<button type="button" class="sswb" data-a="rec" aria-pressed="false">Real recording</button>':'')+'</div>'
+    +(real?`<div class="sswsndcr">Recording: ${sswEsc(real.credit||'')}${real.licence?' · '+sswEsc(real.licence):''}</div>`:'')
+    +'<div class="sswread"></div><div class="sswsndhint">Low sounds (S3, S4, the rumble) need earphones.</div></div>';
+  const q=s=>host.querySelector(s),pb=q('[data-a="play"]');
+  const playing=()=>{const a=document.getElementById('sswAudio');return SSW_SND.owner===me&&a&&!a.paused;};
+  const ui=()=>{pb.textContent=playing()?'❚❚ Pause':(rec?'▶ Listen · recording':'▶ Listen · '+bpm+' bpm');pb.setAttribute('aria-pressed',String(playing()));};
+  const say=()=>{const d=cmp?nrm:base,m0=(d.murmurs||[]).find(m=>m.where||m.radiates);
+    q('.sswsndhd').innerHTML=hide?'<b>Listen — what is this?</b>':`<b>${sswEsc(d.name||id)}</b>${cmp?' <span class="sswpos">for comparison</span>':''}`;
+    q('.sswread').innerHTML=hide?(msg?sswEsc(msg):''):(msg?`<b>${sswEsc(msg)}</b> `:'')+sswEsc(d.note||'')
+      +(m0?`<div class="sswsndwh">${m0.where?'Loudest: '+sswEsc(m0.where):''}${m0.where&&m0.radiates?' · ':''}${m0.radiates?'Radiates: '+sswEsc(m0.radiates):''}</div>`:'');};
+  const draw=()=>{q('.sswpcgbox').innerHTML=hide?'<div class="sswread" style="text-align:center">Listen first — the drawing appears with the answer.</div>':strip();say();ui();}; /* 2026-10-27 (Alkarim): a sound card hides the phonocardiogram until the reveal — the murmur's shape is a hint */
+  const ph=u=>{const l=q('.sswph');if(!l)return;if(u==null){l.style.display='none';return;}const x=X(u).toFixed(1);l.style.display='';l.setAttribute('x1',x);l.setAttribute('x2',x);};
+  const tick=()=>{cancelAnimationFrame(raf);const step=()=>{raf=0;const a=document.getElementById('sswAudio');
+      if(SSW_SND.owner!==me||!a||a.paused){ph(null);ui();return;}if(!host.isConnected){sswSoundStop();return;}
+      ph(rec?null:(a.currentTime%(60/bpm))/(60/bpm));raf=requestAnimationFrame(step);};raf=requestAnimationFrame(step);};
+  const go=()=>{me.key=key();sswSoundPlay(url(),me);ui();tick();};
+  const again=()=>{draw();if(playing())go();};
+  pb.addEventListener('click',()=>{if(playing())sswSoundStop();else go();});
+  q('.sswrate').addEventListener('change',e=>{bpm=+e.target.value||72;again();});
+  const tg=(a,f)=>{const b=q(`[data-a="${a}"]`);if(b)b.addEventListener('click',()=>{const v=f();b.setAttribute('aria-pressed',String(v));again();});};
+  tg('breath',()=>{breath=!breath;const d=base;msg=!breath?'':d.split?(d.fixedSplit?'Breathing in: the split stays the same.':'Breathing in: S2 splits wider.'):'Breathing in: the murmur gets louder.';return breath;});
+  tg('cmp',()=>{cmp=!cmp;msg='';return cmp;});tg('rec',()=>{rec=!rec;msg='';return rec;});
+  host.querySelectorAll('[data-c]').forEach(b=>b.addEventListener('click',()=>{const c=b.dataset.c,now=!on.has(c);now?on.add(c):on.delete(c);b.setAttribute('aria-pressed',String(now));
+    const up=M.some(m=>(m.louder||[]).includes(c)),dn=M.some(m=>(m.softer||[]).includes(c));msg=now?cap(c)+(up&&!dn?': the murmur gets louder.':dn&&!up?': the murmur gets softer.':': the murmur changes.'):'';again();}));
+  draw();
+  const a0=document.getElementById('sswAudio');if(SSW_SND.owner&&SSW_SND.owner!==me&&SSW_SND.owner.key===key()&&a0&&!a0.paused){const prev=SSW_SND.owner;SSW_SND.owner=me;me.key=key();try{prev.stopped();}catch(_){}ui();tick();}}
+/* guides: <a href="#" data-sound="as" data-sound-pack="cardio_heart">Hear it ›</a> mounts the player under the link's paragraph (a second
+   tap removes it); a sound whose pack is not in the library offers to add it, as an atlas link does. The guide frame stays script-free. */
+function sswSoundLink(d,a){const id=a.getAttribute('data-sound')||'',pid=a.getAttribute('data-sound-pack')||'';
+  const blk=a.closest('p,li,dd,td,figcaption,blockquote,h3,h4,div')||a.parentNode;const inLi=blk.tagName==='LI'||blk.tagName==='TD'||blk.tagName==='DD';
+  const ex=inLi?blk.querySelector(':scope > .sswsndbox'):(blk.nextElementSibling&&blk.nextElementSibling.classList.contains('sswsndbox')?blk.nextElementSibling:null);
+  if(ex){const same=ex.dataset.sid===id;sswSoundStop();ex.remove();if(same)return;}
+  if(!soundById(id,pid)||(pid&&!packs.some(p=>p.id===pid))){if(pid&&!packs.some(p=>p.id===pid))offerAtlasPack(null,pid,()=>sswSoundLink(d,a),'sound');else toast('This sound isn’t in your library yet.',3000);return;}
+  sswEnsureCss(d);const box=d.createElement('div');box.className='sswlive sswsndbox';box.dataset.sid=id;if(inLi)blk.appendChild(box);else blk.insertAdjacentElement('afterend',box);
+  mountSoundPlayer(box,id,{packId:pid||undefined});}
+/* repairPacks: a pack an older app read lost its `sounds` (ingestPack kept only known keys) — re-read it once when it uses sounds */
+function sswWantsSounds(p){const W=Object.values(p.widgets||{});return (p.cards||[]).some(c=>c&&c.state&&typeof c.state.sound==='string')
+  ||W.some(w=>w&&((w.type==='cycle'&&((w.tracks||[]).some(x=>x&&x.sound)||(w.views||[]).some(v=>v&&v.sound)))||(w.type==='atlas'&&(w.planes||[]).some(pl=>(pl.levels||[]).some(l=>l&&l.sound)))));}
+/* ===== v0.13.0: the `cycle` widget (PROPOSAL v1.1 §6; spec §2). Two kinds share one engine:
+   kind 'cycle' — tracks over one beat (the Wiggers figure): {dur, bpm, rateRange, tracks:[{id,name,short,color,unit,range,lane,h,pts:[[t,v]]}
+     | {id,name,lane,sound}], phases:[{from,to,name,short,note}], events:[{t,name,note,sound:'s1'|'s2'}], scenes:[{from,to,svg}], sceneVb,
+     views:[{name, tracks:{id:{…override}}, sound, note, weight}]};
+   kind 'ecg' — strips composed from beat templates and a rhythm rule: {dur, speed, gain, leads, layout:'12lead'|'strip'|'3strip', rhythm,
+     beats:{name:{p:{lead:[[t,mV]]}, qrs:{…}, t:{…}, pr, qrsd, qt}}, conduction (svg; ids san atria av his rbb lbb accessory), atlasPack,
+     views:[{name, rule, morph, weight, criteria, note, site, territory, events:[…], sound}]}.
+   Times are seconds within [0, dur]. Beat templates: 0 = P onset and the QRS starts at `pr` (a beat with no P: 0 = QRS onset).
+   Controls (not in cards): Play/Pause, Step, drag to scrub, rate (cycle kind), Sounds, Heart view, Callouts, Strip/12-lead, Where it blocks,
+   Territory, Zoom; views as segmented buttons ordered by `weight` (More ▾ after 6). Cards: state {view, t: seconds | 'play', layout, leads,
+   hideName}. prefers-reduced-motion starts paused with the whole trace drawn; Step walks it. Print shows the whole trace. — */
+const SSW_CVAR={red:'var(--red,var(--hi,#b33a3a))',soft:'var(--soft,var(--ink-soft,#666))',blue:'var(--blue,var(--lo,#2a6bb2))'};
+function sswCol(c,dflt){c=String(c||dflt||'var(--ink)');if(!/^[#a-z0-9(),.\s%-]+$/i.test(c))c=dflt||'var(--ink)';return c.replace(/var\(--([a-z]+)\)/gi,(m,k)=>SSW_CVAR[k]||m);}
+const SSW_ECG12=[['I','aVR','V1','V4'],['II','aVL','V2','V5'],['III','aVF','V3','V6']],SSW_ECGC=new WeakMap();
+/* compose `dur` seconds of every lead for one view: the rule places P onsets and QRS onsets, the beat templates draw them, `morph`
+   changes the shapes (st mm after J coved into T · tinv · q · delta · wide · lvh · rbbb/lbbb presets). Seeded: same view, same strip. */
+function sswEcgCompose(w,v,vi){const c=SSW_ECGC.get(w)||{};if(c[vi])return c[vi];
+  const fs=250,D=+w.dur||10,n=Math.round(D*fs)+1,LD=Array.isArray(w.leads)&&w.leads.length?w.leads.map(String):SSW_ECG12[0].concat(SSW_ECG12[1],SSW_ECG12[2]);
+  const sig={};LD.forEach(l=>{sig[l]=new Float32Array(n);});const B=w.beats||{},r=v.rule||{kind:'regular',rate:72,beat:'sinus'},M=v.morph||{};
+  let seed=((vi|0)+1)*7919;String(v.name||'').split('').forEach(ch=>{seed=(seed*31+ch.charCodeAt(0))>>>0;});const rnd=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};
+  const num=(x,d)=>isFinite(+x)&&+x>0?+x:d,tpl=k=>B[k]||B.sinus||{},pr=b=>+b.pr||0,bk=String(r.beat||'sinus'),bt=tpl(bk);
+  const pK=r.pBeat||'sinus',pT=B[pK]&&B[pK].p?B[pK]:(bt.p?bt:null),K=String(r.kind||'regular');
+  const Q=[],Pz=[],marks=[];
+  if(['regular','ectopic','pause','vt','polymorphic','reentry'].includes(K)){
+    const RR=60/num(r.rate,K==='vt'?170:K==='polymorphic'?220:K==='reentry'?180:72),noP=K==='vt'||K==='polymorphic'||K==='reentry'||!bt.p,ex=Array.isArray(r.extras)?r.extras:[];
+    let q=noP?0.25:pr(bt)+0.2,i=0;
+    while(q<D+0.5){const x=ex.find(e=>+e.at===i);
+      if(x&&K==='ectopic'){const eb=tpl(String(x.beat||'pvc')),qe=q-RR+RR*num(x.coupling,0.6),hasP=!!eb.p;
+        Q.push({t:qe,b:eb,g:1,lab:hasP?'PAC':'PVC'});if(hasP)Pz.push({t:qe-pr(eb),b:eb});
+        q=hasP?qe+RR:q+RR;i++;continue;} /* a PAC resets the sinus node; after a PVC the next sinus beat comes on time (full compensatory pause) */
+      Q.push({t:q,b:bt,g:K==='polymorphic'?0.3+0.7*Math.cos(2*Math.PI*q/num(r.period,2.4)):1});if(!noP)Pz.push({t:q-pr(bt),b:bt});
+      if(K==='reentry'&&r.retroP&&pT)Pz.push({t:q+num(r.retroAt,0.07),b:pT,g:-0.7});
+      if(K==='pause'&&i===(+r.pauseAt|0)){const ps=num(r.pauseSec,2.5);marks.push({t:q+ps/2,n:'pause '+ps.toFixed(1)+' s'});q+=ps;}else q+=RR;i++;}}
+  else if(K==='irregular'){const lo=num((r.rate||[])[0],70),hi=num((r.rate||[])[1],150);let q=0.2;
+    while(q<D+0.5){Q.push({t:q,b:bt,g:1});if(!r.noP&&bt.p)Pz.push({t:q-pr(bt),b:bt});q+=60/(lo+(hi-lo)*rnd());}}
+  else if(K==='dissociated'){const A=60/num(r.atrial,80),Vv=60/num(r.ventricular,40);
+    for(let p=0.12;p<D+0.5;p+=A)if(pT){Pz.push({t:p,b:pT});marks.push({t:p+0.05,n:'P'});}for(let q=0.55;q<D+0.5;q+=Vv)Q.push({t:q,b:bt,g:1});}
+  else if(K==='wenckebach'||K==='mobitz2'){const PP=60/num(r.rate,75),N=Math.max(2,+r.dropEvery|0||4),p0=num(r.prStart,pr(pT||bt)||0.16),dp=K==='wenckebach'?num(r.prStep,0.06):0;
+    for(let p=0.15,j=0;p<D+0.5;p+=PP,j++){const k=j%N;if(pT)Pz.push({t:p,b:pT});if(k===N-1){marks.push({t:p+0.05,n:'blocked P'});continue;}
+      Q.push({t:p+p0+k*dp,b:bt,g:1});marks.push({t:p+0.05,n:'PR '+Math.round((p0+k*dp)*1000)});}}
+  else if(K==='flutter'){const F=60/num(r.atrial,300),bl=Math.max(1,+r.block|0||2),FL={II:-1,III:-1,aVF:-1,aVR:.5,aVL:.3,I:-.2,V1:.6,V2:.3};
+    LD.forEach(l=>{const a=0.18*(FL[l]!=null?FL[l]:0.12),s=sig[l];for(let i=0;i<n;i++){const ph=((i/fs-0.1)/F%1+1)%1;s[i]+=a*(ph<0.75?ph/0.75*2-1:1-(ph-0.75)/0.25*2);}});
+    let j=0;for(let f=0.1;f<D+0.5;f+=F,j++)if(j%bl===0)Q.push({t:f+0.22,b:bt,g:1});}
+  else if(K==='vf'){LD.forEach((l,li)=>{const s=sig[l],A=0.25+0.35*rnd(),f1=4+2.5*rnd(),f2=5.5+2*rnd(),p1=rnd()*6.3,p2=rnd()*6.3;
+    for(let i=0;i<n;i++){const x=i/fs;s[i]+=A*(0.6*Math.sin(2*Math.PI*f1*x+p1+0.8*Math.sin(x*1.3))+0.4*Math.sin(2*Math.PI*f2*x+p2))*(0.6+0.4*Math.sin(x*0.9+li));}});}
+  if(r.baseline==='f')LD.forEach(l=>{const s=sig[l],A=/^(II|III|aVF|V1)$/.test(l)?0.06:0.03,p1=rnd()*6.3,p2=rnd()*6.3,p3=rnd()*6.3;
+    for(let i=0;i<n;i++){const x=i/fs;s[i]+=A*(0.6*Math.sin(2*Math.PI*6.1*x+p1)+0.4*Math.sin(2*Math.PI*7.7*x+p2)+0.3*Math.sin(2*Math.PI*4.6*x+p3));}});
+  /* pts [[u, mV]] placed so that template time u lands at t0 + u*ks (linear inside a QRS, Catmull–Rom for P and T) */
+  const add=(arr,pts,t0,ks,g,sm)=>{if(!Array.isArray(pts)||pts.length<2||!g)return;const a=Math.max(0,Math.ceil((t0+pts[0][0]*ks)*fs)),b=Math.min(n-1,Math.floor((t0+pts[pts.length-1][0]*ks)*fs));let k=0;
+    for(let i=a;i<=b;i++){const u=(i/fs-t0)/ks;while(k<pts.length-2&&u>pts[k+1][0])k++;const p1=pts[k],p2=pts[k+1],f=Math.max(0,Math.min(1,(u-p1[0])/((p2[0]-p1[0])||1)));let y;
+      if(sm){const p0=pts[Math.max(0,k-1)],p3=pts[Math.min(pts.length-1,k+2)],f2=f*f,f3=f2*f;y=0.5*(2*p1[1]+(-p0[1]+p2[1])*f+(2*p0[1]-5*p1[1]+4*p2[1]-p3[1])*f2+(-p0[1]+3*p1[1]-3*p2[1]+p3[1])*f3);}
+      else y=p1[1]+(p2[1]-p1[1])*f;arr[i]+=y*g;}};
+  const gs=(arr,m,wd,a)=>{const a0=Math.max(0,Math.floor((m-4*wd)*fs)),b0=Math.min(n-1,Math.ceil((m+4*wd)*fs));for(let i=a0;i<=b0;i++){const x=i/fs-m;arr[i]+=a*Math.exp(-x*x/(2*wd*wd));}};
+  const has=(x,l)=>x===true||(Array.isArray(x)&&x.includes(l)),ST=M.st&&typeof M.st==='object'?M.st:{},RB=/^(V1|V2)$/,RL=/^(I|aVL|V5|V6)$/,LB=/^(V1|V2|V3)$/;
+  Pz.forEach(P=>LD.forEach(l=>add(sig[l],((P.b.p||{})[l]),P.t+(M.delta&&P.b===bt?0.05:0),1,P.g||1,true)));
+  Q.forEach(x=>{const b=x.b,own=b===bt,qd=+b.qrsd||0.09,P0=pr(b);
+    const kw=own&&M.wide?num(M.wide,qd)/qd:own&&M.lbbb?0.15/qd:own&&M.rbbb?0.13/qd:1,lv=own&&M.lvh?num(M.lvh,1):1;
+    LD.forEach(l=>{const s=sig[l];let qg=lv*x.g,tg=x.g;
+      if(own&&has(M.tinv,l))tg=-tg;
+      if(own&&M.rbbb&&RB.test(l)){tg=-Math.abs(tg);gs(s,x.t+0.095,0.014,0.55*x.g);}
+      if(own&&M.rbbb&&RL.test(l))gs(s,x.t+0.10,0.022,-0.3*x.g);
+      if(own&&M.lbbb&&LB.test(l)){qg=0;gs(s,x.t+0.06,0.03,-1.3*x.g);if(l==='V1')tg=-tg;}
+      if(own&&M.lbbb&&RL.test(l)){qg=0;gs(s,x.t+0.045,0.022,0.9*x.g);gs(s,x.t+0.095,0.022,1.0*x.g);tg=-tg;}
+      if(own&&has(M.q,l))gs(s,x.t+0.014,0.01,-0.32*x.g);
+      if(own&&has(M.delta,l)){const qp=((b.qrs||{})[l])||[];const R=qp.reduce((m,p)=>Math.abs(p[1])>Math.abs(m)?p[1]:m,0);const a0=Math.floor((x.t-0.05)*fs),b0=Math.floor((x.t+0.01)*fs);
+        for(let i=Math.max(0,a0);i<=Math.min(n-1,b0);i++)s[i]+=0.3*R*(i-a0)/(b0-a0||1);}
+      add(s,((b.qrs||{})[l]),x.t-P0*kw,kw,qg,false);add(s,((b.t||{})[l]),x.t-P0+(kw-1)*qd,1,tg,true);
+      const mm=own?+ST[l]||0:0;if(mm){const J=x.t+qd*kw,Te=x.t+(+b.qt||0.4)+(kw-1)*qd,a0=Math.max(0,Math.floor((J-0.01)*fs)),b0=Math.min(n-1,Math.floor(Te*fs));
+        for(let i=a0;i<=b0;i++){const u=i/fs;const rise=Math.min(1,(u-J+0.01)/0.04),fall=Math.max(0,Math.min(1,(Te-u)/0.14));s[i]+=mm*0.1*rise*fall;}}});
+    if(x.lab)marks.push({t:x.t+0.02,n:x.lab});});
+  const qs=Q.map(x=>x.t).filter(t=>t>=0&&t<=D).sort((a,b)=>a-b),rr=qs.slice(1).map((t,i)=>t-qs[i]);
+  const vr=rr.length?Math.round(60*rr.length/rr.reduce((a,b)=>a+b,0)):0,ar=['dissociated','wenckebach','mobitz2'].includes(K)?Math.round(num(r.atrial||r.rate,0)):K==='flutter'?Math.round(num(r.atrial,300)):0;
+  const out={fs,n,dur:D,sig,leads:LD,q:qs,marks:marks.filter(m=>m.t>=0&&m.t<=D),rate:vr,rateText:(vr?'Ventricular rate ≈ '+vr+'/min':'')+(ar?(vr?' · ':'')+(K==='flutter'?'flutter waves ':'P waves ')+'≈ '+ar+'/min':'')};
+  c[vi]=out;SSW_ECGC.set(w,c);return out;}
+function mountCycle(host,w,o){o=o||{};const st=o.state||{},card=!!o.card,hideName=card&&!o.reveal&&!!st.hideName,ecg=w.kind==='ecg',doc=host.ownerDocument||document;sswEnsureCss(doc);
+  const V=Array.isArray(w.views)&&w.views.length?w.views:[{name:''}],ord=V.map((v,i)=>i).sort((a,b)=>((+V[b].weight||0)-(+V[a].weight||0))||a-b);
+  const vIdx=x=>typeof x==='number'||/^\d+$/.test(String(x))?(V[+x]?+x:-1):V.findIndex(v=>v.name===x);
+  let vi=st.view!=null&&vIdx(st.view)>=0?vIdx(st.view):ord[0];
+  const reduce=(()=>{try{return matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(_){return false;}})();
+  const phone=host.clientWidth>0&&host.clientWidth<560;host.classList.toggle('phone',phone);const uid='c'+Math.random().toString(36).slice(2,8);
+  let layout=ecg?String(card?(st.layout||'strip'):(st.layout||w.layout||'12lead')):'cycle',lead1=String((Array.isArray(st.leads)&&st.leads[0])||w.rhythm||'II');
+  const leads3=Array.isArray(st.leads)&&st.leads.length>1?st.leads.slice(0,4).map(String):['II','V1','V5'];
+  const wb=+w.bpm||72;let bpm=wb,snd=false,heart=false,call=!card,site=false,z=1,px=0,py=0,M=null,t=0,play=false,last=0,raf=0,lastSay='';
+  const me={key:'',stopped:()=>ui()},sid=()=>String((V[vi]||{}).sound||((w.tracks||[]).find(x=>x&&x.sound)||{}).sound||'normal'),S=()=>soundById(sid(),o.packId);
+  const hasSnd=ecg?V.some(v=>v.sound):((w.tracks||[]).some(x=>x&&x.sound)||V.some(v=>v.sound)),scenes=!ecg&&Array.isArray(w.scenes)&&w.scenes.length;
+  const hasSite=ecg&&w.conduction&&V.some(v=>v.site);
+  /* ---------- kind 'cycle': lanes of tracks, phase bands, numbered events, the phonocardiogram lane, a playhead ---------- */
+  const cyModel=()=>{const v=V[vi]||{},OV=v.tracks&&typeof v.tracks==='object'&&!Array.isArray(v.tracks)?v.tracks:{};
+    const T=(w.tracks||[]).filter(x=>x&&typeof x==='object').map(x=>Object.assign({},x,OV[x.id]||{})),PH=Array.isArray(v.phases)?v.phases:(w.phases||[]),EV=Array.isArray(v.events)?v.events:(w.events||[]);
+    const D=+w.dur||1,W=+w.vb[0]||380,H=+w.vb[1]||330,L=46,R=W-8,X=s=>L+(s/D)*(R-L),top=22,bot=H-(EV.length?20:6);
+    const lanes=[...new Set(T.map(x=>+x.lane||0))].sort((a,b)=>a-b),inL=k=>T.filter(x=>(+x.lane||0)===k);
+    const lw=k=>{const ts=inL(k);if(ts.some(x=>x.sound))return .55;const h=ts.find(x=>+x.h>0);return h?+h.h:(ts.length>1?1.7:1);};
+    const tot=lanes.reduce((s,k)=>s+lw(k),0)||1,gap=8,av=bot-top-gap*Math.max(0,lanes.length-1);let yy=top;const LY={};lanes.forEach(k=>{const h=av*lw(k)/tot;LY[k]=[yy,yy+h];yy+=h+gap;});
+    const rng=k=>{const ts=inL(k).filter(x=>Array.isArray(x.pts)),rs=ts.filter(x=>Array.isArray(x.range)&&x.range.length===2);
+      if(rs.length)return [Math.min(...rs.map(x=>+x.range[0])),Math.max(...rs.map(x=>+x.range[1]))];
+      let lo=Infinity,hi=-Infinity;ts.forEach(x=>x.pts.forEach(p=>{lo=Math.min(lo,+p[1]);hi=Math.max(hi,+p[1]);}));if(!isFinite(lo))return [0,1];const pd=(hi-lo)*0.08||1;return [lo-pd,hi+pd];};
+    const evT=k=>{const e=EV.find(e=>e.sound===k);return e?+e.t:null;},s1=evT('s1'),s2=evT('s2'),at=s1!=null?s1/D:0,sys=(s1!=null&&s2!=null&&s2>s1)?(s2-s1)/D:0.46;
+    let tr='',ax='';
+    lanes.forEach(k=>{const [y0,y1]=LY[k],[lo,hi]=rng(k),Y=x=>y1-(x-lo)/((hi-lo)||1)*(y1-y0),ts=inL(k),u=ts.find(x=>x.unit),lines=ts.filter(x=>Array.isArray(x.pts)&&x.pts.length>1);
+      if(u&&y1-y0>30)ax+=`<text class="ts" x="2" y="${(y0+8).toFixed(1)}">${sswEsc(u.unit)}</text><text class="ts" x="2" y="${(y0+19).toFixed(1)}">${+hi.toFixed(0)}</text><text class="ts" x="2" y="${y1.toFixed(1)}">${+lo.toFixed(0)}</text>`;
+      else{const x0=ts[0]||{};ax+=`<text class="ts" x="2" y="${((y0+y1)/2+3).toFixed(1)}">${sswEsc(x0.short||x0.name||'')}</text>`;}
+      const labs=[];
+      ts.forEach(x=>{if(x.sound){const d=S(),ym=(y0+y1)/2;tr+=`<line class="sswbase" x1="${L}" y1="${ym.toFixed(1)}" x2="${R}" y2="${ym.toFixed(1)}"/>`
+          +(d?`<g class="sswcpho">${sswPcgSvg(d,{X:f=>L+f*(R-L),y:ym,a:(y1-y0)/2-1,sys,at,bpm:60/D,ly:y0+7,lx:5})}</g>`:'');return;}
+        if(!(Array.isArray(x.pts)&&x.pts.length>1))return;const c=sswCol(x.color,'var(--ink)');
+        tr+=`<path class="sswctr" d="M${x.pts.map(p=>X(+p[0]).toFixed(1)+','+Y(+p[1]).toFixed(1)).join('L')}" style="stroke:${sswEsc(c)}"/>`;
+        if(lines.length>1||u){const lp=x.pts[x.pts.length-1];labs.push({y:Y(+lp[1])-4,n:x.short||x.name||'',c});}});
+      labs.sort((a,b)=>a.y-b.y);for(let i=1;i<labs.length;i++)if(labs[i].y-labs[i-1].y<10)labs[i].y=labs[i-1].y+10;
+      labs.forEach(l=>{ax+=`<text class="sswctn" x="${R-1}" y="${Math.max(y0+8,Math.min(y1+8,l.y)).toFixed(1)}" text-anchor="end" style="fill:${sswEsc(l.c)}">${sswEsc(l.n)}</text>`;});});
+    let ph='',ev='';PH.forEach((p,i)=>{const a=X(+p.from||0),b=X(+p.to||0),nm=String(p.short||p.name||'');
+      ph+=`<rect class="sswcpb" data-i="${i}" x="${a.toFixed(1)}" y="${top-4}" width="${Math.max(0,b-a).toFixed(1)}" height="${(bot-top+4).toFixed(1)}"/>`;ax+=(nm.length*5.3<=b-a-4?`<text class="sswcpn" x="${((a+b)/2).toFixed(1)}" y="12" text-anchor="middle">${sswEsc(nm)}</text>`:'');});
+    EV.forEach((e,i)=>{const x=X(+e.t||0).toFixed(1);ev+=`<g class="sswcev" data-i="${i}"><line x1="${x}" y1="${top-4}" x2="${x}" y2="${bot}"/><circle cx="${x}" cy="${bot+10}" r="6.5"/><text x="${x}" y="${bot+13}" text-anchor="middle">${i+1}</text></g>`;});
+    const sv=+((w.sceneVb||[])[0])||200,sh=+((w.sceneVb||[])[1])||150;
+    return {dur:D,cyc:D*wb/bpm,speed:bpm/wb,steps:EV.map(e=>+e.t||0).sort((a,b)=>a-b),sound:{at,sys},x2t:x=>(x-L)/(R-L)*D,
+      svg:()=>`<svg class="sswcsvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${sswEsc(w.alt||w.title||'The cardiac cycle')}">`
+        +`<g class="sswcpbs">${ph}</g><g>${tr}</g><rect class="sswcfade" x="${W}" y="0" width="0" height="${H}"/>${ax}<g class="sswcevs">${ev}</g>`
+        +`<g class="sswcphd"><line class="sswcpl" x1="${L}" y1="${top-6}" x2="${L}" y2="${bot}"/><circle class="sswcpd" cx="${L}" cy="${top-6}" r="3"/></g></svg>`,
+      scene:()=>scenes?`<svg class="sswcsvg" viewBox="0 0 ${sv} ${sh}" role="img" aria-label="Heart view">${w.scenes.map((s,i)=>`<g class="sswcsc" data-i="${i}" style="display:none">${sswClean(s.svg||'')}</g>`).join('')}</svg>`:'',
+      frame:(x,full)=>{const f=host.querySelector('.sswcfig');if(!f)return;const xx=X(x),fd=f.querySelector('.sswcfade');fd.setAttribute('x',(full?W:xx).toFixed(1));fd.setAttribute('width',(full?0:W-xx).toFixed(1));
+        const g=f.querySelector('.sswcphd');g.style.display=full?'none':'';g.querySelector('line').setAttribute('x1',xx.toFixed(1));g.querySelector('line').setAttribute('x2',xx.toFixed(1));g.querySelector('circle').setAttribute('cx',xx.toFixed(1));
+        const pi=full?-1:PH.findIndex(p=>x>=+p.from&&x<+p.to),ei=full?-1:EV.reduce((m,e,i)=>+e.t<=x+1e-6?i:m,-1);
+        f.querySelectorAll('.sswcpb').forEach(r=>r.classList.toggle('on',+r.dataset.i===pi));f.querySelectorAll('.sswcev').forEach(e=>e.classList.toggle('on',+e.dataset.i===ei));
+        host.querySelectorAll('.sswccall span').forEach(e=>e.classList.toggle('on',+e.dataset.i===ei));
+        host.querySelectorAll('.sswcsc').forEach(e=>{const s=w.scenes[+e.dataset.i];e.style.display=(x>=+s.from&&x<+s.to)||(full&&+e.dataset.i===0)?'':'none';});
+        if(hideName)return '';const p=PH[pi],e=EV[ei];
+        return (V.length>1?`<b>${sswEsc(v.name||'')}</b> · `:'')+(p?`<b>${sswEsc(p.name||'')}</b>${p.note?' — '+sswEsc(p.note):''}`:'')
+          +(e?`<div class="sswcevr"><span class="sswcn">${ei+1}</span> <b>${sswEsc(e.name||'')}</b>${e.note?' — '+sswEsc(e.note):''}</div>`:'')+(v.note?`<div class="sswcvn">${sswEsc(v.note)}</div>`:'');},
+      legend:()=>EV.length?EV.map((e,i)=>`<span data-i="${i}"><span class="sswcn">${i+1}</span> ${sswEsc(e.name||'')}</span>`).join(''):''};};
+  /* ---------- kind 'ecg': the 25 mm/s grid (viewBox in mm), twelve-lead 3 × 4 + the rhythm strip, or strips; the trace prints as the playhead runs ---------- */
+  const ecgModel=()=>{const v=V[vi]||{},C=sswEcgCompose(w,v,vi),D=C.dur,SP=+w.speed||25,G=+w.gain||10,WW=D*SP,rl=String(w.rhythm||'II');
+    const rows=layout==='12lead'?null:layout==='3strip'?leads3:[lead1],RH=layout==='12lead'||layout==='3strip'?30:40,HH=(rows?rows.length:4)*RH;
+    const k=WW/Math.max(200,(host.querySelector('.sswcfig')||host).clientWidth||380),small=(host.clientWidth||0)>=600,gc='var(--red,var(--hi,#b33a3a))';
+    const path=(l,t0,t1,x0,yb)=>{const s=C.sig[l];if(!s)return '';const a=Math.round(t0*C.fs),b=Math.min(C.n-1,Math.round(t1*C.fs));let d='';
+      for(let i=a;i<=b;i++)d+=(i===a?'M':'L')+(x0+(i/C.fs-t0)*SP).toFixed(1)+','+(yb-s[i]*G).toFixed(1);return `<path class="sswcecg" d="${d}"/>`;};
+    let tr='',ax='';const rowLab=(y,l)=>`<text class="sswcl" x="1.2" y="${(y+12.5*k).toFixed(1)}">${sswEsc(l)}</text>`;
+    const callouts=(y)=>C.marks.map(m=>`<text class="sswcco" x="${(m.t*SP).toFixed(1)}" y="${(y-1.2).toFixed(1)}" text-anchor="middle">${sswEsc(m.n)}</text>`).join('');
+    if(!rows){SSW_ECG12.forEach((row,r)=>row.forEach((l,c)=>{const t0=c*D/4,x0=t0*SP,yb=r*RH+RH*0.58;tr+=path(l,t0,(c+1)*D/4,x0,yb);
+        if(c)tr+=`<line class="sswcmk" x1="${x0.toFixed(1)}" y1="${(yb-3).toFixed(1)}" x2="${x0.toFixed(1)}" y2="${(yb+3).toFixed(1)}"/>`;
+        ax+=`<text class="sswcl" x="${(x0+1.2).toFixed(1)}" y="${(r*RH+12.5*k).toFixed(1)}">${sswEsc(l)}</text>`;}));
+      tr+=path(rl,0,D,0,3*RH+RH*0.58)+`<g class="sswcco">${callouts(4*RH)}</g>`;ax+=rowLab(3*RH,rl);}
+    else rows.forEach((l,r)=>{tr+=path(l,0,D,0,r*RH+RH*0.58);ax+=rowLab(r*RH,l);if(r===rows.length-1)tr+=`<g class="sswcco">${callouts((r+1)*RH)}</g>`;});
+    ax+=`<text class="sswcls" x="${(WW-1.2).toFixed(1)}" y="${(HH-RH+12.5*k).toFixed(1)}" text-anchor="end">${SP} mm/s · ${G} mm/mV${C.rate?' · '+C.rate+'/min':''}</text>`;
+    return {dur:D,cyc:C.rate?60/C.rate:0,speed:1,steps:C.q,x2t:x=>x/SP,vb:[WW,HH],
+      svg:()=>`<svg class="sswcsvg sswcekg" viewBox="0 0 ${WW} ${HH}" style="--k:${k.toFixed(4)}" role="img" aria-label="${sswEsc(w.alt||w.title||'ECG')}"><defs>`
+        +`<pattern id="${uid}g" width="5" height="5" patternUnits="userSpaceOnUse">${small?`<path d="M1 0V5M2 0V5M3 0V5M4 0V5M0 1H5M0 2H5M0 3H5M0 4H5" style="fill:none;stroke:${gc};stroke-opacity:.16;stroke-width:${(0.5*k).toFixed(3)}"/>`:''}<path d="M5 0H0V5" style="fill:none;stroke:${gc};stroke-opacity:.4;stroke-width:${(0.8*k).toFixed(3)}"/></pattern>`
+        +`</defs><rect x="0" y="0" width="${WW}" height="${HH}" style="fill:url(#${uid}g)"/>`
+        +`<g>${tr}</g><rect class="sswcfade" x="${WW}" y="0" width="0" height="${HH}"/>${ax}<g class="sswcphd"><line class="sswcpl" x1="0" y1="0" x2="0" y2="${HH}"/></g></svg>`,
+      scene:()=>'',legend:()=>'',
+      tap:(x,y)=>{if(rows)return null;const r=Math.floor(y/RH),c=Math.floor(x/(WW/4));return r>=0&&r<3&&c>=0&&c<4?SSW_ECG12[r][c]:(r===3?rl:null);},
+      frame:(x,full)=>{const f=host.querySelector('.sswcfig');if(!f)return;const xx=x*SP,fd=f.querySelector('.sswcfade');fd.setAttribute('x',(full?WW:xx).toFixed(1));fd.setAttribute('width',(full?0:WW-xx).toFixed(1));
+        const g=f.querySelector('.sswcphd');g.style.display=full?'none':'';g.querySelector('line').setAttribute('x1',xx.toFixed(1));g.querySelector('line').setAttribute('x2',xx.toFixed(1));
+        const sc=host.querySelector('.sswccond');if(sc){sc.querySelectorAll('.sswcsite').forEach(e=>e.classList.remove('sswcsite'));if(v.site)sc.querySelectorAll(`[id="${CSS.escape(String(v.site))}"],[data-site="${CSS.escape(String(v.site))}"]`).forEach(e=>e.classList.add('sswcsite'));}
+        if(hideName)return '';return `<b>${sswEsc(v.name||'')}</b>${v.criteria?' — '+sswEsc(v.criteria):''}${v.note?` <span class="sswcvn">${sswEsc(v.note)}</span>`:''}`
+          +(C.rateText?` <span class="sswpos">${sswEsc(C.rateText)}</span>`:'')+(Array.isArray(v.events)&&v.events.length&&!card?`<div class="sswclook">Look for: ${v.events.map(x=>`<span>${sswEsc(x)}</span>`).join('')}</div>`:'');}};};
+  /* ---------- build ---------- */
+  let h='';const more=V.length>6;
+  if(!card&&V.length>1)h+=`<div class="sswtools sswcv" role="group">${ord.map((k,j)=>`<button type="button" class="sswb${j>=6?' sswcx':''}" data-v="${k}" aria-pressed="${k===vi}">${sswEsc(V[k].name||'View '+(k+1))}</button>`).join('')}${more?'<button type="button" class="sswb" data-a="vmore" aria-pressed="false">More ▾</button>':''}</div>`;
+  h+=`<div class="sswcbody"><div class="sswcscene"></div><div class="sswcfig"></div></div>`+(hasSite&&!card?'<div class="sswccond"></div>':'');
+  if(!card){const rr=(Array.isArray(w.rateRange)?w.rateRange:[40,150]).map(Number),opts=[...new Set([40,60,72,90,110,150,wb])].filter(x=>x>=rr[0]&&x<=rr[1]).sort((a,b)=>a-b);
+    h+=`<div class="sswtools sswcctl"><button type="button" class="sswb sswplay" data-a="play"></button><button type="button" class="sswb" data-a="step">${ecg?'⏭ Next beat':'⏭ Step'}</button>`
+      +(ecg?'':`<select class="sswrate" aria-label="Heart rate">${opts.map(r=>`<option value="${r}"${r===wb?' selected':''}>${r} bpm</option>`).join('')}</select>`)
+      +(hasSnd?'<button type="button" class="sswb" data-a="snd" aria-pressed="false">Sounds</button>':'')+(scenes?'<button type="button" class="sswb" data-a="heart" aria-pressed="false">Heart view</button>':'')
+      +'<button type="button" class="sswb" data-a="call" aria-pressed="true">Callouts</button>'
+      +(ecg?'<button type="button" class="sswb" data-a="lay" aria-pressed="false"></button>'+(hasSite?'<button type="button" class="sswb" data-a="site" aria-pressed="false">Where it blocks</button>':'')
+        +'<a href="#" class="sswb sswcterr" data-a="terr" style="display:none">Territory ›</a><button type="button" class="sswb" data-a="zin" aria-label="Zoom in">Zoom +</button><button type="button" class="sswb" data-a="zout" aria-label="Zoom out">Zoom −</button>':'')+'</div>';}
+  h+='<div class="sswread"></div>'+(!ecg&&!card?'<div class="sswccall"></div>':'');
+  if(!card)h+=`<div class="sswhint">${ecg?(phone?'Tap a lead to enlarge it; pinch or Zoom + to read the grid; Strip shows one long lead.':'Tap a lead to enlarge it; drag along the trace to scrub; Strip shows one long lead.'):'Play, Step through the events, or drag along the trace; switch the views.'}</div>`;
+  host.innerHTML=h;host.classList.toggle('nocall',!call);
+  const q=s=>host.querySelector(s),fig=q('.sswcfig'),rd=q('.sswread');
+  const say=x=>{const s=x||'';if(s!==lastSay){lastSay=s;rd.innerHTML=s;}};
+  const full=()=>!play&&t>=M.dur-1e-6;
+  const frame=()=>{say(M.frame(t,full()));};
+  const vbox=()=>{const sv=fig.querySelector('svg');if(!sv||!M.vb)return;const [W0,H0]=M.vb,bw=W0/z,bh=H0/z;px=Math.max(bw/2,Math.min(W0-bw/2,px));py=Math.max(bh/2,Math.min(H0-bh/2,py));
+    sv.setAttribute('viewBox',`${(px-bw/2).toFixed(2)} ${(py-bh/2).toFixed(2)} ${bw.toFixed(2)} ${bh.toFixed(2)}`);sv.style.setProperty('--k',(+sv.style.getPropertyValue('--k0')/z).toFixed(4));};
+  const build=()=>{M=ecg?ecgModel():cyModel();fig.innerHTML=M.svg();const sc=q('.sswcscene');sc.innerHTML=M.scene();q('.sswcbody').classList.toggle('scene',!!(heart&&scenes));
+    const sv=fig.querySelector('svg');if(sv&&M.vb){sv.style.setProperty('--k0',sv.style.getPropertyValue('--k'));z=1;px=M.vb[0]/2;py=M.vb[1]/2;}
+    const cl=q('.sswccall');if(cl)cl.innerHTML=M.legend();const cd=q('.sswccond');if(cd){cd.innerHTML=site?sswClean(w.conduction||''):'';cd.style.display=site?'':'none';}
+    if(t>M.dur)t=M.dur;lastSay='';frame();ui();};
+  const ui=()=>{if(card)return;const v=V[vi]||{},b=s=>q(`[data-a="${s}"]`);b('play').textContent=play?'❚❚ Pause':'▶ Play';b('play').setAttribute('aria-pressed',String(play));
+    if(b('snd'))b('snd').setAttribute('aria-pressed',String(snd));if(b('heart'))b('heart').setAttribute('aria-pressed',String(heart));b('call').setAttribute('aria-pressed',String(call));
+    if(b('lay')){b('lay').textContent=layout==='12lead'?'Strip':'12-lead';}if(b('site')){b('site').setAttribute('aria-pressed',String(site));b('site').disabled=!v.site;}
+    const tl=b('terr');if(tl){tl.style.display=v.territory?'':'none';if(v.territory){tl.setAttribute('data-atlas',String(v.territory));tl.setAttribute('data-atlas-pack',String(v.atlasPack||w.atlasPack||'cardio_heart'));tl.textContent=v.territoryName?'Territory: '+v.territoryName+' ›':'Territory ›';}}
+    host.querySelectorAll('[data-v]').forEach(x=>x.setAttribute('aria-pressed',String(+x.dataset.v===vi)));};
+  /* sound: the view's (or the phonocardiogram track's) description, rendered with S1 at the S1 event and S2 at the S2 event (cycle kind);
+     an ECG view's sound plays at the rule's rate, not tied to the beats. The playhead follows the audio clock while it plays. */
+  const sndGo=()=>{const d=S();if(!d)return;const cyc=ecg?(M.cyc||60/72):M.cyc,b=60/cyc,o2=ecg?{}:{at:M.sound.at,sys:M.sound.sys};
+    me.key=['cy',uid,vi,b.toFixed(2)].join('|');sswSoundPlay(sswSoundUrl([o.packId||'',sid(),b.toFixed(3),o2.at||0,o2.sys||0].join('|'),()=>soundBlob(d,b,false,4,o2)),me,ecg?0:t/M.dur*cyc);};
+  const loop=now=>{raf=0;if(!play)return;if(!host.isConnected){stop();return;}
+    if(document.hidden){last=0;raf=requestAnimationFrame(loop);return;}
+    const a=snd&&SSW_SND.owner===me&&!ecg?document.getElementById('sswAudio'):null;
+    if(a&&!a.paused&&M.cyc&&a.readyState>=2)t=(a.currentTime%M.cyc)/M.cyc*M.dur;
+    else{const dt=last?Math.min(0.1,(now-last)/1000):0;t+=dt*(M.speed||1);if(t>=M.dur)t=t%M.dur;}
+    last=now;frame();raf=requestAnimationFrame(loop);};
+  const start=()=>{play=true;last=0;if(t>=M.dur-1e-6)t=0;if(snd)sndGo();if(!raf)raf=requestAnimationFrame(loop);ui();};
+  const stop=()=>{play=false;if(raf)cancelAnimationFrame(raf);raf=0;if(SSW_SND.owner===me)sswSoundStop();ui();frame();};
+  /* first state: a card freezes at t (or plays with t:'play', or shows the whole trace); elsewhere it plays, unless reduced motion */
+  build();
+  if(typeof st.t==='number'){t=Math.max(0,Math.min(M.dur,st.t));}else if(card){t=st.t==='play'&&!reduce?0:M.dur;}else t=reduce?M.dur:0;
+  frame();
+  if((card?st.t==='play':st.t==null)&&!reduce){play=true;last=0;raf=requestAnimationFrame(loop);ui();}
+  if(card)return;
+  /* ---------- controls ---------- */
+  const legend=q('.sswccall');if(legend)legend.addEventListener('click',e=>{const s=e.target.closest&&e.target.closest('[data-i]');if(!s)return;const E=(Array.isArray(V[vi].events)?V[vi].events:(w.events||[]))[+s.dataset.i];if(!E)return;if(play)stop();t=+E.t||0;frame();});
+  q('[data-a="play"]').addEventListener('click',()=>{play?stop():start();});
+  q('[data-a="step"]').addEventListener('click',()=>{if(play)stop();const s=M.steps,cur=t>=M.dur-1e-6?-1:t;const nx=s.find(x=>x>cur+0.005);t=nx!=null?Math.min(M.dur,nx+(ecg?0.12:0)):(s.length?s[0]+(ecg?0.12:0):0);frame();});
+  const rs=q('.sswrate');if(rs)rs.addEventListener('change',()=>{bpm=+rs.value||wb;M.speed=bpm/wb;M.cyc=M.dur*wb/bpm;if(play&&snd)sndGo();});
+  const tg=(a,f)=>{const b=q(`[data-a="${a}"]`);if(b)b.addEventListener('click',e=>{e.preventDefault();f();ui();});};
+  tg('snd',()=>{snd=!snd;if(snd&&play)sndGo();else if(!snd&&SSW_SND.owner===me)sswSoundStop();});
+  tg('heart',()=>{heart=!heart;q('.sswcbody').classList.toggle('scene',heart);frame();});
+  tg('call',()=>{call=!call;host.classList.toggle('nocall',!call);});
+  tg('lay',()=>{layout=layout==='12lead'?'strip':'12lead';lead1=String(w.rhythm||'II');build();});
+  tg('site',()=>{site=!site;build();});
+  tg('vmore',()=>{const on=host.classList.toggle('sswcmore');q('[data-a="vmore"]').textContent=on?'Less ▴':'More ▾';});
+  const tl=q('[data-a="terr"]');if(tl)tl.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();if(play)stop();try{atlasLinkGo(tl);}catch(_){}});
+  host.querySelectorAll('[data-v]').forEach(b=>b.addEventListener('click',()=>{vi=+b.dataset.v;const was=play;if(was)stop();t=0;build();if(was)start();}));
+  const zb=(a,f)=>{const b=q(`[data-a="${a}"]`);if(b)b.addEventListener('click',()=>{z=Math.max(1,Math.min(6,z*f));vbox();});};zb('zin',1.5);zb('zout',1/1.5);
+  /* drag scrubs (pans when zoomed); a tap on a twelve-lead cell enlarges that lead; two fingers pinch; ⌘/ctrl-wheel zooms; double-tap resets */
+  const pts=new Map();let x0=null,y0=null,moved=false,d0=0;const pt=e=>{const sv=fig.querySelector('svg');try{const p=sv.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(sv.getScreenCTM().inverse());}catch(_){return null;}};
+  const dist=()=>{const a=[...pts.values()];return a.length<2?0:Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);};
+  fig.addEventListener('pointerdown',e=>{pts.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pts.size===2){d0=dist();x0=null;return;}x0=e.clientX;y0=e.clientY;moved=false;});
+  fig.addEventListener('pointermove',e=>{if(pts.has(e.pointerId))pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(pts.size===2&&M.vb){const d=dist();if(d0>8&&d>8){z=Math.max(1,Math.min(6,z*d/d0));d0=d;vbox();}return;}
+    if(x0===null||e.buttons===0)return;if(Math.abs(e.clientX-x0)+Math.abs(e.clientY-y0)>6)moved=true;if(!moved)return;
+    if(z>1&&M.vb){const sv=fig.querySelector('svg'),r=sv.getBoundingClientRect(),k=(M.vb[0]/z)/r.width;px-=(e.clientX-x0)*k;py-=(e.clientY-y0)*k;x0=e.clientX;y0=e.clientY;vbox();return;}
+    const p=pt(e);if(p){if(play)stop();t=Math.max(0,Math.min(M.dur,M.x2t(p.x)));frame();}});
+  const up=e=>{const was=x0!==null&&!moved&&pts.size<2;pts.delete(e.pointerId);if(pts.size<2)d0=0;if(!was){x0=null;return;}x0=null;
+    if(ecg&&M.tap){const p=pt(e);const l=p&&M.tap(p.x,p.y);if(l&&layout==='12lead'){layout='single';lead1=l;build();}}};
+  fig.addEventListener('pointerup',up);fig.addEventListener('pointercancel',e=>{pts.delete(e.pointerId);x0=null;});
+  fig.addEventListener('wheel',e=>{if(!(e.ctrlKey||e.metaKey)||!M.vb)return;e.preventDefault();z=Math.max(1,Math.min(6,z*Math.exp(-e.deltaY*0.01)));vbox();},{passive:false});
+  fig.addEventListener('dblclick',()=>{z=1;vbox();});
+  doc.addEventListener('visibilitychange',()=>{if(document.hidden&&play&&snd&&SSW_SND.owner===me)sswSoundStop();});
+  if(ecg&&window.ResizeObserver){let w0=fig.clientWidth;const ro=new ResizeObserver(()=>{if(!host.isConnected){ro.disconnect();return;}const w1=fig.clientWidth;if(w1&&Math.abs(w1-w0)>w0*0.15){w0=w1;build();}});ro.observe(fig);}}
 /* ===== v0.10.0: the `atlas` widget type ("The Brain"). Pack data only (plan: Claude/StudySuite/brain-atlas/).
    w = {type:'atlas', vb:[W,H], alt, title,
         systems:{id:{name,color}}, structures:{id:{name,gloss,sys,src[],weeks[]}}, pathways:{id:{name,color,note,src[]}},
@@ -3707,7 +4141,15 @@ const ATLAS_CSS=`.sswlive.ssw-atlas .sswplanes{display:flex;flex-wrap:wrap;gap:6
 .sswlive.ssw-atlas .sswb[data-a="more"]{display:none}
 .sswlive.ssw-atlas.phone .sswb[data-a="more"]{display:inline-flex}
 .sswlive.ssw-atlas.phone .sswmore{display:none!important}
-.sswlive.ssw-atlas.phone.showmore .sswb.sswmore{display:inline-flex!important}.sswlive.ssw-atlas.phone.showmore .sswtools.sswmore{display:flex!important}`;
+.sswlive.ssw-atlas.phone.showmore .sswb.sswmore{display:inline-flex!important}.sswlive.ssw-atlas.phone.showmore .sswtools.sswmore{display:flex!important}
+/* v0.13.0: a level's sound (the player under the drawing), its states (a segmented control; the overlay never takes a tap) and the Cycle sheet */
+.sswlive.ssw-atlas .sswstates{margin-top:6px}.sswlive.ssw-atlas .sswstates:empty{display:none}
+.sswlive.ssw-atlas .sswstate{pointer-events:none}
+.sswlive.ssw-atlas .sswsndhost:empty{display:none}
+.sswlive.ssw-atlas .sswbcy{font-weight:600}
+.sswlive.ssw-atlas .sswcyov{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.55);display:flex;align-items:flex-start;justify-content:center;padding:12px;overflow:auto}
+.sswlive.ssw-atlas .sswcycard{background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:10px 12px;width:min(96vw,780px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.sswlive.ssw-atlas .sswcyhd{display:flex;gap:8px;align-items:center;font-size:14px;margin-bottom:6px}.sswlive.ssw-atlas .sswcyhd b{flex:1}`;
 function atlasLevels(w){const out=[];(w.planes||[]).forEach((p,pi)=>(p.levels||[]).forEach((l,li)=>out.push({p,pi,l,li})));return out;}
 function atlasShows(w,sid){return atlasLevels(w).filter(x=>(x.l.regions||[]).some(r=>r.id===sid));}
 /* srcOn is the app's per-pack source switch test; outside the app (or without a pack) everything counts as on */
@@ -3723,11 +4165,17 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
     return false;}
   const phone=(full||card)&&host.clientWidth>0&&host.clientWidth<560;host.classList.toggle('full',full);host.classList.toggle('phone',phone); /* v0.10.4: phone layout — crop to the drawing, names in a dropdown, orientation as text, tools behind More; v0.10.6: cards too */
   const P=w.planes||[],S=w.structures||{},PW=w.pathways||{},SYS=w.systems||{};
+  const HX=atlasLevels(w).some(x=>x.l.sound||(x.l.cycle&&x.l.cycle.widget)||(Array.isArray(x.l.states)&&x.l.states.length));let si=0,lvKey=null; /* v0.13.0: sound, cycle, states — their markup appears only in an atlas that uses them, so The Brain's is unchanged */
   let pi=Math.max(0,P.findIndex(p=>p.id===st.plane));if(pi<0)pi=0;
   let li=Math.max(0,(P[pi].levels||[]).findIndex(l=>l.id===st.level));if(li<0)li=0;
   let labels=st.labels!=null?!!st.labels:!(full&&phone),terr=!!st.terr, /* v0.10.6: a phone-sized full view starts with Labels off (in-place names on demand) */ref=st.ref===true?2:Math.max(0,Math.min(2,st.ref|0)),outl=st.outlines!=null?!!st.outlines:!card,conv=st.conv==='ana'?'ana':'rad';
   const paths=new Set(Array.isArray(st.paths)?st.paths:[]);let quiz=null,lastQ=null,cycle=null;
-  const lvl=()=>P[pi].levels[li];
+  const RFC=new WeakMap(); /* v0.13.0: ref {use:'<levelId>', box?, credit?, conv?, printedLabels?} borrows the named level's photo (same plane first, then any
+     plane) — several views share one course figure without carrying it twice. Its own box/credit/printedLabels win; a level without `use` is returned as is. */
+  const refLvl=l=>{const r=l&&l.ref;if(!r||!r.use||r.img)return l;if(RFC.has(l))return RFC.get(l);const id=String(r.use),pl=P[pi],own=(pl.levels||[]).find(x=>x&&x.id===id&&x!==l);
+    const src=own||atlasLevels(w).map(x=>x.l).find(x=>x&&x.id===id&&x!==l),sr=(src&&src.ref)||{},m=Object.assign({},sr,r);delete m.use;m.img=sr.img||'';
+    ['box','credit','conv','printedLabels'].forEach(k=>{if(r[k]==null&&sr[k]!=null)m[k]=sr[k];});const c=Object.assign({},l,{ref:m});RFC.set(l,c);return c;};
+  const lvl=()=>refLvl(P[pi].levels[li]);
   const flipFor=l=>l.conv==='rad'&&conv==='ana';
   /* labels sit in the gutters beside the drawing: anchor 'end' = left gutter (text runs leftward from x), 'start' = right
      gutter, 'middle' = above/below. The leader leaves the label on the side facing the drawing and ends at the target t. */
@@ -3742,6 +4190,7 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
     if(m.r)s+=`<text x="${W-12}" y="${H-6}" class="ts" text-anchor="end">← ${sswEsc(flip?m.l||m.r:m.r)}</text>`;return s;};
   /* Reference is three-way: 0 drawing · 1 overlay (the real slice under a translucent drawing, at the box it was traced in)
      · 2 photo. ref = {img, credit, conv, box:[x,y,w,h]}; without a box the image fills the viewBox. */
+  const stSvg=l=>Array.isArray(l.states)&&l.states.length?`<g class="sswstate">${sswClean(((l.states[si]||l.states[0])||{}).svg||'')}</g>`:''; /* v0.13.0: the chosen state's overlay, above the regions */
   const art=l=>{const flip=flipFor(l),g=flip?` transform="translate(${W},0) scale(-1,1)"`:'';
     const hasRef=!!(l.ref&&l.ref.img),mode=hasRef?ref:0;const rflip=hasRef&&((l.ref.conv||'rad')==='rad')!==(conv==='rad')&&l.conv==='rad';
     const bx=(l.ref&&l.ref.box)||[0,0,W,H];
@@ -3749,7 +4198,7 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
     const base=mode===2?'':`<g${g}${mode===1?' style="opacity:.55"':''}>${sswClean(l.svg||'')}</g>`;
     return '<g class="sswart">'+photo+base+'</g>'+`<g${g}><g class="sswterr"${terr?'':' style="display:none"'}>${sswClean(l.terr||'')}</g>`+
       Object.keys(PW).map(k=>`<g class="sswpath" data-p="${sswEsc(k)}"${paths.has(k)?'':' style="display:none"'}>${sswClean((l.paths||{})[k]||'')}</g>`).join('')+
-      (l.regions||[]).map(sswShape).join('')+'</g>'+`<g class="sswov">${labelSvg(l,flip)}</g><g class="sswin">${inSvg(l,flip)}</g>`+'<g class="sswmarks">'+marksSvg(l,flip)+'</g><g class="sswmk"></g>';};
+      (l.regions||[]).map(sswShape).join('')+stSvg(l)+'</g>'+`<g class="sswov">${labelSvg(l,flip)}</g><g class="sswin">${inSvg(l,flip)}</g>`+'<g class="sswmarks">'+marksSvg(l,flip)+'</g><g class="sswmk"></g>';};
   /* the locator (v0.10.6): a level's loc = {map, line|dot, pov} on one of w.maps (dedicated drawings), or the older
      {plane, level, line|dot} / [x1,y1,x2,y2] on a slice drawing. pov = the side the viewer stands on (n/s/e/w in map
      coordinates); a shaded field-of-view wedge sits there and swaps sides with the convention switch. */
@@ -3785,10 +4234,10 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
   const zoneName=()=>{const z=P[pi].zones||[];let n='';z.forEach(x=>{if(li>=(x.from|0))n=x.name;});return n;};
   /* ---------- build ---------- */
   let h='';
-  if(!card)h+=`<div class="sswplanes" role="group">${P.map((p,k)=>`<button type="button" class="sswb" data-pl="${k}" aria-pressed="${k===pi}">${sswEsc(p.name)}</button>`).join('')}<button type="button" class="sswb sswb3d" data-a="v3d" title="The three section planes' current slices in 3D">3D · Three planes</button></div>`; /* v0.10.13: the 3D view sits with the planes */
-  if(!card)h+='<div class="sswor sswor-t"></div>';h+=`<div class="sswframe">${sswSvg(w,'')}${card?'':'<div class="sswlocbox"></div>'}</div>`;if(!card)h+='<div class="sswor sswor-b"></div><div class="sswlabhint">Pinch in (or Zoom +) to see the names on the drawing — this slice has too many to show at once.</div>';
+  if(!card)h+=`<div class="sswplanes" role="group">${P.map((p,k)=>`<button type="button" class="sswb" data-pl="${k}" aria-pressed="${k===pi}">${sswEsc(p.name)}</button>`).join('')}<button type="button" class="sswb sswb3d" data-a="v3d" title="The three section planes' current slices in 3D">3D · Three planes</button>${HX?'<button type="button" class="sswb sswbcy" data-a="cyc" style="display:none">Cycle ›</button>':''}</div>`; /* v0.10.13: the 3D view sits with the planes */
+  if(!card)h+='<div class="sswor sswor-t"></div>';h+=`<div class="sswframe">${sswSvg(w,'')}${card?'':'<div class="sswlocbox"></div>'}</div>`;if(HX&&!card)h+='<div class="sswtools sswstates" role="group"></div>'; /* v0.13.0 */if(!card)h+='<div class="sswor sswor-b"></div><div class="sswlabhint">Pinch in (or Zoom +) to see the names on the drawing — this slice has too many to show at once.</div>';
   if(!card){h+=`<div class="sswbar"><button type="button" class="sswb" data-a="prev" aria-label="Previous">‹</button><input type="range" class="sswrange" min="0" max="0" step="1" value="0" aria-label="Level"><button type="button" class="sswb" data-a="next" aria-label="Next">›</button></div>`;}
-  h+='<div class="sswread"></div><div class="sswcredit"></div><div class="sswtk"></div>'+(card?'':'<div class="sswlv"></div>'); /* v0.10.7: .sswtk = the territory legend */
+  h+='<div class="sswread"></div><div class="sswcredit"></div><div class="sswtk"></div>'+(card?'':'<div class="sswlv"></div>');if(HX&&!card)h+='<div class="sswsndhost"></div>'; /* v0.13.0: the level's player, above the tools */ /* v0.10.7: .sswtk = the territory legend */
   if(!card){h+=`<div class="sswtools"><button type="button" class="sswb" data-a="labels" aria-pressed="${labels}">Labels</button><button type="button" class="sswb" data-a="terr" aria-pressed="${terr}">Territories</button><button type="button" class="sswb" data-a="ref" aria-pressed="${ref>0}">${["Photo","Photo + drawing","Photo only"][ref]}</button><button type="button" class="sswb sswmore" data-a="outl" aria-pressed="${outl}">Outlines</button><button type="button" class="sswb sswmore" data-a="conv" aria-pressed="${conv==='ana'}">Anatomical view</button><button type="button" class="sswb" data-a="quiz" aria-pressed="false">Quiz me</button><button type="button" class="sswb" data-a="zin" aria-label="Zoom in">Zoom +</button><button type="button" class="sswb" data-a="zout" aria-label="Zoom out">Zoom −</button><button type="button" class="sswb" data-a="more" aria-pressed="false">More ▾</button></div>`;
     if(Object.keys(PW).length)h+=`<div class="sswtools sswmore">${Object.keys(PW).map(k=>`<button type="button" class="sswb" data-pw="${sswEsc(k)}" aria-pressed="${paths.has(k)}"><span class="sswdot" style="background:${sswEsc(PW[k].color||'var(--accent)')}"></span>${sswEsc(PW[k].name)}</button>`).join('')}</div>`;
     h+=`<div class="sswsearch"><input type="search" placeholder="Find a structure…" aria-label="Find a structure" autocomplete="off"><div class="sswhits"></div></div><div class="sswhint">${SSW_HINT.atlas}</div>`;}
@@ -3839,7 +4288,16 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
         for(const k of [0,2,4,7]){pt.x=tx+ux*k;pt.y=ty+uy*k;const hit=rg.find(e=>{try{return e.isPointInFill(pt);}catch(_){return false;}});if(hit){const b=N[hit.dataset.id];if(akin(a,b)&&kind(a)===kind(b))id=hit.dataset.id;break;}}}
       if(!id)return;
       sv.querySelectorAll(`.sswlab[data-i="${i}"],.ti[data-i="${i}"]`).forEach(e=>e.setAttribute('data-l',id));});}catch(_){}};
-  const draw=()=>{const l=lvl();sv.innerHTML=art(l);host.classList.toggle('wide',!card&&!phone&&host.clientWidth>=900);const lb=host.querySelector('.sswlocbox');if(lb)lb.innerHTML=locSvg();crop();fitLabels();mapLabels();
+  /* v0.13.0: entering a level — its state (st.state on the first level shown, else state 0), the states control, the player for its
+     sound (a level change stops what was playing) and the Cycle chip */
+  const lvIn=l=>{const key=P[pi].id+':'+l.id;if(key===lvKey)return;const first=lvKey===null;lvKey=key;const SS=Array.isArray(l.states)?l.states:[];
+    si=first&&st.state!=null?Math.max(0,SS.findIndex(x=>x&&x.id===st.state)):0;if(!first)sswSoundStop();if(card)return;
+    const sc=host.querySelector('.sswstates');if(sc){sc.innerHTML=SS.length>1?SS.map((x,k)=>`<button type="button" class="sswb" data-st="${k}" aria-pressed="${k===si}">${sswEsc(x.name||x.id)}</button>`).join(''):'';
+      sc.querySelectorAll('[data-st]').forEach(b=>b.addEventListener('click',()=>{si=+b.dataset.st;const g=sv.querySelector('.sswstate');if(g)g.innerHTML=sswClean((SS[si]||{}).svg||'');
+        sc.querySelectorAll('[data-st]').forEach(x=>x.setAttribute('aria-pressed',String(+x.dataset.st===si)));if(!quiz)read().innerHTML=`<b>${sswEsc(SS[si].name||'')}</b>${SS[si].note?' — '+sswEsc(SS[si].note):''}`;}));}
+    const sh=host.querySelector('.sswsndhost');if(sh){sh.innerHTML='';if(l.sound)try{mountSoundPlayer(sh,String(l.sound),{packId:o.packId});}catch(_){}}
+    const cb=host.querySelector('[data-a="cyc"]');if(cb)cb.style.display=l.cycle&&l.cycle.widget?'':'none';};
+  const draw=()=>{const l=lvl();if(HX)lvIn(l);sv.innerHTML=art(l);host.classList.toggle('wide',!card&&!phone&&host.clientWidth>=900);const lb=host.querySelector('.sswlocbox');if(lb)lb.innerHTML=locSvg();crop();fitLabels();mapLabels();
     const tk=host.querySelector('.sswtk');if(tk){tk.innerHTML=(terr&&Array.isArray(l.terrKey)?l.terrKey:[]).map(k=>`<span><span class="sswdot" style="background:var(--${sswEsc(String(k[1]||'accent').replace(/^var\(--|\)$/g,''))})"></span>${sswEsc(k[0])}</span>`).join('');host.classList.toggle('terron',!!terr);} /* v0.10.7: territory legend (pack v1.6 terrKey) */host.classList.toggle('dense',(l.labels||[]).filter(x=>x.t).length>10); /* v0.10.6: on a phone a dense slice shows in-place names only when zoomed */
     if(!card){const o2=orHtml(l);host.querySelectorAll('.sswor').forEach((e,i)=>{e.innerHTML=o2[i];e.classList.toggle('sswor-on',l.conv!=='rad');});host.classList.toggle('sswbanner',l.conv!=='rad'); /* v0.10.6: the orientation banner is always on for views without a radiological convention */const lv=host.querySelector('.sswlv');if(lv){lv.innerHTML=selHtml(l);const se=lv.querySelector('.sswsel');if(se)se.addEventListener('change',()=>{const id=se.value;if(quiz||!id)return;clear();sel(id);read().innerHTML=tell(id,true);wireCycle(id);});}
       /* v0.10.5: tools the slice cannot honour are greyed — no reference image, no territories, no drawing for a pathway */
@@ -3898,6 +4356,12 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
     ov.querySelectorAll('.ssw3dsl input').forEach(r=>r.addEventListener('input',()=>{const p=P.find(x=>x.id===r.dataset.pl);LAST[p.id]=+r.value;sc.innerHTML=cards3();show3();}));
     ov.querySelector('[data-a="close3"]').addEventListener('click',()=>ov.remove());ov.querySelector('[data-a="reset3"]').addEventListener('click',()=>{rx=-22;ry=-38;apply();});};
   const b3=host.querySelector('[data-a="v3d"]');if(b3)b3.addEventListener('click',view3d);
+  /* v0.13.0: the Cycle chip — the level's cycle widget in a sheet over the atlas, at the level's view; Back returns to the level */
+  const cyb=host.querySelector('[data-a="cyc"]');if(cyb)cyb.addEventListener('click',()=>{const c=lvl().cycle||{},cw=widgetById(c.widget,o.packId);if(!cw)return;quizOff();
+    let ov=host.querySelector('.sswcyov');if(ov)ov.remove();ov=document.createElement('div');ov.className='sswcyov';
+    ov.innerHTML=`<div class="sswcycard" role="dialog" aria-label="Cycle"><div class="sswcyhd"><button type="button" class="sswb" data-a="cyback">‹ Back to the level</button><b>${sswEsc(cw.title||'')}</b></div><div class="sswcyhost"></div></div>`;host.appendChild(ov);
+    const close=()=>{sswSoundStop();ov.remove();};ov.querySelector('[data-a="cyback"]').addEventListener('click',close);ov.addEventListener('click',e=>{if(e.target===ov)close();});
+    mountWidget(ov.querySelector('.sswcyhost'),cw,{packId:o.packId,state:c.view!=null?{view:c.view}:{}});});
   host.querySelector('.sswlocbox').addEventListener('click',e=>{const g=e.target.closest&&e.target.closest('.sswmapln');if(g){if(!quiz)go(pi,+g.dataset.k);return;}if(e.target.closest('.sswloc'))bigMap();});host.querySelector('.sswlocbox').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.closest('.sswloc')){e.preventDefault();bigMap();}});
   host.querySelectorAll('.sswb[data-pl]').forEach(b=>b.addEventListener('click',()=>{quizOff();go(+b.dataset.pl,0);}));
   const r=host.querySelector('.sswrange');r.addEventListener('input',()=>{if(!quiz)go(pi,+r.value);});
@@ -3964,7 +4428,7 @@ function validateCard(c,i){
   if(c.type==='match'){if(!Array.isArray(c.pairs)||c.pairs.some(p=>!Array.isArray(p)||p.length!==2))return `card#${i}: match needs pairs[]`;}
   if(c.type==='qa'){if(!c.answer)return `card#${i}: qa needs answer`;}
   if(c.type==='spot'&&(typeof c.widget!=='string'||typeof c.target!=='string'||!c.prompt))return `card#${i}: spot needs widget, target and prompt`; /* v0.9.0 */
-  if(c.type==='widget'&&(typeof c.widget!=='string'||!c.prompt||!c.answer))return `card#${i}: widget needs widget, prompt and answer`;
+  if(c.type==='widget'&&((typeof c.widget!=='string'&&!(c.state&&typeof c.state.sound==='string'))||!c.prompt||!c.answer)) /* v0.13.0: a sound card needs no widget */return `card#${i}: widget needs widget, prompt and answer`;
   if(c.type==='label'){ /* v0.8.1 */
     if(typeof c.image!=='string'||!/^data:image\/(webp|jpeg|png|gif);base64,[A-Za-z0-9+\/=]+$/.test(c.image))return `card#${i}: label needs a data:image`;
     const num=v=>typeof v==='number'&&isFinite(v)&&v>=0&&v<=1;
@@ -3984,7 +4448,7 @@ function validateQuestion(q,i){
 function ingestPack(obj,sourceName){
   let pk;
   if(Array.isArray(obj)){const isCards=obj.some(x=>x&&x.type&&KNOWN_TYPES.includes(x.type));pk={id:'pack_'+Date.now().toString(36),pack:sourceName||'Imported',questions:isCards?[]:obj,cards:isCards?obj:[],guides:[]};}
-  else {pk={id:obj.id||('pack_'+Date.now().toString(36)),pack:obj.pack||sourceName||'Imported',questions:Array.isArray(obj.questions)?obj.questions:[],cards:Array.isArray(obj.cards)?obj.cards:[],guides:Array.isArray(obj.guides)?obj.guides:[],version:obj.version,author:obj.author||obj.createdBy,school:obj.school,year:obj.year,term:obj.term,course:obj.course,weeks:obj.weeks,groupBy:obj.groupBy,drugs:Array.isArray(obj.drugs)?obj.drugs:[],sources:(obj.sources&&typeof obj.sources==='object'&&!Array.isArray(obj.sources))?obj.sources:undefined,widgets:(obj.widgets&&typeof obj.widgets==='object'&&!Array.isArray(obj.widgets))?obj.widgets:undefined,sortWeek:(typeof obj.sortWeek==='number'?obj.sortWeek:undefined),classes:(obj.classes&&typeof obj.classes==='object'&&!Array.isArray(obj.classes))?obj.classes:undefined};} /* v0.6.6: sources · v0.9.0: widgets */
+  else {pk={id:obj.id||('pack_'+Date.now().toString(36)),pack:obj.pack||sourceName||'Imported',questions:Array.isArray(obj.questions)?obj.questions:[],cards:Array.isArray(obj.cards)?obj.cards:[],guides:Array.isArray(obj.guides)?obj.guides:[],version:obj.version,author:obj.author||obj.createdBy,school:obj.school,year:obj.year,term:obj.term,course:obj.course,weeks:obj.weeks,groupBy:obj.groupBy,drugs:Array.isArray(obj.drugs)?obj.drugs:[],sources:(obj.sources&&typeof obj.sources==='object'&&!Array.isArray(obj.sources))?obj.sources:undefined,widgets:(obj.widgets&&typeof obj.widgets==='object'&&!Array.isArray(obj.widgets))?obj.widgets:undefined,sounds:(obj.sounds&&typeof obj.sounds==='object'&&!Array.isArray(obj.sounds))?obj.sounds:undefined,sortWeek:(typeof obj.sortWeek==='number'?obj.sortWeek:undefined),classes:(obj.classes&&typeof obj.classes==='object'&&!Array.isArray(obj.classes))?obj.classes:undefined};} /* v0.6.6: sources · v0.9.0: widgets · v0.13.0: sounds */
   const errs=[];
   pk.questions=pk.questions.filter((q,i)=>{const v=validateQuestion(q,i);if(v){errs.push(v);return false;}return true;});
   pk.cards=pk.cards.filter((c,i)=>{const v=validateCard(c,i);if(v){errs.push(v);return false;}return true;});
@@ -4015,7 +4479,7 @@ function removePack(id){confirmDialog('Remove this pack? Your review progress is
 /* ===== NAV ===== */
 function currentSection(){const s=document.querySelector('section.on');return s?s.id:'home';}
 let navLock=false; // true while a popstate is driving navigation (prevents double-push)
-function show(which){const switching=currentSection()!==which;document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===which));$('homebtn').style.display=(which==='home'?'none':'');$('timer').style.display=(which==='quiz'&&timerWanted)?'':'none';if(switching){if(!navLock){try{history.pushState({sec:which},'');}catch(e){}}window.scrollTo({top:0});}if(which==='home')setTimeout(appNotesTick,400);}
+function show(which){const switching=currentSection()!==which;document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===which));$('homebtn').style.display=(which==='home'?'none':'');$('timer').style.display=(which==='quiz'&&timerWanted)?'':'none';if(switching){try{sswSoundStop();}catch(e){} /* v0.13.0 */if(!navLock){try{history.pushState({sec:which},'');}catch(e){}}window.scrollTo({top:0});}if(which==='home')setTimeout(appNotesTick,400);}
 /* Browser/mouse back-forward: map history entries onto app sections. */
 function gotoSec(t){
   switch(t){
@@ -4336,7 +4800,7 @@ function buildSession(){const now=Date.now();const due=[],learn=[],news=[];
   due.sort((a,b)=>sched[a].due-sched[b].due);learn.sort((a,b)=>sched[a].due-sched[b].due);
   sessionQueue=[...learn,...due,...shuffle(news).slice(0,Math.max(0,settings.srsNewPerDay-daily.count))];}
 function startSession(){buildSession();studiedThisSession=0;if(sessionQueue.length===0){renderSrs();return;}presentNext();}
-function presentNext(){if(sessionQueue.length===0){finishSession();return;}currentId=sessionQueue.shift();revealed=false;work={picks:new Set(),pick:null,order:[],pool:null,optorder:null};renderCard();show('study');}
+function presentNext(){if(sessionQueue.length===0){finishSession();return;}try{sswSoundStop();}catch(e){} /* v0.13.0 */currentId=sessionQueue.shift();revealed=false;work={picks:new Set(),pick:null,order:[],pool:null,optorder:null};renderCard();show('study');}
 function finishSession(){$('doneSub').textContent=srsSpecial()?'You’ve been through every '+(srsFlagOnly&&srsAgainOnly?'flagged card marked Again':srsFlagOnly?'flagged card':'card marked Again')+' in this scope.':'Nothing more due in this scope right now.';$('doneStats').textContent=`You reviewed ${studiedThisSession} card${studiedThisSession===1?'':'s'}.`;const m=counts();$('doneStudyMore').style.display=(!srsSpecial()&&m.nw+m.lr+m.rv>0)?'':'none';show('srsdone');}
 function renderCard(){const c=cardOf(currentId);
   $('sTag').textContent=`${sysLabel(c.sys).split(' ')[0]} · ${c.topic}`;$('sTag').style.visibility=revealed?'':'hidden'; /* v0.10.17 */

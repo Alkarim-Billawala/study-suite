@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.30 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.31 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.30)
+# Study Suite — Content Authoring Guide (v2.31)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,8 +8,16 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.30 · **Pairs with:** Study Suite app v0.4.4+ (source switches need v0.6.6+, Extras v0.7.1+, image cards v0.8.1+, interactive figures v0.9.0+, atlas packs v0.10.0+, default and paired packs and named atlas links v0.12.3+ — links and read-more v0.10.9–v0.10.10), pack `formatVersion` 2.0
-> **What changed in guide v2.30:** **packs the app adds by itself, and named atlas links** (§6f items 9 and 11). An atlas link may
+> **Authoring system version:** 2.31 · **Pairs with:** Study Suite app v0.4.4+ (source switches need v0.6.6+, Extras v0.7.1+, image cards v0.8.1+, interactive figures v0.9.0+, atlas packs v0.10.0+, default and paired packs and named atlas links v0.12.3+, cycle widgets and sounds v0.13.0+ — links and read-more v0.10.9–v0.10.10), pack `formatVersion` 2.0
+> **What changed in guide v2.31:** **cycle widgets and heart sounds** (app v0.13.0+). New **§6g**: the `cycle` widget
+> type — a moving figure over one beat (`kind:"cycle"`: pressures, volume, ECG and heart sounds — the Wiggers figure) or
+> an ECG the app composes from beat templates and a rhythm rule (`kind:"ecg"`: the twelve-lead, a strip or three strips).
+> New **§6h**: `pack.sounds` — heart sounds as data the app synthesises and draws as a phonocardiogram, an optional credited
+> real recording, the player, `data-sound` guide links and "Listen — what is this?" cards. §6f gains `ref.use` (a level
+> borrows another level's reference), `conv: "none"` atlases, a level's `sound` / `cycle` / `states`, and `state=` links
+> (items 4, 9, 12, 14, 15; the second item 11 is now 13); §6e lists the `cycle` type; the §7a validator accepts sound cards.
+> The checks know the new data (`packbuilder` `sound_errors` / `cycle_errors` / `v013_errors`; `pack_checks.py` scans sound text).
+> **What changed in guide v2.30 (previous):** **packs the app adds by itself, and named atlas links** (§6f items 9 and 11). An atlas link may
 > name its atlas with `data-atlas-pack="<pack id>"` (absent = `neuro_brain`, so every earlier link is unchanged). A pack can be a
 > **default pack** (every user gets it once — listed in `pack_notes.json` `"default"`) or a **paired pack** (an atlas is added
 > once any pack whose guides link into it is in the library and switched on — worked out by the deploy from those links, plus
@@ -982,6 +990,7 @@ script-free guide frame) and in cards. **A pack never carries a script**: every 
 | `spot` (tap-the-spot) | taps a region for its `name` + `info`; **Quiz me** asks for a region | structures on a section or a drawn schematic |
 | `lesion` (lesion localiser) | taps a site for its `deficit` and an overlay (`show`) on a body or map; Quiz me gives the deficit, asks for the site | lesion → deficit, generator → sign, region → disorder |
 | `curves` (switchable views) | segmented buttons between views; `all` adds an overlay of every view | before/after, normal vs disease, stages, step-throughs |
+| `cycle` (moving figure, v2.31) | plays, steps or scrubs one beat or an ECG; Sounds, views | the cardiac cycle (Wiggers), rhythms, twelve-lead patterns — see §6g |
 
 **Rules.**
 1. **Coordinates:** every widget has `vb` `[W, H]`; all SVG, regions (`d` path, `poly` points or `circle` `[cx,cy,r]`) and
@@ -1052,6 +1061,12 @@ drawing modules in Drive `Claude/StudySuite/brain-atlas/` (`build_atlas_test.py`
    is the viewBox rectangle the drawing was traced in (one transform per view = its box, so drawing and figure cannot
    drift). Max side 540–640 px, WebP q 60–64: a 26-level atlas with every reference is ~1.4 MB and the line is 1.5 MB;
    write the pack compact (no indent).
+   A level may **borrow** another level's reference instead of carrying its own image: `"ref": {"use": "<levelId>",
+   "box": [...], "credit": "...", "conv": "none", "printedLabels": true|false}`. The app (v0.13.0+) takes the image from the
+   named level (same plane first, then any plane of the atlas) and keeps this level's own `box`, `credit`, `conv` and
+   `printedLabels` where given (else the source level's). Use it whenever views share one course figure (the left-valve
+   lesions share one echo; the shunt lesions share one section) — each copy of a WebP costs 20–40 KB against the 1.5 MB
+   line. The source level must carry its own `img`. Apps before v0.13.0 show no photo for a borrowing level (harmless).
 5. **Territories** (`terr`, an SVG string) come with **`terrKey`** `[[name, colourVar], …]` — the app shows it as a legend
    while Territories is on. One convention per atlas (The Brain: ACA green · MCA gold · PCA accent · lenticulostriate red ·
    anterior choroidal blue · paramedian accent · circumferential gold · posterior spinal green).
@@ -1071,7 +1086,10 @@ drawing modules in Drive `Claude/StudySuite/brain-atlas/` (`build_atlas_test.py`
    user's codes it says so. Put one line at the end of the sections that teach what a slice shows; nothing else changes.
    **Naming the atlas (v2.30, app v0.12.3):** add `data-atlas-pack="<atlas pack id>"` to the link. Without it the link means
    The Brain (`neuro_brain`). A link for any other atlas must name it — the link opens that atlas, the offer to add it uses its
-   name, and the link is what pairs the week with that atlas (item 11).
+   name, and the link is what pairs the week with that atlas (item 13).
+   **Picking a level's state (v2.31, app v0.13.0):** a `data-atlas` link may pick a level's state (item 15) with the flag
+   `state=<id>`: `data-atlas="in:i4:state=sys"`, joined with others by `+` (`in:i4:terr+state=sys`); a card or a
+   `data-ssw-state` may set `"state":"sys"`.
 10. **Cards:** `spot` with `state {plane, level}` and a `target` that is a region of that level; `widget` with
     `state {plane, level, labels:false, hideName:true}` for "which level is this?", `{region, labels:false}` for "what is
     marked?", `{terr:true, region, labels:false}` for "which artery?"; `conv:"ana"`, `paths:[…]`, `ref:1|2` as needed. Ids
@@ -1083,13 +1101,159 @@ drawing modules in Drive `Claude/StudySuite/brain-atlas/` (`build_atlas_test.py`
     (render with the real engine over the reference at its box) and have an independent verifier read the overlays
     against the named course figures before a zone is frozen; Alkarim reviews by use.
 12. **App first** (memory.md §1f): a pack feature that needs engine support ships after the app version that reads it;
-    older apps ignore unknown fields (`s`, `terrKey`, `ref`, `data-ssw-state`, `data-atlas`) harmlessly.
-11. **Packs the app adds by itself (v2.30, app v0.12.3).** Two kinds, written into the pack list by `encrypt_deploy.py`:
+    older apps ignore unknown fields (`s`, `terrKey`, `ref`, `data-ssw-state`, `data-atlas`) harmlessly. Sounds (§6h), cycle
+    widgets (§6g), `sound` / `cycle` / `states` / `ref.use` on a level and sound cards need **app v0.13.0** live before the
+    pack deploys.
+13. **Packs the app adds by itself (v2.30, app v0.12.3).** Two kinds, written into the pack list by `encrypt_deploy.py`:
     a **default pack** (`"default": true` — the ids in `pack_notes.json` `"default"`, e.g. the Pharmacology Index) is added
     once for every user; a **paired pack** (`"pairedWith": [ids]`) is added once any of those packs is in the library and
     switched on. For an atlas the deploy works the list out from the weeks whose guides link into it (item 9), plus any
     ids in `pack_notes.json` `"paired"`. Both respect a removal (it sticks and syncs); signed-in users get them only after
     that session's first sync. Nothing else is needed from the author: write the atlas links and the pairing follows.
+14. **`conv: "none"` atlases (v2.31).** An atlas whose every view is a surface, section or frontal drawing (The Heart) uses
+    `conv: "none"` throughout, with `marks` stating the orientation on every level ("patient's RIGHT" on the viewer's left
+    on frontal views); the Anatomical-view switch is then greyed and the orientation banner always shows. Cross-sections and
+    echo/film views are drawn as the imaging shows them and say so in the banner.
+15. **A level's `sound`, `cycle`, `states` (v2.31, app v0.13.0).**
+    - `"sound": "<sounds id>"` puts the player (§6h) under the drawing, above the tools, with that sound's manoeuvre chips.
+    - `"cycle": {"widget": "<cycle widget id>", "view": "<view name or index>"}` adds a **Cycle ›** chip beside "3D" that
+      opens that cycle widget (§6g) in a sheet over the atlas at that view; Back returns to the level.
+    - `"states": [{"id":"dia","name":"Diastole","svg":""}, {"id":"sys","name":"Systole","svg":"<g>…</g>","note":"…"}]` — a
+      segmented control under the drawing; state 0 is the base and is shown first; choosing a state swaps an overlay drawn
+      above the regions (it never takes a tap), labels unchanged. Two states or more; inert SVG. Links pick a state with
+      `state=` (item 9).
+    - Nothing of these is added to an atlas that uses none of them: The Brain's markup is unchanged.
+
+---
+
+## 6g. Cycle widgets (`cycle`) — v2.31
+
+A **cycle widget** plays something that happens in time: the traces draw as a playhead runs, the current phase is shaded,
+the current event is named in the readout. Two kinds share one engine (app v0.13.0+): **`kind:"cycle"`** — tracks over one
+beat (the Wiggers figure: pressures, volume, ECG, heart sounds) — and **`kind:"ecg"`** — strips the app composes from
+**beat templates** and a **rhythm rule**, shown as the twelve-lead (the way the course teaches it), a single strip or three
+strips. The pack carries data only; every time is in **seconds within `[0, dur]`**.
+
+```json
+"w18_cycle": {"type":"cycle", "kind":"cycle", "vb":[380,330], "title":"The cardiac cycle", "alt":"…", "dur":0.83, "bpm":72, "rateRange":[40,150],
+  "tracks":[{"id":"pao","name":"Aortic pressure","short":"aorta","color":"var(--red)","unit":"mmHg","range":[0,130],"lane":0,"pts":[[0,80],[0.02,79],…]},
+            {"id":"plv","name":"LV pressure","short":"LV","color":"var(--accent)","unit":"mmHg","range":[0,130],"lane":0,"pts":[…]},
+            {"id":"vol","name":"LV volume","color":"var(--green)","unit":"mL","range":[50,140],"lane":1,"pts":[…]},
+            {"id":"ecg","name":"ECG","color":"var(--ink)","lane":2,"pts":[…]},
+            {"id":"pho","name":"Heart sounds","short":"sound","lane":3,"sound":"normal"}],
+  "phases":[{"from":0,"to":0.083,"name":"Atrial systole","short":"atrial","note":"…"}, …],
+  "events":[{"t":0.232,"name":"Mitral valve closes — S1","note":"…","sound":"s1"},{"t":0.282,"name":"Aortic valve opens","note":"…"},
+            {"t":0.465,"name":"Aortic valve closes — S2","sound":"s2"}, …],
+  "scenes":[{"from":0,"to":0.232,"svg":"<g>…AV valves open…</g>"}, …], "sceneVb":[200,150],
+  "views":[{"name":"Normal","weight":3},{"name":"Aortic stenosis","weight":2,"sound":"as","note":"…","tracks":{"plv":{"pts":[…]},"pao":{"range":[0,200]}}}]}
+
+"w20_rhythms": {"type":"cycle", "kind":"ecg", "vb":[380,330], "title":"Rhythms", "alt":"…", "layout":"12lead", "dur":10, "speed":25, "gain":10,
+  "leads":["I","II","III","aVR","aVL","aVF","V1","V2","V3","V4","V5","V6"], "rhythm":"II", "atlasPack":"cardio_heart",
+  "conduction":"<svg viewBox=…>… elements with id san · atria · av · his · rbb · lbb · accessory …</svg>",
+  "beats":{"sinus":{"p":{"II":[[0,0],[0.05,0.15],[0.10,0]],…},"qrs":{"II":[[0.16,0],[0.175,-0.05],[0.195,1.1],[0.215,-0.15],[0.25,0]],…},
+                    "t":{"II":[[0.28,0],[0.46,0.3],[0.58,0]],…},"pr":0.16,"qrsd":0.09,"qt":0.40},
+           "escape":{…no p, pr 0…}, "pvc":{…wide…}},
+  "views":[{"name":"Sinus rhythm","rule":{"kind":"regular","rate":72,"beat":"sinus"},"weight":3,"criteria":"…","site":"san"},
+           {"name":"Third-degree AV block","rule":{"kind":"dissociated","atrial":86,"ventricular":37,"beat":"escape"},"weight":3,"site":"av",
+            "criteria":"…","events":["P waves march through","escape QRS"]},
+           {"name":"Atrial fibrillation","rule":{"kind":"irregular","rate":[70,150],"beat":"sinus","noP":true,"baseline":"f"},"weight":3,"site":"atria"},
+           {"name":"Inferior STEMI","rule":{"kind":"regular","rate":80,"beat":"sinus"},"morph":{"st":{"II":2,"III":3,"aVF":2.5,"I":-1,"aVL":-1.5}},
+            "weight":3,"territory":"out:o3:terr","territoryName":"right coronary"}]}
+```
+
+**What the learner gets.** Play / Pause, **Step** (to the next event; for an ECG, the next beat), drag along the trace to
+scrub, a rate menu (cycle kind: the beat runs faster or slower and the sound re-renders; an ECG's rate belongs to its rule),
+**Sounds** (cycle kind, or an ECG view with a `sound`), **Heart view** (when `scenes`), the view buttons (ordered by
+`weight`, highest first; More ▾ after six), **Callouts** (the numbered events under the trace and their list; on by
+default), and for ECGs **Strip / 12-lead**, tap a lead to see it full width, **Where it blocks** (lights the view's `site`
+on the pack's `conduction` drawing), **Territory** (opens the atlas at the view's `territory`, a `data-atlas` state, in the
+pack `atlasPack`), Zoom and pinch. Reduced motion starts paused with the whole trace; print shows the whole trace.
+
+**Rules.**
+1. **Cycle kind.** Tracks share a lane (`lane`, from 0 at the top) when they share a scale — the pressures; a lane's scale is
+   the union of its tracks' `range` (or the data's own span). `pts` are `[t, value]` sorted by `t` within `[0, dur]`; about
+   100 points a track is plenty. Give `short` names for the right-hand track labels and the lane label. A track with
+   `sound` (a `pack.sounds` id) is the phonocardiogram lane: the app draws it from the sound's description and plays it with
+   **S1 at the event marked `"sound":"s1"` and S2 at `"sound":"s2"`** (the description's murmurs are stretched to that gap).
+   `phases` tile the beat (`from` < `to`); a phase name shows in its band only where it fits — give `short`. `events` are
+   the course's step-by-step moments; their `note` is the readout. `views` may override tracks (`{trackId: {pts | range …}}`),
+   `phases`, `events`, and set `sound` and `note`.
+2. **ECG kind — beat templates.** A beat has `p`, `qrs` and `t` parts, each `{lead: [[t, mV], …]}`; template time 0 is the
+   start of the P wave and the QRS starts at `pr` (a beat with no P — escape, PVC, VT — starts at its QRS, `pr` 0). A lead
+   missing from a part is flat. 10–16 points a part are enough (P and T are smoothed, the QRS is drawn straight between
+   points). One sinus template + escape + PVC/VT covers most rhythms; ~25 KB for a widget with eighteen views.
+3. **ECG kind — rules.** `rule.kind` and its fields: `regular {rate, beat}` · `irregular {rate:[lo,hi], beat, noP, baseline:"f"}`
+   (AF) · `dissociated {atrial, ventricular, beat, pBeat}` (complete block) · `wenckebach {rate, prStart, prStep, dropEvery, beat}`
+   · `mobitz2 {rate, dropEvery, beat}` · `flutter {atrial:300, block:2|3|4, beat}` (sawtooth) · `reentry {rate, retroP, beat}`
+   (AVNRT; an inverted P after the QRS) · `ectopic {rate, beat, extras:[{at: beat index, beat:"pvc"|"pac", coupling:0.6}]}` (a
+   beat with a P is a PAC and resets the rhythm; one without is a PVC, full compensatory pause) · `vt {rate, beat}` ·
+   `polymorphic {rate, beat, period}` (twisting amplitude) · `vf` (chaotic, no beats) · `pause {rate, pauseAt, pauseSec, beat}`.
+   The strip is the same every time (seeded). The callouts label what a rule makes visible: P waves in a block, "PR 160",
+   "blocked P", "PVC", "pause 2.6 s".
+4. **ECG kind — `morph`** changes the view's own beats lead by lead: `st {lead: mm}` (ST shift after the J point, coved into
+   the T), `tinv [leads]`, `q [leads]` (pathological Q), `delta true|[leads]` (short PR + slurred upstroke), `wide` (QRS seconds),
+   `lvh` (voltage ×), `rbbb`/`lbbb: true` (preset shapes). Ectopic beats are never morphed.
+5. **Words.** `criteria` is the course's criteria for the rhythm (the readout); `note`, `events` (short "look for" phrases)
+   and every name restate the guide (§4a). The app adds the measured rate ("Ventricular rate ≈ 37/min · P waves ≈ 86/min").
+   `weight` 1–3 = how much the course teaches it × how common it is; it orders the buttons and the default view.
+6. **Layouts.** `12lead` = 3 × 4 (2.5 s a column, I II III · aVR aVL aVF · V1–V3 · V4–V6) with the `rhythm` lead (II) underneath,
+   on the 25 mm/s grid (small boxes only when the drawing is ≥ 600 px wide); `strip` = one lead; `3strip` = up to four leads.
+   Phones keep the twelve-lead with pinch zoom and the Strip button.
+7. **In cards** a `widget` card's `state` is `{view (index or name), t (seconds, or "play"), layout, leads, hideName}`: a
+   frozen frame at `t`; without `t` the whole trace; `"play"` loops it on the question side. Cards default to `layout:"strip"`
+   (single or three strips are how exam stems show rhythms). The reveal shows the view's name, criteria and note.
+8. **In guides** a cycle widget is an ordinary `data-ssw` figure (§6e rule 2) with a poster of the whole trace.
+9. **Checks** (`packbuilder.cycle_errors`, `v013_errors`): kind, `dur`, tracks sorted within `[0, dur]`, phases/events inside
+   `dur`, override ids exist, beat leads ⊆ `leads`, rule kinds and beat names, morph keys and leads, `site` values, every
+   `sound` in `pack.sounds`, inert `scenes`/`conduction` SVG; 300 KB per widget as before.
+
+---
+
+## 6h. Sounds (`pack.sounds`) — v2.31
+
+A pack carries **heart sounds as data**: the course's description of each sound (timing, shape, pitch, loudness, what changes
+it). The app (v0.13.0+) synthesises the sound from it and draws its phonocardiogram from the same data, so one description is
+one source of truth for both. An optional **real recording** can ride beside it.
+
+```json
+"sounds": {"as": {"name":"Aortic stenosis", "src":["W21-ICE","W21-L2"], "s1":1, "s2":0.4, "split":0.045, "fixedSplit":false,
+  "extra":[{"type":"s4","t":-0.09,"gain":0.6}],
+  "murmurs":[{"from":0.07,"to":0.40,"shape":"diamond","pitch":"harsh","gain":0.9,"breath":1.0,
+              "where":"right 2nd intercostal space","radiates":"carotids","louder":["squatting"],"softer":["valsalva"]}],
+  "note":"…the course's words…",
+  "audio":{"src":"data:audio/mpeg;base64,…","credit":"Heart Sound and Murmur Library, R. D. Judge and R. Mangrulkar, University of Michigan Medical School (trimmed, re-encoded)","licence":"CC BY-SA 4.0","dur":5.8}}}
+```
+
+**Rules.**
+1. **Times are fractions of the cycle**: 0 = S1, S2 at 0.46 (the app scales with the rate); negative = before S1 (an S4 at
+   −0.09). `extra.type` ∈ `s3 s4 snap click`; `murmurs.shape` ∈ `diamond decrescendo crescendo plateau machinery`; `pitch` ∈
+   `lo mid hi harsh scratch`; `gain` 0–1; `breath` = the inspiratory gain factor (Carvallo: 1.8); `split` seconds (Breathing
+   widens it unless `fixedSplit`). `s1`/`s2` scale the heart sounds (a soft S2: 0.4). Parameters are tuned by ear, not facts —
+   the facts are in `note`, `where`, `radiates`, `louder`, `softer`.
+2. **Manoeuvres:** each word in `louder`/`softer` becomes a chip that makes the murmur ×1.6 louder / ×0.6 softer and says so;
+   "inspiration" is the Breathing switch. Use the course's words ("squatting", "valsalva", "handgrip", "valsalva release").
+3. **Ids are plain words** (`normal`, `split`, `third`, `fourth`, `as`, `mr` …): one id per sound across all packs, so a link
+   or card in any pack reaches it. Avoid `s3`/`s4`-style ids in reader-facing text.
+4. **Real recordings:** openly licensed, diagnosis-labelled clips only (PROPOSAL v1.1 §5.3), trimmed to ~5–6 s, mono MP3 or
+   AAC ~48 kbps, as `data:audio/mpeg;base64,…`; **`credit` is required** (the source, its authors, "trimmed, re-encoded") with
+   `licence`; the checks warn above 60 KB a clip. The pack's sources table, the atlas guide H_01 and the public credits line
+   name the set. MP3 plays everywhere (Safari has no OGG).
+5. **Where sounds play:** an atlas level's `sound` (§6f), a cycle widget's sound lane or a view's `sound` (§6g), a guide link,
+   and a card:
+   - **Guide link:** `<a href="#" data-sound="as" data-sound-pack="cardio_heart">Hear it ›</a>` after the paragraph that
+     describes the murmur; the app mounts the player under that paragraph (a second tap closes it). Without
+     `data-sound-pack` the first pack in the library with that id plays it — name the pack. If the named pack is not in the library
+     the link offers to add it (as an atlas link does).
+   - **Card ("Listen — what is this?"):** `{"type":"widget", "prompt":"Listen — what is this?", "answer":"Aortic stenosis",
+     "state":{"sound":"as","hideName":true}}` — **no `widget` field**; `hideName` hides the name and note until the answer.
+     Apps before v0.13.0 drop such a card (harmless).
+6. **The player:** Listen / Pause (the first play is the tap — iPhone rule), the phonocardiogram with a moving playhead, rate
+   (60 · 72 · 90 · 110), Breathing, the manoeuvre chips, Normal for comparison, Real recording (credit under the strip), the
+   note as the readout, and "Low sounds (S3, S4, the rumble) need earphones." One sound plays at a time; it stops when the
+   reader moves on. It plays through an `<audio>` element, so the iPhone silent switch does not mute it.
+7. **Checks** (`packbuilder.sound_errors`): shape, the enumerations, `from < to`, `audio` a data:audio URI with a credit, the
+   60 KB warning; `pack_checks.py` scans `name`, `note`, `where`, `radiates` as reader-facing text and keeps the audio out of the
+   text scans; every `sound` named by a level, widget, card or same-pack guide link must exist.
 
 ---
 
@@ -1359,9 +1523,12 @@ def validate_pack(pack):
         if t == "qa" and not c.get("answer"): errs.append(f"{cid}: qa needs an answer")
         if t == "label": errs += _label_errs(cid, c)
         if t in {"spot", "widget"}:  # v2.28 (§6e): the figure must be in the pack; packbuilder checks the rest
+            st0 = c.get("state") if isinstance(c.get("state"), dict) else {}
             w = (pack.get("widgets") or {}).get(c.get("widget"))
             if not c.get("prompt"): errs.append(f"{cid}: {t} needs a prompt")
-            if not w: errs.append(f"{cid}: {t} names widget {c.get('widget')!r}, which is not in the pack's widgets (§6e)")
+            if t == "widget" and isinstance(st0.get("sound"), str):  # v2.31 (§6h): a sound card has no widget
+                if st0["sound"] not in (pack.get("sounds") or {}): errs.append(f"{cid}: state.sound {st0['sound']!r} is not in the pack's sounds (§6h)")
+            elif not w: errs.append(f"{cid}: {t} names widget {c.get('widget')!r}, which is not in the pack's widgets (§6e)")
             elif t == "spot" and c.get("target") not in {r.get("id") for r in w.get("regions", [])}:
                 errs.append(f"{cid}: spot target {c.get('target')!r} is not a region of {c.get('widget')!r} (§6e)")
             if t == "widget" and not c.get("answer"): errs.append(f"{cid}: widget card needs an answer (§6e)")
