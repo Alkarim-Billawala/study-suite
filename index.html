@@ -1,7 +1,12 @@
 <!--
-  Study Suite  ·  v0.13.1 (beta)
+  Study Suite  ·  v0.13.2 (beta)
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
+  Changelog v0.13.2 (2026-10-28, Alkarim: "have explanation show up below the nav buttons, so next, prev, etc doesnt shift down"):
+  once a question's answer shows (practice submit, test review), the verdict line, Explanation box, topic-guide link and
+  Sources chips render into #qafter, a new block under .controls (above the question map), not into #qcard. The Skip row
+  keeps its space (visibility:hidden) after the reveal instead of collapsing, so Previous · Flag · Next stay exactly where
+  they were before Submit. #qafter is empty (and hidden) until the reveal; guide links are wired there.
   Changelog v0.13.1 (2026-10-27, Alkarim: reference packs update in the background — Drive Claude/StudySuite/ref-packs-2026-10-26/):
   packs in the Reference year (the Pharmacology Index and the atlases) are updated by quietRefUpdates() as soon as the pack list
   shows a newer version — no ↑ Update tap, and they are left out of pendingUpdates() (header badge, Update all). It runs from
@@ -1098,7 +1103,7 @@ section{display:none}section.on{display:block}
 .choice[disabled]{cursor:default}
 .clozetext{font-size:21px;line-height:1.7;margin-top:16px}
 /* v0.8.1: images inside items (stem / prompt / answer / explain) and label cards */
-.cardbox img:not(.labimg),.qcard img{display:block;max-width:100%;height:auto;max-height:60vh;object-fit:contain;margin:12px auto;border-radius:6px}
+.cardbox img:not(.labimg),.qcard img,.qafter img{display:block;max-width:100%;height:auto;max-height:60vh;object-fit:contain;margin:12px auto;border-radius:6px}
 .labfig{text-align:center;margin:14px 0 4px}
 .labwrap{position:relative;display:inline-block;max-width:100%;vertical-align:top;line-height:0}
 .labimg{display:block;max-width:100%;height:auto;max-height:60vh;border-radius:6px}
@@ -1111,7 +1116,7 @@ section{display:none}section.on{display:block}
 .lnum{position:absolute;left:0;top:50%;transform:translate(-55%,-50%);min-width:17px;height:17px;padding:0 4px;box-sizing:border-box;border-radius:9px;background:var(--accent);color:var(--paper);border:1.5px solid var(--paper);font:600 10px/14px var(--font-mono);text-align:center;pointer-events:none}
 .labhint{font-size:13px;color:var(--ink-soft);text-align:center;margin-top:8px}
 .lablist{margin:4px 0 0 1.4em;padding:0}.lablist li{margin:2px 0}
-@media (max-width:640px){.cardbox img:not(.labimg),.qcard img,.labimg{max-height:46vh}}
+@media (max-width:640px){.cardbox img:not(.labimg),.qcard img,.qafter img,.labimg{max-height:46vh}}
 .cz{border-bottom:2px solid var(--accent-soft);padding:0 3px;color:var(--ink-soft)}
 .cz.on{background:color-mix(in srgb,var(--green) 16%,var(--paper2));border-bottom-color:var(--green);color:var(--ink);font-weight:600;border-radius:3px}
 .orderwrap{margin-top:16px}.pool{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
@@ -1483,6 +1488,7 @@ section{display:none}section.on{display:block}
 .qmeta .pos{font-family:var(--font-mono);font-size:12px;color:var(--ink-soft)}
 .progress{height:5px;background:var(--paper2);border-radius:20px;overflow:hidden;border:1px solid var(--line)}.progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent-soft),var(--accent));transition:width .35s}
 .qcard{animation:rise .3s ease both}
+.qafter{margin-top:18px}.qafter:empty{display:none}.qafter .verdictline{margin-top:0} /* v0.13.2: answer under the nav row */
 .stem{font-size:20px;line-height:1.6;margin:18px 0 18px}.stem .lead{font-family:var(--font-head);font-weight:600}
 .opts{display:flex;flex-direction:column;gap:11px}
 .opt{display:flex;gap:13px;align-items:flex-start;border:1.5px solid var(--line);background:var(--paper);border-radius:7px;padding:13px 15px;cursor:pointer;transition:border-color .15s,background .15s,transform .08s;text-align:left;font:inherit;color:inherit;width:100%}
@@ -1982,6 +1988,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="mid"><button class="nbtn flagbtn" id="flagBtn">⚑ Flag</button><button class="nbtn primary" id="submitAnsBtn" style="display:none">Submit<span class="sa-long"> answer</span></button></div>
       <button class="nbtn" id="nextBtn">Next →</button>
     </div>
+    <div class="qafter" id="qafter"></div>
     <div class="palette"><div class="ttl"><span class="qflhd"><span id="paletteTitle">Question map</span><button class="qflbtn" id="qflBtn" type="button" aria-expanded="false" aria-controls="qflBox">Filter ▾</button><button class="qflbtn" id="qGapsBtn" type="button" title="Your weakest topics">◔ Gaps</button></span><span id="answeredCount"></span></div><div class="qflbox" id="qflBox" role="group" aria-label="Filter the question map" hidden><label class="fltchk"><input type="checkbox" data-f="u"><span>Unanswered</span></label><label class="fltchk"><input type="checkbox" data-f="a"><span>Answered</span></label><label class="fltchk"><input type="checkbox" data-f="f"><span>⚑ Flagged</span></label><label class="fltchk"><input type="checkbox" data-f="w"><span>Incorrect</span></label><label class="fltchk"><input type="checkbox" data-f="c"><span>Correct</span></label><button class="minor" id="qflAll" type="button">Show all</button></div><div class="grid" id="grid"></div><div class="submitbar"><button class="btn" id="finishBtn"></button></div></div>
   </section>
 
@@ -2040,7 +2047,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.13.1';
+const APP_VERSION='0.13.2';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -5460,15 +5467,16 @@ function renderQuiz(){const q=qmap[qorder[qcur]],sel=qans[qcur],done=qRevealed(q
   perm.forEach((oi,disp)=>{const o=q.options[oi];let cls='opt';if(!done){if(sel===oi)cls+=' sel';}else{cls+=' locked';if(oi===q.correct)cls+=' correct';else if(sel===oi)cls+=' wrong';}
     html+=`<button class="${cls}" data-i="${oi}" ${done?'disabled':''}><span class="letter">${LETTERS[disp]}</span><span>${o}</span></button>`;});
   html+='</div>';
-  if(done){const ok=sel===q.correct;html+=`<div class="verdictline ${ok?'ok':'no'}">${ok?'✓ Correct':(sel==null?'— Not answered':'✗ Incorrect')}</div>`;
-    html+=`<div class="answerbox"><div class="h">Explanation · ${q.topic}${diffRank(q)>=0?' · '+q.difficulty:''}</div>${q.explain||''}</div>`+guideHTML(q.guide)+srcHTML(q);} /* v0.6.6 */
+  let after=''; /* v0.13.2: verdict + explanation go under the nav row (#qafter) so the buttons don't move */
+  if(done){const ok=sel===q.correct;after+=`<div class="verdictline ${ok?'ok':'no'}">${ok?'✓ Correct':(sel==null?'— Not answered':'✗ Incorrect')}</div>`;
+    after+=`<div class="answerbox"><div class="h">Explanation · ${q.topic}${diffRank(q)>=0?' · '+q.difficulty:''}</div>${q.explain||''}</div>`+guideHTML(q.guide)+srcHTML(q);} /* v0.6.6 */
   const pr=qmode==='practice'?qPrior[qorder[qcur]]:null;
   if(pr&&!done){const di=perm.indexOf(pr.p);html+=`<div class="priorwrap"><button class="priorbtn" id="priorBtn" aria-expanded="false">↺ Answered before · view your prior answer</button><div class="priorbox" id="priorBox" hidden>${new Date(pr.at).toLocaleDateString([],{month:'short',day:'numeric'})} · you picked <b>${di>=0?LETTERS[di]+'. ':''}${q.options[pr.p]!=null?q.options[pr.p]:'—'}</b> · <span class="${pr.ok?'pok':'pno'}">${pr.ok?'✓ correct':'✗ incorrect'}</span>. This time starts clear.</div></div>`;}
-  $('qcard').innerHTML=html;
+  $('qcard').innerHTML=html;$('qafter').innerHTML=after;
   if($('priorBtn'))$('priorBtn').onclick=()=>{const b=$('priorBox'),open=b.hidden;b.hidden=!open;$('priorBtn').setAttribute('aria-expanded',open?'true':'false');};
   if(!done)$('qcard').querySelectorAll('.opt').forEach(el=>el.addEventListener('click',()=>{qans[qcur]=+el.dataset.i;renderQuiz();renderGrid();savePrac();}));
-  else wireGuideLinks($('qcard'));
-  $('skipBtn').style.display=qRevealed(qcur)?'none':'';
+  else wireGuideLinks($('qafter'));
+  $('skipBtn').style.display='';$('skipBtn').style.visibility=qRevealed(qcur)?'hidden':''; /* v0.13.2: keep its row so the nav stays put */
   if(qmode==='practice'){$('submitAnsBtn').style.display=qsub[qcur]?'none':'';$('submitAnsBtn').disabled=(qans[qcur]==null);if(settings.practiceTimer)updatePracClock();}
   {const f=isFlagged(qorder[qcur]),b=$('flagBtn');qflag[qcur]=f;b.classList.toggle('on',f);b.setAttribute('aria-pressed',f?'true':'false');b.title='Flag this question — it is saved to your Flagged list';
     b.innerHTML='⚑<span class="flw"> '+(f?'Flagged':'Flag')+'</span>';$('quiz').classList.toggle('prac',qmode==='practice');} /* v0.8.0: the saved flag, every mode */
