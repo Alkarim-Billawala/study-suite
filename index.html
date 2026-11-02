@@ -1,5 +1,8 @@
 <!--
-  Study Suite  ·  v0.13.2 (beta)
+  Study Suite  ·  v0.13.3 (beta)
+  Changelog v0.13.3 (2026-11-01, Google showed "studysuite.app" as the site name above the "Study Suite" title): the <head>
+  carries schema.org WebSite JSON-LD (name "Study Suite", url https://studysuite.app/) and og:site_name "Study Suite", which
+  is where Google takes a site's name from. Nothing else changed.
   Author: Alkarim Billawala / alkarim.billawala.ca
   Content-free engine. Loads JSON packs (questions + spaced-repetition cards + embedded topic guides).
   Changelog v0.13.2 (2026-10-28, Alkarim: "have explanation show up below the nav buttons, so next, prev, etc doesnt shift down"):
@@ -946,6 +949,8 @@ var r=document.documentElement;r.setAttribute('data-theme',m);r.setAttribute('da
 window.EAC={on:true,salt:'studysuite::eac::v1',hashes:[]}; /* v0.6.0: codes are checked against content-keys.json — no hashes in the page */</script>
 <meta name="author" content="Alkarim Billawala / alkarim.billawala.ca">
 <title>Study Suite</title>
+<meta property="og:site_name" content="Study Suite">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Study Suite","url":"https://studysuite.app/"}</script>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -2047,7 +2052,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.13.2';
+const APP_VERSION='0.13.3';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
