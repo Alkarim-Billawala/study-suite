@@ -1,5 +1,17 @@
 <!--
-  Study Suite  ·  v0.13.3 (beta)
+  Study Suite  ·  v0.13.4 (beta)
+  Changelog v0.13.4 (2026-11-02, Alkarim: "auto update - app and packs - in settings. on by default"; proposal + answers in the
+  highlights/auto-update side session, notes highlights-proposal-2026-11-02.md): UPDATE AUTOMATICALLY. (1) settings.autoUpd
+  (absent = on, so existing users start on; syncs with the account like any setting); Settings › Updates › "Update
+  automatically" (#setAutoUpd). (2) Packs: quietRefUpdates() also takes week-pack updates when autoUpdOn(), but only when
+  updInterrupts() is false — no Review session, Practice/Exam or results screen open, and no sync running (the v0.6.7 mid-pull case);
+  deferred ones retry every 30 s. Reference packs keep updating as since v0.13.1 whatever the switch says. A pack updated
+  without a tap shows on Home as "… auto-updated to vX" (recordPackNews auto flag). Library ↑ Update and the header badge are
+  unchanged. (3) App: maybeAutoReload() reloads for a newer app-version.json only within 20 s of opening the app or of coming
+  back after ≥ 1 min away, on Home, with no dialog open, nothing focused for typing and no sync running; two tries per
+  version at least 10 min apart (localStorage suite_autoreload_v1), otherwise the Update button stays lit. The "New in vX" tip
+  is skipped when the reload goes ahead; the What's new sheet still shows after it. (4) The What's new sheet (its backdrop, now cursor:pointer so iPhone
+  Safari sends the click) and the "New in vX" tip (any pointerdown elsewhere) close on a tap outside them (Alkarim: "don't require user to click the x or OK").
   Changelog v0.13.3 (2026-11-01, Google showed "studysuite.app" as the site name above the "Study Suite" title): the <head>
   carries schema.org WebSite JSON-LD (name "Study Suite", url https://studysuite.app/) and og:site_name "Study Suite", which
   is where Google takes a site's name from. Nothing else changed.
@@ -1317,7 +1329,7 @@ section{display:none}section.on{display:block}
 @keyframes pharmflash{from{background:var(--accent-soft)}to{background:var(--paper)}}
 .facetval mark,.drugname mark{background:#ffe58a;color:inherit;padding:0 1px;border-radius:2px}
 /* v0.12.4: app release notes — bottom sheet (#anOv), all widths */
-.an-ov{position:fixed;inset:0;z-index:55;background:rgba(20,18,14,.38);display:none;align-items:flex-end;justify-content:center}
+.an-ov{position:fixed;inset:0;z-index:55;background:rgba(20,18,14,.38);display:none;align-items:flex-end;justify-content:center;cursor:pointer}.an-sheet{cursor:auto}
 .an-sheet{position:relative;box-sizing:border-box;width:100%;max-width:560px;max-height:min(80vh,680px);display:flex;flex-direction:column;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-bottom:0;border-radius:16px 16px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,.18);padding:16px 18px calc(12px + env(safe-area-inset-bottom));animation:anUp .28s ease-out}
 @keyframes anUp{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){.an-sheet{animation:none}}
@@ -2037,6 +2049,11 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="setrow"><span>New cards per day</span><input type="number" id="setNewPerDay" min="0" max="500" value="20"></div>
     </div>
     <div class="setsec">
+      <div class="sh">Updates</div>
+      <div class="setrow"><span>Update automatically</span><button class="switch" id="setAutoUpd" type="button">on</button></div>
+      <div class="note" style="text-align:left;margin:-2px 0 4px">New versions of the app and your study packs install by themselves when you’re not in the middle of a review, practice set or exam. What changed shows on Home. Turn this off to update by hand from your library.</div>
+    </div>
+    <div class="setsec">
       <div class="sh">Storage</div>
       <div class="setrow"><span>Offload packs that have been off for a week</span><button class="switch" id="setOffload" type="button">on</button></div>
       <div class="note" style="text-align:left;margin:-2px 0 4px">They stay in your library with a download button and come back in one tap, with your progress. Your own custom packs are never offloaded.</div>
@@ -2052,7 +2069,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.13.3';
+const APP_VERSION='0.13.4';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3139,8 +3156,27 @@ function isStandalone(){return (window.matchMedia&&matchMedia('(display-mode: st
 let appUpdateAvailable=false,updPeeked=false,pkPeeked=false; /* v0.6.9/v0.7.0: the header button shows its label once per page load when the app state, and once when the pack state, lights */
 let lastVerCheck=0;
 async function checkAppVersion(){lastVerCheck=Date.now();try{const r=await fetch('app-version.json',{cache:'no-store'});if(r.ok){const j=await r.json();if(j&&j.appVersion)noteNewerApp(j.appVersion);}}catch(e){}
+  maybeAutoReload(); /* v0.13.4 */
   try{if(DATA_READY)await initPackLinks({ifChanged:true});}catch(e){}} /* v0.6.8: new or updated packs show up without a reload */
-let newerAppVersion='',newerAppTitle='';function noteNewerApp(v){if(!appUpdateAvailable&&v&&verCmp(v,APP_VERSION)>0){appUpdateAvailable=true;newerAppVersion=String(v);updateHeaderButtons();appNotesPeek(newerAppVersion);}}
+let newerAppVersion='',newerAppTitle='';function noteNewerApp(v){if(!appUpdateAvailable&&v&&verCmp(v,APP_VERSION)>0){appUpdateAvailable=true;newerAppVersion=String(v);updateHeaderButtons();if(!maybeAutoReload())appNotesPeek(newerAppVersion);}} /* v0.13.4: no tip when it reloads by itself */
+/* v0.13.4: Update automatically (settings.autoUpd; absent = on). updInterrupts: a pack update would interrupt something. */
+function autoUpdOn(){return !settings||settings.autoUpd!==false;}
+function syncRunning(){try{return !!(ACCT_ON&&SSAccount.session()&&SSSync.status().k==='syncing');}catch(e){return false;}}
+function updInterrupts(){const s=currentSection();return s==='quiz'||s==='study'||s==='results'||syncRunning();}
+function dialogOpen(){const sm=$('settingsModal'),eg=$('eacGate');if(sm&&sm.classList.contains('show'))return true;if(eg&&eg.style.display&&eg.style.display!=='none')return true; /* the welcome / access-code screen */
+  return [...document.querySelectorAll('[id$="Ov"]')].some(o=>o.style.display&&o.style.display!=='none');}
+function typingNow(){const a=document.activeElement;return !!(a&&(/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)||a.isContentEditable));}
+let autoShownAt=Date.now(),autoHiddenAt=0,autoRlT=null;const AUTO_RL='suite_autoreload_v1',AUTO_WIN=20000;
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'){autoHiddenAt=Date.now();return;}
+  if(autoHiddenAt&&Date.now()-autoHiddenAt>=60000)autoShownAt=Date.now();autoHiddenAt=0;});
+/* The app reloads by itself only just after it opens or comes back (≥ 1 min away), on Home with nothing open; two tries per version, 10 min apart. */
+function maybeAutoReload(){clearTimeout(autoRlT);if(!autoUpdOn()||!appUpdateAvailable||!newerAppVersion)return false;
+  if(Date.now()-autoShownAt>AUTO_WIN||document.visibilityState!=='visible')return false;
+  let r={};try{r=JSON.parse(localStorage.getItem(AUTO_RL)||'{}')||{};}catch(e){}
+  if(r.v===newerAppVersion&&((r.n||0)>=2||Date.now()-(r.at||0)<600000))return false;
+  if(!DATA_READY||currentSection()!=='home'||dialogOpen()||typingNow()||syncRunning()){autoRlT=setTimeout(maybeAutoReload,2000);return false;}
+  try{localStorage.setItem(AUTO_RL,JSON.stringify({v:newerAppVersion,n:(r.v===newerAppVersion?(r.n||0):0)+1,at:Date.now()}));}catch(e){return false;} /* no guard → no reload */
+  reloadApp();return true;}
 /* v0.4.12: keep checking while the app stays open — every 5 min on screen, on coming back, and when the connection returns. */
 setInterval(()=>{if(document.visibilityState==='visible'&&Date.now()-lastVerCheck>=5*60000)checkAppVersion();},60000);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&Date.now()-lastVerCheck>=60000)checkAppVersion();});
@@ -3170,6 +3206,7 @@ $('anOv').addEventListener('click',e=>{const ov=$('anOv');if(e.target===ov||e.ta
   const h=e.target.closest('.an-h');if(h){const v=h.parentNode,op=!v.classList.contains('open');v.classList.toggle('open',op);h.setAttribute('aria-expanded',op);v.querySelector('.an-b').hidden=!op;return;}
   const m=e.target.closest('.an-more');if(m){const r=ov.querySelector('.an-rest');if(r)r.hidden=false;m.remove();}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('anOv').style.display==='flex')closeAppNotes();});
+document.addEventListener('pointerdown',e=>{const t=$('updTip');if(t&&t.classList.contains('on')&&!t.contains(e.target))t.classList.remove('on');},true); /* v0.13.4: a tap anywhere else closes the tip; the What's new sheet closes on its backdrop's click (cursor:pointer so iPhone Safari sends it) */
 $('footVer').addEventListener('click',async e=>{e.preventDefault();const href=$('footVer').href;
   try{const n=(await appNotesLoad()).filter(x=>verCmp(x.v,APP_VERSION)<=0);if(!n.length)throw 0;openAppNotes(n,{all:true});}catch(err){window.open(href,'_blank','noopener');}});
 /* The newest older version this person ran, from the sync logs: this device's, then the account's other devices'. */
@@ -3350,24 +3387,24 @@ function packNews(){try{return JSON.parse(localStorage.getItem(NEWS_KEY)||'{}')|
 function setPackNews(o){try{localStorage.setItem(NEWS_KEY,JSON.stringify(o));}catch(e){}}
 function noteFor(id,ver){const mp=manifestEntry(id);return (mp&&typeof mp.note==='string'&&String(mp.version)===String(ver))?mp.note.trim().slice(0,1200):'';} /* v0.7.3: the manifest's release note for exactly this version */
 function noteLead(t){const m=String(t||'').match(/^.*?[.!?](\s|$)/);const a=(m?m[0]:String(t||'')).trim();return a.length>140?a.slice(0,137).replace(/\s+\S*$/,'')+'…':a;} /* first sentence, capped, for a row */
-function recordPackNews(oldP,newP){try{const t=newsText(packDiff(oldP,newP));const o=packNews();o[newP.id]={title:newP.pack||newP.id,v:newP.version,text:t,note:noteFor(newP.id,newP.version),at:Date.now()};setPackNews(o);}catch(e){}}
+function recordPackNews(oldP,newP,auto){try{const t=newsText(packDiff(oldP,newP));const o=packNews();o[newP.id]={title:newP.pack||newP.id,v:newP.version,text:t,note:noteFor(newP.id,newP.version),at:Date.now(),auto:!!auto};setPackNews(o);}catch(e){}}
 /* Shown the first time the home screen is seen after an update, for that session; ✕ clears it. */
 function packsLocked(){const m=defaultManifest;return !!(m&&m.v===2&&eac&&eac.unlocked&&!Object.keys(heldKeys()).length&&(userGroups().size||eac.admin));}
 function renderPackNews(){const box=$('packNews');if(!box)return;const o=packNews(),ids=Object.keys(o).filter(id=>packs.some(p=>p.id===id));
   if(document.visibilityState==='visible'&&$('home')&&$('home').classList.contains('on'))ids.forEach(id=>{if(!o[id].seen){o[id].seen=true;newsShown.add(id);}});
   setPackNews(o);const show=ids.filter(id=>newsShown.has(id)||!o[id].seen);
-  box.innerHTML=show.map(id=>'<div class="packnews"><div><b>'+acctEsc(o[id].title)+' updated to v'+acctEsc(String(o[id].v||''))+'</b>'+(o[id].text?': '+acctEsc(o[id].text)+'.':'.')+(o[id].note?'<div class="note-p">'+acctEsc(o[id].note)+'</div>':'')+'</div><button type="button" aria-label="Dismiss" data-id="'+acctEsc(id)+'">×</button></div>').join('');
+  box.innerHTML=show.map(id=>'<div class="packnews"><div><b>'+acctEsc(o[id].title)+(o[id].auto?' auto-updated to v':' updated to v')+acctEsc(String(o[id].v||''))+'</b>'+(o[id].text?': '+acctEsc(o[id].text)+'.':'.')+(o[id].note?'<div class="note-p">'+acctEsc(o[id].note)+'</div>':'')+'</div><button type="button" aria-label="Dismiss" data-id="'+acctEsc(id)+'">×</button></div>').join('');
   if(packsLocked())box.insertAdjacentHTML('afterbegin','<div class="packnews"><div><b>Your study packs are now protected.</b> Enter your access code once to unlock them — with an account, on all your devices.</div><button type="button" class="minor" id="lockCode" style="font-size:12px">Enter code</button></div>');
   const lc=$('lockCode');if(lc)lc.onclick=()=>{renderAcct('addcode');$('acctOv').style.display='flex';};
   box.querySelectorAll('button:not(#lockCode)').forEach(b=>b.onclick=()=>{const q=packNews();delete q[b.dataset.id];setPackNews(q);newsShown.delete(b.dataset.id);renderPackNews();renderLibrary();});}
 /* Re-fetch the latest pack file and re-ingest. ingestPack replaces by id (keeping the enabled state),
    and review progress is keyed by card id in `sched`, so it survives the update. */
-async function applyPackUpdate(p,mp){const j=await fetchPackJson(mp);
-  const old=packs.find(x=>x.id===p.id)||p;const {pk}=ingestPack(j,(mp.label||mp.file).replace(/\.json$/i,''));if(pk)recordPackNews(old,pk);}
+async function applyPackUpdate(p,mp,auto){const j=await fetchPackJson(mp);
+  const old=packs.find(x=>x.id===p.id)||p;const {pk}=ingestPack(j,(mp.label||mp.file).replace(/\.json$/i,''));if(pk)recordPackNews(old,pk,auto);} /* v0.13.4: auto = applied without a tap */
 function updatePack(p,mp,btn){if(btn){btn.disabled=true;btn.textContent='Updating…';}
   applyPackUpdate(p,mp).then(async()=>{await persist();renderHome();toast('Updated '+(p.pack||p.id)+' to v'+mp.version+'.');})
     .catch(()=>{if(btn){btn.disabled=false;btn.textContent='↑ Update';}toast('Could not update — check your connection and try again.');});}
-var DEFAULT_ATLAS='neuro_brain'; /* v0.12.3: an atlas link without data-atlas-pack opens The Brain (var: renderHome may run before this line) */ var autoBusy=false,autoTimer=null,autoFail={}; function scheduleAutoPacks(){clearTimeout(autoTimer);autoTimer=setTimeout(()=>{ensureAutoPacks().catch(()=>{});quietRefUpdates().catch(()=>{});},400);} /* v0.12.3: default packs (default:true) for everyone, paired packs (pairedWith) when a partner is on — each added once; a removal (packGone) sticks */ async function ensureAutoPacks(){if(autoBusy||!DATA_READY||!defaultManifest)return;   if(ACCT_ON&&SSAccount.session()&&!(SSSync.status().lastOk>0))return; /* signed in: wait for this session's first sync, so a removal on another device is known */   const vm=visibleManifest();if(!vm||!Array.isArray(vm.packs))return;const on=new Set(activePacks().map(p=>p.id));const now=Date.now();   const todo=vm.packs.filter(mp=>mp&&mp.file&&mp.id&&!packs.some(p=>p.id===mp.id)&&!(packGone&&packGone[mp.id])&&!(autoFail[mp.id]>now-600000)     &&(mp.default===true||(Array.isArray(mp.pairedWith)&&mp.pairedWith.some(id=>on.has(id)))));   if(!todo.length)return;autoBusy=true;const added=[];   try{for(const mp of todo){try{ingestPack(await fetchPackJson(mp),(mp.label||mp.file).replace(/\.json$/i,''));added.push(mp);}catch(e){autoFail[mp.id]=Date.now();}}     if(added.length){await persist();renderHome();const nm=mp=>mp.label||mp.id;       toast(added.length===1?(nm(added[0])+' added'+(added[0].default===true?'.':' — it goes with your '+(added[0].id===DEFAULT_ATLAS?'neuro weeks':'weeks')+'.')):('Added: '+added.map(nm).join(', ')+'.'),4000);}}   finally{autoBusy=false;}} /* v0.13.1: Reference packs (Pharmacology Index, atlases) take a newer published version by themselves — no ↑ Update tap; What's new still shows it. Function declarations + var: pendingUpdates() may run before this line. */ function isRefPack(p,mp){return ((mp&&mp.year)||(p&&p.year))==='Reference';} var refBusy=false,refFail={}; async function quietRefUpdates(){if(refBusy||!DATA_READY||!defaultManifest)return;   if(ACCT_ON&&SSAccount.session()&&!(SSSync.status().lastOk>0))return; /* signed in: after this session's first sync, as for the auto packs */   const now=Date.now();const todo=packs.map(p=>[p,packUpdate(p)]).filter(e=>e[1]&&isRefPack(e[0],e[1])&&!(refFail[e[0].id]>now-600000));   if(!todo.length)return;refBusy=true;let n=0;   try{for(const [p,mp] of todo){try{await applyPackUpdate(p,mp);n++;}catch(e){refFail[p.id]=Date.now();}}     if(n){await persist();renderHome();updateHeaderButtons();}}finally{refBusy=false;}} function maybeApplyQueuedUpdates(){if(!DATA_READY||!defaultManifest)return;scheduleAutoPacks();try{sessionStorage.removeItem('suite_apply_updates');}catch(e){} /* v0.6.7: a pre-0.6.7 flag is discarded — pack updates are accepted in the library only */
+var DEFAULT_ATLAS='neuro_brain'; /* v0.12.3: an atlas link without data-atlas-pack opens The Brain (var: renderHome may run before this line) */ var autoBusy=false,autoTimer=null,autoFail={}; function scheduleAutoPacks(){clearTimeout(autoTimer);autoTimer=setTimeout(()=>{ensureAutoPacks().catch(()=>{});quietRefUpdates().catch(()=>{});},400);} /* v0.12.3: default packs (default:true) for everyone, paired packs (pairedWith) when a partner is on — each added once; a removal (packGone) sticks */ async function ensureAutoPacks(){if(autoBusy||!DATA_READY||!defaultManifest)return;   if(ACCT_ON&&SSAccount.session()&&!(SSSync.status().lastOk>0))return; /* signed in: wait for this session's first sync, so a removal on another device is known */   const vm=visibleManifest();if(!vm||!Array.isArray(vm.packs))return;const on=new Set(activePacks().map(p=>p.id));const now=Date.now();   const todo=vm.packs.filter(mp=>mp&&mp.file&&mp.id&&!packs.some(p=>p.id===mp.id)&&!(packGone&&packGone[mp.id])&&!(autoFail[mp.id]>now-600000)     &&(mp.default===true||(Array.isArray(mp.pairedWith)&&mp.pairedWith.some(id=>on.has(id)))));   if(!todo.length)return;autoBusy=true;const added=[];   try{for(const mp of todo){try{ingestPack(await fetchPackJson(mp),(mp.label||mp.file).replace(/\.json$/i,''));added.push(mp);}catch(e){autoFail[mp.id]=Date.now();}}     if(added.length){await persist();renderHome();const nm=mp=>mp.label||mp.id;       toast(added.length===1?(nm(added[0])+' added'+(added[0].default===true?'.':' — it goes with your '+(added[0].id===DEFAULT_ATLAS?'neuro weeks':'weeks')+'.')):('Added: '+added.map(nm).join(', ')+'.'),4000);}}   finally{autoBusy=false;}} /* v0.13.1: Reference packs (Pharmacology Index, atlases) take a newer published version by themselves — no ↑ Update tap; What's new still shows it. Function declarations + var: pendingUpdates() may run before this line. */ function isRefPack(p,mp){return ((mp&&mp.year)||(p&&p.year))==='Reference';} var refBusy=false,refFail={},autoUpdWait=null; async function quietRefUpdates(){if(refBusy||!DATA_READY||!defaultManifest)return;   if(ACCT_ON&&SSAccount.session()&&!(SSSync.status().lastOk>0))return; /* signed in: after this session's first sync, as for the auto packs */   const now=Date.now(),idle=!updInterrupts();let waiting=false;const todo=packs.map(p=>[p,packUpdate(p)]).filter(e=>{if(!e[1]||refFail[e[0].id]>now-600000)return false;if(isRefPack(e[0],e[1]))return true;if(!autoUpdOn())return false;if(!idle){waiting=true;return false;}return true;}); /* v0.13.4: week packs too, when Update automatically is on and nothing is interrupted */   if(waiting){clearTimeout(autoUpdWait);autoUpdWait=setTimeout(scheduleAutoPacks,30000);}   if(!todo.length)return;refBusy=true;let n=0;   try{for(const [p,mp] of todo){try{await applyPackUpdate(p,mp,true);n++;}catch(e){refFail[p.id]=Date.now();}}     if(n){await persist();renderHome();updateHeaderButtons();}}finally{refBusy=false;}} function maybeApplyQueuedUpdates(){if(!DATA_READY||!defaultManifest)return;scheduleAutoPacks();try{sessionStorage.removeItem('suite_apply_updates');}catch(e){} /* v0.6.7: a pre-0.6.7 flag is discarded — pack updates are accepted in the library only */
   try{offloadIdle();}catch(e){}
   repairPacks();}
 /* v0.8.3: re-read a published pack whose copy came from an older app (no readBy, or items dropped by an older app).
@@ -5602,7 +5639,7 @@ function openSettings(){
   toggleSwitch($('setPracTimer'),settings.practiceTimer);toggleSwitch($('setExamTimer'),settings.examTimer);toggleSwitch($('setPracShuffle'),settings.practiceShuffle);
   toggleSwitch($('setPracOnlyNew'),!!settings.practiceOnlyNew);$('setExamFresh').value=settings.examFresh||'prefer';
   $('histPack').innerHTML='<option value="">All packs</option>'+packs.map(p=>`<option value="${acctEsc(p.id)}">${acctEsc(p.pack||p.id)}</option>`).join('');
-  toggleSwitch($('setOffload'),settings.autoOffload!==false);
+  toggleSwitch($('setOffload'),settings.autoOffload!==false);toggleSwitch($('setAutoUpd'),autoUpdOn()); /* v0.13.4 */
   {const gs=[...userGroups()];$('setGroups').textContent=gs.length?'Your groups: '+gs.join(', '):'No access code yet — add one to unlock your group’s default study packs.';}
   renderWeights();$('setMsg').textContent='';$('settingsModal').classList.add('show');}
 function toggleSwitch(el,on){el.classList.toggle('on',on);el.setAttribute('role','switch');el.setAttribute('aria-checked',on?'true':'false');}
@@ -5772,6 +5809,7 @@ $('packFile').addEventListener('change',e=>{if(e.target.files.length)readFiles(e
 ['dragleave','drop'].forEach(ev=>$('dropzone').addEventListener(ev,e=>{e.preventDefault();$('dropzone').classList.remove('drag');}));
 $('dropzone').addEventListener('drop',e=>{if(e.dataTransfer.files.length)readFiles(e.dataTransfer.files);});
 $('settingsBtn').addEventListener('click',openSettings);
+$('setAutoUpd').addEventListener('click',()=>{settings.autoUpd=!autoUpdOn();toggleSwitch($('setAutoUpd'),autoUpdOn());persist();if(autoUpdOn())scheduleAutoPacks();}); /* v0.13.4 */
 $('setOffload').addEventListener('click',()=>{settings.autoOffload=settings.autoOffload===false;toggleSwitch($('setOffload'),settings.autoOffload!==false);persist();offloadIdle();});
 $('setAddCode').addEventListener('click',()=>{$('settingsModal').classList.remove('show');renderAcct('addcode');$('acctOv').style.display='flex';});
 $('setClose').addEventListener('click',()=>{$('settingsModal').classList.remove('show');renderHome();});
