@@ -1,5 +1,9 @@
 <!--
-  Study Suite  ·  v0.14.1 (beta)
+  Study Suite  ·  v0.14.2 (beta)
+  Changelog v0.14.2 (2026-11-02, Alkarim: "they are all broken" — atlas Find it / figure cards drawn as raw SVG, giant labels,
+  legend run together): mountWidget now calls sswEnsureCss on the host's document. Card widgets ('spot', 'widget') mount into
+  #cardWidget in the main document, which only got SSW_CSS+ATLAS_CSS if the Atlas view (openAtlas) or a sound player had run
+  earlier in the visit; guides inject it into their own iframe, not the app.
   Changelog v0.14.1 (2026-11-02, Alkarim: "why only certain highlights hiding with button?"): tapping the highlighter button to
   hide (hlMaskToggle → hlMask 'hide') now clears hlFresh, so it hides every highlight on the question or card, including ones
   made earlier in the session while they were hidden by the setting. Highlights made after that still show (hlFresh again).
@@ -2172,7 +2176,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.14.1';
+const APP_VERSION='0.14.2';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3747,7 +3751,7 @@ function sswSvg(w,inner){return `<svg class="sswsvg" viewBox="0 0 ${+w.vb[0]} ${
 const SSW_HINT={stack:'Drag the slider or swipe the picture to move through the levels.',layers:'Switch the layers on and off.',
   spot:'Tap a structure to name it — or Quiz me.',lesion:'Tap a lesion site to see what it causes — or Quiz me.',curves:'Switch between the views.',cycle:'Play, step or drag through the beat; switch the views.',atlas:'Pick a plane, move through the levels, tap a structure to name it — or search, or Quiz me.'};
 /* o: {card, reveal, state:{frame,labels,hideName,on,view,region,outlines}, pick, target, onPick} */
-function mountWidget(host,w,o){o=o||{};const st=o.state||{};
+function mountWidget(host,w,o){o=o||{};const st=o.state||{};sswEnsureCss(host.ownerDocument||document); /* v0.14.2: cards and the atlas view no longer rely on a guide or the Atlas having loaded the figure CSS first */
   if(!w||!Array.isArray(w.vb)||!SSW_HINT[w.type]){host.innerHTML='<div class="sswread">This figure needs a newer version of the app.</div>';return;}
   host.className='sswlive ssw-'+w.type+(o.card?' sswcard':'');const t=w.type,card=!!o.card,hideName=card&&!o.reveal&&!!st.hideName;let h='';
   const read=()=>host.querySelector('.sswread');
