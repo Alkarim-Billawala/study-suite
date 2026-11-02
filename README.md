@@ -49,6 +49,11 @@ It's currently in **beta**.
   correct questions.
 - **Gaps** — your topics ranked worst first, from the questions you got wrong and the cards you keep
   forgetting. One tap starts a Practice set or a Review on a topic.
+- **Highlights and notes** — select text in a topic guide, the Pharmacology Index, a question or a card to highlight it
+  in one of four colours or add a note; figures and atlas slices take a note too. They sync to your other devices and
+  survive pack updates. Practice and Review show them once you've answered (change it in **Settings → Highlights**);
+  exams start clean, and you can keep an exam's highlights. **Highlights** on Home lists them all by week, with filters
+  and search.
 - **Come back later** — leave Practice or an exam part-way and pick up where you left off; the exam
   timer pauses while you're away. Start fresh instead, and what you'd answered is kept.
 - **Past exams** — your last 20 exams, including unfinished ones, with scores, ready to review
@@ -66,9 +71,11 @@ It's currently in **beta**.
   counts: switch any source off to set its material aside everywhere. An item stays as long as one of its
   sources is on; guides hide only the sections that are off. Questions and cards show their sources under
   the guide link.
-- When a newer version of a pack is published, the app shows **what's new** and offers to **update**
-  it — your progress carries over. Updating a pack on one device updates it on your other devices too.
-  The header **Update** button reloads for a new version of the app; when pack updates are waiting it shows a badge with the count (tinted when only packs are waiting) and takes you to the library, where you accept them per pack or all at once.
+- **Updates install themselves.** A newer version of a pack installs when you're not in the middle of a
+  review, practice set or exam, and a new version of the app when you open Study Suite or come back to it —
+  your progress carries over, and **what's new** says what changed. To update by hand instead, turn off
+  **Settings → Updates → Update automatically**; then the library offers **Update** per pack or all at once,
+  and the header **Update** button reloads for a new version of the app.
 - The **Pharmacology Index** and the atlases keep themselves up to date: a new version is taken by itself, with no
   **Update** to tap, and **what's new** still says what changed.
 - Switched-off packs can be **offloaded** to save space — they stay in your library with a download
@@ -183,6 +190,14 @@ Questions you've never answered come first. Ones you've answered before go to th
 <summary><strong>Can I leave an exam and come back to it?</strong></summary>
 
 Yes. Leave part-way and the exam is saved, with the timer paused. Tap **Exam** to **Resume** — or **Start fresh**, which keeps the questions you'd answered (you can look back at them under **Past exams**) and sets up a new exam that avoids them.
+</details>
+
+<details>
+<summary><strong>How do highlights and notes work?</strong></summary>
+
+Select text in a topic guide, the Pharmacology Index, a question or a card, then tap a colour or **Note**. Tap a highlight to change it or remove it. Figures and atlas slices have a note button of their own. Everything is listed under **Highlights** on Home, by week.
+
+In Practice and Review your saved highlights appear once you've answered; the highlighter button shows or hides them. Exams start clean — tap **Keep my highlights** on the results screen to save the ones you made.
 </details>
 
 <details>

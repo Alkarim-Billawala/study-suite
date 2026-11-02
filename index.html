@@ -1,5 +1,26 @@
 <!--
-  Study Suite  ·  v0.13.4 (beta)
+  Study Suite  ·  v0.14.0 (beta)
+  Changelog v0.14.0 (2026-11-02, Alkarim: "Highlights in all view. topic guides and pharm - persist. in exam - only for that session.
+  in review and practice persist. also central place to see all highlights, by week, similar to gaps." + answers to two rounds of
+  questions, Drive side-session notes highlights-proposal-2026-11-02.md): HIGHLIGHTS AND NOTES. (1) Store: settings['hl:'+id] (see
+  the HIGHLIGHTS block) — same fl/on/at shape as flags, so they ride the encrypted sync and merge newest-wins per highlight; a delete
+  is a tombstone without the text. (2) Anchoring: the highlighted text + ~32 chars either side, found again in the container's
+  counted text (answer buttons, live widgets, svg, our buttons left out — HL_SKIP); whitespace-tolerant fallback; not found =
+  "Not in the current version" on the page. (3) Containers (hlBind): guide body (k g), #qcard / #qafter (k q, f q / a), #cardbox
+  (k c, f card), each Pharmacology .drugcard (k rx), the read-only view. Selecting text shows #hlBar (four colours, Note; Remove
+  when a highlight is tapped): at the bottom on touch screens, under the selection with a mouse; H highlights a selection in the
+  last colour. Overlapping highlights merge (new colour, notes kept). (4) Notes up to 2,000 characters (#hlNoteOv); a note
+  alone = dotted underline, on a colour = a dot at the end. One note per figure / widget (.hlfig button in guide figures and
+  card figures) and per atlas slice (#atlasNote, from mountAtlas o.onLevel; none in 3D). (5) Exams: examHl only (saved in
+  examSave.hl, so pause/resume keeps them); saved highlights are not shown in an exam; dropped when the results are left
+  (hlLeaving in show) unless "Keep my highlights" on the results screen saves them with x = the exam's start — listed under the
+  Exams chip, opened in the read-only view, not shown in Practice. (6) Highlights page (section#hls; Home link beside Flagged
+  and Gaps): chips All · each week · Pharmacology · Exams; Type, Colour, Where filters; sort; search; newest 50 + Show more;
+  hidden-by-sources line; tap opens the guide at the highlight, the drug, the atlas slice, or a read-only question/card view
+  with "Practise this question". (7) A highlighter button (how-to; hover text) in the guide viewer, the question bar, the card
+  bar and Pharmacology. (8) Practice and Review hide saved highlights until the answer shows (settings.hlShow after | always |
+  tap; Settings › Highlights); the highlighter button there shows or hides them for the rest of the session (hlMask); ones made
+  meanwhile show (hlFresh).
   Changelog v0.13.4 (2026-11-02, Alkarim: "auto update - app and packs - in settings. on by default"; proposal + answers in the
   highlights/auto-update side session, notes highlights-proposal-2026-11-02.md): UPDATE AUTOMATICALLY. (1) settings.autoUpd
   (absent = on, so existing users start on; syncs with the account like any setting); Settings › Updates › "Update
@@ -1532,6 +1553,49 @@ section{display:none}section.on{display:block}
 .flaghome{display:flex;justify-content:flex-end;margin:6px 0 0}.flaghome[hidden]{display:none}
 .flaglink{background:transparent;border:1px solid var(--line);border-radius:20px;padding:6px 13px;font-family:var(--font-mono);font-size:12px;letter-spacing:.03em;color:var(--ink);cursor:pointer}
 .flaglink:hover{border-color:var(--gold)}.flaglink .fi{color:var(--gold)}
+/* v0.14.0 highlights + notes */
+mark.hl{background:transparent;color:inherit;border-radius:2px;padding:0 1px;-webkit-box-decoration-break:clone;box-decoration-break:clone;cursor:pointer}
+mark.hl-y{background:rgba(255,212,0,.42)}mark.hl-g{background:rgba(70,200,110,.34)}mark.hl-b{background:rgba(80,160,255,.32)}mark.hl-p{background:rgba(255,100,180,.30)}
+html[data-theme="dark"] mark.hl-y,html[data-theme="black"] mark.hl-y{background:rgba(255,212,0,.32)}
+mark.hl-u{background:transparent;border-bottom:2px dotted var(--gold,#c98a00);border-radius:0}
+mark.hl-n.hl-end::after{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#e08a00;margin:0 0 6px 2px;vertical-align:middle}
+mark.hl.flash{outline:2px solid #e08a00;outline-offset:1px}
+.hlbar{position:fixed;z-index:70;display:flex;align-items:center;gap:6px;padding:7px 9px;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.2)}
+.hlbar[hidden]{display:none}
+.hlbar.bottom{left:50%;top:auto;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom))}
+.hlsw{flex:none;width:30px;height:30px;border-radius:50%;border:2px solid var(--line);cursor:pointer;padding:0}
+.hlsw.hl-y{background:#ffd400}.hlsw.hl-g{background:#46c86e}.hlsw.hl-b{background:#50a0ff}.hlsw.hl-p{background:#ff64b4}
+.hlsw[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 2px var(--paper)}
+.hlbb{flex:none;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:8px;padding:6px 10px;font:inherit;font-size:13px;cursor:pointer}
+.hlbb.hldel{color:var(--red,#c0392b)}.hlbb[hidden]{display:none}
+.hlhow svg{display:block}.hlhow.off{color:var(--ink-soft);border-style:dashed;opacity:.75}
+.hlfig{position:absolute;top:6px;right:6px;z-index:3;width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink-soft);cursor:pointer;padding:0}
+.hlfig.on{background:#e08a00;border-color:#e08a00;color:#fff}
+.labfig,#cardWidget{position:relative}
+.hlatl{display:inline-flex;align-items:center;gap:4px;margin-left:auto}.hlatl.on{border-color:#e08a00;color:#e08a00}.hlatl[hidden]{display:none}
+.hlnote .hlnote-t{font-family:var(--font-head);font-weight:600;font-size:17px;margin:0 0 6px}
+.hlnote .hlnote-q{font-size:13.5px;color:var(--ink-soft);margin:0 0 10px;overflow-wrap:anywhere}.hlnote .hlnote-q[hidden]{display:none}
+.hlnote textarea{box-sizing:border-box;width:100%;min-height:120px;resize:vertical;font:inherit;font-size:16px;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
+.hlnote .hlnote-n{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);text-align:right;min-height:14px;margin:4px 0 0}
+.hlnote #hlNoteDel{margin-right:auto;color:var(--red,#c0392b)}.hlnote #hlNoteDel[hidden]{display:none}
+.hlview .hlv-k{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 8px;overflow-wrap:anywhere}
+.hlview .hlv-opts{margin:6px 0 12px;padding-left:22px}.hlview .hlv-opts li{margin:0 0 4px}.hlview .hlv-opts li.ok{font-weight:600}
+.hlview #hlViewPrac[hidden]{display:none}
+.hlschips{display:flex;gap:6px;overflow-x:auto;padding:2px 0 8px;margin:0 0 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.hlschips::-webkit-scrollbar{display:none}
+.hlschip{flex:none;max-width:70vw;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:18px;padding:6px 12px;font-family:var(--font-mono);font-size:12px;cursor:pointer;text-align:left}
+.hlschip i{font-style:normal;color:var(--ink-soft);margin-left:3px}.hlschip.on{border-color:var(--accent);color:var(--accent)}
+.hlsflt{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 12px}
+.hlsflt input[type=search]{flex:1 1 180px;min-width:0;font:inherit;font-size:16px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
+.hlsflt select{font:inherit;font-size:13px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);max-width:100%}
+.hlsseg{display:flex;gap:4px}.hlsseg .minor.on{border-color:var(--accent);color:var(--accent)}
+.hlscols{display:flex;gap:5px;align-items:center}.hlscols .hlsw{width:24px;height:24px}.hlscols .hlsw.hl-u{background:transparent;border-style:dotted;border-color:#e08a00}
+.hlrow{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--line);background:var(--paper);border-radius:7px;padding:9px 9px 9px 0;margin-bottom:7px;cursor:pointer;overflow:hidden}
+.hlrow .frm{flex:1;min-width:0}.hlrow .frt{font-size:15px;color:var(--ink);overflow-wrap:anywhere}
+.hlrow .frmeta{display:flex;flex-wrap:wrap;gap:3px 12px;margin-top:4px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.04em;color:var(--ink-soft);text-transform:uppercase}
+.hlcb{flex:none;align-self:stretch;width:5px;border-radius:0 3px 3px 0;margin:-9px 0}.hlcb.hl-y{background:#ffd400}.hlcb.hl-g{background:#46c86e}.hlcb.hl-b{background:#50a0ff}.hlcb.hl-p{background:#ff64b4}.hlcb.hl-u{background:repeating-linear-gradient(180deg,#e08a00 0 3px,transparent 3px 6px)}
+.hlrn{font-size:13.5px;color:var(--ink-soft);margin-top:4px;white-space:pre-wrap;overflow-wrap:anywhere;border-left:2px solid #e08a00;padding-left:8px}
+.hlorph{color:var(--red,#c0392b)}
+.hlsmore{display:block;margin:6px auto 0}
 /* v0.11.0 Gaps */
 .flaghome{gap:8px;flex-wrap:wrap}.flaglink .gi{color:var(--accent)}.flaglink[hidden]{display:none}
 .gapsintro{font-size:14px;color:var(--ink-soft);margin:0 0 12px;line-height:1.5}
@@ -1724,7 +1788,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="mode" id="mPractice"><div class="mt">Practice</div><div class="md"><!-- GEN:home-practice -->The question bank one at a time — the answer and a topic-guide link the moment you submit. New questions first; see your prior answer on repeats.<!-- /GEN:home-practice --></div><div class="feat" id="featPractice">— questions</div></div>
       <div class="mode" id="mExam"><div class="mt">Exam</div><div class="md"><!-- GEN:home-exam -->A timed, scored test built from fresh questions and weighted your way. Answers hidden until you submit; leave part-way and resume later.<!-- /GEN:home-exam --></div><div class="feat" id="featExam">— per test</div></div>
     </div>
-    <div class="flaghome" id="flagHome" hidden><button type="button" class="flaglink" id="gapsHomeBtn" hidden><span class="gi">◔</span> Gaps<span id="gapsHomeN"></span></button><button type="button" class="flaglink" id="flagHomeBtn"><span class="fi">⚑</span> Flagged (<span id="flagHomeN">0</span>)</button></div>
+    <div class="flaghome" id="flagHome" hidden><button type="button" class="flaglink" id="gapsHomeBtn" hidden><span class="gi">◔</span> Gaps<span id="gapsHomeN"></span></button><button type="button" class="flaglink" id="hlsHomeBtn" hidden><span class="gi">✎</span> Highlights<span id="hlsHomeN"></span></button><button type="button" class="flaglink" id="flagHomeBtn"><span class="fi">⚑</span> Flagged (<span id="flagHomeN">0</span>)</button></div>
 
 
     <div class="revpanel" id="revPanel">
@@ -1782,7 +1846,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       </div>
       <div class="infopanel" id="faqPanel" style="display:none">
         <div class="faqbody">
-          <!-- GEN:faq · filled from FAQ.md at deploy (Pack Tools/public_copy.py) --><div class="faq-sec">The basics — how it works today</div><h4>What is Study Suite?</h4><p>A study tool with three ways to study — <b>Review</b> (spaced-repetition flashcards), <b>Practice</b> (one question at a time with instant feedback) and <b>Exam</b> (timed, scored mock tests) — plus <b>Topic Guides</b> and a <b>Pharmacology</b> drug index to read from. The app itself is empty — you load <b>study packs</b> that hold the questions, cards and guides. An account is optional and adds encrypted sync between your devices. It's currently in beta.</p><h4>Is it really free?</h4><p>Yes — completely free, with no ads, no tracking, and no account required. Studying runs entirely in your own browser, so there's nothing to charge for — and sync, the optional account feature, is free during the beta. If you want to chip in toward the costs of building it, there's an optional "Support development" link, but it's never required and unlocks nothing — the whole app is yours to use.</p><h4>Where is my data stored? Can you see it?</h4><p>Everything — your packs, review progress, scores, and settings — is stored locally in your own browser, on your own device. Without an account, <b>none of it is sent anywhere.</b> There's no analytics and no tracking cookies. If you turn on sync, your data is end-to-end encrypted on your device before it's uploaded — so either way, I genuinely can't see what you study or how you're doing.</p><h4>How do I back up my progress or move to another device?</h4><p>Use <b>Backup all</b> to save a file with everything in it, then <b>Restore backup</b> on your other device (or after clearing your browser). Or create a free account and turn on sync (below). It's worth backing up now and then, since your progress lives in your browser and clearing site data would wipe it.</p><h4>Does it work offline?</h4><p>Yes, fully. The app is a single self-contained file. Once it's loaded in your browser — or installed to your home screen — it keeps working with no internet connection. Your packs and progress are right there on your device.</p><h4>Can I add it to my phone or computer like a real app?</h4><p>Yes — use <b>Add to Home Screen</b> (the app walks you through it for your device). One thing to know: an installed copy may keep its <b>own separate storage</b> from the browser version (on iPhone and iPad it always does). With an account, just sign in inside the installed app and everything syncs across. No account? <b>Backup all</b> first, then <b>Restore backup</b> inside the installed app.</p><h4>Can I make my own study packs, or use my own notes?</h4><p>Absolutely — that's encouraged. Download the <a href="Study_Suite_Authoring_Guide_latest.md" download><b>instruction set</b></a> (also linked on the home screen) and hand it to the AI assistant of your choice; it walks the assistant through turning your own material into a pack you can load. Packs you make from your own content are <b>yours</b>. (The app, its design, and the pack format are mine, but the content you bring into it is entirely your own.)</p><h4>Is any of this medical advice?</h4><p>No. Study Suite and its packs are <b>educational material for exam preparation only</b> — not medical advice, and never a basis for real decisions about real patients. It's also in beta, so content can contain errors or go out of date. Always check against your own curriculum and trusted sources.</p><div class="faq-sec">Studying</div><h4>Why can't I hear the low heart sounds?</h4><p>S3, S4 and the rumble of a narrowed mitral valve sit below what most phone and laptop speakers can play. Use earphones. Sounds are meant to play even with your phone's silent switch on.</p><h4>How does Practice decide the order of questions?</h4><p>Questions you've never answered come first. Ones you've answered before go to the end — the ones you got wrong last time ahead of the ones you got right — and they're marked on the question map. Each starts clear, with <b>View prior answer</b> if you want to see what you picked before. Prefer only new ones? Turn on <b>Unanswered questions only</b> when you set up Practice. <b>Skip</b> moves on without counting a question as seen.</p><h4>Can I leave an exam and come back to it?</h4><p>Yes. Leave part-way and the exam is saved, with the timer paused. Tap <b>Exam</b> to <b>Resume</b> — or <b>Start fresh</b>, which keeps the questions you'd answered (you can look back at them under <b>Past exams</b>) and sets up a new exam that avoids them.</p><h4>What are topics?</h4><p>Topics are the main subjects each week covers — anywhere from about 6 to 20 per week. They're what you choose from in <b>Review</b>, what you can narrow <b>Practice</b> and <b>Exam</b> to, and one way to weight an exam. Each question and card also carries a smaller label for its exact point.</p><h4>What's the Pharmacology view?</h4><p>A drug index built from every pack you have switched on. Each drug gets its use, mechanism, dosing, cautions, adverse effects, monitoring and interactions, grouped by drug class, with links back to the week and topic guide that teach it.</p><div class="faq-sec">Accounts &amp; sync</div><h4>What does sync do?</h4><p>Sign in on each of your devices — phone, laptop, tablet — and your packs and progress stay in step automatically. Changes sync in the background a few seconds after you make them, whenever you open or come back to the app, and every few minutes while it's open. Offline? Keep studying; it catches up as soon as you're back online. The cloud icon is <b>green</b> when you're in sync, <b>yellow</b> if the last sync is a few minutes old or you're offline, and <b>red</b> if something needs your attention. It's the automatic version of <b>Backup all</b>.</p><h4>Do I have to make an account?</h4><p>No. Choose <b>Use without an account</b> and everything works exactly as before — free, offline, on your device. Your progress just stays in that one browser, so use <b>Backup all</b> now and then. You can create an account any time from the account menu at the top right of the homepage.</p><h4>Does sync cost anything?</h4><p>Sync is free during the beta. It's the one feature that needs a server running around the clock, so it may become a paid option one day. If it does, you'll get at least 30 days' notice in the app, your account stays, and the app keeps working without sync. Everything you can do on your own device stays free.</p><h4>How do I create an account?</h4><p>From the welcome screen or the account menu, choose <b>Create an account</b>. During early access you'll need your access code. You'll get a <b>recovery code</b> straight away — save it in a password manager or somewhere safe.</p><h4>Can you see my synced data?</h4><p>No. Sync is <b>end-to-end encrypted</b>: your data is scrambled on your device <i>before</i> it's uploaded, and only the scrambled version is stored. The key that unlocks it never leaves your devices. That means <b>I can't read your synced data</b> — not for support, not for anything — because I simply don't have the key.</p><h4>What if I forget my password?</h4><p>Choose <b>Forgot password?</b> when signing in and you'll get an email with a link to set a new one. Then enter your <b>recovery code</b> to unlock your synced data — nothing is lost.</p><h4>What if I lose both my password and my recovery code?</h4><p>Your <b>synced</b> copy can't be unlocked by anyone — including me. That's the whole point of end-to-end encryption. But <b>your studying isn't gone:</b> the data on your devices is untouched, and any <b>Backup all</b> file still works. Reset your password, choose <b>Start fresh</b>, and sign in on the device where you last studied — its data becomes your new account copy.</p><h4>What if two devices change at the same time?</h4><p>They're combined — nothing to choose, and nothing studied is lost. If the same card was studied on both, the most recent review counts. Answers to the same question on both are all kept in your history. If a pack was switched on or off on both, the latest switch wins; a pack you removed stays removed. An unfinished exam that's replaced by a newer one moves to <b>Past exams</b>. <b>Sync activity</b> in the account menu lists what was combined, on any of your devices.</p><h4>How do I see which devices are syncing?</h4><p>Account menu → <b>Your devices</b> lists each browser or installed app that syncs with your account, with its app version and when it last synced. Give the one you're on a name you'll recognise — names are saved inside your encrypted study data. <b>Sign out other devices</b> (under Security) signs out all the others at once.</p><h4>What does an account store, and is it private?</h4><p>The minimum: your email address, your encrypted study data, a random ID for each device that syncs, and a few details needed to run the account. No selling data, no ads, no tracking. The <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> lists everything; see also the <a href="terms.html" target="_blank" rel="noopener">Terms</a>.</p><h4>How do I delete my account?</h4><p>Account menu → <b>Delete account</b>. It's instant and permanent, and your data on your devices stays where it is.</p><!-- /GEN:faq -->
+          <!-- GEN:faq · filled from FAQ.md at deploy (Pack Tools/public_copy.py) --><div class="faq-sec">The basics — how it works today</div><h4>What is Study Suite?</h4><p>A study tool with three ways to study — <b>Review</b> (spaced-repetition flashcards), <b>Practice</b> (one question at a time with instant feedback) and <b>Exam</b> (timed, scored mock tests) — plus <b>Topic Guides</b> and a <b>Pharmacology</b> drug index to read from. The app itself is empty — you load <b>study packs</b> that hold the questions, cards and guides. An account is optional and adds encrypted sync between your devices. It's currently in beta.</p><h4>Is it really free?</h4><p>Yes — completely free, with no ads, no tracking, and no account required. Studying runs entirely in your own browser, so there's nothing to charge for — and sync, the optional account feature, is free during the beta. If you want to chip in toward the costs of building it, there's an optional "Support development" link, but it's never required and unlocks nothing — the whole app is yours to use.</p><h4>Where is my data stored? Can you see it?</h4><p>Everything — your packs, review progress, scores, and settings — is stored locally in your own browser, on your own device. Without an account, <b>none of it is sent anywhere.</b> There's no analytics and no tracking cookies. If you turn on sync, your data is end-to-end encrypted on your device before it's uploaded — so either way, I genuinely can't see what you study or how you're doing.</p><h4>How do I back up my progress or move to another device?</h4><p>Use <b>Backup all</b> to save a file with everything in it, then <b>Restore backup</b> on your other device (or after clearing your browser). Or create a free account and turn on sync (below). It's worth backing up now and then, since your progress lives in your browser and clearing site data would wipe it.</p><h4>Does it work offline?</h4><p>Yes, fully. The app is a single self-contained file. Once it's loaded in your browser — or installed to your home screen — it keeps working with no internet connection. Your packs and progress are right there on your device.</p><h4>Can I add it to my phone or computer like a real app?</h4><p>Yes — use <b>Add to Home Screen</b> (the app walks you through it for your device). One thing to know: an installed copy may keep its <b>own separate storage</b> from the browser version (on iPhone and iPad it always does). With an account, just sign in inside the installed app and everything syncs across. No account? <b>Backup all</b> first, then <b>Restore backup</b> inside the installed app.</p><h4>Can I make my own study packs, or use my own notes?</h4><p>Absolutely — that's encouraged. Download the <a href="Study_Suite_Authoring_Guide_latest.md" download><b>instruction set</b></a> (also linked on the home screen) and hand it to the AI assistant of your choice; it walks the assistant through turning your own material into a pack you can load. Packs you make from your own content are <b>yours</b>. (The app, its design, and the pack format are mine, but the content you bring into it is entirely your own.)</p><h4>Is any of this medical advice?</h4><p>No. Study Suite and its packs are <b>educational material for exam preparation only</b> — not medical advice, and never a basis for real decisions about real patients. It's also in beta, so content can contain errors or go out of date. Always check against your own curriculum and trusted sources.</p><div class="faq-sec">Studying</div><h4>Why can't I hear the low heart sounds?</h4><p>S3, S4 and the rumble of a narrowed mitral valve sit below what most phone and laptop speakers can play. Use earphones. Sounds are meant to play even with your phone's silent switch on.</p><h4>How does Practice decide the order of questions?</h4><p>Questions you've never answered come first. Ones you've answered before go to the end — the ones you got wrong last time ahead of the ones you got right — and they're marked on the question map. Each starts clear, with <b>View prior answer</b> if you want to see what you picked before. Prefer only new ones? Turn on <b>Unanswered questions only</b> when you set up Practice. <b>Skip</b> moves on without counting a question as seen.</p><h4>Can I leave an exam and come back to it?</h4><p>Yes. Leave part-way and the exam is saved, with the timer paused. Tap <b>Exam</b> to <b>Resume</b> — or <b>Start fresh</b>, which keeps the questions you'd answered (you can look back at them under <b>Past exams</b>) and sets up a new exam that avoids them.</p><h4>How do highlights and notes work?</h4><p>Select text in a topic guide, the Pharmacology Index, a question or a card, then tap a colour or <b>Note</b>. Tap a highlight to change it or remove it. Figures and atlas slices have a note button of their own. Everything is listed under <b>Highlights</b> on Home, by week.</p><p>In Practice and Review your saved highlights appear once you've answered; the highlighter button shows or hides them. Exams start clean — tap <b>Keep my highlights</b> on the results screen to save the ones you made.</p><h4>What are topics?</h4><p>Topics are the main subjects each week covers — anywhere from about 6 to 20 per week. They're what you choose from in <b>Review</b>, what you can narrow <b>Practice</b> and <b>Exam</b> to, and one way to weight an exam. Each question and card also carries a smaller label for its exact point.</p><h4>What's the Pharmacology view?</h4><p>A drug index built from every pack you have switched on. Each drug gets its use, mechanism, dosing, cautions, adverse effects, monitoring and interactions, grouped by drug class, with links back to the week and topic guide that teach it.</p><div class="faq-sec">Accounts &amp; sync</div><h4>What does sync do?</h4><p>Sign in on each of your devices — phone, laptop, tablet — and your packs and progress stay in step automatically. Changes sync in the background a few seconds after you make them, whenever you open or come back to the app, and every few minutes while it's open. Offline? Keep studying; it catches up as soon as you're back online. The cloud icon is <b>green</b> when you're in sync, <b>yellow</b> if the last sync is a few minutes old or you're offline, and <b>red</b> if something needs your attention. It's the automatic version of <b>Backup all</b>.</p><h4>Do I have to make an account?</h4><p>No. Choose <b>Use without an account</b> and everything works exactly as before — free, offline, on your device. Your progress just stays in that one browser, so use <b>Backup all</b> now and then. You can create an account any time from the account menu at the top right of the homepage.</p><h4>Does sync cost anything?</h4><p>Sync is free during the beta. It's the one feature that needs a server running around the clock, so it may become a paid option one day. If it does, you'll get at least 30 days' notice in the app, your account stays, and the app keeps working without sync. Everything you can do on your own device stays free.</p><h4>How do I create an account?</h4><p>From the welcome screen or the account menu, choose <b>Create an account</b>. During early access you'll need your access code. You'll get a <b>recovery code</b> straight away — save it in a password manager or somewhere safe.</p><h4>Can you see my synced data?</h4><p>No. Sync is <b>end-to-end encrypted</b>: your data is scrambled on your device <i>before</i> it's uploaded, and only the scrambled version is stored. The key that unlocks it never leaves your devices. That means <b>I can't read your synced data</b> — not for support, not for anything — because I simply don't have the key.</p><h4>What if I forget my password?</h4><p>Choose <b>Forgot password?</b> when signing in and you'll get an email with a link to set a new one. Then enter your <b>recovery code</b> to unlock your synced data — nothing is lost.</p><h4>What if I lose both my password and my recovery code?</h4><p>Your <b>synced</b> copy can't be unlocked by anyone — including me. That's the whole point of end-to-end encryption. But <b>your studying isn't gone:</b> the data on your devices is untouched, and any <b>Backup all</b> file still works. Reset your password, choose <b>Start fresh</b>, and sign in on the device where you last studied — its data becomes your new account copy.</p><h4>What if two devices change at the same time?</h4><p>They're combined — nothing to choose, and nothing studied is lost. If the same card was studied on both, the most recent review counts. Answers to the same question on both are all kept in your history. If a pack was switched on or off on both, the latest switch wins; a pack you removed stays removed. An unfinished exam that's replaced by a newer one moves to <b>Past exams</b>. <b>Sync activity</b> in the account menu lists what was combined, on any of your devices.</p><h4>How do I see which devices are syncing?</h4><p>Account menu → <b>Your devices</b> lists each browser or installed app that syncs with your account, with its app version and when it last synced. Give the one you're on a name you'll recognise — names are saved inside your encrypted study data. <b>Sign out other devices</b> (under Security) signs out all the others at once.</p><h4>What does an account store, and is it private?</h4><p>The minimum: your email address, your encrypted study data, a random ID for each device that syncs, and a few details needed to run the account. No selling data, no ads, no tracking. The <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> lists everything; see also the <a href="terms.html" target="_blank" rel="noopener">Terms</a>.</p><h4>How do I delete my account?</h4><p>Account menu → <b>Delete account</b>. It's instant and permanent, and your data on your devices stays where it is.</p><!-- /GEN:faq -->
         </div>
       </div>
     </div>
@@ -1814,7 +1878,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
   <!-- SRS STUDY -->
   <section id="study">
-    <div class="sprog"><span class="tag" id="sTag">—</span><span class="sprog-r"><span id="sLeft"></span><button class="nbtn flagbtn cflag" id="cardFlagBtn" type="button" aria-pressed="false" title="Flag this card — it is saved to your Flagged list">⚑ Flag</button></span></div>
+    <div class="sprog"><span class="tag" id="sTag">—</span><span class="sprog-r"><span id="sLeft"></span><button class="nbtn hlhow" type="button" title="Select text to highlight it or add a note" aria-label="How to highlight"></button><button class="nbtn flagbtn cflag" id="cardFlagBtn" type="button" aria-pressed="false" title="Flag this card — it is saved to your Flagged list">⚑ Flag</button></span></div>
     <div class="cardbox" id="cardbox"></div>
   </section>
 
@@ -1837,6 +1901,21 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
     <div id="flagList"></div>
   </section>
 
+  <!-- HIGHLIGHTS (v0.14.0) -->
+  <section id="hls">
+    <div class="revbar"><button class="minor backbtn" id="hlsBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2">to Home</span></button><h2>Highlights &amp; notes</h2></div>
+    <div class="hlschips" id="hlsChips" aria-label="Which highlights"></div>
+    <div class="hlsflt">
+      <input type="search" id="hlsQ" placeholder="Search highlights and notes" aria-label="Search highlights and notes">
+      <div class="hlsseg" role="group" aria-label="Type"><button class="minor on" type="button" data-ht="all">All</button><button class="minor" type="button" data-ht="hl">Highlights</button><button class="minor" type="button" data-ht="note">Notes</button></div>
+      <div class="hlscols" role="group" aria-label="Colour"><button type="button" class="hlsw hl-y" data-hc="y" aria-label="Yellow" title="Yellow"></button><button type="button" class="hlsw hl-g" data-hc="g" aria-label="Green" title="Green"></button><button type="button" class="hlsw hl-b" data-hc="b" aria-label="Blue" title="Blue"></button><button type="button" class="hlsw hl-p" data-hc="p" aria-label="Pink" title="Pink"></button><button type="button" class="hlsw hl-u" data-hc="" aria-label="Notes without a colour" title="Notes without a colour"></button></div>
+      <select id="hlsWhere" aria-label="Where"><option value="all">Everywhere</option><option value="g">Guides</option><option value="q">Questions</option><option value="c">Cards</option><option value="fig">Figures</option><option value="rx">Pharmacology</option></select>
+      <select id="hlsSort" aria-label="Sort"><option value="new">Newest first</option><option value="old">Oldest first</option><option value="week">Week order</option></select>
+    </div>
+    <p class="flaghidden" id="hlsHidden" hidden></p>
+    <div id="hlsList"></div>
+  </section>
+
   <!-- GAPS (v0.11.0) -->
   <section id="gaps">
     <div class="revbar"><button class="minor backbtn" id="gapsBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2" id="gapsBackTo">to Home</span></button><h2>Gaps</h2></div>
@@ -1847,7 +1926,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
   <!-- CONTENT REVIEWER -->
   <section id="reviewer">
-    <div class="revbar"><button class="minor backbtn" id="revBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2" id="revBackTo"></span></button><h2 class="revtitle" id="revTitle" role="button" tabindex="0" aria-expanded="false" aria-controls="guideList" title="Show or hide the topic list">Topic Guides <span class="revcaret" aria-hidden="true">▾</span></h2><button class="revfind" id="revFind" type="button" title="Search topics & content" aria-label="Search topics and content"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><line x1="21" y1="21" x2="15.5" y2="15.5"></line></svg></button><button class="revfind revbm" id="revBm" type="button" title="Bookmark this guide" aria-label="Bookmark this guide" aria-pressed="false"></button>
+    <div class="revbar"><button class="minor backbtn" id="revBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2" id="revBackTo"></span></button><h2 class="revtitle" id="revTitle" role="button" tabindex="0" aria-expanded="false" aria-controls="guideList" title="Show or hide the topic list">Topic Guides <span class="revcaret" aria-hidden="true">▾</span></h2><button class="revfind" id="revFind" type="button" title="Search topics & content" aria-label="Search topics and content"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><line x1="21" y1="21" x2="15.5" y2="15.5"></line></svg></button><button class="revfind revbm" id="revBm" type="button" title="Bookmark this guide" aria-label="Bookmark this guide" aria-pressed="false"></button><button class="revfind hlhow" type="button" title="Select text to highlight it or add a note" aria-label="How to highlight"></button>
       <div class="sizer">
         <div class="szgrp">
           <button class="minor" id="zoomOut" title="Smaller text">−</button>
@@ -1872,7 +1951,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
   </section>
 
   <section id="pharm">
-    <div class="revbar"><button class="minor backbtn" id="pharmBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2" id="pharmBackTo"></span></button><h2>Pharmacology</h2></div>
+    <div class="revbar"><button class="minor backbtn" id="pharmBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2" id="pharmBackTo"></span></button><h2>Pharmacology</h2><button class="revfind hlhow" type="button" title="Select text to highlight it or add a note" aria-label="How to highlight"></button></div>
     <div class="pharmsearchwrap"><svg class="pharmsearchicon" viewBox="0 0 16 16" aria-hidden="true"><circle cx="6.6" cy="6.6" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="10.2" y1="10.2" x2="14.6" y2="14.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><input type="search" id="pharmSearch" class="pharmsearch hasicon" placeholder="Search drugs, classes, effects…" aria-label="Search pharmacology"></div>
     <div class="pharmsub" id="pharmCount"></div>
     <div class="revlayout" id="pharmLayout">
@@ -1883,7 +1962,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
   <!-- ATLAS (v0.10.4): the `atlas` widget as its own full-width view, outside the guide frame -->
   <section id="atlas">
-    <div class="revbar"><button class="minor backbtn" id="atlasBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2" id="atlasBackTo"></span></button><h2 id="atlasTitle">Atlas</h2></div>
+    <div class="revbar"><button class="minor backbtn" id="atlasBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2" id="atlasBackTo"></span></button><h2 id="atlasTitle">Atlas</h2><button class="minor hlatl" id="atlasNote" type="button" hidden></button></div>
     <div class="pharmsub" id="atlasSub"></div>
     <div id="atlasPick" class="sswtools" style="display:none"></div>
     <div id="atlasHost"></div>
@@ -1902,6 +1981,20 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       </div>
       <div class="steps" id="devSteps"></div>
       <div class="modal-note">These steps work on the hosted site. Once installed, the app opens in its own window like a native app.</div>
+    </div>
+  </div>
+
+  <div class="modal-ov" id="hlViewOv" style="display:none">
+    <div class="modal-card hlview" role="dialog" aria-modal="true" aria-label="Highlighted item">
+      <div id="hlViewBody"></div>
+      <div class="confirm-actions"><button class="btn ghost sm" id="hlViewPrac" type="button">Practise this question</button><button class="btn sm" id="hlViewClose" type="button">Close</button></div>
+    </div>
+  </div>
+  <div class="modal-ov" id="hlNoteOv" style="display:none">
+    <div class="modal-card hlnote" role="dialog" aria-modal="true" aria-labelledby="hlNoteT">
+      <div class="hlnote-t" id="hlNoteT">Note</div><div class="hlnote-q" id="hlNoteQ"></div>
+      <textarea id="hlNoteTx" maxlength="2000" rows="5" placeholder="Write a note" aria-label="Note"></textarea><div class="hlnote-n" id="hlNoteN"></div>
+      <div class="confirm-actions"><button class="btn ghost sm" id="hlNoteDel" type="button">Delete note</button><button class="btn ghost sm" id="hlNoteCancel" type="button">Cancel</button><button class="btn sm" id="hlNoteSave" type="button">Save</button></div>
     </div>
   </div>
 
@@ -2002,7 +2095,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
     <div class="skiprow"><button class="skiplink" id="skipBtn" type="button" title="Move on without answering — it won’t count as seen">Skip →</button></div>
     <div class="controls">
       <button class="nbtn" id="prevBtn">← Previous</button>
-      <div class="mid"><button class="nbtn flagbtn" id="flagBtn">⚑ Flag</button><button class="nbtn primary" id="submitAnsBtn" style="display:none">Submit<span class="sa-long"> answer</span></button></div>
+      <div class="mid"><button class="nbtn hlhow" type="button" title="Select text to highlight it or add a note" aria-label="How to highlight"></button><button class="nbtn flagbtn" id="flagBtn">⚑ Flag</button><button class="nbtn primary" id="submitAnsBtn" style="display:none">Submit<span class="sa-long"> answer</span></button></div>
       <button class="nbtn" id="nextBtn">Next →</button>
     </div>
     <div class="qafter" id="qafter"></div>
@@ -2049,6 +2142,13 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="setrow"><span>New cards per day</span><input type="number" id="setNewPerDay" min="0" max="500" value="20"></div>
     </div>
     <div class="setsec">
+      <div class="sh">Highlights</div>
+      <div class="setrow"><span>In Practice and Review, show highlights</span>
+        <select id="setHlShow"><option value="after">After you answer</option><option value="always">Always</option><option value="tap">Only when I tap</option></select>
+      </div>
+      <div class="note" style="text-align:left;margin:-2px 0 4px">The highlighter button above a question or card shows or hides them for the rest of the session. Topic guides and Pharmacology always show them.</div>
+    </div>
+    <div class="setsec">
       <div class="sh">Updates</div>
       <div class="setrow"><span>Update automatically</span><button class="switch" id="setAutoUpd" type="button">on</button></div>
       <div class="note" style="text-align:left;margin:-2px 0 4px">New versions of the app and your study packs install by themselves when you’re not in the middle of a review, practice set or exam. What changed shows on Home. Turn this off to update by hand from your library.</div>
@@ -2069,7 +2169,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.13.4';
+const APP_VERSION='0.14.0';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -4352,7 +4452,7 @@ function mountAtlas(host,w,o){o=o||{};const st=o.state||{};const W=+w.vb[0],H=+w
         sc.querySelectorAll('[data-st]').forEach(x=>x.setAttribute('aria-pressed',String(+x.dataset.st===si)));if(!quiz)read().innerHTML=`<b>${sswEsc(SS[si].name||'')}</b>${SS[si].note?' — '+sswEsc(SS[si].note):''}`;}));}
     const sh=host.querySelector('.sswsndhost');if(sh){sh.innerHTML='';if(l.sound)try{mountSoundPlayer(sh,String(l.sound),{packId:o.packId});}catch(_){}}
     const cb=host.querySelector('[data-a="cyc"]');if(cb)cb.style.display=l.cycle&&l.cycle.widget?'':'none';};
-  const draw=()=>{const l=lvl();if(HX)lvIn(l);sv.innerHTML=art(l);host.classList.toggle('wide',!card&&!phone&&host.clientWidth>=900);const lb=host.querySelector('.sswlocbox');if(lb)lb.innerHTML=locSvg();crop();fitLabels();mapLabels();
+  const draw=()=>{const l=lvl();if(o.onLevel){try{o.onLevel(P[pi],P[pi].levels[li]);}catch(_){}} /* v0.14.0: slice notes */if(HX)lvIn(l);sv.innerHTML=art(l);host.classList.toggle('wide',!card&&!phone&&host.clientWidth>=900);const lb=host.querySelector('.sswlocbox');if(lb)lb.innerHTML=locSvg();crop();fitLabels();mapLabels();
     const tk=host.querySelector('.sswtk');if(tk){tk.innerHTML=(terr&&Array.isArray(l.terrKey)?l.terrKey:[]).map(k=>`<span><span class="sswdot" style="background:var(--${sswEsc(String(k[1]||'accent').replace(/^var\(--|\)$/g,''))})"></span>${sswEsc(k[0])}</span>`).join('');host.classList.toggle('terron',!!terr);} /* v0.10.7: territory legend (pack v1.6 terrKey) */host.classList.toggle('dense',(l.labels||[]).filter(x=>x.t).length>10); /* v0.10.6: on a phone a dense slice shows in-place names only when zoomed */
     if(!card){const o2=orHtml(l);host.querySelectorAll('.sswor').forEach((e,i)=>{e.innerHTML=o2[i];e.classList.toggle('sswor-on',l.conv!=='rad');});host.classList.toggle('sswbanner',l.conv!=='rad'); /* v0.10.6: the orientation banner is always on for views without a radiological convention */const lv=host.querySelector('.sswlv');if(lv){lv.innerHTML=selHtml(l);const se=lv.querySelector('.sswsel');if(se)se.addEventListener('change',()=>{const id=se.value;if(quiz||!id)return;clear();sel(id);read().innerHTML=tell(id,true);wireCycle(id);});}
       /* v0.10.5: tools the slice cannot honour are greyed — no reference image, no territories, no drawing for a pathway */
@@ -4534,7 +4634,7 @@ function removePack(id){confirmDialog('Remove this pack? Your review progress is
 /* ===== NAV ===== */
 function currentSection(){const s=document.querySelector('section.on');return s?s.id:'home';}
 let navLock=false; // true while a popstate is driving navigation (prevents double-push)
-function show(which){const switching=currentSection()!==which;document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===which));$('homebtn').style.display=(which==='home'?'none':'');$('timer').style.display=(which==='quiz'&&timerWanted)?'':'none';if(switching){try{sswSoundStop();}catch(e){} /* v0.13.0 */if(!navLock){try{history.pushState({sec:which},'');}catch(e){}}window.scrollTo({top:0});}if(which==='home')setTimeout(appNotesTick,400);}
+function show(which){try{hlLeaving(which);}catch(e){} /* v0.14.0 */const switching=currentSection()!==which;document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===which));$('homebtn').style.display=(which==='home'?'none':'');$('timer').style.display=(which==='quiz'&&timerWanted)?'':'none';if(switching){try{sswSoundStop();}catch(e){} /* v0.13.0 */if(!navLock){try{history.pushState({sec:which},'');}catch(e){}}window.scrollTo({top:0});}if(which==='home')setTimeout(appNotesTick,400);}
 /* Browser/mouse back-forward: map history entries onto app sections. */
 function gotoSec(t){
   switch(t){
@@ -4557,6 +4657,7 @@ function gotoSec(t){
       break;
     case 'flagged': openFlagged(); break; /* v0.8.0 */
     case 'gaps': renderGaps();show('gaps'); break; /* v0.11.0 */
+    case 'hls': renderHls();show('hls'); break; /* v0.14.0 */
     case 'atlas': if(atlasWidgets().length)openAtlas();else renderHome(); break; /* v0.10.4 */
     default: renderHome();
   }
@@ -4601,6 +4702,242 @@ function renderFlagged(){const fi=flaggedItems(),host=$('flagList');
 function clearAllFlags(){const fi=flaggedItems(),ids=fi.groups.flatMap(g=>[...g.qs,...g.cs].map(x=>x.id)).concat(fi.hiddenIds),n=ids.length;if(!n)return;
   confirmDialog(`Clear all ${n} flag${n===1?'':'s'}?${fi.hidden?` This includes ${fi.hidden} hidden by your source settings.`:''}`,{confirmText:'Clear all',danger:true},
     ()=>{setFlags(ids,false);renderFlagged();toast('All flags cleared.');});}
+
+/* ===== HIGHLIGHTS + NOTES (v0.14.0) — see the changelog. settings['hl:'+id] = {fl:1,on,at,k,p,r,f,t,pre,suf,c,n,ct,x?}
+   k: g guide · q question · c card · rx Pharmacology · atl atlas slice. f: the field (question 'q' = stem card, 'a' = explanation;
+   card 'card'; 'fig:N' a guide figure, 'fig' a card figure, 'slice:plane:level' an atlas slice). t/pre/suf: the text and ~32
+   characters either side, found again after a pack rewrites the item. c: y|g|b|p, or '' for a note on its own. n: the note.
+   x: the start time of the exam a highlight was kept from (shown only under Exams). A delete is a tombstone {fl:1,on:false,at},
+   so it syncs; merge3 resolves fl entries newest-wins, as for flags and bookmarks. ===== */
+var HLK='hl:',HL_COLS=['y','g','b','p'],HL_CNAME={y:'Yellow',g:'Green',b:'Blue',p:'Pink'},HL_MAX=2000,HL_NOTE_MAX=2000;
+var HL_SVG='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4l5 5-9 9H6v-5z"/><path d="M4 21h9"/></svg>';
+var HL_NOTE_SVG='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h10l4 4v14H5z"/><path d="M8.5 11h7M8.5 15h5"/></svg>';
+var HL_HOW='Select text to highlight it or add a note. Tap a highlight to change its colour, add a note or remove it.';
+var HL_SKIP='script,style,button,select,textarea,option,svg,.sswlive,.hlfig,.hlx';
+var HL_SKIP_APP=HL_SKIP+',.ctype,.answerbox>.h,.banner,.verdictline,.stem>.lead,.guidelink,.srcline2,.labhint,.showbar,.grades,.priorwrap,.hlv-k'; /* the app's own labels in questions and cards (guides keep their own classes) */
+var examHl=[]; /* this exam's highlights: in examSave.hl while it runs, dropped when its results are left */
+var hlState=null,hlScrollId=null,hlLastCol='y',hlSelT=null,hlBarDown=0;
+function hlNewId(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8);}
+function hlEntries(){const out=[];Object.keys(settings).forEach(k=>{if(!k.startsWith(HLK))return;const v=settings[k];if(v&&v.fl&&v.on)out.push(Object.assign({},v,{id:k.slice(HLK.length)}));});return out;}
+function hlIsFig(e){return e.k==='atl'||String(e.f||'').startsWith('fig');}
+function hlFor(sc){const same=e=>e.k===sc.k&&e.r===sc.r&&(e.f||'')===(sc.f||'');
+  if(sc.exam)return examHl.filter(same);let l=hlEntries().filter(e=>same(e)&&(sc.x?e.x===sc.x:!e.x));
+  if(sc.hide&&sc.hide())l=l.filter(e=>hlFresh.has(e.id)); /* hidden in Practice / Review: only the ones made just now */
+  return l;}
+function hlPut(sc,e){e=Object.assign({},e,{at:Date.now()});if(sc&&sc.exam){const i=examHl.findIndex(x=>x.id===e.id);if(i>=0)examHl[i]=e;else examHl.push(e);saveExam();return;}
+  const v=Object.assign({},e,{fl:1,on:true});delete v.id;settings[HLK+e.id]=v;saveFlags();}
+function hlDel(sc,id){if(sc&&sc.exam){examHl=examHl.filter(x=>x.id!==id);saveExam();return;}settings[HLK+id]={fl:1,on:false,at:Date.now()};saveFlags();}
+/* The text a container shows, as counted text nodes (answer buttons, figures' live widgets and our own buttons are left out). */
+function hlModel(root){const sk=root.ownerDocument===document?HL_SKIP_APP:HL_SKIP,w=root.ownerDocument.createTreeWalker(root,4,{acceptNode:n=>{const p=n.parentElement;return (!p||p.closest(sk))?2:1;}});
+  const nodes=[];let n,pos=0;while((n=w.nextNode())){nodes.push({n,s:pos});pos+=n.data.length;}return {nodes,text:nodes.map(o=>o.n.data).join('')};}
+function hlOffset(m,node,off){if(node.nodeType===3){const e=m.nodes.find(x=>x.n===node);if(e)return e.s+Math.min(off,node.data.length);}
+  const r=(node.ownerDocument||node).createRange();try{r.setStart(node,off);}catch(_){return -1;}
+  for(const x of m.nodes){if(r.comparePoint(x.n,0)>=0)return x.s;}return m.text.length;}
+/* Where a saved highlight sits now: [start,length] or null. The best match of its text by the words either side; whitespace may differ. */
+function hlFind(text,e){const t=e.t||'';if(!t)return null;const pre=e.pre||'',suf=e.suf||'';
+  const score=(i,len)=>{let s=0;const a=text.slice(Math.max(0,i-pre.length),i),b=text.slice(i+len,i+len+suf.length);
+    for(let k=1;k<=Math.min(a.length,pre.length)&&a[a.length-k]===pre[pre.length-k];k++)s++;for(let k=0;k<Math.min(b.length,suf.length)&&b[k]===suf[k];k++)s++;return s;};
+  let best=null,bs=-1,i=text.indexOf(t),g=0;while(i>=0&&g++<300){const s=score(i,t.length);if(s>bs){bs=s;best=[i,t.length];}i=text.indexOf(t,i+1);}
+  if(best)return best;
+  try{const re=new RegExp(t.trim().replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/\s+/g,'\\s+'),'g');let mm;g=0;while((mm=re.exec(text))&&g++<300){const s=score(mm.index,mm[0].length);if(s>bs){bs=s;best=[mm.index,mm[0].length];}if(!mm[0].length)re.lastIndex++;}}catch(_){}
+  return best;}
+function hlUnpaint(root){root.querySelectorAll('mark.hl').forEach(mk=>{const p=mk.parentNode;while(mk.firstChild)p.insertBefore(mk.firstChild,mk);p.removeChild(mk);p.normalize();});}
+function hlPaint(root){if(!root||!root._hl)return;hlUnpaint(root);const list=hlFor(root._hl).filter(e=>!hlIsFig(e));if(!list.length)return;
+  const m=hlModel(root),sp=[];list.forEach(e=>{const f=hlFind(m.text,e);if(f)sp.push([f[0],f[0]+f[1],e]);});
+  sp.sort((a,b)=>a[0]-b[0]);const keep=[];let end=-1;sp.forEach(s=>{if(s[0]>=end){keep.push(s);end=s[1];}});
+  for(let i=keep.length-1;i>=0;i--)hlWrap(m,keep[i]);}
+function hlWrap(m,sp){const [s,e,ent]=sp;let last=true; /* last to first, so the offsets of earlier text stay true */
+  for(let j=m.nodes.length-1;j>=0;j--){const x=m.nodes[j],len=x.n.data.length,ns=x.s;if(ns>=e||ns+len<=s)continue;
+    const a=Math.max(s,ns)-ns,b=Math.min(e,ns+len)-ns;let t=x.n;if(b<t.data.length)t.splitText(b);if(a>0)t=t.splitText(a);
+    if(!t.data.trim())continue;const mk=t.ownerDocument.createElement('mark');
+    mk.className='hl hl-'+(ent.c||'u')+(ent.n?' hl-n':'')+(last?' hl-end':'');mk.dataset.hl=ent.id;if(ent.n)mk.title=ent.n.slice(0,200);
+    t.parentNode.insertBefore(mk,t);mk.appendChild(t);last=false;}}
+function hlBind(root,sc){if(!root)return;root._hl=sc;root.setAttribute('data-hlc','');hlWire(root.ownerDocument);hlPaint(root);}
+function hlWire(d){if(!d||d._hlWired)return;d._hlWired=true;
+  d.addEventListener('selectionchange',()=>{clearTimeout(hlSelT);hlSelT=setTimeout(()=>hlCheckSel(d),180);});
+  d.addEventListener('click',hlClick);d.addEventListener('keydown',hlKey,true);
+  d.addEventListener('pointerdown',e=>{if(hlState&&hlState.mode==='edit'&&!(e.target.closest&&e.target.closest('#hlBar,mark.hl')))hlHide();},true);
+  (d.defaultView||window).addEventListener('scroll',()=>{if(hlState&&$('hlBar')&&!$('hlBar').classList.contains('bottom')){if(hlState.mode==='edit')hlHide();else hlCheckSel(hlState.doc);}},{passive:true});}
+function hlCheckSel(d){if(Date.now()-hlBarDown<700)return; /* a tap on the bar itself */
+  const sel=d.getSelection&&d.getSelection();
+  if(!sel||sel.isCollapsed||!sel.rangeCount){if(hlState&&hlState.mode==='new'&&hlState.doc===d)hlHide();return;}
+  const r=sel.getRangeAt(0),anc=r.commonAncestorContainer,el=anc.nodeType===1?anc:anc.parentElement,root=el&&el.closest&&el.closest('[data-hlc]');
+  if(!root||!root._hl){if(hlState&&hlState.mode==='new')hlHide();return;}
+  const m=hlModel(root);let s=hlOffset(m,r.startContainer,r.startOffset),e=hlOffset(m,r.endContainer,r.endOffset);
+  while(s<e&&/\s/.test(m.text[s]))s++;while(e>s&&/\s/.test(m.text[e-1]))e--;
+  const wd=/[\p{L}\p{N}]/u;if(s>=0&&e>s){const ns=m.nodes.find(x=>x.s<=s&&s<x.s+x.n.data.length),ne=m.nodes.find(x=>x.s<e&&e<=x.s+x.n.data.length);const lo=ns?ns.s:s,hi=ne?ne.s+ne.n.data.length:e;
+    while(s>lo&&wd.test(m.text[s-1])&&wd.test(m.text[s]))s--;while(e<hi&&wd.test(m.text[e])&&wd.test(m.text[e-1]))e++;} /* whole words, within the text the selection starts and ends in */
+  if(s<0||e-s<2){if(hlState&&hlState.mode==='new')hlHide();return;}
+  hlState={mode:'new',doc:d,root,s,e,rect:r.getBoundingClientRect()};hlShow();}
+function hlClick(e){const mk=e.target.closest&&e.target.closest('mark.hl');if(!mk)return;const d=mk.ownerDocument,sel=d.getSelection&&d.getSelection();if(sel&&!sel.isCollapsed)return;
+  const root=mk.closest('[data-hlc]');if(!root||!root._hl)return;const ent=hlFor(root._hl).find(x=>x.id===mk.dataset.hl);if(!ent)return;
+  hlState={mode:'edit',doc:d,root,ent,rect:mk.getBoundingClientRect()};hlShow();}
+function hlKey(e){if((e.key!=='h'&&e.key!=='H')||e.metaKey||e.ctrlKey||e.altKey||!hlState||hlState.mode!=='new')return; /* H: only with text selected */
+  const a=e.target&&e.target.ownerDocument?e.target.ownerDocument.activeElement:null;if(a&&(/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)||a.isContentEditable))return;
+  e.preventDefault();e.stopImmediatePropagation();hlApply(hlLastCol);}
+function hlBarEl(){let b=$('hlBar');if(b)return b;b=document.createElement('div');b.id='hlBar';b.className='hlbar';b.setAttribute('role','toolbar');b.setAttribute('aria-label','Highlight');b.hidden=true;
+  b.innerHTML=HL_COLS.map(c=>`<button type="button" class="hlsw hl-${c}" data-c="${c}" aria-label="${HL_CNAME[c]}" title="${HL_CNAME[c]}"></button>`).join('')+'<button type="button" class="hlbb" data-a="note">Note</button><button type="button" class="hlbb hldel" data-a="del">Remove</button>';
+  const keep=e=>{hlBarDown=Date.now();e.preventDefault();};b.addEventListener('pointerdown',keep);b.addEventListener('mousedown',keep); /* keep the selection */
+  b.addEventListener('click',e=>{const t=e.target.closest('button');if(!t)return;if(t.dataset.c)hlApply(t.dataset.c);else if(t.dataset.a==='note')hlNoteFromBar();else if(t.dataset.a==='del')hlRemove();});
+  document.body.appendChild(b);return b;}
+function hlShow(){const b=hlBarEl(),st=hlState;if(!st)return;b.querySelector('.hldel').hidden=st.mode!=='edit';
+  b.querySelectorAll('.hlsw').forEach(x=>x.setAttribute('aria-pressed',st.mode==='edit'&&st.ent.c===x.dataset.c?'true':'false'));
+  b.querySelector('[data-a="note"]').textContent=st.mode==='edit'&&st.ent.n?'Edit note':'Note';
+  const coarse=!!(window.matchMedia&&matchMedia('(pointer:coarse)').matches);b.classList.toggle('bottom',coarse);b.hidden=false;
+  if(coarse){b.style.top='';b.style.left='';return;} /* phones: at the bottom — the phone's own menu sits above a selection */
+  const r=st.rect,fe=st.doc!==document&&st.doc.defaultView&&st.doc.defaultView.frameElement;let ox=0,oy=0;if(fe){const fr=fe.getBoundingClientRect();ox=fr.left;oy=fr.top;}
+  const w=b.offsetWidth,h=b.offsetHeight;let top=oy+r.bottom+8;if(top+h>innerHeight-8)top=Math.max(8,oy+r.top-h-8);
+  b.style.top=Math.round(top)+'px';b.style.left=Math.round(Math.max(8,Math.min(ox+r.left+r.width/2-w/2,innerWidth-w-8)))+'px';}
+function hlHide(){hlState=null;const b=$('hlBar');if(b)b.hidden=true;}
+function hlRefresh(root){hlPaint(root);if(currentSection()==='hls')renderHls();}
+function hlApply(c){const st=hlState;if(!st)return;hlLastCol=c;
+  if(st.mode==='edit'){hlPut(st.root._hl,Object.assign({},st.ent,{c}));hlHide();hlRefresh(st.root);return;}
+  hlCreate(st,{c});}
+/* A new highlight; one it overlaps is merged into it (the new colour wins, notes are kept). */
+function hlCreate(st,o){const sc=st.root._hl,m=hlModel(st.root);let s=st.s,e=st.e,note=o.n||'';const olds=[];
+  hlFor(sc).filter(x=>!hlIsFig(x)).forEach(x=>{const f=hlFind(m.text,x);if(f&&f[0]<e&&f[0]+f[1]>s){olds.push(x);s=Math.min(s,f[0]);e=Math.max(e,f[0]+f[1]);if(x.n)note=note?x.n+'\n\n'+note:x.n;}});
+  if(e-s>HL_MAX){toast('That’s a long passage — highlight up to about 2,000 characters at a time.',4000);return null;}
+  olds.forEach(x=>hlDel(sc,x.id));
+  const ent={id:hlNewId(),k:sc.k,p:sc.p||'',r:sc.r,f:sc.f||'',t:m.text.slice(s,e),pre:m.text.slice(Math.max(0,s-32),s),suf:m.text.slice(e,e+32),
+    c:o.c!=null?o.c:(olds.length?(olds[0].c||''):''),n:note.slice(0,HL_NOTE_MAX),ct:Date.now()};
+  if(sc.x)ent.x=sc.x;if(sc.hide&&sc.hide())hlFresh.add(ent.id);hlPut(sc,ent);try{st.doc.getSelection().removeAllRanges();}catch(_){}hlHide();hlRefresh(st.root);return ent;}
+function hlRemove(){const st=hlState;if(!st||st.mode!=='edit')return;hlDel(st.root._hl,st.ent.id);hlHide();hlRefresh(st.root);}
+function hlNoteFromBar(){const st=hlState;if(!st)return;
+  if(st.mode==='edit'){const ent=st.ent,sc=st.root._hl,root=st.root;hlHide();
+    hlNoteEdit(ent.n||'',{quote:ent.t,del:!!ent.n},n=>{if(n===null){if(!ent.c)hlDel(sc,ent.id);else hlPut(sc,Object.assign({},ent,{n:''}));}else hlPut(sc,Object.assign({},ent,{n}));hlRefresh(root);});return;}
+  const snap=Object.assign({},st),t=hlModel(st.root).text.slice(st.s,st.e);hlHide();
+  hlNoteEdit('',{quote:t},n=>{if(n)hlCreate(snap,{n});});}
+/* The note sheet: Save (empty = no change for a new note, delete for an old one), Delete note, Cancel. */
+var hlNoteCb=null;
+function hlNoteEdit(text,o,cb){o=o||{};hlNoteCb=cb;$('hlNoteT').textContent=o.title||'Note';
+  const q=String(o.quote||'').replace(/\s+/g,' ').trim();$('hlNoteQ').textContent=q?('“'+(q.length>160?q.slice(0,159)+'…':q)+'”'):'';$('hlNoteQ').hidden=!q;
+  const tx=$('hlNoteTx');tx.value=text||'';$('hlNoteDel').hidden=!o.del;hlNoteCount();$('hlNoteOv').style.display='flex';setTimeout(()=>{try{tx.focus();}catch(_){}},30);}
+function hlNoteCount(){const n=$('hlNoteTx').value.length;$('hlNoteN').textContent=n>HL_NOTE_MAX-300?(n+' / '+HL_NOTE_MAX):'';}
+function hlNoteClose(v){$('hlNoteOv').style.display='none';const cb=hlNoteCb;hlNoteCb=null;if(cb&&v!==undefined)cb(v);}
+/* A note on a whole figure, widget or atlas slice: one per figure; the button fills in when there is one. */
+function hlFigBtn(host,sc,find,quote,label,after){const d=host.ownerDocument;let b=null;[...host.children].forEach(x=>{if(x.classList&&x.classList.contains('hlfig'))b=x;});
+  if(!b){b=d.createElement('button');b.type='button';b.className='hlfig';host.insertBefore(b,host.firstChild);}
+  const ent=find();b.classList.toggle('on',!!ent);b.innerHTML=HL_NOTE_SVG;b.title=ent?('Note: '+ent.n.slice(0,140)):'Add a note to this '+label;b.setAttribute('aria-label',ent?'Edit your note on this '+label:'Add a note to this '+label);
+  if(ent)b.dataset.hlfig=ent.id;else delete b.dataset.hlfig;
+  b.onclick=ev=>{ev.preventDefault();ev.stopPropagation();const cur=find();
+    hlNoteEdit(cur?cur.n:'',{title:'Note on this '+label,quote,del:!!cur},n=>{if(n===null){if(cur)hlDel(sc,cur.id);}else if(cur)hlPut(sc,Object.assign({},cur,{n}));
+      else hlPut(sc,{id:hlNewId(),k:sc.k,p:sc.p||'',r:sc.r,f:sc.f,t:quote||'',pre:'',suf:'',c:'',n,ct:Date.now()});after();});};}
+function hlGuideFigs(d,g){const r=guideKey(g),base={k:'g',p:g._pack,r};
+  [...d.querySelectorAll('figure')].forEach((fig,i)=>{const cap=fig.querySelector('figcaption'),t=((cap&&cap.textContent)||'').replace(/\s+/g,' ').trim().slice(0,80);
+    const find=()=>{const ns=hlEntries().filter(e=>e.k==='g'&&e.r===r&&String(e.f).startsWith('fig:'));return (t&&ns.find(e=>e.t===t))||ns.find(e=>e.f==='fig:'+i&&(!t||!e.t));};
+    hlFigBtn(fig,Object.assign({f:'fig:'+i},base),find,t,'figure',()=>hlGuideFigs(d,g));
+    if(hlScrollId&&hlScrollId==='fig:'+((find()||{}).id)){hlScrollId=null;setTimeout(()=>{try{fig.scrollIntoView({block:'center'});}catch(_){}},80);}});}
+var HL_FRAME_CSS='mark.hl{color:inherit;border-radius:2px;padding:0 1px;-webkit-box-decoration-break:clone;box-decoration-break:clone;cursor:pointer}mark.hl-y{background:rgba(255,212,0,.42)}mark.hl-g{background:rgba(70,200,110,.34)}mark.hl-b{background:rgba(80,160,255,.32)}mark.hl-p{background:rgba(255,100,180,.30)}mark.hl-u{background:transparent;border-bottom:2px dotted #c98a00;border-radius:0}mark.hl-n.hl-end::after{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#e08a00;margin:0 0 6px 2px;vertical-align:middle}mark.hl.flash{outline:2px solid #e08a00;outline-offset:1px}figure{position:relative}.hlfig{position:absolute;top:6px;right:6px;z-index:3;width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:1px solid rgba(128,128,128,.45);background:rgba(255,255,255,.85);color:#555;cursor:pointer;padding:0}.hlfig.on{background:#e08a00;border-color:#e08a00;color:#fff}';
+function hlGuideMount(d,g){if(!d.getElementById('ssHl')){const st=d.createElement('style');st.id='ssHl';st.textContent=HL_FRAME_CSS;(d.head||d.documentElement).appendChild(st);}
+  hlBind(d.body,{k:'g',p:g._pack,r:guideKey(g),f:''});hlGuideFigs(d,g);
+  if(hlScrollId){const mk=d.querySelector('mark.hl[data-hl="'+hlScrollId+'"]');hlScrollId=null;if(mk){setTimeout(()=>{try{mk.scrollIntoView({block:'center'});mk.classList.add('flash');setTimeout(()=>mk.classList.remove('flash'),1600);}catch(_){}},80);return true;}}
+  return false;}
+/* Exams: their own highlights, dropped when the results are left unless kept. Kept ones are tied to the questions (x = exam start). */
+function hlKeepExam(){const x=qT0||Date.now();let n=0;examHl.forEach(e=>{hlPut(null,Object.assign({},e,{id:hlNewId(),x}));n++;});return n;}
+function hlLeaving(which){hlHide();if(which!=='quiz'&&which!=='study'){hlMask=null;hlFresh.clear();}if(qmode==='test'&&qTestSubmitted&&examHl.length&&!['quiz','results','gaps'].includes(which))examHl=[];}
+/* Practice and Review: saved highlights show by settings.hlShow — 'after' (default: once the answer shows), 'always', 'tap'
+   (only when shown with the highlighter button). The button shows or hides them for the rest of the session (hlMask);
+   highlights made meanwhile always show (hlFresh). Guides, Pharmacology and the read-only view always show them. */
+var hlMask=null,hlFresh=new Set();
+function hlVisible(kind){if(hlMask)return hlMask==='show';const m=settings.hlShow||'after';if(m==='always')return true;if(m==='tap')return false;
+  return kind==='q'?!!(qsub[qcur]||qTestSubmitted):!!revealed;}
+function hlMaskBtn(sec,kind){const b=$(sec)&&$(sec).querySelector('.hlhow');if(!b)return;
+  if(!kind){b.classList.remove('off');b.removeAttribute('aria-pressed');b.title='Select text to highlight it or add a note';b.setAttribute('aria-label','How to highlight');return;}
+  const on=hlVisible(kind);b.classList.toggle('off',!on);b.setAttribute('aria-pressed',on?'true':'false');
+  b.title=(on?'Highlights shown — tap to hide them.':'Highlights hidden — tap to show them.')+' Select text to highlight it or add a note.';b.setAttribute('aria-label',on?'Hide highlights':'Show highlights');}
+function hlMaskToggle(kind){hlMask=hlVisible(kind)?'hide':'show';let seen=false;try{seen=localStorage.getItem('suite_hlhow_v1')==='1';localStorage.setItem('suite_hlhow_v1','1');}catch(_){}
+  if(kind==='q'){hlPaint($('qcard'));hlPaint($('qafter'));hlMaskBtn('quiz','q');}else{hlPaint($('cardbox'));hlMaskBtn('study','c');}
+  toast((hlMask==='show'?'Highlights shown.':'Highlights hidden.')+(seen?'':' '+HL_HOW),seen?1600:5000);}
+/* ---- the Highlights page (section#hls) ---- */
+var hlsChip='all',hlsType='all',hlsWhere='all',hlsSort='new',hlsQ='',hlsShown=50;var hlsCols=new Set(),hlsTextCache=new Map();
+function hlNorm(s){return String(s||'').replace(/\s+/g,' ').trim().toLowerCase();}
+function hlPlain(h){const tp=document.createElement('template');tp.innerHTML=String(h||'');tp.content.querySelectorAll('script,style').forEach(x=>x.remove());return hlNorm(tp.content.textContent);}
+function hlItemText(x){const parts=[];const add=v=>{if(v==null)return;if(Array.isArray(v))v.forEach(add);else if(typeof v==='object')Object.values(v).forEach(add);else parts.push(String(v));};
+  ['stem','prompt','text','answer','explain','topic','options','items','pairs'].forEach(k=>add(x[k]));return hlPlain(parts.join(' ').replace(/\{\{(.+?)\}\}/g,'$1'));}
+function hlCached(key,fn){if(!hlsTextCache.has(key))hlsTextCache.set(key,fn());return hlsTextCache.get(key);}
+/* Where a highlight lives now: state ok | hidden (pack or source off) | orphan (not in the current version). */
+function hlResolve(e){const act=activePacks(),pk=act.find(p=>p.id===e.p),fig=hlIsFig(e),tn=hlNorm(e.t);
+  const res={e,grp:e.k==='rx'?'rx':e.p,kind:fig?'fig':e.k,state:'ok',label:'',o1:'',o2:0};
+  if(e.k==='rx'){const M=pharmMaster();let nm='';(M?M.drugs:[]).concat(...weekPacks().map(p=>p.drugs||[])).some(d=>{if(d&&d.id===e.r){nm=d.name||'';return true;}return false;});
+    res.label='Pharmacology'+(nm?' · '+nm:'');res.o1='zzz';if(!nm)res.state='orphan';return res;}
+  if(!pk){res.state='hidden';const lp=packs.find(p=>p.id===e.p);res.o1=lp?String(lp.pack||lp.id):'';return res;}
+  res.o1=String(pk.pack||pk.id);
+  if(e.k==='atl'){const a=atlasWidgets().find(x=>x.id===e.r&&x.packId===e.p);res.label=(a?(a.w.title||'Atlas'):'Atlas')+' · slice';if(!a)res.state='orphan';return res;}
+  if(e.k==='g'){const gi=(pk.guides||[]).findIndex(g=>guideKey(g)===e.r),g=gi>=0?pk.guides[gi]:null;res.o2=gi;
+    if(!g){res.state='orphan';res.label=fig?'Figure':'Guide';return res;}if(!srcOn(pk,g))res.state='hidden';
+    const ttl=String(g.title||g.file||'').replace(/^Week\s*[\d–-]+\s*·\s*/i,'');res.label=(fig?'Figure · ':'Guide · ')+ttl;
+    if(!fig&&res.state==='ok'&&!hlCached('g|'+e.p+'|'+e.r+'|'+String(g.html||'').length,()=>hlPlain(g.html)).includes(tn))res.state='orphan';return res;}
+  const arr=e.k==='q'?(pk.questions||[]):(pk.cards||[]),ii=arr.findIndex(x=>x&&x.id===e.r),it=ii>=0?arr[ii]:null;res.o2=ii;
+  res.label=e.x?('Exam · '+new Date(e.x).toLocaleDateString([],{month:'short',day:'numeric'})):(fig?'Figure · card':e.k==='q'?'Question':'Card');
+  if(!it){res.state='orphan';return res;}if(!srcOn(pk,it))res.state='hidden';
+  if(!fig&&res.state==='ok'&&!hlCached(e.k+'|'+e.p+'|'+e.r+'|'+(pk.version||''),()=>hlItemText(it)).includes(tn))res.state='orphan';
+  return res;}
+function hlsChipLabel(id){if(id==='all')return 'All';if(id==='rx')return 'Pharmacology';if(id==='exams')return 'Exams';const p=packs.find(x=>x.id===id);const l=p?String(p.pack||p.id):id;return grpShort(l)||l;}
+function renderHls(){const host=$('hlsList');const all=hlEntries().map(hlResolve),vis=all.filter(r=>r.state!=='hidden'),hidden=all.length-vis.length;
+  const grps=[...new Set(vis.filter(r=>!r.e.x&&r.grp!=='rx').map(r=>r.grp))].sort((a,b)=>natCmp(hlsChipLabel(a),hlsChipLabel(b)));
+  const chips=['all'].concat(grps,vis.some(r=>r.grp==='rx'&&!r.e.x)?['rx']:[],vis.some(r=>r.e.x)?['exams']:[]);if(!chips.includes(hlsChip))hlsChip='all';
+  $('hlsChips').innerHTML=chips.map(c=>{const n=c==='all'?vis.length:c==='exams'?vis.filter(r=>r.e.x).length:vis.filter(r=>!r.e.x&&r.grp===c).length;
+    return `<button type="button" class="hlschip${c===hlsChip?' on':''}" data-c="${acctEsc(c)}" aria-pressed="${c===hlsChip}">${acctEsc(hlsChipLabel(c))} <i>${n}</i></button>`;}).join('');
+  $('hlsChips').querySelectorAll('.hlschip').forEach(b=>b.onclick=()=>{hlsChip=b.dataset.c;hlsShown=50;renderHls();});
+  document.querySelectorAll('#hls [data-ht]').forEach(b=>{const on=b.dataset.ht===hlsType;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);});
+  document.querySelectorAll('#hls [data-hc]').forEach(b=>b.setAttribute('aria-pressed',hlsCols.has(b.dataset.hc)?'true':'false'));
+  $('hlsWhere').value=hlsWhere;$('hlsSort').value=hlsSort;
+  const hd=$('hlsHidden');hd.hidden=!hidden;hd.textContent=hidden?`${hidden} highlight${hidden===1?' is':'s are'} hidden by your pack or source settings.`:'';
+  const q=hlNorm(hlsQ);
+  let list=vis.filter(r=>{const e=r.e;
+    if(hlsChip==='exams'){if(!e.x)return false;}else if(hlsChip!=='all'&&(e.x||r.grp!==hlsChip))return false;
+    if(hlsType==='hl'&&!e.c)return false;if(hlsType==='note'&&!e.n)return false;
+    if(hlsCols.size&&!hlsCols.has(e.c||''))return false;
+    if(hlsWhere!=='all'&&(hlsWhere==='fig'?r.kind!=='fig'&&r.kind!=='atl':r.kind!==hlsWhere))return false;
+    if(q&&!hlNorm(e.t).includes(q)&&!hlNorm(e.n).includes(q)&&!hlNorm(r.label).includes(q))return false;return true;});
+  const KO={g:0,fig:1,atl:1,q:2,c:3,rx:4},t=r=>r.e.ct||r.e.at||0;
+  list.sort(hlsSort==='old'?(a,b)=>t(a)-t(b):hlsSort==='week'?(a,b)=>natCmp(a.o1,b.o1)||(KO[a.kind]-KO[b.kind])||(a.o2-b.o2)||(t(a)-t(b)):(a,b)=>t(b)-t(a));
+  if(!all.length){host.innerHTML='<p class="flagempty">No highlights or notes yet. '+acctEsc(HL_HOW)+'</p>';return;}
+  if(!list.length){host.innerHTML='<p class="flagempty">Nothing matches these filters.</p>';return;}
+  const shown=list.slice(0,hlsShown);
+  host.innerHTML=shown.map((r,i)=>{const e=r.e,fig=r.kind==='fig'||r.kind==='atl';
+    const main=fig?acctEsc((e.k==='atl'?'Slice: ':'Figure: ')+(e.t||'—')):'“'+acctEsc(e.t.length>260?e.t.slice(0,259)+'…':e.t)+'”';
+    const wk=r.grp==='rx'?'':hlsChipLabel(e.p);
+    return `<div class="hlrow" data-i="${i}" role="button" tabindex="0"><span class="hlcb hl-${e.c||'u'}" aria-hidden="true"></span><div class="frm"><div class="frt">${main}</div>${e.n?`<div class="hlrn">${acctEsc(e.n.length>400?e.n.slice(0,399)+'…':e.n)}</div>`:''}<div class="frmeta"><span>${acctEsc(r.label)}</span>${wk&&hlsChip!==e.p?`<span>${acctEsc(wk)}</span>`:''}${r.state==='orphan'?'<span class="hlorph">Not in the current version</span>':''}</div></div><button class="fx" type="button" data-x="${i}" aria-label="Delete" title="Delete">✕</button></div>`;}).join('')
+    +(list.length>shown.length?`<button type="button" class="minor hlsmore" id="hlsMore">Show more (${list.length-shown.length})</button>`:'');
+  host.querySelectorAll('.hlrow').forEach(row=>{const r=shown[+row.dataset.i];const go=ev=>{if(ev.target.closest('.fx'))return;hlOpen(r);};row.onclick=go;row.onkeydown=ev=>{if(ev.key==='Enter')go(ev);};});
+  host.querySelectorAll('.fx').forEach(b=>b.onclick=ev=>{ev.stopPropagation();const r=shown[+b.dataset.x];hlDel(null,r.e.id);renderHls();renderHome();toast('Deleted.');});
+  const mb=$('hlsMore');if(mb)mb.onclick=()=>{hlsShown+=50;renderHls();};}
+function openHls(){hlsShown=50;hlsTextCache.clear();renderHls();show('hls');}
+function hlOpen(r){const e=r.e;
+  if(e.k==='g'){if(r.state==='orphan'&&!activeGuides().some(g=>guideKey(g)===e.r))return;hlScrollId=hlIsFig(e)?'fig:'+e.id:e.id;openGuide(e.r);return;}
+  if(e.k==='rx'){openPharm();setTimeout(()=>{try{jumpToDrug(e.r);const c=document.getElementById(drugSlug(e.r));const mk=c&&c.querySelector('mark.hl[data-hl="'+e.id+'"]');if(mk){mk.classList.add('flash');setTimeout(()=>mk.classList.remove('flash'),1600);}}catch(_){}},60);return;}
+  if(e.k==='atl'){const a=atlasWidgets().find(x=>x.id===e.r&&x.packId===e.p);if(!a)return;const m=/^slice:([^:]*):(.*)$/.exec(e.f||'');openAtlas(a.w,a.packId,m?{plane:m[1],level:m[2]}:{});return;}
+  hlView(e);}
+/* Read-only view of a question or card, with its highlights (they can be changed here too). */
+function hlView(e){const x=e.k==='q'?qpool().find(q=>q.id===e.r):allCards().find(c=>c.id===e.r);if(!x){toast('That '+(e.k==='q'?'question':'card')+' isn’t in your active packs.');return;}
+  const b=$('hlViewBody'),sc={k:e.k,p:x._pack,r:x.id,x:e.x||undefined};
+  if(e.k==='q'){b.innerHTML=`<div class="hlv-k">${e.x?'Exam · '+acctEsc(new Date(e.x).toLocaleDateString([],{month:'short',day:'numeric'}))+' · ':''}Question · ${acctEsc(x._packName||'')}</div><div id="hlvQ"><p class="stem">${x.stem}</p><ol class="hlv-opts hlx" type="A">${(x.options||[]).map((o,i)=>`<li class="${i===x.correct?'ok':''}">${o}${i===x.correct?' <b>✓</b>':''}</li>`).join('')}</ol></div><div class="answerbox" id="hlvA"><div class="h">Explanation · ${x.topic||''}</div>${x.explain||''}</div>`;
+    hlBind($('hlvQ'),Object.assign({f:'q'},sc));hlBind($('hlvA'),Object.assign({f:'a'},sc));}
+  else{const c=x,ok=i=>Array.isArray(c.correct)?c.correct.includes(i):c.correct===i;let h='';
+    if(c.type==='cloze')h=`<div class="clozetext">${String(c.text||'').replace(/\{\{(.+?)\}\}/g,(m,t)=>`<span class="cz on">${t}</span>`)}</div>`;
+    else{h=`<p class="prompt">${c.prompt||''}</p>`;
+      if(c.type==='mcq'||c.type==='multi')h+=`<ol class="hlv-opts hlx" type="A">${(c.options||[]).map((o,i)=>`<li class="${ok(i)?'ok':''}">${o}${ok(i)?' <b>✓</b>':''}</li>`).join('')}</ol>`;
+      if(c.type==='order')h+=`<ol class="hlv-opts hlx">${(c.items||[]).map(t=>`<li>${t}</li>`).join('')}</ol>`;
+      if(c.type==='match')h+=`<ul class="hlv-opts hlx">${(c.pairs||[]).map(p=>`<li>${p[0]} → <b>${p[1]}</b></li>`).join('')}</ul>`;
+      if(c.type==='label')h+=`<ol class="hlv-opts hlx">${(c.labels||[]).map(l=>`<li>${acctEsc(l.t)}</li>`).join('')}</ol>`;}
+    const ans=(c.type==='qa'||c.type==='widget')?(c.answer||''):'',ex=c.explain?`<div style="margin-top:8px;color:var(--ink-soft);font-size:14.5px">${c.explain}</div>`:'';
+    b.innerHTML=`<div class="hlv-k">Card · ${acctEsc(TYPE_LABEL[c.type]||c.type||'')} · ${acctEsc(c._packName||'')}</div><div id="hlvC">${h}<div class="answerbox"><div class="h">Answer · ${c.topic||''}</div>${ans}${ex}</div></div>`;
+    hlBind($('hlvC'),Object.assign({f:'card'},sc));}
+  const pb=$('hlViewPrac');pb.hidden=e.k!=='q';pb.onclick=()=>{hlViewClose();hlPractise(x.id);};
+  $('hlViewOv').style.display='flex';$('hlViewBody').scrollTop=0;
+  const mk=b.querySelector('mark.hl[data-hl="'+e.id+'"]');if(mk){mk.classList.add('flash');setTimeout(()=>mk.classList.remove('flash'),1600);setTimeout(()=>{try{mk.scrollIntoView({block:'center'});}catch(_){}},30);}}
+function hlViewClose(){$('hlViewOv').style.display='none';hlHide();if(currentSection()==='hls')renderHls();}
+function hlPractise(id){const go=()=>{buildQmap();if(!qmap[id]){toast('That question isn’t in your active packs.');return;}qorder=[id];beginPractice('Question map · Highlight');};
+  if(pracInProgress()){confirmDialog('You have a practice session in progress. Replace it with this question? (Your answers so far are kept in your history.)',{confirmText:'Replace'},()=>{flushPrac(prac);clearPrac();go();});return;}go();}
+/* Atlas: one note per slice (plane + level), none in the 3D view. */
+var atlasSlice=null;
+function hlAtlasLevel(cur,pl,l){atlasSlice={aid:cur.id,pk:cur.packId,plane:pl.id,level:l.id,label:[pl.name||pl.id,l.label||l.id].filter(Boolean).join(' · ')};hlAtlasBtn();}
+function hlAtlasBtn(){const b=$('atlasNote');if(!b)return;const s=atlasSlice;b.hidden=!s;if(!s)return;const sc={k:'atl',p:s.pk,r:s.aid,f:'slice:'+s.plane+':'+s.level};
+  const find=()=>hlEntries().find(e=>e.k==='atl'&&e.r===s.aid&&e.p===s.pk&&e.f===sc.f);const ent=find();
+  b.classList.toggle('on',!!ent);b.innerHTML=HL_NOTE_SVG+'<span> '+(ent?'Your note':'Note')+'</span>';b.title=ent?('Note on this slice: '+ent.n.slice(0,140)):'Add a note to this slice';
+  b.onclick=()=>{const cur=find();hlNoteEdit(cur?cur.n:'',{title:'Note on this slice',quote:s.label,del:!!cur},n=>{if(n===null){if(cur)hlDel(sc,cur.id);}else if(cur)hlPut(sc,Object.assign({},cur,{n}));
+    else hlPut(sc,{id:hlNewId(),k:'atl',p:s.pk,r:s.aid,f:sc.f,t:s.label,pre:'',suf:'',c:'',n,ct:Date.now()});hlAtlasBtn();});};}
 
 /* ===== GAPS (v0.11.0, Future-Features #11) — weakest topics first, from answers already given =====
    A topic is an item's section key (_sec: the pack's real topic, or its guide). Per topic: questions answered / wrong
@@ -4685,7 +5022,8 @@ function renderHome(){
    $('flagHomeBtn').innerHTML=(nF?'<span class="fi">⚑</span> Flagged (<span id="flagHomeN">'+nF+'</span>)':'')+(nB?(nF?' · ':'')+'<span class="bmi">'+BM_SVG(true)+'</span> '+nB:'');
    const gs=gapStats(),tried=gs.some(e=>e.qA||e.cS),nW=gs.filter(gapWeak).length; /* v0.11.0: the Gaps link, once anything has been tried */
    $('gapsHomeBtn').hidden=!tried;$('gapsHomeN').textContent=nW?` · ${nW} weak topic${nW===1?'':'s'}`:'';
-   $('flagHome').hidden=!nF&&!nB&&!tried;}
+   const nH=hlEntries().length;$('hlsHomeBtn').hidden=!nH;$('hlsHomeN').textContent=nH?' · '+nH:''; /* v0.14.0 */
+   $('flagHome').hidden=!nF&&!nB&&!tried&&!nH;}
   // topic-guides panel — hidden entirely when no active pack bundles guides
   $('revPanel').style.display=nG?'':'none';
   $('revPanelDesc').textContent=`${nG} topic guide${nG===1?'':'s'} bundled in your active packs.`;
@@ -4863,6 +5201,8 @@ function renderCard(){const c=cardOf(currentId);
   let body=`<div class="ctype">${TYPE_LABEL[c.type]||c.type}${revealed?' — '+c.topic:''}</div>`+renderInteractive(c);
   body+= !revealed ? `<div class="showbar"><button class="showbtn" id="showBtn">Show answer</button></div>` : renderAnswer(c)+renderGrades(c);
   $('cardbox').innerHTML=body;wireInteractive(c);try{mountCardWidget(c);}catch(e){}wireGuideLinks($('cardbox'));
+  try{const sc={k:'c',p:c._pack||'',r:c.id,f:'card',hide:()=>!hlVisible('c')};hlBind($('cardbox'),sc);hlMaskBtn('study','c');const fh=$('cardbox').querySelector('.labfig')||$('cardWidget');
+    if(fh){const fs=Object.assign({},sc,{f:'fig'}),find=()=>hlEntries().find(e=>e.k==='c'&&e.r===c.id&&e.f==='fig');hlFigBtn(fh,fs,find,plainText(c.prompt,80),'figure',()=>renderCard());}}catch(e){} /* v0.14.0 */
   if(!revealed)$('showBtn').addEventListener('click',()=>{revealed=true;renderCard();});else wireGrades(c);}
 function paintCardFlag(){const b=$('cardFlagBtn'),f=isFlagged(currentId);b.classList.toggle('on',f);b.setAttribute('aria-pressed',f?'true':'false');b.textContent=f?'⚑ Flagged':'⚑ Flag';} /* v0.8.0 */
 function renderInteractive(c){
@@ -5091,7 +5431,7 @@ function markInto(node,text,q){if(!q){node.appendChild(document.createTextNode(t
   while((idx=low.indexOf(q,i))>=0){if(idx>i)node.appendChild(document.createTextNode(text.slice(i,idx)));
     const mk=document.createElement('mark');mk.textContent=text.slice(idx,idx+q.length);node.appendChild(mk);i=idx+q.length;}
   if(i<text.length)node.appendChild(document.createTextNode(text.slice(i)));}
-function drugCard(d,label,q){const card=document.createElement('div');card.className='drugcard';card.id=drugSlug(d.id);
+function drugCard(d,label,q){const card=document.createElement('div');card.className='drugcard';card.id=drugSlug(d.id);card.dataset.did=d.id; /* v0.14.0 */
   const h=document.createElement('div');h.className='drugname';markInto(h,d.name,q);
   const ch=document.createElement('span');ch.className='drugclass';ch.textContent=label;h.appendChild(ch);card.appendChild(h);
   if(d.core){drugCardCore(card,d,q);return card;} /* v0.12.0 */
@@ -5114,7 +5454,8 @@ function renderPharmMain(){const host=$('pharmHost');host.innerHTML='';const q=p
   pharmGroups.forEach(g=>{const drugs=q?g.drugs.filter(d=>pharmMatch(d,g.label,q)):g.drugs;if(!drugs.length)return;
     const gh=document.createElement('div');gh.className='pharmclass';gh.textContent=g.label;host.appendChild(gh);
     drugs.forEach(d=>{host.appendChild(drugCard(d,g.label,q));shown++;});});
-  if(!shown)host.innerHTML='<div class="revempty">No drugs match \u201c'+pharmEscape(pharmQuery)+'\u201d.</div>';}
+  if(!shown)host.innerHTML='<div class="revempty">No drugs match \u201c'+pharmEscape(pharmQuery)+'\u201d.</div>';
+  host.querySelectorAll('.drugcard').forEach(c=>{try{hlBind(c,{k:'rx',p:'rx',r:c.dataset.did,f:''});}catch(e){}});} /* v0.14.0 */
 function renderPharmResults(){const nav=$('pharmNav');nav.innerHTML='';const q=pharmQuery.trim().toLowerCase();
   const hd=document.createElement('button');hd.className='revhide';hd.textContent='✕ Close results';hd.onclick=closePharmDrawer;nav.appendChild(hd);
   const hits=[];pharmGroups.forEach(g=>g.drugs.forEach(d=>{if(pharmMatch(d,g.label,q))hits.push({d,label:g.label});}));
@@ -5165,7 +5506,7 @@ function openAtlas(w,packId,state){const all=atlasWidgets();if(!all.length){rend
   pick.querySelectorAll('.sswb').forEach(b=>b.addEventListener('click',()=>openAtlas(all[+b.dataset.i].w,all[+b.dataset.i].packId)));
   show('atlas');setHdrH();sswEnsureCss(document);const host=$('atlasHost');host.innerHTML='';
   if(!atlasAllowed()){host.className='sswlive ssw-atlas';host.innerHTML=`<div class="sswread"><b>${sswEsc(cur.w.title||'The atlas')}</b> works in a desktop browser for now. Phones and iPads are coming.</div>`;return;}
-  mountWidget(host,cur.w,{full:true,packId:cur.packId,state:state||{}});}
+  atlasSlice=null;hlAtlasBtn();mountWidget(host,cur.w,{full:true,packId:cur.packId,state:state||{},onLevel:(pl,l)=>hlAtlasLevel(cur,pl,l)});}
 window.openAtlas=openAtlas;
 function openPharm(){setHdrH();pharmFocusId=null;pharmReturn=currentSection();$('pharmBackTo').textContent='to Home';pharmQuery='';const se=$('pharmSearch');if(se)se.value='';renderPharm();show('pharm');}
 
@@ -5225,12 +5566,12 @@ function renderGuideList(){const gl=$('guideList');gl.innerHTML='';
 function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();syncBmBtn(); /* v0.11.2 */
   const host=$('guideHost');host.innerHTML='';
   const fr=document.createElement('iframe');fr.className='guideframe';fr.setAttribute('sandbox','allow-same-origin allow-scripts allow-modals'); /* v0.10.15: WebKit ignores listeners in a script-less frame; the CSP in guideSrcdoc keeps guide scripts off */
-  fr.onload=()=>{try{const d=fr.contentDocument;if(!d)return;try{wireAtlasLinks(d);}catch(e){} /* v0.10.9 */ try{mountGuideWidgets(d,g,anchorOrSection);}catch(e){} /* v0.9.0 · v0.10.0: state links */try{hideOffSections(d,g);}catch(e){}let el=null; /* v0.6.6 */
+  fr.onload=()=>{try{const d=fr.contentDocument;if(!d)return;try{wireAtlasLinks(d);}catch(e){} /* v0.10.9 */ try{mountGuideWidgets(d,g,anchorOrSection);}catch(e){} /* v0.9.0 · v0.10.0: state links */try{hideOffSections(d,g);}catch(e){}let el=null; /* v0.6.6 */let hlGo=false;try{hlGo=hlGuideMount(d,g);}catch(e){} /* v0.14.0 */
     const anchor=anchorOrSection&&anchorOrSection.anchor;const section=anchorOrSection&&anchorOrSection.section;const search=anchorOrSection&&anchorOrSection.search;
     if(anchor)el=d.getElementById(anchor);
     if(!el&&section){el=[...d.querySelectorAll('h1,h2,h3,h4,[id]')].find(h=>(h.textContent||'').toLowerCase().includes(String(section).toLowerCase()));}
     if(!el&&search){el=highlightInDoc(d,search);}
-    if(el)el.scrollIntoView({block:'center'});
+    if(el&&!hlGo)el.scrollIntoView({block:'center'});
   }catch(e){}
   applyGuideView();
   try{if(!(anchorOrSection&&anchorOrSection.nosave))saveGuidePos(g);}catch(e){} /* v0.10.16: records which guide was read last (the in-guide spot is gone) */
@@ -5414,7 +5755,7 @@ function clearPrac(){prac=null;Store.set(KEY.prac,null);}
 /* ---- Exam persistence (v0.4.1): leaving an exam without submitting keeps it; tapping Exam resumes it. The timer pauses while away. ---- */
 function examInProgress(){return !!(examSave&&Array.isArray(examSave.qorder)&&examSave.qorder.length);}
 function saveExam(){if(qmode!=='test'||qTestSubmitted||!qorder.length)return;
-  examSave={v:1,at:Date.now(),qorder:qorder.slice(),qans:qans.slice(),qflag:qflag.slice(),qopt:qopt.map(a=>Array.isArray(a)?a.slice():a),qcur,left:qTimeLeft,t0:qT0};Store.set(KEY.exam,examSave);}
+  examSave={v:1,at:Date.now(),qorder:qorder.slice(),qans:qans.slice(),qflag:qflag.slice(),qopt:qopt.map(a=>Array.isArray(a)?a.slice():a),qcur,left:qTimeLeft,t0:qT0,hl:examHl.map(e=>Object.assign({},e))};Store.set(KEY.exam,examSave);} /* v0.14.0: hl */
 function clearExam(){examSave=null;Store.set(KEY.exam,null);}
 /* Past exams (v0.4.1): the last 20 exams — full or partial (started fresh over) — kept for review. */
 function logExam(e,partial){const m={};qpool().forEach(q=>m[q.id]=q);let answered=0,correct=0;
@@ -5433,14 +5774,14 @@ function openPastExams(){const b=$('pastBody');
   $('pastOv').style.display='flex';}
 function reviewPastExam(x){buildQmap();const keep=[];x.qorder.forEach((id,i)=>{if(qmap[id])keep.push(i);});
   if(!keep.length){toast('None of that exam’s questions are loaded any more.');return;}
-  qorder=keep.map(i=>x.qorder[i]);qmode='test';qTestSubmitted=true;qPrior={};qans=keep.map(i=>x.qans[i]!=null?x.qans[i]:null);qflag=keep.map(()=>false);qsub=keep.map(()=>true);qelapsed=keep.map(()=>0);
+  examHl=[];qorder=keep.map(i=>x.qorder[i]);qmode='test';qTestSubmitted=true;qPrior={};qans=keep.map(i=>x.qans[i]!=null?x.qans[i]:null);qflag=keep.map(()=>false);qsub=keep.map(()=>true);qelapsed=keep.map(()=>0);
   qopt=keep.map(i=>{const opts=qmap[x.qorder[i]].options||[];const a=x.qopt&&x.qopt[i];return (Array.isArray(a)&&a.length===opts.length)?a:optPerm(opts);});
   qcur=0;clearInterval(qTimerId);timerWanted=false;$('timer').style.display='none';$('flagBtn').style.display='';$('submitAnsBtn').style.display='none';$('skipBtn').style.display='none';$('finishBtn').style.display='none';
   $('paletteTitle').textContent='Question map · past exam';const dropped=x.qorder.length-keep.length;if(dropped)toast(`${dropped} question${dropped===1?'':'s'} from that exam aren’t loaded any more and were left out.`);
   qflReset();renderQuiz();show('quiz');}
 function resumeExam(){const p=examSave;buildQmap();const keep=[];p.qorder.forEach((id,i)=>{if(qmap[id])keep.push(i);});
   if(!keep.length){toast('None of that exam’s questions are loaded any more — set up a new one.');clearExam();openSetup('exam');return;}
-  qorder=keep.map(i=>p.qorder[i]);qmode='test';qTestSubmitted=false;qPrior={};qT0=p.t0||Date.now();
+  examHl=Array.isArray(p.hl)?p.hl.map(e=>Object.assign({},e)):[];qorder=keep.map(i=>p.qorder[i]);qmode='test';qTestSubmitted=false;qPrior={};qT0=p.t0||Date.now();
   qans=keep.map(i=>(Array.isArray(p.qans)&&p.qans[i]!==undefined)?p.qans[i]:null);qflag=keep.map(i=>!!(p.qflag&&p.qflag[i]));flagMigrate(qorder,qflag);qsub=keep.map(()=>false);qelapsed=keep.map(()=>0);
   qopt=keep.map(i=>{const opts=qmap[p.qorder[i]].options||[];const a=Array.isArray(p.qopt)?p.qopt[i]:null;return (Array.isArray(a)&&a.length===opts.length)?a:optPerm(opts);});
   const c=keep.indexOf(p.qcur);qcur=c>=0?c:0;qTimeLeft=typeof p.left==='number'?p.left:settings.examMinutes*60;
@@ -5490,7 +5831,7 @@ function startExam(){const pool=qTestPool('exam');if(!pool.length){toast(fltEmpt
   if(!picks.length){toast(mode==='only'&&fltOn('exam')?'None of the matching questions are fresh. Set Question selection to “Prefer fresh” or “Any”.':mode==='only'?'No fresh questions left in your active packs. Set Question selection to “Prefer fresh” in Settings.':'No questions available for an exam. Load a study pack (or widen the session difficulty).');return;}
   if(short)toast(`Only ${picks.length} fresh question${picks.length===1?'':'s'} fit your weighting, so this exam is ${short} short.`);
   else if(fltOn('exam')&&settings.examAuto&&picks.length<(settings.examTarget||40))toast(`Only ${picks.length} question${picks.length===1?'':'s'} match your filters, so this exam has ${picks.length}.`); /* v0.8.0 */
-  qorder=shuffle(picks);qmode='test';qPrior={};qT0=Date.now();qinit();qTestSubmitted=false;qTimeLeft=settings.examMinutes*60;saveExam();
+  examHl=[];qorder=shuffle(picks);qmode='test';qPrior={};qT0=Date.now();qinit();qTestSubmitted=false;qTimeLeft=settings.examMinutes*60;saveExam();
   timerWanted=!!settings.examTimer;$('flagBtn').style.display='';$('submitAnsBtn').style.display='none';
   $('finishBtn').textContent='Submit examination';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map';
   $('timer').classList.remove('over','warn');qflReset();renderQuiz();startQTick();show('quiz');}
@@ -5522,6 +5863,7 @@ function renderQuiz(){const q=qmap[qorder[qcur]],sel=qans[qcur],done=qRevealed(q
   if(qmode==='practice'){$('submitAnsBtn').style.display=qsub[qcur]?'none':'';$('submitAnsBtn').disabled=(qans[qcur]==null);if(settings.practiceTimer)updatePracClock();}
   {const f=isFlagged(qorder[qcur]),b=$('flagBtn');qflag[qcur]=f;b.classList.toggle('on',f);b.setAttribute('aria-pressed',f?'true':'false');b.title='Flag this question — it is saved to your Flagged list';
     b.innerHTML='⚑<span class="flw"> '+(f?'Flagged':'Flag')+'</span>';$('quiz').classList.toggle('prac',qmode==='practice');} /* v0.8.0: the saved flag, every mode */
+  {const ex=qmode==='test',hd=ex?null:()=>!hlVisible('q');hlBind($('qcard'),{k:'q',p:q._pack||'',r:q.id,f:'q',exam:ex,hide:hd});hlBind($('qafter'),{k:'q',p:q._pack||'',r:q.id,f:'a',exam:ex,hide:hd});hlMaskBtn('quiz',ex?null:'q');} /* v0.14.0: an exam keeps its own; Practice hides saved ones until the answer shows */
   renderGrid();}
 function renderGrid(){const g=$('grid');g.innerHTML='';let answered=0,correct=0,hits=0;
   for(let i=0;i<qorder.length;i++){
@@ -5575,6 +5917,8 @@ function showResults(auto){let total=0,correct=0;const byT={};
   const ag=document.createElement('button');ag.className='btn ghost';ag.textContent=qmode==='test'?'New test':'Restart practice';ag.onclick=()=>{qmode==='test'?openSetup('exam'):startPractice();};ra.appendChild(ag);
   const gb=document.createElement('button');gb.className='btn ghost';gb.textContent='See your gaps';gb.onclick=()=>openGaps('results');ra.appendChild(gb); /* v0.11.0 */
   const hb=document.createElement('button');hb.className='btn ghost';hb.textContent='Home';hb.onclick=()=>renderHome();ra.appendChild(hb);
+  if(qmode==='test'&&examHl.length){const kb=document.createElement('button');kb.className='btn ghost';kb.textContent='Keep my highlights ('+examHl.length+')';kb.title='Save this exam’s highlights and notes under Exams on your Highlights page';
+    kb.onclick=()=>{const n=hlKeepExam();kb.disabled=true;kb.textContent='Highlights kept ✓';toast(n+' highlight'+(n===1?'':'s')+' kept — find them under Exams on your Highlights page.',4500);};ra.insertBefore(kb,ra.children[1]||null);} /* v0.14.0 */
   $('resNote').textContent=qmode==='test'?(auto?'Time expired — auto-submitted.':(settings.examTimer?`Time used: ${fmt(settings.examMinutes*60-qTimeLeft)} of ${fmt(settings.examMinutes*60)}.`:'Untimed test.')):'';
   show('results');}
 function enterReview(){qTestSubmitted=true;if(qmode==='practice')for(let i=0;i<qorder.length;i++)qsub[i]=true;
@@ -5639,7 +5983,7 @@ function openSettings(){
   toggleSwitch($('setPracTimer'),settings.practiceTimer);toggleSwitch($('setExamTimer'),settings.examTimer);toggleSwitch($('setPracShuffle'),settings.practiceShuffle);
   toggleSwitch($('setPracOnlyNew'),!!settings.practiceOnlyNew);$('setExamFresh').value=settings.examFresh||'prefer';
   $('histPack').innerHTML='<option value="">All packs</option>'+packs.map(p=>`<option value="${acctEsc(p.id)}">${acctEsc(p.pack||p.id)}</option>`).join('');
-  toggleSwitch($('setOffload'),settings.autoOffload!==false);toggleSwitch($('setAutoUpd'),autoUpdOn()); /* v0.13.4 */
+  toggleSwitch($('setOffload'),settings.autoOffload!==false);toggleSwitch($('setAutoUpd'),autoUpdOn()); /* v0.13.4 */$('setHlShow').value=settings.hlShow||'after'; /* v0.14.0 */
   {const gs=[...userGroups()];$('setGroups').textContent=gs.length?'Your groups: '+gs.join(', '):'No access code yet — add one to unlock your group’s default study packs.';}
   renderWeights();$('setMsg').textContent='';$('settingsModal').classList.add('show');}
 function toggleSwitch(el,on){el.classList.toggle('on',on);el.setAttribute('role','switch');el.setAttribute('aria-checked',on?'true':'false');}
@@ -5755,7 +6099,20 @@ $('pharmBack').addEventListener('click',()=>renderHome());
 $('atlasBack').addEventListener('click',()=>{if(atlasReturn==='reviewer'&&activeGuides().length){show('reviewer');}else renderHome();}); /* v0.10.4 */
 $('openAtlas').addEventListener('click',()=>{if(atlasWidgets().length)openAtlas();});
 $('flagHomeBtn').addEventListener('click',openFlagged);$('revBm').addEventListener('click',()=>{if(!curGuideKey)return;const on=!isBookmarked(curGuideKey);setBookmark(curGuideKey,on);syncBmBtn();renderGuideList();toast(on?'Bookmarked.':'Bookmark removed.');}); /* v0.11.2 */
-$('gapsHomeBtn').addEventListener('click',()=>openGaps('home'));$('srsGapsBtn').addEventListener('click',()=>openGaps('srs'));$('qGapsBtn').addEventListener('click',()=>openGaps('quiz'));$('gapsBack').addEventListener('click',gapsBack); /* v0.11.0 */
+$('gapsHomeBtn').addEventListener('click',()=>openGaps('home'));
+/* v0.14.0 highlights */
+$('hlsHomeBtn').addEventListener('click',openHls);$('hlsBack').addEventListener('click',()=>renderHome());
+document.querySelectorAll('.hlhow').forEach(b=>{b.innerHTML=HL_SVG;b.addEventListener('click',()=>{if(b.closest('#quiz')&&qmode==='practice')return hlMaskToggle('q');if(b.closest('#study'))return hlMaskToggle('c');toast(HL_HOW,5000);});});
+$('setHlShow').addEventListener('change',e=>{settings.hlShow=e.target.value;hlMask=null;persist();});
+$('hlsQ').addEventListener('input',()=>{hlsQ=$('hlsQ').value;hlsShown=50;renderHls();});
+document.querySelectorAll('#hls [data-ht]').forEach(b=>b.addEventListener('click',()=>{hlsType=b.dataset.ht;hlsShown=50;renderHls();}));
+document.querySelectorAll('#hls [data-hc]').forEach(b=>b.addEventListener('click',()=>{const c=b.dataset.hc;hlsCols.has(c)?hlsCols.delete(c):hlsCols.add(c);hlsShown=50;renderHls();}));
+$('hlsWhere').addEventListener('change',()=>{hlsWhere=$('hlsWhere').value;hlsShown=50;renderHls();});$('hlsSort').addEventListener('change',()=>{hlsSort=$('hlsSort').value;renderHls();});
+$('hlNoteTx').addEventListener('input',hlNoteCount);$('hlNoteSave').addEventListener('click',()=>{const v=$('hlNoteTx').value.trim().slice(0,HL_NOTE_MAX);hlNoteClose(v?v:(!$('hlNoteDel').hidden?null:undefined));});
+$('hlNoteDel').addEventListener('click',()=>hlNoteClose(null));$('hlNoteCancel').addEventListener('click',()=>hlNoteClose());
+$('hlNoteOv').addEventListener('click',e=>{if(e.target===$('hlNoteOv'))hlNoteClose();});
+$('hlViewClose').addEventListener('click',hlViewClose);$('hlViewOv').addEventListener('click',e=>{if(e.target===$('hlViewOv'))hlViewClose();});
+hlWire(document);$('srsGapsBtn').addEventListener('click',()=>openGaps('srs'));$('qGapsBtn').addEventListener('click',()=>openGaps('quiz'));$('gapsBack').addEventListener('click',gapsBack); /* v0.11.0 */
 document.querySelectorAll('#gaps [data-gv]').forEach(b=>b.addEventListener('click',()=>{gapsView=b.dataset.gv;renderGaps();}));
 $('srsAgain').addEventListener('change',e=>{srsAgainOnly=!!e.target.checked;renderSrs();});$('flagBack').addEventListener('click',()=>renderHome());$('flagClearAll').addEventListener('click',clearAllFlags); /* v0.8.0 */
 $('srsFlt').addEventListener('change',e=>{srsFlagOnly=!!e.target.checked;renderSrs();});
