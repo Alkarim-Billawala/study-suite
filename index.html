@@ -1,5 +1,8 @@
 <!--
-  Study Suite  ·  v0.14.0 (beta)
+  Study Suite  ·  v0.14.1 (beta)
+  Changelog v0.14.1 (2026-11-02, Alkarim: "why only certain highlights hiding with button?"): tapping the highlighter button to
+  hide (hlMaskToggle → hlMask 'hide') now clears hlFresh, so it hides every highlight on the question or card, including ones
+  made earlier in the session while they were hidden by the setting. Highlights made after that still show (hlFresh again).
   Changelog v0.14.0 (2026-11-02, Alkarim: "Highlights in all view. topic guides and pharm - persist. in exam - only for that session.
   in review and practice persist. also central place to see all highlights, by week, similar to gaps." + answers to two rounds of
   questions, Drive side-session notes highlights-proposal-2026-11-02.md): HIGHLIGHTS AND NOTES. (1) Store: settings['hl:'+id] (see
@@ -2169,7 +2172,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.14.0';
+const APP_VERSION='0.14.1';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -4845,7 +4848,7 @@ function hlMaskBtn(sec,kind){const b=$(sec)&&$(sec).querySelector('.hlhow');if(!
   if(!kind){b.classList.remove('off');b.removeAttribute('aria-pressed');b.title='Select text to highlight it or add a note';b.setAttribute('aria-label','How to highlight');return;}
   const on=hlVisible(kind);b.classList.toggle('off',!on);b.setAttribute('aria-pressed',on?'true':'false');
   b.title=(on?'Highlights shown — tap to hide them.':'Highlights hidden — tap to show them.')+' Select text to highlight it or add a note.';b.setAttribute('aria-label',on?'Hide highlights':'Show highlights');}
-function hlMaskToggle(kind){hlMask=hlVisible(kind)?'hide':'show';let seen=false;try{seen=localStorage.getItem('suite_hlhow_v1')==='1';localStorage.setItem('suite_hlhow_v1','1');}catch(_){}
+function hlMaskToggle(kind){hlMask=hlVisible(kind)?'hide':'show';if(hlMask==='hide')hlFresh.clear(); /* v0.14.1: hide means all of them */let seen=false;try{seen=localStorage.getItem('suite_hlhow_v1')==='1';localStorage.setItem('suite_hlhow_v1','1');}catch(_){}
   if(kind==='q'){hlPaint($('qcard'));hlPaint($('qafter'));hlMaskBtn('quiz','q');}else{hlPaint($('cardbox'));hlMaskBtn('study','c');}
   toast((hlMask==='show'?'Highlights shown.':'Highlights hidden.')+(seen?'':' '+HL_HOW),seen?1600:5000);}
 /* ---- the Highlights page (section#hls) ---- */
