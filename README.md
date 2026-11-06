@@ -103,7 +103,7 @@ It's currently in **beta**.
   Android and Windows.
 - **Backup all** / **Restore backup** save and restore a file copy of everything.
 - Two colour themes, **Navy** and **Warm**, each in light, dark or black — or following your
-  device.
+  device. Switch light, dark or auto from the button in the top bar.
 
 ## Bring your own content
 
