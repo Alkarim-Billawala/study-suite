@@ -28,7 +28,8 @@ It's currently in **beta**.
   you haven't answered yet first, while keeping the weighting you chose.
 - **Topic Guides** — in-depth guides built into every pack, one per concept. Search their titles
   *and* their content, print them, and jump straight in from any answer's guide link. Every week
-  ends with a one-page **cram sheet**. Some guides carry figures you can work with — step through
+  ends with a one-page **cram sheet**. Most guides end with a quick **Check your understanding**: a few of that
+  guide's questions and cards, a new mix each time. Some guides carry figures you can work with — step through
   levels, tap a structure to name it, quiz yourself, play heart sounds and watch a heartbeat or an ECG run, step by step — and you can **bookmark** the ones you come back to.
 - **Pharmacology** — a drug index built from all your active packs: use, mechanism, dosing,
   cautions, adverse effects, monitoring and interactions for each drug, grouped by class, with

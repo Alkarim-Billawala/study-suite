@@ -1,5 +1,18 @@
 <!--
-  Study Suite  ·  v0.14.3 (beta)
+  Study Suite  ·  v0.15.0 (beta)
+  Changelog v0.15.0 (2026-11-06, Alkarim: "a button … at the bottom of every topic guide … practice questions now … based on the
+  content of that specific guide"; answers: a handful, not every question, "I still want questions to be left for … dedicated
+  review, practice sessions"; cards too, not all; "less than four questions, don't bother"; pointer guides and cram sheets
+  none; Extras follow the switch; counts in the question history; and no frame inside the guide frame, after the atlas): a
+  "Check your understanding" box at the end of a guide's body (gcMount, after the highlights mount, last child of .page or
+  body). It is plain markup in the guide document, never a frame or widget; its buttons are caught by a delegated click on
+  the guide document (the atlas-link pattern) and the session runs in the app's own Practice or Review view. gcItems = the
+  guide's items in qpool()/deck() (so source and Extras switches apply) whose guide pointer file is this guide's file, same
+  pack. gcSize(n) = 0 under 4, else a third rounded up, 3 to 6. Questions: a random handful → beginPractice (history as any
+  practice); a practice in progress asks Replace first, as Gaps does. Cards: a random handful → gapsQueue + startSession
+  (the review schedule moves as in any review). The box hides in print and in the iOS download copy. Practice summary and
+  Session complete get "← Back to the guide" (gcBack: reopens the guide and scrolls to the box) while the session came from
+  a guide; the summary's restart button becomes "Another set from this guide".
   Changelog v0.14.3 (2026-11-06, Alkarim: "add a little like sun, moon, auto thing … for dark mode, light mode, auto?" and
   "clicking study suite on the top left takes you home, just as if you were to click the home button"): a theme button
   (#themeBtn, .hbtn) just left of the account button cycles Auto → Light → Dark → Auto. It drives the existing
@@ -1908,7 +1921,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
     <div class="big">Session complete.</div>
     <div class="sub" id="doneSub"></div>
     <div class="stats" id="doneStats"></div>
-    <div class="done-actions"><button class="btn" id="doneStudyMore" style="display:none">Keep studying</button><button class="btn ghost" id="doneHome">Back to deck</button></div>
+    <div class="done-actions"><button class="btn" id="doneGuide" style="display:none">← Back to the guide</button><button class="btn" id="doneStudyMore" style="display:none">Keep studying</button><button class="btn ghost" id="doneHome">Back to deck</button></div>
   </section>
 
   <!-- BROWSE -->
@@ -2190,7 +2203,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.14.3';
+const APP_VERSION='0.15.0';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -5032,6 +5045,52 @@ function gapsReview(k){const cs=deck().filter(c=>c._sec===k);if(!cs.length)retur
   if(!q.length)q=rest.sort(bd); /* everything up to date: go over the started cards anyway */
   filter=new Set([k]);srsFlagOnly=false;srsAgainOnly=false;gapsQueue=q;startSession();}
 
+/* ===== v0.15.0: CHECK YOUR UNDERSTANDING at the end of a guide =====
+   Plain markup appended inside the guide document (never a frame or widget: the atlas inside the guide frame was the
+   mistake v0.10.4 undid). Its buttons are caught by one delegated click on the guide document, as atlas links are, and the
+   session runs in the app's own Practice / Review views. A handful: a third, 3 to 6; nothing below 4 of a kind. */
+const GC_MIN=4,GC_LO=3,GC_HI=6;
+let gcGuide=null,gcPending=null,gcCardGuide=null,gcCardPending=null; /* {pack,key}: the guide the current session came from */
+function gcSize(n){return n<GC_MIN?0:Math.max(GC_LO,Math.min(GC_HI,Math.ceil(n/3)));}
+function gcItems(g){const f=g&&g.file;if(!f)return {qs:[],cs:[]};const mine=x=>x._pack===g._pack&&String(guideFile(x)||'').split('#')[0]===f;
+  return {qs:qpool().filter(mine),cs:deck().filter(mine)};}
+const GC_CSS='.sscheck{display:block;box-sizing:border-box;width:auto;max-width:440px;margin:30px auto 10px;padding:14px 16px 15px;border:1.5px solid var(--line);border-radius:9px;text-align:center;-webkit-user-select:none;user-select:none}'
+  +'.sscheck .gc-k{font:600 10px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0}'
+  +'.sscheck .gc-s{font-size:12.5px;line-height:1.4;color:var(--soft,var(--ink));margin:6px 0 11px}'
+  +'.sscheck button{display:block;box-sizing:border-box;width:100%;margin:0;border-radius:7px;padding:10px 12px;font:inherit;font-size:13.5px;line-height:1.25;cursor:pointer;-webkit-appearance:none;appearance:none}'
+  +'.sscheck button+button{margin-top:8px}'
+  +'.sscheck .gc-1{background:var(--accent);color:var(--paper);border:1.5px solid var(--accent);font-weight:600}'
+  +'.sscheck .gc-2{background:transparent;color:var(--ink);border:1.5px solid var(--line)}'
+  +'.sscheck button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}'
+  +'@media print{.sscheck{display:none!important}}';
+function gcMount(d,g){try{if(!d||!d.body)return;d.querySelectorAll('.sscheck').forEach(x=>x.remove());
+  const it=gcItems(g),nq=gcSize(it.qs.length),nc=gcSize(it.cs.length);if(!nq&&!nc)return;
+  if(!d.getElementById('ssCheckCss')){const st=d.createElement('style');st.id='ssCheckCss';st.textContent=GC_CSS;(d.head||d.documentElement).appendChild(st);}
+  const box=d.createElement('aside');box.className='sscheck';box.setAttribute('aria-label','Check your understanding');
+  const k=d.createElement('p');k.className='gc-k';k.textContent='Check your understanding';
+  const pl=(n,w)=>n+' '+w+(n===1?'':'s');const s=d.createElement('p');s.className='gc-s';
+  s.textContent=[nq?pl(nq,'question'):'',nc?pl(nc,'card'):''].filter(Boolean).join(' and ')+' from this guide, a new mix each time.';
+  box.append(k,s);
+  const btn=(kind,label,cls)=>{const b=d.createElement('button');b.type='button';b.className=cls;b.setAttribute('data-sscheck',kind);b.textContent=label;box.appendChild(b);};
+  if(nq)btn('q','Practice questions now','gc-1');if(nc)btn('c','Review cards now',nq?'gc-2':'gc-1');
+  (d.querySelector('.page')||d.body).appendChild(box);
+  if(!d.__gcWired){d.__gcWired=true;d.addEventListener('click',e=>{const b=e.target&&e.target.closest&&e.target.closest('[data-sscheck]');if(!b)return;e.preventDefault();
+    if(b.getAttribute('data-sscheck')==='c')gcCards(g);else gcPractise(g);});}
+}catch(e){}}
+function gcRef(g){return {pack:g._pack,key:guideKey(g)};}
+function gcPractise(g){const it=gcItems(g),n=gcSize(it.qs.length);if(!n)return;
+  const go=()=>{buildQmap();qorder=shuffle(it.qs.map(q=>q.id)).slice(0,n);gcPending=gcRef(g);beginPractice('Question map · '+guideMeta(g).label);};
+  if(pracInProgress()){confirmDialog('You have a practice session in progress. Replace it with a few questions from this guide? (Your answers so far are kept in your history.)',{confirmText:'Replace'},()=>{flushPrac(prac);clearPrac();go();});return;}
+  go();}
+function gcCards(g){const it=gcItems(g),n=gcSize(it.cs.length);if(!n)return;
+  filter=new Set(it.cs.map(c=>c._sec));srsFlagOnly=false;srsAgainOnly=false;gapsQueue=shuffle(it.cs.map(c=>c.id)).slice(0,n);gcCardPending=gcRef(g);startSession();}
+function gcFind(r){return r?activeGuides().find(x=>x._pack===r.pack&&guideKey(x)===r.key)||null:null;}
+function gcBack(r){const g=gcFind(r);if(!g){renderHome();return;}
+  revNavOpen=false;setBackLabel();show('reviewer');
+  const fr=document.querySelector('.guideframe');let d=null;try{d=fr&&fr.contentDocument;}catch(e){}
+  if(d&&d.body&&curGuideKey===r.key){gcMount(d,g);setTimeout(()=>{try{const b=d.querySelector('.sscheck');if(b)b.scrollIntoView({block:'end'});}catch(e){}},80);}
+  else loadGuide(g,{nosave:true,gcEnd:true});}
+
 /* ===== HOME ===== */
 function renderHome(){
   scheduleAutoPacks(); // v0.12.3: default and paired packs (debounced; adds only what's missing)
@@ -5226,9 +5285,12 @@ function buildSession(){const now=Date.now();const due=[],learn=[],news=[];
   deck().forEach(c=>{if(!inScope(c))return;const s=sched[c.id];if(s.phase==='new')news.push(c.id);else if(s.due<=now){(s.phase==='review'?due:learn).push(c.id);}});
   due.sort((a,b)=>sched[a].due-sched[b].due);learn.sort((a,b)=>sched[a].due-sched[b].due);
   sessionQueue=[...learn,...due,...shuffle(news).slice(0,Math.max(0,settings.srsNewPerDay-daily.count))];}
-function startSession(){buildSession();studiedThisSession=0;if(sessionQueue.length===0){renderSrs();return;}presentNext();}
+function startSession(){gcCardGuide=gcCardPending;gcCardPending=null; /* v0.15.0 */buildSession();studiedThisSession=0;if(sessionQueue.length===0){renderSrs();return;}presentNext();}
 function presentNext(){if(sessionQueue.length===0){finishSession();return;}try{sswSoundStop();}catch(e){} /* v0.13.0 */currentId=sessionQueue.shift();revealed=false;work={picks:new Set(),pick:null,order:[],pool:null,optorder:null};renderCard();show('study');}
-function finishSession(){$('doneSub').textContent=srsSpecial()?'You’ve been through every '+(srsFlagOnly&&srsAgainOnly?'flagged card marked Again':srsFlagOnly?'flagged card':'card marked Again')+' in this scope.':'Nothing more due in this scope right now.';$('doneStats').textContent=`You reviewed ${studiedThisSession} card${studiedThisSession===1?'':'s'}.`;const m=counts();$('doneStudyMore').style.display=(!srsSpecial()&&m.nw+m.lr+m.rv>0)?'':'none';show('srsdone');}
+function finishSession(){$('doneSub').textContent=srsSpecial()?'You’ve been through every '+(srsFlagOnly&&srsAgainOnly?'flagged card marked Again':srsFlagOnly?'flagged card':'card marked Again')+' in this scope.':'Nothing more due in this scope right now.';$('doneStats').textContent=`You reviewed ${studiedThisSession} card${studiedThisSession===1?'':'s'}.`;const m=counts();$('doneStudyMore').style.display=(!srsSpecial()&&m.nw+m.lr+m.rv>0)?'':'none';
+  const gcG=gcFind(gcCardGuide);$('doneGuide').style.display=gcG?'':'none';$('doneStudyMore').classList.toggle('ghost',!!gcG); /* v0.15.0 */
+  if(gcG)$('doneSub').textContent='Those were a few of this guide’s cards. The rest come up in Review as usual.';
+  show('srsdone');}
 function renderCard(){const c=cardOf(currentId);
   $('sTag').textContent=`${sysLabel(c.sys).split(' ')[0]} · ${c.topic}`;$('sTag').style.visibility=revealed?'':'hidden'; /* v0.10.17 */
   $('sLeft').textContent=`${sessionQueue.length} left · ${TYPE_LABEL[c.type]||c.type}`;paintCardFlag();
@@ -5601,6 +5663,7 @@ function loadGuide(g,anchorOrSection){curGuideKey=guideKey(g);renderGuideList();
   const host=$('guideHost');host.innerHTML='';
   const fr=document.createElement('iframe');fr.className='guideframe';fr.setAttribute('sandbox','allow-same-origin allow-scripts allow-modals'); /* v0.10.15: WebKit ignores listeners in a script-less frame; the CSP in guideSrcdoc keeps guide scripts off */
   fr.onload=()=>{try{const d=fr.contentDocument;if(!d)return;try{wireAtlasLinks(d);}catch(e){} /* v0.10.9 */ try{mountGuideWidgets(d,g,anchorOrSection);}catch(e){} /* v0.9.0 · v0.10.0: state links */try{hideOffSections(d,g);}catch(e){}let el=null; /* v0.6.6 */let hlGo=false;try{hlGo=hlGuideMount(d,g);}catch(e){} /* v0.14.0 */
+    gcMount(d,g);if(anchorOrSection&&anchorOrSection.gcEnd){const gb=d.querySelector('.sscheck');if(gb)setTimeout(()=>{try{gb.scrollIntoView({block:'end'});}catch(_){}},80);} /* v0.15.0 */
     const anchor=anchorOrSection&&anchorOrSection.anchor;const section=anchorOrSection&&anchorOrSection.section;const search=anchorOrSection&&anchorOrSection.search;
     if(anchor)el=d.getElementById(anchor);
     if(!el&&section){el=[...d.querySelectorAll('h1,h2,h3,h4,[id]')].find(h=>(h.textContent||'').toLowerCase().includes(String(section).toLowerCase()));}
@@ -5661,7 +5724,7 @@ function iosStandalone(){const ua=navigator.userAgent||'';return isStandalone()&
 let guideCopyUrl=null;
 function openGuideCopy(fr){try{const d=fr.contentDocument;if(!d||!d.documentElement)return false;
   const root=d.documentElement.cloneNode(true);root.style.zoom='';
-  root.querySelectorAll('#ssTheme,#ssFit').forEach(x=>x.remove());
+  root.querySelectorAll('#ssTheme,#ssFit,.sscheck,#ssCheckCss').forEach(x=>x.remove()); /* v0.15.0: no practice box in the copy */
   const head=root.querySelector('head')||root,body=root.querySelector('body')||root;
   let t=root.querySelector('title');if(!t){t=d.createElement('title');head.appendChild(t);}
   const g=(organizeGuides().flatMap(x=>x.items)).find(x=>guideKey(x.g)===curGuideKey);t.textContent=g?g.title:'Topic guide';
@@ -5832,7 +5895,7 @@ function resumePractice(){const p=prac;buildQmap();
   const keep=[];p.qorder.forEach((id,i)=>{if(qmap[id])keep.push(i);}); /* the session's own mix — difficulty was chosen when it started */
   if(!keep.length){toast('None of that session’s questions are loaded any more — starting fresh.');clearPrac();startPracticeFresh();return;}
   const pick=(arr,fill)=>keep.map(i=>(Array.isArray(arr)&&arr[i]!==undefined&&arr[i]!==null)?arr[i]:fill);
-  qorder=keep.map(i=>p.qorder[i]);qmode='practice';qTestSubmitted=false;
+  qorder=keep.map(i=>p.qorder[i]);qmode='practice';qTestSubmitted=false;gcGuide=null; /* v0.15.0 */
   qans=keep.map(i=>(Array.isArray(p.qans)&&p.qans[i]!==undefined)?p.qans[i]:null);qsub=pick(p.qsub,false);qflag=pick(p.qflag,false);flagMigrate(qorder,qflag);qelapsed=pick(p.qelapsed,0);
   qopt=keep.map(i=>{const opts=qmap[p.qorder[i]].options||[];const a=Array.isArray(p.qopt)?p.qopt[i]:null;return (Array.isArray(a)&&a.length===opts.length)?a:optPerm(opts);});
   const c=keep.indexOf(p.qcur);qcur=c>=0?c:0;qT0=p.t0||0;buildPrior(qT0);
@@ -5849,6 +5912,7 @@ function startPracticeFresh(){const pool=qTestPool('prac');if(!pool.length){toas
   old.sort((a,b)=>(qhist[a].ok===qhist[b].ok?0:(qhist[a].ok?1:-1))||(qhist[a].at-qhist[b].at));
   qorder=fresh.concat(old);beginPractice('Question map · practice');}
 function beginPractice(title){ /* v0.11.0: shared by Practice and Gaps (qorder already set) */
+  gcGuide=gcPending;gcPending=null; /* v0.15.0 */
   qmode='practice';qT0=Date.now();buildPrior(qT0);
   qinit();qTestSubmitted=false;
   timerWanted=!!settings.practiceTimer;$('flagBtn').style.display='';$('submitAnsBtn').style.display='';
@@ -5948,7 +6012,9 @@ function showResults(auto){let total=0,correct=0;const byT={};
   const bd=$('breakdown');bd.innerHTML='';Object.keys(SYS_LABEL).concat(Object.keys(byT).filter(k=>!SYS_LABEL[k])).forEach(s=>{if(!byT[s])return;const {c,t}=byT[s],p=Math.round(c/t*100);bd.innerHTML+=`<div class="brow2"><div class="top"><span class="name">${sysLabel(s)}</span><span class="sc">${c}/${t} · ${p}%</span></div><div class="bar ${p>=70?'good':''}"><i style="width:${p}%"></i></div></div>`;});
   const ra=$('resActions');ra.innerHTML='';
   const rb=document.createElement('button');rb.className='btn';rb.textContent='Review every question →';rb.onclick=enterReview;ra.appendChild(rb);
-  const ag=document.createElement('button');ag.className='btn ghost';ag.textContent=qmode==='test'?'New test':'Restart practice';ag.onclick=()=>{qmode==='test'?openSetup('exam'):startPractice();};ra.appendChild(ag);
+  const gcG=qmode==='practice'?gcFind(gcGuide):null; /* v0.15.0: the session came from a guide's check box */
+  if(gcG){const gr=gcGuide,bk=document.createElement('button');bk.className='btn';bk.textContent='← Back to the guide';bk.onclick=()=>gcBack(gr);ra.insertBefore(bk,ra.firstChild);rb.className='btn ghost';}
+  const ag=document.createElement('button');ag.className='btn ghost';ag.textContent=qmode==='test'?'New test':gcG?'Another set from this guide':'Restart practice';ag.onclick=()=>{if(qmode==='test')openSetup('exam');else if(gcG)gcPractise(gcG);else startPractice();};ra.appendChild(ag);
   const gb=document.createElement('button');gb.className='btn ghost';gb.textContent='See your gaps';gb.onclick=()=>openGaps('results');ra.appendChild(gb); /* v0.11.0 */
   const hb=document.createElement('button');hb.className='btn ghost';hb.textContent='Home';hb.onclick=()=>renderHome();ra.appendChild(hb);
   if(qmode==='test'&&examHl.length){const kb=document.createElement('button');kb.className='btn ghost';kb.textContent='Keep my highlights ('+examHl.length+')';kb.title='Save this exam’s highlights and notes under Exams on your Highlights page';
@@ -6183,6 +6249,7 @@ $('studyBtn').addEventListener('click',startSession);
 $('browseBtn').addEventListener('click',renderBrowse);
 $('doneHome').addEventListener('click',openReview);
 $('doneStudyMore').addEventListener('click',startSession);
+$('doneGuide').addEventListener('click',()=>gcBack(gcCardGuide)); /* v0.15.0 */
 $('topicToggle').addEventListener('click',()=>{const p=$('topicPanel');p.classList.toggle('open');$('topicToggle').querySelector('.ph-t').textContent=(p.classList.contains('open')?'▾':'▸')+' Choose topics';});
 $('allTopics').addEventListener('click',()=>{filter=null;renderSrs();}); // ALL ⇒ every chip on, studies all
 $('noneTopics').addEventListener('click',()=>{filter=new Set();renderSrs();}); // none ⇒ no chips on, studies nothing
