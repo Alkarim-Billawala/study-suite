@@ -1,5 +1,70 @@
 <!--
-  Study Suite  ·  v0.15.0 (beta)
+  Study Suite  ·  v0.16.0 (beta)
+  v0.16.0 also: STRIKE OUT ANSWER OPTIONS (Future-Features #28). Each option in Practice and Exam sits in an .optrow with
+  a small strike control (.optx: an eye, an eye with a line through it once struck; "Strike out option B" / "Restore option B"); right-click an option or Shift+its letter does
+  the same. A struck option is greyed with a line through it; striking never selects or answers; choosing a struck
+  option selects it and removes the strike. Strikes live in localStorage suite_strikes_v1 for this session only (keyed
+  by mode + qT0, and per presentation — position + question id — so a resumed session keeps them and a question shown
+  again, later in the same run or in any new session, starts clean; Alkarim: "ephemeral") — never in question history,
+  never synced. They stay visible after the answer shows (controls disabled then). Cards (.choice) are unchanged.
+  v0.16.0 also: FEEDBACK / REPORT A PROBLEM (spec §0a). A small raised-hand button (✋ emoji, aria-label "Report a
+  problem") on a revealed question (#qafter), a card, the guide bar and the station debrief; the footer Feedback link opens
+  the same form (#fbOv): four kinds, message 10–4000, "Include this item" (on), "Sent with this" + collapsed diagnostic
+  details (fbDiag: app version, device, active packs, sync status + recent Sync activity, recorded errors; capped; never
+  study content, codes, keys or tokens). Sent with SSAccount.sendFeedback to the feedback collection; offline or signed out
+  → queued on this device (suite_fbq_v1, not synced) with a client id, sent by fbFlush on reconnect / app checks, never
+  twice (a duplicate client id counts as sent). 401 → sign in again; 404 or other → the email address instead. api()
+  errors carry .data.
+  v0.16.0 also: OSCE STATIONS (SPEC-station-mode-feedback-v0.1-2026-11-13.md; "sure. spin it up"). ingestPack keeps
+  pack.stations (validateStation: title, stem, checklist sections with items t; bad ones skipped, counted in p.stBad) and an
+  optional pack.rubric; repairPacks re-reads a copy an older app read when the list says the pack has stations (mp.ns).
+  Home panel #stationPanel + library tag; <section id="station">: list (Solo / With a partner, kind and level filters,
+  last score) → instructions with the reading countdown + Start now → encounter on the header timer (stTimerId; over-time
+  shows +m:ss, nothing forced; partner ticks by section with why under a ticked item; solo: notes box + microphone —
+  focuses the box, and starts the browser's own speech recognition only where it exists, else a one-line hint) →
+  examiner questions (probe countdown, Show answers, 0..n stepper) → debrief (checklist + probe scores, per section,
+  missed items with why, solo ticks against the notes, optional rubric rating, guide link; Try again · Next station · All
+  stations). Leaving mid-station asks first and saves nothing. History stLog (KEY.stations, last 50): persist, sync payload
+  'stations' (mergeLog; an older app's copy without the key keeps this device's), backup/restore, wipe, localHasData.
+  Changelog v0.16.0 (2026-11-13, Alkarim: "No more usage without an account" … a gate that tells them "they have to sign up
+  for an account, but that all their data is still preserved in their browser" … "make sure the carryover is clean"; his
+  answers in Accounts_Required_Plan-v0.4-2026-11-13.md; "build it all together"): ACCOUNTS REQUIRED. (1) The existing front
+  door is the gate: applyGate() shows it whenever gateNeeded() — no account session on this device (acctSignedIn() reads
+  suite_acct_v1 directly, so it is right before SSAccount.load), or a session that has been refused for more than 3 days
+  (suite_expired_v1, set when sync goes 'expired', cleared on 'ok' / sign-in / sign-out), unless GATE_PASS. Use without an
+  account (#eacNoAcct), its "?" and the noacct view are gone. (2) gateMode(): 'data' (this browser holds study data —
+  localHasData()) → title "Study Suite now needs an account" + everything-is-still-here line, straight to screen 2 when
+  the device already holds a code (pending filled from eac), Save a backup file link, and a one-time local safety copy
+  (suite_preacct_v1 in IndexedDB, 30 days; Settings-row button "Restore my copy from before the account"); 'expired' →
+  "Sign in to keep going" on screen 1. Screen 2 gains Sign in and Restore links. (3) Account server unreachable (health
+  check 5 s, on every gate show and after an offline sign-in/sign-up error) → #eacDown "Continue for now" (GATE_PASS for this
+  page load); gateRecheck() on every app-version check (open, 5 min, return, reconnect) brings the front door back on Home
+  once the server answers. (4) Restore no longer unlocks (the gate looks at the session; a backup never holds one) — the
+  restored data rides into the account. (5) Sign-out and account deletion land on the front door. (6) Sign-up tries the
+  typed code, the front-door code, then every code the device holds (acctCreate); refused → code box + Request link;
+  acctRegisterCodes adds the device's other codes to the account after sign-up and sign-in while a group is missing.
+  Sign-up order unchanged (recovery code after the account is created). (7) localHasData()/localEmpty() count history,
+  exams, practice, highlights/notes/bookmarks/flags (a device with only those uploads and merges, never overwritten).
+  (8) Sign-out "remove everything I studied" also clears history, exams, highlights/notes/bookmarks/flags and codes; still
+  only after a finished sync. (9) merge3 notes a dropped resumable practice. (10) [outlines: withdrawn, unchanged]
+  (11) quietRefUpdates:
+  Reference packs wait like week packs while updInterrupts(). (12) Copy: sign-in note, save hint, install box.
+  Changelog v0.16.x (sound engine) (2026-11-13, Alkarim: "lets factor this out so its working across both and is more flexible in
+  the future"; design Drive Claude/StudySuite/lung-atlas-2026-11-11/SOUND-ENGINE-DESIGN-v0.1-2026-11-13.md): ONE SOUND ENGINE,
+  KINDS. SSW_KINDS = {heart, breath}; a kind brings its renderer, its strip, its rate list (heart 60 72 90 110 bpm, breath
+  12 16 20 28 /min), its playback low-pass (heart 900 Hz as before, breath 3.5 kHz), its comparison sound (normal, vesicular),
+  whether it has Breathing in and manoeuvre chips, and its hint line. renderSound(d,rate,flag,o) dispatches on d.kind (no kind
+  = heart, so every pack keeps working); the heart synthesiser is now sswRenderHeart, body unchanged: every heart sound
+  renders byte-identical WAVs. o.kind forces a kind (the cycle widget asks for heart). pack.sounds[id].layers = [{kind, gain,
+  rate, seed, ...}]: the first layer sets the cycle; each other layer plays at its own rate (else its kind's default), fitted to
+  a whole number of its cycles per first-layer cycle so the loop has no seam, low-passed at its own kind's filter, summed by
+  gain, normalised to 0.8; the player shows a chip per added layer (not on a card's question side). Breath sounds
+  (sswRenderBreath, seeded): type vesicular | bronchovesicular | bronchial, ie [insp, exp], gap; adv [{type crackles (size
+  fine | coarse) | wheeze | rhonchi | stridor | rub, phase insp | exp | both, from, to, n, pitch, gain}]. The breath strip
+  (sswPpgSvg) draws one breath from the same plan and event list as the sound: inspiration up, expiration down, the pause as
+  a gap, crackles as ticks, tonal sounds as wavy bands, a rub as zigzag bursts, a playhead. Player, sound cards (strip hidden
+  until the reveal), guide links, Real recording and the stop rules are shared. ingestPack keeps pack.sounds whole, so kind,
+  layers and adv survive import, backup and sync without a change.
   Changelog v0.15.0 (2026-11-06, Alkarim: "a button … at the bottom of every topic guide … practice questions now … based on the
   content of that specific guide"; answers: a handful, not every question, "I still want questions to be left for … dedicated
   review, practice sessions"; cards too, not all; "less than four questions, don't bother"; pointer guides and cram sheets
@@ -1086,6 +1151,20 @@ section{display:none}section.on{display:block}
 .seg i{font-style:normal;font-family:var(--font-mono);font-size:11px;opacity:.6;margin-left:5px}
 .seg.on i{opacity:.8}
 /* content reviewer panel */
+#station .st-h{margin:0;font-size:20px;overflow-wrap:anywhere;min-width:0}#station .revbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+#station .st-seg{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}#station .st-seg .seg{min-height:40px}
+#station .st-list{display:flex;flex-direction:column;gap:8px}
+#station .st-row{display:flex;gap:10px;align-items:center;justify-content:space-between;border:1.5px solid var(--line);background:var(--paper);border-radius:10px;padding:10px 12px;cursor:pointer;min-width:0;min-height:44px;color:var(--ink);text-align:left;font:inherit;width:100%;box-sizing:border-box}
+#station .st-row>div{min-width:0}#station .st-t{font-weight:600;overflow-wrap:anywhere}#station .st-m{font-size:13px;opacity:.75;overflow-wrap:anywhere}
+#station .st-grp{margin:16px 0 6px;font-weight:600}#station .st-stem{white-space:pre-wrap;line-height:1.5}
+#station .st-sec{margin:14px 0 4px;font-weight:600}#station .st-item{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line);min-height:44px;box-sizing:border-box}
+#station .st-item>div{min-width:0;overflow-wrap:anywhere}#station .st-item input{width:22px;height:22px;flex:none;margin-top:2px}
+#station .st-why{font-size:13px;opacity:.8;margin-top:4px}#station .st-miss{opacity:.65}
+#station textarea{width:100%;box-sizing:border-box;min-height:160px;font:inherit;padding:10px;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink)}
+#station .st-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}#station .st-probe{border-bottom:1px solid var(--line);padding:10px 0}
+#station .st-step{display:inline-flex;align-items:center;gap:8px;margin-top:6px}#station .st-step button{min-width:44px;min-height:44px}
+#station .st-score{font-size:22px;font-weight:700;margin:6px 0}#station .st-cols{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+@media (min-width:760px){#station .st-cols.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 .revpanel{display:flex;align-items:center;justify-content:space-between;gap:14px;border:1.5px solid var(--line);background:var(--paper);border-radius:10px;padding:16px 18px;margin:18px 0 0}
 .revpanel .rp-t{font-family:var(--font-head);font-weight:600;font-size:19px}
 .revpanel .rp-d{color:var(--ink-soft);font-size:14px;margin-top:3px}
@@ -1252,6 +1331,12 @@ section{display:none}section.on{display:block}
 .installbtn.tile.ghost:hover{filter:none;border-color:var(--accent-soft);color:var(--ink)}
 .installbtn.tile.upd{background:var(--accent);border-color:var(--accent);color:var(--paper);animation:updpulse 2.4s ease-in-out infinite}
 @keyframes updpulse{0%,100%{box-shadow:0 0 0 0 transparent}50%{box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 28%,transparent)}}
+.fbbtn{display:inline-flex;align-items:center;justify-content:center;min-width:36px;min-height:36px;padding:6px;vertical-align:middle}
+.fbglyph{font-size:18px;line-height:1}#qafter .fbq{float:right;margin:0 0 6px 8px}
+#fbOv .modal-card{position:relative;padding-bottom:0}#fbOv .fb-kinds label{display:flex;gap:10px;align-items:center;padding:2px 0;min-height:32px;line-height:1.3}#fbOv h3{margin-top:0}
+#fbOv .fb-foot{position:sticky;bottom:0;background:var(--paper);padding:10px 0 16px;margin-top:6px;border-top:1px solid var(--line)}#fbOv textarea{width:100%;box-sizing:border-box;min-height:96px;font:inherit;padding:10px;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink)}
+#fbOv .fb-count{font-size:12px;opacity:.7;text-align:right}#fbOv .fb-sent{font-size:13px;margin:10px 0}#fbOv .fb-sent ul{margin:4px 0 6px 18px;padding:0}
+#fbOv pre{white-space:pre-wrap;word-break:break-word;font-size:11px;max-height:200px;overflow:auto}
 .modal-ov{position:fixed;inset:0;background:rgba(29,27,22,.45);z-index:50;display:flex;align-items:center;justify-content:center;padding:18px}
 .modal-card{background:var(--paper);border:1.5px solid var(--line);border-radius:12px;max-width:560px;width:100%;max-height:88vh;overflow-y:auto;padding:20px 22px}
 .modal-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
@@ -1291,6 +1376,7 @@ section{display:none}section.on{display:block}
 @media (max-width:440px){#timer:not([style*="none"])~#themeBtn{display:none}} /* v0.14.3: a phone in a timed quiz (timer + Home + Update + account) has no room; the header was 7 px too wide at 390 */
 .skiprow{display:flex;justify-content:flex-end;margin-top:8px}.skiplink{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.06em;background:none;border:0;padding:4px 2px;color:var(--ink-soft);cursor:pointer;text-decoration:underline;text-underline-offset:3px}.skiplink:hover{color:var(--accent)}
 @media (max-width:560px){.controls{gap:6px}.controls .mid{gap:6px}.controls .nbtn{padding:9px 12px;font-size:15px;white-space:nowrap}.sa-long{display:none}}
+@media (max-width:400px){.controls{gap:4px}.controls .mid{gap:4px}.controls .nbtn{padding-left:9px;padding-right:9px}} /* v0.16.0: Practice row fits 375 px */
 .acctbtn{position:relative;width:34px;height:34px;flex:none;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--ink-soft);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
 .acctbtn svg{width:20px;height:20px}
 .acctbtn:hover{border-color:var(--accent-soft);color:var(--ink)}
@@ -1315,7 +1401,7 @@ section{display:none}section.on{display:block}
 .setup-card{max-width:520px;position:relative}.setup-card h3{font-family:var(--font-head);font-weight:600;font-size:22px;margin:0 0 10px;padding-right:28px}
 .setup-card .setsub{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin:16px 0 2px;border-top:1px solid var(--line);padding-top:12px}
 .setup-card .note{text-align:left}.setup-fresh{margin:-4px 0 6px;font-size:13px}.setup-card .btn.wide{width:100%;margin-top:16px}
-.segctl.sdiff .seg{padding:7px 11px;font-size:14px}.segctl.sdiff .seg i{font-style:normal;font-family:var(--font-mono);font-size:11px;opacity:.7;margin-left:3px}
+.segctl.sdiff .seg{padding:7px 11px;font-size:14px}#setupExam [hidden]{display:none!important}.extypes{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;min-width:0}.extypes .seg,.extypes .seg:last-child{border:1.5px solid var(--line);border-radius:8px;padding:6px 10px;font-size:14px}#exTypeRow{align-items:flex-start}#exTypeRow>span{flex:none;padding-top:7px}@media (max-width:480px){.extypes{justify-content:flex-start;width:100%}}.extypes .seg.on{border-color:var(--accent)}.extypes .seg i{font-style:normal;font-family:var(--font-mono);font-size:11px;opacity:.7;margin-left:3px}.setup-card .exmix{justify-content:flex-start;flex-wrap:wrap;gap:8px 16px}.exmix label{display:inline-flex;align-items:center;gap:5px;font-size:14px}.setrow.exmix input[type=number]{width:62px}.excomp{display:inline-flex;align-items:center;gap:6px;flex:none}.excomp i{font-style:normal;font-family:var(--font-mono);font-size:12px;color:var(--ink-soft)}.segctl.sdiff .seg i{font-style:normal;font-family:var(--font-mono);font-size:11px;opacity:.7;margin-left:3px}
 @media (max-width:480px){.setup-card .setrow{flex-wrap:wrap}}
 .histlbl{font-size:15px;margin:9px 0 6px}.histrow{display:flex;gap:8px;align-items:center}.histrow select{flex:1 1 auto;min-width:0;width:100%;text-overflow:ellipsis;font-family:var(--font-body);font-size:15px;padding:6px 8px;border:1.5px solid var(--line);border-radius:5px;background:var(--paper2);color:var(--ink)}
 @media (max-width:480px){.setsec .segctl{flex:none}.setsec .segctl .seg{padding:8px 10px;font-size:14px}}
@@ -1553,7 +1639,7 @@ section{display:none}section.on{display:block}
 }
 /* QUIZ */
 #quiz{margin-top:22px}
-.qmeta{display:flex;align-items:center;justify-content:space-between;margin:0 0 6px;gap:10px}
+.qmeta{display:flex;align-items:center;justify-content:space-between;margin:0 0 6px;gap:10px}#qpos{white-space:nowrap;flex:none} /* v0.16.0: the counter stays on one line */
 .qmeta .left{display:flex;align-items:center;gap:8px}
 .qmeta .tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);border:1px solid var(--line);background:var(--paper);padding:4px 9px;border-radius:20px}
 .qmeta .pos{font-family:var(--font-mono);font-size:12px;color:var(--ink-soft)}
@@ -1562,6 +1648,12 @@ section{display:none}section.on{display:block}
 .qafter{margin-top:18px}.qafter:empty{display:none}.qafter .verdictline{margin-top:0} /* v0.13.2: answer under the nav row */
 .stem{font-size:20px;line-height:1.6;margin:18px 0 18px}.stem .lead{font-family:var(--font-head);font-weight:600}
 .opts{display:flex;flex-direction:column;gap:11px}
+.optrow{display:flex;gap:6px;align-items:stretch;min-width:0}.optrow>.opt{flex:1 1 auto;min-width:0}
+.optx{flex:none;width:38px;border:1.5px solid var(--line);border-radius:7px;background:var(--paper);color:var(--ink);cursor:pointer;font:inherit;opacity:.55;padding:0}
+.optx::before{content:"";display:block;width:20px;height:20px;margin:auto;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E") center/contain no-repeat}
+.optx[aria-pressed=true]::before{-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9.9 5.2A10.4 10.4 0 0 1 12 5c6.4 0 10 7 10 7a17.6 17.6 0 0 1-3.2 4.1M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6'/%3E%3Cpath d='M9.9 9.9a3 3 0 0 0 4.2 4.2'/%3E%3Cpath d='M3 3l18 18'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9.9 5.2A10.4 10.4 0 0 1 12 5c6.4 0 10 7 10 7a17.6 17.6 0 0 1-3.2 4.1M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6'/%3E%3Cpath d='M9.9 9.9a3 3 0 0 0 4.2 4.2'/%3E%3Cpath d='M3 3l18 18'/%3E%3C/svg%3E")}.optx:hover:not(:disabled),.optx[aria-pressed=true]{opacity:1}
+.optx[aria-pressed=true]{border-color:var(--ink)}.optx:disabled{cursor:default}
+.optrow.struck>.opt{opacity:.45}.optrow.struck>.opt>span:last-child{text-decoration:line-through}
 .opt{display:flex;gap:13px;align-items:flex-start;border:1.5px solid var(--line);background:var(--paper);border-radius:7px;padding:13px 15px;cursor:pointer;transition:border-color .15s,background .15s,transform .08s;text-align:left;font:inherit;color:inherit;width:100%}
 .opt:hover{border-color:var(--accent-soft);transform:translateX(2px)}
 .opt .letter{flex:none;width:27px;height:27px;border-radius:50%;border:1.5px solid var(--ink-soft);display:grid;place-items:center;font-family:var(--font-mono);font-weight:600;font-size:13px;color:var(--ink-soft);transition:all .15s;margin-top:1px}
@@ -1780,21 +1872,24 @@ mark.hl.flash{outline:2px solid #e08a00;outline-offset:1px}
       <button type="submit" class="eacgo" id="eacUnlock" aria-label="Continue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </form>
     <div class="eacerr" id="eacErr" role="alert"></div>
-    <div class="eacmore"><a href="#" id="eacRestore">Restore a backup</a><span aria-hidden="true">·</span><a id="eacRequest" href="mailto:accesscodes@studysuite.app?subject=Study%20Suite%20Access%20Code%20Request&body=Hi!%20I'd%20like%20to%20request%20an%20access%20code%20for%20Study%20Suite.%0D%0A%0D%0AName%3A%20%0D%0ASchool%20%2F%20Occupation%3A%20%0D%0AProgram%20%2F%20Year%20(if%20a%20student)%3A%20%0D%0AHow%20I%20heard%20about%20Study%20Suite%3A%20%0D%0A%0D%0AThanks!">Request an access code</a></div>
+    <div class="eacmore"><a href="#" class="eacdata" id="eacBackup" hidden>Save a backup file</a><span aria-hidden="true" class="eacdata" hidden>·</span><a href="#" id="eacRestore">Restore a backup</a><span aria-hidden="true">·</span><a id="eacRequest" href="mailto:accesscodes@studysuite.app?subject=Study%20Suite%20Access%20Code%20Request&body=Hi!%20I'd%20like%20to%20request%20an%20access%20code%20for%20Study%20Suite.%0D%0A%0D%0AName%3A%20%0D%0ASchool%20%2F%20Occupation%3A%20%0D%0AProgram%20%2F%20Year%20(if%20a%20student)%3A%20%0D%0AHow%20I%20heard%20about%20Study%20Suite%3A%20%0D%0A%0D%0AThanks!">Request an access code</a></div>
     </div>
     <div id="eacS2" hidden>
       <button type="button" class="btn wide" id="eacSignUp">Create an account</button>
       <p class="eacnote">Keeps your progress safe and synced across your devices.</p>
       <div class="eacor"><span>or</span></div>
-      <div class="eacnoacct"><button type="button" class="btn ghost wide" id="eacNoAcct">Use without an account</button><button type="button" class="eachelp" id="eacHelp" aria-label="What does using it without an account mean?">?</button></div>
+      <button type="button" class="btn ghost wide" id="eacIn2">I already have an account — Sign in</button>
+      <div class="eacmore"><a href="#" class="eacdata" id="eacBackup2" hidden>Save a backup file</a><span aria-hidden="true" class="eacdata" hidden>·</span><a href="#" id="eacRestore2">Restore a backup</a><span aria-hidden="true">·</span><a id="eacRequest2" href="mailto:accesscodes@studysuite.app">Request an access code</a></div>
       <a href="#" class="eachave" id="eacBack">← Back</a>
     </div>
+    <div id="eacDown" hidden><p class="eacnote">Can’t reach the account server right now. You can keep studying — you’ll be asked again once it’s back.</p><button type="button" class="btn wide" id="eacGoOn" style="margin-top:12px">Continue for now</button></div>
+    <div class="eacmore"><a href="privacy.html" target="_blank" rel="noopener">Privacy</a><span aria-hidden="true">·</span><a href="terms.html" target="_blank" rel="noopener">Terms</a></div>
   </div>
 </div>
 <script>/* Show the gate at parse time (before content paints) when armed; skip if this browser already
    has a stored unlock. Async init re-confirms via the app's storage layer. */
 (function(){try{var g=document.getElementById('eacGate');if(!(window.EAC&&window.EAC.on))return;g.hidden=false;
-var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unlocked)g.hidden=true;}}catch(e){}})();</script>
+var r=localStorage.getItem('suite_eac_v1'),a=JSON.parse(localStorage.getItem('suite_acct_v1')||'null'),x=+localStorage.getItem('suite_expired_v1')||0;if(r){var o=JSON.parse(r);if(o&&o.unlocked&&a&&a.token&&a.id&&!(x&&Date.now()-x>3*864e5))g.hidden=true;} /* v0.16.0: an account is required */}catch(e){}})();</script>
 
 <header class="top">
   <div class="top-inner">
@@ -1837,6 +1932,10 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div><div class="rp-t">Atlas</div><div class="rp-d" id="atlasPanelDesc">Drawn sections and views, from your active packs.</div></div>
       <button class="btn ghost sm" id="openAtlas">Open the atlas</button>
     </div>
+    <div class="revpanel" id="stationPanel" style="display:none">
+      <div><div class="rp-t">OSCE stations</div><div class="rp-d" id="stationPanelDesc">Timed practice with a checklist and examiner questions. Solo, or with a partner as examiner.</div></div>
+      <button class="btn ghost sm" id="openStations">Practise a station</button>
+    </div>
 
     <div class="rule"></div>
     <div class="libpanel" id="libPanel">
@@ -1865,6 +1964,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <button class="minor accent" id="settingsBtn">⚙ Settings</button>
       <button class="minor" id="backupBtn">Backup all</button>
       <button class="minor" id="restoreBtn">Restore backup</button>
+      <button class="minor" id="preAcctBtn" hidden>Restore my copy from before the account</button>
       <input type="file" id="restoreFile" accept="application/json" style="display:none">
     </div>
     <div class="savestate" id="saveState"></div>
@@ -1880,7 +1980,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       </div>
       <div class="infopanel" id="faqPanel" style="display:none">
         <div class="faqbody">
-          <!-- GEN:faq · filled from FAQ.md at deploy (Pack Tools/public_copy.py) --><div class="faq-sec">The basics — how it works today</div><h4>What is Study Suite?</h4><p>A study tool with three ways to study — <b>Review</b> (spaced-repetition flashcards), <b>Practice</b> (one question at a time with instant feedback) and <b>Exam</b> (timed, scored mock tests) — plus <b>Topic Guides</b> and a <b>Pharmacology</b> drug index to read from. The app itself is empty — you load <b>study packs</b> that hold the questions, cards and guides. An account is optional and adds encrypted sync between your devices. It's currently in beta.</p><h4>Is it really free?</h4><p>Yes — completely free, with no ads, no tracking, and no account required. Studying runs entirely in your own browser, so there's nothing to charge for — and sync, the optional account feature, is free during the beta. If you want to chip in toward the costs of building it, there's an optional "Support development" link, but it's never required and unlocks nothing — the whole app is yours to use.</p><h4>Where is my data stored? Can you see it?</h4><p>Everything — your packs, review progress, scores, and settings — is stored locally in your own browser, on your own device. Without an account, <b>none of it is sent anywhere.</b> There's no analytics and no tracking cookies. If you turn on sync, your data is end-to-end encrypted on your device before it's uploaded — so either way, I genuinely can't see what you study or how you're doing.</p><h4>How do I back up my progress or move to another device?</h4><p>Use <b>Backup all</b> to save a file with everything in it, then <b>Restore backup</b> on your other device (or after clearing your browser). Or create a free account and turn on sync (below). It's worth backing up now and then, since your progress lives in your browser and clearing site data would wipe it.</p><h4>Does it work offline?</h4><p>Yes, fully. The app is a single self-contained file. Once it's loaded in your browser — or installed to your home screen — it keeps working with no internet connection. Your packs and progress are right there on your device.</p><h4>Can I add it to my phone or computer like a real app?</h4><p>Yes — use <b>Add to Home Screen</b> (the app walks you through it for your device). One thing to know: an installed copy may keep its <b>own separate storage</b> from the browser version (on iPhone and iPad it always does). With an account, just sign in inside the installed app and everything syncs across. No account? <b>Backup all</b> first, then <b>Restore backup</b> inside the installed app.</p><h4>Can I make my own study packs, or use my own notes?</h4><p>Absolutely — that's encouraged. Download the <a href="Study_Suite_Authoring_Guide_latest.md" download><b>instruction set</b></a> (also linked on the home screen) and hand it to the AI assistant of your choice; it walks the assistant through turning your own material into a pack you can load. Packs you make from your own content are <b>yours</b>. (The app, its design, and the pack format are mine, but the content you bring into it is entirely your own.)</p><h4>Is any of this medical advice?</h4><p>No. Study Suite and its packs are <b>educational material for exam preparation only</b> — not medical advice, and never a basis for real decisions about real patients. It's also in beta, so content can contain errors or go out of date. Always check against your own curriculum and trusted sources.</p><div class="faq-sec">Studying</div><h4>Why can't I hear the low heart sounds?</h4><p>S3, S4 and the rumble of a narrowed mitral valve sit below what most phone and laptop speakers can play. Use earphones. Sounds are meant to play even with your phone's silent switch on.</p><h4>How does Practice decide the order of questions?</h4><p>Questions you've never answered come first. Ones you've answered before go to the end — the ones you got wrong last time ahead of the ones you got right — and they're marked on the question map. Each starts clear, with <b>View prior answer</b> if you want to see what you picked before. Prefer only new ones? Turn on <b>Unanswered questions only</b> when you set up Practice. <b>Skip</b> moves on without counting a question as seen.</p><h4>Can I leave an exam and come back to it?</h4><p>Yes. Leave part-way and the exam is saved, with the timer paused. Tap <b>Exam</b> to <b>Resume</b> — or <b>Start fresh</b>, which keeps the questions you'd answered (you can look back at them under <b>Past exams</b>) and sets up a new exam that avoids them.</p><h4>How do highlights and notes work?</h4><p>Select text in a topic guide, the Pharmacology Index, a question or a card, then tap a colour or <b>Note</b>. Tap a highlight to change it or remove it. Figures and atlas slices have a note button of their own. Everything is listed under <b>Highlights</b> on Home, by week.</p><p>In Practice and Review your saved highlights appear once you've answered; the highlighter button shows or hides them. Exams start clean — tap <b>Keep my highlights</b> on the results screen to save the ones you made.</p><h4>What are topics?</h4><p>Topics are the main subjects each week covers — anywhere from about 6 to 20 per week. They're what you choose from in <b>Review</b>, what you can narrow <b>Practice</b> and <b>Exam</b> to, and one way to weight an exam. Each question and card also carries a smaller label for its exact point.</p><h4>What's the Pharmacology view?</h4><p>A drug index built from every pack you have switched on. Each drug gets its use, mechanism, dosing, cautions, adverse effects, monitoring and interactions, grouped by drug class, with links back to the week and topic guide that teach it.</p><div class="faq-sec">Accounts &amp; sync</div><h4>What does sync do?</h4><p>Sign in on each of your devices — phone, laptop, tablet — and your packs and progress stay in step automatically. Changes sync in the background a few seconds after you make them, whenever you open or come back to the app, and every few minutes while it's open. Offline? Keep studying; it catches up as soon as you're back online. The cloud icon is <b>green</b> when you're in sync, <b>yellow</b> if the last sync is a few minutes old or you're offline, and <b>red</b> if something needs your attention. It's the automatic version of <b>Backup all</b>.</p><h4>Do I have to make an account?</h4><p>No. Choose <b>Use without an account</b> and everything works exactly as before — free, offline, on your device. Your progress just stays in that one browser, so use <b>Backup all</b> now and then. You can create an account any time from the account menu at the top right of the homepage.</p><h4>Does sync cost anything?</h4><p>Sync is free during the beta. It's the one feature that needs a server running around the clock, so it may become a paid option one day. If it does, you'll get at least 30 days' notice in the app, your account stays, and the app keeps working without sync. Everything you can do on your own device stays free.</p><h4>How do I create an account?</h4><p>From the welcome screen or the account menu, choose <b>Create an account</b>. During early access you'll need your access code. You'll get a <b>recovery code</b> straight away — save it in a password manager or somewhere safe.</p><h4>Can you see my synced data?</h4><p>No. Sync is <b>end-to-end encrypted</b>: your data is scrambled on your device <i>before</i> it's uploaded, and only the scrambled version is stored. The key that unlocks it never leaves your devices. That means <b>I can't read your synced data</b> — not for support, not for anything — because I simply don't have the key.</p><h4>What if I forget my password?</h4><p>Choose <b>Forgot password?</b> when signing in and you'll get an email with a link to set a new one. Then enter your <b>recovery code</b> to unlock your synced data — nothing is lost.</p><h4>What if I lose both my password and my recovery code?</h4><p>Your <b>synced</b> copy can't be unlocked by anyone — including me. That's the whole point of end-to-end encryption. But <b>your studying isn't gone:</b> the data on your devices is untouched, and any <b>Backup all</b> file still works. Reset your password, choose <b>Start fresh</b>, and sign in on the device where you last studied — its data becomes your new account copy.</p><h4>What if two devices change at the same time?</h4><p>They're combined — nothing to choose, and nothing studied is lost. If the same card was studied on both, the most recent review counts. Answers to the same question on both are all kept in your history. If a pack was switched on or off on both, the latest switch wins; a pack you removed stays removed. An unfinished exam that's replaced by a newer one moves to <b>Past exams</b>. <b>Sync activity</b> in the account menu lists what was combined, on any of your devices.</p><h4>How do I see which devices are syncing?</h4><p>Account menu → <b>Your devices</b> lists each browser or installed app that syncs with your account, with its app version and when it last synced. Give the one you're on a name you'll recognise — names are saved inside your encrypted study data. <b>Sign out other devices</b> (under Security) signs out all the others at once.</p><h4>What does an account store, and is it private?</h4><p>The minimum: your email address, your encrypted study data, a random ID for each device that syncs, and a few details needed to run the account. No selling data, no ads, no tracking. The <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> lists everything; see also the <a href="terms.html" target="_blank" rel="noopener">Terms</a>.</p><h4>How do I delete my account?</h4><p>Account menu → <b>Delete account</b>. It's instant and permanent, and your data on your devices stays where it is.</p><!-- /GEN:faq -->
+          <!-- GEN:faq · filled from FAQ.md at deploy (Pack Tools/public_copy.py) --><div class="faq-sec">The basics — how it works today</div><h4>What is Study Suite?</h4><p>A study tool with three ways to study — <b>Review</b> (spaced-repetition flashcards), <b>Practice</b> (one question at a time with instant feedback) and <b>Exam</b> (timed, scored mock tests) — plus <b>Topic Guides</b> and a <b>Pharmacology</b> drug index to read from. The app itself is empty — you load <b>study packs</b> that hold the questions, cards and guides. You sign in with a free account, which keeps your progress encrypted and in sync between your devices. It's currently in beta.</p><h4>Is it really free?</h4><p>Yes. Study Suite is free while it's in beta, with no ads and no tracking; you just need a free account. If that ever changes, I'll let you know well before it does. If you want to chip in toward the costs of building it, there's an optional "Support development" link, but it's never required and unlocks nothing.</p><h4>Where is my data stored? Can you see it?</h4><p>Everything — your packs, review progress, scores, and settings — is stored in your own browser, on your own device, and synced to your account. There's no analytics and no tracking cookies. Before anything is uploaded, it's end-to-end encrypted on your device — so I genuinely can't see what you study or how you're doing.</p><h4>How do I back up my progress or move to another device?</h4><p>Use <b>Backup all</b> to save a file with everything in it, then <b>Restore backup</b> on your other device (or after clearing your browser). Or create a free account and turn on sync (below). It's worth backing up now and then, since your progress lives in your browser and clearing site data would wipe it.</p><h4>Does it work offline?</h4><p>Yes, fully. The app is a single self-contained file. Once it's loaded in your browser — or installed to your home screen — it keeps working with no internet connection. Your packs and progress are right there on your device.</p><h4>Can I add it to my phone or computer like a real app?</h4><p>Yes — use <b>Add to Home Screen</b> (the app walks you through it for your device). One thing to know: an installed copy may keep its <b>own separate storage</b> from the browser version (on iPhone and iPad it always does). Just sign in inside the installed app and everything syncs across.</p><h4>Can I make my own study packs, or use my own notes?</h4><p>Absolutely — that's encouraged. Download the <a href="Study_Suite_Authoring_Guide_latest.md" download><b>instruction set</b></a> (also linked on the home screen) and hand it to the AI assistant of your choice; it walks the assistant through turning your own material into a pack you can load. Packs you make from your own content are <b>yours</b>. (The app, its design, and the pack format are mine, but the content you bring into it is entirely your own.)</p><h4>Is any of this medical advice?</h4><p>No. Study Suite and its packs are <b>educational material for exam preparation only</b> — not medical advice, and never a basis for real decisions about real patients. It's also in beta, so content can contain errors or go out of date. Always check against your own curriculum and trusted sources.</p><div class="faq-sec">Studying</div><h4>Why can't I hear the low heart sounds?</h4><p>S3, S4 and the rumble of a narrowed mitral valve sit below what most phone and laptop speakers can play. Use earphones. Sounds are meant to play even with your phone's silent switch on.</p><h4>How does Practice decide the order of questions?</h4><p>Questions you've never answered come first. Ones you've answered before go to the end — the ones you got wrong last time ahead of the ones you got right — and they're marked on the question map. Each starts clear, with <b>View prior answer</b> if you want to see what you picked before. Prefer only new ones? Turn on <b>Unanswered questions only</b> when you set up Practice. <b>Skip</b> moves on without counting a question as seen.</p><h4>Can I leave an exam and come back to it?</h4><p>Yes. Leave part-way and the exam is saved, with the timer paused. Tap <b>Exam</b> to <b>Resume</b> — or <b>Start fresh</b>, which keeps the questions you'd answered (you can look back at them under <b>Past exams</b>) and sets up a new exam that avoids them.</p><h4>How do highlights and notes work?</h4><p>Select text in a topic guide, the Pharmacology Index, a question or a card, then tap a colour or <b>Note</b>. Tap a highlight to change it or remove it. Figures and atlas slices have a note button of their own. Everything is listed under <b>Highlights</b> on Home, by week.</p><p>In Practice and Review your saved highlights appear once you've answered; the highlighter button shows or hides them. Exams start clean — tap <b>Keep my highlights</b> on the results screen to save the ones you made.</p><h4>What are topics?</h4><p>Topics are the main subjects each week covers — anywhere from about 6 to 20 per week. They're what you choose from in <b>Review</b>, what you can narrow <b>Practice</b> and <b>Exam</b> to, and one way to weight an exam. Each question and card also carries a smaller label for its exact point.</p><h4>What's the Pharmacology view?</h4><p>A drug index built from every pack you have switched on. Each drug gets its use, mechanism, dosing, cautions, adverse effects, monitoring and interactions, grouped by drug class, with links back to the week and topic guide that teach it.</p><div class="faq-sec">Accounts &amp; sync</div><h4>What does sync do?</h4><p>Sign in on each of your devices — phone, laptop, tablet — and your packs and progress stay in step automatically. Changes sync in the background a few seconds after you make them, whenever you open or come back to the app, and every few minutes while it's open. Offline? Keep studying; it catches up as soon as you're back online. The cloud icon is <b>green</b> when you're in sync, <b>yellow</b> if the last sync is a few minutes old or you're offline, and <b>red</b> if something needs your attention. It's the automatic version of <b>Backup all</b>.</p><h4>Do I have to make an account?</h4><p>Yes, since app v0.16.0. A free account keeps your progress safe if your browser clears its storage, and keeps your devices in step. If you were using Study Suite without one, nothing you did is lost: it's still saved in your browser, and it all moves into your account when you create one or sign in.</p><h4>How do I create an account?</h4><p>From the welcome screen, choose <b>Create an account</b>. During early access you'll need your access code. You'll get a <b>recovery code</b> straight away — save it in a password manager or somewhere safe.</p><h4>Can you see my synced data?</h4><p>No. Sync is <b>end-to-end encrypted</b>: your data is scrambled on your device <i>before</i> it's uploaded, and only the scrambled version is stored. The key that unlocks it never leaves your devices. That means <b>I can't read your synced data</b> — not for support, not for anything — because I simply don't have the key.</p><h4>What if I forget my password?</h4><p>Choose <b>Forgot password?</b> when signing in and you'll get an email with a link to set a new one. Then enter your <b>recovery code</b> to unlock your synced data — nothing is lost.</p><h4>What if I lose both my password and my recovery code?</h4><p>Your <b>synced</b> copy can't be unlocked by anyone — including me. That's the whole point of end-to-end encryption. But <b>your studying isn't gone:</b> the data on your devices is untouched, and any <b>Backup all</b> file still works. Reset your password, choose <b>Start fresh</b>, and sign in on the device where you last studied — its data becomes your new account copy.</p><h4>What if two devices change at the same time?</h4><p>They're combined — nothing to choose, and nothing studied is lost. If the same card was studied on both, the most recent review counts. Answers to the same question on both are all kept in your history. If a pack was switched on or off on both, the latest switch wins; a pack you removed stays removed. An unfinished exam that's replaced by a newer one moves to <b>Past exams</b>. <b>Sync activity</b> in the account menu lists what was combined, on any of your devices.</p><h4>How do I see which devices are syncing?</h4><p>Account menu → <b>Your devices</b> lists each browser or installed app that syncs with your account, with its app version and when it last synced. Give the one you're on a name you'll recognise — names are saved inside your encrypted study data. <b>Sign out other devices</b> (under Security) signs out all the others at once.</p><h4>What does an account store, and is it private?</h4><p>The minimum: your email address, your encrypted study data, a random ID for each device that syncs, and a few details needed to run the account. No selling data, no ads, no tracking. The <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> lists everything; see also the <a href="terms.html" target="_blank" rel="noopener">Terms</a>.</p><h4>How do I delete my account?</h4><p>Account menu → <b>Delete account</b>. It's instant and permanent, and your data on your devices stays where it is.</p><h4>How do I report a problem or send feedback?</h4><p>Tap the small ✋ button on a question, card or guide — or <b>Feedback</b> at the bottom of the page. It tells me which item you mean and sends a few diagnostic details (shown before you send). If you're offline, it goes as soon as you're back. I read every one.</p><!-- /GEN:faq -->
         </div>
       </div>
     </div>
@@ -1889,7 +1989,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="foot-row">built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
       <div class="foot-row" id="supportWrap" style="display:none"><a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></div>
     </div>
-    <div class="footlinks"><a href="mailto:support@studysuite.app">Support</a> · <a href="mailto:feedback@studysuite.app">Feedback</a> · <a href="mailto:alkarim@studysuite.app">Contact me</a> · <a href="privacy.html" target="_blank" rel="noopener">Privacy</a> · <a href="terms.html" target="_blank" rel="noopener">Terms</a></div>
+    <div class="footlinks"><a href="mailto:support@studysuite.app">Support</a> · <a href="#" id="fbFoot" data-fb="app">Feedback</a> · <a href="mailto:alkarim@studysuite.app">Contact me</a> · <a href="privacy.html" target="_blank" rel="noopener">Privacy</a> · <a href="terms.html" target="_blank" rel="noopener">Terms</a></div>
   </section>
 
   <!-- SRS DECK -->
@@ -1912,7 +2012,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
   <!-- SRS STUDY -->
   <section id="study">
-    <div class="sprog"><span class="tag" id="sTag">—</span><span class="sprog-r"><span id="sLeft"></span><button class="nbtn hlhow" type="button" title="Select text to highlight it or add a note" aria-label="How to highlight"></button><button class="nbtn flagbtn cflag" id="cardFlagBtn" type="button" aria-pressed="false" title="Flag this card — it is saved to your Flagged list">⚑ Flag</button></span></div>
+    <div class="sprog"><span class="tag" id="sTag">—</span><span class="sprog-r"><span id="sLeft"></span><button class="nbtn hlhow" type="button" title="Select text to highlight it or add a note" aria-label="How to highlight"></button><button class="nbtn flagbtn cflag" id="cardFlagBtn" type="button" aria-pressed="false" title="Flag this card — it is saved to your Flagged list">⚑ Flag</button><button class="nbtn fbbtn" id="fbCardBtn" type="button" data-fb="item" aria-label="Report a problem" title="Report a problem"></button></span></div>
     <div class="cardbox" id="cardbox"></div>
   </section>
 
@@ -1960,7 +2060,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
   <!-- CONTENT REVIEWER -->
   <section id="reviewer">
-    <div class="revbar"><button class="minor backbtn" id="revBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2" id="revBackTo"></span></button><h2 class="revtitle" id="revTitle" role="button" tabindex="0" aria-expanded="false" aria-controls="guideList" title="Show or hide the topic list">Topic Guides <span class="revcaret" aria-hidden="true">▾</span></h2><button class="revfind" id="revFind" type="button" title="Search topics & content" aria-label="Search topics and content"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><line x1="21" y1="21" x2="15.5" y2="15.5"></line></svg></button><button class="revfind revbm" id="revBm" type="button" title="Bookmark this guide" aria-label="Bookmark this guide" aria-pressed="false"></button><button class="revfind hlhow" type="button" title="Select text to highlight it or add a note" aria-label="How to highlight"></button>
+    <div class="revbar"><button class="minor backbtn" id="revBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span><span class="bk2" id="revBackTo"></span></button><h2 class="revtitle" id="revTitle" role="button" tabindex="0" aria-expanded="false" aria-controls="guideList" title="Show or hide the topic list">Topic Guides <span class="revcaret" aria-hidden="true">▾</span></h2><button class="revfind" id="revFind" type="button" title="Search topics & content" aria-label="Search topics and content"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><line x1="21" y1="21" x2="15.5" y2="15.5"></line></svg></button><button class="revfind fbbtn" id="fbGuideBtn" type="button" data-fb="item" aria-label="Report a problem" title="Report a problem"></button><button class="revfind revbm" id="revBm" type="button" title="Bookmark this guide" aria-label="Bookmark this guide" aria-pressed="false"></button><button class="revfind hlhow" type="button" title="Select text to highlight it or add a note" aria-label="How to highlight"></button>
       <div class="sizer">
         <div class="szgrp">
           <button class="minor" id="zoomOut" title="Smaller text">−</button>
@@ -1982,6 +2082,11 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <div class="gp-mid"><div class="gp-pages" id="gpPages"></div><div class="gp-where" id="gpWhere"></div><div class="gp-count" id="gpCount"></div></div>
       <button class="gp-btn gp-next" id="gpNext" type="button"><span class="gp-dir" id="gpNextDir"></span><span class="gp-ttl" id="gpNextTtl"></span></button>
     </nav>
+  </section>
+
+  <section id="station">
+    <div class="revbar"><button class="minor backbtn" id="stBack"><span class="bk1"><span class="bka">←</span><span class="bkw"> Back</span></span></button><h2 class="st-h" id="stTitle">OSCE stations</h2></div>
+    <div id="stBody"></div>
   </section>
 
   <section id="pharm">
@@ -2006,7 +2111,7 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
   <div class="modal-ov" id="installOv" style="display:none">
     <div class="modal-card" role="dialog" aria-label="Add to Home Screen">
       <div class="modal-bar"><h3>Add to Home Screen</h3><button class="minor" id="installClose">✕ Close</button></div>
-      <div class="warnbox"><b>Carry your progress over.</b> The installed app may keep its <i>own</i> separate storage — on iPhone and iPad it always does. <b>With an account,</b> just sign in inside the installed app and everything syncs across. <b>No account?</b> Tap <a href="#" id="installBackup"><b>Backup all</b></a> before installing, then <b>Restore backup</b> inside the installed app.</div>
+      <div class="warnbox"><b>Carry your progress over.</b> The installed app may keep its <i>own</i> separate storage — on iPhone and iPad it always does. Just sign in inside the installed app and everything syncs across. To be extra safe, tap <a href="#" id="installBackup"><b>Backup all</b></a> first.</div>
       <div class="segctl" id="devSeg">
         <button class="seg" data-dev="ios">iPhone / iPad</button>
         <button class="seg" data-dev="mac">Mac</button>
@@ -2054,9 +2159,14 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       <button class="acct-x" id="setupX" type="button" aria-label="Close">×</button>
       <h3 id="setupTitle">Set up your exam</h3>
       <div id="setupExam">
+      <div class="setrow"><span>Preset</span><button class="minor" type="button" id="exPreset">Mastery Exercise mix</button></div>
+      <div class="note setup-fresh">40 questions, equal across your packs, 25% easy · 55% medium · 20% hard. Change anything after.</div>
       <div class="setrow"><span>Topics</span><button class="minor stoggle" type="button" data-m="exam" id="exTopBtn">All topics ▸</button></div>
       <div class="stopics" id="exTopics" hidden></div>
       <div class="setrow"><span>Difficulty</span><div class="segctl sdiff" id="exDiff"><button class="seg" data-d="easy">Easy <i>0</i></button><button class="seg" data-d="medium">Medium <i>0</i></button><button class="seg" data-d="hard">Hard <i>0</i></button></div></div>
+      <div class="setrow"><span>Set a mix</span><button class="switch" type="button" id="exMixOn" aria-label="Set a mix">off</button></div>
+      <div id="exMixBox" hidden><div class="setrow exmix"><label>Easy <input type="number" id="exMix_easy" min="0" max="100" inputmode="numeric">%</label><label>Medium <input type="number" id="exMix_medium" min="0" max="100" inputmode="numeric">%</label><label>Hard <input type="number" id="exMix_hard" min="0" max="100" inputmode="numeric">%</label></div><div class="note setup-fresh" id="exMixNote"></div></div>
+      <div class="setrow" id="exTypeRow" hidden><span>Question type</span><div class="extypes" id="exTypes"></div></div>
       <div class="setrow"><span>Only</span><span class="fltbox"><label class="fltchk"><input type="checkbox" id="exFltF"><span>⚑ Flagged</span></label><label class="fltchk" title="Wrong the last time you answered it"><input type="checkbox" id="exFltW"><span>Incorrect</span></label></span></div>
       <div class="note setup-fresh" id="exFltNote" hidden></div>
       <div class="setrow"><span>Question selection</span>
@@ -2064,6 +2174,11 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
       </div>
       <div class="note" style="text-align:left;margin:-2px 0 8px">Prefer fresh uses questions you haven’t answered first, keeping your weighting, then tops up with the ones you saw longest ago. Fresh only never repeats — a group may come up short.</div>
       <div class="note setup-fresh" id="exFreshNote"></div>
+      <div id="exCompBox" hidden><div class="setsub">Set a number from</div>
+      <div class="setrow" id="exCompRow_maps" hidden><span>MAPS / anatomy</span><span class="excomp"><input type="number" id="exComp_maps" min="0" inputmode="numeric" aria-label="MAPS / anatomy questions"><i id="exCompOf_maps"></i></span></div>
+      <div class="setrow" id="exCompRow_ice" hidden><span>ICE</span><span class="excomp"><input type="number" id="exComp_ice" min="0" inputmode="numeric" aria-label="ICE questions"><i id="exCompOf_ice"></i></span></div>
+      <div class="setrow" id="exCompRow_hsr" hidden><span>HSR</span><span class="excomp"><input type="number" id="exComp_hsr" min="0" inputmode="numeric" aria-label="HSR questions"><i id="exCompOf_hsr"></i></span></div>
+      <div class="note setup-fresh">Leave blank for no set number. A set number is exact: the rest of the exam comes from other questions.</div></div>
       <div class="setsub">Weighting</div>
       <div class="setrow"><span>Auto-balance equally across active packs</span><button class="switch" id="setExamAuto">on</button></div>
       <div class="setrow"><span>Group weights by</span>
@@ -2203,15 +2318,29 @@ var r=localStorage.getItem('suite_eac_v1');if(r){var o=JSON.parse(r);if(o&&o.unl
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.15.0';
+const APP_VERSION='0.16.0';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
 const APP_AUTHOR='Alkarim Billawala / alkarim.billawala.ca';
 
 /* ===== STORAGE ===== */
-const KEY={packs:'suite_packs_v1',sched:'srs_sched_v2',daily:'srs_daily_v2',settings:'suite_settings_v1',eac:'suite_eac_v1',prac:'suite_prac_v1',acct:'suite_acct_v1',sync:'suite_sync_v1',localAt:'suite_localat_v1',qhist:'suite_qhist_v1',exam:'suite_exam_v1',exams:'suite_exams_v1',devnames:'suite_devnames_v1',gone:'suite_packgone_v1',devlogs:'suite_devlogs_v1'};
+const KEY={packs:'suite_packs_v1',sched:'srs_sched_v2',daily:'srs_daily_v2',settings:'suite_settings_v1',eac:'suite_eac_v1',prac:'suite_prac_v1',acct:'suite_acct_v1',sync:'suite_sync_v1',localAt:'suite_localat_v1',qhist:'suite_qhist_v1',exam:'suite_exam_v1',exams:'suite_exams_v1',devnames:'suite_devnames_v1',gone:'suite_packgone_v1',devlogs:'suite_devlogs_v1',stations:'suite_stations_v1'};
 const memCache={};
+/* v0.16.0: accounts required. Session read straight from storage (right before SSAccount.load runs). */
+function acctSignedIn(){try{if(typeof SSAccount!=='undefined'&&SSAccount.session())return true;}catch(e){}
+  try{const a=JSON.parse(localStorage.getItem('suite_acct_v1')||'null');return !!(a&&a.token&&a.id);}catch(e){return false;}}
+/* A session the server keeps refusing: marked when sync first goes 'expired'; after 3 days the front door asks for sign-in. */
+const EXP_KEY='suite_expired_v1',EXP_GRACE=3*864e5;
+function expiredMark(){try{if(!localStorage.getItem(EXP_KEY))localStorage.setItem(EXP_KEY,String(Date.now()));}catch(e){}}
+function expiredClear(){try{localStorage.removeItem(EXP_KEY);}catch(e){}}
+function expiredLocked(){try{const t=+localStorage.getItem(EXP_KEY)||0;return !!t&&Date.now()-t>EXP_GRACE;}catch(e){return false;}}
+let GATE_PASS=false; /* account server unreachable → in for this page load; gateRecheck() ends it */
+async function acctServerUp(){try{const c=new AbortController(),t=setTimeout(()=>c.abort(),5000);
+  const r=await fetch(SSAccount.API+'/api/health',{signal:c.signal,cache:'no-store'});clearTimeout(t);return r.ok;}catch(e){return false;}}
+/* Anything studied in this browser (packs, progress, history, exams, practice, highlights/notes/bookmarks/flags). */
+function localHasData(){try{return !!(packs.length||Object.values(sched||{}).some(x=>x&&x.phase&&x.phase!=='new')||Object.keys(qhist||{}).length||
+  (examLog||[]).length||(stLog||[]).length||examSave||prac||Object.values(settings||{}).some(v=>v&&typeof v==='object'&&v.fl&&v.on!==false));}catch(e){return false;}}
 /* ===== ONE ACTIVE COPY PER BROWSER (v0.4.5) =====
    Tabs / windows of the app share storage; two live copies overwrite each other (and sync spreads the stale copy).
    The newest copy wins: it says hello on a BroadcastChannel and older copies pause. As a safety net every data write bumps
@@ -2257,8 +2386,8 @@ function storeFailed(k,e){Store.failed=Date.now();Store.failKey=k;
   if(Date.now()-storeFailToast>60000){storeFailToast=Date.now();
     try{toast('Couldn’t save on this device — its storage is full or blocked. Sync is paused so nothing gets overwritten; don’t reload until it saves again.');}catch(x){}}
   try{if(typeof SSSync!=='undefined')SSSync.sync();}catch(x){}}
-const DATA_KEYS=new Set([KEY.packs,KEY.sched,KEY.daily,KEY.settings,KEY.eac,KEY.prac,KEY.qhist,KEY.exam,KEY.exams,KEY.devnames,KEY.gone]);
-const IDB_KEYS=new Set([...DATA_KEYS,KEY.sync,'suite_syncbase_v2',KEY.devlogs]),MIRROR_KEYS=new Set([KEY.eac,KEY.settings]); /* mirrored: read before the page paints */
+const DATA_KEYS=new Set([KEY.packs,KEY.sched,KEY.daily,KEY.settings,KEY.eac,KEY.prac,KEY.qhist,KEY.exam,KEY.exams,KEY.devnames,KEY.gone,KEY.stations]);
+const IDB_KEYS=new Set([...DATA_KEYS,KEY.sync,'suite_syncbase_v2',KEY.devlogs,'suite_fbq_v1']),MIRROR_KEYS=new Set([KEY.eac,KEY.settings]); /* mirrored: read before the page paints */
 try{localStorage.removeItem('suite_syncbase_v1');}catch(e){} /* v0.4.7 leftover */
 /* Device ID (v0.4.9): random, 12 × [a-z0-9], made once per browser storage and never derived from the device or the person.
    The anchor for troubleshooting and the server's devices row; the readable name lives in devNames (encrypted, synced). */
@@ -2363,7 +2492,7 @@ const SSAccount=(()=>{
     catch(e){const x=new Error('Can’t reach the sync server right now. Your data is safe on this device.');x.offline=true;throw x;}
     finally{clearTimeout(tm);}
     if(r.status===204)return null;let j=null;try{j=await r.json();}catch(e){}
-    if(!r.ok){const x=new Error(niceError(r.status,j));x.status=r.status;if(r.status===401&&sess)x.expired=true;if(j&&j.data&&j.data.owner&&/unique/i.test(j.data.owner.code||''))x.stateExists=true;throw x;}
+    if(!r.ok){const x=new Error(niceError(r.status,j));x.status=r.status;x.data=(j&&j.data)||null;x.serverMsg=(j&&typeof j.message==='string')?j.message:''; /* v0.16.0: the server's own words, for callers that want them */if(r.status===401&&sess)x.expired=true;if(j&&j.data&&j.data.owner&&/unique/i.test(j.data.owner.code||''))x.stateExists=true;throw x;}
     return j;}
   function adopt(token,rec){sess={token,id:rec.id,email:rec.email,verified:!!rec.verified,sub:rec.subscription_status||'',keyV:rec.key_v||1,tag:rec.eac_tag||'',tags:Array.isArray(rec.eac_tags)&&rec.eac_tags.length?rec.eac_tags:(rec.eac_tag?[rec.eac_tag]:[])};return Store.set(KEY.acct,sess);}
   async function load(){const s=await Store.get(KEY.acct);sess=(s&&s.token&&s.id)?s:null;return sess;}
@@ -2461,8 +2590,9 @@ const SSAccount=(()=>{
     return signIn(c.newEmail,pass);}
   /* v0.4.5: rotate the account's token key server-side → every other session ends; this device gets a fresh token. */
   async function signOutOthers(){const j=await api('/api/studysuite/signout-others',{method:'POST'});sess.token=j.token;await Store.set(KEY.acct,sess);}
+  const sendFeedback=rec=>api('/api/collections/feedback/records',{method:'POST',body:rec}); /* v0.16.0 */
   async function deleteAccount(pass){if(pass!==undefined)await unlockWith(pass);await api('/api/collections/users/records/'+sess.id,{method:'DELETE'});await signOut();}
-  return {API,FORMAT,touchDevice,listDevices,addCode,load,session:()=>sess,dek,policy,signIn,signUp,signOut,refresh,getState,putState,deleteAccount,normEmail,requestVerification,confirmVerification,tokenClaims,requestPasswordReset,confirmPasswordReset,recoverWithCode,startFresh,needsRecovery:()=>!!pending,changePassword,newRecoveryCode,requestEmailChange,confirmEmailChange,signOutOthers};
+  return {API,FORMAT,sendFeedback,touchDevice,listDevices,addCode,load,session:()=>sess,dek,policy,signIn,signUp,signOut,refresh,getState,putState,deleteAccount,normEmail,requestVerification,confirmVerification,tokenClaims,requestPasswordReset,confirmPasswordReset,recoverWithCode,startFresh,needsRecovery:()=>!!pending,changePassword,newRecoveryCode,requestEmailChange,confirmEmailChange,signOutOthers};
 })();
 
 /* ===== SCHEDULER ===== */
@@ -2486,8 +2616,8 @@ function humanDelta(ms){if(ms<MIN)return '<1m';if(ms<60*MIN)return Math.round(ms
 function humanFromNow(due,now){if(due<=now)return 'due';return 'in '+humanDelta(due-now);}
 
 /* ===== STATE ===== */
-let packs=[], sched={}, daily={date:'',count:0}, eac=null, prac=null, qhist={}, examSave=null, examLog=[], devNames={}, packGone={};
-let settings={theme:'auto',autoDark:'dark',themeFamily:'navy',examGroupBy:'system',examAuto:true,examFresh:'prefer',practiceOnlyNew:false,examTarget:40,examCounts:{},practiceSecs:90,practiceTimer:true,practiceShuffle:true,examMinutes:60,examTimer:true,srsNewPerDay:20,sessionDiffs:['easy','medium','hard'],revNavCollapsed:false};
+let packs=[], sched={}, daily={date:'',count:0}, eac=null, prac=null, qhist={}, examSave=null, examLog=[], devNames={}, packGone={}, stLog=[]; /* stLog: v0.16.0 station attempts */
+let settings={theme:'auto',autoDark:'dark',themeFamily:'navy',examGroupBy:'system',examAuto:true,examFresh:'prefer',practiceOnlyNew:false,examTarget:40,examCounts:{},practiceSecs:90,practiceTimer:true,practiceShuffle:true,examMinutes:60,examTimer:true,srsNewPerDay:20,sessionDiffs:['easy','medium','hard'],revNavCollapsed:false,examMix:{on:false,easy:25,medium:55,hard:20},examTypesOff:[],examComp:{}}; /* exam mode: defaults = old behaviour */
 /* ===== APPEARANCE / THEME ===== */
 function resolveMode(){const t=settings.theme||'auto';
   if(t==='light'||t==='dark'||t==='black')return t;
@@ -2620,7 +2750,7 @@ function diffRank(q){return DIFFS.indexOf(q&&q.difficulty);}
 function selTopics(m){const v=settings[m==='prac'?'pracTopics':'examTopics'];return Array.isArray(v)?new Set(v):null;}
 function selDiffs(m){const v=settings[m==='prac'?'pracDiffs':'examDiffs'];const s=Array.isArray(v)?v.filter(d=>DIFFS.includes(d)):[];return s.length?s:DIFFS.slice();}
 function matchDiff(q,m){const s=selDiffs(m);if(s.length===DIFFS.length)return true;const r=diffRank(q);return r>=0&&s.includes(DIFFS[r]);}
-function qTestPool(m){m=m||'exam';const t=selTopics(m);return qpool().filter(q=>matchDiff(q,m)&&(!t||t.has(q._sec))&&fltMatch(q,m));} /* v0.8.0: + Flagged / Incorrect */
+function qTestPool(m,noType){m=m||'exam';const t=selTopics(m);return qpool().filter(q=>matchDiff(q,m)&&(!t||t.has(q._sec))&&fltMatch(q,m)&&(m!=='exam'||noType||examTypeOn(q)));} /* exam mode: + question type (exam only) */ /* v0.8.0: + Flagged / Incorrect */
 /* ===== FLAGS (v0.8.0) — one saved, synced flag per question or card, independent of right/wrong.
    settings['flag:'+itemId] = {fl:1,on,at}. A clear writes on:false (a tombstone, so the clear syncs); never deleted.
    Kept in settings so older clients carry it through merges; merge3 resolves fl entries newest-wins by `at`. ===== */
@@ -2669,7 +2799,7 @@ function diffBadge(q){if(!q||diffRank(q)<0)return '';return `<span class="diffba
    would otherwise write the empty starting state over it. A save asked for meanwhile runs right after loading. */
 let DATA_READY=false,persistPending=false;
 async function persist(){if(!DATA_READY){persistPending=true;return;}let ok=true;const w=async(k,v)=>{ok=(await Store.set(k,v))&&ok;};
-  await w(KEY.packs,packs);await w(KEY.sched,sched);await w(KEY.daily,daily);await w(KEY.settings,settings);if(eac)await w(KEY.eac,eac);await w(KEY.prac,prac);await w(KEY.qhist,qhist);await w(KEY.exam,examSave);await w(KEY.exams,examLog);await w(KEY.devnames,devNames);await w(KEY.gone,packGone);
+  await w(KEY.packs,packs);await w(KEY.sched,sched);await w(KEY.daily,daily);await w(KEY.settings,settings);if(eac)await w(KEY.eac,eac);await w(KEY.prac,prac);await w(KEY.qhist,qhist);await w(KEY.exam,examSave);await w(KEY.exams,examLog);await w(KEY.devnames,devNames);await w(KEY.gone,packGone);await w(KEY.stations,stLog);
   if(ok)Store.failed=0; /* a full save worked → sync may resume */
   SSSync.changed();}
 /* ===== SYNC (v0.3.0) — local-first; the cloud copy is one encrypted blob per account =====
@@ -2693,7 +2823,7 @@ const SSSync=(()=>{
   async function manifest(){if(!defaultManifest)await initPackLinks();if(defaultManifest)return defaultManifest;
     try{const r=await fetch('packs-manifest.json',{cache:'no-store'});if(r.ok){const m=await r.json();if(m&&Array.isArray(m.packs))return m;}}catch(e){}return null;}
   const publicIds=m=>new Set(((m&&m.packs)||[]).filter(x=>x&&x.id&&x.file).map(x=>x.id));
-  function payload(pub){return {v:1,app:APP_VERSION,by:DEVICE_ID,devices:devNames,logs:allLogs(),gone:packGone,sched,daily,settings,eac,prac,qhist,exam:examSave,exams:examLog,
+  function payload(pub){return {v:1,app:APP_VERSION,by:DEVICE_ID,devices:devNames,logs:allLogs(),gone:packGone,sched,daily,settings,eac,prac,qhist,exam:examSave,exams:examLog,stations:stLog,
     packs:packs.map(p=>(pub.has(p.id)||p.stub)?Object.assign({ref:1},pick(p,LIGHT)):p).concat((meta&&meta.missing)||[])};}
   /* Fetch a published pack by id and run it through ingestPack in isolation (so `packs` isn't touched). */
   async function fetchPublic(id,m){const mp=m&&m.packs.find(x=>x&&x.id===id&&x.file);if(!mp)return null;
@@ -2743,7 +2873,7 @@ const SSSync=(()=>{
   function slog(what,loc,cl,at){try{const L=JSON.parse(localStorage.getItem('suite_synclog_v1')||'[]');
     L.unshift({t:Date.now(),dev:DEVICE_ID,from:(cl&&cl.by)||'',what,local:loc?pkSum(loc.packs)+' · '+studied(loc.sched)+' studied':'',cloud:cl?pkSum(cl.packs)+' · '+studied(cl.sched)+' studied':'',at:at||'',app:APP_VERSION});
     localStorage.setItem('suite_synclog_v1',JSON.stringify(L.slice(0,LOG_MAX)));}catch(e){}}
-  const localEmpty=()=>!packs.length&&!studied(sched);
+  const localEmpty=()=>!localHasData(); /* v0.16.0: history, exams, practice, highlights count too */
   async function saveMeta(){await Store.set(KEY.sync,meta);}
   async function loadMeta(){const s=SSAccount.session();const m=await Store.get(KEY.sync);
     meta=(m&&s&&m.uid===s.id)?m:{uid:s?s.id:null,stateId:null,lastUpdated:null,lastHash:null,missing:[]};if(!meta.missing)meta.missing=[];
@@ -2751,7 +2881,7 @@ const SSSync=(()=>{
   /* v0.4.7: the icon shows a view, not the raw state — green while the last sync is under 6 min old (background checks
      don't flash "Syncing…"), gold 'stale' when overdue. state.k itself is unchanged (sign-out checks k==='ok'). */
   const viewOf=()=>{const fresh=lastOk&&Date.now()-lastOk<FRESH;return state.k==='syncing'&&fresh?'ok':state.k==='ok'&&!fresh?'stale':state.k;};
-  function setState(k,msg){if(k==='ok'){lastOk=Date.now();staleTries=0;}state={k,msg,at:Date.now()};paint();if(k!=='syncing')setTimeout(appNotesTick,0);} /* v0.12.4 */
+  function setState(k,msg){if(k==='ok'){lastOk=Date.now();staleTries=0;expiredClear();}else if(k==='expired')expiredMark(); /* v0.16.0 */state={k,msg,at:Date.now()};paint();if(k!=='syncing')setTimeout(appNotesTick,0);} /* v0.12.4 */
   function paint(){const el=$('syncState');if(!el)return;const k=viewOf(),hm=new Date(lastOk||Date.now()).toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}),msg=state.msg;
     const t={off:'',syncing:'Syncing…',ok:'Synced '+hm,stale:'Last synced '+hm+' — checking again shortly',
       offline:'Offline — changes will sync later',expired:'Sign in again to keep syncing',
@@ -2760,7 +2890,7 @@ const SSSync=(()=>{
     renderSaveHint(k==='stale'?'ok':k);if(typeof renderAcctBtn==='function')renderAcctBtn();
     if(k==='ok'&&!flashed){flashed=true;const b=$('acctBtn');if(b){b.classList.add('flash');setTimeout(()=>b.classList.remove('flash'),2600);}}}
   function renderSaveHint(k){const el=$('saveHint');if(!el)return;
-    el.innerHTML={off:!ACCT_ON?'Progress lives in this browser — use <b>Backup all</b> / <b>Restore backup</b> to carry it across devices and browsers.':'Progress is saved in this browser only — use <b>Backup all</b> / <b>Restore backup</b> to move it, or sign in to sync it across your devices.',
+    el.innerHTML={off:!ACCT_ON?'Progress lives in this browser — use <b>Backup all</b> / <b>Restore backup</b> to carry it across devices and browsers.':'Progress is saved in this browser. Sign in to keep it in your account and on your other devices.',
       ok:'Progress is saved in this browser and synced, encrypted, to your account. <b>Backup all</b> still exports a copy.',
       offline:'Progress is saved in this browser. Sync will catch up when you’re back online.',
       expired:'Progress is saved in this browser. Sign in again to keep syncing it.',
@@ -2842,9 +2972,9 @@ const SSSync=(()=>{
       devices:mergeMap(b.devices,l.devices,c.devices,pick,[],''),
       eac:(()=>{const a=eacNorm(l.eac),b=eacNorm(c.eac);if(!a||!a.unlocked)return b||a||null;if(!b)return a;
         return Object.assign({},b,a,{codes:[...new Set([...a.codes,...b.codes])],tags:[...new Set([...a.tags,...b.tags])],admin:!!(a.admin||b.admin),keys:Object.assign({},b.keys||{},a.keys||{})});})(),
-      prac:whole(b.prac,l.prac,c.prac,(x,y)=>(!x||!y)?(x||y):newer(x,y)),
+      prac:whole(b.prac,l.prac,c.prac,(x,y)=>{if(!x||!y)return x||y;notes.push('two unfinished practice sessions — kept the newer one');return newer(x,y);}), /* v0.16.0 */
       qhist:mergeMap(b.qhist,l.qhist,c.qhist,qboth,notes,'question(s) answered on both'),
-      exam,exams,gone,packs:mergePacks(b,l.packs||[],c.packs||[],notes,side,gone)};
+      exam,exams,stations:mergeLog(b.stations,l.stations,Array.isArray(c.stations)?c.stations:l.stations).slice(0,50),gone,packs:mergePacks(b,l.packs||[],c.packs||[],notes,side,gone)};
     return {out,notes};}
   async function applyCloud(d,rec,m,guard){suppress=true;
     try{let mr=m;const dk=(d&&d.eac&&d.eac.keys)||{},hk=heldKeys(); /* v0.6.1: keys arriving in this sync open the pack list first */
@@ -2857,7 +2987,7 @@ const SSSync=(()=>{
       if(d.gone&&typeof d.gone==='object'){const g=Object.assign({},packGone||{});Object.entries(d.gone).forEach(([k,t])=>{if(!(g[k]>=t))g[k]=t;});packGone=g;} /* v0.6.1: combine, latest wins */
       if(d.devices&&typeof d.devices==='object'){devNames=Object.assign({},d.devices);if(!devNames[DEVICE_ID])devNames[DEVICE_ID]=guessDeviceName();}
       if(d.qhist&&typeof d.qhist==='object')qhist=d.qhist; /* older account copies have none — keep this device's */
-      if('exam' in d)examSave=(d.exam&&Array.isArray(d.exam.qorder))?d.exam:null;if(Array.isArray(d.exams))examLog=d.exams;
+      if('exam' in d)examSave=(d.exam&&Array.isArray(d.exam.qorder))?d.exam:null;if(Array.isArray(d.exams))examLog=d.exams;if(Array.isArray(d.stations))stLog=d.stations;
       packs=r.out;meta.missing=r.miss;
       allCards().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});rollDaily();
       await persist();applyTheme();applyGate();renderHome();
@@ -2956,6 +3086,7 @@ const SSSync=(()=>{
   window.addEventListener('online',()=>{if(ACCT_ON&&SSAccount.session())sync();});
   async function start(){if(!ACCT_ON){setState('off');return;}await SSAccount.load();if(!SSAccount.session()){setState('off');return;}
     if(typeof acctUnlockDevice==='function')await acctUnlockDevice();
+    if(typeof applyGate==='function')applyGate(); /* v0.16.0: signed in → the front door goes */
     await loadMeta();sync();
     SSAccount.refresh().catch(e=>{if(e&&e.expired)setState('expired');});}
   document.addEventListener('visibilitychange',()=>{if(!ACCT_ON||!SSAccount.session())return;
@@ -2971,6 +3102,16 @@ const SSSync=(()=>{
    Views: signin · signup · recovery (shown once after sign-up; can't be dismissed until "saved" is ticked) · account.
    Sync runs only after the panel closes, so a first-sync choice dialog never stacks on top of it. */
 let acctView=null,acctRc=null,acctEmail='',acctNote={t:'',b:''},acctResetTok=null,acctRcCtx='';
+/* v0.16.0: sign-up with the typed code, then the front-door code, then every code this device holds. → {r, code}. */
+async function acctCreate(email,pass,typed){const held=(eacNorm(eac)||{}).codes||[],pc=(eacPending()||{}).code;
+  const tries=[...new Set([typed,pc,...held].map(eacCanon).filter(Boolean))];if(!tries.length)tries.push('');let last=null;
+  for(const c of tries){try{return {r:await SSAccount.signUp(email,pass,c),code:c};}
+    catch(e){if(/access code/i.test((e&&e.message)||'')&&!SSAccount.session()){last=e;continue;}throw e;}}
+  last=last||new Error('Enter your access code.');last.codeRejected=true;throw last;}
+/* After sign-up or sign-in: the device's other codes go on the account too, while it holds a group the account lacks. */
+async function acctRegisterCodes(){try{const e=eacNorm(eac);if(!SSAccount.session()||!e||!e.unlocked)return;
+  const need=()=>{const has=new Set((SSAccount.session()||{}).tags||[]);return (e.tags||[]).filter(t=>!NOT_GROUPS.has(t)&&!has.has(t));};
+  for(const c of (e.codes||[])){if(!need().length)return;try{await SSAccount.addCode(c);}catch(x){if(x&&(x.status===429||x.offline))return;}}}catch(x){}}
 function acctNotice(t,b,busy){acctNote={t,b,busy:!!busy};renderAcct('notice');$('acctOv').style.display='flex';}
 const acctEsc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function acctStatusText(){const st=SSSync.status(),hm=new Date(st.lastOk||st.at).toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
@@ -2992,12 +3133,12 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
     '<label class="f">Password<input class="fi" type="password" id="acctPw" autocomplete="current-password" required></label><div class="acct-err" id="acctErr"></div>'+
     '<button class="btn sm wide" type="submit" id="acctGo">Sign in</button></form>'+
     '<div class="acct-alt"><a id="acctToForgot">Forgot password?</a> · New here? <a id="acctToUp">Create an account</a></div>'+
-    '<div class="acct-note">An account is optional. Without one, everything still works — your progress just stays in this browser.</div>';
+    '<div class="acct-note">Everything you’ve done in this browser comes with you when you sign in.</div>';
     $('acctToUp').onclick=()=>{acctEmail=$('acctEmail').value;renderAcct('signup');};
     $('acctToForgot').onclick=()=>{acctEmail=$('acctEmail').value;renderAcct('forgot');};
     $('acctForm').onsubmit=async e=>{e.preventDefault();acctErr('');const go=$('acctGo');acctBusy(go,true,'Signing in…');
-      try{await SSAccount.signIn($('acctEmail').value,$('acctPw').value);acctEmail='';closeAcct();toast('Signed in — syncing now.');SSSync.start();}
-      catch(err){if(err.needsRecovery){renderAcct('recover');return;}acctErr(err.message);acctBusy(go,false);}};}
+      try{await SSAccount.signIn($('acctEmail').value,$('acctPw').value);acctEmail='';expiredClear();closeAcct();toast('Signed in — syncing now.');SSSync.start().then(acctRegisterCodes,()=>{});}
+      catch(err){if(err.needsRecovery){renderAcct('recover');return;}acctErr(err.message);acctBusy(go,false);if(err.offline)gateCheckServer();}};}
   else if(view==='signup'){b.innerHTML='<h3>Create an account</h3><p class="acct-sub">Your password also encrypts your study data, so nobody else can reset it — not even Study Suite. You’ll get a recovery code next.</p>'+
     '<form id="acctForm" autocomplete="on"><label class="f">Email<input class="fi" type="email" id="acctEmail" autocomplete="username" required value="'+acctEsc(acctEmail)+'"></label>'+
     '<label class="f">Password (8+ characters)<input class="fi" type="password" id="acctPw" autocomplete="new-password" minlength="8" required></label>'+
@@ -3013,8 +3154,9 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
       if($('acctPw').value!==$('acctPw2').value){acctErr('The two passwords don’t match.');return;}
       const cw=$('acctCodeWrap');if(cw.style.display!=='none'&&!$('acctCode').value.trim()){acctErr('Enter your access code.');return;}
       const go=$('acctGo');acctBusy(go,true,'Creating your account…');
-      try{const r=await SSAccount.signUp($('acctEmail').value,$('acctPw').value,$('acctCode').value.trim());acctTypedCode=eacCanon($('acctCode').value);acctRc=r.recoveryCode;acctEmail='';renderAcct('recovery');SSAccount.requestVerification(SSAccount.session().email).catch(()=>{});}
-      catch(err){if(/access code/i.test(err.message)&&cw.style.display==='none'){cw.style.display='';$('acctCode').value='';err.message='Enter your access code.';}acctErr(err.message);acctBusy(go,false);}};}
+      try{const u=await acctCreate($('acctEmail').value,$('acctPw').value,$('acctCode').value.trim());const r=u.r;acctTypedCode=u.code; /* v0.16.0: every held code */acctRc=r.recoveryCode;acctEmail='';renderAcct('recovery');SSAccount.requestVerification(SSAccount.session().email).catch(()=>{});}
+      catch(err){if(err.codeRejected){cw.style.display='';$('acctCode').value='';acctErr(err.message+' ');const a=document.createElement('a');a.href=($('eacRequest')&&$('eacRequest').href)||'mailto:accesscodes@studysuite.app';a.textContent='Request an access code';$('acctErr').appendChild(a);acctBusy(go,false);return;}
+        acctErr(err.message);acctBusy(go,false);if(err.offline)gateCheckServer();}};}
   else if(view==='recovery'){b.innerHTML='<h3>Save your recovery code</h3><p class="acct-sub">If you ever forget your password, this code is the only way back into your synced data. Nobody else can recover it for you. Keep it in a password manager, or write it down somewhere safe.</p>'+
     '<div class="acct-rc" id="acctRc">'+acctEsc(acctRc).split('-').map(g=>'<span>'+g+'</span>').join('-<wbr>')+'</div><div class="acct-row"><button class="btn ghost sm" id="acctRcCopy">Copy</button><button class="btn ghost sm" id="acctRcDl">Download</button></div>'+
     '<label class="acct-chk"><input type="checkbox" id="acctRcOk"><span>I’ve saved my recovery code somewhere safe.</span></label><button class="btn sm wide" id="acctRcDone" disabled>Done</button>';
@@ -3024,7 +3166,7 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
       const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'text/plain'}));a.download='study-suite-recovery-code.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);};
     $('acctRcOk').onchange=e=>{$('acctRcDone').disabled=!e.target.checked;};
     const fromAcct=acctRcCtx==='acct',fresh=acctRcCtx==='fresh';acctRcCtx='';
-    $('acctRcDone').onclick=()=>{acctRc=null;if(fromAcct){renderAcct('account');toast('New recovery code saved. The old one no longer works.');return;}acctView=null;closeAcct();toast(fresh?'Fresh start done — your data is syncing.':'Account created — your data is syncing.');SSSync.start();};}
+    $('acctRcDone').onclick=()=>{acctRc=null;if(fromAcct){renderAcct('account');toast('New recovery code saved. The old one no longer works.');return;}acctView=null;closeAcct();toast(fresh?'Fresh start done — your data is syncing.':'Account created — your data is syncing.');SSSync.start().then(acctRegisterCodes,()=>{});};}
   else if(view==='forgot'){b.innerHTML='<h3>Reset your password</h3><p class="acct-sub">We’ll email you a link to choose a new password. You’ll need your recovery code afterwards to unlock your synced data — if you don’t have it, your study data on your devices is still safe.</p>'+
     '<form id="acctForm"><label class="f">Email<input class="fi" type="email" id="acctEmail" autocomplete="username" required value="'+acctEsc(acctEmail)+'"></label>'+
     '<div class="acct-err" id="acctErr"></div><button class="btn sm wide" type="submit" id="acctGo">Send reset link</button></form><div class="acct-alt"><a id="acctToIn">Back to sign in</a></div>';
@@ -3057,12 +3199,6 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
     $('acctBack').onclick=()=>renderAcct('recover');
     $('acctGo').onclick=async()=>{const go=$('acctGo');acctBusy(go,true,'Starting fresh…');
       try{const r=await SSAccount.startFresh();acctRc=r.recoveryCode;acctRcCtx='fresh';renderAcct('recovery');}catch(err){acctErr(err.message);acctBusy(go,false);}};}
-  else if(view==='noacct'){b.innerHTML='<h3>Using Study Suite without an account</h3><ul class="acct-list">'+
-    '<li>Everything works: packs, review, practice and exams.</li>'+
-    '<li>Your progress is saved only in this browser. Clearing its site data, or switching browser or phone, loses it.</li>'+
-    '<li><b>Backup all</b> saves a file you can restore anywhere.</li>'+
-    '<li>An account keeps your devices in sync, encrypted so only you can read it. You can create one any time from the account menu at the top right of the homepage.</li></ul>'+
-    '<button class="btn sm wide" id="acctNoteOk">Got it</button>';$('acctNoteOk').onclick=()=>{acctView=null;closeAcct();};}
   else if(view==='synclog'){ /* v0.6.4: every device's log (shared inside the encrypted account copy), copy, force sync */
     b.innerHTML='<h3>Sync activity</h3><p class="acct-sub">Loading…</p>';
     SSSync.otherLogs().then(others=>{if(acctView!=='synclog')return;
@@ -3114,7 +3250,7 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
   else if(view==='notice'){b.innerHTML='<h3>'+acctEsc(acctNote.t)+'</h3><p class="acct-sub">'+acctEsc(acctNote.b)+'</p>'+(acctNote.busy?'':'<button class="btn sm wide" id="acctNoteOk">OK</button>');
     if(!acctNote.busy)$('acctNoteOk').onclick=()=>{acctView=null;closeAcct();};}
   else if(view==='signout'){b.innerHTML='<h3>Sign out of this browser?</h3><p class="acct-sub">Your synced data stays in your account and comes back when you sign in again.</p>'+
-    '<label class="acct-chk"><input type="checkbox" id="acctWipe"><span>Also remove my packs and progress from this browser (for shared computers)</span></label>'+
+    '<label class="acct-chk"><input type="checkbox" id="acctWipe"><span>Also remove everything I studied from this browser — packs, progress, highlights, notes, question history and access codes (for shared computers)</span></label>'+
     (SIGNOUT_OTHERS_ON?'<label class="acct-chk"><input type="checkbox" id="acctAll"><span>Also sign out on all my other devices</span></label>':'')+
     '<div class="acct-err" id="acctErr"></div><div class="acct-row"><button class="btn ghost sm" id="acctBack">Cancel</button><button class="btn sm" id="acctOut">Sign out</button></div>';
     $('acctBack').onclick=()=>renderAcct('account');
@@ -3124,9 +3260,11 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
       const all=!!($('acctAll')&&$('acctAll').checked);
       if(all){try{await SSAccount.signOutOthers();}catch(e){acctErr('Couldn’t sign out your other devices ('+e.message+'). This device is still signed in — try again.');acctBusy(bt,false);return;}}
       await SSAccount.signOut();await SSSync.reset();
-      if(wipe){packs=[];sched={};prac=null;daily={date:today(),count:0};await persist();}
-      renderHome();acctView=null;closeAcct();
-      toast((all?'Signed out on every device. ':'Signed out. ')+(wipe?'Your packs and progress were removed from this browser.':'Your data stays on this device and in your account.'));};}
+      if(wipe){packs=[];sched={};prac=null;daily={date:today(),count:0};qhist={};examSave=null;examLog=[];stLog=[]; /* v0.16.0: everything studied */
+        Object.keys(settings).forEach(k=>{const v=settings[k];if(v&&typeof v==='object'&&v.fl)delete settings[k];}); /* highlights, notes, bookmarks, flags */
+        eac=null;await Store.set(KEY.eac,null);eacPendingSet(null);try{await IDB.del(PREACCT_KEY);}catch(e){}try{localStorage.removeItem('suite_strikes_v1');}catch(e){}await persist();}
+      renderHome();acctView=null;closeAcct();expiredClear();applyGate();preAcctRefresh(); /* v0.16.0: back to the front door */
+      toast((all?'Signed out on every device. ':'Signed out. ')+(wipe?'Everything you studied was removed from this browser.':'Your data stays on this device and in your account.'));};}
   else if(view==='chpw'){b.innerHTML='<h3>Change password</h3><p class="acct-sub">Your other devices will ask you to sign in again with the new password. Your study data isn’t affected.</p>'+
     '<form id="acctForm"><input type="email" autocomplete="username" value="'+acctEsc(s&&s.email)+'" hidden>'+
     '<label class="f">Current password<input class="fi" type="password" id="acctPw0" autocomplete="current-password" required></label>'+
@@ -3166,7 +3304,7 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
     $('acctBack').onclick=()=>renderAcct('account');
     $('acctForm').onsubmit=async e=>{e.preventDefault();acctErr('');if($('acctDel').value.trim()!=='DELETE'){acctErr('Type DELETE in capitals to confirm.');return;}
       const go=$('acctGo');acctBusy(go,true,'Deleting…');
-      try{await SSAccount.deleteAccount($('acctPw0').value);await SSSync.reset();acctNotice('Account deleted','Your account and its synced copy are gone. Your study data on this device is untouched.');}
+      try{await SSAccount.deleteAccount($('acctPw0').value);await SSSync.reset();acctNotice('Account deleted','Your account and its synced copy are gone. Your study data on this device is untouched.');expiredClear();applyGate();}
       catch(err){acctErr(err.message);acctBusy(go,false);}};}
   else{b.innerHTML='<h3>Your account</h3><div class="acct-email">'+acctEsc(s&&s.email)+'</div><div class="acct-st" id="acctSt"></div>'+
     (s&&!s.verified?'<div class="acct-verify">Please confirm your email address — we sent you a link. <a id="acctResend">Resend it</a></div>':'')+
@@ -3227,7 +3365,12 @@ async function addAccessCode(raw){const code=eacCanon(raw);if(!code)throw new Er
 let eacOpen=false;
 function eacScreen(n){const two=n===2;$('eacS1').hidden=two;$('eacS2').hidden=!two;$('eacErr').textContent='';
   document.querySelector('#eacGate .eactitle').textContent=two?'You’re in.':'Welcome to Study Suite';
-  document.querySelector('#eacGate .eacsub').textContent=two?'How do you want to use Study Suite?':(eacOpen?'Sign in to your account, or get started — it takes a minute.':'Sign in to your account, or enter your access code to get started.');
+  document.querySelector('#eacGate .eacsub').textContent=two?'Create your account to get started.':(eacOpen?'Sign in to your account, or get started — it takes a minute.':'Sign in to your account, or enter your access code to get started.');
+  {const gm=gateMode(),T=document.querySelector('#eacGate .eactitle'),S=document.querySelector('#eacGate .eacsub'); /* v0.16.0 */
+    if(gm==='data'){T.textContent='Study Suite now needs an account';S.textContent='Everything you’ve done here is still saved in this browser — nothing has been deleted. Create a free account, or sign in, and it all comes with you.';}
+    else if(gm==='expired'){T.textContent='Sign in to keep going';S.textContent='Everything you’ve done here is still saved in this browser and joins your account when you sign in.';}
+    document.querySelectorAll('#eacGate .eacdata').forEach(x=>x.hidden=gm!=='data'&&gm!=='expired');
+    $('eacForm').hidden=eacOpen||gm==='expired';$('eacOr').hidden=eacOpen||gm==='expired';} /* expired: sign in only, no code box */
   if(two)setTimeout(()=>$('eacSignUp').focus(),60);}
 function eacOpenMode(on){eacOpen=!!on;$('eacStart').hidden=!eacOpen;$('eacOr').hidden=eacOpen;$('eacHaveCode').hidden=!eacOpen;$('eacForm').hidden=eacOpen;if($('eacS2').hidden)eacScreen(1);}
 if(ACCT_ON){$('eacAcct').hidden=false;$('eacInput').placeholder='Access code';eacScreen(eacPending()?2:1);
@@ -3237,10 +3380,14 @@ if(ACCT_ON){$('eacAcct').hidden=false;$('eacInput').placeholder='Access code';ea
   $('eacHaveCode').onclick=e=>{e.preventDefault();$('eacForm').hidden=false;$('eacHaveCode').hidden=true;setTimeout(()=>$('eacInput').focus(),60);};
   $('eacBack').onclick=e=>{e.preventDefault();eacPendingSet(null);eacScreen(1);};
   $('eacSignUp').onclick=()=>{renderAcct('signup');$('acctOv').style.display='flex';};
-  $('eacNoAcct').onclick=async()=>{const pc=eacPending()||{via:'open',code:''};
-    eac={unlocked:true,via:pc.via||'open',admin:!!pc.admin,at:new Date().toISOString()};if(pc.code)eac.code=pc.code;if(pc.keys)eac.keys=pc.keys;
-    await Store.set(KEY.eac,eac);eacPendingSet(null);applyGate();initPackLinks();toast('Welcome to Study Suite.');};
-  $('eacHelp').onclick=()=>{renderAcct('noacct');$('acctOv').style.display='flex';};}
+  /* v0.16.0: no "Use without an account". Account server unreachable → in for now (the front door comes back once it answers). */
+  $('eacGoOn').onclick=async()=>{const pc=eacPending();
+    if(!(eac&&eac.unlocked)&&pc){eac={unlocked:true,via:pc.via||'open',admin:!!pc.admin,at:new Date().toISOString()};if(pc.code)eac.code=pc.code;if(pc.keys)eac.keys=pc.keys;await Store.set(KEY.eac,eac);}
+    GATE_PASS=true;eacPendingSet(null);applyGate();initPackLinks();toast('You can keep studying. You’ll be asked to create your account once the server is back.');};
+  $('eacIn2').onclick=()=>{renderAcct('signin');$('acctOv').style.display='flex';};
+  $('eacRequest2').href=$('eacRequest').href; /* same request mail as screen 1 */
+  $('eacRestore2').onclick=e=>{e.preventDefault();$('restoreFile').click();};
+  ['eacBackup','eacBackup2'].forEach(id=>{$(id).onclick=e=>{e.preventDefault();backup();};});}
 $('acctBtn').addEventListener('click',openAcct);
 /* Links in our emails land on studysuite.app/#verify=TOKEN · #reset=TOKEN · #email=TOKEN (PocketBase mail templates). */
 async function mailLinkRoute(){const m=location.hash.match(/^#(verify|reset|email)=([A-Za-z0-9._-]+)$/);if(!m)return;
@@ -3303,7 +3450,7 @@ function isStandalone(){return (window.matchMedia&&matchMedia('(display-mode: st
 let appUpdateAvailable=false,updPeeked=false,pkPeeked=false; /* v0.6.9/v0.7.0: the header button shows its label once per page load when the app state, and once when the pack state, lights */
 let lastVerCheck=0;
 async function checkAppVersion(){lastVerCheck=Date.now();try{const r=await fetch('app-version.json',{cache:'no-store'});if(r.ok){const j=await r.json();if(j&&j.appVersion)noteNewerApp(j.appVersion);}}catch(e){}
-  maybeAutoReload(); /* v0.13.4 */
+  maybeAutoReload(); /* v0.13.4 */gateRecheck(); /* v0.16.0 */fbFlush();
   try{if(DATA_READY)await initPackLinks({ifChanged:true});}catch(e){}} /* v0.6.8: new or updated packs show up without a reload */
 let newerAppVersion='',newerAppTitle='';function noteNewerApp(v){if(!appUpdateAvailable&&v&&verCmp(v,APP_VERSION)>0){appUpdateAvailable=true;newerAppVersion=String(v);updateHeaderButtons();if(!maybeAutoReload())appNotesPeek(newerAppVersion);}} /* v0.13.4: no tip when it reloads by itself */
 /* v0.13.4: Update automatically (settings.autoUpd; absent = on). updInterrupts: a pack update would interrupt something. */
@@ -3551,7 +3698,7 @@ async function applyPackUpdate(p,mp,auto){const j=await fetchPackJson(mp);
 function updatePack(p,mp,btn){if(btn){btn.disabled=true;btn.textContent='Updating…';}
   applyPackUpdate(p,mp).then(async()=>{await persist();renderHome();toast('Updated '+(p.pack||p.id)+' to v'+mp.version+'.');})
     .catch(()=>{if(btn){btn.disabled=false;btn.textContent='↑ Update';}toast('Could not update — check your connection and try again.');});}
-var DEFAULT_ATLAS='neuro_brain'; /* v0.12.3: an atlas link without data-atlas-pack opens The Brain (var: renderHome may run before this line) */ var autoBusy=false,autoTimer=null,autoFail={}; function scheduleAutoPacks(){clearTimeout(autoTimer);autoTimer=setTimeout(()=>{ensureAutoPacks().catch(()=>{});quietRefUpdates().catch(()=>{});},400);} /* v0.12.3: default packs (default:true) for everyone, paired packs (pairedWith) when a partner is on — each added once; a removal (packGone) sticks */ async function ensureAutoPacks(){if(autoBusy||!DATA_READY||!defaultManifest)return;   if(ACCT_ON&&SSAccount.session()&&!(SSSync.status().lastOk>0))return; /* signed in: wait for this session's first sync, so a removal on another device is known */   const vm=visibleManifest();if(!vm||!Array.isArray(vm.packs))return;const on=new Set(activePacks().map(p=>p.id));const now=Date.now();   const todo=vm.packs.filter(mp=>mp&&mp.file&&mp.id&&!packs.some(p=>p.id===mp.id)&&!(packGone&&packGone[mp.id])&&!(autoFail[mp.id]>now-600000)     &&(mp.default===true||(Array.isArray(mp.pairedWith)&&mp.pairedWith.some(id=>on.has(id)))));   if(!todo.length)return;autoBusy=true;const added=[];   try{for(const mp of todo){try{ingestPack(await fetchPackJson(mp),(mp.label||mp.file).replace(/\.json$/i,''));added.push(mp);}catch(e){autoFail[mp.id]=Date.now();}}     if(added.length){await persist();renderHome();const nm=mp=>mp.label||mp.id;       toast(added.length===1?(nm(added[0])+' added'+(added[0].default===true?'.':' — it goes with your '+(added[0].id===DEFAULT_ATLAS?'neuro weeks':'weeks')+'.')):('Added: '+added.map(nm).join(', ')+'.'),4000);}}   finally{autoBusy=false;}} /* v0.13.1: Reference packs (Pharmacology Index, atlases) take a newer published version by themselves — no ↑ Update tap; What's new still shows it. Function declarations + var: pendingUpdates() may run before this line. */ function isRefPack(p,mp){return ((mp&&mp.year)||(p&&p.year))==='Reference';} var refBusy=false,refFail={},autoUpdWait=null; async function quietRefUpdates(){if(refBusy||!DATA_READY||!defaultManifest)return;   if(ACCT_ON&&SSAccount.session()&&!(SSSync.status().lastOk>0))return; /* signed in: after this session's first sync, as for the auto packs */   const now=Date.now(),idle=!updInterrupts();let waiting=false;const todo=packs.map(p=>[p,packUpdate(p)]).filter(e=>{if(!e[1]||refFail[e[0].id]>now-600000)return false;if(isRefPack(e[0],e[1]))return true;if(!autoUpdOn())return false;if(!idle){waiting=true;return false;}return true;}); /* v0.13.4: week packs too, when Update automatically is on and nothing is interrupted */   if(waiting){clearTimeout(autoUpdWait);autoUpdWait=setTimeout(scheduleAutoPacks,30000);}   if(!todo.length)return;refBusy=true;let n=0;   try{for(const [p,mp] of todo){try{await applyPackUpdate(p,mp,true);n++;}catch(e){refFail[p.id]=Date.now();}}     if(n){await persist();renderHome();updateHeaderButtons();}}finally{refBusy=false;}} function maybeApplyQueuedUpdates(){if(!DATA_READY||!defaultManifest)return;scheduleAutoPacks();try{sessionStorage.removeItem('suite_apply_updates');}catch(e){} /* v0.6.7: a pre-0.6.7 flag is discarded — pack updates are accepted in the library only */
+var DEFAULT_ATLAS='neuro_brain'; /* v0.12.3: an atlas link without data-atlas-pack opens The Brain (var: renderHome may run before this line) */ var autoBusy=false,autoTimer=null,autoFail={}; function scheduleAutoPacks(){clearTimeout(autoTimer);autoTimer=setTimeout(()=>{ensureAutoPacks().catch(()=>{});quietRefUpdates().catch(()=>{});},400);} /* v0.12.3: default packs (default:true) for everyone, paired packs (pairedWith) when a partner is on — each added once; a removal (packGone) sticks */ async function ensureAutoPacks(){if(autoBusy||!DATA_READY||!defaultManifest)return;   if(ACCT_ON&&SSAccount.session()&&!(SSSync.status().lastOk>0))return; /* signed in: wait for this session's first sync, so a removal on another device is known */   const vm=visibleManifest();if(!vm||!Array.isArray(vm.packs))return;const on=new Set(activePacks().map(p=>p.id));const now=Date.now();   const todo=vm.packs.filter(mp=>mp&&mp.file&&mp.id&&!packs.some(p=>p.id===mp.id)&&!(packGone&&packGone[mp.id])&&!(autoFail[mp.id]>now-600000)     &&(mp.default===true||(Array.isArray(mp.pairedWith)&&mp.pairedWith.some(id=>on.has(id)))));   if(!todo.length)return;autoBusy=true;const added=[];   try{for(const mp of todo){try{ingestPack(await fetchPackJson(mp),(mp.label||mp.file).replace(/\.json$/i,''));added.push(mp);}catch(e){autoFail[mp.id]=Date.now();}}     if(added.length){await persist();renderHome();const nm=mp=>mp.label||mp.id;       toast(added.length===1?(nm(added[0])+' added'+(added[0].default===true?'.':' — it goes with your '+(added[0].id===DEFAULT_ATLAS?'neuro weeks':'weeks')+'.')):('Added: '+added.map(nm).join(', ')+'.'),4000);}}   finally{autoBusy=false;}} /* v0.13.1: Reference packs (Pharmacology Index, atlases) take a newer published version by themselves — no ↑ Update tap; What's new still shows it. Function declarations + var: pendingUpdates() may run before this line. */ function isRefPack(p,mp){return ((mp&&mp.year)||(p&&p.year))==='Reference';} var refBusy=false,refFail={},autoUpdWait=null; async function quietRefUpdates(){if(refBusy||!DATA_READY||!defaultManifest)return;   if(ACCT_ON&&SSAccount.session()&&!(SSSync.status().lastOk>0))return; /* signed in: after this session's first sync, as for the auto packs */   const now=Date.now(),idle=!updInterrupts();let waiting=false;const todo=packs.map(p=>[p,packUpdate(p)]).filter(e=>{if(!e[1]||refFail[e[0].id]>now-600000)return false;if(isRefPack(e[0],e[1])){if(!idle){waiting=true;return false;}return true;} /* v0.16.0: never mid-practice/review/results */if(!autoUpdOn())return false;if(!idle){waiting=true;return false;}return true;}); /* v0.13.4: week packs too, when Update automatically is on and nothing is interrupted */   if(waiting){clearTimeout(autoUpdWait);autoUpdWait=setTimeout(scheduleAutoPacks,30000);}   if(!todo.length)return;refBusy=true;let n=0;   try{for(const [p,mp] of todo){try{await applyPackUpdate(p,mp,true);n++;}catch(e){refFail[p.id]=Date.now();}}     if(n){await persist();renderHome();updateHeaderButtons();}}finally{refBusy=false;}} function maybeApplyQueuedUpdates(){if(!DATA_READY||!defaultManifest)return;scheduleAutoPacks();try{sessionStorage.removeItem('suite_apply_updates');}catch(e){} /* v0.6.7: a pre-0.6.7 flag is discarded — pack updates are accepted in the library only */
   try{offloadIdle();}catch(e){}
   repairPacks();}
 /* v0.8.3: re-read a published pack whose copy came from an older app (no readBy, or items dropped by an older app).
@@ -3559,7 +3706,7 @@ var DEFAULT_ATLAS='neuro_brain'; /* v0.12.3: an atlas link without data-atlas-pa
 let repairBusy=false;
 async function repairPacks(){if(repairBusy||!DATA_READY||!defaultManifest)return;repairBusy=true;let n=0;
   try{for(const p of packs.slice()){if(p.stub)continue;const mp=manifestEntry(p.id);if(!mp||!mp.version||verCmp(mp.version,p.version)!==0)continue;
-      if(p.readBy&&!(p.dropped>0&&verCmp(APP_VERSION,p.readBy)>0)&&!(p.id===RX_MASTER&&!p.classes&&verCmp('0.12.1',p.readBy)>0)&&!(!p.sounds&&verCmp('0.13.0',p.readBy)>0&&sswWantsSounds(p)))continue; /* v0.12.1: index copy read before classes were kept */
+      if(p.readBy&&!(p.dropped>0&&verCmp(APP_VERSION,p.readBy)>0)&&!(p.id===RX_MASTER&&!p.classes&&verCmp('0.12.1',p.readBy)>0)&&!(!p.sounds&&verCmp('0.13.0',p.readBy)>0&&sswWantsSounds(p))&&!(!p.stations&&mp.ns>0&&verCmp('0.16.0',p.readBy)>0))continue; /* v0.16.0: stations */ /* v0.12.1: index copy read before classes were kept */
       try{if(await downloadPack(p,false))n++;}catch(e){}}
     if(n){await persist();renderHome();}}finally{repairBusy=false;}}
 function updateAllPacks(){const todo=pendingUpdates();if(!todo.length)return;
@@ -3667,13 +3814,13 @@ async function init(){
   prac=await Store.get(KEY.prac)||null;
   qhist=await Store.get(KEY.qhist)||{};
   examSave=await Store.get(KEY.exam)||null;if(!examInProgress())examSave=null;
-  examLog=await Store.get(KEY.exams)||[];if(!Array.isArray(examLog))examLog=[];if(!(prac&&prac.mode==='practice'&&Array.isArray(prac.qorder)))prac=null;
+  examLog=await Store.get(KEY.exams)||[];if(!Array.isArray(examLog))examLog=[];stLog=await Store.get(KEY.stations)||[];if(!Array.isArray(stLog))stLog=[];if(!(prac&&prac.mode==='practice'&&Array.isArray(prac.qorder)))prac=null;
   daily=await Store.get(KEY.daily)||{date:today(),count:0};
   packGone=await Store.get(KEY.gone)||{};
   devNames=await Store.get(KEY.devnames)||{};if(!devNames[DEVICE_ID]){devNames[DEVICE_ID]=guessDeviceName();Store.set(KEY.devnames,devNames);}
   const sv=await Store.get(KEY.settings);if(sv)settings=Object.assign(settings,sv);
   anFresh=!sv&&!packs.length; /* v0.12.4: never used on this device — no release notes for it */
-  DATA_READY=true;if(persistPending){persistPending=false;persist();}maybeApplyQueuedUpdates();setTimeout(()=>{refreshKeysFromCodes().catch(()=>{});},0);
+  DATA_READY=true;if(persistPending){persistPending=false;persist();}applyGate();preAcctRefresh(); /* v0.16.0: the front door's data line needs the data */maybeApplyQueuedUpdates();setTimeout(()=>{refreshKeysFromCodes().catch(()=>{});},0);
   applyTheme();
   // migrate pre-v0.2.8 cumulative sessionDifficulty -> multi-select sessionDiffs
   if(!Array.isArray(settings.sessionDiffs)){const old=settings.sessionDifficulty;
@@ -3739,6 +3886,7 @@ const SSW_CSS=`.sswlive{margin:2px 0 4px;color:var(--ink);line-height:1.4}
 .sswlive .sswbu line{stroke:var(--ink);stroke-width:1.5}.sswlive .sswbu.lo line{stroke-dasharray:2 1.2}
 .sswlive .sswbl{fill:var(--ink);font-size:10px;font-weight:600}
 .sswlive .sswmur{fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:1}
+.sswlive .sswppg{fill:var(--accent);fill-opacity:.26;stroke:var(--accent);stroke-width:1}.sswlive .sswppg.e{fill-opacity:.14}.sswlive .sswppx{stroke:var(--red);stroke-width:1.3}.sswlive .sswppt{fill:none;stroke:var(--green);stroke-width:1.4}.sswlive .sswppr{fill:none;stroke:var(--red);stroke-width:1.2;stroke-linejoin:bevel} /* v0.16.x sound engine: breath strip */
 .sswlive .sswph,.sswlive .sswcpl{stroke:var(--gold);stroke-width:2;stroke-dasharray:5 4;vector-effect:non-scaling-stroke}
 .sswlive .sswcpd{fill:var(--gold)}
 .sswlive .sswrate{font:inherit;font-size:13px;line-height:1.2;padding:5px 8px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);min-height:32px;max-width:130px}
@@ -3916,7 +4064,7 @@ function sswEnv(shape,u){switch(shape){case'diamond':return Math.sin(Math.PI*u)*
 /* sf = where S2 falls (fraction of the cycle). The player keeps the prototype's 0.46; the cycle widget passes its own S1→S2 gap, and
    every time is re-mapped piecewise (systole [0,0.46] → [0,sf], diastole [0.46,1] → [sf,1]) so the murmurs stay where they belong */
 function sswTm(sf){const S2=0.46;if(!(sf>0&&sf<1)||sf===S2)return f=>f;const m=f=>f<0?m(1+f)-1:f>1?m(f-1)+1:(f<=S2?f*sf/S2:sf+(f-S2)*(1-sf)/(1-S2));return m;}
-function renderSound(d,bpm,breath,o){d=d||{};o=o||{};const cyc=60/(+bpm||72),buf=new Float32Array(Math.floor(cyc*SSW_SR)),sf=+o.sys||0.46,tm=sswTm(sf);
+function sswRenderHeart(d,bpm,breath,o){d=d||{};o=o||{};const cyc=60/(+bpm||72),buf=new Float32Array(Math.floor(cyc*SSW_SR)),sf=+o.sys||0.46,tm=sswTm(sf);
   let seed=7;const rnd=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296*2-1;};
   const thud=(t0,f,dur,amp,sharp)=>{ /* damped sinusoid + short band-noise = a heart sound */
     const n0=Math.floor(t0*SSW_SR),n=Math.floor(dur*SSW_SR),bp=sswBiquad(f*2.2,1.5);
@@ -3939,11 +4087,126 @@ function renderSound(d,bpm,breath,o){d=d||{};o=o||{};const cyc=60/(+bpm||72),buf
   return buf;}
 /* cycles of one rendered beat → a WAV Blob (16-bit PCM mono, 22 050 Hz). o.at = where S1 falls in the output cycle (0..1; the cycle widget) */
 function soundBlob(d,bpm,breath,cycles,o){o=o||{};cycles=cycles||4;const one=renderSound(d,bpm,breath,o),L=one.length,n=L*cycles,sh=Math.round((+o.at||0)*L);
-  const b=new ArrayBuffer(44+n*2),v=new DataView(b),ws=(p,s)=>{for(let i=0;i<s.length;i++)v.setUint8(p+i,s.charCodeAt(i));},lp=sswBiquad(900,0.707,true);
+  const b=new ArrayBuffer(44+n*2),v=new DataView(b),ws=(p,s)=>{for(let i=0;i<s.length;i++)v.setUint8(p+i,s.charCodeAt(i));},lp=sswBiquad(sswKind(d,o).lp||900,0.707,true); /* v0.16.x: the kind's playback filter (heart 900 Hz as before) */
   ws(0,'RIFF');v.setUint32(4,36+n*2,true);ws(8,'WAVE');ws(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);
   v.setUint32(24,SSW_SR,true);v.setUint32(28,SSW_SR*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);ws(36,'data');v.setUint32(40,n*2,true);
   for(let i=0;i<n;i++){const x=lp(one[(((i-sh)%L)+L)%L]);v.setInt16(44+i*2,Math.max(-32767,Math.min(32767,Math.round(x*32767))),true);}
   return new Blob([b],{type:'audio/wav'});}
+/* ===== v0.16.x SOUND ENGINE (design Claude/StudySuite/lung-atlas-2026-11-11/SOUND-ENGINE-DESIGN-v0.1-2026-11-13.md): ONE ENGINE, KINDS.
+   renderSound(d,rate,flag,o) picks the renderer by d.kind (no kind = heart: every heart pack plays as before; the heart synthesiser is
+   sswRenderHeart above, its body unchanged). A kind = {render, strip, box (the player's strip frame; none = the heart's own), rate
+   {label, aria, list, def}, lp (playback low-pass, Hz), normal (the comparison sound's id), manoeuvres (Breathing in + manoeuvre
+   chips), hint, name}. o.kind forces a kind (the cycle widget asks for heart). d.layers = [{kind, gain, rate, seed, …that kind's
+   fields}]: the first layer sets the cycle; each other layer plays at its own rate (else its kind's default) fitted to a whole number
+   of its cycles in the first layer's cycle (no seam in the loop), low-passed at its own kind's filter when that is lower, summed by
+   gain and normalised to 0.8. Each layer is seeded (its seed, else its place in the list).
+   BREATH: {kind:'breath', name, type:'vesicular'|'bronchovesicular'|'bronchial', ie:[insp, exp], gap, seed, adv:[{type:'crackles'
+   (size 'fine'|'coarse') | 'wheeze' | 'rhonchi' | 'stridor' | 'rub', phase:'insp'|'exp'|'both', from, to (fractions of the phase),
+   n, pitch (Hz, tonal sounds), gain}], note, src, audio?}. One breath = inspiration, the pause (gap), expiration, rest. Seeded noise,
+   band-passed by type, shaped per phase; loudness by type (vesicular soft, bronchial loud). The strip is drawn from the same plan
+   and event list as the sound, so what is drawn is what plays. ===== */
+function sswKindName(d,o){if(o&&o.kind&&Object.prototype.hasOwnProperty.call(SSW_KINDS,o.kind))return o.kind;
+  const L0=d&&Array.isArray(d.layers)?d.layers.find(l=>l&&typeof l==='object'):null,k=L0?L0.kind:d&&d.kind;
+  return (typeof k==='string'&&Object.prototype.hasOwnProperty.call(SSW_KINDS,k))?k:'heart';}
+function sswKind(d,o){return SSW_KINDS[sswKindName(d,o)];}
+function sswRateTxt(K,r){const l=K.rate.label;return r+(l.charAt(0)==='/'?'':' ')+l;}
+function renderSound(d,rate,flag,o){d=d||{};o=o||{};const Ls=!o.kind&&Array.isArray(d.layers)?d.layers.filter(l=>l&&typeof l==='object'):[];
+  return Ls.length?sswRenderLayers(Ls,rate,flag,o):sswKind(d,o).render(d,rate,flag,o);}
+function sswRenderLayers(Ls,rate,flag,o){const K0=sswKind(Ls[0]),one=K0.render(Object.assign({seed:1},Ls[0]),rate,flag,o),N=one.length,T=N/SSW_SR,out=new Float32Array(N);
+  Ls.forEach((l,i)=>{const K=sswKind(l),g=(l.gain!=null&&isFinite(+l.gain))?+l.gain:1;let b=one;
+    if(i){const r0=+l.rate>0?+l.rate:K.rate.def,n=Math.max(1,Math.round(T*r0/60));b=K.render(Object.assign({seed:i+1},l),n*60/T,false,{});
+      if(K.lp<K0.lp){const f=sswBiquad(K.lp,0.707,true);b=b.map(f);}}
+    if(b.length)for(let j=0;j<N;j++)out[j]+=b[j%b.length]*g;});
+  let mx=0;for(const v of out)mx=Math.max(mx,Math.abs(v));const k=0.8/(mx||1);for(let j=0;j<N;j++)out[j]*=k;return out;}
+/* biquad with a high-pass too (sswBiquad above is the heart's and stays as it is) */
+function sswBq(type,f0,Q){const w=2*Math.PI*f0/SSW_SR,a=Math.sin(w)/(2*Q),c=Math.cos(w);let b0,b1,b2;
+  if(type==='hp'){b0=(1+c)/2;b1=-(1+c);b2=(1+c)/2;}else if(type==='lp'){b0=(1-c)/2;b1=1-c;b2=(1-c)/2;}else{b0=a;b1=0;b2=-a;}
+  const a0=1+a,a1=-2*c,a2=1-a;let x1=0,x2=0,y1=0,y2=0;return x=>{const y=(b0*x+b1*x1+b2*x2-a1*y1-a2*y2)/a0;x2=x1;x1=x;y2=y1;y1=y;return y;};}
+function sswSm(x){return x<=0?0:x>=1?1:x*x*(3-2*x);}
+/* breath types (fractions of one breath): ti inspiration, g pause, te expiration, eh the part of expiration that is heard; lo–hi the
+   noise band (Hz); res a hollow resonance [Hz, Q, mix]; gi/ge loudness of each phase; loud the type's loudness. Course words: Week 22
+   ICE p8–p10, week22 guide §19.3 — vesicular soft, low, through inspiration and fading a third of the way into expiration;
+   bronchovesicular intermediate, I = E; bronchial loud, high, E ≥ I with a distinct pause. */
+const SSW_BREATH={vesicular:{ti:.38,g:0,te:.52,eh:.38,lo:150,hi:450,res:null,gi:1,ge:.45,loud:.5},
+  bronchovesicular:{ti:.4,g:0,te:.48,eh:.83,lo:200,hi:650,res:[450,2,.35],gi:1,ge:1,loud:.65},
+  bronchial:{ti:.3,g:.08,te:.5,eh:1,lo:300,hi:900,res:[650,4,.7],gi:.8,ge:1,loud:.85}};
+function sswBreathPlan(d){d=d||{};const P=Object.assign({},SSW_BREATH[d.type]||SSW_BREATH.vesicular);
+  if(d.gap!=null&&d.gap!==''&&isFinite(+d.gap))P.g=Math.max(0,Math.min(.3,+d.gap));P.te=Math.min(P.te,.95-P.ti-P.g);
+  if(Array.isArray(d.ie)&&+d.ie[0]>0&&+d.ie[1]>0){const E=Math.min(P.ti*d.ie[1]/d.ie[0],.95-P.ti-P.g);P.te=Math.max(E,P.te);P.eh=E/P.te;}
+  P.i1=P.ti;P.e0=P.ti+P.g;P.e1=P.e0+P.te;P.h1=P.e0+P.te*P.eh;return P;}
+/* the breath envelope at fraction f of the cycle: + in inspiration, − in expiration (the strip draws expiration below the line) */
+function sswBreathEnv(P,f){if(f<P.i1){const u=f/P.ti;return P.gi*sswSm(u/.3)*sswSm((1-u)/.08)*(.7+.3*u);}
+  if(f>=P.e0&&f<P.h1){const u=(f-P.e0)/(P.h1-P.e0);return -P.ge*(P.eh<.6?Math.pow(1-u,1.5)*sswSm(u/.08):sswSm(u/.12)*sswSm((1-u)/.25));}return 0;}
+const SSW_ADV={crackles:{phase:'insp'},wheeze:{phase:'exp',from:.05,to:.95,pitch:400,n:1},rhonchi:{phase:'both',from:.1,to:.9,pitch:150,n:1},
+  stridor:{phase:'insp',from:.08,to:.95,pitch:800,n:1},rub:{phase:'both',from:.12,to:.88,n:2}};
+/* adventitious events placed in the cycle (fractions; seeded): one list for the sound and the strip */
+function sswBreathEvents(d,P){const out=[];let seed=((+d.seed|0)+977)>>>0;const r01=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};
+  (Array.isArray(d.adv)?d.adv:[]).forEach(e=>{if(!e||typeof e.type!=='string'||!Object.prototype.hasOwnProperty.call(SSW_ADV,e.type))return;
+    const cr=e.type==='crackles',fine=cr&&e.size!=='coarse',D=Object.assign({},SSW_ADV[e.type],cr?(fine?{from:.4,to:1,n:12}:{from:0,to:.5,n:6}):{});
+    Object.keys(e).forEach(k=>{if(e[k]!=null&&e[k]!=='')D[k]=e[k];});
+    const g=isFinite(+D.gain)?Math.max(0,+D.gain):1,fr=Math.max(0,Math.min(1,+D.from||0)),to=Math.max(fr,Math.min(1,isFinite(+D.to)?+D.to:1));
+    const n=Math.max(1,Math.min(cr?60:e.type==='rub'?6:3,Math.round(+D.n)||1)),W=[];
+    if(D.phase!=='exp')W.push([0,P.i1,'insp']);if(D.phase==='exp'||D.phase==='both')W.push([P.e0,P.e1,'exp']);
+    W.forEach(([a,b,side])=>{const s=a+(b-a)*fr,t=a+(b-a)*to;
+      if(cr)for(let j=0;j<n;j++){const u=Math.pow(r01(),fine?.6:1.4);
+        out.push({type:'crackle',fine,side,at:s+(t-s)*u,f:fine?900+500*r01():260+200*r01(),dur:fine?.002+.001*r01():.004+.001*r01(),amp:g*(fine?.45:.6)*(.55+.45*r01()),pol:r01()<.5?-1:1});}
+      else if(e.type==='rub')for(let j=0;j<n;j++){const w=.035+.025*r01(),c=s+(t-s)*(j+.5)/n+(r01()-.5)*(t-s)/(n*3);out.push({type:'rub',side,at:Math.max(a,c-w/2),to:Math.min(b,c+w/2),amp:g*1.3});}
+      else{const M=e.type==='wheeze'?[1,1.31,1.68]:e.type==='rhonchi'?[1,1.45,1.9]:[1],k=e.type==='stridor'?1:n,p=+D.pitch>0?+D.pitch:SSW_ADV[e.type].pitch;
+        for(let j=0;j<k;j++)out.push({type:e.type,side,at:s,to:t,f:p*M[j],ph:r01()*6.283,amp:g*(e.type==='stridor'?.5:e.type==='rhonchi'?.5:.28)/Math.sqrt(k)});}});});
+  return out;}
+/* one breath at rr breaths a minute → Float32Array (22 050 Hz), seeded: the same description always gives the same samples */
+function sswRenderBreath(d,rr){d=d||{};const cyc=60/(+rr||16),N=Math.floor(cyc*SSW_SR),out=new Float32Array(N),P=sswBreathPlan(d),EV=sswBreathEvents(d,P);
+  let seed=(((+d.seed|0)*7919)+3)>>>0;const rnd=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296*2-1;};
+  const add=(k,v)=>{out[((k%N)+N)%N]+=v;};
+  const h1=sswBq('hp',P.lo,.707),h2=sswBq('hp',P.lo,.707),l1=sswBq('lp',P.hi,.707),l2=sswBq('lp',P.hi,.707),rz=P.res?sswBq('bp',P.res[0],P.res[1]):null;
+  let jv=0,pw=0,na=0;
+  for(let k=0;k<N;k++){const w=rnd();jv+=(rnd()-jv)*.0012;let v=l2(l1(h2(h1(w))));if(rz)v+=P.res[2]*1.5*rz(w);
+    const e=Math.abs(sswBreathEnv(P,k/N));v*=e*(1+8*jv);out[k]=v;if(e>.05){pw+=v*v;na++;}}
+  const kn=.2*P.loud/(Math.sqrt(pw/Math.max(1,na))||1);for(let k=0;k<N;k++)out[k]*=kn; /* loudness by type: RMS of the sounding part */
+  EV.forEach(x=>{const n0=Math.round(x.at*N);
+    if(x.type==='crackle'){const L=Math.round(x.dur*SSW_SR),tau=x.dur/3.5;for(let i=0;i<L;i++){const t=i/SSW_SR;add(n0+i,x.amp*x.pol*Math.sin(2*Math.PI*x.f*t+.4)*Math.exp(-t/tau));}return;}
+    const n1=Math.round(x.to*N),T=Math.max(1,n1-n0);
+    if(x.type==='rub'){const bp=sswBq('bp',380,1.1);let k=n0;
+      while(k<n1){const u=(k-n0)/T,a=x.amp*Math.pow(Math.sin(Math.PI*u),.6)*(.6+.4*Math.abs(rnd())),L=Math.round(.01*SSW_SR);
+        for(let i=0;i<L;i++){const t=i/SSW_SR;add(k+i,a*(1.4*bp(rnd())+Math.sin(2*Math.PI*230*t))*Math.exp(-t/.003));}
+        k+=Math.round((.006+.01*Math.abs(rnd()))*SSW_SR);}return;}
+    const bp=x.type==='stridor'?sswBq('bp',x.f,3):null;let ph=x.ph,fl=x.ph;
+    for(let i=0;i<T;i++){const u=i/T,t=i/SSW_SR;let f=x.f,a=x.amp,v;
+      if(x.type==='wheeze')f*=1+.025*Math.sin(2*Math.PI*3.2*t+x.ph)-.05*u;else if(x.type==='rhonchi')f*=1+.04*Math.sin(2*Math.PI*1.7*t+x.ph);else f*=1+.006*Math.sin(2*Math.PI*5*t+x.ph);
+      ph+=2*Math.PI*f/SSW_SR;
+      if(x.type==='wheeze')v=Math.sin(ph)+.25*Math.sin(2*ph)+.1*Math.sin(3*ph);
+      else if(x.type==='rhonchi'){v=0;for(let h=1;h<=6;h++)v+=Math.sin(h*ph)/h;v*=.6;fl+=2*Math.PI*(10+3*Math.sin(2*Math.PI*.9*t))/SSW_SR;a*=.45+.55*Math.max(0,Math.sin(fl));}
+      else v=Math.sin(ph)+.5*Math.sin(2*ph)+.3*Math.sin(3*ph)+.6*bp(rnd());
+      const r=x.type==='stridor'?.1:.15;add(n0+i,v*a*sswSm(u/r)*sswSm((1-u)/(r+.05)));}});
+  let m2=0;for(const v of out)m2=Math.max(m2,Math.abs(v));if(m2>.8){const s=.8/m2;for(let k=0;k<N;k++)out[k]*=s;}
+  return out;}
+/* the breath strip (a phonopneumogram): one breath, inspiration up and expiration down (height = the type's loudness), the pause as a
+   gap, crackles as ticks, tonal sounds (wheeze, rhonchi, stridor) as wavy bands, a rub as zigzag bursts, labels naming each phase and
+   what is heard in it. q = {X: fraction → x, y: midline, a: half-height, ty/by: label rows}. Only fixed words reach the SVG. */
+function sswPpgSvg(d,q){d=d||{};if(Array.isArray(d.layers)){const L0=d.layers.find(l=>l&&typeof l==='object');if(L0)d=L0;}
+  const P=sswBreathPlan(d),EV=sswBreathEvents(d,P),A=q.a,y=q.y,X=q.X,hh=A*Math.min(1,.35+.75*P.loud);let s='';
+  const shape=(f0,f1,cls)=>{if(!(f1>f0))return '';const pts=[];for(let i=0;i<=40;i++){const f=Math.min(f0+(f1-f0)*i/40,f1-1e-6);pts.push(X(f).toFixed(1)+','+(y-sswBreathEnv(P,f)*hh).toFixed(1));}
+    return `<path class="sswppg${cls}" d="M${X(f0).toFixed(1)},${y}L${pts.join('L')}L${X(f1).toFixed(1)},${y}Z"/>`;};
+  s+=shape(0,P.i1,'')+shape(P.e0,P.h1,' e');
+  const lab={insp:[],exp:[]},tk={insp:0,exp:0};
+  EV.forEach(x=>{const sg=x.side==='exp'?1:-1,nm=x.type==='crackle'?(x.fine?'fine crackles':'coarse crackles'):x.type;if(!lab[x.side].includes(nm))lab[x.side].push(nm);
+    if(x.type==='crackle'){const xx=X(x.at).toFixed(1),L=A*(.35+.6*Math.min(1,x.amp/.6));s+=`<line class="sswppx" x1="${xx}" y1="${(y+sg*L).toFixed(1)}" x2="${xx}" y2="${(y-sg*L*.35).toFixed(1)}"/>`;return;}
+    const x0=X(x.at),x1=X(x.to);
+    if(x.type==='rub'){let p='';for(let i=0;i<=7;i++)p+=(i?'L':'M')+(x0+(x1-x0)*i/7).toFixed(1)+','+(y+(i%2?1:-1)*A*.55*Math.min(1,x.amp/1.3)).toFixed(1);s+=`<path class="sswppr" d="${p}"/>`;return;}
+    const wl=x.type==='rhonchi'?9:x.type==='stridor'?3.2:4.5,cy=y+sg*(A*.42+5*tk[x.side]++),n=Math.max(2,Math.ceil(x1-x0));let p='';
+    for(let i=0;i<=n;i++){const xx=x0+(x1-x0)*i/n;p+=(i?'L':'M')+xx.toFixed(1)+','+(cy+2.2*Math.sin(2*Math.PI*(xx-x0)/wl)).toFixed(1);}s+=`<path class="sswppt" d="${p}"/>`;});
+  const ti=['inspiration'].concat(lab.insp).join(' · '),te=['expiration'].concat(lab.exp).join(' · '),ty=q.ty!=null?q.ty:y-A-8,by=q.by!=null?q.by:y+A+18;
+  s+=`<text class="ts" x="${Math.max(X(P.ti/2),X(0)+ti.length*2.6).toFixed(1)}" y="${ty}" text-anchor="middle">${ti}</text>`
+    +`<text class="ts" x="${Math.min(X((P.e0+P.e1)/2),X(1)-te.length*2.6).toFixed(1)}" y="${by}" text-anchor="middle">${te}</text>`;
+  return s;}
+/* the player's frame for the breath strip (the heart's frame stays in mountSoundPlayer) */
+function sswPpgBox(d,g){return `<svg class="sswpcg sswppgsvg" viewBox="0 0 ${g.W} 92" role="img" aria-label="Breath sound drawing"><line class="sswbase" x1="${g.L}" y1="${g.Y}" x2="${g.R}" y2="${g.Y}"/>`
+  +`${sswPpgSvg(d,{X:g.X,y:g.Y,a:26})}<line class="sswph" x1="${g.L}" y1="14" x2="${g.L}" y2="84" style="display:none"/></svg>`;}
+const SSW_KINDS={
+  heart:{render:sswRenderHeart,strip:sswPcgSvg,rate:{label:'bpm',aria:'Heart rate',list:[60,72,90,110],def:72},lp:900,normal:'normal',manoeuvres:true,
+    hint:'Low sounds (S3, S4, the rumble) need earphones.',name:'Heart sounds'},
+  breath:{render:sswRenderBreath,strip:sswPpgSvg,box:sswPpgBox,rate:{label:'/min',aria:'Breathing rate',list:[12,16,20,28],def:16},lp:3500,normal:'vesicular',manoeuvres:false,
+    hint:'Breath sounds are soft: earphones help.',name:'Breath sounds'}};
 function sswSoundUrl(k,make){const m=SSW_SND.urls;if(m.has(k))return m.get(k);const u=URL.createObjectURL(make());m.set(k,u);
   if(m.size>24){const [k0,u0]=m.entries().next().value;if(u0!==sswAudio().getAttribute('src'))URL.revokeObjectURL(u0);m.delete(k0);}return u;}
 function sswAudio(){let a=document.getElementById('sswAudio');if(!a){a=document.createElement('audio');a.id='sswAudio';a.loop=true;a.preload='auto';a.setAttribute('playsinline','');a.style.display='none';document.body.appendChild(a);}return a;}
@@ -3974,32 +4237,33 @@ function sswPcgSvg(d,q){d=d||{};const sf=q.sys||0.46,tm=sswTm(sf),at=q.at||0,cyc
 function mountSoundPlayer(host,id,o){o=o||{};const doc=host.ownerDocument||document;sswEnsureCss(doc);if(!host.closest('.sswlive'))host.classList.add('sswlive');
   const pid=o.packId,base=soundById(id,pid),card=!!o.card,hide=card&&!o.reveal&&!!o.hideName;
   if(!base){host.innerHTML='<div class="sswread">This sound is in a pack that isn’t in your library.</div>';return;}
-  const nrm=id!=='normal'&&soundById('normal',pid),real=base.audio&&/^data:audio\/[a-z0-9.+-]+;base64,/i.test(String(base.audio.src||''))?base.audio:null;
-  const M=base.murmurs||[],canBr=!!(base.split||M.some(m=>m.breath)),cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+  const KD=sswKind(base),nid=KD.normal||'normal',LY=Array.isArray(base.layers)?base.layers.filter(l=>l&&typeof l==='object'):[],lOff=new Set(); /* v0.16.x sound engine */
+  const nrm=id!==nid&&soundById(nid,pid),real=base.audio&&/^data:audio\/[a-z0-9.+-]+;base64,/i.test(String(base.audio.src||''))?base.audio:null;
+  const M=(KD.manoeuvres&&base.murmurs)||[],canBr=!!(KD.manoeuvres&&(base.split||M.some(m=>m.breath))),cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
   const chips=[...new Set(M.reduce((a,m)=>a.concat(m.louder||[],m.softer||[]),[]).map(String))].filter(c=>!(canBr&&/^inspiration$/i.test(c)));
-  let bpm=+o.bpm||72,breath=false,cmp=false,rec=false,raf=0,msg='';const on=new Set(),me={key:'',stopped:()=>ui()};
-  const desc=()=>{const d=cmp?nrm:base;if(cmp||!on.size)return d;
+  let bpm=+o.bpm||KD.rate.def,breath=false,cmp=false,rec=false,raf=0,msg='';const on=new Set(),me={key:'',stopped:()=>ui()};
+  const desc=()=>{const d=cmp?nrm:base;if(!cmp&&lOff.size)return Object.assign({},d,{layers:LY.filter((l,i)=>!lOff.has(i))});if(cmp||!on.size)return d;
     return Object.assign({},d,{murmurs:(d.murmurs||[]).map(m=>{let g=m.gain||0.5;on.forEach(c=>{if((m.louder||[]).includes(c))g*=1.6;if((m.softer||[]).includes(c))g*=0.6;});return Object.assign({},m,{gain:g});})});};
-  const key=()=>rec?'rec|'+(pid||'')+'|'+id:[pid||'',cmp?'normal':id,bpm,breath?1:0,[...on].sort().join('+')].join('|');
+  const key=()=>rec?'rec|'+(pid||'')+'|'+id:[pid||'',cmp?nid:id,bpm,breath?1:0,[...on].sort().join('+')].join('|')+(lOff.size?'|L'+[...lOff].sort().join(','):'');
   const url=()=>rec?String(real.src):sswSoundUrl(key(),()=>soundBlob(desc(),bpm,breath));
   const W=380,L=10,R=370,Y=44,X=f=>L+f*(R-L);
-  const strip=()=>`<svg class="sswpcg" viewBox="0 0 ${W} 92" role="img" aria-label="Phonocardiogram"><text class="ts" x="${X(0.23)}" y="10" text-anchor="middle">systole</text><text class="ts" x="${X(0.73)}" y="10" text-anchor="middle">diastole</text>`
+  const strip=()=>KD.box?KD.box(desc(),{W,L,R,Y,X}):`<svg class="sswpcg" viewBox="0 0 ${W} 92" role="img" aria-label="Phonocardiogram"><text class="ts" x="${X(0.23)}" y="10" text-anchor="middle">systole</text><text class="ts" x="${X(0.73)}" y="10" text-anchor="middle">diastole</text>`
     +`<line class="sswbase" x1="${L}" y1="${Y}" x2="${R}" y2="${Y}"/>${sswPcgSvg(desc(),{X,y:Y,a:26,sys:0.46,at:0,breath,bpm})}<line class="sswph" x1="${L}" y1="14" x2="${L}" y2="84" style="display:none"/></svg>`;
-  const rates=[...new Set([60,72,90,110,bpm])].sort((a,b)=>a-b);
+  const rates=[...new Set(KD.rate.list.concat([bpm]))].sort((a,b)=>a-b);
   host.innerHTML=`<div class="sswsnd"><div class="sswsndhd"></div><div class="sswpcgbox"></div><div class="sswtools"><button type="button" class="sswb sswplay" data-a="play"></button>`
-    +`<select class="sswrate" aria-label="Heart rate">${rates.map(r=>`<option value="${r}"${r===bpm?' selected':''}>${r} bpm</option>`).join('')}</select>`
+    +`<select class="sswrate" aria-label="${KD.rate.aria}">${rates.map(r=>`<option value="${r}"${r===bpm?' selected':''}>${sswRateTxt(KD,r)}</option>`).join('')}</select>`
     +(canBr&&!hide?'<button type="button" class="sswb" data-a="breath" aria-pressed="false">Breathing in</button>':'')
     +(hide?[]:chips).map(c=>`<button type="button" class="sswb" data-c="${sswEsc(c)}" aria-pressed="false">${sswEsc(cap(c))}</button>`).join('') /* 2026-10-27: no manoeuvre chips on a card's question side — they name the lesion */
-    +(nrm?'<button type="button" class="sswb" data-a="cmp" aria-pressed="false">Normal for comparison</button>':'')
+    +(LY.length>1&&!hide?LY.slice(1).map((l,i)=>`<button type="button" class="sswb" data-l="${i+1}" aria-pressed="true">${sswEsc(String(l.name||sswKind(l).name))}</button>`).join(''):'')+(nrm?'<button type="button" class="sswb" data-a="cmp" aria-pressed="false">Normal for comparison</button>':'')
     +(real?'<button type="button" class="sswb" data-a="rec" aria-pressed="false">Real recording</button>':'')+'</div>'
     +(real?`<div class="sswsndcr">Recording: ${sswEsc(real.credit||'')}${real.licence?' · '+sswEsc(real.licence):''}</div>`:'')
-    +'<div class="sswread"></div><div class="sswsndhint">Low sounds (S3, S4, the rumble) need earphones.</div></div>';
+    +'<div class="sswread"></div><div class="sswsndhint">'+sswEsc(KD.hint)+'</div></div>';
   const q=s=>host.querySelector(s),pb=q('[data-a="play"]');
   const playing=()=>{const a=document.getElementById('sswAudio');return SSW_SND.owner===me&&a&&!a.paused;};
-  const ui=()=>{pb.textContent=playing()?'❚❚ Pause':(rec?'▶ Listen · recording':'▶ Listen · '+bpm+' bpm');pb.setAttribute('aria-pressed',String(playing()));};
+  const ui=()=>{pb.textContent=playing()?'❚❚ Pause':(rec?'▶ Listen · recording':'▶ Listen · '+sswRateTxt(KD,bpm));pb.setAttribute('aria-pressed',String(playing()));};
   const say=()=>{const d=cmp?nrm:base,m0=(d.murmurs||[]).find(m=>m.where||m.radiates);
     q('.sswsndhd').innerHTML=hide?'<b>Listen — what is this?</b>':`<b>${sswEsc(d.name||id)}</b>${cmp?' <span class="sswpos">for comparison</span>':''}`;
-    q('.sswread').innerHTML=hide?(msg?sswEsc(msg):''):(msg?`<b>${sswEsc(msg)}</b> `:'')+sswEsc(d.note||'')
+    q('.sswsnd > .sswread').innerHTML=hide?(msg?sswEsc(msg):''):(msg?`<b>${sswEsc(msg)}</b> `:'')+sswEsc(d.note||'')
       +(m0?`<div class="sswsndwh">${m0.where?'Loudest: '+sswEsc(m0.where):''}${m0.where&&m0.radiates?' · ':''}${m0.radiates?'Radiates: '+sswEsc(m0.radiates):''}</div>`:'');};
   const draw=()=>{q('.sswpcgbox').innerHTML=hide?'<div class="sswread" style="text-align:center">Listen first — the drawing appears with the answer.</div>':strip();say();ui();}; /* 2026-10-27 (Alkarim): a sound card hides the phonocardiogram until the reveal — the murmur's shape is a hint */
   const ph=u=>{const l=q('.sswph');if(!l)return;if(u==null){l.style.display='none';return;}const x=X(u).toFixed(1);l.style.display='';l.setAttribute('x1',x);l.setAttribute('x2',x);};
@@ -4015,6 +4279,8 @@ function mountSoundPlayer(host,id,o){o=o||{};const doc=host.ownerDocument||docum
   tg('cmp',()=>{cmp=!cmp;msg='';return cmp;});tg('rec',()=>{rec=!rec;msg='';return rec;});
   host.querySelectorAll('[data-c]').forEach(b=>b.addEventListener('click',()=>{const c=b.dataset.c,now=!on.has(c);now?on.add(c):on.delete(c);b.setAttribute('aria-pressed',String(now));
     const up=M.some(m=>(m.louder||[]).includes(c)),dn=M.some(m=>(m.softer||[]).includes(c));msg=now?cap(c)+(up&&!dn?': the murmur gets louder.':dn&&!up?': the murmur gets softer.':': the murmur changes.'):'';again();}));
+  host.querySelectorAll('[data-l]').forEach(b=>b.addEventListener('click',()=>{const i=+b.dataset.l,now=lOff.has(i);now?lOff.delete(i):lOff.add(i);b.setAttribute('aria-pressed',String(now));
+    msg=now?'':b.textContent+' off.';again();})); /* v0.16.x sound engine: layers */
   draw();
   const a0=document.getElementById('sswAudio');if(SSW_SND.owner&&SSW_SND.owner!==me&&SSW_SND.owner.key===key()&&a0&&!a0.paused){const prev=SSW_SND.owner;SSW_SND.owner=me;me.key=key();try{prev.stopped();}catch(_){}ui();tick();}}
 /* guides: <a href="#" data-sound="as" data-sound-pack="cardio_heart">Hear it ›</a> mounts the player under the link's paragraph (a second
@@ -4214,7 +4480,7 @@ function mountCycle(host,w,o){o=o||{};const st=o.state||{},card=!!o.card,hideNam
     host.querySelectorAll('[data-v]').forEach(x=>x.setAttribute('aria-pressed',String(+x.dataset.v===vi)));};
   /* sound: the view's (or the phonocardiogram track's) description, rendered with S1 at the S1 event and S2 at the S2 event (cycle kind);
      an ECG view's sound plays at the rule's rate, not tied to the beats. The playhead follows the audio clock while it plays. */
-  const sndGo=()=>{const d=S();if(!d)return;const cyc=ecg?(M.cyc||60/72):M.cyc,b=60/cyc,o2=ecg?{}:{at:M.sound.at,sys:M.sound.sys};
+  const sndGo=()=>{const d=S();if(!d)return;const cyc=ecg?(M.cyc||60/72):M.cyc,b=60/cyc,o2=ecg?{kind:'heart'}:{kind:'heart',at:M.sound.at,sys:M.sound.sys};
     me.key=['cy',uid,vi,b.toFixed(2)].join('|');sswSoundPlay(sswSoundUrl([o.packId||'',sid(),b.toFixed(3),o2.at||0,o2.sys||0].join('|'),()=>soundBlob(d,b,false,4,o2)),me,ecg?0:t/M.dur*cyc);};
   const loop=now=>{raf=0;if(!play)return;if(!host.isConnected){stop();return;}
     if(document.hidden){last=0;raf=requestAnimationFrame(loop);return;}
@@ -4650,7 +4916,7 @@ function validateQuestion(q,i){
 function ingestPack(obj,sourceName){
   let pk;
   if(Array.isArray(obj)){const isCards=obj.some(x=>x&&x.type&&KNOWN_TYPES.includes(x.type));pk={id:'pack_'+Date.now().toString(36),pack:sourceName||'Imported',questions:isCards?[]:obj,cards:isCards?obj:[],guides:[]};}
-  else {pk={id:obj.id||('pack_'+Date.now().toString(36)),pack:obj.pack||sourceName||'Imported',questions:Array.isArray(obj.questions)?obj.questions:[],cards:Array.isArray(obj.cards)?obj.cards:[],guides:Array.isArray(obj.guides)?obj.guides:[],version:obj.version,author:obj.author||obj.createdBy,school:obj.school,year:obj.year,term:obj.term,course:obj.course,weeks:obj.weeks,groupBy:obj.groupBy,drugs:Array.isArray(obj.drugs)?obj.drugs:[],sources:(obj.sources&&typeof obj.sources==='object'&&!Array.isArray(obj.sources))?obj.sources:undefined,widgets:(obj.widgets&&typeof obj.widgets==='object'&&!Array.isArray(obj.widgets))?obj.widgets:undefined,sounds:(obj.sounds&&typeof obj.sounds==='object'&&!Array.isArray(obj.sounds))?obj.sounds:undefined,sortWeek:(typeof obj.sortWeek==='number'?obj.sortWeek:undefined),classes:(obj.classes&&typeof obj.classes==='object'&&!Array.isArray(obj.classes))?obj.classes:undefined};} /* v0.6.6: sources · v0.9.0: widgets · v0.13.0: sounds */
+  else {pk={id:obj.id||('pack_'+Date.now().toString(36)),pack:obj.pack||sourceName||'Imported',questions:Array.isArray(obj.questions)?obj.questions:[],cards:Array.isArray(obj.cards)?obj.cards:[],guides:Array.isArray(obj.guides)?obj.guides:[],version:obj.version,author:obj.author||obj.createdBy,school:obj.school,year:obj.year,term:obj.term,course:obj.course,weeks:obj.weeks,groupBy:obj.groupBy,drugs:Array.isArray(obj.drugs)?obj.drugs:[],sources:(obj.sources&&typeof obj.sources==='object'&&!Array.isArray(obj.sources))?obj.sources:undefined,widgets:(obj.widgets&&typeof obj.widgets==='object'&&!Array.isArray(obj.widgets))?obj.widgets:undefined,sounds:(obj.sounds&&typeof obj.sounds==='object'&&!Array.isArray(obj.sounds))?obj.sounds:undefined,stations:ingestStations(obj).list,stBad:ingestStations(obj).bad||undefined,rubric:(obj.rubric&&typeof obj.rubric==='object'&&Array.isArray(obj.rubric.options))?obj.rubric:undefined, /* v0.16.0 */components:(obj.components&&typeof obj.components==='object'&&!Array.isArray(obj.components))?obj.components:undefined /* exam mode */,sortWeek:(typeof obj.sortWeek==='number'?obj.sortWeek:undefined),classes:(obj.classes&&typeof obj.classes==='object'&&!Array.isArray(obj.classes))?obj.classes:undefined};} /* v0.6.6: sources · v0.9.0: widgets · v0.13.0: sounds */
   const errs=[];
   pk.questions=pk.questions.filter((q,i)=>{const v=validateQuestion(q,i);if(v){errs.push(v);return false;}return true;});
   pk.cards=pk.cards.filter((c,i)=>{const v=validateCard(c,i);if(v){errs.push(v);return false;}return true;});
@@ -4681,10 +4947,11 @@ function removePack(id){confirmDialog('Remove this pack? Your review progress is
 /* ===== NAV ===== */
 function currentSection(){const s=document.querySelector('section.on');return s?s.id:'home';}
 let navLock=false; // true while a popstate is driving navigation (prevents double-push)
-function show(which){try{hlLeaving(which);}catch(e){} /* v0.14.0 */const switching=currentSection()!==which;document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===which));$('homebtn').style.display=(which==='home'?'none':'');$('timer').style.display=(which==='quiz'&&timerWanted)?'':'none';if(switching){try{sswSoundStop();}catch(e){} /* v0.13.0 */if(!navLock){try{history.pushState({sec:which},'');}catch(e){}}window.scrollTo({top:0});}if(which==='home')setTimeout(appNotesTick,400);}
+function show(which){if(stGuard(which))return; /* v0.16.0: leaving a running station asks first */try{hlLeaving(which);}catch(e){} /* v0.14.0 */const switching=currentSection()!==which;document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===which));$('homebtn').style.display=(which==='home'?'none':'');$('timer').style.display=((which==='quiz'&&timerWanted)||(which==='station'&&stTimerId))?'':'none';if(switching){try{sswSoundStop();}catch(e){} /* v0.13.0 */if(!navLock){try{history.pushState({sec:which},'');}catch(e){}}window.scrollTo({top:0});}if(which==='home')setTimeout(appNotesTick,400);}
 /* Browser/mouse back-forward: map history entries onto app sections. */
 function gotoSec(t){
   switch(t){
+    case 'station':if(ST)show('station');else renderHome();break; /* v0.16.0 */
     case 'quiz':
       if(qorder.length){show('quiz');renderQuiz();if(!qTestSubmitted)startQTick();}
       else{try{history.replaceState({sec:'home'},'');}catch(e){}renderHome();}
@@ -5064,17 +5331,18 @@ const GC_CSS='.sscheck{display:block;box-sizing:border-box;width:auto;max-width:
   +'.sscheck button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}'
   +'@media print{.sscheck{display:none!important}}';
 function gcMount(d,g){try{if(!d||!d.body)return;d.querySelectorAll('.sscheck').forEach(x=>x.remove());
-  const it=gcItems(g),nq=gcSize(it.qs.length),nc=gcSize(it.cs.length);if(!nq&&!nc)return;
+  const it=gcItems(g),nq=gcSize(it.qs.length),nc=gcSize(it.cs.length);const sts=(typeof packStations==='function'?packStations():[]).filter(x=>x.p.id===g._pack&&x.s.guide&&String(x.s.guide.f||'').split('#')[0]===g.file); /* v0.16.0 */if(!nq&&!nc&&!sts.length)return;
   if(!d.getElementById('ssCheckCss')){const st=d.createElement('style');st.id='ssCheckCss';st.textContent=GC_CSS;(d.head||d.documentElement).appendChild(st);}
   const box=d.createElement('aside');box.className='sscheck';box.setAttribute('aria-label','Check your understanding');
-  const k=d.createElement('p');k.className='gc-k';k.textContent='Check your understanding';
+  const k=d.createElement('p');k.className='gc-k';k.textContent=(nq||nc)?'Check your understanding':'Practise a station';
   const pl=(n,w)=>n+' '+w+(n===1?'':'s');const s=d.createElement('p');s.className='gc-s';
-  s.textContent=[nq?pl(nq,'question'):'',nc?pl(nc,'card'):''].filter(Boolean).join(' and ')+' from this guide, a new mix each time.';
+  s.textContent=(nq||nc)?[nq?pl(nq,'question'):'',nc?pl(nc,'card'):''].filter(Boolean).join(' and ')+' from this guide, a new mix each time.':'A timed station on what this guide covers.';
   box.append(k,s);
   const btn=(kind,label,cls)=>{const b=d.createElement('button');b.type='button';b.className=cls;b.setAttribute('data-sscheck',kind);b.textContent=label;box.appendChild(b);};
-  if(nq)btn('q','Practice questions now','gc-1');if(nc)btn('c','Review cards now',nq?'gc-2':'gc-1');
+  if(nq)btn('q','Practice questions now','gc-1');if(nc)btn('c','Review cards now',nq?'gc-2':'gc-1');sts.forEach(x=>{const b=d.createElement('button');b.type='button';b.className=(nq||nc)?'gc-2':'gc-1';b.setAttribute('data-ssstation',x.s.id);b.textContent='Practise a station: '+x.s.title;box.appendChild(b);});
   (d.querySelector('.page')||d.body).appendChild(box);
-  if(!d.__gcWired){d.__gcWired=true;d.addEventListener('click',e=>{const b=e.target&&e.target.closest&&e.target.closest('[data-sscheck]');if(!b)return;e.preventDefault();
+  if(!d.__gcWired){d.__gcWired=true;d.addEventListener('click',e=>{const b=e.target&&e.target.closest&&e.target.closest('[data-sscheck],[data-ssstation]');if(!b)return;e.preventDefault();
+    const sid=b.getAttribute('data-ssstation');if(sid){const f=packStations().find(y=>y.s.id===sid);if(f){openStations();stStart(f.s,f.p);}return;} /* v0.16.0 */
     if(b.getAttribute('data-sscheck')==='c')gcCards(g);else gcPractise(g);});}
 }catch(e){}}
 function gcRef(g){return {pack:g._pack,key:guideKey(g)};}
@@ -5127,6 +5395,7 @@ function renderHome(){
   $('pharmPanel').style.display=nD?'':'none';
   $('pharmPanelDesc').textContent=`${nD} drug${nD===1?'':'s'} indexed across your active packs.`;
   // atlas panel (v0.10.4) — shown when any active pack carries an `atlas` widget (v0.10.5: on every device)
+  {const ns=packStations().length;$('stationPanel').style.display=ns?'':'none';if(ns)$('stationPanelDesc').textContent='Timed practice with a checklist and examiner questions. Solo, or with a partner as examiner.';} /* v0.16.0 */
   {const aw=atlasWidgets();$('atlasPanel').style.display=aw.length&&atlasAllowed()?'':'none';if(aw.length)$('atlasPanelDesc').textContent=aw.map(x=>x.w.title||x.id).join(' · ')+' — drawn sections and views, full width.';}
   // library (hierarchical: school ▸ year ▸ course, mirroring the Default study packs panel)
   renderLibrary();
@@ -5142,7 +5411,7 @@ function libRow(p){const on=p.enabled!==false;const upd=packUpdate(p),stub=!!p.s
   const left=document.createElement('div');left.className='pkleft';
   const sw=document.createElement('button');sw.className='switch'+(on?' on':'');sw.setAttribute('role','switch');sw.setAttribute('aria-checked',on?'true':'false');sw.setAttribute('aria-label','Enable pack');
   sw.onclick=()=>{p.enabled=!on;p.ts=Date.now();persist();renderHome();};
-  const ng=stub?(p.ng||0):(p.guides||[]).length,gtag=ng?` · ${ng} guides`:'';
+  const ng=stub?(p.ng||0):(p.guides||[]).length,gtag=ng?` · ${ng} guides`:'',stag=(!stub&&(p.stations||[]).length)?` · ${p.stations.length} stations`:''; /* v0.16.0 */
   const smp=stub?manifestEntry(p.id):null,ver=(smp&&smp.version)||p.version;
   const vtag=ver?` · v${acctEsc(String(ver))}`:''; /* v0.5.3 */
   const pv=upd?updatePreview(p,upd):'',nw=packNews()[p.id];
@@ -5151,7 +5420,7 @@ function libRow(p){const on=p.enabled!==false;const upd=packUpdate(p),stub=!!p.s
   const xoff=!srcXOn(p),nq=stub?Math.max(0,(p.nq||0)-(xoff&&p.nqx||0)):p.questions.length,nc=stub?Math.max(0,(p.nc||0)-(xoff&&p.ncx||0)):p.cards.length,sttag=stub?(on?' · switched on elsewhere — tap to download':' · offloaded') /* v0.6.8: matches the Offload button */:'';
   const sv0=(!stub&&p.sources&&typeof p.sources==='object')?srcVisible(p):null,sv=on?sv0:null; /* v0.6.6: what the source switches leave visible; v0.7.1: a switched-off pack's counts too */
   const srcline=sv?`<div class="srcrow"><button type="button" class="srcbtn${srcOpen.has(p.id)?' on':''}" aria-expanded="${srcOpen.has(p.id)?'true':'false'}">${sv.off?sv.on+' of '+sv.total+' sources':'All sources'} ${srcOpen.has(p.id)?'▴':'▾'}</button></div>`:'';
-  const info=document.createElement('div');info.innerHTML=p.id===RX_MASTER?`<div class="pn">${p.pack}</div><div class="pm">${stub?"":(p.drugs||[]).length+" drugs · "}reference for the Pharmacology view${vtag}${stub?sttag:updtag}</div>`:`<div class="pn">${p.pack}</div><div class="pm">${sv0?sv0.q:nq} questions · ${sv0?sv0.c:nc} cards${sv0&&ng?` · ${sv0.g} guides`:gtag}${vtag}${stub?sttag:updtag}</div>${srcline}`;
+  const info=document.createElement('div');info.innerHTML=p.id===RX_MASTER?`<div class="pn">${p.pack}</div><div class="pm">${stub?"":(p.drugs||[]).length+" drugs · "}reference for the Pharmacology view${vtag}${stub?sttag:updtag}</div>`:`<div class="pn">${p.pack}</div><div class="pm">${sv0?sv0.q:nq} questions · ${sv0?sv0.c:nc} cards${sv0&&ng?` · ${sv0.g} guides`:gtag}${stag}${vtag}${stub?sttag:updtag}</div>${srcline}`;
   {const ab=(manifestEntry(p.id)||{}).about;if(ab){const d2=document.createElement('div');d2.className='pab';d2.textContent=ab;info.appendChild(d2);}} /* v0.12.0 */
   const sl=info.querySelector('.srcbtn');if(sl)sl.onclick=()=>{srcOpen.has(p.id)?srcOpen.delete(p.id):srcOpen.add(p.id);renderHome();};
   if(stub){const dl=document.createElement('button');dl.className='dlbtn';dl.type='button';dl.setAttribute('aria-label','Download '+(p.pack||'pack'));dl.title='Download and switch on';
@@ -5847,6 +6116,15 @@ function flushPrac(p){if(!p||!Array.isArray(p.qorder))return;const m={};qpool().
   p.qorder.forEach((id,i)=>{const a=p.qans&&p.qans[i];if(a!=null&&!(p.qsub&&p.qsub[i])&&m[id])histRecord(id,a,a===m[id].correct,'p');});saveHist();}
 /* ---- Practice persistence (v0.2.72): the in-progress session lives in Store (KEY.prac) ---- */
 function pracInProgress(){return !!(prac&&prac.mode==='practice'&&Array.isArray(prac.qorder)&&prac.qorder.length);}
+/* v0.16.0: strike-outs — {sid, q:{questionId:[option index…]}} for the current Practice/Exam session only. */
+const STRIKE_KEY='suite_strikes_v1';
+function strikeSid(){return qmode+':'+(qT0||0);}
+function strikeLoad(){try{const x=JSON.parse(localStorage.getItem(STRIKE_KEY)||'null');if(x&&x.sid===strikeSid()&&x.q&&typeof x.q==='object')return x;}catch(e){}return {sid:strikeSid(),q:{}};}
+function strikeKey(){return qcur+':'+qorder[qcur];} /* this presentation: a repeat of the question elsewhere in the run starts clean */
+function strikeHas(oi){const a=strikeLoad().q[strikeKey()];return !!(Array.isArray(a)&&a.includes(oi));}
+function strikeSet(oi,on){const x=strikeLoad(),id=strikeKey(),a=new Set(x.q[id]||[]);if(on)a.add(oi);else a.delete(oi);if(a.size)x.q[id]=[...a];else delete x.q[id];
+  try{localStorage.setItem(STRIKE_KEY,JSON.stringify(x));}catch(e){}}
+function strikeToggle(oi){if(qRevealed(qcur))return;strikeSet(oi,!strikeHas(oi));renderQuiz();}
 function savePrac(){if(qTestSubmitted||!qorder.length)return;if(qmode==='test'){saveExam();return;}if(qmode!=='practice')return;prac={mode:'practice',v:1,at:Date.now(),qorder:qorder.slice(),qans:qans.slice(),qsub:qsub.slice(),qflag:qflag.slice(),qelapsed:qelapsed.slice(),qopt:qopt.map(a=>Array.isArray(a)?a.slice():a),qcur,t0:qT0};Store.set(KEY.prac,prac);}
 function clearPrac(){prac=null;Store.set(KEY.prac,null);}
 /* ---- Exam persistence (v0.4.1): leaving an exam without submitting keeps it; tapping Exam resumes it. The timer pauses while away. ---- */
@@ -5918,10 +6196,11 @@ function beginPractice(title){ /* v0.11.0: shared by Practice and Gaps (qorder a
   timerWanted=!!settings.practiceTimer;$('flagBtn').style.display='';$('submitAnsBtn').style.display='';
   $('finishBtn').textContent='Finish & summary';$('finishBtn').style.display='';$('paletteTitle').textContent=title;
   qflReset();renderQuiz();startQTick();show('quiz');}
-function startExam(){const pool=qTestPool('exam');if(!pool.length){toast(fltEmptyMsg('exam'));return;}buildQmap();
+function startExam(){examTypesTidy();const pool=qTestPool('exam');if(!pool.length){toast(fltEmptyMsg('exam'));return;}buildQmap();
   const counts=currentCounts();const g=examGroups();let picks=[],short=0;const mode=settings.examFresh||'prefer';
   /* Weighting is kept per group; "fresh" = never answered (practice or exam). Prefer tops up with the longest-unseen. */
-  g.forEach((ids,k)=>{const want=Math.min(ids.length,counts[k]||0);let take;
+  const xm=examModeOn()?examPick(g,counts,mode):null; /* exam mode: null = the old path below, unchanged */
+  if(xm){picks=xm.picks;short=mode==='only'?xm.short:0;}else g.forEach((ids,k)=>{const want=Math.min(ids.length,counts[k]||0);let take;
     if(mode==='any')take=shuffle([...ids]).slice(0,want);
     else{const fr=shuffle(ids.filter(id=>!histSeen(id)));take=fr.slice(0,want);
       if(take.length<want){if(mode==='prefer'){const last=id=>qhist[id].ex||qhist[id].at;take=take.concat(ids.filter(histSeen).sort((a,b)=>last(a)-last(b)).slice(0,want-take.length));}else short+=want-take.length;}}
@@ -5929,6 +6208,7 @@ function startExam(){const pool=qTestPool('exam');if(!pool.length){toast(fltEmpt
   if(!picks.length){toast(mode==='only'&&fltOn('exam')?'None of the matching questions are fresh. Set Question selection to “Prefer fresh” or “Any”.':mode==='only'?'No fresh questions left in your active packs. Set Question selection to “Prefer fresh” in Settings.':'No questions available for an exam. Load a study pack (or widen the session difficulty).');return;}
   if(short)toast(`Only ${picks.length} fresh question${picks.length===1?'':'s'} fit your weighting, so this exam is ${short} short.`);
   else if(fltOn('exam')&&settings.examAuto&&picks.length<(settings.examTarget||40))toast(`Only ${picks.length} question${picks.length===1?'':'s'} match your filters, so this exam has ${picks.length}.`); /* v0.8.0 */
+  if(xm)xm.notes.forEach(n=>toast(n,5200)); /* exam mode */
   examHl=[];qorder=shuffle(picks);qmode='test';qPrior={};qT0=Date.now();qinit();qTestSubmitted=false;qTimeLeft=settings.examMinutes*60;saveExam();
   timerWanted=!!settings.examTimer;$('flagBtn').style.display='';$('submitAnsBtn').style.display='none';
   $('finishBtn').textContent='Submit examination';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map';
@@ -5946,16 +6226,19 @@ function renderQuiz(){const q=qmap[qorder[qcur]],sel=qans[qcur],done=qRevealed(q
   let html=`<p class="stem"><span class="lead">${qcur+1}.</span> ${q.stem}</p><div class="opts">`;
   const perm=qopt[qcur]||[...q.options.keys()];
   perm.forEach((oi,disp)=>{const o=q.options[oi];let cls='opt';if(!done){if(sel===oi)cls+=' sel';}else{cls+=' locked';if(oi===q.correct)cls+=' correct';else if(sel===oi)cls+=' wrong';}
-    html+=`<button class="${cls}" data-i="${oi}" ${done?'disabled':''}><span class="letter">${LETTERS[disp]}</span><span>${o}</span></button>`;});
+    {const sk=strikeHas(oi),lab=(sk?'Restore':'Strike out')+' option '+LETTERS[disp]; /* v0.16.0: strike-outs */
+    html+=`<div class="optrow${sk?' struck':''}"><button class="${cls}" data-i="${oi}" ${done?'disabled':''}><span class="letter">${LETTERS[disp]}</span><span>${o}</span></button><button type="button" class="optx" data-x="${oi}" aria-pressed="${sk}" aria-label="${lab}" title="${lab}" ${done?'disabled':''}></button></div>`;}});
   html+='</div>';
   let after=''; /* v0.13.2: verdict + explanation go under the nav row (#qafter) so the buttons don't move */
   if(done){const ok=sel===q.correct;after+=`<div class="verdictline ${ok?'ok':'no'}">${ok?'✓ Correct':(sel==null?'— Not answered':'✗ Incorrect')}</div>`;
-    after+=`<div class="answerbox"><div class="h">Explanation · ${q.topic}${diffRank(q)>=0?' · '+q.difficulty:''}</div>${q.explain||''}</div>`+guideHTML(q.guide)+srcHTML(q);} /* v0.6.6 */
+    after+=`<div class="answerbox"><div class="h">Explanation · ${q.topic}${diffRank(q)>=0?' · '+q.difficulty:''}${examTypeLabel(q)?' · '+examTypeLabel(q):''}</div>${q.explain||''}</div>`+guideHTML(q.guide)+srcHTML(q);} /* v0.6.6 */
   const pr=qmode==='practice'?qPrior[qorder[qcur]]:null;
   if(pr&&!done){const di=perm.indexOf(pr.p);html+=`<div class="priorwrap"><button class="priorbtn" id="priorBtn" aria-expanded="false">↺ Answered before · view your prior answer</button><div class="priorbox" id="priorBox" hidden>${new Date(pr.at).toLocaleDateString([],{month:'short',day:'numeric'})} · you picked <b>${di>=0?LETTERS[di]+'. ':''}${q.options[pr.p]!=null?q.options[pr.p]:'—'}</b> · <span class="${pr.ok?'pok':'pno'}">${pr.ok?'✓ correct':'✗ incorrect'}</span>. This time starts clear.</div></div>`;}
-  $('qcard').innerHTML=html;$('qafter').innerHTML=after;
+  $('qcard').innerHTML=html;$('qafter').innerHTML=after;fbAttachQ(); /* v0.16.0 */
   if($('priorBtn'))$('priorBtn').onclick=()=>{const b=$('priorBox'),open=b.hidden;b.hidden=!open;$('priorBtn').setAttribute('aria-expanded',open?'true':'false');};
-  if(!done)$('qcard').querySelectorAll('.opt').forEach(el=>el.addEventListener('click',()=>{qans[qcur]=+el.dataset.i;renderQuiz();renderGrid();savePrac();}));
+  if(!done){$('qcard').querySelectorAll('.opt').forEach(el=>{el.addEventListener('click',()=>{qans[qcur]=+el.dataset.i;if(strikeHas(+el.dataset.i))strikeSet(+el.dataset.i,false);renderQuiz();renderGrid();savePrac();});
+    el.addEventListener('contextmenu',e=>{e.preventDefault();strikeToggle(+el.dataset.i);});}); /* v0.16.0: right-click strikes */
+    $('qcard').querySelectorAll('.optx').forEach(el=>el.addEventListener('click',()=>strikeToggle(+el.dataset.x)));}
   else wireGuideLinks($('qafter'));
   $('skipBtn').style.display='';$('skipBtn').style.visibility=qRevealed(qcur)?'hidden':''; /* v0.13.2: keep its row so the nav stays put */
   if(qmode==='practice'){$('submitAnsBtn').style.display=qsub[qcur]?'none':'';$('submitAnsBtn').disabled=(qans[qcur]==null);if(settings.practiceTimer)updatePracClock();}
@@ -6029,7 +6312,7 @@ let setupMode=null;
 function setupFreshNotes(){const ep=qTestPool('exam'),pp=qTestPool('prac');
   const ef=ep.filter(q=>!histSeen(q.id)).length,pf=pp.filter(q=>!histSeen(q.id)).length;
   $('exFreshNote').textContent=`${ef} of ${ep.length} question${ep.length===1?'':'s'} not answered yet.`;
-  $('prFreshNote').textContent=`${pf} of ${pp.length} not answered yet.`;fltNote('exam');fltNote('prac');}
+  $('prFreshNote').textContent=`${pf} of ${pp.length} not answered yet.`;fltNote('exam');fltNote('prac');if(setupMode==='exam')examSetupPaint();} /* exam mode */
 function renderSetupDiff(){const m=setupMode==='exam'?'exam':'prac',el=$(m==='exam'?'exDiff':'prDiff'),sd=selDiffs(m),dc=diffCounts();
   el.querySelectorAll('.seg').forEach(b=>{b.classList.toggle('on',sd.includes(b.dataset.d));b.querySelector('i').textContent=dc[b.dataset.d];});
   const box=$(m==='exam'?'exTopics':'prTopics');if(!box.hidden)renderSetupTopics(m);}
@@ -6053,7 +6336,7 @@ function renderSetupTopics(m){const box=$(m==='exam'?'exTopics':'prTopics'),key=
 /* drop topic picks that no longer exist (pack removed/updated); nothing left = all topics */
 function tidyTopics(m){const key=m==='exam'?'examTopics':'pracTopics';if(!Array.isArray(settings[key]))return;const have=new Set(qpool().map(q=>q._sec));
   const kept=settings[key].filter(k=>have.has(k));settings[key]=kept.length||settings[key].length===0?kept:null;}
-function openSetup(m){setupMode=m;const ex=m==='exam';tidyTopics(m);$(ex?'exTopics':'prTopics').hidden=true;setupTopicSummary(m);
+function openSetup(m){setupMode=m;const ex=m==='exam';tidyTopics(m);if(ex)examTypesTidy(); /* exam mode */$(ex?'exTopics':'prTopics').hidden=true;setupTopicSummary(m);
   $('setupTitle').textContent=ex?'Set up your exam':'Set up practice';$('setupExam').style.display=ex?'':'none';$('setupPrac').style.display=ex?'none':'';
   $('setupGo').textContent=ex?'Start exam':'Start practice';
   if(ex){$('setGroupBy').value=settings.examGroupBy;$('autoTarget').value=Math.max(1,settings.examTarget||40);toggleSwitch($('setExamAuto'),settings.examAuto);
@@ -6072,6 +6355,121 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('setupOv').style.
 [['exFltF','exam','f'],['exFltW','exam','w'],['prFltF','prac','f'],['prFltW','prac','w']].forEach(([id,m,k])=>$(id).addEventListener('change',e=>{ /* v0.8.0 */
   const v=fltOf(m);v[k]=!!e.target.checked;settings[m==='prac'?'pracFilt':'examFilt']=v;setupFreshNotes();if(m==='exam')renderWeights();persist();}));
 $('setupGo').addEventListener('click',()=>{const m=setupMode;if(m&&!qTestPool(m).length){toast(fltEmptyMsg(m));return;} /* v0.8.0: stay on setup */$('setupOv').style.display='none';setupMode=null;m==='exam'?startExam():startPracticeFresh();});
+
+/* ===== EXAM MODE (SPEC exam-mode v1.0, 2026-11-13): question types, component counts, difficulty mix, Mastery Exercise preset.
+   Pack data (all optional): question.task (a code in EX_TYPES; anything else = Untyped); pack.components {"<src code>":"maps"|"ice"|"hsr"|"cbl"}
+   (else by src prefix: MAPS/ANAT/LAB → maps, ICE → ice, HSR → hsr, CBL → cbl; EXTRA ignored; any code matching = member).
+   Settings: examMix {on,easy,medium,hard}, examTypesOff [codes; 'none' = Untyped], examComp {maps,ice,hsr}. With the defaults
+   startExam() takes the old path untouched. The type filter is part of qTestPool('exam'); Practice never filters by type. ===== */
+const EX_TYPES={dx:'Diagnosis',loc:'Localization',mech:'Mechanism',inv:'Investigation',mgmt:'Management',prog:'Prognosis and epidemiology',rp:'Research and practice'};
+const EX_COMPS=['maps','ice','hsr'],EX_COMP_LABEL={maps:'MAPS / anatomy',ice:'ICE',hsr:'HSR'},EX_COMP_ALL=['maps','ice','hsr','cbl'];
+function examTypeOf(q){const t=q&&q.task;return (typeof t==='string'&&Object.prototype.hasOwnProperty.call(EX_TYPES,t))?t:'none';}
+function examTypeLabel(q){const t=examTypeOf(q);return t==='none'?'':EX_TYPES[t];}
+function examCodeComp(p,c){if(typeof c!=='string'||c===SRCX)return null;const o=p&&p.components;
+  if(o&&typeof o==='object'&&Object.prototype.hasOwnProperty.call(o,c))return EX_COMP_ALL.includes(o[c])?o[c]:null;
+  const u=c.toUpperCase();return /^(MAPS|ANAT|LAB)/.test(u)?'maps':u.startsWith('ICE')?'ice':u.startsWith('HSR')?'hsr':u.startsWith('CBL')?'cbl':null;}
+function examCompOf(q){const out=[];if(!q||!Array.isArray(q.src))return out;const p=packs.find(x=>x.id===q._pack);
+  q.src.forEach(c=>{const k=examCodeComp(p,c);if(k&&!out.includes(k))out.push(k);});return out;}
+function examTypesOffSet(){const v=settings.examTypesOff;return new Set(Array.isArray(v)?v:[]);}
+function examTypeOn(q){const v=settings.examTypesOff;return !(Array.isArray(v)&&v.length&&v.includes(examTypeOf(q)));}
+/* a type filter that would hide everything (no typed questions left, or every type present is off) is dropped */
+function examTypesTidy(){const v=settings.examTypesOff;if(!Array.isArray(v)||!v.length)return;const base=qTestPool('exam',true),present=new Set(base.map(examTypeOf));
+  if(!base.length)return; /* empty for another reason (topics, filters): keep the choice */
+  if(!base.some(q=>examTypeOf(q)!=='none')||[...present].every(t=>v.includes(t)))settings.examTypesOff=[];}
+function examMixOn(){const x=settings.examMix;return !!(x&&x.on);}
+/* shares of the levels switched on by the Difficulty chips, normalized to 1 (a level that is off takes 0) */
+function examMixShares(){const x=settings.examMix||{},on=selDiffs('exam'),r={};let tot=0;
+  DIFFS.forEach(d=>{r[d]=on.includes(d)?Math.max(0,+x[d]||0):0;tot+=r[d];});
+  DIFFS.forEach(d=>{r[d]=tot>0?r[d]/tot:(on.includes(d)?1/on.length:0);});return r;}
+function examCompSet(){const c=settings.examComp||{},o={};EX_COMPS.forEach(k=>{const n=parseInt(c[k]);if(n>0)o[k]=n;});return o;}
+function examModeOn(){return examMixOn()||Object.keys(examCompSet()).length>0;}
+/* integer split of `total` by weights (summing to 1), largest remainder; ties go to the earlier key */
+function examSplit(total,w){const ks=Object.keys(w),out={},fr=[];let s=0;
+  ks.forEach((k,i)=>{const v=total*w[k];out[k]=Math.floor(v+1e-9);s+=out[k];fr.push([k,v-out[k],i]);});
+  fr.sort((a,b)=>b[1]-a[1]||a[2]-b[2]);for(let i=0;s<total&&i<fr.length;i++,s++)out[fr[i][0]]++;return out;}
+/* The picks for startExam when the mix is on or a component number is set; null = use the old path.
+   g: Map group → ids (the exam pool), counts: per-group targets (currentCounts), mode: any / prefer / only. Needs qmap. */
+function examPick(g,counts,mode){
+  const mix=examMixOn(),set=examCompSet(),keys=[...g.keys()],want={},left={},cOf={},cand=new Map();let T=0;
+  keys.forEach(k=>{want[k]=Math.min(g.get(k).length,counts[k]||0);left[k]=want[k];T+=want[k];g.get(k).forEach(id=>{cOf[id]=examCompOf(qmap[id]);});});
+  const act=EX_COMPS.filter(c=>set[c]&&keys.some(k=>g.get(k).some(id=>cOf[id].includes(c)))); /* a component with no question in the pool is not shown and not used */
+  if(!mix&&!act.length)return null;
+  /* each group's candidates in the Question selection order, exactly as the old path: fresh shuffled; prefer tops up with the longest-unseen */
+  const last=id=>qhist[id].ex||qhist[id].at;
+  keys.forEach(k=>{const ids=g.get(k);let c;if(mode==='any')c=shuffle([...ids]);else{c=shuffle(ids.filter(id=>!histSeen(id)));if(mode==='prefer')c=c.concat(ids.filter(histSeen).sort((a,b)=>last(a)-last(b)));}cand.set(k,c);});
+  const lv=id=>{const r=diffRank(qmap[id]);return r>=0?DIFFS[r]:'none';},LV=DIFFS.concat(['none']);
+  const sh=mix?examMixShares():null,rem=mix?Object.assign({none:0},examSplit(T,sh)):null;
+  const near=l=>l==='easy'?['easy','medium','hard','none']:l==='hard'?['hard','medium','easy','none']:['medium'].concat(rem.easy>=rem.hard?['easy','hard']:['hard','easy'],['none']);
+  const picked=new Set(),picks=[],notes=[];
+  const take=(id,k)=>{picked.add(id);picks.push(id);left[k]--;if(mix)rem[lv(id)]--;};
+  /* one pick from an ordered list: a level that still has quota (most needed first), else the nearest level */
+  const takeOne=list=>{if(!list.length)return null;if(!mix)return list[0];const by={};list.forEach(id=>{const l=lv(id);(by[l]=by[l]||[]).push(id);});
+    const need=DIFFS.filter(d=>rem[d]>0).sort((a,b)=>rem[b]-rem[a]);for(const d of need)if(by[d])return by[d][0];
+    const anchor=need[0]||DIFFS.slice().sort((a,b)=>rem[b]-rem[a])[0];for(const d of near(anchor))if(by[d])return by[d][0];return list[0];};
+  /* 1. components first, in the order maps, ice, hsr; capped at what is left of the exam */
+  let budget=T;const capped=[],shortC=[];
+  act.forEach(c=>{const N=set[c],n=Math.min(N,budget);if(n<N)capped.push([c,N,n]);
+    const sup={};let supTot=0;keys.forEach(k=>{sup[k]=cand.get(k).filter(id=>!picked.has(id)&&cOf[id].includes(c));supTot+=sup[k].length;});
+    const n2=Math.min(n,supTot);if(n2<n)shortC.push([c,n,n2]);
+    const alloc={},wsum=keys.reduce((s,k)=>s+want[k],0);keys.forEach(k=>alloc[k]=0);
+    if(wsum>0&&n2>0){const w={};keys.forEach(k=>w[k]=want[k]/wsum);const sp=examSplit(n2,w);keys.forEach(k=>{alloc[k]=Math.min(sp[k],sup[k].length,left[k]);});}
+    let rest=n2-keys.reduce((s,k)=>s+alloc[k],0),guard=0;
+    while(rest>0&&guard++<1e5){const k=keys.filter(x=>alloc[x]<sup[x].length&&alloc[x]<left[x]).sort((a,b)=>(left[b]-alloc[b])-(left[a]-alloc[a]))[0];if(k===undefined)break;alloc[k]++;rest--;}
+    /* supply only where a group's target is spent: move one place of target from the group with the most room */
+    while(rest>0&&guard++<2e5){const k=keys.filter(x=>alloc[x]<sup[x].length).sort((a,b)=>(sup[b].length-alloc[b])-(sup[a].length-alloc[a]))[0];
+      const d=keys.filter(x=>x!==k&&left[x]-alloc[x]>0).sort((a,b)=>(left[b]-alloc[b])-(left[a]-alloc[a]))[0];if(k===undefined||d===undefined)break;left[d]--;left[k]++;alloc[k]++;rest--;}
+    let got=0;keys.forEach(k=>{for(let i=0;i<alloc[k];i++){const id=takeOne(sup[k].filter(x=>!picked.has(x)));if(id==null)break;take(id,k);got++;budget--;}});
+    if(got<n2){const s2=shortC.find(e=>e[0]===c);if(s2)s2[2]=got;else shortC.push([c,n,got]);}});
+  /* 2. the rest of each group, from questions outside every component with a set number */
+  const pools=new Map();keys.forEach(k=>pools.set(k,cand.get(k).filter(id=>!picked.has(id)&&!act.some(c=>cOf[id].includes(c)))));
+  if(!mix)keys.forEach(k=>{const P=pools.get(k),n=Math.min(left[k],P.length);for(let i=0;i<n;i++)take(P[i],k);});
+  else{/* per group × level counts: split each group by the remaining quota, cap by supply (borrow the nearest level), then move
+       one at a time between groups until no level is over while another is under */
+    const sup={},x={},pos={};let pr=0;DIFFS.forEach(d=>{pos[d]=Math.max(0,rem[d]);pr+=pos[d];});pos.none=0;
+    const w={};DIFFS.forEach(d=>w[d]=pr>0?pos[d]/pr:sh[d]);
+    keys.forEach(k=>{sup[k]={};LV.forEach(l=>sup[k][l]=0);pools.get(k).forEach(id=>sup[k][lv(id)]++);
+      const r=Math.min(left[k],LV.reduce((s,l)=>s+sup[k][l],0)),d=examSplit(r,w);d.none=0;
+      DIFFS.forEach(l=>{let e=d[l]-sup[k][l];if(e<=0)return;d[l]=sup[k][l];for(const m of near(l)){if(e<=0)break;const t=Math.min(sup[k][m]-d[m],e);if(t>0){d[m]+=t;e-=t;}}});
+      x[k]=d;});
+    const tot=l=>keys.reduce((s,k)=>s+x[k][l],0);
+    for(let guard=0;guard<1e5;guard++){let moved=false;
+      const ov=LV.filter(l=>tot(l)>pos[l]).sort((a,b)=>(tot(b)-pos[b])-(tot(a)-pos[a])),un=DIFFS.filter(l=>tot(l)<pos[l]).sort((a,b)=>(pos[b]-tot(b))-(pos[a]-tot(a)));
+      outer:for(const o of ov)for(const u of un)for(const k of keys)if(x[k][o]>0&&sup[k][u]>x[k][u]){x[k][o]--;x[k][u]++;moved=true;break outer;}
+      if(!moved)break;}
+    keys.forEach(k=>{const P=pools.get(k);LV.forEach(l=>{let n=x[k][l];for(const id of P){if(n<=0)break;if(lv(id)===l&&!picked.has(id)){take(id,k);n--;}}});});}
+  let short=0;keys.forEach(k=>{if(left[k]>0)short+=left[k];});
+  /* what to tell them */
+  if(capped.length)notes.push(`Your set numbers add up to more than this exam’s ${T} questions, so it takes ${capped.map(([c,N,n])=>EX_COMP_LABEL[c]+' '+n+' of '+N).join(', ')}.`);
+  if(shortC.length)notes.push(`Not enough ${mode==='only'?'fresh ':''}questions for your set numbers: ${shortC.map(([c,n,n2])=>EX_COMP_LABEL[c]+' '+n2+' of '+n).join(', ')}. The exam uses all there are.`);
+  if(short&&mode!=='only')notes.push(`Only ${picks.length} question${picks.length===1?'':'s'} fit your weighting and set numbers, so this exam is ${short} short.`);
+  if(mix&&picks.length){const n=picks.length,q=examSplit(n,sh),res={easy:0,medium:0,hard:0,none:0};picks.forEach(id=>res[lv(id)]++);
+    if(DIFFS.some(d=>Math.abs(res[d]-q[d])>1)){const lack=DIFFS.filter(d=>res[d]<q[d]-1),pc={};DIFFS.forEach(d=>pc[d]=res[d]/n);const pct=examSplit(100,pc); /* whole percents that add up */
+      notes.push(`This exam is ${DIFFS.filter(d=>sh[d]>0||res[d]>0).map(d=>pct[d]+'% '+d).join(', ')}${lack.length?': not enough '+lack.join(' or ')+' questions matched.':'.'}`);}}
+  return {picks,short,notes,T};}
+/* ---- set-up screen ---- */
+function examMixNote(){const el=$('exMixNote');if(!el)return;const x=settings.examMix||{},sd=selDiffs('exam'),sh=examMixShares();
+  const tot=DIFFS.reduce((s,d)=>s+(sd.includes(d)?Math.max(0,+x[d]||0):0),0);
+  el.textContent=`Total ${tot}%`+((tot!==100||sd.length<DIFFS.length)?` · the exam uses ${DIFFS.filter(d=>sd.includes(d)).map(d=>Math.round(sh[d]*100)+'% '+d).join(' · ')}.`:'.');}
+function examSetupPaint(){if(!$('exTypeRow'))return;
+  const x=settings.examMix||{},sd=selDiffs('exam');toggleSwitch($('exMixOn'),examMixOn());$('exMixBox').hidden=!examMixOn();
+  DIFFS.forEach(d=>{const i=$('exMix_'+d);if(document.activeElement!==i)i.value=sd.includes(d)?Math.max(0,+x[d]||0):0;i.disabled=!sd.includes(d);});examMixNote();
+  const base=qTestPool('exam',true),off=examTypesOffSet(),tc={};base.forEach(q=>{const t=examTypeOf(q);tc[t]=(tc[t]||0)+1;});
+  const typed=base.some(q=>examTypeOf(q)!=='none');$('exTypeRow').hidden=!typed;
+  $('exTypes').innerHTML=typed?Object.keys(EX_TYPES).concat(tc.none?['none']:[]).map(t=>`<button type="button" class="seg${off.has(t)?'':' on'}" data-t="${t}" aria-pressed="${off.has(t)?'false':'true'}"${t==='loc'?' title="Where the lesion is, or which structure. Most MAPS / anatomy questions are this type."':''}>${t==='none'?'Untyped':EX_TYPES[t]} <i>${tc[t]||0}</i></button>`).join(''):'';
+  const pool=qTestPool('exam'),cc={};pool.forEach(q=>examCompOf(q).forEach(c=>{cc[c]=(cc[c]||0)+1;}));let any=false;
+  EX_COMPS.forEach(c=>{const n=cc[c]||0,i=$('exComp_'+c);$('exCompRow_'+c).hidden=!n;if(n)any=true;$('exCompOf_'+c).textContent='of '+n;
+    if(document.activeElement!==i){const v=parseInt((settings.examComp||{})[c]);i.value=v>0?v:'';}});
+  $('exCompBox').hidden=!any;}
+$('exTypes').addEventListener('click',e=>{const b=e.target.closest('.seg');if(!b)return;const t=b.dataset.t,off=examTypesOffSet();
+  if(off.has(t))off.delete(t);else{off.add(t);if(!qTestPool('exam',true).some(q=>!off.has(examTypeOf(q)))){toast('Keep at least one type with questions switched on.');return;}}
+  settings.examTypesOff=[...off];setupFreshNotes();renderWeights();persist();});
+$('exMixOn').addEventListener('click',()=>{const x=Object.assign({on:false,easy:25,medium:55,hard:20},settings.examMix||{});x.on=!x.on;settings.examMix=x;examSetupPaint();persist();});
+DIFFS.forEach(d=>$('exMix_'+d).addEventListener('input',e=>{const x=Object.assign({on:true,easy:25,medium:55,hard:20},settings.examMix||{});
+  x[d]=Math.max(0,Math.min(100,parseInt(e.target.value)||0));settings.examMix=x;examMixNote();persist();}));
+EX_COMPS.forEach(c=>$('exComp_'+c).addEventListener('input',e=>{const v=Math.max(0,parseInt(e.target.value)||0),o=Object.assign({},settings.examComp||{});
+  if(v)o[c]=v;else delete o[c];settings.examComp=o;persist();}));
+$('exPreset').addEventListener('click',()=>{settings.examAuto=true;settings.examGroupBy='pack';settings.examTarget=40;settings.examFresh='prefer';
+  settings.examMix={on:true,easy:25,medium:55,hard:20};persist();openSetup('exam');toast('Mastery Exercise mix set. Change anything below.');});
 
 /* ===== SETTINGS ===== */
 function openSettings(){
@@ -6169,9 +6567,23 @@ async function loadEacCodes(){
   try{const c=localStorage.getItem('suite_eac_codes');if(c){const a=JSON.parse(c);if(Array.isArray(a)&&a.length)window.EAC.hashes=a;}}catch(e){}
 }
 function ensureEacCodes(){if(!eacCodesP)eacCodesP=loadEacCodes();return eacCodesP;}
-function showGate(){const g=$('eacGate');if(g){g.hidden=false;if(ACCT_ON&&eacPending())eacScreen(2);else{if(ACCT_ON)eacScreen(1);const i=$('eacInput');if(i)setTimeout(()=>i.focus(),60);}}}
+function showGate(){const g=$('eacGate');if(g){g.hidden=false;const gm=gateMode(); /* v0.16.0: a code this device holds is never retyped */
+    if(ACCT_ON&&gm==='data'&&!eacPending()&&eac&&eac.unlocked&&(eac.code||eac.admin))eacPendingSet({via:eac.via||'code',admin:!!eac.admin,code:eac.code||'',keys:eac.keys||{}});
+    if(ACCT_ON&&eacPending()&&gm!=='expired')eacScreen(2);else{if(ACCT_ON)eacScreen(1);const i=$('eacInput');if(i&&gm!=='expired')setTimeout(()=>i.focus(),60);}
+    if(gm==='data')preAcctSnapshot();gateCheckServer();}}
 function hideGate(){const g=$('eacGate');if(g)g.hidden=true;}
-function applyGate(){ if(eacArmed()&&!(eac&&eac.unlocked))showGate(); else{hideGate();eacPendingSet(null);} if(typeof renderDefaultPacks==='function')renderDefaultPacks(); }
+function gateNeeded(){if(!eacArmed())return false;if(acctSignedIn()&&!expiredLocked())return false;if(GATE_PASS&&eac&&eac.unlocked)return false;return true;} /* v0.16.0 */
+function gateMode(){if(acctSignedIn())return expiredLocked()?'expired':'';return (DATA_READY&&localHasData())?'data':'new';}
+function applyGate(){ if(gateNeeded())showGate(); else{hideGate();eacPendingSet(null);} if(typeof renderDefaultPacks==='function')renderDefaultPacks(); }
+async function gateCheckServer(){const el=$('eacDown');if(!el||!gateNeeded())return;const can=!!((eac&&eac.unlocked)||eacPending());const up=await acctServerUp();el.hidden=up||!can||!gateNeeded();}
+async function gateRecheck(){try{if(!DATA_READY||!eacArmed())return;if(GATE_PASS){if(!await acctServerUp())return;GATE_PASS=false;}
+  if(!gateNeeded()||!$('eacGate').hidden)return;if(currentSection()!=='home'||dialogOpen()||typingNow())return;applyGate();}catch(e){}}
+/* One local copy of this browser's data the first time it meets the front door with data on it (30 days). */
+const PREACCT_KEY='suite_preacct_v1',PREACCT_KEEP=30*864e5;
+async function preAcctSnapshot(){try{if(!DATA_READY||!localHasData()||!await IDB.ok())return;const x=await IDB.get(PREACCT_KEY);
+  if(x&&x.at&&Date.now()-x.at<PREACCT_KEEP)return;await IDB.set(PREACCT_KEY,{at:Date.now(),d:backupData()});}catch(e){}}
+async function preAcctRefresh(){const b=$('preAcctBtn');if(!b)return;let x=null;try{if(await IDB.ok())x=await IDB.get(PREACCT_KEY);}catch(e){}
+  const ok=!!(x&&x.at&&Date.now()-x.at<PREACCT_KEEP);if(x&&!ok){try{await IDB.del(PREACCT_KEY);}catch(e){}}b.hidden=!(ok&&acctSignedIn());b.dataset.at=ok?x.at:'';}
 async function eacTry(){
   const inp=$('eacInput'),err=$('eacErr');const code=inp?inp.value:'';
   if(!eacCanon(code)){if(err)err.textContent='Enter your access code.';return;}
@@ -6181,8 +6593,166 @@ async function eacTry(){
   else if(m){eac={unlocked:true,via:m.tag||'code',admin:!!m.admin,at:new Date().toISOString(),keys:m.scopes||{}};if(!m.admin)eac.code=eacCanon(code); /* v0.3.0: fills sign-up */await Store.set(KEY.eac,eac);if(err)err.textContent='';hideGate();initPackLinks();toast('Welcome to Study Suite.');}
   else{if(err)err.textContent='That code wasn’t recognized. Double-check with whoever shared it.';if(inp)inp.select();}
 }
-function backup(){const data={suite:APP_VERSION,author:APP_AUTHOR,exported:new Date().toISOString(),packs,sched,daily,settings,eac,prac,qhist,exam:examSave,exams:examLog};const blob=new Blob([JSON.stringify(data)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='study-suite-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}
-function restore(file){const r=new FileReader();r.onload=async()=>{try{const d=JSON.parse(r.result);if(d.packs)packs=d.packs;if(d.sched)sched=d.sched;if(d.daily)daily=d.daily;if(d.settings)settings=Object.assign(settings,d.settings);if(d.eac)eac=d.eac;if(d.qhist&&typeof d.qhist==='object')qhist=d.qhist;if('exam' in d)examSave=(d.exam&&Array.isArray(d.exam.qorder))?d.exam:null;if(Array.isArray(d.exams))examLog=d.exams;if('prac' in d)prac=(d.prac&&d.prac.mode==='practice'&&Array.isArray(d.prac.qorder))?d.prac:null;allCards().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});rollDaily();await persist();renderHome();applyGate();if(eacArmed()&&!(eac&&eac.unlocked)){toast('Restored — but this backup isn’t from an unlocked copy.');}else{toast('Backup restored.');}}catch(e){toast('Could not read that file.');}};r.readAsText(file);}
+function backupData(){return {suite:APP_VERSION,author:APP_AUTHOR,exported:new Date().toISOString(),packs,sched,daily,settings,eac,prac,qhist,exam:examSave,exams:examLog,stations:stLog};} /* v0.16.0: shared with the safety copy */
+function backup(){const data=backupData();const blob=new Blob([JSON.stringify(data)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='study-suite-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}
+function restore(file){const r=new FileReader();r.onload=async()=>{let d;try{d=JSON.parse(r.result);}catch(e){toast('Could not read that file.');return;}await applyBackupData(d);};r.readAsText(file);}
+async function applyBackupData(d){try{if(d.packs)packs=d.packs;if(d.sched)sched=d.sched;if(d.daily)daily=d.daily;if(d.settings)settings=Object.assign(settings,d.settings);if(d.eac)eac=d.eac;if(d.qhist&&typeof d.qhist==='object')qhist=d.qhist;if('exam' in d)examSave=(d.exam&&Array.isArray(d.exam.qorder))?d.exam:null;if(Array.isArray(d.exams))examLog=d.exams;if(Array.isArray(d.stations))stLog=d.stations;if('prac' in d)prac=(d.prac&&d.prac.mode==='practice'&&Array.isArray(d.prac.qorder))?d.prac:null;allCards().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});rollDaily();await persist();renderHome();applyGate();if(gateNeeded()){toast('Backup restored. Create an account or sign in to keep using it — your restored data comes with you.');}else{toast('Backup restored.');}}catch(e){toast('Could not read that file.');}}
+
+/* ===== v0.16.0: FEEDBACK / REPORT A PROBLEM ===== */
+const FB_GLYPH='<span class="fbglyph" aria-hidden="true">✋</span>'; /* his pick (2026-11-13): the raised hand, as an emoji */
+const FB_KEY='suite_fbq_v1',FB_MAX=4000,FB_ERRS=[];
+window.addEventListener('error',e=>{try{FB_ERRS.push(new Date().toISOString().slice(0,19)+' '+String(e.message||'error').slice(0,200));if(FB_ERRS.length>10)FB_ERRS.shift();}catch(x){}});
+window.addEventListener('unhandledrejection',e=>{try{FB_ERRS.push(new Date().toISOString().slice(0,19)+' '+String((e.reason&&e.reason.message)||e.reason||'rejection').slice(0,200));if(FB_ERRS.length>10)FB_ERRS.shift();}catch(x){}});
+function fbBtnHtml(cls){return '<button type="button" class="'+cls+' fbbtn" data-fb="item" aria-label="Report a problem" title="Report a problem">'+FB_GLYPH+'</button>';}
+function fbPaint(){document.querySelectorAll('.fbbtn[data-fb]').forEach(b=>{if(!b.innerHTML.trim())b.innerHTML=FB_GLYPH;});}
+function fbAttachQ(){const a=$('qafter');if(!a||!a.innerHTML.trim())return;if(typeof qmode!=='undefined'&&qmode==='test'&&typeof qTestSubmitted!=='undefined'&&!qTestSubmitted)return;
+  const t=document.createElement('div');t.innerHTML=fbBtnHtml('nbtn fbq');a.insertBefore(t.firstChild,a.firstChild);}
+function fbItem(){const sec=currentSection();try{
+  if(sec==='quiz'){const id=qorder[qcur],q=qmap&&qmap[id];return q?{item_type:'question',item_id:String(id),pack_id:q._pack||'',label:'This question'}:null;}
+  if(sec==='study'){const c=allCards().find(x=>x.id===currentId);return c?{item_type:'card',item_id:String(c.id),pack_id:c._pack||'',label:'This card'}:null;}
+  if(sec==='reviewer'&&curGuideKey){const g=(activeGuides()||[]).find(x=>x&&(x.key===curGuideKey||x.file===curGuideKey));
+    return {item_type:'guide',item_id:String(curGuideKey).slice(0,120),pack_id:(g&&g._pack)||'',label:'This guide'+(g&&g.title?': '+g.title:'')};}
+  if(sec==='station'&&ST&&ST.s)return {item_type:'station',item_id:ST.s.id,pack_id:ST.p.id,label:'This station: '+ST.s.title};}catch(e){}return null;}
+function fbDiag(){const d={app:APP_VERSION,device:guessDeviceName(),view:currentSection(),online:navigator.onLine,storage:STORAGE_MODE,screen:innerWidth+'x'+innerHeight,
+    packs:activePacks().map(p=>p.id+'@'+(p.version||'')).slice(0,60),
+    sync:(()=>{try{const t=SSSync.status();return t.view+(t.msg?' — '+t.msg:'');}catch(e){return '';}})(),
+    syncLog:(()=>{try{return SSSync.myLog().slice(0,8).map(l=>new Date(l.t).toISOString().slice(0,16)+' '+String(l.what||'').slice(0,160));}catch(e){return [];}})(),
+    errors:FB_ERRS.slice(-10)};
+  let j=JSON.stringify(d);while(j.length>6000&&(d.syncLog.length||d.errors.length||d.packs.length)){if(d.syncLog.length)d.syncLog.pop();else if(d.errors.length)d.errors.shift();else d.packs.pop();j=JSON.stringify(d);}return d;}
+function fbId(){const a='abcdefghijklmnopqrstuvwxyz0123456789';let s='';const r=crypto.getRandomValues(new Uint8Array(20));for(const x of r)s+=a[x%36];return s;}
+async function fbQueue(){const q=await Store.get(FB_KEY);return Array.isArray(q)?q:[];}
+let fbBusy=false;
+async function fbFlush(){if(fbBusy||!navigator.onLine||!SSAccount.session())return 0;fbBusy=true;let n=0; /* claimed before any await: two 'online' listeners must not both send */
+  try{let q=await fbQueue();for(const rec of q.slice()){let ok=false;try{await SSAccount.sendFeedback(rec);ok=true;}catch(e){ok=!!(e&&e.status===400&&e.data&&e.data.client_id);} /* already there */
+      if(!ok)break;q=q.filter(x=>x.client_id!==rec.client_id);await Store.set(FB_KEY,q);n++;}}finally{fbBusy=false;}return n;}
+window.addEventListener('online',()=>{fbFlush();});
+async function fbSend(rec){if(!navigator.onLine||!SSAccount.session()){const q=await fbQueue();q.push(rec);await Store.set(FB_KEY,q);return 'queued';}
+  try{await SSAccount.sendFeedback(rec);return 'sent';}
+  catch(e){if(e&&e.offline){const q=await fbQueue();q.push(rec);await Store.set(FB_KEY,q);return 'queued';}
+    if(e&&e.status===400&&e.data&&e.data.client_id)return 'sent';if(e&&(e.expired||e.status===401))return 'expired';if(e&&e.status===429)return 'limit:'+(e.serverMsg||'You’ve sent a lot of feedback for now — try again a little later.'); /* the server's limit message, not the sign-in wording */return 'missing';}}
+let fbCtx=null;
+function openFeedback(mode){fbCtx=mode==='item'?fbItem():null;let ov=$('fbOv');
+  if(!ov){ov=document.createElement('div');ov.className='modal-ov';ov.id='fbOv';ov.style.display='none';ov.innerHTML='<div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="fbTitle">'+
+    '<button class="acct-x" id="fbX" type="button" aria-label="Close">×</button><h3 id="fbTitle">Feedback / Report a problem</h3>'+
+    '<div class="fb-kinds" role="radiogroup" aria-label="What kind">'+[['item','Something’s wrong with this item'],['app','Something in the app isn’t working'],['idea','An idea'],['other','Other']].map(k=>'<label><input type="radio" name="fbKind" value="'+k[0]+'"><span>'+k[1]+'</span></label>').join('')+'</div>'+
+    '<label class="f" for="fbMsg">What happened, and what did you expect?</label><textarea id="fbMsg" maxlength="'+FB_MAX+'"></textarea><div class="fb-count" id="fbCount">0 / '+FB_MAX+'</div>'+
+    '<label class="acct-chk" id="fbIncWrap"><input type="checkbox" id="fbInc" checked><span>Include this item</span></label>'+
+    '<div class="fb-sent"><div>Sent with this:</div><ul id="fbList"></ul><details><summary>Diagnostic details</summary><pre id="fbDiagPre"></pre></details></div>'+
+    '<div class="fb-foot"><div class="acct-err" id="fbErr"></div><button class="btn sm wide" id="fbGo" type="button">Send</button></div></div>'; /* Send stays at the bottom of the card */
+    document.body.appendChild(ov);
+    $('fbX').onclick=()=>{ov.style.display='none';};ov.addEventListener('click',e=>{if(e.target===ov)ov.style.display='none';});
+    $('fbMsg').oninput=()=>{$('fbCount').textContent=$('fbMsg').value.length+' / '+FB_MAX;};$('fbInc').onchange=fbList;$('fbGo').onclick=fbSubmit;}
+  $('fbMsg').value='';$('fbCount').textContent='0 / '+FB_MAX;$('fbErr').textContent='';$('fbInc').checked=true;$('fbIncWrap').style.display=fbCtx?'':'none'; /* .acct-chk sets display, so not [hidden] */
+  ov.querySelectorAll('input[name=fbKind]').forEach(r=>{r.checked=r.value===(fbCtx?'item':'app');r.closest('label').style.display=(r.value==='item'&&!fbCtx)?'none':'';}); /* v0.16.0: no item → no 'this item' choice (label is display:flex, so not [hidden]) */
+  $('fbDiagPre').textContent=JSON.stringify(fbDiag(),null,1);fbList();const b=$('fbGo');b.disabled=false;b.textContent='Send';ov.style.display='flex';}
+function fbList(){const L=[];if(fbCtx&&$('fbInc').checked)L.push(fbCtx.label);{const em=(SSAccount.session()||{}).email;L.push('Your account, so I can reply'+(em?' ('+em+')':''));}L.push('App version '+APP_VERSION+' · '+guessDeviceName());L.push('Diagnostic details (below)');
+  $('fbList').innerHTML=L.map(x=>'<li>'+String(x).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))+'</li>').join('');}
+async function fbSubmit(){const msg=$('fbMsg').value.trim(),err=$('fbErr');err.textContent='';
+  if(msg.length<10){err.textContent='Please say a little more — at least 10 characters.';return;}
+  const kind=(document.querySelector('#fbOv input[name=fbKind]:checked')||{}).value||'other',inc=fbCtx&&$('fbInc').checked;
+  const pk=inc&&fbCtx.pack_id?packs.find(x=>x.id===fbCtx.pack_id):null;
+  const rec={client_id:fbId(),kind,message:msg.slice(0,FB_MAX),item_type:inc?fbCtx.item_type:'none',item_id:inc?fbCtx.item_id:'',pack_id:inc?(fbCtx.pack_id||''):'',
+    pack_version:pk?String(pk.version||'').slice(0,20):'',view:currentSection().slice(0,40),app_version:APP_VERSION,device:guessDeviceName().slice(0,60),diag:fbDiag()};
+  const b=$('fbGo');b.disabled=true;b.textContent='Sending…';const r=await fbSend(rec);b.disabled=false;b.textContent='Send';
+  if(r==='sent'){$('fbOv').style.display='none';toast('Thanks — sent. I read every one.');return;}
+  if(r==='queued'){$('fbOv').style.display='none';toast(SSAccount.session()?'You’re offline. I’ll send this as soon as you’re back online.':'Saved. I’ll send this once you’re signed in.');return;}
+  if(r==='expired'){err.textContent='Sign in again to send this — your message is still here.';return;}
+  if(r.startsWith('limit:')){err.textContent=r.slice(6);return;}
+  err.innerHTML='Feedback can’t be sent right now. Email <a href="mailto:feedback@studysuite.app">feedback@studysuite.app</a> instead.';}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-fb]');if(!b)return;e.preventDefault();openFeedback(b.dataset.fb);});
+setTimeout(fbPaint,0);
+
+/* ===== v0.16.0: OSCE STATIONS ===== */
+var ST=null,stTimerId=null,stLeaving=false;const ST_NOTES_MAX=5000;
+function validateStation(s){if(!s||typeof s!=='object')return ['not an object'];const e=[];if(!s.title)e.push('title');if(!s.stem)e.push('stem');
+  if(!Array.isArray(s.checklist)||!s.checklist.length||s.checklist.some(x=>!x||!Array.isArray(x.items)||!x.items.length||x.items.some(i=>!i||!i.t)))e.push('checklist');return e;}
+function ingestStations(obj){if(!obj||!Array.isArray(obj.stations))return {list:undefined,bad:0};let bad=0;const list=[];
+  obj.stations.forEach((s,i)=>{const e=validateStation(s);if(e.length){bad++;try{console.warn('Station skipped ('+((s&&s.id)||i)+'): needs '+e.join(', '));}catch(x){}return;}
+    const st=Object.assign({},s,{id:s.id||(String(obj.id||'pack')+'_st'+i)});if(st.format!=='practice')delete st.format; /* only "practice" is kept */
+    list.push(st);});return {list:list.length?list:undefined,bad};}
+function stTag(s){return s&&s.format==='practice'?'Practice only':'';} /* v0.16.0: practice-only stations */
+function packStations(){const out=[];activePacks().forEach(p=>(p.stations||[]).forEach(s=>out.push({s,p})));return out;}
+function stItems(s){const out=[];(s.checklist||[]).forEach((sec,si)=>(sec.items||[]).forEach((it,ii)=>out.push({k:si+'.'+ii,si,sec:sec.section||'',t:it.t,why:it.why||''})));return out;}
+function stLast(id){const a=stLog.find(x=>x&&x.id===id);return a?Math.round(100*(a.cs+(a.ps||0))/Math.max(1,a.cm+(a.pm||0)))+'%':'';}
+function stEsc(t){return String(t==null?'':t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function stRunning(){return !!(ST&&ST.run&&ST.phase!=='debrief');}
+function stGuard(which){if(stLeaving||which==='station'||!stRunning()||currentSection()!=='station')return false;
+  confirmDialog('Leave this station? It won’t be saved.',{confirmText:'Leave'},()=>{stLeaving=true;try{stStopAll();ST=null;if(which==='home')renderHome();else show(which);}finally{stLeaving=false;}});return true;}
+function stStopAll(){clearInterval(stTimerId);stTimerId=null;const t=$('timer');if(t){t.style.display='none';t.classList.remove('warn','over');}if(ST&&ST.rec){try{ST.rec.stop();}catch(e){}ST.rec=null;}}
+function stTimer(secs,onEnd){clearInterval(stTimerId);stTimerId=null;const t=$('timer');t.classList.remove('warn','over');if(!(secs>0)){t.style.display='none';return;}
+  const t0=Date.now();t.style.display='';let ended=false;
+  const tick=()=>{const left=secs-(Date.now()-t0)/1000;$('tclock').textContent=left>=0?fmt(left):'+'+fmt(-left);t.classList.toggle('warn',left>0&&left<=30);t.classList.toggle('over',left<0);
+    if(left<=0&&!ended){ended=true;if(onEnd)onEnd();}};tick();stTimerId=setInterval(tick,500);}
+function openStations(){stStopAll();ST={phase:'list',mode:settings.stMode==='partner'?'partner':'solo'};show('station');stRender();}
+function stStart(s,p){stStopAll();ST={phase:'read',run:true,s,p,mode:ST&&ST.mode||'solo',ticks:{},probes:{},notes:'',t0:0,encSecs:0};stRender();}
+function stGo(phase){stStopAll();if(phase==='enc'){ST.t0=Date.now();}if(phase!=='enc'&&ST.t0&&!ST.encSecs)ST.encSecs=Math.round((Date.now()-ST.t0)/1000);ST.phase=phase;if(phase==='debrief')stSave();stRender();}
+function stScore(){const items=stItems(ST.s),cs=items.filter(i=>ST.ticks[i.k]).length,pr=ST.s.probes||[];
+  const ps=pr.reduce((a,q,i)=>a+Math.min(q.n||0,ST.probes[i]||0),0),pm=pr.reduce((a,q)=>a+(q.n||0),0);return {cs,cm:items.length,ps,pm};}
+function stSave(){const sc=stScore(),e={at:Date.now(),id:ST.s.id,pack:ST.p.id,ver:ST.p.version||'',mode:ST.mode,ticks:Object.keys(ST.ticks).filter(k=>ST.ticks[k]),probes:Object.assign({},ST.probes),
+    cs:sc.cs,cm:sc.cm,ps:sc.ps,pm:sc.pm,secs:ST.encSecs||0};if(ST.notes)e.notes=String(ST.notes).slice(0,ST_NOTES_MAX);
+  ST.entry=e;stLog=[e].concat(stLog.filter(x=>x&&x.at!==e.at)).slice(0,50);persist();}
+function stUpdate(){if(!ST||!ST.entry)return;const sc=stScore();Object.assign(ST.entry,{ticks:Object.keys(ST.ticks).filter(k=>ST.ticks[k]),cs:sc.cs,ps:sc.ps,pm:sc.pm});persist();}
+function stMic(){const ta=$('stNotes');if(ta)ta.focus();const SR=window.SpeechRecognition||window.webkitSpeechRecognition,hint=$('stMicHint');
+  if(!SR){if(hint)hint.hidden=false;return;}
+  if(ST.rec){try{ST.rec.stop();}catch(e){}return;}
+  let r;try{r=new SR();}catch(e){if(hint)hint.hidden=false;return;}r.continuous=true;r.interimResults=false;r.lang=navigator.language||'en-CA';
+  r.onresult=e=>{for(let i=e.resultIndex;i<e.results.length;i++)if(e.results[i].isFinal){const t=String(e.results[i][0].transcript||'').trim();if(!t)continue;
+    ta.value=(ta.value+(ta.value&&!/\s$/.test(ta.value)?' ':'')+t).slice(0,ST_NOTES_MAX);ST.notes=ta.value;}};
+  r.onerror=()=>{if(hint)hint.hidden=false;};r.onend=()=>{if(ST)ST.rec=null;const b=$('stMic');if(b)b.setAttribute('aria-pressed','false');};
+  try{r.start();ST.rec=r;$('stMic').setAttribute('aria-pressed','true');}catch(e){if(hint)hint.hidden=false;}}
+function stChecklist(editable,showWhy){const items=stItems(ST.s);let h='',cur=-1;
+  items.forEach(i=>{if(i.si!==cur){cur=i.si;h+='<div class="st-sec">'+stEsc(i.sec||'Checklist')+'</div>';}
+    const on=!!ST.ticks[i.k];h+='<label class="st-item'+((!editable&&!on)?' st-miss':'')+'"><input type="checkbox" data-k="'+i.k+'"'+(on?' checked':'')+(editable?'':' disabled')+'><div>'+stEsc(i.t)+
+      (i.why?'<div class="st-why"'+((showWhy==='all'||(showWhy==='ticked'&&on)||(showWhy==='missed'&&!on))?'':' hidden')+'>'+stEsc(i.why)+'</div>':'')+'</div></label>';});return h;}
+function stWireTicks(after){$('stBody').querySelectorAll('input[data-k]').forEach(x=>x.onchange=()=>{ST.ticks[x.dataset.k]=x.checked;
+  const w=x.closest('.st-item').querySelector('.st-why');if(w&&ST.phase==='enc')w.hidden=!x.checked;if(after)after();});} /* in place: no redraw mid-station */
+function stRender(){const b=$('stBody');if(!b||!ST)return;const s=ST.s,T=s&&s.timing||{};$('stTitle').textContent=s?s.title:'OSCE stations';
+  if(ST.phase==='list'){const all=packStations();const kinds=[...new Set(all.map(x=>x.s.kind).filter(Boolean))],levels=[...new Set(all.map(x=>x.s.level).filter(Boolean))];
+    const fk=ST.fk||'',fl=ST.fl||'';const seg=(id,opts,cur)=>'<div class="st-seg segctl" id="'+id+'">'+opts.map(o=>'<button type="button" class="seg'+(o[0]===cur?' on':'')+'" data-v="'+stEsc(o[0])+'">'+stEsc(o[1])+'</button>').join('')+'</div>';
+    let h=seg('stModeSeg',[['solo','Solo'],['partner','With a partner']],ST.mode);
+    if(kinds.length>1)h+=seg('stKindSeg',[['','All']].concat(kinds.map(k=>[k,k[0].toUpperCase()+k.slice(1)])),fk);
+    if(levels.length>1)h+=seg('stLevelSeg',[['','All levels']].concat(levels.map(l=>[l,l])),fl);
+    const shown=all.filter(x=>(!fk||x.s.kind===fk)&&(!fl||x.s.level===fl)),groups={};shown.forEach(x=>{(groups[x.s.sys||'Other']=groups[x.s.sys||'Other']||[]).push(x);});
+    Object.keys(groups).forEach(g=>{h+='<div class="st-grp">'+stEsc(g)+'</div><div class="st-list">'+groups[g].map((x,i)=>{const t=x.s.timing||{},min=Math.round(((t.encounter||0)+(t.probe||0))/60),last=stLast(x.s.id);
+      return '<button type="button" class="st-row" data-id="'+stEsc(x.s.id)+'"><div><div class="st-t">'+stEsc(x.s.title)+'</div><div class="st-m">'+[x.s.kind,x.s.level,min?min+' min':'',stTag(x.s)].filter(Boolean).map(stEsc).join(' · ')+'</div></div><div class="st-m">'+stEsc(last?'Last '+last:'')+'</div></button>';}).join('')+'</div>';});
+    const past=stLog.slice(0,10).map(a=>{const x=all.find(y=>y.s.id===a.id);return '<div class="st-m">'+stEsc(new Date(a.at).toLocaleDateString())+' · '+stEsc(x?x.s.title:a.id)+' · '+Math.round(100*(a.cs+(a.ps||0))/Math.max(1,a.cm+(a.pm||0)))+'%</div>';}).join('');
+    if(past)h+='<div class="st-grp">Past stations</div>'+past;
+    b.innerHTML=h;
+    b.querySelectorAll('#stModeSeg .seg').forEach(x=>x.onclick=()=>{ST.mode=x.dataset.v;settings.stMode=ST.mode;persist();stRender();});
+    b.querySelectorAll('#stKindSeg .seg').forEach(x=>x.onclick=()=>{ST.fk=x.dataset.v;stRender();});b.querySelectorAll('#stLevelSeg .seg').forEach(x=>x.onclick=()=>{ST.fl=x.dataset.v;stRender();});
+    b.querySelectorAll('.st-row').forEach(x=>x.onclick=()=>{const f=all.find(y=>y.s.id===x.dataset.id);if(f)stStart(f.s,f.p);});return;}
+  if(ST.phase==='read'){b.innerHTML='<div class="st-sec">Candidate instructions</div><div class="st-m">'+stEsc([s.kind,s.level,stTag(s),ST.mode==='partner'?'With a partner':'Solo'].filter(Boolean).join(' · '))+'</div><p class="st-stem">'+stEsc(s.stem)+'</p>'+(stTag(s)?'<div class="st-m">For practice. Not an OSCE station format.</div>':'')+
+      (Array.isArray(s.tasks)&&s.tasks.length?'<div class="st-sec">Your tasks</div><ul>'+s.tasks.map(t=>'<li>'+stEsc(t)+'</li>').join('')+'</ul>':'')+
+      '<div class="st-actions"><button type="button" class="btn" id="stGoEnc">Start now</button></div>'+(T.read?'<div class="st-sec">Reading time</div><div class="st-m">On the timer at the top — the station starts when it runs out.</div>':'');
+    $('stGoEnc').onclick=()=>stGo('enc');stTimer(T.read,()=>{if(ST&&ST.phase==='read')stGo('enc');});return;}
+  if(ST.phase==='enc'){const next=(s.probes||[]).length?'probe':'debrief',lbl=next==='probe'?'Done — examiner questions':'Finish';
+    if(ST.mode==='partner'){b.innerHTML='<div class="st-sec">Station</div><div class="st-m">Hand the phone to your examiner. They tick each step as you do it.</div>'+stChecklist(true,'ticked')+'<div class="st-actions"><button type="button" class="btn" id="stNext">'+lbl+'</button></div>';stWireTicks(null);}
+    else{b.innerHTML='<div class="st-sec">Station</div><div class="st-m">Do the station aloud. Tick what you did when the time is up.</div><p class="st-stem">'+stEsc(s.stem)+'</p><label class="st-sec" for="stNotes">Your notes</label><textarea id="stNotes" maxlength="'+ST_NOTES_MAX+'" placeholder="What you did and said — you’ll tick the checklist against this afterwards."></textarea>'+
+      '<div class="st-actions"><button type="button" class="btn ghost" id="stMic" aria-pressed="false">Dictate</button><button type="button" class="btn" id="stNext">'+lbl+'</button></div><div class="st-m" id="stMicHint" hidden>Tap the microphone on your keyboard to dictate.</div>';
+      const ta=$('stNotes');ta.value=ST.notes||'';ta.oninput=()=>{ST.notes=ta.value.slice(0,ST_NOTES_MAX);};$('stMic').onclick=stMic;}
+    $('stNext').onclick=()=>stGo(next);if(!stTimerId||ST._encT!==ST.t0){ST._encT=ST.t0;stTimer(T.encounter,null);}return;}
+  if(ST.phase==='probe'){b.innerHTML='<div class="st-sec">Examiner questions</div>'+(s.probes||[]).map((q,i)=>'<div class="st-probe"><div>'+stEsc(q.q)+'</div><div class="st-step"><button type="button" class="btn ghost sm" data-d="-1" data-i="'+i+'" aria-label="One fewer">−</button><span id="stP'+i+'">'+(ST.probes[i]||0)+' / '+(q.n||0)+'</span><button type="button" class="btn ghost sm" data-d="1" data-i="'+i+'" aria-label="One more">+</button>'+
+      '<button type="button" class="btn ghost sm" data-show="'+i+'">Show answers</button></div><div class="st-why" id="stA'+i+'" hidden>'+stEsc((q.accept||[]).join(' · '))+'</div></div>').join('')+
+      '<div class="st-actions"><button type="button" class="btn" id="stNext">Finish</button></div>';
+    b.querySelectorAll('[data-d]').forEach(x=>x.onclick=()=>{const i=+x.dataset.i,q=s.probes[i];ST.probes[i]=Math.max(0,Math.min(q.n||0,(ST.probes[i]||0)+(+x.dataset.d)));$('stP'+i).textContent=ST.probes[i]+' / '+(q.n||0);});
+    b.querySelectorAll('[data-show]').forEach(x=>x.onclick=()=>{const a=$('stA'+x.dataset.show);a.hidden=!a.hidden;});
+    $('stNext').onclick=()=>stGo('debrief');stTimer(T.probe,null);return;}
+  if(ST.phase==='debrief'){const sc=stScore(),pct=Math.round(100*(sc.cs+sc.ps)/Math.max(1,sc.cm+sc.pm)),items=stItems(s);
+    const secs=[...new Set(items.map(i=>i.si))].map(si=>{const its=items.filter(i=>i.si===si);return stEsc(its[0].sec||'Checklist')+' '+its.filter(i=>ST.ticks[i.k]).length+'/'+its.length;}).join(' · ');
+    const rub=s.rubric||ST.p.rubric,solo=ST.mode==='solo';
+    let h='<div class="st-sec">Debrief</div>'+(stTag(s)?'<div class="st-m">'+stTag(s)+'</div>':'')+'<div class="st-score" id="stScore">'+pct+'%</div><div class="st-m">Checklist '+sc.cs+'/'+sc.cm+(sc.pm?' · Questions '+sc.ps+'/'+sc.pm:'')+(ST.encSecs?' · '+fmt(ST.encSecs)+' in the station':'')+'</div><div class="st-m">'+secs+'</div>';
+    h+='<div class="st-cols'+(solo&&ST.notes?' two':'')+'">'+(solo&&ST.notes?'<div><div class="st-sec">Your notes</div><p class="st-stem">'+stEsc(ST.notes)+'</p></div>':'')+'<div>'+(solo?'<div class="st-m">Tick what you did.</div>':'')+stChecklist(solo,'missed')+'</div></div>';
+    if(rub&&Array.isArray(rub.options)&&rub.options.length){h+='<div class="st-sec">'+stEsc(rub.title||'Overall rating')+'</div><div class="st-seg segctl" id="stRub">'+rub.options.map(o=>'<button type="button" class="seg'+(ST.entry&&ST.entry.rating===o.v?' on':'')+'" data-v="'+stEsc(o.v)+'">'+stEsc(o.t||o.v)+'</button>').join('')+'</div>';}
+    const nxt=packStations();const ix=nxt.findIndex(x=>x.s.id===s.id);
+    h+='<div class="st-actions"><button type="button" class="btn" id="stAgain">Try again</button>'+fbBtnHtml('btn ghost')+(nxt.length>1?'<button type="button" class="btn ghost" id="stNextSt">Next station</button>':'')+'<button type="button" class="btn ghost" id="stAll">All stations</button>'+
+      (s.guide&&s.guide.f?'<button type="button" class="btn ghost" id="stGuide">Read the guide</button>':'')+'</div>';
+    b.innerHTML=h;if(solo)stWireTicks(()=>{stUpdate();const y=window.scrollY;stRender();window.scrollTo(0,y);});
+    b.querySelectorAll('#stRub .seg').forEach(x=>x.onclick=()=>{const o=rub.options.find(o=>String(o.v)===x.dataset.v);if(ST.entry&&o){ST.entry.rating=o.v;persist();stRender();}});
+    $('stAgain').onclick=()=>stStart(s,ST.p);if($('stNextSt'))$('stNextSt').onclick=()=>{const n=nxt[(ix+1)%nxt.length];stStart(n.s,n.p);};
+    $('stAll').onclick=()=>{const m=ST.mode;ST={phase:'list',mode:m};stRender();};
+    if($('stGuide'))$('stGuide').onclick=()=>{const g=s.guide;ST=null;try{openGuide(g.f,g.t);}catch(e){renderHome();}};}}
+$('openStations').addEventListener('click',()=>{if(packStations().length)openStations();});
+$('stBack').addEventListener('click',()=>{if(ST&&ST.phase!=='list'&&!stRunning()){const m=ST.mode;ST={phase:'list',mode:m};stRender();return;}if(stRunning()){stGuard('home');return;}ST=null;renderHome();});
 
 /* ===== WIRE UP ===== */
 $('mReview').addEventListener('click',()=>{if(deck().length)openReview();});
@@ -6302,6 +6872,8 @@ $('enableAll').addEventListener('click',async()=>{const t=Date.now();packs.forEa
 $('disableAll').addEventListener('click',()=>{const t=Date.now();packs.forEach(p=>{if(p.enabled!==false){p.enabled=false;p.ts=t;}});persist();renderHome();});
 $('backupBtn').addEventListener('click',backup);
 $('restoreBtn').addEventListener('click',()=>$('restoreFile').click());
+$('preAcctBtn').addEventListener('click',async()=>{let x=null;try{x=await IDB.get(PREACCT_KEY);}catch(e){}if(!x||!x.d){preAcctRefresh();return;} /* v0.16.0 */
+  confirmDialog('Put back this browser’s data as it was before you created your account ('+new Date(x.at).toLocaleDateString()+')? It replaces what’s on this device now, and then syncs.',{confirmText:'Put it back'},()=>applyBackupData(x.d));});
 $('restoreFile').addEventListener('change',e=>{if(e.target.files[0])restore(e.target.files[0]);});
 $('eacForm').addEventListener('submit',e=>{e.preventDefault();eacTry();});
 $('eacRestore').addEventListener('click',e=>{e.preventDefault();$('restoreFile').click();});
@@ -6310,7 +6882,7 @@ document.addEventListener('keydown',e=>{
   if(e.target&&e.target.closest&&e.target.closest('input,textarea,select,[contenteditable]'))return;
   if(['acctOv','syncCfOv','confirmOv','setupOv','pastOv'].some(id=>$(id)&&$(id).style.display!=='none'))return;
   if($('study').classList.contains('on')){if(!revealed){if(e.key===' '||e.key==='Enter'){e.preventDefault();revealed=true;renderCard();}}else if(['1','2','3','4'].includes(e.key))grade(+e.key);return;}
-  if($('quiz').classList.contains('on')){const done=qRevealed(qcur);if(!done){const disp=LETTERS.indexOf(e.key.toUpperCase());const perm=qopt[qcur]||[...qmap[qorder[qcur]].options.keys()];if(disp>=0&&disp<perm.length){qans[qcur]=perm[disp];renderQuiz();renderGrid();savePrac();}}if(e.key==='ArrowLeft')qPrev();if(e.key==='ArrowRight')qNext();if(qmode==='practice'&&e.key==='Enter'&&!qsub[qcur]&&qans[qcur]!=null)submitAnswer();}
+  if($('quiz').classList.contains('on')){const done=qRevealed(qcur);if(!done){const disp=LETTERS.indexOf(e.key.toUpperCase());const perm=qopt[qcur]||[...qmap[qorder[qcur]].options.keys()];if(disp>=0&&disp<perm.length){if(e.shiftKey)strikeToggle(perm[disp]);else{qans[qcur]=perm[disp];if(strikeHas(perm[disp]))strikeSet(perm[disp],false);renderQuiz();renderGrid();savePrac();}} /* v0.16.0: Shift+letter strikes */}if(e.key==='ArrowLeft')qPrev();if(e.key==='ArrowRight')qNext();if(qmode==='practice'&&e.key==='Enter'&&!qsub[qcur]&&qans[qcur]!=null)submitAnswer();}
 });
 
 init();

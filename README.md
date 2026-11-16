@@ -2,8 +2,8 @@
 
 **Spaced repetition, practice questions, and timed exams — from your own content.**
 
-A self-contained study app that runs entirely in your web browser. There's nothing to install,
-and an account is optional. The app holds no content of its own — you load **packs** (small files
+A self-contained study app that runs entirely in your web browser. There's nothing to install;
+you sign in with a free account. The app holds no content of its own — you load **packs** (small files
 of questions, flashcards, and topic guides) and it gives you focused ways to study them.
 
 **▶ Use it now: [studysuite.app](https://studysuite.app)**
@@ -85,7 +85,7 @@ It's currently in **beta**.
 - After the app updates, **What's new** shows what changed; tap the version number at the bottom of
   the home screen for every update.
 
-### Accounts and sync (optional)
+### Accounts and sync
 
 - A free account keeps your packs and progress **in sync** across your phone, tablet and computer.
 - **End-to-end encrypted** — your data is locked on your device before it's uploaded, so nobody
@@ -96,9 +96,13 @@ It's currently in **beta**.
 - **Your devices** and **Sync activity** in the account menu show which devices sync and what sync did on each one.
   **Copy for troubleshooting** copies it all as text if you need to report a sync problem.
 
+### Feedback
+
+- **Report a problem** from any question, card or guide — or send an idea. Offline? It's sent when you're back.
+
 ### Private, offline, yours
 
-- No ads, no analytics, no tracking. Without an account, nothing leaves your device.
+- No ads, no analytics, no tracking. Your study data is encrypted on your device before it's synced.
 - The shared study packs are **encrypted** — only an access code unlocks them.
 - Works **offline** once loaded, and installs to your home screen or dock on iPhone, iPad, Mac,
   Android and Windows.
@@ -128,19 +132,19 @@ the right format. The packs you create from your own material are entirely yours
 <details>
 <summary><strong>What is Study Suite?</strong></summary>
 
-A study tool with three ways to study — **Review** (spaced-repetition flashcards), **Practice** (one question at a time with instant feedback) and **Exam** (timed, scored mock tests) — plus **Topic Guides** and a **Pharmacology** drug index to read from. The app itself is empty — you load **study packs** that hold the questions, cards and guides. An account is optional and adds encrypted sync between your devices. It's currently in beta.
+A study tool with three ways to study — **Review** (spaced-repetition flashcards), **Practice** (one question at a time with instant feedback) and **Exam** (timed, scored mock tests) — plus **Topic Guides** and a **Pharmacology** drug index to read from. The app itself is empty — you load **study packs** that hold the questions, cards and guides. You sign in with a free account, which keeps your progress encrypted and in sync between your devices. It's currently in beta.
 </details>
 
 <details>
 <summary><strong>Is it really free?</strong></summary>
 
-Yes — completely free, with no ads, no tracking, and no account required. Studying runs entirely in your own browser, so there's nothing to charge for — and sync, the optional account feature, is free during the beta. If you want to chip in toward the costs of building it, there's an optional "Support development" link, but it's never required and unlocks nothing — the whole app is yours to use.
+Yes. Study Suite is free while it's in beta, with no ads and no tracking; you just need a free account. If that ever changes, I'll let you know well before it does. If you want to chip in toward the costs of building it, there's an optional "Support development" link, but it's never required and unlocks nothing.
 </details>
 
 <details>
 <summary><strong>Where is my data stored? Can you see it?</strong></summary>
 
-Everything — your packs, review progress, scores, and settings — is stored locally in your own browser, on your own device. Without an account, **none of it is sent anywhere.** There's no analytics and no tracking cookies. If you turn on sync, your data is end-to-end encrypted on your device before it's uploaded — so either way, I genuinely can't see what you study or how you're doing.
+Everything — your packs, review progress, scores, and settings — is stored in your own browser, on your own device, and synced to your account. There's no analytics and no tracking cookies. Before anything is uploaded, it's end-to-end encrypted on your device — so I genuinely can't see what you study or how you're doing.
 </details>
 
 <details>
@@ -158,7 +162,7 @@ Yes, fully. The app is a single self-contained file. Once it's loaded in your br
 <details>
 <summary><strong>Can I add it to my phone or computer like a real app?</strong></summary>
 
-Yes — use **Add to Home Screen** (the app walks you through it for your device). One thing to know: an installed copy may keep its **own separate storage** from the browser version (on iPhone and iPad it always does). With an account, just sign in inside the installed app and everything syncs across. No account? **Backup all** first, then **Restore backup** inside the installed app.
+Yes — use **Add to Home Screen** (the app walks you through it for your device). One thing to know: an installed copy may keep its **own separate storage** from the browser version (on iPhone and iPad it always does). Just sign in inside the installed app and everything syncs across.
 </details>
 
 <details>
@@ -224,19 +228,13 @@ Sign in on each of your devices — phone, laptop, tablet — and your packs and
 <details>
 <summary><strong>Do I have to make an account?</strong></summary>
 
-No. Choose **Use without an account** and everything works exactly as before — free, offline, on your device. Your progress just stays in that one browser, so use **Backup all** now and then. You can create an account any time from the account menu at the top right of the homepage.
-</details>
-
-<details>
-<summary><strong>Does sync cost anything?</strong></summary>
-
-Sync is free during the beta. It's the one feature that needs a server running around the clock, so it may become a paid option one day. If it does, you'll get at least 30 days' notice in the app, your account stays, and the app keeps working without sync. Everything you can do on your own device stays free.
+Yes, since app v0.16.0. A free account keeps your progress safe if your browser clears its storage, and keeps your devices in step. If you were using Study Suite without one, nothing you did is lost: it's still saved in your browser, and it all moves into your account when you create one or sign in.
 </details>
 
 <details>
 <summary><strong>How do I create an account?</strong></summary>
 
-From the welcome screen or the account menu, choose **Create an account**. During early access you'll need your access code. You'll get a **recovery code** straight away — save it in a password manager or somewhere safe.
+From the welcome screen, choose **Create an account**. During early access you'll need your access code. You'll get a **recovery code** straight away — save it in a password manager or somewhere safe.
 </details>
 
 <details>
@@ -279,6 +277,12 @@ The minimum: your email address, your encrypted study data, a random ID for each
 <summary><strong>How do I delete my account?</strong></summary>
 
 Account menu → **Delete account**. It's instant and permanent, and your data on your devices stays where it is.
+</details>
+
+<details>
+<summary><strong>How do I report a problem or send feedback?</strong></summary>
+
+Tap the small ✋ button on a question, card or guide — or **Feedback** at the bottom of the page. It tells me which item you mean and sends a few diagnostic details (shown before you send). If you're offline, it goes as soon as you're back. I read every one.
 </details>
 
 ## A note on the content
