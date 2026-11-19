@@ -204,7 +204,7 @@ Yes. Leave part-way and the exam is saved, with the timer paused. Tap **Exam** t
 <details>
 <summary><strong>What are study rooms?</strong></summary>
 
-A study room lets up to 8 people work through the same practice questions at the same time, each on their own device. One person starts a room from the practice setup and gives the others its 6-digit code to type on Home. Everyone picks and submits their own answer. Anyone can press Reveal, and the answer, the explanation and everyone's picks show for the whole room. Your own answers go into your question history as usual. If you hadn't picked anything when the answer was revealed, nothing is recorded for that question.
+A study room lets up to 8 people work through the same practice questions at the same time, each on their own device. One person starts a room from the practice setup and gives the others its 6-digit code to type on Home. Everyone picks and submits their own answer. Anyone can press Reveal, and the answer, the explanation and everyone's picks show for the whole room. Your own answers go into your question history as usual. If you hadn't picked anything when the answer was revealed, nothing is recorded for that question. The question map lets you look back at questions the room has finished without moving the room, and anyone can end the room early to see the scores.
 </details>
 
 <details>
