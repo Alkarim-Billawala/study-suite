@@ -1,8 +1,28 @@
 <!--
-  Study Suite  ·  v0.16.1 (beta)
+  Study Suite  ·  v0.17.0 (beta)
+  Changelog v0.17.0 (2026-11-18, local build, not released): STUDY ROOMS, in testing behind the per-device #beta switch
+  (ROOMS_ON). Plan: UofT Med/Study Suite App/Study_Rooms_Plan-v0.1-2026-11-18.md; build record: Drive
+  Claude/StudySuite/app-v0170-study-rooms-2026-11-18/README.md. Details in the STUDY ROOMS block of the script.
   Changelog v0.16.1 (2026-11-15, Alkarim: "button cut off on dektop. checking phone. same on phone."): the report button
   under an answered question (#qafter .fbq, floated right) was partly covered by the explanation box when the verdict line
   was shorter than the button. Every block after the verdict line now clears the float (#qafter .fbq~:not(.verdictline)).
+  v0.17.0 STUDY ROOMS (core; behind #beta via ROOMS_ON): 2–8 people answer the same practice questions at once, each on
+  their own device, relayed through the account server (/api/studysuite/rooms…, SSAccount.roomApi). The starter's
+  question order and option orders (descriptor {v:1,packs,qorder,qopt}) are used on every device. Picks are original option
+  indexes; at the reveal a device records only its own server-accepted pick, once (device-only list suite_room_v1).
+  v0.17.0 also (stage 1b, behind ROOMS_ON): ROOM NAMES (optional, 40 characters, descriptor `title`, shown in the strip,
+  recent names offered) and ONE SAVED-SESSIONS STORE (KEY.sessions 'suite_sessions_v1', newest 50; sessGet/sessPut/
+  sessList; kind 'room' now). Synced like stations (mergeSessions: by id, later `up` wins whole; a copy from an older app
+  without the key keeps this device's), in backup/restore and the sign-out wipe. Home › Study rooms › Past study rooms.
+  v0.17.0 also (stage 3, behind ROOMS_ON): PACKS ON JOIN — descriptor `pver` {pack id: version}; a joiner's missing
+  descriptor packs load if this device's pack list (opened with its content keys) has them (downloadPack), else a plain
+  refusal and the seat is given back; a different version tries the pack update first, then questions missing here (or with
+  a different option count) are sat out (ROOM.na): no pick, nothing recorded, not counted as unsubmitted on my device.
+  v0.17.0 also (stage 2a, behind ROOMS_ON): THE ROOM LINK — studysuite.app/#room=123456 opens the join prompt (start-up and
+  hashchange; signed out → after sign-in), hash tidied; flag off or malformed → tidied only. Invite panel from the strip:
+  code, room name, the link and Copy link.
+  v0.17.0 also (stage 2b, behind ROOMS_ON): a QR CODE of the room link in the Invite panel — own encoder (byte mode, level M,
+  versions 1–4, penalty-chosen mask), inline SVG, black on white in both themes; decoded by CoreImage + Vision in its check.
   v0.16.0 also: STRIKE OUT ANSWER OPTIONS (Future-Features #28). Each option in Practice and Exam sits in an .optrow with
   a small strike control (.optx: an eye, an eye with a line through it once struck; "Strike out option B" / "Restore option B"); right-click an option or Shift+its letter does
   the same. A struck option is greyed with a line through it; striking never selects or answers; choosing a struck
@@ -1858,6 +1878,59 @@ mark.hl.flash{outline:2px solid #e08a00;outline-offset:1px}
 .srcline2{margin-top:10px;display:flex;flex-wrap:wrap;align-items:center;gap:4px}.srcline2 .gt{font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin-right:4px}.srcline2 .srcchip{margin-left:0}
 .ghead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:7px}.ghead .gname{margin-bottom:0}
 .gall{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:5px;color:var(--accent);cursor:pointer;padding:2px 7px;flex:none}
+/* ===== v0.17.0: STUDY ROOMS ===== */
+.roompanel{flex-wrap:wrap}.roompanel .rp-main{flex:1 1 240px;min-width:0}
+.roomjoin{display:flex;gap:8px;flex:1 1 250px;min-width:0;justify-content:flex-end}
+.roomjoin .btn{padding:10px 14px;white-space:nowrap;flex:none}
+.roomin{font:inherit;font-size:16px;padding:9px 10px;border:1.5px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);min-width:0;box-sizing:border-box}
+.roomjoin .roomin{flex:1 1 7em;width:7em;font-family:var(--font-mono);letter-spacing:.12em}
+.roomerr{flex-basis:100%;color:var(--red);font-size:13px;line-height:1.4}.roomerr:empty{display:none}
+#roomNickOv .modal-card{position:relative;max-width:420px}#roomNickOv h3{margin-top:0;padding-right:28px}#roomNickOv .roomin{width:100%;margin-top:6px}
+#roomNickOv .roomerr{margin-top:6px}#roomNickOv .confirm-actions{margin-top:14px}
+.roomstrip{border:1.5px solid var(--line);border-radius:10px;background:var(--paper2);padding:10px 12px;margin:0 0 14px}
+.roomstrip .rs-top{display:flex;align-items:center;gap:6px 10px;flex-wrap:wrap}
+.roomstrip .rs-code{font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;color:var(--ink-soft)}
+.roomstrip .rs-code b{font-size:16px;letter-spacing:.14em;color:var(--ink)}
+.roomstrip .rs-net{font-size:13px;color:var(--gold)}
+.roomstrip #roomLeaveBtn{margin-left:auto}
+.rs-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.rchip{display:inline-flex;align-items:center;gap:5px;max-width:100%;min-width:0;border:1px solid var(--line);border-radius:14px;padding:3px 10px;font-size:13px;color:var(--ink-soft);background:var(--paper)}
+.rchip .rn{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.rchip .tk{color:var(--green);font-weight:700;flex:none}.rchip.done{border-color:var(--green);color:var(--ink)}.rchip.away{opacity:.55}.rchip.me{font-weight:600}
+.roomact{display:flex;justify-content:center;gap:10px;margin:14px 0 6px}.roomact .nbtn{min-width:140px}
+.roomstrip[hidden],.roomact[hidden]{display:none}
+#quiz.room .skiprow,#quiz.room .controls,#quiz.room .palette{display:none}
+.rpicks{font-size:13px;color:var(--ink-soft);margin:2px 0 8px 12px;overflow-wrap:anywhere}.rpicks.rnone{margin:0 0 8px}
+.roomscores h3{font-family:var(--font-head);font-weight:600;font-size:21px;margin:0 0 4px}
+.roomscores .rsrow{border-bottom:1px solid var(--line);padding:9px 2px;font-size:17px}
+.roomscores .rsrow span{display:block;overflow-wrap:anywhere}.roomscores .rsrow b{display:block;margin-top:2px;font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--ink-soft)}
+.rs-count{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--ink-soft);margin-top:8px}
+.rs-sub{display:inline-flex;align-items:center;font-size:15px;color:var(--green);font-weight:600;padding:0 6px}.rs-sub[hidden]{display:none}
+.roomact{flex-wrap:wrap}
+/* ===== v0.17.0 stage 1b: ROOM NAMES + PAST STUDY ROOMS ===== */
+#roomNickOv .roomnamebox{margin-top:12px}#roomNickOv .roomnamebox[hidden]{display:none}
+.roomsugg{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:8px;min-width:0}.roomsugg:empty{display:none}
+.roomsugg .rsl{font-size:13px;color:var(--ink-soft)}
+.roomsugg .rchip{font:inherit;font-size:13px;cursor:pointer}
+.roomstrip .rs-name{order:9;flex:1 1 100%;font-size:14px;font-weight:600;color:var(--ink);min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.roomstrip .rs-name:empty{display:none}
+.roompast{color:var(--accent);text-decoration:underline;cursor:pointer}
+#roomPastOv .pastrow>div{min-width:0}#roomPastOv .pt,#roomPastOv .pd{overflow-wrap:anywhere}
+/* ===== v0.17.0 stage 3: PACKS ON JOIN ===== */
+#roomBusyOv .modal-card{max-width:360px;text-align:center}.roombusy{margin:6px 0;font-size:16px}
+.roomna .stem{color:var(--ink-soft)}
+/* ===== v0.17.0 stage 2a: ROOM LINK + INVITE ===== */
+.roomstrip .rs-btns{display:inline-flex;gap:6px;margin-left:auto;flex:none}.roomstrip .rs-btns #roomLeaveBtn{margin-left:0}.roomstrip .rs-btns .minor{padding:8px 10px}
+#roomInvOv .modal-card{position:relative;max-width:400px;text-align:center}#roomInvOv h3{margin:0 0 4px;padding:0 28px}
+.rinv-name{font-weight:600;font-size:17px;margin:0 0 6px;overflow-wrap:anywhere}.rinv-name:empty{display:none}
+.rinv-lab{display:block;font-size:13px;color:var(--ink-soft);margin-top:12px;line-height:1.4}
+.rinv-code{font-family:var(--font-mono);font-size:40px;font-weight:700;letter-spacing:.18em;padding-left:.18em;color:var(--ink);margin:2px 0}
+.rinv-link{margin-top:6px;padding:9px 10px;border:1.5px solid var(--line);border-radius:8px;background:var(--paper2);color:var(--ink);font-size:15px;line-height:1.4;overflow-wrap:anywhere;user-select:all;-webkit-user-select:all;cursor:text}
+#roomInvOv .confirm-actions{justify-content:center;margin-top:14px}
+/* ===== v0.17.0 stage 2b: QR in the Invite panel ===== */
+.rinv-qr{display:flex;justify-content:center;margin:8px 0 0}.rinv-qr:empty{display:none}
+.rinv-qr svg{width:176px;height:176px;display:block;border-radius:6px}
+.rinv-lab[hidden]{display:none}
 </style>
 
 <div id="eacGate" class="eacgate" hidden>
@@ -1939,6 +2012,11 @@ var r=localStorage.getItem('suite_eac_v1'),a=JSON.parse(localStorage.getItem('su
     <div class="revpanel" id="stationPanel" style="display:none">
       <div><div class="rp-t">OSCE stations</div><div class="rp-d" id="stationPanelDesc">Timed practice with a checklist and examiner questions. Solo, or with a partner as examiner.</div></div>
       <button class="btn ghost sm" id="openStations">Practise a station</button>
+    </div>
+    <div class="revpanel roompanel" id="roomPanel" style="display:none">
+      <div class="rp-main"><div class="rp-t">Study rooms</div><div class="rp-d">Answer the same questions together, each on your own device. Start one from Practice, or join with a code.</div><div class="rp-d"><a class="roompast" id="roomPastLink" role="button" tabindex="0">Past study rooms</a></div></div>
+      <div class="roomjoin"><input id="roomCodeIn" class="roomin" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="Code" aria-label="6-digit room code"><button class="btn ghost sm" id="roomJoinBtn" type="button">Join a study room</button></div>
+      <div class="roomerr" id="roomJoinErr" role="status"></div>
     </div>
 
     <div class="rule"></div>
@@ -2207,6 +2285,7 @@ var r=localStorage.getItem('suite_eac_v1'),a=JSON.parse(localStorage.getItem('su
       <div class="setrow"><span>Timer — seconds per question</span><span><input type="number" id="setPracSecs" min="5" max="600" value="90"> <button class="switch" id="setPracTimer">on</button></span></div>
       </div>
       <button class="btn wide" id="setupGo" type="button">Start exam</button>
+      <button class="btn ghost wide" id="roomStartBtn" type="button" style="display:none">Start a study room</button>
     </div>
   </div>
   <!-- ONE ACTIVE COPY (v0.4.5) -->
@@ -2242,6 +2321,7 @@ var r=localStorage.getItem('suite_eac_v1'),a=JSON.parse(localStorage.getItem('su
 
   <!-- QUIZ -->
   <section id="quiz">
+    <div class="roomstrip" id="roomStrip" hidden><div class="rs-top"><span class="rs-code">Study room <b id="roomCodeTxt"></b></span><span class="rs-name" id="roomNameTxt"></span><span class="rs-net" id="roomNet" role="status" hidden>Reconnecting…</span><span class="rs-btns"><button class="minor" id="roomInvBtn" type="button">Invite</button><button class="minor" id="roomLeaveBtn" type="button">Leave</button></span></div><div class="rs-count" id="roomCount" role="status"></div><div class="rs-chips" id="roomChips"></div></div>
     <div class="qmeta"><span class="left"><span class="tag" id="qtag">—</span><span id="qdiff"></span></span><span class="pos" id="qpos"></span></div>
     <div class="progress"><i id="pbar" style="width:0%"></i></div>
     <div class="qcard" id="qcard"></div>
@@ -2251,6 +2331,7 @@ var r=localStorage.getItem('suite_eac_v1'),a=JSON.parse(localStorage.getItem('su
       <div class="mid"><button class="nbtn hlhow" type="button" title="Select text to highlight it or add a note" aria-label="How to highlight"></button><button class="nbtn flagbtn" id="flagBtn">⚑ Flag</button><button class="nbtn primary" id="submitAnsBtn" style="display:none">Submit<span class="sa-long"> answer</span></button></div>
       <button class="nbtn" id="nextBtn">Next →</button>
     </div>
+    <div class="roomact" id="roomAct" hidden><button class="nbtn primary" id="roomSubmitBtn" type="button" disabled>Submit</button><span class="rs-sub" id="roomSubState" role="status" hidden>Submitted</span><button class="nbtn" id="roomRevealBtn" type="button">Reveal</button><button class="nbtn primary" id="roomNextBtn" type="button">Next →</button><button class="nbtn primary" id="roomDoneBtn" type="button" style="display:none">Done</button></div>
     <div class="qafter" id="qafter"></div>
     <div class="palette"><div class="ttl"><span class="qflhd"><span id="paletteTitle">Question map</span><button class="qflbtn" id="qflBtn" type="button" aria-expanded="false" aria-controls="qflBox">Filter ▾</button><button class="qflbtn" id="qGapsBtn" type="button" title="Your weakest topics">◔ Gaps</button></span><span id="answeredCount"></span></div><div class="qflbox" id="qflBox" role="group" aria-label="Filter the question map" hidden><label class="fltchk"><input type="checkbox" data-f="u"><span>Unanswered</span></label><label class="fltchk"><input type="checkbox" data-f="a"><span>Answered</span></label><label class="fltchk"><input type="checkbox" data-f="f"><span>⚑ Flagged</span></label><label class="fltchk"><input type="checkbox" data-f="w"><span>Incorrect</span></label><label class="fltchk"><input type="checkbox" data-f="c"><span>Correct</span></label><button class="minor" id="qflAll" type="button">Show all</button></div><div class="grid" id="grid"></div><div class="submitbar"><button class="btn" id="finishBtn"></button></div></div>
   </section>
@@ -2322,14 +2403,14 @@ var r=localStorage.getItem('suite_eac_v1'),a=JSON.parse(localStorage.getItem('su
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.16.1';
+const APP_VERSION='0.17.0';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
 const APP_AUTHOR='Alkarim Billawala / alkarim.billawala.ca';
 
 /* ===== STORAGE ===== */
-const KEY={packs:'suite_packs_v1',sched:'srs_sched_v2',daily:'srs_daily_v2',settings:'suite_settings_v1',eac:'suite_eac_v1',prac:'suite_prac_v1',acct:'suite_acct_v1',sync:'suite_sync_v1',localAt:'suite_localat_v1',qhist:'suite_qhist_v1',exam:'suite_exam_v1',exams:'suite_exams_v1',devnames:'suite_devnames_v1',gone:'suite_packgone_v1',devlogs:'suite_devlogs_v1',stations:'suite_stations_v1'};
+const KEY={packs:'suite_packs_v1',sched:'srs_sched_v2',daily:'srs_daily_v2',settings:'suite_settings_v1',eac:'suite_eac_v1',prac:'suite_prac_v1',acct:'suite_acct_v1',sync:'suite_sync_v1',localAt:'suite_localat_v1',qhist:'suite_qhist_v1',exam:'suite_exam_v1',exams:'suite_exams_v1',devnames:'suite_devnames_v1',gone:'suite_packgone_v1',devlogs:'suite_devlogs_v1',stations:'suite_stations_v1',sessions:'suite_sessions_v1'}; /* sessions: v0.17.0 saved sessions */
 const memCache={};
 /* v0.16.0: accounts required. Session read straight from storage (right before SSAccount.load runs). */
 function acctSignedIn(){try{if(typeof SSAccount!=='undefined'&&SSAccount.session())return true;}catch(e){}
@@ -2344,7 +2425,7 @@ async function acctServerUp(){try{const c=new AbortController(),t=setTimeout(()=
   const r=await fetch(SSAccount.API+'/api/health',{signal:c.signal,cache:'no-store'});clearTimeout(t);return r.ok;}catch(e){return false;}}
 /* Anything studied in this browser (packs, progress, history, exams, practice, highlights/notes/bookmarks/flags). */
 function localHasData(){try{return !!(packs.length||Object.values(sched||{}).some(x=>x&&x.phase&&x.phase!=='new')||Object.keys(qhist||{}).length||
-  (examLog||[]).length||(stLog||[]).length||examSave||prac||Object.values(settings||{}).some(v=>v&&typeof v==='object'&&v.fl&&v.on!==false));}catch(e){return false;}}
+  (examLog||[]).length||(stLog||[]).length||(sessRecs||[]).length||examSave||prac||Object.values(settings||{}).some(v=>v&&typeof v==='object'&&v.fl&&v.on!==false));}catch(e){return false;}}
 /* ===== ONE ACTIVE COPY PER BROWSER (v0.4.5) =====
    Tabs / windows of the app share storage; two live copies overwrite each other (and sync spreads the stale copy).
    The newest copy wins: it says hello on a BroadcastChannel and older copies pause. As a safety net every data write bumps
@@ -2390,7 +2471,7 @@ function storeFailed(k,e){Store.failed=Date.now();Store.failKey=k;
   if(Date.now()-storeFailToast>60000){storeFailToast=Date.now();
     try{toast('Couldn’t save on this device — its storage is full or blocked. Sync is paused so nothing gets overwritten; don’t reload until it saves again.');}catch(x){}}
   try{if(typeof SSSync!=='undefined')SSSync.sync();}catch(x){}}
-const DATA_KEYS=new Set([KEY.packs,KEY.sched,KEY.daily,KEY.settings,KEY.eac,KEY.prac,KEY.qhist,KEY.exam,KEY.exams,KEY.devnames,KEY.gone,KEY.stations]);
+const DATA_KEYS=new Set([KEY.packs,KEY.sched,KEY.daily,KEY.settings,KEY.eac,KEY.prac,KEY.qhist,KEY.exam,KEY.exams,KEY.devnames,KEY.gone,KEY.stations,KEY.sessions]);
 const IDB_KEYS=new Set([...DATA_KEYS,KEY.sync,'suite_syncbase_v2',KEY.devlogs,'suite_fbq_v1']),MIRROR_KEYS=new Set([KEY.eac,KEY.settings]); /* mirrored: read before the page paints */
 try{localStorage.removeItem('suite_syncbase_v1');}catch(e){} /* v0.4.7 leftover */
 /* Device ID (v0.4.9): random, 12 × [a-z0-9], made once per browser storage and never derived from the device or the person.
@@ -2409,9 +2490,11 @@ function detectStorage(){if(typeof window.storage!=='undefined'){STORAGE_MODE='p
 /* ===== ACCOUNTS (v0.4.0: launched for everyone) — ACCT_ON stays as the single switch; the v0.3.x #beta flag is retired
    (old #beta / #nobeta links are tidied from the address bar and the stored flag removed). */
 /* v0.10.4: #beta is back as a per-device switch (localStorage suite_beta_v1; #nobeta clears it; the hash is then dropped).
-   It gates features in testing on that device only — today: the Atlas view on phones and iPads. Accounts are on for everyone. */
+   It gates features in testing on that device only — today: the Atlas view on phones and iPads, and Study rooms (v0.17.0,
+   ROOMS_ON below: every Study rooms entry point checks it). Accounts are on for everyone. */
 const SUITE_BETA=(()=>{try{const h=location.hash;if(/^#beta$/i.test(h))localStorage.setItem('suite_beta_v1','1');else if(/^#nobeta$/i.test(h))localStorage.removeItem('suite_beta_v1');
   if(/^#(no)?beta$/i.test(h))history.replaceState(history.state,'',location.pathname+location.search);return !!localStorage.getItem('suite_beta_v1');}catch(e){return false;}})();window.SUITE_BETA=SUITE_BETA;
+const ROOMS_ON=SUITE_BETA; /* v0.17.0: Study rooms — the ONE gate; set true to launch for everyone */
 const ACCT_ON=true;
 window.addEventListener('hashchange',()=>{if(/^#(verify|reset|email)=/i.test(location.hash)||/^#(no)?beta$/i.test(location.hash))location.reload();}); /* a mail link opened into an open tab; v0.10.4: #beta / #nobeta typed into an open tab */
 /* ===== CRYPTO (v0.3.0: end-to-end encryption for sync — WebCrypto only, no dependencies) =====
@@ -2595,8 +2678,9 @@ const SSAccount=(()=>{
   /* v0.4.5: rotate the account's token key server-side → every other session ends; this device gets a fresh token. */
   async function signOutOthers(){const j=await api('/api/studysuite/signout-others',{method:'POST'});sess.token=j.token;await Store.set(KEY.acct,sess);}
   const sendFeedback=rec=>api('/api/collections/feedback/records',{method:'POST',body:rec}); /* v0.16.0 */
+  const roomApi=(path,o)=>api('/api/studysuite/rooms'+path,o); /* v0.17.0: study rooms (plan §3.2) */
   async function deleteAccount(pass){if(pass!==undefined)await unlockWith(pass);await api('/api/collections/users/records/'+sess.id,{method:'DELETE'});await signOut();}
-  return {API,FORMAT,sendFeedback,touchDevice,listDevices,addCode,load,session:()=>sess,dek,policy,signIn,signUp,signOut,refresh,getState,putState,deleteAccount,normEmail,requestVerification,confirmVerification,tokenClaims,requestPasswordReset,confirmPasswordReset,recoverWithCode,startFresh,needsRecovery:()=>!!pending,changePassword,newRecoveryCode,requestEmailChange,confirmEmailChange,signOutOthers};
+  return {API,FORMAT,sendFeedback,roomApi,touchDevice,listDevices,addCode,load,session:()=>sess,dek,policy,signIn,signUp,signOut,refresh,getState,putState,deleteAccount,normEmail,requestVerification,confirmVerification,tokenClaims,requestPasswordReset,confirmPasswordReset,recoverWithCode,startFresh,needsRecovery:()=>!!pending,changePassword,newRecoveryCode,requestEmailChange,confirmEmailChange,signOutOthers};
 })();
 
 /* ===== SCHEDULER ===== */
@@ -2620,7 +2704,7 @@ function humanDelta(ms){if(ms<MIN)return '<1m';if(ms<60*MIN)return Math.round(ms
 function humanFromNow(due,now){if(due<=now)return 'due';return 'in '+humanDelta(due-now);}
 
 /* ===== STATE ===== */
-let packs=[], sched={}, daily={date:'',count:0}, eac=null, prac=null, qhist={}, examSave=null, examLog=[], devNames={}, packGone={}, stLog=[]; /* stLog: v0.16.0 station attempts */
+let packs=[], sched={}, daily={date:'',count:0}, eac=null, prac=null, qhist={}, examSave=null, examLog=[], devNames={}, packGone={}, stLog=[], sessRecs=[]; /* stLog: v0.16.0 station attempts */ /* sessRecs: v0.17.0 saved sessions (KEY.sessions) */
 let settings={theme:'auto',autoDark:'dark',themeFamily:'navy',examGroupBy:'system',examAuto:true,examFresh:'prefer',practiceOnlyNew:false,examTarget:40,examCounts:{},practiceSecs:90,practiceTimer:true,practiceShuffle:true,examMinutes:60,examTimer:true,srsNewPerDay:20,sessionDiffs:['easy','medium','hard'],revNavCollapsed:false,examMix:{on:false,easy:25,medium:55,hard:20},examTypesOff:[],examComp:{}}; /* exam mode: defaults = old behaviour */
 /* ===== APPEARANCE / THEME ===== */
 function resolveMode(){const t=settings.theme||'auto';
@@ -2803,7 +2887,7 @@ function diffBadge(q){if(!q||diffRank(q)<0)return '';return `<span class="diffba
    would otherwise write the empty starting state over it. A save asked for meanwhile runs right after loading. */
 let DATA_READY=false,persistPending=false;
 async function persist(){if(!DATA_READY){persistPending=true;return;}let ok=true;const w=async(k,v)=>{ok=(await Store.set(k,v))&&ok;};
-  await w(KEY.packs,packs);await w(KEY.sched,sched);await w(KEY.daily,daily);await w(KEY.settings,settings);if(eac)await w(KEY.eac,eac);await w(KEY.prac,prac);await w(KEY.qhist,qhist);await w(KEY.exam,examSave);await w(KEY.exams,examLog);await w(KEY.devnames,devNames);await w(KEY.gone,packGone);await w(KEY.stations,stLog);
+  await w(KEY.packs,packs);await w(KEY.sched,sched);await w(KEY.daily,daily);await w(KEY.settings,settings);if(eac)await w(KEY.eac,eac);await w(KEY.prac,prac);await w(KEY.qhist,qhist);await w(KEY.exam,examSave);await w(KEY.exams,examLog);await w(KEY.devnames,devNames);await w(KEY.gone,packGone);await w(KEY.stations,stLog);await w(KEY.sessions,sessRecs);
   if(ok)Store.failed=0; /* a full save worked → sync may resume */
   SSSync.changed();}
 /* ===== SYNC (v0.3.0) — local-first; the cloud copy is one encrypted blob per account =====
@@ -2827,7 +2911,7 @@ const SSSync=(()=>{
   async function manifest(){if(!defaultManifest)await initPackLinks();if(defaultManifest)return defaultManifest;
     try{const r=await fetch('packs-manifest.json',{cache:'no-store'});if(r.ok){const m=await r.json();if(m&&Array.isArray(m.packs))return m;}}catch(e){}return null;}
   const publicIds=m=>new Set(((m&&m.packs)||[]).filter(x=>x&&x.id&&x.file).map(x=>x.id));
-  function payload(pub){return {v:1,app:APP_VERSION,by:DEVICE_ID,devices:devNames,logs:allLogs(),gone:packGone,sched,daily,settings,eac,prac,qhist,exam:examSave,exams:examLog,stations:stLog,
+  function payload(pub){return {v:1,app:APP_VERSION,by:DEVICE_ID,devices:devNames,logs:allLogs(),gone:packGone,sched,daily,settings,eac,prac,qhist,exam:examSave,exams:examLog,stations:stLog,sessions:sessRecs,
     packs:packs.map(p=>(pub.has(p.id)||p.stub)?Object.assign({ref:1},pick(p,LIGHT)):p).concat((meta&&meta.missing)||[])};}
   /* Fetch a published pack by id and run it through ingestPack in isolation (so `packs` isn't touched). */
   async function fetchPublic(id,m){const mp=m&&m.packs.find(x=>x&&x.id===id&&x.file);if(!mp)return null;
@@ -2953,6 +3037,10 @@ const SSSync=(()=>{
   function mergeLog(b,l,c){const bs=new Set((b||[]).map(e=>e&&e.at)),ls=new Set((l||[]).map(e=>e&&e.at)),cs=new Set((c||[]).map(e=>e&&e.at)),m=new Map();
     [...(l||[]),...(c||[])].forEach(e=>{if(!e||m.has(e.at))return;if(bs.has(e.at)&&(!ls.has(e.at)||!cs.has(e.at)))return;m.set(e.at,e);});
     return [...m.values()].sort((x,y)=>y.at-x.at);}
+  /* v0.17.0: saved sessions (KEY.sessions) — records change over time, so not mergeLog: by id, the later `up` wins whole,
+     then the newest 50. No deletions in v0.17.0, so the base copy isn't needed. */
+  function mergeSessions(b,l,c){const m=new Map();[...(Array.isArray(l)?l:[]),...(Array.isArray(c)?c:[])].forEach(e=>{if(!e||e.id==null)return;const x=m.get(e.id);if(!x||(e.up||0)>(x.up||0))m.set(e.id,e);});
+    return [...m.values()].sort((x,y)=>(y.up||0)-(x.up||0)).slice(0,50);}
   function logEntry(e){const m={};qpool().forEach(q=>m[q.id]=q);let answered=0,correct=0;
     e.qorder.forEach((id,i)=>{const a=(e.qans||[])[i];if(a!=null){answered++;if(m[id]&&a===m[id].correct)correct++;}});
     return {at:e.at||Date.now(),partial:true,qorder:e.qorder.slice(),qans:(e.qans||[]).slice(),qopt:(e.qopt||[]).slice(),total:e.qorder.length,answered,correct};}
@@ -2978,7 +3066,7 @@ const SSSync=(()=>{
         return Object.assign({},b,a,{codes:[...new Set([...a.codes,...b.codes])],tags:[...new Set([...a.tags,...b.tags])],admin:!!(a.admin||b.admin),keys:Object.assign({},b.keys||{},a.keys||{})});})(),
       prac:whole(b.prac,l.prac,c.prac,(x,y)=>{if(!x||!y)return x||y;notes.push('two unfinished practice sessions — kept the newer one');return newer(x,y);}), /* v0.16.0 */
       qhist:mergeMap(b.qhist,l.qhist,c.qhist,qboth,notes,'question(s) answered on both'),
-      exam,exams,stations:mergeLog(b.stations,l.stations,Array.isArray(c.stations)?c.stations:l.stations).slice(0,50),gone,packs:mergePacks(b,l.packs||[],c.packs||[],notes,side,gone)};
+      exam,exams,stations:mergeLog(b.stations,l.stations,Array.isArray(c.stations)?c.stations:l.stations).slice(0,50),sessions:mergeSessions(b.sessions,l.sessions,Array.isArray(c.sessions)?c.sessions:l.sessions),gone,packs:mergePacks(b,l.packs||[],c.packs||[],notes,side,gone)};
     return {out,notes};}
   async function applyCloud(d,rec,m,guard){suppress=true;
     try{let mr=m;const dk=(d&&d.eac&&d.eac.keys)||{},hk=heldKeys(); /* v0.6.1: keys arriving in this sync open the pack list first */
@@ -2991,7 +3079,7 @@ const SSSync=(()=>{
       if(d.gone&&typeof d.gone==='object'){const g=Object.assign({},packGone||{});Object.entries(d.gone).forEach(([k,t])=>{if(!(g[k]>=t))g[k]=t;});packGone=g;} /* v0.6.1: combine, latest wins */
       if(d.devices&&typeof d.devices==='object'){devNames=Object.assign({},d.devices);if(!devNames[DEVICE_ID])devNames[DEVICE_ID]=guessDeviceName();}
       if(d.qhist&&typeof d.qhist==='object')qhist=d.qhist; /* older account copies have none — keep this device's */
-      if('exam' in d)examSave=(d.exam&&Array.isArray(d.exam.qorder))?d.exam:null;if(Array.isArray(d.exams))examLog=d.exams;if(Array.isArray(d.stations))stLog=d.stations;
+      if('exam' in d)examSave=(d.exam&&Array.isArray(d.exam.qorder))?d.exam:null;if(Array.isArray(d.exams))examLog=d.exams;if(Array.isArray(d.stations))stLog=d.stations;if(Array.isArray(d.sessions))sessRecs=d.sessions;
       packs=r.out;meta.missing=r.miss;
       allCards().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});rollDaily();
       await persist();applyTheme();applyGate();renderHome();
@@ -3097,7 +3185,7 @@ const SSSync=(()=>{
     if(document.visibilityState==='hidden'){clearTimeout(timer);sync();}
     else if(Date.now()-lastRun>15000)sync();});
   async function reset(){clearTimeout(timer);meta=null;lastOk=0;pendingSince=0;devLogs=null;await Store.set(KEY.sync,null);await Store.set(BASE_KEY,null);await Store.set(KEY.devlogs,null);setState('off');}
-  return {start,sync,forceSync,otherLogs,myLog,changed,schedule,reset,status:()=>Object.assign({view:viewOf(),lastOk},state),meta:()=>meta,_hash:hash,_payload:payload,_merge3:merge3,_baseOf:baseOf,_resolvePacks:resolvePacks,_applyCloud:applyCloud,_loadMeta:loadMeta,retryMissing,_pulled:()=>pulled,_mergePacks:mergePacks};
+  return {start,sync,forceSync,otherLogs,myLog,changed,schedule,reset,status:()=>Object.assign({view:viewOf(),lastOk},state),meta:()=>meta,_hash:hash,_payload:payload,_merge3:merge3,_baseOf:baseOf,_resolvePacks:resolvePacks,_applyCloud:applyCloud,_loadMeta:loadMeta,retryMissing,_pulled:()=>pulled,_mergePacks:mergePacks,_mergeSessions:mergeSessions};
 })();
 
 
@@ -3141,7 +3229,7 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
     $('acctToUp').onclick=()=>{acctEmail=$('acctEmail').value;renderAcct('signup');};
     $('acctToForgot').onclick=()=>{acctEmail=$('acctEmail').value;renderAcct('forgot');};
     $('acctForm').onsubmit=async e=>{e.preventDefault();acctErr('');const go=$('acctGo');acctBusy(go,true,'Signing in…');
-      try{await SSAccount.signIn($('acctEmail').value,$('acctPw').value);acctEmail='';expiredClear();closeAcct();toast('Signed in — syncing now.');SSSync.start().then(acctRegisterCodes,()=>{});}
+      try{await SSAccount.signIn($('acctEmail').value,$('acctPw').value);acctEmail='';expiredClear();closeAcct();toast('Signed in — syncing now.');SSSync.start().then(acctRegisterCodes,()=>{}).then(()=>{try{roomLinkAfterSignIn();}catch(e){}}); /* v0.17.0 stage 2a */}
       catch(err){if(err.needsRecovery){renderAcct('recover');return;}acctErr(err.message);acctBusy(go,false);if(err.offline)gateCheckServer();}};}
   else if(view==='signup'){b.innerHTML='<h3>Create an account</h3><p class="acct-sub">Your password also encrypts your study data, so nobody else can reset it — not even Study Suite. You’ll get a recovery code next.</p>'+
     '<form id="acctForm" autocomplete="on"><label class="f">Email<input class="fi" type="email" id="acctEmail" autocomplete="username" required value="'+acctEsc(acctEmail)+'"></label>'+
@@ -3170,7 +3258,7 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
       const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'text/plain'}));a.download='study-suite-recovery-code.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);};
     $('acctRcOk').onchange=e=>{$('acctRcDone').disabled=!e.target.checked;};
     const fromAcct=acctRcCtx==='acct',fresh=acctRcCtx==='fresh';acctRcCtx='';
-    $('acctRcDone').onclick=()=>{acctRc=null;if(fromAcct){renderAcct('account');toast('New recovery code saved. The old one no longer works.');return;}acctView=null;closeAcct();toast(fresh?'Fresh start done — your data is syncing.':'Account created — your data is syncing.');SSSync.start().then(acctRegisterCodes,()=>{});};}
+    $('acctRcDone').onclick=()=>{acctRc=null;if(fromAcct){renderAcct('account');toast('New recovery code saved. The old one no longer works.');return;}acctView=null;closeAcct();toast(fresh?'Fresh start done — your data is syncing.':'Account created — your data is syncing.');SSSync.start().then(acctRegisterCodes,()=>{}).then(()=>{try{roomLinkAfterSignIn();}catch(e){}}); /* v0.17.0 stage 2a */};}
   else if(view==='forgot'){b.innerHTML='<h3>Reset your password</h3><p class="acct-sub">We’ll email you a link to choose a new password. You’ll need your recovery code afterwards to unlock your synced data — if you don’t have it, your study data on your devices is still safe.</p>'+
     '<form id="acctForm"><label class="f">Email<input class="fi" type="email" id="acctEmail" autocomplete="username" required value="'+acctEsc(acctEmail)+'"></label>'+
     '<div class="acct-err" id="acctErr"></div><button class="btn sm wide" type="submit" id="acctGo">Send reset link</button></form><div class="acct-alt"><a id="acctToIn">Back to sign in</a></div>';
@@ -3264,7 +3352,7 @@ function renderAcct(view){acctView=view;const b=$('acctBody');const s=SSAccount.
       const all=!!($('acctAll')&&$('acctAll').checked);
       if(all){try{await SSAccount.signOutOthers();}catch(e){acctErr('Couldn’t sign out your other devices ('+e.message+'). This device is still signed in — try again.');acctBusy(bt,false);return;}}
       await SSAccount.signOut();await SSSync.reset();
-      if(wipe){packs=[];sched={};prac=null;daily={date:today(),count:0};qhist={};examSave=null;examLog=[];stLog=[]; /* v0.16.0: everything studied */
+      if(wipe){packs=[];sched={};prac=null;daily={date:today(),count:0};qhist={};examSave=null;examLog=[];stLog=[];sessRecs=[]; /* v0.16.0: everything studied */
         Object.keys(settings).forEach(k=>{const v=settings[k];if(v&&typeof v==='object'&&v.fl)delete settings[k];}); /* highlights, notes, bookmarks, flags */
         eac=null;await Store.set(KEY.eac,null);eacPendingSet(null);try{await IDB.del(PREACCT_KEY);}catch(e){}try{localStorage.removeItem('suite_strikes_v1');}catch(e){}await persist();}
       renderHome();acctView=null;closeAcct();expiredClear();applyGate();preAcctRefresh(); /* v0.16.0: back to the front door */
@@ -3818,7 +3906,7 @@ async function init(){
   prac=await Store.get(KEY.prac)||null;
   qhist=await Store.get(KEY.qhist)||{};
   examSave=await Store.get(KEY.exam)||null;if(!examInProgress())examSave=null;
-  examLog=await Store.get(KEY.exams)||[];if(!Array.isArray(examLog))examLog=[];stLog=await Store.get(KEY.stations)||[];if(!Array.isArray(stLog))stLog=[];if(!(prac&&prac.mode==='practice'&&Array.isArray(prac.qorder)))prac=null;
+  examLog=await Store.get(KEY.exams)||[];if(!Array.isArray(examLog))examLog=[];stLog=await Store.get(KEY.stations)||[];if(!Array.isArray(stLog))stLog=[];sessRecs=await Store.get(KEY.sessions)||[];if(!Array.isArray(sessRecs))sessRecs=[];if(!(prac&&prac.mode==='practice'&&Array.isArray(prac.qorder)))prac=null;
   daily=await Store.get(KEY.daily)||{date:today(),count:0};
   packGone=await Store.get(KEY.gone)||{};
   devNames=await Store.get(KEY.devnames)||{};if(!devNames[DEVICE_ID]){devNames[DEVICE_ID]=guessDeviceName();Store.set(KEY.devnames,devNames);}
@@ -3838,6 +3926,7 @@ async function init(){
   renderHome();
   SSSync.start();
   mailLinkRoute();
+  try{roomLinkRoute();}catch(e){} /* v0.17.0 stage 2a: #room= link */
   setTimeout(appNotesTick,1200); /* v0.12.4 */
 }
 
@@ -5379,7 +5468,7 @@ function renderHome(){
   const past=examLog.length?` · <a id="examPast">Past exams (${examLog.length})</a>`:'';
   if(examInProgress()){const N=examSave.qorder.length,a=(examSave.qans||[]).filter(x=>x!=null).length;$('featExam').innerHTML=`exam in progress · ${a} of ${N} answered${past}`;}
   else $('featExam').innerHTML=examTotal()+' per test'+past;
-  if($('examPast'))$('examPast').onclick=e=>{e.stopPropagation();openPastExams();};
+  if($('examPast'))$('examPast').onclick=e=>{e.stopPropagation();openPastExams();};try{sessPastHome();}catch(e){} /* v0.17.0 1b */
   $('mReview').classList.toggle('dim',nC===0);
   $('mPractice').classList.toggle('dim',tp===0);
   $('mExam').classList.toggle('dim',tp===0);
@@ -6185,14 +6274,16 @@ function resumePractice(){const p=prac;buildQmap();
   $('finishBtn').textContent='Finish & summary';$('finishBtn').style.display='';$('paletteTitle').textContent='Question map · practice';
   const dropped=p.qorder.length-keep.length;toast(dropped?`Practice resumed — ${dropped} question${dropped===1?'':'s'} no longer loaded ${dropped===1?'was':'were'} skipped.`:'Practice resumed.');
   qflReset();renderQuiz();startQTick();show('quiz');savePrac();}
-function startPracticeFresh(){const pool=qTestPool('prac');if(!pool.length){toast(fltEmptyMsg('prac'));return;}buildQmap();
+function startPracticeFresh(){const o=pracFreshOrder();if(!o)return;qorder=o;beginPractice('Question map · practice');}
+/* v0.17.0: the fresh-practice order on its own, shared by Practice and Start a study room (null = nothing to practise; it toasted why) */
+function pracFreshOrder(){const pool=qTestPool('prac');if(!pool.length){toast(fltEmptyMsg('prac'));return null;}buildQmap();
   let ids=pool.map(q=>q.id);
   if(settings.practiceOnlyNew){ids=ids.filter(id=>!histSeen(id));
-    if(!ids.length){toast(fltOn('prac')?'None of the matching questions are unanswered. Turn off “Unanswered questions only” to practise them.':'You’ve answered every question in your active packs. Turn off “Unanswered only” in Settings to practise them again.');return;}}
+    if(!ids.length){toast(fltOn('prac')?'None of the matching questions are unanswered. Turn off “Unanswered questions only” to practise them.':'You’ve answered every question in your active packs. Turn off “Unanswered only” in Settings to practise them again.');return null;}}
   /* never-answered first; previously answered last — wrong last time before right, oldest first */
   const fresh=ids.filter(id=>!histSeen(id)),old=ids.filter(histSeen);if(settings.practiceShuffle)shuffle(fresh);
   old.sort((a,b)=>(qhist[a].ok===qhist[b].ok?0:(qhist[a].ok?1:-1))||(qhist[a].at-qhist[b].at));
-  qorder=fresh.concat(old);beginPractice('Question map · practice');}
+  return fresh.concat(old);}
 function beginPractice(title){ /* v0.11.0: shared by Practice and Gaps (qorder already set) */
   gcGuide=gcPending;gcPending=null; /* v0.15.0 */
   qmode='practice';qT0=Date.now();buildPrior(qT0);
@@ -6219,13 +6310,13 @@ function startExam(){examTypesTidy();const pool=qTestPool('exam');if(!pool.lengt
   $('timer').classList.remove('over','warn');qflReset();renderQuiz();startQTick();show('quiz');}
 function qinit(){qcur=0;qans=new Array(qorder.length).fill(null);qsub=new Array(qorder.length).fill(false);qflag=new Array(qorder.length).fill(false);qelapsed=new Array(qorder.length).fill(0);
   qopt=qorder.map(id=>optPerm(qmap[id].options||[]));}
-function qRevealed(slot){return qmode==='practice'?qsub[slot]:qTestSubmitted;}
+function qRevealed(slot){return (qmode==='practice'||qmode==='room')?qsub[slot]:qTestSubmitted;} /* v0.17.0: room = per-question reveal */
 function startQTick(){clearInterval(qTimerId);qTimerId=setInterval(()=>{
   if(qmode==='test'){if(!settings.examTimer)return;qTimeLeft--;if(qTimeLeft%15===0)saveExam();$('tclock').textContent=fmt(qTimeLeft);$('timer').classList.toggle('warn',qTimeLeft<=300&&qTimeLeft>0);if(qTimeLeft<=0){clearInterval(qTimerId);submitExam(true);}}
   else{if(!settings.practiceTimer)return;if(!qsub[qcur])qelapsed[qcur]++;updatePracClock();}
 },1000);}
 function updatePracClock(){const rem=settings.practiceSecs-qelapsed[qcur];const t=$('timer');if(rem>=0){t.classList.remove('over');t.classList.toggle('warn',rem<=15);$('tclock').textContent=fmt(rem);}else{t.classList.add('over');t.classList.remove('warn');$('tclock').textContent='+'+fmt(-rem);}}
-function renderQuiz(){const q=qmap[qorder[qcur]],sel=qans[qcur],done=qRevealed(qcur);$('qGapsBtn').style.display=(qmode==='test'&&!qTestSubmitted)?'none':''; /* v0.11.0 */
+function renderQuiz(){if(qmode==='room'&&ROOM&&ROOM.na&&ROOM.na.has(qcur)){roomRenderNA();return;} /* v0.17.0 stage 3 */const q=qmap[qorder[qcur]],sel=qans[qcur],done=qRevealed(qcur);$('qGapsBtn').style.display=(qmode==='test'&&!qTestSubmitted)?'none':''; /* v0.11.0 */
   $('qtag').textContent=q.topic;$('qtag').style.visibility=done?'':'hidden'; /* v0.10.17: topic once the answer shows */$('qdiff').innerHTML=diffBadge(q);$('qpos').textContent=`Q${qcur+1} / ${qorder.length}`;$('pbar').style.width=((qcur+1)/qorder.length*100)+'%';
   let html=`<p class="stem"><span class="lead">${qcur+1}.</span> ${q.stem}</p><div class="opts">`;
   const perm=qopt[qcur]||[...q.options.keys()];
@@ -6238,9 +6329,9 @@ function renderQuiz(){const q=qmap[qorder[qcur]],sel=qans[qcur],done=qRevealed(q
     after+=`<div class="answerbox"><div class="h">Explanation · ${q.topic}${diffRank(q)>=0?' · '+q.difficulty:''}${examTypeLabel(q)?' · '+examTypeLabel(q):''}</div>${q.explain||''}</div>`+guideHTML(q.guide)+srcHTML(q);} /* v0.6.6 */
   const pr=qmode==='practice'?qPrior[qorder[qcur]]:null;
   if(pr&&!done){const di=perm.indexOf(pr.p);html+=`<div class="priorwrap"><button class="priorbtn" id="priorBtn" aria-expanded="false">↺ Answered before · view your prior answer</button><div class="priorbox" id="priorBox" hidden>${new Date(pr.at).toLocaleDateString([],{month:'short',day:'numeric'})} · you picked <b>${di>=0?LETTERS[di]+'. ':''}${q.options[pr.p]!=null?q.options[pr.p]:'—'}</b> · <span class="${pr.ok?'pok':'pno'}">${pr.ok?'✓ correct':'✗ incorrect'}</span>. This time starts clear.</div></div>`;}
-  $('qcard').innerHTML=html;$('qafter').innerHTML=after;fbAttachQ(); /* v0.16.0 */
+  $('qcard').innerHTML=html;$('qafter').innerHTML=after;fbAttachQ(); /* v0.16.0 */roomAfterRender(); /* v0.17.0 */
   if($('priorBtn'))$('priorBtn').onclick=()=>{const b=$('priorBox'),open=b.hidden;b.hidden=!open;$('priorBtn').setAttribute('aria-expanded',open?'true':'false');};
-  if(!done){$('qcard').querySelectorAll('.opt').forEach(el=>{el.addEventListener('click',()=>{qans[qcur]=+el.dataset.i;if(strikeHas(+el.dataset.i))strikeSet(+el.dataset.i,false);renderQuiz();renderGrid();savePrac();});
+  if(!done){$('qcard').querySelectorAll('.opt').forEach(el=>{el.addEventListener('click',()=>{qans[qcur]=+el.dataset.i;if(strikeHas(+el.dataset.i))strikeSet(+el.dataset.i,false);renderQuiz();renderGrid();savePrac();if(qmode==='room')roomPick(qcur,qans[qcur]);});
     el.addEventListener('contextmenu',e=>{e.preventDefault();strikeToggle(+el.dataset.i);});}); /* v0.16.0: right-click strikes */
     $('qcard').querySelectorAll('.optx').forEach(el=>el.addEventListener('click',()=>strikeToggle(+el.dataset.x)));}
   else wireGuideLinks($('qafter'));
@@ -6342,7 +6433,7 @@ function tidyTopics(m){const key=m==='exam'?'examTopics':'pracTopics';if(!Array.
   const kept=settings[key].filter(k=>have.has(k));settings[key]=kept.length||settings[key].length===0?kept:null;}
 function openSetup(m){setupMode=m;const ex=m==='exam';tidyTopics(m);if(ex)examTypesTidy(); /* exam mode */$(ex?'exTopics':'prTopics').hidden=true;setupTopicSummary(m);
   $('setupTitle').textContent=ex?'Set up your exam':'Set up practice';$('setupExam').style.display=ex?'':'none';$('setupPrac').style.display=ex?'none':'';
-  $('setupGo').textContent=ex?'Start exam':'Start practice';
+  $('setupGo').textContent=ex?'Start exam':'Start practice';$('roomStartBtn').style.display=(ex||!ROOMS_ON)?'none':''; /* v0.17.0 */
   if(ex){$('setGroupBy').value=settings.examGroupBy;$('autoTarget').value=Math.max(1,settings.examTarget||40);toggleSwitch($('setExamAuto'),settings.examAuto);
     $('setExamMins').value=settings.examMinutes;toggleSwitch($('setExamTimer'),settings.examTimer);$('setExamFresh').value=settings.examFresh||'prefer';renderWeights();}
   else{$('setPracSecs').value=settings.practiceSecs;toggleSwitch($('setPracTimer'),settings.practiceTimer);toggleSwitch($('setPracShuffle'),settings.practiceShuffle);toggleSwitch($('setPracOnlyNew'),!!settings.practiceOnlyNew);}
@@ -6597,10 +6688,10 @@ async function eacTry(){
   else if(m){eac={unlocked:true,via:m.tag||'code',admin:!!m.admin,at:new Date().toISOString(),keys:m.scopes||{}};if(!m.admin)eac.code=eacCanon(code); /* v0.3.0: fills sign-up */await Store.set(KEY.eac,eac);if(err)err.textContent='';hideGate();initPackLinks();toast('Welcome to Study Suite.');}
   else{if(err)err.textContent='That code wasn’t recognized. Double-check with whoever shared it.';if(inp)inp.select();}
 }
-function backupData(){return {suite:APP_VERSION,author:APP_AUTHOR,exported:new Date().toISOString(),packs,sched,daily,settings,eac,prac,qhist,exam:examSave,exams:examLog,stations:stLog};} /* v0.16.0: shared with the safety copy */
+function backupData(){return {suite:APP_VERSION,author:APP_AUTHOR,exported:new Date().toISOString(),packs,sched,daily,settings,eac,prac,qhist,exam:examSave,exams:examLog,stations:stLog,sessions:sessRecs};} /* v0.16.0: shared with the safety copy */
 function backup(){const data=backupData();const blob=new Blob([JSON.stringify(data)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='study-suite-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}
 function restore(file){const r=new FileReader();r.onload=async()=>{let d;try{d=JSON.parse(r.result);}catch(e){toast('Could not read that file.');return;}await applyBackupData(d);};r.readAsText(file);}
-async function applyBackupData(d){try{if(d.packs)packs=d.packs;if(d.sched)sched=d.sched;if(d.daily)daily=d.daily;if(d.settings)settings=Object.assign(settings,d.settings);if(d.eac)eac=d.eac;if(d.qhist&&typeof d.qhist==='object')qhist=d.qhist;if('exam' in d)examSave=(d.exam&&Array.isArray(d.exam.qorder))?d.exam:null;if(Array.isArray(d.exams))examLog=d.exams;if(Array.isArray(d.stations))stLog=d.stations;if('prac' in d)prac=(d.prac&&d.prac.mode==='practice'&&Array.isArray(d.prac.qorder))?d.prac:null;allCards().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});rollDaily();await persist();renderHome();applyGate();if(gateNeeded()){toast('Backup restored. Create an account or sign in to keep using it — your restored data comes with you.');}else{toast('Backup restored.');}}catch(e){toast('Could not read that file.');}}
+async function applyBackupData(d){try{if(d.packs)packs=d.packs;if(d.sched)sched=d.sched;if(d.daily)daily=d.daily;if(d.settings)settings=Object.assign(settings,d.settings);if(d.eac)eac=d.eac;if(d.qhist&&typeof d.qhist==='object')qhist=d.qhist;if('exam' in d)examSave=(d.exam&&Array.isArray(d.exam.qorder))?d.exam:null;if(Array.isArray(d.exams))examLog=d.exams;if(Array.isArray(d.stations))stLog=d.stations;if(Array.isArray(d.sessions))sessRecs=d.sessions;if('prac' in d)prac=(d.prac&&d.prac.mode==='practice'&&Array.isArray(d.prac.qorder))?d.prac:null;allCards().forEach(c=>{if(!sched[c.id])sched[c.id]=newState();});rollDaily();await persist();renderHome();applyGate();if(gateNeeded()){toast('Backup restored. Create an account or sign in to keep using it — your restored data comes with you.');}else{toast('Backup restored.');}}catch(e){toast('Could not read that file.');}}
 
 /* ===== v0.16.0: FEEDBACK / REPORT A PROBLEM ===== */
 const FB_GLYPH='<span class="fbglyph" aria-hidden="true">✋</span>'; /* his pick (2026-11-13): the raised hand, as an emoji */
@@ -6758,6 +6849,349 @@ function stRender(){const b=$('stBody');if(!b||!ST)return;const s=ST.s,T=s&&s.ti
 $('openStations').addEventListener('click',()=>{if(packStations().length)openStations();});
 $('stBack').addEventListener('click',()=>{if(ST&&ST.phase!=='list'&&!stRunning()){const m=ST.mode;ST={phase:'list',mode:m};stRender();return;}if(stRunning()){stGuard('home');return;}ST=null;renderHome();});
 
+/* ===== v0.17.0: STUDY ROOMS (plan Study_Rooms_Plan-v0.1-2026-11-18.md §3; stage 1 = core) =====
+   Behind ROOMS_ON (= SUITE_BETA). Server routes (§3.2) through SSAccount.roomApi; the room lives only on the server.
+   ROOM = this page's room: {code,d,lid,me,st,pend:{qi:pick},mineSent,busy,timer,wl,over,fin,sig}. qmode 'room' reuses the
+   practice question view (qRevealed = qsub, set from the server's reveal). Recording (§3.4): when a question is revealed,
+   this device records the server's pick for its seat ONLY if this device sent that pick (and it was accepted), once,
+   tracked in localStorage ROOM_KEY {rooms:{lid:{mine:{qi:pick},rec:[qi…],at}},last} — never in KEY, never synced. */
+const ROOM_KEY='suite_room_v1',ROOM_POLL=1500 /* the ONE room read interval (ms) while visible; separate from sync timing */,ROOM_MAXQ=200,ROOM_NICK_MAX=24;
+let ROOM=null;
+function roomHash(t){let h=5381;t=String(t||'');for(let i=0;i<t.length;i++)h=((h*33)^t.charCodeAt(i))>>>0;return h.toString(36);}
+function roomLocal(){try{const x=JSON.parse(localStorage.getItem(ROOM_KEY)||'null');if(x&&x.rooms&&typeof x.rooms==='object')return x;}catch(e){}return {rooms:{}};}
+function roomLocalSave(x){const ks=Object.keys(x.rooms).sort((a,b)=>(x.rooms[b].at||0)-(x.rooms[a].at||0));ks.slice(10).forEach(k=>delete x.rooms[k]);
+  try{localStorage.setItem(ROOM_KEY,JSON.stringify(x));}catch(e){}}
+function roomMine(lid){const x=roomLocal();const r=x.rooms[lid]||(x.rooms[lid]={mine:{},rec:[],at:Date.now()});if(!r.mine)r.mine={};if(!Array.isArray(r.rec))r.rec=[];return {x,r};}
+function roomErrMsg(e){if(e&&e.offline)return 'I can’t reach the server right now. Check your connection and try again.';
+  const s=e&&e.status;if(s===401)return 'Your sign-in has expired. Sign in again to use study rooms.';if(s===404)return 'No study room has that code. Check it and try again.';
+  if(s===409)return 'That room is full. A room holds 8 people.';if(s===429)return 'Too many tries. Wait a few minutes and try again.';return 'Something went wrong. Try again in a moment.';}
+function roomSay(m){const e=$('roomJoinErr');if(e&&$('home').classList.contains('on'))e.textContent=m;else toast(m,4200);}
+/* Nickname: asked on every start and join, prefilled with the last one used (settings.roomNick — synced with settings). */
+function roomNickAsk(title,go,then,named){ /* v0.17.0 1b: named = also ask the optional room name */let ov=$('roomNickOv');
+  if(!ov){ov=document.createElement('div');ov.className='modal-ov';ov.id='roomNickOv';ov.style.display='none';ov.style.zIndex='10060';
+    ov.innerHTML='<div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="roomNickT"><button class="acct-x" id="roomNickX" type="button" aria-label="Close">×</button>'+
+      '<h3 id="roomNickT"></h3><label class="acct-sub" for="roomNickIn">Your nickname — the others in the room see it beside your answers and score.</label>'+
+      '<input id="roomNickIn" class="roomin" maxlength="'+ROOM_NICK_MAX+'" autocomplete="nickname" spellcheck="false"><div class="roomerr" id="roomNickErr" role="status"></div>'+
+      '<div class="roomnamebox" id="roomNameBox" hidden><label class="acct-sub" for="roomNameIn">Room name (optional) — everyone in the room sees it, and it’s how the room shows in Past study rooms.</label>'+
+      '<input id="roomNameIn" class="roomin" maxlength="'+ROOM_NAME_MAX+'" autocomplete="off" spellcheck="false"><div class="roomsugg" id="roomNameSugg"></div></div>'+
+      '<div class="confirm-actions"><button class="btn ghost sm" id="roomNickNo" type="button">Cancel</button><button class="btn sm" id="roomNickGo" type="button"></button></div></div>';
+    document.body.appendChild(ov);const close=()=>{ov.style.display='none';};$('roomNickX').onclick=close;$('roomNickNo').onclick=close;
+    $('roomNickIn').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('roomNickGo').click();}});}
+  $('roomNickT').textContent=title;$('roomNickGo').textContent=go;$('roomNickErr').textContent='';roomNameSetup(!!named);
+  const inp=$('roomNickIn');inp.value=String(settings.roomNick||'').slice(0,ROOM_NICK_MAX);
+  $('roomNickGo').onclick=()=>{const v=inp.value.replace(/\s+/g,' ').trim();
+    if(!v){$('roomNickErr').textContent='Type a nickname first.';inp.focus();return;}
+    if(v.length>ROOM_NICK_MAX){$('roomNickErr').textContent='Keep it to '+ROOM_NICK_MAX+' characters.';return;}
+    ov.style.display='none';if(settings.roomNick!==v){settings.roomNick=v;Store.set(KEY.settings,settings);SSSync.changed();}then(v,named?roomNameClean($('roomNameIn').value):'');};
+  ov.style.display='flex';setTimeout(()=>{try{inp.focus();}catch(e){}},30);}
+/* Start (practice setup): the starter's order + option orders become the descriptor (§3.3). */
+function roomStart(){if(!ROOMS_ON)return;const m=setupMode||'prac';
+  if(!SSAccount.session()){toast('Sign in to use study rooms.');return;}
+  if(!qTestPool(m).length){toast(fltEmptyMsg(m));return;}
+  $('setupOv').style.display='none';setupMode=null;
+  roomNickAsk('Start a study room','Start',async(nick,title)=>{const ids=pracFreshOrder();if(!ids)return;const order=ids.slice(0,ROOM_MAXQ);
+    if(ids.length>ROOM_MAXQ)toast(`A room holds up to ${ROOM_MAXQ} questions, so this one has the first ${ROOM_MAXQ}.`,4200);
+    const desc={v:1,title:roomNameClean(title),sid:roomSid(),packs:[...new Set(order.map(id=>qmap[id]._pack).filter(Boolean))],qorder:order,qopt:order.map(id=>optPerm(qmap[id].options||[]))};desc.pver=roomPver(desc.packs); /* v0.17.0 stage 3 */
+    try{const j=await SSAccount.roomApi('',{method:'POST',body:{desc:JSON.stringify(desc),n:order.length,name:nick,device_id:DEVICE_ID}});await roomJoin(String(j&&j.code||''),nick,true);}
+    catch(e){toast(roomErrMsg(e),4200);}},true);}
+/* Join from Home (stage 2: the #room= link calls roomJoinAsk(code) too). */
+function roomJoinAsk(code){if(!ROOMS_ON)return;code=String(code||'').replace(/\D/g,'');if($('roomJoinErr'))$('roomJoinErr').textContent='';
+  if(code.length!==6){roomSay('Enter the 6-digit code.');return;}
+  if(!SSAccount.session()){roomSay('Sign in to use study rooms.');return;}
+  roomNickAsk('Join study room '+code,'Join',nick=>roomJoin(code,nick));}
+async function roomJoin(code,nick,starter){ /* v0.17.0 stage 3: starter = never blocked on packs */if(!ROOMS_ON)return false;
+  if(ROOM)roomEnd(null,false);
+  let j;try{j=await SSAccount.roomApi('/'+code+'/join',{method:'POST',body:{name:nick,device_id:DEVICE_ID}});}catch(e){roomSay(roomErrMsg(e));return false;}
+  const ds=j&&(typeof j.desc==='string'?j.desc:JSON.stringify(j.desc||null));let d=null;try{d=JSON.parse(ds);}catch(e){}
+  buildQmap();
+  const okd=d&&d.v===1&&Array.isArray(d.qorder)&&d.qorder.length&&Array.isArray(d.qopt)&&d.qopt.length===d.qorder.length;
+  /* v0.17.0 stage 3: load the descriptor's packs this account is entitled to; a question missing here is sat out (§3.4) */
+  if(!okd){roomRefuse(code,'Something went wrong. Try again in a moment.');return false;}
+  const pk=starter?{ok:true,note:false}:await roomPacksReady(d);
+  if(!pk.ok){roomRefuse(code,pk.msg);return false;}
+  buildQmap();roomQmapFill(d);
+  roomEnter(code,d,ds,j.state);
+  if(ROOM&&ROOM.code===code&&(pk.note||(ROOM.na&&ROOM.na.size)))toast('Your copy of a pack in this room is a different version, so some questions may be skipped for you.',6000);
+  return true;}
+function roomEnter(code,d,ds,st){clearInterval(qTimerId);timerWanted=false;
+  ROOM={code,d,ds,lid:code+'.'+roomHash(ds),na:roomNAList(d),me:{},st:null,pend:{},busy:false,again:false,timer:null,wl:null,over:false,fin:false,sig:''};
+  qorder=d.qorder.slice();qopt=d.qopt.map(a=>a.slice());qmode='room';qTestSubmitted=false;qPrior={};qT0=Date.now();gcGuide=null;
+  qans=qorder.map(()=>null);qsub=qorder.map(()=>false);qflag=qorder.map(()=>false);qelapsed=qorder.map(()=>0);qcur=0;
+  const L=roomMine(ROOM.lid);L.r.at=Date.now();L.x.last=code;roomLocalSave(L.x);
+  $('roomCodeTxt').textContent=code;$('roomNameTxt').textContent=roomNameClean(d.title);$('roomNet').hidden=true;$('roomStrip').hidden=false;$('roomAct').hidden=false;$('roomDoneBtn').style.display='none';
+  qflReset();show('quiz');roomWake();roomApply(st);roomSched();}
+function roomQ(st,i){const q=(st&&st.q)||{};return q[i]||q[String(i)]||null;}
+function roomMids(st){return new Set(((st&&st.members)||[]).map(m=>m.mid));}
+/* Selecting an option sends it at once with sub:false (the server withholds it and doesn't count it); changing it sends
+   again. Submit sends it with sub:true: from then on it is final (the server refuses a change), as in solo Practice.
+   Locked = this page is sending a submit, or the server lists me in `answered` (= submitted members only). */
+function roomMineOf(s){return (s&&s.mine&&s.mine.pick!=null)?{pick:+s.mine.pick,sub:s.mine.sub!==false}:null;} /* server: q[qi].mine = my own {pick,sub}, before and after the reveal */
+function roomLocked(i){const R=ROOM;if(!R)return false;if(R.na&&R.na.has(i))return true;if(R.pend[i]&&R.pend[i].sub)return true;const m=roomMineOf(roomQ(R.st,i));return !!(m&&m.sub);}
+/* THE recording rule at a reveal (owner 2026-11-18: "selected but not submitted counts as submitted on reveal … so behav is
+   consistent", as flushPrac does in solo Practice). ACTIVE: whatever pick the server holds for my seat counts, submitted or
+   only selected — sp, already limited to a pick this device sent; sub = whether it was submitted. No pick → null → nothing
+   recorded. The alternative ("only a submitted pick counts") is this one line: return sub?sp:null; */
+function roomMyAnswerAtReveal(qi,sp,sub){return sp;}
+function roomApply(st){const R=ROOM;if(!R||R.over||!st)return;R.st=st;R.me=st.me||{};
+  if(R.me.dev&&R.me.dev!==DEVICE_ID){roomEnd('This room is now open on another of your devices, so I’ve closed it here. What you answered here is saved.');return;}
+  const L=roomMine(R.lid),mid=R.me.mid;let rec=0;
+  for(let i=0;i<qorder.length;i++){const s=roomQ(st,i),mn=roomMineOf(s),sv=mn?mn.pick:null,sp=(sv!=null&&L.r.mine[i]===sv)?sv:null;
+    if(s&&s.rev){delete R.pend[i];qsub[i]=true;qans[i]=sv;
+      const a=roomMyAnswerAtReveal(i,sp,!!(mn&&mn.sub));
+      if(a!=null&&!L.r.rec.includes(i)&&!TAB_PAUSED&&!(R.na&&R.na.has(i))){const id=qorder[i];L.r.rec.push(i);histRecord(id,a,a===qmap[id].correct,'p');rec++;}}
+    else if(R.pend[i]==null&&sv!=null)qans[i]=sv;}
+  if(rec){roomLocalSave(L.x);saveHist();}
+  const n=qorder.length,cur=Math.max(0,Math.min(+st.cur||0,n));
+  roomSessSave(Math.min(cur,n-1),cur>=n); /* v0.17.0 1b */
+  roomChips();
+  if(cur>=n){roomScores();return;}
+  if(cur!==qcur){qcur=cur;R.sig='';window.scrollTo({top:0});}
+  const s=roomQ(st,qcur)||{},sig=[qcur,!!s.rev,qans[qcur],roomLocked(qcur),JSON.stringify(s.picks||{}),(st.members||[]).map(m=>m.mid+':'+m.name).join(',')].join('|');
+  if(sig!==R.sig){R.sig=sig;renderQuiz();}}
+function roomChips(){const R=ROOM;if(!R||!R.st)return;const st=R.st,s=roomQ(st,R.fin?-1:qcur)||{},wait=!R.fin&&!s.rev,ans=new Set(wait?(s.answered||[]):[]),mids=roomMids(st); /* ticks + counter: submitted, before the reveal only (after it `answered` holds every pick) */
+  $('roomChips').innerHTML=(st.members||[]).map(m=>{const me=m.mid===R.me.mid,a=!R.fin&&ans.has(m.mid);
+    return `<span class="rchip${a?' done':''}${m.away?' away':''}${me?' me':''}" data-mid="${acctEsc(m.mid)}" title="${a?'Submitted':'Not submitted yet'}${m.away?' · away':''}">${a?'<span class="tk">✓</span>':''}<span class="rn">${acctEsc(m.name)}${me?' (you)':''}</span></span>`;}).join('');
+  /* counter: members whose pick the server has for this question, of the members in the room now (away still count) */
+  $('roomCount').textContent=wait?`${[...ans].filter(x=>mids.has(x)).length} of ${mids.size} submitted`:'';}
+function roomUnsubmitted(){const R=ROOM;if(!R)return 0;const st=R.st||{},s=roomQ(st,qcur)||{},mids=roomMids(st),d=new Set((s.answered||[]).filter(x=>mids.has(x)));
+  if(R.pend[qcur]&&R.pend[qcur].sub&&R.me.mid)d.add(R.me.mid);if(R.na&&R.na.has(qcur)&&R.me.mid)d.add(R.me.mid); /* stage 3: I sit it out */return Math.max(0,mids.size-d.size);}
+function roomRevealAsk(){const R=ROOM;if(!R||R.over||qsub[qcur])return;const go=()=>{if(ROOM===R)roomAct('/reveal',{qi:qcur},$('roomRevealBtn'));},k=roomUnsubmitted();
+  if(k>0)confirmDialog(`${k} ${k===1?'person hasn’t':'people haven’t'} submitted. Reveal anyway?`,{confirmText:'Reveal',cancelText:'Wait'},go);else go();}
+function roomPick(i,oi){const R=ROOM;if(!R||R.over||qsub[i]||roomLocked(i)||oi==null)return;R.pend[i]={pick:oi,sub:false};roomRead();} /* sent at once; the reply is followed by one state read */
+function roomSubmit(){const R=ROOM;if(!R||R.over||qsub[qcur]||roomLocked(qcur)||qans[qcur]==null)return;R.pend[qcur]={pick:qans[qcur],sub:true};renderQuiz();roomRead();}
+/* Called at the end of renderQuiz's paint (patched in): room class, lock after Submit, picks per option after the reveal,
+   Submit / Reveal / Next. */
+function roomAfterRender(){const on=qmode==='room'&&!!ROOM;$('quiz').classList.toggle('room',on);if(!on)return;
+  const R=ROOM,st=R.st||{},s=roomQ(st,qcur)||{},rev=!!qsub[qcur],mem=st.members||[],nm=m=>m.name+(m.mid===R.me.mid?' (you)':''),lock=!rev&&roomLocked(qcur);
+  if(lock)$('qcard').querySelectorAll('.opt,.optx').forEach(b=>{b.disabled=true;});
+  $('roomSubmitBtn').style.display=(rev||lock)?'none':'';$('roomSubmitBtn').disabled=qans[qcur]==null;$('roomSubState').hidden=!lock;
+  if(rev){const pk=s.picks||{};
+    $('qcard').querySelectorAll('.optrow').forEach(row=>{const b=row.querySelector('.opt');if(!b)return;const oi=+b.dataset.i,who=mem.filter(m=>pk[m.mid]!=null&&+pk[m.mid]===oi);
+      if(who.length){const d=document.createElement('div');d.className='rpicks';d.dataset.oi=oi;d.textContent='Picked by '+who.map(nm).join(', ');row.after(d);}});
+    const none=mem.filter(m=>pk[m.mid]==null);if(none.length){const d=document.createElement('div');d.className='rpicks rnone';d.textContent='No answer: '+none.map(nm).join(', ');$('qafter').insertBefore(d,$('qafter').firstChild);}}
+  $('roomRevealBtn').style.display=rev?'none':'';$('roomNextBtn').style.display=rev?'':'none';$('roomRevealBtn').disabled=false;$('roomNextBtn').disabled=false;
+  $('roomNextBtn').textContent=qcur>=qorder.length-1?'See scores':'Next →';}
+function roomFlush(){const R=ROOM;if(!R||R.over)return Promise.resolve();if(R.flushing)return R.flushing;
+  if(!Object.keys(R.pend).length)return Promise.resolve();
+  const run=(async()=>{for(const k of Object.keys(R.pend)){const i=+k,v=R.pend[k];if(!v)continue;
+      try{await SSAccount.roomApi('/'+R.code+'/pick',{method:'POST',body:{qi:i,pick:v.pick,device_id:DEVICE_ID,sub:!!v.sub}});
+        const L=roomMine(R.lid);L.r.mine[i]=v.pick;roomLocalSave(L.x);if(R.pend[k]===v)delete R.pend[k];}
+      catch(e){if(e&&e.status===409){if(R.pend[k]===v)delete R.pend[k];continue;}throw e;}}})(); /* the latest pick always wins: one changed mid-send stays in pend for the next flush; 409 = revealed or already submitted */
+  R.flushing=run;run.then(()=>{if(R.flushing===run)R.flushing=null;},()=>{if(R.flushing===run)R.flushing=null;});
+  return run;}
+async function roomRead(){const R=ROOM;if(!R||R.over||R.fin)return;if(R.busy){R.again=true;return;}R.busy=true;clearTimeout(R.timer);R.timer=null;
+  try{await roomFlush();if(ROOM!==R||R.over)return;const st=await SSAccount.roomApi('/'+R.code+'/state?d='+encodeURIComponent(DEVICE_ID),{timeout:8000});
+    if(ROOM!==R||R.over)return;$('roomNet').hidden=true;roomApply(st);}
+  catch(e){if(ROOM===R&&!R.over)roomFail(e);}
+  finally{R.busy=false;if(ROOM===R&&!R.over){if(R.again){R.again=false;roomRead();}else roomSched();}}}
+function roomFail(e){const s=e&&e.status;
+  if(s===404){roomSessSave(null,true);roomEnd('This study room has closed. Everything you answered in it is saved.');return;}
+  if(s===401){roomEnd('Your sign-in has expired. Sign in again, then join with the code.');return;}
+  $('roomNet').hidden=false;}
+function roomSched(){const R=ROOM;if(!R||R.over||R.fin)return;clearTimeout(R.timer);R.timer=null;if(document.visibilityState!=='visible')return;R.timer=setTimeout(roomRead,ROOM_POLL);}
+function roomWake(){const R=ROOM;if(!R||R.over||(R.wl&&!R.wl.released))return;
+  try{if(navigator.wakeLock&&document.visibilityState==='visible')navigator.wakeLock.request('screen').then(l=>{if(ROOM===R&&!R.over)R.wl=l;else l.release();}).catch(()=>{});}catch(e){}}
+document.addEventListener('visibilitychange',()=>{const R=ROOM;if(!R||R.over)return;
+  if(document.visibilityState==='visible'){roomWake();roomRead();}else{clearTimeout(R.timer);R.timer=null;}});
+async function roomAct(path,body,btn){const R=ROOM;if(!R||R.over)return;if(btn)btn.disabled=true;
+  try{await roomFlush();await SSAccount.roomApi('/'+R.code+path,{method:'POST',body});}catch(e){if(e&&(e.status===404||e.status===401)){roomFail(e);return;}$('roomNet').hidden=false;}
+  finally{if(btn)btn.disabled=false;}
+  roomRead();}
+function roomScores(){const R=ROOM;if(!R||R.over)return;const st=R.st||{},n=qorder.length,mem=st.members||[];let rv=0;const sc={},an={};mem.forEach(m=>{sc[m.mid]=0;an[m.mid]=0;});
+  for(let i=0;i<n;i++){const s=roomQ(st,i);if(!s||!s.rev||(R.na&&R.na.has(i)))continue;rv++;const c=qmap[qorder[i]].correct,pk=s.picks||{};
+    mem.forEach(m=>{if(pk[m.mid]!=null){an[m.mid]++;if(+pk[m.mid]===c)sc[m.mid]++;}});}
+  R.fin=true;clearTimeout(R.timer);R.timer=null;roomChips();
+  const rows=mem.slice().sort((a,b)=>(sc[b.mid]-sc[a.mid])||(an[b.mid]-an[a.mid])).map(m=>`<div class="rsrow" data-mid="${acctEsc(m.mid)}" data-right="${sc[m.mid]}" data-answered="${an[m.mid]}"><span>${acctEsc(m.name)}${m.mid===R.me.mid?' (you)':''}</span><b>${sc[m.mid]} right of ${an[m.mid]} answered · ${rv-an[m.mid]} not answered</b></div>`).join('');
+  $('qtag').style.visibility='hidden';$('qdiff').innerHTML='';$('qpos').textContent='Done';$('pbar').style.width='100%';
+  $('qcard').innerHTML=`<div class="roomscores"><h3>Room scores</h3><p class="acct-sub">${rv} question${rv===1?' was':'s were'} revealed. Your own answers are in your question history.${roomNANote()}</p>${rows}</div>`;
+  $('qafter').innerHTML='';['roomSubmitBtn','roomRevealBtn','roomNextBtn'].forEach(id=>$(id).style.display='none');$('roomSubState').hidden=true;$('roomDoneBtn').style.display='';}
+function roomEnd(msg,home){const R=ROOM;if(!R)return;R.over=true;clearTimeout(R.timer);R.timer=null;ROOM=null;
+  try{if(R.wl)R.wl.release();}catch(e){}
+  $('roomStrip').hidden=true;$('roomAct').hidden=true;$('quiz').classList.remove('room');
+  if(home!==false)renderHome();if(msg)alertDialog('Study room',[msg]);}
+function roomLeave(){const R=ROOM;if(!R)return;roomSessSave(null,false);SSAccount.roomApi('/'+R.code+'/leave',{method:'POST',keepalive:true}).catch(()=>{});roomEnd(null);}
+function roomLeaveAsk(){if(!ROOM)return;if(ROOM.fin){roomLeave();return;}
+  confirmDialog('Leave this study room? What you’ve answered so far is saved. You can join again with the code.',{confirmText:'Leave'},roomLeave);}
+function roomGoHome(){if(!ROOM||!$('quiz').classList.contains('on'))return false;roomLeaveAsk();return true;}
+if(ROOMS_ON)$('roomPanel').style.display='';
+$('roomJoinBtn').addEventListener('click',()=>roomJoinAsk($('roomCodeIn').value));
+$('roomCodeIn').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();roomJoinAsk($('roomCodeIn').value);}});
+$('roomCodeIn').addEventListener('input',e=>{const v=e.target.value.replace(/\D/g,'').slice(0,6);if(v!==e.target.value)e.target.value=v;});
+$('roomStartBtn').addEventListener('click',roomStart);
+$('roomSubmitBtn').addEventListener('click',roomSubmit);
+$('roomRevealBtn').addEventListener('click',roomRevealAsk);
+$('roomNextBtn').addEventListener('click',()=>{if(ROOM)roomAct('/cur',{qi:qcur+1},$('roomNextBtn'));});
+$('roomLeaveBtn').addEventListener('click',roomLeaveAsk);
+$('roomDoneBtn').addEventListener('click',roomLeave);
+
+/* ===== v0.17.0 stage 1b: SAVED SESSIONS (one store; rooms now, solo practice sessions later) + ROOM NAMES =====
+   sessRecs (KEY.sessions, synced like stations, merged by mergeSessions) holds records
+   {id,at,up,kind,name,n,qorder,qopt,ans:{qid:pick},done,cur,correct,room:{code,members:[nicknames],rev}} — my own picks
+   only (original option index), question ids not text; nothing room-specific outside `room`. Only sessGet / sessPut /
+   sessList touch the store. v0.17.0: only Study rooms write it, so sessPut is behind ROOMS_ON. */
+const SESS_MAX=50,ROOM_NAME_MAX=40;
+function sessGet(id){return (sessRecs||[]).find(r=>r&&r.id===id)||null;}
+function sessList(kind){return (sessRecs||[]).filter(r=>r&&r.id!=null&&(!kind||r.kind===kind)).sort((a,b)=>(b.up||0)-(a.up||0));}
+function sessPut(rec){if(!ROOMS_ON||TAB_PAUSED||!rec||rec.id==null)return null;const old=sessGet(rec.id);
+  const r=Object.assign({},rec,{up:Math.max(Date.now(),((old&&old.up)||0)+1)});if(!r.at)r.at=(old&&old.at)||r.up;
+  sessRecs=[r].concat((sessRecs||[]).filter(x=>x&&x.id!==r.id)).sort((a,b)=>(b.up||0)-(a.up||0)).slice(0,SESS_MAX);
+  Store.set(KEY.sessions,sessRecs);SSSync.changed();return r;}
+/* Room name: optional; control characters removed, spaces collapsed, cut to 40 characters. */
+function roomNameClean(t){return String(t==null?'':t).replace(/[\u0000-\u001f\u007f-\u009f\u2028\u2029]/g,'').replace(/\s+/g,' ').trim().slice(0,ROOM_NAME_MAX).trim();}
+function roomSid(){try{const a=new Uint32Array(2);crypto.getRandomValues(a);return a[0].toString(36)+a[1].toString(36);}catch(e){return Math.random().toString(36).slice(2,12);}}
+function roomNameRecent(){const seen=new Set(),out=[];sessList('room').forEach(r=>{const t=roomNameClean(r.name);if(t&&!seen.has(t)&&out.length<5){seen.add(t);out.push(t);}});return out;}
+function roomNameSetup(named){const box=$('roomNameBox'),inp=$('roomNameIn');if(!box||!inp)return;box.hidden=!named;inp.value='';
+  if(!inp.dataset.w){inp.dataset.w='1';inp.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('roomNickGo').click();}});}
+  const sg=$('roomNameSugg'),rec=named?roomNameRecent():[];
+  sg.innerHTML=rec.length?'<span class="rsl">Recent names:</span>'+rec.map(t=>`<button type="button" class="rchip" data-n="${acctEsc(t)}"><span class="rn">${acctEsc(t)}</span></button>`).join(''):'';
+  sg.querySelectorAll('button[data-n]').forEach(b=>b.onclick=()=>{inp.value=b.dataset.n;inp.focus();});}
+/* The room's record: the same id on every device of one account (code + a hash of the descriptor, which the server returns
+   unchanged to every member; the starter's random `sid` in it makes it unique to this room). Written only when it changed. */
+function roomSessId(R){return 'room-'+R.code+'-'+roomHash('sess|'+R.ds);}
+function roomSessSave(ci,fin){const R=ROOM;if(!R||!ROOMS_ON||!R.d)return;
+  const st=R.st||{},n=qorder.length,id=R.sid||(R.sid=roomSessId(R)),old=sessGet(id),ans=Object.assign({},(old&&old.ans)||{});let rev=0;
+  for(let i=0;i<n;i++){const s=roomQ(st,i);if(!s||!s.rev||(R.na&&R.na.has(i)))continue;rev++;const mn=roomMineOf(s),a=roomMyAnswerAtReveal(i,mn?mn.pick:null,!!(mn&&mn.sub));if(a!=null)ans[qorder[i]]=a;}
+  rev=Math.max(rev,(old&&old.room&&old.room.rev)||0);
+  R.seen=R.seen||{};(st.members||[]).forEach(m=>{if(m&&m.mid!=null)R.seen[m.mid]=String(m.name||'');});
+  const cnt=a=>{const m=new Map();(a||[]).forEach(x=>m.set(x,(m.get(x)||0)+1));return m;},pv=cnt(old&&old.room&&old.room.members),nw=cnt(Object.values(R.seen)),members=[];
+  [...new Set([...pv.keys(),...nw.keys()])].forEach(k=>{for(let j=Math.max(pv.get(k)||0,nw.get(k)||0);j>0;j--)members.push(k);});
+  let correct=0;Object.keys(ans).forEach(q=>{if(qmap[q]&&+ans[q]===qmap[q].correct)correct++;});
+  const last=roomQ(st,n-1),cur=ci!=null?ci:((old&&old.cur)||0);
+  const rec={id,at:(old&&old.at)||Date.now(),kind:'room',name:roomNameClean(R.d.title),n,qorder:qorder.slice(),qopt:qopt.map(a=>(a||[]).slice()),ans,
+    done:!!((old&&old.done)||fin||(last&&last.rev)),cur,correct,room:{code:R.code,members,rev}};
+  const k=x=>JSON.stringify(Object.assign({},x,{up:0}));if(old&&k(old)===k(Object.assign({},rec,{up:old.up})))return;
+  sessPut(rec);}
+/* "Past study rooms" — the store filtered to rooms; same look as Past exams; no resume, no delete in v0.17.0. */
+function sessPastHome(){const a=$('roomPastLink');if(!a)return;const k=sessList('room').length;a.textContent=k?`Past study rooms (${k})`:'Past study rooms';}
+function sessPastOpen(){if(!ROOMS_ON)return;let ov=$('roomPastOv');
+  if(!ov){ov=document.createElement('div');ov.className='modal-ov';ov.id='roomPastOv';ov.style.display='none';
+    ov.innerHTML='<div class="modal-card setup-card" role="dialog" aria-modal="true" aria-labelledby="roomPastT"><button class="acct-x" id="roomPastX" type="button" aria-label="Close">×</button><h3 id="roomPastT">Past study rooms</h3><div id="roomPastBody"></div></div>';
+    document.body.appendChild(ov);const close=()=>{ov.style.display='none';};$('roomPastX').onclick=close;ov.addEventListener('click',e=>{if(e.target===ov)close();});}
+  const b=$('roomPastBody'),L=sessList('room').sort((x,y)=>(y.at||0)-(x.at||0));
+  if(!L.length)b.innerHTML='<p class="acct-sub">No study rooms yet. Rooms you start or join show up here, with who was there and your score.</p>';
+  else b.innerHTML=L.map(x=>{const d=new Date(x.at||x.up||Date.now()).toLocaleString([],{dateStyle:'medium',timeStyle:'short'}),nm=roomNameClean(x.name),
+      mem=((x.room&&x.room.members)||[]).map(String),M=Object.keys(x.ans||{}).length,rv=Math.max(M,(x.room&&x.room.rev)||0);
+    return `<div class="pastrow" data-id="${acctEsc(x.id)}"><div><div class="pt">${acctEsc(nm||d)}</div>${nm?`<div class="pd">${d}</div>`:''}${mem.length?`<div class="pd">Who was there: ${acctEsc(mem.join(', '))}</div>`:''}<div class="pd">${x.correct||0} right of ${M} answered · ${rv-M} not answered</div></div></div>`;}).join('');
+  ov.style.display='flex';}
+$('roomPastLink').addEventListener('click',e=>{e.preventDefault();sessPastOpen();});
+$('roomPastLink').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();sessPastOpen();}});
+
+/* ===== v0.17.0 stage 3: PACKS ON JOIN (plan v0.3 §3.4 "Pack on join") =====
+   Entitlement = the pack list this device can open with the content keys it holds (defaultManifest, opened by initPackLinks
+   with heldKeys(); manifestEntry(id) non-null). Loading = the existing downloadPack() (placeholder or not in the library);
+   a different version = the existing packUpdate() → applyPackUpdate() first. Questions still missing here, or with a
+   different option count, are sat out (ROOM.na, a Set of question indexes). */
+function roomPver(ids){const o={};(ids||[]).forEach(id=>{const p=packs.find(x=>x&&x.id===id);o[id]=(p&&p.version!=null)?String(p.version):null;});return o;}
+function roomBusy(on){let ov=$('roomBusyOv');
+  if(!ov){if(!on)return;ov=document.createElement('div');ov.className='modal-ov';ov.id='roomBusyOv';ov.style.display='none';ov.style.zIndex='10060';
+    ov.innerHTML='<div class="modal-card" role="status" aria-live="polite"><p class="roombusy">Getting the pack for this room…</p></div>';document.body.appendChild(ov);}
+  ov.style.display=on?'flex':'none';}
+const ROOM_NOPACK='This study room uses a pack that your access codes don’t include, so it can’t open on this account. If you have another access code, add it in your account (the person icon, top right), then join again.',
+  ROOM_NOGET='I couldn’t get the pack this room uses. Check your connection and try again.';
+function roomRefuse(code,msg){SSAccount.roomApi('/'+code+'/leave',{method:'POST'}).catch(()=>{}); /* the join took a seat; give it back */
+  alertDialog('I can’t open this room here',[msg]);}
+/* → {ok:true, note} (note = a pack here is still a different version from the starter's) or {ok:false, msg}. */
+async function roomPacksReady(d){const ids=(Array.isArray(d.packs)?d.packs:[]).filter(x=>typeof x==='string'&&x),pv=(d.pver&&typeof d.pver==='object')?d.pver:{};
+  const have=id=>packs.find(x=>x&&x.id===id&&!x.stub)||null;let busy=false,changed=false,note=false,listTried=false;
+  const list=async()=>{if(!defaultManifest&&!listTried){listTried=true;try{await initPackLinks();}catch(e){}}return !!defaultManifest;};
+  const wait=()=>{if(!busy){busy=true;roomBusy(true);}};
+  try{for(const id of ids){let p=have(id);
+      if(!p){const known=await list(),mp=manifestEntry(id);
+        if(!mp)return {ok:false,msg:known?ROOM_NOPACK:ROOM_NOGET};
+        const ph=packs.find(x=>x&&x.id===id&&x.stub);wait();
+        try{p=await downloadPack(ph||{id},!ph);}catch(e){return {ok:false,msg:ROOM_NOGET};}
+        if(!p)return {ok:false,msg:ROOM_NOGET};changed=true;}
+      const want=pv[id];
+      if(want!=null&&verCmp(want,p.version)!==0){
+        if(await list()){const mp=packUpdate(p);if(mp){wait();try{await applyPackUpdate(p,mp,true);changed=true;p=have(id)||p;}catch(e){}}}
+        if(verCmp(want,p.version)!==0)note=true;}}
+    return {ok:true,note};}
+  finally{if(busy)roomBusy(false);if(changed){try{await persist();}catch(e){}}}}
+/* The room's questions come from the descriptor's packs even when a pack is switched off here or a source filter hides a
+   question (the starter chose them); qmap only, nothing in the library changes. */
+function roomQmapFill(d){(Array.isArray(d&&d.packs)?d.packs:[]).forEach(id=>{const p=packs.find(x=>x&&x.id===id&&!x.stub);if(!p)return;
+  (p.questions||[]).forEach(q=>{if(q&&q.id&&!qmap[q.id])qmap[q.id]=withSec(p,q);});});}
+/* Questions I sit out: missing here, or a different option count. A missing id gets an empty stand-in in qmap so the shared
+   question-view code never reads an undefined question; it is never shown, picked or recorded. */
+function roomNAList(d){const na=new Set();(d.qorder||[]).forEach((id,i)=>{const q=qmap[id];
+  if(!q||q._roomNA||!Array.isArray(d.qopt[i])||d.qopt[i].length!==(q.options||[]).length){na.add(i);if(!q)qmap[id]={id,_roomNA:1,stem:'',options:[],correct:-1,topic:''};}});return na;}
+function roomRenderNA(){const rev=!!qsub[qcur],last=qcur>=qorder.length-1;
+  $('qtag').style.visibility='hidden';$('qdiff').innerHTML='';$('qpos').textContent=`Q${qcur+1} / ${qorder.length}`;$('pbar').style.width=((qcur+1)/qorder.length*100)+'%';
+  $('qcard').innerHTML=`<div class="roomna" data-na="1"><p class="stem"><span class="lead">${qcur+1}.</span> This question isn’t in your copy of the pack, so you’re sitting this one out.</p><p class="acct-sub">The others can still answer it. Reveal and Next work as usual.</p></div>`;
+  $('qafter').innerHTML='';$('quiz').classList.add('room');
+  $('roomSubmitBtn').style.display='none';$('roomSubState').hidden=true;
+  $('roomRevealBtn').style.display=rev?'none':'';$('roomNextBtn').style.display=rev?'':'none';$('roomRevealBtn').disabled=false;$('roomNextBtn').disabled=false;
+  $('roomNextBtn').textContent=last?'See scores':'Next →';}
+function roomNANote(){const R=ROOM;if(!R||!R.na||!R.na.size)return '';const st=R.st||{};let k=0;R.na.forEach(i=>{const s=roomQ(st,i);if(s&&s.rev)k++;});
+  return k?` ${k} question${k===1?' wasn’t':'s weren’t'} in your copy of the pack, so ${k===1?'it isn’t':'they aren’t'} counted here.`:'';}
+
+/* ===== v0.17.0 stage 2a: THE ROOM LINK (#room=123456) + INVITE PANEL ===== */
+let roomLinkCode=null; /* a link opened while signed out: its join prompt opens once sign-in completes */
+function roomLinkTidy(){try{history.replaceState(history.state,'',location.pathname+location.search);}catch(e){}}
+function roomLinkRoute(){const h=String(location.hash||'');if(!/^#room=/i.test(h))return;const m=h.match(/^#room=(\d{6})$/i);roomLinkTidy();
+  if(!m||!ROOMS_ON)return;const code=m[1];if(ROOM&&ROOM.code===code)return;
+  if(!SSAccount.session()){roomLinkCode=code;toast('Sign in, and study room '+code+' will open.',5000);return;}
+  roomLinkOpen(code);}
+function roomLinkOpen(code){if($('roomCodeIn'))$('roomCodeIn').value=code;roomJoinAsk(code);}
+function roomLinkAfterSignIn(){const c=roomLinkCode;roomLinkCode=null;if(c&&ROOMS_ON&&SSAccount.session())roomLinkOpen(c);}
+window.addEventListener('hashchange',()=>{if(/^#room=/i.test(location.hash))roomLinkRoute();}); /* a room link opened into an open tab */
+function roomInviteLink(code){const b=/^https?:$/.test(location.protocol)?location.origin+location.pathname:'https://studysuite.app/';return b+'#room='+code;}
+function roomInviteOpen(){const R=ROOM;if(!R||!ROOMS_ON)return;let ov=$('roomInvOv');
+  if(!ov){ov=document.createElement('div');ov.className='modal-ov';ov.id='roomInvOv';ov.style.display='none';ov.style.zIndex='10060';
+    ov.innerHTML='<div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="roomInvT"><button class="acct-x" id="roomInvX" type="button" aria-label="Close">×</button>'+
+      '<h3 id="roomInvT">Invite people</h3><div class="rinv-name" id="roomInvName"></div>'+
+      '<div class="rinv-qr" id="roomInvQr"></div><span class="rinv-lab" id="roomInvQrLab">Scan this with a phone’s camera, or use the code.</span>'+
+      '<span class="rinv-lab">Code</span><div class="rinv-code" id="roomInvCode"></div>'+
+      '<span class="rinv-lab">Or send this link — it opens the room in Study Suite:</span><div class="rinv-link" id="roomInvLink" tabindex="0"></div>'+
+      '<div class="confirm-actions"><button class="btn sm" id="roomInvCopy" type="button">Copy link</button></div></div>';
+    document.body.appendChild(ov);const close=()=>{ov.style.display='none';};$('roomInvX').onclick=close;ov.addEventListener('click',e=>{if(e.target===ov)close();});
+    const sel=()=>{try{const g=getSelection();g.removeAllRanges();g.selectAllChildren($('roomInvLink'));}catch(x){}};$('roomInvLink').addEventListener('focus',sel);
+    $('roomInvCopy').onclick=()=>{const t=$('roomInvLink').textContent;Promise.resolve().then(()=>copyToClipboard(t)).then(()=>toast('Link copied.')).catch(()=>{toast('Could not copy — select and copy manually.');try{$('roomInvLink').focus();}catch(x){}sel();});};}
+  const link=roomInviteLink(R.code);$('roomInvCode').textContent=R.code;$('roomInvName').textContent=roomNameClean(R.d&&R.d.title);$('roomInvLink').textContent=link;{const qs=roomQrSvg(link);$('roomInvQr').innerHTML=qs;$('roomInvQrLab').hidden=!qs;} /* v0.17.0 stage 2b */
+  ov.style.display='flex';}
+$('roomInvBtn').addEventListener('click',roomInviteOpen);
+
+/* ===== v0.17.0 stage 2b: QR CODE (byte mode, level M, versions 1–4; no library) =====
+   qrMatrix(text) → rows of booleans (true = dark) or null when the text needs more than version 4-M (62 bytes). */
+const QR_M={1:[16,10,1],2:[28,16,1],3:[44,26,1],4:[64,18,2]}; /* version: [data codewords, EC codewords per block, blocks] */
+let qrGF=null;
+function qrRS(data,n){if(!qrGF){const e=new Array(512),l=new Array(256);let x=1;for(let i=0;i<255;i++){e[i]=x;l[x]=i;x<<=1;if(x&256)x^=0x11d;}for(let i=255;i<512;i++)e[i]=e[i-255];qrGF={e,l};}
+  const G=qrGF,mul=(a,b)=>(a&&b)?G.e[G.l[a]+G.l[b]]:0;let g=[1];
+  for(let i=0;i<n;i++){const ng=new Array(g.length+1).fill(0);for(let j=0;j<g.length;j++){ng[j]^=g[j];ng[j+1]^=mul(g[j],G.e[i]);}g=ng;}
+  const r=new Array(n).fill(0);for(const d of data){const f=d^r[0];r.shift();r.push(0);for(let j=0;j<n;j++)r[j]^=mul(g[j+1],f);}return r;}
+function qrMatrix(text){const B=[...new TextEncoder().encode(String(text))];let v=0;for(let k=1;k<=4;k++)if(B.length+2<=QR_M[k][0]){v=k;break;}if(!v)return null;
+  const [cap,ecn,nb]=QR_M[v],bits=[],put=(val,len)=>{for(let i=len-1;i>=0;i--)bits.push((val>>>i)&1);};
+  put(4,4);put(B.length,8);B.forEach(b=>put(b,8));put(0,Math.min(4,cap*8-bits.length));while(bits.length%8)bits.push(0);
+  const dat=[];for(let i=0;i<bits.length;i+=8){let x=0;for(let j=0;j<8;j++)x=(x<<1)|bits[i+j];dat.push(x);}for(let pb=0xEC;dat.length<cap;pb^=0xEC^0x11)dat.push(pb);
+  const per=cap/nb,blk=[];for(let b=0;b<nb;b++){const d=dat.slice(b*per,(b+1)*per);blk.push([d,qrRS(d,ecn)]);}
+  const cw=[];for(let i=0;i<per;i++)blk.forEach(x=>cw.push(x[0][i]));for(let i=0;i<ecn;i++)blk.forEach(x=>cw.push(x[1][i]));
+  const n=17+4*v,M=[],F=[];for(let y=0;y<n;y++){M.push(new Array(n).fill(false));F.push(new Array(n).fill(false));}
+  const set=(x,y,d)=>{M[y][x]=d;F[y][x]=true;};
+  const finder=(cx,cy)=>{for(let dy=-4;dy<=4;dy++)for(let dx=-4;dx<=4;dx++){const x=cx+dx,y=cy+dy;if(x<0||y<0||x>=n||y>=n)continue;const d=Math.max(Math.abs(dx),Math.abs(dy));set(x,y,d!==2&&d!==4);}};
+  finder(3,3);finder(n-4,3);finder(3,n-4);
+  for(let i=0;i<n;i++){if(!F[6][i])set(i,6,i%2===0);if(!F[i][6])set(6,i,i%2===0);}
+  if(v>=2){const c=n-7;for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++)set(c+dx,c+dy,Math.max(Math.abs(dx),Math.abs(dy))!==1);}
+  const fmt=(T,mk)=>{const data=mk;let r=data;for(let i=0;i<10;i++)r=(r<<1)^((r>>>9)*0x537);const b=((data<<10)|r)^0x5412,bit=i=>((b>>>i)&1)===1,st=(x,y,d)=>{T[y][x]=d;F[y][x]=true;};
+    for(let i=0;i<=5;i++)st(8,i,bit(i));st(8,7,bit(6));st(8,8,bit(7));st(7,8,bit(8));for(let i=9;i<15;i++)st(14-i,8,bit(i));
+    for(let i=0;i<8;i++)st(n-1-i,8,bit(i));for(let i=8;i<15;i++)st(8,n-15+i,bit(i));st(8,n-8,true);}; /* level M = 00, so the 5 data bits are the mask */
+  fmt(M,0);
+  let i=0;for(let right=n-1;right>=1;right-=2){if(right===6)right=5;
+    for(let vert=0;vert<n;vert++)for(let j=0;j<2;j++){const x=right-j,up=((right+1)&2)===0,y=up?n-1-vert:vert;
+      if(!F[y][x]&&i<cw.length*8){M[y][x]=((cw[i>>>3]>>>(7-(i&7)))&1)===1;i++;}}}
+  const MASK=[(x,y)=>(x+y)%2===0,(x,y)=>y%2===0,(x,y)=>x%3===0,(x,y)=>(x+y)%3===0,(x,y)=>(Math.floor(x/3)+Math.floor(y/2))%2===0,
+    (x,y)=>x*y%2+x*y%3===0,(x,y)=>(x*y%2+x*y%3)%2===0,(x,y)=>((x+y)%2+x*y%3)%2===0];
+  const pen=T=>{let p=0,dark=0;const line=get=>{let run=1;for(let k=1;k<n;k++){if(get(k)===get(k-1)){run++;if(run===5)p+=3;else if(run>5)p++;}else run=1;}
+      const s=[];for(let k=0;k<n;k++)s.push(get(k)?1:0);const t=s.join(''),a='10111010000',b='00001011101';for(let k=0;k+11<=n;k++){const w=t.substr(k,11);if(w===a||w===b)p+=40;}};
+    for(let y=0;y<n;y++)line(k=>T[y][k]);for(let x=0;x<n;x++)line(k=>T[k][x]);
+    for(let y=0;y<n-1;y++)for(let x=0;x<n-1;x++){const c=T[y][x];if(c===T[y][x+1]&&c===T[y+1][x]&&c===T[y+1][x+1])p+=3;}
+    for(let y=0;y<n;y++)for(let x=0;x<n;x++)if(T[y][x])dark++;const tot=n*n;p+=10*Math.max(0,Math.ceil(Math.abs(dark*20-tot*10)/tot)-1);return p;};
+  let best=null,bp=Infinity;
+  for(let mk=0;mk<8;mk++){const T=M.map((row,y)=>row.map((d,x)=>F[y][x]?d:(d!==MASK[mk](x,y))));fmt(T,mk);const pp=pen(T);if(pp<bp){bp=pp;best=T;}}
+  return best;}
+function roomQrSvg(text){const m=qrMatrix(text);if(!m)return '';const n=m.length,q=4,N=n+2*q;let d='';
+  for(let y=0;y<n;y++)for(let x=0;x<n;x++)if(m[y][x])d+='M'+(x+q)+' '+(y+q)+'h1v1h-1z';
+  return '<svg viewBox="0 0 '+N+' '+N+'" role="img" aria-label="QR code of the room link" shape-rendering="crispEdges"><rect width="'+N+'" height="'+N+'" fill="#fff"/><path d="'+d+'" fill="#000"/></svg>';}
+
 /* ===== WIRE UP ===== */
 $('mReview').addEventListener('click',()=>{if(deck().length)openReview();});
 $('mPractice').addEventListener('click',()=>{if(qpool().length)startPractice();});
@@ -6815,7 +7249,7 @@ $('zoomOut').addEventListener('click',()=>{guideZoom=Math.max(0.6,Math.round((gu
 $('fitBtn').addEventListener('click',()=>{guideFit=!guideFit;applyGuideView();saveGuideView();});
 $('printBtn').addEventListener('click',()=>{const fr=document.querySelector('.guideframe');if(fr&&iosStandalone()&&openGuideCopy(fr))return; /* v0.7.6 */
   if(fr&&fr.contentWindow){try{fr.contentWindow.focus();fr.contentWindow.print();}catch(e){window.print();}}else{window.print();}});
-function goHome(){if($('quiz').classList.contains('on')||$('study').classList.contains('on')){const keep=$('quiz').classList.contains('on')&&!qTestSubmitted;confirmDialog(keep?(qmode==='test'?'Return home? Your exam is saved — tap Exam to pick up where you left off. The timer pauses until then.':'Return home? Your practice progress is saved — resume it any time from the Practice card.'):'Leave this session and return home?',{confirmText:'Leave'},()=>{clearInterval(qTimerId);savePrac();renderHome();});}else renderHome();} /* v0.14.3: named so the title can call it */
+function goHome(){if(roomGoHome())return; /* v0.17.0 */if($('quiz').classList.contains('on')||$('study').classList.contains('on')){const keep=$('quiz').classList.contains('on')&&!qTestSubmitted;confirmDialog(keep?(qmode==='test'?'Return home? Your exam is saved — tap Exam to pick up where you left off. The timer pauses until then.':'Return home? Your practice progress is saved — resume it any time from the Practice card.'):'Leave this session and return home?',{confirmText:'Leave'},()=>{clearInterval(qTimerId);savePrac();renderHome();});}else renderHome();} /* v0.14.3: named so the title can call it */
 $('homebtn').addEventListener('click',goHome);
 $('brandHome').addEventListener('click',goHome);$('brandHome').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();goHome();}});
 $('themeBtn').addEventListener('click',cycleTheme);
@@ -6886,7 +7320,7 @@ document.addEventListener('keydown',e=>{
   if(e.target&&e.target.closest&&e.target.closest('input,textarea,select,[contenteditable]'))return;
   if(['acctOv','syncCfOv','confirmOv','setupOv','pastOv'].some(id=>$(id)&&$(id).style.display!=='none'))return;
   if($('study').classList.contains('on')){if(!revealed){if(e.key===' '||e.key==='Enter'){e.preventDefault();revealed=true;renderCard();}}else if(['1','2','3','4'].includes(e.key))grade(+e.key);return;}
-  if($('quiz').classList.contains('on')){const done=qRevealed(qcur);if(!done){const disp=LETTERS.indexOf(e.key.toUpperCase());const perm=qopt[qcur]||[...qmap[qorder[qcur]].options.keys()];if(disp>=0&&disp<perm.length){if(e.shiftKey)strikeToggle(perm[disp]);else{qans[qcur]=perm[disp];if(strikeHas(perm[disp]))strikeSet(perm[disp],false);renderQuiz();renderGrid();savePrac();}} /* v0.16.0: Shift+letter strikes */}if(e.key==='ArrowLeft')qPrev();if(e.key==='ArrowRight')qNext();if(qmode==='practice'&&e.key==='Enter'&&!qsub[qcur]&&qans[qcur]!=null)submitAnswer();}
+  if($('quiz').classList.contains('on')){const done=qRevealed(qcur)||(qmode==='room'&&roomLocked(qcur)); /* v0.17.0: a submitted room pick is final */if(!done){const disp=LETTERS.indexOf(e.key.toUpperCase());const perm=qopt[qcur]||[...qmap[qorder[qcur]].options.keys()];if(disp>=0&&disp<perm.length){if(e.shiftKey)strikeToggle(perm[disp]);else{qans[qcur]=perm[disp];if(strikeHas(perm[disp]))strikeSet(perm[disp],false);renderQuiz();renderGrid();savePrac();if(qmode==='room')roomPick(qcur,qans[qcur]);}} /* v0.16.0: Shift+letter strikes */}if(qmode!=='room'){if(e.key==='ArrowLeft')qPrev();if(e.key==='ArrowRight')qNext();} /* v0.17.0: a room moves together */if(qmode==='practice'&&e.key==='Enter'&&!qsub[qcur]&&qans[qcur]!=null)submitAnswer();}
 });
 
 init();
