@@ -1,5 +1,13 @@
 <!--
-  Study Suite  ·  v0.18.0 (beta)
+  Study Suite  ·  v0.18.1 (beta)
+  Changelog v0.18.1 (2026-11-19, local build, not released): THE FOOTER VERSION OPENS EVERY UPDATE IN THE APP ONLY (owner:
+  "try turning that off and only doing in app version list"; in his Safari it opened GitHub). #footVer has no GitHub
+  address any more (an <a role=button tabindex=0> with no href: no default navigation, middle-click or long-press link
+  menu), and the window.open fallback is gone. The click (or Enter / Space) loads the list with appNotesLoadHard(): the
+  usual request, then once more as app-notes.json?v=<APP_VERSION>&t=<now> with no cache option (appNotesLoad gained an
+  optional url argument; its other callers are unchanged). If both fail, the same sheet says so in one plain paragraph,
+  closing it does not mark the notes seen (anFail), and a line goes to FB_ERRS for the Feedback form. Build record: Drive
+  Claude/StudySuite/app-v0181-version-link-2026-11-19/README.md.
   Changelog v0.18.0 (2026-11-18, local build, not released): STUDY ROOMS ON FOR EVERYONE (owner, after testing on real
   devices: "works. push out of #beta onto main"). ROOMS_ON is now true, so Home's Study rooms panel, Start a study
   room, joining by code, Past study rooms and the saved-sessions store no longer need the per-device #beta switch.
@@ -1236,6 +1244,7 @@ section{display:none}section.on{display:block}
 .footlinks a{color:var(--accent);text-decoration:none}.footlinks a:hover{text-decoration:underline}
 #footVer{color:inherit;border-bottom:1px dotted var(--ink-soft);transition:color .12s,border-color .12s}
 #footVer:hover{color:var(--accent);border-bottom-color:var(--accent)}
+#footVer[role=button]{cursor:pointer} /* v0.18.1: no href any more (in-app list only), so the pointer is set here */
 .btn{font-family:var(--font-head);font-weight:600;font-size:19px;background:var(--ink);color:var(--paper);border:none;border-radius:5px;padding:13px 36px;cursor:pointer;box-shadow:var(--shadow);transition:transform .12s,background .2s}
 .btn:hover{background:var(--accent);transform:translateY(-1px)}.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
 .btn.sm{font-size:15px;padding:10px 20px}
@@ -2079,7 +2088,7 @@ var r=localStorage.getItem('suite_eac_v1'),a=JSON.parse(localStorage.getItem('su
       </div>
     </div>
     <div class="attrib">
-      <div class="foot-row foot-name">Study Suite <a id="footVer" href="https://github.com/Alkarim-Billawala/study-suite/releases" target="_blank" rel="noopener" title="See what's new in each update">v0.2.46</a> · <span class="betatag" id="footBeta">beta</span></div>
+      <div class="foot-row foot-name">Study Suite <a id="footVer" role="button" tabindex="0" title="See what's new in each update">v0.2.46</a> · <span class="betatag" id="footBeta">beta</span></div>
       <div class="foot-row">built by Alkarim Billawala · <a href="https://alkarim.billawala.ca" target="_blank" rel="noopener">alkarim.billawala.ca</a></div>
       <div class="foot-row" id="supportWrap" style="display:none"><a id="supportLink" href="#" target="_blank" rel="noopener">☕ Support development</a></div>
     </div>
@@ -2415,7 +2424,7 @@ var r=localStorage.getItem('suite_eac_v1'),a=JSON.parse(localStorage.getItem('su
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.18.0';
+const APP_VERSION='0.18.1';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3584,8 +3593,8 @@ function reloadApp(){try{location.href=location.pathname+'?r='+Date.now();}catch
 /* ===== v0.12.4: APP RELEASE NOTES — "What's new" after an update; every update from the footer version link.
    app-notes.json (deploy, from RELEASE_NOTES.md): {notes:[{v,t,d,b:[['li'|'p', markdown]]}]}. settings.notesSeen={nv} = the
    newest version whose notes this person has seen (syncs; merge3 keeps the higher). See the v0.12.4 changelog. */
-let anFresh=false,anDone=false,anBusy=false,anWait=0,anCache=null,anPeekV='',anPeekT=0,anFocus=null;const anBoot=Date.now();
-async function appNotesLoad(fresh){if(anCache&&!fresh)return anCache;const r=await fetch('app-notes.json',{cache:'no-store'});if(!r.ok)throw new Error('notes '+r.status);
+let anFresh=false,anDone=false,anBusy=false,anWait=0,anCache=null,anPeekV='',anPeekT=0,anFocus=null,anFail=false;const anBoot=Date.now();
+async function appNotesLoad(fresh,url){if(anCache&&!fresh)return anCache;const r=await (url?fetch(url):fetch('app-notes.json',{cache:'no-store'}));if(!r.ok)throw new Error('notes '+r.status);
   const j=await r.json();const n=(j&&Array.isArray(j.notes))?j.notes.filter(e=>e&&e.v&&e.t):[];n.sort((a,b)=>verCmp(b.v,a.v));anCache=n;return n;}
 const anSeen=()=>(settings.notesSeen&&settings.notesSeen.nv)||'';
 function anMark(v){if(verCmp(v,anSeen())>0){settings.notesSeen={nv:String(v)};persist();}}
@@ -3595,19 +3604,31 @@ function anBlocks(b){let h='',ul=false;(b||[]).forEach(([k,t])=>{if(k==='li'){if
 function anItem(e,open){return '<div class="an-v'+(open?' open':'')+'"><button type="button" class="an-h" aria-expanded="'+open+'"><span class="an-ver">v'+acctEsc(e.v)+'</span><span class="an-t">'+acctEsc(e.t)+'</span><span class="an-chev" aria-hidden="true"></span></button>'
   +'<div class="an-b"'+(open?'':' hidden')+'>'+anBlocks(e.b)+(e.d?'<div class="an-d">'+acctEsc(e.d)+'</div>':'')+'</div></div>';}
 /* list = newest first; the first is written out, the next 10 are headlines, the rest behind "and N earlier updates". */
-function openAppNotes(list,o){o=o||{};if(!list.length)return;const first=list[0],rest=list.slice(1),cap=10,more=rest.slice(cap);
+function openAppNotes(list,o){o=o||{};if(!list.length)return;anFail=false;const first=list[0],rest=list.slice(1),cap=10,more=rest.slice(cap);
   $('anTitle').textContent=o.all?'Every update':list.length===1?'Study Suite v'+first.v:o.from?'Since v'+o.from+' · '+list.length+' updates':'Recent updates';
   $('anBody').innerHTML=anItem(first,true)+rest.slice(0,cap).map(e=>anItem(e,false)).join('')
     +(more.length?'<button type="button" class="an-more">and '+more.length+' earlier update'+(more.length===1?'':'s')+'</button><div class="an-rest" hidden>'+more.map(e=>anItem(e,false)).join('')+'</div>':'');
   anFocus=document.activeElement;const ov=$('anOv');ov.style.display='flex';$('anBody').scrollTop=0;try{ov.querySelector('.an-x').focus({preventScroll:true});}catch(e){}}
-function closeAppNotes(){const ov=$('anOv');if(ov.style.display!=='flex')return;ov.style.display='none';anMark(APP_VERSION);try{if(anFocus&&anFocus.focus)anFocus.focus({preventScroll:true});}catch(e){}}
+function closeAppNotes(){const ov=$('anOv');if(ov.style.display!=='flex')return;ov.style.display='none';if(anFail)anFail=false;else anMark(APP_VERSION);try{if(anFocus&&anFocus.focus)anFocus.focus({preventScroll:true});}catch(e){}}
 $('anOv').addEventListener('click',e=>{const ov=$('anOv');if(e.target===ov||e.target.closest('.an-x,.an-ok')){closeAppNotes();return;}
   const h=e.target.closest('.an-h');if(h){const v=h.parentNode,op=!v.classList.contains('open');v.classList.toggle('open',op);h.setAttribute('aria-expanded',op);v.querySelector('.an-b').hidden=!op;return;}
   const m=e.target.closest('.an-more');if(m){const r=ov.querySelector('.an-rest');if(r)r.hidden=false;m.remove();}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('anOv').style.display==='flex')closeAppNotes();});
 document.addEventListener('pointerdown',e=>{const t=$('updTip');if(t&&t.classList.contains('on')&&!t.contains(e.target))t.classList.remove('on');},true); /* v0.13.4: a tap anywhere else closes the tip; the What's new sheet closes on its backdrop's click (cursor:pointer so iPhone Safari sends it) */
-$('footVer').addEventListener('click',async e=>{e.preventDefault();const href=$('footVer').href;
-  try{const n=(await appNotesLoad()).filter(x=>verCmp(x.v,APP_VERSION)<=0);if(!n.length)throw 0;openAppNotes(n,{all:true});}catch(err){window.open(href,'_blank','noopener');}});
+/* v0.18.1: the footer version opens every update in the app only, never GitHub. Two tries: the usual request, then once
+   more with a different shape (a cache-busting query, no cache option). If both fail, the same sheet says so plainly
+   (closing it marks nothing seen) and what went wrong goes to FB_ERRS for the Feedback form's diagnostics. */
+let anFootBusy=false;
+async function appNotesLoadHard(){const why=[],mine=n=>n.filter(x=>verCmp(x.v,APP_VERSION)<=0);
+  for(let i=0;i<2;i++){try{const n=mine(i?await appNotesLoad(true,'app-notes.json?v='+encodeURIComponent(APP_VERSION)+'&t='+Date.now()):await appNotesLoad());
+      if(n.length)return n;why.push('no entries');}catch(e){why.push(String((e&&e.message)||e||'error').slice(0,90));}}
+  try{FB_ERRS.push(new Date().toISOString().slice(0,19)+' '+('notes: '+why.join(' | ')).slice(0,200));if(FB_ERRS.length>10)FB_ERRS.shift();}catch(x){}
+  return null;}
+function appNotesFail(){$('anTitle').textContent='Every update';$('anBody').innerHTML='<div class="an-b"><p>I couldn’t load the list of updates on this device. Check your connection and try again. If a content blocker is on for studysuite.app, turning it off for this site should fix it.</p></div>';anFail=true;
+  anFocus=document.activeElement;const ov=$('anOv');ov.style.display='flex';$('anBody').scrollTop=0;try{ov.querySelector('.an-x').focus({preventScroll:true});}catch(e){}}
+async function footVerOpen(){if(anFootBusy)return;anFootBusy=true;try{const n=await appNotesLoadHard();if(n)openAppNotes(n,{all:true});else appNotesFail();}finally{anFootBusy=false;}}
+$('footVer').addEventListener('click',e=>{e.preventDefault();footVerOpen();});
+$('footVer').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '||e.key==='Spacebar'){e.preventDefault();footVerOpen();}});
 /* The newest older version this person ran, from the sync logs: this device's, then the account's other devices'. */
 async function anPrevFromLogs(){const vs=[],ok=v=>/^\d+(\.\d+)*$/.test(v||'')&&verCmp(v,APP_VERSION)<0;
   try{SSSync.myLog().forEach(x=>{if(x&&ok(x.app))vs.push(x.app);});}catch(e){}
