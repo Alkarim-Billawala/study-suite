@@ -1,5 +1,11 @@
 <!--
-  Study Suite  ·  v0.17.0 (beta)
+  Study Suite  ·  v0.17.1 (beta)
+  Changelog v0.17.1 (2026-11-18, local build, not released): STUDY ROOMS fixes. (1) The explanation flickered every
+  1.5 s after a reveal: the server lists picks in no fixed order, so the redraw check saw a change on every read. Every
+  room "did it change" check is now order-insensitive and made of what is drawn (roomSig, roomCanon), and the chips,
+  counter, scores and Reconnecting line are written only when they change. (2) Invite panel, QR code and #room= link
+  parked behind ROOM_INVITE_ON=false (owner: join by the 6-digit code for now). Build record: Drive
+  Claude/StudySuite/app-v0171-rooms-noflicker-2026-11-18/README.md.
   Changelog v0.17.0 (2026-11-18, local build, not released): STUDY ROOMS, in testing behind the per-device #beta switch
   (ROOMS_ON). Plan: UofT Med/Study Suite App/Study_Rooms_Plan-v0.1-2026-11-18.md; build record: Drive
   Claude/StudySuite/app-v0170-study-rooms-2026-11-18/README.md. Details in the STUDY ROOMS block of the script.
@@ -2403,7 +2409,7 @@ var r=localStorage.getItem('suite_eac_v1'),a=JSON.parse(localStorage.getItem('su
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.17.0';
+const APP_VERSION='0.17.1';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -2494,6 +2500,7 @@ function detectStorage(){if(typeof window.storage!=='undefined'){STORAGE_MODE='p
    ROOMS_ON below: every Study rooms entry point checks it). Accounts are on for everyone. */
 const SUITE_BETA=(()=>{try{const h=location.hash;if(/^#beta$/i.test(h))localStorage.setItem('suite_beta_v1','1');else if(/^#nobeta$/i.test(h))localStorage.removeItem('suite_beta_v1');
   if(/^#(no)?beta$/i.test(h))history.replaceState(history.state,'',location.pathname+location.search);return !!localStorage.getItem('suite_beta_v1');}catch(e){return false;}})();window.SUITE_BETA=SUITE_BETA;
+const ROOM_INVITE_ON=false; /* v0.17.1: parks the room Invite panel, its QR code and the #room= link (owner, 2026-11-18: join by the 6-digit code for now); true brings all three back */
 const ROOMS_ON=SUITE_BETA; /* v0.17.0: Study rooms — the ONE gate; set true to launch for everyone */
 const ACCT_ON=true;
 window.addEventListener('hashchange',()=>{if(/^#(verify|reset|email)=/i.test(location.hash)||/^#(no)?beta$/i.test(location.hash))location.reload();}); /* a mail link opened into an open tab; v0.10.4: #beta / #nobeta typed into an open tab */
@@ -6932,6 +6939,13 @@ function roomLocked(i){const R=ROOM;if(!R)return false;if(R.na&&R.na.has(i))retu
    only selected — sp, already limited to a pick this device sent; sub = whether it was submitted. No pick → null → nothing
    recorded. The alternative ("only a submitted pick counts") is this one line: return sub?sp:null; */
 function roomMyAnswerAtReveal(qi,sp,sub){return sp;}
+/* v0.17.1: the server's store is enumerated in no fixed order, so the same state can arrive with its keys in another
+   order. Every "did it change" decision in room code is made from what is drawn, order-insensitive. roomCanon = JSON with
+   object keys sorted (arrays keep their order). roomSig = what the question view draws from the room state: picks and
+   names are drawn only after the reveal ("Picked by ...", "No answer: ..."), so before it they are left out. */
+function roomCanon(v){return JSON.stringify(v,(k,x)=>(x&&typeof x==='object'&&!Array.isArray(x))?Object.keys(x).sort().reduce((o,j)=>{o[j]=x[j];return o;},{}):x);}
+function roomSig(s,st){const rev=!!s.rev,pk=s.picks||{};
+  return JSON.stringify([qcur,rev,qans[qcur],roomLocked(qcur),rev?Object.keys(pk).sort().map(k=>k+':'+pk[k]):0,rev?(st.members||[]).map(m=>m.mid+':'+m.name).sort():0]);}
 function roomApply(st){const R=ROOM;if(!R||R.over||!st)return;R.st=st;R.me=st.me||{};
   if(R.me.dev&&R.me.dev!==DEVICE_ID){roomEnd('This room is now open on another of your devices, so I’ve closed it here. What you answered here is saved.');return;}
   const L=roomMine(R.lid),mid=R.me.mid;let rec=0;
@@ -6946,13 +6960,14 @@ function roomApply(st){const R=ROOM;if(!R||R.over||!st)return;R.st=st;R.me=st.me
   roomChips();
   if(cur>=n){roomScores();return;}
   if(cur!==qcur){qcur=cur;R.sig='';window.scrollTo({top:0});}
-  const s=roomQ(st,qcur)||{},sig=[qcur,!!s.rev,qans[qcur],roomLocked(qcur),JSON.stringify(s.picks||{}),(st.members||[]).map(m=>m.mid+':'+m.name).join(',')].join('|');
+  const s=roomQ(st,qcur)||{},sig=roomSig(s,st); /* v0.17.1: order-insensitive */
   if(sig!==R.sig){R.sig=sig;renderQuiz();}}
 function roomChips(){const R=ROOM;if(!R||!R.st)return;const st=R.st,s=roomQ(st,R.fin?-1:qcur)||{},wait=!R.fin&&!s.rev,ans=new Set(wait?(s.answered||[]):[]),mids=roomMids(st); /* ticks + counter: submitted, before the reveal only (after it `answered` holds every pick) */
-  $('roomChips').innerHTML=(st.members||[]).map(m=>{const me=m.mid===R.me.mid,a=!R.fin&&ans.has(m.mid);
+  const ch=(st.members||[]).map(m=>{const me=m.mid===R.me.mid,a=!R.fin&&ans.has(m.mid);
     return `<span class="rchip${a?' done':''}${m.away?' away':''}${me?' me':''}" data-mid="${acctEsc(m.mid)}" title="${a?'Submitted':'Not submitted yet'}${m.away?' · away':''}">${a?'<span class="tk">✓</span>':''}<span class="rn">${acctEsc(m.name)}${me?' (you)':''}</span></span>`;}).join('');
+  if(R.chipsH!==ch){R.chipsH=ch;$('roomChips').innerHTML=ch;} /* v0.17.1: only when the chips differ */
   /* counter: members whose pick the server has for this question, of the members in the room now (away still count) */
-  $('roomCount').textContent=wait?`${[...ans].filter(x=>mids.has(x)).length} of ${mids.size} submitted`:'';}
+  {const t=wait?`${[...ans].filter(x=>mids.has(x)).length} of ${mids.size} submitted`:'';if($('roomCount').textContent!==t)$('roomCount').textContent=t;}}
 function roomUnsubmitted(){const R=ROOM;if(!R)return 0;const st=R.st||{},s=roomQ(st,qcur)||{},mids=roomMids(st),d=new Set((s.answered||[]).filter(x=>mids.has(x)));
   if(R.pend[qcur]&&R.pend[qcur].sub&&R.me.mid)d.add(R.me.mid);if(R.na&&R.na.has(qcur)&&R.me.mid)d.add(R.me.mid); /* stage 3: I sit it out */return Math.max(0,mids.size-d.size);}
 function roomRevealAsk(){const R=ROOM;if(!R||R.over||qsub[qcur])return;const go=()=>{if(ROOM===R)roomAct('/reveal',{qi:qcur},$('roomRevealBtn'));},k=roomUnsubmitted();
@@ -6981,20 +6996,20 @@ function roomFlush(){const R=ROOM;if(!R||R.over)return Promise.resolve();if(R.fl
   return run;}
 async function roomRead(){const R=ROOM;if(!R||R.over||R.fin)return;if(R.busy){R.again=true;return;}R.busy=true;clearTimeout(R.timer);R.timer=null;
   try{await roomFlush();if(ROOM!==R||R.over)return;const st=await SSAccount.roomApi('/'+R.code+'/state?d='+encodeURIComponent(DEVICE_ID),{timeout:8000});
-    if(ROOM!==R||R.over)return;$('roomNet').hidden=true;roomApply(st);}
+    if(ROOM!==R||R.over)return;if(!$('roomNet').hidden)$('roomNet').hidden=true;roomApply(st);}
   catch(e){if(ROOM===R&&!R.over)roomFail(e);}
   finally{R.busy=false;if(ROOM===R&&!R.over){if(R.again){R.again=false;roomRead();}else roomSched();}}}
 function roomFail(e){const s=e&&e.status;
   if(s===404){roomSessSave(null,true);roomEnd('This study room has closed. Everything you answered in it is saved.');return;}
   if(s===401){roomEnd('Your sign-in has expired. Sign in again, then join with the code.');return;}
-  $('roomNet').hidden=false;}
+  if($('roomNet').hidden)$('roomNet').hidden=false;}
 function roomSched(){const R=ROOM;if(!R||R.over||R.fin)return;clearTimeout(R.timer);R.timer=null;if(document.visibilityState!=='visible')return;R.timer=setTimeout(roomRead,ROOM_POLL);}
 function roomWake(){const R=ROOM;if(!R||R.over||(R.wl&&!R.wl.released))return;
   try{if(navigator.wakeLock&&document.visibilityState==='visible')navigator.wakeLock.request('screen').then(l=>{if(ROOM===R&&!R.over)R.wl=l;else l.release();}).catch(()=>{});}catch(e){}}
 document.addEventListener('visibilitychange',()=>{const R=ROOM;if(!R||R.over)return;
   if(document.visibilityState==='visible'){roomWake();roomRead();}else{clearTimeout(R.timer);R.timer=null;}});
 async function roomAct(path,body,btn){const R=ROOM;if(!R||R.over)return;if(btn)btn.disabled=true;
-  try{await roomFlush();await SSAccount.roomApi('/'+R.code+path,{method:'POST',body});}catch(e){if(e&&(e.status===404||e.status===401)){roomFail(e);return;}$('roomNet').hidden=false;}
+  try{await roomFlush();await SSAccount.roomApi('/'+R.code+path,{method:'POST',body});}catch(e){if(e&&(e.status===404||e.status===401)){roomFail(e);return;}if($('roomNet').hidden)$('roomNet').hidden=false;}
   finally{if(btn)btn.disabled=false;}
   roomRead();}
 function roomScores(){const R=ROOM;if(!R||R.over)return;const st=R.st||{},n=qorder.length,mem=st.members||[];let rv=0;const sc={},an={};mem.forEach(m=>{sc[m.mid]=0;an[m.mid]=0;});
@@ -7002,8 +7017,10 @@ function roomScores(){const R=ROOM;if(!R||R.over)return;const st=R.st||{},n=qord
     mem.forEach(m=>{if(pk[m.mid]!=null){an[m.mid]++;if(+pk[m.mid]===c)sc[m.mid]++;}});}
   R.fin=true;clearTimeout(R.timer);R.timer=null;roomChips();
   const rows=mem.slice().sort((a,b)=>(sc[b.mid]-sc[a.mid])||(an[b.mid]-an[a.mid])).map(m=>`<div class="rsrow" data-mid="${acctEsc(m.mid)}" data-right="${sc[m.mid]}" data-answered="${an[m.mid]}"><span>${acctEsc(m.name)}${m.mid===R.me.mid?' (you)':''}</span><b>${sc[m.mid]} right of ${an[m.mid]} answered · ${rv-an[m.mid]} not answered</b></div>`).join('');
+  const sch=`<div class="roomscores"><h3>Room scores</h3><p class="acct-sub">${rv} question${rv===1?' was':'s were'} revealed. Your own answers are in your question history.${roomNANote()}</p>${rows}</div>`;
+  if(R.scH===sch&&$('qcard').querySelector('.roomscores'))return; /* v0.17.1: unchanged, nothing to redraw */R.scH=sch;
   $('qtag').style.visibility='hidden';$('qdiff').innerHTML='';$('qpos').textContent='Done';$('pbar').style.width='100%';
-  $('qcard').innerHTML=`<div class="roomscores"><h3>Room scores</h3><p class="acct-sub">${rv} question${rv===1?' was':'s were'} revealed. Your own answers are in your question history.${roomNANote()}</p>${rows}</div>`;
+  $('qcard').innerHTML=sch;
   $('qafter').innerHTML='';['roomSubmitBtn','roomRevealBtn','roomNextBtn'].forEach(id=>$(id).style.display='none');$('roomSubState').hidden=true;$('roomDoneBtn').style.display='';}
 function roomEnd(msg,home){const R=ROOM;if(!R)return;R.over=true;clearTimeout(R.timer);R.timer=null;ROOM=null;
   try{if(R.wl)R.wl.release();}catch(e){}
@@ -7059,7 +7076,7 @@ function roomSessSave(ci,fin){const R=ROOM;if(!R||!ROOMS_ON||!R.d)return;
   const last=roomQ(st,n-1),cur=ci!=null?ci:((old&&old.cur)||0);
   const rec={id,at:(old&&old.at)||Date.now(),kind:'room',name:roomNameClean(R.d.title),n,qorder:qorder.slice(),qopt:qopt.map(a=>(a||[]).slice()),ans,
     done:!!((old&&old.done)||fin||(last&&last.rev)),cur,correct,room:{code:R.code,members,rev}};
-  const k=x=>JSON.stringify(Object.assign({},x,{up:0}));if(old&&k(old)===k(Object.assign({},rec,{up:old.up})))return;
+  const k=x=>roomCanon(Object.assign({},x,{up:0})); /* v0.17.1: key order doesn't count as a change */if(old&&k(old)===k(Object.assign({},rec,{up:old.up})))return;
   sessPut(rec);}
 /* "Past study rooms" — the store filtered to rooms; same look as Past exams; no resume, no delete in v0.17.0. */
 function sessPastHome(){const a=$('roomPastLink');if(!a)return;const k=sessList('room').length;a.textContent=k?`Past study rooms (${k})`:'Past study rooms';}
@@ -7129,14 +7146,14 @@ function roomNANote(){const R=ROOM;if(!R||!R.na||!R.na.size)return '';const st=R
 let roomLinkCode=null; /* a link opened while signed out: its join prompt opens once sign-in completes */
 function roomLinkTidy(){try{history.replaceState(history.state,'',location.pathname+location.search);}catch(e){}}
 function roomLinkRoute(){const h=String(location.hash||'');if(!/^#room=/i.test(h))return;const m=h.match(/^#room=(\d{6})$/i);roomLinkTidy();
-  if(!m||!ROOMS_ON)return;const code=m[1];if(ROOM&&ROOM.code===code)return;
+  if(!m||!ROOMS_ON||!ROOM_INVITE_ON)return;const code=m[1];if(ROOM&&ROOM.code===code)return;
   if(!SSAccount.session()){roomLinkCode=code;toast('Sign in, and study room '+code+' will open.',5000);return;}
   roomLinkOpen(code);}
 function roomLinkOpen(code){if($('roomCodeIn'))$('roomCodeIn').value=code;roomJoinAsk(code);}
-function roomLinkAfterSignIn(){const c=roomLinkCode;roomLinkCode=null;if(c&&ROOMS_ON&&SSAccount.session())roomLinkOpen(c);}
+function roomLinkAfterSignIn(){const c=roomLinkCode;roomLinkCode=null;if(c&&ROOMS_ON&&ROOM_INVITE_ON&&SSAccount.session())roomLinkOpen(c);}
 window.addEventListener('hashchange',()=>{if(/^#room=/i.test(location.hash))roomLinkRoute();}); /* a room link opened into an open tab */
 function roomInviteLink(code){const b=/^https?:$/.test(location.protocol)?location.origin+location.pathname:'https://studysuite.app/';return b+'#room='+code;}
-function roomInviteOpen(){const R=ROOM;if(!R||!ROOMS_ON)return;let ov=$('roomInvOv');
+function roomInviteOpen(){const R=ROOM;if(!R||!ROOMS_ON||!ROOM_INVITE_ON)return;let ov=$('roomInvOv');
   if(!ov){ov=document.createElement('div');ov.className='modal-ov';ov.id='roomInvOv';ov.style.display='none';ov.style.zIndex='10060';
     ov.innerHTML='<div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="roomInvT"><button class="acct-x" id="roomInvX" type="button" aria-label="Close">×</button>'+
       '<h3 id="roomInvT">Invite people</h3><div class="rinv-name" id="roomInvName"></div>'+
@@ -7149,7 +7166,7 @@ function roomInviteOpen(){const R=ROOM;if(!R||!ROOMS_ON)return;let ov=$('roomInv
     $('roomInvCopy').onclick=()=>{const t=$('roomInvLink').textContent;Promise.resolve().then(()=>copyToClipboard(t)).then(()=>toast('Link copied.')).catch(()=>{toast('Could not copy — select and copy manually.');try{$('roomInvLink').focus();}catch(x){}sel();});};}
   const link=roomInviteLink(R.code);$('roomInvCode').textContent=R.code;$('roomInvName').textContent=roomNameClean(R.d&&R.d.title);$('roomInvLink').textContent=link;{const qs=roomQrSvg(link);$('roomInvQr').innerHTML=qs;$('roomInvQrLab').hidden=!qs;} /* v0.17.0 stage 2b */
   ov.style.display='flex';}
-$('roomInvBtn').addEventListener('click',roomInviteOpen);
+if(ROOM_INVITE_ON)$('roomInvBtn').addEventListener('click',roomInviteOpen);else $('roomInvBtn').style.display='none'; /* v0.17.1: parked */
 
 /* ===== v0.17.0 stage 2b: QR CODE (byte mode, level M, versions 1–4; no library) =====
    qrMatrix(text) → rows of booleans (true = dark) or null when the text needs more than version 4-M (62 bytes). */
