@@ -28,8 +28,8 @@ It's currently in **beta**.
   you haven't answered yet first, while keeping the weighting you chose.
 - **Study rooms** — work through practice questions together, each on your own device. Start a room from
   the practice setup and share its 6-digit code. Everyone answers for themselves, anyone can reveal, and
-  each person's answers go into their own history. Rooms can be named, and Past study rooms keeps who was
-  there and your score.
+  each person's answers go into their own history. Rooms can be named and can keep points, with a live
+  leaderboard (no timer), and Past study rooms keeps who was there, your score and the final standings.
 - **Topic Guides** — in-depth guides built into every pack, one per concept. Search their titles
   *and* their content, print them, and jump straight in from any answer's guide link. Every week
   ends with a one-page **cram sheet**. Most guides end with a quick **Check your understanding**: a few of that
@@ -204,13 +204,13 @@ Yes. Leave part-way and the exam is saved, with the timer paused. Tap **Exam** t
 <details>
 <summary><strong>What are study rooms?</strong></summary>
 
-A study room lets up to 8 people work through the same practice questions at the same time, each on their own device. One person starts a room from the practice setup and gives the others its 6-digit code to type on Home. Everyone picks and submits their own answer. Anyone can press Reveal, and the answer, the explanation and everyone's picks show for the whole room. Your own answers go into your question history as usual. If you hadn't picked anything when the answer was revealed, nothing is recorded for that question. The question map lets you look back at questions the room has finished without moving the room, and anyone can end the room early to see the scores.
+A study room lets up to 8 people work through the same practice questions at the same time, each on their own device. One person starts a room from the practice setup and gives the others its 6-digit code to type on Home. Everyone picks and submits their own answer. Anyone can press Reveal, and the answer, the explanation and everyone's picks show for the whole room. Your own answers go into your question history as usual. If you hadn't picked anything when the answer was revealed, nothing is recorded for that question. The question map lets you look back at questions the room has finished without moving the room, and anyone can end the room early to see the scores. Rooms can keep points: 100 for each right answer plus a bonus for right answers in a row, with a leaderboard after each reveal. Whoever starts the room can turn points off.
 </details>
 
 <details>
 <summary><strong>Who can see what in a study room?</strong></summary>
 
-The others in the room see the nickname you chose and, once an answer is revealed, what you picked. While a room is open, my server passes those between you; it doesn't keep them after the room closes. Your own record of the room is encrypted before it syncs, like the rest of your study data.
+The others in the room see the nickname you chose and, once an answer is revealed, what you picked. While a room is open, my server passes those between you; it doesn't keep them after the room closes. Your own record of the room, including the final standings if the room kept points, is encrypted before it syncs, like the rest of your study data.
 </details>
 
 <details>

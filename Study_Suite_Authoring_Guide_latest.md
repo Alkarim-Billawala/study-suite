@@ -1,6 +1,6 @@
-<!-- Study Suite — Content Authoring Guide · v2.32 · [Alkarim Billawala / alkarim.billawala.ca] -->
+<!-- Study Suite — Content Authoring Guide · v2.33 · [Alkarim Billawala / alkarim.billawala.ca] -->
 
-# Study Suite — Content Authoring Guide (v2.32)
+# Study Suite — Content Authoring Guide (v2.33)
 
 > **Read me first — this file is written for the *assistant*, not the end user.**
 > If you are an AI assistant (e.g. Claude) and this document has been given to you, it is your
@@ -8,8 +8,9 @@
 > not simply paraphrase it back to the user. The end user is generally *not* expected to read this
 > file (only an advanced user would). Everything below tells **you** what to produce and how.
 >
-> **Authoring system version:** 2.32 · **Pairs with:** Study Suite app v0.4.4+ (source switches need v0.6.6+, Extras v0.7.1+, image cards v0.8.1+, interactive figures v0.9.0+, atlas packs v0.10.0+, default and paired packs and named atlas links v0.12.3+, cycle widgets and sounds v0.13.0+ — links and read-more v0.10.9–v0.10.10), pack `formatVersion` 2.0
-> **What changed in guide v2.32:** §6g now lists every **conduction site id** a `cycle` widget's view may name in `site` — `san`, `atria`, `av`, `his`, `rbb`, `lbb`, `accessory`, `re-entry-av` and **`ventricles`** (added with Week 20's rhythms; `packbuilder` `ECG_SITES`). The app lights whatever id the widget's own conduction inset defines. No app change.
+> **Authoring system version:** 2.33 · **Pairs with:** Study Suite app v0.4.4+ (question types and components need v0.16.0+, source switches need v0.6.6+, Extras v0.7.1+, image cards v0.8.1+, interactive figures v0.9.0+, atlas packs v0.10.0+, default and paired packs and named atlas links v0.12.3+, cycle widgets and sounds v0.13.0+ — links and read-more v0.10.9–v0.10.10), pack `formatVersion` 2.0
+> **What changed in guide v2.33:** **question types and components.** A question may carry `task` — what kind of thinking it asks for: `dx` Diagnosis, `loc` Localization (also every anatomy and structure question), `mech` Mechanism, `inv` Investigation, `mgmt` Management, `prog` Prognosis and epidemiology, `rp` Research and practice. Exam set-up (app v0.16.0+) spreads an exam across them and shows the type once a question is answered. One type per question, chosen from what the question asks and its key, with a decision rule for the hard cases (new §2 *Question types*). Once a pack has a typed question, every question carries one (the §7a validator errors otherwise); no share per type is required. A pack may also map its sources to the exam components (`components`: MAPS / anatomy, ICE, HSR, CBL) where its codes don't say so by prefix. §6d gains a recommendation for image questions: roughly 5–10% where the course material carries images, no target where it doesn't.
+> **What changed in guide v2.32 (previous):** §6g now lists every **conduction site id** a `cycle` widget's view may name in `site` — `san`, `atria`, `av`, `his`, `rbb`, `lbb`, `accessory`, `re-entry-av` and **`ventricles`** (added with Week 20's rhythms; `packbuilder` `ECG_SITES`). The app lights whatever id the widget's own conduction inset defines. No app change.
 > **What changed in guide v2.31 (previous):** **cycle widgets and heart sounds** (app v0.13.0+). New **§6g**: the `cycle` widget
 > type — a moving figure over one beat (`kind:"cycle"`: pressures, volume, ECG and heart sounds — the Wiggers figure) or
 > an ECG the app composes from beat templates and a rhythm rule (`kind:"ecg"`: the twelve-lead, a strip or three strips).
@@ -316,6 +317,7 @@ A pack is a single JSON object:
 | `guides` | yes if any item links a guide | Embedded topic guides — see §6. |
 | `groupBy` | yes (new packs and updates) | `"topic"` — declares that items' `topic` values are **real topics** (v2.19; see the `topic` field below). Omit it only for a pack whose topics can't be grouped; the app then groups by each item's linked guide. |
 | `drugs` | optional | Pharmacology records that feed the app's cross-week **Pharmacology** view. Additive/optional — omit it and nothing changes. See **§6b**. |
+| `components` | optional (v2.33; app v0.16.0+) | `{code: component}` — which of the pack's `sources` are an exam **component**: `"maps"` (MAPS / anatomy), `"ice"`, `"hsr"`, `"cbl"`, or `"core"` (week content). Exam set-up lets the learner set a number of questions from MAPS / anatomy, ICE and HSR; CBL is recognised but counts as week content. Without it, a code's prefix decides (case-insensitive): `MAPS…`, `ANAT…`, `LAB…` → maps; `ICE…` → ice; `HSR…` → hsr; `CBL…` → cbl; anything else is week content. List only the codes the prefix gets wrong or misses — e.g. `"SLM08": "hsr"` for an HSR module coded as an SLM, or `"LAB2": "core"` for a lab that isn't anatomy. Keys must be codes in `sources`; never `EXTRA`. A question belongs to a component when any of its `src` codes maps to it. |
 | `sources` | optional (v2.22; recommended for new packs and updates) | `{code: label}` — one entry per source the pack was built from, e.g. `"L1-L2": "L1–L2 · Schizophrenia (Wong)"`, `"CBL42": "CBL 42 · Psychosis cases"`. The app lists them as on/off switches under the pack in the library. Codes are short, stable and unique within the pack; labels are what the learner reads. See **Content sources** below. |
 | `school` / `year` / `term` / `course` / `weeks` | optional | Curriculum placement, e.g. `"UofT — Temerty Medicine"` / `"Year 1"` / `"Fall"` (term — optional) / `"CPC 2"` / `"Weeks 25–28"`. Used to **group and chronologically sort** packs in the hosted site's Default study packs panel and the user's Content library; ignored otherwise. `term` sits **between `year` and `course`** and is omitted by most packs (harmless when absent — the level simply doesn't render). Ask the user how their program is organized — see *Organizational hierarchy & sorting* below — and include the fields that apply. |
 
@@ -432,6 +434,7 @@ A pack built before source tables existed (no real codes) may still use Extras (
   "options": ["Adenosine", "A beta-blocker", "Amiodarone bolus", "Digoxin first-line"],
   "correct": 1,
   "difficulty": "medium",
+  "task": "mgmt",
   "explain": "Irregularly irregular + absent P waves = <b>atrial fibrillation</b>. Without pre-excitation, rate control with a <b>beta-blocker</b> (or non-DHP CCB) is first-line.",
   "guide": { "f": "Topic_C1_Arrhythmias.html", "t": "C1 · Arrhythmias", "s": "Atrial fibrillation — rate control" }
 }
@@ -439,7 +442,7 @@ A pack built before source tables existed (no real codes) may still use Extras (
 
 Rules: `options` has **2+** entries; `correct` is a **0-based integer index**; `stem` is required;
 `difficulty` is one of `"easy" | "medium" | "hard"` (see §5). **Put `difficulty` on questions only —
-never on cards.**
+never on cards.** `task` (v2.33) is the question's type — see *Question types* below; cards never carry it.
 
 > **Option order does not matter — the app SHUFFLES options at render time** (app v0.2.62+), for both
 > Practice/Exam questions and `mcq`/`multi` cards. So you may put the `correct` option at **any** index
@@ -451,6 +454,54 @@ never on cards.**
 > "both of the above", "the first option", "Options 1 and 3" — because they point at *specific* other
 > options, which move when the rest shuffle. Those can't be safely shuffled or anchored. Write such an
 > option as a self-contained answer instead. (The §7a validator flags the position-referencing kind.)
+
+### Question types (`task`) — v2.33
+
+A question can say **what kind of thinking it asks for**. Exam set-up (app v0.16.0+) shows one on/off chip per type with
+its count, so a learner can spread an exam across them or leave a type out, and Practice shows the type once a question
+is answered. It is optional and additive: a pack with no types works exactly as before. **Once any question in a pack
+carries a `task`, every question does** — type each new question as you write it (the §7a validator errors on an untyped
+question in a typed pack, and on an unknown code). Cards never carry a type.
+
+| `task` | type | the question asks the learner to… | typical lead-ins |
+|---|---|---|---|
+| `dx` | Diagnosis | name what this is | "most likely diagnosis", "which condition", "what does this ECG / image / smear show" when the key is a condition or finding |
+| `loc` | Localization | say where — the lesion, or which structure | "where is the lesion", "which nerve / artery / tract / structure", "which layer", "what is labelled" — every anatomy and structure question |
+| `mech` | Mechanism | explain why or how | pathophysiology, cause of a sign or symptom, physiology, a drug's mechanism, adverse effects and interactions, genetics and inheritance |
+| `inv` | Investigation | choose a test, or say what a test shows | "best initial / most sensitive / confirmatory test", "which investigation", "what would the CSF / blood gas show", which examination manoeuvre tests what |
+| `mgmt` | Management | decide what to do | "next step", "best treatment", "most appropriate management", drug choice and dose adjustment, counselling, referral, disposition, prevention for this patient |
+| `prog` | Prognosis and epidemiology | say what will happen, how common, or who gets it | risk factors, complications to expect, natural history, prognosis, incidence and prevalence, "most common cause of … in …" |
+| `rp` | Research and practice | appraise, calculate or act on practice standards | study design and bias, biostatistics, screening-test arithmetic, ethics, consent and capacity, law, communication and interview technique, professionalism, health systems and equity |
+
+**How to choose — one type per question, from what it asks, not from its topic.** A question on stroke can be any of
+the seven. Read the lead-in and the keyed answer: the type is what the learner must produce to reach the key.
+
+1. **Classify by the key.** "Where is the lesion?" keyed "lateral medulla" is `loc`; the same vignette keyed "lateral
+   medullary syndrome" is `dx`. In a two-step question (identify the condition, then answer about it), the last step —
+   the one the key answers — sets the type. A lead-in that asks for two things ("the diagnosis and its treatment") takes
+   the type of the part the options differ on; when they differ on both, the first part.
+2. **"What is the next step?" in a patient's care is Management**, even when the key turns out to be a test: the skill
+   is deciding what to do now. A lead-in that itself asks for a test — "which test", "the next test", "the best next
+   investigation", "the next diagnostic step" — is Investigation, as are questions about what a test shows or how good it
+   is, and about examination technique (how to hold the ophthalmoscope, which manoeuvre isolates a muscle, the next step
+   while performing an examination).
+3. **"Which structure / which nerve / where" is Localization**, including every anatomy, histology-of-structure and
+   labelled-image question. A question about what a structure *does* is Mechanism.
+4. **Reading a result:** keyed as the condition or finding it shows → `dx`; keyed as the expected result of a test →
+   `inv`.
+5. **Drugs:** how it works, its adverse effects and interactions → `mech`; choosing, starting, stopping or adjusting a drug
+   for this patient → `mgmt`.
+6. **"Most likely cause of this patient's…"** is `dx`; **"most common cause of … in a population"** and risk factors are
+   `prog`. Screening: who and when → `mgmt` for one patient, `rp` for a programme; the arithmetic of a screening test →
+   `rp`.
+7. **Talking to patients:** the best next question in an interview, how to respond (to a lapse, to distress, to a
+   request), the steps of a counselling framework such as the 5As, breaking bad news, consent, capacity and confidentiality
+   → `rp`; the content of the advice itself (what to recommend) → `mgmt`.
+8. **Still torn?** Pick the type a classmate would expect to see that question under in an exam blueprint, and keep the
+   choice the same for similar questions across the pack.
+
+The list is meant to grow (new codes would be added here, to the validator and to the app together). No share per type
+is required: write the questions the material supports and let the types fall where they fall.
 
 ### Card schema (spaced repetition) — six types, plus `label` (v2.27)
 
@@ -936,6 +987,11 @@ finding look like", "which structure is arrowed", a curve or an ECG strip. Rules
   explain when it shows the answer.
 - Options stay text.
 
+**How many (v2.33).** Aim for roughly **5–10% of a pack's questions to be image-anchored** where the course material
+supplies images that carry a finding — scans, ECGs, fundus and slit-lamp photos, smears and histology, clinical signs,
+labelled anatomy. Where a week is light on images, don't force it: there is no target and no check, and a picture added
+only to reach a share teaches nothing. Image questions are often Diagnosis or Localization (§2 *Question types*).
+
 **2. The `label` card (label this structure).** A figure with its own printed labels covered by numbered masks. The
 learner names each masked label, taps a mask to check that one, then **Show answer** uncovers all of them and lists the
 labels in order; the card is self-graded like `qa` (Again / Hard / Good / Easy).
@@ -1363,6 +1419,10 @@ pack at all, in the core or in Extras (§3b).
 handler or outside resource in any guide; guide length is judged on the text without figures; drawn diagrams checked at
 phone width.
 
+**Question types (v2.33):** if any question carries `task`, every question does, and each is one of `dx`, `loc`, `mech`,
+`inv`, `mgmt`, `prog`, `rp`; chosen from what the question asks and its key (§2). `components`, if present, maps codes in
+`sources` to `maps`, `ice`, `hsr`, `cbl` or `core`. Shares per type are not checked.
+
 **Content sources (v2.22):** if the pack has `sources`, every question, card, guide and drug carries `src` with
 codes from that table; `data-src` headings use only codes from their guide's `src`; the cram sheet and any
 integrated review carry every code. Run the §7a source lints and clear them.
@@ -1620,6 +1680,27 @@ def validate_pack(pack):
     ib = sum(len(m) for x in qs + cs for fld in IMG_FIELDS + ("image",) if isinstance(x.get(fld), str)
              for m in re.findall(r"data:image/[a-z+]+;base64,[A-Za-z0-9+/=]+", x[fld]))
     if ib > 1_000_000: warns.append(f"card images total {ib // 1024} KB (> ~1 MB) — shrink or drop some (§6d)")
+
+    # §2 (v2.33): question types. Optional; once any question carries a `task`, every question needs one.
+    TASKS = ("dx", "loc", "mech", "inv", "mgmt", "prog", "rp")
+    typed = [q for q in qs if "task" in q]
+    for q in typed:
+        if q.get("task") not in TASKS:
+            errs.append(f"{q.get('id', '?')} task {q.get('task')!r} is not a question type ({', '.join(TASKS)})")
+    missing = [q.get("id", "?") for q in qs if "task" not in q] if typed else []
+    if missing:
+        errs.append(f"{len(missing)} question(s) have no task in a typed pack (every question needs one): "
+                    + ", ".join(missing[:12]) + (" …" if len(missing) > 12 else ""))
+    comps = pack.get("components")
+    if comps is not None:
+        if not isinstance(comps, dict) or not comps:
+            errs.append("components must be a non-empty object {source code: component}")
+        else:
+            for code, v in comps.items():
+                if v not in ("maps", "ice", "hsr", "cbl", "core"):
+                    errs.append(f"components[{code!r}] = {v!r}: use one of maps, ice, hsr, cbl, core")
+                if code == "EXTRA" or (srcs and code not in srcs):
+                    errs.append(f"components names {code!r}, which is not one of the pack's sources")
 
     diffs = Counter(q.get("difficulty") for q in qs)
     print(f"questions={len(qs)} cards={len(cs)} guides={len(gs)} "

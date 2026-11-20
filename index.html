@@ -1,5 +1,26 @@
 <!--
-  Study Suite  ·  v0.18.2 (beta)
+  Study Suite  ·  v0.19.0 (beta)
+  Changelog v0.19.0 (2026-11-20): STUDY ROOMS: POINTS, STREAKS AND A LIVE LEADERBOARD (owner: "no speed at all. points,
+  streaks and live leaderboards only"; "make sure this is shown somehow, so ppl know how it adds up. also make raw correct #/
+  streak counts visible under a toggle"). Worked out on every device from the same server state (revealed picks in question
+  order), so no server change: 100 per right answer + 20 for each right answer in a row after the first, capped at +100
+  (roomPoints/roomBonus). Wrong or no pick at the reveal ends the streak; unrevealed questions don't count; ROOM.na questions
+  are left out on this device only. Rows = members in the room now (roomBoard: points, then right answers, then name, then
+  mid; equal points share a rank). After each reveal #roomPts sits under the verdict line in #qafter: my points for the
+  question on screen and how they were made, 'How points work' (roomPtsHow), the leaderboard after the latest reveal with
+  each person's gain, Show counts (right of answered, streak, best) and Hide (both remembered on this device in
+  suite_room_v1, never synced). Final standings replace 'Room scores' (rows keep .rsrow + data-right/-answered and the old
+  'N right of M answered · K not answered' text under Show counts). Starting a room: 'Points and a leaderboard' (on by
+  default) → desc.pts 1/0; absent (an older starter) = on; desc.v stays 1, so v0.18.x devices join and simply show no points.
+  The saved room record keeps room.pts + room.board [{n,p,r,a,b,me?}]; Past study rooms shows a Standings line. PHARMACOLOGY
+  INDEX: recordPackNews skips rx_master and renderPackNews drops any stored one (no what's-new card or row note); its library
+  row shows a waiting update and its Update button only if the background update has failed (refFail). The header badge
+  already left Reference packs out (v0.13.1). HIGHLIGHTS: hlEntries reads each guide highlight through HL_MOVES [[old pack,
+  old file, new pack, new file]] if filled, else by the file name without its 'Wnn_nn_' prefix (same pack first, else one
+  unique match in another switched-on pack), so highlights follow a renumbered or moved guide (read-time only). Build record: Drive Claude/StudySuite/app-v0190-room-points-2026-11-20/README.md.
+  ORDER AND MATCH CARDS, REVEALED (Task 4): an order card's list shows MY order ('Your order', ✓/✗ per row, 'Not placed'),
+  and its Answer box opens with 'The correct order' (numbered) before c.explain; a match card's Answer box lists 'The
+  correct matches' before c.explain. One renderer (renderCardBody/renderAnswer); the read-only view is unchanged.
   Changelog v0.18.2 (2026-11-19, local build, not released): A STUDY ROOM'S QUESTION SCREEN IS THE PRACTICE QUESTION
   SCREEN (owner: "where things are the same, they should look, act, and feel/be in the same place ... in the case of study
   rooms, the main differences are the room member stuff and code at the top, and the addition of reveal alongside
@@ -1332,6 +1353,9 @@ section{display:none}section.on{display:block}
 .seqitem .num{font-family:var(--font-mono);font-weight:600;color:var(--accent);width:18px}
 .seqitem.correct{border-color:var(--green);background:color-mix(in srgb,var(--green) 16%,var(--paper2))}.seqitem.wrong{border-color:var(--red);background:color-mix(in srgb,var(--red) 16%,var(--paper2))}
 .miniresetbar{margin-top:8px}
+.seqlab,.anslab{font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 7px} /* v0.19.0 */
+.seqitem .seqmk{margin-left:auto;font-weight:700;flex:none}.seqitem.correct .seqmk{color:var(--green)}.seqitem.wrong .seqmk{color:var(--red)}.seqmiss{color:var(--ink-soft);font-style:italic}
+ul.lablist{list-style:disc}
 .matchwrap{margin-top:16px;display:flex;flex-direction:column;gap:9px}
 .matchrow{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
 .matchrow .ml{font-size:16px}.matchrow select{font-family:var(--font-body);font-size:15px;padding:7px 9px;border:1.5px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);min-width:150px}
@@ -1944,6 +1968,25 @@ mark.hl.flash{outline:2px solid #e08a00;outline-offset:1px}
 .roomscores h3{font-family:var(--font-head);font-weight:600;font-size:21px;margin:0 0 4px}
 .roomscores .rsrow{border-bottom:1px solid var(--line);padding:9px 2px;font-size:17px}
 .roomscores .rsrow span{display:block;overflow-wrap:anywhere}.roomscores .rsrow b{display:block;margin-top:2px;font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--ink-soft)}
+/* ===== v0.19.0: STUDY ROOM POINTS + LEADERBOARD ===== */
+.rpts{border:1.5px solid var(--line);border-radius:10px;background:var(--paper2);padding:10px 12px;margin:0 0 14px}
+.rp-me{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;font-size:14px;line-height:1.45;color:var(--ink)}.rp-me b{font-family:var(--font-mono);color:var(--green)}
+.rp-how{background:none;border:0;padding:0;font:inherit;font-size:13px;color:var(--accent);text-decoration:underline;cursor:pointer}
+.rp-hd{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px 10px;margin-top:10px}
+.rp-t{font-size:14px;color:var(--ink);min-width:0}.rp-sub{color:var(--ink-soft);font-size:13px}
+.rp-btns{display:inline-flex;gap:6px;flex:none}.rp-btns .minor{padding:5px 9px;font-size:12px}
+.rp-list{list-style:none;margin:8px 0 0;padding:0}
+.rp-row{display:grid;grid-template-columns:1.8em minmax(0,1fr) auto 3.2em;align-items:baseline;column-gap:8px;padding:6px 2px;border-top:1px solid var(--line);font-size:15px;color:var(--ink)}
+.rp-row .rk{font-family:var(--font-mono);font-size:13px;color:var(--ink-soft)}
+.rp-row .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}.rp-row.me .nm{font-weight:600}
+.rp-row .ps{font-family:var(--font-mono);font-weight:700;text-align:right}
+.rp-row .dl{font-family:var(--font-mono);font-size:12px;color:var(--green);text-align:right}
+.rp-row .rc{grid-column:2/-1;font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);overflow-wrap:anywhere}
+.rp-list:not(.cnt) .rc{display:none}
+.roomscores.rp-fin .rsrow.rp-row{display:grid;font-size:16px;padding:9px 2px}.roomscores.rp-fin .rsrow .nm{display:block}
+.roomscores.rp-fin .rsrow .rc b{display:inline;margin:0;font-size:12px;font-weight:600}
+.roomscores.rp-fin .rp-hd{margin:6px 0 2px}
+#roomNickOv .rptsopt{margin-top:14px}#roomNickOv .rptshint{margin-top:3px}
 .rs-count{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--ink-soft);margin-top:8px}
 .rs-sub{display:inline-flex;align-items:center;font-size:15px;color:var(--green);font-weight:600;padding:0 6px}.rs-sub[hidden]{display:none}
 .roomact{flex-wrap:wrap}
@@ -2102,7 +2145,7 @@ var r=localStorage.getItem('suite_eac_v1'),a=JSON.parse(localStorage.getItem('su
       </div>
       <div class="infopanel" id="faqPanel" style="display:none">
         <div class="faqbody">
-          <!-- GEN:faq · filled from FAQ.md at deploy (Pack Tools/public_copy.py) --><div class="faq-sec">The basics — how it works today</div><h4>What is Study Suite?</h4><p>A study tool with three ways to study — <b>Review</b> (spaced-repetition flashcards), <b>Practice</b> (one question at a time with instant feedback) and <b>Exam</b> (timed, scored mock tests) — plus <b>Topic Guides</b> and a <b>Pharmacology</b> drug index to read from. The app itself is empty — you load <b>study packs</b> that hold the questions, cards and guides. You sign in with a free account, which keeps your progress encrypted and in sync between your devices. It's currently in beta.</p><h4>Is it really free?</h4><p>Yes. Study Suite is free while it's in beta, with no ads and no tracking; you just need a free account. If that ever changes, I'll let you know well before it does. If you want to chip in toward the costs of building it, there's an optional "Support development" link, but it's never required and unlocks nothing.</p><h4>Where is my data stored? Can you see it?</h4><p>Everything — your packs, review progress, scores, and settings — is stored in your own browser, on your own device, and synced to your account. There's no analytics and no tracking cookies. Before anything is uploaded, it's end-to-end encrypted on your device — so I genuinely can't see what you study or how you're doing.</p><h4>How do I back up my progress or move to another device?</h4><p>Use <b>Backup all</b> to save a file with everything in it, then <b>Restore backup</b> on your other device (or after clearing your browser). Or create a free account and turn on sync (below). It's worth backing up now and then, since your progress lives in your browser and clearing site data would wipe it.</p><h4>Does it work offline?</h4><p>Yes, fully. The app is a single self-contained file. Once it's loaded in your browser — or installed to your home screen — it keeps working with no internet connection. Your packs and progress are right there on your device.</p><h4>Can I add it to my phone or computer like a real app?</h4><p>Yes — use <b>Add to Home Screen</b> (the app walks you through it for your device). One thing to know: an installed copy may keep its <b>own separate storage</b> from the browser version (on iPhone and iPad it always does). Just sign in inside the installed app and everything syncs across.</p><h4>Can I make my own study packs, or use my own notes?</h4><p>Absolutely — that's encouraged. Download the <a href="Study_Suite_Authoring_Guide_latest.md" download><b>instruction set</b></a> (also linked on the home screen) and hand it to the AI assistant of your choice; it walks the assistant through turning your own material into a pack you can load. Packs you make from your own content are <b>yours</b>. (The app, its design, and the pack format are mine, but the content you bring into it is entirely your own.)</p><h4>Is any of this medical advice?</h4><p>No. Study Suite and its packs are <b>educational material for exam preparation only</b> — not medical advice, and never a basis for real decisions about real patients. It's also in beta, so content can contain errors or go out of date. Always check against your own curriculum and trusted sources.</p><div class="faq-sec">Studying</div><h4>Why can't I hear the low heart sounds?</h4><p>S3, S4 and the rumble of a narrowed mitral valve sit below what most phone and laptop speakers can play. Use earphones. Sounds are meant to play even with your phone's silent switch on.</p><h4>How does Practice decide the order of questions?</h4><p>Questions you've never answered come first. Ones you've answered before go to the end — the ones you got wrong last time ahead of the ones you got right — and they're marked on the question map. Each starts clear, with <b>View prior answer</b> if you want to see what you picked before. Prefer only new ones? Turn on <b>Unanswered questions only</b> when you set up Practice. <b>Skip</b> moves on without counting a question as seen.</p><h4>Can I leave an exam and come back to it?</h4><p>Yes. Leave part-way and the exam is saved, with the timer paused. Tap <b>Exam</b> to <b>Resume</b> — or <b>Start fresh</b>, which keeps the questions you'd answered (you can look back at them under <b>Past exams</b>) and sets up a new exam that avoids them.</p><h4>What are study rooms?</h4><p>A study room lets up to 8 people work through the same practice questions at the same time, each on their own device. One person starts a room from the practice setup and gives the others its 6-digit code to type on Home. Everyone picks and submits their own answer. Anyone can press Reveal, and the answer, the explanation and everyone's picks show for the whole room. Your own answers go into your question history as usual. If you hadn't picked anything when the answer was revealed, nothing is recorded for that question. The question map lets you look back at questions the room has finished without moving the room, and anyone can end the room early to see the scores.</p><h4>Who can see what in a study room?</h4><p>The others in the room see the nickname you chose and, once an answer is revealed, what you picked. While a room is open, my server passes those between you; it doesn't keep them after the room closes. Your own record of the room is encrypted before it syncs, like the rest of your study data.</p><h4>How do highlights and notes work?</h4><p>Select text in a topic guide, the Pharmacology Index, a question or a card, then tap a colour or <b>Note</b>. Tap a highlight to change it or remove it. Figures and atlas slices have a note button of their own. Everything is listed under <b>Highlights</b> on Home, by week.</p><p>In Practice and Review your saved highlights appear once you've answered; the highlighter button shows or hides them. Exams start clean — tap <b>Keep my highlights</b> on the results screen to save the ones you made.</p><h4>What are topics?</h4><p>Topics are the main subjects each week covers — anywhere from about 6 to 20 per week. They're what you choose from in <b>Review</b>, what you can narrow <b>Practice</b> and <b>Exam</b> to, and one way to weight an exam. Each question and card also carries a smaller label for its exact point.</p><h4>What's the Pharmacology view?</h4><p>A drug index built from every pack you have switched on. Each drug gets its use, mechanism, dosing, cautions, adverse effects, monitoring and interactions, grouped by drug class, with links back to the week and topic guide that teach it.</p><div class="faq-sec">Accounts &amp; sync</div><h4>What does sync do?</h4><p>Sign in on each of your devices — phone, laptop, tablet — and your packs and progress stay in step automatically. Changes sync in the background a few seconds after you make them, whenever you open or come back to the app, and every few minutes while it's open. Offline? Keep studying; it catches up as soon as you're back online. The cloud icon is <b>green</b> when you're in sync, <b>yellow</b> if the last sync is a few minutes old or you're offline, and <b>red</b> if something needs your attention. It's the automatic version of <b>Backup all</b>.</p><h4>Do I have to make an account?</h4><p>Yes, since app v0.16.0. A free account keeps your progress safe if your browser clears its storage, and keeps your devices in step. If you were using Study Suite without one, nothing you did is lost: it's still saved in your browser, and it all moves into your account when you create one or sign in.</p><h4>How do I create an account?</h4><p>From the welcome screen, choose <b>Create an account</b>. During early access you'll need your access code. You'll get a <b>recovery code</b> straight away — save it in a password manager or somewhere safe.</p><h4>Can you see my synced data?</h4><p>No. Sync is <b>end-to-end encrypted</b>: your data is scrambled on your device <i>before</i> it's uploaded, and only the scrambled version is stored. The key that unlocks it never leaves your devices. That means <b>I can't read your synced data</b> — not for support, not for anything — because I simply don't have the key.</p><h4>What if I forget my password?</h4><p>Choose <b>Forgot password?</b> when signing in and you'll get an email with a link to set a new one. Then enter your <b>recovery code</b> to unlock your synced data — nothing is lost.</p><h4>What if I lose both my password and my recovery code?</h4><p>Your <b>synced</b> copy can't be unlocked by anyone — including me. That's the whole point of end-to-end encryption. But <b>your studying isn't gone:</b> the data on your devices is untouched, and any <b>Backup all</b> file still works. Reset your password, choose <b>Start fresh</b>, and sign in on the device where you last studied — its data becomes your new account copy.</p><h4>What if two devices change at the same time?</h4><p>They're combined — nothing to choose, and nothing studied is lost. If the same card was studied on both, the most recent review counts. Answers to the same question on both are all kept in your history. If a pack was switched on or off on both, the latest switch wins; a pack you removed stays removed. An unfinished exam that's replaced by a newer one moves to <b>Past exams</b>. <b>Sync activity</b> in the account menu lists what was combined, on any of your devices.</p><h4>How do I see which devices are syncing?</h4><p>Account menu → <b>Your devices</b> lists each browser or installed app that syncs with your account, with its app version and when it last synced. Give the one you're on a name you'll recognise — names are saved inside your encrypted study data. <b>Sign out other devices</b> (under Security) signs out all the others at once.</p><h4>What does an account store, and is it private?</h4><p>The minimum: your email address, your encrypted study data, a random ID for each device that syncs, and a few details needed to run the account. No selling data, no ads, no tracking. The <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> lists everything; see also the <a href="terms.html" target="_blank" rel="noopener">Terms</a>.</p><h4>How do I delete my account?</h4><p>Account menu → <b>Delete account</b>. It's instant and permanent, and your data on your devices stays where it is.</p><h4>How do I report a problem or send feedback?</h4><p>Tap the small ✋ button on a question, card or guide — or <b>Feedback</b> at the bottom of the page. It tells me which item you mean and sends a few diagnostic details (shown before you send). If you're offline, it goes as soon as you're back. I read every one.</p><!-- /GEN:faq -->
+          <!-- GEN:faq · filled from FAQ.md at deploy (Pack Tools/public_copy.py) --><div class="faq-sec">The basics — how it works today</div><h4>What is Study Suite?</h4><p>A study tool with three ways to study — <b>Review</b> (spaced-repetition flashcards), <b>Practice</b> (one question at a time with instant feedback) and <b>Exam</b> (timed, scored mock tests) — plus <b>Topic Guides</b> and a <b>Pharmacology</b> drug index to read from. The app itself is empty — you load <b>study packs</b> that hold the questions, cards and guides. You sign in with a free account, which keeps your progress encrypted and in sync between your devices. It's currently in beta.</p><h4>Is it really free?</h4><p>Yes. Study Suite is free while it's in beta, with no ads and no tracking; you just need a free account. If that ever changes, I'll let you know well before it does. If you want to chip in toward the costs of building it, there's an optional "Support development" link, but it's never required and unlocks nothing.</p><h4>Where is my data stored? Can you see it?</h4><p>Everything — your packs, review progress, scores, and settings — is stored in your own browser, on your own device, and synced to your account. There's no analytics and no tracking cookies. Before anything is uploaded, it's end-to-end encrypted on your device — so I genuinely can't see what you study or how you're doing.</p><h4>How do I back up my progress or move to another device?</h4><p>Use <b>Backup all</b> to save a file with everything in it, then <b>Restore backup</b> on your other device (or after clearing your browser). Or create a free account and turn on sync (below). It's worth backing up now and then, since your progress lives in your browser and clearing site data would wipe it.</p><h4>Does it work offline?</h4><p>Yes, fully. The app is a single self-contained file. Once it's loaded in your browser — or installed to your home screen — it keeps working with no internet connection. Your packs and progress are right there on your device.</p><h4>Can I add it to my phone or computer like a real app?</h4><p>Yes — use <b>Add to Home Screen</b> (the app walks you through it for your device). One thing to know: an installed copy may keep its <b>own separate storage</b> from the browser version (on iPhone and iPad it always does). Just sign in inside the installed app and everything syncs across.</p><h4>Can I make my own study packs, or use my own notes?</h4><p>Absolutely — that's encouraged. Download the <a href="Study_Suite_Authoring_Guide_latest.md" download><b>instruction set</b></a> (also linked on the home screen) and hand it to the AI assistant of your choice; it walks the assistant through turning your own material into a pack you can load. Packs you make from your own content are <b>yours</b>. (The app, its design, and the pack format are mine, but the content you bring into it is entirely your own.)</p><h4>Is any of this medical advice?</h4><p>No. Study Suite and its packs are <b>educational material for exam preparation only</b> — not medical advice, and never a basis for real decisions about real patients. It's also in beta, so content can contain errors or go out of date. Always check against your own curriculum and trusted sources.</p><div class="faq-sec">Studying</div><h4>Why can't I hear the low heart sounds?</h4><p>S3, S4 and the rumble of a narrowed mitral valve sit below what most phone and laptop speakers can play. Use earphones. Sounds are meant to play even with your phone's silent switch on.</p><h4>How does Practice decide the order of questions?</h4><p>Questions you've never answered come first. Ones you've answered before go to the end — the ones you got wrong last time ahead of the ones you got right — and they're marked on the question map. Each starts clear, with <b>View prior answer</b> if you want to see what you picked before. Prefer only new ones? Turn on <b>Unanswered questions only</b> when you set up Practice. <b>Skip</b> moves on without counting a question as seen.</p><h4>Can I leave an exam and come back to it?</h4><p>Yes. Leave part-way and the exam is saved, with the timer paused. Tap <b>Exam</b> to <b>Resume</b> — or <b>Start fresh</b>, which keeps the questions you'd answered (you can look back at them under <b>Past exams</b>) and sets up a new exam that avoids them.</p><h4>What are study rooms?</h4><p>A study room lets up to 8 people work through the same practice questions at the same time, each on their own device. One person starts a room from the practice setup and gives the others its 6-digit code to type on Home. Everyone picks and submits their own answer. Anyone can press Reveal, and the answer, the explanation and everyone's picks show for the whole room. Your own answers go into your question history as usual. If you hadn't picked anything when the answer was revealed, nothing is recorded for that question. The question map lets you look back at questions the room has finished without moving the room, and anyone can end the room early to see the scores. Rooms can keep points: 100 for each right answer plus a bonus for right answers in a row, with a leaderboard after each reveal. Whoever starts the room can turn points off.</p><h4>Who can see what in a study room?</h4><p>The others in the room see the nickname you chose and, once an answer is revealed, what you picked. While a room is open, my server passes those between you; it doesn't keep them after the room closes. Your own record of the room, including the final standings if the room kept points, is encrypted before it syncs, like the rest of your study data.</p><h4>How do highlights and notes work?</h4><p>Select text in a topic guide, the Pharmacology Index, a question or a card, then tap a colour or <b>Note</b>. Tap a highlight to change it or remove it. Figures and atlas slices have a note button of their own. Everything is listed under <b>Highlights</b> on Home, by week.</p><p>In Practice and Review your saved highlights appear once you've answered; the highlighter button shows or hides them. Exams start clean — tap <b>Keep my highlights</b> on the results screen to save the ones you made.</p><h4>What are topics?</h4><p>Topics are the main subjects each week covers — anywhere from about 6 to 20 per week. They're what you choose from in <b>Review</b>, what you can narrow <b>Practice</b> and <b>Exam</b> to, and one way to weight an exam. Each question and card also carries a smaller label for its exact point.</p><h4>What's the Pharmacology view?</h4><p>A drug index built from every pack you have switched on. Each drug gets its use, mechanism, dosing, cautions, adverse effects, monitoring and interactions, grouped by drug class, with links back to the week and topic guide that teach it.</p><div class="faq-sec">Accounts &amp; sync</div><h4>What does sync do?</h4><p>Sign in on each of your devices — phone, laptop, tablet — and your packs and progress stay in step automatically. Changes sync in the background a few seconds after you make them, whenever you open or come back to the app, and every few minutes while it's open. Offline? Keep studying; it catches up as soon as you're back online. The cloud icon is <b>green</b> when you're in sync, <b>yellow</b> if the last sync is a few minutes old or you're offline, and <b>red</b> if something needs your attention. It's the automatic version of <b>Backup all</b>.</p><h4>Do I have to make an account?</h4><p>Yes, since app v0.16.0. A free account keeps your progress safe if your browser clears its storage, and keeps your devices in step. If you were using Study Suite without one, nothing you did is lost: it's still saved in your browser, and it all moves into your account when you create one or sign in.</p><h4>How do I create an account?</h4><p>From the welcome screen, choose <b>Create an account</b>. During early access you'll need your access code. You'll get a <b>recovery code</b> straight away — save it in a password manager or somewhere safe.</p><h4>Can you see my synced data?</h4><p>No. Sync is <b>end-to-end encrypted</b>: your data is scrambled on your device <i>before</i> it's uploaded, and only the scrambled version is stored. The key that unlocks it never leaves your devices. That means <b>I can't read your synced data</b> — not for support, not for anything — because I simply don't have the key.</p><h4>What if I forget my password?</h4><p>Choose <b>Forgot password?</b> when signing in and you'll get an email with a link to set a new one. Then enter your <b>recovery code</b> to unlock your synced data — nothing is lost.</p><h4>What if I lose both my password and my recovery code?</h4><p>Your <b>synced</b> copy can't be unlocked by anyone — including me. That's the whole point of end-to-end encryption. But <b>your studying isn't gone:</b> the data on your devices is untouched, and any <b>Backup all</b> file still works. Reset your password, choose <b>Start fresh</b>, and sign in on the device where you last studied — its data becomes your new account copy.</p><h4>What if two devices change at the same time?</h4><p>They're combined — nothing to choose, and nothing studied is lost. If the same card was studied on both, the most recent review counts. Answers to the same question on both are all kept in your history. If a pack was switched on or off on both, the latest switch wins; a pack you removed stays removed. An unfinished exam that's replaced by a newer one moves to <b>Past exams</b>. <b>Sync activity</b> in the account menu lists what was combined, on any of your devices.</p><h4>How do I see which devices are syncing?</h4><p>Account menu → <b>Your devices</b> lists each browser or installed app that syncs with your account, with its app version and when it last synced. Give the one you're on a name you'll recognise — names are saved inside your encrypted study data. <b>Sign out other devices</b> (under Security) signs out all the others at once.</p><h4>What does an account store, and is it private?</h4><p>The minimum: your email address, your encrypted study data, a random ID for each device that syncs, and a few details needed to run the account. No selling data, no ads, no tracking. The <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> lists everything; see also the <a href="terms.html" target="_blank" rel="noopener">Terms</a>.</p><h4>How do I delete my account?</h4><p>Account menu → <b>Delete account</b>. It's instant and permanent, and your data on your devices stays where it is.</p><h4>How do I report a problem or send feedback?</h4><p>Tap the small ✋ button on a question, card or guide — or <b>Feedback</b> at the bottom of the page. It tells me which item you mean and sends a few diagnostic details (shown before you send). If you're offline, it goes as soon as you're back. I read every one.</p><!-- /GEN:faq -->
         </div>
       </div>
     </div>
@@ -2444,7 +2487,7 @@ var r=localStorage.getItem('suite_eac_v1'),a=JSON.parse(localStorage.getItem('su
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.18.2';
+const APP_VERSION='0.19.0';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -3827,10 +3870,10 @@ function packNews(){try{return JSON.parse(localStorage.getItem(NEWS_KEY)||'{}')|
 function setPackNews(o){try{localStorage.setItem(NEWS_KEY,JSON.stringify(o));}catch(e){}}
 function noteFor(id,ver){const mp=manifestEntry(id);return (mp&&typeof mp.note==='string'&&String(mp.version)===String(ver))?mp.note.trim().slice(0,1200):'';} /* v0.7.3: the manifest's release note for exactly this version */
 function noteLead(t){const m=String(t||'').match(/^.*?[.!?](\s|$)/);const a=(m?m[0]:String(t||'')).trim();return a.length>140?a.slice(0,137).replace(/\s+\S*$/,'')+'…':a;} /* first sentence, capped, for a row */
-function recordPackNews(oldP,newP,auto){try{const t=newsText(packDiff(oldP,newP));const o=packNews();o[newP.id]={title:newP.pack||newP.id,v:newP.version,text:t,note:noteFor(newP.id,newP.version),at:Date.now(),auto:!!auto};setPackNews(o);}catch(e){}}
+function recordPackNews(oldP,newP,auto){try{if(newP&&newP.id==='rx_master')return; /* v0.19.0: the Pharmacology Index updates quietly (owner: "repetitive and unnecessary") */const t=newsText(packDiff(oldP,newP));const o=packNews();o[newP.id]={title:newP.pack||newP.id,v:newP.version,text:t,note:noteFor(newP.id,newP.version),at:Date.now(),auto:!!auto};setPackNews(o);}catch(e){}}
 /* Shown the first time the home screen is seen after an update, for that session; ✕ clears it. */
 function packsLocked(){const m=defaultManifest;return !!(m&&m.v===2&&eac&&eac.unlocked&&!Object.keys(heldKeys()).length&&(userGroups().size||eac.admin));}
-function renderPackNews(){const box=$('packNews');if(!box)return;const o=packNews(),ids=Object.keys(o).filter(id=>packs.some(p=>p.id===id));
+function renderPackNews(){const box=$('packNews');if(!box)return;const o=packNews(),ids=Object.keys(o).filter(id=>id!=='rx_master'&&packs.some(p=>p.id===id)); /* v0.19.0 */
   if(document.visibilityState==='visible'&&$('home')&&$('home').classList.contains('on'))ids.forEach(id=>{if(!o[id].seen){o[id].seen=true;newsShown.add(id);}});
   setPackNews(o);const show=ids.filter(id=>newsShown.has(id)||!o[id].seen);
   box.innerHTML=show.map(id=>'<div class="packnews"><div><b>'+acctEsc(o[id].title)+(o[id].auto?' auto-updated to v':' updated to v')+acctEsc(String(o[id].v||''))+'</b>'+(o[id].text?': '+acctEsc(o[id].text)+'.':'.')+(o[id].note?'<div class="note-p">'+acctEsc(o[id].note)+'</div>':'')+'</div><button type="button" aria-label="Dismiss" data-id="'+acctEsc(id)+'">×</button></div>').join('');
@@ -5179,7 +5222,20 @@ var HL_SKIP_APP=HL_SKIP+',.ctype,.answerbox>.h,.banner,.verdictline,.stem>.lead,
 var examHl=[]; /* this exam's highlights: in examSave.hl while it runs, dropped when its results are left */
 var hlState=null,hlScrollId=null,hlLastCol='y',hlSelT=null,hlBarDown=0;
 function hlNewId(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8);}
-function hlEntries(){const out=[];Object.keys(settings).forEach(k=>{if(!k.startsWith(HLK))return;const v=settings[k];if(v&&v.fl&&v.on)out.push(Object.assign({},v,{id:k.slice(HLK.length)}));});return out;}
+var HL_MOVES=[["wk47","W47_19_ICE_Sensory_Coordination_Gait.html","wk46","W46_19_ICE_Sensory_Coordination_Gait.html"],["wk46","W46_19_Integrated_Review_and_WFQ_Walkthrough.html","wk46","W46_20_Integrated_Review_and_WFQ_Walkthrough.html"],["wk46","W46_20_Cram_Sheet.html","wk46","W46_21_Cram_Sheet.html"],["wk47","W47_20_Breaking_Bad_News.html","wk48","W48_16_Breaking_Bad_News.html"],["wk48","W48_12_Approach_to_Cognitive_Complaints.html","wk49","W49_01_Approach_to_Cognitive_Complaints.html"],["wk48","W48_13_Alzheimers_Disease.html","wk49","W49_02_Alzheimers_Disease.html"],["wk48","W48_14_Frontal_Lobes_Aphasia_and_FTD.html","wk49","W49_03_Frontal_Lobes_Aphasia_and_FTD.html"],["wk45","W45_15_ICE_Neurology_I_History_and_Cranial_Nerve_Exam.html","wk44","W44_20_ICE_Neurology_I_History_and_Cranial_Nerves.html"],["wk48","W48_20_ICE_Clinical_Skills_Neurology_I.html","wk44","W44_20_ICE_Neurology_I_History_and_Cranial_Nerves.html"],["wk44","W44_20_Integrated_Review_and_Quiz_Walkthrough.html","wk44","W44_21_Integrated_Review_and_Quiz_Walkthrough.html"],["wk44","W44_21_Cram_Sheet.html","wk44","W44_22_Cram_Sheet.html"],["wk48","W48_21_Cram_Sheet.html","wk48","W48_20_Cram_Sheet.html"],["wk50","W50_09_Red_Eye_Review.html","wk50","W50_10_Red_Eye_Review.html"],["wk50","W50_10_Cram_Sheet.html","wk50","W50_11_Cram_Sheet.html"]]; /* v0.19.0: [[old pack id, old guide file, new pack id, new guide file]] — guides moved between week packs */
+/* v0.19.0: a guide highlight whose file is gone from its pack (the pack still switched on) follows the guide by its file name
+   without the 'W46_19_' prefix: one match in the same pack (renumbered), else exactly one in another switched-on pack (moved).
+   Read-time only; HL_MOVES (the packs session's map), if it names the file, wins. Nothing moves while the old file is still in a switched-on pack. Built from every guide of the switched-on packs (source switches ignored). */
+var hlGIdx=null,hlGSig='';
+function hlStem(f){return String(f||'').replace(/^[A-Za-z]*\d+[A-Za-z]*_\d+[A-Za-z]?_/,'');}
+function hlGuideIdx(){let ap=[];try{ap=activePacks();}catch(e){return null;}const sig=ap.map(p=>p.id+'@'+p.version+':'+((p.guides||[]).length)).join(',');if(hlGIdx&&hlGSig===sig)return hlGIdx;
+  const have=new Set(),st=new Map(),on=new Set();ap.forEach(p=>{on.add(p.id);(p.guides||[]).forEach(g=>{const r=guideKey(g);if(!r)return;have.add(p.id+'|'+r);const k=hlStem(r);if(k===String(r))return;if(!st.has(k))st.set(k,[]);st.get(k).push({p:p.id,r});});});
+  hlGSig=sig;return hlGIdx={have,st,on};}
+function hlMoved(e){if(!e||e.k!=='g')return e;const X=hlGuideIdx();if(X&&X.have.has(e.p+'|'+e.r))return e; /* still there (e.g. the old pack version): leave it */
+  for(const m of (HL_MOVES||[])){if(e.p===m[0]&&e.r===m[1]){e.p=m[2];e.r=m[3];return e;}}
+  if(!X||!X.on.has(e.p))return e;const k=hlStem(e.r);if(!k||k===String(e.r||''))return e;
+  const c=X.st.get(k)||[],same=c.filter(x=>x.p===e.p),to=same.length===1?same[0]:(!same.length&&c.length===1?c[0]:null);if(to){e.p=to.p;e.r=to.r;}return e;}
+function hlEntries(){const out=[];Object.keys(settings).forEach(k=>{if(!k.startsWith(HLK))return;const v=settings[k];if(v&&v.fl&&v.on)out.push(hlMoved(Object.assign({},v,{id:k.slice(HLK.length)})));});return out;}
 function hlIsFig(e){return e.k==='atl'||String(e.f||'').startsWith('fig');}
 function hlFor(sc){const same=e=>e.k===sc.k&&e.r===sc.r&&(e.f||'')===(sc.f||'');
   if(sc.exam)return examHl.filter(same);let l=hlEntries().filter(e=>same(e)&&(sc.x?e.x===sc.x:!e.x));
@@ -5553,7 +5609,8 @@ function renderHome(){
    across the top ('Other' for packs without a school), then year → course → packs beneath the
    selected school. Enabled packs sort to the top of their subsection. Course groups default open. */
 let libSchool=null, libOpen=null;
-function libRow(p){const on=p.enabled!==false;const upd=packUpdate(p),stub=!!p.stub;
+function libUpd(p){const u=packUpdate(p);return (u&&p&&p.id==='rx_master'&&!(typeof refFail!=='undefined'&&refFail[p.id]))?null:u;} /* v0.19.0: the index's waiting update shows only if its background update failed */
+function libRow(p){const on=p.enabled!==false;const upd=libUpd(p),stub=!!p.stub;
   const row=document.createElement('div');row.className='packrow'+(stub?' off stubrow':(on?'':' off'));
   const left=document.createElement('div');left.className='pkleft';
   const sw=document.createElement('button');sw.className='switch'+(on?' on':'');sw.setAttribute('role','switch');sw.setAttribute('aria-checked',on?'true':'false');sw.setAttribute('aria-label','Enable pack');
@@ -5737,7 +5794,7 @@ function renderInteractive(c){
     if(!revealed){h+='<div class="pool">';work.pool.forEach(it=>{const used=work.order.includes(it.i);h+=`<button class="chip" data-i="${it.i}" ${used?'disabled':''}>${it.t}</button>`;});h+='</div><div class="seq">';
       work.order.forEach((idx,pos)=>{h+=`<div class="seqitem"><span class="num">${pos+1}</span><span>${c.items[idx]}</span></div>`;});h+='</div>';
       if(work.order.length)h+='<div class="miniresetbar"><button class="minor" id="orderReset">Reset</button></div>';}
-    else{h+='<div class="seq">';c.items.forEach((t,pos)=>{const ok=work.order[pos]===pos;h+=`<div class="seqitem ${ok?'correct':'wrong'}"><span class="num">${pos+1}</span><span>${t}</span></div>`;});h+='</div>';}
+    else h+=orderMine(c); /* v0.19.0: my own order, marked; the correct order is in the Answer box */
     return h+'</div>';}
   if(c.type==='match'){if(!work.pool)work.pool=shuffle(c.pairs.map(p=>p[1]));
     let h=`<p class="prompt">${c.prompt}</p><div class="matchwrap">`;
@@ -5748,6 +5805,13 @@ function renderInteractive(c){
       h+=`</div>`;});
     return h+'</div>';}
   return '';}
+function orderMine(c){const o=Array.isArray(work.order)?work.order:[],n=c.items.length; /* v0.19.0 */
+  if(!o.length)return '<div class="seqlab">You didn’t put anything in order.</div>';
+  let h='<div class="seqlab">Your order</div><div class="seq">';
+  for(let pos=0;pos<n;pos++){const idx=o[pos];
+    if(idx==null){h+=`<div class="seqitem wrong"><span class="num">${pos+1}</span><span class="seqmiss">Not placed</span><span class="seqmk" aria-label="Not placed">✗</span></div>`;continue;}
+    const ok=idx===pos;h+=`<div class="seqitem ${ok?'correct':'wrong'}"><span class="num">${pos+1}</span><span>${c.items[idx]}</span><span class="seqmk" aria-label="${ok?'Right place':'Wrong place'}">${ok?'✓':'✗'}</span></div>`;}
+  return h+'</div>';}
 function wireInteractive(c){if(revealed)return;
   if(c.type==='mcq')$('cardbox').querySelectorAll('.choice').forEach(el=>el.addEventListener('click',()=>{work.pick=+el.dataset.i;renderCard();}));
   if(c.type==='multi')$('cardbox').querySelectorAll('.choice').forEach(el=>el.addEventListener('click',()=>{const i=+el.dataset.i;work.picks.has(i)?work.picks.delete(i):work.picks.add(i);renderCard();}));
@@ -5775,6 +5839,8 @@ function renderAnswer(c){let h='';const res=gotCorrect(c);
   let ans=c.type==='qa'?(c.answer+(c.explain?`<div style="margin-top:8px;color:var(--ink-soft);font-size:14.5px">${c.explain}</div>`:'')):
     c.type==='widget'?(c.answer+(c.explain?`<div style="margin-top:8px;color:var(--ink-soft);font-size:14.5px">${c.explain}</div>`:'')): /* v0.9.0 */
     c.type==='label'?(`<ol class="lablist">${c.labels.map(l=>`<li>${acctEsc(l.t)}</li>`).join('')}</ol>`+(c.explain?`<div style="margin-top:8px;color:var(--ink-soft);font-size:14.5px">${c.explain}</div>`:'')): /* v0.8.1 */
+    c.type==='order'?(`<div class="anslab">The correct order</div><ol class="lablist">${c.items.map(t=>`<li>${t}</li>`).join('')}</ol>`+(c.explain?`<div style="margin-top:8px;color:var(--ink-soft);font-size:14.5px">${c.explain}</div>`:'')): /* v0.19.0 */
+    c.type==='match'?(`<div class="anslab">The correct matches</div><ul class="lablist">${c.pairs.map(q=>`<li>${q[0]} → <b>${q[1]}</b></li>`).join('')}</ul>`+(c.explain?`<div style="margin-top:8px;color:var(--ink-soft);font-size:14.5px">${c.explain}</div>`:'')): /* v0.19.0 */
     (c.explain||'');
   h+=`<div class="answerbox"><div class="h">Answer · ${c.topic}</div>${ans}</div>`+guideHTML(c.guide)+srcHTML(c); /* v0.6.6 */
   return h;}
@@ -6914,6 +6980,67 @@ $('stBack').addEventListener('click',()=>{if(ST&&ST.phase!=='list'&&!stRunning()
    tracked in localStorage ROOM_KEY {rooms:{lid:{mine:{qi:pick},rec:[qi…],at}},last} — never in KEY, never synced. */
 const ROOM_KEY='suite_room_v1',ROOM_POLL=1500 /* the ONE room read interval (ms) while visible; separate from sync timing */,ROOM_MAXQ=200,ROOM_NICK_MAX=24;
 let ROOM=null;
+/* ===== v0.19.0: POINTS, STREAKS AND A LIVE LEADERBOARD (Study_Rooms_Plan v0.9 §12) =====
+   Every device works the standings out from the same server state (revealed picks, in question order), so there is no
+   server change: 100 for a right answer, plus 20 for each right answer in a row after the first, capped at +100. A wrong
+   answer, or no pick at the reveal, ends the streak. Unrevealed questions don't count. A question this device can't open
+   (ROOM.na) is left out on this device only. Rows = the members in the room now; picks stay with a member id, so someone
+   who leaves and rejoins keeps their points. desc.pts: 0 = the starter switched points off; absent (older starter) or 1 = on. */
+const ROOM_PT=100,ROOM_STEP=20,ROOM_CAP=100;
+const ROOM_PTS_OPT='<label class="fltchk rptsopt"><input type="checkbox" id="roomPtsIn" checked><span>Points and a leaderboard</span></label><div class="acct-sub rptshint">100 points for each right answer, more for right answers in a row. No timer. Untick for a plain room.</div>';
+function roomPtsOn(d){return !(d&&(d.pts===0||d.pts===false));}
+function roomBonus(run){return Math.min(ROOM_STEP*Math.max(0,run-1),ROOM_CAP);}
+/* THE scoring rule. st = room state, n = questions, cor(i) = correct original option index, or null = not scored here.
+   Returns {by:{mid:{pts,right,ans,run,best,g:{i:{p,ok,base,bonus,run,broke}}}}, seq:[scored i], last}. Pure. */
+function roomPoints(st,n,cor){const by={},seq=[];
+  const get=mid=>by[mid]||(by[mid]={pts:0,right:0,ans:0,run:0,best:0,g:{}});((st&&st.members)||[]).forEach(m=>get(m.mid));
+  for(let i=0;i<n;i++){const s=roomQ(st,i);if(!s||!s.rev)continue;const c=cor(i);if(c==null||c<0)continue;seq.push(i);const pk=s.picks||{};
+    Object.keys(pk).sort().forEach(get);
+    Object.keys(by).forEach(mid=>{const o=by[mid],p=pk[mid]!=null?+pk[mid]:null,was=o.run;
+      if(p!=null&&p===c){o.run++;o.right++;o.ans++;const b=roomBonus(o.run);o.pts+=ROOM_PT+b;if(o.run>o.best)o.best=o.run;o.g[i]={p,ok:true,base:ROOM_PT,bonus:b,run:o.run};}
+      else{if(p!=null)o.ans++;o.run=0;o.g[i]={p,ok:false,base:0,bonus:0,run:0,broke:was};}});}
+  return {by,seq,last:seq.length?seq[seq.length-1]:-1};}
+/* Standings: points, then right answers, then name, then member id (code-point order, the same on every device). */
+function roomBoard(P,mem,me){const z={pts:0,right:0,ans:0,run:0,best:0,g:{}},cp=(a,b)=>a<b?-1:a>b?1:0;
+  const rows=(mem||[]).map(m=>{const o=P.by[m.mid]||z,lg=P.last>=0?o.g[P.last]:null;
+    return {mid:m.mid,name:String(m.name||''),me:m.mid===me,pts:o.pts,right:o.right,ans:o.ans,run:o.run,best:o.best,gain:lg&&lg.ok?lg.base+lg.bonus:0};});
+  rows.sort((a,b)=>(b.pts-a.pts)||(b.right-a.right)||cp(a.name,b.name)||cp(a.mid,b.mid));
+  rows.forEach(r=>{r.rank=1+rows.filter(x=>x.pts>r.pts).length;r.tie=rows.some(x=>x!==r&&x.pts===r.pts);});return rows;}
+function roomCor(){const R=ROOM;return i=>(R&&R.na&&R.na.has(i))?null:((qmap[qorder[i]]||{}).correct);}
+function roomRevSet(st){const o=new Set(),q=(st&&st.q)||{};Object.keys(q).forEach(k=>{if(q[k]&&q[k].rev)o.add(+k);});return o;}
+function roomOrd(k){const s=['th','st','nd','rd'],v=k%100;return k+(s[(v-20)%10]||s[v]||s[0]);}
+function roomMyLine(P,i){const R=ROOM,me=R&&R.me&&R.me.mid,s=R&&roomQ(R.st,i);if(!me||!s||!s.rev||(R.na&&R.na.has(i)))return '';
+  const g=(P.by[me]||{g:{}}).g[i],br=g&&g.broke>=2?` That ends your streak of ${g.broke}.`:'';
+  if(!g||g.p==null)return (R.pre&&R.pre.has(i))?'You weren’t in the room when this was revealed, so it doesn’t count for you.':'No points: no answer at the reveal.'+br;
+  if(!g.ok)return 'No points: wrong answer.'+br;
+  return g.bonus?`<b>+${g.base+g.bonus}</b>: ${g.base} for the right answer + ${g.bonus} streak bonus (${g.run} in a row).`:`<b>+${g.base}</b>: ${g.base} for the right answer.`;}
+function roomRowsHTML(rows,cnt){return `<ol class="rp-list${cnt?' cnt':''}">`+rows.map(r=>`<li class="rp-row${r.me?' me':''}" data-mid="${acctEsc(r.mid)}" data-pts="${r.pts}"><span class="rk">${r.rank}</span><span class="nm">${acctEsc(r.name)}${r.me?' (you)':''}</span><span class="ps">${r.pts}</span><span class="dl">${r.gain?'+'+r.gain:''}</span><span class="rc">${r.right} right of ${r.ans} answered · streak ${r.run} · best ${r.best}</span></li>`).join('')+'</ol>';}
+function roomPtsHTML(){const R=ROOM;if(!R||!R.pts||R.fin||R.over||!R.st||!qsub[qcur])return '';const P=roomPoints(R.st,qorder.length,roomCor());if(P.last<0)return '';
+  const rows=roomBoard(P,R.st.members,R.me.mid),L=roomLocal(),cnt=!!L.cnt,hide=!!L.hide,mine=rows.find(r=>r.me),ln=roomMyLine(P,qcur);
+  const sum=mine?`you’re ${mine.tie?'tied ':''}${roomOrd(mine.rank)} with ${mine.pts}`:'';
+  return `<div class="rp-me">${ln?`<span class="rp-ln">${ln}</span>`:''}<button type="button" class="rp-how" data-rp="how">How points work</button></div>`+
+    `<div class="rp-hd"><span class="rp-t"><b>Leaderboard</b> <span class="rp-sub">after question ${P.last+1}${hide&&sum?' · '+sum:''}</span></span><span class="rp-btns">${hide?'':`<button type="button" class="minor" data-rp="cnt" aria-pressed="${cnt}">${cnt?'Hide counts':'Show counts'}</button>`}<button type="button" class="minor" data-rp="hide" aria-expanded="${!hide}">${hide?'Show':'Hide'}</button></span></div>`+
+    (hide?'':roomRowsHTML(rows,cnt));}
+/* Painted under the verdict line after a reveal; only touched when what it shows changes (no flicker, v0.17.1). */
+function roomPtsPaint(){const R=ROOM,qa=$('qafter');let el=$('roomPts');const h=(qmode==='room'&&R)?roomPtsHTML():'';
+  if(!h){if(el)el.remove();return;}
+  if(!el||!qa.contains(el)){if(el)el.remove();el=document.createElement('div');el.id='roomPts';el.className='rpts';el.setAttribute('role','region');el.setAttribute('aria-label','Points and leaderboard');
+    const v=qa.querySelector('.verdictline');if(v)v.after(el);else qa.insertBefore(el,qa.firstChild);el._h='';}
+  if(el._h!==h){el._h=h;el.innerHTML=h;}}
+function roomPtsHow(){alertDialog('How points work',['Each right answer is worth 100 points.',
+  'Right answers in a row earn a streak bonus: 20 for the second in a row, 40 for the third, and so on, up to 100 extra. So a run scores 100, 120, 140, 160, 180, 200, then 200 for each one after that.',
+  'A wrong answer, or no answer when the answer is revealed, ends the streak. An answer you selected but didn’t submit still counts at the reveal.',
+  'There’s no timer and no points for speed. Questions revealed before you joined don’t count against you.',
+  'Show counts on the leaderboard lists each person’s right answers and streaks.']);}
+function roomFinalHTML(rv,sc,an){const R=ROOM,P=roomPoints(R.st,qorder.length,roomCor()),rows=roomBoard(P,(R.st&&R.st.members)||[],R.me&&R.me.mid),cnt=!!roomLocal().cnt;
+  return `<div class="roomscores rp-fin"><h3>Final standings</h3><p class="acct-sub">${rv} question${rv===1?' was':'s were'} revealed. Your own answers are in your question history.${roomNANote()}</p>`+
+    `<div class="rp-hd"><span class="rp-t"><b>Points</b></span><span class="rp-btns"><button type="button" class="minor" data-rp="cnt" aria-pressed="${cnt}">${cnt?'Hide counts':'Show counts'}</button><button type="button" class="minor" data-rp="how">How points work</button></span></div>`+
+    `<div class="rp-list${cnt?' cnt':''}">`+rows.map(r=>`<div class="rsrow rp-row${r.me?' me':''}" data-mid="${acctEsc(r.mid)}" data-right="${sc[r.mid]||0}" data-answered="${an[r.mid]||0}" data-pts="${r.pts}"><span class="rk">${r.rank}</span><span class="nm">${acctEsc(r.name)}${r.me?' (you)':''}</span><span class="ps">${r.pts}</span><span class="dl"></span><span class="rc"><b>${sc[r.mid]||0} right of ${an[r.mid]||0} answered · ${rv-(an[r.mid]||0)} not answered</b> · best streak ${r.best}</span></div>`).join('')+'</div></div>';}
+/* Final standings in the saved room record (names + points, plus the raw counts), newest state wins. */
+function roomSessBoard(){const R=ROOM;if(!R||!R.pts||!R.st)return {};const P=roomPoints(R.st,qorder.length,roomCor());if(P.last<0)return {pts:1};
+  return {pts:1,board:roomBoard(P,R.st.members,R.me&&R.me.mid).map(r=>Object.assign({n:r.name,p:r.pts,r:r.right,a:r.ans,b:r.best},r.me?{me:1}:{}))};}
+function roomPastBoard(x){const b=x&&x.room&&Array.isArray(x.room.board)?x.room.board:null;if(!b||!b.length)return '';
+  return `<div class="pd">Standings: ${b.slice(0,8).map(r=>{const p=+r.p||0,k=1+b.filter(y=>(+y.p||0)>p).length;return `${k}. ${acctEsc(String(r.n||''))}${r.me?' (you)':''} ${p}`;}).join(' · ')}</div>`;}
 function roomHash(t){let h=5381;t=String(t||'');for(let i=0;i<t.length;i++)h=((h*33)^t.charCodeAt(i))>>>0;return h.toString(36);}
 function roomLocal(){try{const x=JSON.parse(localStorage.getItem(ROOM_KEY)||'null');if(x&&x.rooms&&typeof x.rooms==='object')return x;}catch(e){}return {rooms:{}};}
 function roomLocalSave(x){const ks=Object.keys(x.rooms).sort((a,b)=>(x.rooms[b].at||0)-(x.rooms[a].at||0));ks.slice(10).forEach(k=>delete x.rooms[k]);
@@ -6930,7 +7057,7 @@ function roomNickAsk(title,go,then,named){ /* v0.17.0 1b: named = also ask the o
       '<h3 id="roomNickT"></h3><label class="acct-sub" for="roomNickIn">Your nickname — the others in the room see it beside your answers and score.</label>'+
       '<input id="roomNickIn" class="roomin" maxlength="'+ROOM_NICK_MAX+'" autocomplete="nickname" spellcheck="false"><div class="roomerr" id="roomNickErr" role="status"></div>'+
       '<div class="roomnamebox" id="roomNameBox" hidden><label class="acct-sub" for="roomNameIn">Room name (optional) — everyone in the room sees it, and it’s how the room shows in Past study rooms.</label>'+
-      '<input id="roomNameIn" class="roomin" maxlength="'+ROOM_NAME_MAX+'" autocomplete="off" spellcheck="false"><div class="roomsugg" id="roomNameSugg"></div></div>'+
+      '<input id="roomNameIn" class="roomin" maxlength="'+ROOM_NAME_MAX+'" autocomplete="off" spellcheck="false"><div class="roomsugg" id="roomNameSugg"></div>'+ROOM_PTS_OPT+'</div>'+
       '<div class="confirm-actions"><button class="btn ghost sm" id="roomNickNo" type="button">Cancel</button><button class="btn sm" id="roomNickGo" type="button"></button></div></div>';
     document.body.appendChild(ov);const close=()=>{ov.style.display='none';};$('roomNickX').onclick=close;$('roomNickNo').onclick=close;
     $('roomNickIn').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('roomNickGo').click();}});}
@@ -6939,16 +7066,16 @@ function roomNickAsk(title,go,then,named){ /* v0.17.0 1b: named = also ask the o
   $('roomNickGo').onclick=()=>{const v=inp.value.replace(/\s+/g,' ').trim();
     if(!v){$('roomNickErr').textContent='Type a nickname first.';inp.focus();return;}
     if(v.length>ROOM_NICK_MAX){$('roomNickErr').textContent='Keep it to '+ROOM_NICK_MAX+' characters.';return;}
-    ov.style.display='none';if(settings.roomNick!==v){settings.roomNick=v;Store.set(KEY.settings,settings);SSSync.changed();}then(v,named?roomNameClean($('roomNameIn').value):'');};
+    ov.style.display='none';if(settings.roomNick!==v){settings.roomNick=v;Store.set(KEY.settings,settings);SSSync.changed();}then(v,named?roomNameClean($('roomNameIn').value):'',named?!!($('roomPtsIn')&&$('roomPtsIn').checked):true);};
   ov.style.display='flex';setTimeout(()=>{try{inp.focus();}catch(e){}},30);}
 /* Start (practice setup): the starter's order + option orders become the descriptor (§3.3). */
 function roomStart(){if(!ROOMS_ON)return;const m=setupMode||'prac';
   if(!SSAccount.session()){toast('Sign in to use study rooms.');return;}
   if(!qTestPool(m).length){toast(fltEmptyMsg(m));return;}
   $('setupOv').style.display='none';setupMode=null;
-  roomNickAsk('Start a study room','Start',async(nick,title)=>{const ids=pracFreshOrder();if(!ids)return;const order=ids.slice(0,ROOM_MAXQ);
+  roomNickAsk('Start a study room','Start',async(nick,title,pts)=>{const ids=pracFreshOrder();if(!ids)return;const order=ids.slice(0,ROOM_MAXQ);
     if(ids.length>ROOM_MAXQ)toast(`A room holds up to ${ROOM_MAXQ} questions, so this one has the first ${ROOM_MAXQ}.`,4200);
-    const desc={v:1,title:roomNameClean(title),sid:roomSid(),packs:[...new Set(order.map(id=>qmap[id]._pack).filter(Boolean))],qorder:order,qopt:order.map(id=>optPerm(qmap[id].options||[]))};desc.pver=roomPver(desc.packs); /* v0.17.0 stage 3 */
+    const desc={v:1,title:roomNameClean(title),sid:roomSid(),packs:[...new Set(order.map(id=>qmap[id]._pack).filter(Boolean))],qorder:order,qopt:order.map(id=>optPerm(qmap[id].options||[]))};desc.pver=roomPver(desc.packs); /* v0.17.0 stage 3 */desc.pts=pts===false?0:1; /* v0.19.0 */
     try{const j=await SSAccount.roomApi('',{method:'POST',body:{desc:JSON.stringify(desc),n:order.length,name:nick,device_id:DEVICE_ID}});await roomJoin(String(j&&j.code||''),nick,true);}
     catch(e){toast(roomErrMsg(e),4200);}},true);}
 /* Join from Home (stage 2: the #room= link calls roomJoinAsk(code) too). */
@@ -6971,7 +7098,7 @@ async function roomJoin(code,nick,starter){ /* v0.17.0 stage 3: starter = never 
   if(ROOM&&ROOM.code===code&&(pk.note||(ROOM.na&&ROOM.na.size)))toast('Your copy of a pack in this room is a different version, so some questions may be skipped for you.',6000);
   return true;}
 function roomEnter(code,d,ds,st){clearInterval(qTimerId);timerWanted=false;
-  ROOM={code,d,ds,lid:code+'.'+roomHash(ds),na:roomNAList(d),me:{},st:null,pend:{},busy:false,again:false,timer:null,wl:null,over:false,fin:false,sig:'',cur:null,gsig:''};
+  ROOM={code,d,ds,lid:code+'.'+roomHash(ds),na:roomNAList(d),me:{},st:null,pend:{},busy:false,again:false,timer:null,wl:null,over:false,fin:false,sig:'',cur:null,gsig:'',pts:roomPtsOn(d),pre:roomRevSet(st)}; /* v0.19.0: pts = points on; pre = revealed before I came in */
   qorder=d.qorder.slice();qopt=d.qopt.map(a=>a.slice());qmode='room';qTestSubmitted=false;qPrior={};qT0=Date.now();gcGuide=null;
   qans=qorder.map(()=>null);qsub=qorder.map(()=>false);qflag=qorder.map(()=>false);qelapsed=qorder.map(()=>0);qcur=0;
   const L=roomMine(ROOM.lid);L.r.at=Date.now();L.x.last=code;roomLocalSave(L.x);
@@ -7013,7 +7140,7 @@ function roomApply(st){const R=ROOM;if(!R||R.over||!st)return;R.st=st;R.me=st.me
   if(cur>=n){roomScores();return;}
   if(cur!==was&&qcur!==cur){qcur=cur;R.sig='';window.scrollTo({top:0});if(back&&cur>was)toast(`The room moved on to question ${cur+1}.`);}
   const s=roomQ(st,qcur)||{},sig=roomSig(s,st); /* v0.17.1: order-insensitive */
-  if(sig!==R.sig){R.sig=sig;renderQuiz();}else if(roomGridSig()!==R.gsig){renderGrid();roomBackPaint();}}
+  if(sig!==R.sig){R.sig=sig;renderQuiz();}else if(roomGridSig()!==R.gsig){renderGrid();roomBackPaint();}roomPtsPaint();} /* v0.19.0 */
 /* v0.18.2: a room uses Practice's own row (.controls) and question map (#grid). ROOM.cur is the room's question; qcur is
    the question I'm looking at: the same, unless I've stepped back to a revealed one (personal: nothing is sent). */
 function roomCur(){const R=ROOM;return R&&R.cur!=null?R.cur:qcur;}
@@ -7052,7 +7179,7 @@ function roomAfterRender(){const on=qmode==='room'&&!!ROOM;$('quiz').classList.t
       if(who.length){const d=document.createElement('div');d.className='rpicks';d.dataset.oi=oi;d.textContent='Picked by '+who.map(nm).join(', ');row.after(d);}});
     const none=mem.filter(m=>pk[m.mid]==null);if(none.length){const d=document.createElement('div');d.className='rpicks rnone';d.textContent='No answer: '+none.map(nm).join(', ');$('qafter').insertBefore(d,$('qafter').firstChild);}}
   $('roomRevealBtn').style.display=(rev||!at)?'none':'';$('roomRevealBtn').disabled=false;
-  roomBackPaint();R.sig=roomSig(s,st);} /* v0.18.2: Previous/Next are painted by renderGrid (qNavPaint) */
+  roomBackPaint();R.sig=roomSig(s,st);roomPtsPaint();} /* v0.19.0 */ /* v0.18.2: Previous/Next are painted by renderGrid (qNavPaint) */
 function roomFlush(){const R=ROOM;if(!R||R.over)return Promise.resolve();if(R.flushing)return R.flushing;
   if(!Object.keys(R.pend).length)return Promise.resolve();
   const run=(async()=>{for(const k of Object.keys(R.pend)){const i=+k,v=R.pend[k];if(!v)continue;
@@ -7084,7 +7211,7 @@ function roomScores(){const R=ROOM;if(!R||R.over)return;const st=R.st||{},n=qord
     mem.forEach(m=>{if(pk[m.mid]!=null){an[m.mid]++;if(+pk[m.mid]===c)sc[m.mid]++;}});}
   R.fin=true;clearTimeout(R.timer);R.timer=null;roomChips();
   const rows=mem.slice().sort((a,b)=>(sc[b.mid]-sc[a.mid])||(an[b.mid]-an[a.mid])).map(m=>`<div class="rsrow" data-mid="${acctEsc(m.mid)}" data-right="${sc[m.mid]}" data-answered="${an[m.mid]}"><span>${acctEsc(m.name)}${m.mid===R.me.mid?' (you)':''}</span><b>${sc[m.mid]} right of ${an[m.mid]} answered · ${rv-an[m.mid]} not answered</b></div>`).join('');
-  const sch=`<div class="roomscores"><h3>Room scores</h3><p class="acct-sub">${rv} question${rv===1?' was':'s were'} revealed. Your own answers are in your question history.${roomNANote()}</p>${rows}</div>`;
+  const sch=R.pts?roomFinalHTML(rv,sc,an):`<div class="roomscores"><h3>Room scores</h3><p class="acct-sub">${rv} question${rv===1?' was':'s were'} revealed. Your own answers are in your question history.${roomNANote()}</p>${rows}</div>`;
   if(R.scH===sch&&$('qcard').querySelector('.roomscores'))return; /* v0.17.1: unchanged, nothing to redraw */R.scH=sch;
   $('qtag').style.visibility='hidden';$('qdiff').innerHTML='';$('qpos').textContent='Done';$('pbar').style.width='100%';
   $('qcard').innerHTML=sch;
@@ -7106,6 +7233,9 @@ $('roomRevealBtn').addEventListener('click',roomRevealAsk);
 $('roomBackBtn').addEventListener('click',()=>roomView(roomCur()));
 $('roomLeaveBtn').addEventListener('click',roomLeaveAsk);
 $('roomDoneBtn').addEventListener('click',roomLeave);
+$('quiz').addEventListener('click',e=>{const b=e.target.closest('[data-rp]');if(!b||!ROOM||qmode!=='room')return; /* v0.19.0: points box + final standings */
+  const k=b.dataset.rp;if(k==='how'){roomPtsHow();return;}const L=roomLocal();if(k==='cnt')L.cnt=!L.cnt;else if(k==='hide')L.hide=!L.hide;else return;roomLocalSave(L);
+  if(ROOM.fin){ROOM.scH='';roomScores();}else roomPtsPaint();});
 
 /* ===== v0.17.0 stage 1b: SAVED SESSIONS (one store; rooms now, solo practice sessions later) + ROOM NAMES =====
    sessRecs (KEY.sessions, synced like stations, merged by mergeSessions) holds records
@@ -7123,7 +7253,7 @@ function sessPut(rec){if(!ROOMS_ON||TAB_PAUSED||!rec||rec.id==null)return null;c
 function roomNameClean(t){return String(t==null?'':t).replace(/[\u0000-\u001f\u007f-\u009f\u2028\u2029]/g,'').replace(/\s+/g,' ').trim().slice(0,ROOM_NAME_MAX).trim();}
 function roomSid(){try{const a=new Uint32Array(2);crypto.getRandomValues(a);return a[0].toString(36)+a[1].toString(36);}catch(e){return Math.random().toString(36).slice(2,12);}}
 function roomNameRecent(){const seen=new Set(),out=[];sessList('room').forEach(r=>{const t=roomNameClean(r.name);if(t&&!seen.has(t)&&out.length<5){seen.add(t);out.push(t);}});return out;}
-function roomNameSetup(named){const box=$('roomNameBox'),inp=$('roomNameIn');if(!box||!inp)return;box.hidden=!named;inp.value='';
+function roomNameSetup(named){const box=$('roomNameBox'),inp=$('roomNameIn');if(!box||!inp)return;box.hidden=!named;inp.value='';if($('roomPtsIn'))$('roomPtsIn').checked=true; /* v0.19.0: on by default */
   if(!inp.dataset.w){inp.dataset.w='1';inp.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('roomNickGo').click();}});}
   const sg=$('roomNameSugg'),rec=named?roomNameRecent():[];
   sg.innerHTML=rec.length?'<span class="rsl">Recent names:</span>'+rec.map(t=>`<button type="button" class="rchip" data-n="${acctEsc(t)}"><span class="rn">${acctEsc(t)}</span></button>`).join(''):'';
@@ -7141,7 +7271,7 @@ function roomSessSave(ci,fin){const R=ROOM;if(!R||!ROOMS_ON||!R.d)return;
   let correct=0;Object.keys(ans).forEach(q=>{if(qmap[q]&&+ans[q]===qmap[q].correct)correct++;});
   const last=roomQ(st,n-1),cur=ci!=null?ci:((old&&old.cur)||0);
   const rec={id,at:(old&&old.at)||Date.now(),kind:'room',name:roomNameClean(R.d.title),n,qorder:qorder.slice(),qopt:qopt.map(a=>(a||[]).slice()),ans,
-    done:!!((old&&old.done)||fin||(last&&last.rev)),cur,correct,room:{code:R.code,members,rev}};
+    done:!!((old&&old.done)||fin||(last&&last.rev)),cur,correct,room:Object.assign({code:R.code,members,rev},roomSessBoard())}; /* v0.19.0: + pts, board */
   const k=x=>roomCanon(Object.assign({},x,{up:0})); /* v0.17.1: key order doesn't count as a change */if(old&&k(old)===k(Object.assign({},rec,{up:old.up})))return;
   sessPut(rec);}
 /* "Past study rooms" — the store filtered to rooms; same look as Past exams; no resume, no delete in v0.17.0. */
@@ -7154,7 +7284,7 @@ function sessPastOpen(){if(!ROOMS_ON)return;let ov=$('roomPastOv');
   if(!L.length)b.innerHTML='<p class="acct-sub">No study rooms yet. Rooms you start or join show up here, with who was there and your score.</p>';
   else b.innerHTML=L.map(x=>{const d=new Date(x.at||x.up||Date.now()).toLocaleString([],{dateStyle:'medium',timeStyle:'short'}),nm=roomNameClean(x.name),
       mem=((x.room&&x.room.members)||[]).map(String),M=Object.keys(x.ans||{}).length,rv=Math.max(M,(x.room&&x.room.rev)||0);
-    return `<div class="pastrow" data-id="${acctEsc(x.id)}"><div><div class="pt">${acctEsc(nm||d)}</div>${nm?`<div class="pd">${d}</div>`:''}${mem.length?`<div class="pd">Who was there: ${acctEsc(mem.join(', '))}</div>`:''}<div class="pd">${x.correct||0} right of ${M} answered · ${rv-M} not answered</div></div></div>`;}).join('');
+    return `<div class="pastrow" data-id="${acctEsc(x.id)}"><div><div class="pt">${acctEsc(nm||d)}</div>${nm?`<div class="pd">${d}</div>`:''}${mem.length?`<div class="pd">Who was there: ${acctEsc(mem.join(', '))}</div>`:''}<div class="pd">${x.correct||0} right of ${M} answered · ${rv-M} not answered</div>${roomPastBoard(x)}</div></div>`;}).join('');
   ov.style.display='flex';}
 $('roomPastLink').addEventListener('click',e=>{e.preventDefault();sessPastOpen();});
 $('roomPastLink').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();sessPastOpen();}});
@@ -7204,7 +7334,7 @@ function roomRenderNA(){const rev=!!qsub[qcur],last=qcur>=qorder.length-1;
   $('qafter').innerHTML='';$('quiz').classList.add('room');
   $('submitAnsBtn').style.display='none';$('flagBtn').style.display='none';roomPenShow(false);$('roomSubState').hidden=true;
   $('roomRevealBtn').style.display=(rev||qcur!==roomCur())?'none':'';$('roomRevealBtn').disabled=false;
-  renderGrid();roomBackPaint();if(ROOM&&ROOM.st)ROOM.sig=roomSig(roomQ(ROOM.st,qcur)||{},ROOM.st);} /* v0.18.2: sit-out: no pen, Flag or Submit */
+  renderGrid();roomBackPaint();if(ROOM&&ROOM.st)ROOM.sig=roomSig(roomQ(ROOM.st,qcur)||{},ROOM.st);roomPtsPaint();} /* v0.18.2: sit-out: no pen, Flag or Submit */
 function roomNANote(){const R=ROOM;if(!R||!R.na||!R.na.size)return '';const st=R.st||{};let k=0;R.na.forEach(i=>{const s=roomQ(st,i);if(s&&s.rev)k++;});
   return k?` ${k} question${k===1?' wasn’t':'s weren’t'} in your copy of the pack, so ${k===1?'it isn’t':'they aren’t'} counted here.`:'';}
 
