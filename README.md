@@ -18,8 +18,8 @@ It's currently in **beta**.
 
 - **Review** — spaced-repetition flashcards in seven interactive card types, including **Label** cards
   (a figure with its labels covered). Grade each one Again / Hard / Good / Easy and it's scheduled to
-  come back across the following days. Choose which topics to study, week by week — or a whole week in
-  one tap with **All / None**.
+  come back across the following days. Tick **Review and Recycle** to bring the practice questions into the same
+  schedule. Choose which topics to study, week by week — or a whole week in one tap with **All / None**.
 - **Practice** — the question bank one question at a time. Submit to see the answer, the
   explanation and a link to the right topic guide. Questions you've never answered come first;
   ones you've answered before come last — the ones you got wrong ahead of the ones you got right —
@@ -196,6 +196,12 @@ Questions you've never answered come first. Ones you've answered before go to th
 </details>
 
 <details>
+<summary><strong>What is Review and Recycle?</strong></summary>
+
+Spaced repetition for questions. On the Review deck, tick **Review and Recycle**. The practice questions in your active packs then come up alongside your cards, in the topics you've chosen, with the same Sources and Extras settings as Practice. After the answer shows, rate it Again, Hard, Good or Easy and it comes back on the same schedule as a card, except that Again brings it back tomorrow rather than in a few minutes. Questions you've answered in Practice start from that history, so the ones you got wrong come up first. New questions have their own daily limit in **Settings → Review**. An answer in Review also counts in your question history.
+</details>
+
+<details>
 <summary><strong>Can I leave an exam and come back to it?</strong></summary>
 
 Yes. Leave part-way and the exam is saved, with the timer paused. Tap **Exam** to **Resume** — or **Start fresh**, which keeps the questions you'd answered (you can look back at them under **Past exams**) and sets up a new exam that avoids them.
@@ -274,7 +280,7 @@ Your **synced** copy can't be unlocked by anyone — including me. That's the wh
 <details>
 <summary><strong>What if two devices change at the same time?</strong></summary>
 
-They're combined — nothing to choose, and nothing studied is lost. If the same card was studied on both, the most recent review counts. Answers to the same question on both are all kept in your history. If a pack was switched on or off on both, the latest switch wins; a pack you removed stays removed. An unfinished exam that's replaced by a newer one moves to **Past exams**. **Sync activity** in the account menu lists what was combined, on any of your devices.
+They're combined — nothing to choose, and nothing studied is lost. If the same card or question was reviewed on both, the most recent review counts. Answers to the same question on both are all kept in your history. If a pack was switched on or off on both, the latest switch wins; a pack you removed stays removed. An unfinished exam that's replaced by a newer one moves to **Past exams**. **Sync activity** in the account menu lists what was combined, on any of your devices.
 </details>
 
 <details>

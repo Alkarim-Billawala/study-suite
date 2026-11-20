@@ -1,5 +1,14 @@
 <!--
-  Study Suite  ·  v0.19.0 (beta)
+  Study Suite  ·  v0.20.0 (beta)
+  Changelog v0.20.0 (2026-11-20): QUESTION REVIEW (owner 2026-11-18: "an anki mode (spaced repition) just for MCQ ... users
+  can rate how hard a q is and see it again based on same alg as cards"; 2026-11-20: "just like another toggle"). Review's
+  'Review and Recycle' (settings.srsQ, off by default, synced) puts the active packs' questions (qpool: Sources and Extras as
+  in Practice) in Review's one queue with the cards, inside Review's topic choice. Schedules in sched['q:'+id] (no collision
+  with card ids; older apps carry the keys through mergeMap). schedQ = schedule() with the minute steps made one day (Again =
+  tomorrow). First intervals seeded from question history (rqSeed, never stored). Own daily new limit srsQNewPerDay 20
+  (daily.qn, merged like daily.count). Practice's option rows and explanation are now qOptsHTML/qAfterHTML, shared by
+  renderQuiz and the Review question (rqRender); an answer shown in Review counts in question history. Practice, Exam and
+  Study rooms unchanged. Build record: Drive Claude/StudySuite/app-v0200-question-review-2026-11-20/README.md.
   Changelog v0.19.0 (2026-11-20): STUDY ROOMS: POINTS, STREAKS AND A LIVE LEADERBOARD (owner: "no speed at all. points,
   streaks and live leaderboards only"; "make sure this is shown somehow, so ppl know how it adds up. also make raw correct #/
   streak counts visible under a toggle"). Worked out on every device from the same server state (revealed picks in question
@@ -1605,6 +1614,9 @@ ul.lablist{list-style:disc}
 .defpacks .dp-badge.mini{margin-left:6px;font-size:8.5px;padding:1px 6px;vertical-align:middle}
 .defpacks .dp-d{font-size:15px;color:var(--ink-soft);margin:6px 0 12px}
 .dp-schools{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;margin:0 0 12px;padding-bottom:4px}
+.dp-schools .cfbtn{font-family:var(--font-mono);font-size:11px;align-self:center;flex:none} /* v0.20.0 */
+.qflbox.cfbox{display:block}.qflbox.cfbox[hidden]{display:none}.cfbox>.fltchk{display:flex;margin:0 0 10px}.cfwho{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin:4px 0 8px}
+.cfgrp{margin:0 0 4px}.cfgrp .fltchk{display:flex;font-size:14px;margin:0 0 7px;min-width:0;overflow-wrap:anywhere}.cfmark{font-style:italic}
 .dp-schools:empty{display:none}
 .dp-school{font-family:var(--font-body);font-size:15px;border:1.5px solid var(--line);background:var(--paper);border-radius:20px;padding:6px 14px;cursor:pointer;transition:.12s;white-space:nowrap;color:var(--ink)}
 .dp-school:hover{border-color:var(--accent-soft)}
@@ -2145,7 +2157,7 @@ var r=localStorage.getItem('suite_eac_v1'),a=JSON.parse(localStorage.getItem('su
       </div>
       <div class="infopanel" id="faqPanel" style="display:none">
         <div class="faqbody">
-          <!-- GEN:faq · filled from FAQ.md at deploy (Pack Tools/public_copy.py) --><div class="faq-sec">The basics — how it works today</div><h4>What is Study Suite?</h4><p>A study tool with three ways to study — <b>Review</b> (spaced-repetition flashcards), <b>Practice</b> (one question at a time with instant feedback) and <b>Exam</b> (timed, scored mock tests) — plus <b>Topic Guides</b> and a <b>Pharmacology</b> drug index to read from. The app itself is empty — you load <b>study packs</b> that hold the questions, cards and guides. You sign in with a free account, which keeps your progress encrypted and in sync between your devices. It's currently in beta.</p><h4>Is it really free?</h4><p>Yes. Study Suite is free while it's in beta, with no ads and no tracking; you just need a free account. If that ever changes, I'll let you know well before it does. If you want to chip in toward the costs of building it, there's an optional "Support development" link, but it's never required and unlocks nothing.</p><h4>Where is my data stored? Can you see it?</h4><p>Everything — your packs, review progress, scores, and settings — is stored in your own browser, on your own device, and synced to your account. There's no analytics and no tracking cookies. Before anything is uploaded, it's end-to-end encrypted on your device — so I genuinely can't see what you study or how you're doing.</p><h4>How do I back up my progress or move to another device?</h4><p>Use <b>Backup all</b> to save a file with everything in it, then <b>Restore backup</b> on your other device (or after clearing your browser). Or create a free account and turn on sync (below). It's worth backing up now and then, since your progress lives in your browser and clearing site data would wipe it.</p><h4>Does it work offline?</h4><p>Yes, fully. The app is a single self-contained file. Once it's loaded in your browser — or installed to your home screen — it keeps working with no internet connection. Your packs and progress are right there on your device.</p><h4>Can I add it to my phone or computer like a real app?</h4><p>Yes — use <b>Add to Home Screen</b> (the app walks you through it for your device). One thing to know: an installed copy may keep its <b>own separate storage</b> from the browser version (on iPhone and iPad it always does). Just sign in inside the installed app and everything syncs across.</p><h4>Can I make my own study packs, or use my own notes?</h4><p>Absolutely — that's encouraged. Download the <a href="Study_Suite_Authoring_Guide_latest.md" download><b>instruction set</b></a> (also linked on the home screen) and hand it to the AI assistant of your choice; it walks the assistant through turning your own material into a pack you can load. Packs you make from your own content are <b>yours</b>. (The app, its design, and the pack format are mine, but the content you bring into it is entirely your own.)</p><h4>Is any of this medical advice?</h4><p>No. Study Suite and its packs are <b>educational material for exam preparation only</b> — not medical advice, and never a basis for real decisions about real patients. It's also in beta, so content can contain errors or go out of date. Always check against your own curriculum and trusted sources.</p><div class="faq-sec">Studying</div><h4>Why can't I hear the low heart sounds?</h4><p>S3, S4 and the rumble of a narrowed mitral valve sit below what most phone and laptop speakers can play. Use earphones. Sounds are meant to play even with your phone's silent switch on.</p><h4>How does Practice decide the order of questions?</h4><p>Questions you've never answered come first. Ones you've answered before go to the end — the ones you got wrong last time ahead of the ones you got right — and they're marked on the question map. Each starts clear, with <b>View prior answer</b> if you want to see what you picked before. Prefer only new ones? Turn on <b>Unanswered questions only</b> when you set up Practice. <b>Skip</b> moves on without counting a question as seen.</p><h4>Can I leave an exam and come back to it?</h4><p>Yes. Leave part-way and the exam is saved, with the timer paused. Tap <b>Exam</b> to <b>Resume</b> — or <b>Start fresh</b>, which keeps the questions you'd answered (you can look back at them under <b>Past exams</b>) and sets up a new exam that avoids them.</p><h4>What are study rooms?</h4><p>A study room lets up to 8 people work through the same practice questions at the same time, each on their own device. One person starts a room from the practice setup and gives the others its 6-digit code to type on Home. Everyone picks and submits their own answer. Anyone can press Reveal, and the answer, the explanation and everyone's picks show for the whole room. Your own answers go into your question history as usual. If you hadn't picked anything when the answer was revealed, nothing is recorded for that question. The question map lets you look back at questions the room has finished without moving the room, and anyone can end the room early to see the scores. Rooms can keep points: 100 for each right answer plus a bonus for right answers in a row, with a leaderboard after each reveal. Whoever starts the room can turn points off.</p><h4>Who can see what in a study room?</h4><p>The others in the room see the nickname you chose and, once an answer is revealed, what you picked. While a room is open, my server passes those between you; it doesn't keep them after the room closes. Your own record of the room, including the final standings if the room kept points, is encrypted before it syncs, like the rest of your study data.</p><h4>How do highlights and notes work?</h4><p>Select text in a topic guide, the Pharmacology Index, a question or a card, then tap a colour or <b>Note</b>. Tap a highlight to change it or remove it. Figures and atlas slices have a note button of their own. Everything is listed under <b>Highlights</b> on Home, by week.</p><p>In Practice and Review your saved highlights appear once you've answered; the highlighter button shows or hides them. Exams start clean — tap <b>Keep my highlights</b> on the results screen to save the ones you made.</p><h4>What are topics?</h4><p>Topics are the main subjects each week covers — anywhere from about 6 to 20 per week. They're what you choose from in <b>Review</b>, what you can narrow <b>Practice</b> and <b>Exam</b> to, and one way to weight an exam. Each question and card also carries a smaller label for its exact point.</p><h4>What's the Pharmacology view?</h4><p>A drug index built from every pack you have switched on. Each drug gets its use, mechanism, dosing, cautions, adverse effects, monitoring and interactions, grouped by drug class, with links back to the week and topic guide that teach it.</p><div class="faq-sec">Accounts &amp; sync</div><h4>What does sync do?</h4><p>Sign in on each of your devices — phone, laptop, tablet — and your packs and progress stay in step automatically. Changes sync in the background a few seconds after you make them, whenever you open or come back to the app, and every few minutes while it's open. Offline? Keep studying; it catches up as soon as you're back online. The cloud icon is <b>green</b> when you're in sync, <b>yellow</b> if the last sync is a few minutes old or you're offline, and <b>red</b> if something needs your attention. It's the automatic version of <b>Backup all</b>.</p><h4>Do I have to make an account?</h4><p>Yes, since app v0.16.0. A free account keeps your progress safe if your browser clears its storage, and keeps your devices in step. If you were using Study Suite without one, nothing you did is lost: it's still saved in your browser, and it all moves into your account when you create one or sign in.</p><h4>How do I create an account?</h4><p>From the welcome screen, choose <b>Create an account</b>. During early access you'll need your access code. You'll get a <b>recovery code</b> straight away — save it in a password manager or somewhere safe.</p><h4>Can you see my synced data?</h4><p>No. Sync is <b>end-to-end encrypted</b>: your data is scrambled on your device <i>before</i> it's uploaded, and only the scrambled version is stored. The key that unlocks it never leaves your devices. That means <b>I can't read your synced data</b> — not for support, not for anything — because I simply don't have the key.</p><h4>What if I forget my password?</h4><p>Choose <b>Forgot password?</b> when signing in and you'll get an email with a link to set a new one. Then enter your <b>recovery code</b> to unlock your synced data — nothing is lost.</p><h4>What if I lose both my password and my recovery code?</h4><p>Your <b>synced</b> copy can't be unlocked by anyone — including me. That's the whole point of end-to-end encryption. But <b>your studying isn't gone:</b> the data on your devices is untouched, and any <b>Backup all</b> file still works. Reset your password, choose <b>Start fresh</b>, and sign in on the device where you last studied — its data becomes your new account copy.</p><h4>What if two devices change at the same time?</h4><p>They're combined — nothing to choose, and nothing studied is lost. If the same card was studied on both, the most recent review counts. Answers to the same question on both are all kept in your history. If a pack was switched on or off on both, the latest switch wins; a pack you removed stays removed. An unfinished exam that's replaced by a newer one moves to <b>Past exams</b>. <b>Sync activity</b> in the account menu lists what was combined, on any of your devices.</p><h4>How do I see which devices are syncing?</h4><p>Account menu → <b>Your devices</b> lists each browser or installed app that syncs with your account, with its app version and when it last synced. Give the one you're on a name you'll recognise — names are saved inside your encrypted study data. <b>Sign out other devices</b> (under Security) signs out all the others at once.</p><h4>What does an account store, and is it private?</h4><p>The minimum: your email address, your encrypted study data, a random ID for each device that syncs, and a few details needed to run the account. No selling data, no ads, no tracking. The <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> lists everything; see also the <a href="terms.html" target="_blank" rel="noopener">Terms</a>.</p><h4>How do I delete my account?</h4><p>Account menu → <b>Delete account</b>. It's instant and permanent, and your data on your devices stays where it is.</p><h4>How do I report a problem or send feedback?</h4><p>Tap the small ✋ button on a question, card or guide — or <b>Feedback</b> at the bottom of the page. It tells me which item you mean and sends a few diagnostic details (shown before you send). If you're offline, it goes as soon as you're back. I read every one.</p><!-- /GEN:faq -->
+          <!-- GEN:faq · filled from FAQ.md at deploy (Pack Tools/public_copy.py) --><div class="faq-sec">The basics — how it works today</div><h4>What is Study Suite?</h4><p>A study tool with three ways to study — <b>Review</b> (spaced-repetition flashcards), <b>Practice</b> (one question at a time with instant feedback) and <b>Exam</b> (timed, scored mock tests) — plus <b>Topic Guides</b> and a <b>Pharmacology</b> drug index to read from. The app itself is empty — you load <b>study packs</b> that hold the questions, cards and guides. You sign in with a free account, which keeps your progress encrypted and in sync between your devices. It's currently in beta.</p><h4>Is it really free?</h4><p>Yes. Study Suite is free while it's in beta, with no ads and no tracking; you just need a free account. If that ever changes, I'll let you know well before it does. If you want to chip in toward the costs of building it, there's an optional "Support development" link, but it's never required and unlocks nothing.</p><h4>Where is my data stored? Can you see it?</h4><p>Everything — your packs, review progress, scores, and settings — is stored in your own browser, on your own device, and synced to your account. There's no analytics and no tracking cookies. Before anything is uploaded, it's end-to-end encrypted on your device — so I genuinely can't see what you study or how you're doing.</p><h4>How do I back up my progress or move to another device?</h4><p>Use <b>Backup all</b> to save a file with everything in it, then <b>Restore backup</b> on your other device (or after clearing your browser). Or create a free account and turn on sync (below). It's worth backing up now and then, since your progress lives in your browser and clearing site data would wipe it.</p><h4>Does it work offline?</h4><p>Yes, fully. The app is a single self-contained file. Once it's loaded in your browser — or installed to your home screen — it keeps working with no internet connection. Your packs and progress are right there on your device.</p><h4>Can I add it to my phone or computer like a real app?</h4><p>Yes — use <b>Add to Home Screen</b> (the app walks you through it for your device). One thing to know: an installed copy may keep its <b>own separate storage</b> from the browser version (on iPhone and iPad it always does). Just sign in inside the installed app and everything syncs across.</p><h4>Can I make my own study packs, or use my own notes?</h4><p>Absolutely — that's encouraged. Download the <a href="Study_Suite_Authoring_Guide_latest.md" download><b>instruction set</b></a> (also linked on the home screen) and hand it to the AI assistant of your choice; it walks the assistant through turning your own material into a pack you can load. Packs you make from your own content are <b>yours</b>. (The app, its design, and the pack format are mine, but the content you bring into it is entirely your own.)</p><h4>Is any of this medical advice?</h4><p>No. Study Suite and its packs are <b>educational material for exam preparation only</b> — not medical advice, and never a basis for real decisions about real patients. It's also in beta, so content can contain errors or go out of date. Always check against your own curriculum and trusted sources.</p><div class="faq-sec">Studying</div><h4>Why can't I hear the low heart sounds?</h4><p>S3, S4 and the rumble of a narrowed mitral valve sit below what most phone and laptop speakers can play. Use earphones. Sounds are meant to play even with your phone's silent switch on.</p><h4>How does Practice decide the order of questions?</h4><p>Questions you've never answered come first. Ones you've answered before go to the end — the ones you got wrong last time ahead of the ones you got right — and they're marked on the question map. Each starts clear, with <b>View prior answer</b> if you want to see what you picked before. Prefer only new ones? Turn on <b>Unanswered questions only</b> when you set up Practice. <b>Skip</b> moves on without counting a question as seen.</p><h4>What is Review and Recycle?</h4><p>Spaced repetition for questions. On the Review deck, tick <b>Review and Recycle</b>. The practice questions in your active packs then come up alongside your cards, in the topics you've chosen, with the same Sources and Extras settings as Practice. After the answer shows, rate it Again, Hard, Good or Easy and it comes back on the same schedule as a card, except that Again brings it back tomorrow rather than in a few minutes. Questions you've answered in Practice start from that history, so the ones you got wrong come up first. New questions have their own daily limit in <b>Settings → Review</b>. An answer in Review also counts in your question history.</p><h4>Can I leave an exam and come back to it?</h4><p>Yes. Leave part-way and the exam is saved, with the timer paused. Tap <b>Exam</b> to <b>Resume</b> — or <b>Start fresh</b>, which keeps the questions you'd answered (you can look back at them under <b>Past exams</b>) and sets up a new exam that avoids them.</p><h4>What are study rooms?</h4><p>A study room lets up to 8 people work through the same practice questions at the same time, each on their own device. One person starts a room from the practice setup and gives the others its 6-digit code to type on Home. Everyone picks and submits their own answer. Anyone can press Reveal, and the answer, the explanation and everyone's picks show for the whole room. Your own answers go into your question history as usual. If you hadn't picked anything when the answer was revealed, nothing is recorded for that question. The question map lets you look back at questions the room has finished without moving the room, and anyone can end the room early to see the scores. Rooms can keep points: 100 for each right answer plus a bonus for right answers in a row, with a leaderboard after each reveal. Whoever starts the room can turn points off.</p><h4>Who can see what in a study room?</h4><p>The others in the room see the nickname you chose and, once an answer is revealed, what you picked. While a room is open, my server passes those between you; it doesn't keep them after the room closes. Your own record of the room, including the final standings if the room kept points, is encrypted before it syncs, like the rest of your study data.</p><h4>How do highlights and notes work?</h4><p>Select text in a topic guide, the Pharmacology Index, a question or a card, then tap a colour or <b>Note</b>. Tap a highlight to change it or remove it. Figures and atlas slices have a note button of their own. Everything is listed under <b>Highlights</b> on Home, by week.</p><p>In Practice and Review your saved highlights appear once you've answered; the highlighter button shows or hides them. Exams start clean — tap <b>Keep my highlights</b> on the results screen to save the ones you made.</p><h4>What are topics?</h4><p>Topics are the main subjects each week covers — anywhere from about 6 to 20 per week. They're what you choose from in <b>Review</b>, what you can narrow <b>Practice</b> and <b>Exam</b> to, and one way to weight an exam. Each question and card also carries a smaller label for its exact point.</p><h4>What's the Pharmacology view?</h4><p>A drug index built from every pack you have switched on. Each drug gets its use, mechanism, dosing, cautions, adverse effects, monitoring and interactions, grouped by drug class, with links back to the week and topic guide that teach it.</p><div class="faq-sec">Accounts &amp; sync</div><h4>What does sync do?</h4><p>Sign in on each of your devices — phone, laptop, tablet — and your packs and progress stay in step automatically. Changes sync in the background a few seconds after you make them, whenever you open or come back to the app, and every few minutes while it's open. Offline? Keep studying; it catches up as soon as you're back online. The cloud icon is <b>green</b> when you're in sync, <b>yellow</b> if the last sync is a few minutes old or you're offline, and <b>red</b> if something needs your attention. It's the automatic version of <b>Backup all</b>.</p><h4>Do I have to make an account?</h4><p>Yes, since app v0.16.0. A free account keeps your progress safe if your browser clears its storage, and keeps your devices in step. If you were using Study Suite without one, nothing you did is lost: it's still saved in your browser, and it all moves into your account when you create one or sign in.</p><h4>How do I create an account?</h4><p>From the welcome screen, choose <b>Create an account</b>. During early access you'll need your access code. You'll get a <b>recovery code</b> straight away — save it in a password manager or somewhere safe.</p><h4>Can you see my synced data?</h4><p>No. Sync is <b>end-to-end encrypted</b>: your data is scrambled on your device <i>before</i> it's uploaded, and only the scrambled version is stored. The key that unlocks it never leaves your devices. That means <b>I can't read your synced data</b> — not for support, not for anything — because I simply don't have the key.</p><h4>What if I forget my password?</h4><p>Choose <b>Forgot password?</b> when signing in and you'll get an email with a link to set a new one. Then enter your <b>recovery code</b> to unlock your synced data — nothing is lost.</p><h4>What if I lose both my password and my recovery code?</h4><p>Your <b>synced</b> copy can't be unlocked by anyone — including me. That's the whole point of end-to-end encryption. But <b>your studying isn't gone:</b> the data on your devices is untouched, and any <b>Backup all</b> file still works. Reset your password, choose <b>Start fresh</b>, and sign in on the device where you last studied — its data becomes your new account copy.</p><h4>What if two devices change at the same time?</h4><p>They're combined — nothing to choose, and nothing studied is lost. If the same card or question was reviewed on both, the most recent review counts. Answers to the same question on both are all kept in your history. If a pack was switched on or off on both, the latest switch wins; a pack you removed stays removed. An unfinished exam that's replaced by a newer one moves to <b>Past exams</b>. <b>Sync activity</b> in the account menu lists what was combined, on any of your devices.</p><h4>How do I see which devices are syncing?</h4><p>Account menu → <b>Your devices</b> lists each browser or installed app that syncs with your account, with its app version and when it last synced. Give the one you're on a name you'll recognise — names are saved inside your encrypted study data. <b>Sign out other devices</b> (under Security) signs out all the others at once.</p><h4>What does an account store, and is it private?</h4><p>The minimum: your email address, your encrypted study data, a random ID for each device that syncs, and a few details needed to run the account. No selling data, no ads, no tracking. The <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> lists everything; see also the <a href="terms.html" target="_blank" rel="noopener">Terms</a>.</p><h4>How do I delete my account?</h4><p>Account menu → <b>Delete account</b>. It's instant and permanent, and your data on your devices stays where it is.</p><h4>How do I report a problem or send feedback?</h4><p>Tap the small ✋ button on a question, card or guide — or <b>Feedback</b> at the bottom of the page. It tells me which item you mean and sends a few diagnostic details (shown before you send). If you're offline, it goes as soon as you're back. I read every one.</p><!-- /GEN:faq -->
         </div>
       </div>
     </div>
@@ -2165,6 +2177,7 @@ var r=localStorage.getItem('suite_eac_v1'),a=JSON.parse(localStorage.getItem('su
       <div class="cbox learnc"><div class="n" id="cLearn">0</div><div class="l">Learning</div></div>
       <div class="cbox revc"><div class="n" id="cRev">0</div><div class="l">To review</div></div>
     </div>
+    <div class="srsflt"><label class="fltchk"><input type="checkbox" id="srsQ"><span>Review and Recycle</span></label><span class="fltn" id="srsQN"></span></div>
     <div class="srsflt"><label class="fltchk"><input type="checkbox" id="srsFlt"><span>⚑ Flagged only</span></label><span class="fltn" id="srsFltN"></span></div>
     <div class="srsflt"><label class="fltchk"><input type="checkbox" id="srsAgain"><span>↺ Cards marked Again</span></label><span class="fltn" id="srsAgainN"></span><button type="button" class="flaglink" id="srsGapsBtn" style="margin-left:6px"><span class="gi">◔</span> Gaps</button></div>
     <div class="scopeline" id="scopeline"></div>
@@ -2458,6 +2471,7 @@ var r=localStorage.getItem('suite_eac_v1'),a=JSON.parse(localStorage.getItem('su
     <div class="setsec">
       <div class="sh">Review (spaced repetition)</div>
       <div class="setrow"><span>New cards per day</span><input type="number" id="setNewPerDay" min="0" max="500" value="20"></div>
+      <div class="setrow"><span>New questions per day</span><input type="number" id="setQNewPerDay" min="0" max="500" value="20"></div>
     </div>
     <div class="setsec">
       <div class="sh">Highlights</div>
@@ -2487,7 +2501,7 @@ var r=localStorage.getItem('suite_eac_v1'),a=JSON.parse(localStorage.getItem('su
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.19.0';
+const APP_VERSION='0.20.0';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -2790,7 +2804,7 @@ function humanFromNow(due,now){if(due<=now)return 'due';return 'in '+humanDelta(
 
 /* ===== STATE ===== */
 let packs=[], sched={}, daily={date:'',count:0}, eac=null, prac=null, qhist={}, examSave=null, examLog=[], devNames={}, packGone={}, stLog=[], sessRecs=[]; /* stLog: v0.16.0 station attempts */ /* sessRecs: v0.17.0 saved sessions (KEY.sessions) */
-let settings={theme:'auto',autoDark:'dark',themeFamily:'navy',examGroupBy:'system',examAuto:true,examFresh:'prefer',practiceOnlyNew:false,examTarget:40,examCounts:{},practiceSecs:90,practiceTimer:true,practiceShuffle:true,examMinutes:60,examTimer:true,srsNewPerDay:20,sessionDiffs:['easy','medium','hard'],revNavCollapsed:false,examMix:{on:false,easy:25,medium:55,hard:20},examTypesOff:[],examComp:{}}; /* exam mode: defaults = old behaviour */
+let settings={theme:'auto',autoDark:'dark',themeFamily:'navy',examGroupBy:'system',examAuto:true,examFresh:'prefer',practiceOnlyNew:false,examTarget:40,examCounts:{},practiceSecs:90,practiceTimer:true,practiceShuffle:true,examMinutes:60,examTimer:true,srsNewPerDay:20,srsQ:false,srsQNewPerDay:20,sessionDiffs:['easy','medium','hard'],revNavCollapsed:false,examMix:{on:false,easy:25,medium:55,hard:20},examTypesOff:[],examComp:{}}; /* exam mode: defaults = old behaviour */
 /* ===== APPEARANCE / THEME ===== */
 function resolveMode(){const t=settings.theme||'auto';
   if(t==='light'||t==='dark'||t==='black')return t;
@@ -3137,7 +3151,7 @@ const SSSync=(()=>{
       if(bv){r.n=Math.max(0,(x.n||0)+(y.n||0)-(bv.n||0));r.k=Math.max(0,(x.k||0)+(y.k||0)-(bv.k||0));}else{r.n=Math.max(x.n||0,y.n||0);r.k=Math.max(x.k||0,y.k||0);}
       r.k=Math.min(r.k,r.n);const ex=Math.max(x.ex||0,y.ex||0);if(ex)r.ex=ex;return r;};
     const ld=l.daily||{},cd=c.daily||{},bd=b.daily;
-    const daily=ld.date!==cd.date?((ld.date||'')>(cd.date||'')?ld:cd):Object.assign({},ld,{count:(bd&&bd.date===ld.date)?Math.max(0,(ld.count||0)+(cd.count||0)-(bd.count||0)):Math.max(ld.count||0,cd.count||0)});
+    const daily=ld.date!==cd.date?((ld.date||'')>(cd.date||'')?ld:cd):Object.assign({},ld,{count:(bd&&bd.date===ld.date)?Math.max(0,(ld.count||0)+(cd.count||0)-(bd.count||0)):Math.max(ld.count||0,cd.count||0),qn:(bd&&bd.date===ld.date)?Math.max(0,(ld.qn||0)+(cd.qn||0)-(bd.qn||0)):Math.max(ld.qn||0,cd.qn||0)}); /* v0.20.0: qn = new questions today */
     const moved=[],gone=Object.assign({},c.gone||{});Object.entries(l.gone||{}).forEach(([k,t])=>{if(!(gone[k]>=t))gone[k]=t;});
     const exam=whole(b.exam,l.exam,c.exam,(x,y)=>{if(!x||!y)return x||y;const w=newer(x,y),o=w===x?y:x;
       if(o.t0!==w.t0&&(o.qans||[]).some(a=>a!=null))moved.push(logEntry(o));return w;});
@@ -3782,6 +3796,7 @@ function dpRow(p,isNew){
     }catch(e){btn.disabled=false;btn.textContent=outdated?'↑ Update':'+ Add to library';toast('Could not load that pack — check your connection and try again.');}
   };
   row.appendChild(btn);
+  {const cm=cfMark(p);if(cm){cm.className='dp-about cfmark';row.appendChild(cm);}} /* v0.20.0 */
   if(p.about){const ab=document.createElement('div');ab.className='dp-about';ab.textContent=p.about;row.appendChild(ab);} /* v0.12.0: what this pack gives you (pack_notes.json "about") */
   /* per-pack raw-file download — disabled v0.2.16 (packs are bundled; Add covers it). Revive by uncommenting:
   const dl=document.createElement('a');dl.className='dp-dl';dl.href=encodeURI(String(p.file));dl.setAttribute('download','');dl.textContent='⇣ file';row.appendChild(dl); */
@@ -3808,7 +3823,8 @@ function sortedCourses(cs){return [...cs.entries()].sort((A,B)=>cmpW(courseWeek(
    ingestPack carried them) by copying those fields from the default-packs manifest, matched by id. */
 function backfillPlacement(){const m=defaultManifest;if(!m||!Array.isArray(m.packs))return;let changed=false;
   m.packs.forEach(mp=>{if(!mp||!mp.id)return;const lp=packs.find(p=>p.id===mp.id);if(!lp)return;
-    ['school','year','term','course','weeks'].forEach(k=>{if(mp[k]&&lp[k]!==mp[k]){lp[k]=mp[k];changed=true;}});});
+    ['school','year','term','course','weeks'].forEach(k=>{if(mp[k]&&lp[k]!==mp[k]){lp[k]=mp[k];changed=true;}});
+    if(contribOf(mp)&&!contribOf(lp)){lp.contributor=contribOf(mp);changed=true;}}); /* v0.20.0 */
   if(changed)persist();}
 /* Default-pack updates: compare a loaded library pack's version to the manifest entry for the same id.
    verCmp returns >0 if a is newer (handles "2.10" > "2.9"). Requires `version` in the manifest entries
@@ -3816,7 +3832,7 @@ function backfillPlacement(){const m=defaultManifest;if(!m||!Array.isArray(m.pac
 function verCmp(a,b){const pa=String(a==null?0:a).split('.').map(n=>parseInt(n,10)||0),pb=String(b==null?0:b).split('.').map(n=>parseInt(n,10)||0);
   for(let i=0;i<Math.max(pa.length,pb.length);i++){const x=pa[i]||0,y=pb[i]||0;if(x!==y)return x-y;}return 0;}
 /* ---- Placeholder packs (v0.5.5): a switched-off published pack without its content; downloaded again in one tap. ---- */
-const PACK_META=['pack','version','author','school','year','term','course','weeks','enabled','ts'];
+const PACK_META=['pack','version','author','school','year','term','course','weeks','enabled','ts','contributor']; /* v0.20.0: + contributor */
 function manifestEntry(id){const m=defaultManifest;return (m&&Array.isArray(m.packs))?m.packs.find(x=>x&&x.id===id&&x.file)||null:null;}
 function makeStub(p,mp){const st={id:p.id,stub:1,questions:[],cards:[],guides:[]};PACK_META.forEach(k=>{if(p[k]!==undefined)st[k]=p[k];});
   if(!st.pack)st.pack=(mp&&mp.label)||p.id;
@@ -3887,7 +3903,7 @@ async function applyPackUpdate(p,mp,auto){const j=await fetchPackJson(mp);
 function updatePack(p,mp,btn){if(btn){btn.disabled=true;btn.textContent='Updating…';}
   applyPackUpdate(p,mp).then(async()=>{await persist();renderHome();toast('Updated '+(p.pack||p.id)+' to v'+mp.version+'.');})
     .catch(()=>{if(btn){btn.disabled=false;btn.textContent='↑ Update';}toast('Could not update — check your connection and try again.');});}
-var DEFAULT_ATLAS='neuro_brain'; /* v0.12.3: an atlas link without data-atlas-pack opens The Brain (var: renderHome may run before this line) */ var autoBusy=false,autoTimer=null,autoFail={}; function scheduleAutoPacks(){clearTimeout(autoTimer);autoTimer=setTimeout(()=>{ensureAutoPacks().catch(()=>{});quietRefUpdates().catch(()=>{});},400);} /* v0.12.3: default packs (default:true) for everyone, paired packs (pairedWith) when a partner is on — each added once; a removal (packGone) sticks */ async function ensureAutoPacks(){if(autoBusy||!DATA_READY||!defaultManifest)return;   if(ACCT_ON&&SSAccount.session()&&!(SSSync.status().lastOk>0))return; /* signed in: wait for this session's first sync, so a removal on another device is known */   const vm=visibleManifest();if(!vm||!Array.isArray(vm.packs))return;const on=new Set(activePacks().map(p=>p.id));const now=Date.now();   const todo=vm.packs.filter(mp=>mp&&mp.file&&mp.id&&!packs.some(p=>p.id===mp.id)&&!(packGone&&packGone[mp.id])&&!(autoFail[mp.id]>now-600000)     &&(mp.default===true||(Array.isArray(mp.pairedWith)&&mp.pairedWith.some(id=>on.has(id)))));   if(!todo.length)return;autoBusy=true;const added=[];   try{for(const mp of todo){try{ingestPack(await fetchPackJson(mp),(mp.label||mp.file).replace(/\.json$/i,''));added.push(mp);}catch(e){autoFail[mp.id]=Date.now();}}     if(added.length){await persist();renderHome();const nm=mp=>mp.label||mp.id;       toast(added.length===1?(nm(added[0])+' added'+(added[0].default===true?'.':' — it goes with your '+(added[0].id===DEFAULT_ATLAS?'neuro weeks':'weeks')+'.')):('Added: '+added.map(nm).join(', ')+'.'),4000);}}   finally{autoBusy=false;}} /* v0.13.1: Reference packs (Pharmacology Index, atlases) take a newer published version by themselves — no ↑ Update tap; What's new still shows it. Function declarations + var: pendingUpdates() may run before this line. */ function isRefPack(p,mp){return ((mp&&mp.year)||(p&&p.year))==='Reference';} var refBusy=false,refFail={},autoUpdWait=null; async function quietRefUpdates(){if(refBusy||!DATA_READY||!defaultManifest)return;   if(ACCT_ON&&SSAccount.session()&&!(SSSync.status().lastOk>0))return; /* signed in: after this session's first sync, as for the auto packs */   const now=Date.now(),idle=!updInterrupts();let waiting=false;const todo=packs.map(p=>[p,packUpdate(p)]).filter(e=>{if(!e[1]||refFail[e[0].id]>now-600000)return false;if(isRefPack(e[0],e[1])){if(!idle){waiting=true;return false;}return true;} /* v0.16.0: never mid-practice/review/results */if(!autoUpdOn())return false;if(!idle){waiting=true;return false;}return true;}); /* v0.13.4: week packs too, when Update automatically is on and nothing is interrupted */   if(waiting){clearTimeout(autoUpdWait);autoUpdWait=setTimeout(scheduleAutoPacks,30000);}   if(!todo.length)return;refBusy=true;let n=0;   try{for(const [p,mp] of todo){try{await applyPackUpdate(p,mp,true);n++;}catch(e){refFail[p.id]=Date.now();}}     if(n){await persist();renderHome();updateHeaderButtons();}}finally{refBusy=false;}} function maybeApplyQueuedUpdates(){if(!DATA_READY||!defaultManifest)return;scheduleAutoPacks();try{sessionStorage.removeItem('suite_apply_updates');}catch(e){} /* v0.6.7: a pre-0.6.7 flag is discarded — pack updates are accepted in the library only */
+var DEFAULT_ATLAS='neuro_brain'; /* v0.12.3: an atlas link without data-atlas-pack opens The Brain (var: renderHome may run before this line) */ var autoBusy=false,autoTimer=null,autoFail={}; function scheduleAutoPacks(){clearTimeout(autoTimer);autoTimer=setTimeout(()=>{ensureAutoPacks().catch(()=>{});quietRefUpdates().catch(()=>{});},400);} /* v0.12.3: default packs (default:true) for everyone, paired packs (pairedWith) when a partner is on — each added once; a removal (packGone) sticks */ async function ensureAutoPacks(){if(autoBusy||!DATA_READY||!defaultManifest)return;   if(ACCT_ON&&SSAccount.session()&&!(SSSync.status().lastOk>0))return; /* signed in: wait for this session's first sync, so a removal on another device is known */   const vm=visibleManifest();if(!vm||!Array.isArray(vm.packs))return;const on=new Set(activePacks().map(p=>p.id));const now=Date.now();   const todo=vm.packs.filter(mp=>mp&&mp.file&&mp.id&&!packs.some(p=>p.id===mp.id)&&!(packGone&&packGone[mp.id])&&!(autoFail[mp.id]>now-600000)     &&(mp.default===true||(CONTRIB_AUTO&&contribOf(mp))||(Array.isArray(mp.pairedWith)&&mp.pairedWith.some(id=>on.has(id))))); /* v0.20.0: CONTRIB_AUTO */   if(!todo.length)return;autoBusy=true;const added=[];   try{for(const mp of todo){try{ingestPack(await fetchPackJson(mp),(mp.label||mp.file).replace(/\.json$/i,''));added.push(mp);}catch(e){autoFail[mp.id]=Date.now();}}     if(added.length){await persist();renderHome();const nm=mp=>mp.label||mp.id;       toast(added.length===1?(nm(added[0])+' added'+(added[0].default===true?'.':' — it goes with your '+(added[0].id===DEFAULT_ATLAS?'neuro weeks':'weeks')+'.')):('Added: '+added.map(nm).join(', ')+'.'),4000);}}   finally{autoBusy=false;}} /* v0.13.1: Reference packs (Pharmacology Index, atlases) take a newer published version by themselves — no ↑ Update tap; What's new still shows it. Function declarations + var: pendingUpdates() may run before this line. */ function isRefPack(p,mp){return ((mp&&mp.year)||(p&&p.year))==='Reference';} var refBusy=false,refFail={},autoUpdWait=null; async function quietRefUpdates(){if(refBusy||!DATA_READY||!defaultManifest)return;   if(ACCT_ON&&SSAccount.session()&&!(SSSync.status().lastOk>0))return; /* signed in: after this session's first sync, as for the auto packs */   const now=Date.now(),idle=!updInterrupts();let waiting=false;const todo=packs.map(p=>[p,packUpdate(p)]).filter(e=>{if(!e[1]||refFail[e[0].id]>now-600000)return false;if(isRefPack(e[0],e[1])){if(!idle){waiting=true;return false;}return true;} /* v0.16.0: never mid-practice/review/results */if(!autoUpdOn())return false;if(!idle){waiting=true;return false;}return true;}); /* v0.13.4: week packs too, when Update automatically is on and nothing is interrupted */   if(waiting){clearTimeout(autoUpdWait);autoUpdWait=setTimeout(scheduleAutoPacks,30000);}   if(!todo.length)return;refBusy=true;let n=0;   try{for(const [p,mp] of todo){try{await applyPackUpdate(p,mp,true);n++;}catch(e){refFail[p.id]=Date.now();}}     if(n){await persist();renderHome();updateHeaderButtons();}}finally{refBusy=false;}} function maybeApplyQueuedUpdates(){if(!DATA_READY||!defaultManifest)return;scheduleAutoPacks();try{sessionStorage.removeItem('suite_apply_updates');}catch(e){} /* v0.6.7: a pre-0.6.7 flag is discarded — pack updates are accepted in the library only */
   try{offloadIdle();}catch(e){}
   repairPacks();}
 /* v0.8.3: re-read a published pack whose copy came from an older app (no readBy, or items dropped by an older app).
@@ -3935,11 +3951,12 @@ function renderDefaultPacks(){
     b.appendChild(document.createTextNode(s));
     if(schoolNew[s]){const tag=document.createElement('span');tag.className='dp-badge mini';tag.textContent=schoolNew[s]+' new';b.appendChild(tag);}
     b.onclick=()=>{if(s!==dpSchool){dpSchool=s;dpOpen=null;renderDefaultPacks();}};sh.appendChild(b);});
+  {const old=$('dpCfBox');if(old)old.remove();const cf=cfControls('dp',m.packs.filter(p=>p&&p.file&&(p.school||'Other')===dpSchool));if(cf){sh.appendChild(cf[0]);cf[1].id='dpCfBox';sh.after(cf[1]);}} /* v0.20.0 */
   const host=$('dpList');host.innerHTML='';
   // group (within selected school): year -> term -> course -> packs (term optional)
   const years=new Map();
   m.packs.forEach(p=>{if(!p||!p.file)return;
-    if((p.school||'Other')!==dpSchool)return;
+    if((p.school||'Other')!==dpSchool)return;if(!cfShown(p))return; /* v0.20.0 */
     const y=p.year||'Other packs',t=p.term||'',c=courseLabel(p.course);
     if(!years.has(y))years.set(y,new Map());
     const ts=years.get(y);if(!ts.has(t))ts.set(t,new Map());
@@ -5106,7 +5123,7 @@ function validateQuestion(q,i){
 function ingestPack(obj,sourceName){
   let pk;
   if(Array.isArray(obj)){const isCards=obj.some(x=>x&&x.type&&KNOWN_TYPES.includes(x.type));pk={id:'pack_'+Date.now().toString(36),pack:sourceName||'Imported',questions:isCards?[]:obj,cards:isCards?obj:[],guides:[]};}
-  else {pk={id:obj.id||('pack_'+Date.now().toString(36)),pack:obj.pack||sourceName||'Imported',questions:Array.isArray(obj.questions)?obj.questions:[],cards:Array.isArray(obj.cards)?obj.cards:[],guides:Array.isArray(obj.guides)?obj.guides:[],version:obj.version,author:obj.author||obj.createdBy,school:obj.school,year:obj.year,term:obj.term,course:obj.course,weeks:obj.weeks,groupBy:obj.groupBy,drugs:Array.isArray(obj.drugs)?obj.drugs:[],sources:(obj.sources&&typeof obj.sources==='object'&&!Array.isArray(obj.sources))?obj.sources:undefined,widgets:(obj.widgets&&typeof obj.widgets==='object'&&!Array.isArray(obj.widgets))?obj.widgets:undefined,sounds:(obj.sounds&&typeof obj.sounds==='object'&&!Array.isArray(obj.sounds))?obj.sounds:undefined,stations:ingestStations(obj).list,stBad:ingestStations(obj).bad||undefined,rubric:(obj.rubric&&typeof obj.rubric==='object'&&Array.isArray(obj.rubric.options))?obj.rubric:undefined, /* v0.16.0 */components:(obj.components&&typeof obj.components==='object'&&!Array.isArray(obj.components))?obj.components:undefined /* exam mode */,sortWeek:(typeof obj.sortWeek==='number'?obj.sortWeek:undefined),classes:(obj.classes&&typeof obj.classes==='object'&&!Array.isArray(obj.classes))?obj.classes:undefined};} /* v0.6.6: sources · v0.9.0: widgets · v0.13.0: sounds */
+  else {pk={id:obj.id||('pack_'+Date.now().toString(36)),pack:obj.pack||sourceName||'Imported',questions:Array.isArray(obj.questions)?obj.questions:[],cards:Array.isArray(obj.cards)?obj.cards:[],guides:Array.isArray(obj.guides)?obj.guides:[],version:obj.version,author:obj.author||obj.createdBy,school:obj.school,year:obj.year,term:obj.term,course:obj.course,weeks:obj.weeks,groupBy:obj.groupBy,drugs:Array.isArray(obj.drugs)?obj.drugs:[],sources:(obj.sources&&typeof obj.sources==='object'&&!Array.isArray(obj.sources))?obj.sources:undefined,widgets:(obj.widgets&&typeof obj.widgets==='object'&&!Array.isArray(obj.widgets))?obj.widgets:undefined,sounds:(obj.sounds&&typeof obj.sounds==='object'&&!Array.isArray(obj.sounds))?obj.sounds:undefined,stations:ingestStations(obj).list,stBad:ingestStations(obj).bad||undefined,rubric:(obj.rubric&&typeof obj.rubric==='object'&&Array.isArray(obj.rubric.options))?obj.rubric:undefined, /* v0.16.0 */components:(obj.components&&typeof obj.components==='object'&&!Array.isArray(obj.components))?obj.components:undefined /* exam mode */,sortWeek:(typeof obj.sortWeek==='number'?obj.sortWeek:undefined),contributor:contribOf(obj)||undefined, /* v0.20.0 */classes:(obj.classes&&typeof obj.classes==='object'&&!Array.isArray(obj.classes))?obj.classes:undefined};} /* v0.6.6: sources · v0.9.0: widgets · v0.13.0: sounds */
   const errs=[];
   pk.questions=pk.questions.filter((q,i)=>{const v=validateQuestion(q,i);if(v){errs.push(v);return false;}return true;});
   pk.cards=pk.cards.filter((c,i)=>{const v=validateCard(c,i);if(v){errs.push(v);return false;}return true;});
@@ -5363,7 +5380,7 @@ function hlMaskBtn(sec,kind){const b=$(sec)&&$(sec).querySelector('.hlhow');if(!
   const on=hlVisible(kind);b.classList.toggle('off',!on);b.setAttribute('aria-pressed',on?'true':'false');
   b.title=(on?'Highlights shown — tap to hide them.':'Highlights hidden — tap to show them.')+' Select text to highlight it or add a note.';b.setAttribute('aria-label',on?'Hide highlights':'Show highlights');}
 function hlMaskToggle(kind){hlMask=hlVisible(kind)?'hide':'show';if(hlMask==='hide')hlFresh.clear(); /* v0.14.1: hide means all of them */let seen=false;try{seen=localStorage.getItem('suite_hlhow_v1')==='1';localStorage.setItem('suite_hlhow_v1','1');}catch(_){}
-  if(kind==='q'){hlPaint($('qcard'));hlPaint($('qafter'));hlMaskBtn('quiz','q');}else{hlPaint($('cardbox'));hlMaskBtn('study','c');}
+  if(kind==='q'){hlPaint($('qcard'));hlPaint($('qafter'));hlMaskBtn('quiz','q');}else{hlPaint($('cardbox'));$('cardbox').querySelectorAll('[data-hlc]').forEach(hlPaint);hlMaskBtn('study','c');}
   toast((hlMask==='show'?'Highlights shown.':'Highlights hidden.')+(seen?'':' '+HL_HOW),seen?1600:5000);}
 /* ---- the Highlights page (section#hls) ---- */
 var hlsChip='all',hlsType='all',hlsWhere='all',hlsSort='new',hlsQ='',hlsShown=50;var hlsCols=new Set(),hlsTextCache=new Map();
@@ -5625,6 +5642,7 @@ function libRow(p){const on=p.enabled!==false;const upd=libUpd(p),stub=!!p.stub;
   const sv0=(!stub&&p.sources&&typeof p.sources==='object')?srcVisible(p):null,sv=on?sv0:null; /* v0.6.6: what the source switches leave visible; v0.7.1: a switched-off pack's counts too */
   const srcline=sv?`<div class="srcrow"><button type="button" class="srcbtn${srcOpen.has(p.id)?' on':''}" aria-expanded="${srcOpen.has(p.id)?'true':'false'}">${sv.off?sv.on+' of '+sv.total+' sources':'All sources'} ${srcOpen.has(p.id)?'▴':'▾'}</button></div>`:'';
   const info=document.createElement('div');info.innerHTML=p.id===RX_MASTER?`<div class="pn">${p.pack}</div><div class="pm">${stub?"":(p.drugs||[]).length+" drugs · "}reference for the Pharmacology view${vtag}${stub?sttag:updtag}</div>`:`<div class="pn">${p.pack}</div><div class="pm">${sv0?sv0.q:nq} questions · ${sv0?sv0.c:nc} cards${sv0&&ng?` · ${sv0.g} guides`:gtag}${stag}${vtag}${stub?sttag:updtag}</div>${srcline}`;
+  {const cm=cfMark(p);if(cm)info.appendChild(cm);} /* v0.20.0 */
   {const ab=(manifestEntry(p.id)||{}).about;if(ab){const d2=document.createElement('div');d2.className='pab';d2.textContent=ab;info.appendChild(d2);}} /* v0.12.0 */
   const sl=info.querySelector('.srcbtn');if(sl)sl.onclick=()=>{srcOpen.has(p.id)?srcOpen.delete(p.id):srcOpen.add(p.id);renderHome();};
   if(stub){const dl=document.createElement('button');dl.className='dlbtn';dl.type='button';dl.setAttribute('aria-label','Download '+(p.pack||'pack'));dl.title='Download and switch on';
@@ -5651,6 +5669,45 @@ function pendingRow(p){const row=document.createElement('div');row.className='pa
     if(ok){toast('Downloaded.');renderHome();}
     else{b.disabled=false;b.textContent='Tap to retry';toast('Still couldn’t download it. Check your connection, or try again later.',4000);}};
   acts.appendChild(b);row.appendChild(left);row.appendChild(acts);return row;}
+/* ===== v0.20.0: CONTRIBUTORS FILTER (Supplementary_Questions_Plan v1.1 §4) =====
+   pack.contributor = {id,name,label} marks a classmate's pack (absent = Study Suite's own). A Filter button in the school
+   chip row of Study packs and Your library opens the question map's filter box: Study Suite, then each contributor's packs
+   with All / None. View only. settings.libFlt = {nat:false when unticked, off:[pack ids]}. */
+var CONTRIB_AUTO=false; /* var: ensureAutoPacks may run before this line. true = contributor packs join everyone's library like default packs (today: opt-in) */
+var cfOpen; /* {dp,lib}: the filter box open, this visit (renderHome may run before this line) */
+function contribOf(p){const c=p&&p.contributor;return (c&&typeof c==='object'&&c.id)?{id:String(c.id),name:String(c.name||c.id),label:String(c.label||c.name||c.id)}:null;}
+function cfState(){const v=settings.libFlt;return (v&&typeof v==='object'&&!Array.isArray(v))?v:{};}
+function cfShown(p){const st=cfState();if(!contribOf(p))return st.nat!==false;return !(Array.isArray(st.off)&&st.off.includes(p.id));}
+function cfSet(fn){const st=Object.assign({},cfState());st.off=Array.isArray(st.off)?st.off.slice():[];fn(st);if(!st.off.length)delete st.off;if(st.nat!==false)delete st.nat;settings.libFlt=st;persist();renderHome();}
+/* list = the panel's packs (manifest entries or library packs). Returns [button, box] or null when no contributor pack. */
+function cfControls(kind,list){cfOpen=cfOpen||{};const cps=list.filter(x=>x&&contribOf(x)&&x.id);if(!cps.length)return null;
+  const st=cfState(),groups=new Map();cps.forEach(x=>{const c=contribOf(x);if(!groups.has(c.id))groups.set(c.id,{c,ps:[]});const g=groups.get(c.id);if(!g.ps.some(y=>y.id===x.id))g.ps.push(x);});
+  const nm=x=>String(x.pack||x.label||x.file||x.id).replace(/\.json$/i,'');
+  const nOff=(st.nat===false?1:0)+cps.filter(x=>!cfShown(x)).length,open=!!cfOpen[kind];
+  const b=document.createElement('button');b.type='button';b.className='qflbtn cfbtn'+(nOff?' on':'');b.setAttribute('aria-expanded',open?'true':'false');
+  b.textContent='Filter'+(nOff?' ('+nOff+')':'')+' '+(open?'▴':'▾');b.onclick=()=>{cfOpen[kind]=!cfOpen[kind];renderHome();};
+  const box=document.createElement('div');box.className='qflbox cfbox';box.setAttribute('role','group');box.setAttribute('aria-label','Show packs from');box.hidden=!open;
+  let h=`<label class="fltchk"><input type="checkbox" data-cfn="1"${st.nat!==false?' checked':''}><span>Study Suite</span></label><div class="cfwho">Contributors</div>`;
+  groups.forEach(g=>{const ps=g.ps.slice().sort((x,y)=>cmpW(packWeek(x),packWeek(y))||natCmp(nm(x),nm(y))),on=ps.filter(cfShown).length;
+    h+=`<div class="tgroup cfgrp"><div class="ghead"><span class="gname">${acctEsc(g.c.label)} <span class="gsel">${on} of ${ps.length}</span></span><button class="gall" type="button" data-cfall="${acctEsc(g.c.id)}">${on===ps.length?'None':'All'}</button></div>`+
+      ps.map(x=>`<label class="fltchk"><input type="checkbox" data-cfp="${acctEsc(x.id)}"${cfShown(x)?' checked':''}><span>${acctEsc(nm(x))}</span></label>`).join('')+'</div>';});
+  box.innerHTML=h;
+  box.querySelector('[data-cfn]').onchange=e=>{const on=e.target.checked;cfSet(st2=>{st2.nat=on?undefined:false;});};
+  box.querySelectorAll('[data-cfp]').forEach(el=>el.onchange=()=>{const id=el.dataset.cfp,on=el.checked;cfSet(st2=>{st2.off=st2.off.filter(x=>x!==id);if(!on)st2.off.push(id);});});
+  box.querySelectorAll('[data-cfall]').forEach(el=>el.onclick=()=>{const g=groups.get(el.dataset.cfall);if(!g)return;const ids=g.ps.map(x=>x.id),anyOff=g.ps.some(x=>!cfShown(x));
+    cfSet(st2=>{st2.off=st2.off.filter(x=>!ids.includes(x));if(!anyOff)st2.off=st2.off.concat(ids);});});
+  return [b,box];}
+/* v0.20.0: a contributor question's `ref` {pack,f,t,s} points at a guide in a native week pack (contributor packs have no
+   guides). Found among the switched-on packs (findGuide is global) → the usual guide box (guideHTML). Otherwise the same box
+   says which pack holds it, with no dead link. */
+function refGuideHTML(q){const r=q&&q.ref;if(!r||typeof r!=='object'||(!r.f&&!r.pack))return '';
+  const g={f:r.f?String(r.f):'',t:r.t!=null?String(r.t):'',s:r.s?String(r.s):''};
+  if(g.f&&findGuide(g.f))return guideHTML(g);
+  const pid=r.pack?String(r.pack):'',p=pid?packs.find(x=>x.id===pid):null,mp=pid?manifestEntry(pid):null,nm=acctEsc(String((p&&p.pack)||(mp&&mp.label)||pid||'another pack'));
+  const why=!g.f?`It’s covered in <b>${nm}</b>.`:(p&&p.enabled!==false&&!p.stub)?`It’s in <b>${nm}</b>, but its source is switched off there.`
+    :p?`It’s in <b>${nm}</b>, which is switched off in your library. Switch it on to open the guide here.`:`It’s in <b>${nm}</b>. Add that pack from Study packs to open the guide here.`;
+  return `<div class="guidelink refnote"><div class="gt">Topic guide ${acctEsc(g.t)}</div>${g.s?`<div>Deeper detail: <b>${acctEsc(g.s)}</b></div>`:''}<div class="hint">${why}</div></div>`;}
+function cfMark(p){const c=contribOf(p);if(!c)return null;const d=document.createElement('div');d.className='pab cfmark';d.textContent=c.label;return d;}
 function renderLibrary(){try{renderPackNews();}catch(e){}
   const pl=$('packList');pl.innerHTML='';const libItems=packs.concat(pendingRefs()); /* v0.11.1: waiting-to-download packs keep their place */
   if(!libItems.length)return;
@@ -5660,10 +5717,10 @@ function renderLibrary(){try{renderPackNews();}catch(e){}
     const sh=document.createElement('div');sh.className='dp-schools';
     schools.forEach(s=>{const b=document.createElement('button');b.className='dp-school'+(s===libSchool?' on':'');
       b.textContent=s;b.onclick=()=>{if(s!==libSchool){libSchool=s;libOpen=null;renderHome();}};sh.appendChild(b);});
-    pl.appendChild(sh);}
+    pl.appendChild(sh);const cf=cfControls('lib',libItems.filter(p=>(p.school||'Other')===libSchool));if(cf){sh.appendChild(cf[0]);pl.appendChild(cf[1]);}} /* v0.20.0 */
   // group within the selected school: year → term → course → packs (term optional)
   const years=new Map();
-  libItems.forEach(p=>{if((p.school||'Other')!==libSchool)return;
+  libItems.forEach(p=>{if((p.school||'Other')!==libSchool)return;if(!cfShown(p))return; /* v0.20.0 */
     const y=p.year||'Other packs',t=p.term||'',c=courseLabel(p.course);
     if(!years.has(y))years.set(y,new Map());
     const ts=years.get(y);if(!ts.has(t))ts.set(t,new Map());
@@ -5713,10 +5770,13 @@ let srsFlagOnly=false; /* v0.8.0: Review → Flagged only (this visit, like the 
 let srsAgainOnly=false,gapsQueue=null; /* v0.11.0: Review → Cards marked Again (last rating Again; combinable with Flagged); a Gaps topic session's own queue */
 function lastAgain(id){const s=sched[id];return !!s&&s.lg===1;}
 function srsSpecial(){return srsFlagOnly||srsAgainOnly;}
-function srsPick(c){return (!srsFlagOnly||isFlagged(c.id))&&(!srsAgainOnly||lastAgain(c.id));}
+function srsPick(c){return (!srsFlagOnly||isFlagged(c.id))&&(!srsAgainOnly||lastAgain(c._rq?RQ+c.id:c.id));} /* v0.20.0: questions under q: */
 let filter=null, sessionQueue=[], currentId=null, revealed=false, work={}, studiedThisSession=0; // filter=null ⇒ ALL topics; empty Set ⇒ none; Set with members ⇒ that subset
 function inScope(c){return !filter||filter.has(c._sec);}
-function counts(){const now=Date.now();let nw=0,lr=0,rv=0,nwTot=0;
+function counts(){const c=counts0();if(!rqOn())return c; /* v0.20.0: + questions */
+  if(srsSpecial()){rqPool().forEach(q=>{if(!inScope(q)||!srsPick(q))return;const s=rqSt(q.id);if(s.phase==='new')c.nw++;else if(s.phase==='review')c.rv++;else c.lr++;});return c;}
+  const r=rqCounts(Date.now());c.nw+=Math.min(r.nw,rqNewLeft());c.lr+=r.lr;c.rv+=r.rv;return c;}
+function counts0(){const now=Date.now();let nw=0,lr=0,rv=0,nwTot=0;
   if(srsSpecial()){deck().forEach(c=>{if(!inScope(c)||!srsPick(c))return;const s=sched[c.id];if(!s||s.phase==='new')nw++;else if(s.phase==='review')rv++;else lr++;});return {nw,lr,rv};} /* every flagged / Again card, due or not */
   deck().forEach(c=>{if(!inScope(c))return;const s=sched[c.id];if(s.phase==='new')nwTot++;else if(s.due<=now){(s.phase==='review'?rv++:lr++);}});
   return {nw:Math.min(nwTot,Math.max(0,settings.srsNewPerDay-daily.count)),lr,rv};}
@@ -5727,44 +5787,106 @@ function renderSrs(){
   $('studyBtn').disabled=(c.nw+c.lr+c.rv===0);
   const scope=!filter?'All topics':(filter.size===0?'No topics selected':(filter.size+' topic'+(filter.size>1?'s':'')+' — '+[...filter].slice(0,3).map(k=>secName(k)).join(', ')+(filter.size>3?'…':'')));
   $('scopeline').innerHTML='Studying: <b>'+scope+'</b>'+(srsFlagOnly?' · <b>flagged cards only</b>':'')+(srsAgainOnly?' · <b>cards marked Again</b>':'');
-  {const na=deck().filter(x=>inScope(x)&&lastAgain(x.id)).length;$('srsAgain').checked=srsAgainOnly;$('srsAgainN').textContent=na+' card'+(na===1?'':'s')+(filter?' in these topics':'');} /* v0.11.0 */
-  {const nf=deck().filter(x=>inScope(x)&&isFlagged(x.id)).length;$('srsFlt').checked=srsFlagOnly;$('srsFltN').textContent=nf+' flagged'+(filter?' in these topics':'');} /* v0.8.0 */
+  {const na=deck().filter(x=>inScope(x)&&lastAgain(x.id)).length,qa=rqOn()?rqPool().filter(x=>inScope(x)&&lastAgain(RQ+x.id)).length:-1;$('srsAgain').checked=srsAgainOnly;$('srsAgainN').textContent=na+' card'+(na===1?'':'s')+(qa>=0?', '+qa+' question'+(qa===1?'':'s'):'')+(filter?' in these topics':'');} /* v0.20.0: + questions */ /* v0.11.0 */
+  rqPaint();{const nf=srsItems().filter(x=>inScope(x)&&isFlagged(x.id)).length; /* v0.20.0: srsItems = deck() when questions are off */$('srsFlt').checked=srsFlagOnly;$('srsFltN').textContent=nf+' flagged'+(filter?' in these topics':'');} /* v0.8.0 */
   $('topicSummary').textContent=!filter?'all selected':(filter.size===0?'none selected':filter.size+' selected');
   renderTopics();renderSysbreak();
 }
 function renderSysbreak(){const sb=$('sysbreak');sb.innerHTML='';const set=new Set(deck().map(c=>c.sys));
   systemsPresent(set).forEach(sys=>{const list=deck().filter(c=>c.sys===sys);const seen=list.filter(c=>sched[c.id].phase!=='new').length;const p=list.length?Math.round(seen/list.length*100):0;
     sb.innerHTML+=`<div class="sysrow"><div class="top"><span class="name">${sysLabel(sys)}</span><span class="sc">${seen}/${list.length} started · ${p}%</span></div><div class="sbar"><i style="width:${p}%"></i></div></div>`;});}
-function renderTopics(){const now=Date.now();const tl=$('topicList');const groups=secGroups(deck());const open=groups.length<=1; /* v0.5.5: fold from 2 packs */tl.innerHTML='';
-  groups.forEach((g,gi)=>{let chips='';g.secs.forEach(sec=>{const due=srsSpecial()?sec.items.filter(srsPick).length:sec.items.filter(c=>{const s2=sched[c.id];return s2&&(s2.phase==='new'||s2.due<=now);}).length;
+function renderTopics(){const now=Date.now();const tl=$('topicList');const groups=secGroups(srsItems()); /* v0.20.0: srsItems = deck() when questions are off */const open=groups.length<=1; /* v0.5.5: fold from 2 packs */tl.innerHTML='';
+  groups.forEach((g,gi)=>{let chips='';g.secs.forEach(sec=>{const due=srsSpecial()?sec.items.filter(srsPick).length:sec.items.filter(c=>{const s2=c._rq?rqSt(c.id):sched[c.id];return s2&&(s2.phase==='new'||s2.due<=now);}).length;
       chips+=`<button class="tchip ${(!filter||filter.has(sec.k))?'on':''}" data-t="${encodeURIComponent(sec.k)}">${acctEsc(sec.l)}<span class="ct ${due?'':'zero'}">${due}</span></button>`;});
     const on=g.secs.filter(sec=>!filter||filter.has(sec.k)).length;
     tl.innerHTML+=`<div class="tgroup ${open||tl.dataset['o'+gi]==='1'?'':'closed'}" data-gi="${gi}"><div class="ghead"><button class="gname gtoggle" type="button">${acctEsc(g.name)} <span class="gsel">${on} of ${g.secs.length}</span></button><button class="gall" type="button" data-gi="${gi}">${on===g.secs.length?'None':'All'}</button></div><div class="tchips">${chips}</div></div>`;});
-  tl.querySelectorAll('.gall').forEach(el=>el.addEventListener('click',()=>{const g=groups[+el.dataset.gi];if(!g)return;const all=[...new Set(deck().map(c=>c._sec))];if(!filter)filter=new Set(all); /* v0.6.6: a week's topics on/off in one tap */
+  tl.querySelectorAll('.gall').forEach(el=>el.addEventListener('click',()=>{const g=groups[+el.dataset.gi];if(!g)return;const all=[...new Set(srsItems().map(c=>c._sec))];if(!filter)filter=new Set(all); /* v0.6.6: a week's topics on/off in one tap */
     const keys=g.secs.map(s=>s.k),anyOff=keys.some(k=>!filter.has(k));keys.forEach(k=>anyOff?filter.add(k):filter.delete(k));if(filter.size===all.length)filter=null;renderSrs();}));
   tl.querySelectorAll('.gtoggle').forEach(el=>el.addEventListener('click',()=>{const gr=el.closest('.tgroup');gr.classList.toggle('closed');tl.dataset['o'+gr.dataset.gi]=gr.classList.contains('closed')?'0':'1';}));
   tl.querySelectorAll('.tchip').forEach(el=>el.addEventListener('click',()=>{const t=decodeURIComponent(el.dataset.t);
-    const all=[...new Set(deck().map(c=>c._sec))];
+    const all=[...new Set(srsItems().map(c=>c._sec))];
     if(!filter)filter=new Set(all); // expand 'ALL' to an explicit set before toggling one off
     filter.has(t)?filter.delete(t):filter.add(t);
     if(filter.size===all.length)filter=null; // re-selected everything ⇒ collapse back to 'ALL'
     renderSrs();}));}
 
+/* ===== v0.20.0: QUESTION REVIEW — questions in the Review queue (Question_Review_Plan v0.1) =====
+   settings.srsQ (off by default, synced) adds the active packs' questions (qpool: Sources/Extras switches as in Practice) to
+   Review, inside Review's topic choice. Schedules live in `sched` under 'q:'+id; nothing is stored until a rating. */
+const RQ='q:',RQ_SEED=[1,3,8,20];let rqDone=0;
+function rqOn(){return !!settings.srsQ;}
+function rqKey(id){return RQ+id;}
+function isRQ(k){return typeof k==='string'&&k.slice(0,2)===RQ;}
+function rqIdOf(k){return isRQ(k)?k.slice(2):k;}
+function itemKey(x){return x&&x._rq?rqKey(x.id):(x&&x.id);}
+function rqPool(){return rqOn()?qpool().map(q=>Object.assign({_rq:1},q)):[];}
+function srsItems(){const d=deck();return rqOn()?d.concat(rqPool()):d;}
+function rqNewLeft(){const lim=settings.srsQNewPerDay==null?20:settings.srsQNewPerDay;return Math.max(0,lim-((daily&&daily.qn)||0));}
+function rqHash(t){let h=0;for(let i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))|0;return Math.abs(h);}
+/* First interval from question history (never stored): wrong last -> due a day after that answer; right -> RQ_SEED by
+   times right minus times wrong, plus a stable 0..ivl/4-day offset so a whole practice sitting doesn't land on one day. */
+function rqSeed(id){const h=qhist[id];if(!h||!h.n||!h.at)return null;
+  const k=h.k||0,eff=h.ok?Math.max(1,k-Math.max(0,(h.n||0)-k)):0;
+  if(!eff)return {phase:'review',due:h.at+DAY,ivl:1,ef:START_EF,reps:0,lapses:0,step:0,lapseFrom:0};
+  const ivl=RQ_SEED[Math.min(eff,RQ_SEED.length)-1],sp=Math.floor(ivl/4);
+  return {phase:'review',due:h.at+(ivl+(sp?rqHash(String(id))%(sp+1):0))*DAY,ivl,ef:START_EF,reps:eff,lapses:0,step:0,lapseFrom:0};}
+function rqSt(id){return sched[rqKey(id)]||rqSeed(id)||newState();}
+/* The same scheduler; for questions the 1- and 10-minute steps become one day (a vignette seen twice in ten minutes is
+   recognised, not recalled): Again = tomorrow, Hard/Good on a new or learning question go to the last step. */
+function schedQ(s0,g,now){let b=s0;if((b.phase==='new'||b.phase==='learning')&&g>=2)b=Object.assign({},b,{step:LEARN.length-1});
+  const s=schedule(b,g,now);if((s.phase==='learning'||s.phase==='relearning')&&s.due<now+DAY)s.due=now+DAY;return s;}
+function rqCounts(now){let nw=0,lr=0,rv=0;rqPool().forEach(q=>{if(!inScope(q))return;const s=rqSt(q.id);if(s.phase==='new')nw++;else if(s.due<=now)(s.phase==='review'?rv++:lr++);});return {nw,lr,rv};}
+/* One mixed queue: learning first, then everything due by due time, then new cards and new questions shuffled together,
+   each under its own daily limit. Flagged only / Marked Again take every match, due or not, as for cards. */
+function rqBuild(){const now=Date.now(),due=[],learn=[],cn=[],qn=[],st=k=>isRQ(k)?rqSt(rqIdOf(k)):sched[k];
+  srsItems().forEach(x=>{if(!inScope(x))return;const k=itemKey(x),s=x._rq?rqSt(x.id):sched[x.id];
+    if(srsSpecial()){if(!srsPick(x))return;(!s||s.phase==='new'?cn:s.phase==='review'?due:learn).push(k);return;}
+    if(!s||s.phase==='new')(x._rq?qn:cn).push(k);else if(s.due<=now)(s.phase==='review'?due:learn).push(k);});
+  const bd=(a,b)=>st(a).due-st(b).due;learn.sort(bd);due.sort(bd);
+  if(srsSpecial()){sessionQueue=[...learn,...due,...shuffle(cn)];return;}
+  sessionQueue=[...learn,...due,...shuffle([...shuffle(cn).slice(0,Math.max(0,settings.srsNewPerDay-daily.count)),...shuffle(qn).slice(0,rqNewLeft())])];}
+function rqOf(k){const id=rqIdOf(k);return qpool().find(q=>q.id===id)||activePacks().flatMap(p=>(p.questions||[]).filter(q=>q.id===id).map(q=>withSec(p,q)))[0]||null;}
+function rqPaint(){const b=$('srsQ'),n=$('srsQN');if(!b||!n)return;b.checked=rqOn();if(!rqOn()){n.textContent='adds questions to this deck';return;}
+  const r=rqCounts(Date.now());n.textContent='questions: '+(r.lr+r.rv)+' due · '+Math.min(r.nw,rqNewLeft())+' new today'+(filter?' in these topics':'');} /* owner 2026-11-20: the feature is "Review and Recycle" */
+function srsReveal(){if(isRQ(currentId)){rqReveal();return;}revealed=true;renderCard();}
+function rqReveal(){const q=rqOf(currentId);revealed=true;if(q&&work.pick!=null){histRecord(q.id,work.pick,work.pick===q.correct,'r');saveHist();}renderCard();}
+function rqStrike(oi){if(revealed)return;if(!work.strikes)work.strikes=new Set();work.strikes.has(oi)?work.strikes.delete(oi):work.strikes.add(oi);if(work.pick===oi&&work.strikes.has(oi))work.pick=null;renderCard();}
+function rqKeyPick(e){const disp=LETTERS.indexOf(String(e.key||'').toUpperCase()),perm=work.optorder;if(disp<0||!perm||disp>=perm.length)return;
+  if(e.shiftKey)rqStrike(perm[disp]);else{work.pick=perm[disp];if(work.strikes)work.strikes.delete(perm[disp]);renderCard();}}
+function rqRender(){const q=rqOf(currentId);if(!q)return; /* presentNext skips one whose pack is gone */
+  if(!work.rs0)work.rs0=rqSt(q.id);if(!work.optorder)work.optorder=optPerm(q.options);if(!work.strikes)work.strikes=new Set();
+  $('sTag').textContent=`${sysLabel(q.sys).split(' ')[0]} · ${q.topic}`;$('sTag').style.visibility=revealed?'':'hidden';
+  $('sLeft').textContent=`${sessionQueue.length} left · Question`;paintCardFlag();
+  let body=`<div class="ctype">Question${revealed?' — '+q.topic:''}</div><div id="rqQ"><p class="stem">${q.stem}</p><div class="opts">${qOptsHTML(q,work.optorder,work.pick,revealed,oi=>work.strikes.has(oi))}</div></div>`;
+  body+=!revealed?`<div class="showbar"><button class="showbtn" id="showBtn">Show answer</button></div>`:`<div id="rqA" class="qafter">${qAfterHTML(q,work.pick)}</div>`+renderGrades(Object.assign({_rqs:work.rs0},q));
+  const box=$('cardbox');box.innerHTML=body;
+  if(!revealed){box.querySelectorAll('.opt').forEach(el=>{el.addEventListener('click',()=>{work.pick=+el.dataset.i;work.strikes.delete(work.pick);renderCard();});
+      el.addEventListener('contextmenu',ev=>{ev.preventDefault();rqStrike(+el.dataset.i);});});
+    box.querySelectorAll('.optx').forEach(el=>el.addEventListener('click',()=>rqStrike(+el.dataset.x)));}
+  wireGuideLinks(box);
+  try{const sc={k:'q',p:q._pack||'',r:q.id,hide:()=>!hlVisible('c')};hlBind($('rqQ'),Object.assign({f:'q'},sc));if($('rqA'))hlBind($('rqA'),Object.assign({f:'a'},sc));hlMaskBtn('study','c');}catch(e){}
+  if(!revealed)$('showBtn').addEventListener('click',rqReveal);else wireGrades(q);}
+async function rqGrade(g){const id=rqIdOf(currentId),s=work.rs0||rqSt(id),wasNew=s.phase==='new',n=schedQ(s,g,Date.now());n.lg=g;sched[currentId]=n;
+  if(wasNew){rollDaily();daily.qn=(daily.qn||0)+1;}studiedThisSession++;rqDone++;await persist();presentNext();}
+function rqDoneText(){const c=Math.max(0,studiedThisSession-rqDone),q=rqDone;if(!q)return `You reviewed ${c} card${c===1?'':'s'}.`;
+  return `You reviewed ${c} card${c===1?'':'s'} and ${q} question${q===1?'':'s'}.`;}
+
 /* ===== SRS SESSION ===== */
 function buildSession(){const now=Date.now();const due=[],learn=[],news=[];
   if(gapsQueue){sessionQueue=gapsQueue.slice();gapsQueue=null;return;} /* v0.11.0: a Gaps topic session */
+  if(rqOn()){rqBuild();return;} /* v0.20.0: cards and questions in one queue */
   if(srsSpecial()){deck().forEach(c=>{if(!inScope(c)||!srsPick(c))return;const s=sched[c.id];(!s||s.phase==='new'?news:s.phase==='review'?due:learn).push(c.id);}); /* v0.8.0 */
     const bd=(a,b)=>sched[a].due-sched[b].due;sessionQueue=[...learn.sort(bd),...due.sort(bd),...shuffle(news)];return;}
   deck().forEach(c=>{if(!inScope(c))return;const s=sched[c.id];if(s.phase==='new')news.push(c.id);else if(s.due<=now){(s.phase==='review'?due:learn).push(c.id);}});
   due.sort((a,b)=>sched[a].due-sched[b].due);learn.sort((a,b)=>sched[a].due-sched[b].due);
   sessionQueue=[...learn,...due,...shuffle(news).slice(0,Math.max(0,settings.srsNewPerDay-daily.count))];}
-function startSession(){gcCardGuide=gcCardPending;gcCardPending=null; /* v0.15.0 */buildSession();studiedThisSession=0;if(sessionQueue.length===0){renderSrs();return;}presentNext();}
-function presentNext(){if(sessionQueue.length===0){finishSession();return;}try{sswSoundStop();}catch(e){} /* v0.13.0 */currentId=sessionQueue.shift();revealed=false;work={picks:new Set(),pick:null,order:[],pool:null,optorder:null};renderCard();show('study');}
-function finishSession(){$('doneSub').textContent=srsSpecial()?'You’ve been through every '+(srsFlagOnly&&srsAgainOnly?'flagged card marked Again':srsFlagOnly?'flagged card':'card marked Again')+' in this scope.':'Nothing more due in this scope right now.';$('doneStats').textContent=`You reviewed ${studiedThisSession} card${studiedThisSession===1?'':'s'}.`;const m=counts();$('doneStudyMore').style.display=(!srsSpecial()&&m.nw+m.lr+m.rv>0)?'':'none';
+function startSession(){gcCardGuide=gcCardPending;gcCardPending=null; /* v0.15.0 */buildSession();studiedThisSession=0;rqDone=0;if(sessionQueue.length===0){renderSrs();return;}presentNext();}
+function presentNext(){if(sessionQueue.length===0){finishSession();return;}try{sswSoundStop();}catch(e){} /* v0.13.0 */currentId=sessionQueue.shift();if(isRQ(currentId)&&!rqOf(currentId)){presentNext();return;} /* v0.20.0: its pack was removed */revealed=false;work={picks:new Set(),pick:null,order:[],pool:null,optorder:null};renderCard();show('study');}
+function finishSession(){$('doneSub').textContent=srsSpecial()?'You’ve been through every '+(srsFlagOnly&&srsAgainOnly?'flagged card marked Again':srsFlagOnly?'flagged card':'card marked Again')+' in this scope.':'Nothing more due in this scope right now.';$('doneStats').textContent=rqDoneText(); /* v0.20.0 */const m=counts();$('doneStudyMore').style.display=(!srsSpecial()&&m.nw+m.lr+m.rv>0)?'':'none';
   const gcG=gcFind(gcCardGuide);$('doneGuide').style.display=gcG?'':'none';$('doneStudyMore').classList.toggle('ghost',!!gcG); /* v0.15.0 */
   if(gcG)$('doneSub').textContent='Those were a few of this guide’s cards. The rest come up in Review as usual.';
   show('srsdone');}
-function renderCard(){const c=cardOf(currentId);
+function renderCard(){if(isRQ(currentId)){rqRender();return;} /* v0.20.0 */const c=cardOf(currentId);
   $('sTag').textContent=`${sysLabel(c.sys).split(' ')[0]} · ${c.topic}`;$('sTag').style.visibility=revealed?'':'hidden'; /* v0.10.17 */
   $('sLeft').textContent=`${sessionQueue.length} left · ${TYPE_LABEL[c.type]||c.type}`;paintCardFlag();
   let body=`<div class="ctype">${TYPE_LABEL[c.type]||c.type}${revealed?' — '+c.topic:''}</div>`+renderInteractive(c);
@@ -5773,7 +5895,7 @@ function renderCard(){const c=cardOf(currentId);
   try{const sc={k:'c',p:c._pack||'',r:c.id,f:'card',hide:()=>!hlVisible('c')};hlBind($('cardbox'),sc);hlMaskBtn('study','c');const fh=$('cardbox').querySelector('.labfig')||$('cardWidget');
     if(fh){const fs=Object.assign({},sc,{f:'fig'}),find=()=>hlEntries().find(e=>e.k==='c'&&e.r===c.id&&e.f==='fig');hlFigBtn(fh,fs,find,plainText(c.prompt,80),'figure',()=>renderCard());}}catch(e){} /* v0.14.0 */
   if(!revealed)$('showBtn').addEventListener('click',()=>{revealed=true;renderCard();});else wireGrades(c);}
-function paintCardFlag(){const b=$('cardFlagBtn'),f=isFlagged(currentId);b.classList.toggle('on',f);b.setAttribute('aria-pressed',f?'true':'false');b.textContent=f?'⚑ Flagged':'⚑ Flag';} /* v0.8.0 */
+function paintCardFlag(){const b=$('cardFlagBtn'),f=isFlagged(rqIdOf(currentId));b.title=isRQ(currentId)?'Flag this question — it is saved to your Flagged list':'Flag this card — it is saved to your Flagged list'; /* v0.20.0 */b.classList.toggle('on',f);b.setAttribute('aria-pressed',f?'true':'false');b.textContent=f?'⚑ Flagged':'⚑ Flag';} /* v0.8.0 */
 function renderInteractive(c){
   if(c.type==='mcq'||c.type==='multi'){const multi=c.type==='multi';let h=`<p class="prompt">${c.prompt}</p><div class="choices">`;
     if(!work.optorder)work.optorder=optPerm(c.options);
@@ -5844,14 +5966,14 @@ function renderAnswer(c){let h='';const res=gotCorrect(c);
     (c.explain||'');
   h+=`<div class="answerbox"><div class="h">Answer · ${c.topic}</div>${ans}</div>`+guideHTML(c.guide)+srcHTML(c); /* v0.6.6 */
   return h;}
-function renderGrades(c){const now=Date.now(),s=sched[c.id];const p=[1,2,3,4].map(g=>humanDelta(Math.max(0,schedule(s,g,now).due-now)));
+function renderGrades(c){const now=Date.now(),s=c._rqs||sched[c.id],f=c._rqs?schedQ:schedule;const p=[1,2,3,4].map(g=>humanDelta(Math.max(0,f(s,g,now).due-now))); /* v0.20.0: a question's preview */
   return `<div class="grades">
     <button class="gbtn again" data-g="1"><div class="gl">Again</div><div class="gi">${p[0]}</div></button>
     <button class="gbtn hard" data-g="2"><div class="gl">Hard</div><div class="gi">${p[1]}</div></button>
     <button class="gbtn good" data-g="3"><div class="gl">Good</div><div class="gi">${p[2]}</div></button>
     <button class="gbtn easy" data-g="4"><div class="gl">Easy</div><div class="gi">${p[3]}</div></button></div>`;}
 function wireGrades(c){$('cardbox').querySelectorAll('.gbtn').forEach(b=>b.addEventListener('click',()=>grade(+b.dataset.g)));}
-async function grade(g){const c=cardOf(currentId),s=sched[c.id],wasNew=(s.phase==='new');
+async function grade(g){if(isRQ(currentId)){await rqGrade(g);return;} /* v0.20.0 */const c=cardOf(currentId),s=sched[c.id],wasNew=(s.phase==='new');
   sched[c.id]=schedule(s,g,Date.now());sched[c.id].lg=g; /* v0.11.0: last rating (Gaps, Cards marked Again) */if(wasNew){rollDaily();daily.count++;}studiedThisSession++;await persist();
   if(sched[c.id].phase!=='review'){sessionQueue.splice(Math.min(sessionQueue.length,g===1?1:3),0,currentId);}
   presentNext();}
@@ -5861,7 +5983,7 @@ function renderBrowse(){const now=Date.now();const list=$('browseList');list.inn
   systemsPresent(set).forEach(sys=>{deck().filter(c=>c.sys===sys).forEach(c=>{const s=sched[c.id];const dueTxt=s.phase==='new'?'new':humanFromNow(s.due,now);
     const row=document.createElement('div');row.className='brow';
     row.innerHTML=`<div><div class="bsys">${sysLabel(sys).split(' ')[0]} · ${c.topic}</div><div class="bl">${stripText(c.prompt||c.text)}</div><div class="bmeta">${TYPE_LABEL[c.type]||c.type} · ${s.phase}</div></div><div class="bdue">${dueTxt}</div>`;
-    row.addEventListener('click',()=>{sessionQueue=[c.id];studiedThisSession=0;presentNext();});list.appendChild(row);});});
+    row.addEventListener('click',()=>{sessionQueue=[c.id];studiedThisSession=0;rqDone=0;presentNext();});list.appendChild(row);});});
   show('browse');}
 function stripText(t){t=(t||'').replace(/<img\b[^>]*?\balt="([^"]*)"[^>]*>/gi,' $1 ').replace(/<[^>]+>/g,'').replace(/\{\{(.+?)\}\}/g,'____');return t.length>90?t.slice(0,90)+'…':t;}
 
@@ -6436,17 +6558,23 @@ function startQTick(){clearInterval(qTimerId);qTimerId=setInterval(()=>{
   else{if(!settings.practiceTimer)return;if(!qsub[qcur])qelapsed[qcur]++;updatePracClock();}
 },1000);}
 function updatePracClock(){const rem=settings.practiceSecs-qelapsed[qcur];const t=$('timer');if(rem>=0){t.classList.remove('over');t.classList.toggle('warn',rem<=15);$('tclock').textContent=fmt(rem);}else{t.classList.add('over');t.classList.remove('warn');$('tclock').textContent='+'+fmt(-rem);}}
+/* v0.20.0: Practice's option rows and explanation, shared with question review (memory.md §1i: one renderer) */
+function qOptsHTML(q,perm,sel,done,skf){let html='';
+  perm.forEach((oi,disp)=>{const o=q.options[oi];let cls='opt';if(!done){if(sel===oi)cls+=' sel';}else{cls+=' locked';if(oi===q.correct)cls+=' correct';else if(sel===oi)cls+=' wrong';}
+    {const sk=skf(oi),lab=(sk?'Restore':'Strike out')+' option '+LETTERS[disp]; /* v0.16.0: strike-outs */
+    html+=`<div class="optrow${sk?' struck':''}"><button class="${cls}" data-i="${oi}" ${done?'disabled':''}><span class="letter">${LETTERS[disp]}</span><span>${o}</span></button><button type="button" class="optx" data-x="${oi}" aria-pressed="${sk}" aria-label="${lab}" title="${lab}" ${done?'disabled':''}></button></div>`;}});
+  return html;}
+function qAfterHTML(q,sel){const ok=sel===q.correct;let after=`<div class="verdictline ${ok?'ok':'no'}">${ok?'✓ Correct':(sel==null?'— Not answered':'✗ Incorrect')}</div>`;
+    after+=`<div class="answerbox"><div class="h">Explanation · ${q.topic}${diffRank(q)>=0?' · '+q.difficulty:''}${examTypeLabel(q)?' · '+examTypeLabel(q):''}</div>${q.explain||''}</div>`+(q.guide?guideHTML(q.guide):refGuideHTML(q))+srcHTML(q); /* v0.20.0: a contributor question's ref */
+  return after;}
 function renderQuiz(){if(qmode==='room'&&ROOM&&ROOM.na&&ROOM.na.has(qcur)){roomRenderNA();return;} /* v0.17.0 stage 3 */const q=qmap[qorder[qcur]],sel=qans[qcur],done=qRevealed(qcur);$('qGapsBtn').style.display=((qmode==='test'&&!qTestSubmitted)||qmode==='room')?'none':''; /* v0.11.0 */
   $('qtag').textContent=q.topic;$('qtag').style.visibility=done?'':'hidden'; /* v0.10.17: topic once the answer shows */$('qdiff').innerHTML=diffBadge(q);$('qpos').textContent=`Q${qcur+1} / ${qorder.length}`;$('pbar').style.width=((qcur+1)/qorder.length*100)+'%';
   let html=`<p class="stem"><span class="lead">${qcur+1}.</span> ${q.stem}</p><div class="opts">`;
   const perm=qopt[qcur]||[...q.options.keys()];
-  perm.forEach((oi,disp)=>{const o=q.options[oi];let cls='opt';if(!done){if(sel===oi)cls+=' sel';}else{cls+=' locked';if(oi===q.correct)cls+=' correct';else if(sel===oi)cls+=' wrong';}
-    {const sk=strikeHas(oi),lab=(sk?'Restore':'Strike out')+' option '+LETTERS[disp]; /* v0.16.0: strike-outs */
-    html+=`<div class="optrow${sk?' struck':''}"><button class="${cls}" data-i="${oi}" ${done?'disabled':''}><span class="letter">${LETTERS[disp]}</span><span>${o}</span></button><button type="button" class="optx" data-x="${oi}" aria-pressed="${sk}" aria-label="${lab}" title="${lab}" ${done?'disabled':''}></button></div>`;}});
+  html+=qOptsHTML(q,perm,sel,done,strikeHas); /* v0.20.0: shared with question review */
   html+='</div>';
   let after=''; /* v0.13.2: verdict + explanation go under the nav row (#qafter) so the buttons don't move */
-  if(done){const ok=sel===q.correct;after+=`<div class="verdictline ${ok?'ok':'no'}">${ok?'✓ Correct':(sel==null?'— Not answered':'✗ Incorrect')}</div>`;
-    after+=`<div class="answerbox"><div class="h">Explanation · ${q.topic}${diffRank(q)>=0?' · '+q.difficulty:''}${examTypeLabel(q)?' · '+examTypeLabel(q):''}</div>${q.explain||''}</div>`+guideHTML(q.guide)+srcHTML(q);} /* v0.6.6 */
+  if(done)after+=qAfterHTML(q,sel); /* v0.6.6; v0.20.0: shared with question review */
   const pr=qmode==='practice'?qPrior[qorder[qcur]]:null;
   if(pr&&!done){const di=perm.indexOf(pr.p);html+=`<div class="priorwrap"><button class="priorbtn" id="priorBtn" aria-expanded="false">↺ Answered before · view your prior answer</button><div class="priorbox" id="priorBox" hidden>${new Date(pr.at).toLocaleDateString([],{month:'short',day:'numeric'})} · you picked <b>${di>=0?LETTERS[di]+'. ':''}${q.options[pr.p]!=null?q.options[pr.p]:'—'}</b> · <span class="${pr.ok?'pok':'pno'}">${pr.ok?'✓ correct':'✗ incorrect'}</span>. This time starts clear.</div></div>`;}
   $('qcard').innerHTML=html;$('qafter').innerHTML=after;fbAttachQ(); /* v0.16.0 */roomAfterRender(); /* v0.17.0 */
@@ -6693,7 +6821,7 @@ $('exPreset').addEventListener('click',()=>{settings.examAuto=true;settings.exam
 function openSettings(){
   updateThemeUI();
   $('setGroupBy').value=settings.examGroupBy;
-  $('setPracSecs').value=settings.practiceSecs;$('setExamMins').value=settings.examMinutes;$('setNewPerDay').value=settings.srsNewPerDay;
+  $('setPracSecs').value=settings.practiceSecs;$('setExamMins').value=settings.examMinutes;$('setNewPerDay').value=settings.srsNewPerDay;$('setQNewPerDay').value=settings.srsQNewPerDay==null?20:settings.srsQNewPerDay; /* v0.20.0 */
   $('autoTarget').value=Math.max(1,settings.examTarget||40);
   toggleSwitch($('setExamAuto'),settings.examAuto);
   toggleSwitch($('setPracTimer'),settings.practiceTimer);toggleSwitch($('setExamTimer'),settings.examTimer);toggleSwitch($('setPracShuffle'),settings.practiceShuffle);
@@ -6827,6 +6955,7 @@ function fbAttachQ(){const a=$('qafter');if(!a||!a.innerHTML.trim())return;if(ty
   const t=document.createElement('div');t.innerHTML=fbBtnHtml('nbtn fbq');a.insertBefore(t.firstChild,a.firstChild);}
 function fbItem(){const sec=currentSection();try{
   if(sec==='quiz'){const id=qorder[qcur],q=qmap&&qmap[id];return q?{item_type:'question',item_id:String(id),pack_id:q._pack||'',label:'This question'}:null;}
+  if(sec==='study'&&isRQ(currentId)){const q=rqOf(currentId);return q?{item_type:'question',item_id:String(q.id),pack_id:q._pack||'',label:'This question'}:null;} /* v0.20.0 */
   if(sec==='study'){const c=allCards().find(x=>x.id===currentId);return c?{item_type:'card',item_id:String(c.id),pack_id:c._pack||'',label:'This card'}:null;}
   if(sec==='reviewer'&&curGuideKey){const g=(activeGuides()||[]).find(x=>x&&(x.key===curGuideKey||x.file===curGuideKey));
     return {item_type:'guide',item_id:String(curGuideKey).slice(0,120),pack_id:(g&&g._pack)||'',label:'This guide'+(g&&g.title?': '+g.title:'')};}
@@ -7437,7 +7566,7 @@ hlWire(document);$('srsGapsBtn').addEventListener('click',()=>openGaps('srs'));$
 document.querySelectorAll('#gaps [data-gv]').forEach(b=>b.addEventListener('click',()=>{gapsView=b.dataset.gv;renderGaps();}));
 $('srsAgain').addEventListener('change',e=>{srsAgainOnly=!!e.target.checked;renderSrs();});$('flagBack').addEventListener('click',()=>renderHome());$('flagClearAll').addEventListener('click',clearAllFlags); /* v0.8.0 */
 $('srsFlt').addEventListener('change',e=>{srsFlagOnly=!!e.target.checked;renderSrs();});
-$('cardFlagBtn').addEventListener('click',()=>{if(!currentId)return;setFlag(currentId,!isFlagged(currentId));paintCardFlag();});
+$('cardFlagBtn').addEventListener('click',()=>{if(!currentId)return;const fid=rqIdOf(currentId);setFlag(fid,!isFlagged(fid));paintCardFlag();}); /* v0.20.0: a question's own id */
 $('pharmSearch').addEventListener('input',e=>onPharmSearch(e.target.value));
 $('installBtn').addEventListener('click',openInstall);
 /* v0.5.1: one tap — a new app reloads and then applies waiting pack updates; pack updates alone apply straight away. */
@@ -7516,6 +7645,8 @@ $('histClear').addEventListener('click',()=>{const pid=$('histPack').value,pk=pi
 $('setPracSecs').addEventListener('change',e=>{settings.practiceSecs=Math.max(5,parseInt(e.target.value)||90);persist();});
 $('setExamMins').addEventListener('change',e=>{settings.examMinutes=Math.max(1,parseInt(e.target.value)||60);persist();});
 $('setNewPerDay').addEventListener('change',e=>{settings.srsNewPerDay=Math.max(0,parseInt(e.target.value)||0);persist();});
+$('setQNewPerDay').addEventListener('change',e=>{settings.srsQNewPerDay=Math.max(0,parseInt(e.target.value)||0);persist();}); /* v0.20.0 */
+$('srsQ').addEventListener('change',e=>{settings.srsQ=!!e.target.checked;persist();renderSrs();}); /* v0.20.0 */
 $('updateAll').addEventListener('click',updateAllPacks);
 $('enableAll').addEventListener('click',async()=>{const t=Date.now();packs.forEach(p=>{if(p.enabled===false&&!p.stub){p.enabled=true;p.ts=t;}});
   const st=packs.filter(p=>p.stub);let bad=0;for(const p of st){try{await downloadPack(p,true);}catch(e){bad++;}}
@@ -7532,7 +7663,7 @@ document.addEventListener('keydown',e=>{
   /* v0.3.0: typing in a field or an open dialog (account panel, sync choice) must never grade/answer cards */
   if(e.target&&e.target.closest&&e.target.closest('input,textarea,select,[contenteditable]'))return;
   if(['acctOv','syncCfOv','confirmOv','setupOv','pastOv'].some(id=>$(id)&&$(id).style.display!=='none'))return;
-  if($('study').classList.contains('on')){if(!revealed){if(e.key===' '||e.key==='Enter'){e.preventDefault();revealed=true;renderCard();}}else if(['1','2','3','4'].includes(e.key))grade(+e.key);return;}
+  if($('study').classList.contains('on')){if(!revealed){if(e.key===' '||e.key==='Enter'){e.preventDefault();srsReveal();}else if(isRQ(currentId))rqKeyPick(e);} /* v0.20.0 */else if(['1','2','3','4'].includes(e.key))grade(+e.key);return;}
   if($('quiz').classList.contains('on')){const done=qRevealed(qcur)||(qmode==='room'&&roomLocked(qcur)); /* v0.17.0: a submitted room pick is final */if(!done){const disp=LETTERS.indexOf(e.key.toUpperCase());const perm=qopt[qcur]||[...qmap[qorder[qcur]].options.keys()];if(disp>=0&&disp<perm.length){if(e.shiftKey)strikeToggle(perm[disp]);else{qans[qcur]=perm[disp];if(strikeHas(perm[disp]))strikeSet(perm[disp],false);renderQuiz();renderGrid();savePrac();if(qmode==='room')roomPick(qcur,qans[qcur]);}} /* v0.16.0: Shift+letter strikes */}if(qmode!=='room'){if(e.key==='ArrowLeft')qPrev();if(e.key==='ArrowRight')qNext();} /* v0.17.0: a room moves together */if(qmode==='practice'&&e.key==='Enter'&&!qsub[qcur]&&qans[qcur]!=null)submitAnswer();}
 });
 
