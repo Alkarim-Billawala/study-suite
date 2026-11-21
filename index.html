@@ -1,5 +1,12 @@
 <!--
-  Study Suite  ·  v0.20.1 (beta)
+  Study Suite  ·  v0.20.2 (beta)
+  Changelog v0.20.2 (2026-11-20): CONTRIBUTOR LINE (owner: "caption isnt needed anymore now that name is in title?"). A pack
+  row's italic contributor line (cfMark: Study packs and Your library) is left out when the pack's title already starts
+  with the contributor's name ("Nick's Gastro II"); kept for a contributor pack whose title doesn't.
+  THE FILTER IS THE TOPIC PICKER (owner: "why arent you resusing the same filter functions we built in the topic picker"):
+  one shared group (tgGroupHTML / tgBind / tgSet) now draws Review's picker, the Practice/Exam pickers and the pack Filter
+  (Study Suite + one folding group per contributor, All / None, a chip per pack; the contributor checkbox in that header).
+  Build record: Drive Claude/StudySuite/app-v0202-contributor-caption-2026-11-20/README.md.
   Changelog v0.20.1 (2026-11-20): CONTRIBUTOR CHECKBOX (owner: "add check box next to a contributer itself to be able to
   turn off a contributer entirely"). In the Contributors filter each contributor's line is a checkbox like Study Suite's
   (ticked / mixed / unticked; sets all of that contributor's packs; replaces All / None), packs indented under it without the
@@ -1621,7 +1628,7 @@ ul.lablist{list-style:disc}
 .dp-schools{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;margin:0 0 12px;padding-bottom:4px}
 .dp-schools .cfbtn{font-family:var(--font-mono);font-size:11px;align-self:center;flex:none} /* v0.20.0 */
 .qflbox.cfbox{display:block}.qflbox.cfbox[hidden]{display:none}.cfbox>.fltchk{display:flex;margin:0 0 10px}.cfwho{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin:4px 0 8px}
-.cfgrp{margin:0 0 4px} .cfhead{position:sticky;top:var(--hdrh,64px);z-index:5;background:var(--paper);margin:0 0 6px;padding:5px 0}.cfhead .fltchk{display:flex;font-size:15px;margin:0}.cfhead .gsel{margin-left:auto;padding-left:10px;flex:none;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft)}.cfpks{padding-left:23px}.cfgrp .fltchk{display:flex;font-size:14px;margin:0 0 7px;min-width:0;overflow-wrap:anywhere}.cfmark{font-style:italic}
+.cfmark{font-style:italic} /* v0.20.2: the Filter is the topic picker (.stopics + .tgroup); only these are its own */ .stopics.cfbox{margin:0 0 12px;background:var(--paper)} .cfbox .ghead{position:sticky;top:-10px;z-index:2;background:var(--paper);padding:3px 0} .ghead .gchk{accent-color:var(--accent);width:16px;height:16px;margin:0 8px 0 0;flex:none;align-self:center;cursor:pointer} .tgroup.solo .ghead{justify-content:flex-start;cursor:pointer}
 .dp-schools:empty{display:none}
 .dp-school{font-family:var(--font-body);font-size:15px;border:1.5px solid var(--line);background:var(--paper);border-radius:20px;padding:6px 14px;cursor:pointer;transition:.12s;white-space:nowrap;color:var(--ink)}
 .dp-school:hover{border-color:var(--accent-soft)}
@@ -2506,7 +2513,7 @@ var r=localStorage.getItem('suite_eac_v1'),a=JSON.parse(localStorage.getItem('su
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.20.1';
+const APP_VERSION='0.20.2';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -5680,30 +5687,35 @@ function pendingRow(p){const row=document.createElement('div');row.className='pa
    with All / None. View only. settings.libFlt = {nat:false when unticked, off:[pack ids]}. */
 var CONTRIB_AUTO=false; /* var: ensureAutoPacks may run before this line. true = contributor packs join everyone's library like default packs (today: opt-in) */
 var cfOpen; /* {dp,lib}: the filter box open, this visit (renderHome may run before this line) */
+var cfFold; /* v0.20.2: {dp,lib}: Set of the Filter's open groups, this visit (like setupOpen) */
 function contribOf(p){const c=p&&p.contributor;return (c&&typeof c==='object'&&c.id)?{id:String(c.id),name:String(c.name||c.id),label:String(c.label||c.name||c.id)}:null;}
 function cfState(){const v=settings.libFlt;return (v&&typeof v==='object'&&!Array.isArray(v))?v:{};}
 function cfShown(p){const st=cfState();if(!contribOf(p))return st.nat!==false;return !(Array.isArray(st.off)&&st.off.includes(p.id));}
 function cfSet(fn){const st=Object.assign({},cfState());st.off=Array.isArray(st.off)?st.off.slice():[];fn(st);if(!st.off.length)delete st.off;if(st.nat!==false)delete st.nat;settings.libFlt=st;persist();
-  const ae=document.activeElement,bx=ae&&ae.closest?ae.closest('.cfbox'):null,k=bx&&['cfn','cfg','cfp'].find(a=>ae.dataset&&ae.dataset[a]!=null),sel=k?`.cfbox[data-cfk="${bx.dataset.cfk}"] [data-${k}="${CSS.escape(ae.dataset[k])}"]`:'';
+  const ae=document.activeElement,bx=ae&&ae.closest?ae.closest('.cfbox'):null,c=bx&&['gchk','gall','tchip'].find(x=>ae.classList.contains(x)),
+    sel=c?`.cfbox[data-cfk="${bx.dataset.cfk}"] .${c}`+(c==='tchip'?`[data-t="${CSS.escape(ae.dataset.t)}"]`:`[data-gi="${ae.dataset.gi}"]`):''; /* v0.20.2: focus back on the same control */
   renderHome();if(sel){const nb=document.querySelector(sel);if(nb)nb.focus({preventScroll:true});}}
 /* list = the panel's packs (manifest entries or library packs). Returns [button, box] or null when no contributor pack. */
-function cfControls(kind,list){cfOpen=cfOpen||{};const cps=list.filter(x=>x&&contribOf(x)&&x.id);if(!cps.length)return null;
+const CF_NAT='\u0000studysuite'; /* the Filter's "Study Suite" item key (cannot be a pack id) */
+function cfControls(kind,list){cfOpen=cfOpen||{};cfFold=cfFold||{};const cps=list.filter(x=>x&&contribOf(x)&&x.id);if(!cps.length)return null;
   const st=cfState(),groups=new Map();cps.forEach(x=>{const c=contribOf(x);if(!groups.has(c.id))groups.set(c.id,{c,ps:[]});const g=groups.get(c.id);if(!g.ps.some(y=>y.id===x.id))g.ps.push(x);});
   const nm=x=>String(x.pack||x.label||x.file||x.id).replace(/\.json$/i,'');
+  const own=(x,c)=>{const t=nm(x),n=c.name||'';for(const q of ["'s ",'’s ']){const pre=n+q;if(n&&t.length>pre.length&&t.slice(0,pre.length).toLowerCase()===pre.toLowerCase())return t.slice(pre.length).replace(/^./,m=>m.toUpperCase());}return t;};
+  const nats=list.filter(x=>x&&x.id&&!contribOf(x)),nq=x=>x.nq!=null?x.nq:(x.questions||[]).length;
   const nOff=(st.nat===false?1:0)+cps.filter(x=>!cfShown(x)).length,open=!!cfOpen[kind];
   const b=document.createElement('button');b.type='button';b.className='qflbtn cfbtn'+(nOff?' on':'');b.setAttribute('aria-expanded',open?'true':'false');
-  b.textContent='Filter'+(nOff?' ('+nOff+')':'')+' '+(open?'▴':'▾');b.onclick=()=>{cfOpen[kind]=!cfOpen[kind];renderHome();};if(open&&typeof setHdrH==='function')setHdrH();
-  const box=document.createElement('div');box.className='qflbox cfbox';box.dataset.cfk=kind;box.setAttribute('role','group');box.setAttribute('aria-label','Show packs from');box.hidden=!open;
-  let h=`<label class="fltchk"><input type="checkbox" data-cfn="1"${st.nat!==false?' checked':''}><span>Study Suite</span></label><div class="cfwho">Contributors</div>`;
-  const own=(x,c)=>{const t=nm(x),n=c.name||'';for(const q of ["'s ",'\u2019s ']){const pre=n+q;if(n&&t.length>pre.length&&t.slice(0,pre.length).toLowerCase()===pre.toLowerCase())return t.slice(pre.length).replace(/^./,m=>m.toUpperCase());}return t;};
-  groups.forEach(g=>{const ps=g.ps.slice().sort((x,y)=>cmpW(packWeek(x),packWeek(y))||natCmp(nm(x),nm(y))),on=ps.filter(cfShown).length;
-    h+=`<div class="tgroup cfgrp"><div class="cfhead"><label class="fltchk"><input type="checkbox" data-cfg="${acctEsc(g.c.id)}"${on===ps.length?' checked':''}${on&&on<ps.length?' data-mixed="1"':''}><span>${acctEsc(g.c.label)}</span><span class="gsel">${on} of ${ps.length}</span></label></div><div class="cfpks">`+
-      ps.map(x=>`<label class="fltchk"><input type="checkbox" data-cfp="${acctEsc(x.id)}"${cfShown(x)?' checked':''}><span>${acctEsc(own(x,g.c))}</span></label>`).join('')+'</div></div>';});
-  box.innerHTML=h;
-  box.querySelector('[data-cfn]').onchange=e=>{const on=e.target.checked;cfSet(st2=>{st2.nat=on?undefined:false;});};
-  box.querySelectorAll('[data-cfp]').forEach(el=>el.onchange=()=>{const id=el.dataset.cfp,on=el.checked;cfSet(st2=>{st2.off=st2.off.filter(x=>x!==id);if(!on)st2.off.push(id);});});
-  box.querySelectorAll('[data-cfg]').forEach(el=>{el.indeterminate=!!el.dataset.mixed;el.onchange=()=>{const g=groups.get(el.dataset.cfg);if(!g)return;const ids=g.ps.map(x=>x.id),on=el.checked;
-    cfSet(st2=>{st2.off=st2.off.filter(x=>!ids.includes(x));if(!on)st2.off=st2.off.concat(ids);});};});
+  b.textContent='Filter'+(nOff?' ('+nOff+')':'')+' '+(open?'▴':'▾');b.onclick=()=>{cfOpen[kind]=!cfOpen[kind];renderHome();};
+  /* v0.20.2: the Practice picker's own box and groups (tgGroupHTML / tgBind): "Study Suite" (one switch), then one folding group per contributor */
+  const box=document.createElement('div');box.className='stopics cfbox';box.dataset.cfk=kind;box.setAttribute('role','group');box.setAttribute('aria-label','Show packs from');box.hidden=!open;
+  const fo=cfFold[kind]||(cfFold[kind]=new Set());
+  const gs=[{id:CF_NAT,name:'Study Suite',solo:true,chk:'Show Study Suite packs',items:[{k:CF_NAT,l:'Study Suite packs',ct:nats.length,on:st.nat!==false}]}];
+  groups.forEach(g=>{const ps=g.ps.slice().sort((x,y)=>cmpW(packWeek(x),packWeek(y))||natCmp(nm(x),nm(y)));
+    gs.push({id:g.c.id,name:g.c.label,chk:'Show all of '+g.c.label,items:ps.map(x=>({k:x.id,l:own(x,g.c),ct:nq(x),on:cfShown(x)}))});});
+  const nf=gs.filter(g=>!g.solo).length;gs.forEach(g=>{g.open=nf<=1||fo.has(g.id);}); /* the picker's rule: a single group opens */
+  box.innerHTML=gs.map((g,gi)=>tgGroupHTML(gi,g)).join('');
+  tgBind(box,gs,{fold:(gi,o)=>{o?fo.add(gs[gi].id):fo.delete(gs[gi].id);},
+    set:(keys,on)=>cfSet(s2=>{keys.forEach(k=>{if(k===CF_NAT)s2.nat=on?undefined:false;else{s2.off=s2.off.filter(x=>x!==k);if(!on)s2.off.push(k);}});}),
+    item:k=>cfSet(s2=>{if(k===CF_NAT)s2.nat=s2.nat===false?undefined:false;else{const was=s2.off.includes(k);s2.off=s2.off.filter(x=>x!==k);if(!was)s2.off.push(k);}})});
   return [b,box];}
 /* v0.20.0: a contributor question's `ref` {pack,f,t,s} points at a guide in a native week pack (contributor packs have no
    guides). Found among the switched-on packs (findGuide is global) → the usual guide box (guideHTML). Otherwise the same box
@@ -5715,7 +5727,8 @@ function refGuideHTML(q){const r=q&&q.ref;if(!r||typeof r!=='object'||(!r.f&&!r.
   const why=!g.f?`It’s covered in <b>${nm}</b>.`:(p&&p.enabled!==false&&!p.stub)?`It’s in <b>${nm}</b>, but its source is switched off there.`
     :p?`It’s in <b>${nm}</b>, which is switched off in your library. Switch it on to open the guide here.`:`It’s in <b>${nm}</b>. Add that pack from Study packs to open the guide here.`;
   return `<div class="guidelink refnote"><div class="gt">Topic guide ${acctEsc(g.t)}</div>${g.s?`<div>Deeper detail: <b>${acctEsc(g.s)}</b></div>`:''}<div class="hint">${why}</div></div>`;}
-function cfMark(p){const c=contribOf(p);if(!c)return null;const d=document.createElement('div');d.className='pab cfmark';d.textContent=c.label;return d;}
+function cfMark(p){const c=contribOf(p);if(!c)return null;const t=String(p.pack||p.label||'').trim().toLowerCase(),n=String(c.name||'').trim().toLowerCase();
+  if(n&&t.startsWith(n)&&!/[a-z0-9]/i.test(t.charAt(n.length)))return null;/* v0.20.2: the title already names them */const d=document.createElement('div');d.className='pab cfmark';d.textContent=c.label;return d;}
 function renderLibrary(){try{renderPackNews();}catch(e){}
   const pl=$('packList');pl.innerHTML='';const libItems=packs.concat(pendingRefs()); /* v0.11.1: waiting-to-download packs keep their place */
   if(!libItems.length)return;
@@ -5803,20 +5816,31 @@ function renderSrs(){
 function renderSysbreak(){const sb=$('sysbreak');sb.innerHTML='';const set=new Set(deck().map(c=>c.sys));
   systemsPresent(set).forEach(sys=>{const list=deck().filter(c=>c.sys===sys);const seen=list.filter(c=>sched[c.id].phase!=='new').length;const p=list.length?Math.round(seen/list.length*100):0;
     sb.innerHTML+=`<div class="sysrow"><div class="top"><span class="name">${sysLabel(sys)}</span><span class="sc">${seen}/${list.length} started · ${p}%</span></div><div class="sbar"><i style="width:${p}%"></i></div></div>`;});}
+/* ===== v0.20.2: THE TOPIC-PICKER GROUP, shared by Review's picker (renderTopics), the Practice/Exam pickers
+   (renderSetupTopics) and the pack Filter (cfControls), so they cannot drift.
+   tgGroupHTML(gi, g): g = {name, open, items:[{k, l, ct, zero, on}], chk?, solo?} -> one folding group: the toggle with the name
+   and "k of n", All / None, a chip per item with its count. chk (the Filter only) adds a checkbox for the whole group before
+   the name, ticked / mixed / unticked, labelled by chk. solo (the Filter's "Study Suite") = a header-only group: the checkbox
+   and the name, nothing to fold, one switch for all of its items.
+   tgBind(root, groups, {fold(gi, open), set(keys, on), item(k)}): folding, All / None and the checkbox (set), the chips (item).
+   tgSet(cur, all, keys, on): turn keys on or off in a selection (a Set; null = everything) -> the new selection. */
+function tgGroupHTML(gi,g){const n=g.items.length,on=g.items.filter(x=>x.on).length;
+  const ck=g.chk?`<input type="checkbox" class="gchk" data-gi="${gi}" aria-label="${acctEsc(g.chk)}"${on===n?' checked':''}${on&&on<n?' data-mixed="1"':''}>`:'';
+  if(g.solo)return `<div class="tgroup solo" data-gi="${gi}"><label class="ghead">${ck}<span class="gname">${acctEsc(g.name)}</span></label></div>`;
+  return `<div class="tgroup ${g.open?'':'closed'}" data-gi="${gi}"><div class="ghead">${ck}<button class="gname gtoggle" type="button">${acctEsc(g.name)} <span class="gsel">${on} of ${n}</span></button><button class="gall" type="button" data-gi="${gi}">${on===n?'None':'All'}</button></div><div class="tchips">${g.items.map(x=>`<button class="tchip ${x.on?'on':''}" data-t="${encodeURIComponent(x.k)}">${acctEsc(x.l)}<span class="ct ${x.zero?'zero':''}">${x.ct}</span></button>`).join('')}</div></div>`;}
+function tgBind(root,gs,h){
+  root.querySelectorAll('.gtoggle').forEach(el=>el.onclick=()=>{const gr=el.closest('.tgroup');gr.classList.toggle('closed');if(h.fold)h.fold(+gr.dataset.gi,!gr.classList.contains('closed'));});
+  root.querySelectorAll('.gall').forEach(el=>el.onclick=()=>{const g=gs[+el.dataset.gi];if(g)h.set(g.items.map(x=>x.k),g.items.some(x=>!x.on));}); /* v0.6.6: a group on/off in one tap */
+  root.querySelectorAll('.gchk').forEach(el=>{el.indeterminate=!!el.dataset.mixed;el.onchange=()=>{const g=gs[+el.dataset.gi];if(g)h.set(g.items.map(x=>x.k),el.checked);};});
+  root.querySelectorAll('.tchip').forEach(el=>el.onclick=()=>h.item(decodeURIComponent(el.dataset.t)));}
+function tgSet(cur,all,keys,on){const c=cur?new Set(cur):new Set(all);keys.forEach(k=>on?c.add(k):c.delete(k));return c.size===all.length?null:c;}
 function renderTopics(){const now=Date.now();const tl=$('topicList');const groups=secGroups(srsItems()); /* v0.20.0: srsItems = deck() when questions are off */const open=groups.length<=1; /* v0.5.5: fold from 2 packs */tl.innerHTML='';
-  groups.forEach((g,gi)=>{let chips='';g.secs.forEach(sec=>{const due=srsSpecial()?sec.items.filter(srsPick).length:sec.items.filter(c=>{const s2=c._rq?rqSt(c.id):sched[c.id];return s2&&(s2.phase==='new'||s2.due<=now);}).length;
-      chips+=`<button class="tchip ${(!filter||filter.has(sec.k))?'on':''}" data-t="${encodeURIComponent(sec.k)}">${acctEsc(sec.l)}<span class="ct ${due?'':'zero'}">${due}</span></button>`;});
-    const on=g.secs.filter(sec=>!filter||filter.has(sec.k)).length;
-    tl.innerHTML+=`<div class="tgroup ${open||tl.dataset['o'+gi]==='1'?'':'closed'}" data-gi="${gi}"><div class="ghead"><button class="gname gtoggle" type="button">${acctEsc(g.name)} <span class="gsel">${on} of ${g.secs.length}</span></button><button class="gall" type="button" data-gi="${gi}">${on===g.secs.length?'None':'All'}</button></div><div class="tchips">${chips}</div></div>`;});
-  tl.querySelectorAll('.gall').forEach(el=>el.addEventListener('click',()=>{const g=groups[+el.dataset.gi];if(!g)return;const all=[...new Set(srsItems().map(c=>c._sec))];if(!filter)filter=new Set(all); /* v0.6.6: a week's topics on/off in one tap */
-    const keys=g.secs.map(s=>s.k),anyOff=keys.some(k=>!filter.has(k));keys.forEach(k=>anyOff?filter.add(k):filter.delete(k));if(filter.size===all.length)filter=null;renderSrs();}));
-  tl.querySelectorAll('.gtoggle').forEach(el=>el.addEventListener('click',()=>{const gr=el.closest('.tgroup');gr.classList.toggle('closed');tl.dataset['o'+gr.dataset.gi]=gr.classList.contains('closed')?'0':'1';}));
-  tl.querySelectorAll('.tchip').forEach(el=>el.addEventListener('click',()=>{const t=decodeURIComponent(el.dataset.t);
-    const all=[...new Set(srsItems().map(c=>c._sec))];
-    if(!filter)filter=new Set(all); // expand 'ALL' to an explicit set before toggling one off
-    filter.has(t)?filter.delete(t):filter.add(t);
-    if(filter.size===all.length)filter=null; // re-selected everything ⇒ collapse back to 'ALL'
-    renderSrs();}));}
+  const gs=groups.map((g,gi)=>({name:g.name,open:open||tl.dataset['o'+gi]==='1',items:g.secs.map(sec=>{const due=srsSpecial()?sec.items.filter(srsPick).length:sec.items.filter(c=>{const s2=c._rq?rqSt(c.id):sched[c.id];return s2&&(s2.phase==='new'||s2.due<=now);}).length;
+      return {k:sec.k,l:sec.l,ct:due,zero:!due,on:!filter||filter.has(sec.k)};})}));
+  tl.innerHTML=gs.map((g,gi)=>tgGroupHTML(gi,g)).join(''); /* v0.20.2: the shared topic-picker group (tgGroupHTML / tgBind / tgSet) */
+  const all=()=>[...new Set(srsItems().map(c=>c._sec))];
+  tgBind(tl,gs,{fold:(gi,o)=>{tl.dataset['o'+gi]=o?'1':'0';},set:(keys,on)=>{filter=tgSet(filter,all(),keys,on);renderSrs();},
+    item:k=>{filter=tgSet(filter,all(),[k],!(!filter||filter.has(k)));renderSrs();}});}
 
 /* ===== v0.20.0: QUESTION REVIEW — questions in the Review queue (Question_Review_Plan v0.1) =====
    settings.srsQ (off by default, synced) adds the active packs' questions (qpool: Sources/Extras switches as in Practice) to
@@ -6676,15 +6700,14 @@ const setupOpen={exam:new Set(),prac:new Set()};
 function renderSetupTopics(m){const box=$(m==='exam'?'exTopics':'prTopics'),key=m==='exam'?'examTopics':'pracTopics';
   const pool=qpool().filter(q=>matchDiff(q,m)),t=selTopics(m),groups=secGroups(pool);
   /* v0.5.5: each pack's topics fold under their pack (open state kept while ticking); a single pack opens directly */
-  const op=setupOpen[m];box.innerHTML=groups.map(g=>{const on=g.secs.filter(sec=>!t||t.has(sec.k)).length,open=groups.length===1||op.has(g.name);
-    return `<div class="tgroup${open?'':' closed'}"><div class="ghead"><button type="button" class="gname gtoggle" data-g="${encodeURIComponent(g.name)}">${acctEsc(g.name)} <span class="gsel">${on} of ${g.secs.length}</span></button><button type="button" class="gall" data-ga="${encodeURIComponent(g.name)}">${on===g.secs.length?'None':'All'}</button></div><div class="tchips">${g.secs.map(sec=>`<button class="tchip ${(!t||t.has(sec.k))?'on':''}" data-t="${encodeURIComponent(sec.k)}">${acctEsc(sec.l)}<span class="ct">${sec.n}</span></button>`).join('')}</div></div>`;}).join('')
+  const op=setupOpen[m],all=()=>[...new Set(qpool().map(q=>q._sec))];
+  const gs=groups.map(g=>({name:g.name,open:groups.length===1||op.has(g.name),items:g.secs.map(sec=>({k:sec.k,l:sec.l,ct:sec.n,on:!t||t.has(sec.k)}))}));
+  box.innerHTML=gs.map((g,gi)=>tgGroupHTML(gi,g)).join('') /* v0.20.2: the shared topic-picker group */
     +'<div class="topicactions"><button class="minor" data-all="1">Select all</button><button class="minor" data-none="1">Clear</button></div>';
   const done=()=>{renderSetupTopics(m);setupTopicSummary(m);setupFreshNotes();if(m==='exam')renderWeights();persist();};
-  box.querySelectorAll('.tchip').forEach(el=>el.onclick=()=>{const k=decodeURIComponent(el.dataset.t),all=[...new Set(qpool().map(q=>q._sec))];
-    const cur=selTopics(m)||new Set(all);cur.has(k)?cur.delete(k):cur.add(k);settings[key]=cur.size===all.length?null:[...cur];done();});
-  box.querySelectorAll('.gtoggle').forEach(el=>el.onclick=()=>{const g=decodeURIComponent(el.dataset.g),gr=el.closest('.tgroup');gr.classList.toggle('closed');gr.classList.contains('closed')?op.delete(g):op.add(g);});
-  box.querySelectorAll('.gall').forEach(el=>el.onclick=()=>{const nm=decodeURIComponent(el.dataset.ga),g=groups.find(x=>x.name===nm);if(!g)return; /* v0.6.6: Future-Features #23 */
-    const all=[...new Set(qpool().map(q=>q._sec))],cur=selTopics(m)||new Set(all),keys=g.secs.map(s=>s.k),anyOff=keys.some(k=>!cur.has(k));keys.forEach(k=>anyOff?cur.add(k):cur.delete(k));settings[key]=cur.size===all.length?null:[...cur];done();});
+  const put=c=>{settings[key]=c?[...c]:null;done();};
+  tgBind(box,gs,{fold:(gi,o)=>{o?op.add(gs[gi].name):op.delete(gs[gi].name);},set:(keys,on)=>put(tgSet(selTopics(m),all(),keys,on)),
+    item:k=>{const c=selTopics(m);put(tgSet(c,all(),[k],!(!c||c.has(k))));}});
   box.querySelector('[data-all]').onclick=()=>{settings[key]=null;done();};box.querySelector('[data-none]').onclick=()=>{settings[key]=[];done();};}
 ['exTopBtn','prTopBtn'].forEach(id=>$(id).addEventListener('click',()=>{const m=$(id).dataset.m,box=$(m==='exam'?'exTopics':'prTopics');box.hidden=!box.hidden;if(!box.hidden)renderSetupTopics(m);setupTopicSummary(m);}));
 /* drop topic picks that no longer exist (pack removed/updated); nothing left = all topics */
