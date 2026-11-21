@@ -176,6 +176,12 @@ Absolutely — that's encouraged. Download the [**instruction set**](https://stu
 </details>
 
 <details>
+<summary><strong>What are packs from classmates?</strong></summary>
+
+Some question packs are written by classmates. Each sits in the library next to the weeks it covers and is marked with whose it is, and you add it like any other pack. **Filter**, beside the school chip, chooses what the list shows: Study Suite's own packs, a classmate's, or both. It only changes the list; a pack in your library stays on until you switch it off.
+</details>
+
+<details>
 <summary><strong>Is any of this medical advice?</strong></summary>
 
 No. Study Suite and its packs are **educational material for exam preparation only** — not medical advice, and never a basis for real decisions about real patients. It's also in beta, so content can contain errors or go out of date. Always check against your own curriculum and trusted sources.
