@@ -1,5 +1,10 @@
 <!--
-  Study Suite  ·  v0.20.2 (beta)
+  Study Suite  ·  v0.20.3 (beta)
+  Changelog v0.20.3 (2026-11-20): START A STUDY ROOM FROM HOME (owner: "lets add start a study room here. just to make it
+  more obvious and have it just open the exisiting workflow"). The Study Rooms card has a Start a study room button that
+  opens the Practice set-up sheet with its own Start a study room button ready (roomStartHome -> openSetup('prac')); the
+  room still starts through roomStart and the same dialog. Card text and layout: Start and Join as two stacked actions.
+  Build record: Drive Claude/StudySuite/app-v0203-room-start-home-2026-11-20/README.md.
   Changelog v0.20.2 (2026-11-20): CONTRIBUTOR LINE (owner: "caption isnt needed anymore now that name is in title?"). A pack
   row's italic contributor line (cfMark: Study packs and Your library) is left out when the pack's title already starts
   with the contributor's name ("Nick's Gastro II"); kept for a contributor pack whose title doesn't.
@@ -1965,6 +1970,8 @@ mark.hl.flash{outline:2px solid #e08a00;outline-offset:1px}
 .roompanel{flex-wrap:wrap}.roompanel .rp-main{flex:1 1 240px;min-width:0}
 .roomjoin{display:flex;gap:8px;flex:1 1 250px;min-width:0;justify-content:flex-end}
 .roomjoin .btn{padding:10px 14px;white-space:nowrap;flex:none}
+.roomacts{display:flex;flex-direction:column;gap:8px;flex:1 1 250px;min-width:0} /* v0.20.3: Start above the Join row, as two actions */
+.roomacts .roomjoin{flex:none}.roomacts>.btn{padding:10px 14px;white-space:nowrap}
 .roomin{font:inherit;font-size:16px;padding:9px 10px;border:1.5px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);min-width:0;box-sizing:border-box}
 .roomjoin .roomin{flex:1 1 7em;width:7em;font-family:var(--font-mono);letter-spacing:.12em}
 .roomerr{flex-basis:100%;color:var(--red);font-size:13px;line-height:1.4}.roomerr:empty{display:none}
@@ -2121,8 +2128,8 @@ var r=localStorage.getItem('suite_eac_v1'),a=JSON.parse(localStorage.getItem('su
       <button class="btn ghost sm" id="openStations">Practise a station</button>
     </div>
     <div class="revpanel roompanel" id="roomPanel" style="display:none">
-      <div class="rp-main"><div class="rp-t">Study Rooms</div><div class="rp-d">Answer the same questions together, each on your own device. Start one from Practice, or join with a code.</div><div class="rp-d"><a class="roompast" id="roomPastLink" role="button" tabindex="0">Past study rooms</a></div></div>
-      <div class="roomjoin"><input id="roomCodeIn" class="roomin" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="Code" aria-label="6-digit room code"><button class="btn ghost sm" id="roomJoinBtn" type="button">Join a study room</button></div>
+      <div class="rp-main"><div class="rp-t">Study Rooms</div><div class="rp-d">Answer the same questions together, each on your own device. Start one, or join one with a code.</div><div class="rp-d"><a class="roompast" id="roomPastLink" role="button" tabindex="0">Past study rooms</a></div></div>
+      <div class="roomacts"><button class="btn ghost sm" id="roomStartHome" type="button">Start a study room</button><div class="roomjoin"><input id="roomCodeIn" class="roomin" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="Code" aria-label="6-digit room code"><button class="btn ghost sm" id="roomJoinBtn" type="button">Join a study room</button></div></div>
       <div class="roomerr" id="roomJoinErr" role="status"></div>
     </div>
 
@@ -2513,7 +2520,7 @@ var r=localStorage.getItem('suite_eac_v1'),a=JSON.parse(localStorage.getItem('su
 
 <script>
 /* Study Suite v0.2.46 (beta) — Author: Alkarim Billawala / alkarim.billawala.ca */
-const APP_VERSION='0.20.2';
+const APP_VERSION='0.20.3';
 const APP_BETA=true;
 /* Donations: the footer support link auto-hides if this URL ever contains CHANGEME. */
 const SUPPORT_URL='https://buymeacoffee.com/studysuite';
@@ -7389,6 +7396,9 @@ $('roomJoinBtn').addEventListener('click',()=>roomJoinAsk($('roomCodeIn').value)
 $('roomCodeIn').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();roomJoinAsk($('roomCodeIn').value);}});
 $('roomCodeIn').addEventListener('input',e=>{const v=e.target.value.replace(/\D/g,'').slice(0,6);if(v!==e.target.value)e.target.value=v;});
 $('roomStartBtn').addEventListener('click',roomStart);
+/* v0.20.3: Home's Start a study room = the Practice set-up sheet with its own Start a study room button ready (no second way to start one) */
+function roomStartHome(){if(!ROOMS_ON)return;openSetup('prac');const b=$('roomStartBtn');if(b&&b.style.display!=='none'){b.scrollIntoView({block:'nearest'});b.focus({preventScroll:true});}}
+$('roomStartHome').addEventListener('click',roomStartHome);
 $('roomRevealBtn').addEventListener('click',roomRevealAsk);
 $('roomBackBtn').addEventListener('click',()=>roomView(roomCur()));
 $('roomLeaveBtn').addEventListener('click',roomLeaveAsk);
